@@ -9,7 +9,7 @@ resource "azuread_group_member" "service_endpoint_join_spn" {
     if rg.delegate_service_endpoint == true
   }
   group_object_id  = azuread_group.service_endpoint_join.id
-  member_object_id = azuread_service_principal.aadSp[each.key].object_id
+  member_object_id = azuread_service_principal.aad_sp[each.key].object_id
 }
 
 resource "azuread_group_member" "service_endpoint_join_owner" {

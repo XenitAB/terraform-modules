@@ -1,5 +1,5 @@
 resource "azuread_application" "aadSubReaderApp" {
-  name = "${local.spNamePrefix}${local.groupNameSeparator}sub${local.groupNameSeparator}${var.subscription_name}${local.groupNameSeparator}${var.environment}${local.groupNameSeparator}reader"
+  name = "${local.sp_name_prefix}${local.group_name_separator}sub${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}reader"
 }
 
 resource "azuread_service_principal" "aadSubReaderSp" {
@@ -36,8 +36,8 @@ resource "azuread_application_password" "aadSubReaderSpSecret" {
 
 resource "azurerm_key_vault_secret" "aadSubReaderSpKvSecret" {
   for_each = {
-    for coreRg in local.coreRgs :
-    coreRg => coreRg
+    for core_rg in local.core_rgs :
+    core_rg => core_rg
   }
 
   name = replace(azuread_service_principal.aadSubReaderSp.display_name, ".", "-")

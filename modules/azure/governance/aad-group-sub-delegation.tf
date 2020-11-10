@@ -1,6 +1,6 @@
 # Example: az-sub-<subName>-all-owner
 data "azuread_group" "all_owner" {
-  name = "${local.aadGroupPrefix}${local.groupNameSeparator}sub${local.groupNameSeparator}${var.subscription_name}${local.groupNameSeparator}all${local.groupNameSeparator}owner"
+  name = "${local.aad_group_prefix}${local.group_name_separator}sub${local.group_name_separator}${var.subscription_name}${local.group_name_separator}all${local.group_name_separator}owner"
 }
 
 resource "azuread_group_member" "sub_all_owner" {
@@ -10,7 +10,7 @@ resource "azuread_group_member" "sub_all_owner" {
 
 # Example: az-sub-<subName>-all-contributor
 data "azuread_group" "all_contributor" {
-  name = "${local.aadGroupPrefix}${local.groupNameSeparator}sub${local.groupNameSeparator}${var.subscription_name}${local.groupNameSeparator}all${local.groupNameSeparator}contributor"
+  name = "${local.aad_group_prefix}${local.group_name_separator}sub${local.group_name_separator}${var.subscription_name}${local.group_name_separator}all${local.group_name_separator}contributor"
 }
 
 resource "azuread_group_member" "sub_all_contributor" {
@@ -20,7 +20,7 @@ resource "azuread_group_member" "sub_all_contributor" {
 
 # Example: az-sub-<subName>-all-reader
 data "azuread_group" "all_reader" {
-  name = "${local.aadGroupPrefix}${local.groupNameSeparator}sub${local.groupNameSeparator}${var.subscription_name}${local.groupNameSeparator}all${local.groupNameSeparator}reader"
+  name = "${local.aad_group_prefix}${local.group_name_separator}sub${local.group_name_separator}${var.subscription_name}${local.group_name_separator}all${local.group_name_separator}reader"
 }
 
 resource "azuread_group_member" "sub_all_reader" {

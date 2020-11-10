@@ -1,5 +1,5 @@
 resource "azuread_group" "service_endpoint_join" {
-  name = "${local.aadGroupPrefix}${local.groupNameSeparator}sub${local.groupNameSeparator}${var.subscription_name}${local.groupNameSeparator}${var.environment}${local.groupNameSeparator}serviceEndpointJoin"
+  name = "${local.aad_group_prefix}${local.group_name_separator}sub${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}serviceEndpointJoin"
 }
 
 resource "azuread_group_member" "service_endpoint_join_spn" {

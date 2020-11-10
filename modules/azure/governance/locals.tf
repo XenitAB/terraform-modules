@@ -6,9 +6,9 @@ locals {
     region           = p[1]
     }
   }
-  coreRgs            = [for region in var.regions : "${var.environment}-${region.locationShort}-${var.core_name}"]
-  groupNameSeparator = "-"
-  aadGroupPrefix     = "az"
-  spNamePrefix       = "sp"
-  aksGroupNamePrefix = "aks"
+  core_rgs            = [for region in var.regions : "${var.environment}-${region.locationShort}-${var.core_name}"]
+  group_name_separator = "-"
+  aad_group_prefix     = "az"
+  sp_name_prefix       = "sp"
+  aks_group_name_prefix = "aks"
 }

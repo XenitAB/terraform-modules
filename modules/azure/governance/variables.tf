@@ -35,14 +35,6 @@ variable "resource_group_configs" {
   )
 }
 
-variable "key_vault_default_permissions" {
-  description = "Default permissions for key vault"
-  type = object({
-    key_permissions    = list(string)
-    secret_permissions = list(string)
-  })
-}
-
 variable "owner_service_principal_name" {
   description = "The name of the service principal that will be used to run terraform and is owner of the subsciptions"
   type        = string

@@ -82,9 +82,9 @@ resource "azurerm_key_vault_secret" "aad_sp" {
     clientId       = azuread_service_principal.aad_sp[each.value.resource_group_config.common_name].application_id
     clientSecret   = random_password.aad_sp[each.value.resource_group_config.common_name].result
   })
-  key_vault_id = azurerm_key_vault.delegateKv[each.value.coreRg].id
+  key_vault_id = azurerm_key_vault.delegate_kv[each.value.coreRg].id
 
   depends_on = [
-    azurerm_key_vault_access_policy.delegateKvApOwnerSpn
+    azurerm_key_vault_access_policy.ap_owner_spn
   ]
 }

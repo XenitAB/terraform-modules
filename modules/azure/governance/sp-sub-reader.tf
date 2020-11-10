@@ -47,9 +47,9 @@ resource "azurerm_key_vault_secret" "sub_reader_sp" {
     clientId       = azuread_service_principal.sub_reader_sp.application_id
     clientSecret   = random_password.sub_reader_sp.result
   })
-  key_vault_id = azurerm_key_vault.delegateKv[each.key].id
+  key_vault_id = azurerm_key_vault.delegate_kv[each.key].id
 
   depends_on = [
-    azurerm_key_vault_access_policy.delegateKvApOwnerSpn
+    azurerm_key_vault_access_policy.ap_owner_spn
   ]
 }

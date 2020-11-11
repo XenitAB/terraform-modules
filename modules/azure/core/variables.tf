@@ -1,7 +1,7 @@
 variable "regions" {
   description = "The Azure Regions to configure"
   type = list(object({
-    location      = string
+    location       = string
     location_short = string
   }))
 }
@@ -29,7 +29,7 @@ variable "vnet_config" {
       name              = string
       cidr              = string
       service_endpoints = list(string)
-      aks_subnet         = bool
+      aks_subnet        = bool
     }))
   }))
 }

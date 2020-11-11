@@ -1,7 +1,7 @@
 variable "regions" {
   description = "The Azure Regions to configure"
   type = list(object({
-    location      = string
+    location       = string
     location_short = string
   }))
 }
@@ -25,12 +25,12 @@ variable "resource_group_configs" {
   description = "Resource group configuration"
   type = list(
     object({
-      common_name  = string
-      delegate_aks = bool # Delegate aks permissions
-      delegate_key_vault  = bool # Delegate KeyVault creation
+      common_name                = string
+      delegate_aks               = bool # Delegate aks permissions
+      delegate_key_vault         = bool # Delegate KeyVault creation
       delegate_service_endpoint  = bool # Delegate Service Endpoint permissions
-      delegate_service_principal  = bool # Delegate Service Principal
-      tags        = map(string)
+      delegate_service_principal = bool # Delegate Service Principal
+      tags                       = map(string)
     })
   )
 }

@@ -1,9 +1,9 @@
 locals {
   env_resources = { for region in var.regions : "${var.environment}-${region.location_short}-${var.name}" => {
-    name             = "${var.environment}-${region.location_short}-${var.name}"
+    name        = "${var.environment}-${region.location_short}-${var.name}"
     environment = var.environment
-    region           = region
-    vnet_config       = var.vnet_config[region.location_short]
+    region      = region
+    vnet_config = var.vnet_config[region.location_short]
     }
   }
 

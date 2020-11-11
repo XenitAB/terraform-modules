@@ -10,7 +10,7 @@ resource "azurerm_resource_group" "rg" {
     {
       "Environment"   = each.value.environment,
       "Location"      = each.value.region.location,
-      "LocationShort" = each.value.region.locationShort
+      "LocationShort" = each.value.region.location_short
 
     },
     each.value.resource_group_config.tags

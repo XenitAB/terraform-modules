@@ -2,7 +2,7 @@ variable "regions" {
   description = "The Azure Regions to configure"
   type = list(object({
     location      = string
-    locationShort = string
+    location_short = string
   }))
 }
 

@@ -6,6 +6,7 @@ resource "azuread_group" "rg_owner" {
   }
 
   name = "${local.aad_group_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.value.common_name}${local.group_name_separator}owner"
+  prevent_duplicate_names = true
 }
 
 resource "azurerm_role_assignment" "rg_owner" {
@@ -27,6 +28,7 @@ resource "azuread_group" "rg_contributor" {
   }
 
   name = "${local.aad_group_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.value.common_name}${local.group_name_separator}contributor"
+  prevent_duplicate_names = true
 }
 
 resource "azurerm_role_assignment" "rg_contributor" {
@@ -48,6 +50,7 @@ resource "azuread_group" "rg_reader" {
   }
 
   name = "${local.aad_group_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.value.common_name}${local.group_name_separator}reader"
+  prevent_duplicate_names = true
 }
 
 resource "azurerm_role_assignment" "rg_reader" {

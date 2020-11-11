@@ -1,9 +1,11 @@
 resource "azuread_group" "acr_push" {
   name = "${local.aks_group_name_prefix}${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}acrpush"
+  prevent_duplicate_names = true
 }
 
 resource "azuread_group" "acr_pull" {
   name = "${local.aks_group_name_prefix}${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}acrpull"
+  prevent_duplicate_names = true
 }
 
 resource "azuread_group_member" "acr_spn" {

@@ -19,7 +19,6 @@ resource "azurerm_role_definition" "service_endpoint_join" {
 
 data "azuread_group" "service_endpoint_join" {
   name                    = "${local.aad_group_prefix}${local.group_name_separator}sub${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}serviceEndpointJoin"
-  prevent_duplicate_names = true
 }
 
 resource "azurerm_role_assignment" "service_endpoint_join" {

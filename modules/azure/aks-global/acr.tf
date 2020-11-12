@@ -9,11 +9,13 @@ resource "azurerm_container_registry" "acr" {
 
 # Add AcrPull permission for the AKS Service Principal (Client)
 # This makes it possible for the AKS cluster to pull images without additional authentication
-resource "azurerm_role_assignment" "aks" {
-  scope                = azurerm_container_registry.acr.id
-  role_definition_name = "AcrPull"
-  principal_id         = local.aksAadApps.aksClientAppPrincipalId #FIXME
-}
+
+# MOVE TO AKS
+# resource "azurerm_role_assignment" "aks" {
+#   scope                = azurerm_container_registry.acr.id
+#   role_definition_name = "AcrPull"
+#   principal_id         = local.aksAadApps.aksClientAppPrincipalId #FIXME
+# }
 
 # Add data source for the Azure AD Group for AcrPull
 data "azuread_group" "acr_pull" {

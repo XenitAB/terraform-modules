@@ -9,15 +9,16 @@ resource "azurerm_user_assigned_identity" "aad_pod_identity" {
   name = "uai-${var.environment}-${var.location_short}-${var.aks_name}-${each.key}"
 }
 
-resource "azurerm_role_assignment" "aad_pod_identity" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-  }
-  scope                = azurerm_user_assigned_identity.aad_pod_identity[each.key].id
-  role_definition_name = "Managed Identity Operator"
-  principal_id         = local.aksAadApps.aksClientAppPrincipalId #FIXME
-}
+# MOVE TO AKS
+# resource "azurerm_role_assignment" "aad_pod_identity" {
+#   for_each = {
+#     for ns in var.namespaces :
+#     ns.name => ns
+#   }
+#   scope                = azurerm_user_assigned_identity.aad_pod_identity[each.key].id
+#   role_definition_name = "Managed Identity Operator"
+#   principal_id         = local.aksAadApps.aksClientAppPrincipalId #FIXME
+# }
 
 resource "azuread_group_member" "aad_pod_identity" {
   for_each = {

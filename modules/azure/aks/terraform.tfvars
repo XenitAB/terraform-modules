@@ -1,4 +1,3 @@
-location               = "West Europe"
 location_short          = "we"
 name             = "aks1"
 subscription_name = "tflab"

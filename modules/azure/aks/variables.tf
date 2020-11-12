@@ -1,8 +1,3 @@
-variable "location" {
-  description = "The Azure region to create things in."
-  type        = string
-}
-
 variable "location_short" {
   description = "The Azure region short name."
   type        = string

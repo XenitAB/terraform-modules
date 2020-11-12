@@ -6,7 +6,7 @@ resource "azuread_group" "service_endpoint_join" {
 resource "azuread_group_member" "service_endpoint_join_spn" {
   for_each = {
     for rg in var.resource_group_configs :
-    rg.commonName => rg
+    rg.common_name => rg
     if rg.delegate_service_endpoint == true
   }
   group_object_id  = azuread_group.service_endpoint_join.id
@@ -16,7 +16,7 @@ resource "azuread_group_member" "service_endpoint_join_spn" {
 resource "azuread_group_member" "service_endpoint_join_owner" {
   for_each = {
     for rg in var.resource_group_configs :
-    rg.commonName => rg
+    rg.common_name => rg
     if rg.delegate_service_endpoint == true
   }
   group_object_id  = azuread_group.service_endpoint_join.id
@@ -26,7 +26,7 @@ resource "azuread_group_member" "service_endpoint_join_owner" {
 resource "azuread_group_member" "service_endpoint_join_contributor" {
   for_each = {
     for rg in var.resource_group_configs :
-    rg.commonName => rg
+    rg.common_name => rg
     if rg.delegate_service_endpoint == true
   }
   group_object_id  = azuread_group.service_endpoint_join.id

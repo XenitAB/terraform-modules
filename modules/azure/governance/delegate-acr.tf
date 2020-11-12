@@ -11,7 +11,7 @@ resource "azuread_group" "acr_pull" {
 resource "azuread_group_member" "acr_spn" {
   for_each = {
     for rg in var.resource_group_configs :
-    rg.commonName => rg
+    rg.common_name => rg
     if rg.delegate_aks == true
   }
   group_object_id  = azuread_group.acr_push.id
@@ -21,7 +21,7 @@ resource "azuread_group_member" "acr_spn" {
 resource "azuread_group_member" "acr_owner" {
   for_each = {
     for rg in var.resource_group_configs :
-    rg.commonName => rg
+    rg.common_name => rg
     if rg.delegate_aks == true
   }
   group_object_id  = azuread_group.acr_push.id
@@ -31,7 +31,7 @@ resource "azuread_group_member" "acr_owner" {
 resource "azuread_group_member" "acr_contributor" {
   for_each = {
     for rg in var.resource_group_configs :
-    rg.commonName => rg
+    rg.common_name => rg
     if rg.delegate_aks == true
   }
   group_object_id  = azuread_group.acr_push.id
@@ -41,7 +41,7 @@ resource "azuread_group_member" "acr_contributor" {
 resource "azuread_group_member" "acr_reader" {
   for_each = {
     for rg in var.resource_group_configs :
-    rg.commonName => rg
+    rg.common_name => rg
     if rg.delegate_aks == true
   }
   group_object_id  = azuread_group.acr_pull.id

@@ -1,10 +1,10 @@
-resource "tls_private_key" "sshKey" {
+resource "tls_private_key" "ssh_key" {
   algorithm = "RSA"
   rsa_bits  = "4096"
 }
 
-resource "azurerm_key_vault_secret" "secretSshKey" {
-  name         = "ssh-priv-aks-${var.environmentShort}-${var.locationShort}"
-  value        = jsonencode(tls_private_key.sshKey)
-  key_vault_id = data.azurerm_key_vault.coreKv.id
+resource "azurerm_key_vault_secret" "ssh_key" {
+  name         = "ssh-priv-aks-${var.environment}-${var.location_short}"
+  value        = jsonencode(tls_private_key.ssh_key)
+  key_vault_id = data.azurerm_key_vault.core.id
 }

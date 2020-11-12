@@ -1,8 +1,3 @@
-variable "location" {
-  description = "The Azure region to create things in."
-  type        = string
-}
-
 variable "location_short" {
   description = "The Azure region short name."
   type        = string
@@ -37,9 +32,9 @@ variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes."
   type = list(
     object({
-      name       = string
+      name                    = string
       delegate_resource_group = bool
-      labels     = map(string)
+      labels                  = map(string)
       flux = object({
         enabled      = bool
         azdo_org     = string

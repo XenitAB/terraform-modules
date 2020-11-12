@@ -1,59 +1,59 @@
 # Add data source for the Azure AD Group for resource group owner
-data "azuread_group" "aadGroupRgOwner" {
+data "azuread_group" "resource_group_owner" {
   for_each = {
-    for ns in var.k8sNamespaces :
+    for ns in var.namespaces :
     ns.name => ns
-    if ns.delegateRg == true
+    if ns.delegate_resource_group == true
   }
-  name = "${local.aadGroupPrefix}${local.groupNameSeparator}rg${local.groupNameSeparator}${var.subscriptionCommonName}${local.groupNameSeparator}${var.environmentShort}${local.groupNameSeparator}${each.key}${local.groupNameSeparator}owner"
+  name = "${local.azure_ad_group_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.key}${local.group_name_separator}owner"
 }
 
 # Add data source for the Azure AD Group for resource group contributor
-data "azuread_group" "aadGroupRgContributor" {
+data "azuread_group" "resource_group_contributor" {
   for_each = {
-    for ns in var.k8sNamespaces :
+    for ns in var.namespaces :
     ns.name => ns
-    if ns.delegateRg == true
+    if ns.delegate_resource_group == true
   }
-  name = "${local.aadGroupPrefix}${local.groupNameSeparator}rg${local.groupNameSeparator}${var.subscriptionCommonName}${local.groupNameSeparator}${var.environmentShort}${local.groupNameSeparator}${each.key}${local.groupNameSeparator}contributor"
+  name = "${local.azure_ad_group_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.key}${local.group_name_separator}contributor"
 }
 
 # Add data source for the Azure AD Group for resource group reader
-data "azuread_group" "aadGroupRgReader" {
+data "azuread_group" "resource_group_reader" {
   for_each = {
-    for ns in var.k8sNamespaces :
+    for ns in var.namespaces :
     ns.name => ns
-    if ns.delegateRg == true
+    if ns.delegate_resource_group == true
   }
-  name = "${local.aadGroupPrefix}${local.groupNameSeparator}rg${local.groupNameSeparator}${var.subscriptionCommonName}${local.groupNameSeparator}${var.environmentShort}${local.groupNameSeparator}${each.key}${local.groupNameSeparator}reader"
+  name = "${local.azure_ad_group_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.key}${local.group_name_separator}reader"
 }
 
-resource "azuread_group_member" "aadGroupMemberRgOwner" {
+resource "azuread_group_member" "resource_group_owner" {
   for_each = {
-    for ns in var.k8sNamespaces :
+    for ns in var.namespaces :
     ns.name => ns
-    if ns.delegateRg == true
+    if ns.delegate_resource_group == true
   }
-  group_object_id  = azuread_group.aadGroupEdit[each.key].id
-  member_object_id = data.azuread_group.aadGroupRgOwner[each.key].id
+  group_object_id  = azuread_group.edit[each.key].id
+  member_object_id = data.azuread_group.resource_group_owner[each.key].id
 }
 
-resource "azuread_group_member" "aadGroupMemberRgContributor" {
+resource "azuread_group_member" "resource_group_contributor" {
   for_each = {
-    for ns in var.k8sNamespaces :
+    for ns in var.namespaces :
     ns.name => ns
-    if ns.delegateRg == true
+    if ns.delegate_resource_group == true
   }
-  group_object_id  = azuread_group.aadGroupEdit[each.key].id
-  member_object_id = data.azuread_group.aadGroupRgContributor[each.key].id
+  group_object_id  = azuread_group.edit[each.key].id
+  member_object_id = data.azuread_group.resource_group_contributor[each.key].id
 }
 
-resource "azuread_group_member" "aadGroupMemberRgReader" {
+resource "azuread_group_member" "resource_group_reader" {
   for_each = {
-    for ns in var.k8sNamespaces :
+    for ns in var.namespaces :
     ns.name => ns
-    if ns.delegateRg == true
+    if ns.delegate_resource_group == true
   }
-  group_object_id  = azuread_group.aadGroupView[each.key].id
-  member_object_id = data.azuread_group.aadGroupRgReader[each.key].id
+  group_object_id  = azuread_group.view[each.key].id
+  member_object_id = data.azuread_group.resource_group_reader[each.key].id
 }

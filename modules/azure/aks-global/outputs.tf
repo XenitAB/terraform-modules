@@ -1,31 +1,42 @@
-output "aadGroups" {
+output "azure_ad_group" {
+  description = "Azure AD groups"
   value = {
-    aadGroupView         = azuread_group.aadGroupView
-    aadGroupEdit         = azuread_group.aadGroupEdit
-    aadGroupClusterAdmin = azuread_group.aadGroupClusterAdmin
-    aadGroupClusterView  = azuread_group.aadGroupClusterView
+    view          = azuread_group.view
+    edit          = azuread_group.edit
+    cluster_admin = azuread_group.cluster_admin
+    cluster_view  = azuread_group.cluster_view
   }
 }
 
-output "aadPodIdentity" {
-  value = azurerm_user_assigned_identity.userAssignedIdentityNs
+output "aad_pod_identity" {
+  description = "aad-pod-identity user assigned identities"
+  value       = azurerm_user_assigned_identity.aad_pod_identity
 }
 
 output "acr" {
-  value = azurerm_container_registry.acr
+  description = "Azure Container Registry"
+  value       = azurerm_container_registry.acr
 }
 
 output "namespaces" {
-  value = var.namespaces
+  description = "Kubernetes namespaces"
+  value       = var.namespaces
 }
 
-output "aksAuthorizedIps" {
+output "aks_authorized_ips" {
+  description = "IP addresses authorized for API communication to Azure Kubernetes Service"
   value = concat(
     var.aks_authorized_ips,
-    local.aks_pip_prefixes,
+    local.aks_public_ip_prefixes,
   )
 }
 
-output "aksPipPrefixes" {
-  value = azurerm_public_ip_prefix.aks
+output "aks_public_ip_prefixes" {
+  description = "Azure Kubernetes Service IP Prefixes"
+  value       = azurerm_public_ip_prefix.aks
+}
+
+output "dns_zone" {
+  description = "DNS Zone to be used with external-dns"
+  value       = var.dnz_zone
 }

@@ -1,17 +1,17 @@
-resource "azuread_group" "aadGroupView" {
-  for_each = { for ns in var.k8sNamespaces : ns.name => ns }
-  name     = "${local.aksGroupNamePrefix}${local.groupNameSeparator}${var.subscriptionCommonName}${local.groupNameSeparator}${var.environmentShort}${local.groupNameSeparator}${each.value.name}${local.groupNameSeparator}view"
+resource "azuread_group" "view" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+  name     = "${local.aks_group_name_prefix}${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.value.name}${local.group_name_separator}view"
 }
 
-resource "azuread_group" "aadGroupEdit" {
-  for_each = { for ns in var.k8sNamespaces : ns.name => ns }
-  name     = "${local.aksGroupNamePrefix}${local.groupNameSeparator}${var.subscriptionCommonName}${local.groupNameSeparator}${var.environmentShort}${local.groupNameSeparator}${each.value.name}${local.groupNameSeparator}edit"
+resource "azuread_group" "edit" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+  name     = "${local.aks_group_name_prefix}${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.value.name}${local.group_name_separator}edit"
 }
 
-resource "azuread_group" "aadGroupClusterAdmin" {
-  name = "${local.aksGroupNamePrefix}${local.groupNameSeparator}${var.subscriptionCommonName}${local.groupNameSeparator}${var.environmentShort}${local.groupNameSeparator}clusteradmin"
+resource "azuread_group" "cluster_admin" {
+  name = "${local.aks_group_name_prefix}${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}clusteradmin"
 }
 
-resource "azuread_group" "aadGroupClusterView" {
-  name = "${local.aksGroupNamePrefix}${local.groupNameSeparator}${var.subscriptionCommonName}${local.groupNameSeparator}${var.environmentShort}${local.groupNameSeparator}clusterview"
+resource "azuread_group" "cluster_view" {
+  name = "${local.aks_group_name_prefix}${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}clusterview"
 }

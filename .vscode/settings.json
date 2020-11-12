@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "powershell.startAutomatically": false,
+  "files.associations": {
+    ".ci/*.yml": "azure-pipelines",
+    ".ci/*.yaml": "azure-pipelines",
+    "**/*.tf": "terraform",
+    "**/*.tfvars": "terraform"
+  }
+}

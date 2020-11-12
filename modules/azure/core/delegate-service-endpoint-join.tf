@@ -18,7 +18,7 @@ resource "azurerm_role_definition" "service_endpoint_join" {
 }
 
 data "azuread_group" "service_endpoint_join" {
-  name                    = "${local.aad_group_prefix}${local.group_name_separator}sub${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}serviceEndpointJoin"
+  name = "${local.aad_group_prefix}${local.group_name_separator}sub${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}serviceEndpointJoin"
 }
 
 resource "azurerm_role_assignment" "service_endpoint_join" {
@@ -28,6 +28,6 @@ resource "azurerm_role_assignment" "service_endpoint_join" {
   }
 
   scope              = azurerm_virtual_network.vnet[each.value.name].id
-  role_definition_id = azurerm_role_definition.service_endpoint_join[each.value.name].id
+  role_definition_id = azurerm_role_definition.service_endpoint_join[each.value.name].role_definition_resource_id
   principal_id       = data.azuread_group.service_endpoint_join.id
 }

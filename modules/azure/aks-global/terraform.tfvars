@@ -1,7 +1,6 @@
 location_short    = "we"
 name              = "aks"
 subscription_name = "tflab"
-aks_name          = "aks"
 core_name         = "core"
 
 namespaces = [

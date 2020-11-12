@@ -6,7 +6,7 @@ resource "azurerm_user_assigned_identity" "aad_pod_identity" {
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = data.azurerm_resource_group.rg.location
 
-  name = "uai-${var.environment}-${var.location_short}-${var.aks_name}-${each.key}"
+  name = "uai-${var.environment}-${var.location_short}-${var.name}-${each.key}"
 }
 
 # MOVE TO AKS

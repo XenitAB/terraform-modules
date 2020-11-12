@@ -18,11 +18,6 @@ variable "subscription_name" {
   type        = string
 }
 
-variable "aks_name" {
-  description = "The name for the aks clusters"
-  type        = string
-}
-
 variable "core_name" {
   description = "The name for the core infrastructure"
   type        = string

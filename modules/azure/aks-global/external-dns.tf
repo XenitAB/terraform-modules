@@ -4,7 +4,7 @@ resource "azurerm_dns_zone" "external_dns" {
 }
 
 resource "azuread_application" "external_dns" {
-  name = "${local.service_principal_name_prefix}${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${var.aks_name}${local.group_name_separator}dns"
+  name = "${local.service_principal_name_prefix}${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${var.name}${local.group_name_separator}dns"
 }
 
 resource "azuread_service_principal" "external_dns" {

@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "backup" {
-  name                     = "strg${var.environment}${var.location_short}${var.aks_name}bck"
+  name                     = "strg${var.environment}${var.location_short}${var.name}bck"
   resource_group_name      = data.azurerm_resource_group.rg.name
   location                 = data.azurerm_resource_group.rg.location
   account_tier             = "Standard"
@@ -14,7 +14,7 @@ resource "azurerm_storage_container" "backup" {
 }
 
 resource "azuread_application" "backup" {
-  name = "${local.service_principal_name_prefix}${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${var.aks_name}${local.group_name_separator}k8sbck"
+  name = "${local.service_principal_name_prefix}${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${var.name}${local.group_name_separator}k8sbck"
 }
 
 resource "azuread_service_principal" "backup" {

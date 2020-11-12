@@ -1,5 +1,5 @@
 resource "azuread_application" "helm_operator" {
-  name = "${local.service_principal_name_prefix}${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${var.aks_name}${local.group_name_separator}helmoperator"
+  name = "${local.service_principal_name_prefix}${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${var.name}${local.group_name_separator}helmoperator"
 }
 
 resource "azuread_service_principal" "helm_operator" {

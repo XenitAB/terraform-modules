@@ -69,8 +69,8 @@ resource "azuread_application_password" "aad_sp" {
 resource "azurerm_key_vault_secret" "aad_sp" {
   for_each = {
     for env_resource_core_rg in setproduct(var.resource_group_configs, local.core_rgs) : "${env_resource_core_rg[1]}-${env_resource_core_rg[0].common_name}" => {
-      resource_group_configs = env_resource_core_rg[0]
-      coreRg                 = env_resource_core_rg[1]
+      resource_group_config = env_resource_core_rg[0]
+      coreRg                = env_resource_core_rg[1]
     }
     if env_resource_core_rg[0].delegate_service_principal == true
   }

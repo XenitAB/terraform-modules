@@ -29,7 +29,21 @@ aks_config = {
   ]
 }
 
-kubernetes_namespaces = ["foo"]
+namespaces = [
+  {
+    name                    = "team1"
+    delegate_resource_group = true
+    labels = {
+      "terraform" = "true"
+    }
+    flux = {
+      enabled      = false
+      azdo_org     = ""
+      azdo_project = ""
+      azdo_repo    = ""
+    }
+  }
+]
 
 azure_devops_organization = "xenitab"
 

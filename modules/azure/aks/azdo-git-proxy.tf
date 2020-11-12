@@ -5,7 +5,7 @@ data "azurerm_key_vault_secret" "azdo_git_proxy_pat" {
 
 resource "random_password" "azdo_git_proxy" {
   for_each = {
-    for ns in var.kubernetes_namespaces :
+    for ns in var.namespaces :
     ns.name => ns
     if ns.flux.enabled
   }
@@ -24,7 +24,7 @@ locals {
     pat          = data.azurerm_key_vault_secret.azdo_git_proxy_pat.value
     organization = var.azure_devops_organization
     repositories = [
-      for ns in var.kubernetes_namespaces : {
+      for ns in var.namespaces : {
         project = ns.flux.azdo_project
         name    = ns.flux.azdo_repo
         token   = random_password.azdo_git_proxy[ns.name].result

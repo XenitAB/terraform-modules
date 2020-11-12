@@ -1,5 +1,5 @@
 resource "kubernetes_namespace" "k8sNs" {
-  for_each = { for ns in var.kubernetes_namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     labels = merge(

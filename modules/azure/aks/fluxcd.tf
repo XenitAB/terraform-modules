@@ -1,7 +1,7 @@
 resource "helm_release" "fluxcd_v1" {
   depends_on = [kubernetes_namespace.k8sNs]
   for_each = {
-    for ns in var.kubernetes_namespaces :
+    for ns in var.namespaces :
     ns.name => ns
     if ns.flux.enabled
   }

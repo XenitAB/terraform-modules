@@ -14,7 +14,7 @@ data "azurerm_key_vault_secret" "ssh_key" {
 }
 
 data "azurerm_key_vault" "rg" {
-  for_each = { for ns in var.kubernetes_namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   name                = "kv-${var.environment}-${var.location_short}-${each.key}"
   resource_group_name = "rg-${var.environment}-${var.location_short}-${each.key}"

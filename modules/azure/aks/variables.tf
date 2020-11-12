@@ -57,9 +57,21 @@ variable "aks_config" {
   })
 }
 
-variable "kubernetes_namespaces" {
-  description = "Namespaces to create in the cluster"
-  type = list(string)
+variable "namespaces" {
+  description = "The namespaces that should be created in Kubernetes."
+  type = list(
+    object({
+      name                    = string
+      delegate_resource_group = bool
+      labels                  = map(string)
+      flux = object({
+        enabled      = bool
+        azdo_org     = string
+        azdo_project = string
+        azdo_repo    = string
+      })
+    })
+  )
 }
 
 variable "acr_name" {

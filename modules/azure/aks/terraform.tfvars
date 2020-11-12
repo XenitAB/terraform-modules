@@ -31,13 +31,7 @@ aks_config = {
 
 kubernetes_namespaces = ["foo"]
 
-azdo_git_proxy = {
-  chart             = "azdo-git-proxy"
-  repository        = "https://xenitab.github.io/azdo-git-proxy/"
-  version           = "v0.1.0-rc5"
-  azdo_domain       = "dev.azure.com"
-  azdo_organization = "xenitab"
-}
+azure_devops_organization = "xenitab"
 
 acr_name = ""
 helm_operator_client_id = ""

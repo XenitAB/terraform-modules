@@ -20,9 +20,9 @@ resource "random_password" "azdo_git_proxy" {
 
 locals {
   azdo_git_proxy_json = {
-    domain       = var.azdo_git_proxy.azdo_domain
+    domain       = "dev.azure.com"
     pat          = data.azurerm_key_vault_secret.azdo_git_proxy_pat.value
-    organization = var.azdo_git_proxy.azdo_organization
+    organization = var.azure_devops_organization
     repositories = [
       for ns in var.kubernetes_namespaces : {
         project = ns.flux.azdo_project
@@ -54,10 +54,10 @@ resource "kubernetes_secret" "azdo_git_proxy" {
 }
 
 resource "helm_release" "azdo_git_proxy" {
-  name       = var.azdo_git_proxy.chart
-  repository = var.azdo_git_proxy.repository
-  chart      = var.azdo_git_proxy.chart
-  version    = var.azdo_git_proxy.version
+  name       = "azdo-git-proxy"
+  repository = "https://xenitab.github.io/azdo-git-proxy/"
+  chart      = "azdo-git-proxy"
+  version    = "v0.1.0-rc5"
   namespace  = kubernetes_namespace.azdo_git_proxy.metadata[0].name
 
   set {

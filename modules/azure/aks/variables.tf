@@ -101,13 +101,6 @@ variable "aad_pod_identity" {
   type = string
 }
 
-variable "azdo_git_proxy" {
-  description = "Configuration for Azure DevOps git proxy"
-  type = object({
-    chart             = string
-    repository        = string
-    version           = string
-    azdo_domain       = string
-    azdo_organization = string
-  })
+variable "azure_devops_organization" {
+  description = "Azure Devops organization used to configure azdo-proxy"
 }

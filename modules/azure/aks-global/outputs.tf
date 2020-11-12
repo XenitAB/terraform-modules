@@ -38,5 +38,5 @@ output "aks_public_ip_prefixes" {
 
 output "dns_zone" {
   description = "DNS Zone to be used with external-dns"
-  value       = var.dnz_zone
+  value       = var.dns_zone
 }

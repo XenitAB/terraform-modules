@@ -1,11 +1,11 @@
 data "azurerm_key_vault_secret" "azdo_git_proxy_pat" {
   name         = "azure-devops-pat"
-  key_vault_id = data.azurerm_key_vault.coreKv.id
+  key_vault_id = data.azurerm_key_vault.core.id
 }
 
 resource "random_password" "azdo_git_proxy" {
   for_each = {
-    for ns in local.k8sNamespaces :
+    for ns in var.kubernetes_namespaces :
     ns.name => ns
     if ns.flux.enabled
   }
@@ -24,7 +24,7 @@ locals {
     pat          = data.azurerm_key_vault_secret.azdo_git_proxy_pat.value
     organization = var.azdo_git_proxy.azdo_organization
     repositories = [
-      for ns in local.k8sNamespaces : {
+      for ns in var.kubernetes_namespaces : {
         project = ns.flux.azdo_project
         name    = ns.flux.azdo_repo
         token   = random_password.azdo_git_proxy[ns.name].result

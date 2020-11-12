@@ -1,25 +1,25 @@
-resource "azurerm_role_assignment" "groupViewAksAssignment" {
-  for_each             = { for ns in local.k8sNamespaces : ns.name => ns }
-  scope                = azurerm_kubernetes_cluster.aks.id
-  role_definition_name = "Azure Kubernetes Service Cluster User Role"
-  principal_id         = local.aadGroups.aadGroupView[each.key].id
-}
-
-resource "azurerm_role_assignment" "groupEditAksAssignment" {
-  for_each             = { for ns in local.k8sNamespaces : ns.name => ns }
-  scope                = azurerm_kubernetes_cluster.aks.id
-  role_definition_name = "Azure Kubernetes Service Cluster User Role"
-  principal_id         = local.aadGroups.aadGroupEdit[each.key].id
-}
-
-resource "azurerm_role_assignment" "groupClusterAdminAksAssignment" {
-  scope                = azurerm_kubernetes_cluster.aks.id
-  role_definition_name = "Azure Kubernetes Service Cluster User Role"
-  principal_id         = local.aadGroups.aadGroupClusterAdmin.id
-}
-
-resource "azurerm_role_assignment" "groupClusterViewAksAssignment" {
-  scope                = azurerm_kubernetes_cluster.aks.id
-  role_definition_name = "Azure Kubernetes Service Cluster User Role"
-  principal_id         = local.aadGroups.aadGroupClusterView.id
-}
+#resource "azurerm_role_assignment" "group_view_aks" {
+#  for_each             = { for ns in var.kubernetes_namespaces : ns.name => ns }
+#  scope                = azurerm_kubernetes_cluster.this.id
+#  role_definition_name = "Azure Kubernetes Service Cluster User Role"
+#  principal_id         = var.aad_groups.aadGroupView[each.key].id
+#}
+#
+#resource "azurerm_role_assignment" "group_edit_aks" {
+#  for_each             = { for ns in var.kubernetes_namespaces : ns.name => ns }
+#  scope                = azurerm_kubernetes_cluster.this.id
+#  role_definition_name = "Azure Kubernetes Service Cluster User Role"
+#  principal_id         = var.aadGroups.aadGroupEdit[each.key].id
+#}
+#
+#resource "azurerm_role_assignment" "group_cluster_admin_aks" {
+#  scope                = azurerm_kubernetes_cluster.this.id
+#  role_definition_name = "Azure Kubernetes Service Cluster User Role"
+#  principal_id         = var.aadGroups.aadGroupClusterAdmin.id
+#}
+#
+#resource "azurerm_role_assignment" "group_cluster_view_aks" {
+#  scope                = azurerm_kubernetes_cluster.this.id
+#  role_definition_name = "Azure Kubernetes Service Cluster User Role"
+#  principal_id         = var.aadGroups.aadGroupClusterView.id
+#}

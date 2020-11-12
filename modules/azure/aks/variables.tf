@@ -1,61 +1,39 @@
-variable "REMOTE_STATE_BACKENDKEY" {
-  description = "The Backend Key for the remote state"
-  type        = string
-}
-
-variable "REMOTE_STATE_RESOURCEGROUP" {
-  description = "The Resource Group for the remote state"
-  type        = string
-}
-
-variable "REMOTE_STATE_STORAGEACCOUNTNAME" {
-  description = "The Storage Account Name for the remote state"
-  type        = string
-}
-
-
 variable "location" {
   description = "The Azure region to create things in."
   type        = string
 }
 
-variable "locationShort" {
+variable "location_short" {
   description = "The Azure region short name."
   type        = string
 }
 
-variable "environmentShort" {
-  description = "The environment (short name) to use for the deploy"
+variable "environment" {
+  description = "The environment name to use for the deploy"
   type        = string
 }
 
-variable "commonName" {
+variable "name" {
   description = "The commonName to use for the deploy"
   type        = string
 }
 
-variable "subscriptionCommonName" {
+variable "subscription_name" {
   description = "The commonName for the subscription"
   type        = string
 }
 
-variable "aksCommonName" {
+variable "aks_name" {
   description = "The commonName for the aks clusters"
   type        = string
 }
 
-variable "coreCommonName" {
+variable "core_name" {
   description = "The commonName for the core infrastructure"
   type        = string
 }
 
-
-variable "k8sSaNamespace" {
-  description = "The namespaced used to store service accounts."
-  type        = string
-}
-
-variable "aksConfiguration" {
+variable "aks_config" {
   description = "The Azure Kubernetes Service (AKS) configuration"
   type = object({
     kubernetes_version = string
@@ -77,6 +55,50 @@ variable "aksConfiguration" {
       node_labels          = map(string)
     }))
   })
+}
+
+variable "kubernetes_namespaces" {
+  description = "Namespaces to create in the cluster"
+  type = list(string)
+}
+
+variable "acr_name" {
+  description = "Name of ACR registry to use for cluster"
+  type = string
+}
+
+variable "helm_operator_client_id" {
+  type = string
+}
+
+variable "helm_operator_secret" {
+  type = string
+}
+
+variable "aks_authorized_ips" {
+  type = list(string)
+}
+
+variable "aks_pip_prefix_id" {
+  type = string
+}
+
+variable "aad_apps" {
+  type = object({
+    client_app_client_id     = string
+    client_app_principal_id  = string
+    client_app_client_secret = string
+    server_app_client_id     = string
+    server_app_client_secret = string
+  })
+}
+
+variable "aad_groups" {
+  type = string
+}
+
+variable "aad_pod_identity" {
+  type = string
 }
 
 variable "azdo_git_proxy" {

@@ -1,6 +1,7 @@
-resource "helm_release" "fluxcd" {
+resource "helm_release" "fluxcd_v1" {
+  depends_on = [kubernetes_namespace.k8sNs]
   for_each = {
-    for ns in local.k8sNamespaces :
+    for ns in var.kubernetes_namespaces :
     ns.name => ns
     if ns.flux.enabled
   }
@@ -28,7 +29,7 @@ resource "helm_release" "fluxcd" {
 
   set {
     name  = "git.path"
-    value = var.environmentShort
+    value = var.environment
   }
 
   set {
@@ -73,8 +74,4 @@ resource "helm_release" "fluxcd" {
     name  = "syncGarbageCollection.enabled"
     value = "true"
   }
-
-  depends_on = [
-    kubernetes_namespace.k8sNs
-  ]
 }

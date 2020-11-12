@@ -1,16 +1,22 @@
-data "azurerm_key_vault" "coreKv" {
-  name                = "kv-${var.environmentShort}-${var.locationShort}-${var.coreCommonName}"
-  resource_group_name = "rg-${var.environmentShort}-${var.locationShort}-${var.coreCommonName}"
+data "azurerm_key_vault" "core" {
+  name                = "kv-${var.environment}-${var.location_short}-${var.core_name}"
+  resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"
 }
 
-data "azurerm_key_vault_secret" "kvSecretAadApps" {
+data "azurerm_key_vault_secret" "aad_apps" {
   name         = "aks-aad-apps"
-  key_vault_id = data.azurerm_key_vault.coreKv.id
+  key_vault_id = data.azurerm_key_vault.core.id
 }
 
-data "azurerm_key_vault" "kvRg" {
-  for_each = { for ns in local.k8sNamespaces : ns.name => ns }
-
-  name                = "kv-${var.environmentShort}-${var.locationShort}-${each.key}"
-  resource_group_name = "rg-${var.environmentShort}-${var.locationShort}-${each.key}"
+data "azurerm_key_vault_secret" "ssh_key" {
+  name         = "ssh-priv-aks-${var.environment}-${var.location_short}"
+  key_vault_id = data.azurerm_key_vault.core.id
 }
+
+data "azurerm_key_vault" "rg" {
+  for_each = { for ns in var.kubernetes_namespaces : ns.name => ns }
+
+  name                = "kv-${var.environment}-${var.location_short}-${each.key}"
+  resource_group_name = "rg-${var.environment}-${var.location_short}-${each.key}"
+}
+

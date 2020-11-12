@@ -1,11 +1,11 @@
-resource "azurerm_kubernetes_cluster" "aks" {
-  name                            = "aks-${var.environmentShort}-${var.locationShort}-${var.commonName}"
-  location                        = data.azurerm_resource_group.rg.location
-  resource_group_name             = data.azurerm_resource_group.rg.name
-  dns_prefix                      = "aks-${var.environmentShort}-${var.locationShort}-${var.commonName}"
-  kubernetes_version              = var.aksConfiguration.kubernetes_version
-  sku_tier                        = var.aksConfiguration.sku_tier
-  api_server_authorized_ip_ranges = local.aksAuthorizedIps
+resource "azurerm_kubernetes_cluster" "this" {
+  name                            = "aks-${var.environment}-${var.location_short}-${var.name}"
+  location                        = data.azurerm_resource_group.this.location
+  resource_group_name             = data.azurerm_resource_group.this.name
+  dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}"
+  kubernetes_version              = var.aks_config.kubernetes_version
+  sku_tier                        = var.aks_config.sku_tier
+  api_server_authorized_ip_ranges = var.aks_authorized_ips
 
   auto_scaler_profile {
     balance_similar_node_groups      = false
@@ -21,21 +21,21 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   default_node_pool {
     name                 = "default"
-    orchestrator_version = var.aksConfiguration.default_node_pool.orchestrator_version
-    node_count           = var.aksConfiguration.default_node_pool.min_count
-    min_count            = var.aksConfiguration.default_node_pool.min_count
-    max_count            = var.aksConfiguration.default_node_pool.max_count
-    vm_size              = var.aksConfiguration.default_node_pool.vm_size
+    orchestrator_version = var.aks_config.default_node_pool.orchestrator_version
+    node_count           = var.aks_config.default_node_pool.min_count
+    min_count            = var.aks_config.default_node_pool.min_count
+    max_count            = var.aks_config.default_node_pool.max_count
+    vm_size              = var.aks_config.default_node_pool.vm_size
     node_labels = merge({
       "node-pool" = "default"
       },
-      var.aksConfiguration.default_node_pool.node_labels
+      var.aks_config.default_node_pool.node_labels
     )
 
     availability_zones  = ["1", "2", "3"]
     enable_auto_scaling = true
     type                = "VirtualMachineScaleSets"
-    vnet_subnet_id      = data.azurerm_subnet.subnet.id
+    vnet_subnet_id      = data.azurerm_subnet.this.id
   }
 
   network_profile {
@@ -44,30 +44,30 @@ resource "azurerm_kubernetes_cluster" "aks" {
     load_balancer_sku = "standard"
     load_balancer_profile {
       outbound_ip_prefix_ids = [
-        local.aksPipPrefixId
+        var.aks_pip_prefix_id
       ]
     }
   }
 
   service_principal {
-    client_id     = local.aksAadApps.aksClientAppClientId
-    client_secret = local.aksAadApps.aksClientAppClientSecret
+    client_id     = var.aad_apps.client_app_client_id
+    client_secret = var.aad_apps.client_app_client_secret
   }
 
   role_based_access_control {
     enabled = true
 
     azure_active_directory {
-      client_app_id     = local.aksAadApps.aksClientAppClientId
-      server_app_id     = local.aksAadApps.aksServerAppClientId
-      server_app_secret = local.aksAadApps.aksServerAppClientSecret
+      client_app_id     = var.aad_apps.client_app_client_id
+      server_app_id     = var.aad_apps.server_app_client_id
+      server_app_secret = var.aad_apps.server_app_client_secret
     }
   }
 
   linux_profile {
     admin_username = "aksadmin"
     ssh_key {
-      key_data = jsondecode(data.azurerm_key_vault_secret.secretSshKey.value).public_key_openssh
+      key_data = jsondecode(data.azurerm_key_vault_secret.ssh_key.value).public_key_openssh
     }
   }
 
@@ -78,21 +78,21 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 }
 
-resource "azurerm_kubernetes_cluster_node_pool" "aksNodePools" {
+resource "azurerm_kubernetes_cluster_node_pool" "this" {
   for_each = {
-    for nodePool in var.aksConfiguration.additional_node_pools :
+    for nodePool in var.aks_config.additional_node_pools :
     nodePool.name => nodePool
   }
 
   name                  = each.value.name
   orchestrator_version  = each.value.orchestrator_version
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
   vm_size               = each.value.vm_size
   node_count            = each.value.min_count
   min_count             = each.value.min_count
   max_count             = each.value.max_count
   enable_auto_scaling   = true
-  vnet_subnet_id        = data.azurerm_subnet.subnet.id
+  vnet_subnet_id        = data.azurerm_subnet.this.id
 
   node_taints = each.value.node_taints
 

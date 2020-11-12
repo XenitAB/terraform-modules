@@ -1,11 +1,11 @@
-data "azurerm_key_vault_secret" "kvSecretHelmOperator" {
+data "azurerm_key_vault_secret" "helm_operator" {
   name         = "helm-operator"
-  key_vault_id = data.azurerm_key_vault.coreKv.id
+  key_vault_id = data.azurerm_key_vault.core.id
 }
 
 resource "helm_release" "helmOperator" {
   for_each = {
-    for ns in local.k8sNamespaces :
+    for ns in var.kubernetes_namespaces :
     ns.name => ns
   }
 
@@ -42,17 +42,17 @@ resource "helm_release" "helmOperator" {
 
   set {
     name  = "configureRepositories.repositories[0].url"
-    value = "https://${local.acr.name}.azurecr.io/helm/v1/repo/"
+    value = "https://${var.acr_name}.azurecr.io/helm/v1/repo/"
   }
 
   set {
     name  = "configureRepositories.repositories[0].username"
-    value = local.helmOperator.client_id
+    value = var.helm_operator_client_id
   }
 
   set {
     name  = "configureRepositories.repositories[0].password"
-    value = local.helmOperator.secret
+    value = var.helm_operator_secret
   }
 
   set {

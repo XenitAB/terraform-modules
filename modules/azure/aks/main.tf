@@ -1,46 +1,32 @@
-# Configure backend
 terraform {
-  backend "azurerm" {}
-}
+  required_version = "0.13.5"
 
-# Configure the Azure Provider
-provider "azurerm" {
-  version = "=2.14.0"
-  features {}
-}
-
-# Configure the Azure AD Provider
-provider "azuread" {
-  version = "=0.10.0"
-}
-
-# Configure the Kubernetes Provider
-provider "kubernetes" {
-  load_config_file       = "false"
-  host                   = azurerm_kubernetes_cluster.aks.kube_config.0.host
-  client_certificate     = base64decode(azurerm_kubernetes_cluster.aks.kube_admin_config.0.client_certificate)
-  client_key             = base64decode(azurerm_kubernetes_cluster.aks.kube_admin_config.0.client_key)
-  cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.aks.kube_admin_config.0.cluster_ca_certificate)
-}
-
-provider "helm" {
-  kubernetes {
-    load_config_file       = "false"
-    host                   = azurerm_kubernetes_cluster.aks.kube_config.0.host
-    client_certificate     = base64decode(azurerm_kubernetes_cluster.aks.kube_admin_config.0.client_certificate)
-    client_key             = base64decode(azurerm_kubernetes_cluster.aks.kube_admin_config.0.client_key)
-    cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.aks.kube_admin_config.0.cluster_ca_certificate)
+  required_providers {
+    azurerm = {
+      version = "2.35.0"
+      source  = "hashicorp/azurerm"
+    }
+    azuread = {
+      version = "1.0.0"
+      source  = "hashicorp/azuread"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "1.13.3"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "1.3.2"
+    }
   }
 }
 
-data "terraform_remote_state" "aksGlobal" {
-  backend   = "azurerm"
-  workspace = var.environmentShort
+data "azurerm_resource_group" "this" {
+  name = "rg-${var.environment}-${var.location}-${var.aks_name}"
+}
 
-  config = {
-    resource_group_name  = var.REMOTE_STATE_RESOURCEGROUP
-    storage_account_name = var.REMOTE_STATE_STORAGEACCOUNTNAME
-    container_name       = "tfstate-tf-aks-global"
-    key                  = var.REMOTE_STATE_BACKENDKEY
-  }
+data "azurerm_subnet" "this" {
+  name                 = "sn-${var.environment}-${var.location_short}-${var.core_name}-${var.name}"
+  virtual_network_name = "vnet-${var.environment}-${var.location_short}-${var.core_name}"
+  resource_group_name  = "rg-${var.environment}-${var.location_short}-${var.core_name}"
 }

@@ -29,7 +29,7 @@ resource "azuread_application_password" "helm_operator" {
 }
 
 resource "azuread_group_member" "helm_operator" {
-  group_object_id  = data.azuread_group.aadGroupAcrPull.id
+  group_object_id  = data.azuread_group.acr_pull.id
   member_object_id = azuread_service_principal.helm_operator.object_id
 }
 

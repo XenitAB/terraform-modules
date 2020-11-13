@@ -21,7 +21,7 @@ data "kubernetes_secret" "k8sSaSecret" {
 resource "azurerm_key_vault_secret" "serviceAccountKvSecret" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
-  name     = "${var.commonName}-${each.value.name}-serviceaccount-kubeconfig"
+  name     = "${var.name}-${each.value.name}-serviceaccount-kubeconfig"
   value = base64encode(jsonencode({
     apiVersion = "v1"
     kind       = "Config"
@@ -51,7 +51,7 @@ resource "azurerm_key_vault_secret" "serviceAccountKvSecret" {
 resource "azurerm_key_vault_secret" "serviceAccountKvRgSecret" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
-  name     = "${var.commonName}-${each.value.name}-serviceaccount-kubeconfig"
+  name     = "${var.name}-${each.value.name}-serviceaccount-kubeconfig"
   value = base64encode(jsonencode({
     apiVersion = "v1"
     kind       = "Config"
@@ -75,5 +75,5 @@ resource "azurerm_key_vault_secret" "serviceAccountKvRgSecret" {
     contexts        = null
     current-context = ""
   }))
-  key_vault_id = data.azurerm_key_vault.kvRg[each.key].id
+  key_vault_id = data.azurerm_key_vault.rg[each.key].id
 }

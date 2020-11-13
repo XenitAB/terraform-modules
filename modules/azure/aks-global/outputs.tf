@@ -10,7 +10,7 @@ output "azure_ad_group" {
 
 output "aad_pod_identity" {
   description = "aad-pod-identity user assigned identities"
-  value       = azurerm_user_assigned_identity.aad_pod_identity
+  value       = local.aad_pod_identity
 }
 
 output "acr" {

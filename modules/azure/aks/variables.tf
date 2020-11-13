@@ -104,9 +104,13 @@ variable "aad_groups" {
 }
 
 variable "aad_pod_identity" {
-  type = string
+  type = object({
+    id = string
+    client_id = string
+  })
 }
 
 variable "azure_devops_organization" {
   description = "Azure Devops organization used to configure azdo-proxy"
+  type = string
 }

@@ -49,6 +49,12 @@ resource "azurerm_kubernetes_cluster" "this" {
     }
   }
 
+  role_based_access_control {
+    azure_active_directory {
+      managed = true
+    }
+  }
+
   linux_profile {
     admin_username = "aksadmin"
     ssh_key {

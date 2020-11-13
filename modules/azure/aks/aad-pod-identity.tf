@@ -31,7 +31,7 @@ resource "helm_release" "aad_pod_identity" {
   }
 
   dynamic "set" {
-    for_each = var.kubernetes_namespaces
+    for_each = var.namespaces
     iterator = namespace
     content {
       name  = "azureIdentities[${namespace.key}].namespace"
@@ -40,7 +40,7 @@ resource "helm_release" "aad_pod_identity" {
   }
 
   dynamic "set" {
-    for_each = var.kubernetes_namespaces
+    for_each = var.namespaces
     iterator = namespace
     content {
       name  = "azureIdentities[${namespace.key}].type"
@@ -49,7 +49,7 @@ resource "helm_release" "aad_pod_identity" {
   }
 
   dynamic "set" {
-    for_each = var.kubernetes_namespaces
+    for_each = var.namespaces
     iterator = namespace
     content {
       name  = "azureIdentities[${namespace.key}].resourceID"
@@ -58,7 +58,7 @@ resource "helm_release" "aad_pod_identity" {
   }
 
   dynamic "set" {
-    for_each = var.kubernetes_namespaces
+    for_each = var.namespaces
     iterator = namespace
     content {
       name  = "azureIdentities[${namespace.key}].clientID"
@@ -67,7 +67,7 @@ resource "helm_release" "aad_pod_identity" {
   }
 
   dynamic "set" {
-    for_each = var.kubernetes_namespaces
+    for_each = var.namespaces
     iterator = namespace
     content {
       name  = "azureIdentities[${namespace.key}].binding.name"
@@ -76,7 +76,7 @@ resource "helm_release" "aad_pod_identity" {
   }
 
   dynamic "set" {
-    for_each = var.kubernetes_namespaces
+    for_each = var.namespaces
     iterator = namespace
     content {
       name  = "azureIdentities[${namespace.key}].binding.selector"

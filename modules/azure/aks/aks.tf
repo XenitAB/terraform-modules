@@ -44,7 +44,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     load_balancer_sku = "standard"
     load_balancer_profile {
       outbound_ip_prefix_ids = [
-        var.aks_public_ip_prefix
+        var.aks_public_ip_prefix_id
       ]
     }
   }

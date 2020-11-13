@@ -7,7 +7,6 @@ resource "random_password" "azdo_git_proxy" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
-    if ns.flux.enabled
   }
 
   length  = 48

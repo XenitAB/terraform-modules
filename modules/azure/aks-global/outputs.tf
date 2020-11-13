@@ -22,13 +22,13 @@ output "aks_authorized_ips" {
   description = "IP addresses authorized for API communication to Azure Kubernetes Service"
   value = concat(
     var.aks_authorized_ips,
-    local.aks_public_ip_prefixes,
+    local.aks_public_ip_prefix_ips,
   )
 }
 
-output "aks_public_ip_prefixes" {
+output "aks_public_ip_prefix_ids" {
   description = "Azure Kubernetes Service IP Prefixes"
-  value = local.aks_public_ip_prefixes
+  value = local.aks_public_ip_prefix_ids
 }
 
 output "dns_zone" {

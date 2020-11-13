@@ -74,8 +74,8 @@ variable "aks_authorized_ips" {
   type        = list(string)
 }
 
-variable "aks_public_ip_prefix" {
-  description = "Public IP AKS egresses from"
+variable "aks_public_ip_prefix_id" {
+  description = "Public IP ID AKS egresses from"
   type        = string
 }
 

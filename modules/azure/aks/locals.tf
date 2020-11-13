@@ -1,4 +1,4 @@
 locals {
   # Namespace to create service accounts in
-  service_account_namespace = "service-accounts"
+  service_accounts_namespace = "service-accounts"
 }

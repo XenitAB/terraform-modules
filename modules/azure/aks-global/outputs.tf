@@ -1,11 +1,6 @@
-output "azure_ad_group" {
+output "aad_groups" {
   description = "Azure AD groups"
-  value = {
-    view          = azuread_group.view
-    edit          = azuread_group.edit
-    cluster_admin = azuread_group.cluster_admin
-    cluster_view  = azuread_group.cluster_view
-  }
+  value = local.aad_groups
 }
 
 output "aad_pod_identity" {

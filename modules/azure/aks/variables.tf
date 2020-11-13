@@ -100,7 +100,24 @@ variable "aad_apps" {
 }
 
 variable "aad_groups" {
-  type = string
+  type = object({
+    view          = list(object({
+      id = string
+      name = string
+    })
+    edit          = list(object({
+      id = string
+      name = string
+    })
+    cluster_admin          = list(object({
+      id = string
+      name = string
+    })
+    cluster_view         = list(object({
+      id = string
+      name = string
+    })
+  })
 }
 
 variable "aad_pod_identity" {

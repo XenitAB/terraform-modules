@@ -85,7 +85,7 @@ variable "aks_authorized_ips" {
   type = list(string)
 }
 
-variable "aks_pip_prefix_id" {
+variable "aks_public_ip_prefix" {
   type = string
 }
 

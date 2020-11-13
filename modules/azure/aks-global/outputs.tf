@@ -28,7 +28,7 @@ output "aks_authorized_ips" {
 
 output "aks_public_ip_prefixes" {
   description = "Azure Kubernetes Service IP Prefixes"
-  value       = azurerm_public_ip_prefix.aks
+  value = local.aks_public_ip_prefixes
 }
 
 output "dns_zone" {

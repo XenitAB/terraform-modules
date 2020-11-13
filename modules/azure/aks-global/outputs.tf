@@ -8,9 +8,9 @@ output "aad_pod_identity" {
   value       = local.aad_pod_identity
 }
 
-output "acr" {
-  description = "Azure Container Registry"
-  value       = azurerm_container_registry.acr
+output "acr_name" {
+  description = "Azure Container Registry Name"
+  value       = azurerm_container_registry.acr.name
 }
 
 output "namespaces" {

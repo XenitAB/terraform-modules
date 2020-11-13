@@ -104,19 +104,19 @@ variable "aad_groups" {
     view          = list(object({
       id = string
       name = string
-    })
+    }))
     edit          = list(object({
       id = string
       name = string
-    })
+    }))
     cluster_admin          = list(object({
       id = string
       name = string
-    })
+    }))
     cluster_view         = list(object({
       id = string
       name = string
-    })
+    }))
   })
 }
 

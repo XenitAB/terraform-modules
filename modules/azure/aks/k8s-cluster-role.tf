@@ -1,15 +1,4 @@
-resource "kubernetes_cluster_role" "citrix" {
-  metadata {
-    name = "citrix"
-  }
-  rule {
-    api_groups = ["citrix.com"]
-    resources  = ["*"]
-    verbs      = ["*"]
-  }
-}
-
-resource "kubernetes_cluster_role" "listNamespaces" {
+resource "kubernetes_cluster_role" "list_namespaces" {
   metadata {
     name = "list-namespaces"
   }
@@ -20,7 +9,7 @@ resource "kubernetes_cluster_role" "listNamespaces" {
   }
 }
 
-resource "kubernetes_cluster_role" "helmRelease" {
+resource "kubernetes_cluster_role" "helm_release" {
   metadata {
     name = "helm-release"
   }

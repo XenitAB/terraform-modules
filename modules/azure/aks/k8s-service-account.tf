@@ -1,24 +1,22 @@
-resource "kubernetes_service_account" "k8sSa" {
-  depends_on = [kubernetes_namespace.k8sSaNs]
+resource "kubernetes_service_account" "group" {
   for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name      = "sa-${each.value.name}"
-    namespace = local.service_account_namespace
+    name      = each.value.name
+    namespace = kubernetes_namespace.service_accounts.metadata[0].name
   }
 }
 
-data "kubernetes_secret" "k8sSaSecret" {
-  depends_on = [kubernetes_namespace.k8sSaNs]
+data "kubernetes_secret" "group" {
   for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name      = kubernetes_service_account.k8sSa[each.key].default_secret_name
-    namespace = local.service_account_namespace
+    name      = kubernetes_service_account.namespaces[each.key].default_secret_name
+    namespace = kubernetes_namespace.service_accounts.metadata[0].name
   }
 }
 
-resource "azurerm_key_vault_secret" "serviceAccountKvSecret" {
+resource "azurerm_key_vault_secret" "group" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   name = "${var.name}-${each.value.name}-serviceaccount-kubeconfig"
@@ -28,8 +26,8 @@ resource "azurerm_key_vault_secret" "serviceAccountKvSecret" {
     clusters = [
       {
         cluster = {
-          certificate-authority-data = base64encode(lookup(data.kubernetes_secret.k8sSaSecret[each.key].data, "ca.crt"))
-          server                     = azurerm_kubernetes_cluster.this.kube_config.0.host
+          certificate-authority-data = base64encode(lookup(data.kubernetes_secret.group[each.key].data, "ca.crt"))
+          server                     = azurerm_kubernetes_cluster.this.kube_config[0].host
         }
         name = ""
       }
@@ -38,7 +36,7 @@ resource "azurerm_key_vault_secret" "serviceAccountKvSecret" {
       {
         name = ""
         user = {
-          token = data.kubernetes_secret.k8sSaSecret[each.key].data.token
+          token = data.kubernetes_secret.group[each.key].data.token
         }
       }
     ]
@@ -48,7 +46,7 @@ resource "azurerm_key_vault_secret" "serviceAccountKvSecret" {
   key_vault_id = data.azurerm_key_vault.core.id
 }
 
-resource "azurerm_key_vault_secret" "serviceAccountKvRgSecret" {
+resource "azurerm_key_vault_secret" "group_rg" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   name = "${var.name}-${each.value.name}-serviceaccount-kubeconfig"
@@ -58,8 +56,8 @@ resource "azurerm_key_vault_secret" "serviceAccountKvRgSecret" {
     clusters = [
       {
         cluster = {
-          certificate-authority-data = base64encode(lookup(data.kubernetes_secret.k8sSaSecret[each.key].data, "ca.crt"))
-          server                     = azurerm_kubernetes_cluster.this.kube_config.0.host
+          certificate-authority-data = base64encode(lookup(data.kubernetes_secret.group[each.key].data, "ca.crt"))
+          server                     = azurerm_kubernetes_cluster.this.kube_config[0].host
         }
         name = ""
       }
@@ -68,7 +66,7 @@ resource "azurerm_key_vault_secret" "serviceAccountKvRgSecret" {
       {
         name = ""
         user = {
-          token = data.kubernetes_secret.k8sSaSecret[each.key].data.token
+          token = data.kubernetes_secret.group[each.key].data.token
         }
       }
     ]

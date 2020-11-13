@@ -53,10 +53,10 @@ resource "kubernetes_secret" "azdo_git_proxy" {
 }
 
 resource "helm_release" "azdo_git_proxy" {
-  name       = "azdo-git-proxy"
   repository = "https://xenitab.github.io/azdo-git-proxy/"
   chart      = "azdo-git-proxy"
   version    = "v0.1.0-rc5"
+  name       = kubernetes_namespace.azdo_git_proxy.metadata[0].name
   namespace  = kubernetes_namespace.azdo_git_proxy.metadata[0].name
 
   set {

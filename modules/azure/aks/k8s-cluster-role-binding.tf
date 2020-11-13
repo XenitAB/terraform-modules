@@ -1,6 +1,6 @@
-resource "kubernetes_cluster_role_binding" "k8sCrbClusterAdmin" {
+resource "kubernetes_cluster_role_binding" "cluster_admin" {
   metadata {
-    name = "crb-clusteradmin"
+    name = "clusteradmin"
     labels = {
       "aad-group-name" = var.aad_groups.cluster_admin.name
     }
@@ -17,9 +17,9 @@ resource "kubernetes_cluster_role_binding" "k8sCrbClusterAdmin" {
   }
 }
 
-resource "kubernetes_cluster_role_binding" "k8sCrbClusterView" {
+resource "kubernetes_cluster_role_binding" "cluster_view" {
   metadata {
-    name = "crb-clusterview"
+    name = "clusterview"
     labels = {
       "aad-group-name" = var.aad_groups.cluster_view.name
     }

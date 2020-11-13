@@ -1,5 +1,5 @@
 resource "helm_release" "fluxcd_v1" {
-  depends_on = [kubernetes_namespace.k8sNs]
+  depends_on = [kubernetes_namespace.group]
   for_each = {
     for ns in var.namespaces :
     ns.name => ns

@@ -1,4 +1,4 @@
-resource "kubernetes_namespace" "k8sNs" {
+resource "kubernetes_namespace" "group" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
@@ -10,11 +10,11 @@ resource "kubernetes_namespace" "k8sNs" {
   }
 }
 
-resource "kubernetes_namespace" "k8sSaNs" {
+resource "kubernetes_namespace" "service_accounts" {
   metadata {
     labels = {
-      name = local.service_account_namespace
+      name = local.service_accounts_namespace
     }
-    name = local.service_account_namespace
+    name = local.service_accounts_namespace
   }
 }

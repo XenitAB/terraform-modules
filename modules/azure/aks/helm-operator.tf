@@ -1,18 +1,14 @@
-data "azurerm_key_vault_secret" "helm_operator" {
-  name         = "helm-operator"
-  key_vault_id = data.azurerm_key_vault.core.id
-}
-
-resource "helm_release" "helmOperator" {
+resource "helm_release" "helm_operator" {
+  depends_on = [kubernetes_namespace.group]
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
   }
 
-  name       = "helm-operator"
   repository = "https://charts.fluxcd.io"
   chart      = "helm-operator"
   version    = "1.1.0"
+  name       = "helm-operator"
   namespace  = each.key
 
   set {
@@ -72,8 +68,4 @@ resource "helm_release" "helmOperator" {
           insteadOf = https://dev.azure.com
         EOF
   }
-
-  depends_on = [
-    kubernetes_namespace.k8sNs
-  ]
 }

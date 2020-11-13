@@ -10,10 +10,10 @@ resource "kubernetes_namespace" "aad_pod_identity" {
 resource "helm_release" "aad_pod_identity" {
   depends_on = [kubernetes_namespace.k8sNs]
 
-  name       = "aad-pod-identity"
   repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
   chart      = "aad-pod-identity"
   version    = "2.0.0"
+  name       = kubernetes_namespace.aad_pod_identity.metadata[0].name
   namespace  = kubernetes_namespace.aad_pod_identity.metadata[0].name
 
   set {

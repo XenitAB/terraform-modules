@@ -1,9 +1,9 @@
-resource "kubernetes_role_binding" "k8sRbView" {
-  depends_on = [kubernetes_namespace.k8sNs]
+resource "kubernetes_role_binding" "view" {
+  depends_on = [kubernetes_namespace.group]
   for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name      = "rb-${each.value.name}-view"
+    name      = "${each.value.name}-view"
     namespace = each.value.name
 
     labels = {
@@ -22,12 +22,12 @@ resource "kubernetes_role_binding" "k8sRbView" {
   }
 }
 
-resource "kubernetes_role_binding" "k8sRbEdit" {
-  depends_on = [kubernetes_namespace.k8sNs]
+resource "kubernetes_role_binding" "edit" {
+  depends_on = [kubernetes_namespace.group]
   for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name      = "rb-${each.value.name}-edit"
+    name      = "${each.value.name}-edit"
     namespace = each.value.name
 
     labels = {
@@ -46,35 +46,8 @@ resource "kubernetes_role_binding" "k8sRbEdit" {
   }
 }
 
-resource "kubernetes_role_binding" "k8sRbCitrix" {
-  depends_on = [kubernetes_namespace.k8sNs, kubernetes_cluster_role.citrix]
-  for_each   = { for ns in var.namespaces : ns.name => ns }
-
-  metadata {
-    name      = "rb-${each.value.name}-citrix"
-    namespace = each.value.name
-
-    labels = {
-      "aad-group-name" = var.aad_groups.edit[each.key].name
-    }
-  }
-  role_ref {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "ClusterRole"
-    name      = "citrix"
-  }
-  subject {
-    kind      = "Group"
-    name      = var.aad_groups.edit[each.key].id
-    api_group = "rbac.authorization.k8s.io"
-  }
-}
-
-resource "kubernetes_role_binding" "helmRelease" {
-  depends_on = [
-    kubernetes_namespace.k8sNs,
-    kubernetes_cluster_role.helmRelease
-  ]
+resource "kubernetes_role_binding" "helm_release" {
+  depends_on = [kubernetes_namespace.group, kubernetes_cluster_role.helm_release]
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
@@ -97,15 +70,12 @@ resource "kubernetes_role_binding" "helmRelease" {
   }
 }
 
-resource "kubernetes_role_binding" "k8sRbSaEdit" {
-  depends_on = [
-    kubernetes_namespace.k8sSaNs,
-    kubernetes_service_account.k8sSa
-  ]
+resource "kubernetes_role_binding" "sa_edit" {
+  depends_on = [kubernetes_namespace.service_accounts]
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name      = "rb-sa-${each.value.name}-edit"
+    name      = "sa-${each.value.name}-edit"
     namespace = each.value.name
 
   }
@@ -116,46 +86,20 @@ resource "kubernetes_role_binding" "k8sRbSaEdit" {
   }
   subject {
     kind      = "ServiceAccount"
-    name      = kubernetes_service_account.k8sSa[each.key].metadata[0].name
+    name      = kubernetes_service_account.group[each.key].metadata[0].name
     namespace = local.service_account_namespace
   }
 }
 
-resource "kubernetes_role_binding" "k8sRbSaCitrix" {
+resource "kubernetes_role_binding" "sa_helm_release" {
   depends_on = [
-    kubernetes_namespace.k8sSaNs,
-    kubernetes_service_account.k8sSa,
-    kubernetes_cluster_role.citrix
+    kubernetes_namespace.service_accounts,
+    kubernetes_cluster_role.helm_release
   ]
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name      = "rb-sa-${each.value.name}-citrix"
-    namespace = each.value.name
-
-  }
-  role_ref {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "ClusterRole"
-    name      = "citrix"
-  }
-  subject {
-    kind      = "ServiceAccount"
-    name      = kubernetes_service_account.k8sSa[each.key].metadata[0].name
-    namespace = local.service_account_namespace
-  }
-}
-
-resource "kubernetes_role_binding" "helmReleaseSa" {
-  depends_on = [
-    kubernetes_namespace.k8sSaNs,
-    kubernetes_service_account.k8sSa,
-    kubernetes_cluster_role.helmRelease
-  ]
-  for_each = { for ns in var.namespaces : ns.name => ns }
-
-  metadata {
-    name      = "${each.value.name}-helm-release-sa"
+    name      = "sa-${each.value.name}-helm-release"
     namespace = each.value.name
   }
   role_ref {
@@ -165,7 +109,7 @@ resource "kubernetes_role_binding" "helmReleaseSa" {
   }
   subject {
     kind      = "ServiceAccount"
-    name      = kubernetes_service_account.k8sSa[each.key].metadata[0].name
+    name      = kubernetes_service_account.group[each.key].metadata[0].name
     namespace = local.service_account_namespace
   }
 }

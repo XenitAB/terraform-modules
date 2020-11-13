@@ -1,9 +1,9 @@
-resource "kubernetes_cluster_role_binding" "k8sCrbViewListNs" {
-  depends_on = [kubernetes_namespace.k8sNs]
+resource "kubernetes_cluster_role_binding" "view_list_ns" {
+  depends_on = [kubernetes_namespace.group]
   for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name = "crb-${each.value.name}-view-listns"
+    name = "${each.value.name}-view-listns"
 
     labels = {
       "aad-group-name" = var.aad_groups.view[each.key].name
@@ -21,12 +21,12 @@ resource "kubernetes_cluster_role_binding" "k8sCrbViewListNs" {
   }
 }
 
-resource "kubernetes_cluster_role_binding" "k8sCrbEditListNs" {
-  depends_on = [kubernetes_namespace.k8sNs]
+resource "kubernetes_cluster_role_binding" "edit_list_ns" {
+  depends_on = [kubernetes_namespace.group]
   for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name = "crb-${each.value.name}-edit-listns"
+    name = "${each.value.name}-edit-listns"
 
     labels = {
       "aadGroup" = var.aad_groups.edit[each.key].name

@@ -29,7 +29,7 @@ resource "azurerm_key_vault_secret" "serviceAccountKvSecret" {
       {
         cluster = {
           certificate-authority-data = base64encode(lookup(data.kubernetes_secret.k8sSaSecret[each.key].data, "ca.crt"))
-          server                     = azurerm_kubernetes_cluster.aks.kube_config.0.host
+          server                     = azurerm_kubernetes_cluster.this.kube_config.0.host
         }
         name = ""
       }
@@ -59,7 +59,7 @@ resource "azurerm_key_vault_secret" "serviceAccountKvRgSecret" {
       {
         cluster = {
           certificate-authority-data = base64encode(lookup(data.kubernetes_secret.k8sSaSecret[each.key].data, "ca.crt"))
-          server                     = azurerm_kubernetes_cluster.aks.kube_config.0.host
+          server                     = azurerm_kubernetes_cluster.this.kube_config.0.host
         }
         name = ""
       }

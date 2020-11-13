@@ -74,7 +74,7 @@ variable "acr_name" {
   type = string
 }
 
-variable "helm_operator_secret" {
+variable "helm_operator_credentials" {
   type = object({
     client_id = string
     secret = string

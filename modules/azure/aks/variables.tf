@@ -89,16 +89,6 @@ variable "aks_pip_prefix_id" {
   type = string
 }
 
-variable "aad_apps" {
-  type = object({
-    client_app_client_id     = string
-    client_app_principal_id  = string
-    client_app_client_secret = string
-    server_app_client_id     = string
-    server_app_client_secret = string
-  })
-}
-
 variable "aad_groups" {
   type = object({
     view          = list(object({

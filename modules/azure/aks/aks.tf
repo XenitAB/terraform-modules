@@ -49,21 +49,6 @@ resource "azurerm_kubernetes_cluster" "this" {
     }
   }
 
-  service_principal {
-    client_id     = var.aad_apps.client_app_client_id
-    client_secret = var.aad_apps.client_app_client_secret
-  }
-
-  role_based_access_control {
-    enabled = true
-
-    azure_active_directory {
-      client_app_id     = var.aad_apps.client_app_client_id
-      server_app_id     = var.aad_apps.server_app_client_id
-      server_app_secret = var.aad_apps.server_app_client_secret
-    }
-  }
-
   linux_profile {
     admin_username = "aksadmin"
     ssh_key {

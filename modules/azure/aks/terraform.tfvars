@@ -52,13 +52,5 @@ helm_operator_secret = ""
 aks_authorized_ips = []
 aks_pip_prefix_id = ""
 
-aad_apps = {
-  client_app_client_id     = ""
-  client_app_principal_id  = ""
-  client_app_client_secret = ""
-  server_app_client_id     = ""
-  server_app_client_secret = ""
-}
-
 aad_groups = ""
 aad_pod_identity = ""

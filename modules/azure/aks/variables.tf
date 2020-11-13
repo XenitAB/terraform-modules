@@ -74,12 +74,11 @@ variable "acr_name" {
   type = string
 }
 
-variable "helm_operator_client_id" {
-  type = string
-}
-
 variable "helm_operator_secret" {
-  type = string
+  type = object({
+    client_id = string
+    secret = string
+  })
 }
 
 variable "aks_authorized_ips" {

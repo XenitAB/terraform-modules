@@ -40,3 +40,11 @@ output "dns_zone" {
   description = "DNS Zone to be used with external-dns"
   value       = var.dns_zone
 }
+
+output "helm_operator_credentials" {
+  description = ""
+  value = {
+    client_id = azuread_service_principal.helm_operator.application_id
+    secret    = random_password.helm_operator.result
+  }
+}

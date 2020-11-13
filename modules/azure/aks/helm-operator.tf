@@ -47,12 +47,12 @@ resource "helm_release" "helmOperator" {
 
   set {
     name  = "configureRepositories.repositories[0].username"
-    value = var.helm_operator_client_id
+    value = var.helm_operator_credentials.client_id
   }
 
   set {
     name  = "configureRepositories.repositories[0].password"
-    value = var.helm_operator_secret
+    value = var.helm_operator_credentials.secret
   }
 
   set {

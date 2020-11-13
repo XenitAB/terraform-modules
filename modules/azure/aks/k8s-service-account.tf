@@ -11,7 +11,7 @@ data "kubernetes_secret" "group" {
   for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name      = kubernetes_service_account.namespaces[each.key].default_secret_name
+    name      = kubernetes_service_account.group[each.key].default_secret_name
     namespace = kubernetes_namespace.service_accounts.metadata[0].name
   }
 }

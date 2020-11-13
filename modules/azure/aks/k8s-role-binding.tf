@@ -71,7 +71,6 @@ resource "kubernetes_role_binding" "helm_release" {
 }
 
 resource "kubernetes_role_binding" "sa_edit" {
-  depends_on = [kubernetes_namespace.service_accounts]
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
@@ -87,15 +86,12 @@ resource "kubernetes_role_binding" "sa_edit" {
   subject {
     kind      = "ServiceAccount"
     name      = kubernetes_service_account.group[each.key].metadata[0].name
-    namespace = local.service_account_namespace
+    namespace = kubernetes_namespace.service_accounts.metadata[0].name
   }
 }
 
 resource "kubernetes_role_binding" "sa_helm_release" {
-  depends_on = [
-    kubernetes_namespace.service_accounts,
-    kubernetes_cluster_role.helm_release
-  ]
+  depends_on = [kubernetes_cluster_role.helm_release]
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
@@ -110,6 +106,6 @@ resource "kubernetes_role_binding" "sa_helm_release" {
   subject {
     kind      = "ServiceAccount"
     name      = kubernetes_service_account.group[each.key].metadata[0].name
-    namespace = local.service_account_namespace
+    namespace = kubernetes_namespace.service_accounts.metadata[0].name
   }
 }

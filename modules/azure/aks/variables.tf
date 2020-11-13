@@ -99,14 +99,14 @@ variable "aad_groups" {
       id = string
       name = string
     }))
-    cluster_admin          = list(object({
+    cluster_admin          = object({
       id = string
       name = string
-    }))
-    cluster_view         = list(object({
+    })
+    cluster_view         = object({
       id = string
       name = string
-    }))
+    })
   })
 }
 

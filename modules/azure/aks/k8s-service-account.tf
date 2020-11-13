@@ -1,6 +1,6 @@
 resource "kubernetes_service_account" "k8sSa" {
   depends_on = [kubernetes_namespace.k8sSaNs]
-  for_each = { for ns in var.namespaces : ns.name => ns }
+  for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "sa-${each.value.name}"
@@ -10,7 +10,7 @@ resource "kubernetes_service_account" "k8sSa" {
 
 data "kubernetes_secret" "k8sSaSecret" {
   depends_on = [kubernetes_namespace.k8sSaNs]
-  for_each = { for ns in var.namespaces : ns.name => ns }
+  for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = kubernetes_service_account.k8sSa[each.key].default_secret_name
@@ -21,7 +21,7 @@ data "kubernetes_secret" "k8sSaSecret" {
 resource "azurerm_key_vault_secret" "serviceAccountKvSecret" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
-  name     = "${var.name}-${each.value.name}-serviceaccount-kubeconfig"
+  name = "${var.name}-${each.value.name}-serviceaccount-kubeconfig"
   value = base64encode(jsonencode({
     apiVersion = "v1"
     kind       = "Config"
@@ -51,7 +51,7 @@ resource "azurerm_key_vault_secret" "serviceAccountKvSecret" {
 resource "azurerm_key_vault_secret" "serviceAccountKvRgSecret" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
-  name     = "${var.name}-${each.value.name}-serviceaccount-kubeconfig"
+  name = "${var.name}-${each.value.name}-serviceaccount-kubeconfig"
   value = base64encode(jsonencode({
     apiVersion = "v1"
     kind       = "Config"

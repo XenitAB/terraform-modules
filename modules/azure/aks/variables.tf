@@ -13,18 +13,13 @@ variable "name" {
   type        = string
 }
 
-variable "subscription_name" {
-  description = "The commonName for the subscription"
-  type        = string
-}
-
-variable "aks_name" {
-  description = "The commonName for the aks clusters"
-  type        = string
-}
-
 variable "core_name" {
   description = "The commonName for the core infrastructure"
+  type        = string
+}
+
+variable "aks_name_suffix" {
+  description = "The commonName for the aks clusters"
   type        = string
 }
 
@@ -71,53 +66,49 @@ variable "namespaces" {
 
 variable "acr_name" {
   description = "Name of ACR registry to use for cluster"
-  type = string
-}
-
-variable "helm_operator_credentials" {
-  type = object({
-    client_id = string
-    secret = string
-  })
+  type        = string
 }
 
 variable "aks_authorized_ips" {
-  type = list(string)
+  description = "Authorized IPs to access AKS API"
+  type        = list(string)
 }
 
 variable "aks_public_ip_prefix" {
-  type = string
+  description = "Public IP AKS egresses from"
+  type        = string
 }
 
 variable "aad_groups" {
+  description = "Configuration for aad groups"
   type = object({
-    view          = list(object({
-      id = string
-      name = string
-    }))
-    edit          = list(object({
-      id = string
-      name = string
-    }))
-    cluster_admin          = object({
-      id = string
+    view = map(any)
+    edit = map(any)
+    cluster_admin = object({
+      id   = string
       name = string
     })
-    cluster_view         = object({
-      id = string
+    cluster_view = object({
+      id   = string
       name = string
     })
   })
 }
 
 variable "aad_pod_identity" {
-  type = object({
-    id = string
-    client_id = string
-  })
+  description = "Configuration for aad pod identity"
+  type        = map(any)
 }
 
 variable "azure_devops_organization" {
   description = "Azure Devops organization used to configure azdo-proxy"
-  type = string
+  type        = string
+}
+
+variable "helm_operator_credentials" {
+  description = "ACR credentials pased to Helm Operator"
+  type = object({
+    client_id = string
+    secret    = string
+  })
 }

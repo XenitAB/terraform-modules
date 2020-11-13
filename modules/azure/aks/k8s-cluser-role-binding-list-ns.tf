@@ -1,6 +1,6 @@
 resource "kubernetes_cluster_role_binding" "k8sCrbViewListNs" {
   depends_on = [kubernetes_namespace.k8sNs]
-  for_each = { for ns in var.namespaces : ns.name => ns }
+  for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name = "crb-${each.value.name}-view-listns"
@@ -23,7 +23,7 @@ resource "kubernetes_cluster_role_binding" "k8sCrbViewListNs" {
 
 resource "kubernetes_cluster_role_binding" "k8sCrbEditListNs" {
   depends_on = [kubernetes_namespace.k8sNs]
-  for_each = { for ns in var.namespaces : ns.name => ns }
+  for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name = "crb-${each.value.name}-edit-listns"

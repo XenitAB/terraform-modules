@@ -26,11 +26,11 @@ terraform {
 }
 
 data "azurerm_resource_group" "this" {
-  name = "rg-${var.environment}-${var.location_short}-${var.aks_name}"
+  name = "rg-${var.environment}-${var.location_short}-${var.name}"
 }
 
 data "azurerm_subnet" "this" {
-  name                 = "sn-${var.environment}-${var.location_short}-${var.core_name}-${var.name}"
+  name                 = "sn-${var.environment}-${var.location_short}-${var.core_name}-${var.name}${var.aks_name_suffix}"
   virtual_network_name = "vnet-${var.environment}-${var.location_short}-${var.core_name}"
   resource_group_name  = "rg-${var.environment}-${var.location_short}-${var.core_name}"
 }

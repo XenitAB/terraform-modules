@@ -64,7 +64,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   linux_profile {
     admin_username = "aksadmin"
     ssh_key {
-      key_data = jsondecode(data.azurerm_key_vault_secret.ssh_key.value).public_key_openssh
+      key_data = var.ssh_public_key
     }
   }
 

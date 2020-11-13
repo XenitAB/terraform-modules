@@ -37,9 +37,15 @@ output "dns_zone" {
 }
 
 output "helm_operator_credentials" {
-  description = ""
+  description = "Credentials meant to be used by Helm Operator"
+  sensitive = true
   value = {
     client_id = azuread_service_principal.helm_operator.application_id
     secret    = random_password.helm_operator.result
   }
+}
+
+output "ssh_public_key" {
+  description = "SSH public key to add to servers"
+  value = tls_private_key.ssh_key.public_key_openssh
 }

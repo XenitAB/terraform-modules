@@ -64,6 +64,11 @@ variable "namespaces" {
   )
 }
 
+variable "ssh_public_key" {
+  description = "SSH public key to add to servers"
+  type = string
+}
+
 variable "acr_name" {
   description = "Name of ACR registry to use for cluster"
   type        = string

@@ -45,7 +45,7 @@ resource "azurerm_key_vault_secret" "serviceAccountKvSecret" {
     contexts        = null
     current-context = ""
   }))
-  key_vault_id = data.azurerm_key_vault.coreKv.id
+  key_vault_id = data.azurerm_key_vault.core.id
 }
 
 resource "azurerm_key_vault_secret" "serviceAccountKvRgSecret" {

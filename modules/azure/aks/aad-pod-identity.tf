@@ -14,7 +14,7 @@ resource "helm_release" "aad_pod_identity" {
   repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
   chart      = "aad-pod-identity"
   version    = "2.0.0"
-  namespace  = kubernetes_namespace.aad_pod_identity.name
+  namespace  = kubernetes_namespace.aad_pod_identity.metadata.name
 
   set {
     name  = "forceNameSpaced"
@@ -22,7 +22,7 @@ resource "helm_release" "aad_pod_identity" {
   }
 
   dynamic "set" {
-    for_each = local.k8sNamespaces
+    for_each = var.namespaces
     iterator = namespace
     content {
       name  = "azureIdentities[${namespace.key}].name"

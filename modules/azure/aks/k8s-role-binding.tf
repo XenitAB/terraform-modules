@@ -1,6 +1,6 @@
 resource "kubernetes_role_binding" "k8sRbView" {
   depends_on = [kubernetes_namespace.k8sNs]
-  for_each = { for ns in var.kuberentes_namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "rb-${each.value.name}-view"
@@ -24,7 +24,7 @@ resource "kubernetes_role_binding" "k8sRbView" {
 
 resource "kubernetes_role_binding" "k8sRbEdit" {
   depends_on = [kubernetes_namespace.k8sNs]
-  for_each = { for ns in var.kuberentes_namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "rb-${each.value.name}-edit"
@@ -48,7 +48,7 @@ resource "kubernetes_role_binding" "k8sRbEdit" {
 
 resource "kubernetes_role_binding" "k8sRbCitrix" {
   depends_on = [kubernetes_namespace.k8sNs, kubernetes_cluster_role.citrix]
-  for_each = { for ns in var.kuberentes_namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "rb-${each.value.name}-citrix"
@@ -75,7 +75,7 @@ resource "kubernetes_role_binding" "helmRelease" {
     kubernetes_namespace.k8sNs,
     kubernetes_cluster_role.helmRelease
   ]
-  for_each = { for ns in var.kuberentes_namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "${each.value.name}-helm-release"
@@ -102,7 +102,7 @@ resource "kubernetes_role_binding" "k8sRbSaEdit" {
     kubernetes_namespace.k8sSaNs,
     kubernetes_service_account.k8sSa
   ]
-  for_each = { for ns in var.kuberentes_namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "rb-sa-${each.value.name}-edit"
@@ -127,7 +127,7 @@ resource "kubernetes_role_binding" "k8sRbSaCitrix" {
     kubernetes_service_account.k8sSa,
     kubernetes_cluster_role.citrix
   ]
-  for_each = { for ns in var.kuberentes_namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "rb-sa-${each.value.name}-citrix"
@@ -152,7 +152,7 @@ resource "kubernetes_role_binding" "helmReleaseSa" {
     kubernetes_service_account.k8sSa,
     kubernetes_cluster_role.helmRelease
   ]
-  for_each = { for ns in var.kuberentes_namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "${each.value.name}-helm-release-sa"

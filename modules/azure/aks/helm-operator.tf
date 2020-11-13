@@ -64,7 +64,7 @@ resource "helm_release" "helm_operator" {
   set {
     name  = "git.config.data"
     value = <<EOF
-        [url "http://${random_password.azdo_git_proxy[each.key].result}@azdo-git-proxy.azdo-git-proxy"]
+        [url "http://${random_password.azdo_proxy[each.key].result}@azdo-proxy.azdo-proxy"]
           insteadOf = https://dev.azure.com
         EOF
   }

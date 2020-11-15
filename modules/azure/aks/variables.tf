@@ -66,7 +66,7 @@ variable "namespaces" {
 
 variable "ssh_public_key" {
   description = "SSH public key to add to servers"
-  type = string
+  type        = string
 }
 
 variable "acr_name" {
@@ -108,6 +108,13 @@ variable "aad_pod_identity" {
 variable "azure_devops_organization" {
   description = "Azure Devops organization used to configure azdo-proxy"
   type        = string
+  default     = ""
+}
+
+variable "azdo_proxy_enabled" {
+  description = "Should azdo-proxy be enabled"
+  type        = bool
+  default     = true
 }
 
 variable "helm_operator_credentials" {

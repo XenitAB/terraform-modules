@@ -61,11 +61,18 @@ resource "helm_release" "helm_operator" {
     value = "helm-operator-git-config"
   }
 
-  set {
-    name  = "git.config.data"
-    value = <<EOF
-        [url "http://${random_password.azdo_proxy[each.key].result}@azdo-proxy.azdo-proxy"]
+  dynamic "set" {
+    for_each = {
+      for s in ["azdo-proxy"] :
+      s => s
+      if var.azdo_proxy_enabled == true
+    }
+    content {
+      name  = "git.config.data"
+      value = <<EOF
+        [url "http://${module.azdo_proxy["azdo-proxy"].azdo_proxy_local_passwords[each.key]}@azdo-proxy.azdo-proxy"]
           insteadOf = https://dev.azure.com
         EOF
+    }
   }
 }

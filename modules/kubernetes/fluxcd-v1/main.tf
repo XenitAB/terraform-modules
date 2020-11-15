@@ -40,7 +40,7 @@ resource "helm_release" "fluxcd_v1" {
 
   set {
     name  = "git.path"
-    value = var.environment
+    value = var.fluxcd_v1_git_path
   }
 
   set {

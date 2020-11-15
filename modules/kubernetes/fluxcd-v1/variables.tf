@@ -26,6 +26,13 @@ variable "fluxcd_v1_helm_chart_version" {
   default     = "1.3.0"
 }
 
+# FluxCD v1 Helm Chart version
+variable "fluxcd_v1_git_path" {
+  description = "The git path for fluxcd-v1"
+  type        = string
+  default     = ""
+}
+
 # Namespace configuration
 variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes."

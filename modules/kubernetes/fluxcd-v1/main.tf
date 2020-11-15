@@ -1,15 +1,26 @@
+# Module requirements
+terraform {
+  required_version = "0.13.5"
+
+  required_providers {
+    helm = {
+      source  = "hashicorp/helm"
+      version = "1.3.2"
+    }
+  }
+}
+
 resource "helm_release" "fluxcd_v1" {
-  depends_on = [kubernetes_namespace.group]
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
     if ns.flux.enabled
   }
 
-  name       = "flux"
-  repository = "https://charts.fluxcd.io"
-  chart      = "flux"
-  version    = "1.3.0"
+  name       = var.fluxcd_v1_helm_release_name
+  repository = var.fluxcd_v1_helm_repository
+  chart      = var.fluxcd_v1_helm_chart_name
+  version    = var.fluxcd_v1_helm_chart_version
   namespace  = each.key
 
   set {

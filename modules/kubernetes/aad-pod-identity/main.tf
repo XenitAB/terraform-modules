@@ -1,19 +1,33 @@
+# Module requirements
+terraform {
+  required_version = "0.13.5"
+
+  required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "1.13.3"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "1.3.2"
+    }
+  }
+}
+
 resource "kubernetes_namespace" "aad_pod_identity" {
   metadata {
-    name = "aad-pod-identity"
+    name = var.aad_pod_identity_namespace
     labels = {
-      name = "aad-pod-identity"
+      name = var.aad_pod_identity_namespace
     }
   }
 }
 
 resource "helm_release" "aad_pod_identity" {
-  depends_on = [kubernetes_namespace.group]
-
-  repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
-  chart      = "aad-pod-identity"
-  version    = "2.0.0"
-  name       = kubernetes_namespace.aad_pod_identity.metadata[0].name
+  repository = var.aad_pod_identity_helm_repository
+  chart      = var.aad_pod_identity_helm_chart_name
+  version    = var.aad_pod_identity_helm_chart_version
+  name       = var.aad_pod_identity_helm_release_name
   namespace  = kubernetes_namespace.aad_pod_identity.metadata[0].name
 
   set {

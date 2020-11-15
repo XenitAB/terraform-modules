@@ -117,6 +117,24 @@ variable "azdo_proxy_enabled" {
   default     = true
 }
 
+variable "fluxcd_v1_enabled" {
+  description = "Should fluxcd-v1 be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "helm_operator_enabled" {
+  description = "Should helm-operator be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "aad_pod_identity_enabled" {
+  description = "Should aad-pod-identity be enabled"
+  type        = bool
+  default     = true
+}
+
 variable "helm_operator_credentials" {
   description = "ACR credentials pased to Helm Operator"
   type = object({

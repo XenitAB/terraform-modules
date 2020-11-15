@@ -1,0 +1,50 @@
+# FluxCD v1 Helm release name
+variable "fluxcd_v1_helm_release_name" {
+  description = "The helm release name for fluxcd-v1"
+  type        = string
+  default     = "fluxcd-v1"
+}
+
+# FluxCD v1 Helm Repositroy
+variable "fluxcd_v1_helm_repository" {
+  description = "The helm repository for fluxcd-v1"
+  type        = string
+  default     = "https://charts.fluxcd.io"
+}
+
+# FluxCD v1 Helm Chart name
+variable "fluxcd_v1_helm_chart_name" {
+  description = "The helm chart name for fluxcd-v1"
+  type        = string
+  default     = "flux"
+}
+
+# FluxCD v1 Helm Chart version
+variable "fluxcd_v1_helm_chart_version" {
+  description = "The helm chart version for fluxcd-v1"
+  type        = string
+  default     = "1.3.0"
+}
+
+# Namespace configuration
+variable "namespaces" {
+  description = "The namespaces that should be created in Kubernetes."
+  type = list(
+    object({
+      name = string
+      flux = object({
+        enabled      = bool
+        azdo_org     = string
+        azdo_project = string
+        azdo_repo    = string
+      })
+    })
+  )
+}
+
+# Should FluxCD integrate with Azure DevOps Proxy
+variable "azdo_proxy_enabled" {
+  description = "Should azdo-proxy integration be enabled"
+  type        = bool
+  default     = true
+}

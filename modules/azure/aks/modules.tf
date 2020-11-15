@@ -44,8 +44,9 @@ module "fluxcd_v1" {
     helm = helm
   }
 
-  azdo_proxy_enabled = var.azdo_proxy_enabled
-  fluxcd_v1_git_path = var.environment
+  azdo_proxy_enabled         = var.azdo_proxy_enabled
+  azdo_proxy_local_passwords = module.azdo_proxy["azdo-proxy"].azdo_proxy_local_passwords
+  fluxcd_v1_git_path         = var.environment
 
   namespaces = [for ns in var.namespaces : {
     name = ns.name
@@ -69,9 +70,10 @@ module "helm_operator" {
     helm = helm
   }
 
-  helm_operator_credentials = var.helm_operator_credentials
-  acr_name                  = var.acr_name
-  azdo_proxy_enabled        = var.azdo_proxy_enabled
+  helm_operator_credentials  = var.helm_operator_credentials
+  acr_name                   = var.acr_name
+  azdo_proxy_enabled         = var.azdo_proxy_enabled
+  azdo_proxy_local_passwords = module.azdo_proxy["azdo-proxy"].azdo_proxy_local_passwords
 
   namespaces = [for ns in var.namespaces : {
     name = ns.name

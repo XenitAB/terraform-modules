@@ -49,6 +49,13 @@ variable "azdo_proxy_enabled" {
   default     = true
 }
 
+# Azure DevOps Proxy local passwords
+variable "azdo_proxy_local_passwords" {
+  description = "The passwords (per namespace) to communicate with Azure DevOps Proxy"
+  type        = map(string)
+  default     = {}
+}
+
 # Helm Operator Credentials for Azure Container Registry
 variable "helm_operator_credentials" {
   description = "ACR credentials pased to Helm Operator"

@@ -55,3 +55,10 @@ variable "azdo_proxy_enabled" {
   type        = bool
   default     = true
 }
+
+# Azure DevOps Proxy local passwords
+variable "azdo_proxy_local_passwords" {
+  description = "The passwords (per namespace) to communicate with Azure DevOps Proxy"
+  type        = map(string)
+  default     = {}
+}

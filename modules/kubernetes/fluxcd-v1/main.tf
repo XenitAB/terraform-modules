@@ -67,7 +67,7 @@ resource "helm_release" "fluxcd_v1" {
     content {
       name  = "git.config.data"
       value = <<EOF
-        [url "http://${module.azdo_proxy["azdo-proxy"].azdo_proxy_local_passwords[each.key]}@azdo-proxy.azdo-proxy"]
+        [url "http://${var.azdo_proxy_local_passwords[each.key]}@azdo-proxy.azdo-proxy"]
           insteadOf = https://dev.azure.com
         EOF
     }

@@ -45,6 +45,7 @@ module "fluxcd_v1" {
   }
 
   azdo_proxy_enabled = var.azdo_proxy_enabled
+  fluxcd_v1_git_path = var.environment
 
   namespaces = [for ns in var.namespaces : {
     name = ns.name

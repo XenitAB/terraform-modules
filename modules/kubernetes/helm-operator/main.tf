@@ -11,7 +11,6 @@ terraform {
 }
 
 resource "helm_release" "helm_operator" {
-  depends_on = [kubernetes_namespace.group]
   for_each = {
     for ns in var.namespaces :
     ns.name => ns

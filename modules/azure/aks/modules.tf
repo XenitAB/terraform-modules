@@ -80,7 +80,7 @@ module "helm_operator" {
 
 
 # AAD-Pod-Identity
-module "helm_operator" {
+module "aad_pod_identity" {
   depends_on = [kubernetes_namespace.group]
 
   for_each = {

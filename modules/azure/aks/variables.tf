@@ -102,7 +102,10 @@ variable "aad_groups" {
 
 variable "aad_pod_identity" {
   description = "Configuration for aad pod identity"
-  type        = map(any)
+  type = map(object({
+    id        = string
+    client_id = string
+  }))
 }
 
 variable "azure_devops_organization" {

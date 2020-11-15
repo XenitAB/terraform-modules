@@ -1,3 +1,12 @@
+# AAD-Pod-Identity user assigned identities
+variable "aad_pod_identity" {
+  description = "Configuration for aad pod identity"
+  type = map(object({
+    id        = string
+    client_id = string
+  }))
+}
+
 # AAD-Pod-Identity Namespace name
 variable "aad_pod_identity_namespace" {
   description = "The namespace for aad-pod-identity"

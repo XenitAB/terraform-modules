@@ -97,6 +97,7 @@ module "aad_pod_identity" {
     helm       = helm
   }
 
+  aad_pod_identity = var.aad_pod_identity
   namespaces = [for ns in var.namespaces : {
     name = ns.name
   }]

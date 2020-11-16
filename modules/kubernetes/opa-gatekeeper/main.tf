@@ -1,3 +1,14 @@
+terraform {
+  required_version = "0.13.5"
+
+  required_providers {
+    helm = {
+      source  = "hashicorp/helm"
+      version = "1.3.2"
+    }
+  }
+}
+
 locals {
   values = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", {constraints = concat(var.default_constraints, var.additional_constraints), exclude = var.exclude })
 }

@@ -33,3 +33,15 @@ variable "vnet_config" {
     }))
   }))
 }
+
+variable "peering_config" {
+  description = "Peering configuration"
+  type = map(list(object({
+    name                         = string
+    remote_virtual_network_id    = string
+    allow_forwarded_traffic      = bool
+    use_remote_gateways          = bool
+    allow_virtual_network_access = bool
+  })))
+  default = {}
+}

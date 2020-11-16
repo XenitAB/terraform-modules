@@ -21,6 +21,16 @@ locals {
     ]
   ])
 
+  peerings = flatten([
+    for region, peering_configs in var.peering_config : [
+      for peering_config in peering_configs : {
+        name              = "${var.environment}-${region}-${var.name}-${peering_config.name}"
+        env_resource_name = "${var.environment}-${region}-${var.name}"
+        peering_config    = peering_config
+      }
+    ]
+  ])
+
   group_name_separator = "-"
   aad_group_prefix     = "az"
 }

@@ -15,6 +15,7 @@ resource "helm_release" "gatekeeper_templates" {
   repository = "https://xenitab.github.io/gatekeeper-library/"
   chart      = "gatekeeper-library-templates"
   name       = "gatekeeper-library-templates"
+  namespace  = "gatekeeper-system"
   version    = "v0.4.0"
   values = [local.values]
 }
@@ -25,6 +26,7 @@ resource "helm_release" "gatekeeper_constraints" {
   repository = "https://xenitab.github.io/gatekeeper-library/"
   chart      = "gatekeeper-library-constraints"
   name       = "gatekeeper-library-constraints"
+  namespace  = "gatekeeper-system"
   version    = "v0.4.0"
   values = [local.values]
 }

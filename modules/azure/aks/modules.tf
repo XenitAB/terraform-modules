@@ -7,7 +7,6 @@ module "azdo_proxy" {
   }
 
   source = "../../kubernetes/azdo-proxy"
-  #source = "github.com/xenitab/terraform-modules//modules/kubernetes/azdo-proxy?ref=feature%2Finit"
 
   providers = {
     azurerm    = azurem
@@ -39,7 +38,7 @@ module "fluxcd_v1" {
     if var.fluxcd_v1_enabled
   }
 
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/fluxcd-v1?ref=feature%2Finit"
+  source = "../../kubernetes/fluxcd-v1"
 
   providers = {
     helm = helm
@@ -65,7 +64,7 @@ module "helm_operator" {
     if var.helm_operator_enabled
   }
 
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/helm-operator?ref=feature%2Finit"
+  source = "../../kubernetes/helm-operator"
 
   providers = {
     helm = helm
@@ -93,7 +92,7 @@ module "aad_pod_identity" {
     if var.aad_pod_identity_enabled
   }
 
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/aad-pod-identity?ref=feature%2Finit"
+  source = "../../kubernetes/aad-pod-identity"
 
   providers = {
     kubernetes = kubernetes

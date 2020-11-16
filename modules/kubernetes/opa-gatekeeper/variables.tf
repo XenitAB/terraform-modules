@@ -3,35 +3,57 @@ variable "default_constraints" {
   type = list(object({
     kind = string
     name = string
+    parameters = map(any)
   }))
   default = [
     {
       kind = "K8sPSPAllowPrivilegeEscalationContainer"
       name = "psp-allow-privilege-escalation-container"
+      parameters = {}
     },
     {
       kind = "K8sPSPHostNamespace"
       name = "psp-host-namespace"
+      parameters = {}
     },
     {
       kind = "K8sPSPHostNetworkingPorts"
       name = "psp-host-network-ports"
+      parameters = {}
     },
     {
       kind = "K8sPSPFlexVolumes"
       name = "psp-flexvolume-drivers"
+      parameters = {}
     },
     {
       kind = "K8sPSPPrivilegedContainer"
       name = "psp-privileged-container"
+      parameters = {}
     },
     {
       kind = "K8sPSPProcMount"
       name = "psp-proc-mount"
+      parameters = {}
     },
     {
       kind = "K8sPSPReadOnlyRootFilesystem"
       name = "psp-readonlyrootfilesystem"
+      parameters = {}
+    },
+    {
+      kind = "K8sPSPVolumeTypes"
+      name = "psp-volume-types"
+      parameters = {
+        volumes = ["configMap", "downwardAPI", "emptyDir", "persistentVolumeClaim", "secret", "projected"]
+      }
+    },
+    {
+      kind = "K8sPSPCapabilities"
+      name = "psp-capabilities"
+      parameters = {
+        allowedCapabilities = [""]
+      }
     },
   ]
 }
@@ -41,6 +63,7 @@ variable "additional_constraints" {
   type = list(object({
     kind = string
     name = string
+    parameters = map(any)
   }))
   default = []
 }

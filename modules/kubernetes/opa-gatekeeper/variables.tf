@@ -3,7 +3,7 @@ variable "default_constraints" {
   type = list(object({
     kind = string
     name = string
-    parameters = map(any)
+    parameters = any
   }))
   default = [
     {
@@ -63,7 +63,7 @@ variable "additional_constraints" {
   type = list(object({
     kind = string
     name = string
-    parameters = map(any)
+    parameters = any
   }))
   default = []
 }

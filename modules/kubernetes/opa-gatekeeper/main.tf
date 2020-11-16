@@ -1,5 +1,5 @@
 locals {
-  values = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", {constraints = concat(var.default_constraints, var.additional_constraints)})
+  values = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", {constraints = concat(var.default_constraints, var.additional_constraints), exclude = var.exclude })
 }
 
 resource "helm_release" "gatekeeper" {

@@ -104,3 +104,19 @@ module "aad_pod_identity" {
     name = ns.name
   }]
 }
+
+# OPA Gatekeeper
+module "opa_gatekeeper" {
+  for_each = {
+    for s in ["opa-gatekeeper"] :
+    s => s
+    if var.opa_gatekeeper_enabled
+  }
+
+  source = "../../kubernetes/opa-gatekeeper"
+
+  providers = {
+    kubernetes = kubernetes
+    helm       = helm
+  }
+}

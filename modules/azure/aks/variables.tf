@@ -138,6 +138,12 @@ variable "aad_pod_identity_enabled" {
   default     = true
 }
 
+variable "opa_gatekeeper_enabled" {
+  description = "Should opa_gatekeeper be enabled"
+  type        = bool
+  default     = true
+}
+
 variable "helm_operator_credentials" {
   description = "ACR credentials pased to Helm Operator"
   type = object({

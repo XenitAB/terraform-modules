@@ -10,7 +10,7 @@ terraform {
 }
 
 locals {
-  values = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", {constraints = concat(var.default_constraints, var.additional_constraints), exclude = var.exclude })
+  values = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", { constraints = concat(var.default_constraints, var.additional_constraints), exclude = var.exclude })
 }
 
 resource "helm_release" "gatekeeper" {
@@ -28,7 +28,7 @@ resource "helm_release" "gatekeeper_templates" {
   name       = "gatekeeper-library-templates"
   namespace  = "gatekeeper-system"
   version    = "v0.4.0"
-  values = [local.values]
+  values     = [local.values]
 }
 
 resource "helm_release" "gatekeeper_constraints" {
@@ -39,5 +39,5 @@ resource "helm_release" "gatekeeper_constraints" {
   name       = "gatekeeper-library-constraints"
   namespace  = "gatekeeper-system"
   version    = "v0.4.0"
-  values = [local.values]
+  values     = [local.values]
 }

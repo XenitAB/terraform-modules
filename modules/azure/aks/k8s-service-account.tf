@@ -1,5 +1,5 @@
 resource "kubernetes_service_account" "group" {
-  for_each   = { for ns in var.namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = each.value.name
@@ -8,7 +8,7 @@ resource "kubernetes_service_account" "group" {
 }
 
 data "kubernetes_secret" "group" {
-  for_each   = { for ns in var.namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = kubernetes_service_account.group[each.key].default_secret_name

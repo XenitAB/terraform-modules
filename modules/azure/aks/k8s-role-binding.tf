@@ -48,7 +48,7 @@ resource "kubernetes_role_binding" "edit" {
 
 resource "kubernetes_role_binding" "helm_release" {
   depends_on = [kubernetes_namespace.group, kubernetes_cluster_role.helm_release]
-  for_each = { for ns in var.namespaces : ns.name => ns }
+  for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "${each.value.name}-helm-release"
@@ -92,7 +92,7 @@ resource "kubernetes_role_binding" "sa_edit" {
 
 resource "kubernetes_role_binding" "sa_helm_release" {
   depends_on = [kubernetes_cluster_role.helm_release]
-  for_each = { for ns in var.namespaces : ns.name => ns }
+  for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "sa-${each.value.name}-helm-release"

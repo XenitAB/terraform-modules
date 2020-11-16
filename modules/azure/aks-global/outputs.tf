@@ -1,6 +1,6 @@
 output "aad_groups" {
   description = "Azure AD groups"
-  value = local.aad_groups
+  value       = local.aad_groups
 }
 
 output "aad_pod_identity" {
@@ -28,7 +28,7 @@ output "aks_authorized_ips" {
 
 output "aks_public_ip_prefix_ids" {
   description = "Azure Kubernetes Service IP Prefixes"
-  value = local.aks_public_ip_prefix_ids
+  value       = local.aks_public_ip_prefix_ids
 }
 
 output "dns_zone" {
@@ -38,7 +38,7 @@ output "dns_zone" {
 
 output "helm_operator_credentials" {
   description = "Credentials meant to be used by Helm Operator"
-  sensitive = true
+  sensitive   = true
   value = {
     client_id = azuread_service_principal.helm_operator.application_id
     secret    = random_password.helm_operator.result
@@ -47,5 +47,5 @@ output "helm_operator_credentials" {
 
 output "ssh_public_key" {
   description = "SSH public key to add to servers"
-  value = tls_private_key.ssh_key.public_key_openssh
+  value       = tls_private_key.ssh_key.public_key_openssh
 }

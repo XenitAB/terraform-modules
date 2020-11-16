@@ -1,0 +1,40 @@
+name: check
+on: [pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@master
+      - name: Setup TFLint
+        uses: lablabs/setup-tflint@v1
+        with:
+          tflint_version: v0.20.3
+      - name: Install azurerm plugin
+        run: |
+          mkdir -p .tflint.d/plugins
+          wget https://github.com/terraform-linters/tflint-ruleset-azurerm/releases/download/v0.5.1/tflint-ruleset-azurerm_linux_amd64.zip
+          unzip tflint-ruleset-azurerm_linux_amd64.zip
+          mv tflint-ruleset-azurerm .tflint.d/plugins/
+      - name: Run lint
+        run: |
+          make lint
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@master
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.13.5
+      - name: Run fmt
+        run: |
+          make fmt
+      - name: Check if working tree is dirty
+        run: |
+          if [[ $(git diff --stat) != '' ]]; then
+            git diff
+            echo 'run make test and commit changes'
+            exit 1
+          fi

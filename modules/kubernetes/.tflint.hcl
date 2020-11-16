@@ -4,10 +4,6 @@ config {
   disabled_by_default = false
 }
 
-plugin "azurerm" {
-    enabled = true
-}
-
 rule "terraform_deprecated_interpolation" {
   enabled = true
 }

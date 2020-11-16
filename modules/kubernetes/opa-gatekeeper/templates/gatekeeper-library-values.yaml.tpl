@@ -1,8 +1,6 @@
 constraints:
   - kind: K8sPSPAllowPrivilegeEscalationContainer
     name: psp-allow-privilege-escalation-container
-  - kind: K8sPSPPrivilegedContainer
-    name: psp-privileged-container
   - kind: K8sPSPHostNamespace
     name: psp-host-namespace
   - kind: K8sPSPHostNetworkingPorts

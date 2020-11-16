@@ -16,6 +16,12 @@ variable "name" {
   type        = string
 }
 
+variable "nat_gateway_public_ip_prefix_length" {
+  description = "The Public IP Prefix length for NAT Gateway"
+  type        = number
+  default     = 31
+}
+
 variable "vnet_config" {
   description = "Address spaces used by virtual network."
   type = map(object({

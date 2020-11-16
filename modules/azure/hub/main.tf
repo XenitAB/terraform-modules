@@ -39,7 +39,7 @@ resource "azurerm_public_ip_prefix" "this" {
   name                = "ip-prefix-${each.key}"
   resource_group_name = data.azurerm_resource_group.this[each.key].name
   location            = data.azurerm_resource_group.this[each.key].location
-  prefix_length       = 30
+  prefix_length       = var.nat_gateway_public_ip_prefix_length
 }
 
 resource "azurerm_nat_gateway" "this" {

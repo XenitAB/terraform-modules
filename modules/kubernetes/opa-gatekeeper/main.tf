@@ -6,7 +6,7 @@ resource "helm_release" "gatekeeper" {
   repository = "https://open-policy-agent.github.io/gatekeeper/charts"
   chart      = "gatekeeper"
   name       = "gatekeeper"
-  version    = "v3.2.0"
+  version    = "v3.2.1"
 }
 
 resource "helm_release" "gatekeeper_templates" {

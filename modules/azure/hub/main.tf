@@ -1,0 +1,117 @@
+terraform {
+  required_version = "0.13.5"
+
+  required_providers {
+    azurerm = {
+      version = "2.35.0"
+      source  = "hashicorp/azurerm"
+    }
+  }
+}
+
+data "azurerm_resource_group" "this" {
+  for_each = {
+    for env_resource in local.env_resources :
+    env_resource.name => env_resource
+  }
+
+  name = "rg-${each.value.name}"
+}
+
+resource "azurerm_virtual_network" "this" {
+  for_each = {
+    for env_resource in local.env_resources :
+    env_resource.name => env_resource
+  }
+
+  name                = "vnet-${each.value.name}"
+  resource_group_name = data.azurerm_resource_group.this[each.value.name].name
+  location            = data.azurerm_resource_group.this[each.value.name].location
+  address_space       = each.value.vnet_config.address_space
+}
+
+resource "azurerm_public_ip_prefix" "this" {
+  for_each = {
+    for env_resource in local.env_resources :
+    env_resource.name => env_resource
+  }
+
+  name                = "ip-prefix-${each.key}"
+  resource_group_name = data.azurerm_resource_group.this[each.key].name
+  location            = data.azurerm_resource_group.this[each.key].location
+  prefix_length       = 30
+}
+
+resource "azurerm_nat_gateway" "this" {
+  for_each = {
+    for env_resource in local.env_resources :
+    env_resource.name => env_resource
+  }
+
+  name                    = "natgw-${each.key}"
+  resource_group_name     = data.azurerm_resource_group.this[each.key].name
+  location                = data.azurerm_resource_group.this[each.key].location
+  public_ip_prefix_ids    = [azurerm_public_ip_prefix.this[each.key].id]
+  sku_name                = "Standard"
+  idle_timeout_in_minutes = 10
+}
+
+
+resource "azurerm_subnet" "this" {
+  for_each = {
+    for subnet in local.subnets :
+    subnet.subnet_full_name => subnet
+  }
+
+  name                 = each.value.subnet_full_name
+  resource_group_name  = data.azurerm_resource_group.this[each.value.vnet_resource].name
+  virtual_network_name = azurerm_virtual_network.this[each.value.vnet_resource].name
+  address_prefixes     = [each.value.subnet_cidr]
+  service_endpoints    = each.value.subnet_service_endpoints
+}
+
+resource "azurerm_subnet_nat_gateway_association" "this" {
+  for_each = {
+    for subnet in local.subnets :
+    subnet.subnet_full_name => subnet
+  }
+
+  subnet_id      = azurerm_subnet.this[each.key].id
+  nat_gateway_id = azurerm_nat_gateway.this[each.value.vnet_resource].id
+}
+
+resource "azurerm_network_security_group" "this" {
+  for_each = {
+    for subnet in local.subnets :
+    subnet.subnet_full_name => subnet
+  }
+
+  name                = "nsg-${var.environment}-${each.value.vnet_region}-${var.name}-${each.value.subnet_short_name}"
+  location            = data.azurerm_resource_group.this[each.value.vnet_resource].location
+  resource_group_name = data.azurerm_resource_group.this[each.value.vnet_resource].name
+}
+
+resource "azurerm_subnet_network_security_group_association" "this" {
+  for_each = {
+    for subnet in local.subnets :
+    subnet.subnet_full_name => subnet
+  }
+
+  subnet_id                 = azurerm_subnet.this[each.key].id
+  network_security_group_id = azurerm_network_security_group.this[each.key].id
+}
+
+resource "azurerm_virtual_network_peering" "this" {
+  for_each = {
+    for peering_config in local.peerings :
+    peering_config.name => peering_config
+  }
+
+  name                         = "peering-${each.value.name}"
+  resource_group_name          = data.azurerm_resource_group.this[each.value.env_resource_name].name
+  virtual_network_name         = azurerm_virtual_network.this[each.value.env_resource_name].name
+  remote_virtual_network_id    = each.value.peering_config.remote_virtual_network_id
+  allow_forwarded_traffic      = each.value.peering_config.allow_forwarded_traffic
+  use_remote_gateways          = each.value.peering_config.use_remote_gateways
+  allow_virtual_network_access = each.value.peering_config.allow_virtual_network_access
+}

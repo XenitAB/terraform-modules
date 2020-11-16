@@ -12,7 +12,7 @@ resource "helm_release" "gatekeeper_templates" {
   chart      = "gatekeeper-library-templates"
   name       = "gatekeeper-library-templates"
   version    = "v0.4.0"
-  values = [templatefile("templates/gatekeeper-library-values.yaml.tpl")]
+  values = [templatefile("templates/gatekeeper-library-values.yaml.tpl", {})]
 }
 
 resource "helm_release" "gatekeeper_constraints" {
@@ -22,5 +22,5 @@ resource "helm_release" "gatekeeper_constraints" {
   chart      = "gatekeeper-library-constraints"
   name       = "gatekeeper-library-constraints"
   version    = "v0.4.0"
-  values = [templatefile("templates/gatekeeper-library-values.yaml.tpl")]
+  values = [templatefile("templates/gatekeeper-library-values.yaml.tpl", {})]
 }

@@ -1,17 +1,17 @@
 constraints:
   %{~ for item in constraints ~}
-  - kind: ${item.kind}
-    name: ${item.name}
+  - kind: "${item.kind}"
+    name: "${item.name}"
   %{~ endfor ~}
 exclude:
   %{~ for item in exclude ~}
   - excludedNamespaces:
     %{~ for item in item.excluded_namespaces ~}
-      - ${item}
+      - "${item}"
     %{~ endfor ~}
     processes:
     %{~ for item in item.processes ~}
-      - ${item}
+      - "${item}"
     %{~ endfor ~}
   %{~ endfor ~}
 

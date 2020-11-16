@@ -19,3 +19,22 @@ jobs:
       - name: Run lint
         run: |
           make lint
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@master
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.13.5
+      - name: Run fmt
+        run: |
+          make fmt
+      - name: Check if working tree is dirty
+        run: |
+          if [[ $(git diff --stat) != '' ]]; then
+            git diff
+            echo 'run make test and commit changes'
+            exit 1
+          fi

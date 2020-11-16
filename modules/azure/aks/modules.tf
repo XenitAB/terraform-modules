@@ -119,4 +119,11 @@ module "opa_gatekeeper" {
     kubernetes = kubernetes
     helm       = helm
   }
+
+  exclude = [
+    {
+      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity"]
+      processes = ["*"]
+    }
+  ]
 }

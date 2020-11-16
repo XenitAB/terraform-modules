@@ -1,5 +1,7 @@
 .ONESHELL:
-SHELL: /bin/bash
+SHELL := /bin/bash
+
+all: fmt lint
 
 .SILENT:
 fmt:
@@ -9,6 +11,7 @@ fmt:
 			terraform fmt $$dd
 		done
 	done
+
 
 .SILENT:
 lint:

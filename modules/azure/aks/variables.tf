@@ -144,7 +144,19 @@ variable "aad_pod_identity_enabled" {
 }
 
 variable "opa_gatekeeper_enabled" {
-  description = "Should opa_gatekeeper be enabled"
+  description = "Should OPA Gatekeeper be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "cert_manager_enabled" {
+  description = "Should Cert Manager be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "ingress_nginx_enabled" {
+  description = "Should Ingress NGINX be enabled"
   type        = bool
   default     = true
 }

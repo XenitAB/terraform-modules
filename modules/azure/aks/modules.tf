@@ -116,8 +116,7 @@ module "opa_gatekeeper" {
   source = "../../kubernetes/opa-gatekeeper"
 
   providers = {
-    kubernetes = kubernetes
-    helm       = helm
+    helm = helm
   }
 
   exclude = [
@@ -126,4 +125,34 @@ module "opa_gatekeeper" {
       processes           = ["*"]
     }
   ]
+}
+
+# Ingress Nginx
+module "cert_manager" {
+  for_each = {
+    for s in ["cert-manager"] :
+    s => s
+    if var.cert_manager_enabled
+  }
+
+  source = "../../kubernetes/cert-manager"
+
+  providers = {
+    helm = helm
+  }
+}
+
+# Ingress Nginx
+module "ingress_nginx" {
+  for_each = {
+    for s in ["ingress-nginx"] :
+    s => s
+    if var.ingress_nginx_enabled
+  }
+
+  source = "../../kubernetes/ingress-nginx"
+
+  providers = {
+    helm = helm
+  }
 }

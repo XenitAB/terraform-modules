@@ -6,7 +6,8 @@ module "azdo_proxy" {
     if var.azdo_proxy_enabled
   }
 
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/azdo-proxy?ref=feature%2Finit"
+  source = "${path.module}/../../kubernetes/azdo-proxy"
+  #source = "github.com/xenitab/terraform-modules//modules/kubernetes/azdo-proxy?ref=feature%2Finit"
 
   providers = {
     azurerm    = azurem

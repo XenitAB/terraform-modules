@@ -1,14 +1,17 @@
 constraints:
-  %{ for item in constraints ~}
+  %{~ for item in constraints ~}
   - kind: ${item.kind}
     name: ${item.name}
-  %{ endfor ~}
-
+  %{~ endfor ~}
 exclude:
-  %{ for item in exclude ~}
+  %{~ for item in exclude ~}
   - excludedNamespaces:
-      ${yamlencode(item.excluded_namespaces)}
+    %{~ for item in item.excluded_namespaces ~}
+      - ${item}
+    %{~ endfor ~}
     processes:
-      ${yamlencode(item.processes)}
-  %{ endfor ~}
+    %{~ for item in item.processes ~}
+      - ${item}
+    %{~ endfor ~}
+  %{~ endfor ~}
 

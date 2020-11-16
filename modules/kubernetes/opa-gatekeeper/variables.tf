@@ -48,12 +48,12 @@ variable "additional_constraints" {
 variable "exclude" {
   description = "Namespaces to opt out of constraints"
   type = list(object({
-    exclude_namespaces = list(string)
+    excluded_namespaces = list(string)
     processes = list(string)
   }))
   default = [
     {
-      exclude_namespaces = ["kube-system", "gatekeeper-system"]
+      excluded_namespaces = ["kube-system", "gatekeeper-system"]
       processes = ["*"]
     }
   ]

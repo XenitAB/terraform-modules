@@ -6,7 +6,9 @@ constraints:
 
 exclude:
   %{ for item in exclude ~}
-  - excludedNamespaces: ${item.excluded_namespaces}
-    processes: ${item.processes}
+  - excludedNamespaces:
+      ${yamlencode(item.excluded_namespaces)}
+    processes:
+      ${yamlencode(item.processes)}
   %{ endfor ~}
 

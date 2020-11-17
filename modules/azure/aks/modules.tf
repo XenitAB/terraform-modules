@@ -128,6 +128,36 @@ module "opa_gatekeeper" {
 }
 
 # Ingress Nginx
+module "ingress_nginx" {
+  for_each = {
+    for s in ["ingress-nginx"] :
+    s => s
+    if var.ingress_nginx_enabled
+  }
+
+  source = "../../kubernetes/ingress-nginx"
+
+  providers = {
+    helm = helm
+  }
+}
+
+# External DNS
+module "external_dns" {
+  for_each = {
+    for s in ["external-dns"] :
+    s => s
+    if var.external_dns_enabled
+  }
+
+  source = "../../kubernetes/external-dns"
+
+  providers = {
+    helm = helm
+  }
+}
+
+# Cert Manager
 module "cert_manager" {
   for_each = {
     for s in ["cert-manager"] :
@@ -142,17 +172,3 @@ module "cert_manager" {
   }
 }
 
-# Ingress Nginx
-module "ingress_nginx" {
-  for_each = {
-    for s in ["ingress-nginx"] :
-    s => s
-    if var.ingress_nginx_enabled
-  }
-
-  source = "../../kubernetes/ingress-nginx"
-
-  providers = {
-    helm = helm
-  }
-}

@@ -155,6 +155,8 @@ module "external_dns" {
   providers = {
     helm = helm
   }
+
+  dns_provider = "azure"
 }
 
 # Cert Manager

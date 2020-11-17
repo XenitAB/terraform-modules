@@ -9,6 +9,10 @@ terraform {
   }
 }
 
+locals {
+  values = templatefile("${path.module}/templates/values.yaml.tpl", { provider = var.dns_provider, sources = var.sources })
+}
+
 resource "helm_release" "external_dns" {
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "external-dns"
@@ -16,4 +20,5 @@ resource "helm_release" "external_dns" {
   namespace = "external-dns"
   create_namespace = true
   version    = "v4.0.0"
+  values     = [local.values]
 }

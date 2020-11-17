@@ -13,6 +13,7 @@
 
 | Name | Version |
 |------|---------|
+| azuread | 1.0.0 |
 | azurerm | 2.35.0 |
 | kubernetes | 1.13.3 |
 
@@ -20,7 +21,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| aad\_groups | Configuration for aad groups | <pre>object({<br>    view = map(any)<br>    edit = map(any)<br>    cluster_admin = object({<br>      id   = string<br>      name = string<br>    })<br>    cluster_view = object({<br>      id   = string<br>      name = string<br>    })<br>  })</pre> | n/a | yes |
+| aad\_groups | Configuration for aad groups | <pre>object({<br>    view = map(any)<br>    edit = map(any)<br>    cluster_admin = object({<br>      id   = string<br>      name = string<br>    })<br>    cluster_view = object({<br>      id   = string<br>      name = string<br>    })<br>    aks_managed_identity = object({<br>      id   = string<br>      name = string<br>    })<br>  })</pre> | n/a | yes |
 | aad\_pod\_identity | Configuration for aad pod identity | <pre>map(object({<br>    id        = string<br>    client_id = string<br>  }))</pre> | n/a | yes |
 | aad\_pod\_identity\_enabled | Should aad-pod-identity be enabled | `bool` | `true` | no |
 | acr\_name | Name of ACR registry to use for cluster | `string` | n/a | yes |

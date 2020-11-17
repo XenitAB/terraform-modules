@@ -26,5 +26,5 @@ resource "azuread_group_member" "aad_pod_identity" {
     if ns.delegate_resource_group == true
   }
   group_object_id  = data.azuread_group.resource_group_contributor[each.key].id
-  member_object_id = azurerm_user_assigned_identity.aad_pod_identity[each.key].object_id
+  member_object_id = azurerm_user_assigned_identity.aad_pod_identity[each.key].principal_id
 }

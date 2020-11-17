@@ -5,6 +5,7 @@ resource "azurerm_storage_account" "backup" {
   account_tier             = "Standard"
   account_replication_type = "GRS"
   account_kind             = "StorageV2"
+  min_tls_version          = "TLS1_2"
 }
 
 resource "azurerm_storage_container" "backup" {

@@ -33,7 +33,7 @@ variable "azdo_proxy_namespace" {
 variable "azdo_proxy_config_secret_name" {
   description = "The name of the secret storing the azdo-proxy configuration"
   type        = string
-  default     = "azdo-proxy-config"
+  default     = "azdo-proxy-config" #tfsec:ignore:GEN001
 }
 
 # Azure DevOps Proxy Helm Repositroy

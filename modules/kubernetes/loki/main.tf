@@ -28,6 +28,7 @@ resource "azurerm_storage_account" "loki" {
   account_tier             = var.storage_account_configuration.account_tier
   account_replication_type = var.storage_account_configuration.account_replication_type
   account_kind             = var.storage_account_configuration.account_kind
+  min_tls_version          = "TLS1_2"
 }
 
 resource "azurerm_storage_container" "loki" {

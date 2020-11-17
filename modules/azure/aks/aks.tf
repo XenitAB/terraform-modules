@@ -1,3 +1,4 @@
+#tfsec:ignore:AZU009
 resource "azurerm_kubernetes_cluster" "this" {
   name                            = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
   location                        = data.azurerm_resource_group.this.location

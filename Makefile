@@ -1,13 +1,13 @@
 .ONESHELL:
 SHELL := /bin/bash
 
-all: fmt lint docs
+all: fmt lint docs tfsec
 
 .SILENT:
 fmt:
 	for d in modules/*; do
 		for dd in $$d/*; do
-			echo $$dd
+			echo fmt: $$dd
 			terraform fmt $$dd
 		done
 	done
@@ -17,7 +17,7 @@ fmt:
 lint:
 	for d in modules/*; do
 		for dd in $$d/*; do
-			echo $$dd
+			echo lint: $$dd
 			tflint -c $$d/.tflint.hcl $$dd
 		done
 	done
@@ -26,7 +26,11 @@ lint:
 docs:
 	for d in modules/*; do
 		for dd in $$d/*; do
-			echo $$dd
+			echo docs: $$dd
 			terraform-docs markdown $$dd > $$dd/README.md
 		done
 	done
+
+.SILENT:
+tfsec:
+	tfsec .

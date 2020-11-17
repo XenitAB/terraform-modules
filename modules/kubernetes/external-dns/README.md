@@ -13,7 +13,10 @@
 
 ## Inputs
 
-No input.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| dns\_provider | DNS provider to use. | `string` | n/a | yes |
+| sources | k8s resource types to observe | `list(string)` | <pre>[<br>  "ingress"<br>]</pre> | no |
 
 ## Outputs
 

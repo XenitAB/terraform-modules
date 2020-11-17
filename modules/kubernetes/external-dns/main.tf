@@ -14,11 +14,11 @@ locals {
 }
 
 resource "helm_release" "external_dns" {
-  repository = "https://charts.bitnami.com/bitnami"
-  chart      = "external-dns"
-  name       = "external-dns"
-  namespace = "external-dns"
+  repository       = "https://charts.bitnami.com/bitnami"
+  chart            = "external-dns"
+  name             = "external-dns"
+  namespace        = "external-dns"
   create_namespace = true
-  version    = "v4.0.0"
-  values     = [local.values]
+  version          = "v4.0.0"
+  values           = [local.values]
 }

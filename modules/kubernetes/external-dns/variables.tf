@@ -8,3 +8,18 @@ variable "sources" {
   type        = list(string)
   default     = ["ingress"]
 }
+
+variable "azure_subscription_id" {
+  type = string
+  default = ""
+}
+
+variable "azure_tenant_id" {
+  type = string
+  default = ""
+}
+
+variable "azure_resource_group" {
+  type = string
+  default = ""
+}

@@ -161,6 +161,12 @@ variable "ingress_nginx_enabled" {
   default     = true
 }
 
+variable "external_dns_enabled" {
+  description = "Should External DNS be enabled"
+  type        = bool
+  default     = true
+}
+
 variable "helm_operator_credentials" {
   description = "ACR credentials pased to Helm Operator"
   type = object({

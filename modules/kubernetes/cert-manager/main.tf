@@ -9,6 +9,10 @@ terraform {
   }
 }
 
+locals {
+  values = templatefile("${path.module}/templates/values.yaml.tpl", { })
+}
+
 resource "helm_release" "cert_manager" {
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
@@ -16,4 +20,5 @@ resource "helm_release" "cert_manager" {
   namespace = "cert-manager"
   create_namespace = true
   version    = "v1.0.4"
+  values     = [local.values]
 }

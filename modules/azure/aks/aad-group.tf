@@ -30,5 +30,5 @@ resource "azurerm_role_assignment" "cluster_view" {
 
 resource "azuread_group_member" "aks_managed_identity" {
   group_object_id  = var.aad_groups.aks_managed_identity.id
-  member_object_id = azurerm_kubernetes_cluster.this.kubelet_identity[0].principal_id
+  member_object_id = azurerm_kubernetes_cluster.this.kubelet_identity[0].object_id
 }

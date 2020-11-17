@@ -5,3 +5,5 @@ logFormat: json
 securityContext:
   allowPrivilegeEscalation: false
   readOnlyRootFilesystem: true
+azure:
+  useManagedIdentityExtension: true

@@ -14,5 +14,6 @@ resource "helm_release" "external_dns" {
   chart      = "external-dns"
   name       = "external-dns"
   namespace = "external-dns"
+  create_namespace = true
   version    = "v4.0.0"
 }

@@ -26,7 +26,7 @@
 | acr\_name | Name of ACR registry to use for cluster | `string` | n/a | yes |
 | aks\_authorized\_ips | Authorized IPs to access AKS API | `list(string)` | n/a | yes |
 | aks\_config | The Azure Kubernetes Service (AKS) configuration | <pre>object({<br>    kubernetes_version = string<br>    sku_tier           = string<br>    default_node_pool = object({<br>      orchestrator_version = string<br>      vm_size              = string<br>      min_count            = number<br>      max_count            = number<br>      node_labels          = map(string)<br>    })<br>    additional_node_pools = list(object({<br>      name                 = string<br>      orchestrator_version = string<br>      vm_size              = string<br>      min_count            = number<br>      max_count            = number<br>      node_taints          = list(string)<br>      node_labels          = map(string)<br>    }))<br>  })</pre> | n/a | yes |
-| aks\_name\_suffix | The commonName for the aks clusters | `string` | n/a | yes |
+| aks\_name\_suffix | The suffix for the aks clusters | `number` | `1` | no |
 | aks\_public\_ip\_prefix\_id | Public IP ID AKS egresses from | `string` | n/a | yes |
 | azdo\_proxy\_enabled | Should azdo-proxy be enabled | `bool` | `true` | no |
 | azure\_devops\_organization | Azure Devops organization used to configure azdo-proxy | `string` | `""` | no |

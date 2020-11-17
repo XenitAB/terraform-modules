@@ -1,8 +1,8 @@
 resource "azurerm_kubernetes_cluster" "this" {
-  name                            = "aks-${var.environment}-${var.location_short}-${var.name}"
+  name                            = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
   location                        = data.azurerm_resource_group.this.location
   resource_group_name             = data.azurerm_resource_group.this.name
-  dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}"
+  dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
   kubernetes_version              = var.aks_config.kubernetes_version
   sku_tier                        = var.aks_config.sku_tier
   api_server_authorized_ip_ranges = var.aks_authorized_ips

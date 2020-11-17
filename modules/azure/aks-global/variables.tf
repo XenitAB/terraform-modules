@@ -49,3 +49,15 @@ variable "aks_authorized_ips" {
   description = "Authorized IPs to access AKS API"
   type        = list(string)
 }
+
+variable "public_ip_prefix_configuration" {
+  description = "Configuration for public ip prefix"
+  type = object({
+    count         = number
+    prefix_length = number
+  })
+  default = {
+    count         = 2
+    prefix_length = 30
+  }
+}

@@ -19,8 +19,9 @@ variable "core_name" {
 }
 
 variable "aks_name_suffix" {
-  description = "The commonName for the aks clusters"
-  type        = string
+  description = "The suffix for the aks clusters"
+  type        = number
+  default     = 1
 }
 
 variable "aks_config" {

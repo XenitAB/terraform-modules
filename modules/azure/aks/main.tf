@@ -30,7 +30,6 @@ provider "azurerm" {
 }
 
 provider "kubernetes" {
-  alias = "main"
   load_config_file       = "false"
   host                   = azurerm_kubernetes_cluster.this.kube_config[0].host
   client_certificate     = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].client_certificate)

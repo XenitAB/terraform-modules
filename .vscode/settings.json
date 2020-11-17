@@ -6,5 +6,23 @@
     ".ci/*.yaml": "azure-pipelines",
     "**/*.tf": "terraform",
     "**/*.tfvars": "terraform"
-  }
+  },
+  "terraform.languageServer": {
+    "external": true,
+    "args": ["serve"]
+  },
+  "terraform-ls.rootModules": [
+    "modules/azure/aks",
+    "modules/azure/aks-global",
+    "modules/azure/azure-pipelines-agent-vmss",
+    "modules/azure/core",
+    "modules/azure/governance",
+    "modules/azure/hub",
+    "modules/kubernetes/aad-pod-identity",
+    "modules/kubernetes/azdo-proxy",
+    "modules/kubernetes/fluxcd-v1",
+    "modules/kubernetes/helm-operator",
+    "modules/kubernetes/loki",
+    "modules/kubernetes/opa-gatekeeper"
+  ]
 }

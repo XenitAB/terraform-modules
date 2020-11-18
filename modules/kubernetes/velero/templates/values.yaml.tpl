@@ -8,7 +8,9 @@ configuration:
       resourceGroup: "${azure_resource_group}"
       storageAccount: "${azure_storage_account_name}"
 
-snapshotsEnable: false 
+snapshotsEnable: false
+logLevel: "warning"
+logFormat: "json"
 
 credentials:
   existingSecret: "velero"

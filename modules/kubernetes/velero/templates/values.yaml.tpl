@@ -15,7 +15,7 @@ credentials:
 
 initContainers:
   - name: "velero-plugin-for-microsoft-azure"
-    image: "velero/velero-plugin-for-microsoft-azure:1.1.1"
+    image: "velero/velero-plugin-for-microsoft-azure:v1.1.1"
     volumeMounts:
       - mountPath: "/target"
         name: "plugins"

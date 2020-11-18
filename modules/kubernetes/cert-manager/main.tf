@@ -31,7 +31,7 @@ resource "helm_release" "cert_manager_extras" {
   namespace = "cert-manager"
 
   set {
-    name = "notificationEmail"
+    name  = "notificationEmail"
     value = var.notification_email
   }
 }

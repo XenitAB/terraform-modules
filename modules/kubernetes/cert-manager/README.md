@@ -13,7 +13,9 @@
 
 ## Inputs
 
-No input.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| notification\_email | Email address to send certificate expiration notifications | `string` | `"DG-Team-DevOps@xenit.se"` | no |
 
 ## Outputs
 

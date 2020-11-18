@@ -176,8 +176,9 @@ variable "helm_operator_credentials" {
 }
 
 variable "external_dns_identity" {
+  description = "External DNS identity information"
   type = object({
-    client_id = string
+    client_id   = string
     resource_id = string
   })
 }

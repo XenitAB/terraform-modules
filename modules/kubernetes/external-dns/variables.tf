@@ -10,26 +10,31 @@ variable "sources" {
 }
 
 variable "azure_subscription_id" {
-  type    = string
-  default = ""
+  description = "Azure subscription ID for DNS zone"
+  type        = string
+  default     = ""
 }
 
 variable "azure_tenant_id" {
-  type    = string
-  default = ""
+  description = "Azure tenant ID for DNS zone"
+  type        = string
+  default     = ""
 }
 
 variable "azure_resource_group" {
-  type    = string
-  default = ""
+  description = "Azure resource group for DNS zone"
+  type        = string
+  default     = ""
 }
 
 variable "azure_client_id" {
-  type    = string
-  default = ""
+  description = "Client ID for MSI authentication"
+  type        = string
+  default     = ""
 }
 
 variable "azure_resource_id" {
-  type    = string
-  default = ""
+  description = "Principal ID fo MSI authentication"
+  type        = string
+  default     = ""
 }

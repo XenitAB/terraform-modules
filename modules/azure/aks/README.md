@@ -34,8 +34,8 @@
 | cert\_manager\_enabled | Should Cert Manager be enabled | `bool` | `true` | no |
 | core\_name | The commonName for the core infrastructure | `string` | n/a | yes |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
-| external\_dns\_client\_id | n/a | `string` | n/a | yes |
 | external\_dns\_enabled | Should External DNS be enabled | `bool` | `true` | no |
+| external\_dns\_identity | External DNS identity information | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |
 | fluxcd\_v1\_enabled | Should fluxcd-v1 be enabled | `bool` | `true` | no |
 | helm\_operator\_credentials | ACR credentials pased to Helm Operator | <pre>object({<br>    client_id = string<br>    secret    = string<br>  })</pre> | n/a | yes |
 | helm\_operator\_enabled | Should helm-operator be enabled | `bool` | `true` | no |

@@ -18,11 +18,11 @@ resource "azurerm_role_assignment" "external_dns_msi" {
 resource "azurerm_role_assignment" "external_dns_contributor" {
   scope                = azurerm_dns_zone.this.id
   role_definition_name = "Contributor"
-  principal_id = azurerm_user_assigned_identity.external_dns.principal_id
+  principal_id         = azurerm_user_assigned_identity.external_dns.principal_id
 }
 
 resource "azurerm_role_assignment" "external_dns_rg_read" {
-  scope = data.azurerm_resource_group.this.id
+  scope                = data.azurerm_resource_group.this.id
   role_definition_name = "Reader"
-  principal_id = azurerm_user_assigned_identity.external_dns.principal_id
+  principal_id         = azurerm_user_assigned_identity.external_dns.principal_id
 }

@@ -41,7 +41,7 @@
 | aks\_authorized\_ips | IP addresses authorized for API communication to Azure Kubernetes Service |
 | aks\_public\_ip\_prefix\_ids | Azure Kubernetes Service IP Prefixes |
 | dns\_zone | DNS Zone to be used with external-dns |
-| external\_dns\_client\_id | n/a |
+| external\_dns\_identity | MSI authentication identity for External DNS |
 | helm\_operator\_credentials | Credentials meant to be used by Helm Operator |
 | namespaces | Kubernetes namespaces |
 | ssh\_public\_key | SSH public key to add to servers |

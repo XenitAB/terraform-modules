@@ -23,3 +23,8 @@ variable "azure_resource_group" {
   type = string
   default = ""
 }
+
+variable "service_principal_id" {
+  type = string
+  default = ""
+}

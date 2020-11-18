@@ -26,7 +26,6 @@ resource "helm_release" "cert_manager" {
 resource "helm_release" "cluster_issuer" {
   depends_on = [helm_release.cert_manager]
 
-  repository       = "https://charts.jetstack.io"
   chart            = "${path.module}/charts/cluster-issuer"
   name             = "cluster-issuer"
   namespace        = "cert-manager"

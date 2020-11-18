@@ -22,3 +22,11 @@ resource "helm_release" "external_dns" {
   version          = "v4.0.0"
   values           = [local.values]
 }
+
+resource "helm_release" "aad_pod_identity" {
+  depends_on = [helm_release.external_dns]
+
+  chart            = "${path.module}/charts/aad-pod-identity"
+  name             = "aad-pod-identity"
+  namespace        = "external-dns"
+}

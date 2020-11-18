@@ -45,4 +45,5 @@
 | helm\_operator\_credentials | Credentials meant to be used by Helm Operator |
 | namespaces | Kubernetes namespaces |
 | ssh\_public\_key | SSH public key to add to servers |
+| velero | Velero configuration |
 

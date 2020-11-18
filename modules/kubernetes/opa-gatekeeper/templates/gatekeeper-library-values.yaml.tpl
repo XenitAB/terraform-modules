@@ -3,7 +3,7 @@ constraints:
   - kind: "${item.kind}"
     name: "${item.name}"
     parameters:
-      ${indent(12, yamlencode(item.parameters))}
+      ${indent(6, yamlencode(item.parameters))}
   %{~ endfor ~}
 exclude:
   %{~ for item in exclude ~}
@@ -16,4 +16,3 @@ exclude:
       - "${item}"
     %{~ endfor ~}
   %{~ endfor ~}
-

@@ -120,7 +120,7 @@ module "opa_gatekeeper" {
 
   exclude = [
     {
-      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx"]
+      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero"]
       processes           = ["*"]
     }
   ]
@@ -186,3 +186,25 @@ module "cert_manager" {
   }
 }
 
+# Velero
+module "velero" {
+  for_each = {
+    for s in ["velero"] :
+    s => s
+    if var.velero_enabled
+  }
+
+  source = "../../kubernetes/velero"
+
+  providers = {
+    helm = helm
+  }
+
+  cloud_provider                  = "azure"
+  azure_subscription_id           = data.azurerm_client_config.current.subscription_id
+  azure_resource_group            = data.azurerm_resource_group.this.name
+  azure_storage_account_name      = var.velero.azure_storage_account_name
+  azure_storage_account_container = var.velero.azure_storage_account_container
+  azure_client_id                 = var.velero.identity.client_id
+  azure_resource_id               = var.velero.identity.resource_id
+}

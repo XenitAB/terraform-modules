@@ -55,6 +55,24 @@ variable "default_constraints" {
         allowedCapabilities = [""]
       }
     },
+    {
+      kind       = "K8sBlockNodePort"
+      name       = "block-node-port"
+      parameters = {}
+    },
+    {
+      kind = "K8sRequiredProbes"
+      name = "required-probes"
+      parameters = {
+        probes     = ["readinessProbe"]
+        probeTypes = ["tcpSocket", "httpGet", "exec"]
+      }
+    },
+    {
+      kind       = "K8sPodPriorityClass"
+      name       = "pod-priority-class"
+      parameters = {}
+    },
   ]
 }
 

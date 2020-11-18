@@ -56,15 +56,15 @@ variable "default_constraints" {
       }
     },
     {
-      kind = "K8sBlockNodePort"
-      name = "block-node-port"
+      kind       = "K8sBlockNodePort"
+      name       = "block-node-port"
       parameters = {}
     },
     {
       kind = "K8sRequiredProbes"
       name = "required-probes"
       parameters = {
-        probes = ["readinessProbe"]
+        probes     = ["readinessProbe"]
         probeTypes = ["tcpSocket", "httpGet", "exec"]
       }
     },

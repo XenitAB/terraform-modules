@@ -32,4 +32,15 @@ resource "azuread_group_member" "aks_managed_identity" {
   group_object_id  = var.aad_groups.aks_managed_identity.id
   member_object_id = azurerm_kubernetes_cluster.this.kubelet_identity[0].client_id
 }
+
+resource "azurerm_role_assignment" "aks_managed_identity_noderg_managed_identity_operator" {
+  scope                = azurerm_kubernetes_cluster.this.node_resource_group
+  role_definition_name = "Managed Identity Operator"
+  principal_id         = var.aad_groups.aks_managed_identity.id
+}
+
+resource "azurerm_role_assignment" "aks_managed_identity_noderg_virtual_machine_contributor" {
+  scope                = azurerm_kubernetes_cluster.this.node_resource_group
+  role_definition_name = "Virtual Machine Contributor"
+  principal_id         = var.aad_groups.aks_managed_identity.id
 }

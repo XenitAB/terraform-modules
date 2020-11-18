@@ -175,10 +175,28 @@ variable "helm_operator_credentials" {
   })
 }
 
+variable "velero_enabled" {
+  description = "Should Velero be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "external_dns_identity" {
   description = "External DNS identity information"
   type = object({
     client_id   = string
     resource_id = string
+  })
+}
+
+variable "velero" {
+  description = "Velero configuration"
+  type = object({
+    azure_storage_account_name      = string
+    azure_storage_account_container = string
+    identity = object({
+      client_id   = string
+      resource_id = string
+    })
   })
 }

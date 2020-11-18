@@ -20,3 +20,9 @@ resource "azurerm_role_assignment" "external_dns_contributor" {
   role_definition_name = "Contributor"
   principal_id         = azuread_group.aks_managed_identity.id
 }
+
+resource "azurerm_role_assignment" "external_dns_rg_read" {
+  scope = data.azurerm_resource_group.rg.id
+  role_definition_name = "Reader"
+  principal_id         = azuread_group.aks_managed_identity.id
+}

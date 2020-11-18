@@ -32,7 +32,7 @@ resource "helm_release" "external_dns_extras" {
 
   set {
     name  = "resourceID"
-    value = var.azure_resource_group
+    value = var.azure_resource_id
   }
 
   set {

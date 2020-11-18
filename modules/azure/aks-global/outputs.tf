@@ -50,6 +50,9 @@ output "helm_operator_credentials" {
   }
 }
 
-output "external_dns_client_id" {
-  value = azurerm_user_assigned_identity.external_dns.client_id
+output "external_dns_identity" {
+  value = {
+    client_id = azurerm_user_assigned_identity.external_dns.client_id
+    resource_id = azurerm_user_assigned_identity.external_dns.id
+  }
 }

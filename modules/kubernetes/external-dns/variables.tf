@@ -28,3 +28,8 @@ variable "azure_client_id" {
   type    = string
   default = ""
 }
+
+variable "azure_resource_id" {
+  type    = string
+  default = ""
+}

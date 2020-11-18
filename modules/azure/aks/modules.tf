@@ -160,7 +160,8 @@ module "external_dns" {
   azure_tenant_id       = data.azurerm_client_config.current.tenant_id
   azure_subscription_id = data.azurerm_client_config.current.subscription_id
   azure_resource_group  = data.azurerm_resource_group.this.id
-  azure_client_id       = var.external_dns_client_id
+  azure_client_id       = var.external_dns_identity.client_id
+  azure_resource_id       = var.external_dns_identity.resource_id
 }
 
 # Cert Manager

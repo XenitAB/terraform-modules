@@ -3,10 +3,6 @@ terraform {
   required_version = "0.13.5"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "1.13.3"
-    }
     helm = {
       source  = "hashicorp/helm"
       version = "1.3.2"
@@ -14,21 +10,19 @@ terraform {
   }
 }
 
-resource "kubernetes_namespace" "aad_pod_identity" {
-  metadata {
-    name = var.aad_pod_identity_namespace
-    labels = {
-      name = var.aad_pod_identity_namespace
-    }
-  }
+locals {
+  name = "aad-pod-identity"
+  namespace = "aad-pod-identity"
+  version = "2.0.3"
 }
 
 resource "helm_release" "aad_pod_identity" {
-  repository = var.aad_pod_identity_helm_repository
-  chart      = var.aad_pod_identity_helm_chart_name
-  version    = var.aad_pod_identity_helm_chart_version
-  name       = var.aad_pod_identity_helm_release_name
-  namespace  = kubernetes_namespace.aad_pod_identity.metadata[0].name
+  repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
+  chart      = local.name
+  name       = local.name
+  version    = local.version
+  namespace = local.namespace
+  create_namespace = true
 
   set {
     name  = "forceNameSpaced"

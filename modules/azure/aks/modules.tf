@@ -95,7 +95,6 @@ module "aad_pod_identity" {
   source = "../../kubernetes/aad-pod-identity"
 
   providers = {
-    kubernetes = kubernetes
     helm       = helm
   }
 

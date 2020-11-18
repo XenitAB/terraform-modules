@@ -46,7 +46,7 @@ resource "helm_release" "velero" {
   chart      = "velero"
   name       = "velero"
   namespace  = kubernetes_namespace.velero.metadata[0].name
-  version    = "2.13.7"
+  version    = "2.13.6"
   values     = [local.values]
 }
 

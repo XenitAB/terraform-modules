@@ -125,6 +125,14 @@ module "opa_gatekeeper" {
       processes           = ["*"]
     }
   ]
+
+  additional_constraints = [
+    {
+      kind       = "AzureIdentityFormat"
+      name       = "azure-identity-format"
+      parameters = {}
+    },
+  ]
 }
 
 # Ingress Nginx

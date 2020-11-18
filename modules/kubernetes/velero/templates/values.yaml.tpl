@@ -10,6 +10,9 @@ configuration:
 
 snapshotsEnable: false 
 
+credentials:
+  existingSecret: "velero"
+
 initContainers:
   - name: "velero-plugin-for-microsoft-azure"
     image: "velero/velero-plugin-for-microsoft-azure:1.1.1"

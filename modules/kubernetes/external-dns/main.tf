@@ -29,4 +29,14 @@ resource "helm_release" "aad_pod_identity" {
   chart            = "${path.module}/charts/aad-pod-identity"
   name             = "aad-pod-identity"
   namespace        = "external-dns"
+
+  set {
+    name  = "resourceID"
+    value = var.azure_resource_group
+  }
+
+  set {
+    name  = "clientID"
+    value = var.azure_client_id
+  }
 }

@@ -174,3 +174,7 @@ variable "helm_operator_credentials" {
     secret    = string
   })
 }
+
+variable "external_dns_client_id" {
+  type = string
+}

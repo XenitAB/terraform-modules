@@ -36,6 +36,11 @@ output "dns_zone" {
   value       = var.dns_zone
 }
 
+output "ssh_public_key" {
+  description = "SSH public key to add to servers"
+  value       = tls_private_key.ssh_key.public_key_openssh
+}
+
 output "helm_operator_credentials" {
   description = "Credentials meant to be used by Helm Operator"
   sensitive   = true
@@ -45,7 +50,6 @@ output "helm_operator_credentials" {
   }
 }
 
-output "ssh_public_key" {
-  description = "SSH public key to add to servers"
-  value       = tls_private_key.ssh_key.public_key_openssh
+output "external_dns_client_id" {
+  value = azurerm_user_assigned_identity.external_dns.client_id
 }

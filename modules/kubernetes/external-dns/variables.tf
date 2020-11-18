@@ -24,7 +24,7 @@ variable "azure_resource_group" {
   default = ""
 }
 
-variable "service_principal_id" {
+variable "azure_client_id" {
   type = string
   default = ""
 }

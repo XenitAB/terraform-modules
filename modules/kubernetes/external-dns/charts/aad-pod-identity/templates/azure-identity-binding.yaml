@@ -3,5 +3,5 @@ kind: AzureIdentityBinding
 metadata:
   name: external-dns
 spec:
-  AzureIdentity: external-dns
-  Selector: external-dns
+  azureIdentity: external-dns
+  selector: external-dns

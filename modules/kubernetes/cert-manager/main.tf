@@ -23,10 +23,15 @@ resource "helm_release" "cert_manager" {
   values           = [local.values]
 }
 
-resource "helm_release" "cluster_issuer" {
+resource "helm_release" "cert_manager_extras" {
   depends_on = [helm_release.cert_manager]
 
-  chart     = "${path.module}/charts/cluster-issuer"
-  name      = "cluster-issuer"
+  chart     = "${path.module}/charts/cert-manager-extras"
+  name      = "cert-manager-extras"
   namespace = "cert-manager"
+
+  set {
+    name = "notificationEmail"
+    value = var.notification_email
+  }
 }

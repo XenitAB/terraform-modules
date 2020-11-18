@@ -4,8 +4,7 @@ metadata:
   name: letsencrypt
 spec:
   acme:
-    # FIXME replace with real email
-    email: user@example.com
+    email: {{ .Values.notificationEmail }}
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-cluster-issuer-account-key

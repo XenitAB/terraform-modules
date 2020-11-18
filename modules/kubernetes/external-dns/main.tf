@@ -26,9 +26,9 @@ resource "helm_release" "external_dns" {
 resource "helm_release" "aad_pod_identity" {
   depends_on = [helm_release.external_dns]
 
-  chart            = "${path.module}/charts/aad-pod-identity"
-  name             = "aad-pod-identity"
-  namespace        = "external-dns"
+  chart     = "${path.module}/charts/aad-pod-identity"
+  name      = "aad-pod-identity"
+  namespace = "external-dns"
 
   set {
     name  = "resourceID"

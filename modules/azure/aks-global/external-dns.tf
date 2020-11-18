@@ -6,7 +6,7 @@ resource "azurerm_dns_zone" "this" {
 resource "azurerm_user_assigned_identity" "external_dns" {
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = data.azurerm_resource_group.rg.location
-  name = "uai-${var.environment_short}-${var.location_short}-${var.name}-externaldns"
+  name                = "uai-${var.environment_short}-${var.location_short}-${var.name}-externaldns"
 }
 
 resource "azurerm_role_assignment" "external_dns" {

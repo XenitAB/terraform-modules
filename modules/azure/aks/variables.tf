@@ -98,6 +98,10 @@ variable "aad_groups" {
       id   = string
       name = string
     })
+    aks_managed_identity = object({
+      id   = string
+      name = string
+    })
   })
 }
 

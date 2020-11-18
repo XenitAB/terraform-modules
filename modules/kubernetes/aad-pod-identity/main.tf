@@ -11,17 +11,17 @@ terraform {
 }
 
 locals {
-  name = "aad-pod-identity"
+  name      = "aad-pod-identity"
   namespace = "aad-pod-identity"
-  version = "2.0.3"
+  version   = "2.0.3"
 }
 
 resource "helm_release" "aad_pod_identity" {
-  repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
-  chart      = local.name
-  name       = local.name
-  version    = local.version
-  namespace = local.namespace
+  repository       = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
+  chart            = local.name
+  name             = local.name
+  version          = local.version
+  namespace        = local.namespace
   create_namespace = true
 
   set {

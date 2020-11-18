@@ -47,8 +47,14 @@ provider "helm" {
   }
 }
 
+data "azurerm_client_config" "current" {}
+
 data "azurerm_resource_group" "this" {
   name = "rg-${var.environment}-${var.location_short}-${var.name}"
+}
+
+data "azurerm_resource_group" "aks" {
+  name = azurerm_kubernetes_cluster.this.node_resource_group
 }
 
 data "azurerm_subnet" "this" {

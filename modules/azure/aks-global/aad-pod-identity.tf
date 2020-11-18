@@ -3,8 +3,8 @@ resource "azurerm_user_assigned_identity" "aad_pod_identity" {
     for ns in var.namespaces :
     ns.name => ns
   }
-  resource_group_name = data.azurerm_resource_group.rg.name
-  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
 
   name = "uai-${var.environment}-${var.location_short}-${var.name}-${each.key}"
 }

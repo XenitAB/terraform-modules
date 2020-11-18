@@ -144,7 +144,25 @@ variable "aad_pod_identity_enabled" {
 }
 
 variable "opa_gatekeeper_enabled" {
-  description = "Should opa_gatekeeper be enabled"
+  description = "Should OPA Gatekeeper be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "cert_manager_enabled" {
+  description = "Should Cert Manager be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "ingress_nginx_enabled" {
+  description = "Should Ingress NGINX be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "external_dns_enabled" {
+  description = "Should External DNS be enabled"
   type        = bool
   default     = true
 }
@@ -154,5 +172,13 @@ variable "helm_operator_credentials" {
   type = object({
     client_id = string
     secret    = string
+  })
+}
+
+variable "external_dns_identity" {
+  description = "External DNS identity information"
+  type = object({
+    client_id   = string
+    resource_id = string
   })
 }

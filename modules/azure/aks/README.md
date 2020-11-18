@@ -31,15 +31,19 @@
 | aks\_public\_ip\_prefix\_id | Public IP ID AKS egresses from | `string` | n/a | yes |
 | azdo\_proxy\_enabled | Should azdo-proxy be enabled | `bool` | `true` | no |
 | azure\_devops\_organization | Azure Devops organization used to configure azdo-proxy | `string` | `""` | no |
+| cert\_manager\_enabled | Should Cert Manager be enabled | `bool` | `true` | no |
 | core\_name | The commonName for the core infrastructure | `string` | n/a | yes |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
+| external\_dns\_enabled | Should External DNS be enabled | `bool` | `true` | no |
+| external\_dns\_identity | External DNS identity information | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |
 | fluxcd\_v1\_enabled | Should fluxcd-v1 be enabled | `bool` | `true` | no |
 | helm\_operator\_credentials | ACR credentials pased to Helm Operator | <pre>object({<br>    client_id = string<br>    secret    = string<br>  })</pre> | n/a | yes |
 | helm\_operator\_enabled | Should helm-operator be enabled | `bool` | `true` | no |
+| ingress\_nginx\_enabled | Should Ingress NGINX be enabled | `bool` | `true` | no |
 | location\_short | The Azure region short name. | `string` | n/a | yes |
 | name | The commonName to use for the deploy | `string` | n/a | yes |
 | namespaces | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name                    = string<br>      delegate_resource_group = bool<br>      labels                  = map(string)<br>      flux = object({<br>        enabled      = bool<br>        azdo_org     = string<br>        azdo_project = string<br>        azdo_repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
-| opa\_gatekeeper\_enabled | Should opa\_gatekeeper be enabled | `bool` | `true` | no |
+| opa\_gatekeeper\_enabled | Should OPA Gatekeeper be enabled | `bool` | `true` | no |
 | ssh\_public\_key | SSH public key to add to servers | `string` | n/a | yes |
 
 ## Outputs

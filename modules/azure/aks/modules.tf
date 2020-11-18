@@ -116,14 +116,66 @@ module "opa_gatekeeper" {
   source = "../../kubernetes/opa-gatekeeper"
 
   providers = {
-    kubernetes = kubernetes
-    helm       = helm
+    helm = helm
   }
 
   exclude = [
     {
-      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity"]
+      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx"]
       processes           = ["*"]
     }
   ]
 }
+
+# Ingress Nginx
+module "ingress_nginx" {
+  for_each = {
+    for s in ["ingress-nginx"] :
+    s => s
+    if var.ingress_nginx_enabled
+  }
+
+  source = "../../kubernetes/ingress-nginx"
+
+  providers = {
+    helm = helm
+  }
+}
+
+# External DNS
+module "external_dns" {
+  for_each = {
+    for s in ["external-dns"] :
+    s => s
+    if var.external_dns_enabled
+  }
+
+  source = "../../kubernetes/external-dns"
+
+  providers = {
+    helm = helm
+  }
+
+  dns_provider          = "azure"
+  azure_tenant_id       = data.azurerm_client_config.current.tenant_id
+  azure_subscription_id = data.azurerm_client_config.current.subscription_id
+  azure_resource_group  = data.azurerm_resource_group.this.name
+  azure_client_id       = var.external_dns_identity.client_id
+  azure_resource_id     = var.external_dns_identity.resource_id
+}
+
+# Cert Manager
+module "cert_manager" {
+  for_each = {
+    for s in ["cert-manager"] :
+    s => s
+    if var.cert_manager_enabled
+  }
+
+  source = "../../kubernetes/cert-manager"
+
+  providers = {
+    helm = helm
+  }
+}
+

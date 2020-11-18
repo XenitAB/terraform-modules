@@ -54,6 +54,25 @@ module "fluxcd_v1" {
   }]
 }
 
+# FluxCD v2
+module "fluxcd_v2" {
+  source = "../../kubernetes/fluxcd-v2"
+
+  providers = {
+    helm = helm
+  }
+
+  azdo_proxy_enabled         = var.azdo_proxy_enabled
+  azdo_proxy_local_passwords = module.azdo_proxy["azdo-proxy"].azdo_proxy_local_passwords
+  fluxcd_v1_git_path         = var.environment
+  git_path = var.environment
+
+  namespaces = [for ns in var.namespaces : {
+    name = ns.name
+    flux = ns.flux
+  }]
+}
+
 # Helm Operator
 module "helm_operator" {
   depends_on = [kubernetes_namespace.group]

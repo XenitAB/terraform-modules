@@ -9,9 +9,7 @@
   },
   "terraform.languageServer": {
     "external": true,
-    "args": [
-      "serve"
-    ]
+    "args": ["serve"]
   },
   "terraform-ls.rootModules": [
     "modules/azure/aks-global",

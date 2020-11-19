@@ -1,4 +1,4 @@
-variable "azure_devops_pat" {
+variable "azdo_pat" {
   description = "PAT to authenticate with Azure DevOps"
   type        = string
 }
@@ -13,8 +13,14 @@ variable "azdo_proj" {
   type        = string
 }
 
-variable "bootstrap_repo_name" {
-  description = "Bootstrap repository name"
+variable "repository_name" {
+  description = "Name of repository to bootstrap from"
+  type        = string
+  default     = "fleet-infra"
+}
+
+variable "git_path" {
+  description = "Path to reconcile bootstrap from"
   type        = string
 }
 

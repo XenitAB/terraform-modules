@@ -11,16 +11,14 @@ terraform {
       version = "1.9.1"
     }
     flux = {
-      source = "fluxcd/flux"
+      source  = "fluxcd/flux"
       version = "0.0.3"
     }
   }
 }
 
-provider "flux" {}
-
 locals {
-  bootstrap_repo_url = "https://dev.azure.com/${var.azdo_org}/${var.azdo_proj}/_git/${var.bootstrap_repo_name}"
+  repo_url = "https://dev.azure.com/${var.azdo_org}/${var.azdo_proj}/_git/${var.repository_name}"
 }
 
 resource "kubernetes_namespace" "flux_system" {
@@ -30,12 +28,12 @@ resource "kubernetes_namespace" "flux_system" {
 }
 
 data "flux_install" "main" {
-  target_path = var.target_path
+  target_path = var.git_path
 }
 
 data "flux_sync" "main" {
-  target_path = var.target_path
-  url         = local.bootstrap_repo_url
+  target_path = var.git_path
+  url         = local.repo_url
 }
 
 data "kubectl_file_documents" "install" {
@@ -69,7 +67,7 @@ resource "kubernetes_secret" "main" {
   }
 
   data = {
-    username  = ""
-    passwords = var.azdo_pat
+    username = var.azdo_org
+    password = var.azdo_pat
   }
 }

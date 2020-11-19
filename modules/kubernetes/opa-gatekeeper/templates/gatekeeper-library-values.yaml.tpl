@@ -2,6 +2,10 @@ constraints:
   %{~ for item in constraints ~}
   - kind: "${item.kind}"
     name: "${item.name}"
+    %{~ if length(keys(item.match)) > 0 ~}
+    match:
+      ${indent(6, yamlencode(item.match))}
+    %{~ endif ~}
     parameters:
       ${indent(6, yamlencode(item.parameters))}
   %{~ endfor ~}

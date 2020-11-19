@@ -3,47 +3,56 @@ variable "default_constraints" {
   type = list(object({
     kind       = string
     name       = string
+    match      = any
     parameters = any
   }))
   default = [
     {
       kind       = "K8sPSPAllowPrivilegeEscalationContainer"
       name       = "psp-allow-privilege-escalation-container"
+      match      = {}
       parameters = {}
     },
     {
       kind       = "K8sPSPHostNamespace"
       name       = "psp-host-namespace"
+      match      = {}
       parameters = {}
     },
     {
       kind       = "K8sPSPHostNetworkingPorts"
       name       = "psp-host-network-ports"
+      match      = {}
       parameters = {}
     },
     {
       kind       = "K8sPSPFlexVolumes"
       name       = "psp-flexvolume-drivers"
+      match      = {}
       parameters = {}
     },
     {
       kind       = "K8sPSPPrivilegedContainer"
       name       = "psp-privileged-container"
+      match      = {}
       parameters = {}
     },
     {
       kind       = "K8sPSPProcMount"
       name       = "psp-proc-mount"
+      match      = {}
       parameters = {}
     },
     {
       kind       = "K8sPSPReadOnlyRootFilesystem"
       name       = "psp-readonlyrootfilesystem"
+      match      = {}
       parameters = {}
     },
     {
-      kind = "K8sPSPVolumeTypes"
-      name = "psp-volume-types"
+      kind  = "K8sPSPVolumeTypes"
+      name  = "psp-volume-types"
+      match = {}
       parameters = {
         volumes = ["configMap", "downwardAPI", "emptyDir", "persistentVolumeClaim", "secret", "projected"]
       }
@@ -51,6 +60,15 @@ variable "default_constraints" {
     {
       kind = "K8sPSPCapabilities"
       name = "psp-capabilities"
+      match = {
+        kinds = [
+          {
+            apiGroups = [""]
+            kinds     = ["Pod"]
+          }
+        ]
+        namespaces = []
+      }
       parameters = {
         allowedCapabilities = [""]
       }
@@ -58,11 +76,13 @@ variable "default_constraints" {
     {
       kind       = "K8sBlockNodePort"
       name       = "block-node-port"
+      match      = {}
       parameters = {}
     },
     {
-      kind = "K8sRequiredProbes"
-      name = "required-probes"
+      kind  = "K8sRequiredProbes"
+      name  = "required-probes"
+      match = {}
       parameters = {
         probes     = ["readinessProbe"]
         probeTypes = ["tcpSocket", "httpGet", "exec"]
@@ -71,6 +91,7 @@ variable "default_constraints" {
     {
       kind       = "K8sPodPriorityClass"
       name       = "pod-priority-class"
+      match      = {}
       parameters = {}
     },
   ]
@@ -81,6 +102,7 @@ variable "additional_constraints" {
   type = list(object({
     kind       = string
     name       = string
+    match      = any
     parameters = any
   }))
   default = []

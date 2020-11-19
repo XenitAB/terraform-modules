@@ -1,6 +1,8 @@
 %{ if cloud_provider == "azure" }
 configuration:
   provider: "azure"
+  logLevel: "warning"
+  logFormat: "json"
   backupStorageLocation:
     name: "default"
     bucket: "${azure_storage_account_container}"
@@ -9,8 +11,6 @@ configuration:
       storageAccount: "${azure_storage_account_name}"
 
 snapshotsEnable: false
-logLevel: "warning"
-logFormat: "json"
 
 credentials:
   existingSecret: "velero"

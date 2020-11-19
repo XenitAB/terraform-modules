@@ -29,9 +29,12 @@ module "opa_gatekeeper" {
 
   additional_constraints = [
     {
-      kind       = "AzureIdentityFormat"
-      name       = "azure-identity-format"
-      match      = {}
+      kind = "AzureIdentityFormat"
+      name = "azure-identity-format"
+      match = {
+        kinds      = []
+        namespaces = []
+      }
       parameters = {}
     },
   ]

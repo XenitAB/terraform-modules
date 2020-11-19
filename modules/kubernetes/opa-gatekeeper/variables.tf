@@ -101,7 +101,8 @@ variable "default_constraints" {
         namespaces = ["*"]
       }
       parameters = {
-        allowedCapabilities = [""]
+        allowedCapabilities      = [""]
+        requiredDropCapabilities = ["NET_RAW"]
       }
     },
     {

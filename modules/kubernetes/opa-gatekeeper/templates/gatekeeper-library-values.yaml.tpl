@@ -6,8 +6,10 @@ constraints:
     match:
       ${indent(6, yamlencode(item.match))}
     %{~ endif ~}
+    %{~ if length(keys(item.parameters)) > 0 ~}
     parameters:
       ${indent(6, yamlencode(item.parameters))}
+    %{~ endif ~}
   %{~ endfor ~}
 exclude:
   %{~ for item in exclude ~}

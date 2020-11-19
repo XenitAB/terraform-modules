@@ -10,69 +10,33 @@ terraform {
   }
 }
 
+locals {
+  helm_repository         = "https://charts.fluxcd.io"
+  helm_chart_name         = "helm-operator"
+  helm_chart_release_name = "helm-operator"
+  helm_chart_version      = "1.2.0"
+}
+
 resource "helm_release" "helm_operator" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
   }
 
-  repository = var.helm_operator_helm_repository
-  chart      = var.helm_operator_helm_chart_name
-  version    = var.helm_operator_helm_chart_version
-  name       = var.helm_operator_helm_release_name
+  repository = local.helm_repository
+  chart      = local.helm_chart_name
+  version    = local.helm_chart_version
+  name       = local.helm_chart_release_name
   namespace  = each.key
 
-  set {
-    name  = "allowNamespace"
-    value = each.key
-  }
-
-  set {
-    name  = "clusterRole.create"
-    value = "false"
-  }
-
-  set {
-    name  = "helm.versions"
-    value = "v3"
-  }
-
-  set {
-    name  = "configureRepositories.enable"
-    value = "true"
-  }
-
-  set {
-    name  = "configureRepositories.repositories[0].name"
-    value = "AzureContainerRegistry"
-  }
-
-  set {
-    name  = "configureRepositories.repositories[0].url"
-    value = "https://${var.acr_name}.azurecr.io/helm/v1/repo/"
-  }
-
-  set {
-    name  = "configureRepositories.repositories[0].username"
-    value = var.helm_operator_credentials.client_id
-  }
+  values = [templatefile("${path.module}/templates/values.yaml.tpl", { namespace = each.key, acr_name = var.acr_name, helm_operator_credentials = var.helm_operator_credentials, azdo_proxy_enabled = var.azdo_proxy_enabled, azdo_proxy_local_passwords = var.azdo_proxy_local_passwords })]
 
   set {
     name  = "configureRepositories.repositories[0].password"
     value = var.helm_operator_credentials.secret
   }
 
-  set {
-    name  = "git.config.enabled"
-    value = "true"
-  }
-
-  set {
-    name  = "git.config.secretName"
-    value = "helm-operator-git-config"
-  }
-
-  dynamic "set" {
+  dynamic "set_sensitive" {
     for_each = {
       for s in ["azdo-proxy"] :
       s => s

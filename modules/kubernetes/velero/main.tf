@@ -14,7 +14,8 @@ terraform {
 }
 
 locals {
-  values = templatefile("${path.module}/templates/values.yaml.tpl", { cloud_provider = var.cloud_provider, azure_resource_group = var.azure_resource_group, azure_storage_account_name = var.azure_storage_account_name, azure_storage_account_container = var.azure_storage_account_container })
+  values             = templatefile("${path.module}/templates/values.yaml.tpl", { cloud_provider = var.cloud_provider, azure_resource_group = var.azure_resource_group, azure_storage_account_name = var.azure_storage_account_name, azure_storage_account_container = var.azure_storage_account_container })
+  velero_credentials = templatefile("${path.module}/templates/velero-credentials.tpl", { azure_subscription_id = var.azure_subscription_id, azure_resource_group = var.azure_resource_group })
 }
 
 resource "kubernetes_namespace" "velero" {
@@ -33,11 +34,7 @@ resource "kubernetes_secret" "velero" {
   }
 
   data = {
-    "cloud" = yamlencode({
-      AZURE_SUBSCRIPTION_ID = var.azure_subscription_id
-      AZURE_RESOURCE_GROUP  = var.azure_resource_group
-      AZURE_CLOUD_NAME      = "AzurePublicCloud"
-    })
+    "cloud" = local.velero_credentials
   }
 }
 

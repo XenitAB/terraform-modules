@@ -25,10 +25,6 @@ terraform {
   }
 }
 
-provider "azurerm" {
-  features {}
-}
-
 provider "kubernetes" {
   load_config_file       = "false"
   host                   = azurerm_kubernetes_cluster.this.kube_config[0].host

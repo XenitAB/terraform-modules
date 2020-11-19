@@ -9,20 +9,26 @@
   },
   "terraform.languageServer": {
     "external": true,
-    "args": ["serve"]
+    "args": [
+      "serve"
+    ]
   },
   "terraform-ls.rootModules": [
-    "modules/azure/aks",
     "modules/azure/aks-global",
-    "modules/azure/azure-pipelines-agent-vmss",
     "modules/azure/core",
+    "modules/azure/aks",
+    "modules/azure/azure-pipelines-agent-vmss",
     "modules/azure/governance",
     "modules/azure/hub",
     "modules/kubernetes/aad-pod-identity",
-    "modules/kubernetes/azdo-proxy",
-    "modules/kubernetes/fluxcd-v1",
-    "modules/kubernetes/helm-operator",
     "modules/kubernetes/loki",
+    "modules/kubernetes/external-dns",
+    "modules/kubernetes/velero",
+    "modules/kubernetes/cert-manager",
+    "modules/kubernetes/fluxcd-v1",
+    "modules/kubernetes/azdo-proxy",
+    "modules/kubernetes/helm-operator",
+    "modules/kubernetes/ingress-nginx",
     "modules/kubernetes/opa-gatekeeper"
   ]
 }

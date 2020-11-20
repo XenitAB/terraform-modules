@@ -10,9 +10,9 @@ terraform {
 }
 
 locals {
-  values                     = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", { constraints = concat(var.default_constraints, var.additional_constraints), exclude = var.exclude })
   gatekeeper_version         = "v3.2.1"
   gatekeeper_library_version = "v0.4.3"
+  values                     = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", { constraints = concat(var.default_constraints, var.additional_constraints), exclude = var.exclude })
 }
 
 resource "helm_release" "gatekeeper" {
@@ -20,6 +20,7 @@ resource "helm_release" "gatekeeper" {
   chart      = "gatekeeper"
   name       = "gatekeeper"
   version    = local.gatekeeper_version
+  values = [file("${path.module}/files/gatekeeper-values.yaml")]
 }
 
 resource "helm_release" "gatekeeper_templates" {

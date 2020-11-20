@@ -120,15 +120,19 @@ module "opa_gatekeeper" {
 
   exclude = [
     {
-      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero"]
+      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy"]
       processes           = ["*"]
     }
   ]
 
   additional_constraints = [
     {
-      kind       = "AzureIdentityFormat"
-      name       = "azure-identity-format"
+      kind = "AzureIdentityFormat"
+      name = "azure-identity-format"
+      match = {
+        kinds      = []
+        namespaces = []
+      }
       parameters = {}
     },
   ]

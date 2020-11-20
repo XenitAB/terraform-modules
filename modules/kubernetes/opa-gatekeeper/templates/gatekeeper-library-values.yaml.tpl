@@ -2,8 +2,21 @@ constraints:
   %{~ for item in constraints ~}
   - kind: "${item.kind}"
     name: "${item.name}"
+    %{~ if (length(item.match.kinds)+length(item.match.namespaces)) > 0 ~}
+    match:
+      %{~ if length(item.match.namespaces) > 0 ~}
+      kinds:
+        ${indent(8, chomp(yamlencode(item.match.kinds)))}
+      %{~ endif ~}
+      %{~ if length(item.match.namespaces) > 0 ~}
+      namespaces:
+        ${indent(8, chomp(yamlencode(item.match.namespaces)))}
+      %{~ endif ~}
+    %{~ endif ~}
+    %{~ if length(keys(item.parameters)) > 0 ~}
     parameters:
-      ${indent(6, yamlencode(item.parameters))}
+      ${indent(6, chomp(yamlencode(item.parameters)))}
+    %{~ endif ~}
   %{~ endfor ~}
 exclude:
   %{~ for item in exclude ~}

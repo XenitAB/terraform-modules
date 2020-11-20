@@ -1,31 +1,3 @@
-# FluxCD v1 Helm release name
-variable "fluxcd_v1_helm_release_name" {
-  description = "The helm release name for fluxcd-v1"
-  type        = string
-  default     = "fluxcd-v1"
-}
-
-# FluxCD v1 Helm Repositroy
-variable "fluxcd_v1_helm_repository" {
-  description = "The helm repository for fluxcd-v1"
-  type        = string
-  default     = "https://charts.fluxcd.io"
-}
-
-# FluxCD v1 Helm Chart name
-variable "fluxcd_v1_helm_chart_name" {
-  description = "The helm chart name for fluxcd-v1"
-  type        = string
-  default     = "flux"
-}
-
-# FluxCD v1 Helm Chart version
-variable "fluxcd_v1_helm_chart_version" {
-  description = "The helm chart version for fluxcd-v1"
-  type        = string
-  default     = "1.3.0"
-}
-
 # FluxCD v1 Helm Chart version
 variable "fluxcd_v1_git_path" {
   description = "The git path for fluxcd-v1"

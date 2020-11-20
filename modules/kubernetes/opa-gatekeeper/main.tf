@@ -20,7 +20,7 @@ resource "helm_release" "gatekeeper" {
   chart      = "gatekeeper"
   name       = "gatekeeper"
   version    = local.gatekeeper_version
-  values = [file("${path.module}/files/gatekeeper-values.yaml")]
+  values     = [file("${path.module}/files/gatekeeper-values.yaml")]
 }
 
 resource "helm_release" "gatekeeper_templates" {

@@ -1,4 +1,4 @@
 podAnnotations:
-  ad.datadoghq.com/gatekeeper.check_names: '["openmetrics"]'
-  ad.datadoghq.com/gatekeeper.init_configs: "[{}]"
-  ad.datadoghq.com/gatekeeper.instances: '[{"prometheus_url":"http://%%host%%:8888/metrics","namespace":"gatekeeper-system","metrics":["*"]}]'
+  ad.datadoghq.com/manager.check_names: '["openmetrics"]'
+  ad.datadoghq.com/manager.init_configs: "[{}]"
+  ad.datadoghq.com/manager.instances: '[{"prometheus_url":"http://%%host%%:8888/metrics","namespace":"opa","metrics":["*"]}]'

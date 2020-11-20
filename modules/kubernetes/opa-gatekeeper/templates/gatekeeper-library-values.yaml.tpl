@@ -4,9 +4,11 @@ constraints:
     name: "${item.name}"
     %{~ if (length(item.match.kinds)+length(item.match.namespaces)) > 0 ~}
     match:
+      %{~ if length(item.match.namespaces) > 0 ~}
       kinds:
         ${indent(8, chomp(yamlencode(item.match.kinds)))}
-      %{~ if length(item.match.namespaces) == 1 && item.match.namespaces[0] != "*" ~}
+      %{~ endif ~}
+      %{~ if length(item.match.namespaces) > 0 ~}
       namespaces:
         ${indent(8, chomp(yamlencode(item.match.namespaces)))}
       %{~ endif ~}

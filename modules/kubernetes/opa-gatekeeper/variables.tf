@@ -1,4 +1,3 @@
-# `namespaces = ["*"]` means all namespaces and will remove the `.spec.match.namespace` from the constraint
 variable "default_constraints" {
   description = "Default constraints that should be added"
   type = list(object({
@@ -92,13 +91,8 @@ variable "default_constraints" {
       kind = "K8sPSPCapabilities"
       name = "psp-capabilities"
       match = {
-        kinds = [
-          {
-            apiGroups = [""]
-            kinds     = ["Pod"]
-          }
-        ]
-        namespaces = ["*"]
+        kinds = []
+        namespaces = []
       }
       parameters = {
         allowedCapabilities      = [""]
@@ -138,7 +132,6 @@ variable "default_constraints" {
   ]
 }
 
-# `namespaces = ["*"]` means all namespaces and will remove the `.spec.match.namespace` from the constraint
 variable "additional_constraints" {
   description = "Additional constraints that should be added"
   type = list(object({

@@ -2,6 +2,9 @@ constraints:
   %{~ for item in constraints ~}
   - kind: "${item.kind}"
     name: "${item.name}"
+    %{~ if length(item.enforcement_action) > 0 ~}
+    enforcementAction: ${item.enforcement_action}
+    %{~ endif ~}
     %{~ if (length(item.match.kinds)+length(item.match.namespaces)) > 0 ~}
     match:
       %{~ if length(item.match.namespaces) > 0 ~}

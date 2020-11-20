@@ -91,7 +91,7 @@ variable "default_constraints" {
       kind = "K8sPSPCapabilities"
       name = "psp-capabilities"
       match = {
-        kinds = []
+        kinds      = []
         namespaces = []
       }
       parameters = {

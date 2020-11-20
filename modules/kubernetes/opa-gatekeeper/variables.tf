@@ -1,8 +1,8 @@
 variable "default_constraints" {
   description = "Default constraints that should be added"
   type = list(object({
-    kind = string
-    name = string
+    kind               = string
+    name               = string
     enforcement_action = string
     match = object({
       kinds = list(object({
@@ -15,8 +15,8 @@ variable "default_constraints" {
   }))
   default = [
     {
-      kind = "K8sPSPAllowPrivilegeEscalationContainer"
-      name = "psp-allow-privilege-escalation-container"
+      kind               = "K8sPSPAllowPrivilegeEscalationContainer"
+      name               = "psp-allow-privilege-escalation-container"
       enforcement_action = ""
       match = {
         kinds      = []
@@ -25,8 +25,8 @@ variable "default_constraints" {
       parameters = {}
     },
     {
-      kind = "K8sPSPHostNamespace"
-      name = "psp-host-namespace"
+      kind               = "K8sPSPHostNamespace"
+      name               = "psp-host-namespace"
       enforcement_action = ""
       match = {
         kinds      = []
@@ -35,8 +35,8 @@ variable "default_constraints" {
       parameters = {}
     },
     {
-      kind = "K8sPSPHostNetworkingPorts"
-      name = "psp-host-network-ports"
+      kind               = "K8sPSPHostNetworkingPorts"
+      name               = "psp-host-network-ports"
       enforcement_action = ""
       match = {
         kinds      = []
@@ -45,8 +45,8 @@ variable "default_constraints" {
       parameters = {}
     },
     {
-      kind = "K8sPSPFlexVolumes"
-      name = "psp-flexvolume-drivers"
+      kind               = "K8sPSPFlexVolumes"
+      name               = "psp-flexvolume-drivers"
       enforcement_action = ""
       match = {
         kinds      = []
@@ -55,8 +55,8 @@ variable "default_constraints" {
       parameters = {}
     },
     {
-      kind = "K8sPSPPrivilegedContainer"
-      name = "psp-privileged-container"
+      kind               = "K8sPSPPrivilegedContainer"
+      name               = "psp-privileged-container"
       enforcement_action = ""
       match = {
         kinds      = []
@@ -65,8 +65,8 @@ variable "default_constraints" {
       parameters = {}
     },
     {
-      kind = "K8sPSPProcMount"
-      name = "psp-proc-mount"
+      kind               = "K8sPSPProcMount"
+      name               = "psp-proc-mount"
       enforcement_action = ""
       match = {
         kinds      = []
@@ -75,8 +75,8 @@ variable "default_constraints" {
       parameters = {}
     },
     {
-      kind = "K8sPSPReadOnlyRootFilesystem"
-      name = "psp-readonlyrootfilesystem"
+      kind               = "K8sPSPReadOnlyRootFilesystem"
+      name               = "psp-readonlyrootfilesystem"
       enforcement_action = ""
       match = {
         kinds      = []
@@ -85,8 +85,8 @@ variable "default_constraints" {
       parameters = {}
     },
     {
-      kind = "K8sPSPVolumeTypes"
-      name = "psp-volume-types"
+      kind               = "K8sPSPVolumeTypes"
+      name               = "psp-volume-types"
       enforcement_action = ""
       match = {
         kinds      = []
@@ -97,8 +97,8 @@ variable "default_constraints" {
       }
     },
     {
-      kind = "K8sPSPCapabilities"
-      name = "psp-capabilities"
+      kind               = "K8sPSPCapabilities"
+      name               = "psp-capabilities"
       enforcement_action = ""
       match = {
         kinds      = []
@@ -110,8 +110,8 @@ variable "default_constraints" {
       }
     },
     {
-      kind = "K8sBlockNodePort"
-      name = "block-node-port"
+      kind               = "K8sBlockNodePort"
+      name               = "block-node-port"
       enforcement_action = ""
       match = {
         kinds      = []
@@ -120,8 +120,8 @@ variable "default_constraints" {
       parameters = {}
     },
     {
-      kind = "K8sRequiredProbes"
-      name = "required-probes"
+      kind               = "K8sRequiredProbes"
+      name               = "required-probes"
       enforcement_action = ""
       match = {
         kinds      = []
@@ -133,8 +133,8 @@ variable "default_constraints" {
       }
     },
     {
-      kind = "K8sPodPriorityClass"
-      name = "pod-priority-class"
+      kind               = "K8sPodPriorityClass"
+      name               = "pod-priority-class"
       enforcement_action = ""
       match = {
         kinds      = []
@@ -148,8 +148,8 @@ variable "default_constraints" {
 variable "additional_constraints" {
   description = "Additional constraints that should be added"
   type = list(object({
-    kind = string
-    name = string
+    kind               = string
+    name               = string
     enforcement_action = string
     match = object({
       kinds = list(object({

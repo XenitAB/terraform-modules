@@ -31,6 +31,7 @@ module "opa_gatekeeper" {
     {
       kind = "AzureIdentityFormat"
       name = "azure-identity-format"
+      enforcement_action = ""
       match = {
         kinds      = []
         namespaces = []

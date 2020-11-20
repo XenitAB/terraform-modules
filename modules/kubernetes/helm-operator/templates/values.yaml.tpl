@@ -20,3 +20,10 @@ containerSecurityContext:
     capabilities:
       drop:
         - NET_RAW
+
+extraVolumeMounts:
+  - name: tmp
+    mountPath: /tmp
+extraVolumes:
+  - name: tmp
+    emptyDir: {}

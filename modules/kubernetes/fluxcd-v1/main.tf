@@ -10,6 +10,11 @@ terraform {
   }
 }
 
+locals {
+  helm_release_name = "fluxcd-v1"
+  helm_chart_name   = "flux"
+}
+
 resource "helm_release" "fluxcd_v1" {
   for_each = {
     for ns in var.namespaces :
@@ -17,48 +22,14 @@ resource "helm_release" "fluxcd_v1" {
     if ns.flux.enabled
   }
 
-  name       = var.fluxcd_v1_helm_release_name
-  repository = var.fluxcd_v1_helm_repository
-  chart      = var.fluxcd_v1_helm_chart_name
-  version    = var.fluxcd_v1_helm_chart_version
-  namespace  = each.key
+  name      = local.helm_release_name
+  chart     = "${path.module}/charts/flux"
+  namespace = each.key
 
-  set {
-    name  = "allowNamespaces[0]"
-    value = each.key
-  }
+  values = [templatefile("${path.module}/templates/values.yaml.tpl", { namespace = each.key, git_url = "https://dev.azure.com/${each.value.flux.azdo_org}/${each.value.flux.azdo_project}/_git/${each.value.flux.azdo_repo}", fluxcd_v1_git_path = var.fluxcd_v1_git_path })]
 
-  set {
-    name  = "clusterRole.create"
-    value = "false"
-  }
 
-  set {
-    name  = "git.url"
-    value = "https://dev.azure.com/${each.value.flux.azdo_org}/${each.value.flux.azdo_project}/_git/${each.value.flux.azdo_repo}"
-  }
-
-  set {
-    name  = "git.path"
-    value = var.fluxcd_v1_git_path
-  }
-
-  set {
-    name  = "git.readonly"
-    value = "true"
-  }
-
-  set {
-    name  = "git.config.enabled"
-    value = "true"
-  }
-
-  set {
-    name  = "git.config.secretName"
-    value = "flux-git-config"
-  }
-
-  dynamic "set" {
+  dynamic "set_sensitive" {
     for_each = {
       for s in ["azdo-proxy"] :
       s => s
@@ -71,25 +42,5 @@ resource "helm_release" "fluxcd_v1" {
           insteadOf = https://dev.azure.com
         EOF
     }
-  }
-
-  set {
-    name  = "git.pollInterval"
-    value = "30s"
-  }
-
-  set {
-    name  = "registry.disableScanning"
-    value = "true"
-  }
-
-  set {
-    name  = "memcached.enabled"
-    value = "false"
-  }
-
-  set {
-    name  = "syncGarbageCollection.enabled"
-    value = "true"
   }
 }

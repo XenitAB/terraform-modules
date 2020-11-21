@@ -25,7 +25,6 @@ terraform {
 
 locals {
   helm_release_name = "fluxcd-v1"
-  helm_chart_name   = "flux"
 }
 
 resource "helm_release" "fluxcd_v1" {

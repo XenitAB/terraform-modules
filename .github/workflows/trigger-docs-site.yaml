@@ -5,7 +5,7 @@ on:
       - main
   
 jobs:
-  build:
+  trigger-docs:
     runs-on: ubuntu-latest
     env:
       TOKEN: ${{ secrets.XENIT_HOME_GITHUB_PAT }}

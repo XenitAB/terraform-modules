@@ -1,0 +1,22 @@
+name: Trigger xenit-home to regenerate docs
+on:
+  push:
+    branches:
+      - main
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TOKEN: ${{ secrets.XENIT_HOME_GITHUB_PAT }}
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Trigger docs generation for xenit-home
+      run: |
+        curl -u ":$TOKEN" \
+        -X POST \
+        -H "Accept: application/vnd.github.v3+json" \
+        https://api.github.com/repos/xenitab/home/actions/workflows/publish-docs.yaml/dispatches \
+        -d '{"ref": "main", "inputs": {"remote_repo": "xenitab/terraform-modules"}}'

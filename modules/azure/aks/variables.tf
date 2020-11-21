@@ -65,6 +65,12 @@ variable "namespaces" {
   )
 }
 
+variable "kubernetes_network_policy_default_deny" {
+  description = "Should a network policy be created in each group namespace that disables traffic from other namespaces"
+  type        = bool
+  default     = true
+}
+
 variable "ssh_public_key" {
   description = "SSH public key to add to servers"
   type        = string

@@ -44,6 +44,7 @@ This module is used to create AKS clusters.
 | helm\_operator\_credentials | ACR credentials pased to Helm Operator | <pre>object({<br>    client_id = string<br>    secret    = string<br>  })</pre> | n/a | yes |
 | helm\_operator\_enabled | Should helm-operator be enabled | `bool` | `true` | no |
 | ingress\_nginx\_enabled | Should Ingress NGINX be enabled | `bool` | `true` | no |
+| kubernetes\_network\_policy\_default\_deny | Should a network policy be created in each group namespace that disables traffic from other namespaces | `bool` | `true` | no |
 | location\_short | The Azure region short name. | `string` | n/a | yes |
 | name | The commonName to use for the deploy | `string` | n/a | yes |
 | namespaces | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name                    = string<br>      delegate_resource_group = bool<br>      labels                  = map(string)<br>      flux = object({<br>        enabled      = bool<br>        azdo_org     = string<br>        azdo_project = string<br>        azdo_repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |

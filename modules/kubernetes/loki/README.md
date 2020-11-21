@@ -1,3 +1,11 @@
+# Grafana Loki
+
+This module is used to add [`loki`](https://github.com/grafana/loki) to Kubernetes clusters (tested with AKS).
+
+## Details
+
+This module will also add `minio` (S3 Gateway to Azure Storage Account), `fluent-bit` and `grafana`.
+
 ## Requirements
 
 | Name | Version |

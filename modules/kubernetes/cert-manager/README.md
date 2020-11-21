@@ -1,3 +1,7 @@
+# Certificate manager (cert-manager)
+
+This module is used to add [`cert-manager`](https://github.com/jetstack/cert-manager) to Kubernetes clusters.
+
 ## Requirements
 
 | Name | Version |

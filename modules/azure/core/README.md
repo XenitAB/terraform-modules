@@ -1,3 +1,7 @@
+# Core
+
+This module is used to create core resources like virtual network for the subscription.
+
 ## Requirements
 
 | Name | Version |

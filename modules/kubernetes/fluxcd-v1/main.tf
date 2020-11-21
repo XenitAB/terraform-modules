@@ -1,4 +1,17 @@
-# Module requirements
+/**
+  * # Flux (v1)
+  *
+  * This module is used to add [`flux`](https://github.com/fluxcd/flux) to Kubernetes clusters.
+  *
+  * ## Details
+  *
+  * The helm chart is added to this module to add the securityContext parameters to the pod running flux, to make sure it works with the `opa-gatekeeper` module.
+  *
+  * This module will create a flux instance in each namespace, and not used for fleet-wide configuration.
+  *
+  * Will be deprecated as soon as Flux v2 module is finished and tested.
+  */
+
 terraform {
   required_version = "0.13.5"
 

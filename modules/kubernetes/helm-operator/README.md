@@ -1,3 +1,13 @@
+# Helm Operator (helm-operator)
+
+This module is used to add [`helm-operator`](https://github.com/fluxcd/helm-operator) to Kubernetes clusters.
+
+## Details
+
+This module will create a helm-operator instance in each namespace, and not used for fleet-wide configuration.
+
+Will be deprecated as soon as Flux v2 module is finished and tested.
+
 ## Requirements
 
 | Name | Version |

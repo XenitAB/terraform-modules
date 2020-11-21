@@ -1,3 +1,13 @@
+# Azure DevOps Proxy (azdo-proxy)
+
+This module is used to add [`azdo-proxy`](https://github.com/XenitAB/azdo-proxy) to Kubernetes clusters.
+
+## Details
+
+Azure DevOps Proxy is used to grant convert a single Azure DevOps PAT (Personal Access Token) to a unique local secret in the cluster.
+
+This unique secret can only be used to communicate with a single repository in Azure DevOps, compared to the PAT which may have access to the whole organization.
+
 ## Requirements
 
 | Name | Version |

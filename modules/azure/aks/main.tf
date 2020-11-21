@@ -1,3 +1,9 @@
+/**
+  * # Azure Kubernetes Service
+  *
+  * This module is used to create AKS clusters.
+  */
+
 terraform {
   required_version = "0.13.5"
 

@@ -1,3 +1,9 @@
+/**
+  * # Azure Kubernetes Service - Global
+  *
+  * This module is used to create resources that are used by AKS clusters.
+  */
+
 terraform {
   required_version = "0.13.5"
 

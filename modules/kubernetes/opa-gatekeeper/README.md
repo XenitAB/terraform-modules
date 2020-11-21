@@ -1,3 +1,75 @@
+# Open Policy Agent Gatekeeper (opa-gatekeeper)
+
+This module is used to add [`opa-gatekeeper`](https://github.com/open-policy-agent/gatekeeper) to Kubernetes clusters.
+
+## Details
+
+This module also adds opinionated defaults from the [`gatekeeper-library`](https://github.com/XenitAB/gatekeeper-library) that Xenit hosts (and aggregates the [`gatekeeper-library`](https://github.com/open-policy-agent/gatekeeper-library) OPA hosts).
+
+## Example deployment
+
+```YAML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podinfo
+  labels:
+    app: podinfo
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: podinfo
+  template:
+    metadata:
+      labels:
+        app: podinfo
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: podinfo
+          image: "ghcr.io/stefanprodan/podinfo:5.0.3"
+          imagePullPolicy: "IfNotPresent"
+          command:
+            - ./podinfo
+            - --port=8080
+            - --level=info
+          env:
+          - name: PODINFO_UI_MESSAGE
+            value: "WELCOME TO PODINFO!"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+              - podcli
+              - check
+              - http
+              - localhost:8080/readyz
+            initialDelaySeconds: 1
+            timeoutSeconds: 5
+          volumeMounts:
+          - name: data
+            mountPath: /data
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - NET_RAW
+      volumes:
+      - name: data
+        emptyDir: {}
+```
+
+Required parts are `securityContext` and usually mounting an `emptyDir` to either a data directory or tmp.
+
 ## Requirements
 
 | Name | Version |

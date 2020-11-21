@@ -1,3 +1,9 @@
+/**
+  * # External DNS (external-dns)
+  *
+  * This module is used to add [`external-dns`](https://github.com/kubernetes-sigs/external-dns) to Kubernetes clusters.
+  */
+
 terraform {
   required_version = "0.13.5"
 

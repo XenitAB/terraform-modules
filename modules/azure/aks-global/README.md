@@ -1,3 +1,7 @@
+# Azure Kubernetes Service - Global
+
+This module is used to create resources that are used by AKS clusters.
+
 ## Requirements
 
 | Name | Version |

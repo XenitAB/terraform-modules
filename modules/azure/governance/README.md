@@ -1,3 +1,7 @@
+# Governance
+
+This module is used to create resource groups, service principals, Azure AD groups, Azure KeyVaults and delegation to all of those resources.
+
 ## Requirements
 
 | Name | Version |

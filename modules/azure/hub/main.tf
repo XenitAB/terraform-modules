@@ -1,3 +1,13 @@
+/**
+  * # Hub
+  *
+  * This module is used to create a separate network in one of the subscriptions (usually PROD) and connect it to all the networks.
+  * 
+  * ## Usage
+  *
+  * Use together with the `core` module to create a peered network where SPOF (single point of failure) resources can be created, lik Azure Pipelines Agent Virtual Machine Scale Set (VMSS).
+  */
+
 terraform {
   required_version = "0.13.5"
 

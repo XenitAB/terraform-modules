@@ -1,3 +1,7 @@
+# Ingress NGINX (ingress-nginx)
+
+This module is used to add [`ingress-nginx`](https://github.com/kubernetes/ingress-nginx) to Kubernetes clusters.
+
 ## Requirements
 
 | Name | Version |

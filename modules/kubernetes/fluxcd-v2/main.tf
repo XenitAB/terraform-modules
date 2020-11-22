@@ -21,6 +21,11 @@ terraform {
   }
 }
 
+provider "azuredevops" {
+  personal_access_token = var.azdo_pat
+  org_service_url = "https://dev.azure.com/${var.azdo_org}"
+}
+
 locals {
   repo_url = "https://dev.azure.com/${var.azdo_org}/${var.azdo_proj}/_git/${var.repository_name}"
 }

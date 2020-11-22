@@ -120,7 +120,7 @@ module "opa_gatekeeper" {
 
   exclude = [
     {
-      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy"]
+      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "tekton-operator"]
       processes           = ["*"]
     }
   ]
@@ -219,6 +219,7 @@ module "tekton-operator" {
   source = "../../kubernetes/tekton-operator"
 
   providers = {
-    helm = helm
+    kubernetes = kubernetes
+    helm       = helm
   }
 }

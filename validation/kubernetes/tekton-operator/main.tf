@@ -1,10 +1,18 @@
 terraform {
   required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "1.13.3"
+    }
     helm = {
       source  = "hashicorp/helm"
       version = "1.3.2"
     }
   }
+}
+
+provider "kubernetes" {
+  load_config_file = "false"
 }
 
 provider "helm" {
@@ -17,6 +25,7 @@ module "tekton-operator" {
   source = "../../../modules/kubernetes/tekton-operator"
 
   providers = {
-    helm = helm
+    kubernetes = kubernetes
+    helm       = helm
   }
 }

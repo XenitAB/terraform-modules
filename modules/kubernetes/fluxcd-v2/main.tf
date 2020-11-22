@@ -31,8 +31,8 @@ data "flux_install" "main" {
 }
 
 data "flux_sync" "main" {
-  target_path = var.git_path
   url         = local.repo_url
+  target_path = var.git_path
 }
 
 data "flux_sync" "groups" {
@@ -42,9 +42,9 @@ data "flux_sync" "groups" {
     if ns.flux.enabled
   }
 
-  name = each.key
+  url         = azuredevops_git_repository.groups[each.key].remote_url
   target_path = var.git_path
-  url         = local.repo_url
+  name = each.key
 }
 
 # Azure DevOps
@@ -55,6 +55,20 @@ data "azuredevops_project" "this" {
 resource "azuredevops_git_repository" "this" {
   project_id = data.azuredevops_project.this.id
   name       = var.repository_name
+  initialization {
+    init_type = "Clean"
+  }
+}
+
+resource "azuredevops_git_repository" "groups" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.flux.enabled
+  }
+
+  project_id = data.azuredevops_project.this.id
+  name       = each.key
   initialization {
     init_type = "Clean"
   }
@@ -88,7 +102,7 @@ resource "azuredevops_git_repository_file" "groups" {
     if ns.flux.enabled
   }
 
-  repository_id = azuredevops_git_repository.this.id
+  repository_id = azuredevops_git_repository.groups[each.key].id
   file       = data.flux_sync.groups[each.key].path
   content    = data.flux_sync.groups[each.key].content
   branch     = var.branch

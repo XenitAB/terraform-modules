@@ -214,7 +214,7 @@ module "velero" {
   azure_resource_id               = var.velero.identity.resource_id
 }
 
-# Velero
+# TektonCD Operator
 module "tekton-operator" {
   source = "../../kubernetes/tekton-operator"
 

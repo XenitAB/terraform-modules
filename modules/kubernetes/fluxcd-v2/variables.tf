@@ -27,6 +27,7 @@ variable "git_path" {
 variable "branch" {
   description = "Path to reconcile bootstrap from"
   type        = string
+  default = "master"
 }
 
 variable "namespaces" {

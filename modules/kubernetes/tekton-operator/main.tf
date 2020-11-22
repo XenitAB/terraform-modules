@@ -42,7 +42,7 @@ resource "helm_release" "tekton_operator" {
 
 resource "helm_release" "tekton_operator_extras" {
   depends_on = [helm_release.tekton_operator]
-  name       = local.helm_release_name
+  name       = "${local.helm_release_name}-extras"
   chart      = "${path.module}/charts/tekton-operator-extras"
   namespace  = kubernetes_namespace.tekton_operator.metadata[0].name
 }

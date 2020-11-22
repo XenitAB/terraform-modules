@@ -28,6 +28,10 @@ terraform {
       source  = "hashicorp/helm"
       version = "1.3.2"
     }
+    azuredevops = {
+      source  = "xenitab/azuredevops"
+      version = "0.2.0"
+    }
   }
 }
 

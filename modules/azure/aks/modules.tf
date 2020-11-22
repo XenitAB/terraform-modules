@@ -10,6 +10,7 @@ module "fluxcd_v2" {
 
   providers = {
     helm = helm
+    azuredevops = azuredevops
   }
 
   azdo_org  = var.azure_devops_organization

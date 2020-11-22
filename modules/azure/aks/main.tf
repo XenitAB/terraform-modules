@@ -31,6 +31,11 @@ terraform {
   }
 }
 
+provider "azuredevops" {
+  personal_access_token = data.azurerm_key_vault_secret.azdo_pat.value
+  org_service_url = "https://dev.azure.com/${var.azure_devops_organization}"
+}
+
 provider "kubernetes" {
   load_config_file       = "false"
   host                   = azurerm_kubernetes_cluster.this.kube_config[0].host

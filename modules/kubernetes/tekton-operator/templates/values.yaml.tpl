@@ -1,0 +1,2 @@
+tektoncd:
+  watch_namespace: ""

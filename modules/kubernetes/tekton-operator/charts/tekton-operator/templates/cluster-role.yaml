@@ -1,0 +1,216 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: tekton-operator
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - services
+      - endpoints
+      - persistentvolumeclaims
+      - events
+      - configmaps
+      - secrets
+      - pods/log
+      - limitranges
+    verbs:
+      - "*"
+  - apiGroups:
+      - extensions
+      - apps
+    resources:
+      - ingresses
+      - ingresses/status
+    verbs:
+      - delete
+      - create
+      - patch
+      - get
+      - list
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+      - daemonsets
+      - replicasets
+      - statefulsets
+      - deployments/finalizers
+    verbs:
+      - "*"
+  - apiGroups:
+      - monitoring.coreos.com
+    resources:
+      - servicemonitors
+    verbs:
+      - get
+      - create
+      - delete
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - clusterroles
+      - roles
+    verbs:
+      - get
+      - create
+      - update
+      - delete
+  - apiGroups:
+      - ""
+    resources:
+      - serviceaccounts
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - clusterrolebindings
+      - rolebindings
+    verbs:
+      - get
+      - create
+      - update
+      - delete
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+      - customresourcedefinitions/status
+    verbs:
+      - get
+      - create
+      - update
+      - delete
+      - list
+      - patch
+      - watch
+  - apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - mutatingwebhookconfigurations
+      - validatingwebhookconfigurations
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - build.knative.dev
+    resources:
+      - builds
+      - buildtemplates
+      - clusterbuildtemplates
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - extensions
+    resources:
+      - deployments
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - extensions
+    resources:
+      - deployments/finalizers
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch
+  - apiGroups:
+      - policy
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - get
+      - create
+      - update
+      - delete
+      - use
+  - apiGroups:
+      - operator.tekton.dev
+    resources:
+      - "*"
+      - tektonaddons
+    verbs:
+      - "*"
+  - apiGroups:
+      - tekton.dev
+      - triggers.tekton.dev
+      - operator.tekton.dev
+    resources:
+      - "*"
+    verbs:
+      - "*"
+  - apiGroups:
+      - dashboard.tekton.dev
+    resources:
+      - "*"
+      - tektonaddons
+    verbs:
+      - "*"
+  - apiGroups:
+      - security.openshift.io
+    resources:
+      - securitycontextconstraints
+    verbs:
+      - use
+  - apiGroups:
+      - route.openshift.io
+    resources:
+      - routes
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - delete
+      - patch
+      - watch

@@ -213,3 +213,12 @@ module "velero" {
   azure_client_id                 = var.velero.identity.client_id
   azure_resource_id               = var.velero.identity.resource_id
 }
+
+# Velero
+module "tekton-operator" {
+  source = "../../kubernetes/tekton-operator"
+
+  providers = {
+    helm = helm
+  }
+}

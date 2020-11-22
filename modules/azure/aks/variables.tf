@@ -187,6 +187,12 @@ variable "velero_enabled" {
   default     = false
 }
 
+variable "tekton_operator_enabled" {
+  description = "Should TektonCD Operator be enabled"
+  type        = bool
+  default     = true
+}
+
 variable "external_dns_identity" {
   description = "External DNS identity information"
   type = object({

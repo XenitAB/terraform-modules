@@ -19,3 +19,64 @@ resource "kubernetes_cluster_role" "helm_release" {
     verbs      = ["*"]
   }
 }
+
+resource "kubernetes_cluster_role" "tekton_edit" {
+  for_each = {
+    for s in ["tekton-operator"] :
+    s => s
+    if var.tekton_operator_enabled
+  }
+
+  metadata {
+    name = "tekton-edit"
+  }
+  rule {
+    api_groups = ["tekton.dev"]
+    resources = [
+      "tasks",
+      "taskruns",
+      "pipelines",
+      "pipelineruns",
+      "pipelineresources",
+      "conditions"
+    ]
+    verbs = [
+      "create",
+      "delete",
+      "deletecollection",
+      "get",
+      "list",
+      "patch",
+      "update",
+      "watch"
+    ]
+  }
+}
+
+resource "kubernetes_cluster_role" "tekton_view" {
+  for_each = {
+    for s in ["tekton-operator"] :
+    s => s
+    if var.tekton_operator_enabled
+  }
+
+  metadata {
+    name = "tekton-view"
+  }
+  rule {
+    api_groups = ["tekton.dev"]
+    resources = [
+      "tasks",
+      "taskruns",
+      "pipelines",
+      "pipelineruns",
+      "pipelineresources",
+      "conditions"
+    ]
+    verbs = [
+      "get",
+      "list",
+      "watch"
+    ]
+  }
+}

@@ -122,7 +122,7 @@ variable "default_constraints" {
     {
       kind               = "K8sRequiredProbes"
       name               = "required-probes"
-      enforcement_action = ""
+      enforcement_action = "dryrun"
       match = {
         kinds      = []
         namespaces = []

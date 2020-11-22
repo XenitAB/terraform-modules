@@ -24,6 +24,11 @@ variable "git_path" {
   type        = string
 }
 
+variable "branch" {
+  description = "Path to reconcile bootstrap from"
+  type        = string
+}
+
 variable "namespaces" {
   description = "The namespaces to configure flux with"
   type = list(

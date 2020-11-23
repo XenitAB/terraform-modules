@@ -1,5 +1,5 @@
 resource "kubernetes_role_binding" "view" {
-  for_each   = { for ns in var.namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "${each.value.name}-view"
@@ -22,7 +22,7 @@ resource "kubernetes_role_binding" "view" {
 }
 
 resource "kubernetes_role_binding" "edit" {
-  for_each   = { for ns in var.namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "${each.value.name}-edit"
@@ -69,7 +69,7 @@ resource "kubernetes_role_binding" "helm_release" {
 }
 
 resource "kubernetes_role_binding" "toolkit_helm_release" {
-  for_each   = { for ns in var.namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "toolkit-helm-release"
@@ -92,7 +92,7 @@ resource "kubernetes_role_binding" "toolkit_helm_release" {
 }
 
 resource "kubernetes_role_binding" "toolkit_kustomization" {
-  for_each   = { for ns in var.namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "toolkit-kustomization"

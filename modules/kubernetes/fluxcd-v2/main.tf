@@ -111,7 +111,7 @@ resource "azuredevops_git_repository_file" "groups" {
 
   repository_id = azuredevops_git_repository.this.id
   file          = "${var.git_path}/${each.key}.yaml"
-  content       = templatefile("${path.module}/templates/main.yaml", {azdo_org = var.azdo_org, azdo_proj = var.azdo_proj, azdo_repo = each.key})
+  content       = templatefile("${path.module}/templates/main.yaml", { azdo_org = var.azdo_org, azdo_proj = var.azdo_proj, azdo_repo = each.key })
   branch        = "refs/heads/${var.branch}"
 }
 

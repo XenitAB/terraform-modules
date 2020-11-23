@@ -54,20 +54,6 @@ data "flux_sync" "main" {
   interval    = 60000000000
 }
 
-data "flux_sync" "groups" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  url         = "http://git-cache-http-server/dev.azure.com/${var.azdo_org}/${var.azdo_proj}/_git/${each.key}"
-  branch      = var.branch
-  target_path = var.git_path
-  name        = each.key
-  interval    = 60000000000
-}
-
 # Azure DevOps
 data "azuredevops_project" "this" {
   name = var.azdo_proj
@@ -125,7 +111,7 @@ resource "azuredevops_git_repository_file" "groups" {
 
   repository_id = azuredevops_git_repository.this.id
   file          = "${var.git_path}/${each.key}.yaml"
-  content       = data.flux_sync.groups[each.key].content
+  content       = templatefile("${path.module}/templates/main.yaml", {azdo_org = var.azdo_org, azdo_proj = var.azdo_proj, azdo_repo = each.key})
   branch        = "refs/heads/${var.branch}"
 }
 
@@ -169,24 +155,6 @@ resource "kubernetes_secret" "main" {
 
   metadata {
     name      = data.flux_sync.main.name
-    namespace = data.flux_sync.main.namespace
-  }
-
-  data = {
-    username = var.azdo_org
-    password = var.azdo_pat
-  }
-}
-
-resource "kubernetes_secret" "groups" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  metadata {
-    name      = each.key
     namespace = data.flux_sync.main.namespace
   }
 

@@ -40,6 +40,7 @@ data "flux_sync" "main" {
   url         = local.repo_url
   target_path = var.git_path
   branch = var.branch
+  interval = 60
 }
 
 data "flux_sync" "groups" {
@@ -53,6 +54,7 @@ data "flux_sync" "groups" {
   branch = var.branch
   target_path = var.git_path
   name = each.key
+  interval = 60
 }
 
 # Azure DevOps

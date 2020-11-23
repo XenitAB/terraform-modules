@@ -78,21 +78,21 @@ resource "azuredevops_git_repository_file" "install" {
   repository_id = azuredevops_git_repository.this.id
   file       = data.flux_install.main.path
   content    = data.flux_install.main.content
-  branch     = var.branch
+  branch     = "refs/heads/${var.branch}"
 }
 
 resource "azuredevops_git_repository_file" "sync" {
   repository_id = azuredevops_git_repository.this.id
   file       = data.flux_sync.main.path
   content    = data.flux_sync.main.content
-  branch     = var.branch
+  branch     = "refs/heads/${var.branch}"
 }
 
 resource "azuredevops_git_repository_file" "kustomize" {
   repository_id = azuredevops_git_repository.this.id
   file       = data.flux_sync.main.kustomize_path
   content    = data.flux_sync.main.kustomize_content
-  branch     = var.branch
+  branch     = "refs/heads/${var.branch}"
 }
 
 resource "azuredevops_git_repository_file" "groups" {
@@ -105,7 +105,7 @@ resource "azuredevops_git_repository_file" "groups" {
   repository_id = azuredevops_git_repository.groups[each.key].id
   file       = data.flux_sync.groups[each.key].path
   content    = data.flux_sync.groups[each.key].content
-  branch     = var.branch
+  branch     = "refs/heads/${var.branch}"
 }
 
 # Kubernetes

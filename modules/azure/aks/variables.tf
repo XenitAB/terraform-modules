@@ -120,9 +120,21 @@ variable "aad_pod_identity" {
 }
 
 variable "azure_devops_organization" {
-  description = "Azure Devops organization used to configure azdo-proxy"
+  description = "Azure Devops organization root"
   type        = string
   default     = ""
+}
+
+variable "azure_devops_project" {
+  description = "Azure Devops project root"
+  type        = string
+  default     = ""
+}
+
+variable "fluxcd_v2_enabled" {
+  description = "Should fluxcd-v2 be enabled"
+  type        = bool
+  default     = true
 }
 
 variable "azdo_proxy_enabled" {

@@ -28,7 +28,16 @@ terraform {
       source  = "hashicorp/helm"
       version = "1.3.2"
     }
+    azuredevops = {
+      source  = "xenitab/azuredevops"
+      version = "0.2.1"
+    }
   }
+}
+
+provider "azuredevops" {
+  personal_access_token = data.azurerm_key_vault_secret.azdo_pat_admin.value
+  org_service_url       = "https://dev.azure.com/${var.azure_devops_organization}"
 }
 
 provider "kubernetes" {

@@ -1,10 +1,9 @@
 resource "kubernetes_role_binding" "view" {
-  depends_on = [kubernetes_namespace.group]
-  for_each   = { for ns in var.namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "${each.value.name}-view"
-    namespace = each.value.name
+    namespace = kubernetes_namespace.group[each.key].metadata[0].name
 
     labels = {
       "aad-group-name" = var.aad_groups.view[each.key].name
@@ -16,19 +15,18 @@ resource "kubernetes_role_binding" "view" {
     name      = "view"
   }
   subject {
+    api_group = "rbac.authorization.k8s.io"
     kind      = "Group"
     name      = var.aad_groups.view[each.key].id
-    api_group = "rbac.authorization.k8s.io"
   }
 }
 
 resource "kubernetes_role_binding" "edit" {
-  depends_on = [kubernetes_namespace.group]
-  for_each   = { for ns in var.namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "${each.value.name}-edit"
-    namespace = each.value.name
+    namespace = kubernetes_namespace.group[each.key].metadata[0].name
 
     labels = {
       "aad-group-name" = var.aad_groups.edit[each.key].name
@@ -40,9 +38,9 @@ resource "kubernetes_role_binding" "edit" {
     name      = "edit"
   }
   subject {
+    api_group = "rbac.authorization.k8s.io"
     kind      = "Group"
     name      = var.aad_groups.edit[each.key].id
-    api_group = "rbac.authorization.k8s.io"
   }
 }
 
@@ -67,6 +65,52 @@ resource "kubernetes_role_binding" "helm_release" {
     kind      = "Group"
     name      = var.aad_groups.edit[each.key].id
     api_group = "rbac.authorization.k8s.io"
+  }
+}
+
+resource "kubernetes_role_binding" "toolkit_helm_release" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+
+  metadata {
+    name      = "toolkit-helm-release"
+    namespace = kubernetes_namespace.group[each.key].metadata[0].name
+
+    labels = {
+      "aad-group-name" = var.aad_groups.edit[each.key].name
+    }
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = kubernetes_cluster_role.toolkit_helm_release.metadata[0].name
+  }
+  subject {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "Group"
+    name      = var.aad_groups.edit[each.key].id
+  }
+}
+
+resource "kubernetes_role_binding" "toolkit_kustomization" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+
+  metadata {
+    name      = "toolkit-kustomization"
+    namespace = kubernetes_namespace.group[each.key].metadata[0].name
+
+    labels = {
+      "aad-group-name" = var.aad_groups.edit[each.key].name
+    }
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = kubernetes_cluster_role.toolkit_kustomization.metadata[0].name
+  }
+  subject {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "Group"
+    name      = var.aad_groups.edit[each.key].id
   }
 }
 

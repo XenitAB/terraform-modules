@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: git-cache-http-server
+  namespace: flux-system
+spec:
+  selector:
+    app: git-cache-http-server
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+

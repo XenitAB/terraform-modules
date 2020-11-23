@@ -1,0 +1,50 @@
+# Flux V2
+
+Installs and configures [flux2](https://github.com/fluxcd/flux2) with Azure DevOps.
+
+The module is meant to offer a full bootstrap and confiugration of a Kubernetes cluster  
+with Fluxv2. A "root" repository is created for the bootstrap configuration along with a  
+repository per namepsace passed in the variables. The root repository will receive `cluster-admin`  
+permissions in the cluster while each of the namespace repositories will be limited to their  
+repsective namespace. The CRDs, component deployments and bootstrap configuration are both  
+added to the Kubernetes cluster and commited to the root repository. While the namespace  
+configuration is only comitted to the root repository and expected to be reconciled through  
+the bootstrap configuration.
+
+<p align="center"><img src="../../../assets/fluxcd-v2.jpg"></p>
+
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | 0.13.5 |
+| azuredevops | 0.2.1 |
+| flux | 0.0.4 |
+| kubectl | 1.9.1 |
+| kubernetes | 1.13.3 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| azuredevops | 0.2.1 |
+| flux | 0.0.4 |
+| kubectl | 1.9.1 |
+| kubernetes | 1.13.3 |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| azdo\_org | Azure DevOps organization for bootstrap repository | `string` | n/a | yes |
+| azdo\_pat | PAT to authenticate with Azure DevOps | `string` | n/a | yes |
+| azdo\_proj | Azure DevOps project for bootstrap repository | `string` | n/a | yes |
+| azdo\_repo | Name of repository to bootstrap from | `string` | `"fleet-infra"` | no |
+| branch | Path to reconcile bootstrap from | `string` | `"master"` | no |
+| git\_path | Path to reconcile bootstrap from | `string` | n/a | yes |
+| namespaces | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled      = bool<br>        azdo_org     = string<br>        azdo_project = string<br>        azdo_repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
+
+## Outputs
+
+No output.
+

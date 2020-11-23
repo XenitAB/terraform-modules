@@ -1,3 +1,29 @@
+# FluxCD v2
+module "fluxcd_v2" {
+  for_each = {
+    for s in ["fluxcd-v2"] :
+    s => s
+    if var.fluxcd_v2_enabled
+  }
+
+  source = "../../kubernetes/fluxcd-v2"
+
+  providers = {
+    helm        = helm
+    azuredevops = azuredevops
+  }
+
+  azdo_org  = var.azure_devops_organization
+  azdo_proj = var.azure_devops_project
+  azdo_pat  = data.azurerm_key_vault_secret.azdo_pat.value
+  git_path  = var.environment
+
+  namespaces = [for ns in var.namespaces : {
+    name = ns.name
+    flux = ns.flux
+  }]
+}
+
 # Azure DevOps Proxy
 module "azdo_proxy" {
   for_each = {
@@ -120,7 +146,7 @@ module "opa_gatekeeper" {
 
   exclude = [
     {
-      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy"]
+      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system"]
       processes           = ["*"]
     }
   ]

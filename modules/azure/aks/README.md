@@ -8,6 +8,7 @@ This module is used to create AKS clusters.
 |------|---------|
 | terraform | 0.13.5 |
 | azuread | 1.0.0 |
+| azuredevops | 0.2.1 |
 | azurerm | 2.35.0 |
 | helm | 1.3.2 |
 | kubernetes | 1.13.3 |
@@ -34,13 +35,15 @@ This module is used to create AKS clusters.
 | aks\_name\_suffix | The suffix for the aks clusters | `number` | `1` | no |
 | aks\_public\_ip\_prefix\_id | Public IP ID AKS egresses from | `string` | n/a | yes |
 | azdo\_proxy\_enabled | Should azdo-proxy be enabled | `bool` | `true` | no |
-| azure\_devops\_organization | Azure Devops organization used to configure azdo-proxy | `string` | `""` | no |
+| azure\_devops\_organization | Azure Devops organization root | `string` | `""` | no |
+| azure\_devops\_project | Azure Devops project root | `string` | `""` | no |
 | cert\_manager\_enabled | Should Cert Manager be enabled | `bool` | `true` | no |
 | core\_name | The commonName for the core infrastructure | `string` | n/a | yes |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
 | external\_dns\_enabled | Should External DNS be enabled | `bool` | `true` | no |
 | external\_dns\_identity | External DNS identity information | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |
 | fluxcd\_v1\_enabled | Should fluxcd-v1 be enabled | `bool` | `true` | no |
+| fluxcd\_v2\_enabled | Should fluxcd-v2 be enabled | `bool` | `true` | no |
 | helm\_operator\_credentials | ACR credentials pased to Helm Operator | <pre>object({<br>    client_id = string<br>    secret    = string<br>  })</pre> | n/a | yes |
 | helm\_operator\_enabled | Should helm-operator be enabled | `bool` | `true` | no |
 | ingress\_nginx\_enabled | Should Ingress NGINX be enabled | `bool` | `true` | no |

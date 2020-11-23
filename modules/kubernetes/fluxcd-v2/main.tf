@@ -33,6 +33,7 @@ data "flux_install" "main" {
 data "flux_sync" "main" {
   url         = local.repo_url
   target_path = var.git_path
+  branch = var.branch
 }
 
 data "flux_sync" "groups" {
@@ -43,6 +44,7 @@ data "flux_sync" "groups" {
   }
 
   url         = azuredevops_git_repository.groups[each.key].remote_url
+  branch = var.branch
   target_path = var.git_path
   name = each.key
 }

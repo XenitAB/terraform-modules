@@ -36,7 +36,7 @@ terraform {
 }
 
 provider "azuredevops" {
-  personal_access_token = data.azurerm_key_vault_secret.azdo_pat.value
+  personal_access_token = data.azurerm_key_vault_secret.azdo_pat_admin.value
   org_service_url = "https://dev.azure.com/${var.azure_devops_organization}"
 }
 

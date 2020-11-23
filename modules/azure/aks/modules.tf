@@ -9,7 +9,7 @@ module "fluxcd_v2" {
   source = "../../kubernetes/fluxcd-v2"
 
   providers = {
-    helm = helm
+    helm        = helm
     azuredevops = azuredevops
   }
 

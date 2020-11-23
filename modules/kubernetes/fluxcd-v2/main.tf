@@ -39,8 +39,8 @@ data "flux_install" "main" {
 data "flux_sync" "main" {
   url         = local.repo_url
   target_path = var.git_path
-  branch = var.branch
-  interval = 60000000000
+  branch      = var.branch
+  interval    = 60000000000
 }
 
 data "flux_sync" "groups" {
@@ -50,11 +50,11 @@ data "flux_sync" "groups" {
     if ns.flux.enabled
   }
 
-  url = "http://git-cache-http-server/dev.azure.com/${var.azdo_org}/${var.azdo_proj}/_git/${each.key}"
-  branch = var.branch
+  url         = "http://git-cache-http-server/dev.azure.com/${var.azdo_org}/${var.azdo_proj}/_git/${each.key}"
+  branch      = var.branch
   target_path = var.git_path
-  name = each.key
-  interval = 60000000000
+  name        = each.key
+  interval    = 60000000000
 }
 
 # Azure DevOps
@@ -86,23 +86,23 @@ resource "azuredevops_git_repository" "groups" {
 
 resource "azuredevops_git_repository_file" "install" {
   repository_id = azuredevops_git_repository.this.id
-  file       = data.flux_install.main.path
-  content    = data.flux_install.main.content
-  branch     = "refs/heads/${var.branch}"
+  file          = data.flux_install.main.path
+  content       = data.flux_install.main.content
+  branch        = "refs/heads/${var.branch}"
 }
 
 resource "azuredevops_git_repository_file" "sync" {
   repository_id = azuredevops_git_repository.this.id
-  file       = data.flux_sync.main.path
-  content    = data.flux_sync.main.content
-  branch     = "refs/heads/${var.branch}"
+  file          = data.flux_sync.main.path
+  content       = data.flux_sync.main.content
+  branch        = "refs/heads/${var.branch}"
 }
 
 resource "azuredevops_git_repository_file" "kustomize" {
   repository_id = azuredevops_git_repository.this.id
-  file       = data.flux_sync.main.kustomize_path
-  content    = data.flux_sync.main.kustomize_content
-  branch     = "refs/heads/${var.branch}"
+  file          = data.flux_sync.main.kustomize_path
+  content       = data.flux_sync.main.kustomize_content
+  branch        = "refs/heads/${var.branch}"
 }
 
 resource "azuredevops_git_repository_file" "groups" {
@@ -113,9 +113,9 @@ resource "azuredevops_git_repository_file" "groups" {
   }
 
   repository_id = azuredevops_git_repository.this.id
-  file = "${var.git_path}/${each.key}.yaml"
-  content    = data.flux_sync.groups[each.key].content
-  branch     = "refs/heads/${var.branch}"
+  file          = "${var.git_path}/${each.key}.yaml"
+  content       = data.flux_sync.groups[each.key].content
+  branch        = "refs/heads/${var.branch}"
 }
 
 # Kubernetes

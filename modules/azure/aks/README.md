@@ -8,6 +8,7 @@ This module is used to create AKS clusters.
 |------|---------|
 | terraform | 0.13.5 |
 | azuread | 1.0.0 |
+| azuredevops | 0.2.1 |
 | azurerm | 2.35.0 |
 | helm | 1.3.2 |
 | kubernetes | 1.13.3 |

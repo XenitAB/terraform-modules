@@ -9,7 +9,7 @@ module "fluxcd_v2" {
   azdo_pat = "123456"
   azdo_org = "foo"
   azdo_proj = "bar"
-  repository_name = "baz"
+  azdo_repo = "baz"
   git_path = "dev"
   namespaces = []
 }

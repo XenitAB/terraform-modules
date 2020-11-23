@@ -22,7 +22,7 @@ terraform {
 }
 
 locals {
-  repo_url = "http://git-cache-http-server/dev.azure.com/${var.azdo_org}/${var.azdo_proj}/_git/${var.repository_name}"
+  repo_url = "http://git-cache-http-server/dev.azure.com/${var.azdo_org}/${var.azdo_proj}/_git/${var.azdo_repo}"
 }
 
 # FluxCD
@@ -56,7 +56,7 @@ data "azuredevops_project" "this" {
 
 resource "azuredevops_git_repository" "this" {
   project_id = data.azuredevops_project.this.id
-  name       = var.repository_name
+  name       = var.azdo_name
   initialization {
     init_type = "Clean"
   }
@@ -105,7 +105,7 @@ resource "azuredevops_git_repository_file" "groups" {
   }
 
   repository_id = azuredevops_git_repository.groups[each.key].id
-  file       = data.flux_sync.groups[each.key].path
+  file = "${var.environment}/${each.key}.yaml"
   content    = data.flux_sync.groups[each.key].content
   branch     = "refs/heads/${var.branch}"
 }

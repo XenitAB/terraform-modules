@@ -13,7 +13,7 @@ variable "azdo_proj" {
   type        = string
 }
 
-variable "repository_name" {
+variable "azdo_repo" {
   description = "Name of repository to bootstrap from"
   type        = string
   default     = "fleet-infra"

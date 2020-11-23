@@ -1,3 +1,9 @@
+/**
+ * # Flux V2
+ *
+ * The module installs and configures [flux2](https://github.com/fluxcd/flux2) with Azure DevOps.
+ */
+
 terraform {
   required_version = "0.13.5"
 
@@ -43,7 +49,7 @@ data "flux_sync" "groups" {
     if ns.flux.enabled
   }
 
-  url         = azuredevops_git_repository.groups[each.key].remote_url
+  url = "http://git-cache-http-server/dev.azure.com/${var.azdo_org}/${var.azdo_proj}/_git/${each.key}"
   branch = var.branch
   target_path = var.git_path
   name = each.key
@@ -137,6 +143,24 @@ resource "kubectl_manifest" "sync" {
   depends_on = [kubectl_manifest.install, kubernetes_namespace.flux_system]
 
   yaml_body = each.value
+}
+
+resource "kubernetes_secret" "main" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.flux.enabled
+  }
+
+  metadata {
+    name      = each.key
+    namespace = data.flux_sync.main.namespace
+  }
+
+  data = {
+    username = var.azdo_org
+    password = var.azdo_pat
+  }
 }
 
 resource "kubernetes_secret" "main" {

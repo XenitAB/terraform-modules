@@ -56,7 +56,7 @@ data "azuredevops_project" "this" {
 
 resource "azuredevops_git_repository" "this" {
   project_id = data.azuredevops_project.this.id
-  name       = var.azdo_name
+  name       = var.azdo_repo
   initialization {
     init_type = "Clean"
   }

@@ -9,7 +9,7 @@ resource "kubernetes_cluster_role" "list_namespaces" {
   }
 }
 
-resource "kubernetes_cluster_role" "helm_release_v1" {
+resource "kubernetes_cluster_role" "helm_release" {
   metadata {
     name = "helm-release-v1"
   }

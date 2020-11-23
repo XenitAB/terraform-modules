@@ -1,7 +1,18 @@
 /**
  * # Flux V2
  *
- * The module installs and configures [flux2](https://github.com/fluxcd/flux2) with Azure DevOps.
+ * Installs and configures [flux2](https://github.com/fluxcd/flux2) with Azure DevOps.
+ *
+ * The module is meant to offer a full bootstrap and confiugration of a Kubernetes cluster
+ * with Fluxv2. A "root" repository is created for the bootstrap configuration along with a
+ * repository per namepsace passed in the variables. The root repository will receive `cluster-admin`
+ * permissions in the cluster while each of the namespace repositories will be limited to their
+ * repsective namespace. The CRDs, component deployments and bootstrap configuration are both
+ * added to the Kubernetes cluster and commited to the root repository. While the namespace
+ * configuration is only comitted to the root repository and expected to be reconciled through
+ * the bootstrap configuration.
+ *
+ * <p align="center"><img src="../../../assets/fluxcd-v2.jpg"></p>
  */
 
 terraform {

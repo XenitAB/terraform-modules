@@ -104,7 +104,7 @@ resource "azuredevops_git_repository_file" "groups" {
     if ns.flux.enabled
   }
 
-  repository_id = azuredevops_git_repository.groups[each.key].id
+  repository_id = azuredevops_git_repository.this.id
   file = "${var.environment}/${each.key}.yaml"
   content    = data.flux_sync.groups[each.key].content
   branch     = "refs/heads/${var.branch}"

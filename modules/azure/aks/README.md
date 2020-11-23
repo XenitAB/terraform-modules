@@ -29,12 +29,10 @@ This module is used to create AKS clusters.
 | aad\_groups | Configuration for aad groups | <pre>object({<br>    view = map(any)<br>    edit = map(any)<br>    cluster_admin = object({<br>      id   = string<br>      name = string<br>    })<br>    cluster_view = object({<br>      id   = string<br>      name = string<br>    })<br>    aks_managed_identity = object({<br>      id   = string<br>      name = string<br>    })<br>  })</pre> | n/a | yes |
 | aad\_pod\_identity | Configuration for aad pod identity | <pre>map(object({<br>    id        = string<br>    client_id = string<br>  }))</pre> | n/a | yes |
 | aad\_pod\_identity\_enabled | Should aad-pod-identity be enabled | `bool` | `true` | no |
-| acr\_name | Name of ACR registry to use for cluster | `string` | n/a | yes |
 | aks\_authorized\_ips | Authorized IPs to access AKS API | `list(string)` | n/a | yes |
 | aks\_config | The Azure Kubernetes Service (AKS) configuration | <pre>object({<br>    kubernetes_version = string<br>    sku_tier           = string<br>    default_node_pool = object({<br>      orchestrator_version = string<br>      vm_size              = string<br>      min_count            = number<br>      max_count            = number<br>      node_labels          = map(string)<br>    })<br>    additional_node_pools = list(object({<br>      name                 = string<br>      orchestrator_version = string<br>      vm_size              = string<br>      min_count            = number<br>      max_count            = number<br>      node_taints          = list(string)<br>      node_labels          = map(string)<br>    }))<br>  })</pre> | n/a | yes |
 | aks\_name\_suffix | The suffix for the aks clusters | `number` | `1` | no |
 | aks\_public\_ip\_prefix\_id | Public IP ID AKS egresses from | `string` | n/a | yes |
-| azdo\_proxy\_enabled | Should azdo-proxy be enabled | `bool` | `true` | no |
 | azure\_devops\_organization | Azure Devops organization root | `string` | `""` | no |
 | azure\_devops\_project | Azure Devops project root | `string` | `""` | no |
 | cert\_manager\_enabled | Should Cert Manager be enabled | `bool` | `true` | no |
@@ -42,10 +40,7 @@ This module is used to create AKS clusters.
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
 | external\_dns\_enabled | Should External DNS be enabled | `bool` | `true` | no |
 | external\_dns\_identity | External DNS identity information | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |
-| fluxcd\_v1\_enabled | Should fluxcd-v1 be enabled | `bool` | `true` | no |
 | fluxcd\_v2\_enabled | Should fluxcd-v2 be enabled | `bool` | `true` | no |
-| helm\_operator\_credentials | ACR credentials pased to Helm Operator | <pre>object({<br>    client_id = string<br>    secret    = string<br>  })</pre> | n/a | yes |
-| helm\_operator\_enabled | Should helm-operator be enabled | `bool` | `true` | no |
 | ingress\_nginx\_enabled | Should Ingress NGINX be enabled | `bool` | `true` | no |
 | kubernetes\_network\_policy\_default\_deny | Should a network policy be created in each group namespace that disables traffic from other namespaces | `bool` | `true` | no |
 | location\_short | The Azure region short name. | `string` | n/a | yes |

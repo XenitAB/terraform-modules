@@ -76,11 +76,6 @@ variable "ssh_public_key" {
   type        = string
 }
 
-variable "acr_name" {
-  description = "Name of ACR registry to use for cluster"
-  type        = string
-}
-
 variable "aks_authorized_ips" {
   description = "Authorized IPs to access AKS API"
   type        = list(string)
@@ -137,24 +132,6 @@ variable "fluxcd_v2_enabled" {
   default     = true
 }
 
-variable "azdo_proxy_enabled" {
-  description = "Should azdo-proxy be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "fluxcd_v1_enabled" {
-  description = "Should fluxcd-v1 be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "helm_operator_enabled" {
-  description = "Should helm-operator be enabled"
-  type        = bool
-  default     = true
-}
-
 variable "aad_pod_identity_enabled" {
   description = "Should aad-pod-identity be enabled"
   type        = bool
@@ -183,14 +160,6 @@ variable "external_dns_enabled" {
   description = "Should External DNS be enabled"
   type        = bool
   default     = true
-}
-
-variable "helm_operator_credentials" {
-  description = "ACR credentials pased to Helm Operator"
-  type = object({
-    client_id = string
-    secret    = string
-  })
 }
 
 variable "velero_enabled" {

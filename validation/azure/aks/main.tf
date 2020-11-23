@@ -81,7 +81,6 @@ module "aks" {
   ]
   aks_public_ip_prefix_id = "id"
   aks_authorized_ips      = ["0.0.0.0/0"]
-  acr_name                = "name"
   ssh_public_key          = "key"
 
   aad_pod_identity = {
@@ -118,10 +117,6 @@ module "aks" {
   }
 
   azure_devops_organization = "xenitab"
-  helm_operator_credentials = {
-    client_id = "id"
-    secret    = "secret"
-  }
   external_dns_identity = {
     client_id   = "id"
     resource_id = "id"

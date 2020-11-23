@@ -11,7 +11,7 @@ resource "kubernetes_cluster_role" "list_namespaces" {
 
 resource "kubernetes_cluster_role" "helm_release" {
   metadata {
-    name = "helm-release-v1"
+    name = "helm-release"
   }
   rule {
     api_groups = ["helm.fluxcd.io"]
@@ -22,7 +22,7 @@ resource "kubernetes_cluster_role" "helm_release" {
 
 resource "kubernetes_cluster_role" "toolkit_helm_release" {
   metadata {
-    name = "helm-release-v2"
+    name = "toolkit-helm-release"
   }
   rule {
     api_groups = ["helm.toolkit.fluxcd.io"]
@@ -33,7 +33,7 @@ resource "kubernetes_cluster_role" "toolkit_helm_release" {
 
 resource "kubernetes_cluster_role" "toolkit_kustomization" {
   metadata {
-    name = "helm-release-v2"
+    name = "toolkit-kustomization"
   }
   rule {
     api_groups = ["kustomize.toolkit.fluxcd.io"]

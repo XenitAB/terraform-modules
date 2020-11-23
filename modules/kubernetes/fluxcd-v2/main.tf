@@ -126,7 +126,7 @@ resource "kubernetes_namespace" "flux_system" {
 
   lifecycle {
     ignore_changes = [
-      labels,
+      metadata.labels,
     ]
   }
 }

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: git-cache-http-server
+  namespace: flux-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: git-cache-http-server
+  template:
+    metadata:
+      labels:
+        app: git-cache-http-server
+    spec:
+      containers:
+      - name: git-cache-http-server
+        image: kurzdigital/git-cache-http-server:latest
+        ports:
+        - containerPort: 8080

@@ -22,7 +22,7 @@ terraform {
 }
 
 locals {
-  repo_url = "https://dev.azure.com/${var.azdo_org}/${var.azdo_proj}/_git/${var.repository_name}"
+  repo_url = "http://git-cache-http-server/dev.azure.com/${var.azdo_org}/${var.azdo_proj}/_git/${var.repository_name}"
 }
 
 # FluxCD
@@ -149,4 +149,12 @@ resource "kubernetes_secret" "main" {
     username = var.azdo_org
     password = var.azdo_pat
   }
+}
+
+resource "kubectl_manifest" "git_cache_deplopyment" {
+  yaml_body = file("${path.module}/files/deployment.yaml")
+}
+
+resource "kubectl_manifest" "git_cache_service" {
+  yaml_body = file("${path.module}/files/service.yaml")
 }

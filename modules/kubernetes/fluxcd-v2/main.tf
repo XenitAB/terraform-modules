@@ -146,14 +146,10 @@ resource "kubectl_manifest" "sync" {
 }
 
 resource "kubernetes_secret" "main" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
+  depends_on = [kubectl_manifest.install]
 
   metadata {
-    name      = each.key
+    name      = data.flux_sync.main.name
     namespace = data.flux_sync.main.namespace
   }
 
@@ -163,11 +159,15 @@ resource "kubernetes_secret" "main" {
   }
 }
 
-resource "kubernetes_secret" "main" {
-  depends_on = [kubectl_manifest.install]
+resource "kubernetes_secret" "groups" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.flux.enabled
+  }
 
   metadata {
-    name      = data.flux_sync.main.name
+    name      = each.key
     namespace = data.flux_sync.main.namespace
   }
 

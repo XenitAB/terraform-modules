@@ -82,6 +82,8 @@ resource "azuredevops_git_repository_file" "install" {
 }
 
 resource "azuredevops_git_repository_file" "sync" {
+  depends_on = [azuredevops_git_repository_file.install]
+
   repository_id = azuredevops_git_repository.this.id
   file       = data.flux_sync.main.path
   content    = data.flux_sync.main.content
@@ -89,6 +91,8 @@ resource "azuredevops_git_repository_file" "sync" {
 }
 
 resource "azuredevops_git_repository_file" "kustomize" {
+  depends_on = [azuredevops_git_repository_file.sync]
+
   repository_id = azuredevops_git_repository.this.id
   file       = data.flux_sync.main.kustomize_path
   content    = data.flux_sync.main.kustomize_content
@@ -96,6 +100,8 @@ resource "azuredevops_git_repository_file" "kustomize" {
 }
 
 resource "azuredevops_git_repository_file" "groups" {
+  depends_on = [azuredevops_git_repository_file.kustomize]
+
   for_each = {
     for ns in var.namespaces :
     ns.name => ns

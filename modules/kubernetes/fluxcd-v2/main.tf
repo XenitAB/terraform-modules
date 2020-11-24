@@ -12,7 +12,7 @@
  * configuration is only comitted to the root repository and expected to be reconciled through
  * the bootstrap configuration.
  *
- * <p align="center"><img src="../../../assets/fluxcd-v2.jpg"></p>
+ * <p align="center"><img src="../../../assets/fluxcd-v2.jpg" /></p>
  */
 
 terraform {

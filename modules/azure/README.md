@@ -24,5 +24,6 @@ Create and delegate access to the `owner` service principal:
   - API Permissions: (Application)
     - `Group.ReadWrite.All` (`Microsoft Graph`)
     - `Application.ReadWrite.All` (`Azure Active Directory Graph` - it's under the `Supported legacy APIs` section)
+  - API Permissions: `Grant admin consent for <Tenant>`
   - Subscription permissions on all the subscriptions: `Owner`
   - The service principal also needs to be member of the `User administrator` role

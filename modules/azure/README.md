@@ -20,6 +20,11 @@ INFO: This service principal will be used to run `governance`, `core`, `aks-glob
 Create and delegate access to the `owner` service principal:
 
 - Create new service principal: `sp-sub-<subscription_name>-all-owner`
+- Create three Azure AD groups:
+  - Owner group: `az-sub-<subscription_name>-all-owner`
+  - Contributor group: `az-sub-<subscription_name>-all-contributor`
+  - Reader group: `az-sub-<subscription_name>-all-reader`
+- Add `sp-sub-<subscription_name>-all-owner` too `az-sub-<subscription_name>-all-owner`
 - Grant service principal the following permissions:
   - API Permissions: (Application)
     - `Group.ReadWrite.All` (`Microsoft Graph`)

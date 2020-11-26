@@ -45,6 +45,9 @@ configuration:
 
 snapshotsEnable: false
 
+securityContext:
+  fsGroup: 1337
+
 serviceAccount:
   server:
     annotations:

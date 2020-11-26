@@ -27,7 +27,7 @@ resource "helm_release" "external_secrets" {
   name             = "external-secrets"
   namespace        = "external-secrets"
   create_namespace = true
-  skip_crds        = true # let the custom resource manager instal the CRDs
+  skip_crds        = true # let the custom resource manager install the CRDs
   version          = "6.0.0"
   values           = [local.values]
 }

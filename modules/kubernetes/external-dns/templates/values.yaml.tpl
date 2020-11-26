@@ -14,3 +14,10 @@ azure:
 podLabels:
   aadpodidbinding: external-dns
 %{ endif }
+%{ if provider == "aws" }
+aws:
+  region: "${aws_region}"
+rbac:
+  serviceAccountAnnotations:
+    eks.amazonaws.com/role-arn: ${aws_role_arn}
+%{ endif }

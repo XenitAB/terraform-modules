@@ -38,3 +38,15 @@ variable "azure_resource_id" {
   type        = string
   default     = ""
 }
+
+variable "aws_region" {
+  description = "AWS region to use"
+  type = string
+  default = ""
+}
+
+variable "aws_role_arn" {
+  description = "AWS role ARN to attach to service account"
+  type = string
+  default = ""
+}

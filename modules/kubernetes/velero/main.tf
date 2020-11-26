@@ -33,7 +33,7 @@ resource "helm_release" "velero" {
   name             = "velero"
   namespace        = "velero"
   create_namespace = true
-  version          = "2.13.6"
+  version          = "2.14.0"
   values           = [local.values]
 }
 

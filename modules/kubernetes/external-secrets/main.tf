@@ -23,7 +23,7 @@ locals {
 
 resource "helm_release" "external_secrets" {
   repository       = "https://external-secrets.github.io/kubernetes-external-secrets/"
-  chart            = "external-secrets"
+  chart            = "kubernetes-external-secrets"
   name             = "external-secrets"
   namespace        = "external-secrets"
   create_namespace = true

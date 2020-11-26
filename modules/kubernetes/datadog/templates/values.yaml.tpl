@@ -13,16 +13,22 @@ datadog:
   logs:
     enabled: true
     containerCollectAll: true
+    containerCollectUsingFiles: true
   apm:
     enabled: true
   systemProbe:
-    enabled: true
+    enabled: false
   env:
     - name: DD_KUBELET_TLS_VERIFY
       value: "false"
   processAgent:
     enabled: true
     processCollection: true
+  containerExcludeLogs: "kube_namespace:kube-system kube_namespace:datadog"
+
+agents:
+  tolerations:
+    - operator: "Exists"
 
 clusterAgent:
   enabled: true

@@ -18,6 +18,8 @@ terraform {
 locals {
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
     api_key = var.api_key
+    location = var.location
+    environment = var.environment
   })
 }
 

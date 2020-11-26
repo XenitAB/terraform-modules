@@ -21,9 +21,11 @@ module "external_dns" {
   }
 
   dns_provider          = "azure"
-  azure_tenant_id       = "id"
-  azure_subscription_id = "id"
-  azure_resource_group  = "name"
-  azure_client_id       = "id"
-  azure_resource_id     = "id"
+  azure_config = {
+    tenant_id       = "id"
+    subscription_id = "id"
+    resource_group  = "name"
+    client_id       = "id"
+    resource_id     = "id"
+  }
 }

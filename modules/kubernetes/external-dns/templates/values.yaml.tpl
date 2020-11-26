@@ -17,7 +17,7 @@ podLabels:
 %{ if provider == "aws" }
 aws:
   region: "${aws_region}"
-rbac:
-  serviceAccountAnnotations:
+serviceAccount:
+  annotations:
     eks.amazonaws.com/role-arn: "${aws_role_arn}"
 %{ endif }

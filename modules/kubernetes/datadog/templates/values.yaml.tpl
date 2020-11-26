@@ -1,7 +1,7 @@
 datadog:
   apiKey: ${api_key}
   clusterName: ${location}-${environment}
-  site: datadoghq.eu
+  site: ${datadog_site}datadoghq.eu
   kubeStateMetricsEnabled: true
   clusterChecks:
     enabled: true
@@ -18,9 +18,6 @@ datadog:
     enabled: true
   systemProbe:
     enabled: false
-  env:
-    - name: DD_KUBELET_TLS_VERIFY
-      value: "false"
   processAgent:
     enabled: true
     processCollection: true

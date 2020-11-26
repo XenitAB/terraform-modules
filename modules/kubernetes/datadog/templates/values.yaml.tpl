@@ -1,7 +1,7 @@
 datadog:
   apiKey: ${api_key}
   clusterName: ${location}-${environment}
-  site: ${datadog_site}datadoghq.eu
+  site: ${datadog_site}
   kubeStateMetricsEnabled: true
   clusterChecks:
     enabled: true

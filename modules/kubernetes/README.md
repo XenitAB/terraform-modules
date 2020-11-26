@@ -15,3 +15,4 @@ This directory contains all the Kubernetes Terraform modules.
 - [`loki`](loki/README.md)
 - [`opa-gatekeeper`](opa-gatekeeper/README.md)
 - [`velero`](velero/README.md)
+- [`datadog`](datadog/README.md)

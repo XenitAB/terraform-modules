@@ -19,5 +19,5 @@ aws:
   region: "${aws_region}"
 rbac:
   serviceAccountAnnotations:
-    eks.amazonaws.com/role-arn: ${aws_role_arn}
+    eks.amazonaws.com/role-arn: "${aws_role_arn}"
 %{ endif }

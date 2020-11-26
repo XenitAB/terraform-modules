@@ -1,11 +1,11 @@
 variable "environment" {
   description = "Cluster environment"
-  type = string
+  type        = string
 }
 
 variable "location" {
   description = "Cluster location"
-  type = string
+  type        = string
 }
 
 variable "api_key" {

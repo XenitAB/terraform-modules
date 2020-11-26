@@ -13,7 +13,7 @@ provider "helm" {
   }
 }
 
-module "ingress_nginx" {
+module "datadog" {
   source = "../../../modules/kubernetes/datadog"
 
   providers = {
@@ -21,4 +21,6 @@ module "ingress_nginx" {
   }
 
   api_key = "key" #tfsec:ignore:GEN003
+  location = "foo"
+  environment = "bar"
 }

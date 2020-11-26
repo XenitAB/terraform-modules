@@ -149,11 +149,13 @@ module "velero" {
     helm = helm
   }
 
-  cloud_provider                  = "azure"
-  azure_subscription_id           = data.azurerm_client_config.current.subscription_id
-  azure_resource_group            = data.azurerm_resource_group.this.name
-  azure_storage_account_name      = var.velero.azure_storage_account_name
-  azure_storage_account_container = var.velero.azure_storage_account_container
-  azure_client_id                 = var.velero.identity.client_id
-  azure_resource_id               = var.velero.identity.resource_id
+  cloud_provider = "azure"
+  azure_config = {
+    subscription_id           = data.azurerm_client_config.current.subscription_id
+    resource_group            = data.azurerm_resource_group.this.name
+    storage_account_name      = var.velero.azure_storage_account_name
+    storage_account_container = var.velero.azure_storage_account_container
+    client_id                 = var.velero.identity.client_id
+    resource_id               = var.velero.identity.resource_id
+  }
 }

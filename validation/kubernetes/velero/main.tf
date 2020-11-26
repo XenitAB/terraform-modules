@@ -21,10 +21,12 @@ module "velero" {
   }
 
   cloud_provider                  = "azure"
-  azure_subscription_id           = "id"
-  azure_resource_group            = "name"
-  azure_storage_account_name      = "name"
-  azure_storage_account_container = "name"
-  azure_client_id                 = "id"
-  azure_resource_id               = "id"
+  azure_config = {
+    subscription_id           = "id"
+    resource_group            = "name"
+    storage_account_name      = "name"
+    storage_account_container = "name"
+    client_id                 = "id"
+    resource_id               = "id"
+  }
 }

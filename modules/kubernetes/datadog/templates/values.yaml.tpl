@@ -1,5 +1,5 @@
 datadog:
-  apikey: ${api_key}
+  apiKey: ${api_key}
   clusterName: ${location}-${environment}
   site: datadoghq.eu
   kubeStateMetricsEnabled: true

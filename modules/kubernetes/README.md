@@ -16,3 +16,4 @@ This directory contains all the Kubernetes Terraform modules.
 - [`opa-gatekeeper`](opa-gatekeeper/README.md)
 - [`velero`](velero/README.md)
 - [`datadog`](datadog/README.md)
+- [`external-secrtest`](external-secrets/README.md)

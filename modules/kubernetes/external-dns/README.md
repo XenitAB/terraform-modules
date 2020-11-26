@@ -19,6 +19,8 @@ This module is used to add [`external-dns`](https://github.com/kubernetes-sigs/e
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| aws\_region | AWS region to use | `string` | `""` | no |
+| aws\_role\_arn | AWS role ARN to attach to service account | `string` | `""` | no |
 | azure\_client\_id | Client ID for MSI authentication | `string` | `""` | no |
 | azure\_resource\_group | Azure resource group for DNS zone | `string` | `""` | no |
 | azure\_resource\_id | Principal ID fo MSI authentication | `string` | `""` | no |

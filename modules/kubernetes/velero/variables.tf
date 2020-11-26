@@ -15,10 +15,10 @@ variable "azure_config" {
     storage_account_container = string
   })
   default = {
-    subscription_id           = "",
-    tenant_id                 = "",
-    resource_group            = "",
-    client_id                 = "",
+    subscription_id           = ""
+    tenant_id                 = ""
+    resource_group            = ""
+    client_id                 = ""
     resource_id               = ""
     storage_account_name      = ""
     storage_account_container = ""

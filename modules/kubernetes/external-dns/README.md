@@ -19,11 +19,8 @@ This module is used to add [`external-dns`](https://github.com/kubernetes-sigs/e
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| azure\_client\_id | Client ID for MSI authentication | `string` | `""` | no |
-| azure\_resource\_group | Azure resource group for DNS zone | `string` | `""` | no |
-| azure\_resource\_id | Principal ID fo MSI authentication | `string` | `""` | no |
-| azure\_subscription\_id | Azure subscription ID for DNS zone | `string` | `""` | no |
-| azure\_tenant\_id | Azure tenant ID for DNS zone | `string` | `""` | no |
+| aws\_config | AWS specific configuration | <pre>object({<br>    role_arn = string,<br>    region   = string<br>  })</pre> | <pre>{<br>  "region": "",<br>  "role_arn": ""<br>}</pre> | no |
+| azure\_config | AWS specific configuration | <pre>object({<br>    subscription_id = string,<br>    tenant_id       = string,<br>    resource_group  = string,<br>    client_id       = string,<br>    resource_id     = string<br>  })</pre> | <pre>{<br>  "client_id": "",<br>  "resource_group": "",<br>  "resource_id": "",<br>  "subscription_id": "",<br>  "tenant_id": ""<br>}</pre> | no |
 | dns\_provider | DNS provider to use. | `string` | n/a | yes |
 | sources | k8s resource types to observe | `list(string)` | <pre>[<br>  "ingress"<br>]</pre> | no |
 

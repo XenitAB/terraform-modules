@@ -15,18 +15,13 @@ This module is used to add [`velero`](https://github.com/vmware-tanzu/velero) to
 | Name | Version |
 |------|---------|
 | helm | 1.3.2 |
-| kubernetes | 1.13.3 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| azure\_client\_id | Client ID for MSI authentication | `string` | `""` | no |
-| azure\_resource\_group | Azure resource group for DNS zone | `string` | `""` | no |
-| azure\_resource\_id | Principal ID fo MSI authentication | `string` | `""` | no |
-| azure\_storage\_account\_container | Azure storage account container name | `string` | `""` | no |
-| azure\_storage\_account\_name | Azure storage account name | `string` | `""` | no |
-| azure\_subscription\_id | Azure subscription ID for DNS zone | `string` | `""` | no |
+| aws\_config | AWS specific configuration | <pre>object({<br>    role_arn     = string,<br>    region       = string,<br>    s3_bucket_id = string<br>  })</pre> | <pre>{<br>  "region": "",<br>  "role_arn": "",<br>  "s3_bucket_id": ""<br>}</pre> | no |
+| azure\_config | AWS specific configuration | <pre>object({<br>    subscription_id           = string,<br>    resource_group            = string,<br>    client_id                 = string,<br>    resource_id               = string,<br>    storage_account_name      = string,<br>    storage_account_container = string<br>  })</pre> | <pre>{<br>  "client_id": "",<br>  "resource_group": "",<br>  "resource_id": "",<br>  "storage_account_container": "",<br>  "storage_account_name": "",<br>  "subscription_id": "",<br>  "tenant_id": ""<br>}</pre> | no |
 | cloud\_provider | Cloud provider to use. | `string` | `"azure"` | no |
 
 ## Outputs

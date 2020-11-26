@@ -20,37 +20,21 @@ terraform {
 }
 
 locals {
-  values             = templatefile("${path.module}/templates/values.yaml.tpl", { cloud_provider = var.cloud_provider, azure_resource_group = var.azure_resource_group, azure_storage_account_name = var.azure_storage_account_name, azure_storage_account_container = var.azure_storage_account_container })
-  velero_credentials = templatefile("${path.module}/templates/velero-credentials.tpl", { azure_subscription_id = var.azure_subscription_id, azure_resource_group = var.azure_resource_group })
-}
-
-resource "kubernetes_namespace" "velero" {
-  metadata {
-    labels = {
-      name = "velero"
-    }
-    name = "velero"
-  }
-}
-
-resource "kubernetes_secret" "velero" {
-  metadata {
-    name      = "velero"
-    namespace = kubernetes_namespace.velero.metadata[0].name
-  }
-
-  data = {
-    "cloud" = local.velero_credentials
-  }
+  values = templatefile("${path.module}/templates/values.yaml.tpl", {
+    cloud_provider = var.cloud_provider,
+    azure_config   = var.azure_config
+    aws_config     = var.aws_config
+  })
 }
 
 resource "helm_release" "velero" {
-  repository = "https://vmware-tanzu.github.io/helm-charts"
-  chart      = "velero"
-  name       = "velero"
-  namespace  = kubernetes_namespace.velero.metadata[0].name
-  version    = "2.13.6"
-  values     = [local.values]
+  repository       = "https://vmware-tanzu.github.io/helm-charts"
+  chart            = "velero"
+  name             = "velero"
+  namespace        = "velero"
+  create_namespace = true
+  version          = "2.14.0"
+  values           = [local.values]
 }
 
 resource "helm_release" "velero_extras" {
@@ -58,15 +42,15 @@ resource "helm_release" "velero_extras" {
 
   chart     = "${path.module}/charts/velero-extras"
   name      = "velero-extras"
-  namespace = kubernetes_namespace.velero.metadata[0].name
+  namespace = "velero"
 
   set {
     name  = "resourceID"
-    value = var.azure_resource_id
+    value = var.azure_config.resource_id
   }
 
   set {
     name  = "clientID"
-    value = var.azure_client_id
+    value = var.azure_config.client_id
   }
 }

@@ -4,38 +4,37 @@ variable "cloud_provider" {
   default     = "azure"
 }
 
-variable "azure_subscription_id" {
-  description = "Azure subscription ID for DNS zone"
-  type        = string
-  default     = ""
+variable "azure_config" {
+  description = "AWS specific configuration"
+  type = object({
+    subscription_id           = string,
+    resource_group            = string,
+    client_id                 = string,
+    resource_id               = string,
+    storage_account_name      = string,
+    storage_account_container = string
+  })
+  default = {
+    subscription_id           = ""
+    tenant_id                 = ""
+    resource_group            = ""
+    client_id                 = ""
+    resource_id               = ""
+    storage_account_name      = ""
+    storage_account_container = ""
+  }
 }
 
-variable "azure_resource_group" {
-  description = "Azure resource group for DNS zone"
-  type        = string
-  default     = ""
-}
-
-variable "azure_storage_account_name" {
-  description = "Azure storage account name"
-  type        = string
-  default     = ""
-}
-
-variable "azure_storage_account_container" {
-  description = "Azure storage account container name"
-  type        = string
-  default     = ""
-}
-
-variable "azure_client_id" {
-  description = "Client ID for MSI authentication"
-  type        = string
-  default     = ""
-}
-
-variable "azure_resource_id" {
-  description = "Principal ID fo MSI authentication"
-  type        = string
-  default     = ""
+variable "aws_config" {
+  description = "AWS specific configuration"
+  type = object({
+    role_arn     = string,
+    region       = string,
+    s3_bucket_id = string
+  })
+  default = {
+    role_arn     = ""
+    region       = ""
+    s3_bucket_id = ""
+  }
 }

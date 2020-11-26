@@ -16,7 +16,12 @@ terraform {
 }
 
 locals {
-  values = templatefile("${path.module}/templates/values.yaml.tpl", { provider = var.dns_provider, sources = var.sources, azure_tenant_id = var.azure_tenant_id, azure_subscription_id = var.azure_subscription_id, azure_resource_group = var.azure_resource_group })
+  values = templatefile("${path.module}/templates/values.yaml.tpl", {
+    provider     = var.dns_provider,
+    sources      = var.sources,
+    azure_config = var.azure_config,
+    aws_config   = var.aws_config
+  })
 }
 
 resource "helm_release" "external_dns" {
@@ -38,11 +43,11 @@ resource "helm_release" "external_dns_extras" {
 
   set {
     name  = "resourceID"
-    value = var.azure_resource_id
+    value = var.azure_config.resource_id
   }
 
   set {
     name  = "clientID"
-    value = var.azure_client_id
+    value = var.azure_config.client_id
   }
 }

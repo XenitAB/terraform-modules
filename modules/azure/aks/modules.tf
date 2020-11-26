@@ -110,12 +110,14 @@ module "external_dns" {
     helm = helm
   }
 
-  dns_provider          = "azure"
-  azure_tenant_id       = data.azurerm_client_config.current.tenant_id
-  azure_subscription_id = data.azurerm_client_config.current.subscription_id
-  azure_resource_group  = data.azurerm_resource_group.this.name
-  azure_client_id       = var.external_dns_identity.client_id
-  azure_resource_id     = var.external_dns_identity.resource_id
+  dns_provider = "azure"
+  azure_config = {
+    tenant_id       = data.azurerm_client_config.current.tenant_id
+    subscription_id = data.azurerm_client_config.current.subscription_id
+    resource_group  = data.azurerm_resource_group.this.name
+    client_id       = var.external_dns_identity.client_id
+    resource_id     = var.external_dns_identity.resource_id
+  }
 }
 
 # Cert Manager

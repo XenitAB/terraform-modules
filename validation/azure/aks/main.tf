@@ -34,6 +34,7 @@ module "aks" {
   location_short  = "we"
   name            = "xks"
   core_name       = "core"
+  unique_suffix   = "1234"
   aks_name_suffix = "1"
 
   aks_config = {

@@ -80,3 +80,8 @@ variable "vmss_subnet_config" {
     resource_group_name  = string
   })
 }
+
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
+  type        = string
+}

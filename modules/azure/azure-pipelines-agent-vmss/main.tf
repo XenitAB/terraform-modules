@@ -1,8 +1,8 @@
 /**
   * # Azure Pipelines Agent
-  * 
+  *
   * This is the setup for Azure Pipelines Agent Virtual Machine Scale Set (VMSS).
-  * 
+  *
   * ## Azure DevOps Configuration
   *
   * Follow this guide to setup the agent pool (manually): https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops#create-the-scale-set-agent-pool
@@ -34,7 +34,7 @@ data "azurerm_subnet" "this" {
 }
 
 data "azurerm_key_vault" "this" {
-  name                = local.keyvault_name
+  name                = "${local.keyvault_name}-${var.unique_suffix}"
   resource_group_name = local.keyvault_resource_group_name
 }
 

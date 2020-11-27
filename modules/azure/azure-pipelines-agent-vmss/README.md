@@ -33,6 +33,7 @@ Follow this guide to setup the agent pool (manually): https://docs.microsoft.com
 | location\_short | The location (short name) for the region | `string` | n/a | yes |
 | name | The commonName to use for the deploy | `string` | n/a | yes |
 | resource\_group\_name | The resource group name | `string` | `""` | no |
+| unique\_suffix | Unique suffix that is used in globally unique resources names | `string` | n/a | yes |
 | vmss\_admin\_username | The admin username | `string` | `"azpagent"` | no |
 | vmss\_disk\_size\_gb | The disk size (in GB) for the VMSS instances | `number` | `128` | no |
 | vmss\_instances | The number of instances | `number` | `1` | no |

@@ -3,3 +3,9 @@ variable "notification_email" {
   type        = string
   default     = "DG-Team-DevOps@xenit.se"
 }
+
+variable "server" {
+  description = "ACME server to add to the created ClusterIssuer"
+  type        = string
+  default     = "https://acme-v02.api.letsencrypt.org/directory"
+}

@@ -40,4 +40,9 @@ resource "helm_release" "cert_manager_extras" {
     name  = "notificationEmail"
     value = var.notification_email
   }
+
+  set {
+    name  = "server"
+    value = var.server
+  }
 }

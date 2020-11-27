@@ -5,7 +5,7 @@ metadata:
 spec:
   acme:
     email: {{ .Values.notificationEmail }}
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    server: {{ .Values.server }}
     privateKeySecretRef:
       name: letsencrypt-cluster-issuer-account-key
     solvers:

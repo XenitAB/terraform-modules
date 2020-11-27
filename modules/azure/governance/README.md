@@ -29,7 +29,7 @@ This module is used to create resource groups, service principals, Azure AD grou
 | regions | The Azure Regions to configure | <pre>list(object({<br>    location       = string<br>    location_short = string<br>  }))</pre> | n/a | yes |
 | resource\_group\_configs | Resource group configuration | <pre>list(<br>    object({<br>      common_name                = string<br>      delegate_aks               = bool # Delegate aks permissions<br>      delegate_key_vault         = bool # Delegate KeyVault creation<br>      delegate_service_endpoint  = bool # Delegate Service Endpoint permissions<br>      delegate_service_principal = bool # Delegate Service Principal<br>      tags                       = map(string)<br>    })<br>  )</pre> | n/a | yes |
 | subscription\_name | The commonName for the subscription | `string` | n/a | yes |
-| unique\_suffix | Unique suffix that is used in globally unique resources names | `string` | n/a | yes |
+| unique\_suffix | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
 
 ## Outputs
 

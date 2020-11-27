@@ -34,7 +34,7 @@ data "azurerm_subnet" "this" {
 }
 
 data "azurerm_key_vault" "this" {
-  name                = "${local.keyvault_name}-${var.unique_suffix}"
+  name                = join("-", compact([local.keyvault_name, var.unique_suffix]))
   resource_group_name = local.keyvault_resource_group_name
 }
 

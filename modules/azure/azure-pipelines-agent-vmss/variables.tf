@@ -84,4 +84,5 @@ variable "vmss_subnet_config" {
 variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string
+  default     = ""
 }

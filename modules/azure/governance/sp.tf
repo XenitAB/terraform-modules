@@ -70,7 +70,7 @@ resource "azurerm_key_vault_secret" "aad_sp" {
   for_each = {
     for env_resource_core_rg in setproduct(var.resource_group_configs, local.core_rgs) : "${env_resource_core_rg[1]}-${env_resource_core_rg[0].common_name}" => {
       resource_group_config = env_resource_core_rg[0]
-      coreRg                = env_resource_core_rg[1]
+      core_rg               = env_resource_core_rg[1]
     }
     if env_resource_core_rg[0].delegate_service_principal == true
   }
@@ -82,7 +82,7 @@ resource "azurerm_key_vault_secret" "aad_sp" {
     clientId       = azuread_service_principal.aad_sp[each.value.resource_group_config.common_name].application_id
     clientSecret   = random_password.aad_sp[each.value.resource_group_config.common_name].result
   })
-  key_vault_id = azurerm_key_vault.delegate_kv[each.value.coreRg].id
+  key_vault_id = azurerm_key_vault.delegate_kv[each.value.core_rg].id
 
   depends_on = [
     azurerm_key_vault_access_policy.ap_owner_spn

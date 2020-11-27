@@ -39,3 +39,9 @@ variable "owner_service_principal_name" {
   description = "The name of the service principal that will be used to run terraform and is owner of the subsciptions"
   type        = string
 }
+
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
+  type        = string
+  default     = ""
+}

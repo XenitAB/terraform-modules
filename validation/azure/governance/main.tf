@@ -29,6 +29,7 @@ module "governance" {
   ]
   subscription_name            = "xks"
   core_name                    = "core"
+  unique_suffix                = "1234"
   owner_service_principal_name = "test"
   resource_group_configs = [
     {

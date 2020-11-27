@@ -5,7 +5,7 @@ resource "azurerm_key_vault" "delegate_kv" {
     if env_resource.resource_group_config.delegate_key_vault == true
   }
 
-  name                = "kv-${each.value.name}"
+  name                = join("-", compact(["kv-${each.value.name}", var.unique_suffix]))
   location            = azurerm_resource_group.rg[each.value.name].location
   resource_group_name = azurerm_resource_group.rg[each.value.name].name
   tenant_id           = data.azurerm_client_config.current.tenant_id

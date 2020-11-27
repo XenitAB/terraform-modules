@@ -34,6 +34,7 @@ This module is used to create resources that are used by AKS clusters.
 | namespaces | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name                    = string<br>      delegate_resource_group = bool<br>      labels                  = map(string)<br>      flux = object({<br>        enabled      = bool<br>        azdo_org     = string<br>        azdo_project = string<br>        azdo_repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
 | public\_ip\_prefix\_configuration | Configuration for public ip prefix | <pre>object({<br>    count         = number<br>    prefix_length = number<br>  })</pre> | <pre>{<br>  "count": 2,<br>  "prefix_length": 30<br>}</pre> | no |
 | subscription\_name | The commonName for the subscription | `string` | n/a | yes |
+| unique\_suffix | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
 
 ## Outputs
 

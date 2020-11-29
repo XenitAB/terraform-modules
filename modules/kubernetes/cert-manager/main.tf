@@ -42,7 +42,7 @@ resource "helm_release" "cert_manager_extras" {
   }
 
   set {
-    name  = "server"
-    value = var.server
+    name  = "acmeServer"
+    value = var.acme_server
   }
 }

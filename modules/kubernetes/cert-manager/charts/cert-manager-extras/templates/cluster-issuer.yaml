@@ -5,7 +5,7 @@ metadata:
 spec:
   acme:
     email: {{ .Values.notificationEmail }}
-    server: {{ .Values.server }}
+    server: {{ .Values.acmeServer }}
     privateKeySecretRef:
       name: letsencrypt-cluster-issuer-account-key
     solvers:

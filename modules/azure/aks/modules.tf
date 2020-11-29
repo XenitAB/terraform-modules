@@ -133,6 +133,8 @@ module "cert_manager" {
   providers = {
     helm = helm
   }
+
+  notification_email = var.notification_email
 }
 
 # Velero

@@ -19,7 +19,8 @@ This module is used to add [`cert-manager`](https://github.com/jetstack/cert-man
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| notification\_email | Email address to send certificate expiration notifications | `string` | `"DG-Team-DevOps@xenit.se"` | no |
+| acme\_server | ACME server to add to the created ClusterIssuer | `string` | `"https://acme-v02.api.letsencrypt.org/directory"` | no |
+| notification\_email | Email address to send certificate expiration notifications | `string` | n/a | yes |
 
 ## Outputs
 

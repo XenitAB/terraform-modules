@@ -46,6 +46,7 @@ This module is used to create AKS clusters.
 | location\_short | The Azure region short name. | `string` | n/a | yes |
 | name | The commonName to use for the deploy | `string` | n/a | yes |
 | namespaces | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name                    = string<br>      delegate_resource_group = bool<br>      labels                  = map(string)<br>      flux = object({<br>        enabled      = bool<br>        azdo_org     = string<br>        azdo_project = string<br>        azdo_repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
+| notification\_email | Email address to send certificate expiration notifications | `string` | n/a | yes |
 | opa\_gatekeeper\_enabled | Should OPA Gatekeeper be enabled | `bool` | `true` | no |
 | ssh\_public\_key | SSH public key to add to servers | `string` | n/a | yes |
 | unique\_suffix | Unique suffix that is used in globally unique resources names | `string` | `""` | no |

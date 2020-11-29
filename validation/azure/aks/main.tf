@@ -131,4 +131,5 @@ module "aks" {
       resource_id = "id"
     }
   }
+  notification_email = "example@example.com"
 }

@@ -40,7 +40,7 @@ Setup an image using Packer according [github-runner](https://github.com/XenitAB
 | name | The commonName to use for the deploy | `string` | n/a | yes |
 | resource\_group\_name | The resource group name | `string` | `""` | no |
 | unique\_suffix | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
-| vmss\_admin\_username | The admin username | `string` | `"azpagent"` | no |
+| vmss\_admin\_username | The admin username | `string` | `"ghradmin"` | no |
 | vmss\_disk\_size\_gb | The disk size (in GB) for the VMSS instances | `number` | `128` | no |
 | vmss\_instances | The number of instances | `number` | `1` | no |
 | vmss\_sku | The sku for VMSS instances | `string` | `"Standard_F4s_v2"` | no |

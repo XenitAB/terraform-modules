@@ -1,11 +1,13 @@
 /**
-  * # Azure Pipelines Agent
+  * # GitHub Actions Self-hosted Runner
   *
-  * This is the setup for Azure Pipelines Agent Virtual Machine Scale Set (VMSS).
+  * This is the setup for GitHub Actions Self-hosted Runner Virtual Machine Scale Set (VMSS).
   *
-  * ## Azure DevOps Configuration
+  * ## GitHub Runner Configuration
   *
-  * Follow this guide to setup the agent pool (manually): https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/scale-set-agents?view=azure-devops#create-the-scale-set-agent-pool
+  * Setup a GitHub App according to the documentation for [XenitAB/github-runner](https://github.com/XenitAB/github-runner).
+  * 
+  * Setup an image using Packer according [github-runner](https://github.com/XenitAB/packer-templates/tree/main/templates/azure/github-runner) in [XenitAB/packer-templates](https://github.com/XenitAB/packer-templates).
   */
 
 terraform {
@@ -49,9 +51,20 @@ resource "azurerm_key_vault_secret" "this" {
   key_vault_id = data.azurerm_key_vault.this.id
 }
 
+# START - Validation of secrets that will be used by GitHub Runner
+# tflint-ignore: terraform_unused_declarations
+data "azurerm_key_vault_secret" "github_secrets" {
+  for_each = { for secret_name in [var.github_organization_kvsecret, var.github_app_id_kvsecret, var.github_installation_id_kvsecret, var.github_private_key_kvsecret] :
+    secret_name => secret_name
+  }
+
+  name         = each.key
+  key_vault_id = data.azurerm_key_vault.this.id
+}
+
 data "azurerm_image" "this" {
-  name                = var.azure_pipelines_agent_image_name
-  resource_group_name = local.azure_pipelines_agent_image_resource_group_name
+  name                = var.github_runner_image_name
+  resource_group_name = local.github_runner_image_resource_group_name
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "this" {
@@ -64,6 +77,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "this" {
   disable_password_authentication = true
   overprovision                   = false
   zones                           = var.vmss_zones
+  custom_data                     = base64encode(local.custom_data)
 
   admin_ssh_key {
     username   = var.vmss_admin_username

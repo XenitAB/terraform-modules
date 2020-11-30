@@ -47,9 +47,7 @@ module "aks_global" {
       }
       flux = {
         enabled      = true
-        azdo_org     = "org"
-        azdo_project = "proj"
-        azdo_repo    = "repo"
+        repo    = "repo"
       }
     }
   ]

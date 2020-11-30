@@ -48,29 +48,6 @@ variable "aks_config" {
   })
 }
 
-variable "namespaces" {
-  description = "The namespaces that should be created in Kubernetes."
-  type = list(
-    object({
-      name                    = string
-      delegate_resource_group = bool
-      labels                  = map(string)
-      flux = object({
-        enabled      = bool
-        azdo_org     = string
-        azdo_project = string
-        azdo_repo    = string
-      })
-    })
-  )
-}
-
-variable "kubernetes_network_policy_default_deny" {
-  description = "Should a network policy be created in each group namespace that disables traffic from other namespaces"
-  type        = bool
-  default     = true
-}
-
 variable "ssh_public_key" {
   description = "SSH public key to add to servers"
   type        = string
@@ -106,95 +83,12 @@ variable "aad_groups" {
   })
 }
 
-variable "aad_pod_identity" {
-  description = "Configuration for aad pod identity"
-  type = map(object({
-    id        = string
-    client_id = string
-  }))
-}
-
-variable "azure_devops_organization" {
-  description = "Azure Devops organization root"
-  type        = string
-  default     = ""
-}
-
-variable "azure_devops_project" {
-  description = "Azure Devops project root"
-  type        = string
-  default     = ""
-}
-
-variable "fluxcd_v2_enabled" {
-  description = "Should fluxcd-v2 be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "aad_pod_identity_enabled" {
-  description = "Should aad-pod-identity be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "opa_gatekeeper_enabled" {
-  description = "Should OPA Gatekeeper be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "cert_manager_enabled" {
-  description = "Should Cert Manager be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "ingress_nginx_enabled" {
-  description = "Should Ingress NGINX be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "external_dns_enabled" {
-  description = "Should External DNS be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "velero_enabled" {
-  description = "Should Velero be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "external_dns_identity" {
-  description = "External DNS identity information"
-  type = object({
-    client_id   = string
-    resource_id = string
-  })
-}
-
-variable "velero" {
-  description = "Velero configuration"
-  type = object({
-    azure_storage_account_name      = string
-    azure_storage_account_container = string
-    identity = object({
-      client_id   = string
-      resource_id = string
+variable "namespaces" {
+  description = "The namespaces that should be created in Kubernetes."
+  type = list(
+    object({
+      name                    = string
+      delegate_resource_group = bool
     })
-  })
-}
-
-variable "unique_suffix" {
-  description = "Unique suffix that is used in globally unique resources names"
-  type        = string
-  default     = ""
-}
-
-variable "notification_email" {
-  description = "Email address to send certificate expiration notifications"
-  type        = string
+  )
 }

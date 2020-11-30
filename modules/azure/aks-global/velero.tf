@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "velero" {
-  name                     = "strg${var.environment}${var.location_short}${var.name}velero"
+  name                     = "strg${var.environment}${var.location_short}${var.name}velero${var.unique_suffix}"
   resource_group_name      = data.azurerm_resource_group.this.name
   location                 = data.azurerm_resource_group.this.location
   account_tier             = "Standard"

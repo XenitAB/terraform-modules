@@ -1,6 +1,6 @@
 # Create Azure Container Registry
 resource "azurerm_container_registry" "acr" {
-  name                = "acr${var.environment}${var.location_short}${var.name}"
+  name                = "acr${var.environment}${var.location_short}${var.name}${var.unique_suffix}"
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
   sku                 = "Basic"

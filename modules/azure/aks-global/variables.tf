@@ -29,12 +29,9 @@ variable "namespaces" {
     object({
       name                    = string
       delegate_resource_group = bool
-      labels                  = map(string)
       flux = object({
-        enabled      = bool
-        azdo_org     = string
-        azdo_project = string
-        azdo_repo    = string
+        enabled = bool
+        repo    = string
       })
     })
   )

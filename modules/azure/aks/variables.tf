@@ -92,8 +92,3 @@ variable "namespaces" {
     })
   )
 }
-
-variable "notification_email" {
-  description = "Email address to send certificate expiration notifications"
-  type        = string
-}

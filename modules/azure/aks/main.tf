@@ -20,45 +20,8 @@ terraform {
       source  = "hashicorp/random"
       version = "3.0.0"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "1.13.3"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "1.3.2"
-    }
-    azuredevops = {
-      source  = "xenitab/azuredevops"
-      version = "0.2.1"
-    }
   }
 }
-
-provider "azuredevops" {
-  personal_access_token = data.azurerm_key_vault_secret.azdo_pat_admin.value
-  org_service_url       = "https://dev.azure.com/${var.azure_devops_organization}"
-}
-
-provider "kubernetes" {
-  load_config_file       = "false"
-  host                   = azurerm_kubernetes_cluster.this.kube_config[0].host
-  client_certificate     = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].client_certificate)
-  client_key             = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].client_key)
-  cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].cluster_ca_certificate)
-}
-
-provider "helm" {
-  kubernetes {
-    load_config_file       = "false"
-    host                   = azurerm_kubernetes_cluster.this.kube_config[0].host
-    client_certificate     = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].client_certificate)
-    client_key             = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].client_key)
-    cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].cluster_ca_certificate)
-  }
-}
-
-data "azurerm_client_config" "current" {}
 
 data "azurerm_resource_group" "this" {
   name = "rg-${var.environment}-${var.location_short}-${var.name}"

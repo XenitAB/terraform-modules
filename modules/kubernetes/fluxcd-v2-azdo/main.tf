@@ -21,11 +21,11 @@ terraform {
   required_providers {
     flux = {
       source  = "fluxcd/flux"
-      version = "0.0.4"
+      version = "0.0.5"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
-      version = "0.2.1"
+      version = "0.3.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
@@ -39,29 +39,29 @@ terraform {
 }
 
 locals {
-  repo_url = "http://git-cache-http-server/dev.azure.com/${var.azdo_org}/${var.azdo_proj}/_git/${var.azdo_repo}"
+  repo_url = "http://git-cache-http-server/dev.azure.com/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.bootstrap_repo}"
 }
 
 # FluxCD
 data "flux_install" "main" {
-  target_path = var.git_path
+  target_path = var.bootstrap_path
 }
 
 data "flux_sync" "main" {
   url         = local.repo_url
-  target_path = var.git_path
+  target_path = var.bootstrap_path
   branch      = var.branch
   interval    = 60000000000
 }
 
 # Azure DevOps
 data "azuredevops_project" "this" {
-  name = var.azdo_proj
+  name = var.azure_devops_proj
 }
 
 resource "azuredevops_git_repository" "this" {
   project_id = data.azuredevops_project.this.id
-  name       = var.azdo_repo
+  name       = var.bootstrap_repo
   initialization {
     init_type = "Clean"
   }
@@ -110,9 +110,13 @@ resource "azuredevops_git_repository_file" "groups" {
   }
 
   repository_id = azuredevops_git_repository.this.id
-  file          = "${var.git_path}/${each.key}.yaml"
-  content       = templatefile("${path.module}/templates/main.yaml", { azdo_org = var.azdo_org, azdo_proj = var.azdo_proj, azdo_repo = each.key })
-  branch        = "refs/heads/${var.branch}"
+  file          = "${var.bootstrap_path}/${each.key}.yaml"
+  content = templatefile("${path.module}/templates/main.yaml", {
+    azdo_org  = var.azure_devops_org,
+    azdo_proj = var.azure_devops_proj,
+    azdo_repo = each.key
+  })
+  branch = "refs/heads/${var.branch}"
 }
 
 # Kubernetes
@@ -159,8 +163,8 @@ resource "kubernetes_secret" "main" {
   }
 
   data = {
-    username = var.azdo_org
-    password = var.azdo_pat
+    username = var.azure_devops_org
+    password = var.azure_devops_pat
   }
 }
 

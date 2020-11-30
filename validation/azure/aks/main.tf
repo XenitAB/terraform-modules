@@ -12,6 +12,10 @@ terraform {
       source  = "hashicorp/random"
       version = "3.0.0"
     }
+    github = {
+      source  = "hashicorp/github"
+      version = "4.0.1"
+    }
   }
 }
 
@@ -34,7 +38,6 @@ module "aks" {
   location_short  = "we"
   name            = "xks"
   core_name       = "core"
-  unique_suffix   = "1234"
   aks_name_suffix = "1"
 
   aks_config = {
@@ -74,9 +77,7 @@ module "aks" {
       }
       flux = {
         enabled      = true
-        azdo_org     = "org"
-        azdo_project = "proj"
-        azdo_repo    = "repo"
+        repo    = "repo"
       }
     }
   ]
@@ -84,12 +85,6 @@ module "aks" {
   aks_authorized_ips      = ["0.0.0.0/0"]
   ssh_public_key          = "key"
 
-  aad_pod_identity = {
-    "test" = {
-      id        = "id"
-      client_id = "id"
-    }
-  }
   aad_groups = {
     view = {
       test = {
@@ -116,20 +111,4 @@ module "aks" {
       name = "name"
     }
   }
-
-  azure_devops_organization = "xenitab"
-  external_dns_identity = {
-    client_id   = "id"
-    resource_id = "id"
-  }
-  velero_enabled = true
-  velero = {
-    azure_storage_account_name      = "name"
-    azure_storage_account_container = "container"
-    identity = {
-      client_id   = "id"
-      resource_id = "id"
-    }
-  }
-  notification_email = "example@example.com"
 }

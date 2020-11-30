@@ -1,33 +1,21 @@
-variable "azdo_pat" {
+variable "azure_devops_pat" {
   description = "PAT to authenticate with Azure DevOps"
   type        = string
 }
 
-variable "azdo_org" {
+variable "azure_devops_org" {
   description = "Azure DevOps organization for bootstrap repository"
   type        = string
 }
 
-variable "azdo_proj" {
+variable "azure_devops_proj" {
   description = "Azure DevOps project for bootstrap repository"
   type        = string
 }
 
-variable "azdo_repo" {
-  description = "Name of repository to bootstrap from"
-  type        = string
-  default     = "fleet-infra"
-}
-
-variable "git_path" {
+variable "bootstrap_path" {
   description = "Path to reconcile bootstrap from"
   type        = string
-}
-
-variable "branch" {
-  description = "Path to reconcile bootstrap from"
-  type        = string
-  default     = "master"
 }
 
 variable "namespaces" {
@@ -36,12 +24,21 @@ variable "namespaces" {
     object({
       name = string
       flux = object({
-        enabled      = bool
-        azdo_org     = string
-        azdo_project = string
-        azdo_repo    = string
+        enabled = bool
+        repo    = string
       })
     })
   )
 }
 
+variable "branch" {
+  description = "Path to reconcile bootstrap from"
+  type        = string
+  default     = "master"
+}
+
+variable "bootstrap_repo" {
+  description = "Name of repository to bootstrap from"
+  type        = string
+  default     = "fleet-infra"
+}

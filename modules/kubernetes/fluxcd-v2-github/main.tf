@@ -222,5 +222,6 @@ resource "github_repository_file" "tenant" {
     repo   = data.github_repository.tenant[each.key].ssh_clone_url,
     branch = var.branch,
     name   = each.key,
+    environment = var.environment,
   })
 }

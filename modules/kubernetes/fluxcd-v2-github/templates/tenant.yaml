@@ -32,6 +32,8 @@ metadata:
 spec:
   interval: 1m
   url: ${repo}
+  secretRef:
+    name: flux
   ref:
     branch: ${branch}
 ---
@@ -43,6 +45,7 @@ metadata:
 spec:
   serviceAccountName: ${name}
   interval: 5m
+  path: ${environment}
   sourceRef:
     kind: GitRepository
     name: ${name}

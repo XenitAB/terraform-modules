@@ -219,7 +219,7 @@ resource "github_repository_file" "tenant" {
   branch     = var.branch
   file       = "tenants/${var.environment}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {
-    repo   = "ssh://git@github.com/${var.github_owner}/${data.github_repository.tenant[each.key].full_name}.git",
+    repo   = "ssh://git@github.com/${data.github_repository.tenant[each.key].full_name}.git",
     branch = var.branch,
     name   = each.key,
     environment = var.environment,

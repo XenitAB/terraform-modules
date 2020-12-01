@@ -1,4 +1,35 @@
-## FluxCD v2
+# OPA Gatekeeper
+#module "opa_gatekeeper" {
+#  for_each = {
+#    for s in ["opa-gatekeeper"] :
+#    s => s
+#    if var.opa_gatekeeper_enabled
+#  }
+#
+#  source = "../../kubernetes/opa-gatekeeper"
+#
+#  exclude = [
+#    {
+#      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system"]
+#      processes           = ["*"]
+#    }
+#  ]
+#
+#  additional_constraints = [
+#    {
+#      kind               = "AzureIdentityFormat"
+#      name               = "azure-identity-format"
+#      enforcement_action = ""
+#      match = {
+#        kinds      = []
+#        namespaces = []
+#      }
+#      parameters = {}
+#    },
+#  ]
+#}
+
+# FluxCD v2
 module "fluxcd_v2_azure_devops" {
   depends_on = [kubernetes_namespace.group]
   for_each = {
@@ -30,7 +61,7 @@ module "fluxcd_v2_github" {
   source = "../../kubernetes/fluxcd-v2-github"
 
   github_owner   = var.fluxcd_v2_config.github.owner
-  bootstrap_path = var.environment
+  environment = var.environment
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = ns.flux
@@ -53,37 +84,6 @@ module "aad_pod_identity" {
     name = ns.name
   }]
 }
-
-# OPA Gatekeeper
-#module "opa_gatekeeper" {
-#  for_each = {
-#    for s in ["opa-gatekeeper"] :
-#    s => s
-#    if var.opa_gatekeeper_enabled
-#  }
-#
-#  source = "../../kubernetes/opa-gatekeeper"
-#
-#  exclude = [
-#    {
-#      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system"]
-#      processes           = ["*"]
-#    }
-#  ]
-#
-#  additional_constraints = [
-#    {
-#      kind               = "AzureIdentityFormat"
-#      name               = "azure-identity-format"
-#      enforcement_action = ""
-#      match = {
-#        kinds      = []
-#        namespaces = []
-#      }
-#      parameters = {}
-#    },
-#  ]
-#}
 
 # Ingress Nginx
 module "ingress_nginx" {

@@ -38,12 +38,11 @@ the bootstrap configuration.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| bootstrap\_path | Path to reconcile bootstrap from | `string` | n/a | yes |
-| bootstrap\_repo | Name of bootstrap repository | `string` | `"fleet-infra"` | no |
 | branch | Branch to point source controller towards | `string` | `"main"` | no |
+| cluster\_repo | Name of cluster repository | `string` | `"fleet-infra"` | no |
+| environment | Environment name of the cluster | `string` | n/a | yes |
 | github\_owner | Owner of GitHub repositories | `string` | n/a | yes |
 | namespaces | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled = bool<br>        repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
-| repository\_visibility | Visibility mode for created repositories | `string` | `"private"` | no |
 
 ## Outputs
 

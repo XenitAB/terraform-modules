@@ -21,7 +21,7 @@ terraform {
   required_providers {
     flux = {
       source  = "fluxcd/flux"
-      version = "0.0.5"
+      version = "0.0.6"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"

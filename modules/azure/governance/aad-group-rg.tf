@@ -5,7 +5,7 @@ resource "azuread_group" "rg_owner" {
     rg.common_name => rg
   }
 
-  name                    = "${local.aad_group_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.value.common_name}${local.group_name_separator}owner"
+  name                    = "${var.azure_ad_group_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.value.common_name}${var.group_name_separator}owner"
   prevent_duplicate_names = true
 }
 
@@ -27,7 +27,7 @@ resource "azuread_group" "rg_contributor" {
     rg.common_name => rg
   }
 
-  name                    = "${local.aad_group_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.value.common_name}${local.group_name_separator}contributor"
+  name                    = "${var.azure_ad_group_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.value.common_name}${var.group_name_separator}contributor"
   prevent_duplicate_names = true
 }
 
@@ -49,7 +49,7 @@ resource "azuread_group" "rg_reader" {
     rg.common_name => rg
   }
 
-  name                    = "${local.aad_group_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.value.common_name}${local.group_name_separator}reader"
+  name                    = "${var.azure_ad_group_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.value.common_name}${var.group_name_separator}reader"
   prevent_duplicate_names = true
 }
 

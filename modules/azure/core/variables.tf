@@ -45,3 +45,15 @@ variable "peering_config" {
   })))
   default = {}
 }
+
+variable "group_name_separator" {
+  description = "Separator for group names"
+  type        = string
+  default     = "-"
+}
+
+variable "azure_ad_group_prefix" {
+  description = "Prefix for Azure AD Groupss"
+  type        = string
+  default     = "az"
+}

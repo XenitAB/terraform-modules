@@ -30,7 +30,4 @@ locals {
       }
     ]
   ])
-
-  group_name_separator = "-"
-  aad_group_prefix     = "az"
 }

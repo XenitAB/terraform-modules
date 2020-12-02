@@ -6,12 +6,7 @@ locals {
     region                = p[1]
     }
   }
-  core_rgs              = [for region in var.regions : "${var.environment}-${region.location_short}-${var.core_name}"]
-  group_name_separator  = "-"
-  aad_group_prefix      = "az"
-  sp_name_prefix        = "sp"
-  aks_group_name_prefix = "aks"
-
+  core_rgs = [for region in var.regions : "${var.environment}-${region.location_short}-${var.core_name}"]
 
   key_vault_default_permissions = {
     key_permissions = [

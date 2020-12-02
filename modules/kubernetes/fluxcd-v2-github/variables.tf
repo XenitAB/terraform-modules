@@ -3,8 +3,8 @@ variable "github_owner" {
   type        = string
 }
 
-variable "bootstrap_path" {
-  description = "Path to reconcile bootstrap from"
+variable "environment" {
+  description = "Environment name of the cluster"
   type        = string
 }
 
@@ -21,8 +21,8 @@ variable "namespaces" {
   )
 }
 
-variable "bootstrap_repo" {
-  description = "Name of bootstrap repository"
+variable "cluster_repo" {
+  description = "Name of cluster repository"
   type        = string
   default     = "fleet-infra"
 }
@@ -31,10 +31,4 @@ variable "branch" {
   description = "Branch to point source controller towards"
   type        = string
   default     = "main"
-}
-
-variable "repository_visibility" {
-  description = "Visibility mode for created repositories"
-  type        = string
-  default     = "private"
 }

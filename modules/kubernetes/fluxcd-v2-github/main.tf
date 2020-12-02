@@ -33,7 +33,7 @@ terraform {
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.0.5"
+      version = "0.0.6"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
@@ -46,103 +46,12 @@ locals {
   known_hosts = "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
 }
 
-# SSH
-resource "tls_private_key" "bootstrap" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
-
-# FluxCD
-data "flux_install" "this" {
-  target_path = var.bootstrap_path
-}
-
-data "flux_sync" "this" {
-  url         = "ssh://git@github.com/${var.github_owner}/${var.bootstrap_repo}.git"
-  target_path = var.bootstrap_path
-  branch      = var.branch
-  interval    = 60000000000
-}
-
-# GitHub
-resource "github_repository" "bootstrap" {
-  name           = var.bootstrap_repo
-  visibility     = var.repository_visibility
-  default_branch = var.branch
-  auto_init      = true
-}
-
-resource "github_repository_deploy_key" "bootstrap" {
-  title      = "staging-cluster"
-  repository = github_repository.bootstrap.name
-  key        = tls_private_key.bootstrap.public_key_openssh
-  read_only  = true
-}
-
-resource "github_repository_file" "install" {
-  repository = github_repository.bootstrap.name
-  file       = data.flux_install.this.path
-  content    = data.flux_install.this.content
-  branch     = var.branch
-}
-
-resource "github_repository_file" "sync" {
-  repository = github_repository.bootstrap.name
-  file       = data.flux_sync.this.path
-  content    = data.flux_sync.this.content
-  branch     = var.branch
-}
-
-resource "github_repository_file" "kustomize" {
-  repository = github_repository.bootstrap.name
-  file       = data.flux_sync.this.kustomize_path
-  content    = data.flux_sync.this.kustomize_content
-  branch     = var.branch
-}
-
-resource "github_repository" "group" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  name           = each.key
-  visibility     = var.repository_visibility
-  default_branch = var.branch
-  auto_init      = true
-}
-
-resource "github_repository_deploy_key" "group" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  title      = "staging-cluster"
-  repository = github_repository.bootstrap.name
-  key        = tls_private_key.bootstrap.public_key_openssh
-  read_only  = true
-}
-
-resource "github_repository_file" "group" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  repository = github_repository.bootstrap.name
-  file       = "${var.bootstrap_path}/${each.key}.yaml"
-  content    = templatefile("${path.module}/templates/main.yaml", { github_owner = var.github_owner, name = each.key })
-  branch     = var.branch
-}
-
-# Kubernetes
 resource "kubernetes_namespace" "flux_system" {
   metadata {
     name = "flux-system"
+    labels = {
+      name = "flux-system"
+    }
   }
 
   lifecycle {
@@ -150,6 +59,55 @@ resource "kubernetes_namespace" "flux_system" {
       metadata[0].labels,
     ]
   }
+}
+
+# Cluster
+data "github_repository" "cluster" {
+  name = var.cluster_repo
+}
+
+resource "tls_private_key" "cluster" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+data "flux_install" "this" {
+  target_path = "clusters/${var.environment}"
+}
+
+data "flux_sync" "this" {
+  url         = "ssh://git@github.com/${var.github_owner}/${var.cluster_repo}.git"
+  target_path = "clusters/${var.environment}"
+  branch      = var.branch
+  interval    = 60000000000
+}
+
+resource "github_repository_deploy_key" "cluster" {
+  title      = "flux-${var.environment}"
+  repository = data.github_repository.cluster.name
+  key        = tls_private_key.cluster.public_key_openssh
+  read_only  = true
+}
+
+resource "github_repository_file" "install" {
+  repository = data.github_repository.cluster.name
+  branch     = var.branch
+  file       = data.flux_install.this.path
+  content    = data.flux_install.this.content
+}
+
+resource "github_repository_file" "sync" {
+  repository = data.github_repository.cluster.name
+  branch     = var.branch
+  file       = data.flux_sync.this.path
+  content    = data.flux_sync.this.content
+}
+
+resource "github_repository_file" "kustomize" {
+  repository = data.github_repository.cluster.name
+  branch     = var.branch
+  file       = data.flux_sync.this.kustomize_path
+  content    = data.flux_sync.this.kustomize_content
 }
 
 data "kubectl_file_documents" "install" {
@@ -174,7 +132,7 @@ resource "kubectl_manifest" "sync" {
   yaml_body = each.value
 }
 
-resource "kubernetes_secret" "bootstrap" {
+resource "kubernetes_secret" "cluster" {
   depends_on = [kubectl_manifest.install]
 
   metadata {
@@ -183,8 +141,90 @@ resource "kubernetes_secret" "bootstrap" {
   }
 
   data = {
-    identity       = tls_private_key.bootstrap.private_key_pem
-    "identity.pub" = tls_private_key.bootstrap.public_key_pem
+    identity       = tls_private_key.cluster.private_key_pem
+    "identity.pub" = tls_private_key.cluster.public_key_pem
     known_hosts    = local.known_hosts
   }
+}
+
+resource "github_repository_file" "cluster_tenants" {
+  repository = data.github_repository.cluster.name
+  branch     = var.branch
+  file       = "clusters/${var.environment}/tenants.yaml"
+  content = templatefile("${path.module}/templates/cluster-tenants.yaml", {
+    environment = var.environment
+  })
+}
+
+# Tenants
+data "github_repository" "tenant" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.flux.enabled
+  }
+
+  name = each.key
+}
+
+resource "tls_private_key" "tenant" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.flux.enabled
+  }
+
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "github_repository_deploy_key" "tenant" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.flux.enabled
+  }
+
+  title      = "flux-${var.environment}"
+  repository = data.github_repository.tenant[each.key].name
+  key        = tls_private_key.tenant[each.key].public_key_openssh
+  read_only  = true
+}
+
+resource "kubernetes_secret" "tenant" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.flux.enabled
+  }
+  depends_on = [kubectl_manifest.install]
+
+  metadata {
+    name      = "flux"
+    namespace = each.key
+  }
+
+  data = {
+    identity       = tls_private_key.tenant[each.key].private_key_pem
+    "identity.pub" = tls_private_key.tenant[each.key].public_key_pem
+    known_hosts    = local.known_hosts
+  }
+}
+
+resource "github_repository_file" "tenant" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.flux.enabled
+  }
+
+  repository = data.github_repository.cluster.name
+  branch     = var.branch
+  file       = "tenants/${var.environment}/${each.key}.yaml"
+  content = templatefile("${path.module}/templates/tenant.yaml", {
+    repo        = "ssh://git@github.com/${data.github_repository.tenant[each.key].full_name}.git",
+    branch      = var.branch,
+    name        = each.key,
+    environment = var.environment,
+  })
 }

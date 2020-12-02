@@ -45,7 +45,7 @@ metadata:
 spec:
   serviceAccountName: ${name}
   interval: 5m
-  path: ./${environment}
+  path: ./tenant/${environment}
   sourceRef:
     kind: GitRepository
     name: ${name}

@@ -80,7 +80,7 @@ data "flux_sync" "this" {
 }
 
 resource "github_repository_deploy_key" "cluster" {
-  title      = var.environment
+  title      = "flux-${var.environment}"
   repository = data.github_repository.cluster.name
   key        = tls_private_key.cluster.public_key_openssh
   read_only  = true
@@ -182,7 +182,7 @@ resource "github_repository_deploy_key" "tenant" {
     if ns.flux.enabled
   }
 
-  title      = var.environment
+  title      = "flux-${var.environment}"
   repository = data.github_repository.tenant[each.key].name
   key        = tls_private_key.tenant[each.key].public_key_openssh
   read_only  = true

@@ -1,33 +1,33 @@
 # OPA Gatekeeper
-#module "opa_gatekeeper" {
-#  for_each = {
-#    for s in ["opa-gatekeeper"] :
-#    s => s
-#    if var.opa_gatekeeper_enabled
-#  }
-#
-#  source = "../../kubernetes/opa-gatekeeper"
-#
-#  exclude = [
-#    {
-#      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system"]
-#      processes           = ["*"]
-#    }
-#  ]
-#
-#  additional_constraints = [
-#    {
-#      kind               = "AzureIdentityFormat"
-#      name               = "azure-identity-format"
-#      enforcement_action = ""
-#      match = {
-#        kinds      = []
-#        namespaces = []
-#      }
-#      parameters = {}
-#    },
-#  ]
-#}
+module "opa_gatekeeper" {
+  for_each = {
+    for s in ["opa-gatekeeper"] :
+    s => s
+    if var.opa_gatekeeper_enabled
+  }
+
+  source = "../../kubernetes/opa-gatekeeper"
+
+  exclude = [
+    {
+      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system"]
+      processes           = ["*"]
+    }
+  ]
+
+  additional_constraints = [
+    {
+      kind               = "AzureIdentityFormat"
+      name               = "azure-identity-format"
+      enforcement_action = ""
+      match = {
+        kinds      = []
+        namespaces = []
+      }
+      parameters = {}
+    },
+  ]
+}
 
 # FluxCD v2
 module "fluxcd_v2_azure_devops" {
@@ -60,8 +60,8 @@ module "fluxcd_v2_github" {
 
   source = "../../kubernetes/fluxcd-v2-github"
 
-  github_owner   = var.fluxcd_v2_config.github.owner
-  environment = var.environment
+  github_owner = var.fluxcd_v2_config.github.owner
+  environment  = var.environment
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = ns.flux

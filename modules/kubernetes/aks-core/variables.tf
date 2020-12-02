@@ -89,11 +89,11 @@ variable "aad_pod_identity_config" {
   }))
 }
 
-#variable "opa_gatekeeper_enabled" {
-#  description = "Should OPA Gatekeeper be enabled"
-#  type        = bool
-#  default     = true
-#}
+variable "opa_gatekeeper_enabled" {
+  description = "Should OPA Gatekeeper be enabled"
+  type        = bool
+  default     = true
+}
 
 variable "cert_manager_enabled" {
   description = "Should Cert Manager be enabled"

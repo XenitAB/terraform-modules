@@ -49,6 +49,9 @@ locals {
 resource "kubernetes_namespace" "flux_system" {
   metadata {
     name = "flux-system"
+    labels = {
+      name = "flux-system"
+    }
   }
 
   lifecycle {

@@ -5,7 +5,7 @@ resource "azuread_application" "delegate_kv_aad" {
     if rg.delegate_key_vault == true
   }
 
-  name = "${local.sp_name_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.key}${local.group_name_separator}kvreader"
+  name = "${var.service_principal_name_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.key}${var.group_name_separator}kvreader"
 }
 
 resource "azuread_service_principal" "delegate_kv_aad" {

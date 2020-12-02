@@ -5,7 +5,7 @@ data "azuread_group" "resource_group_owner" {
     ns.name => ns
     if ns.delegate_resource_group == true
   }
-  name = "${local.azure_ad_group_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.key}${local.group_name_separator}owner"
+  name = "${var.azure_ad_group_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.key}${var.group_name_separator}owner"
 }
 
 # Add data source for the Azure AD Group for resource group contributor
@@ -15,7 +15,7 @@ data "azuread_group" "resource_group_contributor" {
     ns.name => ns
     if ns.delegate_resource_group == true
   }
-  name = "${local.azure_ad_group_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.key}${local.group_name_separator}contributor"
+  name = "${var.azure_ad_group_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.key}${var.group_name_separator}contributor"
 }
 
 # Add data source for the Azure AD Group for resource group reader
@@ -25,7 +25,7 @@ data "azuread_group" "resource_group_reader" {
     ns.name => ns
     if ns.delegate_resource_group == true
   }
-  name = "${local.azure_ad_group_prefix}${local.group_name_separator}rg${local.group_name_separator}${var.subscription_name}${local.group_name_separator}${var.environment}${local.group_name_separator}${each.key}${local.group_name_separator}reader"
+  name = "${var.azure_ad_group_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.key}${var.group_name_separator}reader"
 }
 
 resource "azuread_group_member" "resource_group_owner" {

@@ -38,8 +38,6 @@ variable "namespaces" {
   type = list(
     object({
       name                    = string
-      delegate_resource_group = bool
-      labels                  = map(string)
       flux = object({
         enabled = bool
         github = object({

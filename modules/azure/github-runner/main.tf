@@ -124,7 +124,7 @@ resource "azurerm_key_vault_access_policy" "this" {
   key_vault_id = data.azurerm_key_vault.this.id
 
   tenant_id = data.azurerm_subscription.this.tenant_id
-  object_id = azurerm_linux_virtual_machine_scale_set.this.identity.principal_id
+  object_id = azurerm_linux_virtual_machine_scale_set.this.identity[0].principal_id
 
   secret_permissions = [
     "get",

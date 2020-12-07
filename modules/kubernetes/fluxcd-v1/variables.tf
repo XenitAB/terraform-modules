@@ -1,36 +1,37 @@
-# FluxCD v1 Helm Chart version
-variable "fluxcd_v1_git_path" {
-  description = "The git path for fluxcd-v1"
+variable "azure_devops_domain" {
+  description = "Domain for azure devops"
   type        = string
-  default     = ""
+  default     = "dev.azure.com"
 }
 
-# Namespace configuration
+variable "azure_devops_pat" {
+  description = "PAT to authenticate with Azure DevOps"
+  type        = string
+}
+
+variable "azure_devops_org" {
+  description = "Azure DevOps organization for bootstrap repository"
+  type        = string
+}
+
+variable "environment" {
+  description = "Environment name of the cluster"
+  type        = string
+}
+
 variable "namespaces" {
-  description = "The namespaces that should be created in Kubernetes."
+  description = "The namespaces to configure flux with"
   type = list(
     object({
       name = string
       flux = object({
-        enabled      = bool
-        azdo_org     = string
-        azdo_project = string
-        azdo_repo    = string
+        enabled = bool
+        azure_devops = object({
+          org = string
+          proj = string
+          repo    = string
+        })
       })
     })
   )
-}
-
-# Should FluxCD integrate with Azure DevOps Proxy
-variable "azdo_proxy_enabled" {
-  description = "Should azdo-proxy integration be enabled"
-  type        = bool
-  default     = true
-}
-
-# Azure DevOps Proxy local passwords
-variable "azdo_proxy_local_passwords" {
-  description = "The passwords (per namespace) to communicate with Azure DevOps Proxy"
-  type        = map(string)
-  default     = {}
 }

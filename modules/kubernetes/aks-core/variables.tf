@@ -38,6 +38,7 @@ variable "namespaces" {
   type = list(
     object({
       name                    = string
+      labels                  = map(string)
       flux = object({
         enabled = bool
         github = object({

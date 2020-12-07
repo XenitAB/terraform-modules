@@ -52,8 +52,8 @@ locals {
     organization = var.azure_devops_org
     repositories = [
       for ns in var.namespaces : {
-        project = ns.flux.azure_devops_proj
-        name    = ns.flux.azure_devops_repo
+        project = ns.flux.azure_devops.proj
+        name    = ns.flux.azure_devops.repo
         token   = random_password.azdo_proxy[ns.name].result
       }
     ]
@@ -104,7 +104,7 @@ resource "helm_release" "fluxcd" {
   chart     = "${path.module}/charts/flux"
   namespace = each.key
 
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", { namespace = each.key, git_url = "https://dev.azure.com/${each.value.flux.azure_devops_org}/${each.value.flux.azure_devops_proj}/_git/${each.value.flux.azure_devops_repo}", environment = var.environment })]
+  values = [templatefile("${path.module}/templates/values.yaml.tpl", { namespace = each.key, git_url = "https://dev.azure.com/${each.value.flux.azure_devops.org}/${each.value.flux.azure_devops.proj}/_git/${each.value.flux.azure_devops.repo}", environment = var.environment })]
 
   set_sensitive {
     name  = "git.config.data"

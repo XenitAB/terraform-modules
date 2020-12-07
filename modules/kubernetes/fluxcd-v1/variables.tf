@@ -27,9 +27,9 @@ variable "namespaces" {
       flux = object({
         enabled = bool
         azure_devops = object({
-          org = string
+          org  = string
           proj = string
-          repo    = string
+          repo = string
         })
       })
     })

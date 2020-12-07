@@ -29,10 +29,6 @@ variable "namespaces" {
     object({
       name                    = string
       delegate_resource_group = bool
-      flux = object({
-        enabled = bool
-        repo    = string
-      })
     })
   )
 }

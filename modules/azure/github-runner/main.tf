@@ -25,6 +25,8 @@ terraform {
   }
 }
 
+data "azurerm_subscription" "this" {}
+
 data "azurerm_resource_group" "this" {
   name = local.resource_group_name
 }
@@ -106,10 +108,25 @@ resource "azurerm_linux_virtual_machine_scale_set" "this" {
     }
   }
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   lifecycle {
     ignore_changes = [
       tags,
       instances
     ]
   }
+}
+
+resource "azurerm_key_vault_access_policy" "this" {
+  key_vault_id = data.azurerm_key_vault.this.id
+
+  tenant_id = data.azurerm_subscription.this.tenant_id
+  object_id = azurerm_linux_virtual_machine_scale_set.this.identity[0].principal_id
+
+  secret_permissions = [
+    "get",
+  ]
 }

@@ -37,8 +37,8 @@ variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes."
   type = list(
     object({
-      name                    = string
-      labels                  = map(string)
+      name   = string
+      labels = map(string)
       flux = object({
         enabled = bool
         github = object({
@@ -63,7 +63,7 @@ variable "kubernetes_network_policy_default_deny" {
 variable "fluxcd_v1_enabled" {
   description = "Should fluxcd-v1 be enabled"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "fluxcd_v1_config" {

@@ -104,7 +104,30 @@ resource "helm_release" "fluxcd" {
   chart     = "${path.module}/charts/flux"
   namespace = each.key
 
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", { namespace = each.key, git_url = "https://dev.azure.com/${each.value.flux.azure_devops.org}/${each.value.flux.azure_devops.proj}/_git/${each.value.flux.azure_devops.repo}", environment = var.environment })]
+  values = [templatefile("${path.module}/templates/fluxcd-values.yaml.tpl", { namespace = each.key, git_url = "https://dev.azure.com/${each.value.flux.azure_devops.org}/${each.value.flux.azure_devops.proj}/_git/${each.value.flux.azure_devops.repo}", environment = var.environment })]
+
+  set_sensitive {
+    name  = "git.config.data"
+    value = <<EOF
+      [url "http://${random_password.azdo_proxy[each.key].result}@azdo-proxy.azdo-proxy"]
+        insteadOf = https://dev.azure.com
+      EOF
+  }
+}
+
+resource "helm_release" "helm_operator" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+  }
+
+  repository = "https://charts.fluxcd.io"
+  chart      = "helm-operator"
+  version    = "1.2.0"
+  name       = "helm-operator"
+  namespace  = each.key
+
+  values = [templatefile("${path.module}/templates/helm-operator-values.yaml.tpl", { namespace = each.key })]
 
   set_sensitive {
     name  = "git.config.data"

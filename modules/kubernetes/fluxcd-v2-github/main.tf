@@ -212,6 +212,7 @@ resource "kubernetes_secret" "tenant" {
 }
 
 resource "github_repository_file" "tenant" {
+  depends_on = [data.github_repository.tenant]
   for_each = {
     for ns in var.namespaces :
     ns.name => ns

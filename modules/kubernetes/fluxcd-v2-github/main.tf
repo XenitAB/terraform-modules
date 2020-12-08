@@ -213,7 +213,7 @@ resource "kubernetes_secret" "tenant" {
 
   metadata {
     name      = "flux"
-    namespace = data.kubernetes_namespace[each.key].metadata[0].name
+    namespace = data.kubernetes_namespace.tenant[each.key].metadata[0].name
   }
 
   data = {

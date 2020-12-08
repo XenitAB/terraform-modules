@@ -10,7 +10,7 @@ git:
 containerSecurityContext:
   helmOperator:
     allowPrivilegeEscalation: false
-    #readOnlyRootFilesystem: true
+    readOnlyRootFilesystem: true
     capabilities:
       drop:
         - NET_RAW

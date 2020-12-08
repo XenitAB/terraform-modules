@@ -75,6 +75,13 @@ variable "fluxcd_v1_config" {
       proj = string
     })
   })
+  default = {
+    azure_devops = {
+      pat  = ""
+      org  = ""
+      proj = ""
+    }
+  }
 }
 
 variable "fluxcd_v2_enabled" {

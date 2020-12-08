@@ -84,7 +84,10 @@ module "fluxcd_v2_github" {
   environment  = var.environment
   namespaces = [for ns in var.namespaces : {
     name = ns.name
-    flux = ns.flux
+    flux = {
+      enabled = ns.flux.enabled
+      repo    = ns.flux.github.repo
+    }
   }]
 }
 

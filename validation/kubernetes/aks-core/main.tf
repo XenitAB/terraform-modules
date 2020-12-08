@@ -10,10 +10,10 @@ provider "azurerm" {
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
 
-  name = "baz"
+  name           = "baz"
   location_short = "foo"
-  environment = "bar"
-  namespaces = []
+  environment    = "bar"
+  namespaces     = []
   external_dns_config = {
     client_id   = "foo"
     resource_id = "bar"
@@ -30,21 +30,14 @@ module "aks_core" {
   cert_manager_config = {
     notification_email = "foo"
   }
-  fluxcd_v1_config = {
-    azure_devops = {
-      pat = ""
-      org = ""
-      proj = ""
-    }
-  }
   fluxcd_v2_config = {
     type = "github"
     github = {
       owner = ""
     }
     azure_devops = {
-      pat = ""
-      org = ""
+      pat  = ""
+      org  = ""
       proj = ""
     }
   }

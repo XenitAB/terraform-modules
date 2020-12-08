@@ -19,7 +19,7 @@ the bootstrap configuration.
 |------|---------|
 | terraform | 0.13.5 |
 | flux | 0.0.6 |
-| github | 4.0.1 |
+| github | 4.1.0 |
 | kubectl | 1.9.1 |
 | kubernetes | 1.13.3 |
 | tls | 3.0.0 |
@@ -29,7 +29,7 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | flux | 0.0.6 |
-| github | 4.0.1 |
+| github | 4.1.0 |
 | kubectl | 1.9.1 |
 | kubernetes | 1.13.3 |
 | tls | 3.0.0 |

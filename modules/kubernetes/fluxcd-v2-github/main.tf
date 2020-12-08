@@ -29,7 +29,7 @@ terraform {
     }
     github = {
       source  = "hashicorp/github"
-      version = "4.0.1"
+      version = "4.1.0"
     }
     flux = {
       source  = "fluxcd/flux"
@@ -164,7 +164,7 @@ data "github_repository" "tenant" {
     if ns.flux.enabled
   }
 
-  name = each.key
+  name = each.value.flux.repo
 }
 
 resource "tls_private_key" "tenant" {

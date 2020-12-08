@@ -164,7 +164,7 @@ data "github_repository" "tenant" {
     if ns.flux.enabled
   }
 
-  name = each.value.flux.repo
+  full_name = "${var.github_owner}/${each.value.flux.repo}"
 }
 
 resource "tls_private_key" "tenant" {
@@ -222,7 +222,7 @@ resource "github_repository_file" "tenant" {
   branch     = var.branch
   file       = "tenants/${var.environment}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {
-    repo        = "ssh://git@github.com/${data.github_repository.tenant[each.key].name}.git",
+    repo        = "ssh://git@github.com/${data.github_repository.tenant[each.key].full_name}.git",
     branch      = var.branch,
     name        = each.key,
     environment = var.environment,

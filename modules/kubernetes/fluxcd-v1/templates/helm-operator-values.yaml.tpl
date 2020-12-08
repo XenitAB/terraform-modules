@@ -10,7 +10,6 @@ git:
 containerSecurityContext:
   helmOperator:
     allowPrivilegeEscalation: false
-    readOnlyRootFilesystem: true
     capabilities:
       drop:
         - NET_RAW
@@ -18,6 +17,10 @@ containerSecurityContext:
 extraVolumeMounts:
   - name: tmp
     mountPath: /tmp
+  - name: cache
+    mountPath: /root/.cache
 extraVolumes:
   - name: tmp
+    emptyDir: {}
+  - name: cache
     emptyDir: {}

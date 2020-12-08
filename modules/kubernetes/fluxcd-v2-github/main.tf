@@ -164,7 +164,7 @@ data "github_repository" "tenant" {
     if ns.flux.enabled
   }
 
-  name = each.flux.repo
+  name = each.value.flux.repo
 }
 
 resource "tls_private_key" "tenant" {

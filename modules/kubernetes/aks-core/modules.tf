@@ -71,7 +71,7 @@ module "fluxcd_v2_azure_devops" {
 }
 
 module "fluxcd_v2_github" {
-  depends_on = [kubernetes_namespace.group]
+  #depends_on = [kubernetes_namespace.group]
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s

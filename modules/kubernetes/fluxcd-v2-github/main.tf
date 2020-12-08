@@ -191,18 +191,6 @@ resource "github_repository_deploy_key" "tenant" {
   read_only  = true
 }
 
-data "kubernetes_namespace" "tenant" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  metadata {
-    name = each.key
-  }
-}
-
 resource "kubernetes_secret" "tenant" {
   for_each = {
     for ns in var.namespaces :
@@ -213,7 +201,7 @@ resource "kubernetes_secret" "tenant" {
 
   metadata {
     name      = "flux"
-    namespace = data.kubernetes_namespace.tenant[each.key].metadata[0].name
+    namespace = each.key
   }
 
   data = {

@@ -63,7 +63,7 @@ resource "kubernetes_namespace" "flux_system" {
 
 # Cluster
 data "github_repository" "cluster" {
-  name = var.cluster_repo
+  full_name = "${var.github_owner}/${var.cluster_repo}"
 }
 
 resource "tls_private_key" "cluster" {
@@ -164,7 +164,7 @@ data "github_repository" "tenant" {
     if ns.flux.enabled
   }
 
-  name = each.key
+  full_name = each.flux.repo
 }
 
 resource "tls_private_key" "tenant" {
@@ -212,7 +212,6 @@ resource "kubernetes_secret" "tenant" {
 }
 
 resource "github_repository_file" "tenant" {
-  depends_on = [data.github_repository.tenant]
   for_each = {
     for ns in var.namespaces :
     ns.name => ns

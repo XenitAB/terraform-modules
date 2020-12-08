@@ -63,7 +63,7 @@ resource "kubernetes_namespace" "flux_system" {
 
 # Cluster
 data "github_repository" "cluster" {
-  name = var.cluster_repo
+  full_name = "${var.github_owner}/${var.cluster_repo}"
 }
 
 resource "tls_private_key" "cluster" {
@@ -84,27 +84,27 @@ data "flux_sync" "this" {
 
 resource "github_repository_deploy_key" "cluster" {
   title      = "flux-${var.environment}"
-  repository = data.github_repository.cluster.name
+  repository = data.github_repository.cluster.full_name
   key        = tls_private_key.cluster.public_key_openssh
   read_only  = true
 }
 
 resource "github_repository_file" "install" {
-  repository = data.github_repository.cluster.name
+  repository = data.github_repository.cluster.full_name
   branch     = var.branch
   file       = data.flux_install.this.path
   content    = data.flux_install.this.content
 }
 
 resource "github_repository_file" "sync" {
-  repository = data.github_repository.cluster.name
+  repository = data.github_repository.cluster.full_name
   branch     = var.branch
   file       = data.flux_sync.this.path
   content    = data.flux_sync.this.content
 }
 
 resource "github_repository_file" "kustomize" {
-  repository = data.github_repository.cluster.name
+  repository = data.github_repository.cluster.full_name
   branch     = var.branch
   file       = data.flux_sync.this.kustomize_path
   content    = data.flux_sync.this.kustomize_content
@@ -148,7 +148,7 @@ resource "kubernetes_secret" "cluster" {
 }
 
 resource "github_repository_file" "cluster_tenants" {
-  repository = data.github_repository.cluster.name
+  repository = data.github_repository.cluster.full_name
   branch     = var.branch
   file       = "clusters/${var.environment}/tenants.yaml"
   content = templatefile("${path.module}/templates/cluster-tenants.yaml", {
@@ -186,7 +186,7 @@ resource "github_repository_deploy_key" "tenant" {
   }
 
   title      = "flux-${var.environment}"
-  repository = data.github_repository.tenant[each.key].name
+  repository = data.github_repository.tenant[each.key].full_name
   key        = tls_private_key.tenant[each.key].public_key_openssh
   read_only  = true
 }
@@ -218,7 +218,7 @@ resource "github_repository_file" "tenant" {
     if ns.flux.enabled
   }
 
-  repository = data.github_repository.cluster.name
+  repository = data.github_repository.cluster.full_name
   branch     = var.branch
   file       = "tenants/${var.environment}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {

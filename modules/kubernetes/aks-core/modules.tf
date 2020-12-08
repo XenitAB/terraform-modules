@@ -29,6 +29,26 @@ module "opa_gatekeeper" {
   ]
 }
 
+# FluxCD v1
+module "fluxcd_v1_azure_devops" {
+  depends_on = [kubernetes_namespace.group]
+  for_each = {
+    for s in ["fluxcd-v1"] :
+    s => s
+    if var.fluxcd_v1_enabled
+  }
+
+  source = "../../kubernetes/fluxcd-v1"
+
+  azure_devops_pat = var.fluxcd_v1_config.azure_devops.pat
+  azure_devops_org = var.fluxcd_v1_config.azure_devops.org
+  environment      = var.environment
+  namespaces = [for ns in var.namespaces : {
+    name = ns.name
+    flux = ns.flux
+  }]
+}
+
 # FluxCD v2
 module "fluxcd_v2_azure_devops" {
   depends_on = [kubernetes_namespace.group]

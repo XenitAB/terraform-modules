@@ -37,12 +37,18 @@ variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes."
   type = list(
     object({
-      name                    = string
-      delegate_resource_group = bool
-      labels                  = map(string)
+      name   = string
+      labels = map(string)
       flux = object({
         enabled = bool
-        repo    = string
+        github = object({
+          repo = string
+        })
+        azure_devops = object({
+          org  = string
+          proj = string
+          repo = string
+        })
       })
     })
   )
@@ -52,6 +58,23 @@ variable "kubernetes_network_policy_default_deny" {
   description = "If network policies should by default deny cross namespace traffic"
   type        = bool
   default     = false
+}
+
+variable "fluxcd_v1_enabled" {
+  description = "Should fluxcd-v1 be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "fluxcd_v1_config" {
+  description = "Configuration for fluxcd-v1"
+  type = object({
+    azure_devops = object({
+      pat  = string
+      org  = string
+      proj = string
+    })
+  })
 }
 
 variable "fluxcd_v2_enabled" {

@@ -30,6 +30,13 @@ module "aks_core" {
   cert_manager_config = {
     notification_email = "foo"
   }
+  fluxcd_v1_config = {
+    azure_devops = {
+      pat = ""
+      org = ""
+      proj = ""
+    }
+  }
   fluxcd_v2_config = {
     type = "github"
     github = {

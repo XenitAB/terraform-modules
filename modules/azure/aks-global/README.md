@@ -34,7 +34,7 @@ This module is used to create resources that are used by AKS clusters.
 | group\_name\_separator | Separator for group names | `string` | `"-"` | no |
 | location\_short | The Azure region short name. | `string` | n/a | yes |
 | name | The name to use for the deploy | `string` | n/a | yes |
-| namespaces | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name                    = string<br>      delegate_resource_group = bool<br>      flux = object({<br>        enabled = bool<br>        repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
+| namespaces | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name                    = string<br>      delegate_resource_group = bool<br>    })<br>  )</pre> | n/a | yes |
 | public\_ip\_prefix\_configuration | Configuration for public ip prefix | <pre>object({<br>    count         = number<br>    prefix_length = number<br>  })</pre> | <pre>{<br>  "count": 2,<br>  "prefix_length": 30<br>}</pre> | no |
 | service\_principal\_name\_prefix | Prefix for service principals | `string` | `"sp"` | no |
 | subscription\_name | The commonName for the subscription | `string` | n/a | yes |

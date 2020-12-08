@@ -3,12 +3,6 @@ clusterRole:
   create: false
 helm:
   versions: "v3"
-configureRepositories:
-  enable: true
-  repositories:
-    - name: "AzureContainerRegistry"
-      url: "https://${acr_name}.azurecr.io/helm/v1/repo/"
-      username: "${helm_operator_credentials.client_id}"
 git:
   config:
     secretName: "helm-operator-git-config"
@@ -24,6 +18,10 @@ containerSecurityContext:
 extraVolumeMounts:
   - name: tmp
     mountPath: /tmp
+  - name: cache
+    mountPath: /root/.cache
 extraVolumes:
   - name: tmp
+    emptyDir: {}
+  - name: cache
     emptyDir: {}

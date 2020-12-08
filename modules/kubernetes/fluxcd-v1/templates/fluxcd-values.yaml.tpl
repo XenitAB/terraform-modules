@@ -6,7 +6,8 @@ clusterRole:
 
 git:
   url: "${git_url}"
-  path: "${fluxcd_v1_git_path}"
+  path: "${environment}"
+  branch: main
   readonly: true
   pollInterval: "30s"
   config:

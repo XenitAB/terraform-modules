@@ -16,21 +16,26 @@ Will be deprecated as soon as Flux v2 module is finished and tested.
 |------|---------|
 | terraform | 0.13.5 |
 | helm | 1.3.2 |
+| kubernetes | 1.13.3 |
+| random | 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | helm | 1.3.2 |
+| kubernetes | 1.13.3 |
+| random | 3.0.0 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| azdo\_proxy\_enabled | Should azdo-proxy integration be enabled | `bool` | `true` | no |
-| azdo\_proxy\_local\_passwords | The passwords (per namespace) to communicate with Azure DevOps Proxy | `map(string)` | `{}` | no |
-| fluxcd\_v1\_git\_path | The git path for fluxcd-v1 | `string` | `""` | no |
-| namespaces | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled      = bool<br>        azdo_org     = string<br>        azdo_project = string<br>        azdo_repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
+| azure\_devops\_domain | Domain for azure devops | `string` | `"dev.azure.com"` | no |
+| azure\_devops\_org | Azure DevOps organization for bootstrap repository | `string` | n/a | yes |
+| azure\_devops\_pat | PAT to authenticate with Azure DevOps | `string` | n/a | yes |
+| environment | Environment name of the cluster | `string` | n/a | yes |
+| namespaces | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled = bool<br>        azure_devops = object({<br>          org  = string<br>          proj = string<br>          repo = string<br>        })<br>      })<br>    })<br>  )</pre> | n/a | yes |
 
 ## Outputs
 

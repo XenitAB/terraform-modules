@@ -20,20 +20,20 @@ module "fluxcd_v1" {
     helm = helm
   }
 
-  azdo_proxy_enabled = true
-  azdo_proxy_local_passwords = {
-    "team1" = "password"
-  }
-  fluxcd_v1_git_path = "dev"
+  azure_devops_pat = "foo"
+  azure_devops_org = "bar"
+  environment = "dev"
 
   namespaces = [
     {
       name = "team1"
       flux = {
         enabled      = true
-        azdo_org     = "org"
-        azdo_project = "proj"
-        azdo_repo    = "repo"
+        azure_devops = {
+          org     = "org"
+          proj = "proj"
+          repo    = "repo"
+        }
       }
     }
   ]

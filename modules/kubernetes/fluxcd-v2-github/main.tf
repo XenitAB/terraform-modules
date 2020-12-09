@@ -90,24 +90,27 @@ resource "github_repository_deploy_key" "cluster" {
 }
 
 resource "github_repository_file" "install" {
-  repository = data.github_repository.cluster.name
-  branch     = var.branch
-  file       = data.flux_install.this.path
-  content    = data.flux_install.this.content
+  repository          = data.github_repository.cluster.name
+  branch              = var.branch
+  file                = data.flux_install.this.path
+  content             = data.flux_install.this.content
+  overwrite_on_create = true
 }
 
 resource "github_repository_file" "sync" {
-  repository = data.github_repository.cluster.name
-  branch     = var.branch
-  file       = data.flux_sync.this.path
-  content    = data.flux_sync.this.content
+  repository          = data.github_repository.cluster.name
+  branch              = var.branch
+  file                = data.flux_sync.this.path
+  content             = data.flux_sync.this.content
+  overwrite_on_create = true
 }
 
 resource "github_repository_file" "kustomize" {
-  repository = data.github_repository.cluster.name
-  branch     = var.branch
-  file       = data.flux_sync.this.kustomize_path
-  content    = data.flux_sync.this.kustomize_content
+  repository          = data.github_repository.cluster.name
+  branch              = var.branch
+  file                = data.flux_sync.this.kustomize_path
+  content             = data.flux_sync.this.kustomize_content
+  overwrite_on_create = true
 }
 
 data "kubectl_file_documents" "install" {
@@ -227,4 +230,5 @@ resource "github_repository_file" "tenant" {
     name        = each.key,
     environment = var.environment,
   })
+  overwrite_on_create = true
 }

@@ -142,6 +142,17 @@ variable "default_constraints" {
       }
       parameters = {}
     },
+    # FIXES https://github.com/kubernetes/kubernetes/issues/97076
+    {
+      kind               = "K8sExternalIPs"
+      name               = "external-ips"
+      enforcement_action = ""
+      match = {
+        kinds      = []
+        namespaces = []
+      }
+      parameters = {}
+    },
   ]
 }
 

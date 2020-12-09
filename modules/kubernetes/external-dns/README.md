@@ -8,12 +8,14 @@ This module is used to add [`external-dns`](https://github.com/kubernetes-sigs/e
 |------|---------|
 | terraform | 0.13.5 |
 | helm | 1.3.2 |
+| kubernetes | 1.13.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | helm | 1.3.2 |
+| kubernetes | 1.13.3 |
 
 ## Inputs
 

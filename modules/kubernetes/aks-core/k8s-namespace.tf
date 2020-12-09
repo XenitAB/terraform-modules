@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "service_accounts" {
   }
 }
 
-resource "kubernetes_namespace" "group" {
+resource "kubernetes_namespace" "tenant" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
@@ -19,7 +19,7 @@ resource "kubernetes_namespace" "group" {
   }
 }
 
-resource "kubernetes_service_account" "group" {
+resource "kubernetes_service_account" "tenant" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {

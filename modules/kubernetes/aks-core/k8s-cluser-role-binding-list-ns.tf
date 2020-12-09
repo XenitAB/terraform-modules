@@ -1,5 +1,5 @@
 resource "kubernetes_cluster_role_binding" "view_list_ns" {
-  depends_on = [kubernetes_namespace.group]
+  depends_on = [kubernetes_namespace.tenant]
   for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
@@ -22,7 +22,7 @@ resource "kubernetes_cluster_role_binding" "view_list_ns" {
 }
 
 resource "kubernetes_cluster_role_binding" "edit_list_ns" {
-  depends_on = [kubernetes_namespace.group]
+  depends_on = [kubernetes_namespace.tenant]
   for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {

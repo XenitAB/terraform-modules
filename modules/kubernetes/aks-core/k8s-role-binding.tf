@@ -3,7 +3,7 @@ resource "kubernetes_role_binding" "view" {
 
   metadata {
     name      = "${each.value.name}-view"
-    namespace = kubernetes_namespace.group[each.key].metadata[0].name
+    namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
 
     labels = {
       "aad-group-name" = var.aad_groups.view[each.key].name
@@ -26,7 +26,7 @@ resource "kubernetes_role_binding" "edit" {
 
   metadata {
     name      = "${each.value.name}-edit"
-    namespace = kubernetes_namespace.group[each.key].metadata[0].name
+    namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
 
     labels = {
       "aad-group-name" = var.aad_groups.edit[each.key].name
@@ -45,7 +45,7 @@ resource "kubernetes_role_binding" "edit" {
 }
 
 resource "kubernetes_role_binding" "helm_release" {
-  depends_on = [kubernetes_namespace.group, kubernetes_cluster_role.helm_release]
+  depends_on = [kubernetes_namespace.tenant, kubernetes_cluster_role.helm_release]
   for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
@@ -73,7 +73,7 @@ resource "kubernetes_role_binding" "toolkit_helm_release" {
 
   metadata {
     name      = "toolkit-helm-release"
-    namespace = kubernetes_namespace.group[each.key].metadata[0].name
+    namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
 
     labels = {
       "aad-group-name" = var.aad_groups.edit[each.key].name
@@ -96,7 +96,7 @@ resource "kubernetes_role_binding" "toolkit_kustomization" {
 
   metadata {
     name      = "toolkit-kustomization"
-    namespace = kubernetes_namespace.group[each.key].metadata[0].name
+    namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
 
     labels = {
       "aad-group-name" = var.aad_groups.edit[each.key].name
@@ -129,7 +129,7 @@ resource "kubernetes_role_binding" "sa_edit" {
   }
   subject {
     kind      = "ServiceAccount"
-    name      = kubernetes_service_account.group[each.key].metadata[0].name
+    name      = kubernetes_service_account.tenant[each.key].metadata[0].name
     namespace = kubernetes_namespace.service_accounts.metadata[0].name
   }
 }
@@ -149,7 +149,7 @@ resource "kubernetes_role_binding" "sa_helm_release" {
   }
   subject {
     kind      = "ServiceAccount"
-    name      = kubernetes_service_account.group[each.key].metadata[0].name
+    name      = kubernetes_service_account.tenant[each.key].metadata[0].name
     namespace = kubernetes_namespace.service_accounts.metadata[0].name
   }
 }

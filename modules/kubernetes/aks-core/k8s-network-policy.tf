@@ -1,4 +1,4 @@
-resource "kubernetes_network_policy" "group" {
+resource "kubernetes_network_policy" "tenant" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns

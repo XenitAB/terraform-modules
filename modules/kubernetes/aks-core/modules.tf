@@ -31,7 +31,7 @@ module "opa_gatekeeper" {
 
 # FluxCD v1
 module "fluxcd_v1_azure_devops" {
-  depends_on = [kubernetes_namespace.group]
+  depends_on = [kubernetes_namespace.tenant]
   for_each = {
     for s in ["fluxcd-v1"] :
     s => s
@@ -91,7 +91,7 @@ module "fluxcd_v2_github" {
 
 # AAD-Pod-Identity
 module "aad_pod_identity" {
-  depends_on = [kubernetes_namespace.group]
+  depends_on = [kubernetes_namespace.tenant]
   for_each = {
     for s in ["aad-pod-identity"] :
     s => s

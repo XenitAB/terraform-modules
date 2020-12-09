@@ -8,6 +8,10 @@ terraform {
   required_version = "0.13.5"
 
   required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "1.13.3"
+    }
     helm = {
       source  = "hashicorp/helm"
       version = "1.3.2"
@@ -16,6 +20,7 @@ terraform {
 }
 
 locals {
+  namespace = "datadog"
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
     datadog_site = var.datadog_site
     api_key      = var.api_key
@@ -24,12 +29,20 @@ locals {
   })
 }
 
+resource "kubernetes_namespace" "this" {
+  metadata {
+    labels = {
+      name = local.namespace
+    }
+    name = local.namespace
+  }
+}
+
 resource "helm_release" "datadog" {
-  repository       = "https://helm.datadoghq.com"
-  chart            = "datadog"
-  name             = "datadog"
-  namespace        = "datadog"
-  create_namespace = true
-  version          = "2.6.0"
-  values           = [local.values]
+  repository = "https://helm.datadoghq.com"
+  chart      = "datadog"
+  name       = "datadog"
+  namespace  = kubernetes_namespace.this.metadata[0].name
+  version    = "2.6.0"
+  values     = [local.values]
 }

@@ -8,6 +8,10 @@ terraform {
   required_version = "0.13.5"
 
   required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "1.13.3"
+    }
     helm = {
       source  = "hashicorp/helm"
       version = "1.3.2"
@@ -25,12 +29,20 @@ locals {
   values = templatefile("${path.module}/templates/values.yaml.tpl", { namespaces = var.namespaces, aad_pod_identity = var.aad_pod_identity })
 }
 
+resource "kubernetes_namespace" "this" {
+  metadata {
+    labels = {
+      name = local.namespace
+    }
+    name = local.namespace
+  }
+}
+
 resource "helm_release" "aad_pod_identity" {
-  repository       = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
-  chart            = local.name
-  name             = local.name
-  version          = local.version
-  namespace        = local.namespace
-  create_namespace = true
-  values           = [local.values]
+  repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
+  chart      = local.name
+  name       = local.name
+  version    = local.version
+  namespace  = kubernetes_namespace.this.metadata[0].name
+  values     = [local.values]
 }

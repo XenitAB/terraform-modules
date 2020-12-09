@@ -15,6 +15,7 @@ This module is used to add [`velero`](https://github.com/vmware-tanzu/velero) to
 | Name | Version |
 |------|---------|
 | helm | 1.3.2 |
+| kubernetes | 1.13.3 |
 
 ## Inputs
 

@@ -157,6 +157,7 @@ resource "github_repository_file" "cluster_tenants" {
   content = templatefile("${path.module}/templates/cluster-tenants.yaml", {
     environment = var.environment
   })
+  overwrite_on_create = true
 }
 
 # Tenants

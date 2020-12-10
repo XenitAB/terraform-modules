@@ -8,3 +8,9 @@ variable "acme_server" {
   type        = string
   default     = "https://acme-v02.api.letsencrypt.org/directory"
 }
+
+variable "input_depends_on" {
+  description = "Input dependency for module"
+  type        = any
+  default     = {}
+}

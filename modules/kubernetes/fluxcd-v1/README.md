@@ -35,9 +35,12 @@ Will be deprecated as soon as Flux v2 module is finished and tested.
 | azure\_devops\_org | Azure DevOps organization for bootstrap repository | `string` | n/a | yes |
 | azure\_devops\_pat | PAT to authenticate with Azure DevOps | `string` | n/a | yes |
 | environment | Environment name of the cluster | `string` | n/a | yes |
+| input\_depends\_on | Input dependency for module | `any` | `{}` | no |
 | namespaces | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled = bool<br>        azure_devops = object({<br>          org  = string<br>          proj = string<br>          repo = string<br>        })<br>      })<br>    })<br>  )</pre> | n/a | yes |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| output\_depends\_on | Output dependency for module |
 

@@ -98,3 +98,9 @@ variable "loki_helm_release_name" {
   type        = string
   default     = "loki"
 }
+
+variable "input_depends_on" {
+  description = "Input dependency for module"
+  type        = any
+  default     = {}
+}

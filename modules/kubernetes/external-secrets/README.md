@@ -22,8 +22,11 @@ Adds [`external-secrets`](https://github.com/external-secrets/kubernetes-externa
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | aws\_config | AWS specific configuration | <pre>object({<br>    role_arn = string,<br>    region   = string<br>  })</pre> | <pre>{<br>  "region": "",<br>  "role_arn": ""<br>}</pre> | no |
+| input\_depends\_on | Input dependency for module | `any` | `{}` | no |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| output\_depends\_on | Output dependency for module |
 

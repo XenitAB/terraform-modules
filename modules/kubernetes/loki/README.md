@@ -28,6 +28,7 @@ This module will also add `minio` (S3 Gateway to Azure Storage Account), `fluent
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | environment | The environment (short name) to use for the deploy | `string` | n/a | yes |
+| input\_depends\_on | Input dependency for module | `any` | `{}` | no |
 | kubernetes\_namespace\_name | The Kubernetes namespace name | `string` | `"loki"` | no |
 | location\_short | The Azure region short name. | `string` | n/a | yes |
 | loki\_helm\_chart\_name | The helm chart name for loki | `string` | `"loki-stack"` | no |
@@ -46,5 +47,7 @@ This module will also add `minio` (S3 Gateway to Azure Storage Account), `fluent
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| output\_depends\_on | Output dependency for module |
 

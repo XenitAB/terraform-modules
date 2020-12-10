@@ -61,6 +61,8 @@ locals {
 }
 
 resource "kubernetes_namespace" "azdo_proxy" {
+  depends_on = [var.input_depends_on]
+
   metadata {
     labels = {
       name = "azdo-proxy"
@@ -94,6 +96,8 @@ resource "helm_release" "azdo_proxy" {
 }
 
 resource "helm_release" "fluxcd" {
+  depends_on = [var.input_depends_on]
+
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
@@ -116,6 +120,8 @@ resource "helm_release" "fluxcd" {
 }
 
 resource "helm_release" "helm_operator" {
+  depends_on = [var.input_depends_on]
+
   for_each = {
     for ns in var.namespaces :
     ns.name => ns

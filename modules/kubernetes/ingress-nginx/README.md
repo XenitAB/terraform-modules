@@ -19,9 +19,13 @@ This module is used to add [`ingress-nginx`](https://github.com/kubernetes/ingre
 
 ## Inputs
 
-No input.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| input\_depends\_on | Input dependency for module | `any` | `{}` | no |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| output\_depends\_on | Output dependency for module |
 

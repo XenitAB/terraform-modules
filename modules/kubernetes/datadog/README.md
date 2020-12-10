@@ -24,9 +24,12 @@ Adds [Datadog](https://github.com/DataDog/helm-charts) to a Kubernetes cluster.
 | api\_key | API key to authenticate to Datadog | `string` | n/a | yes |
 | datadog\_site | Site to connect Datadog agent | `string` | `"datadoghq.eu"` | no |
 | environment | Cluster environment | `string` | n/a | yes |
+| input\_depends\_on | Input dependency for module | `any` | `{}` | no |
 | location | Cluster location | `string` | n/a | yes |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| output\_depends\_on | Output dependency for module |
 

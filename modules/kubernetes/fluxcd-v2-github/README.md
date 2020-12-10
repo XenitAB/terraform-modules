@@ -42,9 +42,12 @@ the bootstrap configuration.
 | cluster\_repo | Name of cluster repository | `string` | `"fleet-infra"` | no |
 | environment | Environment name of the cluster | `string` | n/a | yes |
 | github\_owner | Owner of GitHub repositories | `string` | n/a | yes |
+| input\_depends\_on | Input dependency for module | `any` | `{}` | no |
 | namespaces | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled = bool<br>        repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| output\_depends\_on | Output dependency for module |
 

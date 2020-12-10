@@ -38,7 +38,8 @@ module "fluxcd_v1_azure_devops" {
     if var.fluxcd_v1_enabled
   }
 
-  source = "../../kubernetes/fluxcd-v1"
+  source           = "../../kubernetes/fluxcd-v1"
+  input_depends_on = module.opa_gatekeeper.output_depends_on
 
   azure_devops_pat = var.fluxcd_v1_config.azure_devops.pat
   azure_devops_org = var.fluxcd_v1_config.azure_devops.org
@@ -57,7 +58,8 @@ module "fluxcd_v2_azure_devops" {
     if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "azure-devops"
   }
 
-  source = "../../kubernetes/fluxcd-v2-azdo"
+  source           = "../../kubernetes/fluxcd-v2-azdo"
+  input_depends_on = module.opa_gatekeeper.output_depends_on
 
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
@@ -76,7 +78,8 @@ module "fluxcd_v2_github" {
     if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "github"
   }
 
-  source = "../../kubernetes/fluxcd-v2-github"
+  source           = "../../kubernetes/fluxcd-v2-github"
+  input_depends_on = module.opa_gatekeeper.output_depends_on
 
   github_owner = var.fluxcd_v2_config.github.owner
   environment  = var.environment
@@ -98,7 +101,8 @@ module "aad_pod_identity" {
     if var.aad_pod_identity_enabled
   }
 
-  source = "../../kubernetes/aad-pod-identity"
+  source           = "../../kubernetes/aad-pod-identity"
+  input_depends_on = module.opa_gatekeeper.output_depends_on
 
   aad_pod_identity = var.aad_pod_identity_config
   namespaces = [for ns in var.namespaces : {
@@ -114,7 +118,8 @@ module "ingress_nginx" {
     if var.ingress_nginx_enabled
   }
 
-  source = "../../kubernetes/ingress-nginx"
+  source           = "../../kubernetes/ingress-nginx"
+  input_depends_on = module.opa_gatekeeper.output_depends_on
 }
 
 # External DNS
@@ -125,7 +130,8 @@ module "external_dns" {
     if var.external_dns_enabled
   }
 
-  source = "../../kubernetes/external-dns"
+  source           = "../../kubernetes/external-dns"
+  input_depends_on = module.opa_gatekeeper.output_depends_on
 
   dns_provider = "azure"
   azure_config = {
@@ -145,7 +151,8 @@ module "cert_manager" {
     if var.cert_manager_enabled
   }
 
-  source = "../../kubernetes/cert-manager"
+  source           = "../../kubernetes/cert-manager"
+  input_depends_on = module.opa_gatekeeper.output_depends_on
 
   notification_email = var.cert_manager_config.notification_email
 }
@@ -158,7 +165,8 @@ module "velero" {
     if var.velero_enabled
   }
 
-  source = "../../kubernetes/velero"
+  source           = "../../kubernetes/velero"
+  input_depends_on = module.opa_gatekeeper.output_depends_on
 
   cloud_provider = "azure"
   azure_config = {

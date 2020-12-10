@@ -102,6 +102,8 @@ locals {
 }
 
 resource "helm_release" "gatekeeper" {
+  depends_on = [var.input_depends_on]
+
   repository = "https://open-policy-agent.github.io/gatekeeper/charts"
   chart      = "gatekeeper"
   name       = "gatekeeper"

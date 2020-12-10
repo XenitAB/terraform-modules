@@ -47,6 +47,8 @@ locals {
 }
 
 resource "kubernetes_namespace" "flux_system" {
+  depends_on = [var.input_depends_on]
+
   metadata {
     name = "flux-system"
     labels = {

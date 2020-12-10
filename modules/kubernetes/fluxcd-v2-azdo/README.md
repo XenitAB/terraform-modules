@@ -42,9 +42,12 @@ the bootstrap configuration.
 | bootstrap\_path | Path to reconcile bootstrap from | `string` | n/a | yes |
 | bootstrap\_repo | Name of repository to bootstrap from | `string` | `"fleet-infra"` | no |
 | branch | Path to reconcile bootstrap from | `string` | `"master"` | no |
+| input\_depends\_on | Input dependency for module | `any` | `{}` | no |
 | namespaces | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled = bool<br>        repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| output\_depends\_on | Output dependency for module |
 

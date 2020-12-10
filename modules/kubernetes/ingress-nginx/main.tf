@@ -25,6 +25,8 @@ locals {
 }
 
 resource "kubernetes_namespace" "this" {
+  depends_on = [var.input_depends_on]
+
   metadata {
     labels = {
       name = local.namespace

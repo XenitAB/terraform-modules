@@ -48,6 +48,8 @@ resource "azurerm_storage_container" "loki" {
 }
 
 resource "kubernetes_namespace" "this" {
+  depends_on = [var.input_depends_on]
+
   metadata {
     labels = {
       name = var.kubernetes_namespace_name

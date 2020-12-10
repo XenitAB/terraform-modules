@@ -161,7 +161,7 @@ module "cert_manager" {
 # Velero
 module "velero" {
   depends_on = [module.opa_gatekeeper]
-  
+
   for_each = {
     for s in ["velero"] :
     s => s

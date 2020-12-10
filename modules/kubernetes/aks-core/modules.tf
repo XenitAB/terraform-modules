@@ -31,7 +31,8 @@ module "opa_gatekeeper" {
 
 # FluxCD v1
 module "fluxcd_v1_azure_devops" {
-  depends_on = [kubernetes_namespace.tenant]
+  depends_on = [kubernetes_namespace.tenant, module.opa_gatekeeper]
+
   for_each = {
     for s in ["fluxcd-v1"] :
     s => s
@@ -91,7 +92,8 @@ module "fluxcd_v2_github" {
 
 # AAD-Pod-Identity
 module "aad_pod_identity" {
-  depends_on = [kubernetes_namespace.tenant]
+  depends_on = [kubernetes_namespace.tenant, module.opa_gatekeeper]
+
   for_each = {
     for s in ["aad-pod-identity"] :
     s => s
@@ -108,6 +110,8 @@ module "aad_pod_identity" {
 
 # Ingress Nginx
 module "ingress_nginx" {
+  depends_on = [module.opa_gatekeeper]
+
   for_each = {
     for s in ["ingress-nginx"] :
     s => s
@@ -119,6 +123,8 @@ module "ingress_nginx" {
 
 # External DNS
 module "external_dns" {
+  depends_on = [module.opa_gatekeeper, module.aad_pod_identity]
+
   for_each = {
     for s in ["external-dns"] :
     s => s
@@ -139,6 +145,8 @@ module "external_dns" {
 
 # Cert Manager
 module "cert_manager" {
+  depends_on = [module.opa_gatekeeper]
+
   for_each = {
     for s in ["cert-manager"] :
     s => s
@@ -152,6 +160,8 @@ module "cert_manager" {
 
 # Velero
 module "velero" {
+  depends_on = [module.opa_gatekeeper]
+  
   for_each = {
     for s in ["velero"] :
     s => s

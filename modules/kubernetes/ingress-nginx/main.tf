@@ -33,7 +33,7 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
-resource "helm_release" "ingres_nginx" {
+resource "helm_release" "ingress_nginx" {
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart      = "ingress-nginx"
   name       = "ingress-nginx"

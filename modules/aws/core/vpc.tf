@@ -75,7 +75,7 @@ resource "aws_route_table_association" "subnet" {
   route_table_id = aws_route_table.rtDefault.id
 }
 
-resource "aws_route_table_association" "rtAssociationSubnetEks" {
+resource "aws_route_table_association" "eks" {
   for_each = {
     for subnet in var.vpcConfig.subnets :
     subnet.name => subnet

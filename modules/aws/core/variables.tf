@@ -23,10 +23,8 @@ variable "vpc_config" {
     enable_dns_support   = bool
     enable_dns_hostnames = bool
     subnets = list(object({
-      name       = string
-      cidr_block = string
       az         = number
-      eksName    = string
+      cidr_block = string
     }))
   })
 }

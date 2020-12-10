@@ -39,7 +39,7 @@ module "fluxcd_v1_azure_devops" {
   }
 
   source           = "../../kubernetes/fluxcd-v1"
-  input_depends_on = module.opa_gatekeeper.output_depends_on
+  input_depends_on = module.opa_gatekeeper["opa-gatekeeper"].output_depends_on
 
   azure_devops_pat = var.fluxcd_v1_config.azure_devops.pat
   azure_devops_org = var.fluxcd_v1_config.azure_devops.org
@@ -59,7 +59,7 @@ module "fluxcd_v2_azure_devops" {
   }
 
   source           = "../../kubernetes/fluxcd-v2-azdo"
-  input_depends_on = module.opa_gatekeeper.output_depends_on
+  input_depends_on = module.opa_gatekeeper["opa-gatekeeper"].output_depends_on
 
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
@@ -79,7 +79,7 @@ module "fluxcd_v2_github" {
   }
 
   source           = "../../kubernetes/fluxcd-v2-github"
-  input_depends_on = module.opa_gatekeeper.output_depends_on
+  input_depends_on = module.opa_gatekeeper["opa-gatekeeper"].output_depends_on
 
   github_owner = var.fluxcd_v2_config.github.owner
   environment  = var.environment
@@ -102,7 +102,7 @@ module "aad_pod_identity" {
   }
 
   source           = "../../kubernetes/aad-pod-identity"
-  input_depends_on = module.opa_gatekeeper.output_depends_on
+  input_depends_on = module.opa_gatekeeper["opa-gatekeeper"].output_depends_on
 
   aad_pod_identity = var.aad_pod_identity_config
   namespaces = [for ns in var.namespaces : {
@@ -119,7 +119,7 @@ module "ingress_nginx" {
   }
 
   source           = "../../kubernetes/ingress-nginx"
-  input_depends_on = module.opa_gatekeeper.output_depends_on
+  input_depends_on = module.opa_gatekeeper["opa-gatekeeper"].output_depends_on
 }
 
 # External DNS
@@ -131,7 +131,7 @@ module "external_dns" {
   }
 
   source           = "../../kubernetes/external-dns"
-  input_depends_on = module.opa_gatekeeper.output_depends_on
+  input_depends_on = module.opa_gatekeeper["opa-gatekeeper"].output_depends_on
 
   dns_provider = "azure"
   azure_config = {
@@ -152,7 +152,7 @@ module "cert_manager" {
   }
 
   source           = "../../kubernetes/cert-manager"
-  input_depends_on = module.opa_gatekeeper.output_depends_on
+  input_depends_on = module.opa_gatekeeper["opa-gatekeeper"].output_depends_on
 
   notification_email = var.cert_manager_config.notification_email
 }
@@ -166,7 +166,7 @@ module "velero" {
   }
 
   source           = "../../kubernetes/velero"
-  input_depends_on = module.opa_gatekeeper.output_depends_on
+  input_depends_on = module.opa_gatekeeper["opa-gatekeeper"].output_depends_on
 
   cloud_provider = "azure"
   azure_config = {

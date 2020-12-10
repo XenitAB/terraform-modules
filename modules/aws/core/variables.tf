@@ -28,3 +28,8 @@ variable "vpc_config" {
     }))
   })
 }
+
+variable "dns_zone" {
+  description = "The DNS Zone that will be used by the EKS cluster"
+  type        = string
+}

@@ -52,7 +52,7 @@ variable "namespaces" {
   type        = set(string)
 }
 
-variable "velero_s3_bucket_name" {
-  description = "Name of velero s3 bucket"
+variable "velero_s3_bucket_arn" {
+  description = "ARN of velero s3 bucket"
   type = string
 }

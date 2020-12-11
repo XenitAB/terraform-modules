@@ -27,7 +27,7 @@ variable "eks_name_suffix" {
   default     = 1
 }
 
-variable "eks_configuration" {
+variable "eks_config" {
   description = "The EKS Config"
   type = object({
     kubernetes_version = string

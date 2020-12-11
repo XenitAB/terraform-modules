@@ -179,5 +179,5 @@ variable "velero_config" {
 variable "kyverno_enabled" {
   description = "Should Kyverno be enabled"
   type        = bool
-  default     = false
+  default     = true
 }

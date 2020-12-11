@@ -16,9 +16,15 @@ variable "region" {
   })
 }
 
-variable "coreInfraCommonName" {
-  description = "The core infrastructure common name for the environment"
+variable "core_name" {
+  description = "The core name for the environment"
   type        = string
+}
+
+variable "eks_name_suffix" {
+  description = "The suffix for the eks clusters"
+  type        = number
+  default     = 1
 }
 
 variable "eks_configuration" {

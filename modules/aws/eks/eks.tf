@@ -1,8 +1,7 @@
 resource "aws_eks_cluster" "this" {
-  provider = aws.eksAdminRole
-  name     = "eks-${var.environment}-${var.locationShort}-${var.commonName}"
+  name     = "${var.environment}-${var.name}${var.eks_name_suffix}"
   role_arn = aws_iam_role.iamRoleEksCluster.arn
-  version  = var.eksConfiguration.kubernetesVersion
+  version  = var.eks_config.kubernetes_version
 
   vpc_config {
     subnet_ids = [
@@ -13,18 +12,19 @@ resource "aws_eks_cluster" "this" {
   }
 
   tags = {
-    Name = "eks-${var.environment}-${var.locationShort}-${var.commonName}"
+    Name = "${var.environment}-${var.name}${var.eks_name_suffix}"
+    Environment = var.environment
   }
 }
 
 resource "aws_eks_node_group" "this" {
   for_each = {
-    for nodeGroup in var.eksConfiguration.nodeGroups :
-    nodeGroup.name => nodeGroup
+    for node_group in var.eks_config.node_groups :
+    node_group.name => node_group
   }
 
   cluster_name    = aws_eks_cluster.eks.name
-  node_group_name = "nodegroup-eks-${var.environment}-${var.locationShort}-${var.commonName}-${each.value.name}"
+  node_group_name = "${var.environment}-${var.name}${var.eks_name_suffix}-${each.value.name}"
   node_role_arn   = aws_iam_role.iamRoleEksNodeGroup.arn
   instance_types  = each.value.instance_types
   disk_size       = each.value.disk_size
@@ -49,7 +49,8 @@ resource "aws_eks_node_group" "this" {
   ]
 
   tags = {
-    Name = "nodegroup-eks-${var.environment}-${var.locationShort}-${var.commonName}-${each.value.name}"
+    Name = "${var.environment}-${var.name}${var.eks_name_suffix}-${each.value.name}"
+    Environment = var.environment
   }
 }
 

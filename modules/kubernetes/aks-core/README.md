@@ -40,7 +40,7 @@ This module is used to create AKS clusters.
 | fluxcd\_v2\_enabled | Should fluxcd-v2 be enabled | `bool` | `true` | no |
 | ingress\_nginx\_enabled | Should Ingress NGINX be enabled | `bool` | `true` | no |
 | kubernetes\_network\_policy\_default\_deny | If network policies should by default deny cross namespace traffic | `bool` | `false` | no |
-| kyverno\_enabled | Should Kyverno be enabled | `bool` | `false` | no |
+| kyverno\_enabled | Should Kyverno be enabled | `bool` | `true` | no |
 | location\_short | The Azure region short name. | `string` | n/a | yes |
 | name | The commonName to use for the deploy | `string` | n/a | yes |
 | namespaces | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name   = string<br>      labels = map(string)<br>      flux = object({<br>        enabled = bool<br>        github = object({<br>          repo = string<br>        })<br>        azure_devops = object({<br>          org  = string<br>          proj = string<br>          repo = string<br>        })<br>      })<br>    })<br>  )</pre> | n/a | yes |

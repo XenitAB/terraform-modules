@@ -10,7 +10,7 @@ module "opa_gatekeeper" {
 
   exclude = [
     {
-      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns"]
+      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns", "kyverno"]
       processes           = ["*"]
     }
   ]
@@ -179,4 +179,19 @@ module "velero" {
     client_id                 = var.velero_config.identity.client_id
     resource_id               = var.velero_config.identity.resource_id
   }
+}
+
+# Kyverno
+module "kyverno" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["kyverno"] :
+    s => s
+    if var.kyverno_enabled
+  }
+
+  source = "../../kubernetes/kyverno"
+
+  namespaces = [for ns in var.namespaces : ns.name]
 }

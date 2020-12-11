@@ -1,5 +1,3 @@
-data "aws_caller_identity" "current" {}
-
 data "aws_iam_policy_document" "eks_admin_permission" {
   statement {
     effect = "Allow"
@@ -30,16 +28,15 @@ data "aws_iam_policy_document" "eks_admin_assume" {
 resource "aws_iam_policy" "eks_admin" {
   name        = "iam-policy-eks-admin"
   description = "EKS Admin Role Plocy"
-
-  policy = data.aws_iam_policy_document.iamPolicyDocumentEksAdminPermission.json
+  policy = data.aws_iam_policy_document.eks_admin_permission.json
 }
 
 resource "aws_iam_role" "eks_admin" {
-  assume_role_policy = data.aws_iam_policy_document.iamPolicyDocumentEksAdminAssume.json
   name               = "iam-role-eks-admin"
+  assume_role_policy = data.aws_iam_policy_document.eks_admin_assume.json
 }
 
 resource "aws_iam_role_policy_attachment" "eks_admin" {
-  role       = aws_iam_role.iamRoleEksAdmin.name
-  policy_arn = aws_iam_policy.iamPolicyEksAdmin.arn
+  role       = aws_iam_role.eks_admin.name
+  policy_arn = aws_iam_policy.eks_admin.arn
 }

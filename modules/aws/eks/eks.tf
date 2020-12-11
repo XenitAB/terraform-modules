@@ -1,6 +1,61 @@
+resource "aws_iam_role" "eks" {
+  name = "${var.environment}-${var.region.location}-${var.name}${var.eks_name_suffix}-cluster"
+
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "eks.amazonaws.com"
+      }
+    }]
+    Version = "2012-10-17"
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "eks_cluster" {
+  role       = aws_iam_role.eks.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+}
+
+resource "aws_iam_role_policy_attachment" "eks_service" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
+  role       = aws_iam_role.eks.name
+}
+
+resource "aws_iam_role" "eks_node_group" {
+  name = "${var.environment}-${var.region.location}-${var.name}${var.eks_name_suffix}-node_group"
+
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "ec2.amazonaws.com"
+      }
+    }]
+    Version = "2012-10-17"
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "eks_worker_node" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+  role       = aws_iam_role.eks_node_group.name
+}
+
+resource "aws_iam_role_policy_attachment" "eks_cni" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  role       = aws_iam_role.eks_node_group.name
+}
+
+resource "aws_iam_role_policy_attachment" "container_registry_read_only" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  role       = aws_iam_role.eks_node_group.name
+}
+
 resource "aws_eks_cluster" "this" {
   name     = "${var.environment}-${var.name}${var.eks_name_suffix}"
-  role_arn = aws_iam_role.iamRoleEksCluster.arn
+  role_arn = aws_iam_role.eks.arn
   version  = var.eks_config.kubernetes_version
 
   vpc_config {
@@ -25,7 +80,7 @@ resource "aws_eks_node_group" "this" {
 
   cluster_name    = aws_eks_cluster.eks.name
   node_group_name = "${var.environment}-${var.name}${var.eks_name_suffix}-${each.value.name}"
-  node_role_arn   = aws_iam_role.iamRoleEksNodeGroup.arn
+  node_role_arn   = aws_iam_role.eks_node_group.arn
   instance_types  = each.value.instance_types
   disk_size       = each.value.disk_size
   subnet_ids = [

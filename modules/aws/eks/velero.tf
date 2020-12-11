@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "velero_s3_bucket" {
       "s3:AbortMultipartUpload",
       "s3:ListMultipartUploadParts"
     ]
-    resources = ["${aws_s3_bucket.s3BucketVelero.arn}/*"]
+    resources = ["${var.velero_s3_bucket_arn}/*"]
   }
   statement {
     effect = "Allow"
@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "velero_s3_bucket" {
       "s3:ListBucket"
 
     ]
-    resources = ["${aws_s3_bucket.s3BucketVelero.arn}"]
+    resources = ["${var.velero_s3_bucket_arn}"]
   }
 }
 

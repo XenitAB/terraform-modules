@@ -51,3 +51,8 @@ variable "namespaces" {
   description = "List of namespaces to create in the cluster"
   type        = set(string)
 }
+
+variable "velero_s3_bucket_name" {
+  description = "Name of velero s3 bucket"
+  type = string
+}

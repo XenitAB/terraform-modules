@@ -30,8 +30,8 @@ variable "eks_name_suffix" {
 variable "eks_configuration" {
   description = "The EKS Config"
   type = object({
-    kubernetesVersion = string
-    nodeGroups = list(object({
+    kubernetes_version = string
+    node_groups = list(object({
       name            = string
       release_version = string
       min_size        = number
@@ -42,15 +42,15 @@ variable "eks_configuration" {
   })
 }
 
-variable "dns_zone" {
-  description = "The DNS Zone that will be used by the EKS cluster"
-  type        = string
-}
-
-variable "namespaces" {
-  description = "List of namespaces to create in the cluster"
-  type        = set(string)
-}
+#variable "namespaces" {
+#  description = "The namespaces that should be created in Kubernetes."
+#  type = list(
+#    object({
+#      name                    = string
+#      delegate_resource_group = bool
+#    })
+#  )
+#}
 
 variable "velero_s3_bucket_arn" {
   description = "ARN of velero s3 bucket"

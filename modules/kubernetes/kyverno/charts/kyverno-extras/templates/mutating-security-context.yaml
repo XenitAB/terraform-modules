@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: set-security-context
+spec:
+  rules:
+    - name: set-security-context
+      match:
+        resources:
+          kinds:
+            - Pod
+          namespaces: {{ .Values.namespaces }}
+      mutate:
+        overlay:
+          spec:
+            containers:
+              - securityContext:
+                  allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: true
+                  capabilities:
+                    drop:
+                      - NET_RAW

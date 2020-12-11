@@ -180,3 +180,20 @@ module "velero" {
     resource_id               = var.velero_config.identity.resource_id
   }
 }
+
+# Kyverno
+module "kyverno" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["kyverno"] :
+    s => s
+    if var.kyverno_enabled
+  }
+
+  source = "../../kubernetes/kyverno"
+
+  namespaces = [for ns in var.namespaces : {
+    name = ns.name
+  }]
+}

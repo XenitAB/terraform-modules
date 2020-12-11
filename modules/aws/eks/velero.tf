@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "velero" {
+data "aws_iam_policy_document" "velero_s3_bucket" {
   statement {
     effect = "Allow"
     actions = [
@@ -32,7 +32,7 @@ data "aws_iam_policy_document" "velero" {
   }
 }
 
-data "aws_iam_policy_document" "velero" {
+data "aws_iam_policy_document" "velero_assume" {
   statement {
     actions = [
       "sts:AssumeRoleWithWebIdentity"
@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "velero" {
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(aws_iam_openid_connect_provider.openIDProviderEks.url, "https://", "")}:sub"
+      variable = "${replace(aws_iam_openid_connect_provider.this.url, "https://", "")}:sub"
       values = [
         "system:serviceaccount:velero:velero-server"
       ]
@@ -49,7 +49,7 @@ data "aws_iam_policy_document" "velero" {
 
     principals {
       identifiers = [
-        aws_iam_openid_connect_provider.openIDProviderEks.arn
+        aws_iam_openid_connect_provider.this.arn
       ]
       type = "Federated"
     }
@@ -57,18 +57,17 @@ data "aws_iam_policy_document" "velero" {
 }
 
 resource "aws_iam_policy" "velero" {
-  name        = "iam-policy-eks-velero"
+  name        = "${var.environment}-${var.region.location}-${var.name}-velero"
   description = "A policy for velero in EKS"
-
-  policy = data.aws_iam_policy_document.iamPolicyDocumentS3BucketVelero.json
+  policy = data.aws_iam_policy_document.velero_s3_bucket.json
 }
 
 resource "aws_iam_role" "velero" {
-  assume_role_policy = data.aws_iam_policy_document.iamPolicyDocumentSaVelero.json
-  name               = "iam-role-eks-sa-velero"
+  name        = "${var.environment}-${var.region.location}-${var.name}-velero"
+  assume_role_policy = data.aws_iam_policy_document.velero_assume.json
 }
 
 resource "aws_iam_role_policy_attachment" "velero" {
-  role       = aws_iam_role.iamRoleSaVelero.name
-  policy_arn = aws_iam_policy.iamPolicyVelero.arn
+  role       = aws_iam_role.velero.name
+  policy_arn = aws_iam_policy.velero.arn
 }

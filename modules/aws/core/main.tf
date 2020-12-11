@@ -17,5 +17,6 @@ resource "aws_route53_zone" "this" {
 
   tags = {
     Name = var.dns_zone
+    Environment = var.environment
   }
 }

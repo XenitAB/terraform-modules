@@ -1,5 +1,4 @@
-# External Secrets
-data "aws_iam_policy_document" "iamPolicyDocumentExternalSecrets" {
+data "aws_iam_policy_document" "external_secrets" {
   statement {
     effect = "Allow"
     actions = [
@@ -12,7 +11,7 @@ data "aws_iam_policy_document" "iamPolicyDocumentExternalSecrets" {
   }
 }
 
-data "aws_iam_policy_document" "iamPolicyDocumentSaExternalSecrets" {
+data "aws_iam_policy_document" "external_secrets" {
   statement {
     actions = [
       "sts:AssumeRoleWithWebIdentity"
@@ -36,19 +35,19 @@ data "aws_iam_policy_document" "iamPolicyDocumentSaExternalSecrets" {
   }
 }
 
-resource "aws_iam_policy" "iamPolicyExternalSecrets" {
+resource "aws_iam_policy" "external_secrets" {
   name        = "iam-policy-eks-external-secrets"
   description = "A policy for external-secrets in EKS"
 
   policy = data.aws_iam_policy_document.iamPolicyDocumentExternalSecrets.json
 }
 
-resource "aws_iam_role" "iamRoleSaExternalSecrets" {
+resource "aws_iam_role" "external_secrets" {
   assume_role_policy = data.aws_iam_policy_document.iamPolicyDocumentSaExternalSecrets.json
   name               = "iam-role-eks-sa-external-secrets"
 }
 
-resource "aws_iam_role_policy_attachment" "iamRolePolicyAttachmentSaExternalSecrets" {
+resource "aws_iam_role_policy_attachment" "external_secrets" {
   role       = aws_iam_role.iamRoleSaExternalSecrets.name
   policy_arn = aws_iam_policy.iamPolicyExternalSecrets.arn
 }

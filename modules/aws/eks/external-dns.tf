@@ -1,5 +1,4 @@
-# External DNS
-data "aws_iam_policy_document" "iamPolicyDocumentRoute53ExternalDns" {
+data "aws_iam_policy_document" "external_dns" {
   statement {
     sid    = "AllowRoute53Change"
     effect = "Allow"
@@ -19,7 +18,7 @@ data "aws_iam_policy_document" "iamPolicyDocumentRoute53ExternalDns" {
   }
 }
 
-data "aws_iam_policy_document" "iamPolicyDocumentSaExternalDns" {
+data "aws_iam_policy_document" "external_dns" {
   statement {
     actions = [
       "sts:AssumeRoleWithWebIdentity"
@@ -43,19 +42,19 @@ data "aws_iam_policy_document" "iamPolicyDocumentSaExternalDns" {
   }
 }
 
-resource "aws_iam_policy" "iamPolicyExternalDns" {
+resource "aws_iam_policy" "external_dns" {
   name        = "iam-policy-eks-external-dns"
   description = "A policy for external-dns in EKS"
 
   policy = data.aws_iam_policy_document.iamPolicyDocumentRoute53ExternalDns.json
 }
 
-resource "aws_iam_role" "iamRoleSaExternalDns" {
+resource "aws_iam_role" "external_dns" {
   assume_role_policy = data.aws_iam_policy_document.iamPolicyDocumentSaExternalDns.json
   name               = "iam-role-eks-sa-external-dns"
 }
 
-resource "aws_iam_role_policy_attachment" "iamRolePolicyAttachmentSaExternalDns" {
+resource "aws_iam_role_policy_attachment" "external_dns" {
   role       = aws_iam_role.iamRoleSaExternalDns.name
   policy_arn = aws_iam_policy.iamPolicyExternalDns.arn
 }

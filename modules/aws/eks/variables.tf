@@ -36,7 +36,7 @@ variable "eks_configuration" {
   })
 }
 
-variable "dnsZone" {
+variable "dns_zone" {
   description = "The DNS Zone that will be used by the EKS cluster"
   type        = string
 }

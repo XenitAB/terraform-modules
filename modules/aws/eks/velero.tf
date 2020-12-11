@@ -1,5 +1,4 @@
-# External DNS
-data "aws_iam_policy_document" "iamPolicyDocumentS3BucketVelero" {
+data "aws_iam_policy_document" "velero" {
   statement {
     effect = "Allow"
     actions = [
@@ -33,7 +32,7 @@ data "aws_iam_policy_document" "iamPolicyDocumentS3BucketVelero" {
   }
 }
 
-data "aws_iam_policy_document" "iamPolicyDocumentSaVelero" {
+data "aws_iam_policy_document" "velero" {
   statement {
     actions = [
       "sts:AssumeRoleWithWebIdentity"
@@ -57,19 +56,19 @@ data "aws_iam_policy_document" "iamPolicyDocumentSaVelero" {
   }
 }
 
-resource "aws_iam_policy" "iamPolicyVelero" {
+resource "aws_iam_policy" "velero" {
   name        = "iam-policy-eks-velero"
   description = "A policy for velero in EKS"
 
   policy = data.aws_iam_policy_document.iamPolicyDocumentS3BucketVelero.json
 }
 
-resource "aws_iam_role" "iamRoleSaVelero" {
+resource "aws_iam_role" "velero" {
   assume_role_policy = data.aws_iam_policy_document.iamPolicyDocumentSaVelero.json
   name               = "iam-role-eks-sa-velero"
 }
 
-resource "aws_iam_role_policy_attachment" "iamRolePolicyAttachmentSaVelero" {
+resource "aws_iam_role_policy_attachment" "velero" {
   role       = aws_iam_role.iamRoleSaVelero.name
   policy_arn = aws_iam_policy.iamPolicyVelero.arn
 }

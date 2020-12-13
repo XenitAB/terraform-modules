@@ -120,19 +120,6 @@ variable "default_constraints" {
       parameters = {}
     },
     {
-      kind               = "K8sRequiredProbes"
-      name               = "required-probes"
-      enforcement_action = ""
-      match = {
-        kinds      = []
-        namespaces = []
-      }
-      parameters = {
-        probes     = ["readinessProbe"]
-        probeTypes = ["tcpSocket", "httpGet", "exec"]
-      }
-    },
-    {
       kind               = "K8sPodPriorityClass"
       name               = "pod-priority-class"
       enforcement_action = ""

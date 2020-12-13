@@ -93,7 +93,7 @@ variable "default_constraints" {
         namespaces = []
       }
       parameters = {
-        volumes = ["configMap", "downwardAPI", "emptyDir", "persistentVolumeClaim", "secret", "projected"]
+        volumes = ["configMap", "downwardAPI", "emptyDir", "persistentVolumeClaim", "secret", "projected", "csi"]
       }
     },
     {

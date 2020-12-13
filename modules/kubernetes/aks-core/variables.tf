@@ -181,3 +181,9 @@ variable "kyverno_enabled" {
   type        = bool
   default     = true
 }
+
+variable "csi_secrets_store_provider_azure_enabled" {
+  description = "Should csi-secrets-store-provider-azure be enabled"
+  type        = bool
+  default     = true
+}

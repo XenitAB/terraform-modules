@@ -33,7 +33,7 @@ resource "aws_internet_gateway" "this" {
 }
 
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.this.id
 
   tags = {
     Name        = "${var.name}-public"

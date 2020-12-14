@@ -121,3 +121,18 @@ module "velero" {
     s3_bucket_id = var.velero_config.s3_bucket_id
   }
 }
+
+# Kyverno
+module "kyverno" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["kyverno"] :
+    s => s
+    if var.kyverno_enabled
+  }
+
+  source = "../../kubernetes/kyverno"
+
+  namespaces = [for ns in var.namespaces : ns.name]
+}

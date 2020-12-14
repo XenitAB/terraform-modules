@@ -3,6 +3,7 @@ kind: ClusterPolicy
 metadata:
   name: set-security-context
 spec:
+  validationFailureAction: enforce
   rules:
     - name: set-security-context
       match:
@@ -11,10 +12,11 @@ spec:
             - Pod
           namespaces: {{ .Values.namespaces }}
       mutate:
-        overlay:
+        patchStrategicMerge:
           spec:
             containers:
-              - securityContext:
+              - (name): "*"
+                securityContext:
                   allowPrivilegeEscalation: false
                   readOnlyRootFilesystem: true
                   capabilities:

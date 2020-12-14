@@ -21,7 +21,7 @@ resource "aws_subnet" "this" {
   map_public_ip_on_launch = true
 
   tags = {
-    "Name"        = "${var.environment}-${var.name}-${each.value.name}"
+    "Name"        = "${var.environment}-${var.name}-${each.key}"
     "Environment" = var.environment
     "kubernetes.io/cluster/${var.environment}-${var.name}${var.eks_name_suffix}" = "shared"
   }

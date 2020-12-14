@@ -8,14 +8,6 @@ variable "name" {
   type        = string
 }
 
-variable "region" {
-  description = "The AWS region to configure"
-  type = object({
-    location       = string
-    location_short = string
-  })
-}
-
 variable "core_name" {
   description = "The core name for the environment"
   type        = string
@@ -56,7 +48,7 @@ variable "eks_config" {
 variable "velero_config" {
   description = "Velero configuration"
   type = object({
-    s3_bucket_arn     = string
-    s3_bucket_id = string
+    s3_bucket_arn = string
+    s3_bucket_id  = string
   })
 }

@@ -1,5 +1,5 @@
 resource "aws_iam_role" "eks" {
-  name = "${var.environment}-${var.region.location}-${var.name}${var.eks_name_suffix}-cluster"
+  name = "${var.environment}-${data.aws_region.current.name}-${var.name}${var.eks_name_suffix}-cluster"
 
   assume_role_policy = jsonencode({
     Statement = [{
@@ -24,7 +24,7 @@ resource "aws_iam_role_policy_attachment" "eks_service" {
 }
 
 resource "aws_iam_role" "eks_node_group" {
-  name = "${var.environment}-${var.region.location}-${var.name}${var.eks_name_suffix}-node_group"
+  name = "${var.environment}-${data.aws_region.current.name}-${var.name}${var.eks_name_suffix}-node_group"
 
   assume_role_policy = jsonencode({
     Statement = [{

@@ -15,9 +15,5 @@ module "eks-global" {
   source = "../../../modules/aws/eks-global"
 
   environment       = "dev"
-  region = {
-    location       = "eu-west-1"
-    location_short = "eu-west-1"
-  }
   name              = "eks"
 }

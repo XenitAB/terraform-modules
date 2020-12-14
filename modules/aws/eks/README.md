@@ -22,13 +22,14 @@
 | eks\_name\_suffix | The suffix for the eks clusters | `number` | `1` | no |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
 | name | Common name for the environment | `string` | n/a | yes |
-| region | The AWS region to configure | <pre>object({<br>    location       = string<br>    location_short = string<br>  })</pre> | n/a | yes |
-| velero\_s3\_bucket\_arn | ARN of velero s3 bucket | `string` | n/a | yes |
+| velero\_config | Velero configuration | <pre>object({<br>    s3_bucket_arn = string<br>    s3_bucket_id  = string<br>  })</pre> | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| external\_dns\_config | Configuration for External DNS |
 | external\_secrets\_config | Configuration for External DNS |
 | kube\_config | Kube config for the created EKS cluster |
+| velero\_config | Configuration for Velero |
 

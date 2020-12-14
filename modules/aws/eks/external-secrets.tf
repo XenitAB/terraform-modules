@@ -36,13 +36,13 @@ data "aws_iam_policy_document" "external_secrets_assume" {
 }
 
 resource "aws_iam_policy" "external_secrets" {
-  name        = "${var.environment}-${var.region.location}-${var.name}-external-secrets"
+  name        = "${var.environment}-${data.aws_region.current.name}-${var.name}-external-secrets"
   description = "A policy for external-secrets in EKS"
   policy      = data.aws_iam_policy_document.external_secrets_secrets_manager.json
 }
 
 resource "aws_iam_role" "external_secrets" {
-  name               = "${var.environment}-${var.region.location}-${var.name}-external-secrets"
+  name               = "${var.environment}-${data.aws_region.current.name}-${var.name}-external-secrets"
   assume_role_policy = data.aws_iam_policy_document.external_secrets_assume.json
 }
 

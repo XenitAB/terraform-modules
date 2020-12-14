@@ -2,7 +2,7 @@ data "aws_iam_policy_document" "eks_admin_permission" {
   statement {
     effect = "Allow"
     actions = [
-      "*"
+      "eks:*"
     ]
     resources = [
       "*"

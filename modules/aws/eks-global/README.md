@@ -17,11 +17,10 @@
 |------|-------------|------|---------|:--------:|
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
 | name | Common name for the environment | `string` | n/a | yes |
-| region | The AWS region to configure | <pre>object({<br>    location       = string<br>    location_short = string<br>  })</pre> | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| velero\_s3\_bucket\_arn | ARN of velero s3 backup bucket |
+| velero\_config | ARN of velero s3 backup bucket |
 

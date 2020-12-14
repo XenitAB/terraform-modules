@@ -15,10 +15,6 @@ module "eks" {
   source = "../../../modules/aws/eks"
 
   environment       = "dev"
-  region = {
-    location       = "eu-west-1"
-    location_short = "eu-west-1"
-  }
   name              = "eks"
   core_name = "core"
   eks_config = {
@@ -26,5 +22,8 @@ module "eks" {
     cidr_block = "10.0.16.0/20"
     node_groups = []
   }
-  velero_s3_bucket_arn = "arn"
+  velero_config = {
+    s3_bucket_arn = "foo"
+    s3_bucket_id = "bar"
+  }
 }

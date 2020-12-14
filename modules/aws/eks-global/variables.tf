@@ -7,11 +7,3 @@ variable "name" {
   description = "Common name for the environment"
   type        = string
 }
-
-variable "region" {
-  description = "The AWS region to configure"
-  type = object({
-    location       = string
-    location_short = string
-  })
-}

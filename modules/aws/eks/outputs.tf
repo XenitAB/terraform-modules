@@ -25,7 +25,7 @@ output "external_dns_config" {
 output "velero_config" {
   description = "Configuration for Velero"
   value = {
-    role_arn = aws_iam_role.velero.arn
+    role_arn     = aws_iam_role.velero.arn
     s3_bucket_id = var.velero_config.s3_bucket_id
   }
 }

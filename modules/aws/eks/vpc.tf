@@ -10,7 +10,7 @@ data "aws_nat_gateway" "this" {
   vpc_id = data.aws_vpc.this.id
 
   tags = {
-    Name        = "${var.name}-${each.value}"
+    Name        = "${var.core_name}-${each.value}"
   }
 }
 

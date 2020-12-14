@@ -8,14 +8,6 @@ variable "name" {
   type        = string
 }
 
-variable "region" {
-  description = "The AWS region to configure"
-  type = object({
-    location       = string
-    location_short = string
-  })
-}
-
 variable "vpc_config" {
   description = "The configuration for the VPC"
   type = object({

@@ -5,6 +5,7 @@ This directory contains all the Kubernetes Terraform modules.
 ## Modules
 
 - [`aks-core`](aks-core/README.md)
+- [`eks-core`](eks-core/README.md)
 - [`aad-pod-identity`](aad-pod-identity/README.md)
 - [`cert-manager`](cert-manager/README.md)
 - [`external-dns`](external-dns/README.md)

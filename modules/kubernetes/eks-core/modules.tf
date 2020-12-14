@@ -10,24 +10,10 @@ module "opa_gatekeeper" {
 
   exclude = [
     {
-      excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns"]
+      excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns"]
       processes           = ["*"]
     }
   ]
-}
-
-# External Secrets
-module "external_secrets" {
-  source = "github.com/XenitAB/terraform-modules//modules/kubernetes/external-secrets?ref=2020.12.11"
-
-  providers = {
-    helm = helm
-  }
-
-  aws_config = {
-    region   = data.aws_region.current.name
-    role_arn = aws_iam_role.iamRoleSaExternalSecrets.arn
-  }
 }
 
 # Fluxcd
@@ -51,6 +37,24 @@ module "fluxcd_v2_github" {
   }]
 }
 
+# External Secrets
+module "external_secrets" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["external-secrets"] :
+    s => s
+    if var.external_secrets_enabled
+  }
+
+  source = "../../kubernetes/external-secrets"
+
+  aws_config = {
+    region   = data.aws_region.current.name
+    role_arn = var.external_secrets_config.role_arn
+  }
+}
+
 # Ingress Nginx
 module "ingress_nginx" {
   depends_on = [module.opa_gatekeeper]
@@ -66,7 +70,7 @@ module "ingress_nginx" {
 
 # External DNS
 module "external_dns" {
-  depends_on = [module.opa_gatekeeper, module.aad_pod_identity]
+  depends_on = [module.opa_gatekeeper]
 
   for_each = {
     for s in ["external-dns"] :
@@ -79,7 +83,7 @@ module "external_dns" {
   dns_provider = "aws"
   aws_config = {
     region   = data.aws_region.current.name
-    role_arn = aws_iam_role.iamRoleSaExternalDns.arn
+    role_arn = var.external_dns_config.role_arn
   }
 }
 
@@ -113,7 +117,7 @@ module "velero" {
   cloud_provider = "aws"
   aws_config = {
     region       = data.aws_region.current.name
-    role_arn     = aws_iam_role.iamRoleSaVelero.arn
-    s3_bucket_id = aws_s3_bucket.s3BucketVelero.id
+    role_arn     = var.velero_config.role_arn
+    s3_bucket_id = var.velero_config.s3_bucket_id
   }
 }

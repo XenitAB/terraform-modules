@@ -1,17 +1,12 @@
-variable "location_short" {
-  description = "The Azure region short name."
-  type        = string
-}
-
 variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string
 }
 
-variable "name" {
-  description = "The name to use for the deploy"
-  type        = string
-}
+#variable "name" {
+#  description = "The name to use for the deploy"
+#  type        = string
+#}
 
 variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes."
@@ -34,11 +29,11 @@ variable "namespaces" {
   )
 }
 
-variable "kubernetes_network_policy_default_deny" {
-  description = "If network policies should by default deny cross namespace traffic"
-  type        = bool
-  default     = false
-}
+#variable "kubernetes_network_policy_default_deny" {
+#  description = "If network policies should by default deny cross namespace traffic"
+#  type        = bool
+#  default     = false
+#}
 
 variable "fluxcd_v2_enabled" {
   description = "Should fluxcd-v2 be enabled"
@@ -65,6 +60,19 @@ variable "opa_gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
   type        = bool
   default     = true
+}
+
+variable "external_secrets_enabled" {
+  description = "Should External Secrets be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "external_secrets_config" {
+  description = "External Secrets configuration"
+  type = object({
+    role_arn = string
+  })
 }
 
 variable "cert_manager_enabled" {
@@ -95,8 +103,7 @@ variable "external_dns_enabled" {
 variable "external_dns_config" {
   description = "External DNS configuration"
   type = object({
-    client_id   = string
-    resource_id = string
+    role_arn = string
   })
 }
 
@@ -109,11 +116,7 @@ variable "velero_enabled" {
 variable "velero_config" {
   description = "Velero configuration"
   type = object({
-    azure_storage_account_name      = string
-    azure_storage_account_container = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-    })
+    role_arn     = string
+    s3_bucket_id = string
   })
 }

@@ -31,7 +31,7 @@ variable "eks_config" {
   description = "The EKS Config"
   type = object({
     kubernetes_version = string
-    cidr_block = string
+    cidr_block         = string
     node_groups = list(object({
       name            = string
       release_version = string

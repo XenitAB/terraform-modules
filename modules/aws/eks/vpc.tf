@@ -34,7 +34,7 @@ resource "aws_route_table" "this" {
   vpc_id = data.aws_vpc.this.id
 
   tags = {
-    "Name"        = "${var.environment}-${var.name}-private-${each.key}"
+    "Name"        = "${var.environment}-${var.core_name}-${var.name}${var.eks_name_suffix}-private-${each.value}"
     "Environment" = var.environment
   }
 }

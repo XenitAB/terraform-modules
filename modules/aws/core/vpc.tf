@@ -17,7 +17,7 @@ resource "aws_subnet" "public" {
   availability_zone = each.key
 
   tags = {
-    Name        = "${var.name}-public-${each.value}"
+    Name        = "${var.environment}-${var.name}-public-${each.value}"
     Environment = var.environment
   }
 }

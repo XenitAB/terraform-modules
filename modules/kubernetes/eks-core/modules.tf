@@ -10,7 +10,7 @@ module "opa_gatekeeper" {
 
   exclude = [
     {
-      excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns"]
+      excluded_namespaces = ["kube-system", "gatekeeper-system", "kyverno", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns", "external-secrets"]
       processes           = ["*"]
     }
   ]

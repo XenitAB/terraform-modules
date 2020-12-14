@@ -59,7 +59,7 @@ resource "aws_eks_cluster" "this" {
   version  = var.eks_config.kubernetes_version
 
   vpc_config {
-    subnet_ids = aws_subnet.this.*.id
+    subnet_ids = [for s in aws_subnet.this: s.id]
     #subnet_ids = [
     #  data.aws_subnet.subnet1.id,
     #  data.aws_subnet.subnet2.id,
@@ -91,7 +91,7 @@ resource "aws_eks_node_group" "this" {
     max_size     = each.value.max_size
   }
 
-  subnet_ids = aws_subnet.this.*.id
+  subnet_ids = [for s in aws_subnet.this: s.id]
   #subnet_ids = [
   #  data.aws_subnet.subnet1.id,
   #  data.aws_subnet.subnet2.id,

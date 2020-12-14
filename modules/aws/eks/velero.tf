@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "velero_s3_bucket" {
       "s3:ListBucket"
 
     ]
-    resources = ["${var.velero_s3_bucket_arn}"]
+    resources = [var.velero_s3_bucket_arn]
   }
 }
 

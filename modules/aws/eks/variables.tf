@@ -53,7 +53,10 @@ variable "eks_config" {
 #  )
 #}
 
-variable "velero_s3_bucket_arn" {
-  description = "ARN of velero s3 bucket"
-  type        = string
+variable "velero_config" {
+  description = "Velero configuration"
+  type = object({
+    s3_bucket_arn     = string
+    s3_bucket_id = string
+  })
 }

@@ -14,3 +14,18 @@ output "external_secrets_config" {
     role_arn = aws_iam_role.external_secrets.arn
   }
 }
+
+output "external_dns_config" {
+  description = "Configuration for External DNS"
+  value = {
+    role_arn = aws_iam_role.external_dns.arn
+  }
+}
+
+output "velero_config" {
+  description = "Configuration for Velero"
+  value = {
+    role_arn = aws_iam_role.velero.arn
+    s3_bucket_id = var.velero_config.s3_bucket_id
+  }
+}

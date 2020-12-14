@@ -78,7 +78,7 @@ resource "aws_eks_node_group" "this" {
     node_group.name => node_group
   }
 
-  cluster_name    = aws_eks_cluster.eks.name
+  cluster_name    = "${aws_eks_cluster.eks.name}${var.eks_name_suffix}"
   node_group_name = "${var.environment}-${var.name}${var.eks_name_suffix}-${each.value.name}"
   node_role_arn   = aws_iam_role.eks_node_group.arn
   instance_types  = each.value.instance_types

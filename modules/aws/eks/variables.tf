@@ -42,10 +42,6 @@ variable "eks_config" {
   })
 }
 
-variable "vpc_id" {
-  type = string
-}
-
 #variable "namespaces" {
 #  description = "The namespaces that should be created in Kubernetes."
 #  type = list(

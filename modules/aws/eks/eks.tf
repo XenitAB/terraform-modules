@@ -60,17 +60,17 @@ resource "aws_eks_cluster" "this" {
 
   vpc_config {
     subnet_ids = [for s in aws_subnet.this : s.id]
-    #subnet_ids = [
-    #  data.aws_subnet.subnet1.id,
-    #  data.aws_subnet.subnet2.id,
-    #  data.aws_subnet.subnet3.id
-    #]
   }
 
   tags = {
     Name        = "${var.environment}-${var.name}${var.eks_name_suffix}"
     Environment = var.environment
   }
+
+  depends_on = [
+    aws_iam_role_policy_attachment.eks_cluster,
+    aws_iam_role_policy_attachment.eks_service,
+  ]
 }
 
 resource "aws_eks_node_group" "this" {
@@ -92,11 +92,6 @@ resource "aws_eks_node_group" "this" {
   }
 
   subnet_ids = [for s in aws_subnet.this : s.id]
-  #subnet_ids = [
-  #  data.aws_subnet.subnet1.id,
-  #  data.aws_subnet.subnet2.id,
-  #  data.aws_subnet.subnet3.id,
-  #]
 
   tags = {
     Name        = "${var.environment}-${var.name}${var.eks_name_suffix}-${each.value.name}"

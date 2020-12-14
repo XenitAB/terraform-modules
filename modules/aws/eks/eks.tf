@@ -97,6 +97,12 @@ resource "aws_eks_node_group" "this" {
     Name        = "${var.environment}-${var.name}${var.eks_name_suffix}-${each.value.name}"
     Environment = var.environment
   }
+
+  depends_on = [
+    aws_iam_role_policy_attachment.eks_worker_node,
+    aws_iam_role_policy_attachment.eks_cni,
+    aws_iam_role_policy_attachment.container_registry_read_only,
+  ]
 }
 
 data "tls_certificate" "thumbprint" {

@@ -4,7 +4,7 @@ locals {
 }
 
 data "aws_vpc" "this" {
-  tags {
+  tags = {
     Name = "wwkcore"
   }
 }

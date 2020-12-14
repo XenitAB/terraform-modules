@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "velero" {
   acl    = "private"
 
   tags = {
-    Name = "${var.environment}-${var.region.location}-${var.name}-velero"
+    Name        = "${var.environment}-${var.region.location}-${var.name}-velero"
     Environment = var.environment
   }
 }

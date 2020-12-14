@@ -59,11 +59,11 @@ data "aws_iam_policy_document" "velero_assume" {
 resource "aws_iam_policy" "velero" {
   name        = "${var.environment}-${var.region.location}-${var.name}-velero"
   description = "A policy for velero in EKS"
-  policy = data.aws_iam_policy_document.velero_s3_bucket.json
+  policy      = data.aws_iam_policy_document.velero_s3_bucket.json
 }
 
 resource "aws_iam_role" "velero" {
-  name        = "${var.environment}-${var.region.location}-${var.name}-velero"
+  name               = "${var.environment}-${var.region.location}-${var.name}-velero"
   assume_role_policy = data.aws_iam_policy_document.velero_assume.json
 }
 

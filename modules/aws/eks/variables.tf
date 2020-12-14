@@ -31,6 +31,7 @@ variable "eks_config" {
   description = "The EKS Config"
   type = object({
     kubernetes_version = string
+    cidr_block = string
     node_groups = list(object({
       name            = string
       release_version = string
@@ -54,5 +55,5 @@ variable "eks_config" {
 
 variable "velero_s3_bucket_arn" {
   description = "ARN of velero s3 bucket"
-  type = string
+  type        = string
 }

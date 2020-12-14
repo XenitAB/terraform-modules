@@ -19,8 +19,8 @@ variable "region" {
 variable "vpc_config" {
   description = "The configuration for the VPC"
   type = object({
-    vpc_cidr_block           = string
-    public_cidr_block           = string
+    vpc_cidr_block    = string
+    public_cidr_block = string
   })
 }
 

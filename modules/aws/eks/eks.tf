@@ -59,7 +59,7 @@ resource "aws_eks_cluster" "this" {
   version  = var.eks_config.kubernetes_version
 
   vpc_config {
-    subnet_ids = [for s in aws_subnet.this: s.id]
+    subnet_ids = [for s in aws_subnet.this : s.id]
     #subnet_ids = [
     #  data.aws_subnet.subnet1.id,
     #  data.aws_subnet.subnet2.id,
@@ -68,7 +68,7 @@ resource "aws_eks_cluster" "this" {
   }
 
   tags = {
-    Name = "${var.environment}-${var.name}${var.eks_name_suffix}"
+    Name        = "${var.environment}-${var.name}${var.eks_name_suffix}"
     Environment = var.environment
   }
 }
@@ -91,7 +91,7 @@ resource "aws_eks_node_group" "this" {
     max_size     = each.value.max_size
   }
 
-  subnet_ids = [for s in aws_subnet.this: s.id]
+  subnet_ids = [for s in aws_subnet.this : s.id]
   #subnet_ids = [
   #  data.aws_subnet.subnet1.id,
   #  data.aws_subnet.subnet2.id,
@@ -99,7 +99,7 @@ resource "aws_eks_node_group" "this" {
   #]
 
   tags = {
-    Name = "${var.environment}-${var.name}${var.eks_name_suffix}-${each.value.name}"
+    Name        = "${var.environment}-${var.name}${var.eks_name_suffix}-${each.value.name}"
     Environment = var.environment
   }
 }

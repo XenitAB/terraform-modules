@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "external_dns_assume" {
 resource "aws_iam_policy" "external_dns" {
   name        = "${var.environment}-${var.region.location}-${var.name}-external-dns"
   description = "A policy for external-dns in EKS"
-  policy = data.aws_iam_policy_document.external_dns_route53.json
+  policy      = data.aws_iam_policy_document.external_dns_route53.json
 }
 
 resource "aws_iam_role" "external_dns" {

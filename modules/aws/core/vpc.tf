@@ -1,5 +1,5 @@
 resource "aws_vpc" "this" {
-  cidr_block           = var.vpc_config.vpc_cidr_block
+  cidr_block           = var.vpc_config.cidr_block
   enable_dns_support   = true
   enable_dns_hostnames = true
 
@@ -13,14 +13,16 @@ resource "aws_subnet" "public" {
   for_each = { for idx, az in data.aws_availability_zones.available.names : az => idx }
 
   vpc_id            = aws_vpc.this.id
-  cidr_block        = cidrsubnet(var.vpc_config.public_cidr_block, 2, each.value)
+  cidr_block        = cidrsubnet(var.vpc_config.public_subnet.cidr_block, 2, each.value)
   availability_zone = each.key
 
-  tags = {
-    Name        = "${var.environment}-${var.name}-public-${each.value}"
-    Environment = var.environment
-    "kubernetes.io/role/elb" = "1"
-  }
+  tags = merge(
+    var.vpc_config.public_subnet.tags,
+    {
+      Name        = "${var.environment}-${var.name}-public-${each.value}"
+      Environment = var.environment
+    }
+  )
 }
 
 resource "aws_internet_gateway" "this" {

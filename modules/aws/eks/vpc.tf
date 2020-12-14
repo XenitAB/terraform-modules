@@ -22,8 +22,8 @@ resource "aws_subnet" "this" {
   availability_zone = each.key
 
   tags = {
-    Name                                                                       = "${var.environment}-${var.name}-private-${each.value}"
-    Environment                                                                = var.environment
+    Name                                                                         = "${var.environment}-${var.core_name}-${var.name}${var.eks_name_suffix}-private-${each.value}"
+    Environment                                                                  = var.environment
     "kubernetes.io/cluster/${var.environment}-${var.name}${var.eks_name_suffix}" = "shared"
   }
 }

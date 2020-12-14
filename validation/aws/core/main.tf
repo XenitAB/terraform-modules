@@ -17,8 +17,11 @@ module "core" {
   environment = "dev"
   name              = "core"
   vpc_config = {
-    vpc_cidr_block           = "10.0.0.0/16"
-    public_cidr_block = "10.0.0.0/20"
+    cidr_block           = "10.0.0.0/16"
+    public_subnet = {
+      cidr_block = "10.0.0.0/20"
+      tags = {}
+    }
   }
   dns_zone = "foobar.com"
 }

@@ -11,8 +11,11 @@ variable "name" {
 variable "vpc_config" {
   description = "The configuration for the VPC"
   type = object({
-    vpc_cidr_block    = string
-    public_cidr_block = string
+    cidr_block = string
+    public_subnet = object({
+      cidr_block = string
+      tags       = map(string)
+    })
   })
 }
 

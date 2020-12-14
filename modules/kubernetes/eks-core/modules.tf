@@ -135,4 +135,5 @@ module "kyverno" {
   source = "../../kubernetes/kyverno"
 
   namespaces = [for ns in var.namespaces : ns.name]
+  createSelfSignedCert = true
 }

@@ -19,13 +19,8 @@ variable "region" {
 variable "vpc_config" {
   description = "The configuration for the VPC"
   type = object({
-    cidr_block           = string
-    enable_dns_support   = bool
-    enable_dns_hostnames = bool
-    subnets = list(object({
-      az         = number
-      cidr_block = string
-    }))
+    vpc_cidr_block           = string
+    public_cidr_block           = string
   })
 }
 

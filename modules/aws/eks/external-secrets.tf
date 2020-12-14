@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "external_secrets_assume" {
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(aws_iam_openid_connect_provider.openIDProviderEks.url, "https://", "")}:sub"
+      variable = "${replace(aws_iam_openid_connect_provider.this.url, "https://", "")}:sub"
       values = [
         "system:serviceaccount:external-secrets:kubernetes-external-secrets"
       ]
@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "external_secrets_assume" {
 
     principals {
       identifiers = [
-        aws_iam_openid_connect_provider.openIDProviderEks.arn
+        aws_iam_openid_connect_provider.this.arn
       ]
       type = "Federated"
     }

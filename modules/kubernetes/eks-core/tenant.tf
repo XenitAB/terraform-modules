@@ -8,7 +8,7 @@ resource "kubernetes_namespace" "tenant" {
       { "name" = each.value.name }
     )
     annotations = {
-      "externalsecrets.kubernetes-client.io/permitted-key-name" = "eks/wks/${each.value}/.*"
+      "externalsecrets.kubernetes-client.io/permitted-key-name" = "eks/wks/${each.value.name}/.*"
     }
   }
 }

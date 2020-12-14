@@ -1,6 +1,6 @@
-locals {
-  subnet_offset = count(data.aws_availability_zones.available.names) - 1
-}
+#locals {
+#  subnet_offset = count(data.aws_availability_zones.available.names) - 1
+#}
 
 data "aws_vpc" "this" {
   tags = {

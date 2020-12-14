@@ -19,8 +19,8 @@ resource "aws_iam_role_policy_attachment" "eks_cluster" {
 }
 
 resource "aws_iam_role_policy_attachment" "eks_service" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
   role       = aws_iam_role.eks.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
 }
 
 resource "aws_iam_role" "eks_node_group" {
@@ -39,18 +39,18 @@ resource "aws_iam_role" "eks_node_group" {
 }
 
 resource "aws_iam_role_policy_attachment" "eks_worker_node" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = aws_iam_role.eks_node_group.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
 }
 
 resource "aws_iam_role_policy_attachment" "eks_cni" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
   role       = aws_iam_role.eks_node_group.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }
 
 resource "aws_iam_role_policy_attachment" "container_registry_read_only" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.eks_node_group.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
 resource "aws_eks_cluster" "this" {
@@ -59,11 +59,12 @@ resource "aws_eks_cluster" "this" {
   version  = var.eks_config.kubernetes_version
 
   vpc_config {
-    subnet_ids = [
-      data.aws_subnet.subnet1.id,
-      data.aws_subnet.subnet2.id,
-      data.aws_subnet.subnet3.id
-    ]
+    subnet_ids = aws_subnet.this.*.id
+    #subnet_ids = [
+    #  data.aws_subnet.subnet1.id,
+    #  data.aws_subnet.subnet2.id,
+    #  data.aws_subnet.subnet3.id
+    #]
   }
 
   tags = {
@@ -78,30 +79,24 @@ resource "aws_eks_node_group" "this" {
     node_group.name => node_group
   }
 
-  cluster_name    = "${aws_eks_cluster.eks.name}${var.eks_name_suffix}"
-  node_group_name = "${var.environment}-${var.name}${var.eks_name_suffix}-${each.value.name}"
+  cluster_name    = aws_eks_cluster.this.name
+  node_group_name = "${aws_eks_cluster.this.name}-${each.value.name}"
   node_role_arn   = aws_iam_role.eks_node_group.arn
   instance_types  = each.value.instance_types
   disk_size       = each.value.disk_size
-  subnet_ids = [
-    data.aws_subnet.subnet1.id,
-    data.aws_subnet.subnet2.id,
-    data.aws_subnet.subnet3.id
-  ]
-
   release_version = each.value.release_version
-
   scaling_config {
     desired_size = each.value.min_size
     min_size     = each.value.min_size
     max_size     = each.value.max_size
   }
 
-  depends_on = [
-    aws_iam_role_policy_attachment.iamRolePolicyAttachmentAmazonEKSWorkerNodePolicy,
-    aws_iam_role_policy_attachment.iamRolePolicyAttachmentAmazonEKS_CNI_Policy,
-    aws_iam_role_policy_attachment.iamRolePolicyAttachmentAmazonEC2ContainerRegistryReadOnly
-  ]
+  subnet_ids = aws_subnet.this.*.id
+  #subnet_ids = [
+  #  data.aws_subnet.subnet1.id,
+  #  data.aws_subnet.subnet2.id,
+  #  data.aws_subnet.subnet3.id,
+  #]
 
   tags = {
     Name = "${var.environment}-${var.name}${var.eks_name_suffix}-${each.value.name}"

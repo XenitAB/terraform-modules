@@ -7,16 +7,18 @@ terraform {
   }
 }
 
-provider "aws" {}
+provider "aws" {
+  region = "eu-west-1"
+}
 
 module "core" {
   source = "../../../modules/aws/core"
 
   environment = "dev"
-  regions = {
-      location       = "West Europe"
-      location_short = "we"
-    }
-
   name              = "core"
+  vpc_config = {
+    vpc_cidr_block           = "10.0.0.0/16"
+    public_cidr_block = "10.0.0.0/20"
+  }
+  dns_zone = "foobar.com"
 }

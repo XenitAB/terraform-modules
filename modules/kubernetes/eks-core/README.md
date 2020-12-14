@@ -7,7 +7,7 @@ This module is used to configure EKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | 0.13.5 |
-| azurerm | 2.35.0 |
+| aws | 3.20.0 |
 | flux | 0.0.6 |
 | github | 4.1.0 |
 | kubectl | 1.9.1 |
@@ -16,7 +16,9 @@ This module is used to configure EKS clusters.
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| aws | 3.20.0 |
 
 ## Inputs
 

@@ -27,5 +27,8 @@
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| external\_secrets\_config | Configuration for External DNS |
+| kube\_config | Kube config for the created EKS cluster |
 

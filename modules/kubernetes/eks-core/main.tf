@@ -8,9 +8,9 @@ terraform {
   required_version = "0.13.5"
 
   required_providers {
-    azurerm = {
-      version = "2.35.0"
-      source  = "hashicorp/azurerm"
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.20.0"
     }
     random = {
       source  = "hashicorp/random"
@@ -34,6 +34,8 @@ terraform {
     }
   }
 }
+
+data "aws_region" "current" {}
 
 #locals {
 #  # Namespace to create service accounts in

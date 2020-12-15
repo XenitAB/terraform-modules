@@ -10,6 +10,8 @@ spec:
         resources:
           kinds:
             - Pod
+      exclude:
+        resources:
           namespaces: {{ .Values.namespaces }}
       mutate:
         patchStrategicMerge:

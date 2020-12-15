@@ -1,5 +1,5 @@
-variable "namespaces" {
-  description = "Namespaces to apply mutating hooks to"
+variable "excluded_namespaces" {
+  description = "Namespaces to exclude from mutating hooks"
   type        = list(string)
 }
 

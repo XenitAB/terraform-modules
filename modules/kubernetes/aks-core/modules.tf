@@ -1,3 +1,7 @@
+locals {
+  excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns", "kyverno", "csi-secrets-store-provider-azure"]
+}
+
 # OPA Gatekeeper
 module "opa_gatekeeper" {
   for_each = {
@@ -10,7 +14,7 @@ module "opa_gatekeeper" {
 
   exclude = [
     {
-      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns", "kyverno", "csi-secrets-store-provider-azure"]
+      excluded_namespaces = local.excluded_namespaces
       processes           = ["*"]
     }
   ]
@@ -193,7 +197,7 @@ module "kyverno" {
 
   source = "../../kubernetes/kyverno"
 
-  namespaces = [for ns in var.namespaces : ns.name]
+  excluded_namespaces = local.excluded_namespaces
 }
 
 # csi-secrets-store-provider-azure

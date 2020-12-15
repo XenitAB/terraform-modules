@@ -25,7 +25,7 @@ This module is used to configure EKS clusters.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| cert\_manager\_config | Cert Manager configuration | <pre>object({<br>    notification_email = string<br>  })</pre> | n/a | yes |
+| cert\_manager\_config | Cert Manager configuration | <pre>object({<br>    notification_email = string<br>    dns_zone           = string<br>  })</pre> | n/a | yes |
 | cert\_manager\_enabled | Should Cert Manager be enabled | `bool` | `true` | no |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
 | external\_dns\_config | External DNS configuration | <pre>object({<br>    role_arn = string<br>  })</pre> | n/a | yes |

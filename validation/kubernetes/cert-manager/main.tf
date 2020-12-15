@@ -29,5 +29,6 @@ module "cert_manager" {
     helm = helm
   }
 
+  cloud_provider = "azure"
   notification_email = "example@example.com"
 }

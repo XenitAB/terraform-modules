@@ -58,4 +58,29 @@ resource "helm_release" "cert_manager_extras" {
     name  = "acmeServer"
     value = var.acme_server
   }
+
+  set {
+    name = "cloudProvider"
+    value = var.cloudProvider
+  }
+
+  set {
+    name = "azureConfig.resourceID"
+    value = var.azure_config.resource_id
+  }
+
+  set {
+    name = "azureConfig.clientID"
+    value = var.azure_config.client_id
+  }
+
+  set {
+    name = "azureConfig.subscriptionID"
+    value = var.azure_config.subscription_id
+  }
+
+  set {
+    name = "azureConfig.hostedZone"
+    value = var.azure_config.hosted_zone
+  }
 }

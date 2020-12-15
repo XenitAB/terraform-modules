@@ -2,3 +2,11 @@ nameOverride: ""
 fullnameOverride: ""
 notificationEmail: ""
 acmeServer: ""
+
+cloudProvider: ""
+
+azureConfig:
+  resourceID: ""
+  clientID: ""
+  subscriptionID: ""
+  hostedZone: ""

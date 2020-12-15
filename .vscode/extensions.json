@@ -1,9 +1,0 @@
-{
-  "recommendations": [
-    "hashicorp.terraform",
-    "ms-azure-devops.azure-pipelines",
-    "tsandall.opa",
-    "ms-vscode.powershell",
-    "eamodio.gitlens"
-  ]
-}

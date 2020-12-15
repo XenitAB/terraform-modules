@@ -89,11 +89,3 @@ terraform-init:
 			terraform init 1>/dev/null
 		done
 	done
-
-.SILENT:
-vscode-tf: terraform-init
-	set -e
-	TF_MODULES=$$(find modules -depth 2 -type d)
-	jq --arg arr "$${TF_MODULES}" '.["terraform-ls.rootModules"] = ($$arr | split("\n"))' .vscode/settings.json > .vscode/settings.json_new
-	mv .vscode/settings.json_new .vscode/settings.json
-	echo vscode-tf: Success

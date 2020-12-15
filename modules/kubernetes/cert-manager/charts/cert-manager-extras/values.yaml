@@ -11,3 +11,7 @@ azureConfig:
   subscriptionID: ""
   hostedZoneName: ""
   resourceID: ""
+
+awsConfig:
+  region: ""
+  hostedZoneID: ""

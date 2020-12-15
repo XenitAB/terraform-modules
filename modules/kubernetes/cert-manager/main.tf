@@ -38,7 +38,7 @@ resource "helm_release" "cert_manager" {
   name       = "cert-manager"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v1.1.0"
-  values     = [templatefile("${path.module}/templates/values.yaml.tpl", {provider = var.cloud_provider,})]
+  values     = [templatefile("${path.module}/templates/values.yaml.tpl", {provider = var.cloud_provider, aws_config = var.aws_config})]
 }
 
 resource "helm_release" "cert_manager_extras" {
@@ -78,7 +78,7 @@ resource "helm_release" "cert_manager_extras" {
     value = var.azure_config.subscription_id
   }
 
-set {
+  set {
     name = "azureConfig.resourceID"
     value = var.azure_config.resource_id
   }
@@ -86,5 +86,15 @@ set {
   set {
     name = "azureConfig.hostedZoneName"
     value = var.azure_config.hosted_zone_name
+  }
+
+  set {
+    name = "awsConfig.region"
+    value = var.aws_config.region
+  }
+
+  set {
+    name = "awsConfig.hostedZoneID"
+    value = var.aws_config.hosted_zone_id
   }
 }

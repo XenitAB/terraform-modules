@@ -103,6 +103,12 @@ module "cert_manager" {
 
   source = "../../kubernetes/cert-manager"
 
+  cloud_provider = "aws"
+  aws_config = {
+    region   = data.aws_region.current.name
+    hosted_zone_id = var.cert_manager_config.hosted_zone_id
+    role_arn = var.external_dns_config.role_arn
+  }
   notification_email = var.cert_manager_config.notification_email
 }
 

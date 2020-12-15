@@ -37,4 +37,8 @@ spec:
           resourceGroupName: {{ .Values.azureConfig.resourceGroupName }}
           hostedZoneName: {{ .Values.azureConfig.hostedZoneName }}
         {{- end }}
-
+        {{- if eq .Values.cloudProvider "aws" }}
+        route53:
+          region: {{ .Values.awsConfig.region }}
+          hostedZoneID: {{ .Values.awsConfig.hostedZoneID }}
+        {{- end }}

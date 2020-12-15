@@ -162,7 +162,7 @@ module "cert_manager" {
   notification_email = var.cert_manager_config.notification_email
   cloud_provider = "azure"
   azure_config = {
-    hosted_zone_name = var.cert_manager_config.hosted_zone_name
+    hosted_zone_name = var.cert_manager_config.dns_zone
     resource_group_name  = data.azurerm_resource_group.this.name
     subscription_id = data.azurerm_client_config.current.subscription_id
     client_id       = var.external_dns_config.client_id

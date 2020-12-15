@@ -1,5 +1,5 @@
 locals {
-  excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns", "external-secrets"]
+  excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns", "external-secrets", "kyverno"]
 }
 
 # OPA Gatekeeper
@@ -103,6 +103,12 @@ module "cert_manager" {
 
   source = "../../kubernetes/cert-manager"
 
+  cloud_provider = "aws"
+  aws_config = {
+    region         = data.aws_region.current.name
+    hosted_zone_id = data.aws_route53_zone.this.zone_id
+    role_arn       = var.cert_manager_config.role_arn
+  }
   notification_email = var.cert_manager_config.notification_email
 }
 
@@ -138,6 +144,5 @@ module "kyverno" {
 
   source = "../../kubernetes/kyverno"
 
-  excluded_namespaces     = local.excluded_namespaces
-  create_self_signed_cert = true
+  excluded_namespaces = local.excluded_namespaces
 }

@@ -80,6 +80,8 @@ variable "cert_manager_config" {
   description = "Cert Manager configuration"
   type = object({
     notification_email = string
+    dns_zone           = string
+    role_arn           = string
   })
 }
 

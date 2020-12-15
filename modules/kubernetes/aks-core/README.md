@@ -29,7 +29,7 @@ This module is used to create AKS clusters.
 | aad\_groups | Configuration for aad groups | <pre>object({<br>    view = map(any)<br>    edit = map(any)<br>    cluster_admin = object({<br>      id   = string<br>      name = string<br>    })<br>    cluster_view = object({<br>      id   = string<br>      name = string<br>    })<br>    aks_managed_identity = object({<br>      id   = string<br>      name = string<br>    })<br>  })</pre> | n/a | yes |
 | aad\_pod\_identity\_config | Configuration for aad pod identity | <pre>map(object({<br>    id        = string<br>    client_id = string<br>  }))</pre> | n/a | yes |
 | aad\_pod\_identity\_enabled | Should aad-pod-identity be enabled | `bool` | `true` | no |
-| cert\_manager\_config | Cert Manager configuration | <pre>object({<br>    notification_email = string<br>  })</pre> | n/a | yes |
+| cert\_manager\_config | Cert Manager configuration | <pre>object({<br>    notification_email = string<br>    dns_zone           = string<br>  })</pre> | n/a | yes |
 | cert\_manager\_enabled | Should Cert Manager be enabled | `bool` | `true` | no |
 | csi\_secrets\_store\_provider\_azure\_enabled | Should csi-secrets-store-provider-azure be enabled | `bool` | `true` | no |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |

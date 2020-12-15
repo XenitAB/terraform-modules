@@ -8,4 +8,6 @@ podLabels:
 serviceAccount:
   annotations:
     eks.amazonaws.com/role-arn: "${aws_config.role_arn}"
+securityContext:
+  fsGroup: 1001
 %{ endif }

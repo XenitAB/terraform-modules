@@ -107,7 +107,7 @@ module "cert_manager" {
   aws_config = {
     region         = data.aws_region.current.name
     hosted_zone_id = data.aws_route53_zone.this.zone_id
-    role_arn       = var.external_dns_config.role_arn
+    role_arn       = var.cert_manager_config.role_arn
   }
   notification_email = var.cert_manager_config.notification_email
 }

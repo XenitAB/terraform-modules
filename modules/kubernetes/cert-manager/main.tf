@@ -61,7 +61,7 @@ resource "helm_release" "cert_manager_extras" {
 
   set {
     name = "cloudProvider"
-    value = var.cloudProvider
+    value = var.cloud_provider
   }
 
   set {

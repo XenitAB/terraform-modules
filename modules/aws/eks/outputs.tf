@@ -22,6 +22,13 @@ output "external_dns_config" {
   }
 }
 
+output "cert_manager_config" {
+  description = "Configuration for Cert Manager"
+  value = {
+    role_arn = aws_iam_role.cert_manager.arn
+  }
+}
+
 output "velero_config" {
   description = "Configuration for Velero"
   value = {

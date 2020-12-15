@@ -4,7 +4,7 @@ installCRDs: true
 podLabels:
   aadpodidbinding: cert-manager
 %{ endif }
-%{ if provider == "azure" }
+%{ if provider == "aws" }
 serviceAccount:
   annotations:
     eks.amazonaws.com/role-arn: "${aws_config.role_arn}"

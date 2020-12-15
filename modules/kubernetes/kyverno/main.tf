@@ -48,7 +48,7 @@ resource "helm_release" "kyverno_extras" {
   namespace = kubernetes_namespace.this.metadata[0].name
 
   set {
-    name  = "excludeNamespaces"
+    name  = "excludedNamespaces"
     value = "{${join(",", var.excluded_namespaces)}}"
   }
 }

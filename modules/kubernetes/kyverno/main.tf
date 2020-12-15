@@ -46,5 +46,5 @@ resource "helm_release" "kyverno_extras" {
   chart     = "${path.module}/charts/kyverno-extras"
   name      = "kyverno-extras"
   namespace = kubernetes_namespace.this.metadata[0].name
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", { excluded_namespaces = var.excluded_namespaces })]
+  values    = [templatefile("${path.module}/templates/values.yaml.tpl", { excluded_namespaces = var.excluded_namespaces })]
 }

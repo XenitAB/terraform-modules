@@ -3,8 +3,8 @@ variable "namespaces" {
   type        = list(string)
 }
 
-variable "createSelfSignedCert" {
+variable "create_self_signed_cert" {
   description = "If true helm will generate a self signed cert"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }

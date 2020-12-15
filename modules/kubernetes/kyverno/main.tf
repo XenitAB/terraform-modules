@@ -35,8 +35,8 @@ resource "helm_release" "kyverno" {
   version    = local.version
 
   set {
-    name = "createSelfSignedCert"
-    value = var.createSelfSignedCert
+    name  = "createSelfSignedCert"
+    value = var.create_self_signed_cert
   }
 }
 

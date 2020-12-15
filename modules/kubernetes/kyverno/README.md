@@ -17,6 +17,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| create\_self\_signed\_cert | If true helm will generate a self signed cert | `bool` | `true` | no |
 | namespaces | Namespaces to apply mutating hooks to | `list(string)` | n/a | yes |
 
 ## Outputs

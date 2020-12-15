@@ -33,6 +33,11 @@ resource "helm_release" "kyverno" {
   name       = "kyverno"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = local.version
+
+  set {
+    name  = "createSelfSignedCert"
+    value = var.create_self_signed_cert
+  }
 }
 
 resource "helm_release" "kyverno_extras" {

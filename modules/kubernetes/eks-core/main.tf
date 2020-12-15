@@ -1,20 +1,16 @@
 /**
-  * # AKS Core
+  * # EKS Core
   *
-  * This module is used to create AKS clusters.
+  * This module is used to configure EKS clusters.
   */
 
 terraform {
   required_version = "0.13.5"
 
   required_providers {
-    azurerm = {
-      version = "2.35.0"
-      source  = "hashicorp/azurerm"
-    }
-    azuread = {
-      version = "1.0.0"
-      source  = "hashicorp/azuread"
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.20.0"
     }
     random = {
       source  = "hashicorp/random"
@@ -39,13 +35,4 @@ terraform {
   }
 }
 
-locals {
-  # Namespace to create service accounts in
-  service_accounts_namespace = "service-accounts"
-}
-
-data "azurerm_client_config" "current" {}
-
-data "azurerm_resource_group" "this" {
-  name = "rg-${var.environment}-${var.location_short}-${var.name}"
-}
+data "aws_region" "current" {}

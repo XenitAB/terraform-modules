@@ -15,7 +15,7 @@ terraform {
 
 locals {
   namespace = "kyverno"
-  version   = "1.2.1"
+  version   = "1.3.0-rc8"
 }
 
 resource "kubernetes_namespace" "this" {

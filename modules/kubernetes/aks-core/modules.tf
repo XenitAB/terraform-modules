@@ -10,7 +10,7 @@ module "opa_gatekeeper" {
 
   exclude = [
     {
-      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns", "kyverno"]
+      excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns", "kyverno", "csi-secrets-store-provider-azure"]
       processes           = ["*"]
     }
   ]
@@ -194,4 +194,17 @@ module "kyverno" {
   source = "../../kubernetes/kyverno"
 
   namespaces = [for ns in var.namespaces : ns.name]
+}
+
+# csi-secrets-store-provider-azure
+module "csi_secrets_store_provider_azure" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["csi-secrets-store-provider-azure"] :
+    s => s
+    if var.csi_secrets_store_provider_azure_enabled
+  }
+
+  source = "../../kubernetes/csi-secrets-store-provider-azure"
 }

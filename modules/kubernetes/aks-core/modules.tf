@@ -160,6 +160,7 @@ module "cert_manager" {
   source = "../../kubernetes/cert-manager"
 
   notification_email = var.cert_manager_config.notification_email
+  cloud_provider = "azure"
   azure_config = {
     hosted_zone       = "int.arc-demo.weaveworks.io"
     subscription_id = data.azurerm_client_config.current.subscription_id

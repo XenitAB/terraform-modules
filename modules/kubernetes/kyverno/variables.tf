@@ -6,5 +6,5 @@ variable "namespaces" {
 variable "create_self_signed_cert" {
   description = "If true helm will generate a self signed cert"
   type        = bool
-  default     = true
+  default     = false
 }

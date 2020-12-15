@@ -15,7 +15,7 @@ terraform {
 
 locals {
   namespace = "kyverno"
-  version   = "1.2.1"
+  version   = "1.3.0-rc8"
 }
 
 resource "kubernetes_namespace" "this" {
@@ -46,9 +46,5 @@ resource "helm_release" "kyverno_extras" {
   chart     = "${path.module}/charts/kyverno-extras"
   name      = "kyverno-extras"
   namespace = kubernetes_namespace.this.metadata[0].name
-
-  set {
-    name  = "namespaces"
-    value = "{${join(",", var.namespaces)}}"
-  }
+  values    = [templatefile("${path.module}/templates/values.yaml.tpl", { excluded_namespaces = var.excluded_namespaces })]
 }

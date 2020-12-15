@@ -29,5 +29,5 @@ module "kyverno" {
     helm = helm
   }
 
-  namespaces = ["foobar"]
+  excluded_namespaces = ["foobar"]
 }

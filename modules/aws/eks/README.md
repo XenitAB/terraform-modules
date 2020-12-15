@@ -28,6 +28,7 @@
 
 | Name | Description |
 |------|-------------|
+| cert\_manager\_config | Configuration for Cert Manager |
 | external\_dns\_config | Configuration for External DNS |
 | external\_secrets\_config | Configuration for External DNS |
 | kube\_config | Kube config for the created EKS cluster |

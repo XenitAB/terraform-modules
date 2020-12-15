@@ -81,7 +81,7 @@ variable "cert_manager_config" {
   type = object({
     notification_email = string
     dns_zone           = string
-    role_arn = string
+    role_arn           = string
   })
 }
 

@@ -22,6 +22,7 @@ module "eks_core" {
   cert_manager_config = {
     notification_email = "foo"
     dns_zone = "bar"
+    role_arn = "foobar"
   }
   fluxcd_v2_config = {
     type = "github"

@@ -21,7 +21,6 @@ terraform {
 
 locals {
   namespace = "cert-manager"
-  values    = templatefile("${path.module}/templates/values.yaml.tpl", {})
 }
 
 resource "kubernetes_namespace" "this" {
@@ -39,7 +38,7 @@ resource "helm_release" "cert_manager" {
   name       = "cert-manager"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v1.1.0"
-  values     = [local.values]
+  values     = [templatefile("${path.module}/templates/values.yaml.tpl", {provider = var.cloud_provider,})]
 }
 
 resource "helm_release" "cert_manager_extras" {

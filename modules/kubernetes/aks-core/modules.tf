@@ -162,9 +162,9 @@ module "cert_manager" {
   notification_email = var.cert_manager_config.notification_email
   cloud_provider = "azure"
   azure_config = {
-    hosted_zone       = "int.arc-demo.weaveworks.io"
+    hosted_zone_name       = "int.arc-demo.weaveworks.io"
+    resource_group_name  = data.azurerm_resource_group.this.name
     subscription_id = data.azurerm_client_config.current.subscription_id
-    resource_group  = data.azurerm_resource_group.this.name
     client_id       = var.external_dns_config.client_id
     resource_id     = var.external_dns_config.resource_id
   }

@@ -18,16 +18,16 @@ variable "azure_config" {
   description = "AWS specific configuration"
   type = object({
     subscription_id = string,
-    hosted_zone       = string,
-    resource_group  = string,
+    hosted_zone_name       = string,
+    resource_group_name  = string,
     client_id       = string,
-    resource_id     = string
+    resource_id = string,
   })
   default = {
     subscription_id = "",
-    hosted_zone       = "",
-    resource_group  = "",
+    hosted_zone_name      = "",
+    resource_group_name  = "",
     client_id       = "",
-    resource_id     = ""
+    resource_id = "",
   }
 }

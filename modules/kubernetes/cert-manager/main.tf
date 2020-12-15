@@ -38,7 +38,7 @@ resource "helm_release" "cert_manager" {
   chart      = "cert-manager"
   name       = "cert-manager"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v1.0.4"
+  version    = "v1.1.0"
   values     = [local.values]
 }
 
@@ -65,8 +65,8 @@ resource "helm_release" "cert_manager_extras" {
   }
 
   set {
-    name = "azureConfig.resourceID"
-    value = var.azure_config.resource_id
+    name = "azureConfig.resourceGroupName"
+    value = var.azure_config.resource_group_name
   }
 
   set {
@@ -79,8 +79,13 @@ resource "helm_release" "cert_manager_extras" {
     value = var.azure_config.subscription_id
   }
 
+set {
+    name = "azureConfig.resourceID"
+    value = var.azure_config.resource_id
+  }
+
   set {
-    name = "azureConfig.hostedZone"
-    value = var.azure_config.hosted_zone
+    name = "azureConfig.hostedZoneName"
+    value = var.azure_config.hosted_zone_name
   }
 }

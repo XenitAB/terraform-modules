@@ -34,7 +34,7 @@ spec:
         azureDNS:
           environment: AzurePublicCloud
           subscriptionID: {{ .Values.azureConfig.subscriptionID }}
-          resourceGroupName: {{ .Values.azureConfig.resourceGroup }}
-          hostedZoneName: {{ .Values.azureConfig.hostedZone }}
+          resourceGroupName: {{ .Values.azureConfig.resourceGroupName }}
+          hostedZoneName: {{ .Values.azureConfig.hostedZoneName }}
         {{- end }}
 

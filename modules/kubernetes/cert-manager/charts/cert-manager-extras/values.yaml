@@ -6,7 +6,8 @@ acmeServer: ""
 cloudProvider: ""
 
 azureConfig:
-  resourceID: ""
+  resourceGroupName: ""
   clientID: ""
   subscriptionID: ""
-  hostedZone: ""
+  hostedZoneName: ""
+  resourceID: ""

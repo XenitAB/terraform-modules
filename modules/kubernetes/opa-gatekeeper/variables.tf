@@ -93,7 +93,7 @@ variable "default_constraints" {
         namespaces = []
       }
       parameters = {
-        volumes = ["configMap", "downwardAPI", "emptyDir", "persistentVolumeClaim", "secret", "projected"]
+        volumes = ["configMap", "downwardAPI", "emptyDir", "persistentVolumeClaim", "secret", "projected", "csi"]
       }
     },
     {
@@ -122,7 +122,7 @@ variable "default_constraints" {
     {
       kind               = "K8sRequiredProbes"
       name               = "required-probes"
-      enforcement_action = ""
+      enforcement_action = "dryrun"
       match = {
         kinds      = []
         namespaces = []

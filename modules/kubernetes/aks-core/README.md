@@ -31,6 +31,7 @@ This module is used to create AKS clusters.
 | aad\_pod\_identity\_enabled | Should aad-pod-identity be enabled | `bool` | `true` | no |
 | cert\_manager\_config | Cert Manager configuration | <pre>object({<br>    notification_email = string<br>  })</pre> | n/a | yes |
 | cert\_manager\_enabled | Should Cert Manager be enabled | `bool` | `true` | no |
+| csi\_secrets\_store\_provider\_azure\_enabled | Should csi-secrets-store-provider-azure be enabled | `bool` | `true` | no |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
 | external\_dns\_config | External DNS configuration | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |
 | external\_dns\_enabled | Should External DNS be enabled | `bool` | `true` | no |

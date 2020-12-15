@@ -33,7 +33,6 @@ resource "helm_release" "kyverno" {
   name       = "kyverno"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = local.version
-  #values     = [file("${path.module}/templates/kyverno-values.yaml.tpl")]
 }
 
 resource "helm_release" "kyverno_extras" {

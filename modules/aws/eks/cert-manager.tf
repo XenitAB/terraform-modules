@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "cert_manager_route53" {
     actions = [
       "route53:ListHostedZonesByName"
     ]
-    resources = ["arn:aws:route53:::*"]
+    resources = ["*"]
   }
 }
 

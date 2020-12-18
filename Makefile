@@ -1,7 +1,7 @@
 .ONESHELL:
 SHELL := /bin/bash
 
-all: fmt lint docs tfsec validate
+all: fmt lint docs tfsec validate graph
 
 .SILENT:
 fmt:

@@ -1,0 +1,117 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] data.flux_install.this (expand)" [label = "data.flux_install.this", shape = "box"]
+		"[root] data.flux_sync.this (expand)" [label = "data.flux_sync.this", shape = "box"]
+		"[root] data.github_repository.cluster (expand)" [label = "data.github_repository.cluster", shape = "box"]
+		"[root] data.github_repository.tenant (expand)" [label = "data.github_repository.tenant", shape = "box"]
+		"[root] data.kubectl_file_documents.install (expand)" [label = "data.kubectl_file_documents.install", shape = "box"]
+		"[root] data.kubectl_file_documents.sync (expand)" [label = "data.kubectl_file_documents.sync", shape = "box"]
+		"[root] github_repository_deploy_key.cluster (expand)" [label = "github_repository_deploy_key.cluster", shape = "box"]
+		"[root] github_repository_deploy_key.tenant (expand)" [label = "github_repository_deploy_key.tenant", shape = "box"]
+		"[root] github_repository_file.cluster_tenants (expand)" [label = "github_repository_file.cluster_tenants", shape = "box"]
+		"[root] github_repository_file.install (expand)" [label = "github_repository_file.install", shape = "box"]
+		"[root] github_repository_file.kustomize (expand)" [label = "github_repository_file.kustomize", shape = "box"]
+		"[root] github_repository_file.sync (expand)" [label = "github_repository_file.sync", shape = "box"]
+		"[root] github_repository_file.tenant (expand)" [label = "github_repository_file.tenant", shape = "box"]
+		"[root] kubectl_manifest.install (expand)" [label = "kubectl_manifest.install", shape = "box"]
+		"[root] kubectl_manifest.sync (expand)" [label = "kubectl_manifest.sync", shape = "box"]
+		"[root] kubernetes_namespace.flux_system (expand)" [label = "kubernetes_namespace.flux_system", shape = "box"]
+		"[root] kubernetes_secret.cluster (expand)" [label = "kubernetes_secret.cluster", shape = "box"]
+		"[root] kubernetes_secret.tenant (expand)" [label = "kubernetes_secret.tenant", shape = "box"]
+		"[root] provider[\"registry.terraform.io/fluxcd/flux\"]" [label = "provider[\"registry.terraform.io/fluxcd/flux\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"]" [label = "provider[\"registry.terraform.io/gavinbunney/kubectl\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"]" [label = "provider[\"registry.terraform.io/hashicorp/github\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]" [label = "provider[\"registry.terraform.io/hashicorp/kubernetes\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"]" [label = "provider[\"registry.terraform.io/hashicorp/tls\"]", shape = "diamond"]
+		"[root] tls_private_key.cluster (expand)" [label = "tls_private_key.cluster", shape = "box"]
+		"[root] tls_private_key.tenant (expand)" [label = "tls_private_key.tenant", shape = "box"]
+		"[root] var.branch" [label = "var.branch", shape = "note"]
+		"[root] var.cluster_repo" [label = "var.cluster_repo", shape = "note"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.github_owner" [label = "var.github_owner", shape = "note"]
+		"[root] var.namespaces" [label = "var.namespaces", shape = "note"]
+		"[root] data.flux_install.this (expand)" -> "[root] provider[\"registry.terraform.io/fluxcd/flux\"]"
+		"[root] data.flux_install.this (expand)" -> "[root] var.environment"
+		"[root] data.flux_sync.this (expand)" -> "[root] provider[\"registry.terraform.io/fluxcd/flux\"]"
+		"[root] data.flux_sync.this (expand)" -> "[root] var.branch"
+		"[root] data.flux_sync.this (expand)" -> "[root] var.cluster_repo"
+		"[root] data.flux_sync.this (expand)" -> "[root] var.environment"
+		"[root] data.flux_sync.this (expand)" -> "[root] var.github_owner"
+		"[root] data.github_repository.cluster (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/github\"]"
+		"[root] data.github_repository.cluster (expand)" -> "[root] var.cluster_repo"
+		"[root] data.github_repository.tenant (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/github\"]"
+		"[root] data.github_repository.tenant (expand)" -> "[root] var.namespaces"
+		"[root] data.kubectl_file_documents.install (expand)" -> "[root] data.flux_install.this (expand)"
+		"[root] data.kubectl_file_documents.install (expand)" -> "[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"]"
+		"[root] data.kubectl_file_documents.sync (expand)" -> "[root] data.flux_sync.this (expand)"
+		"[root] data.kubectl_file_documents.sync (expand)" -> "[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"]"
+		"[root] github_repository_deploy_key.cluster (expand)" -> "[root] data.github_repository.cluster (expand)"
+		"[root] github_repository_deploy_key.cluster (expand)" -> "[root] tls_private_key.cluster (expand)"
+		"[root] github_repository_deploy_key.cluster (expand)" -> "[root] var.environment"
+		"[root] github_repository_deploy_key.tenant (expand)" -> "[root] data.github_repository.tenant (expand)"
+		"[root] github_repository_deploy_key.tenant (expand)" -> "[root] tls_private_key.tenant (expand)"
+		"[root] github_repository_deploy_key.tenant (expand)" -> "[root] var.environment"
+		"[root] github_repository_file.cluster_tenants (expand)" -> "[root] data.github_repository.cluster (expand)"
+		"[root] github_repository_file.cluster_tenants (expand)" -> "[root] var.branch"
+		"[root] github_repository_file.cluster_tenants (expand)" -> "[root] var.environment"
+		"[root] github_repository_file.install (expand)" -> "[root] data.flux_install.this (expand)"
+		"[root] github_repository_file.install (expand)" -> "[root] data.github_repository.cluster (expand)"
+		"[root] github_repository_file.install (expand)" -> "[root] var.branch"
+		"[root] github_repository_file.kustomize (expand)" -> "[root] data.flux_sync.this (expand)"
+		"[root] github_repository_file.kustomize (expand)" -> "[root] data.github_repository.cluster (expand)"
+		"[root] github_repository_file.sync (expand)" -> "[root] data.flux_sync.this (expand)"
+		"[root] github_repository_file.sync (expand)" -> "[root] data.github_repository.cluster (expand)"
+		"[root] github_repository_file.tenant (expand)" -> "[root] data.github_repository.cluster (expand)"
+		"[root] github_repository_file.tenant (expand)" -> "[root] data.github_repository.tenant (expand)"
+		"[root] github_repository_file.tenant (expand)" -> "[root] var.branch"
+		"[root] github_repository_file.tenant (expand)" -> "[root] var.environment"
+		"[root] kubectl_manifest.install (expand)" -> "[root] data.kubectl_file_documents.install (expand)"
+		"[root] kubectl_manifest.install (expand)" -> "[root] kubernetes_namespace.flux_system (expand)"
+		"[root] kubectl_manifest.sync (expand)" -> "[root] data.kubectl_file_documents.sync (expand)"
+		"[root] kubectl_manifest.sync (expand)" -> "[root] kubectl_manifest.install (expand)"
+		"[root] kubernetes_namespace.flux_system (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] kubernetes_secret.cluster (expand)" -> "[root] data.flux_sync.this (expand)"
+		"[root] kubernetes_secret.cluster (expand)" -> "[root] kubectl_manifest.install (expand)"
+		"[root] kubernetes_secret.cluster (expand)" -> "[root] local.known_hosts (expand)"
+		"[root] kubernetes_secret.cluster (expand)" -> "[root] tls_private_key.cluster (expand)"
+		"[root] kubernetes_secret.tenant (expand)" -> "[root] kubectl_manifest.install (expand)"
+		"[root] kubernetes_secret.tenant (expand)" -> "[root] local.known_hosts (expand)"
+		"[root] kubernetes_secret.tenant (expand)" -> "[root] tls_private_key.tenant (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] github_repository_deploy_key.cluster (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] github_repository_deploy_key.tenant (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] github_repository_file.cluster_tenants (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] github_repository_file.install (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] github_repository_file.kustomize (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] github_repository_file.sync (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] github_repository_file.tenant (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] kubectl_manifest.sync (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] kubernetes_secret.cluster (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] kubernetes_secret.tenant (expand)"
+		"[root] provider[\"registry.terraform.io/fluxcd/flux\"] (close)" -> "[root] data.flux_install.this (expand)"
+		"[root] provider[\"registry.terraform.io/fluxcd/flux\"] (close)" -> "[root] data.flux_sync.this (expand)"
+		"[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"] (close)" -> "[root] kubectl_manifest.sync (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] github_repository_deploy_key.cluster (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] github_repository_deploy_key.tenant (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] github_repository_file.cluster_tenants (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] github_repository_file.install (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] github_repository_file.kustomize (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] github_repository_file.sync (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] github_repository_file.tenant (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] kubernetes_secret.cluster (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] kubernetes_secret.tenant (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)" -> "[root] tls_private_key.cluster (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)" -> "[root] tls_private_key.tenant (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/fluxcd/flux\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)"
+		"[root] tls_private_key.cluster (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"]"
+		"[root] tls_private_key.tenant (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"]"
+		"[root] tls_private_key.tenant (expand)" -> "[root] var.namespaces"
+	}
+}
+

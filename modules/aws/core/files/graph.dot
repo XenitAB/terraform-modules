@@ -1,0 +1,53 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_eip.nat (expand)" [label = "aws_eip.nat", shape = "box"]
+		"[root] aws_internet_gateway.this (expand)" [label = "aws_internet_gateway.this", shape = "box"]
+		"[root] aws_nat_gateway.nat (expand)" [label = "aws_nat_gateway.nat", shape = "box"]
+		"[root] aws_route.public (expand)" [label = "aws_route.public", shape = "box"]
+		"[root] aws_route53_zone.this (expand)" [label = "aws_route53_zone.this", shape = "box"]
+		"[root] aws_route_table.public (expand)" [label = "aws_route_table.public", shape = "box"]
+		"[root] aws_route_table_association.public (expand)" [label = "aws_route_table_association.public", shape = "box"]
+		"[root] aws_subnet.public (expand)" [label = "aws_subnet.public", shape = "box"]
+		"[root] aws_vpc.this (expand)" [label = "aws_vpc.this", shape = "box"]
+		"[root] data.aws_availability_zones.available (expand)" [label = "data.aws_availability_zones.available", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.dns_zone" [label = "var.dns_zone", shape = "note"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.name" [label = "var.name", shape = "note"]
+		"[root] var.vpc_config" [label = "var.vpc_config", shape = "note"]
+		"[root] aws_eip.nat (expand)" -> "[root] data.aws_availability_zones.available (expand)"
+		"[root] aws_eip.nat (expand)" -> "[root] var.environment"
+		"[root] aws_eip.nat (expand)" -> "[root] var.name"
+		"[root] aws_internet_gateway.this (expand)" -> "[root] aws_vpc.this (expand)"
+		"[root] aws_nat_gateway.nat (expand)" -> "[root] aws_eip.nat (expand)"
+		"[root] aws_nat_gateway.nat (expand)" -> "[root] aws_subnet.public (expand)"
+		"[root] aws_route.public (expand)" -> "[root] aws_internet_gateway.this (expand)"
+		"[root] aws_route.public (expand)" -> "[root] aws_route_table.public (expand)"
+		"[root] aws_route53_zone.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_route53_zone.this (expand)" -> "[root] var.dns_zone"
+		"[root] aws_route53_zone.this (expand)" -> "[root] var.environment"
+		"[root] aws_route_table.public (expand)" -> "[root] aws_vpc.this (expand)"
+		"[root] aws_route_table_association.public (expand)" -> "[root] aws_route_table.public (expand)"
+		"[root] aws_route_table_association.public (expand)" -> "[root] aws_subnet.public (expand)"
+		"[root] aws_subnet.public (expand)" -> "[root] aws_vpc.this (expand)"
+		"[root] aws_subnet.public (expand)" -> "[root] data.aws_availability_zones.available (expand)"
+		"[root] aws_vpc.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_vpc.this (expand)" -> "[root] var.environment"
+		"[root] aws_vpc.this (expand)" -> "[root] var.name"
+		"[root] aws_vpc.this (expand)" -> "[root] var.vpc_config"
+		"[root] data.aws_availability_zones.available (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_nat_gateway.nat (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_route.public (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_route53_zone.this (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_route_table_association.public (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_nat_gateway.nat (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route.public (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route53_zone.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.public (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+

@@ -1,0 +1,169 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_eks_cluster.this (expand)" [label = "aws_eks_cluster.this", shape = "box"]
+		"[root] aws_eks_node_group.this (expand)" [label = "aws_eks_node_group.this", shape = "box"]
+		"[root] aws_iam_openid_connect_provider.this (expand)" [label = "aws_iam_openid_connect_provider.this", shape = "box"]
+		"[root] aws_iam_policy.cert_manager (expand)" [label = "aws_iam_policy.cert_manager", shape = "box"]
+		"[root] aws_iam_policy.external_dns (expand)" [label = "aws_iam_policy.external_dns", shape = "box"]
+		"[root] aws_iam_policy.external_secrets (expand)" [label = "aws_iam_policy.external_secrets", shape = "box"]
+		"[root] aws_iam_policy.velero (expand)" [label = "aws_iam_policy.velero", shape = "box"]
+		"[root] aws_iam_role.cert_manager (expand)" [label = "aws_iam_role.cert_manager", shape = "box"]
+		"[root] aws_iam_role.eks (expand)" [label = "aws_iam_role.eks", shape = "box"]
+		"[root] aws_iam_role.eks_node_group (expand)" [label = "aws_iam_role.eks_node_group", shape = "box"]
+		"[root] aws_iam_role.external_dns (expand)" [label = "aws_iam_role.external_dns", shape = "box"]
+		"[root] aws_iam_role.external_secrets (expand)" [label = "aws_iam_role.external_secrets", shape = "box"]
+		"[root] aws_iam_role.velero (expand)" [label = "aws_iam_role.velero", shape = "box"]
+		"[root] aws_iam_role_policy_attachment.cert_manager (expand)" [label = "aws_iam_role_policy_attachment.cert_manager", shape = "box"]
+		"[root] aws_iam_role_policy_attachment.container_registry_read_only (expand)" [label = "aws_iam_role_policy_attachment.container_registry_read_only", shape = "box"]
+		"[root] aws_iam_role_policy_attachment.eks_cluster (expand)" [label = "aws_iam_role_policy_attachment.eks_cluster", shape = "box"]
+		"[root] aws_iam_role_policy_attachment.eks_cni (expand)" [label = "aws_iam_role_policy_attachment.eks_cni", shape = "box"]
+		"[root] aws_iam_role_policy_attachment.eks_service (expand)" [label = "aws_iam_role_policy_attachment.eks_service", shape = "box"]
+		"[root] aws_iam_role_policy_attachment.eks_worker_node (expand)" [label = "aws_iam_role_policy_attachment.eks_worker_node", shape = "box"]
+		"[root] aws_iam_role_policy_attachment.external_dns (expand)" [label = "aws_iam_role_policy_attachment.external_dns", shape = "box"]
+		"[root] aws_iam_role_policy_attachment.external_secrets (expand)" [label = "aws_iam_role_policy_attachment.external_secrets", shape = "box"]
+		"[root] aws_iam_role_policy_attachment.velero (expand)" [label = "aws_iam_role_policy_attachment.velero", shape = "box"]
+		"[root] aws_route.this (expand)" [label = "aws_route.this", shape = "box"]
+		"[root] aws_route_table.this (expand)" [label = "aws_route_table.this", shape = "box"]
+		"[root] aws_route_table_association.this (expand)" [label = "aws_route_table_association.this", shape = "box"]
+		"[root] aws_subnet.this (expand)" [label = "aws_subnet.this", shape = "box"]
+		"[root] data.aws_availability_zones.available (expand)" [label = "data.aws_availability_zones.available", shape = "box"]
+		"[root] data.aws_caller_identity.current (expand)" [label = "data.aws_caller_identity.current", shape = "box"]
+		"[root] data.aws_eks_cluster_auth.this (expand)" [label = "data.aws_eks_cluster_auth.this", shape = "box"]
+		"[root] data.aws_iam_policy_document.cert_manager_assume (expand)" [label = "data.aws_iam_policy_document.cert_manager_assume", shape = "box"]
+		"[root] data.aws_iam_policy_document.cert_manager_route53 (expand)" [label = "data.aws_iam_policy_document.cert_manager_route53", shape = "box"]
+		"[root] data.aws_iam_policy_document.external_dns_assume (expand)" [label = "data.aws_iam_policy_document.external_dns_assume", shape = "box"]
+		"[root] data.aws_iam_policy_document.external_dns_route53 (expand)" [label = "data.aws_iam_policy_document.external_dns_route53", shape = "box"]
+		"[root] data.aws_iam_policy_document.external_secrets_assume (expand)" [label = "data.aws_iam_policy_document.external_secrets_assume", shape = "box"]
+		"[root] data.aws_iam_policy_document.external_secrets_secrets_manager (expand)" [label = "data.aws_iam_policy_document.external_secrets_secrets_manager", shape = "box"]
+		"[root] data.aws_iam_policy_document.velero_assume (expand)" [label = "data.aws_iam_policy_document.velero_assume", shape = "box"]
+		"[root] data.aws_iam_policy_document.velero_s3_bucket (expand)" [label = "data.aws_iam_policy_document.velero_s3_bucket", shape = "box"]
+		"[root] data.aws_nat_gateway.this (expand)" [label = "data.aws_nat_gateway.this", shape = "box"]
+		"[root] data.aws_region.current (expand)" [label = "data.aws_region.current", shape = "box"]
+		"[root] data.aws_vpc.this (expand)" [label = "data.aws_vpc.this", shape = "box"]
+		"[root] data.tls_certificate.thumbprint (expand)" [label = "data.tls_certificate.thumbprint", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"]" [label = "provider[\"registry.terraform.io/hashicorp/tls\"]", shape = "diamond"]
+		"[root] var.core_name" [label = "var.core_name", shape = "note"]
+		"[root] var.eks_config" [label = "var.eks_config", shape = "note"]
+		"[root] var.eks_name_suffix" [label = "var.eks_name_suffix", shape = "note"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.name" [label = "var.name", shape = "note"]
+		"[root] var.velero_config" [label = "var.velero_config", shape = "note"]
+		"[root] aws_eks_cluster.this (expand)" -> "[root] aws_iam_role_policy_attachment.eks_cluster (expand)"
+		"[root] aws_eks_cluster.this (expand)" -> "[root] aws_iam_role_policy_attachment.eks_service (expand)"
+		"[root] aws_eks_cluster.this (expand)" -> "[root] aws_subnet.this (expand)"
+		"[root] aws_eks_node_group.this (expand)" -> "[root] aws_eks_cluster.this (expand)"
+		"[root] aws_eks_node_group.this (expand)" -> "[root] aws_iam_role_policy_attachment.container_registry_read_only (expand)"
+		"[root] aws_eks_node_group.this (expand)" -> "[root] aws_iam_role_policy_attachment.eks_cni (expand)"
+		"[root] aws_eks_node_group.this (expand)" -> "[root] aws_iam_role_policy_attachment.eks_worker_node (expand)"
+		"[root] aws_iam_openid_connect_provider.this (expand)" -> "[root] data.tls_certificate.thumbprint (expand)"
+		"[root] aws_iam_policy.cert_manager (expand)" -> "[root] data.aws_iam_policy_document.cert_manager_route53 (expand)"
+		"[root] aws_iam_policy.cert_manager (expand)" -> "[root] data.aws_region.current (expand)"
+		"[root] aws_iam_policy.cert_manager (expand)" -> "[root] var.environment"
+		"[root] aws_iam_policy.cert_manager (expand)" -> "[root] var.name"
+		"[root] aws_iam_policy.external_dns (expand)" -> "[root] data.aws_iam_policy_document.external_dns_route53 (expand)"
+		"[root] aws_iam_policy.external_dns (expand)" -> "[root] data.aws_region.current (expand)"
+		"[root] aws_iam_policy.external_dns (expand)" -> "[root] var.environment"
+		"[root] aws_iam_policy.external_dns (expand)" -> "[root] var.name"
+		"[root] aws_iam_policy.external_secrets (expand)" -> "[root] data.aws_iam_policy_document.external_secrets_secrets_manager (expand)"
+		"[root] aws_iam_policy.external_secrets (expand)" -> "[root] var.environment"
+		"[root] aws_iam_policy.external_secrets (expand)" -> "[root] var.name"
+		"[root] aws_iam_policy.velero (expand)" -> "[root] data.aws_iam_policy_document.velero_s3_bucket (expand)"
+		"[root] aws_iam_policy.velero (expand)" -> "[root] data.aws_region.current (expand)"
+		"[root] aws_iam_policy.velero (expand)" -> "[root] var.environment"
+		"[root] aws_iam_policy.velero (expand)" -> "[root] var.name"
+		"[root] aws_iam_role.cert_manager (expand)" -> "[root] data.aws_iam_policy_document.cert_manager_assume (expand)"
+		"[root] aws_iam_role.eks (expand)" -> "[root] data.aws_region.current (expand)"
+		"[root] aws_iam_role.eks (expand)" -> "[root] var.eks_name_suffix"
+		"[root] aws_iam_role.eks (expand)" -> "[root] var.environment"
+		"[root] aws_iam_role.eks (expand)" -> "[root] var.name"
+		"[root] aws_iam_role.eks_node_group (expand)" -> "[root] data.aws_region.current (expand)"
+		"[root] aws_iam_role.eks_node_group (expand)" -> "[root] var.eks_name_suffix"
+		"[root] aws_iam_role.eks_node_group (expand)" -> "[root] var.environment"
+		"[root] aws_iam_role.eks_node_group (expand)" -> "[root] var.name"
+		"[root] aws_iam_role.external_dns (expand)" -> "[root] data.aws_iam_policy_document.external_dns_assume (expand)"
+		"[root] aws_iam_role.external_secrets (expand)" -> "[root] data.aws_iam_policy_document.external_secrets_assume (expand)"
+		"[root] aws_iam_role.velero (expand)" -> "[root] data.aws_iam_policy_document.velero_assume (expand)"
+		"[root] aws_iam_role_policy_attachment.cert_manager (expand)" -> "[root] aws_iam_policy.cert_manager (expand)"
+		"[root] aws_iam_role_policy_attachment.cert_manager (expand)" -> "[root] aws_iam_role.cert_manager (expand)"
+		"[root] aws_iam_role_policy_attachment.container_registry_read_only (expand)" -> "[root] aws_iam_role.eks_node_group (expand)"
+		"[root] aws_iam_role_policy_attachment.eks_cluster (expand)" -> "[root] aws_iam_role.eks (expand)"
+		"[root] aws_iam_role_policy_attachment.eks_cni (expand)" -> "[root] aws_iam_role.eks_node_group (expand)"
+		"[root] aws_iam_role_policy_attachment.eks_service (expand)" -> "[root] aws_iam_role.eks (expand)"
+		"[root] aws_iam_role_policy_attachment.eks_worker_node (expand)" -> "[root] aws_iam_role.eks_node_group (expand)"
+		"[root] aws_iam_role_policy_attachment.external_dns (expand)" -> "[root] aws_iam_policy.external_dns (expand)"
+		"[root] aws_iam_role_policy_attachment.external_dns (expand)" -> "[root] aws_iam_role.external_dns (expand)"
+		"[root] aws_iam_role_policy_attachment.external_secrets (expand)" -> "[root] aws_iam_policy.external_secrets (expand)"
+		"[root] aws_iam_role_policy_attachment.external_secrets (expand)" -> "[root] aws_iam_role.external_secrets (expand)"
+		"[root] aws_iam_role_policy_attachment.velero (expand)" -> "[root] aws_iam_policy.velero (expand)"
+		"[root] aws_iam_role_policy_attachment.velero (expand)" -> "[root] aws_iam_role.velero (expand)"
+		"[root] aws_route.this (expand)" -> "[root] aws_route_table.this (expand)"
+		"[root] aws_route.this (expand)" -> "[root] data.aws_nat_gateway.this (expand)"
+		"[root] aws_route_table.this (expand)" -> "[root] data.aws_availability_zones.available (expand)"
+		"[root] aws_route_table.this (expand)" -> "[root] data.aws_vpc.this (expand)"
+		"[root] aws_route_table.this (expand)" -> "[root] var.eks_name_suffix"
+		"[root] aws_route_table.this (expand)" -> "[root] var.environment"
+		"[root] aws_route_table.this (expand)" -> "[root] var.name"
+		"[root] aws_route_table_association.this (expand)" -> "[root] aws_route_table.this (expand)"
+		"[root] aws_route_table_association.this (expand)" -> "[root] aws_subnet.this (expand)"
+		"[root] aws_subnet.this (expand)" -> "[root] data.aws_availability_zones.available (expand)"
+		"[root] aws_subnet.this (expand)" -> "[root] data.aws_vpc.this (expand)"
+		"[root] aws_subnet.this (expand)" -> "[root] var.eks_config"
+		"[root] aws_subnet.this (expand)" -> "[root] var.eks_name_suffix"
+		"[root] aws_subnet.this (expand)" -> "[root] var.environment"
+		"[root] aws_subnet.this (expand)" -> "[root] var.name"
+		"[root] data.aws_availability_zones.available (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_caller_identity.current (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_eks_cluster_auth.this (expand)" -> "[root] aws_eks_cluster.this (expand)"
+		"[root] data.aws_iam_policy_document.cert_manager_assume (expand)" -> "[root] aws_iam_openid_connect_provider.this (expand)"
+		"[root] data.aws_iam_policy_document.cert_manager_route53 (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_iam_policy_document.external_dns_assume (expand)" -> "[root] aws_iam_openid_connect_provider.this (expand)"
+		"[root] data.aws_iam_policy_document.external_dns_route53 (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_iam_policy_document.external_secrets_assume (expand)" -> "[root] aws_iam_openid_connect_provider.this (expand)"
+		"[root] data.aws_iam_policy_document.external_secrets_secrets_manager (expand)" -> "[root] data.aws_caller_identity.current (expand)"
+		"[root] data.aws_iam_policy_document.external_secrets_secrets_manager (expand)" -> "[root] data.aws_region.current (expand)"
+		"[root] data.aws_iam_policy_document.velero_assume (expand)" -> "[root] aws_iam_openid_connect_provider.this (expand)"
+		"[root] data.aws_iam_policy_document.velero_s3_bucket (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_iam_policy_document.velero_s3_bucket (expand)" -> "[root] var.velero_config"
+		"[root] data.aws_nat_gateway.this (expand)" -> "[root] data.aws_availability_zones.available (expand)"
+		"[root] data.aws_nat_gateway.this (expand)" -> "[root] data.aws_vpc.this (expand)"
+		"[root] data.aws_region.current (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_vpc.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_vpc.this (expand)" -> "[root] var.core_name"
+		"[root] data.tls_certificate.thumbprint (expand)" -> "[root] aws_eks_cluster.this (expand)"
+		"[root] data.tls_certificate.thumbprint (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"]"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_eks_node_group.this (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_iam_role_policy_attachment.cert_manager (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_iam_role_policy_attachment.external_dns (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_iam_role_policy_attachment.external_secrets (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_iam_role_policy_attachment.velero (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_route.this (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_route_table_association.this (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.cert_manager_config (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.external_dns_config (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.external_secrets_config (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.kube_config (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.velero_config (expand)"
+		"[root] output.cert_manager_config (expand)" -> "[root] aws_iam_role.cert_manager (expand)"
+		"[root] output.external_dns_config (expand)" -> "[root] aws_iam_role.external_dns (expand)"
+		"[root] output.external_secrets_config (expand)" -> "[root] aws_iam_role.external_secrets (expand)"
+		"[root] output.kube_config (expand)" -> "[root] data.aws_eks_cluster_auth.this (expand)"
+		"[root] output.velero_config (expand)" -> "[root] aws_iam_role.velero (expand)"
+		"[root] output.velero_config (expand)" -> "[root] var.velero_config"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_eks_node_group.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_iam_role_policy_attachment.cert_manager (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_iam_role_policy_attachment.external_dns (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_iam_role_policy_attachment.external_secrets (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_iam_role_policy_attachment.velero (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] data.aws_eks_cluster_auth.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)" -> "[root] data.tls_certificate.thumbprint (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)"
+	}
+}
+

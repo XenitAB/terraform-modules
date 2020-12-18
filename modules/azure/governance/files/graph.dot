@@ -1,0 +1,311 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] azuread_application.aad_app (expand)" [label = "azuread_application.aad_app", shape = "box"]
+		"[root] azuread_application.delegate_kv_aad (expand)" [label = "azuread_application.delegate_kv_aad", shape = "box"]
+		"[root] azuread_application.sub_reader_sp (expand)" [label = "azuread_application.sub_reader_sp", shape = "box"]
+		"[root] azuread_application_password.aad_sp (expand)" [label = "azuread_application_password.aad_sp", shape = "box"]
+		"[root] azuread_application_password.delegate_kv_aad (expand)" [label = "azuread_application_password.delegate_kv_aad", shape = "box"]
+		"[root] azuread_application_password.sub_reader_sp (expand)" [label = "azuread_application_password.sub_reader_sp", shape = "box"]
+		"[root] azuread_group.acr_pull (expand)" [label = "azuread_group.acr_pull", shape = "box"]
+		"[root] azuread_group.acr_push (expand)" [label = "azuread_group.acr_push", shape = "box"]
+		"[root] azuread_group.rg_contributor (expand)" [label = "azuread_group.rg_contributor", shape = "box"]
+		"[root] azuread_group.rg_owner (expand)" [label = "azuread_group.rg_owner", shape = "box"]
+		"[root] azuread_group.rg_reader (expand)" [label = "azuread_group.rg_reader", shape = "box"]
+		"[root] azuread_group.service_endpoint_join (expand)" [label = "azuread_group.service_endpoint_join", shape = "box"]
+		"[root] azuread_group.sub_contributor (expand)" [label = "azuread_group.sub_contributor", shape = "box"]
+		"[root] azuread_group.sub_owner (expand)" [label = "azuread_group.sub_owner", shape = "box"]
+		"[root] azuread_group.sub_reader (expand)" [label = "azuread_group.sub_reader", shape = "box"]
+		"[root] azuread_group_member.acr_contributor (expand)" [label = "azuread_group_member.acr_contributor", shape = "box"]
+		"[root] azuread_group_member.acr_owner (expand)" [label = "azuread_group_member.acr_owner", shape = "box"]
+		"[root] azuread_group_member.acr_reader (expand)" [label = "azuread_group_member.acr_reader", shape = "box"]
+		"[root] azuread_group_member.acr_spn (expand)" [label = "azuread_group_member.acr_spn", shape = "box"]
+		"[root] azuread_group_member.service_endpoint_join_contributor (expand)" [label = "azuread_group_member.service_endpoint_join_contributor", shape = "box"]
+		"[root] azuread_group_member.service_endpoint_join_owner (expand)" [label = "azuread_group_member.service_endpoint_join_owner", shape = "box"]
+		"[root] azuread_group_member.service_endpoint_join_spn (expand)" [label = "azuread_group_member.service_endpoint_join_spn", shape = "box"]
+		"[root] azuread_group_member.sub_all_contributor (expand)" [label = "azuread_group_member.sub_all_contributor", shape = "box"]
+		"[root] azuread_group_member.sub_all_owner (expand)" [label = "azuread_group_member.sub_all_owner", shape = "box"]
+		"[root] azuread_group_member.sub_all_reader (expand)" [label = "azuread_group_member.sub_all_reader", shape = "box"]
+		"[root] azuread_service_principal.aad_sp (expand)" [label = "azuread_service_principal.aad_sp", shape = "box"]
+		"[root] azuread_service_principal.delegate_kv_aad (expand)" [label = "azuread_service_principal.delegate_kv_aad", shape = "box"]
+		"[root] azuread_service_principal.sub_reader_sp (expand)" [label = "azuread_service_principal.sub_reader_sp", shape = "box"]
+		"[root] azurerm_key_vault.delegate_kv (expand)" [label = "azurerm_key_vault.delegate_kv", shape = "box"]
+		"[root] azurerm_key_vault_access_policy.ap_kvreader_sp (expand)" [label = "azurerm_key_vault_access_policy.ap_kvreader_sp", shape = "box"]
+		"[root] azurerm_key_vault_access_policy.ap_owner_spn (expand)" [label = "azurerm_key_vault_access_policy.ap_owner_spn", shape = "box"]
+		"[root] azurerm_key_vault_access_policy.ap_rg_aad_group (expand)" [label = "azurerm_key_vault_access_policy.ap_rg_aad_group", shape = "box"]
+		"[root] azurerm_key_vault_access_policy.ap_rg_sp (expand)" [label = "azurerm_key_vault_access_policy.ap_rg_sp", shape = "box"]
+		"[root] azurerm_key_vault_access_policy.ap_sub_aad_group_contributor (expand)" [label = "azurerm_key_vault_access_policy.ap_sub_aad_group_contributor", shape = "box"]
+		"[root] azurerm_key_vault_access_policy.ap_sub_aad_group_owner (expand)" [label = "azurerm_key_vault_access_policy.ap_sub_aad_group_owner", shape = "box"]
+		"[root] azurerm_key_vault_secret.aad_sp (expand)" [label = "azurerm_key_vault_secret.aad_sp", shape = "box"]
+		"[root] azurerm_key_vault_secret.delegate_kv_aad (expand)" [label = "azurerm_key_vault_secret.delegate_kv_aad", shape = "box"]
+		"[root] azurerm_key_vault_secret.sub_reader_sp (expand)" [label = "azurerm_key_vault_secret.sub_reader_sp", shape = "box"]
+		"[root] azurerm_resource_group.rg (expand)" [label = "azurerm_resource_group.rg", shape = "box"]
+		"[root] azurerm_role_assignment.aad_sp (expand)" [label = "azurerm_role_assignment.aad_sp", shape = "box"]
+		"[root] azurerm_role_assignment.rg_contributor (expand)" [label = "azurerm_role_assignment.rg_contributor", shape = "box"]
+		"[root] azurerm_role_assignment.rg_owner (expand)" [label = "azurerm_role_assignment.rg_owner", shape = "box"]
+		"[root] azurerm_role_assignment.rg_reader (expand)" [label = "azurerm_role_assignment.rg_reader", shape = "box"]
+		"[root] azurerm_role_assignment.sub_contributor (expand)" [label = "azurerm_role_assignment.sub_contributor", shape = "box"]
+		"[root] azurerm_role_assignment.sub_owner (expand)" [label = "azurerm_role_assignment.sub_owner", shape = "box"]
+		"[root] azurerm_role_assignment.sub_reader (expand)" [label = "azurerm_role_assignment.sub_reader", shape = "box"]
+		"[root] azurerm_role_assignment.sub_reader_sp (expand)" [label = "azurerm_role_assignment.sub_reader_sp", shape = "box"]
+		"[root] data.azuread_group.all_contributor (expand)" [label = "data.azuread_group.all_contributor", shape = "box"]
+		"[root] data.azuread_group.all_owner (expand)" [label = "data.azuread_group.all_owner", shape = "box"]
+		"[root] data.azuread_group.all_reader (expand)" [label = "data.azuread_group.all_reader", shape = "box"]
+		"[root] data.azuread_service_principal.owner_spn (expand)" [label = "data.azuread_service_principal.owner_spn", shape = "box"]
+		"[root] data.azurerm_client_config.current (expand)" [label = "data.azurerm_client_config.current", shape = "box"]
+		"[root] data.azurerm_subscription.current (expand)" [label = "data.azurerm_subscription.current", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"]" [label = "provider[\"registry.terraform.io/hashicorp/azuread\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]" [label = "provider[\"registry.terraform.io/hashicorp/azurerm\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/random\"]" [label = "provider[\"registry.terraform.io/hashicorp/random\"]", shape = "diamond"]
+		"[root] random_password.aad_sp (expand)" [label = "random_password.aad_sp", shape = "box"]
+		"[root] random_password.delegate_kv_aad (expand)" [label = "random_password.delegate_kv_aad", shape = "box"]
+		"[root] random_password.sub_reader_sp (expand)" [label = "random_password.sub_reader_sp", shape = "box"]
+		"[root] var.aks_group_name_prefix" [label = "var.aks_group_name_prefix", shape = "note"]
+		"[root] var.azure_ad_group_prefix" [label = "var.azure_ad_group_prefix", shape = "note"]
+		"[root] var.core_name" [label = "var.core_name", shape = "note"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.group_name_separator" [label = "var.group_name_separator", shape = "note"]
+		"[root] var.owner_service_principal_name" [label = "var.owner_service_principal_name", shape = "note"]
+		"[root] var.regions" [label = "var.regions", shape = "note"]
+		"[root] var.resource_group_configs" [label = "var.resource_group_configs", shape = "note"]
+		"[root] var.service_principal_name_prefix" [label = "var.service_principal_name_prefix", shape = "note"]
+		"[root] var.subscription_name" [label = "var.subscription_name", shape = "note"]
+		"[root] var.unique_suffix" [label = "var.unique_suffix", shape = "note"]
+		"[root] azuread_application.aad_app (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_application.aad_app (expand)" -> "[root] var.environment"
+		"[root] azuread_application.aad_app (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_application.aad_app (expand)" -> "[root] var.resource_group_configs"
+		"[root] azuread_application.aad_app (expand)" -> "[root] var.service_principal_name_prefix"
+		"[root] azuread_application.aad_app (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_application.delegate_kv_aad (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_application.delegate_kv_aad (expand)" -> "[root] var.environment"
+		"[root] azuread_application.delegate_kv_aad (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_application.delegate_kv_aad (expand)" -> "[root] var.resource_group_configs"
+		"[root] azuread_application.delegate_kv_aad (expand)" -> "[root] var.service_principal_name_prefix"
+		"[root] azuread_application.delegate_kv_aad (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_application.sub_reader_sp (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_application.sub_reader_sp (expand)" -> "[root] var.environment"
+		"[root] azuread_application.sub_reader_sp (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_application.sub_reader_sp (expand)" -> "[root] var.service_principal_name_prefix"
+		"[root] azuread_application.sub_reader_sp (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_application_password.aad_sp (expand)" -> "[root] random_password.aad_sp (expand)"
+		"[root] azuread_application_password.delegate_kv_aad (expand)" -> "[root] random_password.delegate_kv_aad (expand)"
+		"[root] azuread_application_password.sub_reader_sp (expand)" -> "[root] random_password.sub_reader_sp (expand)"
+		"[root] azuread_group.acr_pull (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.acr_pull (expand)" -> "[root] var.aks_group_name_prefix"
+		"[root] azuread_group.acr_pull (expand)" -> "[root] var.environment"
+		"[root] azuread_group.acr_pull (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.acr_pull (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group.acr_push (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.acr_push (expand)" -> "[root] var.aks_group_name_prefix"
+		"[root] azuread_group.acr_push (expand)" -> "[root] var.environment"
+		"[root] azuread_group.acr_push (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.acr_push (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group.rg_contributor (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.rg_contributor (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] azuread_group.rg_contributor (expand)" -> "[root] var.environment"
+		"[root] azuread_group.rg_contributor (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.rg_contributor (expand)" -> "[root] var.resource_group_configs"
+		"[root] azuread_group.rg_contributor (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group.rg_owner (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.rg_owner (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] azuread_group.rg_owner (expand)" -> "[root] var.environment"
+		"[root] azuread_group.rg_owner (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.rg_owner (expand)" -> "[root] var.resource_group_configs"
+		"[root] azuread_group.rg_owner (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group.rg_reader (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.rg_reader (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] azuread_group.rg_reader (expand)" -> "[root] var.environment"
+		"[root] azuread_group.rg_reader (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.rg_reader (expand)" -> "[root] var.resource_group_configs"
+		"[root] azuread_group.rg_reader (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group.service_endpoint_join (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.service_endpoint_join (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] azuread_group.service_endpoint_join (expand)" -> "[root] var.environment"
+		"[root] azuread_group.service_endpoint_join (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.service_endpoint_join (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group.sub_contributor (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.sub_contributor (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] azuread_group.sub_contributor (expand)" -> "[root] var.environment"
+		"[root] azuread_group.sub_contributor (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.sub_contributor (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group.sub_owner (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.sub_owner (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] azuread_group.sub_owner (expand)" -> "[root] var.environment"
+		"[root] azuread_group.sub_owner (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.sub_owner (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group.sub_reader (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.sub_reader (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] azuread_group.sub_reader (expand)" -> "[root] var.environment"
+		"[root] azuread_group.sub_reader (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.sub_reader (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group_member.acr_contributor (expand)" -> "[root] azuread_group.acr_push (expand)"
+		"[root] azuread_group_member.acr_contributor (expand)" -> "[root] azuread_group.rg_contributor (expand)"
+		"[root] azuread_group_member.acr_owner (expand)" -> "[root] azuread_group.acr_push (expand)"
+		"[root] azuread_group_member.acr_owner (expand)" -> "[root] azuread_group.rg_owner (expand)"
+		"[root] azuread_group_member.acr_reader (expand)" -> "[root] azuread_group.acr_pull (expand)"
+		"[root] azuread_group_member.acr_reader (expand)" -> "[root] azuread_group.rg_reader (expand)"
+		"[root] azuread_group_member.acr_spn (expand)" -> "[root] azuread_group.acr_push (expand)"
+		"[root] azuread_group_member.acr_spn (expand)" -> "[root] azuread_service_principal.aad_sp (expand)"
+		"[root] azuread_group_member.service_endpoint_join_contributor (expand)" -> "[root] azuread_group.rg_contributor (expand)"
+		"[root] azuread_group_member.service_endpoint_join_contributor (expand)" -> "[root] azuread_group.service_endpoint_join (expand)"
+		"[root] azuread_group_member.service_endpoint_join_owner (expand)" -> "[root] azuread_group.rg_owner (expand)"
+		"[root] azuread_group_member.service_endpoint_join_owner (expand)" -> "[root] azuread_group.service_endpoint_join (expand)"
+		"[root] azuread_group_member.service_endpoint_join_spn (expand)" -> "[root] azuread_group.service_endpoint_join (expand)"
+		"[root] azuread_group_member.service_endpoint_join_spn (expand)" -> "[root] azuread_service_principal.aad_sp (expand)"
+		"[root] azuread_group_member.sub_all_contributor (expand)" -> "[root] azuread_group.sub_contributor (expand)"
+		"[root] azuread_group_member.sub_all_contributor (expand)" -> "[root] data.azuread_group.all_contributor (expand)"
+		"[root] azuread_group_member.sub_all_owner (expand)" -> "[root] azuread_group.sub_owner (expand)"
+		"[root] azuread_group_member.sub_all_owner (expand)" -> "[root] data.azuread_group.all_owner (expand)"
+		"[root] azuread_group_member.sub_all_reader (expand)" -> "[root] azuread_group.sub_reader (expand)"
+		"[root] azuread_group_member.sub_all_reader (expand)" -> "[root] data.azuread_group.all_reader (expand)"
+		"[root] azuread_service_principal.aad_sp (expand)" -> "[root] azuread_application.aad_app (expand)"
+		"[root] azuread_service_principal.delegate_kv_aad (expand)" -> "[root] azuread_application.delegate_kv_aad (expand)"
+		"[root] azuread_service_principal.sub_reader_sp (expand)" -> "[root] azuread_application.sub_reader_sp (expand)"
+		"[root] azurerm_key_vault.delegate_kv (expand)" -> "[root] azurerm_resource_group.rg (expand)"
+		"[root] azurerm_key_vault.delegate_kv (expand)" -> "[root] data.azurerm_client_config.current (expand)"
+		"[root] azurerm_key_vault.delegate_kv (expand)" -> "[root] var.unique_suffix"
+		"[root] azurerm_key_vault_access_policy.ap_kvreader_sp (expand)" -> "[root] azuread_service_principal.delegate_kv_aad (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_kvreader_sp (expand)" -> "[root] azurerm_key_vault.delegate_kv (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_kvreader_sp (expand)" -> "[root] local.key_vault_default_permissions (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_owner_spn (expand)" -> "[root] azurerm_key_vault.delegate_kv (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_owner_spn (expand)" -> "[root] data.azuread_service_principal.owner_spn (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_owner_spn (expand)" -> "[root] local.key_vault_default_permissions (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_rg_aad_group (expand)" -> "[root] azuread_group.rg_contributor (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_rg_aad_group (expand)" -> "[root] azurerm_key_vault.delegate_kv (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_rg_aad_group (expand)" -> "[root] local.key_vault_default_permissions (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_rg_sp (expand)" -> "[root] azuread_service_principal.aad_sp (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_rg_sp (expand)" -> "[root] azurerm_key_vault.delegate_kv (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_rg_sp (expand)" -> "[root] local.key_vault_default_permissions (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_sub_aad_group_contributor (expand)" -> "[root] azuread_group.sub_contributor (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_sub_aad_group_contributor (expand)" -> "[root] azurerm_key_vault.delegate_kv (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_sub_aad_group_contributor (expand)" -> "[root] local.key_vault_default_permissions (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_sub_aad_group_owner (expand)" -> "[root] azuread_group.sub_owner (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_sub_aad_group_owner (expand)" -> "[root] azurerm_key_vault.delegate_kv (expand)"
+		"[root] azurerm_key_vault_access_policy.ap_sub_aad_group_owner (expand)" -> "[root] local.key_vault_default_permissions (expand)"
+		"[root] azurerm_key_vault_secret.aad_sp (expand)" -> "[root] azurerm_key_vault_access_policy.ap_owner_spn (expand)"
+		"[root] azurerm_key_vault_secret.aad_sp (expand)" -> "[root] data.azurerm_subscription.current (expand)"
+		"[root] azurerm_key_vault_secret.aad_sp (expand)" -> "[root] local.core_rgs (expand)"
+		"[root] azurerm_key_vault_secret.aad_sp (expand)" -> "[root] random_password.aad_sp (expand)"
+		"[root] azurerm_key_vault_secret.delegate_kv_aad (expand)" -> "[root] azurerm_key_vault_access_policy.ap_kvreader_sp (expand)"
+		"[root] azurerm_key_vault_secret.delegate_kv_aad (expand)" -> "[root] azurerm_key_vault_access_policy.ap_owner_spn (expand)"
+		"[root] azurerm_key_vault_secret.delegate_kv_aad (expand)" -> "[root] data.azurerm_subscription.current (expand)"
+		"[root] azurerm_key_vault_secret.delegate_kv_aad (expand)" -> "[root] random_password.delegate_kv_aad (expand)"
+		"[root] azurerm_key_vault_secret.sub_reader_sp (expand)" -> "[root] azurerm_key_vault_access_policy.ap_owner_spn (expand)"
+		"[root] azurerm_key_vault_secret.sub_reader_sp (expand)" -> "[root] data.azurerm_subscription.current (expand)"
+		"[root] azurerm_key_vault_secret.sub_reader_sp (expand)" -> "[root] local.core_rgs (expand)"
+		"[root] azurerm_key_vault_secret.sub_reader_sp (expand)" -> "[root] random_password.sub_reader_sp (expand)"
+		"[root] azurerm_resource_group.rg (expand)" -> "[root] local.env_resources (expand)"
+		"[root] azurerm_resource_group.rg (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] azurerm_role_assignment.aad_sp (expand)" -> "[root] azuread_service_principal.aad_sp (expand)"
+		"[root] azurerm_role_assignment.aad_sp (expand)" -> "[root] azurerm_resource_group.rg (expand)"
+		"[root] azurerm_role_assignment.rg_contributor (expand)" -> "[root] azuread_group.rg_contributor (expand)"
+		"[root] azurerm_role_assignment.rg_contributor (expand)" -> "[root] azurerm_resource_group.rg (expand)"
+		"[root] azurerm_role_assignment.rg_owner (expand)" -> "[root] azuread_group.rg_owner (expand)"
+		"[root] azurerm_role_assignment.rg_owner (expand)" -> "[root] azurerm_resource_group.rg (expand)"
+		"[root] azurerm_role_assignment.rg_reader (expand)" -> "[root] azuread_group.rg_reader (expand)"
+		"[root] azurerm_role_assignment.rg_reader (expand)" -> "[root] azurerm_resource_group.rg (expand)"
+		"[root] azurerm_role_assignment.sub_contributor (expand)" -> "[root] azuread_group.sub_contributor (expand)"
+		"[root] azurerm_role_assignment.sub_contributor (expand)" -> "[root] data.azurerm_subscription.current (expand)"
+		"[root] azurerm_role_assignment.sub_owner (expand)" -> "[root] azuread_group.sub_owner (expand)"
+		"[root] azurerm_role_assignment.sub_owner (expand)" -> "[root] data.azurerm_subscription.current (expand)"
+		"[root] azurerm_role_assignment.sub_reader (expand)" -> "[root] azuread_group.sub_reader (expand)"
+		"[root] azurerm_role_assignment.sub_reader (expand)" -> "[root] data.azurerm_subscription.current (expand)"
+		"[root] azurerm_role_assignment.sub_reader_sp (expand)" -> "[root] azuread_service_principal.sub_reader_sp (expand)"
+		"[root] azurerm_role_assignment.sub_reader_sp (expand)" -> "[root] data.azurerm_subscription.current (expand)"
+		"[root] data.azuread_group.all_contributor (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] data.azuread_group.all_contributor (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] data.azuread_group.all_contributor (expand)" -> "[root] var.group_name_separator"
+		"[root] data.azuread_group.all_contributor (expand)" -> "[root] var.subscription_name"
+		"[root] data.azuread_group.all_owner (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] data.azuread_group.all_owner (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] data.azuread_group.all_owner (expand)" -> "[root] var.group_name_separator"
+		"[root] data.azuread_group.all_owner (expand)" -> "[root] var.subscription_name"
+		"[root] data.azuread_group.all_reader (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] data.azuread_group.all_reader (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] data.azuread_group.all_reader (expand)" -> "[root] var.group_name_separator"
+		"[root] data.azuread_group.all_reader (expand)" -> "[root] var.subscription_name"
+		"[root] data.azuread_service_principal.owner_spn (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] data.azuread_service_principal.owner_spn (expand)" -> "[root] var.owner_service_principal_name"
+		"[root] data.azurerm_client_config.current (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] data.azurerm_subscription.current (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] local.core_rgs (expand)" -> "[root] var.core_name"
+		"[root] local.core_rgs (expand)" -> "[root] var.environment"
+		"[root] local.core_rgs (expand)" -> "[root] var.regions"
+		"[root] local.env_resources (expand)" -> "[root] var.environment"
+		"[root] local.env_resources (expand)" -> "[root] var.regions"
+		"[root] local.env_resources (expand)" -> "[root] var.resource_group_configs"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_application_password.aad_sp (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_application_password.delegate_kv_aad (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_application_password.sub_reader_sp (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.acr_contributor (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.acr_owner (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.acr_reader (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.acr_spn (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.service_endpoint_join_contributor (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.service_endpoint_join_owner (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.service_endpoint_join_spn (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.sub_all_contributor (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.sub_all_owner (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.sub_all_reader (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_key_vault_access_policy.ap_rg_aad_group (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_key_vault_access_policy.ap_rg_sp (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_key_vault_access_policy.ap_sub_aad_group_contributor (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_key_vault_access_policy.ap_sub_aad_group_owner (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_key_vault_secret.aad_sp (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_key_vault_secret.delegate_kv_aad (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_key_vault_secret.sub_reader_sp (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.aad_sp (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.rg_contributor (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.rg_owner (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.rg_reader (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.sub_contributor (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.sub_owner (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.sub_reader (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.sub_reader_sp (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_application_password.aad_sp (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_application_password.delegate_kv_aad (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_application_password.sub_reader_sp (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.acr_contributor (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.acr_owner (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.acr_reader (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.acr_spn (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.service_endpoint_join_contributor (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.service_endpoint_join_owner (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.service_endpoint_join_spn (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.sub_all_contributor (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.sub_all_owner (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.sub_all_reader (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] data.azuread_service_principal.owner_spn (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_key_vault_access_policy.ap_rg_aad_group (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_key_vault_access_policy.ap_rg_sp (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_key_vault_access_policy.ap_sub_aad_group_contributor (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_key_vault_access_policy.ap_sub_aad_group_owner (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_key_vault_secret.aad_sp (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_key_vault_secret.delegate_kv_aad (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_key_vault_secret.sub_reader_sp (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.aad_sp (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.rg_contributor (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.rg_owner (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.rg_reader (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.sub_contributor (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.sub_owner (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.sub_reader (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.sub_reader_sp (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/random\"] (close)" -> "[root] random_password.aad_sp (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/random\"] (close)" -> "[root] random_password.delegate_kv_aad (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/random\"] (close)" -> "[root] random_password.sub_reader_sp (expand)"
+		"[root] random_password.aad_sp (expand)" -> "[root] azuread_service_principal.aad_sp (expand)"
+		"[root] random_password.aad_sp (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/random\"]"
+		"[root] random_password.delegate_kv_aad (expand)" -> "[root] azuread_service_principal.delegate_kv_aad (expand)"
+		"[root] random_password.delegate_kv_aad (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/random\"]"
+		"[root] random_password.sub_reader_sp (expand)" -> "[root] azuread_service_principal.sub_reader_sp (expand)"
+		"[root] random_password.sub_reader_sp (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/random\"]"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/random\"] (close)"
+	}
+}
+

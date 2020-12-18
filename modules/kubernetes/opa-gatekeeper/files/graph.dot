@@ -1,0 +1,27 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] helm_release.gatekeeper (expand)" [label = "helm_release.gatekeeper", shape = "box"]
+		"[root] helm_release.gatekeeper_constraints (expand)" [label = "helm_release.gatekeeper_constraints", shape = "box"]
+		"[root] helm_release.gatekeeper_templates (expand)" [label = "helm_release.gatekeeper_templates", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"]" [label = "provider[\"registry.terraform.io/hashicorp/helm\"]", shape = "diamond"]
+		"[root] var.additional_constraints" [label = "var.additional_constraints", shape = "note"]
+		"[root] var.default_constraints" [label = "var.default_constraints", shape = "note"]
+		"[root] var.exclude" [label = "var.exclude", shape = "note"]
+		"[root] helm_release.gatekeeper (expand)" -> "[root] local.gatekeeper_version (expand)"
+		"[root] helm_release.gatekeeper (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"]"
+		"[root] helm_release.gatekeeper_constraints (expand)" -> "[root] helm_release.gatekeeper_templates (expand)"
+		"[root] helm_release.gatekeeper_templates (expand)" -> "[root] helm_release.gatekeeper (expand)"
+		"[root] helm_release.gatekeeper_templates (expand)" -> "[root] local.gatekeeper_library_version (expand)"
+		"[root] helm_release.gatekeeper_templates (expand)" -> "[root] local.values (expand)"
+		"[root] local.values (expand)" -> "[root] var.additional_constraints"
+		"[root] local.values (expand)" -> "[root] var.default_constraints"
+		"[root] local.values (expand)" -> "[root] var.exclude"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] helm_release.gatekeeper_constraints (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] helm_release.gatekeeper_constraints (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)"
+	}
+}
+

@@ -2,6 +2,9 @@
   * # Core
   *
   * This module is used to create core resources like virtual network for the subscription.
+  *
+  * ![Terraform Graph](files/graph.svg "Terraform Graph")
+  *
   */
 
 terraform {

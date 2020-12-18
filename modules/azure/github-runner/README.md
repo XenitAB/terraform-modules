@@ -2,6 +2,8 @@
 
 This is the setup for GitHub Actions Self-hosted Runner Virtual Machine Scale Set (VMSS).
 
+![Terraform Graph](files/graph.svg "Terraform Graph")
+
 ## GitHub Runner Configuration
 
 Setup a GitHub App according to the documentation for [XenitAB/github-runner](https://github.com/XenitAB/github-runner).

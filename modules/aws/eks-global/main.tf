@@ -1,3 +1,12 @@
+/**
+  * # Core
+  *
+  * More details to be added.
+  * 
+  * ![Terraform Graph](files/graph.svg "Terraform Graph")
+  *
+  */
+  
 terraform {
   required_version = "0.13.5"
   required_providers {

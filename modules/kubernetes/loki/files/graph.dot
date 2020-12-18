@@ -1,0 +1,70 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] azurerm_storage_account.loki (expand)" [label = "azurerm_storage_account.loki", shape = "box"]
+		"[root] azurerm_storage_container.loki (expand)" [label = "azurerm_storage_container.loki", shape = "box"]
+		"[root] data.azurerm_resource_group.this (expand)" [label = "data.azurerm_resource_group.this", shape = "box"]
+		"[root] helm_release.loki_stack (expand)" [label = "helm_release.loki_stack", shape = "box"]
+		"[root] helm_release.minio (expand)" [label = "helm_release.minio", shape = "box"]
+		"[root] kubernetes_namespace.this (expand)" [label = "kubernetes_namespace.this", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]" [label = "provider[\"registry.terraform.io/hashicorp/azurerm\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"]" [label = "provider[\"registry.terraform.io/hashicorp/helm\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]" [label = "provider[\"registry.terraform.io/hashicorp/kubernetes\"]", shape = "diamond"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.kubernetes_namespace_name" [label = "var.kubernetes_namespace_name", shape = "note"]
+		"[root] var.location_short" [label = "var.location_short", shape = "note"]
+		"[root] var.loki_helm_chart_name" [label = "var.loki_helm_chart_name", shape = "note"]
+		"[root] var.loki_helm_chart_version" [label = "var.loki_helm_chart_version", shape = "note"]
+		"[root] var.loki_helm_release_name" [label = "var.loki_helm_release_name", shape = "note"]
+		"[root] var.loki_helm_repository" [label = "var.loki_helm_repository", shape = "note"]
+		"[root] var.minio_helm_chart_name" [label = "var.minio_helm_chart_name", shape = "note"]
+		"[root] var.minio_helm_chart_version" [label = "var.minio_helm_chart_version", shape = "note"]
+		"[root] var.minio_helm_release_name" [label = "var.minio_helm_release_name", shape = "note"]
+		"[root] var.minio_helm_repository" [label = "var.minio_helm_repository", shape = "note"]
+		"[root] var.name" [label = "var.name", shape = "note"]
+		"[root] var.resource_group_name" [label = "var.resource_group_name", shape = "note"]
+		"[root] var.storage_account_configuration" [label = "var.storage_account_configuration", shape = "note"]
+		"[root] var.storage_account_name" [label = "var.storage_account_name", shape = "note"]
+		"[root] var.storage_container_name" [label = "var.storage_container_name", shape = "note"]
+		"[root] azurerm_storage_account.loki (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] azurerm_storage_account.loki (expand)" -> "[root] local.storage_account_name (expand)"
+		"[root] azurerm_storage_account.loki (expand)" -> "[root] var.storage_account_configuration"
+		"[root] azurerm_storage_container.loki (expand)" -> "[root] azurerm_storage_account.loki (expand)"
+		"[root] azurerm_storage_container.loki (expand)" -> "[root] var.storage_container_name"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] local.resource_group_name (expand)"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] helm_release.loki_stack (expand)" -> "[root] azurerm_storage_container.loki (expand)"
+		"[root] helm_release.loki_stack (expand)" -> "[root] helm_release.minio (expand)"
+		"[root] helm_release.loki_stack (expand)" -> "[root] var.loki_helm_chart_name"
+		"[root] helm_release.loki_stack (expand)" -> "[root] var.loki_helm_chart_version"
+		"[root] helm_release.loki_stack (expand)" -> "[root] var.loki_helm_release_name"
+		"[root] helm_release.loki_stack (expand)" -> "[root] var.loki_helm_repository"
+		"[root] helm_release.minio (expand)" -> "[root] azurerm_storage_account.loki (expand)"
+		"[root] helm_release.minio (expand)" -> "[root] kubernetes_namespace.this (expand)"
+		"[root] helm_release.minio (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"]"
+		"[root] helm_release.minio (expand)" -> "[root] var.minio_helm_chart_name"
+		"[root] helm_release.minio (expand)" -> "[root] var.minio_helm_chart_version"
+		"[root] helm_release.minio (expand)" -> "[root] var.minio_helm_release_name"
+		"[root] helm_release.minio (expand)" -> "[root] var.minio_helm_repository"
+		"[root] kubernetes_namespace.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] kubernetes_namespace.this (expand)" -> "[root] var.kubernetes_namespace_name"
+		"[root] local.resource_group_name (expand)" -> "[root] var.environment"
+		"[root] local.resource_group_name (expand)" -> "[root] var.location_short"
+		"[root] local.resource_group_name (expand)" -> "[root] var.name"
+		"[root] local.resource_group_name (expand)" -> "[root] var.resource_group_name"
+		"[root] local.storage_account_name (expand)" -> "[root] var.environment"
+		"[root] local.storage_account_name (expand)" -> "[root] var.location_short"
+		"[root] local.storage_account_name (expand)" -> "[root] var.name"
+		"[root] local.storage_account_name (expand)" -> "[root] var.storage_account_name"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] helm_release.loki_stack (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_storage_container.loki (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] helm_release.loki_stack (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] kubernetes_namespace.this (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)"
+	}
+}
+

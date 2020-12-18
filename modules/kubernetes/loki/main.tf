@@ -3,6 +3,8 @@
   *
   * This module is used to add [`loki`](https://github.com/grafana/loki) to Kubernetes clusters (tested with AKS).
   *
+  * ![Terraform Graph](files/graph.svg "Terraform Graph")
+  *
   * ## Details
   *
   * This module will also add `minio` (S3 Gateway to Azure Storage Account), `fluent-bit` and `grafana`.

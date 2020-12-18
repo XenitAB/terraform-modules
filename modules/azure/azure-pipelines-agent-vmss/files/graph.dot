@@ -1,0 +1,74 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] azurerm_key_vault_secret.this (expand)" [label = "azurerm_key_vault_secret.this", shape = "box"]
+		"[root] azurerm_linux_virtual_machine_scale_set.this (expand)" [label = "azurerm_linux_virtual_machine_scale_set.this", shape = "box"]
+		"[root] data.azurerm_image.this (expand)" [label = "data.azurerm_image.this", shape = "box"]
+		"[root] data.azurerm_key_vault.this (expand)" [label = "data.azurerm_key_vault.this", shape = "box"]
+		"[root] data.azurerm_resource_group.this (expand)" [label = "data.azurerm_resource_group.this", shape = "box"]
+		"[root] data.azurerm_subnet.this (expand)" [label = "data.azurerm_subnet.this", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]" [label = "provider[\"registry.terraform.io/hashicorp/azurerm\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"]" [label = "provider[\"registry.terraform.io/hashicorp/tls\"]", shape = "diamond"]
+		"[root] tls_private_key.this (expand)" [label = "tls_private_key.this", shape = "box"]
+		"[root] var.azure_pipelines_agent_image_name" [label = "var.azure_pipelines_agent_image_name", shape = "note"]
+		"[root] var.azure_pipelines_agent_image_resource_group_name" [label = "var.azure_pipelines_agent_image_resource_group_name", shape = "note"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.keyvault_name" [label = "var.keyvault_name", shape = "note"]
+		"[root] var.keyvault_resource_group_name" [label = "var.keyvault_resource_group_name", shape = "note"]
+		"[root] var.location_short" [label = "var.location_short", shape = "note"]
+		"[root] var.name" [label = "var.name", shape = "note"]
+		"[root] var.resource_group_name" [label = "var.resource_group_name", shape = "note"]
+		"[root] var.unique_suffix" [label = "var.unique_suffix", shape = "note"]
+		"[root] var.vmss_admin_username" [label = "var.vmss_admin_username", shape = "note"]
+		"[root] var.vmss_disk_size_gb" [label = "var.vmss_disk_size_gb", shape = "note"]
+		"[root] var.vmss_instances" [label = "var.vmss_instances", shape = "note"]
+		"[root] var.vmss_sku" [label = "var.vmss_sku", shape = "note"]
+		"[root] var.vmss_subnet_config" [label = "var.vmss_subnet_config", shape = "note"]
+		"[root] var.vmss_zones" [label = "var.vmss_zones", shape = "note"]
+		"[root] azurerm_key_vault_secret.this (expand)" -> "[root] data.azurerm_key_vault.this (expand)"
+		"[root] azurerm_key_vault_secret.this (expand)" -> "[root] tls_private_key.this (expand)"
+		"[root] azurerm_linux_virtual_machine_scale_set.this (expand)" -> "[root] data.azurerm_image.this (expand)"
+		"[root] azurerm_linux_virtual_machine_scale_set.this (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] azurerm_linux_virtual_machine_scale_set.this (expand)" -> "[root] data.azurerm_subnet.this (expand)"
+		"[root] azurerm_linux_virtual_machine_scale_set.this (expand)" -> "[root] tls_private_key.this (expand)"
+		"[root] azurerm_linux_virtual_machine_scale_set.this (expand)" -> "[root] var.vmss_admin_username"
+		"[root] azurerm_linux_virtual_machine_scale_set.this (expand)" -> "[root] var.vmss_disk_size_gb"
+		"[root] azurerm_linux_virtual_machine_scale_set.this (expand)" -> "[root] var.vmss_instances"
+		"[root] azurerm_linux_virtual_machine_scale_set.this (expand)" -> "[root] var.vmss_sku"
+		"[root] azurerm_linux_virtual_machine_scale_set.this (expand)" -> "[root] var.vmss_zones"
+		"[root] data.azurerm_image.this (expand)" -> "[root] local.azure_pipelines_agent_image_resource_group_name (expand)"
+		"[root] data.azurerm_image.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] data.azurerm_image.this (expand)" -> "[root] var.azure_pipelines_agent_image_name"
+		"[root] data.azurerm_key_vault.this (expand)" -> "[root] local.keyvault_name (expand)"
+		"[root] data.azurerm_key_vault.this (expand)" -> "[root] local.keyvault_resource_group_name (expand)"
+		"[root] data.azurerm_key_vault.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] local.resource_group_name (expand)"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] data.azurerm_subnet.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] data.azurerm_subnet.this (expand)" -> "[root] var.vmss_subnet_config"
+		"[root] local.azure_pipelines_agent_image_resource_group_name (expand)" -> "[root] local.resource_group_name (expand)"
+		"[root] local.azure_pipelines_agent_image_resource_group_name (expand)" -> "[root] var.azure_pipelines_agent_image_resource_group_name"
+		"[root] local.keyvault_name (expand)" -> "[root] var.environment"
+		"[root] local.keyvault_name (expand)" -> "[root] var.keyvault_name"
+		"[root] local.keyvault_name (expand)" -> "[root] var.location_short"
+		"[root] local.keyvault_name (expand)" -> "[root] var.name"
+		"[root] local.keyvault_name (expand)" -> "[root] var.unique_suffix"
+		"[root] local.keyvault_resource_group_name (expand)" -> "[root] local.resource_group_name (expand)"
+		"[root] local.keyvault_resource_group_name (expand)" -> "[root] var.keyvault_resource_group_name"
+		"[root] local.resource_group_name (expand)" -> "[root] var.environment"
+		"[root] local.resource_group_name (expand)" -> "[root] var.location_short"
+		"[root] local.resource_group_name (expand)" -> "[root] var.name"
+		"[root] local.resource_group_name (expand)" -> "[root] var.resource_group_name"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_key_vault_secret.this (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_linux_virtual_machine_scale_set.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_key_vault_secret.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_linux_virtual_machine_scale_set.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)" -> "[root] tls_private_key.this (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)"
+		"[root] tls_private_key.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"]"
+	}
+}
+

@@ -1,3 +1,12 @@
+/**
+  * # Kyverno
+  *
+  * This module is used to add [`kyverno`](https://kyverno.io/) to Kubernetes clusters.
+  *
+  * ![Terraform Graph](files/graph.svg "Terraform Graph")
+  *
+  */
+
 terraform {
   required_version = "0.13.5"
 

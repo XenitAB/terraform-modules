@@ -1,0 +1,307 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] data.aws_region.current (expand)" [label = "data.aws_region.current", shape = "box"]
+		"[root] data.aws_route53_zone.this (expand)" [label = "data.aws_route53_zone.this", shape = "box"]
+		"[root] kubernetes_namespace.tenant (expand)" [label = "kubernetes_namespace.tenant", shape = "box"]
+		"[root] kubernetes_network_policy.tenant (expand)" [label = "kubernetes_network_policy.tenant", shape = "box"]
+		"[root] module.cert_manager.helm_release.cert_manager (expand)" [label = "module.cert_manager.helm_release.cert_manager", shape = "box"]
+		"[root] module.cert_manager.helm_release.cert_manager_extras (expand)" [label = "module.cert_manager.helm_release.cert_manager_extras", shape = "box"]
+		"[root] module.cert_manager.kubernetes_namespace.this (expand)" [label = "module.cert_manager.kubernetes_namespace.this", shape = "box"]
+		"[root] module.external_dns.helm_release.external_dns (expand)" [label = "module.external_dns.helm_release.external_dns", shape = "box"]
+		"[root] module.external_dns.helm_release.external_dns_extras (expand)" [label = "module.external_dns.helm_release.external_dns_extras", shape = "box"]
+		"[root] module.external_dns.kubernetes_namespace.this (expand)" [label = "module.external_dns.kubernetes_namespace.this", shape = "box"]
+		"[root] module.external_secrets.helm_release.external_secrets (expand)" [label = "module.external_secrets.helm_release.external_secrets", shape = "box"]
+		"[root] module.external_secrets.kubernetes_namespace.this (expand)" [label = "module.external_secrets.kubernetes_namespace.this", shape = "box"]
+		"[root] module.fluxcd_v2_github.data.flux_install.this (expand)" [label = "module.fluxcd_v2_github.data.flux_install.this", shape = "box"]
+		"[root] module.fluxcd_v2_github.data.flux_sync.this (expand)" [label = "module.fluxcd_v2_github.data.flux_sync.this", shape = "box"]
+		"[root] module.fluxcd_v2_github.data.github_repository.cluster (expand)" [label = "module.fluxcd_v2_github.data.github_repository.cluster", shape = "box"]
+		"[root] module.fluxcd_v2_github.data.github_repository.tenant (expand)" [label = "module.fluxcd_v2_github.data.github_repository.tenant", shape = "box"]
+		"[root] module.fluxcd_v2_github.data.kubectl_file_documents.install (expand)" [label = "module.fluxcd_v2_github.data.kubectl_file_documents.install", shape = "box"]
+		"[root] module.fluxcd_v2_github.data.kubectl_file_documents.sync (expand)" [label = "module.fluxcd_v2_github.data.kubectl_file_documents.sync", shape = "box"]
+		"[root] module.fluxcd_v2_github.github_repository_deploy_key.cluster (expand)" [label = "module.fluxcd_v2_github.github_repository_deploy_key.cluster", shape = "box"]
+		"[root] module.fluxcd_v2_github.github_repository_deploy_key.tenant (expand)" [label = "module.fluxcd_v2_github.github_repository_deploy_key.tenant", shape = "box"]
+		"[root] module.fluxcd_v2_github.github_repository_file.cluster_tenants (expand)" [label = "module.fluxcd_v2_github.github_repository_file.cluster_tenants", shape = "box"]
+		"[root] module.fluxcd_v2_github.github_repository_file.install (expand)" [label = "module.fluxcd_v2_github.github_repository_file.install", shape = "box"]
+		"[root] module.fluxcd_v2_github.github_repository_file.kustomize (expand)" [label = "module.fluxcd_v2_github.github_repository_file.kustomize", shape = "box"]
+		"[root] module.fluxcd_v2_github.github_repository_file.sync (expand)" [label = "module.fluxcd_v2_github.github_repository_file.sync", shape = "box"]
+		"[root] module.fluxcd_v2_github.github_repository_file.tenant (expand)" [label = "module.fluxcd_v2_github.github_repository_file.tenant", shape = "box"]
+		"[root] module.fluxcd_v2_github.kubectl_manifest.install (expand)" [label = "module.fluxcd_v2_github.kubectl_manifest.install", shape = "box"]
+		"[root] module.fluxcd_v2_github.kubectl_manifest.sync (expand)" [label = "module.fluxcd_v2_github.kubectl_manifest.sync", shape = "box"]
+		"[root] module.fluxcd_v2_github.kubernetes_namespace.flux_system (expand)" [label = "module.fluxcd_v2_github.kubernetes_namespace.flux_system", shape = "box"]
+		"[root] module.fluxcd_v2_github.kubernetes_secret.cluster (expand)" [label = "module.fluxcd_v2_github.kubernetes_secret.cluster", shape = "box"]
+		"[root] module.fluxcd_v2_github.kubernetes_secret.tenant (expand)" [label = "module.fluxcd_v2_github.kubernetes_secret.tenant", shape = "box"]
+		"[root] module.fluxcd_v2_github.tls_private_key.cluster (expand)" [label = "module.fluxcd_v2_github.tls_private_key.cluster", shape = "box"]
+		"[root] module.fluxcd_v2_github.tls_private_key.tenant (expand)" [label = "module.fluxcd_v2_github.tls_private_key.tenant", shape = "box"]
+		"[root] module.ingress_nginx.helm_release.ingress_nginx (expand)" [label = "module.ingress_nginx.helm_release.ingress_nginx", shape = "box"]
+		"[root] module.ingress_nginx.kubernetes_namespace.this (expand)" [label = "module.ingress_nginx.kubernetes_namespace.this", shape = "box"]
+		"[root] module.kyverno.helm_release.kyverno (expand)" [label = "module.kyverno.helm_release.kyverno", shape = "box"]
+		"[root] module.kyverno.helm_release.kyverno_extras (expand)" [label = "module.kyverno.helm_release.kyverno_extras", shape = "box"]
+		"[root] module.kyverno.kubernetes_namespace.this (expand)" [label = "module.kyverno.kubernetes_namespace.this", shape = "box"]
+		"[root] module.opa_gatekeeper.helm_release.gatekeeper (expand)" [label = "module.opa_gatekeeper.helm_release.gatekeeper", shape = "box"]
+		"[root] module.opa_gatekeeper.helm_release.gatekeeper_constraints (expand)" [label = "module.opa_gatekeeper.helm_release.gatekeeper_constraints", shape = "box"]
+		"[root] module.opa_gatekeeper.helm_release.gatekeeper_templates (expand)" [label = "module.opa_gatekeeper.helm_release.gatekeeper_templates", shape = "box"]
+		"[root] module.velero.helm_release.velero (expand)" [label = "module.velero.helm_release.velero", shape = "box"]
+		"[root] module.velero.helm_release.velero_extras (expand)" [label = "module.velero.helm_release.velero_extras", shape = "box"]
+		"[root] module.velero.kubernetes_namespace.this (expand)" [label = "module.velero.kubernetes_namespace.this", shape = "box"]
+		"[root] provider[\"registry.terraform.io/fluxcd/flux\"]" [label = "provider[\"registry.terraform.io/fluxcd/flux\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"]" [label = "provider[\"registry.terraform.io/gavinbunney/kubectl\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"]" [label = "provider[\"registry.terraform.io/hashicorp/github\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"]" [label = "provider[\"registry.terraform.io/hashicorp/helm\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]" [label = "provider[\"registry.terraform.io/hashicorp/kubernetes\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"]" [label = "provider[\"registry.terraform.io/hashicorp/tls\"]", shape = "diamond"]
+		"[root] var.cert_manager_config" [label = "var.cert_manager_config", shape = "note"]
+		"[root] var.cert_manager_enabled" [label = "var.cert_manager_enabled", shape = "note"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.external_dns_config" [label = "var.external_dns_config", shape = "note"]
+		"[root] var.external_dns_enabled" [label = "var.external_dns_enabled", shape = "note"]
+		"[root] var.external_secrets_config" [label = "var.external_secrets_config", shape = "note"]
+		"[root] var.external_secrets_enabled" [label = "var.external_secrets_enabled", shape = "note"]
+		"[root] var.fluxcd_v2_config" [label = "var.fluxcd_v2_config", shape = "note"]
+		"[root] var.fluxcd_v2_enabled" [label = "var.fluxcd_v2_enabled", shape = "note"]
+		"[root] var.ingress_nginx_enabled" [label = "var.ingress_nginx_enabled", shape = "note"]
+		"[root] var.kubernetes_network_policy_default_deny" [label = "var.kubernetes_network_policy_default_deny", shape = "note"]
+		"[root] var.kyverno_enabled" [label = "var.kyverno_enabled", shape = "note"]
+		"[root] var.namespaces" [label = "var.namespaces", shape = "note"]
+		"[root] var.opa_gatekeeper_enabled" [label = "var.opa_gatekeeper_enabled", shape = "note"]
+		"[root] var.velero_config" [label = "var.velero_config", shape = "note"]
+		"[root] var.velero_enabled" [label = "var.velero_enabled", shape = "note"]
+		"[root] data.aws_region.current (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_route53_zone.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_route53_zone.this (expand)" -> "[root] var.cert_manager_config"
+		"[root] kubernetes_namespace.tenant (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] kubernetes_namespace.tenant (expand)" -> "[root] var.namespaces"
+		"[root] kubernetes_network_policy.tenant (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] kubernetes_network_policy.tenant (expand)" -> "[root] var.kubernetes_network_policy_default_deny"
+		"[root] kubernetes_network_policy.tenant (expand)" -> "[root] var.namespaces"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] kubernetes_namespace.tenant (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] kubernetes_network_policy.tenant (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.cert_manager (close)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.external_dns (close)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.external_secrets (close)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.fluxcd_v2_github (close)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.ingress_nginx (close)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.kyverno (close)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] module.velero (close)"
+		"[root] module.cert_manager (close)" -> "[root] module.cert_manager.helm_release.cert_manager_extras (expand)"
+		"[root] module.cert_manager (expand)" -> "[root] module.opa_gatekeeper (close)"
+		"[root] module.cert_manager (expand)" -> "[root] var.cert_manager_enabled"
+		"[root] module.cert_manager.helm_release.cert_manager (expand)" -> "[root] module.cert_manager.kubernetes_namespace.this (expand)"
+		"[root] module.cert_manager.helm_release.cert_manager (expand)" -> "[root] module.cert_manager.var.aws_config (expand)"
+		"[root] module.cert_manager.helm_release.cert_manager (expand)" -> "[root] module.cert_manager.var.cloud_provider (expand)"
+		"[root] module.cert_manager.helm_release.cert_manager_extras (expand)" -> "[root] module.cert_manager.helm_release.cert_manager (expand)"
+		"[root] module.cert_manager.helm_release.cert_manager_extras (expand)" -> "[root] module.cert_manager.var.acme_server (expand)"
+		"[root] module.cert_manager.helm_release.cert_manager_extras (expand)" -> "[root] module.cert_manager.var.azure_config (expand)"
+		"[root] module.cert_manager.helm_release.cert_manager_extras (expand)" -> "[root] module.cert_manager.var.notification_email (expand)"
+		"[root] module.cert_manager.kubernetes_namespace.this (expand)" -> "[root] module.cert_manager.local.namespace (expand)"
+		"[root] module.cert_manager.kubernetes_namespace.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] module.cert_manager.local.namespace (expand)" -> "[root] module.cert_manager (expand)"
+		"[root] module.cert_manager.var.acme_server (expand)" -> "[root] module.cert_manager (expand)"
+		"[root] module.cert_manager.var.aws_config (expand)" -> "[root] data.aws_region.current (expand)"
+		"[root] module.cert_manager.var.aws_config (expand)" -> "[root] data.aws_route53_zone.this (expand)"
+		"[root] module.cert_manager.var.aws_config (expand)" -> "[root] module.cert_manager (expand)"
+		"[root] module.cert_manager.var.azure_config (expand)" -> "[root] module.cert_manager (expand)"
+		"[root] module.cert_manager.var.cloud_provider (expand)" -> "[root] module.cert_manager (expand)"
+		"[root] module.cert_manager.var.notification_email (expand)" -> "[root] module.cert_manager (expand)"
+		"[root] module.cert_manager.var.notification_email (expand)" -> "[root] var.cert_manager_config"
+		"[root] module.external_dns (close)" -> "[root] module.external_dns.helm_release.external_dns_extras (expand)"
+		"[root] module.external_dns (expand)" -> "[root] module.opa_gatekeeper (close)"
+		"[root] module.external_dns (expand)" -> "[root] var.external_dns_enabled"
+		"[root] module.external_dns.helm_release.external_dns (expand)" -> "[root] module.external_dns.kubernetes_namespace.this (expand)"
+		"[root] module.external_dns.helm_release.external_dns (expand)" -> "[root] module.external_dns.local.values (expand)"
+		"[root] module.external_dns.helm_release.external_dns_extras (expand)" -> "[root] module.external_dns.helm_release.external_dns (expand)"
+		"[root] module.external_dns.kubernetes_namespace.this (expand)" -> "[root] module.external_dns.local.namespace (expand)"
+		"[root] module.external_dns.kubernetes_namespace.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] module.external_dns.local.namespace (expand)" -> "[root] module.external_dns (expand)"
+		"[root] module.external_dns.local.values (expand)" -> "[root] module.external_dns.var.aws_config (expand)"
+		"[root] module.external_dns.local.values (expand)" -> "[root] module.external_dns.var.azure_config (expand)"
+		"[root] module.external_dns.local.values (expand)" -> "[root] module.external_dns.var.dns_provider (expand)"
+		"[root] module.external_dns.local.values (expand)" -> "[root] module.external_dns.var.sources (expand)"
+		"[root] module.external_dns.var.aws_config (expand)" -> "[root] data.aws_region.current (expand)"
+		"[root] module.external_dns.var.aws_config (expand)" -> "[root] module.external_dns (expand)"
+		"[root] module.external_dns.var.aws_config (expand)" -> "[root] var.external_dns_config"
+		"[root] module.external_dns.var.azure_config (expand)" -> "[root] module.external_dns (expand)"
+		"[root] module.external_dns.var.dns_provider (expand)" -> "[root] module.external_dns (expand)"
+		"[root] module.external_dns.var.sources (expand)" -> "[root] module.external_dns (expand)"
+		"[root] module.external_secrets (close)" -> "[root] module.external_secrets.helm_release.external_secrets (expand)"
+		"[root] module.external_secrets (expand)" -> "[root] module.opa_gatekeeper (close)"
+		"[root] module.external_secrets (expand)" -> "[root] var.external_secrets_enabled"
+		"[root] module.external_secrets.helm_release.external_secrets (expand)" -> "[root] module.external_secrets.kubernetes_namespace.this (expand)"
+		"[root] module.external_secrets.helm_release.external_secrets (expand)" -> "[root] module.external_secrets.local.values (expand)"
+		"[root] module.external_secrets.kubernetes_namespace.this (expand)" -> "[root] module.external_secrets.local.namespace (expand)"
+		"[root] module.external_secrets.kubernetes_namespace.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] module.external_secrets.local.namespace (expand)" -> "[root] module.external_secrets (expand)"
+		"[root] module.external_secrets.local.values (expand)" -> "[root] module.external_secrets.var.aws_config (expand)"
+		"[root] module.external_secrets.var.aws_config (expand)" -> "[root] data.aws_region.current (expand)"
+		"[root] module.external_secrets.var.aws_config (expand)" -> "[root] module.external_secrets (expand)"
+		"[root] module.external_secrets.var.aws_config (expand)" -> "[root] var.external_secrets_config"
+		"[root] module.fluxcd_v2_github (close)" -> "[root] module.fluxcd_v2_github.github_repository_deploy_key.cluster (expand)"
+		"[root] module.fluxcd_v2_github (close)" -> "[root] module.fluxcd_v2_github.github_repository_deploy_key.tenant (expand)"
+		"[root] module.fluxcd_v2_github (close)" -> "[root] module.fluxcd_v2_github.github_repository_file.cluster_tenants (expand)"
+		"[root] module.fluxcd_v2_github (close)" -> "[root] module.fluxcd_v2_github.github_repository_file.install (expand)"
+		"[root] module.fluxcd_v2_github (close)" -> "[root] module.fluxcd_v2_github.github_repository_file.kustomize (expand)"
+		"[root] module.fluxcd_v2_github (close)" -> "[root] module.fluxcd_v2_github.github_repository_file.sync (expand)"
+		"[root] module.fluxcd_v2_github (close)" -> "[root] module.fluxcd_v2_github.github_repository_file.tenant (expand)"
+		"[root] module.fluxcd_v2_github (close)" -> "[root] module.fluxcd_v2_github.kubectl_manifest.sync (expand)"
+		"[root] module.fluxcd_v2_github (close)" -> "[root] module.fluxcd_v2_github.kubernetes_secret.cluster (expand)"
+		"[root] module.fluxcd_v2_github (close)" -> "[root] module.fluxcd_v2_github.kubernetes_secret.tenant (expand)"
+		"[root] module.fluxcd_v2_github (expand)" -> "[root] var.fluxcd_v2_config"
+		"[root] module.fluxcd_v2_github (expand)" -> "[root] var.fluxcd_v2_enabled"
+		"[root] module.fluxcd_v2_github.data.flux_install.this (expand)" -> "[root] module.fluxcd_v2_github.var.environment (expand)"
+		"[root] module.fluxcd_v2_github.data.flux_install.this (expand)" -> "[root] provider[\"registry.terraform.io/fluxcd/flux\"]"
+		"[root] module.fluxcd_v2_github.data.flux_sync.this (expand)" -> "[root] module.fluxcd_v2_github.var.branch (expand)"
+		"[root] module.fluxcd_v2_github.data.flux_sync.this (expand)" -> "[root] module.fluxcd_v2_github.var.cluster_repo (expand)"
+		"[root] module.fluxcd_v2_github.data.flux_sync.this (expand)" -> "[root] module.fluxcd_v2_github.var.environment (expand)"
+		"[root] module.fluxcd_v2_github.data.flux_sync.this (expand)" -> "[root] module.fluxcd_v2_github.var.github_owner (expand)"
+		"[root] module.fluxcd_v2_github.data.flux_sync.this (expand)" -> "[root] provider[\"registry.terraform.io/fluxcd/flux\"]"
+		"[root] module.fluxcd_v2_github.data.github_repository.cluster (expand)" -> "[root] module.fluxcd_v2_github.var.cluster_repo (expand)"
+		"[root] module.fluxcd_v2_github.data.github_repository.cluster (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/github\"]"
+		"[root] module.fluxcd_v2_github.data.github_repository.tenant (expand)" -> "[root] module.fluxcd_v2_github.var.namespaces (expand)"
+		"[root] module.fluxcd_v2_github.data.github_repository.tenant (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/github\"]"
+		"[root] module.fluxcd_v2_github.data.kubectl_file_documents.install (expand)" -> "[root] module.fluxcd_v2_github.data.flux_install.this (expand)"
+		"[root] module.fluxcd_v2_github.data.kubectl_file_documents.install (expand)" -> "[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"]"
+		"[root] module.fluxcd_v2_github.data.kubectl_file_documents.sync (expand)" -> "[root] module.fluxcd_v2_github.data.flux_sync.this (expand)"
+		"[root] module.fluxcd_v2_github.data.kubectl_file_documents.sync (expand)" -> "[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"]"
+		"[root] module.fluxcd_v2_github.github_repository_deploy_key.cluster (expand)" -> "[root] module.fluxcd_v2_github.data.github_repository.cluster (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_deploy_key.cluster (expand)" -> "[root] module.fluxcd_v2_github.tls_private_key.cluster (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_deploy_key.cluster (expand)" -> "[root] module.fluxcd_v2_github.var.environment (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_deploy_key.tenant (expand)" -> "[root] module.fluxcd_v2_github.data.github_repository.tenant (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_deploy_key.tenant (expand)" -> "[root] module.fluxcd_v2_github.tls_private_key.tenant (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_deploy_key.tenant (expand)" -> "[root] module.fluxcd_v2_github.var.environment (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.cluster_tenants (expand)" -> "[root] module.fluxcd_v2_github.data.github_repository.cluster (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.cluster_tenants (expand)" -> "[root] module.fluxcd_v2_github.var.branch (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.cluster_tenants (expand)" -> "[root] module.fluxcd_v2_github.var.environment (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.install (expand)" -> "[root] module.fluxcd_v2_github.data.flux_install.this (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.install (expand)" -> "[root] module.fluxcd_v2_github.data.github_repository.cluster (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.install (expand)" -> "[root] module.fluxcd_v2_github.var.branch (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.kustomize (expand)" -> "[root] module.fluxcd_v2_github.data.flux_sync.this (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.kustomize (expand)" -> "[root] module.fluxcd_v2_github.data.github_repository.cluster (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.sync (expand)" -> "[root] module.fluxcd_v2_github.data.flux_sync.this (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.sync (expand)" -> "[root] module.fluxcd_v2_github.data.github_repository.cluster (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.tenant (expand)" -> "[root] module.fluxcd_v2_github.data.github_repository.cluster (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.tenant (expand)" -> "[root] module.fluxcd_v2_github.data.github_repository.tenant (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.tenant (expand)" -> "[root] module.fluxcd_v2_github.var.branch (expand)"
+		"[root] module.fluxcd_v2_github.github_repository_file.tenant (expand)" -> "[root] module.fluxcd_v2_github.var.environment (expand)"
+		"[root] module.fluxcd_v2_github.kubectl_manifest.install (expand)" -> "[root] module.fluxcd_v2_github.data.kubectl_file_documents.install (expand)"
+		"[root] module.fluxcd_v2_github.kubectl_manifest.install (expand)" -> "[root] module.fluxcd_v2_github.kubernetes_namespace.flux_system (expand)"
+		"[root] module.fluxcd_v2_github.kubectl_manifest.sync (expand)" -> "[root] module.fluxcd_v2_github.data.kubectl_file_documents.sync (expand)"
+		"[root] module.fluxcd_v2_github.kubectl_manifest.sync (expand)" -> "[root] module.fluxcd_v2_github.kubectl_manifest.install (expand)"
+		"[root] module.fluxcd_v2_github.kubernetes_namespace.flux_system (expand)" -> "[root] module.fluxcd_v2_github (expand)"
+		"[root] module.fluxcd_v2_github.kubernetes_namespace.flux_system (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] module.fluxcd_v2_github.kubernetes_secret.cluster (expand)" -> "[root] module.fluxcd_v2_github.data.flux_sync.this (expand)"
+		"[root] module.fluxcd_v2_github.kubernetes_secret.cluster (expand)" -> "[root] module.fluxcd_v2_github.kubectl_manifest.install (expand)"
+		"[root] module.fluxcd_v2_github.kubernetes_secret.cluster (expand)" -> "[root] module.fluxcd_v2_github.local.known_hosts (expand)"
+		"[root] module.fluxcd_v2_github.kubernetes_secret.cluster (expand)" -> "[root] module.fluxcd_v2_github.tls_private_key.cluster (expand)"
+		"[root] module.fluxcd_v2_github.kubernetes_secret.tenant (expand)" -> "[root] module.fluxcd_v2_github.kubectl_manifest.install (expand)"
+		"[root] module.fluxcd_v2_github.kubernetes_secret.tenant (expand)" -> "[root] module.fluxcd_v2_github.local.known_hosts (expand)"
+		"[root] module.fluxcd_v2_github.kubernetes_secret.tenant (expand)" -> "[root] module.fluxcd_v2_github.tls_private_key.tenant (expand)"
+		"[root] module.fluxcd_v2_github.local.known_hosts (expand)" -> "[root] module.fluxcd_v2_github (expand)"
+		"[root] module.fluxcd_v2_github.tls_private_key.cluster (expand)" -> "[root] module.fluxcd_v2_github (expand)"
+		"[root] module.fluxcd_v2_github.tls_private_key.cluster (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"]"
+		"[root] module.fluxcd_v2_github.tls_private_key.tenant (expand)" -> "[root] module.fluxcd_v2_github.var.namespaces (expand)"
+		"[root] module.fluxcd_v2_github.tls_private_key.tenant (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"]"
+		"[root] module.fluxcd_v2_github.var.branch (expand)" -> "[root] module.fluxcd_v2_github (expand)"
+		"[root] module.fluxcd_v2_github.var.cluster_repo (expand)" -> "[root] module.fluxcd_v2_github (expand)"
+		"[root] module.fluxcd_v2_github.var.environment (expand)" -> "[root] module.fluxcd_v2_github (expand)"
+		"[root] module.fluxcd_v2_github.var.environment (expand)" -> "[root] var.environment"
+		"[root] module.fluxcd_v2_github.var.github_owner (expand)" -> "[root] module.fluxcd_v2_github (expand)"
+		"[root] module.fluxcd_v2_github.var.namespaces (expand)" -> "[root] module.fluxcd_v2_github (expand)"
+		"[root] module.fluxcd_v2_github.var.namespaces (expand)" -> "[root] var.namespaces"
+		"[root] module.ingress_nginx (close)" -> "[root] module.ingress_nginx.helm_release.ingress_nginx (expand)"
+		"[root] module.ingress_nginx (expand)" -> "[root] module.opa_gatekeeper (close)"
+		"[root] module.ingress_nginx (expand)" -> "[root] var.ingress_nginx_enabled"
+		"[root] module.ingress_nginx.helm_release.ingress_nginx (expand)" -> "[root] module.ingress_nginx.kubernetes_namespace.this (expand)"
+		"[root] module.ingress_nginx.helm_release.ingress_nginx (expand)" -> "[root] module.ingress_nginx.local.version (expand)"
+		"[root] module.ingress_nginx.kubernetes_namespace.this (expand)" -> "[root] module.ingress_nginx.local.namespace (expand)"
+		"[root] module.ingress_nginx.kubernetes_namespace.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] module.ingress_nginx.local.namespace (expand)" -> "[root] module.ingress_nginx (expand)"
+		"[root] module.ingress_nginx.local.version (expand)" -> "[root] module.ingress_nginx (expand)"
+		"[root] module.kyverno (close)" -> "[root] module.kyverno.helm_release.kyverno_extras (expand)"
+		"[root] module.kyverno (expand)" -> "[root] module.opa_gatekeeper (close)"
+		"[root] module.kyverno (expand)" -> "[root] var.kyverno_enabled"
+		"[root] module.kyverno.helm_release.kyverno (expand)" -> "[root] module.kyverno.kubernetes_namespace.this (expand)"
+		"[root] module.kyverno.helm_release.kyverno (expand)" -> "[root] module.kyverno.local.version (expand)"
+		"[root] module.kyverno.helm_release.kyverno_extras (expand)" -> "[root] module.kyverno.helm_release.kyverno (expand)"
+		"[root] module.kyverno.helm_release.kyverno_extras (expand)" -> "[root] module.kyverno.var.excluded_namespaces (expand)"
+		"[root] module.kyverno.kubernetes_namespace.this (expand)" -> "[root] module.kyverno.local.namespace (expand)"
+		"[root] module.kyverno.kubernetes_namespace.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] module.kyverno.local.namespace (expand)" -> "[root] module.kyverno (expand)"
+		"[root] module.kyverno.local.version (expand)" -> "[root] module.kyverno (expand)"
+		"[root] module.kyverno.var.excluded_namespaces (expand)" -> "[root] module.kyverno (expand)"
+		"[root] module.opa_gatekeeper (close)" -> "[root] module.opa_gatekeeper.helm_release.gatekeeper_constraints (expand)"
+		"[root] module.opa_gatekeeper (expand)" -> "[root] var.opa_gatekeeper_enabled"
+		"[root] module.opa_gatekeeper.helm_release.gatekeeper (expand)" -> "[root] module.opa_gatekeeper.local.gatekeeper_version (expand)"
+		"[root] module.opa_gatekeeper.helm_release.gatekeeper (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"]"
+		"[root] module.opa_gatekeeper.helm_release.gatekeeper_constraints (expand)" -> "[root] module.opa_gatekeeper.helm_release.gatekeeper_templates (expand)"
+		"[root] module.opa_gatekeeper.helm_release.gatekeeper_templates (expand)" -> "[root] module.opa_gatekeeper.helm_release.gatekeeper (expand)"
+		"[root] module.opa_gatekeeper.helm_release.gatekeeper_templates (expand)" -> "[root] module.opa_gatekeeper.local.gatekeeper_library_version (expand)"
+		"[root] module.opa_gatekeeper.helm_release.gatekeeper_templates (expand)" -> "[root] module.opa_gatekeeper.local.values (expand)"
+		"[root] module.opa_gatekeeper.local.gatekeeper_library_version (expand)" -> "[root] module.opa_gatekeeper (expand)"
+		"[root] module.opa_gatekeeper.local.gatekeeper_version (expand)" -> "[root] module.opa_gatekeeper (expand)"
+		"[root] module.opa_gatekeeper.local.values (expand)" -> "[root] module.opa_gatekeeper.var.additional_constraints (expand)"
+		"[root] module.opa_gatekeeper.local.values (expand)" -> "[root] module.opa_gatekeeper.var.default_constraints (expand)"
+		"[root] module.opa_gatekeeper.local.values (expand)" -> "[root] module.opa_gatekeeper.var.exclude (expand)"
+		"[root] module.opa_gatekeeper.var.additional_constraints (expand)" -> "[root] module.opa_gatekeeper (expand)"
+		"[root] module.opa_gatekeeper.var.default_constraints (expand)" -> "[root] module.opa_gatekeeper (expand)"
+		"[root] module.opa_gatekeeper.var.exclude (expand)" -> "[root] local.excluded_namespaces (expand)"
+		"[root] module.opa_gatekeeper.var.exclude (expand)" -> "[root] module.opa_gatekeeper (expand)"
+		"[root] module.velero (close)" -> "[root] module.velero.helm_release.velero_extras (expand)"
+		"[root] module.velero (expand)" -> "[root] module.opa_gatekeeper (close)"
+		"[root] module.velero (expand)" -> "[root] var.velero_enabled"
+		"[root] module.velero.helm_release.velero (expand)" -> "[root] module.velero.kubernetes_namespace.this (expand)"
+		"[root] module.velero.helm_release.velero (expand)" -> "[root] module.velero.local.values (expand)"
+		"[root] module.velero.helm_release.velero_extras (expand)" -> "[root] module.velero.helm_release.velero (expand)"
+		"[root] module.velero.kubernetes_namespace.this (expand)" -> "[root] module.velero.local.namespace (expand)"
+		"[root] module.velero.kubernetes_namespace.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] module.velero.local.namespace (expand)" -> "[root] module.velero (expand)"
+		"[root] module.velero.local.values (expand)" -> "[root] module.velero.var.aws_config (expand)"
+		"[root] module.velero.local.values (expand)" -> "[root] module.velero.var.azure_config (expand)"
+		"[root] module.velero.local.values (expand)" -> "[root] module.velero.var.cloud_provider (expand)"
+		"[root] module.velero.var.aws_config (expand)" -> "[root] data.aws_region.current (expand)"
+		"[root] module.velero.var.aws_config (expand)" -> "[root] module.velero (expand)"
+		"[root] module.velero.var.aws_config (expand)" -> "[root] var.velero_config"
+		"[root] module.velero.var.azure_config (expand)" -> "[root] module.velero (expand)"
+		"[root] module.velero.var.cloud_provider (expand)" -> "[root] module.velero (expand)"
+		"[root] provider[\"registry.terraform.io/fluxcd/flux\"] (close)" -> "[root] module.fluxcd_v2_github.data.flux_install.this (expand)"
+		"[root] provider[\"registry.terraform.io/fluxcd/flux\"] (close)" -> "[root] module.fluxcd_v2_github.data.flux_sync.this (expand)"
+		"[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"] (close)" -> "[root] module.fluxcd_v2_github.kubectl_manifest.sync (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] data.aws_region.current (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] data.aws_route53_zone.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] module.fluxcd_v2_github.github_repository_deploy_key.cluster (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] module.fluxcd_v2_github.github_repository_deploy_key.tenant (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] module.fluxcd_v2_github.github_repository_file.cluster_tenants (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] module.fluxcd_v2_github.github_repository_file.install (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] module.fluxcd_v2_github.github_repository_file.kustomize (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] module.fluxcd_v2_github.github_repository_file.sync (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)" -> "[root] module.fluxcd_v2_github.github_repository_file.tenant (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] module.cert_manager.helm_release.cert_manager_extras (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] module.external_dns.helm_release.external_dns_extras (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] module.external_secrets.helm_release.external_secrets (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] module.ingress_nginx.helm_release.ingress_nginx (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] module.kyverno.helm_release.kyverno_extras (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] module.velero.helm_release.velero_extras (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] kubernetes_namespace.tenant (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] kubernetes_network_policy.tenant (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] module.cert_manager.kubernetes_namespace.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] module.external_dns.kubernetes_namespace.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] module.external_secrets.kubernetes_namespace.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] module.fluxcd_v2_github.kubernetes_secret.cluster (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] module.fluxcd_v2_github.kubernetes_secret.tenant (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] module.ingress_nginx.kubernetes_namespace.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] module.kyverno.kubernetes_namespace.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] module.velero.kubernetes_namespace.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)" -> "[root] module.fluxcd_v2_github.tls_private_key.cluster (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)" -> "[root] module.fluxcd_v2_github.tls_private_key.tenant (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/fluxcd/flux\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/github\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)"
+	}
+}
+

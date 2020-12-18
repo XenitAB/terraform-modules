@@ -68,6 +68,27 @@ jobs:
             echo 'run make docs and commit changes'
             exit 1
           fi
+  graph:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@master
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.13.5
+      - name: Run graph
+        run: |
+          make graph
+      - name: Check if working tree is dirty
+        run: |
+          if [[ $(git status --porcelain) ]]; then
+            git diff
+            echo 'run make docs and commit changes'
+            exit 1
+          fi
   tfsec:
     name: tfsec
     runs-on: ubuntu-latest

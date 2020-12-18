@@ -1,0 +1,82 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] azuread_group_member.aks_managed_identity (expand)" [label = "azuread_group_member.aks_managed_identity", shape = "box"]
+		"[root] azurerm_kubernetes_cluster.this (expand)" [label = "azurerm_kubernetes_cluster.this", shape = "box"]
+		"[root] azurerm_kubernetes_cluster_node_pool.this (expand)" [label = "azurerm_kubernetes_cluster_node_pool.this", shape = "box"]
+		"[root] azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator (expand)" [label = "azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator", shape = "box"]
+		"[root] azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor (expand)" [label = "azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor", shape = "box"]
+		"[root] azurerm_role_assignment.cluster_admin (expand)" [label = "azurerm_role_assignment.cluster_admin", shape = "box"]
+		"[root] azurerm_role_assignment.cluster_view (expand)" [label = "azurerm_role_assignment.cluster_view", shape = "box"]
+		"[root] azurerm_role_assignment.edit (expand)" [label = "azurerm_role_assignment.edit", shape = "box"]
+		"[root] azurerm_role_assignment.view (expand)" [label = "azurerm_role_assignment.view", shape = "box"]
+		"[root] data.azurerm_resource_group.aks (expand)" [label = "data.azurerm_resource_group.aks", shape = "box"]
+		"[root] data.azurerm_resource_group.this (expand)" [label = "data.azurerm_resource_group.this", shape = "box"]
+		"[root] data.azurerm_subnet.this (expand)" [label = "data.azurerm_subnet.this", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"]" [label = "provider[\"registry.terraform.io/hashicorp/azuread\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]" [label = "provider[\"registry.terraform.io/hashicorp/azurerm\"]", shape = "diamond"]
+		"[root] var.aad_groups" [label = "var.aad_groups", shape = "note"]
+		"[root] var.aks_authorized_ips" [label = "var.aks_authorized_ips", shape = "note"]
+		"[root] var.aks_config" [label = "var.aks_config", shape = "note"]
+		"[root] var.aks_name_suffix" [label = "var.aks_name_suffix", shape = "note"]
+		"[root] var.aks_public_ip_prefix_id" [label = "var.aks_public_ip_prefix_id", shape = "note"]
+		"[root] var.core_name" [label = "var.core_name", shape = "note"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.location_short" [label = "var.location_short", shape = "note"]
+		"[root] var.name" [label = "var.name", shape = "note"]
+		"[root] var.namespaces" [label = "var.namespaces", shape = "note"]
+		"[root] var.ssh_public_key" [label = "var.ssh_public_key", shape = "note"]
+		"[root] azuread_group_member.aks_managed_identity (expand)" -> "[root] azurerm_kubernetes_cluster.this (expand)"
+		"[root] azuread_group_member.aks_managed_identity (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azurerm_kubernetes_cluster.this (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] azurerm_kubernetes_cluster.this (expand)" -> "[root] data.azurerm_subnet.this (expand)"
+		"[root] azurerm_kubernetes_cluster.this (expand)" -> "[root] var.aad_groups"
+		"[root] azurerm_kubernetes_cluster.this (expand)" -> "[root] var.aks_authorized_ips"
+		"[root] azurerm_kubernetes_cluster.this (expand)" -> "[root] var.aks_config"
+		"[root] azurerm_kubernetes_cluster.this (expand)" -> "[root] var.aks_public_ip_prefix_id"
+		"[root] azurerm_kubernetes_cluster.this (expand)" -> "[root] var.ssh_public_key"
+		"[root] azurerm_kubernetes_cluster_node_pool.this (expand)" -> "[root] azurerm_kubernetes_cluster.this (expand)"
+		"[root] azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator (expand)" -> "[root] data.azurerm_resource_group.aks (expand)"
+		"[root] azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor (expand)" -> "[root] data.azurerm_resource_group.aks (expand)"
+		"[root] azurerm_role_assignment.cluster_admin (expand)" -> "[root] azurerm_kubernetes_cluster.this (expand)"
+		"[root] azurerm_role_assignment.cluster_view (expand)" -> "[root] azurerm_kubernetes_cluster.this (expand)"
+		"[root] azurerm_role_assignment.edit (expand)" -> "[root] azurerm_kubernetes_cluster.this (expand)"
+		"[root] azurerm_role_assignment.edit (expand)" -> "[root] var.namespaces"
+		"[root] azurerm_role_assignment.view (expand)" -> "[root] azurerm_kubernetes_cluster.this (expand)"
+		"[root] azurerm_role_assignment.view (expand)" -> "[root] var.namespaces"
+		"[root] data.azurerm_resource_group.aks (expand)" -> "[root] azurerm_kubernetes_cluster.this (expand)"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] var.environment"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] var.location_short"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] var.name"
+		"[root] data.azurerm_subnet.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] data.azurerm_subnet.this (expand)" -> "[root] var.aks_name_suffix"
+		"[root] data.azurerm_subnet.this (expand)" -> "[root] var.core_name"
+		"[root] data.azurerm_subnet.this (expand)" -> "[root] var.environment"
+		"[root] data.azurerm_subnet.this (expand)" -> "[root] var.location_short"
+		"[root] data.azurerm_subnet.this (expand)" -> "[root] var.name"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.aks_managed_identity (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_kubernetes_cluster_node_pool.this (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.cluster_admin (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.cluster_view (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.edit (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.view (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.kube_config (expand)"
+		"[root] output.kube_config (expand)" -> "[root] azurerm_kubernetes_cluster.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.aks_managed_identity (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_kubernetes_cluster_node_pool.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.cluster_admin (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.cluster_view (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.edit (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.view (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)"
+	}
+}
+

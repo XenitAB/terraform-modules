@@ -1,0 +1,49 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] helm_release.azdo_proxy (expand)" [label = "helm_release.azdo_proxy", shape = "box"]
+		"[root] helm_release.fluxcd (expand)" [label = "helm_release.fluxcd", shape = "box"]
+		"[root] helm_release.helm_operator (expand)" [label = "helm_release.helm_operator", shape = "box"]
+		"[root] kubernetes_namespace.azdo_proxy (expand)" [label = "kubernetes_namespace.azdo_proxy", shape = "box"]
+		"[root] kubernetes_secret.azdo_proxy (expand)" [label = "kubernetes_secret.azdo_proxy", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"]" [label = "provider[\"registry.terraform.io/hashicorp/helm\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]" [label = "provider[\"registry.terraform.io/hashicorp/kubernetes\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/random\"]" [label = "provider[\"registry.terraform.io/hashicorp/random\"]", shape = "diamond"]
+		"[root] random_password.azdo_proxy (expand)" [label = "random_password.azdo_proxy", shape = "box"]
+		"[root] var.azure_devops_domain" [label = "var.azure_devops_domain", shape = "note"]
+		"[root] var.azure_devops_org" [label = "var.azure_devops_org", shape = "note"]
+		"[root] var.azure_devops_pat" [label = "var.azure_devops_pat", shape = "note"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.namespaces" [label = "var.namespaces", shape = "note"]
+		"[root] helm_release.azdo_proxy (expand)" -> "[root] kubernetes_secret.azdo_proxy (expand)"
+		"[root] helm_release.azdo_proxy (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"]"
+		"[root] helm_release.fluxcd (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"]"
+		"[root] helm_release.fluxcd (expand)" -> "[root] random_password.azdo_proxy (expand)"
+		"[root] helm_release.fluxcd (expand)" -> "[root] var.environment"
+		"[root] helm_release.helm_operator (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"]"
+		"[root] helm_release.helm_operator (expand)" -> "[root] random_password.azdo_proxy (expand)"
+		"[root] kubernetes_namespace.azdo_proxy (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] kubernetes_secret.azdo_proxy (expand)" -> "[root] kubernetes_namespace.azdo_proxy (expand)"
+		"[root] kubernetes_secret.azdo_proxy (expand)" -> "[root] local.azdo_proxy_json (expand)"
+		"[root] local.azdo_proxy_json (expand)" -> "[root] random_password.azdo_proxy (expand)"
+		"[root] local.azdo_proxy_json (expand)" -> "[root] var.azure_devops_domain"
+		"[root] local.azdo_proxy_json (expand)" -> "[root] var.azure_devops_org"
+		"[root] local.azdo_proxy_json (expand)" -> "[root] var.azure_devops_pat"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] helm_release.azdo_proxy (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] helm_release.fluxcd (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] helm_release.helm_operator (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] helm_release.azdo_proxy (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] helm_release.fluxcd (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] helm_release.helm_operator (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] kubernetes_secret.azdo_proxy (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/random\"] (close)" -> "[root] random_password.azdo_proxy (expand)"
+		"[root] random_password.azdo_proxy (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/random\"]"
+		"[root] random_password.azdo_proxy (expand)" -> "[root] var.namespaces"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/random\"] (close)"
+	}
+}
+

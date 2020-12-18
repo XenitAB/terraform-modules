@@ -3,6 +3,8 @@
   *
   * Adds [`opa-gatekeeper`](https://github.com/open-policy-agent/gatekeeper) and [gatekeeper-library](https://github.com/xenitab/gatekeeper-library) to a Kubernetes clusters.
   *
+  * ![Terraform Graph](files/graph.svg "Terraform Graph")
+  *
   * Running the gatekeeper is a prerequirement for the library to work, as the library only adds different types of constraints that are used by gatekeeper.
   * Constraints are added through first creating a `ConstraintTemplate` and then adding a `Constraint` that enforces the template. The module constains a list of default
   * constraints in the `default_constraints` that are recomended to always be applied. These constraints are cloud agnostic and are either re-implemetnations of specific PSPs

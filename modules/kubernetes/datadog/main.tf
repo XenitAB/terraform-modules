@@ -2,6 +2,9 @@
   * # Datadog
   *
   * Adds [Datadog](https://github.com/DataDog/helm-charts) to a Kubernetes cluster.
+  *
+  * ![Terraform Graph](files/graph.svg "Terraform Graph")
+  *
   */
 
 terraform {

@@ -2,6 +2,8 @@
 
 This module is used to configure EKS clusters.
 
+![Terraform Graph](files/graph.svg "Terraform Graph")
+
 ## Requirements
 
 | Name | Version |

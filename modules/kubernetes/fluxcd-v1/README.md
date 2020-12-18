@@ -2,6 +2,8 @@
 
 This module is used to add [`flux`](https://github.com/fluxcd/flux) to Kubernetes clusters.
 
+![Terraform Graph](files/graph.svg "Terraform Graph")
+
 ## Details
 
 The helm chart is added to this module to add the securityContext parameters to the pod running flux, to make sure it works with the `opa-gatekeeper` module.

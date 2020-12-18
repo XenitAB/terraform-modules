@@ -2,6 +2,9 @@
   * # Azure AD POD Identity (AAD-POD-Identity)
   *
   * This module is used to add [`aad-pod-identity`](https://github.com/Azure/aad-pod-identity) to Kubernetes clusters (tested with AKS).
+  *
+  * ![Terraform Graph](files/graph.svg "Terraform Graph")
+  *
   */
 
 terraform {

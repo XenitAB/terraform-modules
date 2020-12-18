@@ -1,0 +1,65 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] azurerm_nat_gateway.this (expand)" [label = "azurerm_nat_gateway.this", shape = "box"]
+		"[root] azurerm_network_security_group.this (expand)" [label = "azurerm_network_security_group.this", shape = "box"]
+		"[root] azurerm_public_ip_prefix.this (expand)" [label = "azurerm_public_ip_prefix.this", shape = "box"]
+		"[root] azurerm_subnet.this (expand)" [label = "azurerm_subnet.this", shape = "box"]
+		"[root] azurerm_subnet_nat_gateway_association.this (expand)" [label = "azurerm_subnet_nat_gateway_association.this", shape = "box"]
+		"[root] azurerm_subnet_network_security_group_association.this (expand)" [label = "azurerm_subnet_network_security_group_association.this", shape = "box"]
+		"[root] azurerm_virtual_network.this (expand)" [label = "azurerm_virtual_network.this", shape = "box"]
+		"[root] azurerm_virtual_network_peering.this (expand)" [label = "azurerm_virtual_network_peering.this", shape = "box"]
+		"[root] data.azurerm_resource_group.this (expand)" [label = "data.azurerm_resource_group.this", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]" [label = "provider[\"registry.terraform.io/hashicorp/azurerm\"]", shape = "diamond"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.name" [label = "var.name", shape = "note"]
+		"[root] var.nat_gateway_public_ip_prefix_length" [label = "var.nat_gateway_public_ip_prefix_length", shape = "note"]
+		"[root] var.peering_config" [label = "var.peering_config", shape = "note"]
+		"[root] var.regions" [label = "var.regions", shape = "note"]
+		"[root] var.vnet_config" [label = "var.vnet_config", shape = "note"]
+		"[root] azurerm_nat_gateway.this (expand)" -> "[root] azurerm_public_ip_prefix.this (expand)"
+		"[root] azurerm_network_security_group.this (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] azurerm_network_security_group.this (expand)" -> "[root] local.subnets (expand)"
+		"[root] azurerm_public_ip_prefix.this (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] azurerm_public_ip_prefix.this (expand)" -> "[root] var.nat_gateway_public_ip_prefix_length"
+		"[root] azurerm_subnet.this (expand)" -> "[root] azurerm_virtual_network.this (expand)"
+		"[root] azurerm_subnet.this (expand)" -> "[root] local.subnets (expand)"
+		"[root] azurerm_subnet_nat_gateway_association.this (expand)" -> "[root] azurerm_nat_gateway.this (expand)"
+		"[root] azurerm_subnet_nat_gateway_association.this (expand)" -> "[root] azurerm_subnet.this (expand)"
+		"[root] azurerm_subnet_network_security_group_association.this (expand)" -> "[root] azurerm_network_security_group.this (expand)"
+		"[root] azurerm_subnet_network_security_group_association.this (expand)" -> "[root] azurerm_subnet.this (expand)"
+		"[root] azurerm_virtual_network.this (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] azurerm_virtual_network_peering.this (expand)" -> "[root] azurerm_virtual_network.this (expand)"
+		"[root] azurerm_virtual_network_peering.this (expand)" -> "[root] local.peerings (expand)"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] local.env_resources (expand)"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] local.env_resources (expand)" -> "[root] var.environment"
+		"[root] local.env_resources (expand)" -> "[root] var.name"
+		"[root] local.env_resources (expand)" -> "[root] var.regions"
+		"[root] local.env_resources (expand)" -> "[root] var.vnet_config"
+		"[root] local.peerings (expand)" -> "[root] var.environment"
+		"[root] local.peerings (expand)" -> "[root] var.name"
+		"[root] local.peerings (expand)" -> "[root] var.peering_config"
+		"[root] local.subnets (expand)" -> "[root] var.environment"
+		"[root] local.subnets (expand)" -> "[root] var.name"
+		"[root] local.subnets (expand)" -> "[root] var.vnet_config"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_subnet_nat_gateway_association.this (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_subnet_network_security_group_association.this (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_virtual_network_peering.this (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.public_ip_prefixes (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.resource_groups (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.subnets (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.virtual_networks (expand)"
+		"[root] output.public_ip_prefixes (expand)" -> "[root] azurerm_public_ip_prefix.this (expand)"
+		"[root] output.resource_groups (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] output.subnets (expand)" -> "[root] azurerm_subnet.this (expand)"
+		"[root] output.virtual_networks (expand)" -> "[root] azurerm_virtual_network.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_subnet_nat_gateway_association.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_subnet_network_security_group_association.this (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_virtual_network_peering.this (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)"
+	}
+}
+

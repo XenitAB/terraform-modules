@@ -1,0 +1,101 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] azuredevops_git_repository.groups (expand)" [label = "azuredevops_git_repository.groups", shape = "box"]
+		"[root] azuredevops_git_repository.this (expand)" [label = "azuredevops_git_repository.this", shape = "box"]
+		"[root] azuredevops_git_repository_file.groups (expand)" [label = "azuredevops_git_repository_file.groups", shape = "box"]
+		"[root] azuredevops_git_repository_file.install (expand)" [label = "azuredevops_git_repository_file.install", shape = "box"]
+		"[root] azuredevops_git_repository_file.kustomize (expand)" [label = "azuredevops_git_repository_file.kustomize", shape = "box"]
+		"[root] azuredevops_git_repository_file.sync (expand)" [label = "azuredevops_git_repository_file.sync", shape = "box"]
+		"[root] data.azuredevops_project.this (expand)" [label = "data.azuredevops_project.this", shape = "box"]
+		"[root] data.flux_install.main (expand)" [label = "data.flux_install.main", shape = "box"]
+		"[root] data.flux_sync.main (expand)" [label = "data.flux_sync.main", shape = "box"]
+		"[root] data.kubectl_file_documents.install (expand)" [label = "data.kubectl_file_documents.install", shape = "box"]
+		"[root] data.kubectl_file_documents.sync (expand)" [label = "data.kubectl_file_documents.sync", shape = "box"]
+		"[root] kubectl_manifest.git_cache_deplopyment (expand)" [label = "kubectl_manifest.git_cache_deplopyment", shape = "box"]
+		"[root] kubectl_manifest.git_cache_service (expand)" [label = "kubectl_manifest.git_cache_service", shape = "box"]
+		"[root] kubectl_manifest.install (expand)" [label = "kubectl_manifest.install", shape = "box"]
+		"[root] kubectl_manifest.sync (expand)" [label = "kubectl_manifest.sync", shape = "box"]
+		"[root] kubernetes_namespace.flux_system (expand)" [label = "kubernetes_namespace.flux_system", shape = "box"]
+		"[root] kubernetes_secret.main (expand)" [label = "kubernetes_secret.main", shape = "box"]
+		"[root] provider[\"registry.terraform.io/fluxcd/flux\"]" [label = "provider[\"registry.terraform.io/fluxcd/flux\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"]" [label = "provider[\"registry.terraform.io/gavinbunney/kubectl\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]" [label = "provider[\"registry.terraform.io/hashicorp/kubernetes\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/xenitab/azuredevops\"]" [label = "provider[\"registry.terraform.io/xenitab/azuredevops\"]", shape = "diamond"]
+		"[root] var.azure_devops_org" [label = "var.azure_devops_org", shape = "note"]
+		"[root] var.azure_devops_pat" [label = "var.azure_devops_pat", shape = "note"]
+		"[root] var.azure_devops_proj" [label = "var.azure_devops_proj", shape = "note"]
+		"[root] var.bootstrap_path" [label = "var.bootstrap_path", shape = "note"]
+		"[root] var.bootstrap_repo" [label = "var.bootstrap_repo", shape = "note"]
+		"[root] var.branch" [label = "var.branch", shape = "note"]
+		"[root] var.namespaces" [label = "var.namespaces", shape = "note"]
+		"[root] azuredevops_git_repository.groups (expand)" -> "[root] data.azuredevops_project.this (expand)"
+		"[root] azuredevops_git_repository.groups (expand)" -> "[root] var.namespaces"
+		"[root] azuredevops_git_repository.this (expand)" -> "[root] data.azuredevops_project.this (expand)"
+		"[root] azuredevops_git_repository.this (expand)" -> "[root] var.bootstrap_repo"
+		"[root] azuredevops_git_repository_file.groups (expand)" -> "[root] azuredevops_git_repository.this (expand)"
+		"[root] azuredevops_git_repository_file.groups (expand)" -> "[root] var.azure_devops_org"
+		"[root] azuredevops_git_repository_file.groups (expand)" -> "[root] var.bootstrap_path"
+		"[root] azuredevops_git_repository_file.groups (expand)" -> "[root] var.branch"
+		"[root] azuredevops_git_repository_file.groups (expand)" -> "[root] var.namespaces"
+		"[root] azuredevops_git_repository_file.install (expand)" -> "[root] azuredevops_git_repository.this (expand)"
+		"[root] azuredevops_git_repository_file.install (expand)" -> "[root] data.flux_install.main (expand)"
+		"[root] azuredevops_git_repository_file.install (expand)" -> "[root] var.branch"
+		"[root] azuredevops_git_repository_file.kustomize (expand)" -> "[root] azuredevops_git_repository.this (expand)"
+		"[root] azuredevops_git_repository_file.kustomize (expand)" -> "[root] data.flux_sync.main (expand)"
+		"[root] azuredevops_git_repository_file.sync (expand)" -> "[root] azuredevops_git_repository.this (expand)"
+		"[root] azuredevops_git_repository_file.sync (expand)" -> "[root] data.flux_sync.main (expand)"
+		"[root] data.azuredevops_project.this (expand)" -> "[root] provider[\"registry.terraform.io/xenitab/azuredevops\"]"
+		"[root] data.azuredevops_project.this (expand)" -> "[root] var.azure_devops_proj"
+		"[root] data.flux_install.main (expand)" -> "[root] provider[\"registry.terraform.io/fluxcd/flux\"]"
+		"[root] data.flux_install.main (expand)" -> "[root] var.bootstrap_path"
+		"[root] data.flux_sync.main (expand)" -> "[root] local.repo_url (expand)"
+		"[root] data.flux_sync.main (expand)" -> "[root] provider[\"registry.terraform.io/fluxcd/flux\"]"
+		"[root] data.flux_sync.main (expand)" -> "[root] var.bootstrap_path"
+		"[root] data.flux_sync.main (expand)" -> "[root] var.branch"
+		"[root] data.kubectl_file_documents.install (expand)" -> "[root] data.flux_install.main (expand)"
+		"[root] data.kubectl_file_documents.install (expand)" -> "[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"]"
+		"[root] data.kubectl_file_documents.sync (expand)" -> "[root] data.flux_sync.main (expand)"
+		"[root] data.kubectl_file_documents.sync (expand)" -> "[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"]"
+		"[root] kubectl_manifest.git_cache_deplopyment (expand)" -> "[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"]"
+		"[root] kubectl_manifest.git_cache_service (expand)" -> "[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"]"
+		"[root] kubectl_manifest.install (expand)" -> "[root] data.kubectl_file_documents.install (expand)"
+		"[root] kubectl_manifest.install (expand)" -> "[root] kubernetes_namespace.flux_system (expand)"
+		"[root] kubectl_manifest.sync (expand)" -> "[root] data.kubectl_file_documents.sync (expand)"
+		"[root] kubectl_manifest.sync (expand)" -> "[root] kubectl_manifest.install (expand)"
+		"[root] kubernetes_namespace.flux_system (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] kubernetes_secret.main (expand)" -> "[root] data.flux_sync.main (expand)"
+		"[root] kubernetes_secret.main (expand)" -> "[root] kubectl_manifest.install (expand)"
+		"[root] kubernetes_secret.main (expand)" -> "[root] var.azure_devops_pat"
+		"[root] local.repo_url (expand)" -> "[root] var.azure_devops_org"
+		"[root] local.repo_url (expand)" -> "[root] var.azure_devops_proj"
+		"[root] local.repo_url (expand)" -> "[root] var.bootstrap_repo"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuredevops_git_repository.groups (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuredevops_git_repository_file.groups (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuredevops_git_repository_file.install (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuredevops_git_repository_file.kustomize (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuredevops_git_repository_file.sync (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] kubectl_manifest.git_cache_deplopyment (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] kubectl_manifest.git_cache_service (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] kubectl_manifest.sync (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] kubernetes_secret.main (expand)"
+		"[root] provider[\"registry.terraform.io/fluxcd/flux\"] (close)" -> "[root] data.flux_install.main (expand)"
+		"[root] provider[\"registry.terraform.io/fluxcd/flux\"] (close)" -> "[root] data.flux_sync.main (expand)"
+		"[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"] (close)" -> "[root] kubectl_manifest.git_cache_deplopyment (expand)"
+		"[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"] (close)" -> "[root] kubectl_manifest.git_cache_service (expand)"
+		"[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"] (close)" -> "[root] kubectl_manifest.sync (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] kubernetes_secret.main (expand)"
+		"[root] provider[\"registry.terraform.io/xenitab/azuredevops\"] (close)" -> "[root] azuredevops_git_repository.groups (expand)"
+		"[root] provider[\"registry.terraform.io/xenitab/azuredevops\"] (close)" -> "[root] azuredevops_git_repository_file.groups (expand)"
+		"[root] provider[\"registry.terraform.io/xenitab/azuredevops\"] (close)" -> "[root] azuredevops_git_repository_file.install (expand)"
+		"[root] provider[\"registry.terraform.io/xenitab/azuredevops\"] (close)" -> "[root] azuredevops_git_repository_file.kustomize (expand)"
+		"[root] provider[\"registry.terraform.io/xenitab/azuredevops\"] (close)" -> "[root] azuredevops_git_repository_file.sync (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/fluxcd/flux\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/gavinbunney/kubectl\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/xenitab/azuredevops\"] (close)"
+	}
+}
+

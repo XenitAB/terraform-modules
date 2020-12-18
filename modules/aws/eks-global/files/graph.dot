@@ -1,0 +1,38 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_iam_policy.eks_admin (expand)" [label = "aws_iam_policy.eks_admin", shape = "box"]
+		"[root] aws_iam_role.eks_admin (expand)" [label = "aws_iam_role.eks_admin", shape = "box"]
+		"[root] aws_iam_role_policy_attachment.eks_admin (expand)" [label = "aws_iam_role_policy_attachment.eks_admin", shape = "box"]
+		"[root] aws_kms_key.velero (expand)" [label = "aws_kms_key.velero", shape = "box"]
+		"[root] aws_s3_bucket.velero (expand)" [label = "aws_s3_bucket.velero", shape = "box"]
+		"[root] data.aws_caller_identity.current (expand)" [label = "data.aws_caller_identity.current", shape = "box"]
+		"[root] data.aws_iam_policy_document.eks_admin_assume (expand)" [label = "data.aws_iam_policy_document.eks_admin_assume", shape = "box"]
+		"[root] data.aws_iam_policy_document.eks_admin_permission (expand)" [label = "data.aws_iam_policy_document.eks_admin_permission", shape = "box"]
+		"[root] data.aws_region.current (expand)" [label = "data.aws_region.current", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.name" [label = "var.name", shape = "note"]
+		"[root] aws_iam_policy.eks_admin (expand)" -> "[root] data.aws_iam_policy_document.eks_admin_permission (expand)"
+		"[root] aws_iam_role.eks_admin (expand)" -> "[root] data.aws_iam_policy_document.eks_admin_assume (expand)"
+		"[root] aws_iam_role_policy_attachment.eks_admin (expand)" -> "[root] aws_iam_policy.eks_admin (expand)"
+		"[root] aws_iam_role_policy_attachment.eks_admin (expand)" -> "[root] aws_iam_role.eks_admin (expand)"
+		"[root] aws_kms_key.velero (expand)" -> "[root] data.aws_region.current (expand)"
+		"[root] aws_kms_key.velero (expand)" -> "[root] var.environment"
+		"[root] aws_kms_key.velero (expand)" -> "[root] var.name"
+		"[root] aws_s3_bucket.velero (expand)" -> "[root] aws_kms_key.velero (expand)"
+		"[root] data.aws_caller_identity.current (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_iam_policy_document.eks_admin_assume (expand)" -> "[root] data.aws_caller_identity.current (expand)"
+		"[root] data.aws_iam_policy_document.eks_admin_permission (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_region.current (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_iam_role_policy_attachment.eks_admin (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.velero_config (expand)"
+		"[root] output.velero_config (expand)" -> "[root] aws_s3_bucket.velero (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_iam_role_policy_attachment.eks_admin (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_s3_bucket.velero (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+

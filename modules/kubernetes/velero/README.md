@@ -2,6 +2,8 @@
 
 This module is used to add [`velero`](https://github.com/vmware-tanzu/velero) to Kubernetes clusters.
 
+![Terraform Graph](files/graph.svg "Terraform Graph")
+
 ## Requirements
 
 | Name | Version |

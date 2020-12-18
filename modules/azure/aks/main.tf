@@ -2,6 +2,9 @@
   * # Azure Kubernetes Service
   *
   * This module is used to create AKS clusters.
+  *
+  * ![Terraform Graph](files/graph.svg "Terraform Graph")
+  *
   */
 
 terraform {

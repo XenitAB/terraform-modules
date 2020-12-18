@@ -1,0 +1,263 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] azuread_application.helm_operator (expand)" [label = "azuread_application.helm_operator", shape = "box"]
+		"[root] azuread_application_password.helm_operator (expand)" [label = "azuread_application_password.helm_operator", shape = "box"]
+		"[root] azuread_group.aks_managed_identity (expand)" [label = "azuread_group.aks_managed_identity", shape = "box"]
+		"[root] azuread_group.cluster_admin (expand)" [label = "azuread_group.cluster_admin", shape = "box"]
+		"[root] azuread_group.cluster_view (expand)" [label = "azuread_group.cluster_view", shape = "box"]
+		"[root] azuread_group.edit (expand)" [label = "azuread_group.edit", shape = "box"]
+		"[root] azuread_group.view (expand)" [label = "azuread_group.view", shape = "box"]
+		"[root] azuread_group_member.aad_pod_identity (expand)" [label = "azuread_group_member.aad_pod_identity", shape = "box"]
+		"[root] azuread_group_member.helm_operator (expand)" [label = "azuread_group_member.helm_operator", shape = "box"]
+		"[root] azuread_group_member.resource_group_contributor (expand)" [label = "azuread_group_member.resource_group_contributor", shape = "box"]
+		"[root] azuread_group_member.resource_group_owner (expand)" [label = "azuread_group_member.resource_group_owner", shape = "box"]
+		"[root] azuread_group_member.resource_group_reader (expand)" [label = "azuread_group_member.resource_group_reader", shape = "box"]
+		"[root] azuread_service_principal.helm_operator (expand)" [label = "azuread_service_principal.helm_operator", shape = "box"]
+		"[root] azurerm_container_registry.acr (expand)" [label = "azurerm_container_registry.acr", shape = "box"]
+		"[root] azurerm_dns_zone.this (expand)" [label = "azurerm_dns_zone.this", shape = "box"]
+		"[root] azurerm_key_vault_secret.ssh_key (expand)" [label = "azurerm_key_vault_secret.ssh_key", shape = "box"]
+		"[root] azurerm_public_ip_prefix.aks (expand)" [label = "azurerm_public_ip_prefix.aks", shape = "box"]
+		"[root] azurerm_role_assignment.aad_pod_identity (expand)" [label = "azurerm_role_assignment.aad_pod_identity", shape = "box"]
+		"[root] azurerm_role_assignment.acr_pull (expand)" [label = "azurerm_role_assignment.acr_pull", shape = "box"]
+		"[root] azurerm_role_assignment.acr_push (expand)" [label = "azurerm_role_assignment.acr_push", shape = "box"]
+		"[root] azurerm_role_assignment.aks (expand)" [label = "azurerm_role_assignment.aks", shape = "box"]
+		"[root] azurerm_role_assignment.external_dns_contributor (expand)" [label = "azurerm_role_assignment.external_dns_contributor", shape = "box"]
+		"[root] azurerm_role_assignment.external_dns_msi (expand)" [label = "azurerm_role_assignment.external_dns_msi", shape = "box"]
+		"[root] azurerm_role_assignment.external_dns_rg_read (expand)" [label = "azurerm_role_assignment.external_dns_rg_read", shape = "box"]
+		"[root] azurerm_role_assignment.external_storage_contributor (expand)" [label = "azurerm_role_assignment.external_storage_contributor", shape = "box"]
+		"[root] azurerm_role_assignment.velero_msi (expand)" [label = "azurerm_role_assignment.velero_msi", shape = "box"]
+		"[root] azurerm_role_assignment.velero_rg_read (expand)" [label = "azurerm_role_assignment.velero_rg_read", shape = "box"]
+		"[root] azurerm_storage_account.velero (expand)" [label = "azurerm_storage_account.velero", shape = "box"]
+		"[root] azurerm_storage_container.velero (expand)" [label = "azurerm_storage_container.velero", shape = "box"]
+		"[root] azurerm_user_assigned_identity.aad_pod_identity (expand)" [label = "azurerm_user_assigned_identity.aad_pod_identity", shape = "box"]
+		"[root] azurerm_user_assigned_identity.external_dns (expand)" [label = "azurerm_user_assigned_identity.external_dns", shape = "box"]
+		"[root] azurerm_user_assigned_identity.velero (expand)" [label = "azurerm_user_assigned_identity.velero", shape = "box"]
+		"[root] data.azuread_group.acr_pull (expand)" [label = "data.azuread_group.acr_pull", shape = "box"]
+		"[root] data.azuread_group.acr_push (expand)" [label = "data.azuread_group.acr_push", shape = "box"]
+		"[root] data.azuread_group.resource_group_contributor (expand)" [label = "data.azuread_group.resource_group_contributor", shape = "box"]
+		"[root] data.azuread_group.resource_group_owner (expand)" [label = "data.azuread_group.resource_group_owner", shape = "box"]
+		"[root] data.azuread_group.resource_group_reader (expand)" [label = "data.azuread_group.resource_group_reader", shape = "box"]
+		"[root] data.azurerm_key_vault.core (expand)" [label = "data.azurerm_key_vault.core", shape = "box"]
+		"[root] data.azurerm_resource_group.this (expand)" [label = "data.azurerm_resource_group.this", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"]" [label = "provider[\"registry.terraform.io/hashicorp/azuread\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]" [label = "provider[\"registry.terraform.io/hashicorp/azurerm\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/random\"]" [label = "provider[\"registry.terraform.io/hashicorp/random\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"]" [label = "provider[\"registry.terraform.io/hashicorp/tls\"]", shape = "diamond"]
+		"[root] random_password.helm_operator (expand)" [label = "random_password.helm_operator", shape = "box"]
+		"[root] tls_private_key.ssh_key (expand)" [label = "tls_private_key.ssh_key", shape = "box"]
+		"[root] var.aks_authorized_ips" [label = "var.aks_authorized_ips", shape = "note"]
+		"[root] var.aks_group_name_prefix" [label = "var.aks_group_name_prefix", shape = "note"]
+		"[root] var.azure_ad_group_prefix" [label = "var.azure_ad_group_prefix", shape = "note"]
+		"[root] var.core_name" [label = "var.core_name", shape = "note"]
+		"[root] var.dns_zone" [label = "var.dns_zone", shape = "note"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.group_name_separator" [label = "var.group_name_separator", shape = "note"]
+		"[root] var.location_short" [label = "var.location_short", shape = "note"]
+		"[root] var.name" [label = "var.name", shape = "note"]
+		"[root] var.namespaces" [label = "var.namespaces", shape = "note"]
+		"[root] var.public_ip_prefix_configuration" [label = "var.public_ip_prefix_configuration", shape = "note"]
+		"[root] var.service_principal_name_prefix" [label = "var.service_principal_name_prefix", shape = "note"]
+		"[root] var.subscription_name" [label = "var.subscription_name", shape = "note"]
+		"[root] var.unique_suffix" [label = "var.unique_suffix", shape = "note"]
+		"[root] azuread_application.helm_operator (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_application.helm_operator (expand)" -> "[root] var.environment"
+		"[root] azuread_application.helm_operator (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_application.helm_operator (expand)" -> "[root] var.name"
+		"[root] azuread_application.helm_operator (expand)" -> "[root] var.service_principal_name_prefix"
+		"[root] azuread_application.helm_operator (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_application_password.helm_operator (expand)" -> "[root] random_password.helm_operator (expand)"
+		"[root] azuread_group.aks_managed_identity (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.aks_managed_identity (expand)" -> "[root] var.aks_group_name_prefix"
+		"[root] azuread_group.aks_managed_identity (expand)" -> "[root] var.environment"
+		"[root] azuread_group.aks_managed_identity (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.aks_managed_identity (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group.cluster_admin (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.cluster_admin (expand)" -> "[root] var.aks_group_name_prefix"
+		"[root] azuread_group.cluster_admin (expand)" -> "[root] var.environment"
+		"[root] azuread_group.cluster_admin (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.cluster_admin (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group.cluster_view (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.cluster_view (expand)" -> "[root] var.aks_group_name_prefix"
+		"[root] azuread_group.cluster_view (expand)" -> "[root] var.environment"
+		"[root] azuread_group.cluster_view (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.cluster_view (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group.edit (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.edit (expand)" -> "[root] var.aks_group_name_prefix"
+		"[root] azuread_group.edit (expand)" -> "[root] var.environment"
+		"[root] azuread_group.edit (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.edit (expand)" -> "[root] var.namespaces"
+		"[root] azuread_group.edit (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group.view (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] azuread_group.view (expand)" -> "[root] var.aks_group_name_prefix"
+		"[root] azuread_group.view (expand)" -> "[root] var.environment"
+		"[root] azuread_group.view (expand)" -> "[root] var.group_name_separator"
+		"[root] azuread_group.view (expand)" -> "[root] var.namespaces"
+		"[root] azuread_group.view (expand)" -> "[root] var.subscription_name"
+		"[root] azuread_group_member.aad_pod_identity (expand)" -> "[root] azurerm_user_assigned_identity.aad_pod_identity (expand)"
+		"[root] azuread_group_member.aad_pod_identity (expand)" -> "[root] data.azuread_group.resource_group_contributor (expand)"
+		"[root] azuread_group_member.helm_operator (expand)" -> "[root] azuread_service_principal.helm_operator (expand)"
+		"[root] azuread_group_member.helm_operator (expand)" -> "[root] data.azuread_group.acr_pull (expand)"
+		"[root] azuread_group_member.resource_group_contributor (expand)" -> "[root] azuread_group.edit (expand)"
+		"[root] azuread_group_member.resource_group_contributor (expand)" -> "[root] data.azuread_group.resource_group_contributor (expand)"
+		"[root] azuread_group_member.resource_group_owner (expand)" -> "[root] azuread_group.edit (expand)"
+		"[root] azuread_group_member.resource_group_owner (expand)" -> "[root] data.azuread_group.resource_group_owner (expand)"
+		"[root] azuread_group_member.resource_group_reader (expand)" -> "[root] azuread_group.view (expand)"
+		"[root] azuread_group_member.resource_group_reader (expand)" -> "[root] data.azuread_group.resource_group_reader (expand)"
+		"[root] azuread_service_principal.helm_operator (expand)" -> "[root] azuread_application.helm_operator (expand)"
+		"[root] azurerm_container_registry.acr (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] azurerm_container_registry.acr (expand)" -> "[root] var.unique_suffix"
+		"[root] azurerm_dns_zone.this (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] azurerm_dns_zone.this (expand)" -> "[root] var.dns_zone"
+		"[root] azurerm_key_vault_secret.ssh_key (expand)" -> "[root] data.azurerm_key_vault.core (expand)"
+		"[root] azurerm_key_vault_secret.ssh_key (expand)" -> "[root] tls_private_key.ssh_key (expand)"
+		"[root] azurerm_public_ip_prefix.aks (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] azurerm_public_ip_prefix.aks (expand)" -> "[root] var.public_ip_prefix_configuration"
+		"[root] azurerm_role_assignment.aad_pod_identity (expand)" -> "[root] azuread_group.aks_managed_identity (expand)"
+		"[root] azurerm_role_assignment.aad_pod_identity (expand)" -> "[root] azurerm_user_assigned_identity.aad_pod_identity (expand)"
+		"[root] azurerm_role_assignment.acr_pull (expand)" -> "[root] azurerm_container_registry.acr (expand)"
+		"[root] azurerm_role_assignment.acr_pull (expand)" -> "[root] data.azuread_group.acr_pull (expand)"
+		"[root] azurerm_role_assignment.acr_push (expand)" -> "[root] azurerm_container_registry.acr (expand)"
+		"[root] azurerm_role_assignment.acr_push (expand)" -> "[root] data.azuread_group.acr_push (expand)"
+		"[root] azurerm_role_assignment.aks (expand)" -> "[root] azuread_group.aks_managed_identity (expand)"
+		"[root] azurerm_role_assignment.aks (expand)" -> "[root] azurerm_container_registry.acr (expand)"
+		"[root] azurerm_role_assignment.external_dns_contributor (expand)" -> "[root] azurerm_dns_zone.this (expand)"
+		"[root] azurerm_role_assignment.external_dns_contributor (expand)" -> "[root] azurerm_user_assigned_identity.external_dns (expand)"
+		"[root] azurerm_role_assignment.external_dns_msi (expand)" -> "[root] azuread_group.aks_managed_identity (expand)"
+		"[root] azurerm_role_assignment.external_dns_msi (expand)" -> "[root] azurerm_user_assigned_identity.external_dns (expand)"
+		"[root] azurerm_role_assignment.external_dns_rg_read (expand)" -> "[root] azurerm_user_assigned_identity.external_dns (expand)"
+		"[root] azurerm_role_assignment.external_storage_contributor (expand)" -> "[root] azurerm_storage_account.velero (expand)"
+		"[root] azurerm_role_assignment.external_storage_contributor (expand)" -> "[root] azurerm_user_assigned_identity.velero (expand)"
+		"[root] azurerm_role_assignment.velero_msi (expand)" -> "[root] azuread_group.aks_managed_identity (expand)"
+		"[root] azurerm_role_assignment.velero_msi (expand)" -> "[root] azurerm_user_assigned_identity.velero (expand)"
+		"[root] azurerm_role_assignment.velero_rg_read (expand)" -> "[root] azurerm_user_assigned_identity.velero (expand)"
+		"[root] azurerm_storage_account.velero (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] azurerm_storage_account.velero (expand)" -> "[root] var.unique_suffix"
+		"[root] azurerm_storage_container.velero (expand)" -> "[root] azurerm_storage_account.velero (expand)"
+		"[root] azurerm_user_assigned_identity.aad_pod_identity (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] azurerm_user_assigned_identity.aad_pod_identity (expand)" -> "[root] var.namespaces"
+		"[root] azurerm_user_assigned_identity.external_dns (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] azurerm_user_assigned_identity.velero (expand)" -> "[root] data.azurerm_resource_group.this (expand)"
+		"[root] data.azuread_group.acr_pull (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] data.azuread_group.acr_pull (expand)" -> "[root] var.aks_group_name_prefix"
+		"[root] data.azuread_group.acr_pull (expand)" -> "[root] var.environment"
+		"[root] data.azuread_group.acr_pull (expand)" -> "[root] var.group_name_separator"
+		"[root] data.azuread_group.acr_pull (expand)" -> "[root] var.subscription_name"
+		"[root] data.azuread_group.acr_push (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] data.azuread_group.acr_push (expand)" -> "[root] var.aks_group_name_prefix"
+		"[root] data.azuread_group.acr_push (expand)" -> "[root] var.environment"
+		"[root] data.azuread_group.acr_push (expand)" -> "[root] var.group_name_separator"
+		"[root] data.azuread_group.acr_push (expand)" -> "[root] var.subscription_name"
+		"[root] data.azuread_group.resource_group_contributor (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] data.azuread_group.resource_group_contributor (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] data.azuread_group.resource_group_contributor (expand)" -> "[root] var.environment"
+		"[root] data.azuread_group.resource_group_contributor (expand)" -> "[root] var.group_name_separator"
+		"[root] data.azuread_group.resource_group_contributor (expand)" -> "[root] var.namespaces"
+		"[root] data.azuread_group.resource_group_contributor (expand)" -> "[root] var.subscription_name"
+		"[root] data.azuread_group.resource_group_owner (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] data.azuread_group.resource_group_owner (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] data.azuread_group.resource_group_owner (expand)" -> "[root] var.environment"
+		"[root] data.azuread_group.resource_group_owner (expand)" -> "[root] var.group_name_separator"
+		"[root] data.azuread_group.resource_group_owner (expand)" -> "[root] var.namespaces"
+		"[root] data.azuread_group.resource_group_owner (expand)" -> "[root] var.subscription_name"
+		"[root] data.azuread_group.resource_group_reader (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] data.azuread_group.resource_group_reader (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] data.azuread_group.resource_group_reader (expand)" -> "[root] var.environment"
+		"[root] data.azuread_group.resource_group_reader (expand)" -> "[root] var.group_name_separator"
+		"[root] data.azuread_group.resource_group_reader (expand)" -> "[root] var.namespaces"
+		"[root] data.azuread_group.resource_group_reader (expand)" -> "[root] var.subscription_name"
+		"[root] data.azurerm_key_vault.core (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] data.azurerm_key_vault.core (expand)" -> "[root] var.core_name"
+		"[root] data.azurerm_key_vault.core (expand)" -> "[root] var.environment"
+		"[root] data.azurerm_key_vault.core (expand)" -> "[root] var.location_short"
+		"[root] data.azurerm_key_vault.core (expand)" -> "[root] var.unique_suffix"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] var.environment"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] var.location_short"
+		"[root] data.azurerm_resource_group.this (expand)" -> "[root] var.name"
+		"[root] local.aad_groups (expand)" -> "[root] azuread_group.aks_managed_identity (expand)"
+		"[root] local.aad_groups (expand)" -> "[root] azuread_group.cluster_admin (expand)"
+		"[root] local.aad_groups (expand)" -> "[root] azuread_group.cluster_view (expand)"
+		"[root] local.aad_groups (expand)" -> "[root] azuread_group.edit (expand)"
+		"[root] local.aad_groups (expand)" -> "[root] azuread_group.view (expand)"
+		"[root] local.aad_pod_identity (expand)" -> "[root] azurerm_user_assigned_identity.aad_pod_identity (expand)"
+		"[root] local.aks_public_ip_prefix_ids (expand)" -> "[root] azurerm_public_ip_prefix.aks (expand)"
+		"[root] local.aks_public_ip_prefix_ips (expand)" -> "[root] azurerm_public_ip_prefix.aks (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_application_password.helm_operator (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.aad_pod_identity (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.helm_operator (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.resource_group_contributor (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.resource_group_owner (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azuread_group_member.resource_group_reader (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_key_vault_secret.ssh_key (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.aad_pod_identity (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.acr_pull (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.acr_push (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.aks (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.external_dns_contributor (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.external_dns_msi (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.external_dns_rg_read (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.external_storage_contributor (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.velero_msi (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.velero_rg_read (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.aad_groups (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.aad_pod_identity (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.acr_name (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.aks_authorized_ips (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.aks_public_ip_prefix_ids (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.dns_zone (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.external_dns_identity (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.helm_operator_credentials (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.namespaces (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.ssh_public_key (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.velero (expand)"
+		"[root] output.aad_groups (expand)" -> "[root] local.aad_groups (expand)"
+		"[root] output.aad_pod_identity (expand)" -> "[root] local.aad_pod_identity (expand)"
+		"[root] output.acr_name (expand)" -> "[root] azurerm_container_registry.acr (expand)"
+		"[root] output.aks_authorized_ips (expand)" -> "[root] local.aks_public_ip_prefix_ips (expand)"
+		"[root] output.aks_authorized_ips (expand)" -> "[root] var.aks_authorized_ips"
+		"[root] output.aks_public_ip_prefix_ids (expand)" -> "[root] local.aks_public_ip_prefix_ids (expand)"
+		"[root] output.dns_zone (expand)" -> "[root] var.dns_zone"
+		"[root] output.external_dns_identity (expand)" -> "[root] azurerm_user_assigned_identity.external_dns (expand)"
+		"[root] output.helm_operator_credentials (expand)" -> "[root] random_password.helm_operator (expand)"
+		"[root] output.namespaces (expand)" -> "[root] var.namespaces"
+		"[root] output.ssh_public_key (expand)" -> "[root] tls_private_key.ssh_key (expand)"
+		"[root] output.velero (expand)" -> "[root] azurerm_storage_container.velero (expand)"
+		"[root] output.velero (expand)" -> "[root] azurerm_user_assigned_identity.velero (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_application_password.helm_operator (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group.aks_managed_identity (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group.cluster_admin (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group.cluster_view (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.aad_pod_identity (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.helm_operator (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.resource_group_contributor (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.resource_group_owner (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] azuread_group_member.resource_group_reader (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] data.azuread_group.acr_push (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_key_vault_secret.ssh_key (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_public_ip_prefix.aks (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.aad_pod_identity (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.acr_pull (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.acr_push (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.aks (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.external_dns_contributor (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.external_dns_msi (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.external_dns_rg_read (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.external_storage_contributor (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.velero_msi (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.velero_rg_read (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_storage_container.velero (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/random\"] (close)" -> "[root] random_password.helm_operator (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)" -> "[root] tls_private_key.ssh_key (expand)"
+		"[root] random_password.helm_operator (expand)" -> "[root] azuread_service_principal.helm_operator (expand)"
+		"[root] random_password.helm_operator (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/random\"]"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/random\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"] (close)"
+		"[root] tls_private_key.ssh_key (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/tls\"]"
+	}
+}
+

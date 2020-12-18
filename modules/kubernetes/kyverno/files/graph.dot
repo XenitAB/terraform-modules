@@ -1,0 +1,26 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] helm_release.kyverno (expand)" [label = "helm_release.kyverno", shape = "box"]
+		"[root] helm_release.kyverno_extras (expand)" [label = "helm_release.kyverno_extras", shape = "box"]
+		"[root] kubernetes_namespace.this (expand)" [label = "kubernetes_namespace.this", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"]" [label = "provider[\"registry.terraform.io/hashicorp/helm\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]" [label = "provider[\"registry.terraform.io/hashicorp/kubernetes\"]", shape = "diamond"]
+		"[root] var.excluded_namespaces" [label = "var.excluded_namespaces", shape = "note"]
+		"[root] helm_release.kyverno (expand)" -> "[root] kubernetes_namespace.this (expand)"
+		"[root] helm_release.kyverno (expand)" -> "[root] local.version (expand)"
+		"[root] helm_release.kyverno (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"]"
+		"[root] helm_release.kyverno_extras (expand)" -> "[root] helm_release.kyverno (expand)"
+		"[root] helm_release.kyverno_extras (expand)" -> "[root] var.excluded_namespaces"
+		"[root] kubernetes_namespace.this (expand)" -> "[root] local.namespace (expand)"
+		"[root] kubernetes_namespace.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] helm_release.kyverno_extras (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] helm_release.kyverno_extras (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] kubernetes_namespace.this (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)"
+	}
+}
+

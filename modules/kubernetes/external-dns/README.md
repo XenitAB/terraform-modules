@@ -2,6 +2,8 @@
 
 This module is used to add [`external-dns`](https://github.com/kubernetes-sigs/external-dns) to Kubernetes clusters.
 
+![Terraform Graph](files/graph.svg "Terraform Graph")
+
 ## Requirements
 
 | Name | Version |

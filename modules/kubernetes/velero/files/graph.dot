@@ -1,0 +1,30 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] helm_release.velero (expand)" [label = "helm_release.velero", shape = "box"]
+		"[root] helm_release.velero_extras (expand)" [label = "helm_release.velero_extras", shape = "box"]
+		"[root] kubernetes_namespace.this (expand)" [label = "kubernetes_namespace.this", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"]" [label = "provider[\"registry.terraform.io/hashicorp/helm\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]" [label = "provider[\"registry.terraform.io/hashicorp/kubernetes\"]", shape = "diamond"]
+		"[root] var.aws_config" [label = "var.aws_config", shape = "note"]
+		"[root] var.azure_config" [label = "var.azure_config", shape = "note"]
+		"[root] var.cloud_provider" [label = "var.cloud_provider", shape = "note"]
+		"[root] helm_release.velero (expand)" -> "[root] kubernetes_namespace.this (expand)"
+		"[root] helm_release.velero (expand)" -> "[root] local.values (expand)"
+		"[root] helm_release.velero (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"]"
+		"[root] helm_release.velero_extras (expand)" -> "[root] helm_release.velero (expand)"
+		"[root] kubernetes_namespace.this (expand)" -> "[root] local.namespace (expand)"
+		"[root] kubernetes_namespace.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] local.values (expand)" -> "[root] var.aws_config"
+		"[root] local.values (expand)" -> "[root] var.azure_config"
+		"[root] local.values (expand)" -> "[root] var.cloud_provider"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] helm_release.velero_extras (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] helm_release.velero_extras (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] kubernetes_namespace.this (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)"
+	}
+}
+

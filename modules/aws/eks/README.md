@@ -1,3 +1,9 @@
+# Core
+
+More details to be added.
+
+![Terraform Graph](files/graph.svg "Terraform Graph")
+
 ## Requirements
 
 | Name | Version |

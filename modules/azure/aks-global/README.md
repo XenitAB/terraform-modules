@@ -2,6 +2,8 @@
 
 This module is used to create resources that are used by AKS clusters.
 
+![Terraform Graph](files/graph.svg "Terraform Graph")
+
 ## Requirements
 
 | Name | Version |

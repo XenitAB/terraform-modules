@@ -2,6 +2,8 @@
 
 This module is used to add [`cert-manager`](https://github.com/jetstack/cert-manager) to Kubernetes clusters.
 
+![Terraform Graph](files/graph.svg "Terraform Graph")
+
 ## Requirements
 
 | Name | Version |

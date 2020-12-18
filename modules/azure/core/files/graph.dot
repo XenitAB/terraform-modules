@@ -1,0 +1,70 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] azurerm_network_security_group.nsg (expand)" [label = "azurerm_network_security_group.nsg", shape = "box"]
+		"[root] azurerm_role_assignment.service_endpoint_join (expand)" [label = "azurerm_role_assignment.service_endpoint_join", shape = "box"]
+		"[root] azurerm_role_definition.service_endpoint_join (expand)" [label = "azurerm_role_definition.service_endpoint_join", shape = "box"]
+		"[root] azurerm_subnet.subnet (expand)" [label = "azurerm_subnet.subnet", shape = "box"]
+		"[root] azurerm_subnet.subnet_aks (expand)" [label = "azurerm_subnet.subnet_aks", shape = "box"]
+		"[root] azurerm_subnet_network_security_group_association.nsg_associations (expand)" [label = "azurerm_subnet_network_security_group_association.nsg_associations", shape = "box"]
+		"[root] azurerm_virtual_network.vnet (expand)" [label = "azurerm_virtual_network.vnet", shape = "box"]
+		"[root] azurerm_virtual_network_peering.peering (expand)" [label = "azurerm_virtual_network_peering.peering", shape = "box"]
+		"[root] data.azuread_group.service_endpoint_join (expand)" [label = "data.azuread_group.service_endpoint_join", shape = "box"]
+		"[root] data.azurerm_resource_group.rg (expand)" [label = "data.azurerm_resource_group.rg", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"]" [label = "provider[\"registry.terraform.io/hashicorp/azuread\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]" [label = "provider[\"registry.terraform.io/hashicorp/azurerm\"]", shape = "diamond"]
+		"[root] var.azure_ad_group_prefix" [label = "var.azure_ad_group_prefix", shape = "note"]
+		"[root] var.environment" [label = "var.environment", shape = "note"]
+		"[root] var.group_name_separator" [label = "var.group_name_separator", shape = "note"]
+		"[root] var.name" [label = "var.name", shape = "note"]
+		"[root] var.peering_config" [label = "var.peering_config", shape = "note"]
+		"[root] var.regions" [label = "var.regions", shape = "note"]
+		"[root] var.subscription_name" [label = "var.subscription_name", shape = "note"]
+		"[root] var.vnet_config" [label = "var.vnet_config", shape = "note"]
+		"[root] azurerm_network_security_group.nsg (expand)" -> "[root] data.azurerm_resource_group.rg (expand)"
+		"[root] azurerm_network_security_group.nsg (expand)" -> "[root] local.subnets (expand)"
+		"[root] azurerm_role_assignment.service_endpoint_join (expand)" -> "[root] azurerm_role_definition.service_endpoint_join (expand)"
+		"[root] azurerm_role_assignment.service_endpoint_join (expand)" -> "[root] data.azuread_group.service_endpoint_join (expand)"
+		"[root] azurerm_role_definition.service_endpoint_join (expand)" -> "[root] azurerm_virtual_network.vnet (expand)"
+		"[root] azurerm_subnet.subnet (expand)" -> "[root] azurerm_virtual_network.vnet (expand)"
+		"[root] azurerm_subnet.subnet (expand)" -> "[root] local.subnets (expand)"
+		"[root] azurerm_subnet.subnet_aks (expand)" -> "[root] azurerm_virtual_network.vnet (expand)"
+		"[root] azurerm_subnet.subnet_aks (expand)" -> "[root] local.subnets (expand)"
+		"[root] azurerm_subnet_network_security_group_association.nsg_associations (expand)" -> "[root] azurerm_network_security_group.nsg (expand)"
+		"[root] azurerm_subnet_network_security_group_association.nsg_associations (expand)" -> "[root] azurerm_subnet.subnet (expand)"
+		"[root] azurerm_virtual_network.vnet (expand)" -> "[root] data.azurerm_resource_group.rg (expand)"
+		"[root] azurerm_virtual_network_peering.peering (expand)" -> "[root] azurerm_virtual_network.vnet (expand)"
+		"[root] azurerm_virtual_network_peering.peering (expand)" -> "[root] local.peerings (expand)"
+		"[root] data.azuread_group.service_endpoint_join (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"]"
+		"[root] data.azuread_group.service_endpoint_join (expand)" -> "[root] var.azure_ad_group_prefix"
+		"[root] data.azuread_group.service_endpoint_join (expand)" -> "[root] var.environment"
+		"[root] data.azuread_group.service_endpoint_join (expand)" -> "[root] var.group_name_separator"
+		"[root] data.azuread_group.service_endpoint_join (expand)" -> "[root] var.subscription_name"
+		"[root] data.azurerm_resource_group.rg (expand)" -> "[root] local.env_resources (expand)"
+		"[root] data.azurerm_resource_group.rg (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"]"
+		"[root] local.env_resources (expand)" -> "[root] var.environment"
+		"[root] local.env_resources (expand)" -> "[root] var.name"
+		"[root] local.env_resources (expand)" -> "[root] var.regions"
+		"[root] local.env_resources (expand)" -> "[root] var.vnet_config"
+		"[root] local.peerings (expand)" -> "[root] var.environment"
+		"[root] local.peerings (expand)" -> "[root] var.name"
+		"[root] local.peerings (expand)" -> "[root] var.peering_config"
+		"[root] local.subnets (expand)" -> "[root] var.environment"
+		"[root] local.subnets (expand)" -> "[root] var.name"
+		"[root] local.subnets (expand)" -> "[root] var.vnet_config"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_role_assignment.service_endpoint_join (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_subnet.subnet_aks (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_subnet_network_security_group_association.nsg_associations (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] azurerm_virtual_network_peering.peering (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)" -> "[root] data.azuread_group.service_endpoint_join (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_role_assignment.service_endpoint_join (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_subnet.subnet_aks (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_subnet_network_security_group_association.nsg_associations (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)" -> "[root] azurerm_virtual_network_peering.peering (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/azuread\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/azurerm\"] (close)"
+	}
+}
+

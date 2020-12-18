@@ -1,0 +1,22 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] helm_release.ingress_nginx (expand)" [label = "helm_release.ingress_nginx", shape = "box"]
+		"[root] kubernetes_namespace.this (expand)" [label = "kubernetes_namespace.this", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"]" [label = "provider[\"registry.terraform.io/hashicorp/helm\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]" [label = "provider[\"registry.terraform.io/hashicorp/kubernetes\"]", shape = "diamond"]
+		"[root] helm_release.ingress_nginx (expand)" -> "[root] kubernetes_namespace.this (expand)"
+		"[root] helm_release.ingress_nginx (expand)" -> "[root] local.version (expand)"
+		"[root] helm_release.ingress_nginx (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"]"
+		"[root] kubernetes_namespace.this (expand)" -> "[root] local.namespace (expand)"
+		"[root] kubernetes_namespace.this (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"]"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] helm_release.ingress_nginx (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)" -> "[root] helm_release.ingress_nginx (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)" -> "[root] kubernetes_namespace.this (expand)"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/helm\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/kubernetes\"] (close)"
+	}
+}
+

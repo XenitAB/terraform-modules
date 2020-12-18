@@ -3,6 +3,9 @@
  *
  * Installs and configures [flux2](https://github.com/fluxcd/flux2) with Azure DevOps.
  *
+ * ![Terraform Graph](files/graph.svg "Terraform Graph")
+ *
+ *
  * The module is meant to offer a full bootstrap and confiugration of a Kubernetes cluster
  * with Fluxv2. A "root" repository is created for the bootstrap configuration along with a
  * repository per namepsace passed in the variables. The root repository will receive `cluster-admin`

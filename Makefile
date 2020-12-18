@@ -58,6 +58,28 @@ docs:
 	echo docs: Success
 
 .SILENT:
+graph:
+	set -e
+	echo graph: Start
+	MODULE_GROUPS=$$(find modules -mindepth 1 -maxdepth 1 -type d)
+	for MODULE_GROUP in $${MODULE_GROUPS}; do
+		MODULES=$$(find $${MODULE_GROUP} -mindepth 1 -maxdepth 1 -type d)
+		for MODULE in $$MODULES; do
+			README_FILE="$${MODULE}/README.md"
+			echo graph: $${MODULE}
+			mkdir -p $${MODULE}/files
+			terraform init $${MODULE} 1>/dev/null
+			terraform graph $${MODULE} > $${MODULE}/files/graph.dot
+			dot $${MODULE}/files/graph.dot -Tsvg -o $${MODULE}/files/graph.svg
+			if [[ ! $$(grep "files/graph.svg" $${MODULE}/main.tf) ]]; then
+				echo "graph: ERROR! Add documentation reference '![Terraform Graph](files/graph.svg \"Terraform Graph\")' to $${MODULE}/main.tf."
+				exit 1
+			fi
+		done
+	done
+	echo graph: Success
+
+.SILENT:
 tfsec:
 	set -e
 	echo tfsec: Start

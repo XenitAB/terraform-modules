@@ -25,6 +25,8 @@ resource "azuread_application_password" "owner_spn" {
 }
 
 resource "pal_management_partner" "owner_spn" {
+  depends_on = [azuread_application_password.owner_spn]
+
   tenant_id       = data.azurerm_subscription.current.tenant_id
   client_id       = data.azuread_service_principal.owner_spn.application_id
   client_secret   = random_password.owner_spn.result
@@ -53,6 +55,8 @@ resource "azuread_service_principal" "aad_sp" {
 }
 
 resource "pal_management_partner" "aad_sp" {
+  depends_on = [azuread_application_password.aad_sp]
+
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg

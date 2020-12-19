@@ -30,8 +30,8 @@ resource "pal_management_partner" "aad_sp" {
   }
 
   tenant_id       = data.azurerm_subscription.current.tenant_id
-  client_id       = azuread_service_principal.aad_sp[each.value.resource_group_config.common_name].application_id
-  client_secret   = random_password.aad_sp[each.value.resource_group_config.common_name].result
+  client_id       = azuread_service_principal.aad_sp[each.key].application_id
+  client_secret   = random_password.aad_sp[each.key].result
   partner_id      = var.partner_id
   overwrite       = true
 }

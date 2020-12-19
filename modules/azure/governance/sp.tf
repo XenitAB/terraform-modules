@@ -2,6 +2,10 @@ data "azuread_service_principal" "owner_spn" {
   display_name = var.owner_service_principal_name
 }
 
+data "azuread_application" "owner_spn" {
+  name = var.owner_service_principal_name
+}
+
 resource "random_password" "owner_spn" {
   length           = 48
   special          = true
@@ -13,7 +17,7 @@ resource "random_password" "owner_spn" {
 }
 
 resource "azuread_application_password" "owner_spn" {
-  application_object_id = data.azuread_service_principal.owner_spn.application_id
+  application_object_id = data.azuread_service_principal.owner_spn.object_id
   value                 = random_password.owner_spn.result
   end_date              = timeadd(timestamp(), "87600h") # 10 years
 

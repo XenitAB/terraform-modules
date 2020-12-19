@@ -2,6 +2,36 @@ data "azuread_service_principal" "owner_spn" {
   display_name = var.owner_service_principal_name
 }
 
+resource "random_password" "owner_spn" {
+  length           = 48
+  special          = true
+  override_special = "!-_="
+
+  keepers = {
+    service_principal = data.azuread_service_principal.owner_spn.id
+  }
+}
+
+resource "azuread_application_password" "owner_spn" {
+  application_object_id = data.azuread_service_principal.owner_spn.application_id
+  value                 = random_password.owner_spn.result
+  end_date              = timeadd(timestamp(), "87600h") # 10 years
+
+  lifecycle {
+    ignore_changes = [
+      end_date
+    ]
+  }
+}
+
+resource "pal_management_partner" "owner_spn" {
+  tenant_id       = data.azurerm_subscription.current.tenant_id
+  client_id       = data.azuread_service_principal.owner_spn.application_id
+  client_secret   = random_password.owner_spn.result
+  partner_id      = var.partner_id
+  overwrite       = true
+}
+
 resource "azuread_application" "aad_app" {
   for_each = {
     for rg in var.resource_group_configs :

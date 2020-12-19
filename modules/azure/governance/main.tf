@@ -21,7 +21,7 @@ terraform {
       source  = "hashicorp/random"
     }
     pal = {
-      version = "0.0.0-dev"
+      version = "0.0.1"
       source  = "xenitab/pal"
     }
   }

@@ -31,6 +31,12 @@ resource "azuread_application_password" "owner_spn" {
 resource "pal_management_partner" "owner_spn" {
   depends_on = [azuread_application_password.owner_spn]
 
+  for_each = {
+    for s in ["pal"] :
+    s => s
+    if var.partner_id != ""
+  }
+
   tenant_id     = data.azurerm_subscription.current.tenant_id
   client_id     = data.azuread_service_principal.owner_spn.application_id
   client_secret = random_password.owner_spn.result

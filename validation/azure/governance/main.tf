@@ -8,6 +8,10 @@ terraform {
       source  = "hashicorp/azuread"
       version = "1.0.0"
     }
+    pal = {
+      source = "xenitab/pal"
+      version = "0.2.1"
+    }
   }
 }
 
@@ -16,6 +20,8 @@ provider "azurerm" {
 }
 
 provider "azuread" {}
+
+provider "pal" {}
 
 module "governance" {
   source = "../../../modules/azure/governance"

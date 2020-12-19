@@ -20,6 +20,10 @@ terraform {
       version = "3.0.0"
       source  = "hashicorp/random"
     }
+    pal = {
+      version = "dev"
+      source  = "xenitab/pal"
+    }
   }
 }
 

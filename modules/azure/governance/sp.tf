@@ -22,6 +22,20 @@ resource "azuread_service_principal" "aad_sp" {
   application_id = azuread_application.aad_app[each.key].application_id
 }
 
+resource "pal_management_partner" "aad_sp" {
+  for_each = {
+    for rg in var.resource_group_configs :
+    rg.common_name => rg
+    if rg.delegate_service_principal == true && var.partner_id != ""
+  }
+
+  tenant_id       = data.azurerm_subscription.current.tenant_id
+  client_id       = azuread_service_principal.aad_sp[each.value.resource_group_config.common_name].application_id
+  client_secret   = random_password.aad_sp[each.value.resource_group_config.common_name].result
+  partner_id      = var.partner_id
+  overwrite       = true
+}
+
 resource "azurerm_role_assignment" "aad_sp" {
   for_each = {
     for env_resource in local.env_resources :

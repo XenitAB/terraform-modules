@@ -6,11 +6,11 @@ terraform {
     }
     azuread = {
       source  = "hashicorp/azuread"
-      version = "1.0.0"
+      version = "1.1.1"
     }
     pal = {
       source = "xenitab/pal"
-      version = "0.2.1"
+      version = "0.2.3"
     }
   }
 }

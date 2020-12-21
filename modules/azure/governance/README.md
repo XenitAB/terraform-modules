@@ -7,18 +7,18 @@ This module is used to create resource groups, service principals, Azure AD grou
 | Name | Version |
 |------|---------|
 | terraform | 0.13.5 |
-| azuread | 1.0.0 |
+| azuread | 1.1.1 |
 | azurerm | 2.35.0 |
-| pal | 0.2.1 |
+| pal | 0.2.3 |
 | random | 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azuread | 1.0.0 |
+| azuread | 1.1.1 |
 | azurerm | 2.35.0 |
-| pal | 0.2.1 |
+| pal | 0.2.3 |
 | random | 3.0.0 |
 
 ## Inputs

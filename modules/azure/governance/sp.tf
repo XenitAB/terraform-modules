@@ -45,7 +45,7 @@ resource "pal_management_partner" "owner_spn" {
 
   tenant_id     = data.azurerm_subscription.current.tenant_id
   client_id     = data.azuread_service_principal.owner_spn.application_id
-  client_secret = random_password.owner_spn.result
+  client_secret = random_password.owner_spn["pal"].result
   partner_id    = var.partner_id
   overwrite     = true
 }

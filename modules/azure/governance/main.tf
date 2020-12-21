@@ -20,10 +20,10 @@ terraform {
       version = "3.0.0"
       source  = "hashicorp/random"
     }
-    #pal = {
-    #  version = "0.2.2"
-    #  source  = "xenitab/pal"
-    #}
+    pal = {
+      version = "0.0.0-dev"
+      source  = "xenitab/pal"
+    }
   }
 }
 

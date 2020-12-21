@@ -31,7 +31,13 @@ resource "azuread_application_password" "owner_spn" {
 
   application_object_id = data.azuread_application.owner_spn.object_id
   value                 = random_password.owner_spn["pal"].result
-  end_date_relative     = "10y"
+  end_date              = timeadd(timestamp(), "87600h") # 10 years
+
+  lifecycle {
+    ignore_changes = [
+      end_date
+    ]
+  }
 }
 
 resource "pal_management_partner" "owner_spn" {
@@ -105,7 +111,13 @@ resource "azuread_application_password" "aad_sp" {
   }
   application_object_id = azuread_application.aad_app[each.key].id
   value                 = random_password.aad_sp[each.key].result
-  end_date_relative     = "10y"
+  end_date              = timeadd(timestamp(), "87600h") # 10 years
+
+  lifecycle {
+    ignore_changes = [
+      end_date
+    ]
+  }
 }
 
 resource "pal_management_partner" "aad_sp" {

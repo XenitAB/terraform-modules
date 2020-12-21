@@ -9,7 +9,7 @@ This module is used to create resource groups, service principals, Azure AD grou
 | terraform | 0.13.5 |
 | azuread | 1.1.1 |
 | azurerm | 2.35.0 |
-| pal | 0.2.3 |
+| pal | 0.2.4 |
 | random | 3.0.0 |
 
 ## Providers
@@ -18,7 +18,7 @@ This module is used to create resource groups, service principals, Azure AD grou
 |------|---------|
 | azuread | 1.1.1 |
 | azurerm | 2.35.0 |
-| pal | 0.2.3 |
+| pal | 0.2.4 |
 | random | 3.0.0 |
 
 ## Inputs

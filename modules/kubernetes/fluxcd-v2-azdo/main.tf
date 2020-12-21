@@ -21,7 +21,7 @@ terraform {
   required_providers {
     flux = {
       source  = "fluxcd/flux"
-      version = "0.0.7"
+      version = "0.0.8"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
@@ -51,7 +51,7 @@ data "flux_sync" "main" {
   url         = local.repo_url
   target_path = var.bootstrap_path
   branch      = var.branch
-  interval    = 60000000000
+  interval    = 1
 }
 
 # Azure DevOps

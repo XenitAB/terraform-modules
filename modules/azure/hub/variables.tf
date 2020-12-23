@@ -11,6 +11,11 @@ variable "environment" {
   type        = string
 }
 
+variable "subscription_name" {
+  description = "The subscriptionCommonName to use for the deploy"
+  type        = string
+}
+
 variable "name" {
   description = "The name to use for the deploy"
   type        = string
@@ -44,4 +49,16 @@ variable "peering_config" {
     allow_virtual_network_access = bool
   })))
   default = {}
+}
+
+variable "group_name_separator" {
+  description = "Separator for group names"
+  type        = string
+  default     = "-"
+}
+
+variable "azure_ad_group_prefix" {
+  description = "Prefix for Azure AD Groupss"
+  type        = string
+  default     = "az"
 }

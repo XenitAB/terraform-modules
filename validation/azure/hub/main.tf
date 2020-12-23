@@ -4,12 +4,18 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "2.35.0"
     }
+    azuread = {
+      version = "1.1.1"
+      source  = "hashicorp/azuread"
+    }
   }
 }
 
 provider "azurerm" {
   features {}
 }
+
+provider "azuread" {}
 
 module "hub" {
   source = "../../../modules/azure/hub"
@@ -21,6 +27,7 @@ module "hub" {
       location_short = "we"
     }
   ]
+  subscription_name = "sub"
   name = "hub"
   vnet_config = {
     we = {

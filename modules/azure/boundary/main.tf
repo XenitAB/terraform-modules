@@ -18,15 +18,26 @@ locals {
   custom_data                             = templatefile("${path.module}/templates/cloud-init.tpl", {
     username = azurerm_postgresql_server.controller.administrator_login,
     password = random_password.controller.result,
-    server = "",
-    database = ""
+    server = azurerm_postgresql_server.controller.fqdn,
+    database = azurerm_postgresql_database.controller.name,
+    tenant_id = data.azurerm_client_config.this.tenant_id,
+    key_vault_name = data.azurerm_key_vault.this.name,
+    key_name_root = azurerm_key_vault_key.controller_root.name
+    key_name_worker_auth = azurerm_key_vault_key.controller_worker_auth.name
   })
 }
+
+data "azurerm_client_config" "this" {}
 
 data "azurerm_subscription" "this" {}
 
 data "azurerm_resource_group" "this" {
   name = local.resource_group_name
+}
+
+data "azurerm_key_vault" "this" {
+  name                = "kv-dev-we-boundary"
+  resource_group_name  = data.azurerm_resource_group.this.name
 }
 
 data "azurerm_image" "this" {

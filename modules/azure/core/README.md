@@ -21,7 +21,7 @@ This module is used to create core resources like virtual network for the subscr
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| azure\_ad\_group\_prefix | Prefix for Azure AD Groupss | `string` | `"az"` | no |
+| azure\_ad\_group\_prefix | Prefix for Azure AD Groups | `string` | `"az"` | no |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
 | group\_name\_separator | Separator for group names | `string` | `"-"` | no |
 | name | The commonName to use for the deploy | `string` | n/a | yes |

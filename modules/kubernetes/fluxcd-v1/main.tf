@@ -146,7 +146,7 @@ resource "helm_release" "fluxcd" {
       s => s
       if var.flux_status_enabled
     }
-    
+
     content {
       name  = "additionalArgs"
       value = "{--connect=ws://localhost:3000}"

@@ -140,6 +140,19 @@ resource "helm_release" "fluxcd" {
     yamlencode(local.flux_values[each.key]),
   ]
 
+  dynamic "set" {
+    for_each = {
+      for s in ["flux-status"] :
+      s => s
+      if var.flux_status_enabled
+    }
+    
+    content {
+      name  = "additionalArgs"
+      value = "{--connect=ws://localhost:3000}"
+    }
+  }
+
   set_sensitive {
     name  = "git.config.data"
     value = <<EOF

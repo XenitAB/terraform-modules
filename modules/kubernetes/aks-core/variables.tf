@@ -69,6 +69,7 @@ variable "fluxcd_v1_enabled" {
 variable "fluxcd_v1_config" {
   description = "Configuration for fluxcd-v1"
   type = object({
+    flux_status_enabled = bool
     azure_devops = object({
       pat  = string
       org  = string
@@ -76,6 +77,7 @@ variable "fluxcd_v1_config" {
     })
   })
   default = {
+    flux_status_enabled = false
     azure_devops = {
       pat  = ""
       org  = ""

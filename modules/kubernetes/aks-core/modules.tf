@@ -45,9 +45,10 @@ module "fluxcd_v1_azure_devops" {
 
   source = "../../kubernetes/fluxcd-v1"
 
-  azure_devops_pat = var.fluxcd_v1_config.azure_devops.pat
-  azure_devops_org = var.fluxcd_v1_config.azure_devops.org
-  environment      = var.environment
+  azure_devops_pat    = var.fluxcd_v1_config.azure_devops.pat
+  azure_devops_org    = var.fluxcd_v1_config.azure_devops.org
+  flux_status_enabled = var.fluxcd_v1_config.flux_status_enabled
+  environment         = var.environment
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = ns.flux

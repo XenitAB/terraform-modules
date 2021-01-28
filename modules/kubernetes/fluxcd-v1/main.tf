@@ -110,7 +110,7 @@ resource "kubernetes_secret" "azdo_proxy" {
 resource "helm_release" "azdo_proxy" {
   repository = "https://xenitab.github.io/azdo-proxy/"
   chart      = "azdo-proxy"
-  version    = "v0.3.0"
+  version    = "v0.3.2"
   name       = kubernetes_namespace.azdo_proxy.metadata[0].name
   namespace  = kubernetes_namespace.azdo_proxy.metadata[0].name
 

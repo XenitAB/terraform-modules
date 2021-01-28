@@ -35,3 +35,9 @@ variable "namespaces" {
     })
   )
 }
+
+variable "flux_status_enabled" {
+  description = "Should flux status be enabled?"
+  type        = bool
+  default     = false
+}

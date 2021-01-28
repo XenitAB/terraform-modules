@@ -58,6 +58,33 @@ locals {
       }
     ]
   }
+
+  flux_values = { for ns in var.namespaces : ns.name => {
+    extraContainers = [
+      {
+        name            = "flux-status"
+        image           = "quay.io/xenitab/flux-status:v0.3.0"
+        imagePullPolicy = "IfNotPresent"
+        args            = ["--git-url=http://${random_password.azdo_proxy[ns.name].result}@azdo-proxy.azdo-proxy/${ns.flux.azure_devops.org}/${ns.flux.azure_devops.proj}/_git/${ns.flux.azure_devops.repo}", "--instance=${var.environment}"]
+        securityContext = {
+          allowPrivilegeEscalation = false
+          readOnlyRootFilesystem   = true
+          capabilities = {
+            drop = ["NET_RAW"]
+          }
+        }
+        volumeMounts = [
+          {
+            name      = "tmp"
+            mountPath = "/tmp"
+          }
+        ]
+
+      }
+    ]
+    }
+    if ns.flux.enabled && var.flux_status_enabled
+  }
 }
 
 resource "kubernetes_namespace" "azdo_proxy" {
@@ -104,7 +131,14 @@ resource "helm_release" "fluxcd" {
   chart     = "${path.module}/charts/flux"
   namespace = each.key
 
-  values = [templatefile("${path.module}/templates/fluxcd-values.yaml.tpl", { namespace = each.key, git_url = "https://dev.azure.com/${each.value.flux.azure_devops.org}/${each.value.flux.azure_devops.proj}/_git/${each.value.flux.azure_devops.repo}", environment = var.environment })]
+  values = [
+    templatefile("${path.module}/templates/fluxcd-values.yaml.tpl", {
+      namespace   = each.key,
+      git_url     = "https://dev.azure.com/${each.value.flux.azure_devops.org}/${each.value.flux.azure_devops.proj}/_git/${each.value.flux.azure_devops.repo}",
+      environment = var.environment
+    }),
+    yamlencode(local.flux_values[each.key]),
+  ]
 
   set_sensitive {
     name  = "git.config.data"

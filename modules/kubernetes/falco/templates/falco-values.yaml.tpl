@@ -2,7 +2,7 @@ docker:
   enabled: false
 
 fakeEventGenerator:
-  enabled: false
+  enabled: true
   args:
     - run
     - --loop

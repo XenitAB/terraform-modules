@@ -20,3 +20,4 @@ This directory contains all the Kubernetes Terraform modules.
 - [`datadog`](datadog/README.md)
 - [`external-secrtest`](external-secrets/README.md)
 - [`kyverno`](kyverno/README.md)
+- [`falco`](falco/README.md)

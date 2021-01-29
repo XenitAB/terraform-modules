@@ -22,6 +22,7 @@ terraform {
 }
 
 locals {
+  falco_values = templatefile("${path.module}/templates/falco-values.yaml.tpl", {})
   falcosidekick_values = templatefile("${path.module}/templates/falcosidekick-values.yaml.tpl", {
     datadog_host    = var.datadog_host
     datadog_api_key = var.datadog_api_key
@@ -43,6 +44,7 @@ resource "helm_release" "falco" {
   name       = "falco"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v1.7.1"
+  values     = [local.falco_values]
 }
 
 resource "helm_release" "falcosidekick" {

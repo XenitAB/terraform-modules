@@ -21,6 +21,13 @@ terraform {
   }
 }
 
+locals {
+  falcosidekick_values = templatefile("${path.module}/templates/falcosidekick-values.yaml.tpl", {
+    datadog_host    = var.datadog_host
+    datadog_api_key = var.datadog_api_key
+  })
+}
+
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
@@ -36,4 +43,13 @@ resource "helm_release" "falco" {
   name       = "falco"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v1.7.1"
+}
+
+resource "helm_release" "falcosidekick" {
+  repository = "https://falcosecurity.github.io/charts"
+  chart      = "falcosidekick"
+  name       = "falcosidekick"
+  namespace  = kubernetes_namespace.this.metadata[0].name
+  version    = "v0.2.2"
+  values     = [local.falcosidekick_values]
 }

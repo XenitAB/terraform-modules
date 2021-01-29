@@ -28,4 +28,6 @@ module "falco" {
     kubernetes = kubernetes
     helm = helm
   }
+
+  datadog_api_key = "foobar" #tfsec:ignore:GEN003
 }

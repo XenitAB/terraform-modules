@@ -21,7 +21,10 @@ exports events to Datadog.
 
 ## Inputs
 
-No input.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| datadog\_api\_key | Datadog api key used to authenticate | `string` | n/a | yes |
+| datadog\_host | Datadog host to send events to | `string` | `"https://api.datadoghq.eu"` | no |
 
 ## Outputs
 

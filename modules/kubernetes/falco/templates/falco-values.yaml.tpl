@@ -19,10 +19,8 @@ fakeEventGenerator:
 #    url: ""
 
 falco:
-  # Whether to output events in json or text
-  #jsonOutput: false
-  # Minimum rule priority level to load and run. All rules having a
-  # priority more severe than this level will be loaded/run.  Can be one
-  # of "emergency", "alert", "critical", "error", "warning", "notice",
-  # "info", "debug".
-  #priority: debug
+  jsonOutput: true
+  jsonIncludeOutputProperty: true
+  httpOutput:
+    enabled: true
+    url: "http://falcosidekick:2801/"

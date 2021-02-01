@@ -1,5 +1,5 @@
 auditLog:
-  enabled: true
+  enabled: false
 
 # Use EBPF instead of kernel module
 ebpf:

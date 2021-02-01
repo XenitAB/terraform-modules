@@ -24,6 +24,7 @@ terraform {
 locals {
   falco_values = templatefile("${path.module}/templates/falco-values.yaml.tpl", {})
   falcosidekick_values = templatefile("${path.module}/templates/falcosidekick-values.yaml.tpl", {
+    environment     = var.environment
     datadog_host    = var.datadog_host
     datadog_api_key = var.datadog_api_key
   })

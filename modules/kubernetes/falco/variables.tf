@@ -1,3 +1,8 @@
+variable "environment" {
+  description = "Variable to add to custom fields"
+  type        = string
+}
+
 variable "datadog_host" {
   description = "Datadog host to send events to"
   type        = string

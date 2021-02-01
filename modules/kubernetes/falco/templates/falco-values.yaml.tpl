@@ -14,4 +14,4 @@ falco:
   jsonIncludeOutputProperty: true
   httpOutput:
     enabled: true
-    url: "http://falcosidekick:2801/"
+    url: "http://falcosidekick:2801"

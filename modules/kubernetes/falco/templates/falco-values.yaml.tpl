@@ -1,6 +1,9 @@
 auditLog:
   enabled: true
 
+ebpf:
+  enabled: true
+
 falco:
   jsonOutput: true
   jsonIncludeOutputProperty: true

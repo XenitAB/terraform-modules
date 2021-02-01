@@ -3,6 +3,12 @@ variable "environment" {
   type        = string
 }
 
+variable "minimum_priority" {
+  description = "Minimum priority required before being exported"
+  type = string
+  default = "INFO"
+}
+
 variable "datadog_host" {
   description = "Datadog host to send events to"
   type        = string

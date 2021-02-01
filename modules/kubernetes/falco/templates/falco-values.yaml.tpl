@@ -1,11 +1,3 @@
-fakeEventGenerator:
-  enabled: true
-  args:
-    - run
-    - --loop
-    - ^syscall
-  replicas: 1
-
 auditLog:
   enabled: true
 

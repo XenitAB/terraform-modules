@@ -1,6 +1,3 @@
-docker:
-  enabled: false
-
 fakeEventGenerator:
   enabled: true
   args:

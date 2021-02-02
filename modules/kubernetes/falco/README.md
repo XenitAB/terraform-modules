@@ -24,7 +24,9 @@ exports events to Datadog.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | datadog\_api\_key | Datadog api key used to authenticate | `string` | n/a | yes |
-| datadog\_host | Datadog host to send events to | `string` | `"https://api.datadoghq.eu"` | no |
+| datadog\_site | Datadog host to send events to | `string` | `"api.datadoghq.eu"` | no |
+| environment | Variable to add to custom fields | `string` | n/a | yes |
+| minimum\_priority | Minimum priority required before being exported | `string` | `"INFO"` | no |
 
 ## Outputs
 

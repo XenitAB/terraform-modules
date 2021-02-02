@@ -221,3 +221,38 @@ module "csi_secrets_store_provider_azure" {
 
   source = "../../kubernetes/csi-secrets-store-provider-azure"
 }
+
+# datadog
+module "datadog" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["datadog"] :
+    s => s
+    if var.datadog_enabled
+  }
+
+  source = "../../kubernetes/datadog"
+
+  location     = var.location_short
+  environment  = var.environment
+  datadog_site = var.datadog_config.datadog_site
+  api_key      = var.datadog_config.api_key
+}
+
+# falco
+module "falco" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["falco"] :
+    s => s
+    if var.falco_enabled
+  }
+
+  source = "../../kubernetes/falco"
+
+  environment     = var.environment
+  datadog_site    = var.datadog_config.datadog_site
+  datadog_api_key = var.datadog_config.api_key
+}

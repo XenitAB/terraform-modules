@@ -5,14 +5,14 @@ variable "environment" {
 
 variable "minimum_priority" {
   description = "Minimum priority required before being exported"
-  type = string
-  default = "INFO"
+  type        = string
+  default     = "INFO"
 }
 
-variable "datadog_host" {
+variable "datadog_site" {
   description = "Datadog host to send events to"
   type        = string
-  default     = "https://api.datadoghq.eu"
+  default     = "api.datadoghq.eu"
 }
 
 variable "datadog_api_key" {

@@ -1,5 +1,5 @@
 config:
-  customfields: "env:${environment}"
+  customfields: "source:falco,env:${environment}"
   datadog:
     host: "${datadog_host}"
     apikey: "${datadog_api_key}"

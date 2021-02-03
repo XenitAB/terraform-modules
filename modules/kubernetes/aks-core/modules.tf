@@ -1,5 +1,5 @@
 locals {
-  excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns", "kyverno", "csi-secrets-store-provider-azure"]
+  excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns", "kyverno", "csi-secrets-store-provider-azure", "falco"]
 }
 
 # OPA Gatekeeper

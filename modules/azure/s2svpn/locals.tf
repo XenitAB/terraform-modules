@@ -12,7 +12,7 @@ locals {
       for subnet in vnet.subnets : {
         vnet_region              = region
         vnet_resource            = "${var.environment}-${region}-${var.name}"
-        subnet_full_name         = "sn-${var.environment}-${region}-${var.name}-${subnet.name}"
+        subnet_full_name         = "GatewaySubnet"
         subnet_short_name        = subnet.name
         subnet_cidr              = subnet.cidr
         subnet_service_endpoints = subnet.service_endpoints

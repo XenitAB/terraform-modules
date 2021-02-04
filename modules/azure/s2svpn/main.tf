@@ -38,27 +38,6 @@ resource "random_password" "this" {
 
 }
 
-data "azurerm_key_vault" "this" {
-  for_each = {
-    for env_resource in local.env_resources :
-    env_resource.name => env_resource
-  }
-
-  name                = join("-", compact(["kv-${var.environment}-${each.value.location_short}-${var.core_name}", var.unique_suffix]))
-  resource_group_name = "rg-${var.environment}-${each.value.location_short}-${var.core_name}"
-}
-
-resource "azurerm_key_vault_secret" "this" {
-  for_each = {
-    for env_resource in local.env_resources :
-    env_resource.name => env_resource
-  }
-
-  name         = azurerm_virtual_network_gateway.this[each.key]
-  value        = var.shared_secret != "" ? var.shared_secret : random_password.this.result # If shared_secret is empty string, then use random_password, else use variable
-  key_vault_id = data.azurerm_key_vault.this[each.key]
-}
-
 resource "azurerm_public_ip" "this" {
   for_each = {
     for env_resource in local.env_resources :
@@ -77,7 +56,7 @@ resource "azurerm_subnet" "this" {
     subnet.subnet_full_name => subnet
   }
 
-  name                 = each.value.subnet_full_name
+  name                 = subnet
   resource_group_name  = data.azurerm_resource_group.this[each.value.vnet_resource].name
   virtual_network_name = var.vnet_name
   address_prefixes     = [each.value.subnet_cidr]
@@ -104,9 +83,9 @@ resource "azurerm_virtual_network_gateway" "this" {
 
 
   ip_configuration {
-    public_ip_address_id          = azurerm_public_ip.this[each.key]
+    public_ip_address_id          = azurerm_public_ip.this[each.key].id
     private_ip_address_allocation = "Dynamic"
-    subnet_id                     = azurerm_subnet.this[each.key]
+    subnet_id                     = azurerm_subnet.this[each.key].id
   }
 }
 

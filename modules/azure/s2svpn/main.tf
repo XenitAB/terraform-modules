@@ -138,5 +138,5 @@ resource "azurerm_virtual_network_gateway_connection" "this" {
   virtual_network_gateway_id = azurerm_virtual_network_gateway.this[each.key]
   local_network_gateway_id   = azurerm_local_network_gateway.this[each.key]
 
-  shared_key = random_password.this.result
+  shared_key = var.shared_secret != "" ? var.shared_secret : random_password.this.result # If shared_secret is empty string, then use random_password, else use variable
 }

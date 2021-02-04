@@ -15,16 +15,4 @@ locals {
       subnet_cidr   = subnet.cidr
     }
   ])
-
-  subnets = flatten([
-    for region, vnet in var.vnet_config : [
-      for subnet in vnet.subnets : {
-        vnet_region              = region
-        vnet_resource            = "${var.environment}-${region}-${var.name}"
-        subnet_short_name        = subnet.name
-        subnet_cidr              = subnet.cidr
-        subnet_service_endpoints = subnet.service_endpoints
-      }
-    ]
-  ])
 }

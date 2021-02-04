@@ -25,7 +25,6 @@ Use together with the `hub` module to create a site 2 site connection with virtu
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| core\_name | The commonName for the core infrastructure | `string` | n/a | yes |
 | environment | The environment (short name) to use for the deploy | `string` | n/a | yes |
 | gateway\_subnet\_config | configuration for all GatewaySubnets | <pre>map(object({<br>    name = string<br>    cidr = string<br>  }))</pre> | n/a | yes |
 | local\_gateway\_address | Local gateway address | `string` | n/a | yes |

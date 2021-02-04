@@ -27,13 +27,16 @@ Use together with the `hub` module to create a site 2 site connection with virtu
 |------|-------------|------|---------|:--------:|
 | core\_name | The commonName for the core infrastructure | `string` | n/a | yes |
 | environment | The environment (short name) to use for the deploy | `string` | n/a | yes |
+| gateway\_subnet\_config | configuration for all GatewaySubnets | <pre>map(object({<br>    name = string<br>    cidr = string<br>  }))</pre> | n/a | yes |
 | local\_gateway\_address | Local gateway address | `string` | n/a | yes |
 | local\_gateway\_address\_space | Local gateway address space | `list(string)` | n/a | yes |
 | name | The name to use for the deploy | `string` | n/a | yes |
 | regions | The Azure Regions to configure | <pre>list(object({<br>    location       = string<br>    location_short = string<br>  }))</pre> | n/a | yes |
+| shared\_secret | Shared secret for vpn connection | `string` | `""` | no |
 | unique\_suffix | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
 | vnet\_config | Address spaces used by virtual network. | <pre>map(object({<br>    address_space = list(string)<br>    subnets = list(object({<br>      name              = string<br>      cidr              = string<br>      service_endpoints = list(string)<br>    }))<br>  }))</pre> | n/a | yes |
 | vnet\_name | Virtual network name | `string` | n/a | yes |
+| vpn\_type | vpn type | `string` | `"RouteBased"` | no |
 
 ## Outputs
 

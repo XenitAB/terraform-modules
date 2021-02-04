@@ -33,6 +33,14 @@ variable "vnet_config" {
   }))
 }
 
+variable "gateway_subnet_config" {
+  description = "configuration for all GatewaySubnets"
+  type = map(object({
+    name = string
+    cidr = string
+  }))
+}
+
 variable "local_gateway_address" {
   description = "Local gateway address"
   type        = string

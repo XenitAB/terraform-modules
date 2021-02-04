@@ -16,11 +16,6 @@ variable "name" {
   type        = string
 }
 
-variable "core_name" {
-  description = "The commonName for the core infrastructure"
-  type        = string
-}
-
 variable "vnet_config" {
   description = "Address spaces used by virtual network."
   type = map(object({

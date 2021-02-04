@@ -57,7 +57,7 @@ variable "vnet_name" {
 variable "shared_secret" {
   description = "Shared secret for vpn connection"
   type        = string
-  sensitive   = true
+  #sensitive   = true
   default     = ""
 }
 

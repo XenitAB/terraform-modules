@@ -53,3 +53,16 @@ variable "vnet_name" {
   description = "Virtual network name"
   type        = string
 }
+
+variable "shared_secret" {
+  description = "Shared secret for vpn connection"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "vpn_type" {
+  description = "vpn type"
+  type        = string
+  default     = "RouteBased"
+}

@@ -55,7 +55,7 @@ resource "azurerm_key_vault_secret" "this" {
   }
 
   name         = azurerm_virtual_network_gateway.this[each.key]
-  value        = random_password.this.result
+  value        = var.shared_secret != "" ? var.shared_secret : random_password.this.result # If shared_secret is empty string, then use random_password, else use variable
   key_vault_id = data.azurerm_key_vault.this[each.key]
 }
 
@@ -95,7 +95,7 @@ resource "azurerm_virtual_network_gateway" "this" {
   resource_group_name = data.azurerm_resource_group.this[each.value.name].name
 
   type     = "Vpn"
-  vpn_type = "RouteBased"
+  vpn_type = var.vpn_type
 
   active_active = false
   enable_bgp    = false

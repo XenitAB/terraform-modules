@@ -7,7 +7,7 @@ locals {
     }
   }
 
-  gateways =  flatten([
+  gateways = flatten([
     for region, subnet in var.gateway_subnet_config : {
       vnet_region   = region
       vnet_resource = "${var.environment}-${region}-${var.name}"

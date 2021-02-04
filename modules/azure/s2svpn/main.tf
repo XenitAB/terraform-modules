@@ -55,7 +55,7 @@ resource "azurerm_subnet" "this" {
     for subnet in local.gateways :
     subnet.subnet_name => subnet
   }
-  
+
   name                 = each.value.subnet_name
   resource_group_name  = data.azurerm_resource_group.this[each.value.vnet_resource].name
   virtual_network_name = var.vnet_name
@@ -71,7 +71,7 @@ resource "azurerm_virtual_network_gateway" "this" {
   name                = "gw-${each.value.vnet_resource}-site2site"
   location            = data.azurerm_resource_group.this[each.value.vnet_resource].location
   resource_group_name = data.azurerm_resource_group.this[each.value.vnet_resource].name
-  
+
 
   type     = "Vpn"
   vpn_type = var.vpn_type
@@ -79,7 +79,7 @@ resource "azurerm_virtual_network_gateway" "this" {
   active_active = false
   enable_bgp    = false
   sku           = "VpnGw1"
-  
+
   ip_configuration {
     public_ip_address_id          = azurerm_public_ip.this[each.key].id
     private_ip_address_allocation = "Dynamic"

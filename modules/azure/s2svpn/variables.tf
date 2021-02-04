@@ -51,12 +51,6 @@ variable "local_gateway_address_space" {
   type        = list(string)
 }
 
-variable "unique_suffix" {
-  description = "Unique suffix that is used in globally unique resources names"
-  type        = string
-  default     = ""
-}
-
 variable "vnet_name" {
   description = "Virtual network name"
   type        = string
@@ -66,7 +60,7 @@ variable "shared_secret" {
   description = "Shared secret for vpn connection"
   type        = string
   #sensitive   = true
-  default     = ""
+  default = ""
 }
 
 variable "vpn_type" {

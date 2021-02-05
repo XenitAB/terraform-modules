@@ -9,11 +9,11 @@ jobs:
       - name: Setup TFLint
         uses: lablabs/setup-tflint@v1.0.2
         with:
-          tflint_version: v0.23.1
+          tflint_version: v0.24.1
       - name: Install azurerm plugin
         run: |
           mkdir -p .tflint.d/plugins
-          wget https://github.com/terraform-linters/tflint-ruleset-azurerm/releases/download/v0.7.0/tflint-ruleset-azurerm_linux_amd64.zip
+          wget https://github.com/terraform-linters/tflint-ruleset-azurerm/releases/download/v0.8.2/tflint-ruleset-azurerm_linux_amd64.zip
           unzip tflint-ruleset-azurerm_linux_amd64.zip
           mv tflint-ruleset-azurerm .tflint.d/plugins/
       - name: Run lint
@@ -69,15 +69,27 @@ jobs:
             exit 1
           fi
   tfsec:
-    name: tfsec
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Terraform security scan
-        uses: triat/terraform-security-scan@v2.0.2
+      - name: Clone repo
+        uses: actions/checkout@master
+      - name: Setup tfsec
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TFSEC_VERSION: "v0.37.2"
+          TFSEC_SHA: "bd3fc58aad65b32eb4f4411770fcc442a324f6191e3723207f644cb6207b9cff"
+        run: |
+          wget https://github.com/tfsec/tfsec/releases/download/${TFSEC_VERSION}/tfsec-linux-amd64
+          DOWNLOAD_TFSEC_SHA=$(openssl sha1 -sha256 tfsec-linux-amd64 | awk '{print $2}')
+          if [[ "${TFSEC_SHA}" != "${DOWNLOAD_TFSEC_SHA}" ]]; then
+              echo "Downloaded checksum (${DOWNLOAD_TFSEC_SHA}) for tfsec does not match expected value: ${TFSEC_SHA}"
+              exit 1
+          fi
+              chmod +x tfsec-linux-amd64:W
+          mv ./tfsec-linux-amd64 ~/.local/bin/tfsec
+      - name: Run tfsec
+        run: |
+          export PATH=${PATH}:~/.local/bin
+          make tfsec
   validate:
     runs-on: ubuntu-latest
     steps:

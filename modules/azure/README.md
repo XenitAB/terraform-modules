@@ -11,6 +11,8 @@ This directory contains all the Azure Terraform modules.
 - [`github-runner`](github-runner/README.md)
 - [`governance`](governance/README.md)
 - [`hub`](hub/README.md)
+- [`bastion`](bastion/README.md)
+
 
 ## Getting started
 

@@ -13,37 +13,43 @@ terraform {
   }
 }
 
-data "azurerm_resource_group" "this" {
-
-  name = "rg-test"
+provider "azurerm" {
+  features {}
 }
+module "bastion" {
+  source = "../../../modules/azure/bastion"
 
-resource "azurerm_public_ip" "this" {
-
-  name                = "pip-name"
-  location            = "we"
-  resource_group_name = "rg-name"
-  sku                 = "Standard"
-  allocation_method   = "Static"
-}
-
-resource "azurerm_subnet" "this" {
-
-  name                 = "subnet-name"
-  resource_group_name  = "rg-name"
-  virtual_network_name = "vnet-name"
-  address_prefixes     = "subnet-prefix"
-}
-
-resource "azurerm_bastion_host" "this" {
-
-  name                = "bastion-name"
-  location            = "we"
-  resource_group_name = "rg-name"
-
-  ip_configuration {
-    name                 = "configuration"
-    subnet_id            = "subnet.id"
-    public_ip_address_id = "pip.id"
+  environment = "dev"
+  regions = [
+    {
+      location       = "West Europe"
+      location_short = "we"
+    }
+  ]
+  vnet_config = {
+    we = {
+      address_space = ["10.180.0.0/16"]
+      subnets = [
+        {
+          name              = "servers"
+          cidr              = "10.180.0.0/24"
+          service_endpoints = []
+        }
+      ]
+    }
   }
+
+  bastion_subnet_config = {
+    we = {
+    
+          name = "subnet1"
+          cidr = "10.180.1.0/24"  
+    }
+  }
+
+  vnet_name = "vnet-name"
+
+  name = "name"
+
 }
+  

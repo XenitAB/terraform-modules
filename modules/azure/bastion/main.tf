@@ -1,11 +1,11 @@
 /**
   * # Hub
   *
-  * This module is used to create a site 2 site vpn connection for the virtual network in the production subscription. .
+  * This module is used to create a Azure Bastion host in production subscription.
   * 
   * ## Usage
   *
-  * Use together with the `hub` module to create a site 2 site connection with virtual network gateway.
+  * Use together with the `hub` module to create a Azure Bastion host.
   */
 
 terraform {

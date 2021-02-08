@@ -7,3 +7,7 @@ This repository contains the Xenit Terraform modules.
 - [`aws`](modules/aws/README.md)
 - [`azure`](modules/azure/README.md)
 - [`kubernetes`](modules/kubernetes/README.md)
+
+## Contributing
+
+Read the [contributing guide](./CONTRIBUTING.md) to get started writing modules.

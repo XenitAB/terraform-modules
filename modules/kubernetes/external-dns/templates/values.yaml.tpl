@@ -21,3 +21,4 @@ serviceAccount:
   annotations:
     eks.amazonaws.com/role-arn: "${aws_config.role_arn}"
 %{ endif }
+policy: sync # will also delete the record

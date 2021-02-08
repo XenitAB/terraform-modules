@@ -69,6 +69,7 @@ variable "fluxcd_v1_enabled" {
 variable "fluxcd_v1_config" {
   description = "Configuration for fluxcd-v1"
   type = object({
+    flux_status_enabled = bool
     azure_devops = object({
       pat  = string
       org  = string
@@ -76,6 +77,7 @@ variable "fluxcd_v1_config" {
     })
   })
   default = {
+    flux_status_enabled = false
     azure_devops = {
       pat  = ""
       org  = ""
@@ -187,4 +189,24 @@ variable "csi_secrets_store_provider_azure_enabled" {
   description = "Should csi-secrets-store-provider-azure be enabled"
   type        = bool
   default     = true
+}
+
+variable "datadog_enabled" {
+  description = "Should Datadog be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "datadog_config" {
+  description = "Datadog configuration"
+  type = object({
+    datadog_site = string
+    api_key      = string
+  })
+}
+
+variable "falco_enabled" {
+  description = "Should Falco be enabled"
+  type        = bool
+  default     = false
 }

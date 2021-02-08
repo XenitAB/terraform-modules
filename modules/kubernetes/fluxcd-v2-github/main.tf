@@ -33,7 +33,7 @@ terraform {
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.0.7"
+      version = "0.0.8"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
@@ -79,7 +79,7 @@ data "flux_sync" "this" {
   url         = "ssh://git@github.com/${var.github_owner}/${var.cluster_repo}.git"
   target_path = "clusters/${var.environment}"
   branch      = var.branch
-  interval    = 60000000000
+  interval    = 1
 }
 
 resource "github_repository_deploy_key" "cluster" {

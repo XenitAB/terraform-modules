@@ -13,12 +13,16 @@ terraform {
       source  = "hashicorp/azurerm"
     }
     azuread = {
-      version = "1.0.0"
+      version = "1.1.1"
       source  = "hashicorp/azuread"
     }
     random = {
       version = "3.0.0"
       source  = "hashicorp/random"
+    }
+    pal = {
+      version = "0.2.4"
+      source  = "xenitab/pal"
     }
   }
 }

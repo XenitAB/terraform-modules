@@ -9,7 +9,7 @@ This module is used to create AKS clusters.
 | terraform | 0.13.5 |
 | azuread | 1.0.0 |
 | azurerm | 2.35.0 |
-| flux | 0.0.7 |
+| flux | 0.0.8 |
 | github | 4.1.0 |
 | kubectl | 1.9.1 |
 | kubernetes | 1.13.3 |
@@ -32,10 +32,13 @@ This module is used to create AKS clusters.
 | cert\_manager\_config | Cert Manager configuration | <pre>object({<br>    notification_email = string<br>    dns_zone           = string<br>  })</pre> | n/a | yes |
 | cert\_manager\_enabled | Should Cert Manager be enabled | `bool` | `true` | no |
 | csi\_secrets\_store\_provider\_azure\_enabled | Should csi-secrets-store-provider-azure be enabled | `bool` | `true` | no |
+| datadog\_config | Datadog configuration | <pre>object({<br>    datadog_site = string<br>    api_key      = string<br>  })</pre> | n/a | yes |
+| datadog\_enabled | Should Datadog be enabled | `bool` | `false` | no |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
 | external\_dns\_config | External DNS configuration | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |
 | external\_dns\_enabled | Should External DNS be enabled | `bool` | `true` | no |
-| fluxcd\_v1\_config | Configuration for fluxcd-v1 | <pre>object({<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | <pre>{<br>  "azure_devops": {<br>    "org": "",<br>    "pat": "",<br>    "proj": ""<br>  }<br>}</pre> | no |
+| falco\_enabled | Should Falco be enabled | `bool` | `false` | no |
+| fluxcd\_v1\_config | Configuration for fluxcd-v1 | <pre>object({<br>    flux_status_enabled = bool<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | <pre>{<br>  "azure_devops": {<br>    "org": "",<br>    "pat": "",<br>    "proj": ""<br>  },<br>  "flux_status_enabled": false<br>}</pre> | no |
 | fluxcd\_v1\_enabled | Should fluxcd-v1 be enabled | `bool` | `false` | no |
 | fluxcd\_v2\_config | Configuration for fluxcd-v2 | <pre>object({<br>    type = string<br>    github = object({<br>      owner = string<br>    })<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | n/a | yes |
 | fluxcd\_v2\_enabled | Should fluxcd-v2 be enabled | `bool` | `true` | no |

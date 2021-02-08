@@ -1,0 +1,13 @@
+name: Update terraform dependencies
+on:
+  schedule:
+    - cron:  '0 6 * * *'
+  push:
+jobs:
+  dependabot-terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: update terraform dependencies
+        uses: patrickjahns/dependabot-terraform-action@v1
+        with:
+          github_dependency_token: ${{ github.token }}

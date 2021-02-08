@@ -11,3 +11,5 @@ jobs:
         uses: patrickjahns/dependabot-terraform-action@v1
         with:
           github_dependency_token: ${{ github.token }}
+          directory: |
+            ./modules/azure/aks

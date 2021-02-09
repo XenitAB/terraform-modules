@@ -1,5 +1,5 @@
 locals {
-  excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns", "kyverno", "csi-secrets-store-provider-azure", "falco"]
+  excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns", "kyverno", "csi-secrets-store-provider-azure", "falco", "reloader"]
 }
 
 # OPA Gatekeeper
@@ -255,4 +255,17 @@ module "falco" {
   environment     = var.environment
   datadog_site    = var.datadog_config.datadog_site
   datadog_api_key = var.datadog_config.api_key
+}
+
+# Reloader
+module "reloader" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["reloader"] :
+    s => s
+    if var.reloader_enabled
+  }
+
+  source = "../../kubernetes/reloader"
 }

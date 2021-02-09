@@ -210,3 +210,9 @@ variable "falco_enabled" {
   type        = bool
   default     = false
 }
+
+variable "reloader_enabled" {
+  description = "Should Reloader be enabled"
+  type        = bool
+  default     = true
+}

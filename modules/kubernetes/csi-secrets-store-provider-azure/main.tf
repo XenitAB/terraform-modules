@@ -54,6 +54,11 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
   }
 
   set {
+    name  = "secrets-store-csi-driver.enableSecretRotation"
+    value = false
+  }
+
+  set {
     name  = "secrets-store-csi-driver.linux.tolerations[0].operator"
     value = "Exists"
   }

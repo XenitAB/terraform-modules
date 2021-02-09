@@ -32,7 +32,7 @@ This module is used to create AKS clusters.
 | cert\_manager\_config | Cert Manager configuration | <pre>object({<br>    notification_email = string<br>    dns_zone           = string<br>  })</pre> | n/a | yes |
 | cert\_manager\_enabled | Should Cert Manager be enabled | `bool` | `true` | no |
 | csi\_secrets\_store\_provider\_azure\_enabled | Should csi-secrets-store-provider-azure be enabled | `bool` | `true` | no |
-| datadog\_config | Datadog configuration | <pre>object({<br>    datadog_site = string<br>    api_key      = string<br>  })</pre> | n/a | yes |
+| datadog\_config | Datadog configuration | <pre>object({<br>    datadog_site = string<br>    api_key      = string<br>  })</pre> | <pre>{<br>  "api_key": "",<br>  "datadog_site": ""<br>}</pre> | no |
 | datadog\_enabled | Should Datadog be enabled | `bool` | `false` | no |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
 | external\_dns\_config | External DNS configuration | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |

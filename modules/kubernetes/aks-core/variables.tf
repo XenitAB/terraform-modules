@@ -203,6 +203,10 @@ variable "datadog_config" {
     datadog_site = string
     api_key      = string
   })
+  default = {
+    datadog_site = ""
+    api_key      = ""
+  }
 }
 
 variable "falco_enabled" {

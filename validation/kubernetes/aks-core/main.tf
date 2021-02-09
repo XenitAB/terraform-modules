@@ -69,8 +69,4 @@ module "aks_core" {
       name = "name"
     }
   }
-  datadog_config = {
-    datadog_site = ""
-    api_key = ""
-  }
 }

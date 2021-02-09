@@ -55,7 +55,7 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
 
   set {
     name  = "secrets-store-csi-driver.enableSecretRotation"
-    value = false
+    value = true
   }
 
   set {

@@ -1,0 +1,43 @@
+name: Update terraform dependencies
+on:
+  schedule:
+    - cron:  '0 6 * * *'
+  push:
+jobs:
+  tf-latest-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup tf-latest-version
+        env:
+          TF_LATEST_VERSION_VERSION: "0.0.3"
+          TF_LATEST_VERSION_SHA: "85428a3d1494dda2921344e1b7c11266ea0285a3bbe2f57397625c12533895ee"
+        run: |
+          set -e
+          wget https://github.com/XenitAB/tf-latest-version/releases/download/v${TF_LATEST_VERSION_VERSION}/tf-latest-version_${TF_LATEST_VERSION_VERSION}_linux_amd64.tar.gz
+          DOWNLOAD_TF_LATEST_VERSION_SHA=$(openssl sha1 -sha256 tf-latest-version_${TF_LATEST_VERSION_VERSION}_linux_amd64.tar.gz | awk '{print $2}')
+          if [[ "${TF_LATEST_VERSION_SHA}" != "${DOWNLOAD_TF_LATEST_VERSION_SHA}" ]]; then
+              echo "Downloaded checksum (${DOWNLOAD_TF_LATEST_VERSION_SHA}) for tf-latest-version does not match expected value: ${TF_LATEST_VERSION_SHA}"
+              exit 1
+          fi
+          tar xzvf tf-latest-version_${TF_LATEST_VERSION_VERSION}_linux_amd64.tar.gz
+          rm tf-latest-version_${TF_LATEST_VERSION_VERSION}_linux_amd64.tar.gz
+          mkdir -p ~/.local/bin/
+          mv ./tf-latest-version ~/.local/bin/tf-latest-version
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: run tf-latest-version
+        run: |
+          set -xe
+          export PATH=${PATH}:~/.local/bin
+          CURRENT_DIR=$(pwd)
+          MODULE_GROUPS=$(find modules -mindepth 1 -maxdepth 1 -type d)
+          for MODULE_GROUP in ${MODULE_GROUPS}; do
+            MODULES=$(find ${MODULE_GROUP} -mindepth 1 -maxdepth 1 -type d)
+            for MODULE in $MODULES; do
+              tf-latest-version ${CURRENT_DIR}/${MODULE}
+            done
+          done
+          git diff
+

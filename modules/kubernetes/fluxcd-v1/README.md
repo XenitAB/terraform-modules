@@ -15,17 +15,17 @@ Will be deprecated as soon as Flux v2 module is finished and tested.
 | Name | Version |
 |------|---------|
 | terraform | 0.13.5 |
-| helm | 1.3.2 |
-| kubernetes | 1.13.3 |
-| random | 3.0.0 |
+| helm | 2.0.2 |
+| kubernetes | 2.0.2 |
+| random | 3.0.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| helm | 1.3.2 |
-| kubernetes | 1.13.3 |
-| random | 3.0.0 |
+| helm | 2.0.2 |
+| kubernetes | 2.0.2 |
+| random | 3.0.1 |
 
 ## Inputs
 

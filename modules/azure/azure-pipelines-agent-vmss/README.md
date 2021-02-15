@@ -11,14 +11,14 @@ Follow this guide to setup the agent pool (manually): https://docs.microsoft.com
 | Name | Version |
 |------|---------|
 | terraform | 0.13.5 |
-| azurerm | 2.35.0 |
+| azurerm | 2.47.0 |
 | tls | 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azurerm | 2.35.0 |
+| azurerm | 2.47.0 |
 | tls | 3.0.0 |
 
 ## Inputs

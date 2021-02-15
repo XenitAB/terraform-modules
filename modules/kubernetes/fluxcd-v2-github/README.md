@@ -18,20 +18,20 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | terraform | 0.13.5 |
-| flux | 0.0.8 |
-| github | 4.1.0 |
-| kubectl | 1.9.1 |
-| kubernetes | 1.13.3 |
+| flux | 0.0.12 |
+| github | 4.4.0 |
+| kubectl | 1.10.0 |
+| kubernetes | 2.0.2 |
 | tls | 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| flux | 0.0.8 |
-| github | 4.1.0 |
-| kubectl | 1.9.1 |
-| kubernetes | 1.13.3 |
+| flux | 0.0.12 |
+| github | 4.4.0 |
+| kubectl | 1.10.0 |
+| kubernetes | 2.0.2 |
 | tls | 3.0.0 |
 
 ## Inputs

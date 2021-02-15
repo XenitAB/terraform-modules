@@ -7,20 +7,20 @@ This module is used to create AKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | 0.13.5 |
-| azuread | 1.0.0 |
-| azurerm | 2.35.0 |
-| flux | 0.0.8 |
-| github | 4.1.0 |
-| kubectl | 1.9.1 |
-| kubernetes | 1.13.3 |
-| random | 3.0.0 |
+| azuread | 1.3.0 |
+| azurerm | 2.47.0 |
+| flux | 0.0.12 |
+| github | 4.4.0 |
+| kubectl | 1.10.0 |
+| kubernetes | 2.0.2 |
+| random | 3.0.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azurerm | 2.35.0 |
-| kubernetes | 1.13.3 |
+| azurerm | 2.47.0 |
+| kubernetes | 2.0.2 |
 
 ## Inputs
 

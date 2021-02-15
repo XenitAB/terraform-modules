@@ -1,7 +1,4 @@
-terraform {
-  required_providers {
-  }
-}
+terraform {}
 
 provider "aws" {
   region = "eu-west-1"

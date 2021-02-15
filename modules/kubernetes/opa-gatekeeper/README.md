@@ -87,13 +87,13 @@ as the same values are passed to both of the charts, there will never be a diffe
 | Name | Version |
 |------|---------|
 | terraform | 0.13.5 |
-| helm | 1.3.2 |
+| helm | 2.0.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| helm | 1.3.2 |
+| helm | 2.0.2 |
 
 ## Inputs
 

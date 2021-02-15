@@ -27,7 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: run tf-latest-version
+      - name: Run tf-latest-version
         run: |
           set -xe
           export PATH=${PATH}:~/.local/bin
@@ -39,7 +39,10 @@ jobs:
               tf-latest-version ${CURRENT_DIR}/${MODULE}
             done
           done
-          git diff
+
+      - name: Generate docs
+        run: |
+          make docs
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3

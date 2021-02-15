@@ -96,8 +96,8 @@ terraform {
 }
 
 locals {
-  gatekeeper_version         = "v3.2.2"
-  gatekeeper_library_version = "v0.5.2"
+  gatekeeper_version         = "v3.3.0"
+  gatekeeper_library_version = "v0.6.0"
   values                     = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", { constraints = concat(var.default_constraints, var.additional_constraints), exclude = var.exclude })
 }
 

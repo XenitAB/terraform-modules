@@ -142,6 +142,16 @@ variable "default_constraints" {
       }
       parameters = {}
     },
+    {
+      kind               = "SecretsStoreCSIUniqueVolume"
+      name               = "unique-volume"
+      enforcement_action = ""
+      match = {
+        kinds      = []
+        namespaces = []
+      }
+      parameters = {}
+    },
     # FIXES https://github.com/kubernetes/kubernetes/issues/97076
     {
       kind               = "K8sExternalIPs"

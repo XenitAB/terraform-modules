@@ -1,7 +1,4 @@
-terraform {
-  required_providers {
-  }
-}
+terraform {}
 
 provider "azurerm" {
   features {}

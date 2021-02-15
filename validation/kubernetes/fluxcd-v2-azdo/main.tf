@@ -1,7 +1,4 @@
-terraform {
-  required_providers {
-  }
-}
+terraform {}
 
 module "fluxcd_v2_azdo" {
   source = "../../../modules/kubernetes/fluxcd-v2-azdo"

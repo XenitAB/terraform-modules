@@ -18,7 +18,7 @@ resource "azurerm_role_definition" "service_endpoint_join" {
 }
 
 data "azuread_group" "service_endpoint_join" {
-  name = "${var.azure_ad_group_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}serviceEndpointJoin"
+  display_name = "${var.azure_ad_group_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}serviceEndpointJoin"
 }
 
 resource "azurerm_role_assignment" "service_endpoint_join" {

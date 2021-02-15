@@ -1,10 +1,10 @@
 resource "azuread_group" "acr_push" {
-  name                    = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrpush"
+  display_name                    = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrpush"
   prevent_duplicate_names = true
 }
 
 resource "azuread_group" "acr_pull" {
-  name                    = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrpull"
+  display_name                    = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrpull"
   prevent_duplicate_names = true
 }
 

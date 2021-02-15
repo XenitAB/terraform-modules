@@ -40,8 +40,23 @@ jobs:
             done
           done
 
-      - name: Generate docs
+      - name: Setup terraform-docs
+        env:
+          TERRAFORM_DOCS_VERSION: "v0.10.1"
+          TERRAFORM_DOCS_SHA: "37fa36d8340ceebf54f9eda73570ddbccb04fd0a53c133d3deae279161d941a1"
         run: |
+          curl -Lo ./terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/${TERRAFORM_DOCS_VERSION}/terraform-docs-${TERRAFORM_DOCS_VERSION}-$(uname | tr '[:upper:]' '[:lower:]')-amd64
+          DOWNLOAD_TERRAFORM_DOCS_SHA=$(openssl sha1 -sha256 terraform-docs | awk '{print $2}')
+          if [[ "${TERRAFORM_DOCS_SHA}" != "${DOWNLOAD_TERRAFORM_DOCS_SHA}" ]]; then
+              echo "Downloaded checksum (${DOWNLOAD_TERRAFORM_DOCS_SHA}) for terraform-docs does not match expected value: ${TERRAFORM_DOCS_SHA}"
+              exit 1
+          fi
+          chmod +x ./terraform-docs
+          mkdir -p ~/.local/bin/
+          mv ./terraform-docs ~/.local/bin/terraform-docs
+      - name: Run docs
+        run: |
+          export PATH=${PATH}:~/.local/bin
           make docs
 
       - name: Create Pull Request

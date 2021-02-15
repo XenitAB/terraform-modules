@@ -1,17 +1,6 @@
-terraform {
-  required_providers {
-    helm = {
-      source  = "hashicorp/helm"
-      version = "1.3.2"
-    }
-  }
-}
+terraform {}
 
-provider "helm" {
-  kubernetes {
-    load_config_file = "false"
-  }
-}
+provider "helm" {}
 
 module "opa_gatekeeper" {
   source = "../../../modules/kubernetes/opa-gatekeeper"

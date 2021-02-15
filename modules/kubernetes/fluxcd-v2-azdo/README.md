@@ -19,18 +19,18 @@ the bootstrap configuration.
 |------|---------|
 | terraform | 0.13.5 |
 | azuredevops | 0.3.0 |
-| flux | 0.0.8 |
-| kubectl | 1.9.1 |
-| kubernetes | 1.13.3 |
+| flux | 0.0.12 |
+| kubectl | 1.10.0 |
+| kubernetes | 2.0.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | azuredevops | 0.3.0 |
-| flux | 0.0.8 |
-| kubectl | 1.9.1 |
-| kubernetes | 1.13.3 |
+| flux | 0.0.12 |
+| kubectl | 1.10.0 |
+| kubernetes | 2.0.2 |
 
 ## Inputs
 

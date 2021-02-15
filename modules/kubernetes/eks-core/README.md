@@ -7,19 +7,19 @@ This module is used to configure EKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | 0.13.5 |
-| aws | 3.20.0 |
-| flux | 0.0.8 |
-| github | 4.1.0 |
-| kubectl | 1.9.1 |
-| kubernetes | 1.13.3 |
-| random | 3.0.0 |
+| aws | 3.28.0 |
+| flux | 0.0.12 |
+| github | 4.4.0 |
+| kubectl | 1.10.0 |
+| kubernetes | 2.0.2 |
+| random | 3.0.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | 3.20.0 |
-| kubernetes | 1.13.3 |
+| aws | 3.28.0 |
+| kubernetes | 2.0.2 |
 
 ## Inputs
 

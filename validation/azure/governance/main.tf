@@ -1,16 +1,7 @@
 terraform {
   required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "2.35.0"
-    }
-    azuread = {
-      source  = "hashicorp/azuread"
-      version = "1.1.1"
-    }
     pal = {
-      source = "xenitab/pal"
-      version = "0.2.4"
+      source  = "xenitab/pal"
     }
   }
 }

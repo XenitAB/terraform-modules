@@ -1,34 +1,13 @@
-terraform {
-  required_providers {
-    azurerm = {
-      version = "2.35.0"
-      source  = "hashicorp/azurerm"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "1.13.3"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "1.3.2"
-    }
-  }
-}
+terraform {}
 
 provider "azurerm" {
   features {}
 }
 
-provider "kubernetes" {
-  load_config_file = "false"
-}
+provider "kubernetes" {}
 
 
-provider "helm" {
-  kubernetes {
-    load_config_file = "false"
-  }
-}
+provider "helm" {}
 
 module "loki" {
   source = "../../../modules/kubernetes/loki"

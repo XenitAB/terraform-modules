@@ -11,17 +11,17 @@ This module will also add `minio` (S3 Gateway to Azure Storage Account), `fluent
 | Name | Version |
 |------|---------|
 | terraform | 0.13.5 |
-| azurerm | 2.35.0 |
-| helm | 1.3.2 |
-| kubernetes | 1.13.3 |
+| azurerm | 2.47.0 |
+| helm | 2.0.2 |
+| kubernetes | 2.0.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azurerm | 2.35.0 |
-| helm | 1.3.2 |
-| kubernetes | 1.13.3 |
+| azurerm | 2.47.0 |
+| helm | 2.0.2 |
+| kubernetes | 2.0.2 |
 
 ## Inputs
 

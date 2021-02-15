@@ -2,7 +2,7 @@
   * # Hub
   *
   * This module is used to create a separate network in one of the subscriptions (usually PROD) and connect it to all the networks.
-  * 
+  *
   * ## Usage
   *
   * Use together with the `core` module to create a peered network where SPOF (single point of failure) resources can be created, lik Azure Pipelines Agent Virtual Machine Scale Set (VMSS).
@@ -13,11 +13,11 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "2.35.0"
+      version = "2.47.0"
       source  = "hashicorp/azurerm"
     }
     azuread = {
-      version = "1.1.1"
+      version = "1.3.0"
       source  = "hashicorp/azuread"
     }
   }
@@ -150,7 +150,7 @@ resource "azurerm_role_definition" "service_endpoint_join" {
 }
 
 data "azuread_group" "service_endpoint_join" {
-  name = "${var.azure_ad_group_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}serviceEndpointJoin"
+  display_name = "${var.azure_ad_group_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}serviceEndpointJoin"
 }
 
 resource "azurerm_role_assignment" "service_endpoint_join" {

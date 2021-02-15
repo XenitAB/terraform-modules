@@ -7,16 +7,16 @@ This module is used to create AKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | 0.13.5 |
-| azuread | 1.0.0 |
-| azurerm | 2.35.0 |
-| random | 3.0.0 |
+| azuread | 1.3.0 |
+| azurerm | 2.47.0 |
+| random | 3.0.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azuread | 1.0.0 |
-| azurerm | 2.35.0 |
+| azuread | 1.3.0 |
+| azurerm | 2.47.0 |
 
 ## Inputs
 

@@ -31,7 +31,7 @@ module "governance" {
   owner_service_principal_name = "test"
   resource_group_configs = [
     {
-      common_name                = "pkscore",
+      common_name                = "core",
       delegate_aks               = false,
       delegate_key_vault         = true,
       delegate_service_endpoint  = false,

@@ -95,6 +95,16 @@ as the same values are passed to both of the charts, there will never be a diffe
 |------|---------|
 | helm | 2.0.2 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.2/docs/resources/release) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -106,4 +116,3 @@ as the same values are passed to both of the charts, there will never be a diffe
 ## Outputs
 
 No output.
-

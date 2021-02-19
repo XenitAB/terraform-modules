@@ -27,6 +27,19 @@ Will be deprecated as soon as Flux v2 module is finished and tested.
 | kubernetes | 2.0.2 |
 | random | 3.0.1 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.2/docs/resources/release) |
+| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
+| [kubernetes_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/secret) |
+| [random_password](https://registry.terraform.io/providers/hashicorp/random/3.0.1/docs/resources/password) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -41,4 +54,3 @@ Will be deprecated as soon as Flux v2 module is finished and tested.
 ## Outputs
 
 No output.
-

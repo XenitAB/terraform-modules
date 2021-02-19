@@ -10,6 +10,7 @@ This directory contains all the Azure Terraform modules.
 - [`core`](core/README.md)
 - [`github-runner`](github-runner/README.md)
 - [`governance-global`](governance-global/README.md)
+- [`governance-regional`](governance-regional/README.md)
 - [`hub`](hub/README.md)
 
 ### Deprecated modules

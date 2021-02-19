@@ -17,6 +17,7 @@ provider "pal" {}
 module "governance" {
   source = "../../../modules/azure/governance"
 
+  accept_deprecation = "yes"
   environment = "dev"
   regions = [
     {

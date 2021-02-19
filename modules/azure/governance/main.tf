@@ -1,6 +1,8 @@
 /**
   * # Governance
   *
+  * DEPRECATED: Use `governance-global` and `governance-regional` instead.
+  *
   * This module is used to create resource groups, service principals, Azure AD groups, Azure KeyVaults and delegation to all of those resources.
   */
 

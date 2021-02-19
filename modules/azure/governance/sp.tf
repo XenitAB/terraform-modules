@@ -3,7 +3,7 @@ data "azuread_service_principal" "owner_spn" {
 }
 
 data "azuread_application" "owner_spn" {
-  name = var.owner_service_principal_name
+  display_name = var.owner_service_principal_name
 }
 
 resource "random_password" "owner_spn" {
@@ -63,7 +63,7 @@ resource "azuread_application" "aad_app" {
     if rg.delegate_service_principal == true
   }
 
-  name = "${var.service_principal_name_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.value.common_name}${var.group_name_separator}contributor"
+  display_name = "${var.service_principal_name_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.value.common_name}${var.group_name_separator}contributor"
 }
 
 resource "azuread_service_principal" "aad_sp" {

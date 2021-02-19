@@ -77,3 +77,10 @@ variable "partner_id" {
   type        = string
   default     = ""
 }
+
+variable "delegate_acr" {
+  description = "Should Azure Container Registry delegation be configured?"
+  type        = bool
+  default     = true
+}
+

@@ -49,6 +49,12 @@ variable "delegate_sub_groups" {
   default     = true
 }
 
+variable "delegate_acr" {
+  description = "Should Azure Container Registry delegation be configured?"
+  type        = bool
+  default     = true
+}
+
 variable "resource_group_configs" {
   description = "Resource group configuration"
   type = list(

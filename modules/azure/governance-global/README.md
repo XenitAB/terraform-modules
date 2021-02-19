@@ -53,6 +53,7 @@ No Modules.
 | group\_name\_separator | Separator for group names | `string` | `"-"` | no |
 | owner\_service\_principal\_name | The name of the service principal that will be used to run terraform and is owner of the subsciptions | `string` | n/a | yes |
 | partner\_id | Azure partner id to link service principal with | `string` | `""` | no |
+| resource\_group\_configs | Resource group configuration | <pre>list(<br>    object({<br>      common_name                = string<br>      delegate_aks               = bool # Delegate aks permissions<br>      delegate_key_vault         = bool # Delegate KeyVault creation<br>      delegate_service_endpoint  = bool # Delegate Service Endpoint permissions<br>      delegate_service_principal = bool # Delegate Service Principal<br>      tags                       = map(string)<br>    })<br>  )</pre> | n/a | yes |
 | service\_principal\_name\_prefix | Prefix for service principals | `string` | `"sp"` | no |
 | subscription\_name | The commonName for the subscription | `string` | n/a | yes |
 

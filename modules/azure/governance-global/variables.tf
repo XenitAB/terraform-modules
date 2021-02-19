@@ -48,3 +48,17 @@ variable "delegate_sub_groups" {
   type        = bool
   default     = true
 }
+
+variable "resource_group_configs" {
+  description = "Resource group configuration"
+  type = list(
+    object({
+      common_name                = string
+      delegate_aks               = bool # Delegate aks permissions
+      delegate_key_vault         = bool # Delegate KeyVault creation
+      delegate_service_endpoint  = bool # Delegate Service Endpoint permissions
+      delegate_service_principal = bool # Delegate Service Principal
+      tags                       = map(string)
+    })
+  )
+}

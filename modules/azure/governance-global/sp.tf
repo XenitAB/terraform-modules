@@ -55,3 +55,23 @@ resource "pal_management_partner" "owner_spn" {
   partner_id    = var.partner_id
   overwrite     = true
 }
+
+resource "azuread_application" "aad_app" {
+  for_each = {
+    for rg in var.resource_group_configs :
+    rg.common_name => rg
+    if rg.delegate_service_principal == true
+  }
+
+  display_name = "${var.service_principal_name_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.value.common_name}${var.group_name_separator}contributor"
+}
+
+resource "azuread_service_principal" "aad_sp" {
+  for_each = {
+    for rg in var.resource_group_configs :
+    rg.common_name => rg
+    if rg.delegate_service_principal == true
+  }
+
+  application_id = azuread_application.aad_app[each.key].application_id
+}

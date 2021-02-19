@@ -11,13 +11,3 @@ resource "azurerm_role_assignment" "sub_reader_sp" {
   role_definition_name = "Reader"
   principal_id         = azuread_service_principal.sub_reader_sp.object_id
 }
-
-resource "random_password" "sub_reader_sp" {
-  length           = 48
-  special          = true
-  override_special = "!-_="
-
-  keepers = {
-    service_principal = azuread_service_principal.sub_reader_sp.id
-  }
-}

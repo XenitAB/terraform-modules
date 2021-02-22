@@ -44,7 +44,7 @@ resource "azurerm_key_vault_access_policy" "ap_rg_sp" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
-    if rg.delegate_key_vault == true
+    if rg.delegate_key_vault == true && rg.delegate_service_principal == true
   }
 
   key_vault_id       = azurerm_key_vault.delegate_kv[each.key].id

@@ -24,48 +24,28 @@ terraform {
 }
 
 data "azurerm_resource_group" "this" {
-  for_each = {
-    for env_resource in local.env_resources :
-    env_resource.name => env_resource
-  }
-
-  name = "rg-${each.value.name}"
+  name = "rg-${var.environment}-${var.location_short}-${var.name}"
 }
 
 resource "azurerm_virtual_network" "this" {
-  for_each = {
-    for env_resource in local.env_resources :
-    env_resource.name => env_resource
-  }
-
-  name                = "vnet-${each.value.name}"
-  resource_group_name = data.azurerm_resource_group.this[each.value.name].name
-  location            = data.azurerm_resource_group.this[each.value.name].location
-  address_space       = each.value.vnet_config.address_space
+  name                = "vnet-${var.environment}-${var.location_short}-${var.name}"
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
+  address_space       = var.vnet_config.address_space
 }
 
 resource "azurerm_public_ip_prefix" "this" {
-  for_each = {
-    for env_resource in local.env_resources :
-    env_resource.name => env_resource
-  }
-
-  name                = "ip-prefix-${each.key}"
-  resource_group_name = data.azurerm_resource_group.this[each.key].name
-  location            = data.azurerm_resource_group.this[each.key].location
+  name                = "ip-prefix-${var.environment}-${var.location_short}-${var.name}"
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
   prefix_length       = var.nat_gateway_public_ip_prefix_length
 }
 
 resource "azurerm_nat_gateway" "this" {
-  for_each = {
-    for env_resource in local.env_resources :
-    env_resource.name => env_resource
-  }
-
-  name                    = "natgw-${each.key}"
-  resource_group_name     = data.azurerm_resource_group.this[each.key].name
-  location                = data.azurerm_resource_group.this[each.key].location
-  public_ip_prefix_ids    = [azurerm_public_ip_prefix.this[each.key].id]
+  name                    = "natgw-${var.environment}-${var.location_short}-${var.name}"
+  resource_group_name     = data.azurerm_resource_group.this.name
+  location                = data.azurerm_resource_group.this.location
+  public_ip_prefix_ids    = [azurerm_public_ip_prefix.this.id]
   sku_name                = "Standard"
   idle_timeout_in_minutes = 10
 }
@@ -78,8 +58,8 @@ resource "azurerm_subnet" "this" {
   }
 
   name                 = each.value.subnet_full_name
-  resource_group_name  = data.azurerm_resource_group.this[each.value.vnet_resource].name
-  virtual_network_name = azurerm_virtual_network.this[each.value.vnet_resource].name
+  resource_group_name  = data.azurerm_resource_group.this.name
+  virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = [each.value.subnet_cidr]
   service_endpoints    = each.value.subnet_service_endpoints
 }
@@ -91,7 +71,7 @@ resource "azurerm_subnet_nat_gateway_association" "this" {
   }
 
   subnet_id      = azurerm_subnet.this[each.key].id
-  nat_gateway_id = azurerm_nat_gateway.this[each.value.vnet_resource].id
+  nat_gateway_id = azurerm_nat_gateway.this.id
 }
 
 resource "azurerm_network_security_group" "this" {
@@ -100,9 +80,9 @@ resource "azurerm_network_security_group" "this" {
     subnet.subnet_full_name => subnet
   }
 
-  name                = "nsg-${var.environment}-${each.value.vnet_region}-${var.name}-${each.value.subnet_short_name}"
-  location            = data.azurerm_resource_group.this[each.value.vnet_resource].location
-  resource_group_name = data.azurerm_resource_group.this[each.value.vnet_resource].name
+  name                = "nsg-${var.environment}-${var.location_short}-${var.name}-${each.value.subnet_short_name}"
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
 }
 
 resource "azurerm_subnet_network_security_group_association" "this" {
@@ -122,8 +102,8 @@ resource "azurerm_virtual_network_peering" "this" {
   }
 
   name                         = "peering-${each.value.name}"
-  resource_group_name          = data.azurerm_resource_group.this[each.value.env_resource_name].name
-  virtual_network_name         = azurerm_virtual_network.this[each.value.env_resource_name].name
+  resource_group_name          = data.azurerm_resource_group.this.name
+  virtual_network_name         = azurerm_virtual_network.this.name
   remote_virtual_network_id    = each.value.peering_config.remote_virtual_network_id
   allow_forwarded_traffic      = each.value.peering_config.allow_forwarded_traffic
   use_remote_gateways          = each.value.peering_config.use_remote_gateways
@@ -131,13 +111,8 @@ resource "azurerm_virtual_network_peering" "this" {
 }
 
 resource "azurerm_role_definition" "service_endpoint_join" {
-  for_each = {
-    for env_resource in local.env_resources :
-    env_resource.name => env_resource
-  }
-
-  name  = "role-${each.value.name}-serviceEndpointJoin"
-  scope = azurerm_virtual_network.this[each.key].id
+  name  = "role-${var.environment}-${var.location_short}-${var.name}-serviceEndpointJoin"
+  scope = azurerm_virtual_network.this.id
 
   permissions {
     actions     = ["Microsoft.Network/virtualNetworks/subnets/joinViaServiceEndpoint/action"]
@@ -145,7 +120,7 @@ resource "azurerm_role_definition" "service_endpoint_join" {
   }
 
   assignable_scopes = [
-    azurerm_virtual_network.this[each.key].id
+    azurerm_virtual_network.this.id
   ]
 }
 
@@ -154,12 +129,7 @@ data "azuread_group" "service_endpoint_join" {
 }
 
 resource "azurerm_role_assignment" "service_endpoint_join" {
-  for_each = {
-    for env_resource in local.env_resources :
-    env_resource.name => env_resource
-  }
-
-  scope              = azurerm_virtual_network.this[each.key].id
-  role_definition_id = azurerm_role_definition.service_endpoint_join[each.key].role_definition_resource_id
+  scope              = azurerm_virtual_network.this.id
+  role_definition_id = azurerm_role_definition.service_endpoint_join.role_definition_resource_id
   principal_id       = data.azuread_group.service_endpoint_join.id
 }

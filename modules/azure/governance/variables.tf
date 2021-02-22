@@ -75,3 +75,9 @@ variable "partner_id" {
   type        = string
   default     = ""
 }
+
+# tflint-ignore: terraform_unused_declarations
+variable "accept_deprecation" {
+  description = "This variable is used to make sure those using it gets a notification. Not used for anything, but requires you to set it to something."
+  type        = string
+}

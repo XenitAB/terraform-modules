@@ -23,6 +23,20 @@ This module will also add `minio` (S3 Gateway to Azure Storage Account), `fluent
 | helm | 2.0.2 |
 | kubernetes | 2.0.2 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/resource_group) |
+| [azurerm_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/storage_account) |
+| [azurerm_storage_container](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/storage_container) |
+| [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.2/docs/resources/release) |
+| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -47,4 +61,3 @@ This module will also add `minio` (S3 Gateway to Azure Storage Account), `fluent
 ## Outputs
 
 No output.
-

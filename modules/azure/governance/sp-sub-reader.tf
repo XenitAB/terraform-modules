@@ -1,5 +1,5 @@
 resource "azuread_application" "sub_reader_sp" {
-  name = "${var.service_principal_name_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}reader"
+  display_name = "${var.service_principal_name_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}reader"
 }
 
 resource "azuread_service_principal" "sub_reader_sp" {

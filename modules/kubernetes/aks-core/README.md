@@ -22,6 +22,38 @@ This module is used to create AKS clusters.
 | azurerm | 2.47.0 |
 | kubernetes | 2.0.2 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| aad_pod_identity | ../../kubernetes/aad-pod-identity |  |
+| cert_manager | ../../kubernetes/cert-manager |  |
+| csi_secrets_store_provider_azure | ../../kubernetes/csi-secrets-store-provider-azure |  |
+| datadog | ../../kubernetes/datadog |  |
+| external_dns | ../../kubernetes/external-dns |  |
+| falco | ../../kubernetes/falco |  |
+| fluxcd_v1_azure_devops | ../../kubernetes/fluxcd-v1 |  |
+| fluxcd_v2_azure_devops | ../../kubernetes/fluxcd-v2-azdo |  |
+| fluxcd_v2_github | ../../kubernetes/fluxcd-v2-github |  |
+| ingress_nginx | ../../kubernetes/ingress-nginx |  |
+| kyverno | ../../kubernetes/kyverno |  |
+| opa_gatekeeper | ../../kubernetes/opa-gatekeeper |  |
+| reloader | ../../kubernetes/reloader |  |
+| velero | ../../kubernetes/velero |  |
+
+## Resources
+
+| Name |
+|------|
+| [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/client_config) |
+| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/resource_group) |
+| [kubernetes_cluster_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/cluster_role_binding) |
+| [kubernetes_cluster_role](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/cluster_role) |
+| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
+| [kubernetes_network_policy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/network_policy) |
+| [kubernetes_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/role_binding) |
+| [kubernetes_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/service_account) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -56,4 +88,3 @@ This module is used to create AKS clusters.
 ## Outputs
 
 No output.
-

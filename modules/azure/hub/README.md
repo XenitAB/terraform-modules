@@ -21,6 +21,27 @@ Use together with the `core` module to create a peered network where SPOF (singl
 | azuread | 1.3.0 |
 | azurerm | 2.47.0 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [azuread_group](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/data-sources/group) |
+| [azurerm_nat_gateway](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/nat_gateway) |
+| [azurerm_network_security_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/network_security_group) |
+| [azurerm_public_ip_prefix](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/public_ip_prefix) |
+| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/resource_group) |
+| [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/role_assignment) |
+| [azurerm_role_definition](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/role_definition) |
+| [azurerm_subnet_nat_gateway_association](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/subnet_nat_gateway_association) |
+| [azurerm_subnet_network_security_group_association](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/subnet_network_security_group_association) |
+| [azurerm_subnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/subnet) |
+| [azurerm_virtual_network_peering](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/virtual_network_peering) |
+| [azurerm_virtual_network](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/virtual_network) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -43,4 +64,3 @@ Use together with the `core` module to create a peered network where SPOF (singl
 | resource\_groups | Resource group information |
 | subnets | Subnet information |
 | virtual\_networks | Virtual network information |
-

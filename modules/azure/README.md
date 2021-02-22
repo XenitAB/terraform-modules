@@ -9,14 +9,19 @@ This directory contains all the Azure Terraform modules.
 - [`azure-pipelines-agent-vmss`](azure-pipelines-agent-vmss/README.md)
 - [`core`](core/README.md)
 - [`github-runner`](github-runner/README.md)
-- [`governance`](governance/README.md)
+- [`governance-global`](governance-global/README.md)
+- [`governance-regional`](governance-regional/README.md)
 - [`hub`](hub/README.md)
+
+### Deprecated modules
+
+- [`governance`](governance/README.md)
 
 ## Getting started
 
 ### Azure Service Principal (owner)
 
-INFO: This service principal will be used to run `governance`, `core`, `aks-global`, `aks` and `hub` modules. Running other modules, like `azure-pipelines-agent-vmss` can be done with the service principals that are created and stored in the core Azure KeyVault.
+INFO: This service principal will be used to run `governance-global`, `governance-regional`, `core`, `aks-global`, `aks` and `hub` modules. Running other modules, like `azure-pipelines-agent-vmss` can be done with the service principals that are created and stored in the core Azure KeyVault.
 
 Create and delegate access to the `owner` service principal:
 

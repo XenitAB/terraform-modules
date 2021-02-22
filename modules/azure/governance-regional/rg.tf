@@ -12,6 +12,6 @@ resource "azurerm_resource_group" "rg" {
       "LocationShort" = var.location_short
 
     },
-    each.value.resource_group_config.tags
+    each.value.tags
   )
 }

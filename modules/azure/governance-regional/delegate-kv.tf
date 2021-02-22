@@ -6,8 +6,8 @@ resource "azurerm_key_vault" "delegate_kv" {
   }
 
   name                = join("-", compact(["kv-${var.environment}-${var.location_short}-${each.value.common_name}", var.unique_suffix]))
-  location            = azurerm_resource_group.rg[each.value.name].location
-  resource_group_name = azurerm_resource_group.rg[each.value.name].name
+  location            = azurerm_resource_group.rg[each.key].location
+  resource_group_name = azurerm_resource_group.rg[each.key].name
   tenant_id           = data.azurerm_client_config.current.tenant_id
   sku_name            = "standard"
 }
@@ -19,7 +19,7 @@ resource "azurerm_key_vault_access_policy" "ap_owner_spn" {
     if rg.delegate_key_vault == true
   }
 
-  key_vault_id       = azurerm_key_vault.delegate_kv[each.value.name].id
+  key_vault_id       = azurerm_key_vault.delegate_kv[each.key].id
   tenant_id          = data.azurerm_client_config.current.tenant_id
   object_id          = data.azuread_service_principal.owner_spn.id
   key_permissions    = local.key_vault_default_permissions.key_permissions
@@ -33,7 +33,7 @@ resource "azurerm_key_vault_access_policy" "ap_rg_aad_group" {
     if rg.delegate_key_vault == true
   }
 
-  key_vault_id       = azurerm_key_vault.delegate_kv[each.value.name].id
+  key_vault_id       = azurerm_key_vault.delegate_kv[each.key].id
   tenant_id          = data.azurerm_client_config.current.tenant_id
   object_id          = data.azuread_group.rg_contributor[each.value.common_name].id
   key_permissions    = local.key_vault_default_permissions.key_permissions
@@ -47,7 +47,7 @@ resource "azurerm_key_vault_access_policy" "ap_rg_sp" {
     if rg.delegate_key_vault == true
   }
 
-  key_vault_id       = azurerm_key_vault.delegate_kv[each.value.name].id
+  key_vault_id       = azurerm_key_vault.delegate_kv[each.key].id
   tenant_id          = data.azurerm_client_config.current.tenant_id
   object_id          = data.azuread_service_principal.aad_sp[each.value.common_name].object_id
   key_permissions    = local.key_vault_default_permissions.key_permissions
@@ -61,7 +61,7 @@ resource "azurerm_key_vault_access_policy" "ap_kvreader_sp" {
     if rg.delegate_key_vault == true
   }
 
-  key_vault_id       = azurerm_key_vault.delegate_kv[each.value.name].id
+  key_vault_id       = azurerm_key_vault.delegate_kv[each.key].id
   tenant_id          = data.azurerm_client_config.current.tenant_id
   object_id          = data.azuread_service_principal.delegate_kv_aad[each.value.common_name].object_id
   key_permissions    = local.key_vault_default_permissions.key_permissions
@@ -75,7 +75,7 @@ resource "azurerm_key_vault_access_policy" "ap_sub_aad_group_owner" {
     if rg.delegate_key_vault == true
   }
 
-  key_vault_id       = azurerm_key_vault.delegate_kv[each.value.name].id
+  key_vault_id       = azurerm_key_vault.delegate_kv[each.key].id
   tenant_id          = data.azurerm_client_config.current.tenant_id
   object_id          = data.azuread_group.sub_owner.id
   key_permissions    = local.key_vault_default_permissions.key_permissions
@@ -89,7 +89,7 @@ resource "azurerm_key_vault_access_policy" "ap_sub_aad_group_contributor" {
     if rg.delegate_key_vault == true
   }
 
-  key_vault_id       = azurerm_key_vault.delegate_kv[each.value.name].id
+  key_vault_id       = azurerm_key_vault.delegate_kv[each.key].id
   tenant_id          = data.azurerm_client_config.current.tenant_id
   object_id          = data.azuread_group.sub_contributor.id
   key_permissions    = local.key_vault_default_permissions.key_permissions

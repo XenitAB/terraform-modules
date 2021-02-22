@@ -1,11 +1,6 @@
 resource "azurerm_role_definition" "service_endpoint_join" {
-  for_each = {
-    for env_resource in local.env_resources :
-    env_resource.name => env_resource
-  }
-
-  name  = "role-${each.value.name}-serviceEndpointJoin"
-  scope = azurerm_virtual_network.vnet[each.value.name].id
+  name  = "role-${var.environment}-${var.location_short}-${var.name}-serviceEndpointJoin"
+  scope = azurerm_virtual_network.this.id
 
   permissions {
     actions     = ["Microsoft.Network/virtualNetworks/subnets/joinViaServiceEndpoint/action"]
@@ -13,7 +8,7 @@ resource "azurerm_role_definition" "service_endpoint_join" {
   }
 
   assignable_scopes = [
-    azurerm_virtual_network.vnet[each.value.name].id
+    azurerm_virtual_network.this.id
   ]
 }
 
@@ -22,12 +17,7 @@ data "azuread_group" "service_endpoint_join" {
 }
 
 resource "azurerm_role_assignment" "service_endpoint_join" {
-  for_each = {
-    for env_resource in local.env_resources :
-    env_resource.name => env_resource
-  }
-
-  scope              = azurerm_virtual_network.vnet[each.value.name].id
-  role_definition_id = azurerm_role_definition.service_endpoint_join[each.value.name].role_definition_resource_id
+  scope              = azurerm_virtual_network.this.id
+  role_definition_id = azurerm_role_definition.service_endpoint_join.role_definition_resource_id
   principal_id       = data.azuread_group.service_endpoint_join.id
 }

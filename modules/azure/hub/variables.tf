@@ -1,9 +1,6 @@
-variable "regions" {
-  description = "The Azure Regions to configure"
-  type = list(object({
-    location       = string
-    location_short = string
-  }))
+variable "location_short" {
+  description = "The location shortname for the subscription"
+  type        = string
 }
 
 variable "environment" {
@@ -29,26 +26,26 @@ variable "nat_gateway_public_ip_prefix_length" {
 
 variable "vnet_config" {
   description = "Address spaces used by virtual network."
-  type = map(object({
+  type = object({
     address_space = list(string)
     subnets = list(object({
       name              = string
       cidr              = string
       service_endpoints = list(string)
     }))
-  }))
+  })
 }
 
 variable "peering_config" {
   description = "Peering configuration"
-  type = map(list(object({
+  type = list(object({
     name                         = string
     remote_virtual_network_id    = string
     allow_forwarded_traffic      = bool
     use_remote_gateways          = bool
     allow_virtual_network_access = bool
-  })))
-  default = {}
+  }))
+  default = []
 }
 
 variable "group_name_separator" {

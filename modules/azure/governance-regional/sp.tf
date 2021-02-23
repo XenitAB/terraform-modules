@@ -63,9 +63,9 @@ resource "azurerm_role_assignment" "aad_sp" {
     if rg.delegate_service_principal == true
   }
 
-  scope                = azurerm_resource_group.rg[each.value.name].id
+  scope                = azurerm_resource_group.rg[each.key].id
   role_definition_name = "Contributor"
-  principal_id         = data.azuread_service_principal.aad_sp[each.value.resource_group_config.common_name].object_id
+  principal_id         = data.azuread_service_principal.aad_sp[each.value.common_name].object_id
 }
 
 resource "pal_management_partner" "aad_sp" {

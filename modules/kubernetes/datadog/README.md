@@ -6,7 +6,7 @@ Adds [Datadog](https://github.com/DataDog/helm-charts) to a Kubernetes cluster.
 
 | Name | Version |
 |------|---------|
-| terraform | 0.13.5 |
+| terraform | 0.14.7 |
 | helm | 2.0.2 |
 | kubernetes | 2.0.2 |
 

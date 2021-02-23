@@ -6,7 +6,7 @@ Adds [`external-secrets`](https://github.com/external-secrets/kubernetes-externa
 
 | Name | Version |
 |------|---------|
-| terraform | 0.13.5 |
+| terraform | 0.14.7 |
 | helm | 2.0.2 |
 | kubernetes | 2.0.2 |
 

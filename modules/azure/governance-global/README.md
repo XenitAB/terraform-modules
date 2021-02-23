@@ -6,7 +6,7 @@ This module is used for governance on a global level and not using any specific 
 
 | Name | Version |
 |------|---------|
-| terraform | 0.13.5 |
+| terraform | 0.14.7 |
 | azuread | 1.3.0 |
 | azurerm | 2.47.0 |
 | pal | 0.2.4 |

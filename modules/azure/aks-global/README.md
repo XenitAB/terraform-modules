@@ -6,7 +6,7 @@ This module is used to create resources that are used by AKS clusters.
 
 | Name | Version |
 |------|---------|
-| terraform | 0.13.5 |
+| terraform | 0.14.7 |
 | azuread | 1.3.0 |
 | azurerm | 2.47.0 |
 | random | 3.0.1 |

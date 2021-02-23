@@ -6,7 +6,7 @@ This module is used to configure EKS clusters.
 
 | Name | Version |
 |------|---------|
-| terraform | 0.13.5 |
+| terraform | 0.14.7 |
 | aws | 3.28.0 |
 | flux | 0.0.12 |
 | github | 4.4.0 |

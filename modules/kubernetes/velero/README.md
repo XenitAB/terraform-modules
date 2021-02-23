@@ -6,7 +6,7 @@ This module is used to add [`velero`](https://github.com/vmware-tanzu/velero) to
 
 | Name | Version |
 |------|---------|
-| terraform | 0.13.5 |
+| terraform | 0.14.7 |
 | helm | 2.0.2 |
 | kubernetes | 2.0.2 |
 

@@ -6,7 +6,7 @@ This module is used to create core resources like virtual network for the subscr
 
 | Name | Version |
 |------|---------|
-| terraform | 0.13.5 |
+| terraform | 0.14.7 |
 | azuread | 1.3.0 |
 | azurerm | 2.47.0 |
 

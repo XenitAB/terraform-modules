@@ -12,7 +12,7 @@ Setup an image using Packer according [github-runner](https://github.com/XenitAB
 
 | Name | Version |
 |------|---------|
-| terraform | 0.13.5 |
+| terraform | 0.14.7 |
 | azurerm | 2.47.0 |
 | tls | 3.0.0 |
 

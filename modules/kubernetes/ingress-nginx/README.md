@@ -6,7 +6,7 @@ This module is used to add [`ingress-nginx`](https://github.com/kubernetes/ingre
 
 | Name | Version |
 |------|---------|
-| terraform | 0.13.5 |
+| terraform | 0.14.7 |
 | helm | 2.0.2 |
 | kubernetes | 2.0.2 |
 

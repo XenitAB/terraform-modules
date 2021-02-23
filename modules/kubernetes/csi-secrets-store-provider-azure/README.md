@@ -6,7 +6,7 @@ Adds [csi-secrets-store-provider-azure](https://github.com/Azure/secrets-store-c
 
 | Name | Version |
 |------|---------|
-| terraform | 0.13.5 |
+| terraform | 0.14.7 |
 | helm | 2.0.2 |
 | kubernetes | 2.0.2 |
 

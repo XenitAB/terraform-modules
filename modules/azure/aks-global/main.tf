@@ -9,20 +9,20 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "2.47.0"
+      version = "2.48.0"
       source  = "hashicorp/azurerm"
     }
     azuread = {
-      version = "1.3.0"
+      version = "1.4.0"
       source  = "hashicorp/azuread"
     }
     random = {
       source  = "hashicorp/random"
-      version = "3.0.1"
+      version = "3.1.0"
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "3.0.0"
+      version = "3.1.0"
     }
   }
 }

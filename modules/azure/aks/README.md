@@ -7,31 +7,16 @@ This module is used to create AKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | 0.13.5 |
-| azuread | 1.3.0 |
-| azurerm | 2.47.0 |
-| random | 3.0.1 |
+| azuread | 1.4.0 |
+| azurerm | 2.48.0 |
+| random | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azuread | 1.3.0 |
-| azurerm | 2.47.0 |
-
-## Modules
-
-No Modules.
-
-## Resources
-
-| Name |
-|------|
-| [azuread_group_member](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/group_member) |
-| [azurerm_kubernetes_cluster_node_pool](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/kubernetes_cluster_node_pool) |
-| [azurerm_kubernetes_cluster](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/kubernetes_cluster) |
-| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/resource_group) |
-| [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/role_assignment) |
-| [azurerm_subnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/subnet) |
+| azuread | 1.4.0 |
+| azurerm | 2.48.0 |
 
 ## Inputs
 
@@ -54,3 +39,4 @@ No Modules.
 | Name | Description |
 |------|-------------|
 | kube\_config | Kube config for the created AKS cluster |
+

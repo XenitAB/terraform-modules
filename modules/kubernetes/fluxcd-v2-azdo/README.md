@@ -32,24 +32,6 @@ the bootstrap configuration.
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.2 |
 
-## Modules
-
-No Modules.
-
-## Resources
-
-| Name |
-|------|
-| [azuredevops_git_repository_file](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository_file) |
-| [azuredevops_git_repository](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository) |
-| [azuredevops_project](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/project) |
-| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.0.12/docs/data-sources/install) |
-| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.0.12/docs/data-sources/sync) |
-| [kubectl_file_documents](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/data-sources/file_documents) |
-| [kubectl_manifest](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/resources/manifest) |
-| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
-| [kubernetes_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/secret) |
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -65,3 +47,4 @@ No Modules.
 ## Outputs
 
 No output.
+

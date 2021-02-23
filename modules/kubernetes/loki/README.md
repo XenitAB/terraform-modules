@@ -45,11 +45,9 @@ No Modules.
 | kubernetes\_namespace\_name | The Kubernetes namespace name | `string` | `"loki"` | no |
 | location\_short | The Azure region short name. | `string` | n/a | yes |
 | loki\_helm\_chart\_name | The helm chart name for loki | `string` | `"loki-stack"` | no |
-| loki\_helm\_chart\_version | The helm chart version for loki | `string` | `"2.0.0"` | no |
 | loki\_helm\_release\_name | The helm release name for loki | `string` | `"loki"` | no |
 | loki\_helm\_repository | The helm repository for loki | `string` | `"https://grafana.github.io/loki/charts"` | no |
 | minio\_helm\_chart\_name | The helm chart name for minio | `string` | `"minio"` | no |
-| minio\_helm\_chart\_version | The helm chart version for minio | `string` | `"8.0.0"` | no |
 | minio\_helm\_release\_name | The helm release name for minio | `string` | `"loki-minio"` | no |
 | minio\_helm\_repository | The helm repository for minio | `string` | `"https://helm.min.io/"` | no |
 | name | The name to use for the deploy | `string` | n/a | yes |

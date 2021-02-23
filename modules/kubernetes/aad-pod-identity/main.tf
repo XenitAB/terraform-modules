@@ -22,7 +22,6 @@ terraform {
 locals {
   name      = "aad-pod-identity"
   namespace = "aad-pod-identity"
-  version   = "2.1.0"
 }
 
 locals {
@@ -42,7 +41,7 @@ resource "helm_release" "aad_pod_identity" {
   repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
   chart      = local.name
   name       = local.name
-  version    = local.version
+  version    = "2.1.0"
   namespace  = kubernetes_namespace.this.metadata[0].name
   values     = [local.values]
 }

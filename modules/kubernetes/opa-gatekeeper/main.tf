@@ -96,16 +96,14 @@ terraform {
 }
 
 locals {
-  gatekeeper_version         = "v3.3.0"
-  gatekeeper_library_version = "v0.6.0"
-  values                     = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", { constraints = concat(var.default_constraints, var.additional_constraints), exclude = var.exclude })
+  values = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", { constraints = concat(var.default_constraints, var.additional_constraints), exclude = var.exclude })
 }
 
 resource "helm_release" "gatekeeper" {
   repository = "https://open-policy-agent.github.io/gatekeeper/charts"
   chart      = "gatekeeper"
   name       = "gatekeeper"
-  version    = local.gatekeeper_version
+  version    = "v3.3.0"
   values     = [file("${path.module}/files/gatekeeper-values.yaml")]
 }
 
@@ -116,7 +114,7 @@ resource "helm_release" "gatekeeper_templates" {
   chart      = "gatekeeper-library-templates"
   name       = "gatekeeper-library-templates"
   namespace  = "gatekeeper-system"
-  version    = local.gatekeeper_library_version
+  version    = "v0.6.0"
   values     = [local.values]
 }
 
@@ -127,6 +125,6 @@ resource "helm_release" "gatekeeper_constraints" {
   chart      = "gatekeeper-library-constraints"
   name       = "gatekeeper-library-constraints"
   namespace  = "gatekeeper-system"
-  version    = local.gatekeeper_library_version
+  version    = "v0.6.0"
   values     = [local.values]
 }

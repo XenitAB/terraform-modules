@@ -60,7 +60,7 @@ resource "helm_release" "minio" {
   name       = var.minio_helm_release_name
   repository = var.minio_helm_repository
   chart      = var.minio_helm_chart_name
-  version    = var.minio_helm_chart_version
+  version    = "8.0.0"
   namespace  = kubernetes_namespace.this.metadata[0].name
 
   values = [
@@ -82,7 +82,7 @@ resource "helm_release" "loki_stack" {
   name       = var.loki_helm_release_name
   repository = var.loki_helm_repository
   chart      = var.loki_helm_chart_name
-  version    = var.loki_helm_chart_version
+  version    = "2.0.0"
   namespace  = kubernetes_namespace.this.metadata[0].name
 
   values = [

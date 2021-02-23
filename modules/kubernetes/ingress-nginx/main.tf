@@ -21,7 +21,6 @@ terraform {
 
 locals {
   namespace = "ingress-nginx"
-  version   = "v3.10.1"
 }
 
 resource "kubernetes_namespace" "this" {
@@ -38,5 +37,5 @@ resource "helm_release" "ingress_nginx" {
   chart      = "ingress-nginx"
   name       = "ingress-nginx"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = local.version
+  version    = "v3.10.1"
 }

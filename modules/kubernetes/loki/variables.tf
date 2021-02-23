@@ -63,12 +63,6 @@ variable "minio_helm_chart_name" {
   default     = "minio"
 }
 
-variable "minio_helm_chart_version" {
-  description = "The helm chart version for minio"
-  type        = string
-  default     = "8.0.0"
-}
-
 variable "minio_helm_release_name" {
   description = "The helm release name for minio"
   type        = string
@@ -85,12 +79,6 @@ variable "loki_helm_chart_name" {
   description = "The helm chart name for loki"
   type        = string
   default     = "loki-stack"
-}
-
-variable "loki_helm_chart_version" {
-  description = "The helm chart version for loki"
-  type        = string
-  default     = "2.0.0"
 }
 
 variable "loki_helm_release_name" {

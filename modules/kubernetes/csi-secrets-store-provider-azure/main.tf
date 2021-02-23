@@ -24,7 +24,6 @@ locals {
   chart_release_name = "csi-secrets-store-provider-azure"
   chart_repository   = "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
   chart_name         = "csi-secrets-store-provider-azure"
-  chart_version      = "0.0.16"
 }
 
 resource "kubernetes_namespace" "this" {
@@ -40,7 +39,7 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
   name       = local.chart_release_name
   repository = local.chart_repository
   chart      = local.chart_name
-  version    = local.chart_version
+  version    = "0.0.16"
   namespace  = kubernetes_namespace.this.metadata[0].name
 
   set {

@@ -15,7 +15,6 @@ terraform {
 
 locals {
   namespace = "kyverno"
-  version   = "1.3.0-rc11"
 }
 
 resource "kubernetes_namespace" "this" {
@@ -32,7 +31,7 @@ resource "helm_release" "kyverno" {
   chart      = "kyverno"
   name       = "kyverno"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = local.version
+  version    = "1.3.0-rc11"
 }
 
 resource "helm_release" "kyverno_extras" {

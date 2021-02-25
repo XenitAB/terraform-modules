@@ -19,39 +19,20 @@ the bootstrap configuration.
 |------|---------|
 | terraform | 0.14.7 |
 | flux | 0.0.12 |
-| github | 4.4.0 |
+| github | 4.5.0 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.2 |
-| tls | 3.0.0 |
+| tls | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | flux | 0.0.12 |
-| github | 4.4.0 |
+| github | 4.5.0 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.2 |
-| tls | 3.0.0 |
-
-## Modules
-
-No Modules.
-
-## Resources
-
-| Name |
-|------|
-| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.0.12/docs/data-sources/install) |
-| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.0.12/docs/data-sources/sync) |
-| [github_repository_deploy_key](https://registry.terraform.io/providers/hashicorp/github/4.4.0/docs/resources/repository_deploy_key) |
-| [github_repository_file](https://registry.terraform.io/providers/hashicorp/github/4.4.0/docs/resources/repository_file) |
-| [github_repository](https://registry.terraform.io/providers/hashicorp/github/4.4.0/docs/data-sources/repository) |
-| [kubectl_file_documents](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/data-sources/file_documents) |
-| [kubectl_manifest](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/resources/manifest) |
-| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
-| [kubernetes_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/secret) |
-| [tls_private_key](https://registry.terraform.io/providers/hashicorp/tls/3.0.0/docs/resources/private_key) |
+| tls | 3.1.0 |
 
 ## Inputs
 
@@ -66,3 +47,4 @@ No Modules.
 ## Outputs
 
 No output.
+

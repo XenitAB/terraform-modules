@@ -3,42 +3,15 @@
 | Name | Version |
 |------|---------|
 | terraform | 0.14.7 |
-| aws | 3.28.0 |
-| tls | 3.0.0 |
+| aws | 3.29.1 |
+| tls | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | 3.28.0 |
-| tls | 3.0.0 |
-
-## Modules
-
-No Modules.
-
-## Resources
-
-| Name |
-|------|
-| [aws_availability_zones](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/data-sources/availability_zones) |
-| [aws_caller_identity](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/data-sources/caller_identity) |
-| [aws_eks_cluster_auth](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/data-sources/eks_cluster_auth) |
-| [aws_eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/resources/eks_cluster) |
-| [aws_eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/resources/eks_node_group) |
-| [aws_iam_openid_connect_provider](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/resources/iam_openid_connect_provider) |
-| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/data-sources/iam_policy_document) |
-| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/resources/iam_policy) |
-| [aws_iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/resources/iam_role_policy_attachment) |
-| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/resources/iam_role) |
-| [aws_nat_gateway](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/data-sources/nat_gateway) |
-| [aws_region](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/data-sources/region) |
-| [aws_route_table_association](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/resources/route_table_association) |
-| [aws_route_table](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/resources/route_table) |
-| [aws_route](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/resources/route) |
-| [aws_subnet](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/resources/subnet) |
-| [aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/data-sources/vpc) |
-| [tls_certificate](https://registry.terraform.io/providers/hashicorp/tls/3.0.0/docs/data-sources/certificate) |
+| aws | 3.29.1 |
+| tls | 3.1.0 |
 
 ## Inputs
 
@@ -60,3 +33,4 @@ No Modules.
 | external\_secrets\_config | Configuration for External DNS |
 | kube\_config | Kube config for the created EKS cluster |
 | velero\_config | Configuration for Velero |
+

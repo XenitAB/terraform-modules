@@ -7,41 +7,19 @@ This module is used to configure EKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | 0.14.7 |
-| aws | 3.28.0 |
+| aws | 3.29.1 |
 | flux | 0.0.12 |
-| github | 4.4.0 |
+| github | 4.5.0 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.2 |
-| random | 3.0.1 |
+| random | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | 3.28.0 |
+| aws | 3.29.1 |
 | kubernetes | 2.0.2 |
-
-## Modules
-
-| Name | Source | Version |
-|------|--------|---------|
-| cert_manager | ../../kubernetes/cert-manager |  |
-| external_dns | ../../kubernetes/external-dns |  |
-| external_secrets | ../../kubernetes/external-secrets |  |
-| fluxcd_v2_github | ../../kubernetes/fluxcd-v2-github |  |
-| ingress_nginx | ../../kubernetes/ingress-nginx |  |
-| kyverno | ../../kubernetes/kyverno |  |
-| opa_gatekeeper | ../../kubernetes/opa-gatekeeper |  |
-| velero | ../../kubernetes/velero |  |
-
-## Resources
-
-| Name |
-|------|
-| [aws_region](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/data-sources/region) |
-| [aws_route53_zone](https://registry.terraform.io/providers/hashicorp/aws/3.28.0/docs/data-sources/route53_zone) |
-| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
-| [kubernetes_network_policy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/network_policy) |
 
 ## Inputs
 
@@ -67,3 +45,4 @@ This module is used to configure EKS clusters.
 ## Outputs
 
 No output.
+

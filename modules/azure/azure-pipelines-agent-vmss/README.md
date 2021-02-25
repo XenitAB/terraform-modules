@@ -11,31 +11,15 @@ Follow this guide to setup the agent pool (manually): https://docs.microsoft.com
 | Name | Version |
 |------|---------|
 | terraform | 0.14.7 |
-| azurerm | 2.47.0 |
-| tls | 3.0.0 |
+| azurerm | 2.48.0 |
+| tls | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azurerm | 2.47.0 |
-| tls | 3.0.0 |
-
-## Modules
-
-No Modules.
-
-## Resources
-
-| Name |
-|------|
-| [azurerm_image](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/image) |
-| [azurerm_key_vault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/key_vault_secret) |
-| [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/key_vault) |
-| [azurerm_linux_virtual_machine_scale_set](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/linux_virtual_machine_scale_set) |
-| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/resource_group) |
-| [azurerm_subnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/subnet) |
-| [tls_private_key](https://registry.terraform.io/providers/hashicorp/tls/3.0.0/docs/resources/private_key) |
+| azurerm | 2.48.0 |
+| tls | 3.1.0 |
 
 ## Inputs
 
@@ -60,3 +44,4 @@ No Modules.
 ## Outputs
 
 No output.
+

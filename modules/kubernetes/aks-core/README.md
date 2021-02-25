@@ -7,52 +7,20 @@ This module is used to create AKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | 0.14.7 |
-| azuread | 1.3.0 |
-| azurerm | 2.47.0 |
+| azuread | 1.4.0 |
+| azurerm | 2.48.0 |
 | flux | 0.0.12 |
-| github | 4.4.0 |
+| github | 4.5.0 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.2 |
-| random | 3.0.1 |
+| random | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azurerm | 2.47.0 |
+| azurerm | 2.48.0 |
 | kubernetes | 2.0.2 |
-
-## Modules
-
-| Name | Source | Version |
-|------|--------|---------|
-| aad_pod_identity | ../../kubernetes/aad-pod-identity |  |
-| cert_manager | ../../kubernetes/cert-manager |  |
-| csi_secrets_store_provider_azure | ../../kubernetes/csi-secrets-store-provider-azure |  |
-| datadog | ../../kubernetes/datadog |  |
-| external_dns | ../../kubernetes/external-dns |  |
-| falco | ../../kubernetes/falco |  |
-| fluxcd_v1_azure_devops | ../../kubernetes/fluxcd-v1 |  |
-| fluxcd_v2_azure_devops | ../../kubernetes/fluxcd-v2-azdo |  |
-| fluxcd_v2_github | ../../kubernetes/fluxcd-v2-github |  |
-| ingress_nginx | ../../kubernetes/ingress-nginx |  |
-| kyverno | ../../kubernetes/kyverno |  |
-| opa_gatekeeper | ../../kubernetes/opa-gatekeeper |  |
-| reloader | ../../kubernetes/reloader |  |
-| velero | ../../kubernetes/velero |  |
-
-## Resources
-
-| Name |
-|------|
-| [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/client_config) |
-| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/resource_group) |
-| [kubernetes_cluster_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/cluster_role_binding) |
-| [kubernetes_cluster_role](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/cluster_role) |
-| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
-| [kubernetes_network_policy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/network_policy) |
-| [kubernetes_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/role_binding) |
-| [kubernetes_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/service_account) |
 
 ## Inputs
 
@@ -88,3 +56,4 @@ This module is used to create AKS clusters.
 ## Outputs
 
 No output.
+

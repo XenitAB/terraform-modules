@@ -30,8 +30,8 @@ No Modules.
 | Name |
 |------|
 | [azurerm_image](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/image) |
-| [azurerm_key_vault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/key_vault_secret) |
 | [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/key_vault) |
+| [azurerm_key_vault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/key_vault_secret) |
 | [azurerm_linux_virtual_machine_scale_set](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/linux_virtual_machine_scale_set) |
 | [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/resource_group) |
 | [azurerm_subnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/subnet) |

@@ -30,10 +30,10 @@ No Modules.
 | [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/resource_group) |
 | [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/role_assignment) |
 | [azurerm_role_definition](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/role_definition) |
-| [azurerm_subnet_network_security_group_association](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/subnet_network_security_group_association) |
 | [azurerm_subnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/subnet) |
-| [azurerm_virtual_network_peering](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/virtual_network_peering) |
+| [azurerm_subnet_network_security_group_association](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/subnet_network_security_group_association) |
 | [azurerm_virtual_network](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/virtual_network) |
+| [azurerm_virtual_network_peering](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/virtual_network_peering) |
 
 ## Inputs
 

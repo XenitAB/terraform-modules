@@ -29,16 +29,16 @@ No Modules.
 
 | Name |
 |------|
-| [azuread_application_password](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/application_password) |
 | [azuread_application](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/application) |
-| [azuread_group_member](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/group_member) |
+| [azuread_application_password](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/application_password) |
 | [azuread_group](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/data-sources/group) |
 | [azuread_group](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/group) |
+| [azuread_group_member](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/group_member) |
 | [azuread_service_principal](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/service_principal) |
 | [azurerm_container_registry](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/container_registry) |
 | [azurerm_dns_zone](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/dns_zone) |
-| [azurerm_key_vault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/key_vault_secret) |
 | [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/key_vault) |
+| [azurerm_key_vault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/key_vault_secret) |
 | [azurerm_public_ip_prefix](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/public_ip_prefix) |
 | [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/resource_group) |
 | [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/role_assignment) |

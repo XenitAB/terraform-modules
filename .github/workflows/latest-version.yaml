@@ -41,8 +41,8 @@ jobs:
 
       - name: Setup terraform-docs
         env:
-          TERRAFORM_DOCS_VERSION: "v0.10.1"
-          TERRAFORM_DOCS_SHA: "37fa36d8340ceebf54f9eda73570ddbccb04fd0a53c133d3deae279161d941a1"
+          TERRAFORM_DOCS_VERSION: "v0.11.2"
+          TERRAFORM_DOCS_SHA: "0d1e42d6fcb15b14027ae8efb794edb1cd7faa7a32507ccad449340529d04937"
         run: |
           curl -Lo ./terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/${TERRAFORM_DOCS_VERSION}/terraform-docs-${TERRAFORM_DOCS_VERSION}-$(uname | tr '[:upper:]' '[:lower:]')-amd64
           DOWNLOAD_TERRAFORM_DOCS_SHA=$(openssl sha1 -sha256 terraform-docs | awk '{print $2}')

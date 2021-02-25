@@ -40,8 +40,8 @@ No Modules.
 
 | Name |
 |------|
-| [azuredevops_git_repository_file](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository_file) |
 | [azuredevops_git_repository](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository) |
+| [azuredevops_git_repository_file](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository_file) |
 | [azuredevops_project](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/project) |
 | [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.0.12/docs/data-sources/install) |
 | [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.0.12/docs/data-sources/sync) |

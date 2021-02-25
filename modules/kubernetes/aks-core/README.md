@@ -47,8 +47,8 @@ This module is used to create AKS clusters.
 |------|
 | [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/client_config) |
 | [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/resource_group) |
-| [kubernetes_cluster_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/cluster_role_binding) |
 | [kubernetes_cluster_role](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/cluster_role) |
+| [kubernetes_cluster_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/cluster_role_binding) |
 | [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
 | [kubernetes_network_policy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/network_policy) |
 | [kubernetes_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/role_binding) |

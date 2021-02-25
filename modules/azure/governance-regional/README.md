@@ -31,15 +31,15 @@ No Modules.
 
 | Name |
 |------|
-| [azuread_application_password](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/application_password) |
 | [azuread_application](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/data-sources/application) |
-| [azuread_group_member](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/group_member) |
+| [azuread_application_password](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/application_password) |
 | [azuread_group](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/data-sources/group) |
+| [azuread_group_member](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/group_member) |
 | [azuread_service_principal](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/data-sources/service_principal) |
 | [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/client_config) |
+| [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/key_vault) |
 | [azurerm_key_vault_access_policy](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/key_vault_access_policy) |
 | [azurerm_key_vault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/key_vault_secret) |
-| [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/key_vault) |
 | [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/resource_group) |
 | [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/role_assignment) |
 | [azurerm_subscription](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/subscription) |

@@ -54,3 +54,15 @@ variable "azure_ad_group_prefix" {
   type        = string
   default     = "az"
 }
+
+variable "enable_storage_account" {
+  description = "Should a storage account be created in the core resource group? (used for diagnostics)"
+  type        = bool
+  default     = false
+}
+
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
+  type        = string
+  default     = ""
+}

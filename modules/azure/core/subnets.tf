@@ -2,7 +2,7 @@ resource "azurerm_subnet" "this" {
   for_each = {
     for subnet in local.subnets :
     subnet.subnet_full_name => subnet
-    if subnet.subnet_aksSubnet == false
+    if subnet.subnet_aks_subnet == false
   }
 
   name                 = each.value.subnet_full_name
@@ -16,7 +16,7 @@ resource "azurerm_subnet" "aks" {
   for_each = {
     for subnet in local.subnets :
     subnet.subnet_full_name => subnet
-    if subnet.subnet_aksSubnet == true
+    if subnet.subnet_aks_subnet == true
   }
 
   name                 = each.value.subnet_full_name

@@ -6,7 +6,7 @@ locals {
       subnet_short_name        = subnet.name
       subnet_cidr              = subnet.cidr
       subnet_service_endpoints = subnet.service_endpoints
-      subnet_aksSubnet         = subnet.aks_subnet
+      subnet_aks_subnet        = subnet.aks_subnet
     }
   ]
 
@@ -16,4 +16,14 @@ locals {
       peering_config = peering_config
     }
   ]
+
+  routes = flatten([
+    for route_config in var.route_config : [
+      for route in route_config.routes : {
+        name        = "${route_config.subnet_name}-${route.name}"
+        subnet_name = route_config.subnet_name
+        route       = route
+      }
+    ]
+  ])
 }

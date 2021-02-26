@@ -6,7 +6,7 @@ locals {
       subnet_short_name        = subnet.name
       subnet_cidr              = subnet.cidr
       subnet_service_endpoints = subnet.service_endpoints
-      subnet_aksSubnet         = subnet.aks_subnet
+      subnet_aks_subnet        = subnet.aks_subnet
     }
   ]
 

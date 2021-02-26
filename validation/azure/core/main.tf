@@ -45,4 +45,17 @@ module "core" {
       allow_virtual_network_access = true
     },
   ]
+  route_config = [
+    {
+      subnet_name = "servers"
+      routes = [
+        {
+          name                   = "default"
+          address_prefix         = "0.0.0.0/0"
+          next_hop_type          = "Internet"
+          next_hop_in_ip_address = ""
+        },
+      ]
+    },
+  ]
 }

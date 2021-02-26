@@ -31,6 +31,21 @@ variable "vnet_config" {
   })
 }
 
+variable "route_config" {
+  description = "Route configuration. Not applied to aks subnets."
+  type = list(object({
+    subnet_name = string # Short name for the subnet
+    routes = list(object({
+      name                   = string # Name of the route
+      address_prefix         = string # Example: 192.168.0.0/24
+      next_hop_type          = string # VirtualNetworkGateway, VnetLocal, Internet, VirtualAppliance and None
+      next_hop_in_ip_address = string # Only set if next_hop_type is VirtualAppliance
+    }))
+
+  }))
+  default = []
+}
+
 variable "peering_config" {
   description = "Peering configuration"
   type = list(object({

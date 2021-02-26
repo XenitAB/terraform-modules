@@ -16,4 +16,14 @@ locals {
       peering_config = peering_config
     }
   ]
+
+  routes = flatten([
+    for route_config in var.route_config : [
+      for route in route_config.routes : {
+        name        = "${route_config.subnet_name}-${route.name}"
+        subnet_name = route_config.subnet_name
+        route       = route
+      }
+    ]
+  ])
 }

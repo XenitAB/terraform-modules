@@ -40,6 +40,7 @@ No Modules.
 | [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/key_vault) |
 | [azurerm_key_vault_access_policy](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/key_vault_access_policy) |
 | [azurerm_key_vault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/key_vault_secret) |
+| [azurerm_management_lock](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/management_lock) |
 | [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/resource_group) |
 | [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/role_assignment) |
 | [azurerm_subscription](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/subscription) |
@@ -60,7 +61,7 @@ No Modules.
 | location\_short | The location shortname for the subscription | `string` | n/a | yes |
 | owner\_service\_principal\_name | The name of the service principal that will be used to run terraform and is owner of the subsciptions | `string` | n/a | yes |
 | partner\_id | Azure partner id to link service principal with | `string` | `""` | no |
-| resource\_group\_configs | Resource group configuration | <pre>list(<br>    object({<br>      common_name                = string<br>      delegate_aks               = bool # Delegate aks permissions<br>      delegate_key_vault         = bool # Delegate KeyVault creation<br>      delegate_service_endpoint  = bool # Delegate Service Endpoint permissions<br>      delegate_service_principal = bool # Delegate Service Principal<br>      tags                       = map(string)<br>    })<br>  )</pre> | n/a | yes |
+| resource\_group\_configs | Resource group configuration | <pre>list(<br>    object({<br>      common_name                = string<br>      delegate_aks               = bool # Delegate aks permissions<br>      delegate_key_vault         = bool # Delegate KeyVault creation<br>      delegate_service_endpoint  = bool # Delegate Service Endpoint permissions<br>      delegate_service_principal = bool # Delegate Service Principal<br>      lock_resource_group        = bool # Adds management_lock (CanNotDelete) to the resource group<br>      tags                       = map(string)<br>    })<br>  )</pre> | n/a | yes |
 | service\_principal\_name\_prefix | Prefix for service principals | `string` | `"sp"` | no |
 | subscription\_name | The commonName for the subscription | `string` | n/a | yes |
 | unique\_suffix | Unique suffix that is used in globally unique resources names | `string` | `""` | no |

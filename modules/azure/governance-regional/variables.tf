@@ -37,6 +37,7 @@ variable "resource_group_configs" {
       delegate_key_vault         = bool # Delegate KeyVault creation
       delegate_service_endpoint  = bool # Delegate Service Endpoint permissions
       delegate_service_principal = bool # Delegate Service Principal
+      lock_resource_group        = bool # Adds management_lock (CanNotDelete) to the resource group
       tags                       = map(string)
     })
   )

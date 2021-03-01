@@ -72,6 +72,7 @@ validate:
 	for MODULE in $$TF_MODULES; do
 		cd $$CURRENT_DIR/$${MODULE}
 		echo terraform-validate: $${MODULE}
+		rm -f .terraform.lock.hcl
 		terraform init 1>/dev/null
 		terraform validate
 	done

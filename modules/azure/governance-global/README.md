@@ -7,19 +7,19 @@ This module is used for governance on a global level and not using any specific 
 | Name | Version |
 |------|---------|
 | terraform | 0.14.7 |
-| azuread | 1.3.0 |
-| azurerm | 2.47.0 |
+| azuread | 1.4.0 |
+| azurerm | 2.49.0 |
 | pal | 0.2.4 |
-| random | 3.0.1 |
+| random | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azuread | 1.3.0 |
-| azurerm | 2.47.0 |
+| azuread | 1.4.0 |
+| azurerm | 2.49.0 |
 | pal | 0.2.4 |
-| random | 3.0.1 |
+| random | 3.1.0 |
 
 ## Modules
 
@@ -29,18 +29,18 @@ No Modules.
 
 | Name |
 |------|
-| [azuread_application](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/data-sources/application) |
-| [azuread_application](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/application) |
-| [azuread_application_password](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/application_password) |
-| [azuread_group](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/data-sources/group) |
-| [azuread_group](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/group) |
-| [azuread_group_member](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/group_member) |
-| [azuread_service_principal](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/data-sources/service_principal) |
-| [azuread_service_principal](https://registry.terraform.io/providers/hashicorp/azuread/1.3.0/docs/resources/service_principal) |
-| [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/resources/role_assignment) |
-| [azurerm_subscription](https://registry.terraform.io/providers/hashicorp/azurerm/2.47.0/docs/data-sources/subscription) |
+| [azuread_application](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/application) |
+| [azuread_application](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/application) |
+| [azuread_application_password](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/application_password) |
+| [azuread_group](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) |
+| [azuread_group](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group) |
+| [azuread_group_member](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) |
+| [azuread_service_principal](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/service_principal) |
+| [azuread_service_principal](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/service_principal) |
+| [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.49.0/docs/resources/role_assignment) |
+| [azurerm_subscription](https://registry.terraform.io/providers/hashicorp/azurerm/2.49.0/docs/data-sources/subscription) |
 | [pal_management_partner](https://registry.terraform.io/providers/xenitab/pal/0.2.4/docs/resources/management_partner) |
-| [random_password](https://registry.terraform.io/providers/hashicorp/random/3.0.1/docs/resources/password) |
+| [random_password](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) |
 
 ## Inputs
 

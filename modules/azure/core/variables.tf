@@ -22,6 +22,7 @@ variable "vnet_config" {
   description = "Address spaces used by virtual network."
   type = object({
     address_space = list(string)
+    dns_servers   = list(string)
     subnets = list(object({
       name              = string
       cidr              = string

@@ -53,7 +53,7 @@ No Modules.
 | route\_config | Route configuration. Not applied to aks subnets. | <pre>list(object({<br>    subnet_name = string # Short name for the subnet<br>    routes = list(object({<br>      name                   = string # Name of the route<br>      address_prefix         = string # Example: 192.168.0.0/24<br>      next_hop_type          = string # VirtualNetworkGateway, VnetLocal, Internet, VirtualAppliance and None<br>      next_hop_in_ip_address = string # Only set if next_hop_type is VirtualAppliance<br>    }))<br><br>  }))</pre> | `[]` | no |
 | subscription\_name | The subscriptionCommonName to use for the deploy | `string` | n/a | yes |
 | unique\_suffix | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
-| vnet\_config | Address spaces used by virtual network. | <pre>object({<br>    address_space = list(string)<br>    subnets = list(object({<br>      name              = string<br>      cidr              = string<br>      service_endpoints = list(string)<br>      aks_subnet        = bool<br>    }))<br>  })</pre> | n/a | yes |
+| vnet\_config | Address spaces used by virtual network. | <pre>object({<br>    address_space = list(string)<br>    dns_servers   = list(string)<br>    subnets = list(object({<br>      name              = string<br>      cidr              = string<br>      service_endpoints = list(string)<br>      aks_subnet        = bool<br>    }))<br>  })</pre> | n/a | yes |
 
 ## Outputs
 

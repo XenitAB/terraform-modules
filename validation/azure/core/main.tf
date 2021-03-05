@@ -15,6 +15,7 @@ module "core" {
   name              = "core"
   vnet_config = {
     address_space = ["10.180.0.0/16"]
+    dns_servers   = []
     subnets = [
       {
         name              = "servers"

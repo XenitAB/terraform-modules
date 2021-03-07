@@ -152,6 +152,26 @@ variable "default_constraints" {
       }
       parameters = {}
     },
+    {
+      kind               = "FluxRequireServiceAccount"
+      name               = "require-service-account"
+      enforcement_action = ""
+      match = {
+        kinds      = []
+        namespaces = []
+      }
+      parameters = {}
+    },
+    {
+      kind               = "FluxDisableCrossNamespaceSource"
+      name               = "disable-cross-namespace-source"
+      enforcement_action = ""
+      match = {
+        kinds      = []
+        namespaces = []
+      }
+      parameters = {}
+    },
     # FIXES https://github.com/kubernetes/kubernetes/issues/97076
     {
       kind               = "K8sExternalIPs"

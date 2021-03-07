@@ -20,8 +20,10 @@ the bootstrap configuration.
 | terraform | 0.14.7 |
 | azuredevops | 0.3.0 |
 | flux | 0.0.12 |
+| helm | 2.0.2 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.2 |
+| random | 3.1.0 |
 
 ## Providers
 
@@ -29,8 +31,10 @@ the bootstrap configuration.
 |------|---------|
 | azuredevops | 0.3.0 |
 | flux | 0.0.12 |
+| helm | 2.0.2 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.2 |
+| random | 3.1.0 |
 
 ## Modules
 
@@ -40,15 +44,17 @@ No Modules.
 
 | Name |
 |------|
-| [azuredevops_git_repository](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository) |
+| [azuredevops_git_repository](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/git_repository) |
 | [azuredevops_git_repository_file](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository_file) |
 | [azuredevops_project](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/project) |
 | [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.0.12/docs/data-sources/install) |
 | [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.0.12/docs/data-sources/sync) |
+| [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.2/docs/resources/release) |
 | [kubectl_file_documents](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/data-sources/file_documents) |
 | [kubectl_manifest](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/resources/manifest) |
 | [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
 | [kubernetes_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/secret) |
+| [random_password](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) |
 
 ## Inputs
 
@@ -57,10 +63,10 @@ No Modules.
 | azure\_devops\_org | Azure DevOps organization for bootstrap repository | `string` | n/a | yes |
 | azure\_devops\_pat | PAT to authenticate with Azure DevOps | `string` | n/a | yes |
 | azure\_devops\_proj | Azure DevOps project for bootstrap repository | `string` | n/a | yes |
-| bootstrap\_path | Path to reconcile bootstrap from | `string` | n/a | yes |
-| bootstrap\_repo | Name of repository to bootstrap from | `string` | `"fleet-infra"` | no |
-| branch | Path to reconcile bootstrap from | `string` | `"master"` | no |
-| namespaces | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled = bool<br>        repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
+| branch | Branch to point source controller towards | `string` | `"main"` | no |
+| cluster\_repo | Name of cluster repository | `string` | `"fleet-infra"` | no |
+| environment | Environment name of the cluster | `string` | n/a | yes |
+| namespaces | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled = bool<br>        azure_devops = object({<br>          org  = string<br>          proj = string<br>          repo = string<br>        })<br>      })<br>    })<br>  )</pre> | n/a | yes |
 
 ## Outputs
 

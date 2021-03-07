@@ -19,6 +19,10 @@ terraform {
   required_version = "0.14.7"
 
   required_providers {
+    helm = {
+      source  = "hashicorp/helm"
+      version = "2.0.2"
+    }
     flux = {
       source  = "fluxcd/flux"
       version = "0.0.12"
@@ -35,94 +39,23 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = "1.10.0"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.1.0"
+    }
   }
 }
 
-locals {
-  repo_url = "http://git-cache-http-server/dev.azure.com/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.bootstrap_repo}"
-}
-
-# FluxCD
-data "flux_install" "main" {
-  target_path = var.bootstrap_path
-}
-
-data "flux_sync" "main" {
-  url         = local.repo_url
-  target_path = var.bootstrap_path
-  branch      = var.branch
-  interval    = 1
-}
-
-# Azure DevOps
 data "azuredevops_project" "this" {
   name = var.azure_devops_proj
 }
 
-resource "azuredevops_git_repository" "this" {
-  project_id = data.azuredevops_project.this.id
-  name       = var.bootstrap_repo
-  initialization {
-    init_type = "Clean"
-  }
-}
-
-resource "azuredevops_git_repository" "groups" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  project_id = data.azuredevops_project.this.id
-  name       = each.key
-  initialization {
-    init_type = "Clean"
-  }
-}
-
-resource "azuredevops_git_repository_file" "install" {
-  repository_id = azuredevops_git_repository.this.id
-  file          = data.flux_install.main.path
-  content       = data.flux_install.main.content
-  branch        = "refs/heads/${var.branch}"
-}
-
-resource "azuredevops_git_repository_file" "sync" {
-  repository_id = azuredevops_git_repository.this.id
-  file          = data.flux_sync.main.path
-  content       = data.flux_sync.main.content
-  branch        = "refs/heads/${var.branch}"
-}
-
-resource "azuredevops_git_repository_file" "kustomize" {
-  repository_id = azuredevops_git_repository.this.id
-  file          = data.flux_sync.main.kustomize_path
-  content       = data.flux_sync.main.kustomize_content
-  branch        = "refs/heads/${var.branch}"
-}
-
-resource "azuredevops_git_repository_file" "groups" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  repository_id = azuredevops_git_repository.this.id
-  file          = "${var.bootstrap_path}/${each.key}.yaml"
-  content = templatefile("${path.module}/templates/main.yaml", {
-    azdo_org  = var.azure_devops_org,
-    azdo_proj = var.azure_devops_proj,
-    azdo_repo = each.key
-  })
-  branch = "refs/heads/${var.branch}"
-}
-
-# Kubernetes
-resource "kubernetes_namespace" "flux_system" {
+resource "kubernetes_namespace" "this" {
   metadata {
     name = "flux-system"
+    labels = {
+      name = "flux-system"
+    }
   }
 
   lifecycle {
@@ -132,46 +65,186 @@ resource "kubernetes_namespace" "flux_system" {
   }
 }
 
-data "kubectl_file_documents" "install" {
-  content = data.flux_install.main.content
+# Azdo Proxy
+locals {
+  azdo_proxy_values = templatefile("${path.module}/templates/azdo-proxy-values.yaml.tpl", {
+    azure_devops_pat  = var.azure_devops_pat,
+    azure_devops_org  = var.azure_devops_org,
+    azure_devops_proj = var.azure_devops_proj,
+    cluster_repo      = var.cluster_repo,
+    cluster_token     = random_password.cluster.result,
+    tenants = [for ns in var.namespaces : {
+      project : ns.flux.azure_devops.repo
+      repo : ns.flux.azure_devops.repo
+      token : random_password.tenant[ns.name].result,
+      }
+      if ns.flux.enabled
+    ]
+  })
+  azdo_proxy_url = "http://azdo-proxy.flux-system.svc.cluster.local"
 }
 
-resource "kubectl_manifest" "install" {
-  for_each   = { for v in data.kubectl_file_documents.install.documents : sha1(v) => v }
-  depends_on = [kubernetes_namespace.flux_system]
+resource "helm_release" "azdo_proxy" {
+  repository = "https://xenitab.github.io/azdo-proxy/"
+  chart      = "azdo-proxy"
+  name       = "azdo-proxy"
+  namespace  = kubernetes_namespace.this.metadata[0].name
+  version    = "0.3.6"
+  values     = [local.azdo_proxy_values]
+}
 
-  yaml_body = each.value
+# Cluster
+data "azuredevops_git_repository" "cluster" {
+  project_id = data.azuredevops_project.this.id
+  name       = var.cluster_repo
+}
+
+resource "random_password" "cluster" {
+  length  = 32
+  special = false
+}
+
+data "flux_install" "this" {
+  target_path = "clusters/${var.environment}"
+  version     = "v0.9.0"
+}
+
+data "flux_sync" "this" {
+  url                = "${local.azdo_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
+  branch             = var.branch
+  target_path        = "clusters/${var.environment}"
+  git_implementation = "libgit2"
+}
+
+data "kubectl_file_documents" "install" {
+  content = data.flux_install.this.content
 }
 
 data "kubectl_file_documents" "sync" {
-  content = data.flux_sync.main.content
+  content = data.flux_sync.this.content
+}
+
+locals {
+  install = [for v in data.kubectl_file_documents.install.documents : {
+    data : yamldecode(v)
+    content : v
+    }
+  ]
+  sync = [for v in data.kubectl_file_documents.sync.documents : {
+    data : yamldecode(v)
+    content : v
+    }
+  ]
+}
+
+resource "kubectl_manifest" "install" {
+  depends_on = [kubernetes_namespace.this]
+  for_each   = { for v in local.install : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+  yaml_body  = each.value
 }
 
 resource "kubectl_manifest" "sync" {
-  for_each   = { for v in data.kubectl_file_documents.sync.documents : sha1(v) => v }
-  depends_on = [kubectl_manifest.install, kubernetes_namespace.flux_system]
-
-  yaml_body = each.value
+  depends_on = [kubernetes_namespace.this]
+  for_each   = { for v in local.sync : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+  yaml_body  = each.value
 }
 
-resource "kubernetes_secret" "main" {
+resource "kubernetes_secret" "cluster" {
   depends_on = [kubectl_manifest.install]
 
   metadata {
-    name      = data.flux_sync.main.name
-    namespace = data.flux_sync.main.namespace
+    name      = data.flux_sync.this.name
+    namespace = data.flux_sync.this.namespace
   }
 
   data = {
-    username = var.azure_devops_org
-    password = var.azure_devops_pat
+    username = "git"
+    password = random_password.cluster.result
   }
 }
 
-resource "kubectl_manifest" "git_cache_deplopyment" {
-  yaml_body = file("${path.module}/files/deployment.yaml")
+resource "azuredevops_git_repository_file" "install" {
+  repository_id       = data.azuredevops_git_repository.cluster.id
+  file                = data.flux_install.this.path
+  content             = data.flux_install.this.content
+  branch              = "refs/heads/${var.branch}"
+  overwrite_on_create = true
 }
 
-resource "kubectl_manifest" "git_cache_service" {
-  yaml_body = file("${path.module}/files/service.yaml")
+resource "azuredevops_git_repository_file" "sync" {
+  repository_id       = data.azuredevops_git_repository.cluster.id
+  file                = data.flux_sync.this.path
+  content             = data.flux_sync.this.content
+  branch              = "refs/heads/${var.branch}"
+  overwrite_on_create = true
 }
+
+resource "azuredevops_git_repository_file" "kustomize" {
+  repository_id       = data.azuredevops_git_repository.cluster.id
+  file                = data.flux_sync.this.kustomize_path
+  content             = data.flux_sync.this.kustomize_content
+  branch              = "refs/heads/${var.branch}"
+  overwrite_on_create = true
+}
+
+resource "azuredevops_git_repository_file" "cluster_tenants" {
+  repository_id = data.azuredevops_git_repository.cluster.id
+  file          = "clusters/${var.environment}/tenants.yaml"
+  content = templatefile("${path.module}/templates/cluster-tenants.yaml", {
+    environment = var.environment
+  })
+  branch              = "refs/heads/${var.branch}"
+  overwrite_on_create = true
+}
+
+# Tenants
+resource "random_password" "tenant" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.flux.enabled
+  }
+
+  length  = 32
+  special = false
+}
+
+resource "kubernetes_secret" "tenant" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.flux.enabled
+  }
+  depends_on = [kubectl_manifest.install]
+
+  metadata {
+    name      = "flux"
+    namespace = each.key
+  }
+
+  data = {
+    username = "git"
+    password = random_password.tenant[each.key].result
+    token    = random_password.tenant[each.key].result
+  }
+}
+
+resource "azuredevops_git_repository_file" "tenant" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.flux.enabled
+  }
+
+  repository_id = data.azuredevops_git_repository.cluster.id
+  branch        = "refs/heads/${var.branch}"
+  file          = "tenants/${var.environment}/${each.key}.yaml"
+  content = templatefile("${path.module}/templates/tenant.yaml", {
+    repo        = "${local.azdo_proxy_url}/${var.azure_devops_org}/${each.value.flux.azure_devops.proj}/_git/${each.value.flux.azure_devops.repo}"
+    branch      = var.branch,
+    name        = each.key,
+    environment = var.environment,
+  })
+  overwrite_on_create = true
+}
+

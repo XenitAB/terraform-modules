@@ -6,7 +6,6 @@ module "fluxcd_v2_azdo" {
   azure_devops_pat = "123456"
   azure_devops_org = "foo"
   azure_devops_proj = "bar"
-  bootstrap_repo = "baz"
-  bootstrap_path = "dev"
+  environment = "dev"
   namespaces = []
 }

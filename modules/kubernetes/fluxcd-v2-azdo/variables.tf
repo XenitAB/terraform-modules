@@ -1,6 +1,7 @@
 variable "azure_devops_pat" {
   description = "PAT to authenticate with Azure DevOps"
   type        = string
+  sensitive   = true
 }
 
 variable "azure_devops_org" {
@@ -13,8 +14,8 @@ variable "azure_devops_proj" {
   type        = string
 }
 
-variable "bootstrap_path" {
-  description = "Path to reconcile bootstrap from"
+variable "environment" {
+  description = "Environment name of the cluster"
   type        = string
 }
 
@@ -25,20 +26,24 @@ variable "namespaces" {
       name = string
       flux = object({
         enabled = bool
-        repo    = string
+        azure_devops = object({
+          org  = string
+          proj = string
+          repo = string
+        })
       })
     })
   )
 }
 
-variable "branch" {
-  description = "Path to reconcile bootstrap from"
-  type        = string
-  default     = "master"
-}
-
-variable "bootstrap_repo" {
-  description = "Name of repository to bootstrap from"
+variable "cluster_repo" {
+  description = "Name of cluster repository"
   type        = string
   default     = "fleet-infra"
+}
+
+variable "branch" {
+  description = "Branch to point source controller towards"
+  type        = string
+  default     = "main"
 }

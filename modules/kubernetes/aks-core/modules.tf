@@ -68,7 +68,7 @@ module "fluxcd_v2_azure_devops" {
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
   azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
-  bootstrap_path    = var.environment
+  environment       = var.environment
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = ns.flux

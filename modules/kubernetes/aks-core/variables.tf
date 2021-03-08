@@ -233,6 +233,7 @@ variable "azad_kube_proxy_config" {
     fqdn                  = string
     dashboard             = string
     azure_ad_group_prefix = string
+    allowed_ips           = list(string)
     azure_ad_app = object({
       client_id     = string
       client_secret = string
@@ -248,6 +249,7 @@ variable "azad_kube_proxy_config" {
     fqdn                  = ""
     dashboard             = ""
     azure_ad_group_prefix = ""
+    allowed_ips           = []
     azure_ad_app = {
       client_id     = ""
       client_secret = ""

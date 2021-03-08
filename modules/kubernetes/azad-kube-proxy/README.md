@@ -30,7 +30,7 @@ AZ_APP_DASH_NAME="aks-dashboard-${ENVIRONMENT}"
 AZ_APP_DASH_REPLY_URL="https://aks.${ENVIRONMENT}.example.com/"
 AZ_APP_DASH_ID=$(az ad app create --display-name ${AZ_APP_DASH_NAME} --reply-urls ${AZ_APP_DASH_REPLY_URL} --query appId -o tsv)
 AZ_APP_DASH_OBJECT_ID=$(az ad app show --id ${AZ_APP_DASH_ID} --output tsv --query objectId)
-# This adds permission for the dashboard to the k8s-api app added above. Note that the variables from above are needed.
+# This adds permission for the dashboard to the aks app added above. Note that the variables from above are needed.
 az rest --method PATCH --uri "https://graph.microsoft.com/beta/applications/${AZ_APP_OBJECT_ID}" --body "{\"api\":{\"preAuthorizedApplications\":[{\"appId\":\"04b07795-8ddb-461a-bbee-02f9e1bf7b46\",\"permissionIds\":[\"${AZ_APP_PERMISSION_ID}\"]},{\"appId\":\"${AZ_APP_DASH_ID}\",\"permissionIds\":[\"${AZ_APP_PERMISSION_ID}\"]}]}}"
 az rest --method PATCH --uri "https://graph.microsoft.com/beta/applications/${AZ_APP_DASH_OBJECT_ID}" --body '{"api":{"requestedAccessTokenVersion": 2}}'
 AZ_APP_DASH_SECRET=$(az ad sp credential reset --name ${AZ_APP_DASH_ID} --credential-description "azad-kube-proxy" --output tsv --query password)
@@ -59,8 +59,10 @@ module "aks_core" {
 
   azad_kube_proxy_enabled = true
   azad_kube_proxy_config = {
-    fqdn      = "aks.${var.dns_zone}"
-    dashboard = "k8dash"
+    fqdn                  = "aks.${var.dns_zone}"
+    dashboard             = "k8dash"
+    azure_ad_group_prefix = var.aks_group_name_prefix
+    allowed_ips           = var.aks_authorized_ips
     azure_ad_app = {
       client_id     = jsondecode(data.azurerm_key_vault_secret.azad_kube_proxy.value).client_id
       client_secret = jsondecode(data.azurerm_key_vault_secret.azad_kube_proxy.value).client_secret

@@ -283,6 +283,7 @@ module "azad_kube_proxy" {
   fqdn                  = var.azad_kube_proxy_config.fqdn
   dashboard             = var.azad_kube_proxy_config.dashboard
   azure_ad_group_prefix = var.azad_kube_proxy_config.azure_ad_group_prefix
+  allowed_ips           = var.azad_kube_proxy_config.allowed_ips
 
   azure_ad_app = {
     client_id     = var.azad_kube_proxy_config.azure_ad_app.client_id

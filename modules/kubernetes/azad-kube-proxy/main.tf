@@ -102,9 +102,10 @@ locals {
   }
   secret_data = merge(local.aad_config, local.k8dash_config)
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
-    dashboard       = var.dashboard
-    fqdn            = var.fqdn,
-    allowed_ips_csv = join(",", var.allowed_ips),
+    dashboard             = var.dashboard
+    fqdn                  = var.fqdn,
+    allowed_ips_csv       = join(",", var.allowed_ips),
+    azure_ad_group_prefix = var.azure_ad_group_prefix
   })
 }
 

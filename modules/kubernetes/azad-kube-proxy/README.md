@@ -62,14 +62,14 @@ module "aks_core" {
     fqdn      = "aks.${var.dns_zone}"
     dashboard = "k8dash"
     azure_ad_app = {
-      client_id     = jsondecode(data.azurerm_key_vault_secret.azure_devops_pat.value).client_id
-      client_secret = jsondecode(data.azurerm_key_vault_secret.azure_devops_pat.value).client_secret
-      tenant_id     = jsondecode(data.azurerm_key_vault_secret.azure_devops_pat.value).tenant_id
+      client_id     = jsondecode(data.azurerm_key_vault_secret.azad_kube_proxy.value).client_id
+      client_secret = jsondecode(data.azurerm_key_vault_secret.azad_kube_proxy.value).client_secret
+      tenant_id     = jsondecode(data.azurerm_key_vault_secret.azad_kube_proxy.value).tenant_id
     }
     k8dash_config = {
-      client_id     = jsondecode(data.azurerm_key_vault_secret.azure_devops_pat.value).k8dash_client_id
-      client_secret = jsondecode(data.azurerm_key_vault_secret.azure_devops_pat.value).k8dash_client_secret
-      scope         = jsondecode(data.azurerm_key_vault_secret.azure_devops_pat.value).k8dash_scope
+      client_id     = jsondecode(data.azurerm_key_vault_secret.azad_kube_proxy.value).k8dash_client_id
+      client_secret = jsondecode(data.azurerm_key_vault_secret.azad_kube_proxy.value).k8dash_client_secret
+      scope         = jsondecode(data.azurerm_key_vault_secret.azad_kube_proxy.value).k8dash_scope
     }
   }
 }
@@ -108,6 +108,7 @@ No Modules.
 |------|-------------|------|---------|:--------:|
 | allowed\_ips | The external IPs allowed through the ingress to azad-kube-proxy | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | azure\_ad\_app | The Azure AD Application config for azad-kube-proxy | <pre>object({<br>    client_id     = string<br>    client_secret = string<br>    tenant_id     = string<br>  })</pre> | n/a | yes |
+| azure\_ad\_group\_prefix | The Azure AD group prefix to filter for | `string` | `""` | no |
 | dashboard | What dashboard to use with azad-kube-proxy | `string` | `"k8dash"` | no |
 | fqdn | The name to use with the ingress (fully qualified domain name). Example: k8s.example.com | `string` | n/a | yes |
 | k8dash\_config | The k8dash configuration if chosen as dashboard | <pre>object({<br>    client_id     = string<br>    client_secret = string<br>    scope         = string<br>  })</pre> | <pre>{<br>  "client_id": "",<br>  "client_secret": "",<br>  "scope": ""<br>}</pre> | no |

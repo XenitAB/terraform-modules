@@ -230,8 +230,9 @@ variable "azad_kube_proxy_enabled" {
 variable "azad_kube_proxy_config" {
   description = "The azad-kube-proxy configuration"
   type = object({
-    fqdn      = string
-    dashboard = string
+    fqdn                  = string
+    dashboard             = string
+    azure_ad_group_prefix = string
     azure_ad_app = object({
       client_id     = string
       client_secret = string
@@ -244,8 +245,9 @@ variable "azad_kube_proxy_config" {
     })
   })
   default = {
-    fqdn      = ""
-    dashboard = ""
+    fqdn                  = ""
+    dashboard             = ""
+    azure_ad_group_prefix = ""
     azure_ad_app = {
       client_id     = ""
       client_secret = ""

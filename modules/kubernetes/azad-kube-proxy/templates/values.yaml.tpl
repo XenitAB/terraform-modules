@@ -26,6 +26,8 @@ podEnv:
     value: "8080"
   - name: GROUP_IDENTIFIER
     value: "OBJECTID"
+  - name: AZURE_AD_GROUP_PREFIX
+    value: "${azure_ad_group_prefix}"
 %{ if dashboard == "k8dash" }
   - name: DASHBOARD
     value: "K8DASH"

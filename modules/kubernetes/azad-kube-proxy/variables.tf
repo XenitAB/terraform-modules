@@ -43,3 +43,9 @@ variable "fqdn" {
   description = "The name to use with the ingress (fully qualified domain name). Example: k8s.example.com"
   type        = string
 }
+
+variable "azure_ad_group_prefix" {
+  description = "The Azure AD group prefix to filter for"
+  type        = string
+  default     = ""
+}

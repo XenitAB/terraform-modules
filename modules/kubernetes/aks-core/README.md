@@ -8,9 +8,9 @@ This module is used to create AKS clusters.
 |------|---------|
 | terraform | 0.14.7 |
 | azuread | 1.4.0 |
-| azurerm | 2.49.0 |
+| azurerm | 2.50.0 |
 | flux | 0.0.12 |
-| github | 4.5.0 |
+| github | 4.5.1 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.2 |
 | random | 3.1.0 |
@@ -19,7 +19,7 @@ This module is used to create AKS clusters.
 
 | Name | Version |
 |------|---------|
-| azurerm | 2.49.0 |
+| azurerm | 2.50.0 |
 | kubernetes | 2.0.2 |
 
 ## Modules
@@ -45,8 +45,8 @@ This module is used to create AKS clusters.
 
 | Name |
 |------|
-| [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/2.49.0/docs/data-sources/client_config) |
-| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.49.0/docs/data-sources/resource_group) |
+| [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/data-sources/client_config) |
+| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/data-sources/resource_group) |
 | [kubernetes_cluster_role](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/cluster_role) |
 | [kubernetes_cluster_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/cluster_role_binding) |
 | [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |

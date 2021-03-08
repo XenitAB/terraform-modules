@@ -10,7 +10,7 @@ This module is used to create resource groups, service principals, Azure AD grou
 |------|---------|
 | terraform | 0.14.7 |
 | azuread | 1.4.0 |
-| azurerm | 2.49.0 |
+| azurerm | 2.50.0 |
 | pal | 0.2.4 |
 | random | 3.1.0 |
 
@@ -19,7 +19,7 @@ This module is used to create resource groups, service principals, Azure AD grou
 | Name | Version |
 |------|---------|
 | azuread | 1.4.0 |
-| azurerm | 2.49.0 |
+| azurerm | 2.50.0 |
 | pal | 0.2.4 |
 | random | 3.1.0 |
 
@@ -39,13 +39,13 @@ No Modules.
 | [azuread_group_member](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) |
 | [azuread_service_principal](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/service_principal) |
 | [azuread_service_principal](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/service_principal) |
-| [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/2.49.0/docs/data-sources/client_config) |
-| [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/2.49.0/docs/resources/key_vault) |
-| [azurerm_key_vault_access_policy](https://registry.terraform.io/providers/hashicorp/azurerm/2.49.0/docs/resources/key_vault_access_policy) |
-| [azurerm_key_vault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/2.49.0/docs/resources/key_vault_secret) |
-| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.49.0/docs/resources/resource_group) |
-| [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.49.0/docs/resources/role_assignment) |
-| [azurerm_subscription](https://registry.terraform.io/providers/hashicorp/azurerm/2.49.0/docs/data-sources/subscription) |
+| [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/data-sources/client_config) |
+| [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/resources/key_vault) |
+| [azurerm_key_vault_access_policy](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/resources/key_vault_access_policy) |
+| [azurerm_key_vault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/resources/key_vault_secret) |
+| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/resources/resource_group) |
+| [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/resources/role_assignment) |
+| [azurerm_subscription](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/data-sources/subscription) |
 | [pal_management_partner](https://registry.terraform.io/providers/xenitab/pal/0.2.4/docs/resources/management_partner) |
 | [random_password](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) |
 

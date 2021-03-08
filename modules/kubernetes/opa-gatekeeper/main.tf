@@ -114,7 +114,7 @@ resource "helm_release" "gatekeeper_templates" {
   chart      = "gatekeeper-library-templates"
   name       = "gatekeeper-library-templates"
   namespace  = "gatekeeper-system"
-  version    = "v0.6.1"
+  version    = "v0.6.2"
   values     = [local.values]
 }
 
@@ -125,6 +125,6 @@ resource "helm_release" "gatekeeper_constraints" {
   chart      = "gatekeeper-library-constraints"
   name       = "gatekeeper-library-constraints"
   namespace  = "gatekeeper-system"
-  version    = "v0.6.1"
+  version    = "v0.6.2"
   values     = [local.values]
 }

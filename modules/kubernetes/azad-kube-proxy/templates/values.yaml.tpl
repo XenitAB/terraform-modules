@@ -58,7 +58,8 @@ ingress:
     nginx.ingress.kubernetes.io/whitelist-source-range: "${allowed_ips_csv}"
   hosts:
   - host: "${fqdn}"
-    paths: []
+    paths:
+    - "/"
   tls:
   - secretName: azad-kube-proxy-cert
     hosts:

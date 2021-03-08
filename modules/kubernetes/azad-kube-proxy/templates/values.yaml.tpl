@@ -59,7 +59,10 @@ ingress:
   hosts:
   - host: "${fqdn}"
     paths:
-    - "/"
+    - path: /
+      backend:
+        serviceName: azad-kube-proxy
+        servicePort: http
   tls:
   - secretName: azad-kube-proxy-cert
     hosts:

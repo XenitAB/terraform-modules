@@ -27,6 +27,7 @@ This module is used to create AKS clusters.
 | Name | Source | Version |
 |------|--------|---------|
 | aad_pod_identity | ../../kubernetes/aad-pod-identity |  |
+| azad_kube_proxy | ../../kubernetes/azad-kube-proxy |  |
 | cert_manager | ../../kubernetes/cert-manager |  |
 | csi_secrets_store_provider_azure | ../../kubernetes/csi-secrets-store-provider-azure |  |
 | datadog | ../../kubernetes/datadog |  |
@@ -61,6 +62,8 @@ This module is used to create AKS clusters.
 | aad\_groups | Configuration for aad groups | <pre>object({<br>    view = map(any)<br>    edit = map(any)<br>    cluster_admin = object({<br>      id   = string<br>      name = string<br>    })<br>    cluster_view = object({<br>      id   = string<br>      name = string<br>    })<br>    aks_managed_identity = object({<br>      id   = string<br>      name = string<br>    })<br>  })</pre> | n/a | yes |
 | aad\_pod\_identity\_config | Configuration for aad pod identity | <pre>map(object({<br>    id        = string<br>    client_id = string<br>  }))</pre> | n/a | yes |
 | aad\_pod\_identity\_enabled | Should aad-pod-identity be enabled | `bool` | `true` | no |
+| azad\_kube\_proxy\_config | The azad-kube-proxy configuration | <pre>object({<br>    fqdn      = string<br>    dashboard = string<br>    azure_ad_app = object({<br>      client_id     = string<br>      client_secret = string<br>      tenant_id     = string<br>    })<br>    k8dash_config = object({<br>      client_id     = string<br>      client_secret = string<br>      scope         = string<br>    })<br>  })</pre> | <pre>{<br>  "azure_ad_app": {<br>    "client_id": "",<br>    "client_secret": "",<br>    "tenant_id": ""<br>  },<br>  "dashboard": "",<br>  "fqdn": "",<br>  "k8dash_config": {<br>    "client_id": "",<br>    "client_secret": "",<br>    "scope": ""<br>  }<br>}</pre> | no |
+| azad\_kube\_proxy\_enabled | Should azad-kube-proxy be enabled | `bool` | `false` | no |
 | cert\_manager\_config | Cert Manager configuration | <pre>object({<br>    notification_email = string<br>    dns_zone           = string<br>  })</pre> | n/a | yes |
 | cert\_manager\_enabled | Should Cert Manager be enabled | `bool` | `true` | no |
 | csi\_secrets\_store\_provider\_azure\_enabled | Should csi-secrets-store-provider-azure be enabled | `bool` | `true` | no |

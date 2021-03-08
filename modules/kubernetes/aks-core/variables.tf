@@ -220,3 +220,43 @@ variable "reloader_enabled" {
   type        = bool
   default     = true
 }
+
+variable "azad_kube_proxy_enabled" {
+  description = "Should azad-kube-proxy be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "azad_kube_proxy_config" {
+  description = "The azad-kube-proxy configuration"
+  type = object({
+    fqdn                  = string
+    dashboard             = string
+    azure_ad_group_prefix = string
+    azure_ad_app = object({
+      client_id     = string
+      client_secret = string
+      tenant_id     = string
+    })
+    k8dash_config = object({
+      client_id     = string
+      client_secret = string
+      scope         = string
+    })
+  })
+  default = {
+    fqdn                  = ""
+    dashboard             = ""
+    azure_ad_group_prefix = ""
+    azure_ad_app = {
+      client_id     = ""
+      client_secret = ""
+      tenant_id     = ""
+    }
+    k8dash_config = {
+      client_id     = ""
+      client_secret = ""
+      scope         = ""
+    }
+  }
+}

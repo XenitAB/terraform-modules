@@ -1,9 +1,7 @@
 /**
-  * # Governance
+  * # Governance (Regional)
   *
-  * DEPRECATED: Use `governance-global` and `governance-regional` instead.
-  *
-  * This module is used to create resource groups, service principals, Azure AD groups, Azure KeyVaults and delegation to all of those resources.
+  * This module is used for governance on a regional level and not using any specific resource groups. Replaces the old `governance` together with `governance-global`.
   */
 
 terraform {

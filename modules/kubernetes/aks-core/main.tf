@@ -25,7 +25,7 @@ terraform {
       version = "2.0.2"
     }
     github = {
-      source  = "hashicorp/github"
+      source  = "integrations/github"
       version = "4.5.1"
     }
     flux = {

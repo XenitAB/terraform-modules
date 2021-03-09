@@ -1,4 +1,4 @@
-# Governance
+# Governance (Deprecated)
 
 DEPRECATED: Use `governance-global` and `governance-regional` instead.
 

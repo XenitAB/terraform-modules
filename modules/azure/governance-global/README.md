@@ -49,7 +49,7 @@ No Modules.
 | aks\_group\_name\_prefix | Prefix for AKS Azure AD groups | `string` | `"aks"` | no |
 | azure\_ad\_group\_prefix | Prefix for Azure AD Groupss | `string` | `"az"` | no |
 | delegate\_acr | Should Azure Container Registry delegation be configured? | `bool` | `true` | no |
-| delegate\_sub\_groups | Should the subscription groups be delegated to global groups (example: az-sub-<subName>-all-owner) | `bool` | `true` | no |
+| delegate\_sub\_groups | Should the subscription groups be delegated to global groups (example: az-sub-[subName]-all-owner) | `bool` | `true` | no |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
 | group\_name\_separator | Separator for group names | `string` | `"-"` | no |
 | owner\_service\_principal\_name | The name of the service principal that will be used to run terraform and is owner of the subsciptions | `string` | n/a | yes |

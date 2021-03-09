@@ -44,7 +44,7 @@ variable "partner_id" {
 }
 
 variable "delegate_sub_groups" {
-  description = "Should the subscription groups be delegated to global groups (example: az-sub-<subName>-all-owner)"
+  description = "Should the subscription groups be delegated to global groups (example: az-sub-[subName]-all-owner)"
   type        = bool
   default     = true
 }

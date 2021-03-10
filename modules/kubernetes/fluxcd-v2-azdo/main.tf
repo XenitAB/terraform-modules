@@ -74,7 +74,7 @@ locals {
     cluster_repo      = var.cluster_repo,
     cluster_token     = random_password.cluster.result,
     tenants = [for ns in var.namespaces : {
-      project : ns.flux.azure_devops.repo
+      project : ns.flux.azure_devops.proj
       repo : ns.flux.azure_devops.repo
       token : random_password.tenant[ns.name].result,
       }

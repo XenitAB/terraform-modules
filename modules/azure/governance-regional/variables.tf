@@ -72,3 +72,9 @@ variable "partner_id" {
   type        = string
   default     = ""
 }
+
+variable "key_vault_purge_protection_enabled" {
+  description = "If true purge protection will be enabled to all key vaults"
+  type        = bool
+  default     = false
+}

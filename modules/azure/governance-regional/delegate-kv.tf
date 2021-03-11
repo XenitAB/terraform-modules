@@ -5,11 +5,12 @@ resource "azurerm_key_vault" "delegate_kv" {
     if rg.delegate_key_vault == true
   }
 
-  name                = join("-", compact(["kv-${var.environment}-${var.location_short}-${each.value.common_name}", var.unique_suffix]))
-  location            = azurerm_resource_group.rg[each.key].location
-  resource_group_name = azurerm_resource_group.rg[each.key].name
-  tenant_id           = data.azurerm_client_config.current.tenant_id
-  sku_name            = "standard"
+  name                     = join("-", compact(["kv-${var.environment}-${var.location_short}-${each.value.common_name}", var.unique_suffix]))
+  location                 = azurerm_resource_group.rg[each.key].location
+  resource_group_name      = azurerm_resource_group.rg[each.key].name
+  tenant_id                = data.azurerm_client_config.current.tenant_id
+  sku_name                 = "standard"
+  purge_protection_enabled = var.key_vault_purge_protection_enabled
 }
 
 resource "azurerm_key_vault_access_policy" "ap_owner_spn" {

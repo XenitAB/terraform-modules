@@ -53,6 +53,7 @@ No Modules.
 | core\_name | The commonName for the core infra | `string` | n/a | yes |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |
 | group\_name\_separator | Separator for group names | `string` | `"-"` | no |
+| key\_vault\_purge\_protection\_enabled | If true purge protection will be enabled to all key vaults | `bool` | `false` | no |
 | location | The location for the subscription | `string` | n/a | yes |
 | location\_short | The location shortname for the subscription | `string` | n/a | yes |
 | owner\_service\_principal\_name | The name of the service principal that will be used to run terraform and is owner of the subsciptions | `string` | n/a | yes |

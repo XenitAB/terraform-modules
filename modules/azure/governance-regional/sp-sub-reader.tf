@@ -29,20 +29,14 @@ resource "azuread_application_password" "sub_reader_sp" {
 }
 
 resource "azurerm_key_vault_secret" "sub_reader_sp" {
-  for_each = {
-    for rg in var.resource_group_configs :
-    rg.common_name => rg
-    if rg.delegate_service_principal == true
-  }
-
-  name = replace(data.azuread_service_principal.aad_sp[each.value.common_name].display_name, ".", "-")
+  name = replace(data.azuread_service_principal.sub_reader_sp.display_name, ".", "-")
   value = jsonencode({
     tenantId       = data.azurerm_subscription.current.tenant_id
     subscriptionId = data.azurerm_subscription.current.subscription_id
     clientId       = data.azuread_service_principal.sub_reader_sp.application_id
     clientSecret   = random_password.sub_reader_sp.result
   })
-  key_vault_id = azurerm_key_vault.delegate_kv[each.key].id
+  key_vault_id = azurerm_key_vault.delegate_kv[var.core_name].id
 
   depends_on = [
     azurerm_key_vault_access_policy.ap_owner_spn

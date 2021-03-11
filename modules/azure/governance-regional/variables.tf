@@ -67,21 +67,8 @@ variable "service_principal_name_prefix" {
   default     = "sp"
 }
 
-variable "aks_group_name_prefix" {
-  description = "Prefix for AKS Azure AD groups"
-  type        = string
-  default     = "aks"
-}
-
 variable "partner_id" {
   description = "Azure partner id to link service principal with"
   type        = string
   default     = ""
 }
-
-variable "delegate_acr" {
-  description = "Should Azure Container Registry delegation be configured?"
-  type        = bool
-  default     = true
-}
-

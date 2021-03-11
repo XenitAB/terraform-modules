@@ -101,11 +101,6 @@ resource "azurerm_key_vault_secret" "aad_sp" {
   key_vault_id = azurerm_key_vault.delegate_kv[var.core_name].id
 
   depends_on = [
-    azurerm_key_vault_access_policy.ap_owner_spn,
-    azurerm_key_vault_access_policy.ap_rg_aad_group,
-    azurerm_key_vault_access_policy.ap_rg_sp,
-    azurerm_key_vault_access_policy.ap_kvreader_sp,
-    azurerm_key_vault_access_policy.ap_sub_aad_group_owner,
-    azurerm_key_vault_access_policy.ap_sub_aad_group_contributor,
+    azurerm_key_vault_access_policy.ap_owner_spn
   ]
 }

@@ -50,6 +50,7 @@ This module is used to create AKS clusters.
 | [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/data-sources/resource_group) |
 | [kubernetes_cluster_role](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/cluster_role) |
 | [kubernetes_cluster_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/cluster_role_binding) |
+| [kubernetes_limit_range](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/limit_range) |
 | [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
 | [kubernetes_network_policy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/network_policy) |
 | [kubernetes_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/role_binding) |
@@ -78,6 +79,7 @@ This module is used to create AKS clusters.
 | fluxcd\_v2\_config | Configuration for fluxcd-v2 | <pre>object({<br>    type = string<br>    github = object({<br>      owner = string<br>    })<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | n/a | yes |
 | fluxcd\_v2\_enabled | Should fluxcd-v2 be enabled | `bool` | `true` | no |
 | ingress\_nginx\_enabled | Should Ingress NGINX be enabled | `bool` | `true` | no |
+| kubernetes\_default\_limit\_range | Default limit range for tenant namespaces | <pre>object({<br>    default_request = object({<br>      cpu    = string<br>      memory = string<br>    })<br>    default = object({<br>      cpu    = string<br>      memory = string<br>    })<br>  })</pre> | <pre>{<br>  "default": {<br>    "cpu": "",<br>    "memory": "256Mi"<br>  },<br>  "default_request": {<br>    "cpu": "50m",<br>    "memory": "32Mi"<br>  }<br>}</pre> | no |
 | kubernetes\_network\_policy\_default\_deny | If network policies should by default deny cross namespace traffic | `bool` | `false` | no |
 | kyverno\_enabled | Should Kyverno be enabled | `bool` | `true` | no |
 | location\_short | The Azure region short name. | `string` | n/a | yes |

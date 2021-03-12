@@ -152,7 +152,7 @@ variable "opa_gatekeeper_enabled" {
 }
 
 variable "opa_gatekeeper_config" {
-  description "Configuration for OPA Gatekeeper"
+  description = "Configuration for OPA Gatekeeper"
   type = object({
     enable_default_constraints = bool
     additional_constraints = list(object({
@@ -161,7 +161,7 @@ variable "opa_gatekeeper_config" {
     }))
   })
   default = {
-    add_default_constraints = true
+    enable_default_constraints = true
     additional_constraints = []
   }
 }

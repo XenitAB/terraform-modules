@@ -78,7 +78,6 @@ variable "kubernetes_default_limit_range" {
       memory = "32Mi"
     }
     default = {
-      cpu    = ""
       memory = "256Mi"
     }
   }

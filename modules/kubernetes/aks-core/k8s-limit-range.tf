@@ -14,7 +14,6 @@ resource "kubernetes_limit_range" "this" {
         memory = var.kubernetes_default_limit_range.default_request.memory
       }
       default = {
-        cpu    = var.kubernetes_default_limit_range.default.cpu
         memory = var.kubernetes_default_limit_range.default.memory
       }
     }

@@ -60,6 +60,30 @@ variable "kubernetes_network_policy_default_deny" {
   default     = false
 }
 
+variable "kubernetes_default_limit_range" {
+  description = "Default limit range for tenant namespaces"
+  type = object({
+    default_request = object({
+      cpu    = string
+      memory = string
+    })
+    default = object({
+      cpu    = string
+      memory = string
+    })
+  })
+  default = {
+    default_request = {
+      cpu    = "50m"
+      memory = "32Mi"
+    }
+    default = {
+      cpu    = ""
+      memory = "256Mi"
+    }
+  }
+}
+
 variable "fluxcd_v1_enabled" {
   description = "Should fluxcd-v1 be enabled"
   type        = bool

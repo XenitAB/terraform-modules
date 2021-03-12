@@ -136,6 +136,7 @@ resource "helm_release" "fluxcd" {
       namespace   = each.key,
       git_url     = "https://dev.azure.com/${each.value.flux.azure_devops.org}/${each.value.flux.azure_devops.proj}/_git/${each.value.flux.azure_devops.repo}",
       environment = var.environment
+      branch      = var.branch
     }),
     yamlencode(local.flux_values[each.key]),
   ]

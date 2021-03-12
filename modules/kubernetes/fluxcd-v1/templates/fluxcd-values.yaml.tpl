@@ -7,7 +7,7 @@ clusterRole:
 git:
   url: "${git_url}"
   path: "${environment}"
-  branch: main
+  branch: "${branch}"
   readonly: true
   pollInterval: "30s"
   config:

@@ -19,6 +19,12 @@ variable "environment" {
   type        = string
 }
 
+variable "branch" {
+  description = "The branch to reconcile manifests from"
+  type        = string
+  default     = "main"
+}
+
 variable "namespaces" {
   description = "The namespaces to configure flux with"
   type = list(

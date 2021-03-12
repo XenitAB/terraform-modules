@@ -74,7 +74,7 @@ This module is used to create AKS clusters.
 | external\_dns\_config | External DNS configuration | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |
 | external\_dns\_enabled | Should External DNS be enabled | `bool` | `true` | no |
 | falco\_enabled | Should Falco be enabled | `bool` | `false` | no |
-| fluxcd\_v1\_config | Configuration for fluxcd-v1 | <pre>object({<br>    flux_status_enabled = bool<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | <pre>{<br>  "azure_devops": {<br>    "org": "",<br>    "pat": "",<br>    "proj": ""<br>  },<br>  "flux_status_enabled": false<br>}</pre> | no |
+| fluxcd\_v1\_config | Configuration for fluxcd-v1 | <pre>object({<br>    flux_status_enabled = bool<br>    branch              = string<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | <pre>{<br>  "azure_devops": {<br>    "org": "",<br>    "pat": "",<br>    "proj": ""<br>  },<br>  "branch": "main",<br>  "flux_status_enabled": false<br>}</pre> | no |
 | fluxcd\_v1\_enabled | Should fluxcd-v1 be enabled | `bool` | `false` | no |
 | fluxcd\_v2\_config | Configuration for fluxcd-v2 | <pre>object({<br>    type = string<br>    github = object({<br>      owner = string<br>    })<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | n/a | yes |
 | fluxcd\_v2\_enabled | Should fluxcd-v2 be enabled | `bool` | `true` | no |

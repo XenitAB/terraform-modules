@@ -68,7 +68,6 @@ variable "kubernetes_default_limit_range" {
       memory = string
     })
     default = object({
-      cpu    = string
       memory = string
     })
   })

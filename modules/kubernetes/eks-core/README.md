@@ -7,8 +7,8 @@ This module is used to configure EKS clusters.
 | Name | Version |
 |------|---------|
 | terraform | 0.14.7 |
-| aws | 3.31.0 |
-| flux | 0.0.12 |
+| aws | 3.32.0 |
+| flux | 0.0.13 |
 | github | 4.5.1 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.2 |
@@ -18,7 +18,7 @@ This module is used to configure EKS clusters.
 
 | Name | Version |
 |------|---------|
-| aws | 3.31.0 |
+| aws | 3.32.0 |
 | kubernetes | 2.0.2 |
 
 ## Modules
@@ -38,8 +38,8 @@ This module is used to configure EKS clusters.
 
 | Name |
 |------|
-| [aws_region](https://registry.terraform.io/providers/hashicorp/aws/3.31.0/docs/data-sources/region) |
-| [aws_route53_zone](https://registry.terraform.io/providers/hashicorp/aws/3.31.0/docs/data-sources/route53_zone) |
+| [aws_region](https://registry.terraform.io/providers/hashicorp/aws/3.32.0/docs/data-sources/region) |
+| [aws_route53_zone](https://registry.terraform.io/providers/hashicorp/aws/3.32.0/docs/data-sources/route53_zone) |
 | [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
 | [kubernetes_network_policy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/network_policy) |
 

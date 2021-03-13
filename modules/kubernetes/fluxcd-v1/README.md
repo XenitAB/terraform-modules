@@ -15,7 +15,7 @@ Will be deprecated as soon as Flux v2 module is finished and tested.
 | Name | Version |
 |------|---------|
 | terraform | 0.14.7 |
-| helm | 2.0.2 |
+| helm | 2.0.3 |
 | kubernetes | 2.0.2 |
 | random | 3.1.0 |
 
@@ -23,7 +23,7 @@ Will be deprecated as soon as Flux v2 module is finished and tested.
 
 | Name | Version |
 |------|---------|
-| helm | 2.0.2 |
+| helm | 2.0.3 |
 | kubernetes | 2.0.2 |
 | random | 3.1.0 |
 
@@ -35,7 +35,7 @@ No Modules.
 
 | Name |
 |------|
-| [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.2/docs/resources/release) |
+| [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.3/docs/resources/release) |
 | [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
 | [kubernetes_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/secret) |
 | [random_password](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) |

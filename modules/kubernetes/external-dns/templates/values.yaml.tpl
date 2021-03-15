@@ -1,6 +1,8 @@
 provider: "${provider}"
 sources:
-  ${yamlencode(sources)}
+  %{~ for item in sources ~}
+  - "${item}"
+  %{~ endfor ~}
 logFormat: json
 securityContext:
   allowPrivilegeEscalation: false

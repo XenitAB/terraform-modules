@@ -26,3 +26,10 @@ extraVolumes:
     emptyDir: {}
   - name: cache
     emptyDir: {}
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 628Mi

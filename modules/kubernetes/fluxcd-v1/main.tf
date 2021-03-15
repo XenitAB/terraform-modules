@@ -171,7 +171,7 @@ resource "helm_release" "helm_operator" {
 
   repository = "https://charts.fluxcd.io"
   chart      = "helm-operator"
-  version    = "1.6.2"
+  version    = "1.2.0"
   name       = "helm-operator"
   namespace  = each.key
 

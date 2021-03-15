@@ -13,6 +13,11 @@ variable "name" {
   type        = string
 }
 
+variable "aks_name_suffix" {
+  description = "The suffix for the aks clusters"
+  type        = number
+}
+
 variable "aad_groups" {
   description = "Configuration for aad groups"
   type = object({

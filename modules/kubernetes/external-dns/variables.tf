@@ -6,7 +6,12 @@ variable "dns_provider" {
 variable "sources" {
   description = "k8s resource types to observe"
   type        = list(string)
-  default     = ["ingress"]
+  default     = ["ingress", "service"]
+}
+
+variable "txt_owner_id" {
+  description = "The txt-owner-id for external-dns"
+  type        = string
 }
 
 variable "azure_config" {

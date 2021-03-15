@@ -12,24 +12,27 @@ module "opa_gatekeeper" {
 
   source = "../../kubernetes/opa-gatekeeper"
 
+  enable_default_constraints = var.opa_gatekeeper_config.enable_default_constraints
+  additional_constraints = concat(
+    var.opa_gatekeeper_config.additional_constraints,
+    [
+      {
+        kind               = "AzureIdentityFormat"
+        name               = "azure-identity-format"
+        enforcement_action = ""
+        match = {
+          kinds      = []
+          namespaces = []
+        }
+        parameters = {}
+      },
+    ]
+  )
   exclude = [
     {
       excluded_namespaces = local.excluded_namespaces
       processes           = ["*"]
     }
-  ]
-
-  additional_constraints = [
-    {
-      kind               = "AzureIdentityFormat"
-      name               = "azure-identity-format"
-      enforcement_action = ""
-      match = {
-        kinds      = []
-        namespaces = []
-      }
-      parameters = {}
-    },
   ]
 }
 
@@ -140,6 +143,7 @@ module "external_dns" {
   source = "../../kubernetes/external-dns"
 
   dns_provider = "azure"
+  txt_owner_id = "${var.environment}-${var.name}${var.aks_name_suffix}"
   azure_config = {
     tenant_id       = data.azurerm_client_config.current.tenant_id
     subscription_id = data.azurerm_client_config.current.subscription_id

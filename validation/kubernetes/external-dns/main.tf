@@ -9,10 +9,11 @@ module "external_dns" {
 
   providers = {
     kubernetes = kubernetes
-    helm = helm
+    helm       = helm
   }
 
-  dns_provider          = "azure"
+  dns_provider = "azure"
+  txt_owner_id = "dev-aks1"
   azure_config = {
     tenant_id       = "id"
     subscription_id = "id"

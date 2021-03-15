@@ -5,6 +5,7 @@ helm:
   versions: "v3"
 git:
   config:
+    enabled: true
     secretName: "helm-operator-git-config"
 
 containerSecurityContext:
@@ -25,3 +26,10 @@ extraVolumes:
     emptyDir: {}
   - name: cache
     emptyDir: {}
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 628Mi

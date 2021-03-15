@@ -13,6 +13,11 @@ variable "name" {
   type        = string
 }
 
+variable "aks_name_suffix" {
+  description = "The suffix for the aks clusters"
+  type        = number
+}
+
 variable "aad_groups" {
   description = "Configuration for aad groups"
   type = object({
@@ -149,6 +154,21 @@ variable "opa_gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
   type        = bool
   default     = true
+}
+
+variable "opa_gatekeeper_config" {
+  description = "Configuration for OPA Gatekeeper"
+  type = object({
+    enable_default_constraints = bool
+    additional_constraints = list(object({
+      excluded_namespaces = list(string)
+      processes           = list(string)
+    }))
+  })
+  default = {
+    enable_default_constraints = true
+    additional_constraints     = []
+  }
 }
 
 variable "cert_manager_enabled" {

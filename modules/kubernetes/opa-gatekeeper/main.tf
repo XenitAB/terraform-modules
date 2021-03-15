@@ -98,7 +98,7 @@ terraform {
 locals {
   values = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", {
     constraints = concat((var.enable_default_constraints ? local.default_constraints : []), var.additional_constraints),
-    exclude = var.exclude
+    exclude     = var.exclude
   })
 }
 

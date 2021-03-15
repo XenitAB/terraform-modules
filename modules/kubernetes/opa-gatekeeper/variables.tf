@@ -1,7 +1,7 @@
 variable "enable_default_constraints" {
   description = "If enabled default constraints will be added"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "additional_constraints" {

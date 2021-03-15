@@ -162,7 +162,7 @@ variable "opa_gatekeeper_config" {
   })
   default = {
     enable_default_constraints = true
-    additional_constraints = []
+    additional_constraints     = []
   }
 }
 

@@ -85,6 +85,7 @@ This module is used to create AKS clusters.
 | location\_short | The Azure region short name. | `string` | n/a | yes |
 | name | The commonName to use for the deploy | `string` | n/a | yes |
 | namespaces | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name   = string<br>      labels = map(string)<br>      flux = object({<br>        enabled = bool<br>        github = object({<br>          repo = string<br>        })<br>        azure_devops = object({<br>          org  = string<br>          proj = string<br>          repo = string<br>        })<br>      })<br>    })<br>  )</pre> | n/a | yes |
+| opa\_gatekeeper\_config | Configuration for OPA Gatekeeper | <pre>object({<br>    enable_default_constraints = bool<br>    additional_constraints = list(object({<br>      excluded_namespaces = list(string)<br>      processes           = list(string)<br>    }))<br>  })</pre> | <pre>{<br>  "additional_constraints": [],<br>  "enable_default_constraints": true<br>}</pre> | no |
 | opa\_gatekeeper\_enabled | Should OPA Gatekeeper be enabled | `bool` | `true` | no |
 | reloader\_enabled | Should Reloader be enabled | `bool` | `true` | no |
 | velero\_config | Velero configuration | <pre>object({<br>    azure_storage_account_name      = string<br>    azure_storage_account_container = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>    })<br>  })</pre> | n/a | yes |

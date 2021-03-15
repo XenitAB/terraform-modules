@@ -38,3 +38,10 @@ extraVolumeMounts:
 extraVolumes:
   - name: tmp
     emptyDir: {}
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 628Mi

@@ -40,7 +40,7 @@ No Modules.
 | aad\_groups | Configuration for aad groups | <pre>object({<br>    view = map(any)<br>    edit = map(any)<br>    cluster_admin = object({<br>      id   = string<br>      name = string<br>    })<br>    cluster_view = object({<br>      id   = string<br>      name = string<br>    })<br>    aks_managed_identity = object({<br>      id   = string<br>      name = string<br>    })<br>  })</pre> | n/a | yes |
 | aks\_authorized\_ips | Authorized IPs to access AKS API | `list(string)` | n/a | yes |
 | aks\_config | The Azure Kubernetes Service (AKS) configuration | <pre>object({<br>    kubernetes_version = string<br>    sku_tier           = string<br>    default_node_pool = object({<br>      orchestrator_version = string<br>      vm_size              = string<br>      min_count            = number<br>      max_count            = number<br>      node_labels          = map(string)<br>    })<br>    additional_node_pools = list(object({<br>      name                 = string<br>      orchestrator_version = string<br>      vm_size              = string<br>      min_count            = number<br>      max_count            = number<br>      node_taints          = list(string)<br>      node_labels          = map(string)<br>    }))<br>  })</pre> | n/a | yes |
-| aks\_name\_suffix | The suffix for the aks clusters | `number` | `1` | no |
+| aks\_name\_suffix | The suffix for the aks clusters | `number` | n/a | yes |
 | aks\_public\_ip\_prefix\_id | Public IP ID AKS egresses from | `string` | n/a | yes |
 | core\_name | The commonName for the core infrastructure | `string` | n/a | yes |
 | environment | The environment name to use for the deploy | `string` | n/a | yes |

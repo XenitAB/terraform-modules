@@ -7,10 +7,11 @@ provider "azurerm" {
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
 
-  name           = "baz"
-  location_short = "foo"
-  environment    = "bar"
-  namespaces     = []
+  name            = "baz"
+  aks_name_suffix = 1
+  location_short  = "foo"
+  environment     = "bar"
+  namespaces      = []
   external_dns_config = {
     client_id   = "foo"
     resource_id = "bar"
@@ -26,7 +27,7 @@ module "aks_core" {
   }
   cert_manager_config = {
     notification_email = "foo"
-    dns_zone = "bar"
+    dns_zone           = "bar"
   }
   fluxcd_v2_config = {
     type = "github"

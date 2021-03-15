@@ -105,4 +105,10 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
     "2",
     "3"
   ]
+
+  lifecycle {
+    ignore_changes = [
+      node_count
+    ]
+  }
 }

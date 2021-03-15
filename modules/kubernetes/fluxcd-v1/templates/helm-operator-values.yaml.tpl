@@ -5,6 +5,7 @@ helm:
   versions: "v3"
 git:
   config:
+    enabled: true
     secretName: "helm-operator-git-config"
 
 containerSecurityContext:

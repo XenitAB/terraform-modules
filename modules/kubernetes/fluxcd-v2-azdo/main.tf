@@ -21,11 +21,11 @@ terraform {
   required_providers {
     helm = {
       source  = "hashicorp/helm"
-      version = "2.0.2"
+      version = "2.0.3"
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.0.12"
+      version = "0.0.13"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"

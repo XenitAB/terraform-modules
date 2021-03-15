@@ -87,13 +87,13 @@ as the same values are passed to both of the charts, there will never be a diffe
 | Name | Version |
 |------|---------|
 | terraform | 0.14.7 |
-| helm | 2.0.2 |
+| helm | 2.0.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| helm | 2.0.2 |
+| helm | 2.0.3 |
 
 ## Modules
 
@@ -103,7 +103,7 @@ No Modules.
 
 | Name |
 |------|
-| [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.2/docs/resources/release) |
+| [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.3/docs/resources/release) |
 
 ## Inputs
 

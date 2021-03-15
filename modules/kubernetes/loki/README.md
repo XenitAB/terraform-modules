@@ -11,16 +11,16 @@ This module will also add `minio` (S3 Gateway to Azure Storage Account), `fluent
 | Name | Version |
 |------|---------|
 | terraform | 0.14.7 |
-| azurerm | 2.50.0 |
-| helm | 2.0.2 |
+| azurerm | 2.51.0 |
+| helm | 2.0.3 |
 | kubernetes | 2.0.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azurerm | 2.50.0 |
-| helm | 2.0.2 |
+| azurerm | 2.51.0 |
+| helm | 2.0.3 |
 | kubernetes | 2.0.2 |
 
 ## Modules
@@ -31,10 +31,10 @@ No Modules.
 
 | Name |
 |------|
-| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/data-sources/resource_group) |
-| [azurerm_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/resources/storage_account) |
-| [azurerm_storage_container](https://registry.terraform.io/providers/hashicorp/azurerm/2.50.0/docs/resources/storage_container) |
-| [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.2/docs/resources/release) |
+| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/data-sources/resource_group) |
+| [azurerm_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/storage_account) |
+| [azurerm_storage_container](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/storage_container) |
+| [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.3/docs/resources/release) |
 | [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
 
 ## Inputs

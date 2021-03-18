@@ -60,6 +60,9 @@ locals {
   }
 
   flux_values = { for ns in var.namespaces : ns.name => {
+    clusterRole = {
+      create = false,
+    },
     extraContainers = [
       {
         name            = "flux-status"
@@ -127,8 +130,9 @@ resource "helm_release" "fluxcd" {
     if ns.flux.enabled
   }
 
-  name      = "fluxcd"
+  name      = "${each.key}-fluxcd"
   chart     = "${path.module}/charts/flux"
+  version   = "v1.7.0"
   namespace = each.key
 
   values = [

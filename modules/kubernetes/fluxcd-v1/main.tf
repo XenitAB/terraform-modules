@@ -132,7 +132,7 @@ resource "helm_release" "fluxcd" {
 
   name      = "${each.key}-fluxcd"
   chart     = "${path.module}/charts/flux"
-  version    = "v1.7.0"
+  version   = "v1.7.0"
   namespace = each.key
 
   values = [

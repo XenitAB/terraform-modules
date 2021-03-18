@@ -8,14 +8,14 @@ This module is used to add [`aad-pod-identity`](https://github.com/Azure/aad-pod
 |------|---------|
 | terraform | 0.14.7 |
 | helm | 2.0.3 |
-| kubernetes | 2.0.2 |
+| kubernetes | 2.0.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | helm | 2.0.3 |
-| kubernetes | 2.0.2 |
+| kubernetes | 2.0.3 |
 
 ## Modules
 
@@ -26,7 +26,7 @@ No Modules.
 | Name |
 |------|
 | [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.3/docs/resources/release) |
-| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
+| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/namespace) |
 
 ## Inputs
 

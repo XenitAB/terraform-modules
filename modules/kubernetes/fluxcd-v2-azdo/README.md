@@ -19,10 +19,10 @@ the bootstrap configuration.
 |------|---------|
 | terraform | 0.14.7 |
 | azuredevops | 0.3.0 |
-| flux | 0.0.13 |
+| flux | 0.0.14 |
 | helm | 2.0.3 |
 | kubectl | 1.10.0 |
-| kubernetes | 2.0.2 |
+| kubernetes | 2.0.3 |
 | random | 3.1.0 |
 
 ## Providers
@@ -30,10 +30,10 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | azuredevops | 0.3.0 |
-| flux | 0.0.13 |
+| flux | 0.0.14 |
 | helm | 2.0.3 |
 | kubectl | 1.10.0 |
-| kubernetes | 2.0.2 |
+| kubernetes | 2.0.3 |
 | random | 3.1.0 |
 
 ## Modules
@@ -47,13 +47,13 @@ No Modules.
 | [azuredevops_git_repository](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/git_repository) |
 | [azuredevops_git_repository_file](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository_file) |
 | [azuredevops_project](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/project) |
-| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.0.13/docs/data-sources/install) |
-| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.0.13/docs/data-sources/sync) |
+| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.0.14/docs/data-sources/install) |
+| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.0.14/docs/data-sources/sync) |
 | [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.3/docs/resources/release) |
 | [kubectl_file_documents](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/data-sources/file_documents) |
 | [kubectl_manifest](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/resources/manifest) |
-| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
-| [kubernetes_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/secret) |
+| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/namespace) |
+| [kubernetes_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/secret) |
 | [random_password](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) |
 
 ## Inputs

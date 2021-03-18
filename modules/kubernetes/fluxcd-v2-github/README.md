@@ -18,20 +18,20 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | terraform | 0.14.7 |
-| flux | 0.0.13 |
-| github | 4.5.1 |
+| flux | 0.0.14 |
+| github | 4.5.2 |
 | kubectl | 1.10.0 |
-| kubernetes | 2.0.2 |
+| kubernetes | 2.0.3 |
 | tls | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| flux | 0.0.13 |
-| github | 4.5.1 |
+| flux | 0.0.14 |
+| github | 4.5.2 |
 | kubectl | 1.10.0 |
-| kubernetes | 2.0.2 |
+| kubernetes | 2.0.3 |
 | tls | 3.1.0 |
 
 ## Modules
@@ -42,15 +42,15 @@ No Modules.
 
 | Name |
 |------|
-| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.0.13/docs/data-sources/install) |
-| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.0.13/docs/data-sources/sync) |
-| [github_repository](https://registry.terraform.io/providers/integrations/github/4.5.1/docs/data-sources/repository) |
-| [github_repository_deploy_key](https://registry.terraform.io/providers/integrations/github/4.5.1/docs/resources/repository_deploy_key) |
-| [github_repository_file](https://registry.terraform.io/providers/integrations/github/4.5.1/docs/resources/repository_file) |
+| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.0.14/docs/data-sources/install) |
+| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.0.14/docs/data-sources/sync) |
+| [github_repository](https://registry.terraform.io/providers/integrations/github/4.5.2/docs/data-sources/repository) |
+| [github_repository_deploy_key](https://registry.terraform.io/providers/integrations/github/4.5.2/docs/resources/repository_deploy_key) |
+| [github_repository_file](https://registry.terraform.io/providers/integrations/github/4.5.2/docs/resources/repository_file) |
 | [kubectl_file_documents](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/data-sources/file_documents) |
 | [kubectl_manifest](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/resources/manifest) |
-| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/namespace) |
-| [kubernetes_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.2/docs/resources/secret) |
+| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/namespace) |
+| [kubernetes_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/secret) |
 | [tls_private_key](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/resources/private_key) |
 
 ## Inputs

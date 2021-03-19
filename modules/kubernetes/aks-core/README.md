@@ -8,7 +8,7 @@ This module is used to create AKS clusters.
 |------|---------|
 | terraform | 0.14.7 |
 | azuread | 1.4.0 |
-| azurerm | 2.51.0 |
+| azurerm | 2.52.0 |
 | flux | 0.1.0 |
 | github | 4.5.2 |
 | helm | 2.0.3 |
@@ -20,7 +20,7 @@ This module is used to create AKS clusters.
 
 | Name | Version |
 |------|---------|
-| azurerm | 2.51.0 |
+| azurerm | 2.52.0 |
 | kubernetes | 2.0.3 |
 
 ## Modules
@@ -47,8 +47,8 @@ This module is used to create AKS clusters.
 
 | Name |
 |------|
-| [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/data-sources/client_config) |
-| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/data-sources/resource_group) |
+| [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/data-sources/client_config) |
+| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/data-sources/resource_group) |
 | [kubernetes_cluster_role](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/cluster_role) |
 | [kubernetes_cluster_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/cluster_role_binding) |
 | [kubernetes_limit_range](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/limit_range) |

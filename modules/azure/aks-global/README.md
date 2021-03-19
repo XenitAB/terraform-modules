@@ -8,7 +8,7 @@ This module is used to create resources that are used by AKS clusters.
 |------|---------|
 | terraform | 0.14.7 |
 | azuread | 1.4.0 |
-| azurerm | 2.51.0 |
+| azurerm | 2.52.0 |
 | random | 3.1.0 |
 | tls | 3.1.0 |
 
@@ -17,7 +17,7 @@ This module is used to create resources that are used by AKS clusters.
 | Name | Version |
 |------|---------|
 | azuread | 1.4.0 |
-| azurerm | 2.51.0 |
+| azurerm | 2.52.0 |
 | random | 3.1.0 |
 | tls | 3.1.0 |
 
@@ -35,16 +35,16 @@ No Modules.
 | [azuread_group](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group) |
 | [azuread_group_member](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) |
 | [azuread_service_principal](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/service_principal) |
-| [azurerm_container_registry](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/container_registry) |
-| [azurerm_dns_zone](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/dns_zone) |
-| [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/data-sources/key_vault) |
-| [azurerm_key_vault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/key_vault_secret) |
-| [azurerm_public_ip_prefix](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/public_ip_prefix) |
-| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/data-sources/resource_group) |
-| [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/role_assignment) |
-| [azurerm_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/storage_account) |
-| [azurerm_storage_container](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/storage_container) |
-| [azurerm_user_assigned_identity](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/user_assigned_identity) |
+| [azurerm_container_registry](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/resources/container_registry) |
+| [azurerm_dns_zone](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/resources/dns_zone) |
+| [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/data-sources/key_vault) |
+| [azurerm_key_vault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/resources/key_vault_secret) |
+| [azurerm_public_ip_prefix](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/resources/public_ip_prefix) |
+| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/data-sources/resource_group) |
+| [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/resources/role_assignment) |
+| [azurerm_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/resources/storage_account) |
+| [azurerm_storage_container](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/resources/storage_container) |
+| [azurerm_user_assigned_identity](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/resources/user_assigned_identity) |
 | [random_password](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) |
 | [tls_private_key](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/resources/private_key) |
 

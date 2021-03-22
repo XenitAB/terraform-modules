@@ -36,6 +36,10 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = "1.10.0"
     }
+    helm = {
+      source = "hashicorp/helm"
+      version = "2.0.3"
+    }
   }
 }
 

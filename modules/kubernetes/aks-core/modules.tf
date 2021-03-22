@@ -73,16 +73,15 @@ module "fluxcd_v2_azure_devops" {
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
   azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
   environment       = var.environment
-  namespaces = []
-  #namespaces = [for ns in var.namespaces : {
-  #  name = ns.name
-  #  flux = {
-  #    enabled = ns.flux.enabled
-  #    org = ns.flux.azure_devops.org
-  #    proj = ns.flux.azure_devops.proj
-  #    repo = ns.flux.azure_devops.repo
-  #  }
-  #}]
+  namespaces = [for ns in var.namespaces : {
+    name = ns.name
+    flux = {
+      enabled = ns.flux.enabled
+      org = ns.flux.azure_devops.org
+      proj = ns.flux.azure_devops.proj
+      repo = ns.flux.azure_devops.repo
+    }
+  }]
 }
 
 module "fluxcd_v2_github" {

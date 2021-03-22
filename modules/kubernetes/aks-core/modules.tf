@@ -75,9 +75,12 @@ module "fluxcd_v2_azure_devops" {
   environment       = var.environment
   namespaces = [for ns in var.namespaces : {
     name = ns.name
-    org = ns.flux.azure_devops.org
-    proj = ns.flux.azure_devops.proj
-    repo = ns.flux.azure_devops.repo
+    flux = {
+      enabled = ns.flux.enabled
+      org = ns.flux.azure_devops.org
+      proj = ns.flux.azure_devops.proj
+      repo = ns.flux.azure_devops.repo
+    }
   }]
 }
 

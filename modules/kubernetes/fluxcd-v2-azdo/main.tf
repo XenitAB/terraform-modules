@@ -25,7 +25,7 @@ terraform {
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.0.14"
+      version = "0.1.0"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
@@ -106,7 +106,7 @@ resource "random_password" "cluster" {
 
 data "flux_install" "this" {
   target_path = "clusters/${var.environment}"
-  version     = "v0.9.0"
+  version     = "v0.10.0"
 }
 
 data "flux_sync" "this" {

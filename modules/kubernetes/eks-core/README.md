@@ -8,7 +8,7 @@ This module is used to configure EKS clusters.
 |------|---------|
 | terraform | 0.14.7 |
 | aws | 3.32.0 |
-| flux | 0.0.14 |
+| flux | 0.1.0 |
 | github | 4.5.2 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.3 |

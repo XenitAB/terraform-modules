@@ -81,8 +81,8 @@ locals {
       if ns.flux.enabled
     ]
   })
- azdo_proxy_url = "http://azdo-proxy.flux-system.svc.cluster.local"
-
+  azdo_proxy_url = "http://azdo-proxy.flux-system.svc.cluster.local"
+}
 
 resource "helm_release" "azdo_proxy" {
   repository = "https://xenitab.github.io/azdo-proxy/"

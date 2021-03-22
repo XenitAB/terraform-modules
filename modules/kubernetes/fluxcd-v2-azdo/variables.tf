@@ -1,7 +1,7 @@
 variable "azure_devops_pat" {
   description = "PAT to authenticate with Azure DevOps"
   type        = string
-  #sensitive   = true
+  sensitive   = true
 }
 
 variable "azure_devops_org" {
@@ -26,9 +26,9 @@ variable "namespaces" {
       name = string
       flux = object({
         enabled = bool
-        org  = string
-        proj = string
-        repo = string
+        org     = string
+        proj    = string
+        repo    = string
       })
     })
   )

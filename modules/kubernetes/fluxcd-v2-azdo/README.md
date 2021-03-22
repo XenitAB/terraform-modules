@@ -19,7 +19,7 @@ the bootstrap configuration.
 |------|---------|
 | terraform | 0.14.7 |
 | azuredevops | 0.3.0 |
-| flux | 0.0.14 |
+| flux | 0.1.0 |
 | helm | 2.0.3 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.3 |
@@ -30,7 +30,7 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | azuredevops | 0.3.0 |
-| flux | 0.0.14 |
+| flux | 0.1.0 |
 | helm | 2.0.3 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.3 |
@@ -47,8 +47,8 @@ No Modules.
 | [azuredevops_git_repository](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/git_repository) |
 | [azuredevops_git_repository_file](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository_file) |
 | [azuredevops_project](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/project) |
-| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.0.14/docs/data-sources/install) |
-| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.0.14/docs/data-sources/sync) |
+| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.1.0/docs/data-sources/install) |
+| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.1.0/docs/data-sources/sync) |
 | [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.3/docs/resources/release) |
 | [kubectl_file_documents](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/data-sources/file_documents) |
 | [kubectl_manifest](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/resources/manifest) |
@@ -66,7 +66,7 @@ No Modules.
 | branch | Branch to point source controller towards | `string` | `"main"` | no |
 | cluster\_repo | Name of cluster repository | `string` | `"fleet-infra"` | no |
 | environment | Environment name of the cluster | `string` | n/a | yes |
-| namespaces | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled = bool<br>        azure_devops = object({<br>          org  = string<br>          proj = string<br>          repo = string<br>        })<br>      })<br>    })<br>  )</pre> | n/a | yes |
+| namespaces | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled = bool<br>        org     = string<br>        proj    = string<br>        repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
 
 ## Outputs
 

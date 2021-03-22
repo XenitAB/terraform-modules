@@ -77,9 +77,9 @@ module "fluxcd_v2_azure_devops" {
     name = ns.name
     flux = {
       enabled = ns.flux.enabled
-      org = ns.flux.azure_devops.org
-      proj = ns.flux.azure_devops.proj
-      repo = ns.flux.azure_devops.repo
+      org     = ns.flux.azure_devops.org
+      proj    = ns.flux.azure_devops.proj
+      repo    = ns.flux.azure_devops.repo
     }
   }]
 }

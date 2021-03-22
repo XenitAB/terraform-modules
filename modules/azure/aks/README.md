@@ -8,7 +8,7 @@ This module is used to create AKS clusters.
 |------|---------|
 | terraform | 0.14.7 |
 | azuread | 1.4.0 |
-| azurerm | 2.51.0 |
+| azurerm | 2.52.0 |
 | random | 3.1.0 |
 
 ## Providers
@@ -16,7 +16,7 @@ This module is used to create AKS clusters.
 | Name | Version |
 |------|---------|
 | azuread | 1.4.0 |
-| azurerm | 2.51.0 |
+| azurerm | 2.52.0 |
 
 ## Modules
 
@@ -27,11 +27,11 @@ No Modules.
 | Name |
 |------|
 | [azuread_group_member](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) |
-| [azurerm_kubernetes_cluster](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/kubernetes_cluster) |
-| [azurerm_kubernetes_cluster_node_pool](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/kubernetes_cluster_node_pool) |
-| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/data-sources/resource_group) |
-| [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/resources/role_assignment) |
-| [azurerm_subnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.51.0/docs/data-sources/subnet) |
+| [azurerm_kubernetes_cluster](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/resources/kubernetes_cluster) |
+| [azurerm_kubernetes_cluster_node_pool](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/resources/kubernetes_cluster_node_pool) |
+| [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/data-sources/resource_group) |
+| [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/resources/role_assignment) |
+| [azurerm_subnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.52.0/docs/data-sources/subnet) |
 
 ## Inputs
 

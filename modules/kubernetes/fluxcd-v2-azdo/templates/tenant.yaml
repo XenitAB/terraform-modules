@@ -68,7 +68,7 @@ kind: ClusterRoleBinding
 metadata:
   name: flux-tenant-${name}-crd-manage
 subjects:
-  - apiGroup: v1
+  - apiGroup: ""
     kind: ServiceAccount
     name: flux
     namespace: ${name}

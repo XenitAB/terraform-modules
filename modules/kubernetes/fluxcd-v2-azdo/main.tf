@@ -67,31 +67,31 @@ resource "kubernetes_namespace" "this" {
 
 # Azdo Proxy
 locals {
-#  azdo_proxy_values = templatefile("${path.module}/templates/azdo-proxy-values.yaml.tpl", {
-#    azure_devops_pat  = var.azure_devops_pat,
-#    azure_devops_org  = var.azure_devops_org,
-#    azure_devops_proj = var.azure_devops_proj,
-#    cluster_repo      = var.cluster_repo,
-#    cluster_token     = random_password.cluster.result,
-#    tenants = [for ns in var.namespaces : {
-#      project : ns.flux.proj
-#      repo : ns.flux.repo
-#      token : random_password.tenant[ns.name].result,
-#      }
-#      if ns.flux.enabled
-#    ]
-#  })
-  azdo_proxy_url = "http://azdo-proxy.flux-system.svc.cluster.local"
-}
+  azdo_proxy_values = templatefile("${path.module}/templates/azdo-proxy-values.yaml.tpl", {
+    azure_devops_pat  = var.azure_devops_pat,
+    azure_devops_org  = var.azure_devops_org,
+    azure_devops_proj = var.azure_devops_proj,
+    cluster_repo      = var.cluster_repo,
+    cluster_token     = random_password.cluster.result,
+    tenants = [for ns in var.namespaces : {
+      project : ns.flux.proj
+      repo : ns.flux.repo
+      token : random_password.tenant[ns.name].result,
+      }
+      if ns.flux.enabled
+    ]
+  })
+ azdo_proxy_url = "http://azdo-proxy.flux-system.svc.cluster.local"
 
-#resource "helm_release" "azdo_proxy" {
-#  repository = "https://xenitab.github.io/azdo-proxy/"
-#  chart      = "azdo-proxy"
-#  name       = "azdo-proxy"
-#  namespace  = kubernetes_namespace.this.metadata[0].name
-#  version    = "0.3.6"
-#  values     = [local.azdo_proxy_values]
-#}
+
+resource "helm_release" "azdo_proxy" {
+  repository = "https://xenitab.github.io/azdo-proxy/"
+  chart      = "azdo-proxy"
+  name       = "azdo-proxy"
+  namespace  = kubernetes_namespace.this.metadata[0].name
+  version    = "0.3.6"
+  values     = [local.azdo_proxy_values]
+}
 
 # Cluster
 data "azuredevops_git_repository" "cluster" {

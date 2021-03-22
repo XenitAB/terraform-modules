@@ -244,6 +244,7 @@ resource "azuredevops_git_repository_file" "tenant" {
     branch      = var.branch,
     name        = each.key,
     environment = var.environment,
+    create_crds = ns.flux.create_crds
   })
   overwrite_on_create = true
 }

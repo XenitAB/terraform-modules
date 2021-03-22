@@ -26,6 +26,7 @@ variable "namespaces" {
       name = string
       flux = object({
         enabled = bool
+        create_crds = bool
         org     = string
         proj    = string
         repo    = string

@@ -68,7 +68,7 @@ kind: ClusterRoleBinding
 metadata:
   name: flux-tenant-${name}-crd-manage
 subjects:
-  - apiGroup: rbac.authorization.k8s.io
+  - apiGroup: v1
     kind: ServiceAccount
     name: flux
     namespace: ${name}

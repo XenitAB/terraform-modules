@@ -66,7 +66,7 @@ No Modules.
 | branch | Branch to point source controller towards | `string` | `"main"` | no |
 | cluster\_repo | Name of cluster repository | `string` | `"fleet-infra"` | no |
 | environment | Environment name of the cluster | `string` | n/a | yes |
-| namespaces | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled = bool<br>        org     = string<br>        proj    = string<br>        repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
+| namespaces | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled     = bool<br>        create_crds = bool<br>        org         = string<br>        proj        = string<br>        repo        = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
 
 ## Outputs
 

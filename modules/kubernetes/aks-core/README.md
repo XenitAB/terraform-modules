@@ -9,8 +9,9 @@ This module is used to create AKS clusters.
 | terraform | 0.14.7 |
 | azuread | 1.4.0 |
 | azurerm | 2.51.0 |
-| flux | 0.0.14 |
+| flux | 0.1.0 |
 | github | 4.5.2 |
+| helm | 2.0.3 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.3 |
 | random | 3.1.0 |

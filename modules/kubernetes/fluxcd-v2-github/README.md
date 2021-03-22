@@ -18,7 +18,7 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | terraform | 0.14.7 |
-| flux | 0.0.14 |
+| flux | 0.1.0 |
 | github | 4.5.2 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.3 |
@@ -28,7 +28,7 @@ the bootstrap configuration.
 
 | Name | Version |
 |------|---------|
-| flux | 0.0.14 |
+| flux | 0.1.0 |
 | github | 4.5.2 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.3 |
@@ -42,8 +42,8 @@ No Modules.
 
 | Name |
 |------|
-| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.0.14/docs/data-sources/install) |
-| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.0.14/docs/data-sources/sync) |
+| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.1.0/docs/data-sources/install) |
+| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.1.0/docs/data-sources/sync) |
 | [github_repository](https://registry.terraform.io/providers/integrations/github/4.5.2/docs/data-sources/repository) |
 | [github_repository_deploy_key](https://registry.terraform.io/providers/integrations/github/4.5.2/docs/resources/repository_deploy_key) |
 | [github_repository_file](https://registry.terraform.io/providers/integrations/github/4.5.2/docs/resources/repository_file) |

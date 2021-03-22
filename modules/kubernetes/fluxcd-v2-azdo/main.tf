@@ -25,7 +25,7 @@ terraform {
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.0.14"
+      version = "0.1.0"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
@@ -74,8 +74,8 @@ locals {
     cluster_repo      = var.cluster_repo,
     cluster_token     = random_password.cluster.result,
     tenants = [for ns in var.namespaces : {
-      project : ns.flux.azure_devops.proj
-      repo : ns.flux.azure_devops.repo
+      project : ns.flux.proj
+      repo : ns.flux.repo
       token : random_password.tenant[ns.name].result,
       }
       if ns.flux.enabled
@@ -106,7 +106,7 @@ resource "random_password" "cluster" {
 
 data "flux_install" "this" {
   target_path = "clusters/${var.environment}"
-  version     = "v0.9.0"
+  version     = "v0.10.0"
 }
 
 data "flux_sync" "this" {

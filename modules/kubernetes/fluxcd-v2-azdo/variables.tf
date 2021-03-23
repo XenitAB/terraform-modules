@@ -25,10 +25,11 @@ variable "namespaces" {
     object({
       name = string
       flux = object({
-        enabled = bool
-        org     = string
-        proj    = string
-        repo    = string
+        enabled     = bool
+        create_crds = bool
+        org         = string
+        proj        = string
+        repo        = string
       })
     })
   )

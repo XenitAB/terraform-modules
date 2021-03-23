@@ -45,13 +45,14 @@ variable "namespaces" {
       name   = string
       labels = map(string)
       flux = object({
-        enabled = bool
-        github = object({
-          repo = string
-        })
+        enabled     = bool
+        create_crds = bool
         azure_devops = object({
           org  = string
           proj = string
+          repo = string
+        })
+        github = object({
           repo = string
         })
       })

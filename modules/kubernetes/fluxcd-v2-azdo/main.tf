@@ -240,10 +240,11 @@ resource "azuredevops_git_repository_file" "tenant" {
   branch        = "refs/heads/${var.branch}"
   file          = "tenants/${var.environment}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {
-    repo        = "${local.azdo_proxy_url}/${var.azure_devops_org}/${each.value.flux.azure_devops.proj}/_git/${each.value.flux.azure_devops.repo}"
+    repo        = "${local.azdo_proxy_url}/${var.azure_devops_org}/${each.value.flux.proj}/_git/${each.value.flux.repo}"
     branch      = var.branch,
     name        = each.key,
     environment = var.environment,
+    create_crds = each.value.flux.create_crds
   })
   overwrite_on_create = true
 }

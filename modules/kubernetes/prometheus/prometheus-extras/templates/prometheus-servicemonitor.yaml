@@ -1,0 +1,15 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    {{- include "prometheus-extras.labels" . | nindent 4 }}
+  name: prometheus
+  namespace: prometheus
+spec:
+  endpoints:
+    - interval: 30s
+      port: web
+  selector:
+    matchLabels:
+      {{- include "prometheus-extras.labels" . | nindent 6 }}

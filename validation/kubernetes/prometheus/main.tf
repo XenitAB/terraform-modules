@@ -11,4 +11,7 @@ module "prometheus" {
     kubernetes = kubernetes
     helm       = helm
   }
+
+  remote_write_url = "https://my-remote-writer.com"
+
 }

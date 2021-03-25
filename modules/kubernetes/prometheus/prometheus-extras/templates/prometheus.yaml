@@ -1,0 +1,31 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    {{- include "prometheus-extras.labels" . | nindent 4 }}
+  name: prometheus-xks
+  namespace: prometheus
+spec:
+  replicas: {{ .Values.replicaCount }}
+  serviceAccountName: {{ .Values.serviceAccount.name }}
+  serviceMonitorSelector:
+    matchLabels:
+      {{- include "prometheus-extras.labels" . | nindent 6 }}
+  {{- if .Values.remoteWrite.enabled }}
+  remoteWrite:
+    - url: {{ .Values.remoteWrite.url }}
+      name: {{ .Values.remoteWrite.name }}
+  {{- end }}
+  {{- if .Values.volumeClaim.enabled }}
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: {{ .Values.volumeClaim.storageClassName }}
+        resources:
+          requests:
+            storage: {{ .Values.volumeClaim.size }}
+  {{- end }}
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000

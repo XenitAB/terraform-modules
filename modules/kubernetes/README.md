@@ -23,3 +23,4 @@ This directory contains all the Kubernetes Terraform modules.
 - [`falco`](falco/README.md)
 - [`reloader`](reloader/README.md)
 - [`azad-kube-proxy`](azad-kube-proxy/README.md)
+- [`prometheus`](prometheus/README.md)

@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 remoteWrite:
-  enabled:  ${remote_write_enabled}
+  enabled: ${remote_write_enabled}
   url: ${remote_write_url}
   name: ${remote_write_name}
 

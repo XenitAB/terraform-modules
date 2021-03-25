@@ -310,3 +310,24 @@ module "azad_kube_proxy" {
     scope         = var.azad_kube_proxy_config.k8dash_config.scope
   }
 }
+
+# Prometheus
+module "prometheus" {
+  depends_on = [kubernetes_namespace.tenant, module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["prometheus"] :
+    s => s
+    if var.prometheus_enabled
+  }
+
+  source = "../../kubernetes/prometheus"
+
+  remote_write_enabled = var.prometheus_config.remote_write_enabled
+  remote_write_url     = var.prometheus_config.remote_write_url
+  remote_write_name    = var.prometheus_config.remote_write_name
+
+  volume_claim_enabled            = var.prometheus_config.volume_claim_enabled
+  volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
+  volume_claim_size               = var.prometheus_config.volume_claim_size
+}

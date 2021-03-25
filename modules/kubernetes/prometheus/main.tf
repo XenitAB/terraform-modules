@@ -20,8 +20,8 @@ terraform {
 }
 
 locals {
-  namespace = "prometheus"
-  values    = templatefile("${path.module}/templates/values.yaml.tpl", {})
+  namespace         = "prometheus"
+  values_prometheus = templatefile("${path.module}/templates/values.yaml.tpl", {})
 }
 
 resource "kubernetes_namespace" "this" {
@@ -33,11 +33,27 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
-resource "helm_release" "datadog" {
+resource "helm_release" "prometheus" {
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
   name       = "prometheus"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "14.3.0"
-  values     = [local.values]
+  values     = [local.values_prometheus]
+}
+
+resource "helm_release" "prometheus_extras" {
+  depends_on = [helm_release.prometheus]
+  chart      = "${path.module}/charts/prometheus-extras"
+  name       = "prometheus"
+  namespace  = kubernetes_namespace.this.metadata[0].name
+  values = [templatefile("${path.module}/templates/values-extras.yaml.tpl", {
+    remote_write_enabled = var.remote_write_enabled
+    remote_write_url     = var.remote_write_url
+    remote_write_name    = var.remote_write_name
+
+    volume_claim_enabled            = var.volume_claim_enabled
+    volume_claim_storage_class_name = var.volume_claim_storage_class_name
+    volume_claim_size               = var.volume_claim_size
+  })]
 }

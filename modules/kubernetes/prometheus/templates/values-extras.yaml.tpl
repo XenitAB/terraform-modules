@@ -1,0 +1,13 @@
+# Default values for prometheus-extras.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+remoteWrite:
+  enabled:  ${remote_write_enabled}
+  url: ${remote_write_url}
+  name: ${remote_write_name}
+
+volumeClaim:
+  enabled: ${volume_claim_enabled}
+  storageClassName: ${volume_claim_storage_class_name}
+  size: ${volume_claim_size}

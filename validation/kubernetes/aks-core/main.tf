@@ -67,4 +67,15 @@ module "aks_core" {
       name = "name"
     }
   }
+
+    prometheus_enabled = true
+    prometheus_config = {
+    remote_write_enabled = true
+    remote_write_url     = "https://my-receiver.com"
+    remote_write_name    = "xenitInfra"
+
+    volume_claim_enabled            = true
+    volume_claim_storage_class_name = "default"
+    volume_claim_size               = "5Gi"
+  }
 }

@@ -45,7 +45,7 @@ resource "helm_release" "prometheus" {
 resource "helm_release" "prometheus_extras" {
   depends_on = [helm_release.prometheus]
   chart      = "${path.module}/charts/prometheus-extras"
-  name       = "prometheus"
+  name       = "prometheus-extras"
   namespace  = kubernetes_namespace.this.metadata[0].name
   values = [templatefile("${path.module}/templates/values-extras.yaml.tpl", {
     remote_write_enabled = var.remote_write_enabled

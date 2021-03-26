@@ -80,6 +80,7 @@ This module is used to create AKS clusters.
 | fluxcd\_v1\_enabled | Should fluxcd-v1 be enabled | `bool` | `false` | no |
 | fluxcd\_v2\_config | Configuration for fluxcd-v2 | <pre>object({<br>    type = string<br>    github = object({<br>      owner = string<br>    })<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | n/a | yes |
 | fluxcd\_v2\_enabled | Should fluxcd-v2 be enabled | `bool` | `true` | no |
+| ingress\_config | Ingress configuration | <pre>object({<br>    http_snipet = string<br>  })</pre> | n/a | yes |
 | ingress\_nginx\_enabled | Should Ingress NGINX be enabled | `bool` | `true` | no |
 | kubernetes\_default\_limit\_range | Default limit range for tenant namespaces | <pre>object({<br>    default_request = object({<br>      cpu    = string<br>      memory = string<br>    })<br>    default = object({<br>      memory = string<br>    })<br>  })</pre> | <pre>{<br>  "default": {<br>    "memory": "256Mi"<br>  },<br>  "default_request": {<br>    "cpu": "50m",<br>    "memory": "32Mi"<br>  }<br>}</pre> | no |
 | kubernetes\_network\_policy\_default\_deny | If network policies should by default deny cross namespace traffic | `bool` | `false` | no |

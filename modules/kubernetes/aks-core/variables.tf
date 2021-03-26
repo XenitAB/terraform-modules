@@ -192,6 +192,13 @@ variable "ingress_nginx_enabled" {
   default     = true
 }
 
+variable "ingress_config" {
+  description = "Ingress configuration"
+  type = object({
+    http_snipet = string
+  })
+}
+
 variable "external_dns_enabled" {
   description = "Should External DNS be enabled"
   type        = bool

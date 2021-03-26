@@ -30,7 +30,9 @@ No Modules.
 
 ## Inputs
 
-No input.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| http\_snipet | Configure helm ingress http-snipet | `string` | `""` | no |
 
 ## Outputs
 

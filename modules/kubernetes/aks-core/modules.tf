@@ -313,7 +313,7 @@ module "azad_kube_proxy" {
 
 # Prometheus
 module "prometheus" {
-  depends_on = [kubernetes_namespace.tenant, module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper]
 
   for_each = {
     for s in ["prometheus"] :

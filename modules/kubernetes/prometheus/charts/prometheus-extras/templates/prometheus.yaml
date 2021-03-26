@@ -25,6 +25,18 @@ spec:
           requests:
             storage: {{ .Values.volumeClaim.size }}
   {{- end }}
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: prometheus
+                  operator: In
+                  values:
+                    - prometheus-xks
+            topologyKey: topology.kubernetes.io/zone
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true

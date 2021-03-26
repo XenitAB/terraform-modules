@@ -28,8 +28,16 @@ spec:
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          podAffinityTerm:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: prometheus
+                  operator: In
+                  values:
+                    - prometheus-xks
+            topologyKey: kubernetes.io/hostname
+          weight: 100
+        - podAffinityTerm:
             labelSelector:
               matchExpressions:
                 - key: prometheus
@@ -37,6 +45,7 @@ spec:
                   values:
                     - prometheus-xks
             topologyKey: topology.kubernetes.io/zone
+          weight: 100
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true

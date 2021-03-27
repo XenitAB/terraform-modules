@@ -19,7 +19,7 @@ the bootstrap configuration.
 |------|---------|
 | terraform | 0.14.7 |
 | azuredevops | 0.3.0 |
-| flux | 0.1.0 |
+| flux | 0.1.1 |
 | helm | 2.0.3 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.3 |
@@ -30,7 +30,7 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | azuredevops | 0.3.0 |
-| flux | 0.1.0 |
+| flux | 0.1.1 |
 | helm | 2.0.3 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.3 |
@@ -47,8 +47,8 @@ No Modules.
 | [azuredevops_git_repository](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/git_repository) |
 | [azuredevops_git_repository_file](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository_file) |
 | [azuredevops_project](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/project) |
-| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.1.0/docs/data-sources/install) |
-| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.1.0/docs/data-sources/sync) |
+| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.1.1/docs/data-sources/install) |
+| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.1.1/docs/data-sources/sync) |
 | [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.3/docs/resources/release) |
 | [kubectl_file_documents](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/data-sources/file_documents) |
 | [kubectl_manifest](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/resources/manifest) |

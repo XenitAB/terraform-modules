@@ -13,7 +13,7 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "2.52.0"
+      version = "2.53.0"
       source  = "hashicorp/azurerm"
     }
     kubernetes = {

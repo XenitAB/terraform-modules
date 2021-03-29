@@ -21,7 +21,6 @@ terraform {
 
 locals {
   namespace = "ingress-nginx"
-  values    = templatefile("${path.module}/templates/values.yaml.tpl", {})
 }
 
 resource "kubernetes_namespace" "this" {
@@ -39,5 +38,7 @@ resource "helm_release" "ingress_nginx" {
   name       = "ingress-nginx"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v3.10.1"
-  values     = [local.values]
+  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
+    http_snipet = var.http_snipet
+  })]
 }

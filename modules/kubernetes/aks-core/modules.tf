@@ -134,6 +134,8 @@ module "ingress_nginx" {
   }
 
   source = "../../kubernetes/ingress-nginx"
+
+  http_snipet = var.ingress_config.http_snipet
 }
 
 # External DNS

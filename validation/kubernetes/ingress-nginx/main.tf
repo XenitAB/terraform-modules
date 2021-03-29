@@ -9,6 +9,8 @@ module "ingress_nginx" {
 
   providers = {
     kubernetes = kubernetes
-    helm = helm
+    helm       = helm
   }
+
+  http_snipet = "foo"
 }

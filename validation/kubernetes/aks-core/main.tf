@@ -74,8 +74,6 @@ module "aks_core" {
 
   prometheus_enabled = true
   prometheus_config = {
-    prometheus_enabled = true
-    prometheus_config = {
     remote_write_enabled = true
     remote_write_url     = "https://my-receiver.com"
     remote_write_name    = "xenitInfra"

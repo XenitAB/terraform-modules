@@ -25,7 +25,7 @@ commonLabels:
 
 global:
   rbac:
-    pspEnabled: false
+    pspEnabled: true
 
 # We don't monitor the clusters locally
 defaultRules:

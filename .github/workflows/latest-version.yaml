@@ -9,8 +9,8 @@ jobs:
     steps:
       - name: Setup tf-latest-version
         env:
-          TF_LATEST_VERSION_VERSION: "0.0.3"
-          TF_LATEST_VERSION_SHA: "85428a3d1494dda2921344e1b7c11266ea0285a3bbe2f57397625c12533895ee"
+          TF_LATEST_VERSION_VERSION: "0.0.4"
+          TF_LATEST_VERSION_SHA: "b9c288ba8f52c0f665c9f2dee2e83bcb3f5111621db6ff6afd9409d377f17007"
         run: |
           set -e
           wget https://github.com/XenitAB/tf-latest-version/releases/download/v${TF_LATEST_VERSION_VERSION}/tf-latest-version_${TF_LATEST_VERSION_VERSION}_linux_amd64.tar.gz
@@ -42,8 +42,8 @@ jobs:
 
       - name: Setup terraform-docs
         env:
-          TERRAFORM_DOCS_VERSION: "v0.11.2"
-          TERRAFORM_DOCS_SHA: "0d1e42d6fcb15b14027ae8efb794edb1cd7faa7a32507ccad449340529d04937"
+          TERRAFORM_DOCS_VERSION: "v0.12.1"
+          TERRAFORM_DOCS_SHA: "32c0611a33a9c83857240ce2095287a5329564f26acd04818da5156192ecf401"
         run: |
           curl -Lo ./terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/${TERRAFORM_DOCS_VERSION}/terraform-docs-${TERRAFORM_DOCS_VERSION}-$(uname | tr '[:upper:]' '[:lower:]')-amd64
           DOWNLOAD_TERRAFORM_DOCS_SHA=$(openssl sha1 -sha256 terraform-docs | awk '{print $2}')

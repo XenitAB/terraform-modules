@@ -1,4 +1,4 @@
-# Azure AD Kubernetes API Proxy  
+# Azure AD Kubernetes API Proxy
 Adds [`azad-kube-proxy`](https://github.com/XenitAB/azad-kube-proxy) to a Kubernetes clusters.
 
 ## Configuring Azure AD Applications
@@ -81,40 +81,40 @@ module "aks_core" {
 
 | Name | Version |
 |------|---------|
-| terraform | 0.14.7 |
-| helm | 2.0.3 |
-| kubernetes | 2.0.3 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.14.7 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.0.3 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.0.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| helm | 2.0.3 |
-| kubernetes | 2.0.3 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.0.3 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.0.3 |
 
 ## Modules
 
-No Modules.
+No modules.
 
 ## Resources
 
-| Name |
-|------|
-| [helm_release](https://registry.terraform.io/providers/hashicorp/helm/2.0.3/docs/resources/release) |
-| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/namespace) |
-| [kubernetes_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/secret) |
+| Name | Type |
+|------|------|
+| [helm_release.azad_kube_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.0.3/docs/resources/release) | resource |
+| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/namespace) | resource |
+| [kubernetes_secret.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/secret) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| allowed\_ips | The external IPs allowed through the ingress to azad-kube-proxy | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
-| azure\_ad\_app | The Azure AD Application config for azad-kube-proxy | <pre>object({<br>    client_id     = string<br>    client_secret = string<br>    tenant_id     = string<br>  })</pre> | n/a | yes |
-| azure\_ad\_group\_prefix | The Azure AD group prefix to filter for | `string` | `""` | no |
-| dashboard | What dashboard to use with azad-kube-proxy | `string` | `"k8dash"` | no |
-| fqdn | The name to use with the ingress (fully qualified domain name). Example: k8s.example.com | `string` | n/a | yes |
-| k8dash\_config | The k8dash configuration if chosen as dashboard | <pre>object({<br>    client_id     = string<br>    client_secret = string<br>    scope         = string<br>  })</pre> | <pre>{<br>  "client_id": "",<br>  "client_secret": "",<br>  "scope": ""<br>}</pre> | no |
+| <a name="input_allowed_ips"></a> [allowed\_ips](#input\_allowed\_ips) | The external IPs allowed through the ingress to azad-kube-proxy | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
+| <a name="input_azure_ad_app"></a> [azure\_ad\_app](#input\_azure\_ad\_app) | The Azure AD Application config for azad-kube-proxy | <pre>object({<br>    client_id     = string<br>    client_secret = string<br>    tenant_id     = string<br>  })</pre> | n/a | yes |
+| <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | The Azure AD group prefix to filter for | `string` | `""` | no |
+| <a name="input_dashboard"></a> [dashboard](#input\_dashboard) | What dashboard to use with azad-kube-proxy | `string` | `"k8dash"` | no |
+| <a name="input_fqdn"></a> [fqdn](#input\_fqdn) | The name to use with the ingress (fully qualified domain name). Example: k8s.example.com | `string` | n/a | yes |
+| <a name="input_k8dash_config"></a> [k8dash\_config](#input\_k8dash\_config) | The k8dash configuration if chosen as dashboard | <pre>object({<br>    client_id     = string<br>    client_secret = string<br>    scope         = string<br>  })</pre> | <pre>{<br>  "client_id": "",<br>  "client_secret": "",<br>  "scope": ""<br>}</pre> | no |
 
 ## Outputs
 
-No output.
+No outputs.

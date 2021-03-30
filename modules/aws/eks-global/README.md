@@ -2,41 +2,42 @@
 
 | Name | Version |
 |------|---------|
-| terraform | 0.14.7 |
-| aws | 3.34.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.14.7 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.34.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | 3.34.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.34.0 |
 
 ## Modules
 
-No Modules.
+No modules.
 
 ## Resources
 
-| Name |
-|------|
-| [aws_caller_identity](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/data-sources/caller_identity) |
-| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/resources/iam_policy) |
-| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/data-sources/iam_policy_document) |
-| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/resources/iam_role) |
-| [aws_iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/resources/iam_role_policy_attachment) |
-| [aws_kms_key](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/resources/kms_key) |
-| [aws_region](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/data-sources/region) |
-| [aws_s3_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/resources/s3_bucket) |
+| Name | Type |
+|------|------|
+| [aws_iam_policy.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/resources/iam_policy) | resource |
+| [aws_iam_role.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_kms_key.velero](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/resources/kms_key) | resource |
+| [aws_s3_bucket.velero](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/resources/s3_bucket) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.eks_admin_assume](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.eks_admin_permission](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.34.0/docs/data-sources/region) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| environment | The environment name to use for the deploy | `string` | n/a | yes |
-| name | Common name for the environment | `string` | n/a | yes |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | Common name for the environment | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| velero\_config | ARN of velero s3 backup bucket |
+| <a name="output_velero_config"></a> [velero\_config](#output\_velero\_config) | ARN of velero s3 backup bucket |

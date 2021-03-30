@@ -20,7 +20,6 @@ terraform {
 }
 
 locals {
-  namespace = "external-secrets"
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
     aws_config = var.aws_config
   })
@@ -29,9 +28,9 @@ locals {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = local.namespace
+      name = "external-secrets"
     }
-    name = local.namespace
+    name = "external-secrets"
   }
 }
 

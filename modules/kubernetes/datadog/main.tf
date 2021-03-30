@@ -20,7 +20,6 @@ terraform {
 }
 
 locals {
-  namespace = "datadog"
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
     datadog_site = var.datadog_site
     api_key      = var.api_key
@@ -32,9 +31,9 @@ locals {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = local.namespace
+      name = "datadog"
     }
-    name = local.namespace
+    name = "datadog"
   }
 }
 

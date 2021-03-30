@@ -19,16 +19,12 @@ terraform {
   }
 }
 
-locals {
-  namespace = "ingress-nginx"
-}
-
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = local.namespace
+      name = "ingress-nginx"
     }
-    name = local.namespace
+    name = "ingress-nginx"
   }
 }
 

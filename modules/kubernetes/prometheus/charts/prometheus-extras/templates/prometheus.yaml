@@ -10,7 +10,7 @@ spec:
   serviceAccountName: {{ .Values.serviceAccount.name }}
   serviceMonitorSelector:
     matchLabels:
-      {{- include "prometheus-extras.labels" . | nindent 6 }}
+      platform: "true"
   {{- if .Values.remoteWrite.enabled }}
   remoteWrite:
     - url: {{ .Values.remoteWrite.url }}

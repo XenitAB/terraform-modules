@@ -1,3 +1,4 @@
+# For more values see: https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
 # grafana is managed by the grafana-operator
 grafana:
   enabled: false
@@ -18,3 +19,14 @@ prometheus:
 kube-state-metrics:
   podSecurityPolicy:
     enabled: false
+
+commonLabels:
+  platform: "true"
+
+global:
+  rbac:
+    pspEnabled: false
+
+# We don't monitor the clusters locally
+defaultRules:
+  create: false

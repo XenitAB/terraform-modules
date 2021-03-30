@@ -53,6 +53,7 @@ resource "aws_iam_role_policy_attachment" "container_registry_read_only" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
+#tfsec:ignore:AWS068
 resource "aws_eks_cluster" "this" {
   name     = "${var.environment}-${var.name}${var.eks_name_suffix}"
   role_arn = aws_iam_role.eks.arn

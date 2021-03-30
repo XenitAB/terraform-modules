@@ -20,7 +20,6 @@ terraform {
 }
 
 locals {
-  namespace = "velero"
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
     cloud_provider = var.cloud_provider,
     azure_config   = var.azure_config
@@ -31,9 +30,9 @@ locals {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = local.namespace
+      name = "velero"
     }
-    name = local.namespace
+    name = "velero"
   }
 }
 

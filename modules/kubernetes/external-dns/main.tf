@@ -20,7 +20,6 @@ terraform {
 }
 
 locals {
-  namespace = "external-dns"
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
     provider     = var.dns_provider,
     sources      = var.sources,
@@ -33,9 +32,9 @@ locals {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = local.namespace
+      name = "external-dns"
     }
-    name = local.namespace
+    name = "external-dns"
   }
 }
 

@@ -13,16 +13,12 @@ terraform {
   }
 }
 
-locals {
-  namespace = "kyverno"
-}
-
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = local.namespace
+      name = "kyverno"
     }
-    name = local.namespace
+    name = "kyverno"
   }
 }
 

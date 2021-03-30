@@ -18,8 +18,8 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | terraform | 0.14.7 |
-| flux | 0.1.0 |
-| github | 4.5.2 |
+| flux | 0.1.1 |
+| github | 4.6.0 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.3 |
 | tls | 3.1.0 |
@@ -28,8 +28,8 @@ the bootstrap configuration.
 
 | Name | Version |
 |------|---------|
-| flux | 0.1.0 |
-| github | 4.5.2 |
+| flux | 0.1.1 |
+| github | 4.6.0 |
 | kubectl | 1.10.0 |
 | kubernetes | 2.0.3 |
 | tls | 3.1.0 |
@@ -42,11 +42,11 @@ No Modules.
 
 | Name |
 |------|
-| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.1.0/docs/data-sources/install) |
-| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.1.0/docs/data-sources/sync) |
-| [github_repository](https://registry.terraform.io/providers/integrations/github/4.5.2/docs/data-sources/repository) |
-| [github_repository_deploy_key](https://registry.terraform.io/providers/integrations/github/4.5.2/docs/resources/repository_deploy_key) |
-| [github_repository_file](https://registry.terraform.io/providers/integrations/github/4.5.2/docs/resources/repository_file) |
+| [flux_install](https://registry.terraform.io/providers/fluxcd/flux/0.1.1/docs/data-sources/install) |
+| [flux_sync](https://registry.terraform.io/providers/fluxcd/flux/0.1.1/docs/data-sources/sync) |
+| [github_repository](https://registry.terraform.io/providers/integrations/github/4.6.0/docs/data-sources/repository) |
+| [github_repository_deploy_key](https://registry.terraform.io/providers/integrations/github/4.6.0/docs/resources/repository_deploy_key) |
+| [github_repository_file](https://registry.terraform.io/providers/integrations/github/4.6.0/docs/resources/repository_file) |
 | [kubectl_file_documents](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/data-sources/file_documents) |
 | [kubectl_manifest](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/resources/manifest) |
 | [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/namespace) |

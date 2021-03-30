@@ -15,6 +15,12 @@ variable "remote_write_name" {
   default     = "xenitInfra"
 }
 
+variable "remote_tls_secret_name" {
+  description = "The secret name of tls for remote write"
+  type        = string
+  default     = "client-certificate"
+}
+
 variable "volume_claim_enabled" {
   description = "If prometheus should store data localy"
   type        = bool

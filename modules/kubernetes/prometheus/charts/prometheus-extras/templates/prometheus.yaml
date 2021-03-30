@@ -15,6 +15,14 @@ spec:
   remoteWrite:
     - url: {{ .Values.remoteWrite.url }}
       name: {{ .Values.remoteWrite.name }}
+      tlsConfig:
+        keySecret:
+          name: {{ .Values.remoteWrite.tlsSecretName }}
+          key: tls.key
+        cert:
+          secret:
+            name: {{ .Values.remoteWrite.tlsSecretName }}
+            key: tls.crt
   {{- end }}
   {{- if .Values.volumeClaim.enabled }}
   storage:

@@ -48,9 +48,10 @@ resource "helm_release" "prometheus_extras" {
   name       = "prometheus-extras"
   namespace  = kubernetes_namespace.this.metadata[0].name
   values = [templatefile("${path.module}/templates/values-extras.yaml.tpl", {
-    remote_write_enabled = var.remote_write_enabled
-    remote_write_url     = var.remote_write_url
-    remote_write_name    = var.remote_write_name
+    remote_write_enabled   = var.remote_write_enabled
+    remote_write_url       = var.remote_write_url
+    remote_write_name      = var.remote_write_name
+    remote_tls_secret_name = var.remote_tls_secret_name
 
     volume_claim_enabled            = var.volume_claim_enabled
     volume_claim_storage_class_name = var.volume_claim_storage_class_name

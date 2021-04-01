@@ -11,6 +11,16 @@ spec:
   serviceMonitorSelector:
     matchLabels:
       platform: "true"
+  {{- if .Values.alertmanager.enabled }}
+  alerting:
+    alertmanagers:
+    - namespace: prometheus
+      name: alertmanager
+      port: web
+  ruleSelector:
+    matchLabels:
+      platform: "true"
+  {{- end }}
   {{- if .Values.remoteWrite.enabled }}
   remoteWrite:
     - url: {{ .Values.remoteWrite.url }}

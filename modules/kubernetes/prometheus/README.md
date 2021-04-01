@@ -32,6 +32,7 @@ No Modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| alertmanager\_enabled | If prometheus alertmanager should be enabled or not | `bool` | `false` | no |
 | remote\_tls\_secret\_name | The secret name of tls for remote write | `string` | `"client-certificate"` | no |
 | remote\_write\_enabled | If remote write should be enabled or not | `bool` | `true` | no |
 | remote\_write\_name | The name of the remote write in prometheus | `string` | `"xenitInfra"` | no |

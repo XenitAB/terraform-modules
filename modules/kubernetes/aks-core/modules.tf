@@ -323,6 +323,8 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
+  alertmanager_enabled = var.prometheus_config.alertmanager_enabled
+
   remote_write_enabled   = var.prometheus_config.remote_write_enabled
   remote_write_url       = var.prometheus_config.remote_write_url
   remote_write_name      = var.prometheus_config.remote_write_name

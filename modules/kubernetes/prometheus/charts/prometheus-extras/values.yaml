@@ -22,3 +22,6 @@ volumeClaim:
   enabled: true
   storageClassName: default
   size: 5Gi
+
+alertmanager:
+  enabled: true

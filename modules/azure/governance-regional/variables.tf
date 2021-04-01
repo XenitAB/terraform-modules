@@ -78,3 +78,54 @@ variable "key_vault_purge_protection_enabled" {
   type        = bool
   default     = false
 }
+
+variable "azuread_groups" {
+  description = "Azure AD groups from global"
+  type = object({
+    rg_owner = map(object({
+      id = string
+    }))
+    rg_contributor = map(object({
+      id = string
+    }))
+    rg_reader = map(object({
+      id = string
+    }))
+    sub_owner = object({
+      id = string
+    })
+    sub_contributor = object({
+      id = string
+    })
+    sub_reader = object({
+      id = string
+    })
+    service_endpoint_join = object({
+      id = string
+    })
+  })
+}
+
+variable "azuread_apps" {
+  description = "Azure AD applications from global"
+  type = object({
+    delegate_kv = map(object({
+      display_name                = string
+      application_object_id       = string
+      application_id              = string
+      service_principal_object_id = string
+    }))
+    rg_contributor = map(object({
+      display_name                = string
+      application_object_id       = string
+      application_id              = string
+      service_principal_object_id = string
+    }))
+    sub_reader = object({
+      display_name                = string
+      application_object_id       = string
+      application_id              = string
+      service_principal_object_id = string
+    })
+  })
+}

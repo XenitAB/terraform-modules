@@ -11,6 +11,9 @@ spec:
   serviceMonitorSelector:
     matchLabels:
       platform: "true"
+  probeSelector:
+    matchLabels:
+      platform: "true"
   {{- if .Values.alertmanager.enabled }}
   alerting:
     alertmanagers:

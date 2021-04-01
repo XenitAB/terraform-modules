@@ -55,19 +55,7 @@ No modules.
 | [random_password.aad_sp](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) | resource |
 | [random_password.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) | resource |
 | [random_password.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) | resource |
-| [azuread_application.aad_app](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/application) | data source |
-| [azuread_application.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/application) | data source |
-| [azuread_application.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/application) | data source |
-| [azuread_group.rg_contributor](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
-| [azuread_group.rg_owner](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
-| [azuread_group.rg_reader](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
-| [azuread_group.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
-| [azuread_group.sub_contributor](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
-| [azuread_group.sub_owner](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
-| [azuread_service_principal.aad_sp](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/service_principal) | data source |
-| [azuread_service_principal.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/service_principal) | data source |
 | [azuread_service_principal.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/service_principal) | data source |
-| [azuread_service_principal.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/service_principal) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.53.0/docs/data-sources/client_config) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.53.0/docs/data-sources/subscription) | data source |
 
@@ -75,18 +63,16 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groupss | `string` | `"az"` | no |
+| <a name="input_azuread_apps"></a> [azuread\_apps](#input\_azuread\_apps) | Azure AD applications from global | <pre>object({<br>    delegate_kv = map(object({<br>      display_name                = string<br>      application_object_id       = string<br>      application_id              = string<br>      service_principal_object_id = string<br>    }))<br>    rg_contributor = map(object({<br>      display_name                = string<br>      application_object_id       = string<br>      application_id              = string<br>      service_principal_object_id = string<br>    }))<br>    sub_reader = object({<br>      display_name                = string<br>      application_object_id       = string<br>      application_id              = string<br>      service_principal_object_id = string<br>    })<br>  })</pre> | n/a | yes |
+| <a name="input_azuread_groups"></a> [azuread\_groups](#input\_azuread\_groups) | Azure AD groups from global | <pre>object({<br>    rg_owner = map(object({<br>      id = string<br>    }))<br>    rg_contributor = map(object({<br>      id = string<br>    }))<br>    rg_reader = map(object({<br>      id = string<br>    }))<br>    sub_owner = object({<br>      id = string<br>    })<br>    sub_contributor = object({<br>      id = string<br>    })<br>    sub_reader = object({<br>      id = string<br>    })<br>    service_endpoint_join = object({<br>      id = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The commonName for the core infra | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
-| <a name="input_group_name_separator"></a> [group\_name\_separator](#input\_group\_name\_separator) | Separator for group names | `string` | `"-"` | no |
 | <a name="input_key_vault_purge_protection_enabled"></a> [key\_vault\_purge\_protection\_enabled](#input\_key\_vault\_purge\_protection\_enabled) | If true purge protection will be enabled to all key vaults | `bool` | `false` | no |
 | <a name="input_location"></a> [location](#input\_location) | The location for the subscription | `string` | n/a | yes |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The location shortname for the subscription | `string` | n/a | yes |
 | <a name="input_owner_service_principal_name"></a> [owner\_service\_principal\_name](#input\_owner\_service\_principal\_name) | The name of the service principal that will be used to run terraform and is owner of the subsciptions | `string` | n/a | yes |
 | <a name="input_partner_id"></a> [partner\_id](#input\_partner\_id) | Azure partner id to link service principal with | `string` | `""` | no |
 | <a name="input_resource_group_configs"></a> [resource\_group\_configs](#input\_resource\_group\_configs) | Resource group configuration | <pre>list(<br>    object({<br>      common_name                = string<br>      delegate_aks               = bool # Delegate aks permissions<br>      delegate_key_vault         = bool # Delegate KeyVault creation<br>      delegate_service_endpoint  = bool # Delegate Service Endpoint permissions<br>      delegate_service_principal = bool # Delegate Service Principal<br>      lock_resource_group        = bool # Adds management_lock (CanNotDelete) to the resource group<br>      tags                       = map(string)<br>    })<br>  )</pre> | n/a | yes |
-| <a name="input_service_principal_name_prefix"></a> [service\_principal\_name\_prefix](#input\_service\_principal\_name\_prefix) | Prefix for service principals | `string` | `"sp"` | no |
-| <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
 
 ## Outputs

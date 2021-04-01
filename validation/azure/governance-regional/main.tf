@@ -21,7 +21,6 @@ module "governance-regional" {
   location_short               = "we"
   location                     = "West Europe"
   core_name                    = "core"
-  subscription_name            = "xks"
   owner_service_principal_name = "test"
   resource_group_configs = [
     {
@@ -80,4 +79,57 @@ module "governance-regional" {
       }
     },
   ]
+  azuread_groups = {
+    rg_owner = {
+      test = {
+        id = "00000000-0000-0000-0000-000000000000"
+      }
+    }
+    rg_contributor = {
+      test = {
+        id = "00000000-0000-0000-0000-000000000000"
+      }
+    }
+    rg_reader = {
+      test = {
+        id = "00000000-0000-0000-0000-000000000000"
+      }
+    }
+    sub_owner = {
+      id = "00000000-0000-0000-0000-000000000000"
+    }
+    sub_contributor = {
+      id = "00000000-0000-0000-0000-000000000000"
+    }
+    sub_reader = {
+      id = "00000000-0000-0000-0000-000000000000"
+    }
+    service_endpoint_join = {
+      id = "00000000-0000-0000-0000-000000000000"
+    }
+  }
+  azuread_apps = {
+    delegate_kv = {
+      test = {
+        display_name                = "test"
+        application_object_id       = "00000000-0000-0000-0000-000000000000"
+        application_id              = "00000000-0000-0000-0000-000000000000"
+        service_principal_object_id = "00000000-0000-0000-0000-000000000000"
+      }
+    }
+    rg_contributor = {
+      test = {
+        display_name                = "test"
+        application_object_id       = "00000000-0000-0000-0000-000000000000"
+        application_id              = "00000000-0000-0000-0000-000000000000"
+        service_principal_object_id = "00000000-0000-0000-0000-000000000000"
+      }
+    }
+    sub_reader = {
+      display_name                = "test"
+      application_object_id       = "00000000-0000-0000-0000-000000000000"
+      application_id              = "00000000-0000-0000-0000-000000000000"
+      service_principal_object_id = "00000000-0000-0000-0000-000000000000"
+    }
+  }
 }

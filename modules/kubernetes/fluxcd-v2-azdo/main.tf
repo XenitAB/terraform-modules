@@ -193,7 +193,7 @@ resource "azuredevops_git_repository_file" "cluster_tenants" {
     env => env
   }
   repository_id = data.azuredevops_git_repository.cluster.id
-  file          = "clusters/${var.environment}/tenants.yaml"
+  file          = "clusters/${var.environment}/tenants-${each.value}.yaml"
   content = templatefile("${path.module}/templates/cluster-tenants.yaml", {
     environment = each.value
   })

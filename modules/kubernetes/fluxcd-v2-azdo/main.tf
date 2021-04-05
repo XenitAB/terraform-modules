@@ -188,10 +188,14 @@ resource "azuredevops_git_repository_file" "kustomize" {
 }
 
 resource "azuredevops_git_repository_file" "cluster_tenants" {
+  for_each = {
+    for env in distinct(var.namespaces.flux.environment) :
+    env => env
+  }
   repository_id = data.azuredevops_git_repository.cluster.id
   file          = "clusters/${var.environment}/tenants.yaml"
   content = templatefile("${path.module}/templates/cluster-tenants.yaml", {
-    environment = var.environment
+    environment = each.value
   })
   branch              = "refs/heads/${var.branch}"
   overwrite_on_create = true

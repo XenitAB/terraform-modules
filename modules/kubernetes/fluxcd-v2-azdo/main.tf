@@ -189,7 +189,7 @@ resource "azuredevops_git_repository_file" "kustomize" {
 
 resource "azuredevops_git_repository_file" "cluster_tenants" {
   for_each = {
-    for env in distinct(var.namespaces.flux.environment) :
+    for env in distinct(var.namespaces.*.flux.environment) :
     env => env
   }
   repository_id = data.azuredevops_git_repository.cluster.id

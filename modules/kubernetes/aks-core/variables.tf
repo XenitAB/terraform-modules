@@ -47,6 +47,7 @@ variable "namespaces" {
       flux = object({
         enabled     = bool
         create_crds = bool
+        environment = string
         azure_devops = object({
           org  = string
           proj = string

@@ -78,6 +78,7 @@ module "fluxcd_v2_azure_devops" {
     flux = {
       enabled     = ns.flux.enabled
       create_crds = ns.flux.create_crds
+      environment = ns.flux.environment
       org         = ns.flux.azure_devops.org
       proj        = ns.flux.azure_devops.proj
       repo        = ns.flux.azure_devops.repo

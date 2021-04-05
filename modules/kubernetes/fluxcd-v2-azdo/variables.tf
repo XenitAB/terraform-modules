@@ -30,6 +30,7 @@ variable "namespaces" {
         org         = string
         proj        = string
         repo        = string
+        environment = string
       })
     })
   )

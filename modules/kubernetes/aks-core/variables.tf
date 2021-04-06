@@ -195,8 +195,11 @@ variable "ingress_nginx_enabled" {
 variable "ingress_config" {
   description = "Ingress configuration"
   type = object({
-    http_snipet = string
+    http_snippet = string
   })
+  default = {
+    http_snippet = ""
+  }
 }
 
 variable "external_dns_enabled" {

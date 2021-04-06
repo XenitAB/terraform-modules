@@ -32,7 +32,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_http_snipet"></a> [http\_snipet](#input\_http\_snipet) | Configure helm ingress http-snipet | `string` | `""` | no |
+| <a name="input_http_snippet"></a> [http\_snippet](#input\_http\_snippet) | Configure helm ingress http-snippet | `string` | `""` | no |
 
 ## Outputs
 

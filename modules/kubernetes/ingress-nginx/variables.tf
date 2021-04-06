@@ -1,5 +1,5 @@
-variable "http_snipet" {
-  description = "Configure helm ingress http-snipet"
+variable "http_snippet" {
+  description = "Configure helm ingress http-snippet"
   type        = string
   default     = ""
 }

@@ -12,5 +12,5 @@ module "ingress_nginx" {
     helm       = helm
   }
 
-  http_snipet = "foo"
+  http_snippet = "foo"
 }

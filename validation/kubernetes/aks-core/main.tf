@@ -67,8 +67,4 @@ module "aks_core" {
       name = "name"
     }
   }
-
-  ingress_config = {
-    http_snipet = ""
-  }
 }

@@ -35,6 +35,6 @@ resource "helm_release" "ingress_nginx" {
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v3.10.1"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    http_snipet = var.http_snipet
+    http_snippet = var.http_snippet
   })]
 }

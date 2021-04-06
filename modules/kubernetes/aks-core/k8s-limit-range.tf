@@ -1,5 +1,6 @@
 resource "kubernetes_limit_range" "this" {
   for_each = { for ns in var.namespaces : ns.name => ns }
+  depends_on = [kubernetes_namespace.tenant]
 
   metadata {
     name      = "default"

@@ -163,29 +163,29 @@ resource "kubernetes_secret" "cluster" {
   }
 }
 
-resource "azuredevops_git_repository_file" "install" {
-  repository_id       = data.azuredevops_git_repository.cluster.id
-  file                = data.flux_install.this.path
-  content             = data.flux_install.this.content
-  branch              = "refs/heads/${var.branch}"
-  overwrite_on_create = true
-}
-
-resource "azuredevops_git_repository_file" "sync" {
-  repository_id       = data.azuredevops_git_repository.cluster.id
-  file                = data.flux_sync.this.path
-  content             = data.flux_sync.this.content
-  branch              = "refs/heads/${var.branch}"
-  overwrite_on_create = true
-}
-
-resource "azuredevops_git_repository_file" "kustomize" {
-  repository_id       = data.azuredevops_git_repository.cluster.id
-  file                = data.flux_sync.this.kustomize_path
-  content             = data.flux_sync.this.kustomize_content
-  branch              = "refs/heads/${var.branch}"
-  overwrite_on_create = true
-}
+#resource "azuredevops_git_repository_file" "install" {
+#  repository_id       = data.azuredevops_git_repository.cluster.id
+#  file                = data.flux_install.this.path
+#  content             = data.flux_install.this.content
+#  branch              = "refs/heads/${var.branch}"
+#  overwrite_on_create = true
+#}
+#
+#resource "azuredevops_git_repository_file" "sync" {
+#  repository_id       = data.azuredevops_git_repository.cluster.id
+#  file                = data.flux_sync.this.path
+#  content             = data.flux_sync.this.content
+#  branch              = "refs/heads/${var.branch}"
+#  overwrite_on_create = true
+#}
+#
+#resource "azuredevops_git_repository_file" "kustomize" {
+#  repository_id       = data.azuredevops_git_repository.cluster.id
+#  file                = data.flux_sync.this.kustomize_path
+#  content             = data.flux_sync.this.kustomize_content
+#  branch              = "refs/heads/${var.branch}"
+#  overwrite_on_create = true
+#}
 
 resource "azuredevops_git_repository_file" "cluster_tenants" {
   for_each = {
@@ -233,23 +233,23 @@ resource "kubernetes_secret" "tenant" {
   }
 }
 
-resource "azuredevops_git_repository_file" "tenant" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  repository_id = data.azuredevops_git_repository.cluster.id
-  branch        = "refs/heads/${var.branch}"
-  file          = "tenants/${each.value.flux.environment}/${each.key}.yaml"
-  content = templatefile("${path.module}/templates/tenant.yaml", {
-    repo        = "${local.azdo_proxy_url}/${var.azure_devops_org}/${each.value.flux.proj}/_git/${each.value.flux.repo}"
-    branch      = var.branch,
-    name        = each.key,
-    environment = each.value.flux.environment,
-    create_crds = each.value.flux.create_crds
-  })
-  overwrite_on_create = true
-}
+#resource "azuredevops_git_repository_file" "tenant" {
+#  for_each = {
+#    for ns in var.namespaces :
+#    ns.name => ns
+#    if ns.flux.enabled
+#  }
+#
+#  repository_id = data.azuredevops_git_repository.cluster.id
+#  branch        = "refs/heads/${var.branch}"
+#  file          = "tenants/${each.value.flux.environment}/${each.key}.yaml"
+#  content = templatefile("${path.module}/templates/tenant.yaml", {
+#    repo        = "${local.azdo_proxy_url}/${var.azure_devops_org}/${each.value.flux.proj}/_git/${each.value.flux.repo}"
+#    branch      = var.branch,
+#    name        = each.key,
+#    environment = each.value.flux.environment,
+#    create_crds = each.value.flux.create_crds
+#  })
+#  overwrite_on_create = true
+#}
 

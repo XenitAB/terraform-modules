@@ -53,11 +53,13 @@ resource "aws_iam_role_policy_attachment" "container_registry_read_only" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
+#tfsec:ignore:AWS066 tfsec:ignore:AWS067
 resource "aws_eks_cluster" "this" {
   name     = "${var.environment}-${var.name}${var.eks_name_suffix}"
   role_arn = aws_iam_role.eks.arn
   version  = var.eks_config.kubernetes_version
 
+  #tfsec:ignore:AWS068 tfsec:ignore:AWS069
   vpc_config {
     subnet_ids = [for s in aws_subnet.this : s.id]
   }

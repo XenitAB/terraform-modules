@@ -4,7 +4,7 @@ controller:
     externalTrafficPolicy: Local
   config:
     server-tokens: "false"
-    %{ if http_snipet != "" }
+    %{ if http_snippet != "" }
     http-snippet: |
-      ${http_snipet}
+      ${http_snippet}
     %{ endif }

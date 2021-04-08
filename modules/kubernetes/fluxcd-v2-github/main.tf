@@ -29,11 +29,11 @@ terraform {
     }
     github = {
       source  = "integrations/github"
-      version = "4.5.2"
+      version = "4.6.0"
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.1.0"
+      version = "0.1.1"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"

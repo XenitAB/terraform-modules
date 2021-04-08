@@ -13,11 +13,6 @@ variable "location_short" {
   type        = string
 }
 
-variable "subscription_name" {
-  description = "The commonName for the subscription"
-  type        = string
-}
-
 variable "owner_service_principal_name" {
   description = "The name of the service principal that will be used to run terraform and is owner of the subsciptions"
   type        = string
@@ -49,24 +44,6 @@ variable "unique_suffix" {
   default     = ""
 }
 
-variable "group_name_separator" {
-  description = "Separator for group names"
-  type        = string
-  default     = "-"
-}
-
-variable "azure_ad_group_prefix" {
-  description = "Prefix for Azure AD Groupss"
-  type        = string
-  default     = "az"
-}
-
-variable "service_principal_name_prefix" {
-  description = "Prefix for service principals"
-  type        = string
-  default     = "sp"
-}
-
 variable "partner_id" {
   description = "Azure partner id to link service principal with"
   type        = string
@@ -77,4 +54,55 @@ variable "key_vault_purge_protection_enabled" {
   description = "If true purge protection will be enabled to all key vaults"
   type        = bool
   default     = false
+}
+
+variable "azuread_groups" {
+  description = "Azure AD groups from global"
+  type = object({
+    rg_owner = map(object({
+      id = string
+    }))
+    rg_contributor = map(object({
+      id = string
+    }))
+    rg_reader = map(object({
+      id = string
+    }))
+    sub_owner = object({
+      id = string
+    })
+    sub_contributor = object({
+      id = string
+    })
+    sub_reader = object({
+      id = string
+    })
+    service_endpoint_join = object({
+      id = string
+    })
+  })
+}
+
+variable "azuread_apps" {
+  description = "Azure AD applications from global"
+  type = object({
+    delegate_kv = map(object({
+      display_name                = string
+      application_object_id       = string
+      application_id              = string
+      service_principal_object_id = string
+    }))
+    rg_contributor = map(object({
+      display_name                = string
+      application_object_id       = string
+      application_id              = string
+      service_principal_object_id = string
+    }))
+    sub_reader = object({
+      display_name                = string
+      application_object_id       = string
+      application_id              = string
+      service_principal_object_id = string
+    })
+  })
 }

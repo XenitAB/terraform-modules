@@ -19,16 +19,12 @@ terraform {
   }
 }
 
-locals {
-  namespace = "ingress-nginx"
-}
-
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = local.namespace
+      name = "ingress-nginx"
     }
-    name = local.namespace
+    name = "ingress-nginx"
   }
 }
 
@@ -37,8 +33,8 @@ resource "helm_release" "ingress_nginx" {
   chart      = "ingress-nginx"
   name       = "ingress-nginx"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v3.10.1"
+  version    = "v3.27.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    http_snipet = var.http_snipet
+    http_snippet = var.http_snippet
   })]
 }

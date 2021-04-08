@@ -1,3 +1,4 @@
+#tfsec:ignore:AZU020
 resource "azurerm_key_vault" "delegate_kv" {
   for_each = {
     for env_resource in local.env_resources :

@@ -331,3 +331,9 @@ variable "prometheus_config" {
     volume_claim_size               = string
   })
 }
+
+variable "ingress_healthz_enabled" {
+  description = "Should ingress-healthz be enabled"
+  type        = bool
+  default     = true
+}

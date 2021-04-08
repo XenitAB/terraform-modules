@@ -323,3 +323,17 @@ module "prometheus" {
   volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 }
+
+module "ingress_healthz" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["ingress-healthz"] :
+    s => s
+    if var.ingress_healthz_enabled
+  }
+
+  source = "../../kubernetes/ingress-healthz"
+
+  environment = var.environment
+}

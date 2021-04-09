@@ -16,7 +16,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.0.3"
+      version = "2.1.0"
     }
   }
 }
@@ -45,7 +45,7 @@ resource "helm_release" "falco" {
   chart      = "falco"
   name       = "falco"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v1.7.2"
+  version    = "1.8.0"
   values     = [local.falco_values]
 }
 
@@ -54,6 +54,6 @@ resource "helm_release" "falcosidekick" {
   chart      = "falcosidekick"
   name       = "falcosidekick"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.2.4"
+  version    = "0.3.0"
   values     = [local.falcosidekick_values]
 }

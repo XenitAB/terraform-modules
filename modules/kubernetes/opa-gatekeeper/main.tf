@@ -90,7 +90,7 @@ terraform {
   required_providers {
     helm = {
       source  = "hashicorp/helm"
-      version = "2.0.3"
+      version = "2.1.0"
     }
   }
 }
@@ -106,7 +106,7 @@ resource "helm_release" "gatekeeper" {
   repository = "https://open-policy-agent.github.io/gatekeeper/charts"
   chart      = "gatekeeper"
   name       = "gatekeeper"
-  version    = "v3.3.0"
+  version    = "3.4.0"
   values     = [file("${path.module}/files/gatekeeper-values.yaml")]
 }
 

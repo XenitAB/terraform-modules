@@ -13,7 +13,7 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "2.53.0"
+      version = "2.55.0"
       source  = "hashicorp/azurerm"
     }
     kubernetes = {
@@ -22,7 +22,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.0.3"
+      version = "2.1.0"
     }
   }
 }
@@ -60,7 +60,7 @@ resource "helm_release" "minio" {
   name       = "loki-minio"
   repository = "https://helm.min.io/"
   chart      = "minio"
-  version    = "8.0.0"
+  version    = "8.0.10"
   namespace  = kubernetes_namespace.this.metadata[0].name
 
   values = [
@@ -82,7 +82,7 @@ resource "helm_release" "loki_stack" {
   name       = "loki"
   repository = "https://grafana.github.io/loki/charts"
   chart      = "loki-stack"
-  version    = "2.0.0"
+  version    = "2.1.2"
   namespace  = kubernetes_namespace.this.metadata[0].name
 
   values = [

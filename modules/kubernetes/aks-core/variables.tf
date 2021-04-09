@@ -317,3 +317,23 @@ variable "azad_kube_proxy_config" {
     }
   }
 }
+
+variable "prometheus_enabled" {
+  description = "Should prometheus be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "prometheus_config" {
+  description = "Configuration for prometheus"
+  type = object({
+    alertmanager_enabled   = bool
+    remote_write_enabled   = bool
+    remote_write_url       = string
+    remote_tls_secret_name = string
+
+    volume_claim_enabled            = bool
+    volume_claim_storage_class_name = string
+    volume_claim_size               = string
+  })
+}

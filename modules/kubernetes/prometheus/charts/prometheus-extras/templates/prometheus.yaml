@@ -1,0 +1,66 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    {{- include "prometheus-extras.labels" . | nindent 4 }}
+  name: prometheus-xks
+  namespace: prometheus
+spec:
+  replicas: {{ .Values.replicaCount }}
+  serviceAccountName: {{ .Values.serviceAccount.name }}
+  serviceMonitorSelector:
+    matchLabels:
+      xkf.xenit.se/monitoring: platform
+  probeSelector:
+    matchLabels:
+      xkf.xenit.se/monitoring: platform
+  podMonitorSelector:
+    matchLabels:
+      xkf.xenit.se/monitoring: platform
+  {{- if .Values.remoteWrite.enabled }}
+  remoteWrite:
+    - url: {{ .Values.remoteWrite.url }}
+      name: thanos
+      tlsConfig:
+        keySecret:
+          name: {{ .Values.remoteWrite.tlsSecretName }}
+          key: tls.key
+        cert:
+          secret:
+            name: {{ .Values.remoteWrite.tlsSecretName }}
+            key: tls.crt
+  {{- end }}
+  {{- if .Values.volumeClaim.enabled }}
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: {{ .Values.volumeClaim.storageClassName }}
+        resources:
+          requests:
+            storage: {{ .Values.volumeClaim.size }}
+  {{- end }}
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: prometheus
+                  operator: In
+                  values:
+                    - prometheus-xks
+            topologyKey: kubernetes.io/hostname
+          weight: 100
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: prometheus
+                  operator: In
+                  values:
+                    - prometheus-xks
+            topologyKey: topology.kubernetes.io/zone
+          weight: 100
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000

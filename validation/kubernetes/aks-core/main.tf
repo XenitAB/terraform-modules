@@ -67,4 +67,20 @@ module "aks_core" {
       name = "name"
     }
   }
+
+  ingress_config = {
+    http_snippet = ""
+  }
+
+  prometheus_enabled = true
+  prometheus_config = {
+    alertmanager_enabled   = true
+    remote_write_enabled   = true
+    remote_write_url       = "https://my-receiver.com"
+    remote_tls_secret_name = "client-certificate-customer1"
+
+    volume_claim_enabled            = true
+    volume_claim_storage_class_name = "default"
+    volume_claim_size               = "5Gi"
+  }
 }

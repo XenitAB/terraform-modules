@@ -109,7 +109,8 @@ locals {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "gatekeeper-system"
+      name                             = "gatekeeper-system"
+      "admission.gatekeeper.sh/ignore" = "no-self-managing"
     }
     name = "gatekeeper-system"
   }

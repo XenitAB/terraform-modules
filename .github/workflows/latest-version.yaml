@@ -33,7 +33,8 @@ jobs:
           set -xe
           export PATH=${PATH}:~/.local/bin
           RESULT=$(tf-latest-version modules)
-          echo "::set-output name=pr_result::$RESULT"
+          BODY="Update Terraform Provider and Helm Chart versions.\n\n${RESULT}"
+          echo "::set-output name=pr_body::$BODY"
 
       - name: Setup terraform-docs
         env:
@@ -70,9 +71,7 @@ jobs:
           commit-message: Update versions
           title: Update Terraform Provider and Helm Chart versions
           body: |
-            Update Terraform Provider and Helm Chart versions.
-
-            ${{ steps.update.outputs.pr_result }}
+            ${{ steps.update.outputs.pr_body }}
           delete-branch: true
           branch: update/terraform-versions
           labels: |

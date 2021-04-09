@@ -4,7 +4,7 @@ nmi:
 
 azureIdentities:
 %{ for namespace in namespaces ~}
-  - name: "${namespace.name}"
+  "${namespace.name}":
     namespace: "${namespace.name}"
     type: "0"
     resourceID: "${aad_pod_identity[namespace.name].id}"

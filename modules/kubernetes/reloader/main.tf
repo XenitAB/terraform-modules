@@ -15,7 +15,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.0.3"
+      version = "2.1.0"
     }
   }
 }
@@ -34,5 +34,5 @@ resource "helm_release" "reloader" {
   chart      = "reloader"
   name       = "reloader"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.0.80"
+  version    = "v0.0.86"
 }

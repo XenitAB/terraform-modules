@@ -14,7 +14,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.0.3"
+      version = "2.1.0"
     }
   }
 }
@@ -33,7 +33,7 @@ resource "helm_release" "ingress_nginx" {
   chart      = "ingress-nginx"
   name       = "ingress-nginx"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v3.27.0"
+  version    = "3.29.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet = var.http_snippet
   })]

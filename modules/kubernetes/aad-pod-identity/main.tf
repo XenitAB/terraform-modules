@@ -14,7 +14,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.0.3"
+      version = "2.1.0"
     }
   }
 }
@@ -36,7 +36,7 @@ resource "helm_release" "aad_pod_identity" {
   repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
   chart      = "aad-pod-identity"
   name       = "aad-pod-identity"
-  version    = "2.1.0"
+  version    = "4.0.0"
   namespace  = kubernetes_namespace.this.metadata[0].name
   values     = [local.values]
 }

@@ -21,11 +21,11 @@ terraform {
   required_providers {
     helm = {
       source  = "hashicorp/helm"
-      version = "2.0.3"
+      version = "2.1.0"
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.1.1"
+      version = "0.1.3"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
@@ -89,7 +89,7 @@ resource "helm_release" "azdo_proxy" {
   chart      = "azdo-proxy"
   name       = "azdo-proxy"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "0.3.6"
+  version    = "v0.3.6"
   values     = [local.azdo_proxy_values]
 }
 

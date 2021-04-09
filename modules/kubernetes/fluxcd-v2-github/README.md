@@ -18,7 +18,7 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.14.7 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.1 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.3 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 4.6.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.10.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.0.3 |
@@ -28,7 +28,7 @@ the bootstrap configuration.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_flux"></a> [flux](#provider\_flux) | 0.1.1 |
+| <a name="provider_flux"></a> [flux](#provider\_flux) | 0.1.3 |
 | <a name="provider_github"></a> [github](#provider\_github) | 4.6.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.10.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.0.3 |
@@ -56,8 +56,8 @@ No modules.
 | [kubernetes_secret.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/secret) | resource |
 | [tls_private_key.cluster](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/resources/private_key) | resource |
 | [tls_private_key.tenant](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/resources/private_key) | resource |
-| [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.1/docs/data-sources/install) | data source |
-| [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.1/docs/data-sources/sync) | data source |
+| [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.3/docs/data-sources/install) | data source |
+| [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.3/docs/data-sources/sync) | data source |
 | [github_repository.cluster](https://registry.terraform.io/providers/integrations/github/4.6.0/docs/data-sources/repository) | data source |
 | [github_repository.tenant](https://registry.terraform.io/providers/integrations/github/4.6.0/docs/data-sources/repository) | data source |
 | [kubectl_file_documents.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/data-sources/file_documents) | data source |

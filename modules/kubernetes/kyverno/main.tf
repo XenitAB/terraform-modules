@@ -8,7 +8,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.0.3"
+      version = "2.1.0"
     }
   }
 }
@@ -27,7 +27,7 @@ resource "helm_release" "kyverno" {
   chart      = "kyverno"
   name       = "kyverno"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "1.3.0-rc11"
+  version    = "v1.3.4"
 }
 
 resource "helm_release" "kyverno_extras" {

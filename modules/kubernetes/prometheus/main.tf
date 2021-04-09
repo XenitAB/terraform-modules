@@ -51,7 +51,6 @@ resource "helm_release" "prometheus_extras" {
     alertmanager_enabled   = var.alertmanager_enabled
     remote_write_enabled   = var.remote_write_enabled
     remote_write_url       = var.remote_write_url
-    remote_write_name      = var.remote_write_name
     remote_tls_secret_name = var.remote_tls_secret_name
 
     volume_claim_enabled            = var.volume_claim_enabled

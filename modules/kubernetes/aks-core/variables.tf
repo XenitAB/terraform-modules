@@ -330,7 +330,6 @@ variable "prometheus_config" {
     alertmanager_enabled   = bool
     remote_write_enabled   = bool
     remote_write_url       = string
-    remote_write_name      = string
     remote_tls_secret_name = string
 
     volume_claim_enabled            = bool

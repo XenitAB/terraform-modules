@@ -15,12 +15,6 @@ variable "remote_write_url" {
   type        = string
 }
 
-variable "remote_write_name" {
-  description = "The name of the remote write in prometheus"
-  type        = string
-  default     = "xenitInfra"
-}
-
 variable "remote_tls_secret_name" {
   description = "The secret name of tls for remote write"
   type        = string

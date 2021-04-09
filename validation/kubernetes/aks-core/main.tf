@@ -77,7 +77,6 @@ module "aks_core" {
     alertmanager_enabled   = true
     remote_write_enabled   = true
     remote_write_url       = "https://my-receiver.com"
-    remote_write_name      = "xenitInfra"
     remote_tls_secret_name = "client-certificate-customer1"
 
     volume_claim_enabled            = true

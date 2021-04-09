@@ -5,7 +5,6 @@
 remoteWrite:
   enabled: ${remote_write_enabled}
   url: ${remote_write_url}
-  name: ${remote_write_name}
   tlsSecretName: ${remote_tls_secret_name}
 
 volumeClaim:

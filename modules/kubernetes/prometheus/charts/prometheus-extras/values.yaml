@@ -16,7 +16,6 @@ resources: {}
 remoteWrite:
   enabled: true
   url: ""
-  name: xenitInfra
 
 volumeClaim:
   enabled: true

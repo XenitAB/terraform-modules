@@ -20,7 +20,7 @@ spec:
   {{- if .Values.remoteWrite.enabled }}
   remoteWrite:
     - url: {{ .Values.remoteWrite.url }}
-      name: {{ .Values.remoteWrite.name }}
+      name: thanos
       tlsConfig:
         keySecret:
           name: {{ .Values.remoteWrite.tlsSecretName }}

@@ -21,7 +21,7 @@ kube-state-metrics:
     enabled: false
 
 commonLabels:
-  platform: "true"
+  xkf.xenit.se/monitoring: platform
 
 global:
   rbac:

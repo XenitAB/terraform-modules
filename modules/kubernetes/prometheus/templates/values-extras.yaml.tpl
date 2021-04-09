@@ -12,6 +12,3 @@ volumeClaim:
   enabled: ${volume_claim_enabled}
   storageClassName: ${volume_claim_storage_class_name}
   size: ${volume_claim_size}
-
-alertmanager:
-  enabled: ${alertmanager_enabled}

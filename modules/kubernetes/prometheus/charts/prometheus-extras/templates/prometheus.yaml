@@ -10,20 +10,13 @@ spec:
   serviceAccountName: {{ .Values.serviceAccount.name }}
   serviceMonitorSelector:
     matchLabels:
-      platform: "true"
+      xkf.xenit.se/monitoring: platform
   probeSelector:
     matchLabels:
-      platform: "true"
-  {{- if .Values.alertmanager.enabled }}
-  alerting:
-    alertmanagers:
-    - namespace: prometheus
-      name: alertmanager
-      port: web
-  ruleSelector:
+      xkf.xenit.se/monitoring: platform
+  podMonitorSelector:
     matchLabels:
-      platform: "true"
-  {{- end }}
+      xkf.xenit.se/monitoring: platform
   {{- if .Values.remoteWrite.enabled }}
   remoteWrite:
     - url: {{ .Values.remoteWrite.url }}

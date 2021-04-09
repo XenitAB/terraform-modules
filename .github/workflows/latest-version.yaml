@@ -33,7 +33,11 @@ jobs:
           set -xe
           export PATH=${PATH}:~/.local/bin
           RESULT=$(tf-latest-version modules)
-          echo $RESULT
+          # Needed as set-output truncates multiline strings
+          # https://github.community/t/set-output-truncates-multiline-strings/16852/4
+          RESULT="${RESULT//'%'/'%25'}"
+          RESULT="${RESULT//$'\n'/'%0A'}"
+          RESULT="${RESULT//$'\r'/'%0D'}"
           echo "::set-output name=pr_body::$RESULT"
 
       - name: Setup terraform-docs

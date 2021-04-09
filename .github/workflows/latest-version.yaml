@@ -28,11 +28,17 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run tf-latest-version
+        id: update
         run: |
           set -xe
           export PATH=${PATH}:~/.local/bin
           RESULT=$(tf-latest-version modules)
-          echo "::set-output name=pr_result::$RESULT"
+          # Needed as set-output truncates multiline strings
+          # https://github.community/t/set-output-truncates-multiline-strings/16852/4
+          RESULT="${RESULT//'%'/'%25'}"
+          RESULT="${RESULT//$'\n'/'%0A'}"
+          RESULT="${RESULT//$'\r'/'%0D'}"
+          echo "::set-output name=pr_body::$RESULT"
 
       - name: Setup terraform-docs
         env:
@@ -69,9 +75,7 @@ jobs:
           commit-message: Update versions
           title: Update Terraform Provider and Helm Chart versions
           body: |
-            Update Terraform Provider and Helm Chart versions.
-
-            ${{ steps.update.outputs.pr_result }}
+            ${{ steps.update.outputs.pr_body }}
           delete-branch: true
           branch: update/terraform-versions
           labels: |

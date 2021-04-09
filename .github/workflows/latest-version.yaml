@@ -28,6 +28,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run tf-latest-version
+        id: update
         run: |
           set -xe
           export PATH=${PATH}:~/.local/bin

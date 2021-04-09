@@ -88,6 +88,10 @@ terraform {
   required_version = "0.14.7"
 
   required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.0.3"
+    }
     helm = {
       source  = "hashicorp/helm"
       version = "2.1.0"
@@ -102,10 +106,20 @@ locals {
   })
 }
 
+resource "kubernetes_namespace" "this" {
+  metadata {
+    labels = {
+      name = "gatekeeper-system"
+    }
+    name = "gatekeeper-system"
+  }
+}
+
 resource "helm_release" "gatekeeper" {
   repository = "https://open-policy-agent.github.io/gatekeeper/charts"
   chart      = "gatekeeper"
   name       = "gatekeeper"
+  namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "3.4.0"
   values     = [file("${path.module}/files/gatekeeper-values.yaml")]
 }
@@ -116,7 +130,7 @@ resource "helm_release" "gatekeeper_templates" {
   repository = "https://xenitab.github.io/gatekeeper-library/"
   chart      = "gatekeeper-library-templates"
   name       = "gatekeeper-library-templates"
-  namespace  = "gatekeeper-system"
+  namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v0.6.2"
   values     = [local.values]
 }
@@ -127,7 +141,7 @@ resource "helm_release" "gatekeeper_constraints" {
   repository = "https://xenitab.github.io/gatekeeper-library/"
   chart      = "gatekeeper-library-constraints"
   name       = "gatekeeper-library-constraints"
-  namespace  = "gatekeeper-system"
+  namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v0.6.2"
   values     = [local.values]
 }

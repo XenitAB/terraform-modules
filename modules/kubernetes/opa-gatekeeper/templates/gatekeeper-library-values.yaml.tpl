@@ -1,7 +1,3 @@
-postInstall:
-  labelNamespace:
-    enabled: true
-experimentalEnableMutation: true
 constraints:
   %{~ for item in constraints ~}
   - kind: "${item.kind}"

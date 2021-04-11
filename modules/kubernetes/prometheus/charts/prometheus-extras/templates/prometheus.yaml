@@ -10,13 +10,13 @@ spec:
   serviceAccountName: {{ .Values.serviceAccount.name }}
   serviceMonitorSelector:
     matchLabels:
-      xkf.xenit.se/monitoring: platform
+      xkf.xenit.io/monitoring: platform
   probeSelector:
     matchLabels:
-      xkf.xenit.se/monitoring: platform
+      xkf.xenit.io/monitoring: platform
   podMonitorSelector:
     matchLabels:
-      xkf.xenit.se/monitoring: platform
+      xkf.xenit.io/monitoring: platform
   {{- if .Values.remoteWrite.enabled }}
   remoteWrite:
     - url: {{ .Values.remoteWrite.url }}

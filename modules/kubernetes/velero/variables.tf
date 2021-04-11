@@ -1,3 +1,9 @@
+variable "prometheus_enabled" {
+  description = "Should a ServiceMonitor be created"
+  type        = bool
+  default     = false
+}
+
 variable "cloud_provider" {
   description = "Cloud provider to use."
   type        = string

@@ -27,6 +27,7 @@ resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
       name = "aad-pod-identity"
+      "xkf.xenit.io/kind" = "platform"
     }
     name = "aad-pod-identity"
   }
@@ -39,4 +40,17 @@ resource "helm_release" "aad_pod_identity" {
   version    = "4.0.0"
   namespace  = kubernetes_namespace.this.metadata[0].name
   values     = [local.values]
+}
+
+resource "helm_release" "aad_pod_identity_extras" {
+  depends_on = [helm_release.aad_pod_identity]
+
+  chart     = "${path.module}/charts/aad-pod-identity-extras"
+  name      = "aad-pod-identity-extras"
+  namespace = kubernetes_namespace.this.metadata[0].name
+
+  set {
+    name  = "prometheusEnabled"
+    value = var.prometheus_enabled
+  }
 }

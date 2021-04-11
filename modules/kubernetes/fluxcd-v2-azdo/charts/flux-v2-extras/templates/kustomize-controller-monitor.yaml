@@ -1,0 +1,14 @@
+{{- if .Values.prometheusEnabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: kustomize-controller
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      app: kustomize-controller
+  podMetricsEndpoints:
+    - port: http-prom
+{{- end }}

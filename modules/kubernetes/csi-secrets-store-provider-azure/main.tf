@@ -23,6 +23,7 @@ resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
       name = "csi-secrets-store-provider-azure"
+      "xkf.xenit.io/kind" = "platform"
     }
     name = "csi-secrets-store-provider-azure"
   }
@@ -53,5 +54,18 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
   set {
     name  = "secrets-store-csi-driver.linux.tolerations[0].operator"
     value = "Exists"
+  }
+}
+
+resource "helm_release" "csi_secrets_store_provider_azure_extras" {
+  depends_on = [helm_release.csi_secrets_store_provider_azure]
+
+  chart     = "${path.module}/charts/csi-secrets-store-provider-azure-extras"
+  name      = "csi-secrets-store-provider-azure-extras"
+  namespace = kubernetes_namespace.this.metadata[0].name
+
+  set {
+    name  = "prometheusEnabled"
+    value = var.prometheus_enabled
   }
 }

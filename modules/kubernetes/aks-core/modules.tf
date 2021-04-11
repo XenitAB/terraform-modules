@@ -78,6 +78,7 @@ module "fluxcd_v2_azure_devops" {
       repo        = ns.flux.azure_devops.repo
     }
   }]
+  prometheus_enabled = var.prometheus_enabled
 }
 
 module "fluxcd_v2_github" {
@@ -116,6 +117,7 @@ module "aad_pod_identity" {
   namespaces = [for ns in var.namespaces : {
     name = ns.name
   }]
+  prometheus_enabled = var.prometheus_enabled
 }
 
 # Ingress Nginx
@@ -131,6 +133,7 @@ module "ingress_nginx" {
   source = "../../kubernetes/ingress-nginx"
 
   http_snippet = var.ingress_config.http_snippet
+  prometheus_enabled = var.prometheus_enabled
 }
 
 # External DNS
@@ -154,6 +157,7 @@ module "external_dns" {
     client_id       = var.external_dns_config.client_id
     resource_id     = var.external_dns_config.resource_id
   }
+  prometheus_enabled = var.prometheus_enabled
 }
 
 # Cert Manager
@@ -177,6 +181,7 @@ module "cert_manager" {
     client_id           = var.external_dns_config.client_id
     resource_id         = var.external_dns_config.resource_id
   }
+  prometheus_enabled = var.prometheus_enabled
 }
 
 # Velero
@@ -200,6 +205,7 @@ module "velero" {
     client_id                 = var.velero_config.identity.client_id
     resource_id               = var.velero_config.identity.resource_id
   }
+  prometheus_enabled = var.prometheus_enabled
 }
 
 # csi-secrets-store-provider-azure
@@ -213,6 +219,8 @@ module "csi_secrets_store_provider_azure" {
   }
 
   source = "../../kubernetes/csi-secrets-store-provider-azure"
+
+  prometheus_enabled = var.prometheus_enabled
 }
 
 # datadog
@@ -261,6 +269,8 @@ module "reloader" {
   }
 
   source = "../../kubernetes/reloader"
+
+  prometheus_enabled = var.prometheus_enabled
 }
 
 # azad-kube-proxy

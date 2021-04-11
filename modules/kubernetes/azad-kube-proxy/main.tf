@@ -1,11 +1,11 @@
 /**
  * # Azure AD Kubernetes API Proxy
  * Adds [`azad-kube-proxy`](https://github.com/XenitAB/azad-kube-proxy) to a Kubernetes clusters.
- * 
+ *
  * ## Configuring Azure AD Applications
- * 
+ *
  * ### Azure AD App: azad-kube-proxy
- * 
+ *
  * ```shell
  * ENVIRONMENT="dev"
  * TENANT_ID=$(az account show --output tsv --query tenantId)
@@ -23,9 +23,9 @@
  * az ad app permission add --id ${AZ_APP_ID} --api 00000003-0000-0000-c000-000000000000 --api-permissions 7ab1d382-f21e-4acd-a863-ba3e13f7da61=Role
  * az ad app permission admin-consent --id ${AZ_APP_ID}
  * ```
- * 
+ *
  * ### Azure AD App: k8dash
- * 
+ *
  * ```shell
  * AZ_APP_DASH_NAME="aks-dashboard-${ENVIRONMENT}"
  * AZ_APP_DASH_REPLY_URL="https://aks.${ENVIRONMENT}.example.com/"
@@ -36,28 +36,28 @@
  * az rest --method PATCH --uri "https://graph.microsoft.com/beta/applications/${AZ_APP_DASH_OBJECT_ID}" --body '{"api":{"requestedAccessTokenVersion": 2}}'
  * AZ_APP_DASH_SECRET=$(az ad sp credential reset --name ${AZ_APP_DASH_ID} --credential-description "azad-kube-proxy" --output tsv --query password)
  * ```
- * 
+ *
  * ### Azure KeyVault
- * 
+ *
  * ```shell
  * JSON_FMT='{"client_id":"%s","client_secret":"%s","tenant_id":"%s","k8dash_client_id":"%s","k8dash_client_secret":"%s","k8dash_scope":"%s"}'
  * KV_SECRET=$(printf "${JSON_FMT}" "${AZ_APP_ID}" "${AZ_APP_SECRET}" "${TENANT_ID}" "${AZ_APP_DASH_ID}" "${AZ_APP_DASH_SECRET}" "${AZ_APP_URI}/.default")
  * az keyvault secret set --vault-name <keyvault name> --name azad-kube-proxy --value "${KV_SECRET}"
  * ```
- * 
+ *
  * ## Terraform example (aks-core)
- * 
+ *
  * ```terraform
  * data "azurerm_key_vault_secret" "azad_kube_proxy" {
  *   key_vault_id = data.azurerm_key_vault.core.id
  *   name         = "azad-kube-proxy"
  * }
- * 
+ *
  * module "aks_core" {
  *   source = "github.com/xenitab/terraform-modules//modules/kubernetes/aks-core?ref=[ref]"
- * 
+ *
  *   [...]
- * 
+ *
  *   azad_kube_proxy_enabled = true
  *   azad_kube_proxy_config = {
  *     fqdn                  = "aks.${var.dns_zone}"
@@ -77,7 +77,7 @@
  *   }
  * }
  * ```
- * 
+ *
 */
 
 terraform {
@@ -115,6 +115,7 @@ resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
       name = "azad-kube-proxy"
+      "xkf.xenit.io/kind" = "platform"
     }
     name = "azad-kube-proxy"
   }

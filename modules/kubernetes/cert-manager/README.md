@@ -38,6 +38,7 @@ No modules.
 | <a name="input_azure_config"></a> [azure\_config](#input\_azure\_config) | Azure specific configuration | <pre>object({<br>    subscription_id     = string,<br>    hosted_zone_name    = string,<br>    resource_group_name = string,<br>    client_id           = string,<br>    resource_id         = string,<br>  })</pre> | <pre>{<br>  "client_id": "",<br>  "hosted_zone_name": "",<br>  "resource_group_name": "",<br>  "resource_id": "",<br>  "subscription_id": ""<br>}</pre> | no |
 | <a name="input_cloud_provider"></a> [cloud\_provider](#input\_cloud\_provider) | Cloud provider to use. | `string` | n/a | yes |
 | <a name="input_notification_email"></a> [notification\_email](#input\_notification\_email) | Email address to send certificate expiration notifications | `string` | n/a | yes |
+| <a name="input_prometheus_enabled"></a> [prometheus\_enabled](#input\_prometheus\_enabled) | Should a ServiceMonitor be created | `bool` | `false` | no |
 
 ## Outputs
 

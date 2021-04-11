@@ -28,6 +28,7 @@ resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
       name = local.namespace
+      "xkf.xenit.io/kind" = "platform"
     }
     name = local.namespace
   }

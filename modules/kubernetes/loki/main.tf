@@ -51,6 +51,7 @@ resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
       name = "loki"
+      "xkf.xenit.io/kind" = "platform"
     }
     name = "loki"
   }

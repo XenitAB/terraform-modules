@@ -2,7 +2,7 @@
   * # Reloader
   *
   * Adds [`Reloader`](https://github.com/stakater/Reloader) to a Kubernetes clusters.
-  * 
+  *
   */
 
 terraform {
@@ -24,6 +24,7 @@ resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
       name = "reloader"
+      "xkf.xenit.io/kind" = "platform"
     }
     name = "reloader"
   }
@@ -35,4 +36,7 @@ resource "helm_release" "reloader" {
   name       = "reloader"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v0.0.86"
+  values     = [templatefile("${path.module}/templates/values.yaml.tpl", {
+    prometheus_enabled = var.prometheus_enabled
+  })]
 }

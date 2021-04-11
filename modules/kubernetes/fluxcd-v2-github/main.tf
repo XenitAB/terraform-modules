@@ -51,6 +51,7 @@ resource "kubernetes_namespace" "flux_system" {
     name = "flux-system"
     labels = {
       name = "flux-system"
+      "xkf.xenit.io/kind" = "platform"
     }
   }
 

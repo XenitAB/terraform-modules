@@ -135,6 +135,6 @@ resource "helm_release" "azad_kube_proxy" {
   chart      = "azad-kube-proxy"
   name       = "azad-kube-proxy"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.0.15"
+  version    = "v0.0.16"
   values     = [local.values]
 }

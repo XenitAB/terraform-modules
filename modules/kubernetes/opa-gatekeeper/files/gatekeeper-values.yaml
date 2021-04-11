@@ -1,8 +1,4 @@
-podAnnotations:
-  ad.datadoghq.com/manager.check_names: '["openmetrics"]'
-  ad.datadoghq.com/manager.init_configs: "[{}]"
-  ad.datadoghq.com/manager.instances: '[{"prometheus_url":"http://%%host%%:8888/metrics","namespace":"opa","metrics":["*"]}]'
-controllerManager:
-  priorityClassName: ""
-audit:
-  priorityClassName: ""
+postInstall:
+  labelNamespace:
+    enabled: false
+experimentalEnableMutation: true

@@ -114,9 +114,11 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_additional_assigns"></a> [additional\_assigns](#input\_additional\_assigns) | Additional assigns that should be added | <pre>list(object({<br>    name = string<br>  }))</pre> | `[]` | no |
 | <a name="input_additional_constraints"></a> [additional\_constraints](#input\_additional\_constraints) | Additional constraints that should be added | <pre>list(object({<br>    kind               = string<br>    name               = string<br>    enforcement_action = string<br>    match = object({<br>      kinds = list(object({<br>        apiGroups = list(string)<br>        kinds     = list(string)<br>      }))<br>      namespaces = list(string)<br>    })<br>    parameters = any<br>  }))</pre> | `[]` | no |
+| <a name="input_enable_default_assigns"></a> [enable\_default\_assigns](#input\_enable\_default\_assigns) | If enabled default assigns will be added | `bool` | `true` | no |
 | <a name="input_enable_default_constraints"></a> [enable\_default\_constraints](#input\_enable\_default\_constraints) | If enabled default constraints will be added | `bool` | `true` | no |
-| <a name="input_exclude"></a> [exclude](#input\_exclude) | Namespaces to opt out of constraints | <pre>list(object({<br>    excluded_namespaces = list(string)<br>    processes           = list(string)<br>  }))</pre> | <pre>[<br>  {<br>    "excluded_namespaces": [<br>      "kube-system",<br>      "gatekeeper-system"<br>    ],<br>    "processes": [<br>      "*"<br>    ]<br>  }<br>]</pre> | no |
+| <a name="input_excluded_namespaces"></a> [excluded\_namespaces](#input\_excluded\_namespaces) | Namespaces to opt out of constraints and assigns | `list(string)` | <pre>[<br>  "kube-system",<br>  "gatekeeper-system"<br>]</pre> | no |
 
 ## Outputs
 

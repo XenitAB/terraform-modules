@@ -21,14 +21,20 @@ constraints:
       ${indent(6, chomp(yamlencode(item.parameters)))}
     %{~ endif ~}
   %{~ endfor ~}
+
+mutationExcludedNamespaces:
+  %{~ for item in excluded_namespaces ~}
+  - "${item}"
+  %{~ endfor ~}
+assigns:
+  %{~ for item in assigns ~}
+  - name: "${item.name}"
+  %{~ endfor ~}
+
 exclude:
-  %{~ for item in exclude ~}
+  %{~ for item in excluded_namespaces ~}
   - excludedNamespaces:
-    %{~ for item in item.excluded_namespaces ~}
       - "${item}"
-    %{~ endfor ~}
     processes:
-    %{~ for item in item.processes ~}
-      - "${item}"
-    %{~ endfor ~}
+      - "*"
   %{~ endfor ~}

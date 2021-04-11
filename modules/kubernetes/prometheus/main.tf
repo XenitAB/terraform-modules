@@ -38,7 +38,7 @@ resource "helm_release" "prometheus" {
   chart      = "kube-prometheus-stack"
   name       = "prometheus"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "14.3.0"
+  version    = "14.5.0"
   values     = [local.values_prometheus]
 }
 

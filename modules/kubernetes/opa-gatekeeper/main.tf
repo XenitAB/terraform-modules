@@ -101,8 +101,9 @@ terraform {
 
 locals {
   values = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", {
-    constraints = concat((var.enable_default_constraints ? local.default_constraints : []), var.additional_constraints),
-    exclude     = var.exclude
+    constraints         = concat((var.enable_default_constraints ? local.default_constraints : []), var.additional_constraints),
+    assigns             = concat((var.enable_default_assigns ? local.default_assigns : []), var.additional_assigns),
+    excluded_namespaces = var.excluded_namespaces
   })
 }
 
@@ -132,7 +133,7 @@ resource "helm_release" "gatekeeper_templates" {
   chart      = "gatekeeper-library-templates"
   name       = "gatekeeper-library-templates"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.6.2"
+  version    = "v0.7.0"
   values     = [local.values]
 }
 
@@ -143,6 +144,6 @@ resource "helm_release" "gatekeeper_constraints" {
   chart      = "gatekeeper-library-constraints"
   name       = "gatekeeper-library-constraints"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.6.2"
+  version    = "v0.7.0"
   values     = [local.values]
 }

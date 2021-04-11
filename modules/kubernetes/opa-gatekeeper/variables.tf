@@ -22,16 +22,22 @@ variable "additional_constraints" {
   default = []
 }
 
-variable "exclude" {
-  description = "Namespaces to opt out of constraints"
+variable "enable_default_assigns" {
+  description = "If enabled default assigns will be added"
+  type        = bool
+  default     = true
+}
+
+variable "additional_assigns" {
+  description = "Additional assigns that should be added"
   type = list(object({
-    excluded_namespaces = list(string)
-    processes           = list(string)
+    name = string
   }))
-  default = [
-    {
-      excluded_namespaces = ["kube-system", "gatekeeper-system"]
-      processes           = ["*"]
-    }
-  ]
+  default = []
+}
+
+variable "excluded_namespaces" {
+  description = "Namespaces to opt out of constraints and assigns"
+  type        = list(string)
+  default     = ["kube-system", "gatekeeper-system"]
 }

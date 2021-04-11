@@ -45,7 +45,7 @@ resource "helm_release" "falco" {
   chart      = "falco"
   name       = "falco"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "1.8.0"
+  version    = "1.8.1"
   values     = [local.falco_values]
 }
 
@@ -54,6 +54,6 @@ resource "helm_release" "falcosidekick" {
   chart      = "falcosidekick"
   name       = "falcosidekick"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "0.3.0"
+  version    = "0.3.1"
   values     = [local.falcosidekick_values]
 }

@@ -28,12 +28,7 @@ module "opa_gatekeeper" {
       },
     ]
   )
-  exclude = [
-    {
-      excluded_namespaces = local.excluded_namespaces
-      processes           = ["*"]
-    }
-  ]
+  excluded_namespaces = local.excluded_namespaces
 }
 
 # FluxCD v1

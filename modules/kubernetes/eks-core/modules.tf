@@ -12,12 +12,7 @@ module "opa_gatekeeper" {
 
   source = "../../kubernetes/opa-gatekeeper"
 
-  exclude = [
-    {
-      excluded_namespaces = local.excluded_namespaces
-      processes           = ["*"]
-    }
-  ]
+  excluded_namespaces = local.excluded_namespaces
 }
 
 # Fluxcd

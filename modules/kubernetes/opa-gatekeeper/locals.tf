@@ -1,4 +1,15 @@
 locals {
+  default_assigns = [
+    {
+      name = "container-disallow-privilege-escalation"
+    },
+    {
+      name = "container-drop-net-raw"
+    },
+    {
+      name = "container-read-only-root-fs"
+    }
+  ]
   default_constraints = [
     {
       kind               = "K8sPSPAllowPrivilegeEscalationContainer"

@@ -22,7 +22,7 @@ terraform {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "ingress-nginx"
+      name                = "ingress-nginx"
       "xkf.xenit.io/kind" = "platform"
     }
     name = "ingress-nginx"

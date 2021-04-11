@@ -132,7 +132,7 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  http_snippet = var.ingress_config.http_snippet
+  http_snippet       = var.ingress_config.http_snippet
   prometheus_enabled = var.prometheus_enabled
 }
 

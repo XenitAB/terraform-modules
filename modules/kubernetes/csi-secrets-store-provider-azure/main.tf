@@ -22,7 +22,7 @@ terraform {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "csi-secrets-store-provider-azure"
+      name                = "csi-secrets-store-provider-azure"
       "xkf.xenit.io/kind" = "platform"
     }
     name = "csi-secrets-store-provider-azure"

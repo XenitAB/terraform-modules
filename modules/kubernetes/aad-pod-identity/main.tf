@@ -26,7 +26,7 @@ locals {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "aad-pod-identity"
+      name                = "aad-pod-identity"
       "xkf.xenit.io/kind" = "platform"
     }
     name = "aad-pod-identity"

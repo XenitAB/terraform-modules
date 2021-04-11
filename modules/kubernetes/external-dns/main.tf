@@ -33,7 +33,7 @@ locals {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "external-dns"
+      name                = "external-dns"
       "xkf.xenit.io/kind" = "platform"
     }
     name = "external-dns"

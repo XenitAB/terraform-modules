@@ -30,7 +30,9 @@ No modules.
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_prometheus_enabled"></a> [prometheus\_enabled](#input\_prometheus\_enabled) | Should a ServiceMonitor be created | `bool` | `false` | no |
 
 ## Outputs
 

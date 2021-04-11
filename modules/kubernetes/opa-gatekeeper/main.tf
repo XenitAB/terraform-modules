@@ -112,7 +112,7 @@ resource "kubernetes_namespace" "this" {
     labels = {
       name                             = "gatekeeper-system"
       "admission.gatekeeper.sh/ignore" = "no-self-managing"
-      "xkf.xenit.io/kind" = "platform"
+      "xkf.xenit.io/kind"              = "platform"
     }
     name = "gatekeeper-system"
   }

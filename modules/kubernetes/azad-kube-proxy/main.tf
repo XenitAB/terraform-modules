@@ -114,7 +114,7 @@ locals {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "azad-kube-proxy"
+      name                = "azad-kube-proxy"
       "xkf.xenit.io/kind" = "platform"
     }
     name = "azad-kube-proxy"

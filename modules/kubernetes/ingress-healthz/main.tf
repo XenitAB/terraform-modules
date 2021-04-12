@@ -1,11 +1,9 @@
 /**
   * # Ingress Healthz (ingress-healthz)
   *
-  * This module is used to add [`ingress-healthz`](https://github.com/XenitAB/ingress-healthz) to Kubernetes clusters.
-  *
-  * Ingress Healthz is used to test and measure access to the cluster, it has no other functional value. It is meant
-  * to simulate an application that expects traffic through the ingress controller with automatic DNS creation and
-  * certificate creation, without depending on the stability of a dynamic application.
+  * This module is used to deploy a very simple NGINX server meant to check the health of cluster ingress.
+  * It is meant to simulate an application that expects traffic through the ingress controller with
+  * automatic DNS creation and certificate creation, without depending on the stability of a dynamic application.
   */
 
 terraform {
@@ -26,7 +24,7 @@ terraform {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "ingress-healthz"
+      name                = "ingress-healthz"
       "xkf.xenit.io/kind" = "platform"
     }
     name = "ingress-healthz"

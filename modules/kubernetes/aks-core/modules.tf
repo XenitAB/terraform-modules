@@ -122,7 +122,7 @@ module "aad_pod_identity" {
 
 # Ingress Nginx
 module "ingress_nginx" {
-  depends_on = [module.opa_gatekeeper, module.prometheus]
+  depends_on = [module.opa_gatekeeper]
 
   for_each = {
     for s in ["ingress-nginx"] :
@@ -133,12 +133,12 @@ module "ingress_nginx" {
   source = "../../kubernetes/ingress-nginx"
 
   http_snippet       = var.ingress_config.http_snippet
-  prometheus_enabled = var.prometheus_enabled
+  prometheus_enabled = false
 }
 
 # External DNS
 module "external_dns" {
-  depends_on = [module.opa_gatekeeper, module.aad_pod_identity, module.prometheus]
+  depends_on = [module.opa_gatekeeper, module.aad_pod_identity]
 
   for_each = {
     for s in ["external-dns"] :
@@ -157,12 +157,12 @@ module "external_dns" {
     client_id       = var.external_dns_config.client_id
     resource_id     = var.external_dns_config.resource_id
   }
-  prometheus_enabled = var.prometheus_enabled
+  prometheus_enabled = false
 }
 
 # Cert Manager
 module "cert_manager" {
-  depends_on = [module.opa_gatekeeper, module.prometheus]
+  depends_on = [module.opa_gatekeeper]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -181,7 +181,7 @@ module "cert_manager" {
     client_id           = var.external_dns_config.client_id
     resource_id         = var.external_dns_config.resource_id
   }
-  prometheus_enabled = var.prometheus_enabled
+  prometheus_enabled = false
 }
 
 # Velero

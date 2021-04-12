@@ -27,14 +27,10 @@ affinity:
 
 ingress:
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /healthz
-    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt
   hosts:
     - host: ingress-healthz.${dns_zone}
-      paths:
-        - /cluster-health/healthz
   tls:
-    - hosts:
+    - secretName: ingress-healthz-cert
+      hosts:
         - ingress-healthz.${dns_zone}
-      secretName: ingress-healthz-cert

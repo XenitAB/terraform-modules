@@ -1,0 +1,16 @@
+{{- if .Values.prometheusEnabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: secrets-store-csi-driver
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: secrets-store-csi-driver
+      app.kubernetes.io/instance: csi-secrets-store-provider-azure
+  podMetricsEndpoints:
+    - path: /metrics
+      port: "8081"
+{{- end }}

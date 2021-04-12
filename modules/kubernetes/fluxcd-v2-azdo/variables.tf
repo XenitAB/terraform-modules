@@ -1,3 +1,9 @@
+variable "prometheus_enabled" {
+  description = "Should a ServiceMonitor be created"
+  type        = bool
+  default     = false
+}
+
 variable "azure_devops_pat" {
   description = "PAT to authenticate with Azure DevOps"
   type        = string

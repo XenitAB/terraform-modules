@@ -13,7 +13,10 @@ resource "kubernetes_namespace" "tenant" {
   metadata {
     labels = merge(
       { for k, v in each.value.labels : k => v },
-      { "name" = each.value.name }
+      {
+        "name"              = each.value.name,
+        "xkf.xenit.io/kind" = "tenant"
+      }
     )
     name = each.value.name
   }

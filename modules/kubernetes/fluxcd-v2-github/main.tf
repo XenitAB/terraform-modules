@@ -50,7 +50,8 @@ resource "kubernetes_namespace" "flux_system" {
   metadata {
     name = "flux-system"
     labels = {
-      name = "flux-system"
+      name                = "flux-system"
+      "xkf.xenit.io/kind" = "platform"
     }
   }
 

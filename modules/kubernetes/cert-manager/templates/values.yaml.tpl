@@ -11,3 +11,10 @@ serviceAccount:
 securityContext:
   fsGroup: 1001
 %{ endif }
+
+prometheus:
+  enabled: ${prometheus_enabled}
+  servicemonitor:
+    enabled: ${prometheus_enabled}
+    labels:
+      xkf.xenit.io/monitoring: platform

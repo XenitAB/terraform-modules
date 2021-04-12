@@ -8,3 +8,10 @@ controller:
     http-snippet: |
       ${http_snippet}
     %{ endif }
+
+  metrics:
+    enabled: ${prometheus_enabled}
+    serviceMonitor:
+      enabled: ${prometheus_enabled}
+      additionalLabels:
+        xkf.xenit.io/monitoring: platform

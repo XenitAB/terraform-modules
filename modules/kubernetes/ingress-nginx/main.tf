@@ -22,7 +22,8 @@ terraform {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "ingress-nginx"
+      name                = "ingress-nginx"
+      "xkf.xenit.io/kind" = "platform"
     }
     name = "ingress-nginx"
   }
@@ -35,6 +36,7 @@ resource "helm_release" "ingress_nginx" {
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "3.29.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    http_snippet = var.http_snippet
+    http_snippet       = var.http_snippet,
+    prometheus_enabled = var.prometheus_enabled,
   })]
 }

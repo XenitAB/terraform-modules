@@ -93,6 +93,18 @@ resource "helm_release" "azdo_proxy" {
   values     = [local.azdo_proxy_values]
 }
 
+# Monitoring
+resource "helm_release" "flux_v2_extras" {
+  chart     = "${path.module}/charts/flux-v2-extras"
+  name      = "flux-v2-extras"
+  namespace = kubernetes_namespace.this.metadata[0].name
+
+  set {
+    name  = "prometheusEnabled"
+    value = var.prometheus_enabled
+  }
+}
+
 # Cluster
 data "azuredevops_git_repository" "cluster" {
   project_id = data.azuredevops_project.this.id
@@ -182,7 +194,7 @@ resource "azuredevops_git_repository_file" "sync" {
 resource "azuredevops_git_repository_file" "kustomize" {
   repository_id       = data.azuredevops_git_repository.cluster.id
   file                = data.flux_sync.this.kustomize_path
-  content             = data.flux_sync.this.kustomize_content
+  content             = file("${path.module}/templates/kustomization-override.yaml")
   branch              = "refs/heads/${var.branch}"
   overwrite_on_create = true
 }

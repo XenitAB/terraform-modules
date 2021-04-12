@@ -28,7 +28,8 @@ locals {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "external-secrets"
+      name                = "external-secrets"
+      "xkf.xenit.io/kind" = "platform"
     }
     name = "external-secrets"
   }

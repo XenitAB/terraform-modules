@@ -112,6 +112,7 @@ resource "kubernetes_namespace" "this" {
     labels = {
       name                             = "gatekeeper-system"
       "admission.gatekeeper.sh/ignore" = "no-self-managing"
+      "xkf.xenit.io/kind"              = "platform"
     }
     name = "gatekeeper-system"
   }
@@ -133,7 +134,7 @@ resource "helm_release" "gatekeeper_templates" {
   chart      = "gatekeeper-library-templates"
   name       = "gatekeeper-library-templates"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.7.0"
+  version    = "v0.7.1"
   values     = [local.values]
 }
 
@@ -144,6 +145,6 @@ resource "helm_release" "gatekeeper_constraints" {
   chart      = "gatekeeper-library-constraints"
   name       = "gatekeeper-library-constraints"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.7.0"
+  version    = "v0.7.1"
   values     = [local.values]
 }

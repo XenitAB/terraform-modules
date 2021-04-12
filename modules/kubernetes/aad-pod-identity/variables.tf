@@ -1,3 +1,9 @@
+variable "prometheus_enabled" {
+  description = "Should a ServiceMonitor be created"
+  type        = bool
+  default     = false
+}
+
 variable "aad_pod_identity" {
   description = "Configuration for aad pod identity"
   type = map(object({

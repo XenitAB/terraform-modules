@@ -1,6 +1,11 @@
 forceNameSpaced: true
+
+mic:
+  prometheusPort: 8888
+
 nmi:
   allowNetworkPluginKubenet: true
+  prometheusPort: 9090
 
 azureIdentities:
 %{ for namespace in namespaces ~}

@@ -16,7 +16,8 @@ terraform {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "kyverno"
+      name                = "kyverno"
+      "xkf.xenit.io/kind" = "platform"
     }
     name = "kyverno"
   }

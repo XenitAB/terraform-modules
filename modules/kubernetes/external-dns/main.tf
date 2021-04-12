@@ -21,18 +21,20 @@ terraform {
 
 locals {
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider     = var.dns_provider,
-    sources      = var.sources,
-    azure_config = var.azure_config,
-    aws_config   = var.aws_config,
-    txt_owner_id = var.txt_owner_id,
+    provider           = var.dns_provider,
+    sources            = var.sources,
+    azure_config       = var.azure_config,
+    aws_config         = var.aws_config,
+    txt_owner_id       = var.txt_owner_id,
+    prometheus_enabled = var.prometheus_enabled
   })
 }
 
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "external-dns"
+      name                = "external-dns"
+      "xkf.xenit.io/kind" = "platform"
     }
     name = "external-dns"
   }

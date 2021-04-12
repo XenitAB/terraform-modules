@@ -26,6 +26,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [helm_release.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/helm/2.1.0/docs/resources/release) | resource |
+| [helm_release.aad_pod_identity_extras](https://registry.terraform.io/providers/hashicorp/helm/2.1.0/docs/resources/release) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/namespace) | resource |
 
 ## Inputs
@@ -34,6 +35,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_aad_pod_identity"></a> [aad\_pod\_identity](#input\_aad\_pod\_identity) | Configuration for aad pod identity | <pre>map(object({<br>    id        = string<br>    client_id = string<br>  }))</pre> | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | Namespaces to create AzureIdentity and AzureIdentityBindings in. | <pre>list(<br>    object({<br>      name = string<br>    })<br>  )</pre> | n/a | yes |
+| <a name="input_prometheus_enabled"></a> [prometheus\_enabled](#input\_prometheus\_enabled) | Should a ServiceMonitor be created | `bool` | `false` | no |
 
 ## Outputs
 

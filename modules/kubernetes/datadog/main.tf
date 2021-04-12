@@ -31,7 +31,8 @@ locals {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "datadog"
+      name                = "datadog"
+      "xkf.xenit.io/kind" = "platform"
     }
     name = "datadog"
   }

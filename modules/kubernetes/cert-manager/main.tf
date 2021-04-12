@@ -26,7 +26,8 @@ locals {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = local.namespace
+      name                = local.namespace
+      "xkf.xenit.io/kind" = "platform"
     }
     name = local.namespace
   }
@@ -38,7 +39,11 @@ resource "helm_release" "cert_manager" {
   name       = "cert-manager"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v1.3.0"
-  values     = [templatefile("${path.module}/templates/values.yaml.tpl", { provider = var.cloud_provider, aws_config = var.aws_config })]
+  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
+    provider           = var.cloud_provider,
+    aws_config         = var.aws_config,
+    prometheus_enabled = var.prometheus_enabled,
+  })]
 }
 
 resource "helm_release" "cert_manager_extras" {

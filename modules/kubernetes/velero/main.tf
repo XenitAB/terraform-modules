@@ -19,18 +19,11 @@ terraform {
   }
 }
 
-locals {
-  values = templatefile("${path.module}/templates/values.yaml.tpl", {
-    cloud_provider = var.cloud_provider,
-    azure_config   = var.azure_config
-    aws_config     = var.aws_config
-  })
-}
-
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name = "velero"
+      name                = "velero"
+      "xkf.xenit.io/kind" = "platform"
     }
     name = "velero"
   }
@@ -42,7 +35,12 @@ resource "helm_release" "velero" {
   name       = "velero"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "2.16.0"
-  values     = [local.values]
+  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
+    cloud_provider     = var.cloud_provider,
+    azure_config       = var.azure_config,
+    aws_config         = var.aws_config,
+    prometheus_enabled = var.prometheus_enabled
+  })]
 }
 
 resource "helm_release" "velero_extras" {

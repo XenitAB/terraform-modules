@@ -1,0 +1,17 @@
+{{- if .Values.prometheusEnabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: aad-pod-identity-nmi
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: aad-pod-identity
+      app.kubernetes.io/name: aad-pod-identity
+      app.kubernetes.io/component: nmi
+  podMetricsEndpoints:
+    - path: /metrics
+      port: metrics
+{{- end }}

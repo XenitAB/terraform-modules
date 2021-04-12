@@ -38,7 +38,7 @@ resource "helm_release" "ingress_healthz" {
   chart      = "nginx"
   name       = "ingress-healthz"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "1.19.9"
+  version    = "8.8.1"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     environment = var.environment
     dns_zone    = var.dns_zone

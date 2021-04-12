@@ -23,3 +23,12 @@ ingress:
 pdb:
   create: true
   minAvailable: 1
+
+serverBlock: |-
+  server {
+    listen 0.0.0.0:8080;
+    root /app;
+    location / {
+      index index.html index.php;
+    }
+  }

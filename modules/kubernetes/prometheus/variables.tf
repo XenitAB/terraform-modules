@@ -1,9 +1,3 @@
-variable "alertmanager_enabled" {
-  description = "If prometheus alertmanager should be enabled or not"
-  type        = bool
-  default     = false
-}
-
 variable "remote_write_enabled" {
   description = "If remote write should be enabled or not"
   type        = bool

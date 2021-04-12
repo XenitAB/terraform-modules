@@ -74,7 +74,6 @@ module "aks_core" {
 
   prometheus_enabled = true
   prometheus_config = {
-    alertmanager_enabled   = true
     remote_write_enabled   = true
     remote_write_url       = "https://my-receiver.com"
     remote_tls_secret_name = "client-certificate-customer1"

@@ -321,7 +321,6 @@ variable "prometheus_enabled" {
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
-    alertmanager_enabled   = bool
     remote_write_enabled   = bool
     remote_write_url       = string
     remote_tls_secret_name = string

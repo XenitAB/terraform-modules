@@ -313,8 +313,6 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
-  alertmanager_enabled = var.prometheus_config.alertmanager_enabled
-
   remote_write_enabled   = var.prometheus_config.remote_write_enabled
   remote_write_url       = var.prometheus_config.remote_write_url
   remote_tls_secret_name = var.prometheus_config.remote_tls_secret_name #tfsec:ignore:GEN003 ,it's a secret name not a secret

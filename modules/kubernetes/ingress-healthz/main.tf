@@ -34,11 +34,11 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "ingress_healthz" {
-  repository = "https://xenitab.github.io/ingress-healthz"
-  chart      = "ingress-healthz"
+  repository = "https://charts.bitnami.com/bitnami"
+  chart      = "nginx"
   name       = "ingress-healthz"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v1.1.0"
+  version    = "1.19.9"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     environment = var.environment
     dns_zone    = var.dns_zone

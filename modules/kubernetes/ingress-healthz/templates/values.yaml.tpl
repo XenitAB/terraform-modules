@@ -1,36 +1,25 @@
 replicaCount: 2
 
-application:
-  environment: ${environment}
+resources:
+  equests:
+     cpu: 50m
+     memory: 64Mi
+  limits:
+    memory: 128Mi
 
-affinity:
-  podAntiAffinity:
-    preferredDuringSchedulingIgnoredDuringExecution:
-      - podAffinityTerm:
-          labelSelector:
-            matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                  - ingress-healthz
-          topologyKey: kubernetes.io/hostname
-        weight: 100
-      - podAffinityTerm:
-          labelSelector:
-            matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                  - ingress-healthz
-          topologyKey: topology.kubernetes.io/zone
-        weight: 100
+service:
+  type: ClusterIP
 
 ingress:
+  enabled: true
+  hostname: ingress-healthz.${dns_zone}
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-  hosts:
-    - host: ingress-healthz.${dns_zone}
-  tls:
-    - secretName: ingress-healthz-cert
-      hosts:
+  extraTls:
+    - hosts:
         - ingress-healthz.${dns_zone}
+      secretName: ingress-healthz-cert
+
+pdb:
+  create: true
+  minAvailable: 1

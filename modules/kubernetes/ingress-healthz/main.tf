@@ -18,7 +18,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.0.3"
+      version = "2.1.0"
     }
   }
 }
@@ -40,5 +40,6 @@ resource "helm_release" "ingress_healthz" {
   version    = "v1.0.6"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     environment = var.environment
+    dns_zone    = var.dns_zone
   })]
 }

@@ -336,4 +336,5 @@ module "ingress_healthz" {
   source = "../../kubernetes/ingress-healthz"
 
   environment = var.environment
+  dns_zone    = var.cert_manager_config.dns_zone
 }

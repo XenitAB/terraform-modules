@@ -27,8 +27,18 @@ pdb:
 serverBlock: |-
   server {
     listen 0.0.0.0:8080;
-    root /app;
+
     location / {
-      index index.html index.php;
+      ssi on;
+      return 200 'hello world';
     }
   }
+
+extraVolumes:
+  - emptyDir: {}
+    name: temp
+
+extraVolumeMounts:
+  - mountPath: /opt/bitnami/nginx/tmp/
+    name: temp
+

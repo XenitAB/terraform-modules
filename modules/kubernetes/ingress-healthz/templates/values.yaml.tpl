@@ -1,7 +1,7 @@
 replicaCount: 2
 
 resources:
-  equests:
+  requests:
      cpu: 50m
      memory: 64Mi
   limits:

@@ -27,6 +27,7 @@ resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
       name = "ingress-healthz"
+      "xkf.xenit.io/kind" = "platform"
     }
     name = "ingress-healthz"
   }

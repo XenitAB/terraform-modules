@@ -27,10 +27,13 @@ pdb:
 serverBlock: |-
   server {
     listen 0.0.0.0:8080;
+    root /app;
 
     location / {
       ssi on;
-      return 200 'hello world';
+      ssi_types *;
+      add_header Content-Type application/json;
+      return 200 '{"status": "pass", "environment": "${environment}", "date": "<!--# config timefmt="%c" --><!--#echo var="date_local"-->"}';
     }
   }
 

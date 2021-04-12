@@ -95,9 +95,10 @@ resource "helm_release" "azdo_proxy" {
 
 # Monitoring
 resource "helm_release" "flux_v2_extras" {
-  chart     = "${path.module}/charts/flux-v2-extras"
-  name      = "flux-v2-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
+  chart                      = "${path.module}/charts/flux-v2-extras"
+  name                       = "flux-v2-extras"
+  namespace                  = kubernetes_namespace.this.metadata[0].name
+  disable_openapi_validation = true
 
   set {
     name  = "prometheusEnabled"

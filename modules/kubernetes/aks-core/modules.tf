@@ -56,7 +56,6 @@ module "fluxcd_v1_azure_devops" {
 
 # FluxCD v2
 module "fluxcd_v2_azure_devops" {
-  depends_on = [module.prometheus]
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s

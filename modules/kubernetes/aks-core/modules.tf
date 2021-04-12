@@ -56,6 +56,7 @@ module "fluxcd_v1_azure_devops" {
 
 # FluxCD v2
 module "fluxcd_v2_azure_devops" {
+  depends_on = [module.prometheus]
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s
@@ -103,7 +104,7 @@ module "fluxcd_v2_github" {
 
 # AAD-Pod-Identity
 module "aad_pod_identity" {
-  depends_on = [kubernetes_namespace.tenant, module.opa_gatekeeper]
+  depends_on = [kubernetes_namespace.tenant, module.opa_gatekeeper, module.prometheus]
 
   for_each = {
     for s in ["aad-pod-identity"] :
@@ -122,7 +123,7 @@ module "aad_pod_identity" {
 
 # Ingress Nginx
 module "ingress_nginx" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.prometheus]
 
   for_each = {
     for s in ["ingress-nginx"] :
@@ -138,7 +139,7 @@ module "ingress_nginx" {
 
 # External DNS
 module "external_dns" {
-  depends_on = [module.opa_gatekeeper, module.aad_pod_identity]
+  depends_on = [module.opa_gatekeeper, module.aad_pod_identity, module.prometheus]
 
   for_each = {
     for s in ["external-dns"] :
@@ -162,7 +163,7 @@ module "external_dns" {
 
 # Cert Manager
 module "cert_manager" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.prometheus]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -186,7 +187,7 @@ module "cert_manager" {
 
 # Velero
 module "velero" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.prometheus]
 
   for_each = {
     for s in ["velero"] :
@@ -210,7 +211,7 @@ module "velero" {
 
 # csi-secrets-store-provider-azure
 module "csi_secrets_store_provider_azure" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.prometheus]
 
   for_each = {
     for s in ["csi-secrets-store-provider-azure"] :
@@ -260,7 +261,7 @@ module "falco" {
 
 # Reloader
 module "reloader" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.prometheus]
 
   for_each = {
     for s in ["reloader"] :

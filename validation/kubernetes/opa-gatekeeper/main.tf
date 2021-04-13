@@ -9,7 +9,7 @@ module "opa_gatekeeper" {
     helm = helm
   }
 
-  additional_excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero"]
+  excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero"]
 
   additional_constraints = [
     {

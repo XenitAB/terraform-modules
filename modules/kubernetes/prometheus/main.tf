@@ -45,6 +45,7 @@ resource "helm_release" "prometheus" {
 
 resource "helm_release" "prometheus_extras" {
   depends_on = [helm_release.prometheus]
+
   chart      = "${path.module}/charts/prometheus-extras"
   name       = "prometheus-extras"
   namespace  = kubernetes_namespace.this.metadata[0].name

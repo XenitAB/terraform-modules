@@ -50,9 +50,9 @@ resource "helm_release" "external_dns" {
 resource "helm_release" "external_dns_extras" {
   depends_on = [helm_release.external_dns]
 
-  chart     = "${path.module}/charts/external-dns-extras"
-  name      = "external-dns-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
+  chart                      = "${path.module}/charts/external-dns-extras"
+  name                       = "external-dns-extras"
+  namespace                  = kubernetes_namespace.this.metadata[0].name
   disable_openapi_validation = true
 
   set {
@@ -63,10 +63,5 @@ resource "helm_release" "external_dns_extras" {
   set {
     name  = "clientID"
     value = var.azure_config.client_id
-  }
-
-  set {
-    name  = "prometheusEnabled"
-    value = var.prometheus_enabled
   }
 }

@@ -39,17 +39,3 @@ resource "helm_release" "ingress_nginx" {
     http_snippet = var.http_snippet,
   })]
 }
-
-resource "helm_release" "ingress_nginx_extras" {
-  depends_on = [helm_release.ingress_nginx]
-
-  chart     = "${path.module}/charts/ingress-nginx-extras"
-  name      = "ingress-nginx-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
-  disable_openapi_validation = true
-
-  set {
-    name  = "prometheusEnabled"
-    value = var.prometheus_enabled
-  }
-}

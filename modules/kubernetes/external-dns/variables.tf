@@ -1,9 +1,3 @@
-variable "prometheus_enabled" {
-  description = "Should a ServiceMonitor be created"
-  type        = bool
-  default     = false
-}
-
 variable "dns_provider" {
   description = "DNS provider to use."
   type        = string

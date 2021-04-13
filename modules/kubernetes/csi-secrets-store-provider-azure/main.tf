@@ -56,17 +56,3 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
     value = "Exists"
   }
 }
-
-resource "helm_release" "csi_secrets_store_provider_azure_extras" {
-  depends_on = [helm_release.csi_secrets_store_provider_azure]
-
-  chart     = "${path.module}/charts/csi-secrets-store-provider-azure-extras"
-  name      = "csi-secrets-store-provider-azure-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
-  disable_openapi_validation = true
-
-  set {
-    name  = "prometheusEnabled"
-    value = var.prometheus_enabled
-  }
-}

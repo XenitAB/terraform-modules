@@ -48,9 +48,9 @@ resource "helm_release" "cert_manager" {
 resource "helm_release" "cert_manager_extras" {
   depends_on = [helm_release.cert_manager]
 
-  chart     = "${path.module}/charts/cert-manager-extras"
-  name      = "cert-manager-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
+  chart                      = "${path.module}/charts/cert-manager-extras"
+  name                       = "cert-manager-extras"
+  namespace                  = kubernetes_namespace.this.metadata[0].name
   disable_openapi_validation = true
 
   set {
@@ -101,10 +101,5 @@ resource "helm_release" "cert_manager_extras" {
   set {
     name  = "awsConfig.hostedZoneID"
     value = var.aws_config.hosted_zone_id
-  }
-
-  set {
-    name  = "prometheusEnabled"
-    value = var.prometheus_enabled
   }
 }

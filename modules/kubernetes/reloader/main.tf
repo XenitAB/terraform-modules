@@ -36,7 +36,4 @@ resource "helm_release" "reloader" {
   name       = "reloader"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v0.0.87"
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    prometheus_enabled = var.prometheus_enabled
-  })]
 }

@@ -15,5 +15,3 @@ azureConfig:
 awsConfig:
   region: ""
   hostedZoneID: ""
-
-prometheusEnabled: false

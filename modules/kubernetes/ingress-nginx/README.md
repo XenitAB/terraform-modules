@@ -26,7 +26,6 @@ No modules.
 | Name | Type |
 |------|------|
 | [helm_release.ingress_nginx](https://registry.terraform.io/providers/hashicorp/helm/2.1.0/docs/resources/release) | resource |
-| [helm_release.ingress_nginx_extras](https://registry.terraform.io/providers/hashicorp/helm/2.1.0/docs/resources/release) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/namespace) | resource |
 
 ## Inputs
@@ -34,7 +33,6 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_http_snippet"></a> [http\_snippet](#input\_http\_snippet) | Configure helm ingress http-snippet | `string` | `""` | no |
-| <a name="input_prometheus_enabled"></a> [prometheus\_enabled](#input\_prometheus\_enabled) | Should a ServiceMonitor be created | `bool` | `false` | no |
 
 ## Outputs
 

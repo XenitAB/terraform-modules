@@ -37,6 +37,18 @@ resource "helm_release" "ingress_nginx" {
   version    = "3.29.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet       = var.http_snippet,
-    prometheus_enabled = var.prometheus_enabled,
   })]
+}
+
+resource "helm_release" "ingress_nginx_extras" {
+  depends_on = [helm_release.ingress_nginx]
+
+  chart     = "${path.module}/charts/ingress-nginx-extras"
+  name      = "ingress-nginx-extras"
+  namespace = kubernetes_namespace.this.metadata[0].name
+
+  set {
+    name = "prometheusEnabled"
+    value = var.prometheus_enabled
+  }
 }

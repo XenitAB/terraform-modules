@@ -42,7 +42,6 @@ resource "helm_release" "cert_manager" {
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     provider           = var.cloud_provider,
     aws_config         = var.aws_config,
-    prometheus_enabled = var.prometheus_enabled,
   })]
 }
 
@@ -101,5 +100,10 @@ resource "helm_release" "cert_manager_extras" {
   set {
     name  = "awsConfig.hostedZoneID"
     value = var.aws_config.hosted_zone_id
+  }
+
+  set {
+    name = "prometheusEnabled"
+    value = var.prometheus_enabled
   }
 }

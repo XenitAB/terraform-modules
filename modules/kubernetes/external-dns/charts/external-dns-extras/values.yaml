@@ -3,3 +3,5 @@ fullnameOverride: ""
 
 resourceID: ""
 clientID: ""
+
+prometheusEnabled: false

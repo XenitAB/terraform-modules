@@ -1,6 +1,6 @@
 # Xenit Platform Configuration
 
-This module is used to add Xenit Kubernetes Framework xenit configuration to Kubernetes clusters.
+This module is used to add Xenit Kubernetes Framework configuration to Kubernetes clusters.
 
 ## Requirements
 

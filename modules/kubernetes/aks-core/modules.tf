@@ -312,6 +312,7 @@ module "prometheus" {
   volume_claim_size               = var.prometheus_config.volume_claim_size
 }
 
+# ingress-healthz
 module "ingress_healthz" {
   depends_on = [module.opa_gatekeeper]
 

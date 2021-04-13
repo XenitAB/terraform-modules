@@ -26,10 +26,3 @@ serviceAccount:
 policy: sync # will also delete the record
 registry: "txt"
 txtOwnerId: "${txt_owner_id}"
-
-metrics:
-  enabled: true
-  serviceMonitor:
-    enabled: ${prometheus_enabled}
-    selector:
-      xkf.xenit.io/monitoring: platform

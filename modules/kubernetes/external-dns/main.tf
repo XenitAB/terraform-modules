@@ -20,14 +20,6 @@ terraform {
 }
 
 locals {
-  values = templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider           = var.dns_provider,
-    sources            = var.sources,
-    azure_config       = var.azure_config,
-    aws_config         = var.aws_config,
-    txt_owner_id       = var.txt_owner_id,
-    prometheus_enabled = var.prometheus_enabled
-  })
 }
 
 resource "kubernetes_namespace" "this" {
@@ -46,7 +38,13 @@ resource "helm_release" "external_dns" {
   name       = "external-dns"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "4.10.0"
-  values     = [local.values]
+  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
+    provider     = var.dns_provider,
+    sources      = var.sources,
+    azure_config = var.azure_config,
+    aws_config   = var.aws_config,
+    txt_owner_id = var.txt_owner_id,
+  })]
 }
 
 resource "helm_release" "external_dns_extras" {

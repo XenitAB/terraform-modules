@@ -1,14 +1,3 @@
-metrics:
-  enabled: ${prometheus_enabled}
-  podAnnotations: {}
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "8085"
-    prometheus.io/path: "/metrics"
-  serviceMonitor:
-    enabled: ${prometheus_enabled}
-    additionalLabels:
-      xkf.xenit.io/monitoring: platform
-
 %{ if cloud_provider == "azure" }
 configuration:
   provider: "azure"

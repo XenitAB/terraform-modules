@@ -43,6 +43,7 @@ This module is used to create AKS clusters.
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../../kubernetes/prometheus |  |
 | <a name="module_reloader"></a> [reloader](#module\_reloader) | ../../kubernetes/reloader |  |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../../kubernetes/velero |  |
+| <a name="module_xenit"></a> [xenit](#module\_xenit) | ../../kubernetes/xenit |  |
 
 ## Resources
 
@@ -109,6 +110,9 @@ This module is used to create AKS clusters.
 | <a name="input_reloader_enabled"></a> [reloader\_enabled](#input\_reloader\_enabled) | Should Reloader be enabled | `bool` | `true` | no |
 | <a name="input_velero_config"></a> [velero\_config](#input\_velero\_config) | Velero configuration | <pre>object({<br>    azure_storage_account_name      = string<br>    azure_storage_account_container = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_velero_enabled"></a> [velero\_enabled](#input\_velero\_enabled) | Should Velero be enabled | `bool` | `false` | no |
+| <a name="input_xenit_config"></a> [xenit\_config](#input\_xenit\_config) | Xenit Platform configuration | <pre>object({<br>    azure_key_vault_name = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>      tenant_id   = string<br>    })<br>  })</pre> | <pre>{<br>  "azure_key_vault_name": "",<br>  "identity": {<br>    "client_id": "",<br>    "resource_id": "",<br>    "tenant_id": ""<br>  }<br>}</pre> | no |
+| <a name="input_xenit_enabled"></a> [xenit\_enabled](#input\_xenit\_enabled) | Should Platform be enabled | `bool` | `false` | no |
+| <a name="input_xenit_fqdn"></a> [xenit\_fqdn](#input\_xenit\_fqdn) | Platform FQDNs | <pre>object({<br>    thanos_receiver = string<br>    loki_api        = string<br>  })</pre> | <pre>{<br>  "loki_api": "",<br>  "thanos_receiver": ""<br>}</pre> | no |
 
 ## Outputs
 

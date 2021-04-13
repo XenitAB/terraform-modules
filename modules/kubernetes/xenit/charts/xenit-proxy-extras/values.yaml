@@ -1,0 +1,8 @@
+nameOverride: ""
+fullnameOverride: ""
+
+resourceID: ""
+clientID: ""
+tenantID: ""
+keyVaultName: ""
+keyVaultSecretName: "xenit-proxy-certificate"

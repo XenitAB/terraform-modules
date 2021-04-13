@@ -326,3 +326,19 @@ module "ingress_healthz" {
   environment = var.environment
   dns_zone    = var.cert_manager_config.dns_zone
 }
+
+# xenit
+module "xenit" {
+  for_each = {
+    for s in ["xenit"] :
+    s => s
+    if var.xenit_enabled
+  }
+
+  source = "../../kubernetes/xenit"
+
+  xenit_config = var.xenit_config
+
+  thanos_receiver_fqdn = var.xenit_fqdn.thanos_receiver
+  loki_api_fqdn        = var.xenit_fqdn.loki_api
+}

@@ -68,8 +68,14 @@ No modules.
 | [azuread_group.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
 | [azuread_group.resource_group_owner](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
 | [azuread_group.resource_group_reader](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
+<<<<<<< HEAD
 | [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/data-sources/key_vault) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/data-sources/resource_group) | data source |
+=======
+| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.53.0/docs/data-sources/client_config) | data source |
+| [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/2.53.0/docs/data-sources/key_vault) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.53.0/docs/data-sources/resource_group) | data source |
+>>>>>>> 239af2e (Add Xenit Platform config)
 
 ## Inputs
 
@@ -82,6 +88,7 @@ No modules.
 | <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | The DNS Zone to create | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_group_name_separator"></a> [group\_name\_separator](#input\_group\_name\_separator) | Separator for group names | `string` | `"-"` | no |
+| <a name="input_key_vault_purge_protection_enabled"></a> [key\_vault\_purge\_protection\_enabled](#input\_key\_vault\_purge\_protection\_enabled) | If true purge protection will be enabled to Azure Key Vaults | `bool` | `false` | no |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name. | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The name to use for the deploy | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name                    = string<br>      delegate_resource_group = bool<br>    })<br>  )</pre> | n/a | yes |
@@ -105,3 +112,4 @@ No modules.
 | <a name="output_namespaces"></a> [namespaces](#output\_namespaces) | Kubernetes namespaces |
 | <a name="output_ssh_public_key"></a> [ssh\_public\_key](#output\_ssh\_public\_key) | SSH public key to add to servers |
 | <a name="output_velero"></a> [velero](#output\_velero) | Velero configuration |
+| <a name="output_xenit"></a> [xenit](#output\_xenit) | Xenit Platform configuration |

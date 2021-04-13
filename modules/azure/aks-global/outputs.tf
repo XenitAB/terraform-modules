@@ -69,3 +69,15 @@ output "velero" {
     }
   }
 }
+
+output "xenit" {
+  description = "Xenit Platform configuration"
+  value = {
+    azure_key_vault_name = data.azurerm_key_vault.core.name
+    identity = {
+      client_id   = azurerm_user_assigned_identity.xenit.client_id
+      resource_id = azurerm_user_assigned_identity.xenit.id
+      tenant_id   = data.azurerm_client_config.current.tenant_id
+    }
+  }
+}

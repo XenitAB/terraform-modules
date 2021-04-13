@@ -160,7 +160,7 @@ variable "opa_gatekeeper_enabled" {
 variable "opa_gatekeeper_config" {
   description = "Configuration for OPA Gatekeeper"
   type = object({
-    excluded_namespaces        = list(string)
+    additional_excluded_namespaces        = list(string)
     enable_default_constraints = bool
     additional_constraints = list(object({
       excluded_namespaces = list(string)
@@ -172,7 +172,7 @@ variable "opa_gatekeeper_config" {
     }))
   })
   default = {
-    excluded_namespaces        = []
+    additional_excluded_namespaces        = []
     enable_default_constraints = true
     additional_constraints     = []
     enable_default_assigns     = true

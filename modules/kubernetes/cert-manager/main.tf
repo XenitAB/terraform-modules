@@ -40,8 +40,8 @@ resource "helm_release" "cert_manager" {
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v1.3.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider           = var.cloud_provider,
-    aws_config         = var.aws_config,
+    provider   = var.cloud_provider,
+    aws_config = var.aws_config,
   })]
 }
 
@@ -103,7 +103,7 @@ resource "helm_release" "cert_manager_extras" {
   }
 
   set {
-    name = "prometheusEnabled"
+    name  = "prometheusEnabled"
     value = var.prometheus_enabled
   }
 }

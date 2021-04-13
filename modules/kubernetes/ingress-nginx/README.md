@@ -26,6 +26,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [helm_release.ingress_nginx](https://registry.terraform.io/providers/hashicorp/helm/2.1.0/docs/resources/release) | resource |
+| [helm_release.ingress_nginx_extras](https://registry.terraform.io/providers/hashicorp/helm/2.1.0/docs/resources/release) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.0.3/docs/resources/namespace) | resource |
 
 ## Inputs

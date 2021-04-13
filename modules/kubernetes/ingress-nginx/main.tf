@@ -36,7 +36,7 @@ resource "helm_release" "ingress_nginx" {
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "3.29.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    http_snippet       = var.http_snippet,
+    http_snippet = var.http_snippet,
   })]
 }
 
@@ -48,7 +48,7 @@ resource "helm_release" "ingress_nginx_extras" {
   namespace = kubernetes_namespace.this.metadata[0].name
 
   set {
-    name = "prometheusEnabled"
+    name  = "prometheusEnabled"
     value = var.prometheus_enabled
   }
 }

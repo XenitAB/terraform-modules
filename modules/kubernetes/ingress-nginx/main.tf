@@ -46,6 +46,7 @@ resource "helm_release" "ingress_nginx_extras" {
   chart     = "${path.module}/charts/ingress-nginx-extras"
   name      = "ingress-nginx-extras"
   namespace = kubernetes_namespace.this.metadata[0].name
+  disable_openapi_validation = true
 
   set {
     name  = "prometheusEnabled"

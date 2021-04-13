@@ -48,6 +48,7 @@ resource "helm_release" "aad_pod_identity_extras" {
   chart     = "${path.module}/charts/aad-pod-identity-extras"
   name      = "aad-pod-identity-extras"
   namespace = kubernetes_namespace.this.metadata[0].name
+  disable_openapi_validation = true
 
   set {
     name  = "prometheusEnabled"

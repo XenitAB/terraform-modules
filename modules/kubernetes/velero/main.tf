@@ -45,10 +45,9 @@ resource "helm_release" "velero" {
 resource "helm_release" "velero_extras" {
   depends_on = [helm_release.velero]
 
-  chart                      = "${path.module}/charts/velero-extras"
-  name                       = "velero-extras"
-  namespace                  = kubernetes_namespace.this.metadata[0].name
-  disable_openapi_validation = true
+  chart     = "${path.module}/charts/velero-extras"
+  name      = "velero-extras"
+  namespace = kubernetes_namespace.this.metadata[0].name
 
   set {
     name  = "resourceID"

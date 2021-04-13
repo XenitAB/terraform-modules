@@ -50,10 +50,9 @@ resource "helm_release" "external_dns" {
 resource "helm_release" "external_dns_extras" {
   depends_on = [helm_release.external_dns]
 
-  chart                      = "${path.module}/charts/external-dns-extras"
-  name                       = "external-dns-extras"
-  namespace                  = kubernetes_namespace.this.metadata[0].name
-  disable_openapi_validation = true
+  chart     = "${path.module}/charts/external-dns-extras"
+  name      = "external-dns-extras"
+  namespace = kubernetes_namespace.this.metadata[0].name
 
   set {
     name  = "resourceID"

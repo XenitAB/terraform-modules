@@ -46,7 +46,7 @@ resource "helm_release" "falco" {
   chart      = "falco"
   name       = "falco"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "1.8.1"
+  version    = "1.9.0"
   values     = [local.falco_values]
 }
 

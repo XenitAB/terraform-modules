@@ -2,6 +2,12 @@
 
 This module is used to add Xenit Kubernetes Framework configuration to Kubernetes clusters.
 
+You need to configure a certificate in Azure KeyVault
+```shell
+openssl pkcs12 -export -in tenant-xenit-proxy.crt -inkey tenant-xenit-proxy.key -out tenant-xenit-proxy.pfx
+az keyvault certificate import --vault-name <aks keyvault name> -n xenit-proxy-certificate -f tenant-xenit-proxy.pfx
+```
+
 ## Requirements
 
 | Name | Version |

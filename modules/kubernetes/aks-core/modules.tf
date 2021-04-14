@@ -303,9 +303,8 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
-  remote_write_enabled   = var.prometheus_config.remote_write_enabled
-  remote_write_url       = var.prometheus_config.remote_write_url
-  remote_tls_secret_name = var.prometheus_config.remote_tls_secret_name #tfsec:ignore:GEN003 ,it's a secret name not a secret
+  remote_write_enabled = var.prometheus_config.remote_write_enabled
+  remote_write_url     = var.prometheus_config.remote_write_url
 
   volume_claim_enabled            = var.prometheus_config.volume_claim_enabled
   volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name

@@ -9,12 +9,6 @@ variable "remote_write_url" {
   type        = string
 }
 
-variable "remote_tls_secret_name" {
-  description = "The secret name of tls for remote write"
-  type        = string
-  default     = "client-certificate" #tfsec:ignore:GEN001
-}
-
 variable "volume_claim_enabled" {
   description = "If prometheus should store data localy"
   type        = bool

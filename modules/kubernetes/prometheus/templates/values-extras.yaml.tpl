@@ -18,4 +18,3 @@ resources:
     cpu: "20m"
   limits:
     memory: "500Mi"
-    cpu: "100m"

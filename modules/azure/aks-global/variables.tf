@@ -84,9 +84,3 @@ variable "aks_group_name_prefix" {
   type        = string
   default     = "aks"
 }
-
-variable "key_vault_purge_protection_enabled" {
-  description = "If true purge protection will be enabled to Azure Key Vaults"
-  type        = bool
-  default     = false
-}

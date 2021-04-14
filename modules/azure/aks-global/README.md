@@ -44,6 +44,7 @@ No modules.
 | [azuread_service_principal.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/service_principal) | resource |
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/container_registry) | resource |
 | [azurerm_dns_zone.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/dns_zone) | resource |
+| [azurerm_key_vault_access_policy.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_public_ip_prefix.aks](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/public_ip_prefix) | resource |
 | [azurerm_role_assignment.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/role_assignment) | resource |
@@ -56,11 +57,13 @@ No modules.
 | [azurerm_role_assignment.external_storage_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.velero_msi](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.velero_rg_read](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/role_assignment) | resource |
 | [azurerm_storage_account.velero](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/storage_account) | resource |
 | [azurerm_storage_container.velero](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/storage_container) | resource |
 | [azurerm_user_assigned_identity.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.external_dns](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.velero](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/user_assigned_identity) | resource |
+| [azurerm_user_assigned_identity.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/resources/user_assigned_identity) | resource |
 | [random_password.helm_operator](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) | resource |
 | [tls_private_key.ssh_key](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/resources/private_key) | resource |
 | [azuread_group.acr_pull](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
@@ -68,6 +71,7 @@ No modules.
 | [azuread_group.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
 | [azuread_group.resource_group_owner](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
 | [azuread_group.resource_group_reader](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
+| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/data-sources/client_config) | data source |
 | [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/data-sources/key_vault) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.55.0/docs/data-sources/resource_group) | data source |
 
@@ -105,3 +109,4 @@ No modules.
 | <a name="output_namespaces"></a> [namespaces](#output\_namespaces) | Kubernetes namespaces |
 | <a name="output_ssh_public_key"></a> [ssh\_public\_key](#output\_ssh\_public\_key) | SSH public key to add to servers |
 | <a name="output_velero"></a> [velero](#output\_velero) | Velero configuration |
+| <a name="output_xenit"></a> [xenit](#output\_xenit) | Xenit Platform configuration |

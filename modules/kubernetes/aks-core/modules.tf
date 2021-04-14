@@ -303,15 +303,15 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
-  remote_write_enabled   = var.prometheus_config.remote_write_enabled
-  remote_write_url       = var.prometheus_config.remote_write_url
-  remote_tls_secret_name = var.prometheus_config.remote_tls_secret_name #tfsec:ignore:GEN003 ,it's a secret name not a secret
+  remote_write_enabled = var.prometheus_config.remote_write_enabled
+  remote_write_url     = var.prometheus_config.remote_write_url
 
   volume_claim_enabled            = var.prometheus_config.volume_claim_enabled
   volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 }
 
+# ingress-healthz
 module "ingress_healthz" {
   depends_on = [module.opa_gatekeeper]
 
@@ -325,4 +325,20 @@ module "ingress_healthz" {
 
   environment = var.environment
   dns_zone    = var.cert_manager_config.dns_zone
+}
+
+# xenit
+module "xenit" {
+  for_each = {
+    for s in ["xenit"] :
+    s => s
+    if var.xenit_enabled
+  }
+
+  source = "../../kubernetes/xenit"
+
+  xenit_config = var.xenit_config
+
+  thanos_receiver_fqdn = var.xenit_fqdn.thanos_receiver
+  loki_api_fqdn        = var.xenit_fqdn.loki_api
 }

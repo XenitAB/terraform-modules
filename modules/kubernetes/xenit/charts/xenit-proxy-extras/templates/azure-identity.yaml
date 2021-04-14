@@ -1,0 +1,16 @@
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentity
+metadata:
+  name: xenit-proxy
+spec:
+  type: 0
+  resourceID: {{ .Values.resourceID }}
+  clientID: {{ .Values.clientID }}
+---
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentityBinding
+metadata:
+  name: xenit-proxy
+spec:
+  azureIdentity: xenit-proxy
+  selector: xenit-proxy

@@ -25,3 +25,4 @@ This directory contains all the Kubernetes Terraform modules.
 - [`azad-kube-proxy`](azad-kube-proxy/README.md)
 - [`prometheus`](prometheus/README.md)
 - [`ingress-healthz`](ingress-healthz/README.md)
+- [`xenit`](xenit/README.md)

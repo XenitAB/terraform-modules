@@ -329,9 +329,8 @@ variable "prometheus_enabled" {
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
-    remote_write_enabled   = bool
-    remote_write_url       = string
-    remote_tls_secret_name = string
+    remote_write_enabled = bool
+    remote_write_url     = string
 
     volume_claim_enabled            = bool
     volume_claim_storage_class_name = string
@@ -343,4 +342,42 @@ variable "ingress_healthz_enabled" {
   description = "Should ingress-healthz be enabled"
   type        = bool
   default     = true
+}
+
+variable "xenit_enabled" {
+  description = "Should Platform be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "xenit_config" {
+  description = "Xenit Platform configuration"
+  type = object({
+    azure_key_vault_name = string
+    identity = object({
+      client_id   = string
+      resource_id = string
+      tenant_id   = string
+    })
+  })
+  default = {
+    azure_key_vault_name = ""
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
+  }
+}
+
+variable "xenit_fqdn" {
+  description = "Xenit Platform FQDNs"
+  type = object({
+    thanos_receiver = string
+    loki_api        = string
+  })
+  default = {
+    thanos_receiver = ""
+    loki_api        = ""
+  }
 }

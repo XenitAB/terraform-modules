@@ -12,4 +12,35 @@ locals {
     cluster_view         = { id = azuread_group.cluster_view.id, name = azuread_group.cluster_view.name }
     aks_managed_identity = { id = azuread_group.aks_managed_identity.id, name = azuread_group.aks_managed_identity.name }
   }
+
+  key_vault_default_permissions = {
+    key_permissions = [
+      "Backup",
+      "Create",
+      "Decrypt",
+      "Delete",
+      "Encrypt",
+      "Get",
+      "Import",
+      "List",
+      "Purge",
+      "Recover",
+      "Restore",
+      "Sign",
+      "UnwrapKey",
+      "Update",
+      "Verify",
+      "WrapKey"
+    ]
+    secret_permissions = [
+      "Backup",
+      "Delete",
+      "Get",
+      "List",
+      "Purge",
+      "Recover",
+      "Restore",
+      "Set"
+    ]
+  }
 }

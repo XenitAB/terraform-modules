@@ -11,3 +11,11 @@ volumeClaim:
   enabled: ${volume_claim_enabled}
   storageClassName: ${volume_claim_storage_class_name}
   size: ${volume_claim_size}
+
+resources:
+  requests:
+    memory: "250Mi"
+    cpu: "20m"
+  limits:
+    memory: "500Mi"
+    cpu: "100m"

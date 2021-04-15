@@ -15,5 +15,5 @@ ingressClass: ${ingress_class}
 %{ if internal_load_balancer }
 service:
   annotations:
-    service.beta.kubernetes.io/${provider}-load-balancer-internal: "true"
+    "service.beta.kubernetes.io/${provider}-load-balancer-internal": "true"
 %{ endif }

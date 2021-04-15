@@ -37,5 +37,9 @@ resource "helm_release" "ingress_nginx" {
   version    = "3.29.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet = var.http_snippet,
+    name_override = var.name_override != "" ? var.name_override : null
+    provider = var.cloud_provider
+    ingress_class = join(",", compact(["nginx", var.name_override]))
+    internal_load_balancer = var.internal_load_balancer
   })]
 }

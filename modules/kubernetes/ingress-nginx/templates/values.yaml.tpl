@@ -12,8 +12,8 @@ controller:
 nameOverride: ${name_override}
 ingressClass: ${ingress_class}
 
-%{ if provider == "aws" && internal_load_balancer }
+%{ if internal_load_balancer }
 service:
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-internal
+    service.beta.kubernetes.io/${provider}-load-balancer-internal: "true"
 %{ endif }

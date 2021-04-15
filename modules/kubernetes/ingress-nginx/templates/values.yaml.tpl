@@ -8,8 +8,8 @@ controller:
   service:
     externalTrafficPolicy: Local
     %{ if internal_load_balancer }
-      annotations:
-        service.beta.kubernetes.io/${provider}-load-balancer-internal: true
+    annotations:
+      service.beta.kubernetes.io/${provider}-load-balancer-internal: true
     %{ endif }
 
   config:

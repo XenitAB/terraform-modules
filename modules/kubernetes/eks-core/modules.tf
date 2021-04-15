@@ -65,6 +65,8 @@ module "ingress_nginx" {
   }
 
   source = "../../kubernetes/ingress-nginx"
+
+  cloud_provider = "aws"
 }
 
 # External DNS

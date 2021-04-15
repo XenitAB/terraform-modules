@@ -12,5 +12,6 @@ module "ingress_nginx" {
     helm       = helm
   }
 
+  cloud_provider = "bar"
   http_snippet = "foo"
 }

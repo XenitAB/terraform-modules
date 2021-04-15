@@ -130,7 +130,8 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  http_snippet = var.ingress_config.http_snippet
+  cloud_provider = "azure"
+  http_snippet   = var.ingress_config.http_snippet
 }
 
 # External DNS

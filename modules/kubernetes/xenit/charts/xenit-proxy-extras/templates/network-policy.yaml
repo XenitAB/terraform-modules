@@ -1,0 +1,66 @@
+# deny all ingress and egress traffic from and to pods in namespace
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress: []
+  egress: []
+---
+# limit egress traffic to non private ips on all pods in the namespace
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: only-allow-internet
+spec:
+  policyTypes:
+    - Egress
+  podSelector:
+    matchLabels:
+      app: xenit-proxy
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        except:
+        - 10.0.0.0/8
+        - 192.168.0.0/16
+        - 172.16.0.0/20
+---
+# allow metrics traffic on port 80 from prometheus namespace to xenit-proxy pod
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: xenit-proxy-allow-prometheus
+spec:
+  podSelector:
+    matchLabels:
+      app: xenit-proxy
+  ingress:
+  - ports:
+    - port: 80
+    from:
+    - namespaceSelector:
+        matchLabels:
+          name: prometheus
+---
+# allow log traffic on port 80 from loki namespace to xenit-proxy pod
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: xenit-proxy-allow-loki
+spec:
+  podSelector:
+    matchLabels:
+      app: xenit-proxy
+  ingress:
+  - ports:
+    - port: 80
+    from:
+    - namespaceSelector:
+        matchLabels:
+          name: loki

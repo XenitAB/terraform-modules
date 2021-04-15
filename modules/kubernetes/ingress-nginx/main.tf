@@ -25,7 +25,7 @@ resource "kubernetes_namespace" "this" {
       name                = join("-", compact(["ingress-nginx", var.name_override]))
       "xkf.xenit.io/kind" = "platform"
     }
-    name = "ingress-nginx"
+    name = join("-", compact(["ingress-nginx", var.name_override]))
   }
 }
 

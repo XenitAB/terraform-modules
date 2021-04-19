@@ -43,6 +43,6 @@ resource "helm_release" "datadog" {
   chart      = "datadog"
   name       = "datadog"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "2.10.14"
+  version    = "2.11.0"
   values     = [local.values]
 }

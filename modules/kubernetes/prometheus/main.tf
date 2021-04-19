@@ -10,11 +10,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.0.3"
+      version = "2.1.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.1.0"
+      version = "2.1.1"
     }
   }
 }
@@ -39,7 +39,7 @@ resource "helm_release" "prometheus" {
   chart      = "kube-prometheus-stack"
   name       = "prometheus"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "14.6.2"
+  version    = "14.9.0"
   values     = [local.values_prometheus]
 }
 

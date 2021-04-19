@@ -86,11 +86,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.0.3"
+      version = "2.1.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.1.0"
+      version = "2.1.1"
     }
   }
 }
@@ -136,6 +136,6 @@ resource "helm_release" "azad_kube_proxy" {
   chart      = "azad-kube-proxy"
   name       = "azad-kube-proxy"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.0.16"
+  version    = "v0.0.18"
   values     = [local.values]
 }

@@ -10,11 +10,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.0.3"
+      version = "2.1.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.1.0"
+      version = "2.1.1"
     }
   }
 }
@@ -41,6 +41,6 @@ resource "helm_release" "external_secrets" {
   name       = "external-secrets"
   namespace  = kubernetes_namespace.this.metadata[0].name
   skip_crds  = true # let the custom resource manager install the CRDs
-  version    = "7.1.0"
+  version    = "7.2.0"
   values     = [local.values]
 }

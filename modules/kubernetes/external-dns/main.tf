@@ -10,11 +10,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.0.3"
+      version = "2.1.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.1.0"
+      version = "2.1.1"
     }
   }
 }
@@ -37,7 +37,7 @@ resource "helm_release" "external_dns" {
   chart      = "external-dns"
   name       = "external-dns"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "4.10.0"
+  version    = "4.11.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     provider     = var.dns_provider,
     sources      = var.sources,

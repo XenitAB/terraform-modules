@@ -12,7 +12,7 @@ module "xenit" {
     helm       = helm
   }
 
-  xenit_config = {
+  azure_config = {
     azure_key_vault_name = ""
     identity = {
       client_id   = ""

@@ -338,8 +338,14 @@ module "xenit" {
 
   source = "../../kubernetes/xenit"
 
-  xenit_config = var.xenit_config
-
-  thanos_receiver_fqdn = var.xenit_fqdn.thanos_receiver
-  loki_api_fqdn        = var.xenit_fqdn.loki_api
+  azure_config = {
+    azure_key_vault_name = var.xenit_config.azure_key_vault_name
+    identity = {
+      client_id   = var.xenit_config.identity.client_id
+      resource_id = var.xenit_config.identity.resource_id
+      tenant_id   = var.xenit_config.identity.tenant_id
+    }
+  }
+  thanos_receiver_fqdn = var.xenit_config.thanos_receiver
+  loki_api_fqdn        = var.xenit_config.loki_api
 }

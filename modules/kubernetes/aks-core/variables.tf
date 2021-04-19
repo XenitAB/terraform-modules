@@ -359,6 +359,8 @@ variable "xenit_config" {
       resource_id = string
       tenant_id   = string
     })
+    thanos_receiver = string
+    loki_api        = string
   })
   default = {
     azure_key_vault_name = ""
@@ -367,16 +369,6 @@ variable "xenit_config" {
       resource_id = ""
       tenant_id   = ""
     }
-  }
-}
-
-variable "xenit_fqdn" {
-  description = "Xenit Platform FQDNs"
-  type = object({
-    thanos_receiver = string
-    loki_api        = string
-  })
-  default = {
     thanos_receiver = ""
     loki_api        = ""
   }

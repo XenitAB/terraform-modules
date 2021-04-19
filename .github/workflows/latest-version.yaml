@@ -9,8 +9,8 @@ jobs:
     steps:
       - name: Setup tf-latest-version
         env:
-          TF_LATEST_VERSION_VERSION: "0.0.6"
-          TF_LATEST_VERSION_SHA: "86ef11c91bdff56a964e58ca6c5adf5cba0b49bdff29bd96ee98422950d2d070"
+          TF_LATEST_VERSION_VERSION: "0.0.7"
+          TF_LATEST_VERSION_SHA: "d81d87680881afed414d8e01a7ee6a9840445d567009b73977270f12d634abfa"
         run: |
           set -e
           wget https://github.com/XenitAB/tf-latest-version/releases/download/v${TF_LATEST_VERSION_VERSION}/tf-latest-version_${TF_LATEST_VERSION_VERSION}_linux_amd64.tar.gz

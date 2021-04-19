@@ -12,11 +12,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.0.3"
+      version = "2.1.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.1.0"
+      version = "2.1.1"
     }
   }
 }
@@ -55,6 +55,6 @@ resource "helm_release" "falcosidekick" {
   chart      = "falcosidekick"
   name       = "falcosidekick"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "0.3.1"
+  version    = "0.3.3"
   values     = [local.falcosidekick_values]
 }

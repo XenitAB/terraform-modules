@@ -110,6 +110,7 @@ resource "kubernetes_secret" "azdo_proxy" {
   }
 }
 
+#tf-latest-version:ignore
 resource "helm_release" "azdo_proxy" {
   repository = "https://xenitab.github.io/azdo-proxy/"
   chart      = "azdo-proxy"

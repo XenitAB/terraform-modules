@@ -1,5 +1,5 @@
-variable "xenit_config" {
-  description = "Xenit Platform configuration"
+variable "azure_config" {
+  description = "Azure specific configuration"
   type = object({
     azure_key_vault_name = string
     identity = object({

@@ -22,10 +22,10 @@ terraform {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name                = "ingress-nginx"
+      name                = join("-", compact(["ingress-nginx", var.name_override]))
       "xkf.xenit.io/kind" = "platform"
     }
-    name = "ingress-nginx"
+    name = join("-", compact(["ingress-nginx", var.name_override]))
   }
 }
 
@@ -36,6 +36,10 @@ resource "helm_release" "ingress_nginx" {
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "3.29.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    http_snippet = var.http_snippet,
+    http_snippet           = var.http_snippet,
+    name_override          = var.name_override,
+    provider               = var.cloud_provider,
+    ingress_class          = join("-", compact(["nginx", var.name_override])),
+    internal_load_balancer = var.internal_load_balancer,
   })]
 }

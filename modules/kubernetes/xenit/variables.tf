@@ -15,7 +15,19 @@ variable "thanos_receiver_fqdn" {
   type        = string
 }
 
+variable "thanos_receiver_path" {
+  description = "The thanos receiver fqdn"
+  type        = string
+  default     = "/"
+}
+
 variable "loki_api_fqdn" {
   description = "The loki api fqdn"
   type        = string
+}
+
+variable "loki_api_path" {
+  description = "The loki api path"
+  type        = string
+  default     = "/"
 }

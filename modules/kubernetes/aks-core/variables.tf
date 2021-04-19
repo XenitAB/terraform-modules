@@ -359,8 +359,10 @@ variable "xenit_config" {
       resource_id = string
       tenant_id   = string
     })
-    thanos_receiver = string
-    loki_api        = string
+    thanos_receiver_fqdn = string
+    thanos_receiver_path = string
+    loki_api_fqdn        = string
+    loki_api_path        = string
   })
   default = {
     azure_key_vault_name = ""
@@ -369,7 +371,9 @@ variable "xenit_config" {
       resource_id = ""
       tenant_id   = ""
     }
-    thanos_receiver = ""
-    loki_api        = ""
+    thanos_receiver_fqdn = ""
+    thanos_receiver_path = ""
+    loki_api_fqdn        = ""
+    loki_api_path        = ""
   }
 }

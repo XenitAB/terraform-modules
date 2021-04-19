@@ -26,7 +26,7 @@ serverBlock: |-
       listen 8080;
       server_name thanos-receiver.xenit-system.svc.cluster.local;
       location / {
-          proxy_pass https://${thanos_receiver_fqdn};
+          proxy_pass https://${thanos_receiver_fqdn}${thanos_receiver_path};
           proxy_set_header Host ${thanos_receiver_fqdn};
           proxy_ssl_name ${thanos_receiver_fqdn};
           proxy_ssl_certificate "/mnt/tls/tls.crt";
@@ -38,7 +38,7 @@ serverBlock: |-
   #     listen 8080;
   #     server_name loki-api.xenit-system.svc.cluster.local;
   #     location / {
-  #         proxy_pass https://${loki_api_fqdn};
+  #         proxy_pass https://${loki_api_fqdn}${loki_api_path};
   #         proxy_set_header Host ${loki_api_fqdn};
   #         proxy_ssl_name ${loki_api_fqdn};
   #         proxy_ssl_certificate "/mnt/tls/tls.crt";

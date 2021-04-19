@@ -75,6 +75,8 @@ resource "helm_release" "xenit_proxy" {
   version    = "8.8.1"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     thanos_receiver_fqdn = var.thanos_receiver_fqdn
+    thanos_receiver_path = var.thanos_receiver_path
     loki_api_fqdn        = var.loki_api_fqdn
+    loki_api_path        = var.loki_api_path
   })]
 }

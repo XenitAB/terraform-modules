@@ -346,6 +346,8 @@ module "xenit" {
       tenant_id   = var.xenit_config.identity.tenant_id
     }
   }
-  thanos_receiver_fqdn = var.xenit_config.thanos_receiver
-  loki_api_fqdn        = var.xenit_config.loki_api
+  thanos_receiver_fqdn = var.xenit_config.thanos_receiver_fqdn
+  thanos_receiver_path = var.xenit_config.thanos_receiver_path
+  loki_api_fqdn        = var.xenit_config.loki_api_fqdn
+  loki_api_path        = var.xenit_config.loki_api_path
 }

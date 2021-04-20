@@ -52,6 +52,8 @@ secret:
   create: false
   name: azad-kube-proxy
 
+replicaCount: 2
+
 ingress:
   enabled: true
   annotations:

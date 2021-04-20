@@ -52,6 +52,11 @@ secret:
   create: false
   name: azad-kube-proxy
 
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+
 ingress:
   enabled: true
   annotations:

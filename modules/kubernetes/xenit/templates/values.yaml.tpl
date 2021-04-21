@@ -29,6 +29,7 @@ serverBlock: |-
           proxy_pass https://${thanos_receiver_fqdn};
           proxy_set_header Host ${thanos_receiver_fqdn};
           proxy_ssl_name ${thanos_receiver_fqdn};
+          proxy_ssl_server_name on;
           proxy_ssl_certificate "/mnt/tls/tls.crt";
           proxy_ssl_certificate_key "/mnt/tls/tls.key";
           proxy_redirect off;
@@ -41,6 +42,7 @@ serverBlock: |-
   #         proxy_pass https://${loki_api_fqdn};
   #         proxy_set_header Host ${loki_api_fqdn};
   #         proxy_ssl_name ${loki_api_fqdn};
+  #         proxy_ssl_server_name on;
   #         proxy_ssl_certificate "/mnt/tls/tls.crt";
   #         proxy_ssl_certificate_key "/mnt/tls/tls.key";
   #         proxy_redirect off;

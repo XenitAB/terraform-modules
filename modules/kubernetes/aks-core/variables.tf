@@ -45,6 +45,7 @@ variable "namespaces" {
       name   = string
       labels = map(string)
       flux = object({
+        enabled_v1 = bool
         enabled     = bool
         create_crds = bool
         azure_devops = object({

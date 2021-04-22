@@ -1,6 +1,9 @@
 
 replicaCount: 2
 
+podAnnotations:
+  secret.reloader.stakater.com/reload: "xenit-proxy-certificate"
+
 podLabels:
   aadpodidbinding: "xenit-proxy"
   app: "xenit-proxy"

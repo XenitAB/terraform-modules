@@ -33,8 +33,8 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the prometheus cluster | `string` | `"aks1"` | no |
-| <a name="input_environment"></a> [environment](#input\_environment) | The environment in which the prometheus instance is deployed | `string` | `"dev"` | no |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the prometheus cluster | `string` | n/a | yes |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment in which the prometheus instance is deployed | `string` | n/a | yes |
 | <a name="input_remote_write_enabled"></a> [remote\_write\_enabled](#input\_remote\_write\_enabled) | If remote write should be enabled or not | `bool` | `true` | no |
 | <a name="input_remote_write_url"></a> [remote\_write\_url](#input\_remote\_write\_url) | The URL where to send prometheus remote\_write data | `string` | n/a | yes |
 | <a name="input_volume_claim_enabled"></a> [volume\_claim\_enabled](#input\_volume\_claim\_enabled) | If prometheus should store data localy | `bool` | `true` | no |

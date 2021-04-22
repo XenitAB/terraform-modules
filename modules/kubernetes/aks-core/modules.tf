@@ -311,8 +311,8 @@ module "prometheus" {
   volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
-  cluster_name = var.prometheus_config.cluster_name
-  environment  = var.prometheus_config.environment
+  cluster_name = "${var.name}${var.aks_name_suffix}"
+  environment  = var.environment
 }
 
 # ingress-healthz

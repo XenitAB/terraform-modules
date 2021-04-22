@@ -15,25 +15,6 @@ alertmanager:
 
 prometheus:
   enabled: false
-  prometheusSpec:
-    serviceMonitorSelector:
-      matchLabels:
-       "xkf.xenit.io/monitoring": platform
-    serviceMonitorNamespaceSelector:
-      matchLabels:
-       "xkf.xenit.io/kind": platform
-    podMonitorSelector:
-      matchLabels:
-       "xkf.xenit.io/monitoring": platform
-    podMonitorNamespaceSelector:
-      matchLabels:
-       "xkf.xenit.io/kind": platform
-    probeSelector:
-      matchLabels:
-       "xkf.xenit.io/monitoring": platform
-    probeNamespaceSelector:
-      matchLabels:
-       "xkf.xenit.io/kind": platform
 
 kube-state-metrics:
   podSecurityPolicy:

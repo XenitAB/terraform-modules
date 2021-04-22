@@ -56,5 +56,8 @@ resource "helm_release" "prometheus_extras" {
     volume_claim_enabled            = var.volume_claim_enabled
     volume_claim_storage_class_name = var.volume_claim_storage_class_name
     volume_claim_size               = var.volume_claim_size
+
+    cluster_name = var.cluster_name
+    environment  = var.environment
   })]
 }

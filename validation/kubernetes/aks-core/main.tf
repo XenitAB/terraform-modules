@@ -80,5 +80,8 @@ module "aks_core" {
     volume_claim_enabled            = true
     volume_claim_storage_class_name = "default"
     volume_claim_size               = "5Gi"
+
+    cluster_name = "aks1"
+    environment  = "dev"
   }
 }

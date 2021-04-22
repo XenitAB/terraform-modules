@@ -22,5 +22,6 @@ volumeClaim:
   storageClassName: default
   size: 5Gi
 
-alertmanager:
-  enabled: true
+externalLabels:
+  clusterName: aks1
+  environment: dev

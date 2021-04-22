@@ -26,3 +26,13 @@ variable "volume_claim_size" {
   type        = string
   default     = "5Gi"
 }
+
+variable "cluster_name" {
+  description = "Name of the prometheus cluster"
+  type        = string
+}
+
+variable "environment" {
+  description = "The environment in which the prometheus instance is deployed"
+  type        = string
+}

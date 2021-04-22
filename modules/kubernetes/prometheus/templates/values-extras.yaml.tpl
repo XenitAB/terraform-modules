@@ -17,3 +17,7 @@ resources:
     cpu: "20m"
   limits:
     memory: "500Mi"
+
+externalLabels:
+  clusterName: ${cluster_name}
+  environment: ${environment}

@@ -335,9 +335,6 @@ variable "prometheus_config" {
     volume_claim_enabled            = bool
     volume_claim_storage_class_name = string
     volume_claim_size               = string
-
-    cluster_name = string
-    environment  = string
   })
 }
 

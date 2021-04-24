@@ -8,9 +8,8 @@ metadata:
   name: prometheus
   namespace: prometheus
 spec:
-  endpoints:
-    - interval: 30s
-      port: web
+  podMetricsEndpoints:
+    - port: web
   selector:
     matchLabels:
       app: prometheus

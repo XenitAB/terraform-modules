@@ -46,11 +46,11 @@ variable "tenant_id" {
 variable "resource_selector" {
   description = "Monitoring type labels to look for in Prometheus resources"
   type = list(string)
-  default ["platform"]
+  default = ["platform"]
 }
 
 variable "namespace_selector" {
   description = "Kind labels to look for in namespaces"
   type = list(string)
-  default ["platform"]
+  default = ["platform"]
 }

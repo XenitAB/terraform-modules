@@ -29,9 +29,9 @@ prometheus:
     matchExpressions:
       - key: xkf.xenit.io/monitoring
         operator: In
-        values: [for v in resource_selector : "${v}"]
+        values: ${resource_selector}
   namespaceSelector:
     matchExpressions:
       - key: xkf.xenit.io/kind
         operator: In
-        values: [for v in namespace_selector : "${v}"]
+        values: ${namespace_selector}

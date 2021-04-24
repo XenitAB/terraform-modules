@@ -60,7 +60,7 @@ resource "helm_release" "prometheus_extras" {
     environment  = var.environment
     tenant_id = var.tenant_id
 
-    resource_selector = var.resource_selector
-    namespace_selector = var.namespace_selector
+    resource_selector = [for v in var.resource_selector : "${v}"],
+    namespace_selector = [for v in var.namespace_selector : "${v}"],
   })]
 }

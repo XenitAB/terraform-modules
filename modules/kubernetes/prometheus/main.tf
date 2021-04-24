@@ -59,5 +59,8 @@ resource "helm_release" "prometheus_extras" {
     cluster_name = var.cluster_name
     environment  = var.environment
     tenant_id = var.tenant_id
+
+    resource_selector = var.resource_selector
+    namespace_selector = var.namespace_selector
   })]
 }

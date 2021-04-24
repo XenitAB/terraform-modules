@@ -15,24 +15,30 @@ spec:
     {{- end }}
   replicas: {{ .Values.replicaCount }}
   serviceAccountName: {{ .Values.serviceAccount.name }}
+  {{- with .Values.prometheus.resourceSelector }}
   serviceMonitorSelector:
-    matchLabels:
-      xkf.xenit.io/monitoring: platform
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.prometheus.namespaceSelector }}
   serviceMonitorNamespaceSelector:
-    matchLabels:
-     xkf.xenit.io/kind: platform
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.prometheus.resourceSelector }}
   probeSelector:
-    matchLabels:
-      xkf.xenit.io/monitoring: platform
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.prometheus.namespaceSelector }}
   probeNamespaceSelector:
-    matchLabels:
-     xkf.xenit.io/kind: platform
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.prometheus.resourceSelector }}
   podMonitorSelector:
-    matchLabels:
-      xkf.xenit.io/monitoring: platform
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.prometheus.namespaceSelector }}
   podMonitorNamespaceSelector:
-    matchLabels:
-     xkf.xenit.io/kind: platform
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   {{- if .Values.remoteWrite.enabled }}
   remoteWrite:
     - name: thanos

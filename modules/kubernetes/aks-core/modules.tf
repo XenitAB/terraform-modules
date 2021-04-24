@@ -314,6 +314,8 @@ module "prometheus" {
 
   cluster_name = "${var.name}${var.aks_name_suffix}"
   environment  = var.environment
+  resource_selector = var.prometheus_config.resource_selector
+  namespace_selector = var.prometheus_config.namespace_selector
 }
 
 # ingress-healthz

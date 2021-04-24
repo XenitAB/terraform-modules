@@ -23,3 +23,15 @@ resources:
 externalLabels:
   clusterName: ${cluster_name}
   environment: ${environment}
+
+prometheus:
+  resourceSelector:
+    matchExpressions:
+      - key: xkf.xenit.io/monitoring
+        operator: In
+        values: ${resource_selector}
+  namespaceSelector:
+    matchExpressions:
+      - key: xkf.xenit.io/kind
+        operator: In
+        values: ${namespace_selector}

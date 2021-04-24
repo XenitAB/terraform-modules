@@ -21,3 +21,4 @@ resources:
 externalLabels:
   clusterName: ${cluster_name}
   environment: ${environment}
+  tenantId: ${tenant_id}

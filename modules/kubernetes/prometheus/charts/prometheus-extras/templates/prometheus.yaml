@@ -10,6 +10,9 @@ spec:
     cluster_name: {{ .Values.externalLabels.clusterName }}
     environment: {{ .Values.externalLabels.environment }}
     {{ .Values.externalLabels.environment }}_{{ .Values.externalLabels.clusterName }}: "true"
+    {{- if .Values.externalLabels.tenantId }}
+    tenant_id: {{ .Values.externalLabels.tenantId }}
+    {{- end }}
   replicas: {{ .Values.replicaCount }}
   serviceAccountName: {{ .Values.serviceAccount.name }}
   serviceMonitorSelector:

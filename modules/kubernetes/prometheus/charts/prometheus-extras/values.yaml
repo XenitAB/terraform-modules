@@ -25,3 +25,4 @@ volumeClaim:
 externalLabels:
   clusterName: aks1
   environment: dev
+  tenantId: ""

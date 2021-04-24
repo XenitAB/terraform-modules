@@ -5,6 +5,8 @@
 remoteWrite:
   enabled: ${remote_write_enabled}
   url: ${remote_write_url}
+  headers:
+    THANOS-TENANT: ${tenant_id}
 
 volumeClaim:
   enabled: ${volume_claim_enabled}
@@ -21,4 +23,3 @@ resources:
 externalLabels:
   clusterName: ${cluster_name}
   environment: ${environment}
-  tenantId: ${tenant_id}

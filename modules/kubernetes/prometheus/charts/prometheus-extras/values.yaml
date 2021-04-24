@@ -16,6 +16,7 @@ resources: {}
 remoteWrite:
   enabled: true
   url: ""
+  headers: {}
 
 volumeClaim:
   enabled: true
@@ -25,4 +26,3 @@ volumeClaim:
 externalLabels:
   clusterName: aks1
   environment: dev
-  tenantId: ""

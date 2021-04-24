@@ -18,3 +18,6 @@ controller:
     http-snippet: |
       ${http_snippet}
     %{ endif }
+
+  metrics:
+    enabled: true

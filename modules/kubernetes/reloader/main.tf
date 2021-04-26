@@ -35,5 +35,5 @@ resource "helm_release" "reloader" {
   chart      = "reloader"
   name       = "reloader"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.0.87"
+  version    = "v0.0.89"
 }

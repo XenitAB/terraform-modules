@@ -246,8 +246,6 @@ module "falco" {
   }
 
   source = "../../kubernetes/falco"
-
-  environment     = var.environment
 }
 
 # Reloader

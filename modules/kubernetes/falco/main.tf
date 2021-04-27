@@ -40,7 +40,7 @@ resource "helm_release" "falco" {
   values     = [templatefile("${path.module}/templates/falco-values.yaml.tpl", {})]
 }
 
-resource "helm_release" "falco-exporter" {
+resource "helm_release" "falco_exporter" {
   repository = "https://falcosecurity.github.io/charts"
   chart      = "falco-exporter"
   name       = "falco-exporter"

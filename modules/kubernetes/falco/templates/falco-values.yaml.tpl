@@ -36,10 +36,14 @@ customRules:
         (container.image.repository = "ghcr.io/fluxcd/helm-controller")
 
   # Applications which spawn a docker or kubectl client
+  # Kustomize controller runs kubectl and kustomize
+  # Tunnel front is expected to do this
+  # https://github.com/Azure/AKS/issues/2087
   rules_user_known_k8s_client_container.yaml: |-
     - macro: user_known_k8s_client_container_parens
       condition: >
-        (container.image.repository = "ghcr.io/fluxcd/kustomize-controller")
+        (container.image.repository = "ghcr.io/fluxcd/kustomize-controller") or
+        (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front")
 
   # Sensitive mounts in containers
   # AKS uses a different kube-proxy image

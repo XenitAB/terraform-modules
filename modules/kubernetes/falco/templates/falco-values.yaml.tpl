@@ -35,9 +35,17 @@ customRules:
         (container.image.repository = "ghcr.io/fluxcd/kustomize-controller") or
         (container.image.repository = "ghcr.io/fluxcd/helm-controller")
 
+  # Applications which spawn a docker or kubectl client
+  rules_user_known_k8s_client_container.yaml: |-
+    - macro: user_known_k8s_client_container_parens
+      condition: >
+        (container.image.repository = "ghcr.io/fluxcd/kustomize-controller")
+
   # Sensitive mounts in containers
   # AKS uses a different kube-proxy image
+  # Node exporter has to mount sensitive paths
   rules_user_sensitive_mount_containers.yaml: |-
     - macro: user_sensitive_mount_containers
       condition: >
-        (container.image.repository = "mcr.microsoft.com/oss/kubernetes/kube-proxy")
+        (container.image.repository = "mcr.microsoft.com/oss/kubernetes/kube-proxy") or
+        (container.image.repository = "quay.io/prometheus/node-exporter")

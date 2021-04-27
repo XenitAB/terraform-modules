@@ -20,7 +20,7 @@ terraform {
 }
 
 locals {
-  namespace         = "prometheus"
+  namespace = "prometheus"
 }
 
 resource "kubernetes_namespace" "this" {
@@ -58,9 +58,9 @@ resource "helm_release" "prometheus_extras" {
 
     cluster_name = var.cluster_name
     environment  = var.environment
-    tenant_id = var.tenant_id
+    tenant_id    = var.tenant_id
 
-    resource_selector = "[${join(", ", var.resource_selector)}]",
+    resource_selector  = "[${join(", ", var.resource_selector)}]",
     namespace_selector = "[${join(", ", var.namespace_selector)}]",
   })]
 }

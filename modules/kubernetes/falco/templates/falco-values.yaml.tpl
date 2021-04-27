@@ -26,9 +26,17 @@ falco:
 priorityClassName: system-node-critical
 
 customRules:
+  # Applications which are expected to communicate with the Kubernetes API
   rules_user_known_k8s_api_callers.yaml: |-
     - macro: user_known_contact_k8s_api_server_activities
       condition: >
         (container.image.repository = "docker.io/fluxcd/helm-operator") or
         (container.image.repository = "docker.io/fluxcd/flux") or
-        (container.image.repository = "ghcr.io/fluxcd/kustomize-controller")
+        (container.image.repository = "ghcr.io/fluxcd/kustomize-controller") or
+        (container.image.repository = "ghcr.io/fluxcd/helm-controller")
+
+  # Sensitive mounts in containers
+  rules_user_sensitive_mount_containers.yaml: |-
+    - macro: user_sensitive_mount_containers
+      condition: >
+        (container.image.repository = "mcr.microsoft.com/oss/kubernetes/kube-proxy") # AKS uses a different kube-proxy image

@@ -36,7 +36,8 @@ customRules:
         (container.image.repository = "ghcr.io/fluxcd/helm-controller")
 
   # Sensitive mounts in containers
+  # AKS uses a different kube-proxy image
   rules_user_sensitive_mount_containers.yaml: |-
     - macro: user_sensitive_mount_containers
       condition: >
-        (container.image.repository = "mcr.microsoft.com/oss/kubernetes/kube-proxy") # AKS uses a different kube-proxy image
+        (container.image.repository = "mcr.microsoft.com/oss/kubernetes/kube-proxy")

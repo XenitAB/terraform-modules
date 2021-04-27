@@ -6,11 +6,10 @@ ebpf:
   enabled: true
 
 falco:
-  jsonOutput: true
-  jsonIncludeOutputProperty: true
-  httpOutput:
+  grpc:
     enabled: true
-    url: "http://falcosidekick:2801"
+  grpcOutput:
+    enabled: true
 
   # This should be further explored in the future but seems
   # to be a bug right now with no fix so the solution is sadly

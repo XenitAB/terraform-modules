@@ -2,8 +2,8 @@
   * # Falco
   *
   * Adds [`Falco`](https://github.com/falcosecurity/falco) to a Kubernetes clusters.
-  * The modules consists of two components, the main Falco driver and the sidekick which
-  * exports metrics.
+  * The modules consists of two components, the main Falco driver and Falco exporter
+  * to expose event metrics.
   */
 
 terraform {
@@ -40,14 +40,10 @@ resource "helm_release" "falco" {
   values     = [templatefile("${path.module}/templates/falco-values.yaml.tpl", {})]
 }
 
-resource "helm_release" "falcosidekick" {
+resource "helm_release" "falco-exporter" {
   repository = "https://falcosecurity.github.io/charts"
-  chart      = "falcosidekick"
-  name       = "falcosidekick"
+  chart      = "falco-exporter"
+  name       = "falco-exporter"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "0.3.4"
-  values     = [templatefile("${path.module}/templates/falcosidekick-values.yaml.tpl", {
-    environment      = var.environment
-    minimum_priority = var.minimum_priority
-  })]
+  version    = "0.5.1"
 }

@@ -46,4 +46,5 @@ resource "helm_release" "falco-exporter" {
   name       = "falco-exporter"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "0.5.1"
+  values     = [templatefile("${path.module}/templates/falco-exporter-values.yaml.tpl", {})]
 }

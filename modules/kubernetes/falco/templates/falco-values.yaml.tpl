@@ -18,3 +18,5 @@ falco:
   syscallEventDrops:
     actions:
       - log
+
+priorityClassName: system-node-critical

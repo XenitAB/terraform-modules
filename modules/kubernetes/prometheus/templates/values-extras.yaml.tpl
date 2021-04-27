@@ -5,8 +5,10 @@
 remoteWrite:
   enabled: ${remote_write_enabled}
   url: ${remote_write_url}
+  %{ if tenant_id != "" }
   headers:
     THANOS-TENANT: ${tenant_id}
+  %{ endif }
 
 volumeClaim:
   enabled: ${volume_claim_enabled}

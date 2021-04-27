@@ -28,6 +28,7 @@ module "opa_gatekeeper" {
       },
     ]
   )
+  enable_default_assigns = var.opa_gatekeeper_config.enable_default_assigns
   excluded_namespaces = concat(var.opa_gatekeeper_config.additional_excluded_namespaces, local.excluded_namespaces)
 }
 

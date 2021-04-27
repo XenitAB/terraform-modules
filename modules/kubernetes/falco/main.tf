@@ -3,7 +3,7 @@
   *
   * Adds [`Falco`](https://github.com/falcosecurity/falco) to a Kubernetes clusters.
   * The modules consists of two components, the main Falco driver and the sidekick which
-  * exports events to Datadog.
+  * exports metrics.
   */
 
 terraform {
@@ -19,16 +19,6 @@ terraform {
       version = "2.1.1"
     }
   }
-}
-
-locals {
-  falco_values = templatefile("${path.module}/templates/falco-values.yaml.tpl", {})
-  falcosidekick_values = templatefile("${path.module}/templates/falcosidekick-values.yaml.tpl", {
-    environment      = var.environment
-    minimum_priority = var.minimum_priority
-    datadog_host     = "https://${var.datadog_site}"
-    datadog_api_key  = var.datadog_api_key
-  })
 }
 
 resource "kubernetes_namespace" "this" {
@@ -47,7 +37,7 @@ resource "helm_release" "falco" {
   name       = "falco"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "1.10.0"
-  values     = [local.falco_values]
+  values     = [templatefile("${path.module}/templates/falco-values.yaml.tpl", {})]
 }
 
 resource "helm_release" "falcosidekick" {
@@ -56,5 +46,8 @@ resource "helm_release" "falcosidekick" {
   name       = "falcosidekick"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "0.3.4"
-  values     = [local.falcosidekick_values]
+  values     = [templatefile("${path.module}/templates/falcosidekick-values.yaml.tpl", {
+    environment      = var.environment
+    minimum_priority = var.minimum_priority
+  })]
 }

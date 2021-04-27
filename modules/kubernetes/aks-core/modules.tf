@@ -248,8 +248,6 @@ module "falco" {
   source = "../../kubernetes/falco"
 
   environment     = var.environment
-  datadog_site    = var.datadog_config.datadog_site
-  datadog_api_key = var.datadog_config.api_key
 }
 
 # Reloader

@@ -9,13 +9,3 @@ variable "minimum_priority" {
   default     = "INFO"
 }
 
-variable "datadog_site" {
-  description = "Datadog host to send events to"
-  type        = string
-  default     = "api.datadoghq.eu"
-}
-
-variable "datadog_api_key" {
-  description = "Datadog api key used to authenticate"
-  type        = string
-}

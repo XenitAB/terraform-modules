@@ -331,10 +331,14 @@ variable "prometheus_config" {
   type = object({
     remote_write_enabled = bool
     remote_write_url     = string
+    tenant_id            = string
 
     volume_claim_enabled            = bool
     volume_claim_storage_class_name = string
     volume_claim_size               = string
+
+    resource_selector  = list(string)
+    namespace_selector = list(string)
   })
 }
 

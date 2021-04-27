@@ -5,6 +5,10 @@
 remoteWrite:
   enabled: ${remote_write_enabled}
   url: ${remote_write_url}
+  %{ if tenant_id != "" }
+  headers:
+    THANOS-TENANT: ${tenant_id}
+  %{ endif }
 
 volumeClaim:
   enabled: ${volume_claim_enabled}
@@ -21,3 +25,15 @@ resources:
 externalLabels:
   clusterName: ${cluster_name}
   environment: ${environment}
+
+prometheus:
+  resourceSelector:
+    matchExpressions:
+      - key: xkf.xenit.io/monitoring
+        operator: In
+        values: ${resource_selector}
+  namespaceSelector:
+    matchExpressions:
+      - key: xkf.xenit.io/kind
+        operator: In
+        values: ${namespace_selector}

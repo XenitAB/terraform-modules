@@ -20,8 +20,7 @@ terraform {
 }
 
 locals {
-  namespace         = "prometheus"
-  values_prometheus = templatefile("${path.module}/templates/values.yaml.tpl", {})
+  namespace = "prometheus"
 }
 
 resource "kubernetes_namespace" "this" {
@@ -40,7 +39,7 @@ resource "helm_release" "prometheus" {
   name       = "prometheus"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "15.2.1"
-  values     = [local.values_prometheus]
+  values     = [templatefile("${path.module}/templates/values.yaml.tpl", {})]
 }
 
 resource "helm_release" "prometheus_extras" {
@@ -59,5 +58,9 @@ resource "helm_release" "prometheus_extras" {
 
     cluster_name = var.cluster_name
     environment  = var.environment
+    tenant_id    = var.tenant_id
+
+    resource_selector  = "[${join(", ", var.resource_selector)}]",
+    namespace_selector = "[${join(", ", var.namespace_selector)}]",
   })]
 }

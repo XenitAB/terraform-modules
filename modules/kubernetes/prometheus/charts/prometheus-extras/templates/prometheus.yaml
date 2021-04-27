@@ -9,31 +9,43 @@ spec:
   externalLabels:
     cluster_name: {{ .Values.externalLabels.clusterName }}
     environment: {{ .Values.externalLabels.environment }}
-    {{ .Values.externalLabels.environment }}_{{ .Values.externalLabels.clusterName }}: "true"
+    {{- if .Values.externalLabels.tenantId }}
+    tenant_id: {{ .Values.externalLabels.tenantId }}
+    {{- end }}
   replicas: {{ .Values.replicaCount }}
   serviceAccountName: {{ .Values.serviceAccount.name }}
+  {{- with .Values.prometheus.resourceSelector }}
   serviceMonitorSelector:
-    matchLabels:
-      xkf.xenit.io/monitoring: platform
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.prometheus.namespaceSelector }}
   serviceMonitorNamespaceSelector:
-    matchLabels:
-     xkf.xenit.io/kind: platform
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.prometheus.resourceSelector }}
   probeSelector:
-    matchLabels:
-      xkf.xenit.io/monitoring: platform
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.prometheus.namespaceSelector }}
   probeNamespaceSelector:
-    matchLabels:
-     xkf.xenit.io/kind: platform
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.prometheus.resourceSelector }}
   podMonitorSelector:
-    matchLabels:
-      xkf.xenit.io/monitoring: platform
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.prometheus.namespaceSelector }}
   podMonitorNamespaceSelector:
-    matchLabels:
-     xkf.xenit.io/kind: platform
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   {{- if .Values.remoteWrite.enabled }}
   remoteWrite:
-    - url: {{ .Values.remoteWrite.url }}
-      name: thanos
+    - name: thanos
+      url: {{ .Values.remoteWrite.url }}
+      {{- with .Values.remoteWrite.headers }}
+      headers:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
   {{- end }}
   {{- if .Values.volumeClaim.enabled }}
   storage:

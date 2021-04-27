@@ -13,10 +13,6 @@ service:
 
 resources: {}
 
-remoteWrite:
-  enabled: true
-  url: ""
-
 volumeClaim:
   enabled: true
   storageClassName: default
@@ -25,3 +21,21 @@ volumeClaim:
 externalLabels:
   clusterName: aks1
   environment: dev
+
+remoteWrite:
+  enabled: true
+  url: ""
+  headers: {}
+
+prometheus:
+  resourceSelector:
+    matchExpressions:
+      - key: xkf.xenit.io/monitoring
+        operator: In
+        values: [platform]
+  namespaceSelector:
+    matchExpressions:
+      - key: xkf.xenit.io/kind
+        operator: In
+        values: [platform]
+

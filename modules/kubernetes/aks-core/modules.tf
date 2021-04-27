@@ -307,13 +307,16 @@ module "prometheus" {
 
   remote_write_enabled = var.prometheus_config.remote_write_enabled
   remote_write_url     = var.prometheus_config.remote_write_url
+  tenant_id            = var.prometheus_config.tenant_id
 
   volume_claim_enabled            = var.prometheus_config.volume_claim_enabled
   volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
-  cluster_name = "${var.name}${var.aks_name_suffix}"
-  environment  = var.environment
+  cluster_name       = "${var.name}${var.aks_name_suffix}"
+  environment        = var.environment
+  resource_selector  = var.prometheus_config.resource_selector
+  namespace_selector = var.prometheus_config.namespace_selector
 }
 
 # ingress-healthz

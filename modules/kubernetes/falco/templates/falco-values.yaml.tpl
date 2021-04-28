@@ -33,7 +33,8 @@ customRules:
         (container.image.repository = "docker.io/fluxcd/helm-operator") or
         (container.image.repository = "docker.io/fluxcd/flux") or
         (container.image.repository = "ghcr.io/fluxcd/kustomize-controller") or
-        (container.image.repository = "ghcr.io/fluxcd/helm-controller")
+        (container.image.repository = "ghcr.io/fluxcd/helm-controller") or
+        (container.image.repository = "docker.io/grafana/loki")
 
   # Applications which spawn a docker or kubectl client
   # Kustomize controller runs kubectl and kustomize
@@ -42,6 +43,8 @@ customRules:
   rules_user_known_k8s_client_container.yaml: |-
     - macro: user_known_k8s_client_container_parens
       condition: >
+        (container.image.repository = "docker.io/fluxcd/helm-operator") or
+        (container.image.repository = "docker.io/fluxcd/flux") or
         (container.image.repository = "ghcr.io/fluxcd/kustomize-controller") or
         (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front")
 

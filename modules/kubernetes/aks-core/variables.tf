@@ -269,7 +269,7 @@ variable "datadog_config" {
 variable "falco_enabled" {
   description = "Should Falco be enabled"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "reloader_enabled" {

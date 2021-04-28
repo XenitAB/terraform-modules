@@ -165,3 +165,22 @@ spec:
       app.kubernetes.io/component: controller
       app.kubernetes.io/instance: ingress-nginx
       app.kubernetes.io/name: ingress-nginx
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    xkf.xenit.io/monitoring: platform
+  name: falco-exporter
+  namespace: falco
+spec:
+  endpoints:
+  - interval: 30s
+    port: metrics
+  namespaceSelector:
+    matchNames:
+    - falco
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: falco-exporter
+      app.kubernetes.io/name: falco-exporter

@@ -11,7 +11,4 @@ module "falco" {
     kubernetes = kubernetes
     helm = helm
   }
-
-  environment = "dev"
-  datadog_api_key = "foobar" #tfsec:ignore:GEN003
 }

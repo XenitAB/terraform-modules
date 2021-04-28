@@ -1,0 +1,1 @@
+priorityClassName: system-node-critical

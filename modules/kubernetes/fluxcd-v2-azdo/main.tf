@@ -106,7 +106,6 @@ resource "random_password" "cluster" {
 
 data "flux_install" "this" {
   target_path = "clusters/${var.environment}"
-  version     = "v0.10.0"
 }
 
 data "flux_sync" "this" {

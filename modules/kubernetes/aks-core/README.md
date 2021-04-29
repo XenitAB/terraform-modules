@@ -9,9 +9,9 @@ This module is used to create AKS clusters.
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.14.7 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 1.4.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.56.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.3 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.4 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 4.9.2 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.1.1 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.1.2 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.10.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.1.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |

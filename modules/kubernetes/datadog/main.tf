@@ -14,7 +14,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.1.1"
+      version = "2.1.2"
     }
   }
 }
@@ -43,6 +43,6 @@ resource "helm_release" "datadog" {
   chart      = "datadog"
   name       = "datadog"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "2.11.2"
+  version    = "2.11.5"
   values     = [local.values]
 }

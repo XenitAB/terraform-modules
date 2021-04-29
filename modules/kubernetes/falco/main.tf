@@ -16,7 +16,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.1.1"
+      version = "2.1.2"
     }
   }
 }
@@ -36,7 +36,7 @@ resource "helm_release" "falco" {
   chart      = "falco"
   name       = "falco"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "1.10.0"
+  version    = "1.11.0"
   values     = [templatefile("${path.module}/templates/falco-values.yaml.tpl", {})]
 }
 

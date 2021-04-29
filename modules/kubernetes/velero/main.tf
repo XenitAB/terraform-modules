@@ -14,7 +14,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.1.1"
+      version = "2.1.2"
     }
   }
 }
@@ -34,7 +34,7 @@ resource "helm_release" "velero" {
   chart      = "velero"
   name       = "velero"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "2.19.1"
+  version    = "2.19.2"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     cloud_provider = var.cloud_provider,
     azure_config   = var.azure_config,

@@ -30,7 +30,7 @@ terraform {
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.1.3"
+      version = "0.1.4"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
@@ -38,7 +38,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.1.1"
+      version = "2.1.2"
     }
   }
 }

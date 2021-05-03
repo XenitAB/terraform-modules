@@ -48,7 +48,7 @@ resource "azurerm_role_assignment" "acr_push" {
 }
 
 # Assign Reader permissions to the Azure AD Group for AcrReader
-resource "azurerm_role_assignment" "acr_push" {
+resource "azurerm_role_assignment" "acr_reader" {
   scope                = azurerm_container_registry.acr.id
   role_definition_name = "Reader"
   principal_id         = data.azuread_group.acr_reader.id

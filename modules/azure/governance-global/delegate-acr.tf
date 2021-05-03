@@ -82,7 +82,7 @@ resource "azuread_group_member" "acr_reader" {
 }
 
 # Grant ACR Reader permissions to the resource group owners
-resource "azuread_group_member" "acr_viewer_rg_owner" {
+resource "azuread_group_member" "acr_reader_rg_owner" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
@@ -93,7 +93,7 @@ resource "azuread_group_member" "acr_viewer_rg_owner" {
 }
 
 # Grant ACR Reader permissions to the resource group contributors
-resource "azuread_group_member" "acr_viewer_rg_contributor" {
+resource "azuread_group_member" "acr_reader_rg_contributor" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
@@ -104,7 +104,7 @@ resource "azuread_group_member" "acr_viewer_rg_contributor" {
 }
 
 # Grant ACR Reader permissions to the resource group readers
-resource "azuread_group_member" "acr_viewer_rg_reader" {
+resource "azuread_group_member" "acr_reader_rg_reader" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg

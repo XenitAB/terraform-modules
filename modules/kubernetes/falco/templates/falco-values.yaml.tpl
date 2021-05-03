@@ -35,7 +35,9 @@ customRules:
         (container.image.repository = "ghcr.io/fluxcd/kustomize-controller") or
         (container.image.repository = "ghcr.io/fluxcd/helm-controller") or
         (container.image.repository = "docker.io/grafana/loki") or
-        (container.image.repository = "grafana/fluent-bit-plugin-loki")
+        (container.image.repository = "grafana/fluent-bit-plugin-loki") or
+        (container.image.repository = "ghcr.io/xenitab/azad-kube-proxy")
+
 
   # Applications which spawn a docker or kubectl client
   # Kustomize controller runs kubectl and kustomize

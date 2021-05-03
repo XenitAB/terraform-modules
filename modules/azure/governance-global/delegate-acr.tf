@@ -1,3 +1,6 @@
+# More info about Azure Container Registry Roles can be found here: https://docs.microsoft.com/en-us/azure/container-registry/container-registry-roles
+
+# ACR Push Azure AD group will grant push and pull permissions to the Container Registry
 resource "azuread_group" "acr_push" {
   for_each = {
     for s in ["delegate_acr"] :
@@ -9,6 +12,7 @@ resource "azuread_group" "acr_push" {
   prevent_duplicate_names = true
 }
 
+# ACR Pull Azure AD group will grant pull permissions to the Container Registry
 resource "azuread_group" "acr_pull" {
   for_each = {
     for s in ["delegate_acr"] :
@@ -20,6 +24,19 @@ resource "azuread_group" "acr_pull" {
   prevent_duplicate_names = true
 }
 
+# ACR Reader Azure AD group will grant ARM (to view Container Registry in Azure Portal) and pull permissions to the Container Registry
+resource "azuread_group" "acr_reader" {
+  for_each = {
+    for s in ["delegate_acr"] :
+    s => s
+    if var.delegate_acr
+  }
+
+  display_name            = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrreader"
+  prevent_duplicate_names = true
+}
+
+# Grant ACR Push permissions to the resource group service principal
 resource "azuread_group_member" "acr_spn" {
   for_each = {
     for rg in var.resource_group_configs :
@@ -30,6 +47,7 @@ resource "azuread_group_member" "acr_spn" {
   member_object_id = azuread_service_principal.aad_sp[each.key].object_id
 }
 
+# Grant ACR Push permissions to the resource group owners
 resource "azuread_group_member" "acr_owner" {
   for_each = {
     for rg in var.resource_group_configs :
@@ -40,6 +58,7 @@ resource "azuread_group_member" "acr_owner" {
   member_object_id = azuread_group.rg_owner[each.key].id
 }
 
+# Grant ACR Push permissions to the resource group contributors
 resource "azuread_group_member" "acr_contributor" {
   for_each = {
     for rg in var.resource_group_configs :
@@ -50,6 +69,8 @@ resource "azuread_group_member" "acr_contributor" {
   member_object_id = azuread_group.rg_contributor[each.key].id
 }
 
+# Grant ACR Pull permissions to the resource group readers
+# This is now redundant since ACR Reader also grants Pull permissions, but kept for backward compatibility
 resource "azuread_group_member" "acr_reader" {
   for_each = {
     for rg in var.resource_group_configs :
@@ -57,5 +78,38 @@ resource "azuread_group_member" "acr_reader" {
     if rg.delegate_aks == true && var.delegate_acr
   }
   group_object_id  = azuread_group.acr_pull["delegate_acr"].id
+  member_object_id = azuread_group.rg_reader[each.key].id
+}
+
+# Grant ACR Reader permissions to the resource group owners
+resource "azuread_group_member" "acr_reader_rg_owner" {
+  for_each = {
+    for rg in var.resource_group_configs :
+    rg.common_name => rg
+    if rg.delegate_aks == true && var.delegate_acr
+  }
+  group_object_id  = azuread_group.acr_reader["delegate_acr"].id
+  member_object_id = azuread_group.rg_owner[each.key].id
+}
+
+# Grant ACR Reader permissions to the resource group contributors
+resource "azuread_group_member" "acr_reader_rg_contributor" {
+  for_each = {
+    for rg in var.resource_group_configs :
+    rg.common_name => rg
+    if rg.delegate_aks == true && var.delegate_acr
+  }
+  group_object_id  = azuread_group.acr_reader["delegate_acr"].id
+  member_object_id = azuread_group.rg_contributor[each.key].id
+}
+
+# Grant ACR Reader permissions to the resource group readers
+resource "azuread_group_member" "acr_reader_rg_reader" {
+  for_each = {
+    for rg in var.resource_group_configs :
+    rg.common_name => rg
+    if rg.delegate_aks == true && var.delegate_acr
+  }
+  group_object_id  = azuread_group.acr_reader["delegate_acr"].id
   member_object_id = azuread_group.rg_reader[each.key].id
 }

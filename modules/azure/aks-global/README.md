@@ -50,6 +50,7 @@ No modules.
 | [azurerm_role_assignment.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/2.57.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.acr_pull](https://registry.terraform.io/providers/hashicorp/azurerm/2.57.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.acr_push](https://registry.terraform.io/providers/hashicorp/azurerm/2.57.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.acr_reader](https://registry.terraform.io/providers/hashicorp/azurerm/2.57.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.aks](https://registry.terraform.io/providers/hashicorp/azurerm/2.57.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.external_dns_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/2.57.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.external_dns_msi](https://registry.terraform.io/providers/hashicorp/azurerm/2.57.0/docs/resources/role_assignment) | resource |
@@ -68,6 +69,7 @@ No modules.
 | [tls_private_key.ssh_key](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/resources/private_key) | resource |
 | [azuread_group.acr_pull](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
 | [azuread_group.acr_push](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
+| [azuread_group.acr_reader](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
 | [azuread_group.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
 | [azuread_group.resource_group_owner](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |
 | [azuread_group.resource_group_reader](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/data-sources/group) | data source |

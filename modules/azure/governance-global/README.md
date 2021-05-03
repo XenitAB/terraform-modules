@@ -35,6 +35,7 @@ No modules.
 | [azuread_application_password.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/application_password) | resource |
 | [azuread_group.acr_pull](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group) | resource |
 | [azuread_group.acr_push](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group) | resource |
+| [azuread_group.acr_reader](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group) | resource |
 | [azuread_group.rg_contributor](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group) | resource |
 | [azuread_group.rg_owner](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group) | resource |
 | [azuread_group.rg_reader](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group) | resource |
@@ -45,6 +46,9 @@ No modules.
 | [azuread_group_member.acr_contributor](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) | resource |
 | [azuread_group_member.acr_owner](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) | resource |
 | [azuread_group_member.acr_reader](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) | resource |
+| [azuread_group_member.acr_reader_rg_contributor](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) | resource |
+| [azuread_group_member.acr_reader_rg_owner](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) | resource |
+| [azuread_group_member.acr_reader_rg_reader](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) | resource |
 | [azuread_group_member.acr_spn](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) | resource |
 | [azuread_group_member.sub_all_contributor](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) | resource |
 | [azuread_group_member.sub_all_owner](https://registry.terraform.io/providers/hashicorp/azuread/1.4.0/docs/resources/group_member) | resource |

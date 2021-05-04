@@ -119,9 +119,20 @@ module "aad_pod_identity" {
   }]
 }
 
-# Ingress Nginx
+# linkerd
+module "linkerd" {
+  for_each = {
+    for s in ["linkerd"] :
+    s => s
+    if var.linkerd_enabled
+  }
+
+  source = "../../kubernetes/linkerd"
+}
+
+# ingress-nginx
 module "ingress_nginx" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.linkerd]
 
   for_each = {
     for s in ["ingress-nginx"] :
@@ -131,8 +142,26 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider = "azure"
-  http_snippet   = var.ingress_config.http_snippet
+  cloud_provider  = "azure"
+  http_snippet    = var.ingress_config.http_snippet
+  linkerd_enabled = var.linkerd_enabled
+}
+
+# ingress-healthz
+module "ingress_healthz" {
+  depends_on = [module.opa_gatekeeper, module.linkerd]
+
+  for_each = {
+    for s in ["ingress-healthz"] :
+    s => s
+    if var.ingress_healthz_enabled
+  }
+
+  source = "../../kubernetes/ingress-healthz"
+
+  environment     = var.environment
+  dns_zone        = var.cert_manager_config.dns_zone
+  linkerd_enabled = var.linkerd_enabled
 }
 
 # External DNS
@@ -315,22 +344,6 @@ module "prometheus" {
   namespace_selector = var.prometheus_config.namespace_selector
 }
 
-# ingress-healthz
-module "ingress_healthz" {
-  depends_on = [module.opa_gatekeeper]
-
-  for_each = {
-    for s in ["ingress-healthz"] :
-    s => s
-    if var.ingress_healthz_enabled
-  }
-
-  source = "../../kubernetes/ingress-healthz"
-
-  environment = var.environment
-  dns_zone    = var.cert_manager_config.dns_zone
-}
-
 # xenit
 module "xenit" {
   for_each = {
@@ -352,3 +365,4 @@ module "xenit" {
   thanos_receiver_fqdn = var.xenit_config.thanos_receiver
   loki_api_fqdn        = var.xenit_config.loki_api
 }
+

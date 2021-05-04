@@ -28,10 +28,20 @@ ingress:
   hostname: ingress-healthz.${dns_zone}
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    %{ if linkerd_enabled }
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+    %{ endif }
   extraTls:
     - hosts:
         - ingress-healthz.${dns_zone}
       secretName: ingress-healthz-cert
+
+%{ if linkerd_enabled }
+podAnnotations:
+  linkerd.io/inject: enabled
+%{ endif }
 
 pdb:
   create: true

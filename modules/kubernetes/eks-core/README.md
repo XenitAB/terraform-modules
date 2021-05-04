@@ -7,7 +7,7 @@ This module is used to configure EKS clusters.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.14.7 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.37.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.38.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.4 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 4.9.2 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.10.0 |
@@ -18,7 +18,7 @@ This module is used to configure EKS clusters.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.37.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.38.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.1.0 |
 
 ## Modules
@@ -40,8 +40,8 @@ This module is used to configure EKS clusters.
 |------|------|
 | [kubernetes_namespace.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.1.0/docs/resources/namespace) | resource |
 | [kubernetes_network_policy.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.1.0/docs/resources/network_policy) | resource |
-| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/region) | data source |
-| [aws_route53_zone.this](https://registry.terraform.io/providers/hashicorp/aws/3.37.0/docs/data-sources/route53_zone) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.38.0/docs/data-sources/region) | data source |
+| [aws_route53_zone.this](https://registry.terraform.io/providers/hashicorp/aws/3.38.0/docs/data-sources/route53_zone) | data source |
 
 ## Inputs
 

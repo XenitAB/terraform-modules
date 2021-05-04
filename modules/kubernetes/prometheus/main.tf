@@ -38,7 +38,7 @@ resource "helm_release" "prometheus" {
   chart      = "kube-prometheus-stack"
   name       = "prometheus"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "15.3.1"
+  version    = "15.4.2"
   values     = [templatefile("${path.module}/templates/values.yaml.tpl", {})]
 }
 

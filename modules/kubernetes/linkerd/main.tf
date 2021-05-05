@@ -5,6 +5,10 @@
   *
   * ## Additional information
   * 
+  * ### CLI Installation
+  *
+  * To verify that everything is working, install the [linkerd cli](https://linkerd.io/2.10/reference/cli/install/) and run [`linkerd check`](https://linkerd.io/2.10/reference/cli/check/) when connected to the cluster.
+  *
   * ### Ingress configuration
   * 
   * ```YAML
@@ -25,7 +29,11 @@
   * Add the following annotation to your pod to inject the linkerd-proxy: `linkerd.io/inject: enabled`
   *
   * Look at the [docs](https://linkerd.io/2.10/tasks/adding-your-service/) for more information.
+  *
+  * ### Linkerd CNI
   * 
+  * The [Linkerd CNI](https://linkerd.io/2.10/features/cni/) is required to if the linkerd-proxy sidecar isn't allowed to be root, which happens if using OPA-Gatekeeper.
+  *
   */
 
 terraform {
@@ -59,6 +67,7 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+# Information regarding cni namespace and the annotations and labels taken from: https://github.com/linkerd/linkerd2/blob/5f2d969cfac6ebc8893011eb120a32472a0648f3/charts/linkerd2-cni/templates/cni-plugin.yaml#L21-L29
 resource "kubernetes_namespace" "cni" {
   metadata {
     labels = {
@@ -82,6 +91,7 @@ resource "tls_private_key" "linkerd_trust_anchor" {
   ecdsa_curve = "P256" # P256 required by linkerd: https://github.com/linkerd/linkerd2/blob/b9aa32f9b20057c7166347825428e53525962b9c/pkg/issuercerts/issuercerts.go#L144-L146
 }
 
+# More information regarding creating the trust anchor: https://linkerd.io/2.10/tasks/automatically-rotating-control-plane-tls-credentials/#cert-manager-as-an-on-cluster-ca
 resource "tls_self_signed_cert" "linkerd_trust_anchor" {
   key_algorithm         = tls_private_key.linkerd_trust_anchor.algorithm
   private_key_pem       = tls_private_key.linkerd_trust_anchor.private_key_pem
@@ -119,6 +129,7 @@ resource "tls_private_key" "webhook_issuer_tls" {
   ecdsa_curve = "P256" # P256 required by linkerd: https://github.com/linkerd/linkerd2/blob/b9aa32f9b20057c7166347825428e53525962b9c/pkg/issuercerts/issuercerts.go#L144-L146
 }
 
+# More information regarding the webhook issuer: https://linkerd.io/2.10/tasks/automatically-rotating-webhook-tls-credentials/#save-the-signing-key-pair-as-a-secret
 resource "tls_self_signed_cert" "webhook_issuer_tls" {
   key_algorithm         = tls_private_key.webhook_issuer_tls.algorithm
   private_key_pem       = tls_private_key.webhook_issuer_tls.private_key_pem

@@ -4,6 +4,10 @@ Adds [`linkerd`](https://github.com/linkerd/linkerd2) to a Kubernetes clusters.
 
 ## Additional information
 
+### CLI Installation
+
+To verify that everything is working, install the [linkerd cli](https://linkerd.io/2.10/reference/cli/install/) and run [`linkerd check`](https://linkerd.io/2.10/reference/cli/check/) when connected to the cluster.
+
 ### Ingress configuration
 
 ```YAML
@@ -24,6 +28,10 @@ Look at the [nginx](https://linkerd.io/2.10/tasks/using-ingress/#nginx) example 
 Add the following annotation to your pod to inject the linkerd-proxy: `linkerd.io/inject: enabled`
 
 Look at the [docs](https://linkerd.io/2.10/tasks/adding-your-service/) for more information.
+
+### Linkerd CNI
+
+The [Linkerd CNI](https://linkerd.io/2.10/features/cni/) is required to if the linkerd-proxy sidecar isn't allowed to be root, which happens if using OPA-Gatekeeper.
 
 ## Requirements
 

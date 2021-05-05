@@ -9,8 +9,16 @@
   *
   * To verify that everything is working, install the [linkerd cli](https://linkerd.io/2.10/reference/cli/install/) and run [`linkerd check`](https://linkerd.io/2.10/reference/cli/check/) when connected to the cluster.
   *
+  * ### Proxy injection
+  *
+  * Add the following annotation to your pod to inject the linkerd-proxy: `linkerd.io/inject: enabled`
+  *
+  * Look at the [docs](https://linkerd.io/2.10/tasks/adding-your-service/) for more information.
+  *
   * ### Ingress configuration
   * 
+  * The following `configuration-snippet` is needed for all ingress objects (using `ingress-nginx`) that exposes PODs with `linkerd.io/inject: enabled`.
+  *
   * ```YAML
   * apiVersion: extensions/v1beta1
   * kind: Ingress
@@ -23,12 +31,6 @@
   * ```
   *
   * Look at the [nginx](https://linkerd.io/2.10/tasks/using-ingress/#nginx) example for more information.
-  *
-  * ### Proxy injection
-  *
-  * Add the following annotation to your pod to inject the linkerd-proxy: `linkerd.io/inject: enabled`
-  *
-  * Look at the [docs](https://linkerd.io/2.10/tasks/adding-your-service/) for more information.
   *
   * ### Linkerd CNI
   * 

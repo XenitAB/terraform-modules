@@ -164,16 +164,16 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
 }
 
 # Install linkerd-cni helm chart
-locals {
-  values_cni = templatefile("${path.module}/templates/values-cni.yaml.tpl", {})
-}
 resource "helm_release" "linkerd_cni" {
   repository = "https://helm.linkerd.io/stable"
   chart      = "linkerd2-cni"
   name       = "linkerd-cni"
   namespace  = kubernetes_namespace.cni.metadata[0].name
   version    = "2.10.1"
-  values     = [local.values_cni]
+
+  values = [
+    templatefile("${path.module}/templates/values-cni.yaml.tpl", {}),
+  ]
 }
 
 # Install linkerd helm charts
@@ -188,13 +188,6 @@ resource "helm_release" "linkerd_extras" {
   namespace = kubernetes_namespace.this.metadata[0].name
 }
 
-locals {
-  values = templatefile("${path.module}/templates/values.yaml.tpl", {
-    linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem),
-    webhook_issuer_pem       = indent(4, tls_self_signed_cert.webhook_issuer_tls.cert_pem),
-  })
-}
-
 resource "helm_release" "linkerd" {
   depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
 
@@ -203,5 +196,10 @@ resource "helm_release" "linkerd" {
   name       = "linkerd"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "2.10.1"
-  values     = [local.values]
+  values = [
+    templatefile("${path.module}/templates/values.yaml.tpl", {
+      linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem),
+      webhook_issuer_pem       = indent(4, tls_self_signed_cert.webhook_issuer_tls.cert_pem),
+    }),
+  ]
 }

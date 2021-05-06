@@ -26,3 +26,4 @@ This directory contains all the Kubernetes Terraform modules.
 - [`prometheus`](prometheus/README.md)
 - [`ingress-healthz`](ingress-healthz/README.md)
 - [`xenit`](xenit/README.md)
+- [`linkerd`](linkerd/README.md)

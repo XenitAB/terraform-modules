@@ -7,3 +7,9 @@ variable "dns_zone" {
   type        = string
   description = "DNS Zone to create ingress sub domain under"
 }
+
+variable "linkerd_enabled" {
+  description = "Should linkerd be enabled"
+  type        = bool
+  default     = false
+}

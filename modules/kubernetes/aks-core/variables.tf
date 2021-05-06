@@ -377,3 +377,9 @@ variable "xenit_config" {
     loki_api        = ""
   }
 }
+
+variable "linkerd_enabled" {
+  description = "Should linkerd be enabled"
+  type        = bool
+  default     = false
+}

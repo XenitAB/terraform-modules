@@ -7,7 +7,18 @@
   * 
   * ### CLI Installation
   *
-  * To verify that everything is working, install the [linkerd cli](https://linkerd.io/2.10/reference/cli/install/) and run [`linkerd check`](https://linkerd.io/2.10/reference/cli/check/) when connected to the cluster.
+  * To verify that everything is working, install the [linkerd cli](https://linkerd.io/2.10/reference/cli/install/) and run [`linkerd check`](https://linkerd.io/2.10/reference/cli/check/) when connected to the cluster. This tool can only be used by cluster admins with access to the `linkerd` namespace.
+  *
+  * Expected warnings from `linkerd check`:
+  *
+  * - issuer cert is valid for at least 60 days
+  *   - using `cert-manager` and renewing certificates multiple times per day
+  * - proxy-injector cert is valid for at least 60 days
+  *   - using `cert-manager` and renewing certificates multiple times per day
+  * - sp-validator cert is valid for at least 60 days
+  *   - using `cert-manager` and renewing certificates multiple times per day
+  * - pod injection disabled on kube-system
+  *   - a namespaceSelector is added to exclude namespaces containing `control-plane=true`
   *
   * ### Proxy injection
   *

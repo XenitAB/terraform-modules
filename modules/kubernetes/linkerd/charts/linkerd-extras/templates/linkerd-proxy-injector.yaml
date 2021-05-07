@@ -5,7 +5,7 @@ metadata:
 spec:
   secretName: linkerd-proxy-injector-k8s-tls
   duration: 24h
-  renewBefore: 1h
+  renewBefore: 12h
   issuerRef:
     name: webhook-issuer
     kind: Issuer

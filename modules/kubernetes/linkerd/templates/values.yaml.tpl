@@ -10,11 +10,31 @@ identityTrustAnchorsPEM: |
   ${linkerd_trust_anchor_pem}
 
 proxyInjector:
+  namespaceSelector:
+    matchExpressions:
+    - key: config.linkerd.io/admission-webhooks
+      operator: NotIn
+      values:
+      - disabled
+    - key: control-plane
+      operator: NotIn
+      values:
+      - "true"
   externalSecret: true
   caBundle: |
     ${webhook_issuer_pem}
 
 profileValidator:
+  namespaceSelector:
+    matchExpressions:
+    - key: config.linkerd.io/admission-webhooks
+      operator: NotIn
+      values:
+      - disabled
+    - key: control-plane
+      operator: NotIn
+      values:
+      - "true"
   externalSecret: true
   caBundle: |
     ${webhook_issuer_pem}

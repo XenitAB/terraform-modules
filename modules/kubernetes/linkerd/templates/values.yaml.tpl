@@ -12,10 +12,6 @@ identityTrustAnchorsPEM: |
 proxyInjector:
   namespaceSelector:
     matchExpressions:
-    - key: config.linkerd.io/admission-webhooks
-      operator: NotIn
-      values:
-      - disabled
     - key: control-plane
       operator: NotIn
       values:
@@ -27,10 +23,6 @@ proxyInjector:
 profileValidator:
   namespaceSelector:
     matchExpressions:
-    - key: config.linkerd.io/admission-webhooks
-      operator: NotIn
-      values:
-      - disabled
     - key: control-plane
       operator: NotIn
       values:

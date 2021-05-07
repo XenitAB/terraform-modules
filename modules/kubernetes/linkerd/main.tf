@@ -75,6 +75,7 @@ resource "kubernetes_namespace" "this" {
       name                                   = "linkerd"
       "xkf.xenit.io/kind"                    = "platform"
       "config.linkerd.io/admission-webhooks" = "disabled"
+      "control-plane"                        = "true"
     }
     name = "linkerd"
   }
@@ -88,6 +89,7 @@ resource "kubernetes_namespace" "cni" {
       "xkf.xenit.io/kind"                    = "platform"
       "config.linkerd.io/admission-webhooks" = "disabled"
       "linkerd.io/cni-resource"              = "true"
+      "control-plane"                        = "true"
     }
 
     annotations = {

@@ -10,23 +10,31 @@ identityTrustAnchorsPEM: |
   ${linkerd_trust_anchor_pem}
 
 proxyInjector:
+  namespaceSelector:
+    matchExpressions:
+    - key: control-plane
+      operator: NotIn
+      values:
+      - "true"
   externalSecret: true
   caBundle: |
     ${webhook_issuer_pem}
 
 profileValidator:
+  namespaceSelector:
+    matchExpressions:
+    - key: control-plane
+      operator: NotIn
+      values:
+      - "true"
   externalSecret: true
   caBundle: |
     ${webhook_issuer_pem}
 
 
 #
-# The below is taken from: https://github.com/linkerd/linkerd2/blob/main/charts/linkerd2/values.yaml
+# The below is taken from: https://github.com/linkerd/linkerd2/blob/main/charts/linkerd2/values-ha.yaml
 #
-
-# This values.yaml file contains the values needed to enable HA mode.
-# Usage:
-#   helm install -f values.yaml -f values-ha.yaml
 
 enablePodAntiAffinity: true
 
@@ -62,7 +70,7 @@ heartbeatResources: *controller_resources
 
 # proxy injector configuration
 proxyInjectorResources: *controller_resources
-webhookFailurePolicy: Ignore
+webhookFailurePolicy: Fail
 
 # service profile validator configuration
 spValidatorResources: *controller_resources

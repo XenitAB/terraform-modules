@@ -121,6 +121,8 @@ module "aad_pod_identity" {
 
 # linkerd
 module "linkerd" {
+  depends_on = [module.opa_gatekeeper, module.cert_manager]
+
   for_each = {
     for s in ["linkerd"] :
     s => s

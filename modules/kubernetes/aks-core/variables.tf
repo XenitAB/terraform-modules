@@ -337,6 +337,8 @@ variable "prometheus_config" {
     volume_claim_storage_class_name = string
     volume_claim_size               = string
 
+    alertmanager_enabled = bool
+
     resource_selector  = list(string)
     namespace_selector = list(string)
   })

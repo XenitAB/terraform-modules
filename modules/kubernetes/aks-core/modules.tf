@@ -340,6 +340,8 @@ module "prometheus" {
   volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
+  alertmanager_enabled = var.prometheus_config.alertmanager_enabled
+
   cluster_name       = "${var.name}${var.aks_name_suffix}"
   environment        = var.environment
   resource_selector  = var.prometheus_config.resource_selector

@@ -103,13 +103,12 @@ resource "kubernetes_namespace" "cni" {
 resource "kubernetes_namespace" "viz" {
   metadata {
     labels = {
-      name                                   = "linkerd-viz"
-      "xkf.xenit.io/kind"                    = "platform"
+      name                   = "linkerd-viz"
+      "xkf.xenit.io/kind"    = "platform"
       "linkerd.io/extension" = "viz"
     }
     annotations = {
-      #"viz.linkerd.io/external-prometheus" = "{{.Values.prometheusUrl}}"
-      "linkerd.io/inject" = "enabled"
+      "linkerd.io/inject"             = "enabled"
       "config.linkerd.io/proxy-await" = "enabled"
     }
     name = "linkerd-viz"

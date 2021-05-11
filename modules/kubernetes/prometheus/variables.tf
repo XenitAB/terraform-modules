@@ -57,6 +57,8 @@ variable "namespace_selector" {
 
 variable "alertmanager_enabled" {
   description = "If alertmanager should be setup or not"
+  type        = bool
+  default     = false
 }
 
 variable "linkerd_enabled" {

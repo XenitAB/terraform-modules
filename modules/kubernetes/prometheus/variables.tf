@@ -60,3 +60,9 @@ variable "alertmanager_enabled" {
   type        = bool
   default     = false
 }
+
+variable "linkerd_enabled" {
+  description = "Should linkerd be enabled"
+  type        = bool
+  default     = false
+}

@@ -4,7 +4,7 @@
   * Adds [`linkerd`](https://github.com/linkerd/linkerd2) to a Kubernetes clusters.
   *
   * ## Additional information
-  * 
+  *
   * ### CLI Installation
   *
   * To verify that everything is working, install the [linkerd cli](https://linkerd.io/2.10/reference/cli/install/) and run [`linkerd check`](https://linkerd.io/2.10/reference/cli/check/) when connected to the cluster. This tool can only be used by cluster admins with access to the `linkerd` namespace.
@@ -27,7 +27,7 @@
   * Look at the [docs](https://linkerd.io/2.10/tasks/adding-your-service/) for more information.
   *
   * ### Ingress configuration
-  * 
+  *
   * The following `configuration-snippet` is needed for all ingress objects (using `ingress-nginx`) that exposes PODs with `linkerd.io/inject: enabled`.
   *
   * ```YAML
@@ -44,7 +44,7 @@
   * Look at the [nginx](https://linkerd.io/2.10/tasks/using-ingress/#nginx) example for more information.
   *
   * ### Linkerd CNI
-  * 
+  *
   * The [Linkerd CNI](https://linkerd.io/2.10/features/cni/) is required to if the linkerd-proxy sidecar isn't allowed to be root, which happens if using OPA-Gatekeeper.
   *
   */
@@ -97,6 +97,21 @@ resource "kubernetes_namespace" "cni" {
     }
 
     name = "linkerd-cni"
+  }
+}
+
+resource "kubernetes_namespace" "viz" {
+  metadata {
+    labels = {
+      name                   = "linkerd-viz"
+      "xkf.xenit.io/kind"    = "platform"
+      "linkerd.io/extension" = "viz"
+    }
+    annotations = {
+      "linkerd.io/inject"             = "enabled"
+      "config.linkerd.io/proxy-await" = "enabled"
+    }
+    name = "linkerd-viz"
   }
 }
 
@@ -214,5 +229,19 @@ resource "helm_release" "linkerd" {
       linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem),
       webhook_issuer_pem       = indent(4, tls_self_signed_cert.webhook_issuer_tls.cert_pem),
     }),
+  ]
+}
+
+# Install linkerd viz extension https://github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz
+resource "helm_release" "linkerd_viz" {
+  depends_on = [helm_release.linkerd]
+
+  repository = "https://helm.linkerd.io/stable"
+  chart      = "linkerd-viz"
+  name       = "linkerd-viz"
+  namespace  = kubernetes_namespace.viz.metadata[0].name
+  version    = "2.10.1"
+  values = [
+    templatefile("${path.module}/templates/values-viz.yaml.tpl", {}),
   ]
 }

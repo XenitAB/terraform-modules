@@ -39,3 +39,5 @@ prometheus:
         operator: In
         values: [platform]
 
+enabledMonitors:
+  linkerd: false

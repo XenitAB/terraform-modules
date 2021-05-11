@@ -184,3 +184,36 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: falco-exporter
       app.kubernetes.io/name: falco-exporter
+{{- if .Values.enabledMonitors.linkerd }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: linkerd-federate
+  namespace: linkerd-viz
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  endpoints:
+  - interval: 30s
+    scrapeTimeout: 30s
+    params:
+      match[]:
+      - '{job="linkerd-proxy"}'
+      - '{job="linkerd-controller"}'
+    path: /federate
+    port: admin-http
+    honorLabels: true
+    relabelings:
+    - action: keep
+      regex: '^prometheus$'
+      sourceLabels:
+      - '__meta_kubernetes_pod_container_name'
+  jobLabel: app
+  namespaceSelector:
+    matchNames:
+    - linkerd-viz
+  selector:
+    matchLabels:
+      component: prometheus
+{{- end }}

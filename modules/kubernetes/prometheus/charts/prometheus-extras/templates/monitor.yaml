@@ -184,3 +184,30 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: falco-exporter
       app.kubernetes.io/name: falco-exporter
+{{- if .Values.enabledMonitors.linkerd }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: linkerd-controller
+  namespace: linkerd
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      linkerd.io/control-plane-component: controller
+      linkerd.io/control-plane-ns: linkerd
+      linkerd.io/proxy-deployment: linkerd-controller
+  podMetricsEndpoints:
+    - port: linkerd-admin
+      #relabelings:
+      #- source_labels:
+      #    - __meta_kubernetes_pod_container_port_name
+      #  action: keep
+      #  regex: admin-http
+      #- source_labels:
+      #    - __meta_kubernetes_pod_container_name
+      #  action: replace
+      #  target_label: component
+{{- end }}

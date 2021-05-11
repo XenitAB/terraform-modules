@@ -40,3 +40,6 @@ prometheus:
 
 alertmanager:
   enabled: ${alertmanager_enabled}
+
+enabledMonitors:
+  linkerd: ${linkerd_enabled}

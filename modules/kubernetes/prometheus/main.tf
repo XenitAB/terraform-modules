@@ -60,6 +60,8 @@ resource "helm_release" "prometheus_extras" {
     environment  = var.environment
     tenant_id    = var.tenant_id
 
+    alertmanager_enabled = var.alertmanager_enabled
+
     resource_selector  = "[${join(", ", var.resource_selector)}]",
     namespace_selector = "[${join(", ", var.namespace_selector)}]",
   })]

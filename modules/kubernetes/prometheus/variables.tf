@@ -54,3 +54,9 @@ variable "namespace_selector" {
   type        = list(string)
   default     = ["platform"]
 }
+
+variable "alertmanager_enabled" {
+  description = "If alertmanager should be setup or not"
+  type        = bool
+  default     = false
+}

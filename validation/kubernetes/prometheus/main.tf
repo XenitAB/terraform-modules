@@ -15,5 +15,4 @@ module "prometheus" {
   remote_write_url = "https://my-remote-writer.com"
   cluster_name     = "aks1"
   environment      = "dev"
-
 }

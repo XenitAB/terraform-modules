@@ -37,3 +37,6 @@ prometheus:
       - key: xkf.xenit.io/kind
         operator: In
         values: ${namespace_selector}
+
+alertmanager:
+  enabled: ${alertmanager_enabled}

@@ -81,3 +81,10 @@ spec:
     fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 1000
+  {{- if .Values.alertmanager.enabled }}
+  alerting:
+    alertmanagers:
+    - name: alertmanager-xks
+      namespace: prometheus
+      port: web
+  {{- end }}

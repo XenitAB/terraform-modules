@@ -217,3 +217,24 @@ spec:
     matchLabels:
       component: prometheus
 {{- end }}
+{{- if .Values.enabledMonitors.goldpinger }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: goldpinger
+  namespace: goldpinger
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  endpoints:
+  - interval: 30s
+    port: http
+  namespaceSelector:
+    matchNames:
+    - goldpinger
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: goldpinger
+      app.kubernetes.io/name: goldpinger
+{{- end }}

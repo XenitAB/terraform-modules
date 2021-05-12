@@ -41,3 +41,4 @@ prometheus:
 
 enabledMonitors:
   linkerd: false
+  goldpinger: false

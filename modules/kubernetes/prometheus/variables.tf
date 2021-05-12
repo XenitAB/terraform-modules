@@ -61,8 +61,15 @@ variable "alertmanager_enabled" {
   default     = false
 }
 
+# Enable/Disable monitors
 variable "linkerd_enabled" {
   description = "Should linkerd be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "goldpinger_enabled" {
+  description = "Should goldpinger be enabled"
   type        = bool
   default     = false
 }

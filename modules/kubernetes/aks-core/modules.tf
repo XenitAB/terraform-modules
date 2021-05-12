@@ -383,5 +383,7 @@ module "goldpinger" {
   }
 
   source = "../../kubernetes/goldpinger"
+
+  linkerd_enabled = var.linkerd_enabled
 }
 

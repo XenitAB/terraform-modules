@@ -347,7 +347,7 @@ module "prometheus" {
   resource_selector  = var.prometheus_config.resource_selector
   namespace_selector = var.prometheus_config.namespace_selector
 
-  linkerd_enabled = var.linkerd_enabled
+  linkerd_enabled    = var.linkerd_enabled
   goldpinger_enabled = var.goldpinger_enabled
 }
 

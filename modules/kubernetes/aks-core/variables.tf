@@ -385,3 +385,9 @@ variable "linkerd_enabled" {
   type        = bool
   default     = false
 }
+
+variable "goldpinger_enabled" {
+  description = "Should goldpinger be enabled"
+  type        = bool
+  default     = true
+}

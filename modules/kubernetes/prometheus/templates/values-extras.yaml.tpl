@@ -43,3 +43,4 @@ alertmanager:
 
 enabledMonitors:
   linkerd: ${linkerd_enabled}
+  goldpinger: ${goldpinger_enabled}

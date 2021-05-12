@@ -66,5 +66,6 @@ resource "helm_release" "prometheus_extras" {
     namespace_selector = "[${join(", ", var.namespace_selector)}]",
 
     linkerd_enabled = var.linkerd_enabled
+    goldpinger_enabled = var.goldpinger_enabled
   })]
 }

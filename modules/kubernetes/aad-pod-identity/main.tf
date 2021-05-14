@@ -29,11 +29,12 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+#tf-latest-version:ignore
 resource "helm_release" "aad_pod_identity" {
   repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
   chart      = "aad-pod-identity"
   name       = "aad-pod-identity"
-  version    = "4.1.0"
+  version    = "4.0.0"
   namespace  = kubernetes_namespace.this.metadata[0].name
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     namespaces       = var.namespaces,

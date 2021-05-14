@@ -21,7 +21,7 @@ the bootstrap configuration.
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.6 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 4.9.4 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.10.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.1.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.2.0 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 3.1.0 |
 
 ## Providers
@@ -31,7 +31,7 @@ the bootstrap configuration.
 | <a name="provider_flux"></a> [flux](#provider\_flux) | 0.1.6 |
 | <a name="provider_github"></a> [github](#provider\_github) | 4.9.4 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.10.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.1.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.2.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 3.1.0 |
 
 ## Modules
@@ -51,9 +51,9 @@ No modules.
 | [github_repository_file.tenant](https://registry.terraform.io/providers/integrations/github/4.9.4/docs/resources/repository_file) | resource |
 | [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/resources/manifest) | resource |
 | [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/resources/manifest) | resource |
-| [kubernetes_namespace.flux_system](https://registry.terraform.io/providers/hashicorp/kubernetes/2.1.0/docs/resources/namespace) | resource |
-| [kubernetes_secret.cluster](https://registry.terraform.io/providers/hashicorp/kubernetes/2.1.0/docs/resources/secret) | resource |
-| [kubernetes_secret.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.1.0/docs/resources/secret) | resource |
+| [kubernetes_namespace.flux_system](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/namespace) | resource |
+| [kubernetes_secret.cluster](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/secret) | resource |
+| [kubernetes_secret.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/secret) | resource |
 | [tls_private_key.cluster](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/resources/private_key) | resource |
 | [tls_private_key.tenant](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/resources/private_key) | resource |
 | [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.6/docs/data-sources/install) | data source |

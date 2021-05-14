@@ -68,14 +68,43 @@ tfsec:
 validate:
 	set -e
 	CURRENT_DIR=$$PWD
+	PIDS=()
+
+	tf_validate () {
+		rm -f .terraform.lock.hcl
+		terraform init 1>/dev/null
+		set +e
+		OUTPUT=$$(terraform validate 2>&1)
+		EXIT_CODE=$$?
+		set -e
+		if [[ $$EXIT_CODE -ne 0 ]]; then
+			echo terraform-validate: $$1 failed
+			echo "$$OUTPUT"
+			exit $$EXIT_CODE
+		fi
+
+		echo terraform-validate: $$1 succeeded
+		exit $$EXIT_CODE
+	}
+
 	TF_MODULES=$$(find modules -maxdepth 2 -mindepth 2 -type d | sed "s|^modules/|validation/|g")
 	for MODULE in $$TF_MODULES; do
 		cd $$CURRENT_DIR/$${MODULE}
-		echo terraform-validate: $${MODULE}
-		rm -f .terraform.lock.hcl
-		terraform init 1>/dev/null
-		terraform validate
+		tf_validate $${MODULE} &
+		PIDS+=($$!)
 	done
+
+	EXIT_CODE=0
+	for PID in "$${PIDS[@]}"; do
+		set +e
+		wait "$$PID"
+		WAIT_EXIT_CODE=$$?
+		set -e
+		if [[ $$WAIT_EXIT_CODE -ne 0 ]]; then
+			EXIT_CODE=1
+		fi
+	done
+	exit $$EXIT_CODE
 
 .SILENT:
 terraform-init:

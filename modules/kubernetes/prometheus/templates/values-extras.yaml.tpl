@@ -40,7 +40,7 @@ prometheus:
 
 alertmanager:
   enabled: ${alertmanager_enabled}
-    ruleSelector:
+  ruleSelector:
     matchExpressions:
       - key: xkf.xenit.io/monitoring
         operator: In

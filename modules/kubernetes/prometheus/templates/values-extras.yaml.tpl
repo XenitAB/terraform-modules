@@ -40,6 +40,19 @@ prometheus:
 
 alertmanager:
   enabled: ${alertmanager_enabled}
+  ruleSelector:
+    matchExpressions:
+      - key: xkf.xenit.io/monitoring
+        operator: In
+        values: ${resource_selector}
+      - key: xkf.xenit.io/rule
+        operator: In
+        values: prometheus
+  ruleNamespaceSelector:
+    matchExpressions:
+      - key: xkf.xenit.io/kind
+        operator: In
+        values: ${namespace_selector}
 
 enabledMonitors:
   linkerd: ${linkerd_enabled}

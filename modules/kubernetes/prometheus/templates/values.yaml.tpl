@@ -30,3 +30,7 @@ global:
 # We don't monitor the clusters locally
 defaultRules:
   create: false
+
+prometheus-node-exporter:
+  nodeExporter:
+    priorityClassName: "system-node-critical"

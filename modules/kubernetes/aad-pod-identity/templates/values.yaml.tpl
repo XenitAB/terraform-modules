@@ -6,6 +6,7 @@ mic:
 nmi:
   allowNetworkPluginKubenet: true
   prometheusPort: 9090
+  priorityClassName: "system-node-critical"
 
 azureIdentities:
 %{ for namespace in namespaces ~}

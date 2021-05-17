@@ -10,7 +10,7 @@ This module will also add `minio` (S3 Gateway to Azure Storage Account), `fluent
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.14.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.59.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.1.2 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.2.0 |

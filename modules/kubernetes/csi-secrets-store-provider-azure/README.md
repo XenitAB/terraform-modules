@@ -6,7 +6,7 @@ Adds [csi-secrets-store-provider-azure](https://github.com/Azure/secrets-store-c
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.14.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.1.2 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.2.0 |
 

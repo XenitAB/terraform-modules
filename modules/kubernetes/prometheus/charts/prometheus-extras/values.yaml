@@ -39,6 +39,22 @@ prometheus:
         operator: In
         values: [platform]
 
+alertmanager:
+  enabled: false
+  ruleSelector:
+    matchExpressions:
+      - key: xkf.xenit.io/monitoring
+        operator: In
+        values: [platform]
+      - key: xkf.xenit.io/rule
+        operator: In
+        values: [prometheus]
+  ruleNamespaceSelector:
+    matchExpressions:
+      - key: xkf.xenit.io/kind
+        operator: In
+        values: [platform]
+
 enabledMonitors:
   linkerd: false
   goldpinger: false

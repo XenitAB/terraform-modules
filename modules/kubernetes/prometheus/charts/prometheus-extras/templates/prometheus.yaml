@@ -13,6 +13,7 @@ spec:
     tenant_id: {{ .Values.externalLabels.tenantId }}
     {{- end }}
   replicas: {{ .Values.replicaCount }}
+  priorityClassName: "platform-medium"
   serviceAccountName: {{ .Values.serviceAccount.name }}
   {{- with .Values.prometheus.resourceSelector }}
   serviceMonitorSelector:
@@ -84,7 +85,15 @@ spec:
   {{- if .Values.alertmanager.enabled }}
   alerting:
     alertmanagers:
-    - name: alertmanager-xks
-      namespace: prometheus
+    - name: alertmanager
+      namespace: monitor
       port: web
+  {{- with .Values.alertmanager.ruleNamespaceSelector }}
+  ruleNamespaceSelector:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.alertmanager.ruleSelector }}
+  ruleSelector:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   {{- end }}

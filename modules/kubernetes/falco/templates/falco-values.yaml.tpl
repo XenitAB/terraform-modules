@@ -67,3 +67,9 @@ customRules:
       condition: >
         (container.image.repository = "mcr.microsoft.com/oss/kubernetes/kube-proxy") or
         (container.image.repository = "quay.io/prometheus/node-exporter")
+
+  # AKS tunnelfront writes in /etc
+  rules_user_known_write_below_etc_activities.yaml: |-
+    - macro: user_known_write_below_etc_activities
+      condition: >
+        (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front")

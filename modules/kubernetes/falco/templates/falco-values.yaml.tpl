@@ -36,7 +36,14 @@ customRules:
         (container.image.repository = "ghcr.io/fluxcd/helm-controller") or
         (container.image.repository = "docker.io/grafana/loki") or
         (container.image.repository = "grafana/fluent-bit-plugin-loki") or
-        (container.image.repository = "ghcr.io/xenitab/azad-kube-proxy")
+        (container.image.repository = "ghcr.io/xenitab/azad-kube-proxy") or
+        (container.image.repository = "cr.l5d.io/linkerd/controller") or
+        (container.image.repository = "mcr.microsoft.com/oss/azure/aad-pod-identity/nmi") or
+        (container.image.repository = "quay.io/jetstack/cert-manager-cainjector") or
+        (container.image.repository = "docker.io/bitnami/external-dns") or
+        (container.image.repository = "squat/configmap-to-disk") or # thanos statefulset cm reloader
+        (container.image.repository = "stakater/reloader") or
+        (container.image.repository = "bloomberg/goldpinger")
 
 
   # Applications which spawn a docker or kubectl client
@@ -49,11 +56,8 @@ customRules:
         (container.image.repository = "docker.io/fluxcd/helm-operator") or
         (container.image.repository = "docker.io/fluxcd/flux") or
         (container.image.repository = "ghcr.io/fluxcd/kustomize-controller") or
-        (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front") or
-        (container.image.repository = "mcr.microsoft.com/oss/azure/aad-pod-identity/nmi") or
-        (container.image.repository = "docker.io/bitnami/external-dns") or
-        (container.image.repository = "stakater/reloader") or
-        (container.image.repository = "squat/configmap-to-disk")
+        (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front")
+
 
   # Sensitive mounts in containers
   # AKS uses a different kube-proxy image

@@ -28,7 +28,7 @@ resource "helm_release" "kyverno" {
   chart      = "kyverno"
   name       = "kyverno"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v1.3.5"
+  version    = "v1.3.6"
 }
 
 resource "helm_release" "kyverno_extras" {

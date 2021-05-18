@@ -223,7 +223,7 @@ resource "helm_release" "linkerd" {
   chart      = "linkerd2"
   name       = "linkerd"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "2.10.1"
+  version    = "2.10.2"
   values = [
     templatefile("${path.module}/templates/values.yaml.tpl", {
       linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem),

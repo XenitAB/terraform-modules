@@ -47,7 +47,7 @@ alertmanager:
         values: ${resource_selector}
       - key: xkf.xenit.io/rule
         operator: In
-        values: prometheus
+        values: [prometheus]
   ruleNamespaceSelector:
     matchExpressions:
       - key: xkf.xenit.io/kind

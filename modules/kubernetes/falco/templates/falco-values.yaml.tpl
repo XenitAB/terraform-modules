@@ -49,7 +49,11 @@ customRules:
         (container.image.repository = "docker.io/fluxcd/helm-operator") or
         (container.image.repository = "docker.io/fluxcd/flux") or
         (container.image.repository = "ghcr.io/fluxcd/kustomize-controller") or
-        (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front")
+        (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front") or
+        (container.image.repository = "mcr.microsoft.com/oss/azure/aad-pod-identity/nmi") or
+        (container.image.repository = "docker.io/bitnami/external-dns") or
+        (container.image.repository = "stakater/reloader") or
+        (container.image.repository = "squat/configmap-to-disk")
 
   # Sensitive mounts in containers
   # AKS uses a different kube-proxy image

@@ -31,6 +31,8 @@ global:
 defaultRules:
   create: false
 
+prometheusOperator:
+  priorityClassName: "platform-low"
+
 prometheus-node-exporter:
-  nodeExporter:
-    priorityClassName: "platform-high"
+  priorityClassName: "platform-high"

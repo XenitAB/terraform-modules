@@ -60,4 +60,9 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
     name  = "secrets-store-csi-driver.linux.tolerations[0].operator"
     value = "Exists"
   }
+
+  set {
+    name  = "secrets-store-csi-driver.linux.priorityClassName"
+    value = "platform-high"
+  }
 }

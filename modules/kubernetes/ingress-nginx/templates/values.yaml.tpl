@@ -3,7 +3,7 @@ nameOverride: ${name_override}
 controller:
   replicaCount: 3
 
-  priorityClassName: high
+  priorityClassName: platform-high
 
   ingressClass: ${ingress_class}
 

@@ -1,52 +1,85 @@
+# Priority classes allows pods to be scheduled before other pods and evict pods from nodes.
+# There are two types of priority classes, platform and tenant. All platform priority classes
+# should have a higher priority value than the tenant priority classes. The platform-high
+# class is not set to the maximum value on purpose, as to leave space to create even more
+# prioritized classes in the future. It is preferred to use these classes rather than
+# system-cluster-critical and system-node-critical as they are used by AKS critical pods
+# which should have higher priority.
+
 # TODO (Philip): Set preemptionPolicy when availible in the kubernetes provider.
-# Do not set global default until this has been completed.
 
-# Used by DaemonSets that need to always schedule on a node.
-# Ex. node-exporter, promtail, aad-pod-identity-nmi
-resource "kubernetes_priority_class" "critical" {
+# Platform
+
+resource "kubernetes_priority_class" "platform_high" {
   metadata {
-    name = "critical"
+    name = "platform-high"
     labels = {
       "xkf.xenit.io/kind" = "platform"
     }
   }
 
-  value = 1000000
+  description = "Used by DaemonSets that need to always schedule on every node. Ex. node-exporter, promtail, aad-pod-identity-nmi."
+  value = 900002
 }
 
-# Used by less critical pods that still need premeption.
-# Ex. Thanos Receiver, Nginx Ingress
-resource "kubernetes_priority_class" "high" {
+resource "kubernetes_priority_class" "platform_medium" {
   metadata {
-    name = "high"
+    name = "platform-medium"
     labels = {
       "xkf.xenit.io/kind" = "platform"
     }
   }
 
-  value = 100000
+  description = "Used by less critical pods that still need premeption. Ex. Thanos Receiver, Nginx Ingress."
+  value = 900001
 }
 
-# Used by anything non ciritical within XKF.
-resource "kubernetes_priority_class" "medium" {
+resource "kubernetes_priority_class" "platform_low" {
   metadata {
-    name = "medium"
+    name = "platform-low"
     labels = {
       "xkf.xenit.io/kind" = "platform"
     }
   }
 
-  value = 10000
+  description = "Should be default for all other platform pods."
+  value = 900000
 }
 
-# Default priority class.
-resource "kubernetes_priority_class" "low" {
+# Tenant
+
+resource "kubernetes_priority_class" "tenant_high" {
   metadata {
-    name = "low"
+    name = "tenant-high"
     labels = {
-      "xkf.xenit.io/kind" = "platform"
+      "xkf.xenit.io/kind" = "tenant"
     }
   }
 
-  value = 1000
+  description = "Used by tenant critical applications that should needs to run."
+  value = 800002
+}
+
+resource "kubernetes_priority_class" "tenant_medium" {
+  metadata {
+    name = "tenant-medium"
+    labels = {
+      "xkf.xenit.io/kind" = "tenant"
+    }
+  }
+
+  description = "Used by less critical tenant applications that still need priority."
+  value = 800001
+}
+
+resource "kubernetes_priority_class" "tenant_low" {
+  metadata {
+    name = "tenant-low"
+    labels = {
+      "xkf.xenit.io/kind" = "tenant"
+    }
+  }
+
+  description = "Good default for most tenant pods."
+  value = 800000
 }

@@ -3,6 +3,6 @@ postInstall:
     enabled: false
 experimentalEnableMutation: true
 controllerManager:
-  priorityClassName: critical
+  priorityClassName: platform-high
 audit:
-  priorityClassName: critical
+  priorityClassName: platform-high

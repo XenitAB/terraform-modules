@@ -1,1 +1,1 @@
-priorityClassName: critical
+priorityClassName: platform-high

@@ -1,30 +1,51 @@
+# TODO (Philip): Set preemptionPolicy when availible in the kubernetes provider.
+# Do not set global default until this has been completed.
+
+# Used by DaemonSets that need to always schedule on a node.
+# Ex. node-exporter, promtail, aad-pod-identity-nmi
 resource "kubernetes_priority_class" "critical" {
   metadata {
     name = "critical"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
   }
 
   value = 1000000
 }
 
+# Used by less critical pods that still need premeption.
+# Ex. Thanos Receiver, Nginx Ingress
 resource "kubernetes_priority_class" "high" {
   metadata {
     name = "high"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
   }
 
   value = 100000
 }
 
+# Used by anything non ciritical within XKF.
 resource "kubernetes_priority_class" "medium" {
   metadata {
     name = "medium"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
   }
 
   value = 10000
 }
 
+# Default priority class.
 resource "kubernetes_priority_class" "low" {
   metadata {
     name = "low"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
   }
 
   value = 1000

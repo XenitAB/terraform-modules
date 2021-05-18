@@ -2,3 +2,7 @@ postInstall:
   labelNamespace:
     enabled: false
 experimentalEnableMutation: true
+controllerManager:
+  priorityClassName: critical
+audit:
+  priorityClassName: critical

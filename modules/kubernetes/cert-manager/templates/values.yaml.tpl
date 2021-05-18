@@ -1,5 +1,8 @@
 installCRDs: true
 
+global:
+  priorityClassName: "platform-low"
+
 %{ if provider == "azure" }
 podLabels:
   aadpodidbinding: cert-manager

@@ -42,6 +42,11 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
   }
 
   set {
+    name  = "linux.priorityClassName"
+    value = "platform-high"
+  }
+
+  set {
     name  = "secrets-store-csi-driver.linux.metricsAddr"
     value = ":8081"
   }
@@ -54,5 +59,10 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
   set {
     name  = "secrets-store-csi-driver.linux.tolerations[0].operator"
     value = "Exists"
+  }
+
+  set {
+    name  = "secrets-store-csi-driver.linux.priorityClassName"
+    value = "platform-high"
   }
 }

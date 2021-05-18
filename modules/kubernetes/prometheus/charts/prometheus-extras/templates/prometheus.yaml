@@ -13,6 +13,7 @@ spec:
     tenant_id: {{ .Values.externalLabels.tenantId }}
     {{- end }}
   replicas: {{ .Values.replicaCount }}
+  priorityClassName: "platform-medium"
   serviceAccountName: {{ .Values.serviceAccount.name }}
   {{- with .Values.prometheus.resourceSelector }}
   serviceMonitorSelector:

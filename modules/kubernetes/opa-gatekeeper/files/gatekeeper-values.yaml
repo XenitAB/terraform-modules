@@ -2,3 +2,7 @@ postInstall:
   labelNamespace:
     enabled: false
 experimentalEnableMutation: true
+controllerManager:
+  priorityClassName: platform-high
+audit:
+  priorityClassName: platform-high

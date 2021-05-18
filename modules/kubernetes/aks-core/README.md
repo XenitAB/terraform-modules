@@ -6,7 +6,7 @@ This module is used to create AKS clusters.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.14.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 1.4.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.59.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.6 |
@@ -63,6 +63,12 @@ This module is used to create AKS clusters.
 | [kubernetes_namespace.service_accounts](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/namespace) | resource |
 | [kubernetes_namespace.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/namespace) | resource |
 | [kubernetes_network_policy.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/network_policy) | resource |
+| [kubernetes_priority_class.platform_high](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/priority_class) | resource |
+| [kubernetes_priority_class.platform_low](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/priority_class) | resource |
+| [kubernetes_priority_class.platform_medium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/priority_class) | resource |
+| [kubernetes_priority_class.tenant_high](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/priority_class) | resource |
+| [kubernetes_priority_class.tenant_low](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/priority_class) | resource |
+| [kubernetes_priority_class.tenant_medium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/priority_class) | resource |
 | [kubernetes_role_binding.edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.sa_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/role_binding) | resource |

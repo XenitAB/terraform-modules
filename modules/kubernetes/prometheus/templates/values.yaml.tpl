@@ -17,6 +17,7 @@ prometheus:
   enabled: false
 
 kube-state-metrics:
+  priorityClassName: "platform-low"
   podSecurityPolicy:
     enabled: false
 

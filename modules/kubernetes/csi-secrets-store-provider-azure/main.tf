@@ -42,6 +42,11 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
   }
 
   set {
+    name  = "linux.priorityClassName"
+    value = "platform-high"
+  }
+
+  set {
     name  = "secrets-store-csi-driver.linux.metricsAddr"
     value = ":8081"
   }

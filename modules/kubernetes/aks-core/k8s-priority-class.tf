@@ -5,7 +5,10 @@
 # prioritized classes in the future. It is preferred to use these classes rather than
 # system-cluster-critical and system-node-critical as they are used by AKS critical pods
 # which should have higher priority.
-
+#
+# Hot tip if you want to list all pods and their priority class in a cluster.
+# `kubectl get pods --all-namespaces -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name,PRIORITY:.spec.priorityClassName`
+#
 # TODO (Philip): Set preemptionPolicy when availible in the kubernetes provider.
 
 # Platform

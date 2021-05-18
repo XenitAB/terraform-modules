@@ -1,0 +1,31 @@
+resource "kubernetes_priority_class" "critical" {
+  metadata {
+    name = "critical"
+  }
+
+  value = 1000000
+}
+
+resource "kubernetes_priority_class" "high" {
+  metadata {
+    name = "high"
+  }
+
+  value = 100000
+}
+
+resource "kubernetes_priority_class" "medium" {
+  metadata {
+    name = "medium"
+  }
+
+  value = 10000
+}
+
+resource "kubernetes_priority_class" "low" {
+  metadata {
+    name = "low"
+  }
+
+  value = 1000
+}

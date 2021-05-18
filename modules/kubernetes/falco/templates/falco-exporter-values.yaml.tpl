@@ -1,1 +1,1 @@
-priorityClassName: system-node-critical
+priorityClassName: critical

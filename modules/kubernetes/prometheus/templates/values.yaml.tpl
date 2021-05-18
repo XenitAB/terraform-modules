@@ -33,4 +33,4 @@ defaultRules:
 
 prometheus-node-exporter:
   nodeExporter:
-    priorityClassName: "system-node-critical"
+    priorityClassName: "critical"

@@ -1,7 +1,7 @@
 goldpinger:
   port: 8080
 
-priorityClassName: "system-node-critical"
+priorityClassName: "critical"
 
 %{ if linkerd_enabled }
 podAnnotations:

@@ -23,7 +23,7 @@ falco:
     actions:
       - log
 
-priorityClassName: system-node-critical
+priorityClassName: critical
 
 customRules:
   # Applications which are expected to communicate with the Kubernetes API

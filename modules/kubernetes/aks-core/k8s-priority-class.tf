@@ -22,7 +22,7 @@ resource "kubernetes_priority_class" "platform_high" {
   }
 
   description = "Used by DaemonSets that need to always schedule on every node. Ex. node-exporter, promtail, aad-pod-identity-nmi."
-  value = 900002
+  value       = 900002
 }
 
 resource "kubernetes_priority_class" "platform_medium" {
@@ -34,7 +34,7 @@ resource "kubernetes_priority_class" "platform_medium" {
   }
 
   description = "Used by less critical pods that still need premeption. Ex. Thanos Receiver, Nginx Ingress."
-  value = 900001
+  value       = 900001
 }
 
 resource "kubernetes_priority_class" "platform_low" {
@@ -46,7 +46,7 @@ resource "kubernetes_priority_class" "platform_low" {
   }
 
   description = "Should be default for all other platform pods."
-  value = 900000
+  value       = 900000
 }
 
 # Tenant
@@ -60,7 +60,7 @@ resource "kubernetes_priority_class" "tenant_high" {
   }
 
   description = "Used by tenant critical applications that should needs to run."
-  value = 800002
+  value       = 800002
 }
 
 resource "kubernetes_priority_class" "tenant_medium" {
@@ -72,7 +72,7 @@ resource "kubernetes_priority_class" "tenant_medium" {
   }
 
   description = "Used by less critical tenant applications that still need priority."
-  value = 800001
+  value       = 800001
 }
 
 resource "kubernetes_priority_class" "tenant_low" {
@@ -84,5 +84,5 @@ resource "kubernetes_priority_class" "tenant_low" {
   }
 
   description = "Good default for most tenant pods."
-  value = 800000
+  value       = 800000
 }

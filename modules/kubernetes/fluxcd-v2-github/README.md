@@ -17,7 +17,7 @@ the bootstrap configuration.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.14.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.6 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 4.9.4 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.10.0 |

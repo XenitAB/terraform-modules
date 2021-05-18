@@ -26,3 +26,5 @@ serviceAccount:
 policy: sync # will also delete the record
 registry: "txt"
 txtOwnerId: "${txt_owner_id}"
+
+priorityClassName: "platform-low"

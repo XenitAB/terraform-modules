@@ -17,6 +17,7 @@ prometheus:
   enabled: false
 
 kube-state-metrics:
+  priorityClassName: "platform-low"
   podSecurityPolicy:
     enabled: false
 
@@ -30,3 +31,9 @@ global:
 # We don't monitor the clusters locally
 defaultRules:
   create: false
+
+prometheusOperator:
+  priorityClassName: "platform-low"
+
+prometheus-node-exporter:
+  priorityClassName: "platform-high"

@@ -10,7 +10,7 @@ Follow this guide to setup the agent pool (manually): https://docs.microsoft.com
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.14.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.59.0 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 3.1.0 |
 

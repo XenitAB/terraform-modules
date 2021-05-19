@@ -60,3 +60,5 @@ initContainers:
       - mountPath: "/target"
         name: "plugins"
 %{ endif }
+
+priorityClassName: "platform-low"

@@ -9,7 +9,7 @@ variable "environment" {
 }
 
 variable "subscription_name" {
-  description = "The subscriptionCommonName to use for the deploy"
+  description = "The subscription CommonName to use for the deploy"
   type        = string
 }
 
@@ -55,7 +55,7 @@ variable "group_name_separator" {
 }
 
 variable "azure_ad_group_prefix" {
-  description = "Prefix for Azure AD Groupss"
+  description = "Prefix for Azure AD Groups"
   type        = string
   default     = "az"
 }

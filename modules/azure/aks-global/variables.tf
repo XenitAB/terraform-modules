@@ -1,5 +1,5 @@
 variable "location_short" {
-  description = "The Azure region short name."
+  description = "The Azure region short name"
   type        = string
 }
 
@@ -24,7 +24,7 @@ variable "core_name" {
 }
 
 variable "namespaces" {
-  description = "The namespaces that should be created in Kubernetes."
+  description = "The namespaces that should be created in Kubernetes"
   type = list(
     object({
       name                    = string
@@ -44,7 +44,7 @@ variable "aks_authorized_ips" {
 }
 
 variable "public_ip_prefix_configuration" {
-  description = "Configuration for public ip prefix"
+  description = "Configuration for public IP prefix"
   type = object({
     count         = number
     prefix_length = number
@@ -68,7 +68,7 @@ variable "group_name_separator" {
 }
 
 variable "azure_ad_group_prefix" {
-  description = "Prefix for Azure AD Groupss"
+  description = "Prefix for Azure AD Groups"
   type        = string
   default     = "az"
 }

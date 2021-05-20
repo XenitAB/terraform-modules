@@ -1,10 +1,10 @@
 variable "location_short" {
-  description = "The location (short name) for the region"
+  description = "The Azure region short name"
   type        = string
 }
 
 variable "environment" {
-  description = "The environment (short name) to use for the deploy"
+  description = "The environment name to use for the deploy"
   type        = string
 }
 
@@ -55,7 +55,7 @@ variable "vmss_instances" {
 }
 
 variable "vmss_sku" {
-  description = "The sku for VMSS instances"
+  description = "The SKU for VMSS instances"
   type        = string
   default     = "Standard_F4s_v2"
 }

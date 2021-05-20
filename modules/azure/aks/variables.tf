@@ -1,5 +1,5 @@
 variable "location_short" {
-  description = "The Azure region short name."
+  description = "The Azure region short name"
   type        = string
 }
 
@@ -19,7 +19,7 @@ variable "core_name" {
 }
 
 variable "aks_name_suffix" {
-  description = "The suffix for the aks clusters"
+  description = "The suffix for the Azure Kubernetes Service (AKS) clusters"
   type        = number
 }
 
@@ -63,7 +63,7 @@ variable "aks_public_ip_prefix_id" {
 }
 
 variable "aad_groups" {
-  description = "Configuration for aad groups"
+  description = "Configuration for Azure AD Groups (AAD Groups)"
   type = object({
     view = map(any)
     edit = map(any)
@@ -83,7 +83,7 @@ variable "aad_groups" {
 }
 
 variable "namespaces" {
-  description = "The namespaces that should be created in Kubernetes."
+  description = "The namespaces that should be created in Kubernetes"
   type = list(
     object({
       name                    = string

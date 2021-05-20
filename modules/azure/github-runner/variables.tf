@@ -1,10 +1,10 @@
 variable "location_short" {
-  description = "The location (short name) for the region"
+  description = "The Azure region short name"
   type        = string
 }
 
 variable "environment" {
-  description = "The environment (short name) to use for the deploy"
+  description = "The environment name to use for the deploy"
   type        = string
 }
 
@@ -106,7 +106,7 @@ variable "github_installation_id_kvsecret" {
 }
 
 variable "github_private_key_kvsecret" {
-  description = "The Azure KeyVault Secret containing the GitHub App Private Key"
+  description = "The AzureKey Vault Secret containing the GitHub App Private Key"
   type        = string
   default     = "github-private-key" #tfsec:ignore:GEN001
 }

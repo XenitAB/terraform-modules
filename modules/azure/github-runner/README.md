@@ -46,16 +46,16 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_environment"></a> [environment](#input\_environment) | The environment (short name) to use for the deploy | `string` | n/a | yes |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_github_app_id_kvsecret"></a> [github\_app\_id\_kvsecret](#input\_github\_app\_id\_kvsecret) | The Azure KeyVault Secret containing the GitHub App ID | `string` | `"github-app-id"` | no |
 | <a name="input_github_installation_id_kvsecret"></a> [github\_installation\_id\_kvsecret](#input\_github\_installation\_id\_kvsecret) | The Azure KeyVault Secret containing the GitHub App Installation ID | `string` | `"github-installation-id"` | no |
 | <a name="input_github_organization_kvsecret"></a> [github\_organization\_kvsecret](#input\_github\_organization\_kvsecret) | The Azure KeyVault Secret containing the GitHub Organization name | `string` | `"github-organization"` | no |
-| <a name="input_github_private_key_kvsecret"></a> [github\_private\_key\_kvsecret](#input\_github\_private\_key\_kvsecret) | The Azure KeyVault Secret containing the GitHub App Private Key | `string` | `"github-private-key"` | no |
+| <a name="input_github_private_key_kvsecret"></a> [github\_private\_key\_kvsecret](#input\_github\_private\_key\_kvsecret) | The AzureKey Vault Secret containing the GitHub App Private Key | `string` | `"github-private-key"` | no |
 | <a name="input_github_runner_image_name"></a> [github\_runner\_image\_name](#input\_github\_runner\_image\_name) | The Azure Pipelines agent image name | `string` | n/a | yes |
 | <a name="input_github_runner_image_resource_group_name"></a> [github\_runner\_image\_resource\_group\_name](#input\_github\_runner\_image\_resource\_group\_name) | The Azure Pipelines agent image resource group name | `string` | `""` | no |
 | <a name="input_keyvault_name"></a> [keyvault\_name](#input\_keyvault\_name) | The keyvault name | `string` | `""` | no |
 | <a name="input_keyvault_resource_group_name"></a> [keyvault\_resource\_group\_name](#input\_keyvault\_resource\_group\_name) | The keyvault resource group name | `string` | `""` | no |
-| <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The location (short name) for the region | `string` | n/a | yes |
+| <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The commonName to use for the deploy | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The resource group name | `string` | `""` | no |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | `""` | no |

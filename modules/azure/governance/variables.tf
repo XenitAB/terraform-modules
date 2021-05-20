@@ -17,12 +17,12 @@ variable "subscription_name" {
 }
 
 variable "core_name" {
-  description = "The commonName for the core infra"
+  description = "The commonName for the core infrastrucutre"
   type        = string
 }
 
 variable "resource_group_configs" {
-  description = "Resource group configuration"
+  description = "Resource Group configuration"
   type = list(
     object({
       common_name                = string
@@ -53,7 +53,7 @@ variable "group_name_separator" {
 }
 
 variable "azure_ad_group_prefix" {
-  description = "Prefix for Azure AD Groupss"
+  description = "Prefix for Azure AD Groups"
   type        = string
   default     = "az"
 }

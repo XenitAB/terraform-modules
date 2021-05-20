@@ -19,7 +19,7 @@ variable "owner_service_principal_name" {
 }
 
 variable "core_name" {
-  description = "The commonName for the core infra"
+  description = "The commonName for the core infrastructure"
   type        = string
 }
 

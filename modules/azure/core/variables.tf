@@ -1,5 +1,5 @@
 variable "location_short" {
-  description = "The location shortname for the subscription"
+  description = "The Azure region short name"
   type        = string
 }
 
@@ -9,7 +9,7 @@ variable "environment" {
 }
 
 variable "subscription_name" {
-  description = "The subscription CommonName to use for the deploy"
+  description = "The subscription commonName to use for the deploy"
   type        = string
 }
 
@@ -19,7 +19,7 @@ variable "name" {
 }
 
 variable "vnet_config" {
-  description = "Address spaces used by virtual network."
+  description = "Address spaces used by virtual network"
   type = object({
     address_space = list(string)
     dns_servers   = list(string)
@@ -33,7 +33,7 @@ variable "vnet_config" {
 }
 
 variable "route_config" {
-  description = "Route configuration. Not applied to aks subnets."
+  description = "Route configuration. Not applied to AKS subnets"
   type = list(object({
     subnet_name = string # Short name for the subnet
     routes = list(object({
@@ -48,7 +48,7 @@ variable "route_config" {
 }
 
 variable "peering_config" {
-  description = "Peering configuration"
+  description = "Network peering configuration"
   type = list(object({
     name                         = string
     remote_virtual_network_id    = string
@@ -66,7 +66,7 @@ variable "group_name_separator" {
 }
 
 variable "azure_ad_group_prefix" {
-  description = "Prefix for Azure AD Groupss"
+  description = "Prefix for Azure AD Groups"
   type        = string
   default     = "az"
 }

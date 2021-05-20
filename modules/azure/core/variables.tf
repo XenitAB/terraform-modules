@@ -9,7 +9,7 @@ variable "environment" {
 }
 
 variable "subscription_name" {
-  description = "The subscriptionCommonName to use for the deploy"
+  description = "The subscription CommonName to use for the deploy"
   type        = string
 }
 

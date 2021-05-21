@@ -34,5 +34,5 @@ override.tf.json
 node_modules/
 dist/
 
-# Temporary folders
+# temp
 tmp/

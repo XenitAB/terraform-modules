@@ -72,40 +72,22 @@ data "template_file" "shutdown_aks_function_json" {
 
 resource "local_file" "shutdown_aks_function_json" {
     content     = data.template_file.shutdown_aks_function_json.rendered
-    filename = "${path.module}/tmp/functions/ShutdownAKS/function.json"
+    filename = "${path.module}/functions/ShutdownAKS/function.json"
 }
 
 # This is only used to trigger null_resource.this in case of files changed inside of the functions folder
-data "archive_file" "dummy" {
+data "archive_file" "this" {
   type        = "zip"
   source_dir = "${path.module}/functions"
-  output_path = "${path.module}/tmp/dummy.zip"
-}
-
-resource "null_resource" "this" {
-  depends_on = [local_file.shutdown_aks_function_json, data.archive_file.dummy]
-  
-  provisioner "local-exec" {
-    command = "cd ${path.module}/functions && ./terraform-deploy.sh"
-  }
-
-  triggers = {
-    "functions" = data.archive_file.dummy.output_sha
-    "shutdown_aks_function_json" = sha256(data.template_file.shutdown_aks_function_json.rendered)
-  }
-}
-
-locals {
-  archive_file_path = "${path.module}/tmp/functions.zip"
+  output_path = "${path.module}/tmp/functions.zip"
 }
 
 resource "azurerm_storage_blob" "this" {
-  depends_on = [null_resource.this]
-  name                   = "${filesha256(local.archive_file_path)}.zip"
+  name                   = "${data.archive_file.this.output_sha}.zip"
   storage_account_name   = azurerm_storage_account.this.name
   storage_container_name = azurerm_storage_container.this.name
   type                   = "Block"
-  source                 = local.archive_file_path
+  source                 = "${path.module}/tmp/functions.zip"
 }
 
 resource "time_rotating" "this" {

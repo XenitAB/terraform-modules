@@ -29,3 +29,10 @@ override.tf.json
 # example: *tfplan*
 
 .terraform.lock.hcl
+
+# Node / TypeScript folders
+node_modules/
+dist/
+
+# Temporary folders
+tmp/

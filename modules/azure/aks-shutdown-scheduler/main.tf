@@ -155,7 +155,7 @@ resource "null_resource" "this" {
 
           printf '.'
           attempt_counter=$(($attempt_counter+1))
-          sleep 5
+          sleep $(($attempt_counter*5))
       done
 EOT
 

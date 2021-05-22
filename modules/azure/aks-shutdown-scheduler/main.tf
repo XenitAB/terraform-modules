@@ -90,8 +90,6 @@ data "template_file" "this" {
   vars = {
     shutdown_aks_cron_expression = var.shutdown_aks_cron_expression
     shutdown_aks_disabled        = var.shutdown_aks_disabled
-    start_aks_cron_expression    = var.start_aks_cron_expression
-    start_aks_disabled           = var.start_aks_disabled
   }
 }
 

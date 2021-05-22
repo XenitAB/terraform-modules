@@ -49,11 +49,17 @@ resource "azurerm_app_service_plan" "this" {
   name                = "svcplan-${var.environment}-${var.location_short}-${var.name}"
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
-  kind                = "FunctionApp"
+  kind                = "Linux"
 
   sku {
     tier = "Dynamic"
     size = "Y1"
+  }
+
+  lifecycle {
+    ignore_changes = [
+      kind
+    ]
   }
 }
 
@@ -168,8 +174,11 @@ resource "azurerm_function_app" "this" {
   storage_account_name       = azurerm_storage_account.this.name
   storage_account_access_key = azurerm_storage_account.this.primary_access_key
   version                    = "~3"
+  os_type                    = "linux"
 
   app_settings = {
+    "SCM_DO_BUILD_DURING_DEPLOYMENT" = "true",
+    "ENABLE_ORYX_BUILD"              = "true",
     "WEBSITE_RUN_FROM_PACKAGE"       = "${azurerm_storage_blob.this.url}${data.azurerm_storage_account_blob_container_sas.this.sas}",
     "FUNCTIONS_WORKER_RUNTIME"       = "node",
     "AzureWebJobsDisableHomepage"    = "true",

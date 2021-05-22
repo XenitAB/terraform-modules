@@ -27,7 +27,7 @@ terraform {
       version = "0.7.1"
     }
     local = {
-      source = "hashicorp/local"
+      source  = "hashicorp/local"
       version = "2.1.0"
     }
   }
@@ -63,23 +63,65 @@ resource "azurerm_storage_container" "this" {
   container_access_type = "private"
 }
 
-data "template_file" "shutdown_aks_function_json" {
-  template = "${file("${path.module}/templates/shutdown_aks_function.json.tpl")}"
+locals {
+  function_files = { for function_file in fileset("${path.module}/functions", "**") :
+    function_file => {
+      destination_path = function_file
+      source_path      = "${path.module}/functions/${function_file}"
+    }
+  }
+  template_files = { for template_file in fileset("${path.module}/templates", "**") :
+    template_file => {
+      destination_path = template_file
+      source_path      = "${path.module}/templates/${template_file}"
+    }
+  }
+}
+
+output "function_files" {
+  description = "Function files"
+  value       = local.function_files
+}
+
+output "template_files" {
+  description = "Template files"
+  value       = local.template_files
+}
+
+data "local_file" "this" {
+  for_each = local.function_files
+  filename = each.value.source_path
+}
+
+data "template_file" "this" {
+  for_each = local.template_files
+  template = file(each.value.source_path)
+
   vars = {
     cron_expression = var.shutdown_aks_cron_expression
   }
 }
 
-resource "local_file" "shutdown_aks_function_json" {
-    content     = data.template_file.shutdown_aks_function_json.rendered
-    filename = "${path.module}/functions/ShutdownAKS/function.json"
-}
-
 # This is only used to trigger null_resource.this in case of files changed inside of the functions folder
 data "archive_file" "this" {
   type        = "zip"
-  source_dir = "${path.module}/functions"
   output_path = "${path.module}/tmp/functions.zip"
+
+  dynamic "source" {
+    for_each = local.function_files
+    content {
+      content  = data.local_file.this[source.key].content
+      filename = source.value.destination_path
+    }
+  }
+
+  dynamic "source" {
+    for_each = local.template_files
+    content {
+      content  = data.template_file.this[source.key].rendered
+      filename = source.value.destination_path
+    }
+  }
 }
 
 resource "azurerm_storage_blob" "this" {
@@ -87,7 +129,7 @@ resource "azurerm_storage_blob" "this" {
   storage_account_name   = azurerm_storage_account.this.name
   storage_container_name = azurerm_storage_container.this.name
   type                   = "Block"
-  source                 = "${path.module}/tmp/functions.zip"
+  source                 = data.archive_file.this.output_path
 }
 
 resource "time_rotating" "this" {
@@ -134,6 +176,6 @@ resource "azurerm_function_app" "this" {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.this.instrumentation_key,
     "WEBSITE_NODE_DEFAULT_VERSION"   = "~14",
     "FUNCTION_APP_EDIT_MODE"         = "readonly",
-    "HASH"                           = filesha256(local.archive_file_path)
+    "HASH"                           = data.archive_file.this.output_sha
   }
 }

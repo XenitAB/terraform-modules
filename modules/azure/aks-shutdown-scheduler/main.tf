@@ -37,14 +37,6 @@ data "azurerm_resource_group" "this" {
   name = var.resource_group_name == "" ? "rg-${var.environment}-${var.location_short}-${var.name}" : var.resource_group_name
 }
 
-resource "azurerm_storage_account" "this" {
-  name                     = "strg${var.environment}${var.location_short}${var.name}fn${var.unique_suffix}"
-  resource_group_name      = data.azurerm_resource_group.this.name
-  location                 = data.azurerm_resource_group.this.location
-  account_tier             = "Standard"
-  account_replication_type = "GRS"
-}
-
 resource "azurerm_app_service_plan" "this" {
   name                = "svcplan-${var.environment}-${var.location_short}-${var.name}"
   resource_group_name = data.azurerm_resource_group.this.name
@@ -55,12 +47,6 @@ resource "azurerm_app_service_plan" "this" {
     tier = "Dynamic"
     size = "Y1"
   }
-}
-
-resource "azurerm_storage_container" "this" {
-  name                  = "functions"
-  storage_account_name  = azurerm_storage_account.this.name
-  container_access_type = "private"
 }
 
 locals {
@@ -114,6 +100,14 @@ data "archive_file" "this" {
   }
 }
 
+resource "azurerm_storage_account" "this" {
+  name                     = "strg${var.environment}${var.location_short}${var.name}fn${var.unique_suffix}"
+  resource_group_name      = data.azurerm_resource_group.this.name
+  location                 = data.azurerm_resource_group.this.location
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
+}
+
 resource "azurerm_application_insights" "this" {
   name                = "ai-${var.environment}-${var.location_short}-${var.name}"
   resource_group_name = data.azurerm_resource_group.this.name
@@ -145,7 +139,7 @@ resource "null_resource" "this" {
   provisioner "local-exec" {
     command = <<EOT
       attempt_counter=0
-      max_attempts=5
+      max_attempts=10
 
       until $(curl --silent --fail -X POST --user $DEPLOYMENT_USER --data-binary @$BINARY_DATA_PATH $URL); do
           if [ $attempt_counter -eq $max_attempts ];then

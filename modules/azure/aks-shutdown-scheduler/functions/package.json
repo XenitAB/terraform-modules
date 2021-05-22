@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "npm install && tsc && npm prune --production",
     "postinstall": "npm run build"
   },
   "devDependencies": {

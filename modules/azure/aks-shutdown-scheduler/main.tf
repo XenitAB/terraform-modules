@@ -50,6 +50,7 @@ resource "azurerm_app_service_plan" "this" {
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
   kind                = "Linux"
+  reserved            = true
 
   sku {
     tier = "Dynamic"

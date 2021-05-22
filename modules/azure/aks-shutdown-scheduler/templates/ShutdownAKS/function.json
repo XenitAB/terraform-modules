@@ -1,10 +1,11 @@
 {
+  "disabled": ${shutdown_aks_disabled},
   "bindings": [
     {
       "name": "myTimer",
       "type": "timerTrigger",
       "direction": "in",
-      "schedule": "${cron_expression}"
+      "schedule": "${shutdown_aks_cron_expression}"
     }
   ],
   "scriptFile": "../dist/ShutdownAKS/index.js"

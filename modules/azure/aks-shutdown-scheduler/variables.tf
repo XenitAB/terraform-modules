@@ -28,5 +28,11 @@ variable "unique_suffix" {
 variable "shutdown_aks_cron_expression" {
   description = "The cron expression to use to shutdown AKS"
   type        = string
-  default     = "0 2 * * * *"
+  default     = "0 20 * * * *"
+}
+
+variable "shutdown_aks_disabled" {
+  description = "Should the ShutdownAKS function be disabled?"
+  type        = bool
+  default     = false
 }

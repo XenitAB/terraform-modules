@@ -1,13 +1,16 @@
 {
-  "name": "azfn-shutdown-aks",
+  "name": "azfn-aks-power-schedule",
   "version": "1.0.0",
-  "description": "",
+  "description": "Azure Function to handle AKS Power Schedule",
+  "author": {
+    "email": "noreply@xenit.se",
+    "name": "Xenit",
+    "url": "https://www.xenit.se"
+  },
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w",
-    "prestart": "npm run build",
-    "start": "func start",
-    "test": "echo \"No tests yet...\""
+    "postinstall": "npm run build"
   },
   "devDependencies": {
     "@azure/functions": "^1.2.3",

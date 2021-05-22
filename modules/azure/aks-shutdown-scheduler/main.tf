@@ -22,13 +22,13 @@ terraform {
       source  = "hashicorp/archive"
       version = "2.2.0"
     }
-    time = {
-      source  = "hashicorp/time"
-      version = "0.7.1"
-    }
     local = {
       source  = "hashicorp/local"
       version = "2.1.0"
+    }
+    null = {
+      source  = "hashicorp/null"
+      version = "3.1.0"
     }
   }
 }
@@ -49,18 +49,11 @@ resource "azurerm_app_service_plan" "this" {
   name                = "svcplan-${var.environment}-${var.location_short}-${var.name}"
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
-  kind                = "Linux"
-  reserved            = true
+  kind                = "FunctionApp"
 
   sku {
     tier = "Dynamic"
     size = "Y1"
-  }
-
-  lifecycle {
-    ignore_changes = [
-      kind
-    ]
   }
 }
 
@@ -85,16 +78,6 @@ locals {
   }
 }
 
-output "function_files" {
-  description = "Function files"
-  value       = local.function_files
-}
-
-output "template_files" {
-  description = "Template files"
-  value       = local.template_files
-}
-
 data "local_file" "this" {
   for_each = local.function_files
   filename = each.value.source_path
@@ -105,11 +88,13 @@ data "template_file" "this" {
   template = file(each.value.source_path)
 
   vars = {
-    cron_expression = var.shutdown_aks_cron_expression
+    shutdown_aks_cron_expression = var.shutdown_aks_cron_expression
+    shutdown_aks_disabled        = var.shutdown_aks_disabled
+    start_aks_cron_expression    = var.start_aks_cron_expression
+    start_aks_disabled           = var.start_aks_disabled
   }
 }
 
-# This is only used to trigger null_resource.this in case of files changed inside of the functions folder
 data "archive_file" "this" {
   type        = "zip"
   output_path = "${path.module}/tmp/functions.zip"
@@ -131,35 +116,6 @@ data "archive_file" "this" {
   }
 }
 
-resource "azurerm_storage_blob" "this" {
-  name                   = "${data.archive_file.this.output_sha}.zip"
-  storage_account_name   = azurerm_storage_account.this.name
-  storage_container_name = azurerm_storage_container.this.name
-  type                   = "Block"
-  source                 = data.archive_file.this.output_path
-}
-
-resource "time_rotating" "this" {
-  rotation_hours = 43800 # 5 years
-}
-
-data "azurerm_storage_account_blob_container_sas" "this" {
-  connection_string = azurerm_storage_account.this.primary_connection_string
-  container_name    = azurerm_storage_container.this.name
-
-  start  = time_rotating.this.rfc3339
-  expiry = timeadd(time_rotating.this.rotation_rfc3339, "87600h") # 10 years
-
-  permissions {
-    read   = true
-    add    = false
-    create = false
-    write  = false
-    delete = false
-    list   = false
-  }
-}
-
 resource "azurerm_application_insights" "this" {
   name                = "ai-${var.environment}-${var.location_short}-${var.name}"
   resource_group_name = data.azurerm_resource_group.this.name
@@ -175,17 +131,45 @@ resource "azurerm_function_app" "this" {
   storage_account_name       = azurerm_storage_account.this.name
   storage_account_access_key = azurerm_storage_account.this.primary_access_key
   version                    = "~3"
-  os_type                    = "linux"
 
   app_settings = {
     "SCM_DO_BUILD_DURING_DEPLOYMENT" = "true",
-    "ENABLE_ORYX_BUILD"              = "true",
-    "WEBSITE_RUN_FROM_PACKAGE"       = "${azurerm_storage_blob.this.url}${data.azurerm_storage_account_blob_container_sas.this.sas}",
     "FUNCTIONS_WORKER_RUNTIME"       = "node",
     "AzureWebJobsDisableHomepage"    = "true",
     "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.this.instrumentation_key,
     "WEBSITE_NODE_DEFAULT_VERSION"   = "~14",
-    "FUNCTION_APP_EDIT_MODE"         = "readonly",
-    "HASH"                           = data.archive_file.this.output_sha
+  }
+}
+
+resource "null_resource" "this" {
+  depends_on = [azurerm_function_app.this]
+
+  provisioner "local-exec" {
+    command = <<EOT
+      attempt_counter=0
+      max_attempts=5
+
+      until $(curl --silent --fail -X POST --user $DEPLOYMENT_USER --data-binary @$BINARY_DATA_PATH $URL); do
+          if [ $attempt_counter -eq $max_attempts ];then
+            echo "Max attempts reached"
+            exit 1
+          fi
+
+          printf '.'
+          attempt_counter=$(($attempt_counter+1))
+          sleep 5
+      done
+EOT
+
+    environment = {
+      DEPLOYMENT_USER  = "${azurerm_function_app.this.site_credential[0].username}:${azurerm_function_app.this.site_credential[0].password}"
+      BINARY_DATA_PATH = data.archive_file.this.output_path
+      URL              = "https://${azurerm_function_app.this.name}.scm.azurewebsites.net/api/zipdeploy?isAsync=true"
+    }
+  }
+
+  triggers = {
+    "archive_sha"     = data.archive_file.this.output_sha
+    "deployment_user" = "${azurerm_function_app.this.site_credential[0].username}:${azurerm_function_app.this.site_credential[0].password}"
   }
 }

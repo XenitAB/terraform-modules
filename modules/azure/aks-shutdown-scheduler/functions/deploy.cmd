@@ -2,7 +2,7 @@
 
 :: ----------------------
 :: KUDU Deployment Script
-:: Version: 1.0.8
+:: Version: 1.0.17
 :: ----------------------
 
 :: Prerequisites
@@ -47,64 +47,106 @@ IF NOT DEFINED KUDU_SYNC_CMD (
   :: Locally just running "kuduSync" would also work
   SET KUDU_SYNC_CMD=%appdata%\npm\kuduSync.cmd
 )
-goto Deployment
-
-:: Utility Functions
-:: -----------------
-
-:SelectNodeVersion
-
-IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
-  :: The following are done only on Windows Azure Websites environment
-  call %KUDU_SELECT_NODE_VERSION_CMD% "%DEPLOYMENT_SOURCE%" "%DEPLOYMENT_TARGET%" "%DEPLOYMENT_TEMP%"
-  IF !ERRORLEVEL! NEQ 0 goto error
-
-  IF EXIST "%DEPLOYMENT_TEMP%\__nodeVersion.tmp" (
-    SET /p NODE_EXE=<"%DEPLOYMENT_TEMP%\__nodeVersion.tmp"
-    IF !ERRORLEVEL! NEQ 0 goto error
-  )
-
-  IF EXIST "%DEPLOYMENT_TEMP%\__npmVersion.tmp" (
-    SET /p NPM_JS_PATH=<"%DEPLOYMENT_TEMP%\__npmVersion.tmp"
-    IF !ERRORLEVEL! NEQ 0 goto error
-  )
-
-  IF NOT DEFINED NODE_EXE (
-    SET NODE_EXE=node
-  )
-
-  SET NPM_CMD="!NODE_EXE!" "!NPM_JS_PATH!"
-) ELSE (
-  SET NPM_CMD=npm
-  SET NODE_EXE=node
-)
-
-goto :EOF
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: Deployment
 :: ----------
 
-:Deployment
-echo Handling node.js deployment.
+echo Handling function App deployment.
 
-:: 1. KuduSync
+if "%SCM_USE_FUNCPACK%" == "1" (
+  call :DeployWithFuncPack
+) else (
+  call :DeployWithoutFuncPack
+)
+
+goto end
+
+:DeployWithFuncPack
+setlocal
+
+echo Using funcpack to optimize cold start
+
+:: 1. Copy to local storage
+echo Copying repository files to local storage
+xcopy "%DEPLOYMENT_SOURCE%" "%DEPLOYMENT_TEMP%" /seyiq
+IF !ERRORLEVEL! NEQ 0 goto error
+
+:: 2. Install function extensions
+call :InstallFunctionExtensions "%DEPLOYMENT_TEMP%"
+
+:: 3. Restore npm
+call :RestoreNpmPackages "%DEPLOYMENT_TEMP%"
+
+:: 4. FuncPack
+pushd "%DEPLOYMENT_TEMP%"
+call funcpack pack .
+IF !ERRORLEVEL! NEQ 0 goto error
+popd
+
+:: 5. KuduSync
+call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd;node_modules;obj"
+IF !ERRORLEVEL! NEQ 0 goto error
+
+exit /b %ERRORLEVEL%
+
+
+:DeployWithoutFuncPack
+setlocal
+
+echo Not using funcpack because SCM_USE_FUNCPACK is not set to 1
+
+:: 1. Install function extensions
+call :InstallFunctionExtensions "%DEPLOYMENT_SOURCE%"
+
+:: 2. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd;obj"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
-:: 2. Select node version
-call :SelectNodeVersion
+:: 3. Restore npm
+call :RestoreNpmPackages "%DEPLOYMENT_TARGET%"
 
-:: 3. Install npm packages
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
-  !NPM_CMD! run build
+exit /b %ERRORLEVEL%
+
+
+:RestoreNpmPackages
+setlocal
+
+echo Restoring npm packages in %1
+
+IF EXIST "%1\package.json" (
+  pushd "%1"
+  call npm install
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
 
+FOR /F "tokens=*" %%i IN ('DIR /B %1 /A:D') DO (
+  IF EXIST "%1\%%i\package.json" (
+    pushd "%1\%%i"
+    call npm install --production
+    IF !ERRORLEVEL! NEQ 0 goto error
+    popd
+  )
+)
+
+exit /b %ERRORLEVEL%
+
+:InstallFunctionExtensions
+setlocal
+
+echo Installing function extensions from nuget
+
+IF EXIST "%1\extensions.csproj" (
+  pushd "%1"
+  call dotnet build -o bin
+  IF !ERRORLEVEL! NEQ 0 goto error
+  popd
+)
+
+exit /b %ERRORLEVEL%
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
 

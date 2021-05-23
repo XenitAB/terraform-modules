@@ -2,7 +2,7 @@
   "disabled": ${shutdown_aks_disabled},
   "bindings": [
     {
-      "name": "myTimer",
+      "name": "timer",
       "type": "timerTrigger",
       "direction": "in",
       "schedule": "${shutdown_aks_cron_expression}"

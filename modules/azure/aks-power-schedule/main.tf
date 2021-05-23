@@ -1,12 +1,7 @@
 /**
-  * # Azure Kubernetes Service Shutdown Scheduler
+  * # Azure Kubernetes Service Power Schedule
   *
-  * Levrage Azure Functions (consumption plan) to create a cron job (time trigger) to shutdown a specific AKS cluster on a schedule.
-  *
-  * # Using module locally
-  *
-  * You may have to delete the `tmp` folder between local runs if it fails with an error like:
-  * `could not generate output checksum: archive/tar: write too long`
+  * Levrage Azure Functions (consumption plan) to create a cron job (time trigger) to handle AKS power schedule.
   *
   */
 
@@ -32,6 +27,8 @@ terraform {
     }
   }
 }
+
+data "azurerm_subscription" "this" {}
 
 data "azurerm_resource_group" "this" {
   name = var.resource_group_name == "" ? "rg-${var.environment}-${var.location_short}-${var.name}" : var.resource_group_name
@@ -124,13 +121,28 @@ resource "azurerm_function_app" "this" {
   storage_account_access_key = azurerm_storage_account.this.primary_access_key
   version                    = "~3"
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   app_settings = {
     "SCM_DO_BUILD_DURING_DEPLOYMENT" = "true",
     "FUNCTIONS_WORKER_RUNTIME"       = "node",
     "AzureWebJobsDisableHomepage"    = "true",
     "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.this.instrumentation_key,
     "WEBSITE_NODE_DEFAULT_VERSION"   = "~14",
+    "AZURE_SUBSCRIPTION_ID"          = data.azurerm_subscription.this.subscription_id,
+    "AZURE_RESOURCE_NAME_FILTER"     = var.aks_cluster_name
   }
+}
+
+resource "azurerm_role_assignment" "this" {
+  scope = data.azurerm_resource_group.this.id
+
+  # Can't find any roles that allow the specific action to stop a cluster
+  role_definition_name = "Contributor"
+
+  principal_id = azurerm_function_app.this.identity[0].principal_id
 }
 
 resource "null_resource" "this" {

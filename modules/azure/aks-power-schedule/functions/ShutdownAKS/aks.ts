@@ -27,12 +27,13 @@ export const ShutdownClusters = async (context: Context, config: Config.Config):
     return true
 }
 
-const newCredential = async (): Promise<AzureAuth.AzureCliCredentials> => {
-    const credential = await AzureAuth.AzureCliCredentials.create()
+const newCredential = async (): Promise<AzureAuth.MSIAppServiceTokenCredentials> => {
+    const options: AzureAuth.MSIAppServiceOptions = {}
+    const credential = await AzureAuth.loginWithAppServiceMSI(options)
     return credential
 }
 
-const newClient = (credentials: AzureAuth.AzureCliCredentials, subscriptionId: string): ContainerServiceClient => {
+const newClient = (credentials: AzureAuth.MSIAppServiceTokenCredentials, subscriptionId: string): ContainerServiceClient => {
     const client = new ContainerServiceClient(credentials, subscriptionId)
     return client
 }

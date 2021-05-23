@@ -25,6 +25,11 @@ variable "unique_suffix" {
   default     = ""
 }
 
+variable "aks_cluster_name" {
+  description = "The name of the AKS cluster"
+  type        = string
+}
+
 variable "shutdown_aks_cron_expression" {
   description = "The cron expression to use to shutdown AKS"
   type        = string

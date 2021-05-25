@@ -70,12 +70,3 @@ resource "helm_release" "prometheus_extras" {
     goldpinger_enabled     = var.goldpinger_enabled
   })]
 }
-
-resource "helm_release" "k8s_version_exporter" {
-  repository = "https://charts.bitnami.com/bitnami"
-  chart      = "nginx"
-  name       = "k8s-version-exporter"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "8.9.0"
-  values     = [templatefile("${path.module}/templates/k8s-version-exporter-values.yaml.tpl", {})]
-}

@@ -16,6 +16,9 @@ containerSecurityContext:
   capabilities:
     drop:
     - NET_RAW
+  # Work around until PR gets merged
+  # https://github.com/bitnami/charts/pull/6101
+  sysctls: null
 
 service:
   type: ClusterIP

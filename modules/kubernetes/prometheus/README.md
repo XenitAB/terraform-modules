@@ -25,6 +25,7 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [helm_release.k8s_version_exporter](https://registry.terraform.io/providers/hashicorp/helm/2.1.2/docs/resources/release) | resource |
 | [helm_release.prometheus](https://registry.terraform.io/providers/hashicorp/helm/2.1.2/docs/resources/release) | resource |
 | [helm_release.prometheus_extras](https://registry.terraform.io/providers/hashicorp/helm/2.1.2/docs/resources/release) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/namespace) | resource |

@@ -184,6 +184,37 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: falco-exporter
       app.kubernetes.io/name: falco-exporter
+{{- if .Values.enabledMonitors.opaGatekeeper }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: gatekeeper-audit
+  namespace: gatekeeper-system
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      app: gatekeeper
+      control-plane: audit-controller
+  podMetricsEndpoints:
+    - port: metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: gatekeeper-controller-manager
+  namespace: gatekeeper-system
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      app: gatekeeper
+      control-plane: controller-manager
+  podMetricsEndpoints:
+    - port: metrics
+{{- end }}
 {{- if .Values.enabledMonitors.linkerd }}
 ---
 apiVersion: monitoring.coreos.com/v1

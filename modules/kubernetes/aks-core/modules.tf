@@ -26,6 +26,18 @@ module "opa_gatekeeper" {
         }
         parameters = {}
       },
+      {
+        kind               = "K8sPodPriorityClass"
+        name               = "pod-priority-class"
+        enforcement_action = ""
+        match = {
+          kinds      = []
+          namespaces = []
+        }
+        parameters = {
+          permittedClassNames = ["platform-high", "platform-medium", "platform-low", "tenant-high", "tenant-medium", "tenant-low"]
+        }
+      },
     ]
   )
   enable_default_assigns = var.opa_gatekeeper_config.enable_default_assigns

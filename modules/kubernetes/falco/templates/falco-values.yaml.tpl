@@ -41,7 +41,7 @@ customRules:
         (container.image.repository = "mcr.microsoft.com/oss/azure/aad-pod-identity/nmi") or
         (container.image.repository = "quay.io/jetstack/cert-manager-cainjector") or
         (container.image.repository = "docker.io/bitnami/external-dns") or
-        (container.image.repository = "squat/configmap-to-disk") or # thanos statefulset cm reloader
+        (container.image.repository = "squat/configmap-to-disk") or
         (container.image.repository = "stakater/reloader") or
         (container.image.repository = "bloomberg/goldpinger")
 

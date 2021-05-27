@@ -130,16 +130,6 @@ locals {
       }
     },
     {
-      kind               = "K8sPodPriorityClass"
-      name               = "pod-priority-class"
-      enforcement_action = ""
-      match = {
-        kinds      = []
-        namespaces = []
-      }
-      parameters = {}
-    },
-    {
       kind               = "SecretsStoreCSIUniqueVolume"
       name               = "unique-volume"
       enforcement_action = ""

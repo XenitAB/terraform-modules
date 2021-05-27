@@ -36,7 +36,14 @@ customRules:
         (container.image.repository = "ghcr.io/fluxcd/helm-controller") or
         (container.image.repository = "docker.io/grafana/loki") or
         (container.image.repository = "grafana/fluent-bit-plugin-loki") or
-        (container.image.repository = "ghcr.io/xenitab/azad-kube-proxy")
+        (container.image.repository = "ghcr.io/xenitab/azad-kube-proxy") or
+        (container.image.repository = "cr.l5d.io/linkerd/controller") or
+        (container.image.repository = "mcr.microsoft.com/oss/azure/aad-pod-identity/nmi") or
+        (container.image.repository = "quay.io/jetstack/cert-manager-cainjector") or
+        (container.image.repository = "docker.io/bitnami/external-dns") or
+        (container.image.repository = "squat/configmap-to-disk") or
+        (container.image.repository = "stakater/reloader") or
+        (container.image.repository = "bloomberg/goldpinger")
 
 
   # Applications which spawn a docker or kubectl client
@@ -51,6 +58,7 @@ customRules:
         (container.image.repository = "ghcr.io/fluxcd/kustomize-controller") or
         (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front")
 
+
   # Sensitive mounts in containers
   # AKS uses a different kube-proxy image
   # Node exporter has to mount sensitive paths
@@ -59,3 +67,9 @@ customRules:
       condition: >
         (container.image.repository = "mcr.microsoft.com/oss/kubernetes/kube-proxy") or
         (container.image.repository = "quay.io/prometheus/node-exporter")
+
+  # AKS tunnelfront writes in /etc
+  rules_user_known_write_below_etc_activities.yaml: |-
+    - macro: user_known_write_below_etc_activities
+      condition: >
+        (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front")

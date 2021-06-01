@@ -272,10 +272,11 @@ module "datadog" {
 
   source = "../../kubernetes/datadog"
 
-  location     = var.location_short
-  environment  = var.environment
-  datadog_site = var.datadog_config.datadog_site
-  api_key      = var.datadog_config.api_key
+  location          = var.location_short
+  environment       = var.environment
+  datadog_site      = var.datadog_config.datadog_site
+  api_key           = var.datadog_config.api_key
+  container_include = var.datadog_config.container_include
 }
 
 # falco

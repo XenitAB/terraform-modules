@@ -18,3 +18,8 @@ variable "api_key" {
   description = "API key to authenticate to Datadog"
   type        = string
 }
+
+variable "container_include" {
+  description = "The container/ns that should be checked by Datadog"
+  type        = string
+}

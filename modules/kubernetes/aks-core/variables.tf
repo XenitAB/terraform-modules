@@ -257,12 +257,14 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
-    datadog_site = string
-    api_key      = string
+    datadog_site      = string
+    api_key           = string
+    container_include = string
   })
   default = {
-    datadog_site = ""
-    api_key      = ""
+    datadog_site      = ""
+    api_key           = ""
+    container_include = ""
   }
 }
 

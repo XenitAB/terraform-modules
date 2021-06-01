@@ -9,10 +9,11 @@ module "datadog" {
 
   providers = {
     kubernetes = kubernetes
-    helm = helm
+    helm       = helm
   }
 
-  api_key = "key" #tfsec:ignore:GEN003
-  location = "foo"
-  environment = "bar"
+  api_key           = "key" #tfsec:ignore:GEN003
+  location          = "foo"
+  environment       = "bar"
+  container_include = "kube_namespace:.*."
 }

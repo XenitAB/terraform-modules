@@ -1,6 +1,7 @@
 # Datadog
 
 Adds [Datadog](https://github.com/DataDog/helm-charts) to a Kubernetes cluster.
+This module is built to only gather application data
 
 ## Requirements
 
@@ -33,6 +34,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_api_key"></a> [api\_key](#input\_api\_key) | API key to authenticate to Datadog | `string` | n/a | yes |
+| <a name="input_container_include"></a> [container\_include](#input\_container\_include) | The container/ns that should be checked by Datadog | `string` | n/a | yes |
 | <a name="input_datadog_site"></a> [datadog\_site](#input\_datadog\_site) | Site to connect Datadog agent | `string` | `"datadoghq.eu"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Cluster environment | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | Cluster location | `string` | n/a | yes |

@@ -2,6 +2,7 @@
   * # Datadog
   *
   * Adds [Datadog](https://github.com/DataDog/helm-charts) to a Kubernetes cluster.
+  * This module is built to only gather application data
   */
 
 terraform {
@@ -21,10 +22,11 @@ terraform {
 
 locals {
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
-    datadog_site = var.datadog_site
-    api_key      = var.api_key
-    location     = var.location
-    environment  = var.environment
+    datadog_site      = var.datadog_site
+    api_key           = var.api_key
+    location          = var.location
+    environment       = var.environment
+    container_include = var.container_include
   })
 }
 

@@ -12,7 +12,7 @@ datadog:
   leaderElection: true
   logs:
     enabled: true
-    containerCollectAll: true
+    containerCollectAll: false
     containerCollectUsingFiles: true
   apm:
     enabled: true
@@ -22,6 +22,9 @@ datadog:
     enabled: true
     processCollection: true
   containerExcludeLogs: "kube_namespace:kube-system kube_namespace:datadog"
+  env:
+    - name: DD_CONTAINER_INCLUDE
+      value: ${container_include}
 
 agents:
   tolerations:

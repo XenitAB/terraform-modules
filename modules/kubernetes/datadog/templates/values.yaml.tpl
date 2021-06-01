@@ -25,6 +25,10 @@ datadog:
   env:
     - name: DD_CONTAINER_INCLUDE
       value: ${container_include}
+    - name: DD_CONTAINER_INCLUDE_METRICS
+      value: ${container_include}
+    - name: DD_CONTAINER_INCLUDE_LOGS
+      value: ${container_include}
     - name: DD_KUBELET_TLS_VERIFY
       value: "false"
 

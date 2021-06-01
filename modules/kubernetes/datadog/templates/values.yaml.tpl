@@ -29,6 +29,8 @@ datadog:
 agents:
   tolerations:
     - operator: "Exists"
+  priorityClassName: platform-high
 
 clusterAgent:
   enabled: true
+  priorityClassName: platform-low

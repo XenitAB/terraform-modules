@@ -25,6 +25,8 @@ datadog:
   env:
     - name: DD_CONTAINER_INCLUDE
       value: ${container_include}
+    - name: DD_KUBELET_TLS_VERIFY
+      value: "false"
 
 agents:
   tolerations:

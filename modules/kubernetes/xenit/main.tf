@@ -17,7 +17,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.2.0"
+      version = "2.3.0"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -72,7 +72,7 @@ resource "helm_release" "xenit_proxy" {
   chart      = "nginx"
   name       = "xenit-proxy"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "8.9.0"
+  version    = "8.9.1"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     thanos_receiver_fqdn = var.thanos_receiver_fqdn
     loki_api_fqdn        = var.loki_api_fqdn

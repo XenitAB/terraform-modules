@@ -7,21 +7,21 @@ This module is used to create AKS clusters.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 1.4.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.59.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.6 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 4.9.4 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 1.5.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.61.0 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.8 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | 4.10.1 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.1.2 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.10.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.2.0 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.11.1 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.3.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.59.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.2.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.61.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.3.0 |
 
 ## Modules
 
@@ -51,34 +51,34 @@ This module is used to create AKS clusters.
 
 | Name | Type |
 |------|------|
-| [kubernetes_cluster_role.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.list_namespaces](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.toolkit_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.toolkit_kustomization](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role_binding.cluster_admin](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_cluster_role_binding.cluster_view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_cluster_role_binding.edit_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_cluster_role_binding.view_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_limit_range.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/limit_range) | resource |
-| [kubernetes_namespace.service_accounts](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/namespace) | resource |
-| [kubernetes_namespace.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/namespace) | resource |
-| [kubernetes_network_policy.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/network_policy) | resource |
-| [kubernetes_priority_class.platform_high](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/priority_class) | resource |
-| [kubernetes_priority_class.platform_low](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/priority_class) | resource |
-| [kubernetes_priority_class.platform_medium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/priority_class) | resource |
-| [kubernetes_priority_class.tenant_high](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/priority_class) | resource |
-| [kubernetes_priority_class.tenant_low](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/priority_class) | resource |
-| [kubernetes_priority_class.tenant_medium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/priority_class) | resource |
-| [kubernetes_role_binding.edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.sa_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.sa_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.toolkit_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.toolkit_kustomization](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/role_binding) | resource |
-| [kubernetes_service_account.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/service_account) | resource |
-| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.59.0/docs/data-sources/client_config) | data source |
-| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.59.0/docs/data-sources/resource_group) | data source |
+| [kubernetes_cluster_role.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.list_namespaces](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.toolkit_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.toolkit_kustomization](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role_binding.cluster_admin](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_cluster_role_binding.cluster_view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_cluster_role_binding.edit_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_cluster_role_binding.view_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_limit_range.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/limit_range) | resource |
+| [kubernetes_namespace.service_accounts](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/namespace) | resource |
+| [kubernetes_namespace.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/namespace) | resource |
+| [kubernetes_network_policy.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/network_policy) | resource |
+| [kubernetes_priority_class.platform_high](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/priority_class) | resource |
+| [kubernetes_priority_class.platform_low](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/priority_class) | resource |
+| [kubernetes_priority_class.platform_medium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/priority_class) | resource |
+| [kubernetes_priority_class.tenant_high](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/priority_class) | resource |
+| [kubernetes_priority_class.tenant_low](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/priority_class) | resource |
+| [kubernetes_priority_class.tenant_medium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/priority_class) | resource |
+| [kubernetes_role_binding.edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.sa_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.sa_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.toolkit_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.toolkit_kustomization](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/role_binding) | resource |
+| [kubernetes_service_account.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/service_account) | resource |
+| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.61.0/docs/data-sources/client_config) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.61.0/docs/data-sources/resource_group) | data source |
 
 ## Inputs
 

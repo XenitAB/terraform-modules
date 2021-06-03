@@ -10,7 +10,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.2.0"
+      version = "2.3.0"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -34,7 +34,7 @@ resource "helm_release" "ingress_nginx" {
   chart      = "ingress-nginx"
   name       = "ingress-nginx"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "3.30.0"
+  version    = "3.32.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet,
     name_override          = var.name_override,

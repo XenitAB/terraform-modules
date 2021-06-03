@@ -10,7 +10,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.2.0"
+      version = "2.3.0"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -38,7 +38,7 @@ resource "helm_release" "prometheus" {
   chart      = "kube-prometheus-stack"
   name       = "prometheus"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "15.4.6"
+  version    = "16.1.2"
   values     = [templatefile("${path.module}/templates/values.yaml.tpl", {})]
 }
 

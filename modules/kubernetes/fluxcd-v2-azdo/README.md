@@ -19,10 +19,10 @@ the bootstrap configuration.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
 | <a name="requirement_azuredevops"></a> [azuredevops](#requirement\_azuredevops) | 0.3.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.6 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.8 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.1.2 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.10.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.2.0 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.11.1 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.3.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
 
 ## Providers
@@ -30,10 +30,10 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | <a name="provider_azuredevops"></a> [azuredevops](#provider\_azuredevops) | 0.3.0 |
-| <a name="provider_flux"></a> [flux](#provider\_flux) | 0.1.6 |
+| <a name="provider_flux"></a> [flux](#provider\_flux) | 0.1.8 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.1.2 |
-| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.10.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.2.0 |
+| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.11.1 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.3.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.1.0 |
 
 ## Modules
@@ -50,19 +50,19 @@ No modules.
 | [azuredevops_git_repository_file.sync](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository_file) | resource |
 | [azuredevops_git_repository_file.tenant](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository_file) | resource |
 | [helm_release.azdo_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.1.2/docs/resources/release) | resource |
-| [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/resources/manifest) | resource |
-| [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/resources/manifest) | resource |
-| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/namespace) | resource |
-| [kubernetes_secret.cluster](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/secret) | resource |
-| [kubernetes_secret.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.2.0/docs/resources/secret) | resource |
+| [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.1/docs/resources/manifest) | resource |
+| [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.1/docs/resources/manifest) | resource |
+| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/namespace) | resource |
+| [kubernetes_secret.cluster](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/secret) | resource |
+| [kubernetes_secret.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/secret) | resource |
 | [random_password.cluster](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) | resource |
 | [random_password.tenant](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) | resource |
 | [azuredevops_git_repository.cluster](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/git_repository) | data source |
 | [azuredevops_project.this](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/project) | data source |
-| [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.6/docs/data-sources/install) | data source |
-| [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.6/docs/data-sources/sync) | data source |
-| [kubectl_file_documents.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/data-sources/file_documents) | data source |
-| [kubectl_file_documents.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.10.0/docs/data-sources/file_documents) | data source |
+| [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.8/docs/data-sources/install) | data source |
+| [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.8/docs/data-sources/sync) | data source |
+| [kubectl_file_documents.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.1/docs/data-sources/file_documents) | data source |
+| [kubectl_file_documents.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.1/docs/data-sources/file_documents) | data source |
 
 ## Inputs
 

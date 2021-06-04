@@ -37,7 +37,7 @@ terraform {
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
-      version = "1.11.1"
+      version = "1.10.0"
     }
     random = {
       source  = "hashicorp/random"
@@ -76,18 +76,18 @@ resource "helm_release" "azdo_proxy" {
   name       = "azdo-proxy"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v0.4.0-rc1"
-  values = [templatefile("${path.module}/templates/azdo-proxy-values.yaml.tpl", {
-    azure_devops_pat  = var.azure_devops_pat,
-    azure_devops_org  = var.azure_devops_org,
-    azure_devops_proj = var.azure_devops_proj,
-    cluster_repo      = var.cluster_repo,
-    tenants = [for ns in var.namespaces : {
-      project : ns.flux.proj
-      repo : ns.flux.repo
-      namespace : ns.name
-      }
-      if ns.flux.enabled
-    ],
+  values     = [templatefile("${path.module}/templates/azdo-proxy-values.yaml.tpl", {
+      azure_devops_pat  = var.azure_devops_pat,
+      azure_devops_org  = var.azure_devops_org,
+      azure_devops_proj = var.azure_devops_proj,
+      cluster_repo      = var.cluster_repo,
+      tenants = [for ns in var.namespaces : {
+          project : ns.flux.proj
+          repo : ns.flux.repo
+          namespace: ns.name
+        }
+        if ns.flux.enabled
+      ],
     })
   ]
 }

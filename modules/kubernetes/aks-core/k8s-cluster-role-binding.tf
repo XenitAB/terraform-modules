@@ -2,7 +2,8 @@ resource "kubernetes_cluster_role_binding" "cluster_admin" {
   metadata {
     name = "clusteradmin"
     labels = {
-      "aad-group-name" = var.aad_groups.cluster_admin.name
+      "aad-group-name"    = var.aad_groups.cluster_admin.name
+      "xkf.xenit.io/kind" = "platform"
     }
   }
   role_ref {
@@ -21,7 +22,8 @@ resource "kubernetes_cluster_role_binding" "cluster_view" {
   metadata {
     name = "clusterview"
     labels = {
-      "aad-group-name" = var.aad_groups.cluster_view.name
+      "aad-group-name"    = var.aad_groups.cluster_view.name
+      "xkf.xenit.io/kind" = "platform"
     }
   }
   role_ref {

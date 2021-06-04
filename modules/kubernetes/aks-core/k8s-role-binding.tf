@@ -6,7 +6,8 @@ resource "kubernetes_role_binding" "view" {
     namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
 
     labels = {
-      "aad-group-name" = var.aad_groups.view[each.key].name
+      "aad-group-name"    = var.aad_groups.view[each.key].name
+      "xkf.xenit.io/kind" = "platform"
     }
   }
   role_ref {
@@ -29,7 +30,8 @@ resource "kubernetes_role_binding" "edit" {
     namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
 
     labels = {
-      "aad-group-name" = var.aad_groups.edit[each.key].name
+      "aad-group-name"    = var.aad_groups.edit[each.key].name
+      "xkf.xenit.io/kind" = "platform"
     }
   }
   role_ref {
@@ -53,7 +55,8 @@ resource "kubernetes_role_binding" "helm_release" {
     namespace = each.value.name
 
     labels = {
-      "aad-group-name" = var.aad_groups.edit[each.key].name
+      "aad-group-name"    = var.aad_groups.edit[each.key].name
+      "xkf.xenit.io/kind" = "platform"
     }
   }
   role_ref {
@@ -68,21 +71,22 @@ resource "kubernetes_role_binding" "helm_release" {
   }
 }
 
-resource "kubernetes_role_binding" "toolkit_helm_release" {
+resource "kubernetes_role_binding" "toolkit_cr_permissions" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name      = "toolkit-helm-release"
+    name      = "toolkit-cr-permissions"
     namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
 
     labels = {
-      "aad-group-name" = var.aad_groups.edit[each.key].name
+      "aad-group-name"    = var.aad_groups.edit[each.key].name
+      "xkf.xenit.io/kind" = "platform"
     }
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.toolkit_helm_release.metadata[0].name
+    name      = kubernetes_cluster_role.toolkit_cr_permissions.metadata[0].name
   }
   subject {
     api_group = "rbac.authorization.k8s.io"
@@ -91,21 +95,22 @@ resource "kubernetes_role_binding" "toolkit_helm_release" {
   }
 }
 
-resource "kubernetes_role_binding" "toolkit_kustomization" {
+resource "kubernetes_role_binding" "cert_manager_cr_permissions" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name      = "toolkit-kustomization"
+    name      = "cert-manager-cr-permissions"
     namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
 
     labels = {
-      "aad-group-name" = var.aad_groups.edit[each.key].name
+      "aad-group-name"    = var.aad_groups.edit[each.key].name
+      "xkf.xenit.io/kind" = "platform"
     }
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.toolkit_kustomization.metadata[0].name
+    name      = kubernetes_cluster_role.cert_manager_cr_permissions.metadata[0].name
   }
   subject {
     api_group = "rbac.authorization.k8s.io"
@@ -120,7 +125,9 @@ resource "kubernetes_role_binding" "sa_edit" {
   metadata {
     name      = "sa-${each.value.name}-edit"
     namespace = each.value.name
-
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
@@ -141,6 +148,9 @@ resource "kubernetes_role_binding" "sa_helm_release" {
   metadata {
     name      = "sa-${each.value.name}-helm-release"
     namespace = each.value.name
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"

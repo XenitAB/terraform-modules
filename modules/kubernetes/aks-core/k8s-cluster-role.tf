@@ -1,6 +1,9 @@
 resource "kubernetes_cluster_role" "list_namespaces" {
   metadata {
     name = "list-namespaces"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
   }
   rule {
     api_groups = [""]
@@ -12,6 +15,9 @@ resource "kubernetes_cluster_role" "list_namespaces" {
 resource "kubernetes_cluster_role" "helm_release" {
   metadata {
     name = "helm-release"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
   }
   rule {
     api_groups = ["helm.fluxcd.io"]
@@ -20,24 +26,30 @@ resource "kubernetes_cluster_role" "helm_release" {
   }
 }
 
-resource "kubernetes_cluster_role" "toolkit_helm_release" {
+resource "kubernetes_cluster_role" "toolkit_cr_permissions" {
   metadata {
-    name = "toolkit-helm-release"
+    name = "toolkit-cr-permissions"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
   }
   rule {
-    api_groups = ["helm.toolkit.fluxcd.io"]
+    api_groups = ["*.toolkit.fluxcd.io"]
     resources  = ["*"]
     verbs      = ["*"]
   }
 }
 
-resource "kubernetes_cluster_role" "toolkit_kustomization" {
+resource "kubernetes_cluster_role" "cert_manager_cr_permissions" {
   metadata {
-    name = "toolkit-kustomization"
+    name = "cert-manager-cr-permissions"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
   }
   rule {
-    api_groups = ["kustomize.toolkit.fluxcd.io"]
+    api_groups = ["*.cert-manager.io"]
     resources  = ["*"]
-    verbs      = ["get, list, watch"]
+    verbs      = ["*"]
   }
 }

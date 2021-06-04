@@ -1,6 +1,5 @@
 image:
-  tag: v0.3.6
-replicaCount: 1
+  tag: v0.4.0-rc1
 resources:
   requests:
     cpu: 100m
@@ -9,20 +8,24 @@ resources:
     memory: 256Mi
 config: |
   {
-    "pat": "${azure_devops_pat}",
-    "organization": "${azure_devops_org}",
-    "repositories": [
-      %{ for tenant in tenants ~}
+    "organizations": [
       {
-        "project": "${tenant.project}",
-        "name": "${tenant.repo}",
-        "token": "${tenant.token}"
-      },
-      %{ endfor }
-      {
-        "project": "${azure_devops_proj}",
-        "name": "${cluster_repo}",
-        "token": "${cluster_token}"
+        "name": "${azure_devops_org}",
+        "pat": "${azure_devops_pat}",
+        "repositories": [
+          %{ for tenant in tenants ~}
+          {
+            "project": "${tenant.project}",
+            "name": "${tenant.repo}",
+            "namespaces": ["${tenant.namepsace}"]
+          },
+          %{ endfor }
+          {
+            "project": "${azure_devops_proj}",
+            "name": "${cluster_repo}",
+            "namespaces": ["flux-system"]
+          }
+        ]
       }
     ]
   }

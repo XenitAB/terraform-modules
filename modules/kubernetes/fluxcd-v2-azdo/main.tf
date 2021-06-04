@@ -46,6 +46,10 @@ terraform {
   }
 }
 
+locals {
+  azdo_proxy_url = "http://azdo-proxy.flux-system.svc.cluster.local"
+}
+
 data "azuredevops_project" "this" {
   name = var.azure_devops_proj
 }
@@ -66,42 +70,33 @@ resource "kubernetes_namespace" "this" {
 }
 
 # Azdo Proxy
-locals {
-  azdo_proxy_values = templatefile("${path.module}/templates/azdo-proxy-values.yaml.tpl", {
-    azure_devops_pat  = var.azure_devops_pat,
-    azure_devops_org  = var.azure_devops_org,
-    azure_devops_proj = var.azure_devops_proj,
-    cluster_repo      = var.cluster_repo,
-    cluster_token     = random_password.cluster.result,
-    tenants = [for ns in var.namespaces : {
-      project : ns.flux.proj
-      repo : ns.flux.repo
-      token : random_password.tenant[ns.name].result,
-      }
-      if ns.flux.enabled
-    ]
-  })
-  azdo_proxy_url = "http://azdo-proxy.flux-system.svc.cluster.local"
-}
-
 resource "helm_release" "azdo_proxy" {
   repository = "https://xenitab.github.io/azdo-proxy/"
   chart      = "azdo-proxy"
   name       = "azdo-proxy"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.3.6"
-  values     = [local.azdo_proxy_values]
+  version    = "v0.4.0-rc1"
+  values     = [
+    azdo_proxy_values = templatefile("${path.module}/templates/azdo-proxy-values.yaml.tpl", {
+      azure_devops_pat  = var.azure_devops_pat,
+      azure_devops_org  = var.azure_devops_org,
+      azure_devops_proj = var.azure_devops_proj,
+      cluster_repo      = var.cluster_repo,
+      tenants = [for ns in var.namespaces : {
+          project : ns.flux.proj
+          repo : ns.flux.repo
+          namespace: ns.name
+        }
+        if ns.flux.enabled
+      ]
+    })
+  ]
 }
 
 # Cluster
 data "azuredevops_git_repository" "cluster" {
   project_id = data.azuredevops_project.this.id
   name       = var.cluster_repo
-}
-
-resource "random_password" "cluster" {
-  length  = 32
-  special = false
 }
 
 data "flux_install" "this" {
@@ -148,20 +143,6 @@ resource "kubectl_manifest" "sync" {
   yaml_body  = each.value
 }
 
-resource "kubernetes_secret" "cluster" {
-  depends_on = [kubectl_manifest.install]
-
-  metadata {
-    name      = data.flux_sync.this.name
-    namespace = data.flux_sync.this.namespace
-  }
-
-  data = {
-    username = "git"
-    password = random_password.cluster.result
-  }
-}
-
 resource "azuredevops_git_repository_file" "install" {
   repository_id       = data.azuredevops_git_repository.cluster.id
   file                = data.flux_install.this.path
@@ -197,37 +178,6 @@ resource "azuredevops_git_repository_file" "cluster_tenants" {
 }
 
 # Tenants
-resource "random_password" "tenant" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  length  = 32
-  special = false
-}
-
-resource "kubernetes_secret" "tenant" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-  depends_on = [kubectl_manifest.install]
-
-  metadata {
-    name      = "flux"
-    namespace = each.key
-  }
-
-  data = {
-    username = "git"
-    password = random_password.tenant[each.key].result
-    token    = random_password.tenant[each.key].result
-  }
-}
-
 resource "azuredevops_git_repository_file" "tenant" {
   for_each = {
     for ns in var.namespaces :
@@ -247,4 +197,3 @@ resource "azuredevops_git_repository_file" "tenant" {
   })
   overwrite_on_create = true
 }
-

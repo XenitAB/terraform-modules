@@ -17,7 +17,6 @@ config: |
           {
             "project": "${tenant.project}",
             "name": "${tenant.repo}",
-            "namespaces": ["${tenant.namepsace}"]
           },
           %{ endfor }
           {

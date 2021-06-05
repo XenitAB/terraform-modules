@@ -17,13 +17,15 @@ config: |
           {
             "project": "${tenant.project}",
             "name": "${tenant.repo}",
-            "namespaces": ["${tenant.namespace}"]
+            "namespaces": ["${tenant.namespace}"],
+            "secretNameOverride": "flux"
           },
           %{ endfor }
           {
             "project": "${azure_devops_proj}",
             "name": "${cluster_repo}",
-            "namespaces": ["flux-system"]
+            "namespaces": ["flux-system"],
+            "secretNameOverride": "flux-system"
           }
         ]
       }

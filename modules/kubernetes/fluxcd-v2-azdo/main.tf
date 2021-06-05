@@ -82,14 +82,13 @@ resource "helm_release" "azdo_proxy" {
     azure_devops_proj = var.azure_devops_proj,
     cluster_repo      = var.cluster_repo,
     tenants = [for ns in var.namespaces : {
-      project : ns.flux.proj
-      repo : ns.flux.repo
-      namespace : ns.name
+      project: ns.flux.proj
+      repo: ns.flux.repo
+      namespace: ns.name
       }
       if ns.flux.enabled
     ],
-    })
-  ]
+  })]
 }
 
 # Cluster

@@ -1,9 +1,7 @@
-#image:
-  #tag: v0.4.0-rc1
 image:
-  repository: phillebaba/azdo-proxy
-  pullPolicy: Always
-  tag: "dev"
+  tag: v0.4.0
+networkPolicy:
+  enabled: true
 resources:
   requests:
     cpu: 100m

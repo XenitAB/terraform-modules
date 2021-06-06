@@ -34,7 +34,6 @@ the bootstrap configuration.
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.1.2 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.11.1 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.3.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.1.0 |
 
 ## Modules
 
@@ -53,10 +52,6 @@ No modules.
 | [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.1/docs/resources/manifest) | resource |
 | [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.1/docs/resources/manifest) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/namespace) | resource |
-| [kubernetes_secret.cluster](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/secret) | resource |
-| [kubernetes_secret.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/secret) | resource |
-| [random_password.cluster](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) | resource |
-| [random_password.tenant](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) | resource |
 | [azuredevops_git_repository.cluster](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/git_repository) | data source |
 | [azuredevops_project.this](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/project) | data source |
 | [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.8/docs/data-sources/install) | data source |

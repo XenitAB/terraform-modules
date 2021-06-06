@@ -25,14 +25,14 @@ This module is used to configure EKS clusters.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../../kubernetes/cert-manager |  |
-| <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../../kubernetes/external-dns |  |
-| <a name="module_external_secrets"></a> [external\_secrets](#module\_external\_secrets) | ../../kubernetes/external-secrets |  |
-| <a name="module_fluxcd_v2_github"></a> [fluxcd\_v2\_github](#module\_fluxcd\_v2\_github) | ../../kubernetes/fluxcd-v2-github |  |
-| <a name="module_ingress_nginx"></a> [ingress\_nginx](#module\_ingress\_nginx) | ../../kubernetes/ingress-nginx |  |
-| <a name="module_kyverno"></a> [kyverno](#module\_kyverno) | ../../kubernetes/kyverno |  |
-| <a name="module_opa_gatekeeper"></a> [opa\_gatekeeper](#module\_opa\_gatekeeper) | ../../kubernetes/opa-gatekeeper |  |
-| <a name="module_velero"></a> [velero](#module\_velero) | ../../kubernetes/velero |  |
+| <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../../kubernetes/cert-manager | n/a |
+| <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../../kubernetes/external-dns | n/a |
+| <a name="module_external_secrets"></a> [external\_secrets](#module\_external\_secrets) | ../../kubernetes/external-secrets | n/a |
+| <a name="module_fluxcd_v2_github"></a> [fluxcd\_v2\_github](#module\_fluxcd\_v2\_github) | ../../kubernetes/fluxcd-v2-github | n/a |
+| <a name="module_ingress_nginx"></a> [ingress\_nginx](#module\_ingress\_nginx) | ../../kubernetes/ingress-nginx | n/a |
+| <a name="module_kyverno"></a> [kyverno](#module\_kyverno) | ../../kubernetes/kyverno | n/a |
+| <a name="module_opa_gatekeeper"></a> [opa\_gatekeeper](#module\_opa\_gatekeeper) | ../../kubernetes/opa-gatekeeper | n/a |
+| <a name="module_velero"></a> [velero](#module\_velero) | ../../kubernetes/velero | n/a |
 
 ## Resources
 

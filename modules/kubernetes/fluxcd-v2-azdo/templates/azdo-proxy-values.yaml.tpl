@@ -1,5 +1,3 @@
-image:
-  tag: v0.4.0
 networkPolicy:
   enabled: true
 resources:

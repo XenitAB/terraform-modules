@@ -72,7 +72,7 @@ resource "helm_release" "xenit_proxy" {
   chart      = "nginx"
   name       = "xenit-proxy"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "8.9.1"
+  version    = "9.1.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     thanos_receiver_fqdn = var.thanos_receiver_fqdn
     loki_api_fqdn        = var.loki_api_fqdn

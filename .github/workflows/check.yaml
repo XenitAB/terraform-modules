@@ -63,6 +63,7 @@ jobs:
           make docs
       - name: Check if working tree is dirty
         run: |
+          set -ex
           if [[ $(git status --porcelain) ]]; then
             git diff
             echo 'run make docs and commit changes'

@@ -149,6 +149,25 @@ spec:
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
+  name: azdo-proxy
+  namespace: flux-system
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  endpoints:
+  - interval: 30s
+    port: metrics
+  namespaceSelector:
+    matchNames:
+    - flux-system
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: azdo-proxy
+      app.kubernetes.io/name: azdo-proxy
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
   labels:
     xkf.xenit.io/monitoring: platform
   name: ingress-nginx-controller

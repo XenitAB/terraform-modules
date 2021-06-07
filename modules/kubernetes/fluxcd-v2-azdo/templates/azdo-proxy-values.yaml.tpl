@@ -1,3 +1,4 @@
+priorityClassName: "platform-medium"
 networkPolicy:
   enabled: true
 resources:

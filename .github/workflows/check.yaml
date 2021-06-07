@@ -55,6 +55,7 @@ jobs:
               exit 1
           fi
           tar xzvf terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz terraform-docs
+          rm terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz
           mkdir -p ~/.local/bin/
           mv ./terraform-docs ~/.local/bin/terraform-docs
       - name: Run docs
@@ -63,7 +64,6 @@ jobs:
           make docs
       - name: Check if working tree is dirty
         run: |
-          set -ex
           if [[ $(git status --porcelain) ]]; then
             git diff
             echo 'run make docs and commit changes'

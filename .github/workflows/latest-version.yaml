@@ -52,6 +52,7 @@ jobs:
               exit 1
           fi
           tar xzvf terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz terraform-docs
+          rm terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz
           mkdir -p ~/.local/bin/
           mv ./terraform-docs ~/.local/bin/terraform-docs
 

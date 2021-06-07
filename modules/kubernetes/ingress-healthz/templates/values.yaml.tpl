@@ -1,5 +1,7 @@
 replicaCount: 2
 
+priorityClassName: "platform-low"
+
 resources:
   requests:
      cpu: 50m

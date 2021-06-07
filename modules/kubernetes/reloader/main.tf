@@ -38,7 +38,7 @@ resource "helm_release" "reloader" {
   version    = "v0.0.90"
 
   set {
-    name  = "reloader.priorityClassName"
+    name  = "reloader.deployment.priorityClassName"
     value = "platform-low"
   }
 }

@@ -1,3 +1,5 @@
 site: ""
 clusterName: ""
 containerInclude: ""
+
+clusterRole: true

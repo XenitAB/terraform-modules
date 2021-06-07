@@ -51,7 +51,7 @@ jobs:
               echo "Downloaded checksum (${DOWNLOAD_TERRAFORM_DOCS_SHA}) for terraform-docs does not match expected value: ${TERRAFORM_DOCS_SHA}"
               exit 1
           fi
-          tar xzvf terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz
+          tar xzvf terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz terraform-docs
           mkdir -p ~/.local/bin/
           mv ./terraform-docs ~/.local/bin/terraform-docs
 

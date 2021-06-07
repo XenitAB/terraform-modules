@@ -54,7 +54,6 @@ jobs:
           tar xzvf terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz
           mkdir -p ~/.local/bin/
           mv ./terraform-docs ~/.local/bin/terraform-docs
-          rm LICENSE README.md
 
       - name: Run docs
         run: |

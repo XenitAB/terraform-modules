@@ -259,11 +259,13 @@ variable "datadog_config" {
   type = object({
     datadog_site      = string
     api_key           = string
+    app_key           = string
     container_include = string
   })
   default = {
     datadog_site      = ""
     api_key           = ""
+    app_key           = ""
     container_include = ""
   }
 }

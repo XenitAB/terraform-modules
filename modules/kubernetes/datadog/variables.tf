@@ -15,7 +15,12 @@ variable "location" {
 }
 
 variable "api_key" {
-  description = "API key to authenticate to Datadog"
+  description = "API key to upload data to Datadog"
+  type        = string
+}
+
+variable "app_key" {
+  description = "APP key to configure data like alarms in Datadog"
   type        = string
 }
 

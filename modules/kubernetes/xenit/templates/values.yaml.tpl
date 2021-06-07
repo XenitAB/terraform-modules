@@ -1,5 +1,6 @@
-
 replicaCount: 2
+
+priorityClassName: "platform-low"
 
 podAnnotations:
   secret.reloader.stakater.com/reload: "xenit-proxy-certificate"

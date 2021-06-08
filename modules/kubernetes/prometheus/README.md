@@ -14,8 +14,8 @@ Adds [Prometheus](https://github.com/prometheus-community/helm-charts/tree/main/
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.1.1 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.1.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.1.2 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.3.1 |
 
 ## Modules
 

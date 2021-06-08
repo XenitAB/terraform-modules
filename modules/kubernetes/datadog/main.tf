@@ -10,7 +10,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.3.0"
+      version = "2.3.1"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -43,6 +43,6 @@ resource "helm_release" "datadog" {
   chart      = "datadog"
   name       = "datadog"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "2.15.5"
+  version    = "2.16.3"
   values     = [local.values]
 }

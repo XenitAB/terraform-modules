@@ -55,7 +55,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.3.0"
+      version = "2.3.1"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -197,7 +197,7 @@ resource "helm_release" "linkerd_cni" {
   chart      = "linkerd2-cni"
   name       = "linkerd-cni"
   namespace  = kubernetes_namespace.cni.metadata[0].name
-  version    = "2.10.1"
+  version    = "2.10.2"
 
   values = [
     templatefile("${path.module}/templates/values-cni.yaml.tpl", {}),
@@ -240,7 +240,7 @@ resource "helm_release" "linkerd_viz" {
   chart      = "linkerd-viz"
   name       = "linkerd-viz"
   namespace  = kubernetes_namespace.viz.metadata[0].name
-  version    = "2.10.1"
+  version    = "2.10.2"
   values = [
     templatefile("${path.module}/templates/values-viz.yaml.tpl", {}),
   ]

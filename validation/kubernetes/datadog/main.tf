@@ -12,9 +12,9 @@ module "datadog" {
     helm       = helm
   }
 
-  api_key                  = "key"    #tfsec:ignore:GEN003
-  app_key                  = "appkey" #tfsec:ignore:GEN003
-  location                 = "foo"
-  environment              = "bar"
-  container_filter_include = "kube_namespace:.*."
+  api_key           = "key"    #tfsec:ignore:GEN003
+  app_key           = "appkey" #tfsec:ignore:GEN003
+  location          = "foo"
+  environment       = "bar"
+  namespace_include = ["ns1", "ns2"]
 }

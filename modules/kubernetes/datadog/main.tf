@@ -21,11 +21,12 @@ terraform {
 }
 
 locals {
+  container_filter_include = join(" ", formatlist("kube_namespace:%s", var.namespace_include))
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
     datadog_site             = var.datadog_site
     location                 = var.location
     environment              = var.environment
-    container_filter_include = var.container_filter_include
+    container_filter_include = local.container_filter_include
   })
 }
 

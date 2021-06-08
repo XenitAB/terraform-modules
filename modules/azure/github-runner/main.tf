@@ -6,7 +6,7 @@
   * ## GitHub Runner Configuration
   *
   * Setup a GitHub App according to the documentation for [XenitAB/github-runner](https://github.com/XenitAB/github-runner).
-  * 
+  *
   * Setup an image using Packer according [github-runner](https://github.com/XenitAB/packer-templates/tree/main/templates/azure/github-runner) in [XenitAB/packer-templates](https://github.com/XenitAB/packer-templates).
   */
 
@@ -14,6 +14,7 @@ terraform {
   required_version = "0.15.3"
 
   required_providers {
+    #tf-latest-version:ignore
     azurerm = {
       version = "2.61.0"
       source  = "hashicorp/azurerm"

@@ -26,29 +26,71 @@ resource "kubernetes_cluster_role" "helm_release" {
   }
 }
 
-resource "kubernetes_cluster_role" "toolkit_cr_permissions" {
+resource "kubernetes_cluster_role" "toolkit_helm" {
   metadata {
-    name = "toolkit-cr-permissions"
+    name = "toolkit-helm"
     labels = {
       "xkf.xenit.io/kind" = "platform"
     }
   }
   rule {
-    api_groups = ["*.toolkit.fluxcd.io"]
+    api_groups = ["helm.toolkit.fluxcd.io"]
     resources  = ["*"]
     verbs      = ["*"]
   }
 }
 
-resource "kubernetes_cluster_role" "cert_manager_cr_permissions" {
+resource "kubernetes_cluster_role" "toolkit_kustomization" {
   metadata {
-    name = "cert-manager-cr-permissions"
+    name = "toolkit-kustomization"
     labels = {
       "xkf.xenit.io/kind" = "platform"
     }
   }
   rule {
-    api_groups = ["*.cert-manager.io"]
+    api_groups = ["kustomize.toolkit.fluxcd.io"]
+    resources  = ["*"]
+    verbs      = ["*"]
+  }
+}
+
+resource "kubernetes_cluster_role" "toolkit_source" {
+  metadata {
+    name = "toolkit-source"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  rule {
+    api_groups = ["source.toolkit.fluxcd.io"]
+    resources  = ["*"]
+    verbs      = ["*"]
+  }
+}
+
+resource "kubernetes_cluster_role" "toolkit_notification" {
+  metadata {
+    name = "toolkit-notification"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  rule {
+    api_groups = ["notification.toolkit.fluxcd.io"]
+    resources  = ["*"]
+    verbs      = ["*"]
+  }
+}
+
+resource "kubernetes_cluster_role" "datadog_edit" {
+  metadata {
+    name = "datadog-edit"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  rule {
+    api_groups = ["datadogmetrics.datadoghq.com", "datadogmonitors.datadoghq.com"]
     resources  = ["*"]
     verbs      = ["*"]
   }

@@ -30,7 +30,7 @@ resource "kubernetes_cluster_role_binding" "edit_list_ns" {
     name = "${each.value.name}-edit-listns"
 
     labels = {
-      "aadGroup"          = var.aad_groups.edit[each.key].name
+      "aad-group-name"    = var.aad_groups.edit[each.key].name
       "xkf.xenit.io/kind" = "platform"
     }
   }

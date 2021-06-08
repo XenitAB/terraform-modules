@@ -26,57 +26,15 @@ resource "kubernetes_cluster_role" "helm_release" {
   }
 }
 
-resource "kubernetes_cluster_role" "toolkit_helm" {
+resource "kubernetes_cluster_role" "toolkit_edit" {
   metadata {
-    name = "toolkit-helm"
+    name = "toolkit-edit"
     labels = {
       "xkf.xenit.io/kind" = "platform"
     }
   }
   rule {
-    api_groups = ["helm.toolkit.fluxcd.io"]
-    resources  = ["*"]
-    verbs      = ["*"]
-  }
-}
-
-resource "kubernetes_cluster_role" "toolkit_kustomization" {
-  metadata {
-    name = "toolkit-kustomization"
-    labels = {
-      "xkf.xenit.io/kind" = "platform"
-    }
-  }
-  rule {
-    api_groups = ["kustomize.toolkit.fluxcd.io"]
-    resources  = ["*"]
-    verbs      = ["*"]
-  }
-}
-
-resource "kubernetes_cluster_role" "toolkit_source" {
-  metadata {
-    name = "toolkit-source"
-    labels = {
-      "xkf.xenit.io/kind" = "platform"
-    }
-  }
-  rule {
-    api_groups = ["source.toolkit.fluxcd.io"]
-    resources  = ["*"]
-    verbs      = ["*"]
-  }
-}
-
-resource "kubernetes_cluster_role" "toolkit_notification" {
-  metadata {
-    name = "toolkit-notification"
-    labels = {
-      "xkf.xenit.io/kind" = "platform"
-    }
-  }
-  rule {
-    api_groups = ["notification.toolkit.fluxcd.io"]
+    api_groups = ["helm.toolkit.fluxcd.io", "kustomize.toolkit.fluxcd.io", "source.toolkit.fluxcd.io", "notification.toolkit.fluxcd.io"]
     resources  = ["*"]
     verbs      = ["*"]
   }

@@ -36,7 +36,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_api_key"></a> [api\_key](#input\_api\_key) | API key to upload data to Datadog | `string` | n/a | yes |
 | <a name="input_app_key"></a> [app\_key](#input\_app\_key) | APP key to configure data like alarms in Datadog | `string` | n/a | yes |
-| <a name="input_container_include"></a> [container\_include](#input\_container\_include) | The container/ns that should be checked by Datadog | `string` | n/a | yes |
+| <a name="input_container_filter_include"></a> [container\_filter\_include](#input\_container\_filter\_include) | The container/ns that should be checked by Datadog, example: kube\_namespace:<NAMESPACE> image:<IMAGE\_NAME> | `string` | n/a | yes |
 | <a name="input_datadog_site"></a> [datadog\_site](#input\_datadog\_site) | Site to connect Datadog agent | `string` | `"datadoghq.eu"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Cluster environment | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | Cluster location | `string` | n/a | yes |

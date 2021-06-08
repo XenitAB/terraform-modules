@@ -22,10 +22,10 @@ terraform {
 
 locals {
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
-    datadog_site      = var.datadog_site
-    location          = var.location
-    environment       = var.environment
-    container_include = var.container_include
+    datadog_site             = var.datadog_site
+    location                 = var.location
+    environment              = var.environment
+    container_filter_include = var.container_filter_include
   })
 }
 

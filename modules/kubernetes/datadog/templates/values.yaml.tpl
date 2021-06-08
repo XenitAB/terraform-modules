@@ -1,3 +1,3 @@
 site: ${datadog_site}
 clusterName: ${location}-${environment}
-containerInclude: ${container_include}
+containerInclude: ${container_filter_include}

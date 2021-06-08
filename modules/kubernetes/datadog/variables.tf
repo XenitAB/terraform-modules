@@ -24,7 +24,7 @@ variable "app_key" {
   type        = string
 }
 
-variable "container_include" {
-  description = "The container/ns that should be checked by Datadog"
+variable "container_filter_include" {
+  description = "The container/ns that should be checked by Datadog, example: kube_namespace:<NAMESPACE> image:<IMAGE_NAME>"
   type        = string
 }

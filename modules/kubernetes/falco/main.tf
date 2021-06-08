@@ -12,7 +12,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.3.0"
+      version = "2.3.1"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -36,7 +36,7 @@ resource "helm_release" "falco" {
   chart      = "falco"
   name       = "falco"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "1.11.1"
+  version    = "1.13.1"
   values     = [templatefile("${path.module}/templates/falco-values.yaml.tpl", {})]
 }
 

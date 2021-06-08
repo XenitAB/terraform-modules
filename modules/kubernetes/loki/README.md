@@ -13,7 +13,7 @@ This module will also add `minio` (S3 Gateway to Azure Storage Account), `fluent
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.61.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.1.2 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.3.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.3.1 |
 
 ## Providers
 
@@ -21,7 +21,7 @@ This module will also add `minio` (S3 Gateway to Azure Storage Account), `fluent
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.61.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.1.2 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.3.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.3.1 |
 
 ## Modules
 
@@ -35,7 +35,7 @@ No modules.
 | [azurerm_storage_container.loki](https://registry.terraform.io/providers/hashicorp/azurerm/2.61.0/docs/resources/storage_container) | resource |
 | [helm_release.loki_stack](https://registry.terraform.io/providers/hashicorp/helm/2.1.2/docs/resources/release) | resource |
 | [helm_release.minio](https://registry.terraform.io/providers/hashicorp/helm/2.1.2/docs/resources/release) | resource |
-| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.0/docs/resources/namespace) | resource |
+| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/namespace) | resource |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.61.0/docs/data-sources/resource_group) | data source |
 
 ## Inputs

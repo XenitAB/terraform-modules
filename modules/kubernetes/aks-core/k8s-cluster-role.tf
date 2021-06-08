@@ -26,7 +26,7 @@ resource "kubernetes_cluster_role" "helm_release" {
   }
 }
 
-resource "kubernetes_cluster_role" "toolkit_edit" {
+resource "kubernetes_cluster_role" "custom_cr_edit" {
   metadata {
     name = "toolkit-edit"
     labels = {
@@ -34,22 +34,15 @@ resource "kubernetes_cluster_role" "toolkit_edit" {
     }
   }
   rule {
-    api_groups = ["helm.toolkit.fluxcd.io", "kustomize.toolkit.fluxcd.io", "source.toolkit.fluxcd.io", "notification.toolkit.fluxcd.io"]
-    resources  = ["*"]
-    verbs      = ["*"]
-  }
-}
-
-resource "kubernetes_cluster_role" "datadog_edit" {
-  metadata {
-    name = "datadog-edit"
-    labels = {
-      "xkf.xenit.io/kind" = "platform"
-    }
-  }
-  rule {
-    api_groups = ["datadogmetrics.datadoghq.com", "datadogmonitors.datadoghq.com"]
-    resources  = ["*"]
-    verbs      = ["*"]
+    api_groups = [
+      "helm.toolkit.fluxcd.io",
+      "kustomize.toolkit.fluxcd.io",
+      "source.toolkit.fluxcd.io",
+      "notification.toolkit.fluxcd.io",
+      "datadogmetrics.datadoghq.com",
+      "datadogmonitors.datadoghq.com",
+    ]
+    resources = ["*"]
+    verbs     = ["*"]
   }
 }

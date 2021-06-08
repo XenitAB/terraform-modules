@@ -59,7 +59,7 @@ resource "helm_release" "datadog_operator" {
   }
 }
 
-resource "helm_release" "datadog-extras" {
+resource "helm_release" "datadog_extras" {
   depends_on = [helm_release.datadog_operator]
 
   chart     = "${path.module}/charts/datadog-extras"

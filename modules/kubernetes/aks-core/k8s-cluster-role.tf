@@ -26,9 +26,9 @@ resource "kubernetes_cluster_role" "helm_release" {
   }
 }
 
-resource "kubernetes_cluster_role" "custom_cr_edit" {
+resource "kubernetes_cluster_role" "custom_resource_edit" {
   metadata {
-    name = "toolkit-edit"
+    name = "custom-resource-edit"
     labels = {
       "xkf.xenit.io/kind" = "platform"
     }

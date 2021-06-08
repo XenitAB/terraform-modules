@@ -71,11 +71,11 @@ resource "kubernetes_role_binding" "helm_release" {
   }
 }
 
-resource "kubernetes_role_binding" "custom_cr_edit" {
+resource "kubernetes_role_binding" "custom_resource_edit" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name      = "custom-cr-edit"
+    name      = "custom-resource-edit"
     namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
 
     labels = {
@@ -86,7 +86,7 @@ resource "kubernetes_role_binding" "custom_cr_edit" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.custom_cr_edit.metadata[0].name
+    name      = kubernetes_cluster_role.custom_resource_edit.metadata[0].name
   }
   subject {
     api_group = "rbac.authorization.k8s.io"

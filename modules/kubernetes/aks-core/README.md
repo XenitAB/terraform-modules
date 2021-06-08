@@ -51,10 +51,9 @@ This module is used to create AKS clusters.
 
 | Name | Type |
 |------|------|
+| [kubernetes_cluster_role.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.list_namespaces](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.toolkit_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.toolkit_kustomization](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role_binding.cluster_admin](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_cluster_role_binding.cluster_view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_cluster_role_binding.edit_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/cluster_role_binding) | resource |
@@ -69,12 +68,11 @@ This module is used to create AKS clusters.
 | [kubernetes_priority_class.tenant_high](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/priority_class) | resource |
 | [kubernetes_priority_class.tenant_low](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/priority_class) | resource |
 | [kubernetes_priority_class.tenant_medium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/priority_class) | resource |
+| [kubernetes_role_binding.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.sa_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.sa_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.toolkit_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.toolkit_kustomization](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/role_binding) | resource |
 | [kubernetes_service_account.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.1/docs/resources/service_account) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.61.0/docs/data-sources/client_config) | data source |

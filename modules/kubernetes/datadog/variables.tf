@@ -25,6 +25,6 @@ variable "app_key" {
 }
 
 variable "namespace_include" {
-  description = "The container/ns that should be checked by Datadog, example: kube_namespace:<NAMESPACE> image:<IMAGE_NAME>"
+  description = "The namespace that should be checked by Datadog, example: kube_namespace:<NAMESPACE> kube_namespace:<NAMESPACE2>"
   type        = list(string)
 }

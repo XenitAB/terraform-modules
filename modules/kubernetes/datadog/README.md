@@ -1,7 +1,11 @@
 # Datadog
 
 Adds [Datadog](https://github.com/DataDog/helm-charts) to a Kubernetes cluster.
-This module is built to only gather application data
+This module is built to only gather application data.
+API vs APP key.
+API is used to send metrics to datadog from the agents.
+APP key is used to be able to manage configuration inside datadog like alarms.
+https://docs.datadoghq.com/account_management/api-app-keys/
 
 ## Requirements
 
@@ -39,7 +43,7 @@ No modules.
 | <a name="input_datadog_site"></a> [datadog\_site](#input\_datadog\_site) | Site to connect Datadog agent | `string` | `"datadoghq.eu"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Cluster environment | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | Cluster location | `string` | n/a | yes |
-| <a name="input_namespace_include"></a> [namespace\_include](#input\_namespace\_include) | The container/ns that should be checked by Datadog, example: kube\_namespace:<NAMESPACE> image:<IMAGE\_NAME> | `list(string)` | n/a | yes |
+| <a name="input_namespace_include"></a> [namespace\_include](#input\_namespace\_include) | The namespace that should be checked by Datadog, example: kube\_namespace:<NAMESPACE> kube\_namespace:<NAMESPACE2> | `list(string)` | n/a | yes |
 
 ## Outputs
 

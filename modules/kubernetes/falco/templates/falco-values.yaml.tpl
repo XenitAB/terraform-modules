@@ -43,8 +43,8 @@ customRules:
         (container.image.repository = "docker.io/bitnami/external-dns") or
         (container.image.repository = "squat/configmap-to-disk") or
         (container.image.repository = "stakater/reloader") or
-        (container.image.repository = "bloomberg/goldpinger")
-
+        (container.image.repository = "bloomberg/goldpinger") or
+        (container.image.repository = "gcr.io/datadoghq/agent")
 
   # Applications which spawn a docker or kubectl client
   # Kustomize controller runs kubectl and kustomize
@@ -66,7 +66,8 @@ customRules:
     - macro: user_sensitive_mount_containers
       condition: >
         (container.image.repository = "mcr.microsoft.com/oss/kubernetes/kube-proxy") or
-        (container.image.repository = "quay.io/prometheus/node-exporter")
+        (container.image.repository = "quay.io/prometheus/node-exporter") or
+        (container.image.repository = "gcr.io/datadoghq/agent")
 
   # AKS tunnelfront writes in /etc
   rules_user_known_write_below_etc_activities.yaml: |-

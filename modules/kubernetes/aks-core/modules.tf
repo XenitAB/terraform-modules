@@ -1,5 +1,5 @@
 locals {
-  excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns", "csi-secrets-store-provider-azure", "falco", "reloader", "linkerd", "linkerd-cni"]
+  excluded_namespaces = ["kube-system", "gatekeeper-system", "aad-pod-identity", "cert-manager", "ingress-nginx", "velero", "azdo-proxy", "flux-system", "external-dns", "csi-secrets-store-provider-azure", "falco", "reloader", "linkerd", "linkerd-cni", "datadog"]
 }
 
 # OPA Gatekeeper
@@ -272,10 +272,12 @@ module "datadog" {
 
   source = "../../kubernetes/datadog"
 
-  location     = var.location_short
-  environment  = var.environment
-  datadog_site = var.datadog_config.datadog_site
-  api_key      = var.datadog_config.api_key
+  location          = var.location_short
+  environment       = var.environment
+  datadog_site      = var.datadog_config.datadog_site
+  api_key           = var.datadog_config.api_key
+  app_key           = var.datadog_config.app_key
+  namespace_include = var.namespaces[*].name
 }
 
 # falco

@@ -12,7 +12,6 @@ terraform {
   required_version = "0.15.3"
 
   required_providers {
-    #tf-latest-version:ignore
     azurerm = {
       version = "2.61.0"
       source  = "hashicorp/azurerm"

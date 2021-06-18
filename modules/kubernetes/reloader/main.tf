@@ -11,11 +11,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.3.1"
+      version = "2.3.2"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.1.2"
+      version = "2.2.0"
     }
   }
 }
@@ -35,7 +35,7 @@ resource "helm_release" "reloader" {
   chart      = "reloader"
   name       = "reloader"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.0.90"
+  version    = "v0.0.94"
 
   set {
     name  = "reloader.deployment.priorityClassName"

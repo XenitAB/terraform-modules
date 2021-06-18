@@ -10,11 +10,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.3.1"
+      version = "2.3.2"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.1.2"
+      version = "2.2.0"
     }
   }
 }
@@ -33,7 +33,7 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
   name       = "csi-secrets-store-provider-azure"
   repository = "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
   chart      = "csi-secrets-store-provider-azure"
-  version    = "0.0.19"
+  version    = "0.0.20"
   namespace  = kubernetes_namespace.this.metadata[0].name
 
   set {

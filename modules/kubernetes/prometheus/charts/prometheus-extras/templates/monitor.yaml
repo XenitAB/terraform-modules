@@ -184,6 +184,7 @@ spec:
       app.kubernetes.io/component: controller
       app.kubernetes.io/instance: ingress-nginx
       app.kubernetes.io/name: ingress-nginx
+{{- if .Values.enabledMonitors.falco }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -203,7 +204,9 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: falco-exporter
       app.kubernetes.io/name: falco-exporter
+{{- end }}
 {{- if .Values.enabledMonitors.opaGatekeeper }}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:

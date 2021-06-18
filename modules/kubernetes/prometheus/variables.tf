@@ -62,6 +62,12 @@ variable "alertmanager_enabled" {
 }
 
 # Enable/Disable monitors
+variable "falco_enabled" {
+  description = "Should Falco be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "opa_gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
   type        = bool

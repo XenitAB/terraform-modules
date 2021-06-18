@@ -65,6 +65,7 @@ resource "helm_release" "prometheus_extras" {
     resource_selector  = "[${join(", ", var.resource_selector)}]",
     namespace_selector = "[${join(", ", var.namespace_selector)}]",
 
+    falco_enabled          = var.falco_enabled
     opa_gatekeeper_enabled = var.opa_gatekeeper_enabled
     linkerd_enabled        = var.linkerd_enabled
     goldpinger_enabled     = var.goldpinger_enabled

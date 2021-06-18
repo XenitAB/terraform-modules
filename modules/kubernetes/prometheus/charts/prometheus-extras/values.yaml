@@ -56,6 +56,7 @@ alertmanager:
         values: [platform]
 
 enabledMonitors:
+  falco: false
   opaGatekeeper: false
   linkerd: false
   goldpinger: false

@@ -55,6 +55,7 @@ alertmanager:
         values: ${namespace_selector}
 
 enabledMonitors:
+  falco: ${falco_enabled}
   opaGatekeeper: ${opa_gatekeeper_enabled}
   linkerd: ${linkerd_enabled}
   goldpinger: ${goldpinger_enabled}

@@ -8,8 +8,8 @@ This module is used to configure EKS clusters.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.46.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.10 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 4.11.0 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.11 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | 4.12.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.11.1 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.3.2 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |

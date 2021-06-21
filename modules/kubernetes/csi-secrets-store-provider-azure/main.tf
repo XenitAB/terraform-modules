@@ -37,6 +37,11 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
   namespace  = kubernetes_namespace.this.metadata[0].name
 
   set {
+    name  = "syncSecret.enabled"
+    value = "true"
+  }
+
+  set {
     name  = "linux.tolerations[0].operator"
     value = "Exists"
   }

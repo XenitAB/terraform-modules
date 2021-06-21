@@ -33,13 +33,8 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
   name       = "csi-secrets-store-provider-azure"
   repository = "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
   chart      = "csi-secrets-store-provider-azure"
-  version    = "0.0.23"
+  version    = "0.0.20"
   namespace  = kubernetes_namespace.this.metadata[0].name
-
-  set {
-    name  = "syncSecret.enabled"
-    value = "true"
-  }
 
   set {
     name  = "linux.tolerations[0].operator"
@@ -69,5 +64,10 @@ resource "helm_release" "csi_secrets_store_provider_azure" {
   set {
     name  = "secrets-store-csi-driver.linux.priorityClassName"
     value = "platform-high"
+  }
+
+  set {
+    name  = "secrets-store-csi-driver.syncSecret.enabled"
+    value = "true"
   }
 }

@@ -23,20 +23,14 @@ resource "azurerm_kubernetes_cluster" "this" {
   default_node_pool {
     name                 = "default"
     orchestrator_version = var.aks_config.default_node_pool.orchestrator_version
-    node_count           = var.aks_config.default_node_pool.min_count
-    min_count            = var.aks_config.default_node_pool.min_count
-    max_count            = var.aks_config.default_node_pool.max_count
-    vm_size              = var.aks_config.default_node_pool.vm_size
-    node_labels = merge({
-      "node-pool" = "default"
-      },
-      var.aks_config.default_node_pool.node_labels
-    )
-
-    availability_zones  = ["1", "2", "3"]
-    enable_auto_scaling = true
-    type                = "VirtualMachineScaleSets"
-    vnet_subnet_id      = data.azurerm_subnet.this.id
+    node_labels          = var.aks_config.default_node_pool.node_labels
+    node_count           = 1
+    vm_size              = "Standard_D2as_v4"
+    availability_zones   = ["1", "2", "3"]
+    enable_auto_scaling  = false
+    only_critical_addons_enabled = true
+    type                 = "VirtualMachineScaleSets"
+    vnet_subnet_id       = data.azurerm_subnet.this.id
   }
 
   network_profile {

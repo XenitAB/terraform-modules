@@ -34,7 +34,7 @@ resource "helm_release" "ingress_nginx" {
   chart      = "ingress-nginx"
   name       = "ingress-nginx"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "3.33.0"
+  version    = "3.34.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet,
     name_override          = var.name_override,

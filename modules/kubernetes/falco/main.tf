@@ -36,7 +36,7 @@ resource "helm_release" "falco" {
   chart      = "falco"
   name       = "falco"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "1.13.2"
+  version    = "1.14.0"
   values     = [templatefile("${path.module}/templates/falco-values.yaml.tpl", {})]
 }
 

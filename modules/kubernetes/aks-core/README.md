@@ -21,6 +21,7 @@ This module is used to create AKS clusters.
 | Name | Version |
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.64.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.2.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.3.2 |
 
 ## Modules
@@ -51,6 +52,7 @@ This module is used to create AKS clusters.
 
 | Name | Type |
 |------|------|
+| [helm_release.aks_core_extras](https://registry.terraform.io/providers/hashicorp/helm/2.2.0/docs/resources/release) | resource |
 | [kubernetes_cluster_role.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.list_namespaces](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role) | resource |
@@ -62,12 +64,6 @@ This module is used to create AKS clusters.
 | [kubernetes_namespace.service_accounts](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/namespace) | resource |
 | [kubernetes_namespace.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/namespace) | resource |
 | [kubernetes_network_policy.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/network_policy) | resource |
-| [kubernetes_priority_class.platform_high](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/priority_class) | resource |
-| [kubernetes_priority_class.platform_low](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/priority_class) | resource |
-| [kubernetes_priority_class.platform_medium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/priority_class) | resource |
-| [kubernetes_priority_class.tenant_high](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/priority_class) | resource |
-| [kubernetes_priority_class.tenant_low](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/priority_class) | resource |
-| [kubernetes_priority_class.tenant_medium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/priority_class) | resource |
 | [kubernetes_role_binding.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/role_binding) | resource |

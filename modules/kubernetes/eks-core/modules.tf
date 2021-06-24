@@ -2,7 +2,16 @@ locals {
   excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns", "external-secrets", "kyverno"]
 }
 
-# OPA Gatekeeper
+module "calico" {
+  for_each = {
+    for s in ["calico"] :
+    s => s
+    if var.calico_enabled
+  }
+
+  source = "../../kubernetes/calico"
+}
+
 module "opa_gatekeeper" {
   for_each = {
     for s in ["opa-gatekeeper"] :
@@ -15,7 +24,6 @@ module "opa_gatekeeper" {
   excluded_namespaces = local.excluded_namespaces
 }
 
-# Fluxcd
 module "fluxcd_v2_github" {
   for_each = {
     for s in ["fluxcd-v2"] :
@@ -36,25 +44,6 @@ module "fluxcd_v2_github" {
   }]
 }
 
-# External Secrets
-module "external_secrets" {
-  depends_on = [module.opa_gatekeeper]
-
-  for_each = {
-    for s in ["external-secrets"] :
-    s => s
-    if var.external_secrets_enabled
-  }
-
-  source = "../../kubernetes/external-secrets"
-
-  aws_config = {
-    region   = data.aws_region.current.name
-    role_arn = var.external_secrets_config.role_arn
-  }
-}
-
-# Ingress Nginx
 module "ingress_nginx" {
   depends_on = [module.opa_gatekeeper]
 
@@ -69,7 +58,6 @@ module "ingress_nginx" {
   cloud_provider = "aws"
 }
 
-# External DNS
 module "external_dns" {
   depends_on = [module.opa_gatekeeper]
 
@@ -89,7 +77,6 @@ module "external_dns" {
   }
 }
 
-# Cert Manager
 module "cert_manager" {
   depends_on = [module.opa_gatekeeper]
 
@@ -110,7 +97,6 @@ module "cert_manager" {
   notification_email = var.cert_manager_config.notification_email
 }
 
-# Velero
 module "velero" {
   depends_on = [module.opa_gatekeeper]
 
@@ -127,5 +113,22 @@ module "velero" {
     region       = data.aws_region.current.name
     role_arn     = var.velero_config.role_arn
     s3_bucket_id = var.velero_config.s3_bucket_id
+  }
+}
+
+module "external_secrets" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["external-secrets"] :
+    s => s
+    if var.external_secrets_enabled
+  }
+
+  source = "../../kubernetes/external-secrets"
+
+  aws_config = {
+    region   = data.aws_region.current.name
+    role_arn = var.external_secrets_config.role_arn
   }
 }

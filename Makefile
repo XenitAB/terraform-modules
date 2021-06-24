@@ -67,10 +67,9 @@ tfsec:
 .SILENT:
 validate:
 	set -e
-	CURRENT_DIR=$$PWD
-	PIDS=()
 
 	tf_validate () {
+		cd $$1
 		rm -f .terraform.lock.hcl
 		terraform init 1>/dev/null
 		set +e
@@ -87,24 +86,12 @@ validate:
 		exit $$EXIT_CODE
 	}
 
-	TF_MODULES=$$(find modules -maxdepth 2 -mindepth 2 -type d | sed "s|^modules/|validation/|g")
-	for MODULE in $$TF_MODULES; do
-		cd $$CURRENT_DIR/$${MODULE}
-		tf_validate $${MODULE} &
-		PIDS+=($$!)
-	done
+	export -f tf_validate
 
-	EXIT_CODE=0
-	for PID in "$${PIDS[@]}"; do
-		set +e
-		wait "$$PID"
-		WAIT_EXIT_CODE=$$?
-		set -e
-		if [[ $$WAIT_EXIT_CODE -ne 0 ]]; then
-			EXIT_CODE=1
-		fi
-	done
-	exit $$EXIT_CODE
+	TF_MODULES=$$(find modules -maxdepth 2 -mindepth 2 -type d | sed "s|^modules/|validation/|g")
+
+	PARALLEL_JOBS=10
+	printf '%s\n' $${TF_MODULES[@]} | parallel --halt now,fail=1 -j$${PARALLEL_JOBS} "tf_validate {}"
 
 .SILENT:
 terraform-init:

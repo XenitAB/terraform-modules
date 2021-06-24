@@ -3,8 +3,8 @@ kind: PriorityClass
 metadata:
   name: platform-high
   labels:
-    "xkf.xenit.io/kind": "platform"
     {{- include "aks-core-extras.labels" . | nindent 4 }}
+    "xkf.xenit.io/kind": "platform"
 description: "Used by DaemonSets that need to always schedule on every node. Ex. node-exporter, promtail, aad-pod-identity-nmi."
 value:  900002
 preemptionPolicy: PreemptLowerPriority
@@ -15,7 +15,7 @@ kind: PriorityClass
 metadata:
   name: platform-medium
   labels:
-    "xkf.xenit.io/kind" = "platform"
+    "xkf.xenit.io/kind": "platform"
     {{- include "aks-core-extras.labels" . | nindent 4 }}
 description: "Used by less critical pods that still need premeption. Ex. Thanos Receiver, Nginx Ingress."
 value: 900001
@@ -27,7 +27,7 @@ kind: PriorityClass
 metadata:
   name: platform-low
   labels:
-    "xkf.xenit.io/kind" = "platform"
+    "xkf.xenit.io/kind": "platform"
     {{- include "aks-core-extras.labels" . | nindent 4 }}
 description: "Should be default for all other platform pods."
 value: 900000

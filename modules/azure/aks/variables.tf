@@ -30,9 +30,6 @@ variable "aks_config" {
     sku_tier           = string
     default_node_pool = object({
       orchestrator_version = string
-      vm_size              = string
-      min_count            = number
-      max_count            = number
       node_labels          = map(string)
     })
     additional_node_pools = list(object({

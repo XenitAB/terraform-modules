@@ -1,6 +1,13 @@
 # Azure Kubernetes Service
 
 This module is used to create AKS clusters.
+The cluster is configured with a system pool that currently has a single node. The node is tainted
+so that only kube-system pods can run on that system pool. This is partially to protect the system
+critical pods from user applications and simplify scaling.
+https://docs.microsoft.com/en-us/azure/aks/use-system-pools#system-and-user-node-pools
+
+Refer to the following docs for steps to replace the system node pool without recreating the cluster.
+https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-redeploying-the-cluster/
 
 ## Requirements
 
@@ -45,7 +52,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_aad_groups"></a> [aad\_groups](#input\_aad\_groups) | Configuration for Azure AD Groups (AAD Groups) | <pre>object({<br>    view = map(any)<br>    edit = map(any)<br>    cluster_admin = object({<br>      id   = string<br>      name = string<br>    })<br>    cluster_view = object({<br>      id   = string<br>      name = string<br>    })<br>    aks_managed_identity = object({<br>      id   = string<br>      name = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_aks_authorized_ips"></a> [aks\_authorized\_ips](#input\_aks\_authorized\_ips) | Authorized IPs to access AKS API | `list(string)` | n/a | yes |
-| <a name="input_aks_config"></a> [aks\_config](#input\_aks\_config) | The Azure Kubernetes Service (AKS) configuration | <pre>object({<br>    kubernetes_version = string<br>    sku_tier           = string<br>    default_node_pool = object({<br>      orchestrator_version = string<br>      vm_size              = string<br>      min_count            = number<br>      max_count            = number<br>      node_labels          = map(string)<br>    })<br>    additional_node_pools = list(object({<br>      name                 = string<br>      orchestrator_version = string<br>      vm_size              = string<br>      min_count            = number<br>      max_count            = number<br>      node_taints          = list(string)<br>      node_labels          = map(string)<br>    }))<br>  })</pre> | n/a | yes |
+| <a name="input_aks_config"></a> [aks\_config](#input\_aks\_config) | The Azure Kubernetes Service (AKS) configuration | <pre>object({<br>    kubernetes_version = string<br>    sku_tier           = string<br>    default_node_pool = object({<br>      orchestrator_version = string<br>      node_labels          = map(string)<br>    })<br>    additional_node_pools = list(object({<br>      name                 = string<br>      orchestrator_version = string<br>      vm_size              = string<br>      min_count            = number<br>      max_count            = number<br>      node_taints          = list(string)<br>      node_labels          = map(string)<br>    }))<br>  })</pre> | n/a | yes |
 | <a name="input_aks_name_suffix"></a> [aks\_name\_suffix](#input\_aks\_name\_suffix) | The suffix for the Azure Kubernetes Service (AKS) clusters | `number` | n/a | yes |
 | <a name="input_aks_public_ip_prefix_id"></a> [aks\_public\_ip\_prefix\_id](#input\_aks\_public\_ip\_prefix\_id) | Public IP ID AKS egresses from | `string` | n/a | yes |
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The commonName for the core infrastructure | `string` | n/a | yes |

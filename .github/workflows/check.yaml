@@ -103,4 +103,5 @@ jobs:
           terraform_version: 0.15.3
       - name: Run terraform validate
         run: |
+          sudo apt-get install parallel
           make validate

@@ -4,12 +4,13 @@ resource "aws_kms_key" "velero" {
   enable_key_rotation     = true
 
   tags = {
-    Name        = "${var.environment}-${var.name}-velero"
+    Name        = var.name
     Environment = var.environment
+    Component   = "velero"
   }
 }
 
-resource "aws_s3_bucket" "velero" { #tfsec:ignore:AWS002
+resource "aws_s3_bucket" "velero" {
   bucket = "${var.environment}-${data.aws_region.current.name}-${var.name}-velero"
   acl    = "private"
 
@@ -27,7 +28,8 @@ resource "aws_s3_bucket" "velero" { #tfsec:ignore:AWS002
   }
 
   tags = {
-    Name        = "${var.environment}-${data.aws_region.current.name}-${var.name}-velero"
+    Name        = var.name
     Environment = var.environment
+    Component   = "velero"
   }
 }

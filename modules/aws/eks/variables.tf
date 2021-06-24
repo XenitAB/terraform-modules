@@ -29,7 +29,6 @@ variable "eks_config" {
       release_version = string
       min_size        = number
       max_size        = number
-      disk_size       = number
       instance_types  = list(string)
     }))
   })

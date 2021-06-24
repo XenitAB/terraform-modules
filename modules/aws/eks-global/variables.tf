@@ -4,6 +4,6 @@ variable "environment" {
 }
 
 variable "name" {
-  description = "Common name for the environment"
+  description = "Name for the deployment"
   type        = string
 }

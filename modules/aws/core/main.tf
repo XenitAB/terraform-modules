@@ -1,3 +1,11 @@
+/**
+  * # Core
+  *
+  * This module is used to configure a standard public/private VPC and accompanying Route53 zome.
+  *
+  */
+
+
 terraform {
   required_version = "0.15.3"
   required_providers {
@@ -10,13 +18,4 @@ terraform {
 
 data "aws_availability_zones" "available" {
   state = "available"
-}
-
-resource "aws_route53_zone" "this" {
-  name = var.dns_zone
-
-  tags = {
-    Name        = var.dns_zone
-    Environment = var.environment
-  }
 }

@@ -33,11 +33,11 @@ terraform {
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.1.11"
+      version = "0.1.12"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
-      version = "1.11.1"
+      version = "1.11.2"
     }
   }
 }

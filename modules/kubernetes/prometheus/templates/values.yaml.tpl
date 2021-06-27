@@ -21,7 +21,7 @@ kube-state-metrics:
   podSecurityPolicy:
     enabled: false
   metricLabelsAllowlist:
-    - namespaces=[xkf.xenit.io/kind]
+    - namespaces=[xkf.xenit.io\/kind]
 
 commonLabels:
   xkf.xenit.io/monitoring: platform

@@ -19,9 +19,9 @@ the bootstrap configuration.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
 | <a name="requirement_azuredevops"></a> [azuredevops](#requirement\_azuredevops) | 0.3.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.11 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.1.12 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.2.0 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.11.1 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.11.2 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.3.2 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
 
@@ -30,9 +30,9 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | <a name="provider_azuredevops"></a> [azuredevops](#provider\_azuredevops) | 0.3.0 |
-| <a name="provider_flux"></a> [flux](#provider\_flux) | 0.1.11 |
+| <a name="provider_flux"></a> [flux](#provider\_flux) | 0.1.12 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.2.0 |
-| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.11.1 |
+| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.11.2 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.3.2 |
 
 ## Modules
@@ -49,15 +49,15 @@ No modules.
 | [azuredevops_git_repository_file.sync](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository_file) | resource |
 | [azuredevops_git_repository_file.tenant](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/resources/git_repository_file) | resource |
 | [helm_release.azdo_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.2.0/docs/resources/release) | resource |
-| [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.1/docs/resources/manifest) | resource |
-| [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.1/docs/resources/manifest) | resource |
+| [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.2/docs/resources/manifest) | resource |
+| [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.2/docs/resources/manifest) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/namespace) | resource |
 | [azuredevops_git_repository.cluster](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/git_repository) | data source |
 | [azuredevops_project.this](https://registry.terraform.io/providers/xenitab/azuredevops/0.3.0/docs/data-sources/project) | data source |
-| [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.11/docs/data-sources/install) | data source |
-| [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.11/docs/data-sources/sync) | data source |
-| [kubectl_file_documents.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.1/docs/data-sources/file_documents) | data source |
-| [kubectl_file_documents.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.1/docs/data-sources/file_documents) | data source |
+| [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.12/docs/data-sources/install) | data source |
+| [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/0.1.12/docs/data-sources/sync) | data source |
+| [kubectl_file_documents.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.2/docs/data-sources/file_documents) | data source |
+| [kubectl_file_documents.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.2/docs/data-sources/file_documents) | data source |
 
 ## Inputs
 

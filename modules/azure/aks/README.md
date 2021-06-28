@@ -14,16 +14,16 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 1.5.1 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.64.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 1.6.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.65.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 1.5.1 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.64.0 |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 1.6.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.65.0 |
 
 ## Modules
 
@@ -33,18 +33,18 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azuread_group_member.aks_managed_identity](https://registry.terraform.io/providers/hashicorp/azuread/1.5.1/docs/resources/group_member) | resource |
-| [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.64.0/docs/resources/kubernetes_cluster) | resource |
-| [azurerm_kubernetes_cluster_node_pool.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.64.0/docs/resources/kubernetes_cluster_node_pool) | resource |
-| [azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator](https://registry.terraform.io/providers/hashicorp/azurerm/2.64.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/2.64.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.cluster_admin](https://registry.terraform.io/providers/hashicorp/azurerm/2.64.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azurerm/2.64.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/2.64.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/2.64.0/docs/resources/role_assignment) | resource |
-| [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/2.64.0/docs/data-sources/resource_group) | data source |
-| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.64.0/docs/data-sources/resource_group) | data source |
-| [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.64.0/docs/data-sources/subnet) | data source |
+| [azuread_group_member.aks_managed_identity](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group_member) | resource |
+| [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.65.0/docs/resources/kubernetes_cluster) | resource |
+| [azurerm_kubernetes_cluster_node_pool.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.65.0/docs/resources/kubernetes_cluster_node_pool) | resource |
+| [azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator](https://registry.terraform.io/providers/hashicorp/azurerm/2.65.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/2.65.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.cluster_admin](https://registry.terraform.io/providers/hashicorp/azurerm/2.65.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azurerm/2.65.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/2.65.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/2.65.0/docs/resources/role_assignment) | resource |
+| [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/2.65.0/docs/data-sources/resource_group) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.65.0/docs/data-sources/resource_group) | data source |
+| [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.65.0/docs/data-sources/subnet) | data source |
 
 ## Inputs
 

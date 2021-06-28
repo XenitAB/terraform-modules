@@ -20,6 +20,8 @@ kube-state-metrics:
   priorityClassName: "platform-low"
   podSecurityPolicy:
     enabled: false
+  metricLabelsAllowlist:
+    - "namespaces=[xkf.xenit.io/kind]"
 
 commonLabels:
   xkf.xenit.io/monitoring: platform

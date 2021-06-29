@@ -140,7 +140,7 @@ resource "aws_route" "private" {
 
   route_table_id         = aws_route_table.private[each.key].id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = aws_nat_gateway.public["pub${each.value.availability_zone_index}"].id
+  nat_gateway_id         = aws_nat_gateway.public["${var.vpc_config.nat_subnet_name_prefix}-${each.value.availability_zone_index}"].id
 }
 
 resource "aws_route_table_association" "private" {

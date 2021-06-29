@@ -13,7 +13,7 @@ resource "aws_internet_gateway" "this" {
   vpc_id = aws_vpc.this.id
 
   tags = {
-    Name = var.name
+    Name        = var.name
     Environment = var.environment
   }
 }
@@ -27,12 +27,12 @@ resource "aws_subnet" "public" {
 
   vpc_id                  = aws_vpc.this.id
   cidr_block              = each.value.cidr_block
-  availability_zone       = data.aws_availability_zones.available.names[each.value.az]
+  availability_zone       = data.aws_availability_zones.available.names[each.value.availability_zone_index]
   map_public_ip_on_launch = true
 
   tags = {
-    Name = each.value.name
-    Environment = var.environment
+    Name                     = each.value.name
+    Environment              = var.environment
     "kubernetes.io/role/elb" = "1"
   }
 }
@@ -43,10 +43,10 @@ resource "aws_eip" "public" {
     subnet.name => subnet
   }
 
-  vpc        = true
+  vpc = true
 
   tags = {
-    Name = each.value.name
+    Name        = each.value.name
     Environment = var.environment
   }
 }
@@ -61,7 +61,7 @@ resource "aws_nat_gateway" "public" {
   subnet_id     = aws_subnet.public[each.key].id
 
   tags = {
-    Name = each.value.name
+    Name        = each.value.name
     Environment = var.environment
   }
 }
@@ -97,7 +97,7 @@ resource "aws_route_table_association" "public" {
     subnet.name => subnet
   }
 
-  subnet_id     = aws_subnet.public[each.key].id
+  subnet_id      = aws_subnet.public[each.key].id
   route_table_id = aws_route_table.public[each.key].id
 }
 
@@ -108,12 +108,12 @@ resource "aws_subnet" "private" {
     subnet.name => subnet
   }
 
-  vpc_id                  = aws_vpc.this.id
-  cidr_block              = each.value.cidr_block
-  availability_zone       = data.aws_availability_zones.available.names[each.value.az]
+  vpc_id            = aws_vpc.this.id
+  cidr_block        = each.value.cidr_block
+  availability_zone = data.aws_availability_zones.available.names[each.value.availability_zone_index]
 
   tags = {
-    Name = each.value.name
+    Name        = each.value.name
     Environment = var.environment
   }
 }
@@ -140,7 +140,7 @@ resource "aws_route" "private" {
 
   route_table_id         = aws_route_table.private[each.key].id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id             = aws_nat_gateway.public["pub${each.value.az}"].id
+  nat_gateway_id         = aws_nat_gateway.public["pub${each.value.availability_zone_index}"].id
 }
 
 resource "aws_route_table_association" "private" {
@@ -149,7 +149,7 @@ resource "aws_route_table_association" "private" {
     subnet.name => subnet
   }
 
-  subnet_id     = aws_subnet.private[each.key].id
+  subnet_id      = aws_subnet.private[each.key].id
   route_table_id = aws_route_table.private[each.key].id
 }
 

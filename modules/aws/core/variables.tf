@@ -16,31 +16,31 @@ variable "dns_zone" {
 variable "vpc_config" {
   description = "The configuration of the VPC"
   type = object({
-    cidr_block           = string
+    cidr_block = string
     public_subnets = list(object({
-      name       = string
-      cidr_block = string
-      az         = number
+      name                    = string
+      cidr_block              = string
+      availability_zone_index = number
     }))
     private_subnets = list(object({
-      name       = string
-      cidr_block = string
-      az         = number
+      name                    = string
+      cidr_block              = string
+      availability_zone_index = number
     }))
   })
 }
 
 variable "vpc_peering_enabled" {
   description = "If true vpc peering will be configured"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "vpc_peering_config" {
   description = "VPC Peering configuration"
   type = object({
-    peer_owner_id = string
-    peer_vpc_id = string
+    peer_owner_id          = string
+    peer_vpc_id            = string
     destination_cidr_block = string
   })
 }

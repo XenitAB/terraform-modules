@@ -31,7 +31,7 @@ resource "aws_subnet" "public" {
 
   vpc_id                  = aws_vpc.this.id
   cidr_block              = each.value.cidr_block
-  availability_zone       = data.aws_availability_zones.available.names[each.value.availability_zone_index]
+  availability_zone       = data.aws_availability_zones.available.names[idx]
   map_public_ip_on_launch = true
 
   tags = {
@@ -178,7 +178,7 @@ resource "aws_vpc_peering_connection" "this" {
 resource "aws_route" "peer" {
   for_each = {
     for subnet in var.vpc_config.private_subnets :
-    subnet.name => subnet
+    "${subnet.name_prefix}-${subnet.availability_zone_index}" => subnet
     if var.vpc_peering_enabled
   }
 

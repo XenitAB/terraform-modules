@@ -72,7 +72,7 @@ resource "aws_route_table" "public" {
     subnet.name => subnet
   }
 
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.this.id
 
   tags = {
     Name        = each.value.name
@@ -108,7 +108,7 @@ resource "aws_subnet" "private" {
     subnet.name => subnet
   }
 
-  vpc_id                  = aws_vpc.vpc.id
+  vpc_id                  = aws_vpc.this.id
   cidr_block              = each.value.cidr_block
   availability_zone       = data.aws_availability_zones.available.names[each.value.az]
 
@@ -124,7 +124,7 @@ resource "aws_route_table" "private" {
     subnet.name => subnet
   }
 
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.this.id
 
   tags = {
     Name        = each.value.name

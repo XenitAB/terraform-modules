@@ -9,6 +9,15 @@ kubeControllerManager:
 kubeScheduler:
   enabled: false
 
+kubeEtcd:
+  enabled: false
+
+# Specific for AKS kube-proxy label
+kubeProxy:
+  service:
+    selector:
+      component: kube-proxy
+
 # We don't use alert manager in the cluster, we use thanos ruler
 alertmanager:
   enabled: false

@@ -26,12 +26,12 @@ resource "aws_internet_gateway" "this" {
 resource "aws_subnet" "public" {
   for_each = {
     for idx, subnet in var.vpc_config.public_subnets :
-    "${local.public_subnet_name_prefix}-${idx}" => subnet
+    "${local.public_subnet_name_prefix}-${idx}" => { index : idx, object : subnet }
   }
 
   vpc_id                  = aws_vpc.this.id
-  cidr_block              = each.value.cidr_block
-  availability_zone       = data.aws_availability_zones.available.names[idx]
+  cidr_block              = each.value.object.cidr_block
+  availability_zone       = data.aws_availability_zones.available.names[each.value.index]
   map_public_ip_on_launch = true
 
   tags = {

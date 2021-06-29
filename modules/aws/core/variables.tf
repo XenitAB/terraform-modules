@@ -18,12 +18,10 @@ variable "vpc_config" {
   type = object({
     cidr_block = string
     public_subnets = list(object({
-      name                    = string
-      cidr_block              = string
-      availability_zone_index = number
+      cidr_block = string
     }))
     private_subnets = list(object({
-      name                    = string
+      name_prefix             = string
       cidr_block              = string
       availability_zone_index = number
     }))

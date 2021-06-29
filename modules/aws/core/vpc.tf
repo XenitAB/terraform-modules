@@ -1,3 +1,7 @@
+locals {
+  public_subnet_name_prefix = "public"
+}
+
 resource "aws_vpc" "this" {
   cidr_block           = var.vpc_config.cidr_block
   enable_dns_support   = true
@@ -21,8 +25,8 @@ resource "aws_internet_gateway" "this" {
 # public subnets with NAT
 resource "aws_subnet" "public" {
   for_each = {
-    for subnet in var.vpc_config.public_subnets :
-    subnet.name => subnet
+    for idx, subnet in var.vpc_config.public_subnets :
+    "${local.public_subnet_name_prefix}-${idx}" => subnet
   }
 
   vpc_id                  = aws_vpc.this.id
@@ -31,7 +35,7 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name                     = each.value.name
+    Name                     = each.key
     Environment              = var.environment
     "kubernetes.io/role/elb" = "1"
   }
@@ -39,51 +43,51 @@ resource "aws_subnet" "public" {
 
 resource "aws_eip" "public" {
   for_each = {
-    for subnet in var.vpc_config.public_subnets :
-    subnet.name => subnet
+    for idx, subnet in var.vpc_config.public_subnets :
+    "${local.public_subnet_name_prefix}-${idx}" => subnet
   }
 
   vpc = true
 
   tags = {
-    Name        = each.value.name
+    Name        = each.key
     Environment = var.environment
   }
 }
 
 resource "aws_nat_gateway" "public" {
   for_each = {
-    for subnet in var.vpc_config.public_subnets :
-    subnet.name => subnet
+    for idx, subnet in var.vpc_config.public_subnets :
+    "${local.public_subnet_name_prefix}-${idx}" => subnet
   }
 
   allocation_id = aws_eip.public[each.key].id
   subnet_id     = aws_subnet.public[each.key].id
 
   tags = {
-    Name        = each.value.name
+    Name        = each.key
     Environment = var.environment
   }
 }
 
 resource "aws_route_table" "public" {
   for_each = {
-    for subnet in var.vpc_config.public_subnets :
-    subnet.name => subnet
+    for idx, subnet in var.vpc_config.public_subnets :
+    "${local.public_subnet_name_prefix}-${idx}" => subnet
   }
 
   vpc_id = aws_vpc.this.id
 
   tags = {
-    Name        = each.value.name
+    Name        = each.key
     Environment = var.environment
   }
 }
 
 resource "aws_route" "public" {
   for_each = {
-    for subnet in var.vpc_config.public_subnets :
-    subnet.name => subnet
+    for idx, subnet in var.vpc_config.public_subnets :
+    "${local.public_subnet_name_prefix}-${idx}" => subnet
   }
 
   route_table_id         = aws_route_table.public[each.key].id
@@ -93,8 +97,8 @@ resource "aws_route" "public" {
 
 resource "aws_route_table_association" "public" {
   for_each = {
-    for subnet in var.vpc_config.public_subnets :
-    subnet.name => subnet
+    for idx, subnet in var.vpc_config.public_subnets :
+    "${local.public_subnet_name_prefix}-${idx}" => subnet
   }
 
   subnet_id      = aws_subnet.public[each.key].id
@@ -105,7 +109,7 @@ resource "aws_route_table_association" "public" {
 resource "aws_subnet" "private" {
   for_each = {
     for subnet in var.vpc_config.private_subnets :
-    subnet.name => subnet
+    "${subnet.name_prefix}-${subnet.availability_zone_index}" => subnet
   }
 
   vpc_id            = aws_vpc.this.id
@@ -113,7 +117,7 @@ resource "aws_subnet" "private" {
   availability_zone = data.aws_availability_zones.available.names[each.value.availability_zone_index]
 
   tags = {
-    Name        = each.value.name
+    Name        = each.key
     Environment = var.environment
   }
 }
@@ -121,13 +125,13 @@ resource "aws_subnet" "private" {
 resource "aws_route_table" "private" {
   for_each = {
     for subnet in var.vpc_config.private_subnets :
-    subnet.name => subnet
+    "${subnet.name_prefix}-${subnet.availability_zone_index}" => subnet
   }
 
   vpc_id = aws_vpc.this.id
 
   tags = {
-    Name        = each.value.name
+    Name        = each.key
     Environment = var.environment
   }
 }
@@ -135,18 +139,18 @@ resource "aws_route_table" "private" {
 resource "aws_route" "private" {
   for_each = {
     for subnet in var.vpc_config.private_subnets :
-    subnet.name => subnet
+    "${subnet.name_prefix}-${subnet.availability_zone_index}" => subnet
   }
 
   route_table_id         = aws_route_table.private[each.key].id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = aws_nat_gateway.public["${var.vpc_config.nat_subnet_name_prefix}-${each.value.availability_zone_index}"].id
+  nat_gateway_id         = aws_nat_gateway.public["${local.public_subnet_name_prefix}-${each.value.availability_zone_index}"].id
 }
 
 resource "aws_route_table_association" "private" {
   for_each = {
     for subnet in var.vpc_config.private_subnets :
-    subnet.name => subnet
+    "${subnet.name_prefix}-${subnet.availability_zone_index}" => subnet
   }
 
   subnet_id      = aws_subnet.private[each.key].id

@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "this" {
-  name     = "${var.environment}-${var.name}${var.eks_name_suffix}"
+  name     = "${var.name}${var.eks_name_suffix}-${var.environment}"
   role_arn = aws_iam_role.eks_cluster.arn
   version  = var.eks_config.kubernetes_version
 
@@ -8,7 +8,7 @@ resource "aws_eks_cluster" "this" {
   }
 
   tags = {
-    Name        = "${var.environment}-${var.name}${var.eks_name_suffix}"
+    Name        = "${var.name}${var.eks_name_suffix}-${var.environment}"
     Environment = var.environment
   }
 
@@ -16,6 +16,20 @@ resource "aws_eks_cluster" "this" {
     aws_iam_role_policy_attachment.eks_cluster,
     aws_iam_role_policy_attachment.eks_service,
   ]
+}
+
+data "aws_subnet" "cluster" {
+  for_each = {
+    for i in ["0", "1"] :
+    i => i
+  }
+
+  filter {
+    name = "tag:Name"
+    values = [
+      "${var.name}${var.eks_name_suffix}-cluster-${each.value}"
+    ]
+  }
 }
 
 resource "aws_eks_node_group" "this" {
@@ -35,10 +49,10 @@ resource "aws_eks_node_group" "this" {
     max_size     = each.value.max_size
   }
 
-  subnet_ids = [for s in aws_subnet.this : s.id]
+  subnet_ids = [for s in data.aws_subnet.cluster : s.id]
 
   tags = {
-    Name        = "${var.environment}-${var.name}${var.eks_name_suffix}-${each.value.name}"
+    Name        = "${var.name}${var.eks_name_suffix}-${each.value.name}"
     Environment = var.environment
   }
 

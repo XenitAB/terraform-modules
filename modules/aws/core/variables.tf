@@ -41,4 +41,9 @@ variable "vpc_peering_config" {
     peer_vpc_id            = string
     destination_cidr_block = string
   })
+  default = {
+    destination_cidr_block = ""
+    peer_owner_id = ""
+    peer_vpc_id = ""
+  }
 }

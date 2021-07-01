@@ -7,3 +7,6 @@ priorityClassName: "platform-high"
 podAnnotations:
   linkerd.io/inject: enabled
 %{ endif }
+
+service:
+  type: ClusterIP

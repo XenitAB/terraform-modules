@@ -4,13 +4,14 @@ resource "aws_kms_key" "velero" {
   enable_key_rotation     = true
 
   tags = {
-    Name      = var.name
-    Component = "velero"
+    Name        = var.name
+    Environment = var.environment
+    Component   = "velero"
   }
 }
 
 resource "aws_s3_bucket" "velero" {
-  bucket = "${data.aws_region.current.name}-${var.name}-velero"
+  bucket = "${data.aws_region.current.name}-${var.name}-${var.environment}-${var.unique_suffix}-velero"
   acl    = "private"
 
   versioning {
@@ -27,7 +28,8 @@ resource "aws_s3_bucket" "velero" {
   }
 
   tags = {
-    Name      = var.name
-    Component = "velero"
+    Name        = var.name
+    Environment = var.environment
+    Component   = "velero"
   }
 }

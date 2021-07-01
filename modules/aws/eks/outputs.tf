@@ -8,6 +8,7 @@ output "kube_config" {
   }
 }
 
+/*
 output "external_secrets_config" {
   description = "Configuration for External DNS"
   value = {
@@ -36,3 +37,4 @@ output "velero_config" {
     s3_bucket_id = var.velero_config.s3_bucket_id
   }
 }
+*/

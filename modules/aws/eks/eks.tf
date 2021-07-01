@@ -1,14 +1,14 @@
 data "aws_iam_role" "eks_cluster" {
-  name = "eks_cluster"
+  name = "${data.aws_region.current.name}-${var.name}-cluster"
 }
 
 resource "aws_eks_cluster" "this" {
   name     = "${var.name}${var.eks_name_suffix}-${var.environment}"
-  role_arn = aws_iam_role.eks_cluster.arn
+  role_arn = data.aws_iam_role.eks_cluster.arn
   version  = var.eks_config.kubernetes_version
 
   vpc_config {
-    subnet_ids = [for s in aws_subnet.this : s.id]
+    subnet_ids = [for s in data.aws_subnet.cluster : s.id]
   }
 
   tags = {
@@ -31,6 +31,14 @@ data "aws_subnet" "cluster" {
   }
 }
 
+data "aws_eks_cluster_auth" "this" {
+  name = "${var.name}${var.eks_name_suffix}-${var.environment}"
+}
+
+data "aws_iam_role" "eks_node_group" {
+  name = "${data.aws_region.current.name}-${var.name}-node_group"
+}
+
 resource "aws_eks_node_group" "this" {
   for_each = {
     for node_group in var.eks_config.node_groups :
@@ -39,7 +47,7 @@ resource "aws_eks_node_group" "this" {
 
   cluster_name    = aws_eks_cluster.this.name
   node_group_name = "${aws_eks_cluster.this.name}-${each.value.name}"
-  node_role_arn   = aws_iam_role.eks_node_group.arn
+  node_role_arn   = data.aws_iam_role.eks_node_group.arn
   instance_types  = each.value.instance_types
   release_version = each.value.release_version
   scaling_config {
@@ -48,6 +56,7 @@ resource "aws_eks_node_group" "this" {
     max_size     = each.value.max_size
   }
 
+  // unsure about the cluster subnet
   subnet_ids = [for s in data.aws_subnet.cluster : s.id]
 
   tags = {

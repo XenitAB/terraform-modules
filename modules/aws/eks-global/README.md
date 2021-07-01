@@ -21,7 +21,13 @@ No modules.
 |------|------|
 | [aws_iam_policy.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_policy) | resource |
 | [aws_iam_role.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role) | resource |
+| [aws_iam_role.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role) | resource |
+| [aws_iam_role.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.container_registry_read_only](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.eks_service](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.eks_worker_node](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_kms_key.velero](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/kms_key) | resource |
 | [aws_s3_bucket.velero](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/s3_bucket) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/caller_identity) | data source |
@@ -33,8 +39,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
-| <a name="input_name"></a> [name](#input\_name) | Common name for the environment | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | Name for the deployment | `string` | n/a | yes |
 
 ## Outputs
 

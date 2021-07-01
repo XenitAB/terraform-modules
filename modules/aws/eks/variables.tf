@@ -8,11 +8,6 @@ variable "name" {
   type        = string
 }
 
-variable "core_name" {
-  description = "The core name for the environment"
-  type        = string
-}
-
 variable "eks_name_suffix" {
   description = "The suffix for the eks clusters"
   type        = number
@@ -31,13 +26,5 @@ variable "eks_config" {
       max_size        = number
       instance_types  = list(string)
     }))
-  })
-}
-
-variable "velero_config" {
-  description = "Velero configuration"
-  type = object({
-    s3_bucket_arn = string
-    s3_bucket_id  = string
   })
 }

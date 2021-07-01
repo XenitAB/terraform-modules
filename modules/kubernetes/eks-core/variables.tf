@@ -117,9 +117,3 @@ variable "velero_config" {
     s3_bucket_id = string
   })
 }
-
-variable "kyverno_enabled" {
-  description = "Should Kyverno be enabled"
-  type        = bool
-  default     = true
-}

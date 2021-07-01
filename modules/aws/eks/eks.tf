@@ -56,7 +56,7 @@ resource "aws_eks_node_group" "this" {
     max_size     = each.value.max_size
   }
 
-  // unsure about the cluster subnet
+  # unsure about the cluster subnet
   subnet_ids = [for s in data.aws_subnet.cluster : s.id]
 
   tags = {

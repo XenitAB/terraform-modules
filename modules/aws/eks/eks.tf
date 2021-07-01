@@ -1,3 +1,7 @@
+data "aws_iam_role" "eks_cluster" {
+  name = "eks_cluster"
+}
+
 resource "aws_eks_cluster" "this" {
   name     = "${var.name}${var.eks_name_suffix}-${var.environment}"
   role_arn = aws_iam_role.eks_cluster.arn

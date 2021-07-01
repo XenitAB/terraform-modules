@@ -11,11 +11,6 @@ resource "aws_eks_cluster" "this" {
     Name        = "${var.name}${var.eks_name_suffix}-${var.environment}"
     Environment = var.environment
   }
-
-  depends_on = [
-    aws_iam_role_policy_attachment.eks_cluster,
-    aws_iam_role_policy_attachment.eks_service,
-  ]
 }
 
 data "aws_subnet" "cluster" {
@@ -55,11 +50,6 @@ resource "aws_eks_node_group" "this" {
     Name        = "${var.name}${var.eks_name_suffix}-${each.value.name}"
     Environment = var.environment
   }
-
-  depends_on = [
-    aws_iam_role_policy_attachment.eks_worker_node,
-    aws_iam_role_policy_attachment.container_registry_read_only,
-  ]
 }
 
 data "tls_certificate" "thumbprint" {

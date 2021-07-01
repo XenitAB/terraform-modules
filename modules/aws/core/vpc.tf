@@ -140,6 +140,7 @@ resource "aws_route" "private" {
   for_each = {
     for subnet in var.vpc_config.private_subnets :
     "${subnet.name_prefix}-${subnet.availability_zone_index}" => subnet
+    if subnet.public_routing_enabled
   }
 
   route_table_id         = aws_route_table.private[each.key].id

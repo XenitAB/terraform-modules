@@ -24,6 +24,7 @@ variable "vpc_config" {
       name_prefix             = string
       cidr_block              = string
       availability_zone_index = number
+      public_routing_enabled  = bool
     }))
   })
 }
@@ -43,7 +44,7 @@ variable "vpc_peering_config" {
   })
   default = {
     destination_cidr_block = ""
-    peer_owner_id = ""
-    peer_vpc_id = ""
+    peer_owner_id          = ""
+    peer_vpc_id            = ""
   }
 }

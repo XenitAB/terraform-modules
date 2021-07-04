@@ -25,7 +25,7 @@ terraform {
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.1.12"
+      version = "0.2.0"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"

@@ -87,7 +87,7 @@ resource "kubernetes_network_policy" "tenant" {
       to {
         namespace_selector {}
         pod_selector {
-          match_labels {
+          match_labels = {
             k8s-app = "kube-dns"
           }
         }

@@ -94,7 +94,7 @@ resource "kubernetes_network_policy" "tenant" {
       }
 
       ports {
-        port = 54
+        port = 53
         protocol = "UDP"
       }
     }

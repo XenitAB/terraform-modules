@@ -1,22 +1,3 @@
-data "aws_iam_role" "eks_cluster" {
-  name = "${data.aws_region.current.name}-${var.name}-cluster"
-}
-
-resource "aws_eks_cluster" "this" {
-  name     = "${var.name}${var.eks_name_suffix}-${var.environment}"
-  role_arn = data.aws_iam_role.eks_cluster.arn
-  version  = var.eks_config.kubernetes_version
-
-  vpc_config {
-    subnet_ids = [for s in data.aws_subnet.cluster : s.id]
-  }
-
-  tags = {
-    Name        = "${var.name}${var.eks_name_suffix}-${var.environment}"
-    Environment = var.environment
-  }
-}
-
 data "aws_subnet" "cluster" {
   for_each = {
     for i in ["0", "1"] :
@@ -31,12 +12,33 @@ data "aws_subnet" "cluster" {
   }
 }
 
-data "aws_eks_cluster_auth" "this" {
-  name = "${var.name}${var.eks_name_suffix}-${var.environment}"
+resource "aws_eks_cluster" "this" {
+  name     = "${var.name}${var.eks_name_suffix}-${var.environment}"
+  role_arn = var.cluster_role_arn
+  version  = var.eks_config.kubernetes_version
+
+  vpc_config {
+    subnet_ids = [for s in data.aws_subnet.cluster : s.id]
+  }
+
+  tags = {
+    Name        = "${var.name}${var.eks_name_suffix}-${var.environment}"
+    Environment = var.environment
+  }
 }
 
-data "aws_iam_role" "eks_node_group" {
-  name = "${data.aws_region.current.name}-${var.name}-node_group"
+data "aws_subnet" "node" {
+  for_each = {
+    for i in ["0", "1", "2"] :
+    i => i
+  }
+
+  filter {
+    name = "tag:Name"
+    values = [
+      "${var.name}${var.eks_name_suffix}-nodes-${each.value}"
+    ]
+  }
 }
 
 resource "aws_eks_node_group" "this" {
@@ -47,7 +49,7 @@ resource "aws_eks_node_group" "this" {
 
   cluster_name    = aws_eks_cluster.this.name
   node_group_name = "${aws_eks_cluster.this.name}-${each.value.name}"
-  node_role_arn   = data.aws_iam_role.eks_node_group.arn
+  node_role_arn   = var.node_group_role_arn
   instance_types  = each.value.instance_types
   release_version = each.value.release_version
   scaling_config {
@@ -56,11 +58,10 @@ resource "aws_eks_node_group" "this" {
     max_size     = each.value.max_size
   }
 
-  # unsure about the cluster subnet
-  subnet_ids = [for s in data.aws_subnet.cluster : s.id]
+  subnet_ids = [for s in data.aws_subnet.node : s.id]
 
   tags = {
-    Name        = "${var.name}${var.eks_name_suffix}-${each.value.name}"
+    Name        = "${aws_eks_cluster.this.name}-${each.value.name}"
     Environment = var.environment
   }
 }

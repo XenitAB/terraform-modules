@@ -34,11 +34,13 @@ resource "aws_subnet" "public" {
   availability_zone       = data.aws_availability_zones.available.names[each.value.index]
   map_public_ip_on_launch = true
 
-  tags = {
-    Name                     = each.key
-    Environment              = var.environment
-    "kubernetes.io/role/elb" = "1"
-  }
+  tags = merge(
+    each.value.object.tags,
+    {
+      Name                     = each.key,
+      Environment              = var.environment
+    }
+  )
 }
 
 resource "aws_eip" "public" {
@@ -116,10 +118,13 @@ resource "aws_subnet" "private" {
   cidr_block        = each.value.cidr_block
   availability_zone = data.aws_availability_zones.available.names[each.value.availability_zone_index]
 
-  tags = {
-    Name        = each.key
-    Environment = var.environment
-  }
+  tags = merge(
+    each.value.tags,
+    {
+      Name        = each.key,
+      Environment = var.environment
+    }
+  )
 }
 
 resource "aws_route_table" "private" {

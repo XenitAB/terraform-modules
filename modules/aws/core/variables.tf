@@ -19,12 +19,14 @@ variable "vpc_config" {
     cidr_block = string
     public_subnets = list(object({
       cidr_block = string
+      tags = map(string)
     }))
     private_subnets = list(object({
       name_prefix             = string
       cidr_block              = string
       availability_zone_index = number
       public_routing_enabled  = bool
+      tags = map(string)
     }))
   })
 }

@@ -3,7 +3,8 @@ data "aws_iam_policy_document" "eks_admin_permission" {
   statement {
     effect = "Allow"
     actions = [
-      "eks:*"
+      "eks:*",
+       "ec2:DescribeAccountAttributes",
     ]
     resources = [
       "*"
@@ -18,22 +19,20 @@ data "aws_iam_policy_document" "eks_admin_assume" {
     ]
     effect = "Allow"
     principals {
-      identifiers = [
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
-      ]
       type = "AWS"
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
   }
 }
 
 resource "aws_iam_policy" "eks_admin" {
-  name        = "iam-policy-eks-admin"
+  name        = "eks-admin"
   description = "EKS Admin Role Plocy"
   policy      = data.aws_iam_policy_document.eks_admin_permission.json
 }
 
 resource "aws_iam_role" "eks_admin" {
-  name               = "iam-role-eks-admin"
+  name               = "eks-admin"
   assume_role_policy = data.aws_iam_policy_document.eks_admin_assume.json
 }
 
@@ -44,7 +43,7 @@ resource "aws_iam_role_policy_attachment" "eks_admin" {
 
 # EKS Cluster
 resource "aws_iam_role" "eks_cluster" {
-  name = "${data.aws_region.current.name}-${var.name}-cluster"
+  name = "${var.name}-cluster"
 
   assume_role_policy = jsonencode({
     Statement = [{
@@ -63,14 +62,9 @@ resource "aws_iam_role_policy_attachment" "eks_cluster" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
-resource "aws_iam_role_policy_attachment" "eks_service" {
-  role       = aws_iam_role.eks_cluster.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
-}
-
 # EKS Node Group
 resource "aws_iam_role" "eks_node_group" {
-  name = "${data.aws_region.current.name}-${var.name}-node_group"
+  name = "${var.name}-node-group"
 
   assume_role_policy = jsonencode({
     Statement = [{
@@ -92,4 +86,9 @@ resource "aws_iam_role_policy_attachment" "eks_worker_node" {
 resource "aws_iam_role_policy_attachment" "container_registry_read_only" {
   role       = aws_iam_role.eks_node_group.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
+resource "aws_iam_role_policy_attachment" "eks_cni" {
+  role       = aws_iam_role.eks_node_group.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }

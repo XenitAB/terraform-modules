@@ -13,6 +13,8 @@ data "aws_subnet" "cluster" {
 }
 
 resource "aws_eks_cluster" "this" {
+  provider = aws.eks_admin
+
   name     = "${var.name}${var.eks_name_suffix}-${var.environment}"
   role_arn = var.cluster_role_arn
   version  = var.eks_config.kubernetes_version
@@ -25,6 +27,22 @@ resource "aws_eks_cluster" "this" {
     Name        = "${var.name}${var.eks_name_suffix}-${var.environment}"
     Environment = var.environment
   }
+}
+
+# This is a sad dirty trick as there is no way to opt-out
+# of EKS installing the VPC CNI. EKS will not try to create
+# the daemonset again after you delete.
+resource "null_resource" "remove_aws_vpc_cni" {
+  provisioner "local-exec" {
+    interpreter = ["bash", "-c"]
+    command = <<-EOT
+      curl https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/release-1.8/config/v1.8/aws-k8s-cni.yaml | kubectl --context='${aws_eks_cluster.cluster.arn}' delete -f - || true
+    EOT
+  }
+
+  depends_on = [
+    aws_eks_cluster.this
+  ]
 }
 
 data "aws_subnet" "node" {
@@ -42,10 +60,12 @@ data "aws_subnet" "node" {
 }
 
 resource "aws_eks_node_group" "this" {
+  provider = aws.eks_admin
   for_each = {
     for node_group in var.eks_config.node_groups :
     node_group.name => node_group
   }
+  depends_on = [null_resource.remove_aws_vpc_cni]
 
   cluster_name    = aws_eks_cluster.this.name
   node_group_name = "${aws_eks_cluster.this.name}-${each.value.name}"
@@ -75,3 +95,11 @@ resource "aws_iam_openid_connect_provider" "this" {
   thumbprint_list = [data.tls_certificate.thumbprint.certificates[0].sha1_fingerprint]
   url             = aws_eks_cluster.this.identity[0].oidc[0].issuer
 }
+
+data "aws_eks_cluster_auth" "this" {
+  provider = aws.eks_admin
+
+  name = aws_eks_cluster.this.name
+}
+
+

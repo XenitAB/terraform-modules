@@ -31,10 +31,10 @@ variable "eks_config" {
 
 variable "cluster_role_arn" {
   description = "IAM role to attach to EKS cluster"
-  type = string
+  type        = string
 }
 
 variable "node_group_role_arn" {
   description = "IAM role to attach to EKS node groups"
-  type = string
+  type        = string
 }

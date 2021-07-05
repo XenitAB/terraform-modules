@@ -1,5 +1,5 @@
 resource "aws_kms_key" "velero" {
-  description             = "Velero S3 Bucket Encrytion for ${data.aws_region.current.name}-${var.name}-velero"
+  description             = "Velero S3 Bucket Encrytion for ${var.name}-velero"
   deletion_window_in_days = 10
   enable_key_rotation     = true
 
@@ -11,7 +11,7 @@ resource "aws_kms_key" "velero" {
 }
 
 resource "aws_s3_bucket" "velero" {
-  bucket = "${data.aws_region.current.name}-${var.name}-${var.environment}-${var.unique_suffix}-velero"
+  bucket = "${var.name}-${var.environment}-${var.unique_suffix}-velero"
   acl    = "private"
 
   versioning {

@@ -40,8 +40,8 @@ resource "helm_release" "cluster_autoscaler" {
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "v9.9.2"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider   = var.cloud_provider,
+    provider     = var.cloud_provider,
     cluster_name = var.cluster_name
-    aws_region = var.aws_region
+    aws_region   = var.aws_region
   })]
 }

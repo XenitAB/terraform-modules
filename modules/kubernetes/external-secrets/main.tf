@@ -41,6 +41,6 @@ resource "helm_release" "external_secrets" {
   name       = "external-secrets"
   namespace  = kubernetes_namespace.this.metadata[0].name
   skip_crds  = true # let the custom resource manager install the CRDs
-  version    = "8.1.3"
+  version    = "8.2.1"
   values     = [local.values]
 }

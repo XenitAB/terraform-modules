@@ -60,7 +60,7 @@ This module is used to create AKS clusters.
 | [kubernetes_cluster_role_binding.cluster_view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_cluster_role_binding.edit_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_cluster_role_binding.view_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_limit_range.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/limit_range) | resource |
+| [kubernetes_limit_range.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/limit_range) | resource |
 | [kubernetes_namespace.service_accounts](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/namespace) | resource |
 | [kubernetes_namespace.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/namespace) | resource |
 | [kubernetes_network_policy.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/network_policy) | resource |

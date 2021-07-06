@@ -42,13 +42,13 @@ resource "null_resource" "remove_aws_vpc_cni" {
     command = <<-EOT
       TMPDIR=$(mktemp -d) && \
       KUBECONFIG="$TMPDIR/config" && \
-      kubectl config set clusters.cluster-admin.server ${aws_eks_cluster.this.endpoint} && \
-      kubectl config set clusters.cluster-admin.certificate-authority-data $(echo ${aws_eks_cluster.this.certificate_authority[0].data} | base64 -i -) && \
-      kubectl config set users.cluster-admin.token ${data.aws_eks_cluster_auth.this.token} && \
+      kubectl config set clusters.cluster-admin.server '${aws_eks_cluster.this.endpoint}' && \
+      kubectl config set clusters.cluster-admin.certificate-authority-data $(echo '${aws_eks_cluster.this.certificate_authority[0].data}' | base64 -i -) && \
+      kubectl config set users.cluster-admin.token '${data.aws_eks_cluster_auth.this.token}' && \
       kubectl config set contexts.cluster-admin.cluster cluster-admin && \
       kubectl config set contexts.cluster-admin.user cluster-admin && \
       kubectl config set contexts.cluster-admin.namespace default && \
-      curl https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/release-1.8/config/v1.8/aws-k8s-cni.yaml | kubectl delete -f - || true
+      curl https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/release-1.8/config/v1.8/aws-k8s-cni.yaml | kubectl --context=cluster-admin delete -f - || true
     EOT
   }
 

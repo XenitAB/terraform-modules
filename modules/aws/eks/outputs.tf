@@ -8,6 +8,14 @@ output "kube_config" {
   }
 }
 
+/*
+output "external_secrets_config" {
+  description = "Configuration for External DNS"
+  value = {
+    role_arn = aws_iam_role.external_secrets.arn
+  }
+}
+
 output "external_dns_config" {
   description = "Configuration for External DNS"
   value = {
@@ -19,14 +27,6 @@ output "cert_manager_config" {
   description = "Configuration for Cert Manager"
   value = {
     role_arn = aws_iam_role.cert_manager.arn
-  }
-}
-
-/*
-output "external_secrets_config" {
-  description = "Configuration for External DNS"
-  value = {
-    role_arn = aws_iam_role.external_secrets.arn
   }
 }
 

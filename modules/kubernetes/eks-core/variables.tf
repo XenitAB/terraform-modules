@@ -69,21 +69,21 @@ variable "opa_gatekeeper_enabled" {
 #    role_arn = string
 #  })
 #}
-#
-#variable "cert_manager_enabled" {
-#  description = "Should Cert Manager be enabled"
-#  type        = bool
-#  default     = true
-#}
-#
-#variable "cert_manager_config" {
-#  description = "Cert Manager configuration"
-#  type = object({
-#    notification_email = string
-#    dns_zone           = string
-#    role_arn           = string
-#  })
-#}
+
+variable "cert_manager_enabled" {
+  description = "Should Cert Manager be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "cert_manager_config" {
+  description = "Cert Manager configuration"
+  type = object({
+    notification_email = string
+    dns_zone           = string
+    role_arn           = string
+  })
+}
 
 variable "ingress_nginx_enabled" {
   description = "Should Ingress NGINX be enabled"
@@ -91,19 +91,19 @@ variable "ingress_nginx_enabled" {
   default     = true
 }
 
-#variable "external_dns_enabled" {
-#  description = "Should External DNS be enabled"
-#  type        = bool
-#  default     = true
-#}
-#
-#variable "external_dns_config" {
-#  description = "External DNS configuration"
-#  type = object({
-#    role_arn = string
-#  })
-#}
-#
+variable "external_dns_enabled" {
+  description = "Should External DNS be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "external_dns_config" {
+  description = "External DNS configuration"
+  type = object({
+    role_arn = string
+  })
+}
+
 #variable "velero_enabled" {
 #  description = "Should Velero be enabled"
 #  type        = bool

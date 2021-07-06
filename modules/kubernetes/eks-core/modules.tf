@@ -58,44 +58,44 @@ module "ingress_nginx" {
   cloud_provider = "aws"
 }
 
-#module "external_dns" {
-#  depends_on = [module.opa_gatekeeper]
-#
-#  for_each = {
-#    for s in ["external-dns"] :
-#    s => s
-#    if var.external_dns_enabled
-#  }
-#
-#  source = "../../kubernetes/external-dns"
-#
-#  dns_provider = "aws"
-#  txt_owner_id = var.environment # TODO: Add "name" definition to eks-core as well
-#  aws_config = {
-#    region   = data.aws_region.current.name
-#    role_arn = var.external_dns_config.role_arn
-#  }
-#}
-#
-#module "cert_manager" {
-#  depends_on = [module.opa_gatekeeper]
-#
-#  for_each = {
-#    for s in ["cert-manager"] :
-#    s => s
-#    if var.cert_manager_enabled
-#  }
-#
-#  source = "../../kubernetes/cert-manager"
-#
-#  cloud_provider = "aws"
-#  aws_config = {
-#    region         = data.aws_region.current.name
-#    hosted_zone_id = data.aws_route53_zone.this.zone_id
-#    role_arn       = var.ert_manager_config.role_arn
-#  }
-#  notification_email = var.cert_manager_config.notification_email
-#}
+module "external_dns" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["external-dns"] :
+    s => s
+    if var.external_dns_enabled
+  }
+
+  source = "../../kubernetes/external-dns"
+
+  dns_provider = "aws"
+  txt_owner_id = var.environment # TODO: Add "name" definition to eks-core as well
+  aws_config = {
+    region   = data.aws_region.current.name
+    role_arn = var.external_dns_config.role_arn
+  }
+}
+
+module "cert_manager" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["cert-manager"] :
+    s => s
+    if var.cert_manager_enabled
+  }
+
+  source = "../../kubernetes/cert-manager"
+
+  cloud_provider = "aws"
+  aws_config = {
+    region         = data.aws_region.current.name
+    hosted_zone_id = data.aws_route53_zone.this.zone_id
+    role_arn       = var.cert_manager_config.role_arn
+  }
+  notification_email = var.cert_manager_config.notification_email
+}
 #
 #module "velero" {
 #  depends_on = [module.opa_gatekeeper]

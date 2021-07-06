@@ -33,6 +33,10 @@ resource "aws_eks_cluster" "this" {
 # of EKS installing the VPC CNI. EKS will not try to create
 # the daemonset again after you delete.
 resource "null_resource" "remove_aws_vpc_cni" {
+  triggers = {
+    always_run = uuid()
+  }
+
   provisioner "local-exec" {
     interpreter = ["bash", "-c"]
     command = <<-EOT
@@ -44,7 +48,7 @@ resource "null_resource" "remove_aws_vpc_cni" {
       kubectl config set contexts.cluster-admin.cluster cluster-admin && \
       kubectl config set contexts.cluster-admin.user cluster-admin && \
       kubectl config set contexts.cluster-admin.namespace default && \
-      curl https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/release-1.8/config/v1.8/aws-k8s-cni.yaml | kubectl --context='${aws_eks_cluster.this.arn}' delete -f - || true
+      curl https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/release-1.8/config/v1.8/aws-k8s-cni.yaml | kubectl delete -f - || true
     EOT
   }
 

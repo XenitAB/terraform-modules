@@ -106,6 +106,12 @@ resource "aws_eks_node_group" "this" {
     Name        = "${aws_eks_cluster.this.name}-${each.value.name}"
     Environment = var.environment
   }
+
+  timeouts {
+    create = "5m"
+    update = "5m"
+  }
+
 }
 
 data "tls_certificate" "thumbprint" {

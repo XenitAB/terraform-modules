@@ -43,9 +43,9 @@ resource "aws_eks_addon" "core_dns" {
 # of EKS installing the VPC CNI. EKS will not try to create
 # the daemonset again after you delete.
 resource "null_resource" "remove_aws_vpc_cni" {
-  triggers = {
-    always_run = uuid()
-  }
+  #triggers = {
+  #  always_run = uuid()
+  #}
 
   provisioner "local-exec" {
     interpreter = ["bash", "-c"]
@@ -81,32 +81,32 @@ data "aws_subnet" "node" {
   }
 }
 
-#resource "aws_eks_node_group" "this" {
-#  provider = aws.eks_admin
-#  for_each = {
-#    for node_group in var.eks_config.node_groups :
-#    node_group.name => node_group
-#  }
-#  #depends_on = [null_resource.remove_aws_vpc_cni]
-#
-#  cluster_name    = aws_eks_cluster.this.name
-#  node_group_name = "${aws_eks_cluster.this.name}-${each.value.name}"
-#  node_role_arn   = var.node_group_role_arn
-#  instance_types  = each.value.instance_types
-#  release_version = each.value.release_version
-#  scaling_config {
-#    desired_size = each.value.min_size
-#    min_size     = each.value.min_size
-#    max_size     = each.value.max_size
-#  }
-#
-#  subnet_ids = [for s in data.aws_subnet.node : s.id]
-#
-#  tags = {
-#    Name        = "${aws_eks_cluster.this.name}-${each.value.name}"
-#    Environment = var.environment
-#  }
-#}
+resource "aws_eks_node_group" "this" {
+  provider = aws.eks_admin
+  for_each = {
+    for node_group in var.eks_config.node_groups :
+    node_group.name => node_group
+  }
+  depends_on = [null_resource.remove_aws_vpc_cni]
+
+  cluster_name    = aws_eks_cluster.this.name
+  node_group_name = "${aws_eks_cluster.this.name}-${each.value.name}"
+  node_role_arn   = var.node_group_role_arn
+  instance_types  = each.value.instance_types
+  release_version = each.value.release_version
+  scaling_config {
+    desired_size = each.value.min_size
+    min_size     = each.value.min_size
+    max_size     = each.value.max_size
+  }
+
+  subnet_ids = [for s in data.aws_subnet.node : s.id]
+
+  tags = {
+    Name        = "${aws_eks_cluster.this.name}-${each.value.name}"
+    Environment = var.environment
+  }
+}
 
 data "tls_certificate" "thumbprint" {
   url = aws_eks_cluster.this.identity[0].oidc[0].issuer

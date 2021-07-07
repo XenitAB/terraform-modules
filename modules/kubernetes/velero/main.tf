@@ -34,7 +34,7 @@ resource "helm_release" "velero" {
   chart      = "velero"
   name       = "velero"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "2.23.1"
+  version    = "2.23.3"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     cloud_provider = var.cloud_provider,
     azure_config   = var.azure_config,

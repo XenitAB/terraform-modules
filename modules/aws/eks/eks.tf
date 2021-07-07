@@ -42,7 +42,8 @@ resource "aws_eks_addon" "core_dns" {
 # This is a sad dirty trick as there is no way to opt-out
 # of EKS installing the VPC CNI. EKS will not try to create
 # the daemonset again after you delete.
-resource "null_resource" "remove_aws_vpc_cni" {
+# Also installs calico
+resource "null_resource" "update_eks_cni" {
   #triggers = {
   #  always_run = uuid()
   #}
@@ -59,6 +60,7 @@ resource "null_resource" "remove_aws_vpc_cni" {
       kubectl config set contexts.cluster-admin.user cluster-admin && \
       kubectl config set contexts.cluster-admin.namespace kube-system && \
       kubectl --context=cluster-admin delete ds aws-node -n kube-system --ignore-not-found=true
+      kubectl --context=cluster-admin apply -f https://docs.projectcalico.org/manifests/calico-vxlan.yaml
     EOT
   }
 
@@ -87,7 +89,7 @@ resource "aws_eks_node_group" "this" {
     for node_group in var.eks_config.node_groups :
     node_group.name => node_group
   }
-  depends_on = [null_resource.remove_aws_vpc_cni]
+  depends_on = [null_resource.update_eks_cni]
 
   cluster_name    = aws_eks_cluster.this.name
   node_group_name = "${aws_eks_cluster.this.name}-${each.value.name}"

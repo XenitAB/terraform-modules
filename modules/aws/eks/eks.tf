@@ -52,12 +52,12 @@ resource "null_resource" "remove_aws_vpc_cni" {
     command = <<-EOT
       TMPDIR=$(mktemp -d) && \
       KUBECONFIG="$TMPDIR/config" && \
-      kubectl config set clusters.cluster-admin.server '${aws_eks_cluster.this.endpoint}' && \
-      kubectl config set clusters.cluster-admin.certificate-authority-data $(echo '${aws_eks_cluster.this.certificate_authority[0].data}' | base64 -i -) && \
-      kubectl config set users.cluster-admin.token '${data.aws_eks_cluster_auth.this.token}' && \
+      kubectl config set clusters.cluster-admin.server ${aws_eks_cluster.this.endpoint} && \
+      kubectl config set clusters.cluster-admin.certificate-authority-data ${aws_eks_cluster.this.certificate_authority[0].data} && \
+      kubectl config set users.cluster-admin.token ${data.aws_eks_cluster_auth.this.token} && \
       kubectl config set contexts.cluster-admin.cluster cluster-admin && \
       kubectl config set contexts.cluster-admin.user cluster-admin && \
-      kubectl config set contexts.cluster-admin.namespace default && \
+      kubectl config set contexts.cluster-admin.namespace kube-system && \
       kubectl --context=cluster-admin delete ds aws-node -n kube-system
     EOT
   }

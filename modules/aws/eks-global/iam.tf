@@ -41,6 +41,7 @@ data "aws_iam_policy_document" "eks_admin_permission" {
       "iam:DeleteRole",
       "iam:CreateRole",
       "iam:AttachRolePolicy",
+      "kms:ListKeys",
     ]
     resources = [
       "*"

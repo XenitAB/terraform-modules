@@ -29,6 +29,18 @@ data "aws_iam_policy_document" "eks_admin_permission" {
       "ec2:CreateKeyPair",
       "ec2:AuthorizeSecurityGroupIngress",
       "ec2:AuthorizeSecurityGroupEgress",
+      "iam:PassRole",
+      "iam:ListRoles",
+      "iam:ListRoleTags",
+      "iam:ListInstanceProfilesForRole",
+      "iam:ListInstanceProfiles",
+      "iam:ListAttachedRolePolicies",
+      "iam:GetRole",
+      "iam:GetInstanceProfile",
+      "iam:DetachRolePolicy",
+      "iam:DeleteRole",
+      "iam:CreateRole",
+      "iam:AttachRolePolicy",
     ]
     resources = [
       "*"

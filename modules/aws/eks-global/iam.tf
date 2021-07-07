@@ -4,7 +4,31 @@ data "aws_iam_policy_document" "eks_admin_permission" {
     effect = "Allow"
     actions = [
       "eks:*",
-       "ec2:DescribeAccountAttributes",
+      "ec2:RunInstances",
+      "ec2:RevokeSecurityGroupIngress",
+      "ec2:RevokeSecurityGroupEgress",
+      "ec2:DescribeVpcs",
+      "ec2:DescribeTags",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeRouteTables",
+      "ec2:DescribeLaunchTemplateVersions",
+      "ec2:DescribeLaunchTemplates",
+      "ec2:DescribeKeyPairs",
+      "ec2:DescribeInternetGateways",
+      "ec2:DescribeImages",
+      "ec2:DescribeAvailabilityZones",
+      "ec2:DescribeAccountAttributes",
+      "ec2:DeleteTags",
+      "ec2:DeleteSecurityGroup",
+      "ec2:DeleteKeyPair",
+      "ec2:CreateTags",
+      "ec2:CreateSecurityGroup",
+      "ec2:CreateLaunchTemplateVersion",
+      "ec2:CreateLaunchTemplate",
+      "ec2:CreateKeyPair",
+      "ec2:AuthorizeSecurityGroupIngress",
+      "ec2:AuthorizeSecurityGroupEgress",
     ]
     resources = [
       "*"

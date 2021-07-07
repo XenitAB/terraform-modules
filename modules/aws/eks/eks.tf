@@ -58,7 +58,7 @@ resource "null_resource" "remove_aws_vpc_cni" {
       kubectl config set contexts.cluster-admin.cluster cluster-admin && \
       kubectl config set contexts.cluster-admin.user cluster-admin && \
       kubectl config set contexts.cluster-admin.namespace default && \
-      kubectl --context=cluster-admin delete ds aws-node
+      kubectl --context=cluster-admin delete ds aws-node -n kube-system
     EOT
   }
 

@@ -1,16 +1,10 @@
 locals {
-  excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns", "external-secrets", "kyverno"]
+  excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns", "external-secrets", "calico-system"]
 }
 
-#module "calico" {
-#  for_each = {
-#    for s in ["calico"] :
-#    s => s
-#    if var.calico_enabled
-#  }
-#
-#  source = "../../kubernetes/calico"
-#}
+module "calico" {
+  source = "../../kubernetes/aws-calico"
+}
 
 module "opa_gatekeeper" {
   for_each = {

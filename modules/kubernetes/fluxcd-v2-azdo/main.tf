@@ -76,7 +76,7 @@ resource "helm_release" "azdo_proxy" {
   chart      = "azdo-proxy"
   name       = "azdo-proxy"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.4.1"
+  version    = "v0.4.2"
   values = [templatefile("${path.module}/templates/azdo-proxy-values.yaml.tpl", {
     azure_devops_pat  = var.azure_devops_pat,
     azure_devops_org  = var.azure_devops_org,

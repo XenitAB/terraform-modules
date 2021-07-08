@@ -14,6 +14,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`fluxcd-v2-azdo`](fluxcd-v2-azdo/README.md)
 - [`fluxcd-v2-github`](fluxcd-v2-github/README.md)
 - [`ingress-nginx`](ingress-nginx/README.md)
+- [`kube2iam`](kube2iam/README.md)
 - [`loki`](loki/README.md)
 - [`opa-gatekeeper`](opa-gatekeeper/README.md)
 - [`velero`](velero/README.md)

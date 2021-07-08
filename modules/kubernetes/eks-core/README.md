@@ -27,7 +27,6 @@ This module is used to configure EKS clusters.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_azad_kube_proxy"></a> [azad\_kube\_proxy](#module\_azad\_kube\_proxy) | ../../kubernetes/azad-kube-proxy | n/a |
-| <a name="module_calico"></a> [calico](#module\_calico) | ../../kubernetes/aws-calico | n/a |
 | <a name="module_ingress_nginx"></a> [ingress\_nginx](#module\_ingress\_nginx) | ../../kubernetes/ingress-nginx | n/a |
 | <a name="module_opa_gatekeeper"></a> [opa\_gatekeeper](#module\_opa\_gatekeeper) | ../../kubernetes/opa-gatekeeper | n/a |
 

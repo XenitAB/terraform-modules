@@ -7,3 +7,4 @@ This directory contains all the AWS Terraform modules.
 - [`core`](core/README.md)
 - [`eks-global`](eks-global/README.md)
 - [`eks`](eks/README.md)
+- [`irsa`](irsa/README.md)

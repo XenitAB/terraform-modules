@@ -5,7 +5,10 @@ variable "name" {
 
 variable "oidc_urls" {
   description = "EKS OIDC URLs to trust"
-  type        = list(string)
+  type        = list(object({
+    url = string
+    arn = string
+  }))
 }
 
 variable "kubernetes_namespace" {

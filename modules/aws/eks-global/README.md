@@ -23,11 +23,7 @@ No modules.
 | [aws_iam_role.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role) | resource |
 | [aws_iam_role.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role) | resource |
 | [aws_iam_role.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy_attachment.container_registry_read_only](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_role_policy_attachment.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_role_policy_attachment.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_role_policy_attachment.eks_service](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_role_policy_attachment.eks_worker_node](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_kms_key.this](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/kms_key) | resource |
 | [aws_kms_key.velero](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/kms_key) | resource |
 | [aws_s3_bucket.velero](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/s3_bucket) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/caller_identity) | data source |
@@ -46,6 +42,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_aws_kms_key_cmk"></a> [aws\_kms\_key\_cmk](#output\_aws\_kms\_key\_cmk) | eks secrets customer master key |
 | <a name="output_cluster_role_arn"></a> [cluster\_role\_arn](#output\_cluster\_role\_arn) | EKS cluster IAM role |
 | <a name="output_eks_admin_role_arn"></a> [eks\_admin\_role\_arn](#output\_eks\_admin\_role\_arn) | ARN for IAM role that should be used to create an EKS cluster |
 | <a name="output_node_group_role_arn"></a> [node\_group\_role\_arn](#output\_node\_group\_role\_arn) | EKS node grouop IAM role |

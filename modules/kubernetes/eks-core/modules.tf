@@ -87,41 +87,24 @@ module "cert_manager" {
   notification_email = var.cert_manager_config.notification_email
 }
 
-#module "velero" {
-#  depends_on = [module.opa_gatekeeper]
-#
-#  for_each = {
-#    for s in ["velero"] :
-#    s => s
-#    if var.velero_enabled
-#  }
-#
-#  source = "../../kubernetes/velero"
-#
-#  cloud_provider = "aws"
-#  aws_config = {
-#    region       = data.aws_region.current.name
-#    role_arn     = var.velero_config.role_arn
-#    s3_bucket_id = var.velero_config.s3_bucket_id
-#  }
-#}
-#
-#module "external_secrets" {
-#  depends_on = [module.opa_gatekeeper]
-#
-#  for_each = {
-#    for s in ["external-secrets"] :
-#    s => s
-#    if var.external_secrets_enabled
-#  }
-#
-#  source = "../../kubernetes/external-secrets"
-#
-#  aws_config = {
-#    region   = data.aws_region.current.name
-#    role_arn = var.external_secrets_config.role_arn
-#  }
-#}
+module "velero" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["velero"] :
+    s => s
+    if var.velero_enabled
+  }
+
+  source = "../../kubernetes/velero"
+
+  cloud_provider = "aws"
+  aws_config = {
+    region       = data.aws_region.current.name
+    role_arn     = var.velero_config.role_arn
+    s3_bucket_id = var.velero_config.s3_bucket_id
+  }
+}
 
 module "azad_kube_proxy" {
   for_each = {

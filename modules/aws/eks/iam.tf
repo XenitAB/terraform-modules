@@ -27,13 +27,13 @@ data "aws_iam_policy_document" "cert_manager" {
 }
 
 module "cert_manager" {
-  source "../irsa"
+  source = "../irsa"
 
-  name = "cert-manager-${var.name}${var.eks_name_suffix}"
-  oidc_urls = [aws_iam_openid_connect_provider.this.url]
-  kubernetes_namespace = "cert-manager"
+  name                      = "cert-manager-${var.name}${var.eks_name_suffix}"
+  oidc_urls                 = [aws_iam_openid_connect_provider.this.url]
+  kubernetes_namespace      = "cert-manager"
   kubernetes_serviceaccount = "cert-manager"
-  policy_json = data.aws_iam_policy_document.cert_manager.json
+  policy_json               = data.aws_iam_policy_document.cert_manager.json
 }
 
 data "aws_iam_policy_document" "external_dns" {
@@ -57,13 +57,13 @@ data "aws_iam_policy_document" "external_dns" {
 }
 
 module "external_dns" {
-  source "../irsa"
+  source = "../irsa"
 
-  name = "external-dns-${var.name}${var.eks_name_suffix}"
-  oidc_urls = [aws_iam_openid_connect_provider.this.url]
-  kubernetes_namespace = "external-dns"
+  name                      = "external-dns-${var.name}${var.eks_name_suffix}"
+  oidc_urls                 = [aws_iam_openid_connect_provider.this.url]
+  kubernetes_namespace      = "external-dns"
   kubernetes_serviceaccount = "external-dns"
-  policy_json = data.aws_iam_policy_document.external_dns.json
+  policy_json               = data.aws_iam_policy_document.external_dns.json
 }
 
 data "aws_iam_policy_document" "velero" {
@@ -100,11 +100,11 @@ data "aws_iam_policy_document" "velero" {
 }
 
 module "velero" {
-  source "../irsa"
+  source = "../irsa"
 
-  name = "velero-${var.name}${var.eks_name_suffix}"
-  oidc_urls = [aws_iam_openid_connect_provider.this.url]
-  kubernetes_namespace = "velero"
+  name                      = "velero-${var.name}${var.eks_name_suffix}"
+  oidc_urls                 = [aws_iam_openid_connect_provider.this.url]
+  kubernetes_namespace      = "velero"
   kubernetes_serviceaccount = "velero"
-  policy_json = data.aws_iam_policy_document.cert_manager.json
+  policy_json               = data.aws_iam_policy_document.cert_manager.json
 }

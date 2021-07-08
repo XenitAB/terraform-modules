@@ -57,19 +57,6 @@ variable "opa_gatekeeper_enabled" {
   default     = true
 }
 
-#variable "external_secrets_enabled" {
-#  description = "Should External Secrets be enabled"
-#  type        = bool
-#  default     = true
-#}
-#
-#variable "external_secrets_config" {
-#  description = "External Secrets configuration"
-#  type = object({
-#    role_arn = string
-#  })
-#}
-
 variable "cert_manager_enabled" {
   description = "Should Cert Manager be enabled"
   type        = bool
@@ -104,19 +91,19 @@ variable "external_dns_config" {
   })
 }
 
-#variable "velero_enabled" {
-#  description = "Should Velero be enabled"
-#  type        = bool
-#  default     = false
-#}
-#
-#variable "velero_config" {
-#  description = "Velero configuration"
-#  type = object({
-#    role_arn     = string
-#    s3_bucket_id = string
-#  })
-#}
+variable "velero_enabled" {
+  description = "Should Velero be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "velero_config" {
+  description = "Velero configuration"
+  type = object({
+    role_arn     = string
+    s3_bucket_id = string
+  })
+}
 
 variable "azad_kube_proxy_enabled" {
   description = "Should azad-kube-proxy be enabled"

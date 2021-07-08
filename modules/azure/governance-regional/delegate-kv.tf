@@ -1,4 +1,4 @@
-#tfsec:ignore:AZU020
+#tfsec:ignore:AZU020 tfsec:ignore:AZU021
 resource "azurerm_key_vault" "delegate_kv" {
   for_each = {
     for rg in var.resource_group_configs :

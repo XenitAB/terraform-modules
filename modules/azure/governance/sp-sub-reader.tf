@@ -34,6 +34,7 @@ resource "azuread_application_password" "sub_reader_sp" {
   }
 }
 
+#tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "sub_reader_sp" {
   for_each = {
     for core_rg in local.core_rgs :
@@ -48,6 +49,7 @@ resource "azurerm_key_vault_secret" "sub_reader_sp" {
     clientSecret   = random_password.sub_reader_sp.result
   })
   key_vault_id = azurerm_key_vault.delegate_kv[each.key].id
+  content_type = "application/json"
 
   depends_on = [
     azurerm_key_vault_access_policy.ap_owner_spn

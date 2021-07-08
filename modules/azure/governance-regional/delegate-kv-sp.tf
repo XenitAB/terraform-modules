@@ -32,6 +32,7 @@ resource "azuread_application_password" "delegate_kv_aad" {
   }
 }
 
+#tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "delegate_kv_aad" {
   for_each = {
     for rg in var.resource_group_configs :
@@ -48,6 +49,7 @@ resource "azurerm_key_vault_secret" "delegate_kv_aad" {
     keyVaultName   = azurerm_key_vault.delegate_kv[each.key].name
   })
   key_vault_id = azurerm_key_vault.delegate_kv[each.key].id
+  content_type = "application/json"
 
   depends_on = [
     azurerm_key_vault_access_policy.ap_kvreader_sp,

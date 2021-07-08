@@ -20,6 +20,7 @@ resource "azuread_application_password" "sub_reader_sp" {
   }
 }
 
+#tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "sub_reader_sp" {
   name = replace(var.azuread_apps.sub_reader.display_name, ".", "-")
   value = jsonencode({
@@ -29,6 +30,7 @@ resource "azurerm_key_vault_secret" "sub_reader_sp" {
     clientSecret   = random_password.sub_reader_sp.result
   })
   key_vault_id = azurerm_key_vault.delegate_kv[var.core_name].id
+  content_type = "application/json"
 
   depends_on = [
     azurerm_key_vault_access_policy.ap_owner_spn

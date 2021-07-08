@@ -64,6 +64,7 @@ resource "pal_management_partner" "aad_sp" {
   overwrite     = true
 }
 
+#tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "aad_sp" {
   for_each = {
     for rg in var.resource_group_configs :
@@ -79,6 +80,7 @@ resource "azurerm_key_vault_secret" "aad_sp" {
     clientSecret   = random_password.aad_sp[each.value.common_name].result
   })
   key_vault_id = azurerm_key_vault.delegate_kv[var.core_name].id
+  content_type = "application/json"
 
   depends_on = [
     azurerm_key_vault_access_policy.ap_owner_spn

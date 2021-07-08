@@ -13,6 +13,10 @@ resource "aws_s3_bucket" "velero" { #tfsec:ignore:AWS002
   bucket = "${var.environment}-${data.aws_region.current.name}-${var.name}-velero"
   acl    = "private"
 
+  versioning {
+    enabled = true
+  }
+
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {

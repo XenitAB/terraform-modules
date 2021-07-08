@@ -37,8 +37,8 @@ resource "aws_subnet" "public" {
   tags = merge(
     each.value.object.tags,
     {
-      Name                     = each.key,
-      Environment              = var.environment
+      Name        = each.key,
+      Environment = var.environment
     }
   )
 }

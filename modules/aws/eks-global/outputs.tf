@@ -23,5 +23,5 @@ output "velero_config" {
 
 output "aws_kms_key_cmk" {
   description = "eks secrets customer master key"
-  value  = aws_kms_key.this.arn
+  value       = aws_kms_key.this.arn
 }

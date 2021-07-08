@@ -10,7 +10,7 @@ resource "aws_kms_key" "velero" {
   }
 }
 
-resource "aws_s3_bucket" "velero" { #tfsec:ignore:AWS002 tfsec:ignore:AWS077
+resource "aws_s3_bucket" "velero" { #tfsec:ignore:AWS002
   bucket = "${var.name}-${var.environment}-${var.unique_suffix}-velero"
   acl    = "private"
 

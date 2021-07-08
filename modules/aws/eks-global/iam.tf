@@ -42,6 +42,8 @@ data "aws_iam_policy_document" "eks_admin_permission" {
       "iam:CreateRole",
       "iam:AttachRolePolicy",
       "kms:ListKeys",
+      "kms:DescribeKey",
+      "kms:CreateGrant",
     ]
     resources = [
       "*"
@@ -56,7 +58,7 @@ data "aws_iam_policy_document" "eks_admin_assume" {
     ]
     effect = "Allow"
     principals {
-      type = "AWS"
+      type        = "AWS"
       identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
   }

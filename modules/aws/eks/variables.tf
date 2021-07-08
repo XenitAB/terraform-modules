@@ -38,3 +38,8 @@ variable "node_group_role_arn" {
   description = "IAM role to attach to EKS node groups"
   type        = string
 }
+
+variable "aws_kms_key_arn" {
+  description = "eks secrets customer master key"
+  type        = string
+}

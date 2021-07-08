@@ -20,3 +20,8 @@ output "velero_config" {
     s3_bucket_id  = aws_s3_bucket.velero.id
   }
 }
+
+output "aws_kms_key_cmk" {
+  description = "eks secrets customer master key"
+  value  = aws_kms_key.this.arn
+}

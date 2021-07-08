@@ -23,6 +23,13 @@ resource "aws_eks_cluster" "this" {
     subnet_ids = [for s in data.aws_subnet.cluster : s.id]
   }
 
+  encryption_config {
+    resources = ["secrets"]
+    provider {
+      key_arn = var.aws_kms_key_arn
+    }
+  }
+
   tags = {
     Name        = "${var.name}${var.eks_name_suffix}-${var.environment}"
     Environment = var.environment
@@ -50,7 +57,7 @@ resource "null_resource" "update_eks_cni" {
 
   provisioner "local-exec" {
     interpreter = ["bash", "-c"]
-    command = <<-EOT
+    command     = <<-EOT
       TMPDIR=$(mktemp -d) && \
       KUBECONFIG="$TMPDIR/config" && \
       kubectl config set clusters.cluster-admin.server ${aws_eks_cluster.this.endpoint} && \

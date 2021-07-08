@@ -29,16 +29,16 @@ data "aws_iam_policy_document" "cert_manager" {
 module "cert_manager" {
   source = "../irsa"
 
-  name                      = "cert-manager-${var.name}${var.eks_name_suffix}"
-  oidc_providers            = [
+  name = "cert-manager-${var.name}${var.eks_name_suffix}"
+  oidc_providers = [
     {
       url = aws_iam_openid_connect_provider.this.url
       arn = aws_iam_openid_connect_provider.this.arn
     }
   ]
-  kubernetes_namespace      = "cert-manager"
+  kubernetes_namespace       = "cert-manager"
   kubernetes_service_account = "cert-manager"
-  policy_json               = data.aws_iam_policy_document.cert_manager.json
+  policy_json                = data.aws_iam_policy_document.cert_manager.json
 }
 
 data "aws_iam_policy_document" "external_dns" {
@@ -64,16 +64,16 @@ data "aws_iam_policy_document" "external_dns" {
 module "external_dns" {
   source = "../irsa"
 
-  name                      = "external-dns-${var.name}${var.eks_name_suffix}"
-  oidc_providers            = [
+  name = "external-dns-${var.name}${var.eks_name_suffix}"
+  oidc_providers = [
     {
       url = aws_iam_openid_connect_provider.this.url
       arn = aws_iam_openid_connect_provider.this.arn
     }
   ]
-  kubernetes_namespace      = "external-dns"
+  kubernetes_namespace       = "external-dns"
   kubernetes_service_account = "external-dns"
-  policy_json               = data.aws_iam_policy_document.external_dns.json
+  policy_json                = data.aws_iam_policy_document.external_dns.json
 }
 
 data "aws_iam_policy_document" "velero" {
@@ -112,14 +112,14 @@ data "aws_iam_policy_document" "velero" {
 module "velero" {
   source = "../irsa"
 
-  name                      = "velero-${var.name}${var.eks_name_suffix}"
-  oidc_providers            = [
+  name = "velero-${var.name}${var.eks_name_suffix}"
+  oidc_providers = [
     {
       url = aws_iam_openid_connect_provider.this.url
       arn = aws_iam_openid_connect_provider.this.arn
     }
   ]
-  kubernetes_namespace      = "velero"
+  kubernetes_namespace       = "velero"
   kubernetes_service_account = "velero"
-  policy_json               = data.aws_iam_policy_document.cert_manager.json
+  policy_json                = data.aws_iam_policy_document.velero.json
 }

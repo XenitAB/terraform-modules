@@ -5,7 +5,7 @@ variable "name" {
 
 variable "oidc_providers" {
   description = "OIDC provider configuration"
-  type        = list(object({
+  type = list(object({
     url = string
     arn = string
   }))

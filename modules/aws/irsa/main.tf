@@ -19,7 +19,7 @@ terraform {
 data "aws_iam_policy_document" "assume" {
   dynamic "statement" {
     for_each = {
-      for v in var.oidc_urls :
+      for v in var.oidc_providers :
       v => v
     }
 

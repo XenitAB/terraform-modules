@@ -47,10 +47,12 @@ resource "tls_private_key" "this" {
   rsa_bits  = "4096"
 }
 
+#tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "this" {
   name         = "ssh-priv-${var.environment}-${var.location_short}-${var.name}"
   value        = jsonencode(tls_private_key.this)
   key_vault_id = data.azurerm_key_vault.this.id
+  content_type = "application/json"
 }
 
 # START - Validation of secrets that will be used by GitHub Runner

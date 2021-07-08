@@ -46,7 +46,7 @@ data "aws_iam_policy_document" "eks_admin_permission" {
       "kms:CreateGrant",
     ]
     resources = [
-      "*"
+      "*" #tfsec:ignore:AWS097
     ]
   }
 }

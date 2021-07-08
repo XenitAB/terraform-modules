@@ -39,7 +39,7 @@ terraform {
   }
 }
 
-data "aws_region" "current" {}
+#data "aws_region" "current" {}
 
 #data "aws_route53_zone" "this" {
 #  name = "${var.cert_manager_config.dns_zone}."

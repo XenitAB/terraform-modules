@@ -1,7 +1,7 @@
-variable "environment" {
-  description = "The environment name to use for the deploy"
-  type        = string
-}
+#variable "environment" {
+#  description = "The environment name to use for the deploy"
+#  type        = string
+#}
 
 variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes."

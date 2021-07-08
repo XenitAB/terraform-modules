@@ -7,13 +7,13 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@master
       - name: Setup TFLint
-        uses: lablabs/setup-tflint@v1.0.2
+        uses: lablabs/setup-tflint@v1.1.0
         with:
-          tflint_version: v0.25.0
+          tflint_version: v0.30.0
       - name: Install azurerm plugin
         run: |
           mkdir -p .tflint.d/plugins
-          wget https://github.com/terraform-linters/tflint-ruleset-azurerm/releases/download/v0.8.2/tflint-ruleset-azurerm_linux_amd64.zip
+          wget https://github.com/terraform-linters/tflint-ruleset-azurerm/releases/download/v0.11.0/tflint-ruleset-azurerm_linux_amd64.zip
           unzip tflint-ruleset-azurerm_linux_amd64.zip
           mv tflint-ruleset-azurerm .tflint.d/plugins/
       - name: Run lint
@@ -76,8 +76,8 @@ jobs:
         uses: actions/checkout@master
       - name: Setup tfsec
         env:
-          TFSEC_VERSION: "v0.39.14"
-          TFSEC_SHA: "ea6c5c6315dec16d0111d0da9a27449221a6f74efcd2d89200f1fe8f9c19254e"
+          TFSEC_VERSION: "v0.43.0"
+          TFSEC_SHA: "7eba972bf0efa0a0a530a046a23a07606420f8e87327819fdd3eacd01c618d03"
         run: |
           wget https://github.com/tfsec/tfsec/releases/download/${TFSEC_VERSION}/tfsec-linux-amd64
           DOWNLOAD_TFSEC_SHA=$(openssl sha1 -sha256 tfsec-linux-amd64 | awk '{print $2}')

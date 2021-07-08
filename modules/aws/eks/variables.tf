@@ -43,3 +43,11 @@ variable "aws_kms_key_arn" {
   description = "eks secrets customer master key"
   type        = string
 }
+
+variable "velero_config" {
+  description = "Configuration for Velero"
+  type = object({
+    s3_bucket_id = string
+    s3_bucket_arn = string
+  })
+}

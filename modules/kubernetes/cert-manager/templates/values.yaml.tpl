@@ -17,5 +17,6 @@ securityContext:
 # EKS will not be able to reach the webhook service.
 # https://cert-manager.io/docs/concepts/webhook/#webhook-connection-problems-on-aws-eks
 webhook:
+  securePort: 10260
   hostNetwork: true
 %{ endif }

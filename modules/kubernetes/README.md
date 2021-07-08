@@ -28,3 +28,5 @@ This directory contains all the Kubernetes Terraform modules.
 - [`xenit`](xenit/README.md)
 - [`linkerd`](linkerd/README.md)
 - [`goldpinger`](goldpinger/README.md)
+- [`aws-calico`](aws-calico/README.md)
+- [`cluster-autoscaler`](cluster-autoscaler/README.md)

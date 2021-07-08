@@ -1,91 +1,107 @@
-resource "aws_iam_role" "eks" {
-  name = "${var.environment}-${data.aws_region.current.name}-${var.name}${var.eks_name_suffix}-cluster"
+data "aws_subnet" "cluster" {
+  for_each = {
+    for i in ["0", "1"] :
+    i => i
+  }
 
-  assume_role_policy = jsonencode({
-    Statement = [{
-      Action = "sts:AssumeRole"
-      Effect = "Allow"
-      Principal = {
-        Service = "eks.amazonaws.com"
-      }
-    }]
-    Version = "2012-10-17"
-  })
+  filter {
+    name = "tag:Name"
+    values = [
+      "${var.name}${var.eks_name_suffix}-cluster-${each.value}"
+    ]
+  }
 }
 
-resource "aws_iam_role_policy_attachment" "eks_cluster" {
-  role       = aws_iam_role.eks.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-}
+resource "aws_eks_cluster" "this" { #tfsec:ignore:AWS067
+  provider = aws.eks_admin
 
-resource "aws_iam_role_policy_attachment" "eks_service" {
-  role       = aws_iam_role.eks.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
-}
-
-resource "aws_iam_role" "eks_node_group" {
-  name = "${var.environment}-${data.aws_region.current.name}-${var.name}${var.eks_name_suffix}-node_group"
-
-  assume_role_policy = jsonencode({
-    Statement = [{
-      Action = "sts:AssumeRole"
-      Effect = "Allow"
-      Principal = {
-        Service = "ec2.amazonaws.com"
-      }
-    }]
-    Version = "2012-10-17"
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "eks_worker_node" {
-  role       = aws_iam_role.eks_node_group.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-}
-
-resource "aws_iam_role_policy_attachment" "eks_cni" {
-  role       = aws_iam_role.eks_node_group.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-}
-
-resource "aws_iam_role_policy_attachment" "container_registry_read_only" {
-  role       = aws_iam_role.eks_node_group.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-}
-
-#tfsec:ignore:AWS066 tfsec:ignore:AWS067
-resource "aws_eks_cluster" "this" {
-  name     = "${var.environment}-${var.name}${var.eks_name_suffix}"
-  role_arn = aws_iam_role.eks.arn
+  name     = "${var.name}${var.eks_name_suffix}-${var.environment}"
+  role_arn = var.cluster_role_arn
   version  = var.eks_config.kubernetes_version
 
-  #tfsec:ignore:AWS068 tfsec:ignore:AWS069
   vpc_config {
-    subnet_ids = [for s in aws_subnet.this : s.id]
+    subnet_ids = [for s in data.aws_subnet.cluster : s.id] #tfsec:ignore:AWS069 tfsec:ignore:AWS068
+  }
+
+  encryption_config {
+    resources = ["secrets"]
+    provider {
+      key_arn = var.aws_kms_key_arn
+    }
   }
 
   tags = {
-    Name        = "${var.environment}-${var.name}${var.eks_name_suffix}"
+    Name        = "${var.name}${var.eks_name_suffix}-${var.environment}"
     Environment = var.environment
+  }
+}
+
+resource "aws_eks_addon" "kube_proxy" {
+  cluster_name = aws_eks_cluster.this.name
+  addon_name   = "kube-proxy"
+}
+
+resource "aws_eks_addon" "core_dns" {
+  cluster_name = aws_eks_cluster.this.name
+  addon_name   = "coredns"
+}
+
+# This is a sad dirty trick as there is no way to opt-out
+# of EKS installing the VPC CNI. EKS will not try to create
+# the daemonset again after you delete.
+# Also installs calico
+resource "null_resource" "update_eks_cni" {
+  #triggers = {
+  #  always_run = uuid()
+  #}
+
+  provisioner "local-exec" {
+    interpreter = ["bash", "-c"]
+    command     = <<-EOT
+      TMPDIR=$(mktemp -d) && \
+      KUBECONFIG="$TMPDIR/config" && \
+      kubectl config set clusters.cluster-admin.server ${aws_eks_cluster.this.endpoint} && \
+      kubectl config set clusters.cluster-admin.certificate-authority-data ${aws_eks_cluster.this.certificate_authority[0].data} && \
+      kubectl config set users.cluster-admin.token ${data.aws_eks_cluster_auth.this.token} && \
+      kubectl config set contexts.cluster-admin.cluster cluster-admin && \
+      kubectl config set contexts.cluster-admin.user cluster-admin && \
+      kubectl config set contexts.cluster-admin.namespace kube-system && \
+      kubectl --context=cluster-admin delete ds aws-node -n kube-system --ignore-not-found=true
+      kubectl --context=cluster-admin apply -f https://docs.projectcalico.org/manifests/calico-vxlan.yaml
+    EOT
   }
 
   depends_on = [
-    aws_iam_role_policy_attachment.eks_cluster,
-    aws_iam_role_policy_attachment.eks_service,
+    aws_eks_cluster.this
   ]
 }
 
+data "aws_subnet" "node" {
+  for_each = {
+    for i in ["0", "1", "2"] :
+    i => i
+  }
+
+  filter {
+    name = "tag:Name"
+    values = [
+      "${var.name}${var.eks_name_suffix}-nodes-${each.value}"
+    ]
+  }
+}
+
 resource "aws_eks_node_group" "this" {
+  provider = aws.eks_admin
   for_each = {
     for node_group in var.eks_config.node_groups :
     node_group.name => node_group
   }
+  depends_on = [null_resource.update_eks_cni]
 
   cluster_name    = aws_eks_cluster.this.name
   node_group_name = "${aws_eks_cluster.this.name}-${each.value.name}"
-  node_role_arn   = aws_iam_role.eks_node_group.arn
+  node_role_arn   = var.node_group_role_arn
   instance_types  = each.value.instance_types
-  disk_size       = each.value.disk_size
   release_version = each.value.release_version
   scaling_config {
     desired_size = each.value.min_size
@@ -93,18 +109,18 @@ resource "aws_eks_node_group" "this" {
     max_size     = each.value.max_size
   }
 
-  subnet_ids = [for s in aws_subnet.this : s.id]
+  subnet_ids = [for s in data.aws_subnet.node : s.id]
 
   tags = {
-    Name        = "${var.environment}-${var.name}${var.eks_name_suffix}-${each.value.name}"
+    Name        = "${aws_eks_cluster.this.name}-${each.value.name}"
     Environment = var.environment
   }
 
-  depends_on = [
-    aws_iam_role_policy_attachment.eks_worker_node,
-    aws_iam_role_policy_attachment.eks_cni,
-    aws_iam_role_policy_attachment.container_registry_read_only,
-  ]
+  timeouts {
+    create = "5m"
+    update = "5m"
+  }
+
 }
 
 data "tls_certificate" "thumbprint" {
@@ -118,5 +134,9 @@ resource "aws_iam_openid_connect_provider" "this" {
 }
 
 data "aws_eks_cluster_auth" "this" {
+  provider = aws.eks_admin
+
   name = aws_eks_cluster.this.name
 }
+
+

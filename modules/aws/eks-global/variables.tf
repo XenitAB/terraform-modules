@@ -1,9 +1,14 @@
 variable "environment" {
-  description = "The environment name to use for the deploy"
+  description = "The environemnt"
   type        = string
 }
 
 variable "name" {
-  description = "Common name for the environment"
+  description = "Name for the deployment"
+  type        = string
+}
+
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
   type        = string
 }

@@ -4,19 +4,17 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "3.48.0"
+      # Need both providers, one is default and the other is
+      # to create the eks cluster and get auth token
+      configuration_aliases = [aws.eks_admin]
     }
     tls = {
       source  = "hashicorp/tls"
       version = "3.1.0"
     }
+    null = {
+      source  = "hashicorp/null"
+      version = "3.1.0"
+    }
   }
 }
-
-data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
-
-data "aws_availability_zones" "available" {
-  state = "available"
-}
-

@@ -1,16 +1,17 @@
 resource "aws_kms_key" "velero" {
-  description             = "Velero S3 Bucket Encrytion for ${var.environment}-${data.aws_region.current.name}-${var.name}-velero"
+  description             = "Velero S3 Bucket Encrytion for ${var.name}-velero"
   deletion_window_in_days = 10
   enable_key_rotation     = true
 
   tags = {
-    Name        = "${var.environment}-${var.name}-velero"
+    Name        = var.name
     Environment = var.environment
+    Component   = "velero"
   }
 }
 
 resource "aws_s3_bucket" "velero" { #tfsec:ignore:AWS002
-  bucket = "${var.environment}-${data.aws_region.current.name}-${var.name}-velero"
+  bucket = "${var.name}-${var.environment}-${var.unique_suffix}-velero"
   acl    = "private"
 
   versioning {
@@ -27,7 +28,8 @@ resource "aws_s3_bucket" "velero" { #tfsec:ignore:AWS002
   }
 
   tags = {
-    Name        = "${var.environment}-${data.aws_region.current.name}-${var.name}-velero"
+    Name        = var.name
     Environment = var.environment
+    Component   = "velero"
   }
 }

@@ -12,7 +12,7 @@ data "aws_subnet" "cluster" {
   }
 }
 
-resource "aws_eks_cluster" "this" {
+resource "aws_eks_cluster" "this" { #tfsec:ignore:AWS067
   provider = aws.eks_admin
 
   name     = "${var.name}${var.eks_name_suffix}-${var.environment}"
@@ -20,7 +20,7 @@ resource "aws_eks_cluster" "this" {
   version  = var.eks_config.kubernetes_version
 
   vpc_config {
-    subnet_ids = [for s in data.aws_subnet.cluster : s.id]
+    subnet_ids = [for s in data.aws_subnet.cluster : s.id] #tfsec:ignore:AWS069 tfsec:ignore:AWS068
   }
 
   encryption_config {

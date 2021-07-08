@@ -117,8 +117,20 @@ variable "cert_manager_config" {
   })
 }
 
+variable "linkerd_enabled" {
+  description = "Should linkerd be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "ingress_nginx_enabled" {
   description = "Should Ingress NGINX be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "ingress_healthz_enabled" {
+  description = "Should ingress-healthz be enabled"
   type        = bool
   default     = true
 }
@@ -191,3 +203,4 @@ variable "azad_kube_proxy_config" {
     }
   }
 }
+

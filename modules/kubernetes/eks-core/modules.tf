@@ -34,6 +34,18 @@ module "opa_gatekeeper" {
 #  }]
 #}
 
+module "linkerd" {
+  depends_on = [module.opa_gatekeeper, module.cert_manager]
+
+  for_each = {
+    for s in ["linkerd"] :
+    s => s
+    if var.linkerd_enabled
+  }
+
+  source = "../../kubernetes/linkerd"
+}
+
 module "ingress_nginx" {
   depends_on = [module.opa_gatekeeper]
 
@@ -46,6 +58,22 @@ module "ingress_nginx" {
   source = "../../kubernetes/ingress-nginx"
 
   cloud_provider = "aws"
+}
+
+module "ingress_healthz" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["ingress-healthz"] :
+    s => s
+    if var.ingress_healthz_enabled
+  }
+
+  source = "../../kubernetes/ingress-healthz"
+
+  environment     = var.environment
+  dns_zone        = var.cert_manager_config.dns_zone
+  linkerd_enabled = var.linkerd_enabled
 }
 
 module "external_dns" {

@@ -31,14 +31,14 @@ data "aws_iam_policy_document" "assume" {
 
       principals {
         identifiers = [
-          each.value
+          statement.value
         ]
         type = "Federated"
       }
 
       condition {
         test     = "StringEquals"
-        variable = "${replace(each.value, "https://", "")}:sub"
+        variable = "${replace(statement.value, "https://", "")}:sub"
         values = [
           "system:serviceaccount:${var.kubernetes_namespace}:${var.kubernetes_service_account}"
         ]

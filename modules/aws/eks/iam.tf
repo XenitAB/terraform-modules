@@ -32,7 +32,7 @@ module "cert_manager" {
   name                      = "cert-manager-${var.name}${var.eks_name_suffix}"
   oidc_urls                 = [aws_iam_openid_connect_provider.this.url]
   kubernetes_namespace      = "cert-manager"
-  kubernetes_serviceaccount = "cert-manager"
+  kubernetes_service_account = "cert-manager"
   policy_json               = data.aws_iam_policy_document.cert_manager.json
 }
 
@@ -62,7 +62,7 @@ module "external_dns" {
   name                      = "external-dns-${var.name}${var.eks_name_suffix}"
   oidc_urls                 = [aws_iam_openid_connect_provider.this.url]
   kubernetes_namespace      = "external-dns"
-  kubernetes_serviceaccount = "external-dns"
+  kubernetes_service_account = "external-dns"
   policy_json               = data.aws_iam_policy_document.external_dns.json
 }
 
@@ -105,6 +105,6 @@ module "velero" {
   name                      = "velero-${var.name}${var.eks_name_suffix}"
   oidc_urls                 = [aws_iam_openid_connect_provider.this.url]
   kubernetes_namespace      = "velero"
-  kubernetes_serviceaccount = "velero"
+  kubernetes_service_account = "velero"
   policy_json               = data.aws_iam_policy_document.cert_manager.json
 }

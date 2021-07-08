@@ -30,6 +30,28 @@ variable "kubernetes_network_policy_default_deny" {
   default     = false
 }
 
+#variable "kubernetes_default_limit_range" {
+#  description = "Default limit range for tenant namespaces"
+#  type = object({
+#    default_request = object({
+#      cpu    = string
+#      memory = string
+#    })
+#    default = object({
+#      memory = string
+#    })
+#  })
+#  default = {
+#    default_request = {
+#      cpu    = "50m"
+#      memory = "32Mi"
+#    }
+#    default = {
+#      memory = "256Mi"
+#    }
+#  }
+#}
+
 #variable "fluxcd_v2_enabled" {
 #  description = "Should fluxcd-v2 be enabled"
 #  type        = bool
@@ -56,6 +78,29 @@ variable "opa_gatekeeper_enabled" {
   type        = bool
   default     = true
 }
+
+#variable "opa_gatekeeper_config" {
+#  description = "Configuration for OPA Gatekeeper"
+#  type = object({
+#    additional_excluded_namespaces = list(string)
+#    enable_default_constraints     = bool
+#    additional_constraints = list(object({
+#      excluded_namespaces = list(string)
+#      processes           = list(string)
+#    }))
+#    enable_default_assigns = bool
+#    additional_assigns = list(object({
+#      name = string
+#    }))
+#  })
+#  default = {
+#    additional_excluded_namespaces = []
+#    enable_default_constraints     = true
+#    additional_constraints         = []
+#    enable_default_assigns         = true
+#    additional_assigns             = []
+#  }
+#}
 
 variable "cert_manager_enabled" {
   description = "Should Cert Manager be enabled"

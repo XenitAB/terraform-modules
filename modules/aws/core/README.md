@@ -1,6 +1,6 @@
 # Core
 
-This module is used to configure a standard public/private VPC and accompanying Route53 zome.
+This module is used to configure a standard public/private VPC and accompanying Route53 zone.
 
 ## Requirements
 

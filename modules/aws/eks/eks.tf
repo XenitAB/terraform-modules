@@ -13,11 +13,6 @@ locals {
     token          = "foobar"
     calico_version = local.calico_version
   })
-  user_data_script = templatefile("${path.module}/templates/userdata.sh.tpl", {
-    cluster_name   = aws_eks_cluster.this.name,
-    b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
-    api_server_url = aws_eks_cluster.this.endpoint
-  })
 }
 
 data "aws_subnet" "cluster" {
@@ -132,7 +127,12 @@ resource "aws_launch_template" "eks_node_group" {
       volume_size = 20
     }
   }
-  user_data = base64encode(local.user_data_script)
+  user_data = base64encode(templatefile("${path.module}/templates/userdata.sh.tpl", {
+    cluster_name   = aws_eks_cluster.this.name,
+    b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
+    api_server_url = aws_eks_cluster.this.endpoint
+    node_group     = "${aws_eks_cluster.this.name}-${each.value.name}"
+  }))
 }
 
 resource "aws_eks_node_group" "this" {
@@ -157,7 +157,7 @@ resource "aws_eks_node_group" "this" {
   subnet_ids = [for s in data.aws_subnet.node : s.id]
 
   launch_template {
-    name    = aws_launch_template.eks_node_group[each.key].name
+    id      = aws_launch_template.eks_node_group[each.key].id
     version = aws_launch_template.eks_node_group[each.key].latest_version
   }
 
@@ -171,7 +171,7 @@ resource "aws_eks_node_group" "this" {
   }
 
   timeouts {
-    create = "5m"
-    update = "5m"
+    create = "15m"
+    update = "15m"
   }
 }

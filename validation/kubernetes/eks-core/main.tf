@@ -10,6 +10,8 @@ module "eks_core" {
   namespaces = []
 
   environment = "dev"
+  name = "foo"
+  eks_name_suffix = 1
 
   external_dns_enabled = true
   external_dns_config = {
@@ -25,6 +27,9 @@ module "eks_core" {
   cert_manager_config = {
     notification_email = "foo"
     dns_zone           = "bar"
+    role_arn           = "foobar"
+  }
+  cluster_autoscaler_config = {
     role_arn           = "foobar"
   }
   #fluxcd_v2_config = {

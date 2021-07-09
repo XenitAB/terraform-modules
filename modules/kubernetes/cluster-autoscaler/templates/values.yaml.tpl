@@ -3,14 +3,12 @@ cloudProvider: ${provider}
 autoDiscovery:
   clusterName: ${cluster_name}
 
-awsRegion: ${aws_region}
-
 containerSecurityContext:
  capabilities:
    drop:
    - ALL
 
-priorityClassName: "platform-medium"
+priorityClassName: "platform-high"
 
 resources:
   requests:
@@ -23,3 +21,12 @@ securityContext:
   runAsNonRoot: true
   runAsUser: 1001
   runAsGroup: 1001
+
+%{ if provider == "aws" }
+awsRegion: ${aws_config.region}
+rbac:
+  serviceAccount:
+    name: "cluster-autoscaler"
+    annotations:
+      eks.amazonaws.com/role-arn: ${aws_config.role_arn}
+%{ endif }

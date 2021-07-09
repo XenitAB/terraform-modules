@@ -8,6 +8,13 @@ output "kube_config" {
   }
 }
 
+output "cluster_autoscaler_config" {
+  description = "Configuration for Cluster Autoscaler"
+  value = {
+    role_arn = module.cluster_autoscaler.role_arn
+  }
+}
+
 output "cert_manager_config" {
   description = "Configuration for Cert Manager"
   value = {

@@ -161,3 +161,22 @@ module "azad_kube_proxy" {
     scope         = var.azad_kube_proxy_config.k8dash_config.scope
   }
 }
+
+module "cluster_autoscaler" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["cluster-autoscaler"] :
+    s => s
+    if var.cluster_autoscaler_enabled
+  }
+
+  source = "../../kubernetes/cluster-autoscaler"
+
+  cluster_name   = "${var.name}${var.eks_name_suffix}"
+  cloud_provider = "aws"
+  aws_config = {
+    region   = data.aws_region.current.name
+    role_arn = var.cluster_autoscaler_config.role_arn
+  }
+}

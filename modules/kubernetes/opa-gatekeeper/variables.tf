@@ -41,3 +41,9 @@ variable "excluded_namespaces" {
   type        = list(string)
   default     = ["kube-system", "gatekeeper-system"]
 }
+
+variable "cloud_provider" {
+  description = "Cloud provider to use."
+  type        = string
+  default     = "azure"
+}

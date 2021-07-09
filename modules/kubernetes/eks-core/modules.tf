@@ -12,6 +12,7 @@ module "opa_gatekeeper" {
   source = "../../kubernetes/opa-gatekeeper"
 
   excluded_namespaces = local.excluded_namespaces
+  cloud_provider      = "aws"
 }
 
 #module "fluxcd_v2_github" {

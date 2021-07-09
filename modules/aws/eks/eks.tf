@@ -161,6 +161,11 @@ resource "aws_eks_node_group" "this" {
     version = aws_launch_template.eks_node_group[each.key].latest_version
   }
 
+  labels = {
+    "eks.amazonaws.com/capacityType" = "ON_DEMAND"
+    "eks.amazonaws.com/nodegroup" = "${aws_eks_cluster.this.name}-${each.value.name}"
+  }
+
   tags = {
     Name        = "${aws_eks_cluster.this.name}-${each.value.name}"
     Environment = var.environment

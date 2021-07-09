@@ -54,6 +54,7 @@
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Common name for the environment | `string` | n/a | yes |
 | <a name="input_node_group_role_arn"></a> [node\_group\_role\_arn](#input\_node\_group\_role\_arn) | IAM role to attach to EKS node groups | `string` | n/a | yes |
+| <a name="input_velero_config"></a> [velero\_config](#input\_velero\_config) | Configuration for Velero | <pre>object({<br>    s3_bucket_id  = string<br>    s3_bucket_arn = string<br>  })</pre> | n/a | yes |
 
 ## Outputs
 

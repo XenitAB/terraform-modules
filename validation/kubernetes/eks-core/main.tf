@@ -10,6 +10,8 @@ module "eks_core" {
   namespaces = []
 
   environment = "dev"
+  name = "foo"
+  eks_name_suffix = 1
 
   external_dns_enabled = true
   external_dns_config = {

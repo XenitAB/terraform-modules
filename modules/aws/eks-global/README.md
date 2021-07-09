@@ -52,6 +52,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_aad_groups"></a> [aad\_groups](#output\_aad\_groups) | Azure AD groups |
 | <a name="output_aws_kms_key_cmk"></a> [aws\_kms\_key\_cmk](#output\_aws\_kms\_key\_cmk) | eks secrets customer master key |
 | <a name="output_cluster_role_arn"></a> [cluster\_role\_arn](#output\_cluster\_role\_arn) | EKS cluster IAM role |
 | <a name="output_eks_admin_role_arn"></a> [eks\_admin\_role\_arn](#output\_eks\_admin\_role\_arn) | ARN for IAM role that should be used to create an EKS cluster |

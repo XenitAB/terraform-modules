@@ -12,6 +12,7 @@ module "opa_gatekeeper" {
   source = "../../kubernetes/opa-gatekeeper"
 
   excluded_namespaces = local.excluded_namespaces
+  cloud_provider      = "aws"
 }
 
 #module "fluxcd_v2_github" {
@@ -34,6 +35,18 @@ module "opa_gatekeeper" {
 #  }]
 #}
 
+module "linkerd" {
+  depends_on = [module.opa_gatekeeper, module.cert_manager]
+
+  for_each = {
+    for s in ["linkerd"] :
+    s => s
+    if var.linkerd_enabled
+  }
+
+  source = "../../kubernetes/linkerd"
+}
+
 module "ingress_nginx" {
   depends_on = [module.opa_gatekeeper]
 
@@ -48,80 +61,79 @@ module "ingress_nginx" {
   cloud_provider = "aws"
 }
 
-#module "external_dns" {
-#  depends_on = [module.opa_gatekeeper]
-#
-#  for_each = {
-#    for s in ["external-dns"] :
-#    s => s
-#    if var.external_dns_enabled
-#  }
-#
-#  source = "../../kubernetes/external-dns"
-#
-#  dns_provider = "aws"
-#  txt_owner_id = var.environment # TODO: Add "name" definition to eks-core as well
-#  aws_config = {
-#    region   = data.aws_region.current.name
-#    role_arn = var.external_dns_config.role_arn
-#  }
-#}
-#
-#module "cert_manager" {
-#  depends_on = [module.opa_gatekeeper]
-#
-#  for_each = {
-#    for s in ["cert-manager"] :
-#    s => s
-#    if var.cert_manager_enabled
-#  }
-#
-#  source = "../../kubernetes/cert-manager"
-#
-#  cloud_provider = "aws"
-#  aws_config = {
-#    region         = data.aws_region.current.name
-#    hosted_zone_id = data.aws_route53_zone.this.zone_id
-#    role_arn       = var.ert_manager_config.role_arn
-#  }
-#  notification_email = var.cert_manager_config.notification_email
-#}
-#
-#module "velero" {
-#  depends_on = [module.opa_gatekeeper]
-#
-#  for_each = {
-#    for s in ["velero"] :
-#    s => s
-#    if var.velero_enabled
-#  }
-#
-#  source = "../../kubernetes/velero"
-#
-#  cloud_provider = "aws"
-#  aws_config = {
-#    region       = data.aws_region.current.name
-#    role_arn     = var.velero_config.role_arn
-#    s3_bucket_id = var.velero_config.s3_bucket_id
-#  }
-#}
-#
-#module "external_secrets" {
-#  depends_on = [module.opa_gatekeeper]
-#
-#  for_each = {
-#    for s in ["external-secrets"] :
-#    s => s
-#    if var.external_secrets_enabled
-#  }
-#
-#  source = "../../kubernetes/external-secrets"
-#
-#  aws_config = {
-#    region   = data.aws_region.current.name
-#    role_arn = var.external_secrets_config.role_arn
-#  }
-#}
+module "ingress_healthz" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["ingress-healthz"] :
+    s => s
+    if var.ingress_healthz_enabled
+  }
+
+  source = "../../kubernetes/ingress-healthz"
+
+  environment     = var.environment
+  dns_zone        = var.cert_manager_config.dns_zone
+  linkerd_enabled = var.linkerd_enabled
+}
+
+module "external_dns" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["external-dns"] :
+    s => s
+    if var.external_dns_enabled
+  }
+
+  source = "../../kubernetes/external-dns"
+
+  dns_provider = "aws"
+  txt_owner_id = var.environment # TODO: Add "name" definition to eks-core as well
+  aws_config = {
+    region   = data.aws_region.current.name
+    role_arn = var.external_dns_config.role_arn
+  }
+}
+
+module "cert_manager" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["cert-manager"] :
+    s => s
+    if var.cert_manager_enabled
+  }
+
+  source = "../../kubernetes/cert-manager"
+
+  cloud_provider = "aws"
+  aws_config = {
+    region         = data.aws_region.current.name
+    hosted_zone_id = data.aws_route53_zone.this.zone_id
+    role_arn       = var.cert_manager_config.role_arn
+  }
+  notification_email = var.cert_manager_config.notification_email
+}
+
+module "velero" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["velero"] :
+    s => s
+    if var.velero_enabled
+  }
+
+  source = "../../kubernetes/velero"
+
+  cloud_provider = "aws"
+  aws_config = {
+    region       = data.aws_region.current.name
+    role_arn     = var.velero_config.role_arn
+    s3_bucket_id = var.velero_config.s3_bucket_id
+  }
+}
 
 module "azad_kube_proxy" {
   for_each = {

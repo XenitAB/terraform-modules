@@ -19,8 +19,8 @@ terraform {
 data "aws_iam_policy_document" "assume" {
   dynamic "statement" {
     for_each = {
-      for v in var.oidc_urls :
-      v => v
+      for v in var.oidc_providers :
+      v.arn => v
     }
 
     content {
@@ -31,14 +31,14 @@ data "aws_iam_policy_document" "assume" {
 
       principals {
         identifiers = [
-          each.value
+          statement.value.arn
         ]
         type = "Federated"
       }
 
       condition {
         test     = "StringEquals"
-        variable = "${replace(each.value, "https://", "")}:sub"
+        variable = "${replace(statement.value.url, "https://", "")}:sub"
         values = [
           "system:serviceaccount:${var.kubernetes_namespace}:${var.kubernetes_service_account}"
         ]

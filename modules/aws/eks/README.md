@@ -18,7 +18,11 @@
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../irsa | n/a |
+| <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../irsa | n/a |
+| <a name="module_velero"></a> [velero](#module\_velero) | ../irsa | n/a |
 
 ## Resources
 
@@ -31,6 +35,9 @@ No modules.
 | [aws_iam_openid_connect_provider.this](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_openid_connect_provider) | resource |
 | [null_resource.update_eks_cni](https://registry.terraform.io/providers/hashicorp/null/3.1.0/docs/resources/resource) | resource |
 | [aws_eks_cluster_auth.this](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/eks_cluster_auth) | data source |
+| [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.external_dns](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.velero](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_subnet.cluster](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/subnet) | data source |
 | [aws_subnet.node](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/subnet) | data source |
 | [tls_certificate.thumbprint](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/data-sources/certificate) | data source |
@@ -46,9 +53,13 @@ No modules.
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Common name for the environment | `string` | n/a | yes |
 | <a name="input_node_group_role_arn"></a> [node\_group\_role\_arn](#input\_node\_group\_role\_arn) | IAM role to attach to EKS node groups | `string` | n/a | yes |
+| <a name="input_velero_config"></a> [velero\_config](#input\_velero\_config) | Configuration for Velero | <pre>object({<br>    s3_bucket_id  = string<br>    s3_bucket_arn = string<br>  })</pre> | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| <a name="output_cert_manager_config"></a> [cert\_manager\_config](#output\_cert\_manager\_config) | Configuration for Cert Manager |
+| <a name="output_external_dns_config"></a> [external\_dns\_config](#output\_external\_dns\_config) | Configuration for External DNS |
 | <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Kube config for the created EKS cluster |
+| <a name="output_velero_config"></a> [velero\_config](#output\_velero\_config) | Configuration for Velero |

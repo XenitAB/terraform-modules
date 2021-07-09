@@ -1,7 +1,7 @@
-#variable "environment" {
-#  description = "The environment name to use for the deploy"
-#  type        = string
-#}
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
 
 variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes."
@@ -24,11 +24,49 @@ variable "namespaces" {
   )
 }
 
+variable "aad_groups" {
+  description = "Configuration for aad groups"
+  type = object({
+    view = map(any)
+    edit = map(any)
+    cluster_admin = object({
+      id   = string
+      name = string
+    })
+    cluster_view = object({
+      id   = string
+      name = string
+    })
+  })
+}
+
 variable "kubernetes_network_policy_default_deny" {
   description = "If network policies should by default deny cross namespace traffic"
   type        = bool
   default     = false
 }
+
+#variable "kubernetes_default_limit_range" {
+#  description = "Default limit range for tenant namespaces"
+#  type = object({
+#    default_request = object({
+#      cpu    = string
+#      memory = string
+#    })
+#    default = object({
+#      memory = string
+#    })
+#  })
+#  default = {
+#    default_request = {
+#      cpu    = "50m"
+#      memory = "32Mi"
+#    }
+#    default = {
+#      memory = "256Mi"
+#    }
+#  }
+#}
 
 #variable "fluxcd_v2_enabled" {
 #  description = "Should fluxcd-v2 be enabled"
@@ -57,33 +95,49 @@ variable "opa_gatekeeper_enabled" {
   default     = true
 }
 
-#variable "external_secrets_enabled" {
-#  description = "Should External Secrets be enabled"
-#  type        = bool
-#  default     = true
-#}
-#
-#variable "external_secrets_config" {
-#  description = "External Secrets configuration"
+#variable "opa_gatekeeper_config" {
+#  description = "Configuration for OPA Gatekeeper"
 #  type = object({
-#    role_arn = string
+#    additional_excluded_namespaces = list(string)
+#    enable_default_constraints     = bool
+#    additional_constraints = list(object({
+#      excluded_namespaces = list(string)
+#      processes           = list(string)
+#    }))
+#    enable_default_assigns = bool
+#    additional_assigns = list(object({
+#      name = string
+#    }))
 #  })
+#  default = {
+#    additional_excluded_namespaces = []
+#    enable_default_constraints     = true
+#    additional_constraints         = []
+#    enable_default_assigns         = true
+#    additional_assigns             = []
+#  }
 #}
-#
-#variable "cert_manager_enabled" {
-#  description = "Should Cert Manager be enabled"
-#  type        = bool
-#  default     = true
-#}
-#
-#variable "cert_manager_config" {
-#  description = "Cert Manager configuration"
-#  type = object({
-#    notification_email = string
-#    dns_zone           = string
-#    role_arn           = string
-#  })
-#}
+
+variable "cert_manager_enabled" {
+  description = "Should Cert Manager be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "cert_manager_config" {
+  description = "Cert Manager configuration"
+  type = object({
+    notification_email = string
+    dns_zone           = string
+    role_arn           = string
+  })
+}
+
+variable "linkerd_enabled" {
+  description = "Should linkerd be enabled"
+  type        = bool
+  default     = false
+}
 
 variable "ingress_nginx_enabled" {
   description = "Should Ingress NGINX be enabled"
@@ -91,32 +145,38 @@ variable "ingress_nginx_enabled" {
   default     = true
 }
 
-#variable "external_dns_enabled" {
-#  description = "Should External DNS be enabled"
-#  type        = bool
-#  default     = true
-#}
-#
-#variable "external_dns_config" {
-#  description = "External DNS configuration"
-#  type = object({
-#    role_arn = string
-#  })
-#}
-#
-#variable "velero_enabled" {
-#  description = "Should Velero be enabled"
-#  type        = bool
-#  default     = false
-#}
-#
-#variable "velero_config" {
-#  description = "Velero configuration"
-#  type = object({
-#    role_arn     = string
-#    s3_bucket_id = string
-#  })
-#}
+variable "ingress_healthz_enabled" {
+  description = "Should ingress-healthz be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "external_dns_enabled" {
+  description = "Should External DNS be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "external_dns_config" {
+  description = "External DNS configuration"
+  type = object({
+    role_arn = string
+  })
+}
+
+variable "velero_enabled" {
+  description = "Should Velero be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "velero_config" {
+  description = "Velero configuration"
+  type = object({
+    role_arn     = string
+    s3_bucket_id = string
+  })
+}
 
 variable "azad_kube_proxy_enabled" {
   description = "Should azad-kube-proxy be enabled"
@@ -159,3 +219,4 @@ variable "azad_kube_proxy_config" {
     }
   }
 }
+

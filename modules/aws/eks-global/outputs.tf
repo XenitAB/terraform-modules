@@ -25,3 +25,8 @@ output "aws_kms_key_cmk" {
   description = "eks secrets customer master key"
   value       = aws_kms_key.this.arn
 }
+
+output "aad_groups" {
+  description = "Azure AD groups"
+  value       = local.aad_groups
+}

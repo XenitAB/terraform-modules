@@ -3,6 +3,16 @@ variable "environment" {
   type        = string
 }
 
+variable "name" {
+  description = "The name to use for the deploy"
+  type        = string
+}
+
+variable "eks_name_suffix" {
+  description = "The suffix for the eks clusters"
+  type        = number
+}
+
 variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes."
   type = list(

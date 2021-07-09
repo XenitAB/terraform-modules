@@ -7,6 +7,14 @@ controller:
 
   ingressClass: ${ingress_class}
 
+  %{ if provider == "aws" }
+  # Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
+  # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
+  # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
+  dnsPolicy: ClusterFirstWithHostNet
+  hostNetwork: true
+  %{ endif }
+
   service:
     externalTrafficPolicy: Local
     %{ if internal_load_balancer }

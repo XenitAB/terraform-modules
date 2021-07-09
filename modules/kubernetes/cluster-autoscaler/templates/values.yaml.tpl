@@ -26,6 +26,7 @@ securityContext:
 awsRegion: ${aws_config.region}
 rbac:
   serviceAccount:
+    name: "cluster-autoscaler"
     annotations:
       eks.amazonaws.com/role-arn: ${aws_config.role_arn}
 %{ endif }

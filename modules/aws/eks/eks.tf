@@ -124,7 +124,7 @@ resource "aws_launch_template" "eks_node_group" {
     node_group.name => node_group
   }
 
-  name                   = "${aws_eks_cluster.this.name}-${each.value}"
+  name                   = "${aws_eks_cluster.this.name}-${each.value.name}"
   vpc_security_group_ids = [aws_eks_cluster.this.vpc_config[0].cluster_security_group_id]
   block_device_mappings {
     device_name = "/dev/xvda"

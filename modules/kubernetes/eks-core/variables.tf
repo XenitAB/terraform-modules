@@ -24,6 +24,22 @@ variable "namespaces" {
   )
 }
 
+variable "aad_groups" {
+  description = "Configuration for aad groups"
+  type = object({
+    view = map(any)
+    edit = map(any)
+    cluster_admin = object({
+      id   = string
+      name = string
+    })
+    cluster_view = object({
+      id   = string
+      name = string
+    })
+  })
+}
+
 variable "kubernetes_network_policy_default_deny" {
   description = "If network policies should by default deny cross namespace traffic"
   type        = bool

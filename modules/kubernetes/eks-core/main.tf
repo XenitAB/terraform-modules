@@ -39,6 +39,11 @@ terraform {
   }
 }
 
+locals {
+  # Namespace to create service accounts in
+  service_accounts_namespace = "service-accounts"
+}
+
 data "aws_region" "current" {}
 
 data "aws_route53_zone" "this" {

@@ -21,6 +21,7 @@
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../irsa | n/a |
+| <a name="module_cluster_autoscaler"></a> [cluster\_autoscaler](#module\_cluster\_autoscaler) | ../irsa | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../irsa | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../irsa | n/a |
 
@@ -37,6 +38,7 @@
 | [null_resource.update_eks_cni](https://registry.terraform.io/providers/hashicorp/null/3.1.0/docs/resources/resource) | resource |
 | [aws_eks_cluster_auth.this](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/eks_cluster_auth) | data source |
 | [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.cluster_autoscaler](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.external_dns](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.velero](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_subnet.cluster](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/subnet) | data source |
@@ -61,6 +63,7 @@
 | Name | Description |
 |------|-------------|
 | <a name="output_cert_manager_config"></a> [cert\_manager\_config](#output\_cert\_manager\_config) | Configuration for Cert Manager |
+| <a name="output_cluster_autoscaler_config"></a> [cluster\_autoscaler\_config](#output\_cluster\_autoscaler\_config) | Configuration for Cluster Autoscaler |
 | <a name="output_external_dns_config"></a> [external\_dns\_config](#output\_external\_dns\_config) | Configuration for External DNS |
 | <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Kube config for the created EKS cluster |
 | <a name="output_velero_config"></a> [velero\_config](#output\_velero\_config) | Configuration for Velero |

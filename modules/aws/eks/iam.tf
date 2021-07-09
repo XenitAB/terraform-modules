@@ -1,3 +1,34 @@
+data "aws_iam_policy_document" "cluster_autoscaler" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "autoscaling:DescribeAutoScalingGroups",
+      "autoscaling:DescribeAutoScalingInstances",
+      "autoscaling:DescribeLaunchConfigurations",
+      "autoscaling:DescribeTags",
+      "autoscaling:SetDesiredCapacity",
+      "autoscaling:TerminateInstanceInAutoScalingGroup",
+      "ec2:DescribeLaunchTemplateVersions"
+    ]
+    resources = ["*"]
+  }
+}
+
+module "cluster_autoscaler" {
+  source = "../irsa"
+
+  name = "cluster-autoscaler-${var.name}${var.eks_name_suffix}"
+  oidc_providers = [
+    {
+      url = aws_iam_openid_connect_provider.this.url
+      arn = aws_iam_openid_connect_provider.this.arn
+    }
+  ]
+  kubernetes_namespace       = "cluster-autoscaler"
+  kubernetes_service_account = "cluster-autoscaler"
+  policy_json                = data.aws_iam_policy_document.cluster_autoscaler.json
+}
+
 data "aws_iam_policy_document" "cert_manager" {
   statement {
     sid    = "AllowRoute53Change"

@@ -27,6 +27,9 @@ module "eks_core" {
     dns_zone           = "bar"
     role_arn           = "foobar"
   }
+  cluster_autoscaler_config = {
+    role_arn           = "foobar"
+  }
   #fluxcd_v2_config = {
   #  type = "github"
   #  github = {

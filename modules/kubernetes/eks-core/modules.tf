@@ -173,10 +173,10 @@ module "cluster_autoscaler" {
 
   source = "../../kubernetes/cluster-autoscaler"
 
-  cluster_name       = "${var.name}${var.eks_name_suffix}"
+  cluster_name   = "${var.name}${var.eks_name_suffix}"
   cloud_provider = "aws"
   aws_config = {
-    region         = data.aws_region.current.name
-    role_arn       = var.cluster_autoscaler_config.role_arn
+    region   = data.aws_region.current.name
+    role_arn = var.cluster_autoscaler_config.role_arn
   }
 }

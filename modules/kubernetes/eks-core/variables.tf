@@ -229,6 +229,6 @@ variable "cluster_autoscaler_enabled" {
 variable "cluster_autoscaler_config" {
   description = "Cluster Autoscaler configuration"
   type = object({
-    role_arn           = string
+    role_arn = string
   })
 }

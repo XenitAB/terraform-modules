@@ -31,6 +31,49 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+resource "kubernetes_network_policy" "this" {
+  metadata {
+    name      = "default-deny"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {}
+    }
+
+    policy_types = ["Ingress", "Egress"]
+
+    ingress {
+      from {
+        pod_selector {}
+      }
+    }
+
+    egress {
+      to {
+        namespace_selector {}
+        pod_selector {
+          match_labels = {
+            k8s-app = "kube-dns"
+          }
+        }
+      }
+
+      ports {
+        port     = 53
+        protocol = "UDP"
+      }
+    }
+
+    egress {
+      to {
+        pod_selector {}
+      }
+    }
+  }
+}
+
 resource "helm_release" "ingress_healthz" {
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "nginx"

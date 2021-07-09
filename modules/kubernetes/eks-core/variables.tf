@@ -220,3 +220,15 @@ variable "azad_kube_proxy_config" {
   }
 }
 
+variable "cluster_autoscaler_enabled" {
+  description = "Should Cluster Autoscaler be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "cluster_autoscaler_config" {
+  description = "Cluster Autoscaler configuration"
+  type = object({
+    role_arn           = string
+  })
+}

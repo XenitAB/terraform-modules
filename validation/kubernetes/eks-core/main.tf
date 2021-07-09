@@ -15,10 +15,11 @@ module "eks_core" {
   external_dns_config = {
     role_arn = "bar"
   }
-  #velero_config = {
-  #  s3_bucket_id = "foo"
-  #  role_arn     = "bar"
-  #}
+
+  velero_config = {
+    s3_bucket_id = "foo"
+    role_arn     = "bar"
+  }
 
   cert_manager_enabled = true
   cert_manager_config = {

@@ -8,8 +8,13 @@ module "eks" {
   source = "../../../modules/aws/irsa"
 
   name = "foobar"
-  oidc_urls = ["https://example.com"]
-  kubernetes_namespace = "foo"
+  oidc_providers = [
+    {
+      url = "https://example.com"
+      arn = ""
+    }
+  ]
+  kubernetes_namespace       = "foo"
   kubernetes_service_account = "bar"
-  policy_json = "{\"foo\": \"bar\"}"
+  policy_json                = "{\"foo\": \"bar\"}"
 }

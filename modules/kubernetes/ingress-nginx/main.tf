@@ -42,5 +42,6 @@ resource "helm_release" "ingress_nginx" {
     ingress_class          = join("-", compact(["nginx", var.name_override])),
     internal_load_balancer = var.internal_load_balancer,
     linkerd_enabled        = var.linkerd_enabled
+    hostnetwork_enabled    = var.hostnetwork_enabled
   })]
 }

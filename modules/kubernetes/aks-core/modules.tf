@@ -156,9 +156,10 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider  = "azure"
-  http_snippet    = var.ingress_config.http_snippet
-  linkerd_enabled = var.linkerd_enabled
+  cloud_provider      = "azure"
+  http_snippet        = var.ingress_config.http_snippet
+  linkerd_enabled     = var.linkerd_enabled
+  hostnetwork_enabled = var.hostnetwork_enabled
 }
 
 # ingress-healthz

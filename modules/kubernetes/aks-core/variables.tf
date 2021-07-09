@@ -388,6 +388,12 @@ variable "linkerd_enabled" {
   default     = false
 }
 
+variable "hostnetwork_enabled" {
+  description = "Should hostnetwork be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "goldpinger_enabled" {
   description = "Should goldpinger be enabled"
   type        = bool

@@ -26,3 +26,9 @@ variable "linkerd_enabled" {
   type        = bool
   default     = false
 }
+
+variable "hostnetwork_enabled" {
+  description = "Should hostNetwork be enabled"
+  type        = bool
+  default     = false
+}

@@ -33,6 +33,7 @@
 | [aws_eks_cluster.this](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/eks_cluster) | resource |
 | [aws_eks_node_group.this](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/eks_node_group) | resource |
 | [aws_iam_openid_connect_provider.this](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_openid_connect_provider) | resource |
+| [aws_launch_template.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/launch_template) | resource |
 | [null_resource.update_eks_cni](https://registry.terraform.io/providers/hashicorp/null/3.1.0/docs/resources/resource) | resource |
 | [aws_eks_cluster_auth.this](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/eks_cluster_auth) | data source |
 | [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/iam_policy_document) | data source |

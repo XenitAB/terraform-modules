@@ -171,7 +171,7 @@ resource "aws_eks_node_group" "this" {
   }
 
   timeouts {
-    create = "5m"
-    update = "5m"
+    create = "15m"
+    update = "15m"
   }
 }

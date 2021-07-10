@@ -3,14 +3,14 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.48.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.49.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 1.6.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.48.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.49.0 |
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 1.6.0 |
 
 ## Modules
@@ -21,20 +21,20 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_iam_policy.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_policy) | resource |
-| [aws_iam_role.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role) | resource |
-| [aws_iam_role.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role) | resource |
-| [aws_iam_role.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/iam_role) | resource |
-| [aws_kms_key.this](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/kms_key) | resource |
-| [aws_kms_key.velero](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/kms_key) | resource |
-| [aws_s3_bucket.velero](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/resources/s3_bucket) | resource |
+| [aws_iam_policy.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/resources/iam_policy) | resource |
+| [aws_iam_role.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/resources/iam_role) | resource |
+| [aws_iam_role.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/resources/iam_role) | resource |
+| [aws_iam_role.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/resources/iam_role) | resource |
+| [aws_kms_key.this](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/resources/kms_key) | resource |
+| [aws_kms_key.velero](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/resources/kms_key) | resource |
+| [aws_s3_bucket.velero](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/resources/s3_bucket) | resource |
 | [azuread_group.cluster_admin](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group) | resource |
 | [azuread_group.cluster_view](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group) | resource |
 | [azuread_group.edit](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group) | resource |
 | [azuread_group.view](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group) | resource |
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/caller_identity) | data source |
-| [aws_iam_policy_document.eks_admin_assume](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.eks_admin_permission](https://registry.terraform.io/providers/hashicorp/aws/3.48.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.eks_admin_assume](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.eks_admin_permission](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 

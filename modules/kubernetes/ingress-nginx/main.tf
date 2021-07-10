@@ -152,11 +152,7 @@ resource "kubernetes_network_policy" "allow_ingress_traffic" {
       }
     }
 
-    egress {
-      pod_selector {
-        match_labels = {}
-      }
-    }
+    egress {}
   }
 }
 

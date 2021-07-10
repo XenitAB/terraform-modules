@@ -83,8 +83,8 @@ resource "kubernetes_network_policy" "allow_ingress" {
   spec {
     pod_selector {
       match_labels = {
-        "app.kubernetes.io/instance" = ingress-healthz
-        "app.kubernetes.io/name" = nginx
+        "app.kubernetes.io/instance" = "ingress-healthz"
+        "app.kubernetes.io/name" = "nginx"
       }
     }
 
@@ -99,13 +99,13 @@ resource "kubernetes_network_policy" "allow_ingress" {
       from {
         namespace_selector {
           match_labels = {
-            name = ingress-nginx
+            name = "ingress-nginx"
           }
         }
         pod_selector {
           match_labels = {
-            "app.kubernetes.io/name" = ingress-nginx
-            "app.kubernetes.io/component" = controller
+            "app.kubernetes.io/name" = "ingress-nginx"
+            "app.kubernetes.io/component" = "controller"
           }
         }
       }

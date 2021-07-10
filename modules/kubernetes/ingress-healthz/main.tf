@@ -31,9 +31,9 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
-resource "kubernetes_network_policy" "this" {
+resource "kubernetes_network_policy" "deny_default" {
   metadata {
-    name      = "default-deny"
+    name      = "deny-default"
     namespace = kubernetes_namespace.this.metadata[0].name
   }
 
@@ -69,6 +69,67 @@ resource "kubernetes_network_policy" "this" {
     egress {
       to {
         pod_selector {}
+      }
+    }
+  }
+}
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: ingress-healthz
+      app.kubernetes.io/name: nginx
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ingress-nginx
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: ingress-nginx
+              app.kubernetes.io/component: controller
+      ports:
+        - port: 8080
+
+resource "kubernetes_network_policy" "allow_ingress" {
+  metadata {
+    name      = "allow-ingress"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {
+        app.kubernetes.io/instance = ingress-healthz
+        app.kubernetes.io/name = nginx
+      }
+    }
+
+    policy_types = ["Ingress"]
+
+    ingress {
+      from {
+        namespace_selector {
+          match_labels = {
+            name = ingress-nginx
+          }
+        }
+        pod_selector {
+          match_labels = {
+            app.kubernetes.io/name = ingress-nginx
+            app.kubernetes.io/component = controller
+          }
+        }
+      }
+      ports {
+        port = "8080"
+        protocol = "TCP"
       }
     }
   }

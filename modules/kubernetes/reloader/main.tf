@@ -35,7 +35,7 @@ resource "helm_release" "reloader" {
   chart      = "reloader"
   name       = "reloader"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.0.95"
+  version    = "v0.0.96"
 
   set {
     name  = "reloader.deployment.priorityClassName"

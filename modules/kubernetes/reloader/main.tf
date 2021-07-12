@@ -30,6 +30,49 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+resource "kubernetes_network_policy" "deny_default" {
+  metadata {
+    name      = "deny-default"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {}
+    }
+
+    policy_types = ["Ingress", "Egress"]
+
+    ingress {
+      from {
+        pod_selector {}
+      }
+    }
+
+    egress {
+      to {
+        namespace_selector {}
+        pod_selector {
+          match_labels = {
+            k8s-app = "kube-dns"
+          }
+        }
+      }
+
+      ports {
+        port     = 53
+        protocol = "UDP"
+      }
+    }
+
+    egress {
+      to {
+        pod_selector {}
+      }
+    }
+  }
+}
+
 resource "helm_release" "reloader" {
   repository = "https://stakater.github.io/stakater-charts"
   chart      = "reloader"

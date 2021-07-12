@@ -5,9 +5,18 @@ priorityClassName: "platform-low"
 podAnnotations:
   secret.reloader.stakater.com/reload: "xenit-proxy-certificate"
 
+%{ if cloud_provider == "azure" }
 podLabels:
   aadpodidbinding: "xenit-proxy"
   app: "xenit-proxy"
+%{ endif }
+%{ if cloud_provider == "aws" }
+serviceAccount:
+  create: true
+  name: "xenit-proxy"
+  annotations:
+    "eks.amazonaws.com/role-arn": "${aws_config.role_arn}"
+%{ endif }
 
 resources:
   requests:
@@ -67,8 +76,8 @@ extraVolumes:
       secretName: xenit-proxy-certificate
 
 extraVolumeMounts:
-  - mountPath: /opt/bitnami/nginx/tmp/
-    name: temp
+  - name: temp
+    mountPath: /opt/bitnami/nginx/tmp/
   - name: "secrets-store"
     mountPath: "/mnt/secrets-store"
     readOnly: true

@@ -33,7 +33,7 @@ resource "helm_release" "csi_secrets_store_driver" {
   name       = "secrets-store-csi-driver"
   repository = "https://raw.githubusercontent.com/kubernetes-sigs/secrets-store-csi-driver/master/charts"
   chart      = "secrets-store-csi-driver"
-  version    = "0.0.20"
+  version    = "0.0.23"
   namespace  = kubernetes_namespace.this.metadata[0].name
 
   set {

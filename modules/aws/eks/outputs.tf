@@ -36,3 +36,10 @@ output "velero_config" {
     s3_bucket_id = var.velero_config.s3_bucket_id
   }
 }
+
+output "xenit_config" {
+  description = "Configuration for Xenit proxy"
+  value = {
+    role_arn = module.xenit.role_arn
+  }
+}

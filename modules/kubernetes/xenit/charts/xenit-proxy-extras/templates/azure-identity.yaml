@@ -1,11 +1,12 @@
+{{- if eq .Values.cloudProvider "azure" }}
 apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentity
 metadata:
   name: xenit-proxy
 spec:
   type: 0
-  resourceID: {{ .Values.resourceID }}
-  clientID: {{ .Values.clientID }}
+  resourceID: {{ .Values.azureConfig.resourceID }}
+  clientID: {{ .Values.azureConfig.clientID }}
 ---
 apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentityBinding
@@ -14,3 +15,4 @@ metadata:
 spec:
   azureIdentity: xenit-proxy
   selector: xenit-proxy
+{{- end }}

@@ -12,6 +12,7 @@ module "xenit" {
     helm       = helm
   }
 
+  cloud_provider = "azure"
   azure_config = {
     azure_key_vault_name = ""
     identity = {

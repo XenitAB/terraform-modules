@@ -1,3 +1,8 @@
+variable "cloud_provider" {
+  description = "Cloud provider to use"
+  type        = string
+}
+
 variable "azure_config" {
   description = "Azure specific configuration"
   type = object({
@@ -8,6 +13,24 @@ variable "azure_config" {
       tenant_id   = string
     })
   })
+  default = {
+    azure_key_vault_name = ""
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
+  }
+}
+
+variable "aws_config" {
+  description = "AWS specific configuration"
+  type = object({
+    role_arn = string
+  })
+  default = {
+    role_arn = ""
+  }
 }
 
 variable "thanos_receiver_fqdn" {

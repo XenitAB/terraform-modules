@@ -378,6 +378,7 @@ module "xenit" {
 
   source = "../../kubernetes/xenit"
 
+  cloud_provider = "azure"
   azure_config = {
     azure_key_vault_name = var.xenit_config.azure_key_vault_name
     identity = {

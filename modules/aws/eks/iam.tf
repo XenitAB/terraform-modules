@@ -154,3 +154,35 @@ module "velero" {
   kubernetes_service_account = "velero"
   policy_json                = data.aws_iam_policy_document.velero.json
 }
+
+data "aws_iam_policy_document" "xenit" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "ssm:DescribeParameters",
+    ]
+    resources = ["*"]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ssm:GetParameter",
+    ]
+    resources = ["arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/xenit-proxy-certificate"]
+  }
+}
+
+module "xenit" {
+  source = "../irsa"
+
+  name = "xenit-${var.name}${var.eks_name_suffix}"
+  oidc_providers = [
+    {
+      url = aws_iam_openid_connect_provider.this.url
+      arn = aws_iam_openid_connect_provider.this.arn
+    }
+  ]
+  kubernetes_namespace       = "xenit-system"
+  kubernetes_service_account = "xenit-system"
+  policy_json                = data.aws_iam_policy_document.xenit.json
+}

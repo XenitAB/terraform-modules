@@ -204,7 +204,7 @@ module "xenit" {
 
   cloud_provider = "aws"
   aws_config = {
-    var.xenit_config.role_arn
+    role_arn = var.xenit_config.role_arn
   }
   thanos_receiver_fqdn = var.xenit_config.thanos_receiver
   loki_api_fqdn        = var.xenit_config.loki_api

@@ -73,6 +73,82 @@ resource "kubernetes_network_policy" "deny_default" {
   }
 }
 
+resource "kubernetes_network_policy" "allow_scraping" {
+  metadata {
+    name      = "allow-scraping"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {
+        app = "reloader-reloader"
+        group = "com.stakater.platform"
+        provider = "stakater"
+        release = "reloader"
+      }
+    }
+
+    policy_types = ["Ingress"]
+
+    ingress {
+      from {
+        namespace_selector {
+          match_labels = {
+            name = "prometheus"
+          }
+        }
+        pod_selector {
+          match_labels = {
+            app = "prometheus"
+            "app.kubernetes.io/name" = "prometheus"
+          }
+        }
+      }
+
+      ports {
+        port = "metrics"
+        protocol = "TCP"
+      }
+    }
+  }
+}
+
+resource "kubernetes_network_policy" "allow_api_server" {
+  metadata {
+    name      = "allow-api-server"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {
+        app = "reloader-reloader"
+        group = "com.stakater.platform"
+        provider = "stakater"
+        release = "reloader"
+      }
+    }
+
+    policy_types = ["Egress"]
+
+    egress {
+      to {
+        namespace_selector {
+          match_labels {
+            name = "default"
+          }
+        }
+      }
+
+      ports {
+        port     = 443
+        protocol = "TCP"
+      }
+    }
+  }
+}
+
 resource "helm_release" "reloader" {
   repository = "https://stakater.github.io/stakater-charts"
   chart      = "reloader"

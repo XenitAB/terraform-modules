@@ -2,6 +2,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 cloudProvider: ""
+secretName: "xenit-proxy-certificate"
 
 azureConfig:
   resourceID: ""
@@ -11,4 +12,5 @@ azureConfig:
   keyVaultSecretName: "xenit-proxy-certificate"
 
 awsConfig:
-  parameterName: "xenit-proxy-certificate"
+  keyParameterName: "xenit-proxy-certificate-key"
+  crtParameterName: "xenit-proxy-certificate-crt"

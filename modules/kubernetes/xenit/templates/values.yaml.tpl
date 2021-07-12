@@ -76,8 +76,8 @@ extraVolumes:
       secretName: xenit-proxy-certificate
 
 extraVolumeMounts:
-  - mountPath: /opt/bitnami/nginx/tmp/
-    name: temp
+  - name: temp
+    mountPath: /opt/bitnami/nginx/tmp/
   - name: "secrets-store"
     mountPath: "/mnt/secrets-store"
     readOnly: true

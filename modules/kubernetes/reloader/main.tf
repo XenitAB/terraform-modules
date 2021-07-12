@@ -135,7 +135,7 @@ resource "kubernetes_network_policy" "allow_api_server" {
     egress {
       to {
         ip_block {
-          cidr = "10.0.0.1"
+          cidr = "10.0.0.1/32"
         }
       }
 

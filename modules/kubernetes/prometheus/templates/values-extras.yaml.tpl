@@ -59,3 +59,5 @@ enabledMonitors:
   opaGatekeeper: ${opa_gatekeeper_enabled}
   linkerd: ${linkerd_enabled}
   goldpinger: ${goldpinger_enabled}
+  fluxSystem: ${flux_system_enabled}
+  csiSecretsStorProviderAzure: ${csi_secrets_store_provider_azure_enabled}

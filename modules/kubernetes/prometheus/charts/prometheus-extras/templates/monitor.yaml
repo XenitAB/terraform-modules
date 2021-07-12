@@ -55,6 +55,7 @@ spec:
       app.kubernetes.io/instance: cert-manager
       app.kubernetes.io/name: cert-manager
 ---
+{{- if .Values.enabledMonitors.csiSecretsStorProviderAzure }}
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
@@ -70,6 +71,7 @@ spec:
   podMetricsEndpoints:
     - path: /metrics
       port: "8081"
+{{- end }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -90,6 +92,7 @@ spec:
       app.kubernetes.io/instance: external-dns
       app.kubernetes.io/name: external-dns
 ---
+{{- if .Values.enabledMonitors.fluxSystem }}
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
@@ -164,6 +167,7 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: azdo-proxy
       app.kubernetes.io/name: azdo-proxy
+{{- end }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor

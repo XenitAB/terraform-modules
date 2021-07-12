@@ -189,10 +189,12 @@ module "prometheus" {
   resource_selector  = var.prometheus_config.resource_selector
   namespace_selector = var.prometheus_config.namespace_selector
 
-  falco_enabled          = var.falco_enabled
-  opa_gatekeeper_enabled = var.opa_gatekeeper_enabled
-  linkerd_enabled        = var.linkerd_enabled
-  goldpinger_enabled     = var.goldpinger_enabled
+  falco_enabled                            = var.falco_enabled
+  opa_gatekeeper_enabled                   = var.opa_gatekeeper_enabled
+  linkerd_enabled                          = var.linkerd_enabled
+  goldpinger_enabled                       = var.goldpinger_enabled
+  flux_system_enabled                      = var.flux_system_enabled
+  csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
 }
 
 module "cluster_autoscaler" {

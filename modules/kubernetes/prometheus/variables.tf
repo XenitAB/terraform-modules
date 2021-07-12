@@ -85,3 +85,15 @@ variable "goldpinger_enabled" {
   type        = bool
   default     = false
 }
+
+variable "flux_system_enabled" {
+  description = "Should flux-system be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "csi_secrets_store_provider_azure_enabled" {
+  description = "Should csi-secrets-store-provider-azure be enabled"
+  type        = bool
+  default     = false
+}

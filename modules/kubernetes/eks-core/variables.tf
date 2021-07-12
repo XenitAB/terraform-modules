@@ -314,5 +314,11 @@ variable "flux_system_enabled" {
 variable "csi_secrets_store_provider_azure_enabled" {
   description = "Should si-secrets-store-provider-azure be enabled"
   type        = bool
-  default     = true
+  default     = false
+}
+
+variable "aad_pod_identity_enabled" {
+  description = "Should aad pod dentity be enabled"
+  type        = bool
+  default     = false
 }

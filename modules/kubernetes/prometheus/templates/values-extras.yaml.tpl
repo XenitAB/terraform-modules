@@ -60,4 +60,5 @@ enabledMonitors:
   linkerd: ${linkerd_enabled}
   goldpinger: ${goldpinger_enabled}
   fluxSystem: ${flux_system_enabled}
+  aadPodIdentity: ${aad_pod_identity_enabled}
   csiSecretsStorProviderAzure: ${csi_secrets_store_provider_azure_enabled}

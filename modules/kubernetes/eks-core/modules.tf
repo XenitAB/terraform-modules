@@ -194,6 +194,7 @@ module "prometheus" {
   linkerd_enabled                          = var.linkerd_enabled
   goldpinger_enabled                       = var.goldpinger_enabled
   flux_system_enabled                      = var.flux_system_enabled
+  aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
   csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
 }
 

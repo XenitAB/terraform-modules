@@ -13,7 +13,7 @@ podLabels:
 %{ if cloud_provider == "aws" }
 serviceAccount
   annotations:
-    eks.amazonaws.com/role-arn: ${aws_config.role_arn}
+    eks.amazonaws.com/role-arn: "${aws_config.role_arn}"
 %{ endif }
 
 resources:

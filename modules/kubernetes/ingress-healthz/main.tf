@@ -31,6 +31,88 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+resource "kubernetes_network_policy" "deny_default" {
+  metadata {
+    name      = "deny-default"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {}
+    }
+
+    policy_types = ["Ingress", "Egress"]
+
+    ingress {
+      from {
+        pod_selector {}
+      }
+    }
+
+    egress {
+      to {
+        namespace_selector {}
+        pod_selector {
+          match_labels = {
+            k8s-app = "kube-dns"
+          }
+        }
+      }
+
+      ports {
+        port     = 53
+        protocol = "UDP"
+      }
+    }
+
+    egress {
+      to {
+        pod_selector {}
+      }
+    }
+  }
+}
+
+resource "kubernetes_network_policy" "allow_ingress" {
+  metadata {
+    name      = "allow-ingress"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {
+        "app.kubernetes.io/instance" = "ingress-healthz"
+        "app.kubernetes.io/name" = "nginx"
+      }
+    }
+
+    policy_types = ["Ingress"]
+
+    ingress {
+      ports {
+        port = "8080"
+        protocol = "TCP"
+      }
+
+      from {
+        namespace_selector {
+          match_labels = {
+            name = "ingress-nginx"
+          }
+        }
+        pod_selector {
+          match_labels = {
+            "app.kubernetes.io/name" = "ingress-nginx"
+            "app.kubernetes.io/component" = "controller"
+          }
+        }
+      }
+    }
+  }
+}
+
 resource "helm_release" "ingress_healthz" {
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "nginx"

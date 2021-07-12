@@ -181,7 +181,6 @@ module "cluster_autoscaler" {
   }
 }
 
-# csi-secrets-store-provider-aws
 module "csi_secrets_store_provider_aws" {
   depends_on = [module.opa_gatekeeper]
 
@@ -192,4 +191,21 @@ module "csi_secrets_store_provider_aws" {
   }
 
   source = "../../kubernetes/csi-secrets-store-provider-aws"
+}
+
+module "xenit" {
+  for_each = {
+    for s in ["xenit"] :
+    s => s
+    if var.xenit_enabled
+  }
+
+  source = "../../kubernetes/xenit"
+
+  cloud_provider = "aws"
+  aws_config = {
+    var.xenit_config.role_arn
+  }
+  thanos_receiver_fqdn = var.xenit_config.thanos_receiver
+  loki_api_fqdn        = var.xenit_config.loki_api
 }

@@ -248,3 +248,23 @@ variable "cluster_autoscaler_config" {
     role_arn = string
   })
 }
+
+variable "xenit_enabled" {
+  description = "Should Platform be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "xenit_config" {
+  description = "Xenit Platform configuration"
+  type = object({
+    role_arn = string
+    thanos_receiver = string
+    loki_api        = string
+  })
+  default = {
+    role_arn = ""
+    thanos_receiver = ""
+    loki_api        = ""
+  }
+}

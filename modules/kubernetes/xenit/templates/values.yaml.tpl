@@ -11,9 +11,11 @@ podLabels:
   app: "xenit-proxy"
 %{ endif }
 %{ if cloud_provider == "aws" }
-serviceAccount
+serviceAccount:
+  create: true
+  name: "xenit-proxy"
   annotations:
-    eks.amazonaws.com/role-arn: "${aws_config.role_arn}"
+    "eks.amazonaws.com/role-arn": "${aws_config.role_arn}"
 %{ endif }
 
 resources:

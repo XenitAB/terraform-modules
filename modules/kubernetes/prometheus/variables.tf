@@ -98,6 +98,12 @@ variable "csi_secrets_store_provider_azure_enabled" {
   default     = false
 }
 
+variable "csi_secrets_store_provider_aws_enabled" {
+  description = "Should csi-secrets-store-provider-aws be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "aad_pod_identity_enabled" {
   description = "Should aad pod dentity be enabled"
   type        = bool

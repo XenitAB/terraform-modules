@@ -312,9 +312,15 @@ variable "flux_system_enabled" {
 }
 
 variable "csi_secrets_store_provider_azure_enabled" {
-  description = "Should si-secrets-store-provider-azure be enabled"
+  description = "Should csi-secrets-store-provider-azure be enabled"
   type        = bool
   default     = false
+}
+
+variable "csi_secrets_store_provider_aws_enabled" {
+  description = "Should csi-secrets-store-provider-aws be enabled"
+  type        = bool
+  default     = true
 }
 
 variable "aad_pod_identity_enabled" {

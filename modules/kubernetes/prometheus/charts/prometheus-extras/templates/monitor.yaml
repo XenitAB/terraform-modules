@@ -75,6 +75,24 @@ spec:
       port: "8081"
 {{- end }}
 ---
+{{- if .Values.enabledMonitors.csiSecretsStorProviderAws }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: secrets-store-csi-driver
+  namespace: csi-secrets-store-provider-aws
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: secrets-store-csi-driver
+      app.kubernetes.io/instance: secrets-store-csi-driver
+  podMetricsEndpoints:
+    - path: /metrics
+      port: "8081"
+{{- end }}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:

@@ -196,6 +196,7 @@ module "prometheus" {
   flux_system_enabled                      = var.flux_system_enabled
   aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
   csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
+  csi_secrets_store_provider_aws_enabled   = var.csi_secrets_store_provider_aws_enabled
 }
 
 module "cluster_autoscaler" {

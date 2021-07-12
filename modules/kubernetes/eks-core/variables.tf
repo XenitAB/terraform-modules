@@ -149,12 +149,6 @@ variable "csi_secrets_store_provider_aws_enabled" {
   default     = true
 }
 
-variable "linkerd_enabled" {
-  description = "Should linkerd be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "ingress_nginx_enabled" {
   description = "Should Ingress NGINX be enabled"
   type        = bool
@@ -236,6 +230,30 @@ variable "azad_kube_proxy_config" {
   }
 }
 
+variable "prometheus_enabled" {
+  description = "Should prometheus be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "prometheus_config" {
+  description = "Configuration for prometheus"
+  type = object({
+    remote_write_enabled = bool
+    remote_write_url     = string
+    tenant_id            = string
+
+    volume_claim_enabled            = bool
+    volume_claim_storage_class_name = string
+    volume_claim_size               = string
+
+    alertmanager_enabled = bool
+
+    resource_selector  = list(string)
+    namespace_selector = list(string)
+  })
+}
+
 variable "cluster_autoscaler_enabled" {
   description = "Should Cluster Autoscaler be enabled"
   type        = bool
@@ -267,4 +285,22 @@ variable "xenit_config" {
     thanos_receiver = ""
     loki_api        = ""
   }
+}
+
+variable "falco_enabled" {
+  description = "Should Falco be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "linkerd_enabled" {
+  description = "Should linkerd be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "goldpinger_enabled" {
+  description = "Should goldpinger be enabled"
+  type        = bool
+  default     = true
 }

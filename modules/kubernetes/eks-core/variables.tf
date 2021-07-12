@@ -258,12 +258,12 @@ variable "xenit_enabled" {
 variable "xenit_config" {
   description = "Xenit Platform configuration"
   type = object({
-    role_arn = string
+    role_arn        = string
     thanos_receiver = string
     loki_api        = string
   })
   default = {
-    role_arn = ""
+    role_arn        = ""
     thanos_receiver = ""
     loki_api        = ""
   }

@@ -43,7 +43,7 @@ resource "helm_release" "xenit_proxy_extras" {
 
   set {
     name  = "cloudProvider"
-    value = var.cloudProvider
+    value = var.cloud_provider
   }
 
   set {
@@ -79,8 +79,8 @@ resource "helm_release" "xenit_proxy" {
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "9.3.6"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    cloud_provider = var.cloud_provider
-    aws_config = var.aws_config
+    cloud_provider       = var.cloud_provider
+    aws_config           = var.aws_config
     thanos_receiver_fqdn = var.thanos_receiver_fqdn
     loki_api_fqdn        = var.loki_api_fqdn
   })]

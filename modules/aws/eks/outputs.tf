@@ -40,6 +40,6 @@ output "velero_config" {
 output "xenit_config" {
   description = "Configuration for Xenit proxy"
   value = {
-    role_arn     = module.xenit.role_arn
+    role_arn = module.xenit.role_arn
   }
 }

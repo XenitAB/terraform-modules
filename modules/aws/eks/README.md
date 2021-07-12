@@ -24,6 +24,7 @@
 | <a name="module_cluster_autoscaler"></a> [cluster\_autoscaler](#module\_cluster\_autoscaler) | ../irsa | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../irsa | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../irsa | n/a |
+| <a name="module_xenit"></a> [xenit](#module\_xenit) | ../irsa | n/a |
 
 ## Resources
 
@@ -36,11 +37,14 @@
 | [aws_iam_openid_connect_provider.this](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/resources/iam_openid_connect_provider) | resource |
 | [aws_launch_template.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/resources/launch_template) | resource |
 | [null_resource.update_eks_cni](https://registry.terraform.io/providers/hashicorp/null/3.1.0/docs/resources/resource) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/caller_identity) | data source |
 | [aws_eks_cluster_auth.this](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/eks_cluster_auth) | data source |
 | [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.cluster_autoscaler](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.external_dns](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.velero](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.xenit](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/region) | data source |
 | [aws_subnet.cluster](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/subnet) | data source |
 | [aws_subnet.node](https://registry.terraform.io/providers/hashicorp/aws/3.49.0/docs/data-sources/subnet) | data source |
 | [tls_certificate.thumbprint](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/data-sources/certificate) | data source |
@@ -67,3 +71,4 @@
 | <a name="output_external_dns_config"></a> [external\_dns\_config](#output\_external\_dns\_config) | Configuration for External DNS |
 | <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Kube config for the created EKS cluster |
 | <a name="output_velero_config"></a> [velero\_config](#output\_velero\_config) | Configuration for Velero |
+| <a name="output_xenit_config"></a> [xenit\_config](#output\_xenit\_config) | Configuration for Xenit proxy |

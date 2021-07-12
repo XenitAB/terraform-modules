@@ -183,6 +183,6 @@ module "xenit" {
     }
   ]
   kubernetes_namespace       = "xenit-system"
-  kubernetes_service_account = "xenit-system"
+  kubernetes_service_account = "xenit-proxy"
   policy_json                = data.aws_iam_policy_document.xenit.json
 }

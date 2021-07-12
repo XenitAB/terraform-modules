@@ -42,22 +42,27 @@ resource "helm_release" "xenit_proxy_extras" {
   namespace = kubernetes_namespace.this.metadata[0].name
 
   set {
-    name  = "resourceID"
+    name  = "cloudProvider"
+    value = var.cloudProvider
+  }
+
+  set {
+    name  = "azureConfig.resourceID"
     value = var.azure_config.identity.resource_id
   }
 
   set {
-    name  = "clientID"
+    name  = "azureConfig.clientID"
     value = var.azure_config.identity.client_id
   }
 
   set {
-    name  = "tenantID"
+    name  = "azureConfig.tenantID"
     value = var.azure_config.identity.tenant_id
   }
 
   set {
-    name  = "keyVaultName"
+    name  = "azureConfig.keyVaultName"
     value = var.azure_config.azure_key_vault_name
   }
 }
@@ -74,6 +79,8 @@ resource "helm_release" "xenit_proxy" {
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "9.3.6"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
+    cloud_provider = var.cloud_provider
+    aws_config = var.aws_config
     thanos_receiver_fqdn = var.thanos_receiver_fqdn
     loki_api_fqdn        = var.loki_api_fqdn
   })]

@@ -1,8 +1,14 @@
 nameOverride: ""
 fullnameOverride: ""
 
-resourceID: ""
-clientID: ""
-tenantID: ""
-keyVaultName: ""
-keyVaultSecretName: "xenit-proxy-certificate"
+cloudProvider: ""
+
+azureConfig:
+  resourceID: ""
+  clientID: ""
+  tenantID: ""
+  keyVaultName: ""
+  keyVaultSecretName: "xenit-proxy-certificate"
+
+awsConfig:
+  parameterName: "xenit-proxy-certificate"

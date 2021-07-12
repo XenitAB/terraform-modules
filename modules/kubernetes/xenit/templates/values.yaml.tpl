@@ -5,9 +5,16 @@ priorityClassName: "platform-low"
 podAnnotations:
   secret.reloader.stakater.com/reload: "xenit-proxy-certificate"
 
+%{ if cloud_provider == "azure" }
 podLabels:
   aadpodidbinding: "xenit-proxy"
   app: "xenit-proxy"
+%{ endif }
+%{ if cloud_provider == "aws" }
+serviceAccount
+  annotations:
+    eks.amazonaws.com/role-arn: ${aws_config.role_arn}
+%{ endif }
 
 resources:
   requests:

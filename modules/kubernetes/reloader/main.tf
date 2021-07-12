@@ -135,7 +135,7 @@ resource "kubernetes_network_policy" "allow_api_server" {
     egress {
       to {
         namespace_selector {
-          match_labels {
+          match_labels = {
             name = "default"
           }
         }

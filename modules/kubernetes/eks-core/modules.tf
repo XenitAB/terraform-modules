@@ -180,3 +180,16 @@ module "cluster_autoscaler" {
     role_arn = var.cluster_autoscaler_config.role_arn
   }
 }
+
+# csi-secrets-store-provider-aws
+module "csi_secrets_store_provider_aws" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["csi-secrets-store-provider-aws"] :
+    s => s
+    if var.csi_secrets_store_provider_aws_enabled
+  }
+
+  source = "../../kubernetes/csi-secrets-store-provider-aws"
+}

@@ -143,12 +143,6 @@ variable "cert_manager_config" {
   })
 }
 
-variable "csi_secrets_store_provider_aws_enabled" {
-  description = "Should csi-secrets-store-provider-aws be enabled"
-  type        = bool
-  default     = true
-}
-
 variable "ingress_nginx_enabled" {
   description = "Should Ingress NGINX be enabled"
   type        = bool

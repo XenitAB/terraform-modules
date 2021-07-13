@@ -10,6 +10,7 @@ rbac:
   create: true
 
 hostNetwork: true
+securePort: 7443
 
 apiService:
   create: true

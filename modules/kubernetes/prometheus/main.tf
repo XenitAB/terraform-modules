@@ -2,6 +2,7 @@
   * # Prometheus
   *
   * Adds [Prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) to a Kubernetes cluster.
+  * If you are running on AWS we also install [Metrics server](https://aws.amazon.com/premiumsupport/knowledge-center/eks-metrics-server/)
   */
 
 terraform {
@@ -51,6 +52,7 @@ resource "helm_release" "prometheus_extras" {
   name      = "prometheus-extras"
   namespace = kubernetes_namespace.this.metadata[0].name
   values = [templatefile("${path.module}/templates/values-extras.yaml.tpl", {
+    cloud_provider       = var.cloud_provider
     remote_write_enabled = var.remote_write_enabled
     remote_write_url     = var.remote_write_url
 

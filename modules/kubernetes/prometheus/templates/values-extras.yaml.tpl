@@ -2,6 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+cloudProvider: ${cloud_provider}
+
 remoteWrite:
   enabled: ${remote_write_enabled}
   url: ${remote_write_url}

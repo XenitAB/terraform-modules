@@ -109,3 +109,9 @@ variable "aad_pod_identity_enabled" {
   type        = bool
   default     = false
 }
+
+variable "cloud_provider" {
+  description = "Cloud provider to use."
+  type        = string
+  default     = "azure"
+}

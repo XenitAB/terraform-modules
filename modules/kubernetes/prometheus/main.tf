@@ -39,7 +39,9 @@ resource "helm_release" "prometheus" {
   name       = "prometheus"
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "16.12.2"
-  values     = [templatefile("${path.module}/templates/values.yaml.tpl", {})]
+  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
+    cloud_provider = var.cloud_provider
+  })]
 }
 
 resource "helm_release" "prometheus_extras" {

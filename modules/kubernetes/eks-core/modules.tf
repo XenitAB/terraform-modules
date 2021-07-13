@@ -174,6 +174,8 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
+  cloud_provider = "aws"
+
   remote_write_enabled = var.prometheus_config.remote_write_enabled
   remote_write_url     = var.prometheus_config.remote_write_url
   tenant_id            = var.prometheus_config.tenant_id

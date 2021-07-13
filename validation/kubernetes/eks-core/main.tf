@@ -9,8 +9,8 @@ module "eks_core" {
 
   namespaces = []
 
-  environment = "dev"
-  name = "foo"
+  environment     = "dev"
+  name            = "foo"
   eks_name_suffix = 1
 
   external_dns_enabled = true
@@ -30,7 +30,7 @@ module "eks_core" {
     role_arn           = "foobar"
   }
   cluster_autoscaler_config = {
-    role_arn           = "foobar"
+    role_arn = "foobar"
   }
   #fluxcd_v2_config = {
   #  type = "github"
@@ -71,5 +71,21 @@ module "eks_core" {
       id   = "id"
       name = "name"
     }
+  }
+
+  prometheus_enabled = true
+  prometheus_config = {
+    remote_write_enabled = true
+    remote_write_url     = "https://my-receiver.com"
+
+    volume_claim_enabled            = true
+    volume_claim_storage_class_name = "default"
+    volume_claim_size               = "5Gi"
+
+    alertmanager_enabled = false
+
+    tenant_id          = ""
+    resource_selector  = ["platform"]
+    namespace_selector = ["platform"]
   }
 }

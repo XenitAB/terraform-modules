@@ -48,3 +48,9 @@ prometheusOperator:
 
 prometheus-node-exporter:
   priorityClassName: "platform-high"
+
+%{ if cloud_provider == "aws" }
+kubelet:
+  serviceMonitor:
+    https: false
+%{ endif }

@@ -162,6 +162,45 @@ module "azad_kube_proxy" {
   }
 }
 
+# Prometheus
+module "prometheus" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["prometheus"] :
+    s => s
+    if var.prometheus_enabled
+  }
+
+  source = "../../kubernetes/prometheus"
+
+  cloud_provider = "aws"
+
+  remote_write_enabled = var.prometheus_config.remote_write_enabled
+  remote_write_url     = var.prometheus_config.remote_write_url
+  tenant_id            = var.prometheus_config.tenant_id
+
+  volume_claim_enabled            = var.prometheus_config.volume_claim_enabled
+  volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
+  volume_claim_size               = var.prometheus_config.volume_claim_size
+
+  alertmanager_enabled = var.prometheus_config.alertmanager_enabled
+
+  cluster_name       = "${var.name}${var.eks_name_suffix}"
+  environment        = var.environment
+  resource_selector  = var.prometheus_config.resource_selector
+  namespace_selector = var.prometheus_config.namespace_selector
+
+  falco_enabled                            = var.falco_enabled
+  opa_gatekeeper_enabled                   = var.opa_gatekeeper_enabled
+  linkerd_enabled                          = var.linkerd_enabled
+  goldpinger_enabled                       = var.goldpinger_enabled
+  flux_system_enabled                      = var.flux_system_enabled
+  aad_pod_identity_enabled                 = false
+  csi_secrets_store_provider_azure_enabled = false
+  csi_secrets_store_provider_aws_enabled   = var.csi_secrets_store_provider_aws_enabled
+}
+
 module "cluster_autoscaler" {
   depends_on = [module.opa_gatekeeper]
 

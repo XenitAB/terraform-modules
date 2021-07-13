@@ -45,6 +45,21 @@ resource "helm_release" "prometheus" {
   })]
 }
 
+resource "helm_release" "metrics_server" {
+  for_each = {
+    for s in ["metrics-server"] :
+    s => s
+    if var.cloud_provider == "aws"
+  }
+
+  repository = "https://charts.bitnami.com/bitnami"
+  chart      = "metrics-server"
+  name       = "metrics-server"
+  namespace  = "kube-system"
+  version    = "5.9.0"
+  values     = [templatefile("${path.module}/templates/values-metrics-server.yaml.tpl", {})]
+}
+
 resource "helm_release" "prometheus_extras" {
   depends_on = [helm_release.prometheus]
 
@@ -52,7 +67,6 @@ resource "helm_release" "prometheus_extras" {
   name      = "prometheus-extras"
   namespace = kubernetes_namespace.this.metadata[0].name
   values = [templatefile("${path.module}/templates/values-extras.yaml.tpl", {
-    cloud_provider       = var.cloud_provider
     remote_write_enabled = var.remote_write_enabled
     remote_write_url     = var.remote_write_url
 

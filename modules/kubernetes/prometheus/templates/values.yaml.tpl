@@ -45,9 +45,6 @@ defaultRules:
 
 prometheusOperator:
   priorityClassName: "platform-low"
-  %{ if cloud_provider == "aws" }
-  hostNetwork: true
-  %{ endif }
 
 prometheus-node-exporter:
   priorityClassName: "platform-high"

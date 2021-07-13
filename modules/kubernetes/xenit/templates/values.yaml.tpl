@@ -5,10 +5,10 @@ priorityClassName: "platform-low"
 podAnnotations:
   secret.reloader.stakater.com/reload: "xenit-proxy-certificate"
 
-%{ if cloud_provider == "azure" }
 podLabels:
-  aadpodidbinding: "xenit-proxy"
   app: "xenit-proxy"
+%{ if cloud_provider == "azure" }
+  aadpodidbinding: "xenit-proxy"
 %{ endif }
 %{ if cloud_provider == "aws" }
 serviceAccount:

@@ -127,7 +127,7 @@ resource "kubernetes_network_policy" "allow_ingress_traffic" {
       }
     }
 
-    policy_types = ["Ingress", "Egress"]
+    policy_types = ["Ingress"]
 
     ingress {
       from {
@@ -146,8 +146,6 @@ resource "kubernetes_network_policy" "allow_ingress_traffic" {
         protocol = "TCP"
       }
     }
-
-    egress {}
   }
 }
 

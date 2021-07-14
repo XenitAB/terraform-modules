@@ -175,19 +175,6 @@ resource "kubernetes_network_policy" "allow_webhook" {
     policy_types = ["Ingress"]
 
     ingress {
-      from {
-        namespace_selector {
-          match_labels = {
-            name = "kube-system"
-          }
-        }
-        pod_selector {
-          match_labels = {
-            component = "tunnel"
-          }
-        }
-      }
-
       ports {
         port = "webhook"
         protocol = "TCP"

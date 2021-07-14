@@ -130,6 +130,8 @@ resource "kubernetes_network_policy" "allow_ingress_traffic" {
     policy_types = ["Ingress", "Egress"]
 
     ingress {
+      # Blocking internal IPs will block correct ingress
+      # traffic coming from inside the cluster.
       from {
         ip_block {
           cidr = "0.0.0.0/0"
@@ -137,12 +139,12 @@ resource "kubernetes_network_policy" "allow_ingress_traffic" {
       }
 
       ports {
-        port = "443"
+        port = "https"
         protocol = "TCP"
       }
 
       ports {
-        port = "80"
+        port = "http"
         protocol = "TCP"
       }
     }
@@ -150,6 +152,47 @@ resource "kubernetes_network_policy" "allow_ingress_traffic" {
     # Without allowing all egress the controller will not be
     # able to initate new requests to forward the traffic.
     egress {}
+  }
+}
+
+# When running in AKS tunnelfront will need access
+# to the validating webhook endpoint.
+resource "kubernetes_network_policy" "allow_webhook" {
+  metadata {
+    name      = "allow-webhook"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {
+        "app.kubernetes.io/component" = "controller"
+        "app.kubernetes.io/instance" = "ingress-nginx"
+        "app.kubernetes.io/name" = "ingress-nginx"
+      }
+    }
+
+    policy_types = ["Ingress"]
+
+    ingress {
+      from {
+        namespace_selector {
+          match_labels = {
+            name = "kube-system"
+          }
+        }
+        pod_selector {
+          match_labels = {
+            component = "tunnel"
+          }
+        }
+      }
+
+      ports {
+        port = "webhook"
+        protocol = "TCP"
+      }
+    }
   }
 }
 

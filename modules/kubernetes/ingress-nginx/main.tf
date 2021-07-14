@@ -147,6 +147,8 @@ resource "kubernetes_network_policy" "allow_ingress_traffic" {
       }
     }
 
+    # Without allowing all egress the controller will not be
+    # able to initate new requests to forward the traffic.
     egress {}
   }
 }

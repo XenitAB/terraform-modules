@@ -11,6 +11,13 @@ variable "name" {
 variable "dns_zone" {
   description = "The DNS Zone host name"
   type        = string
+  default     = ""
+}
+
+variable "dns_zone_enabled" {
+  description = "Should dns zone be enabled"
+  type        = bool
+  default     = false
 }
 
 variable "vpc_config" {

@@ -34,4 +34,5 @@ module "core" {
   }
   vpc_peering_enabled = false
   dns_zone            = "foobar.com"
+  dns_zone_enabled    = true
 }

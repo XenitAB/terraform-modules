@@ -194,6 +194,22 @@ resource "aws_vpc_peering_connection" "this" {
   }
 }
 
+# Accepter's side of the connection.
+resource "aws_vpc_peering_connection_accepter" "peer" {
+  for_each = {
+    for s in ["peer"] :
+    s => s
+    if var.vpc_peer_enabled
+  }
+
+  vpc_peering_connection_id = var.vpc_peering_connection_id
+  auto_accept               = false
+
+  tags = {
+    Side = "Accepter"
+  }
+}
+
 resource "aws_route" "peer" {
   for_each = {
     for value in local.peering_subnets : value.key => value

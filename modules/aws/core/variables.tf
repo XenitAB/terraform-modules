@@ -48,3 +48,15 @@ variable "vpc_peering_config" {
   }))
   default = []
 }
+
+variable "vpc_peer_enabled" {
+  description = "Should vpc peering be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "vpc_peering_connection_id" {
+  description = "The vpc peering connection id to peer with"
+  type        = string
+  default     = ""
+}

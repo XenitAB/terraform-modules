@@ -3,7 +3,7 @@ locals {
 
   peering_subnets = [
     for pair in setproduct(var.vpc_config.private_subnets, var.vpc_peering_config) : {
-      key                       = "${pair[1].name}-${pair[0].name}-${pair[0].availability_zone_index}"
+      key                       = "${pair[1].name}-${pair[0].name_prefix}-${pair[0].availability_zone_index}"
       route_table_id            = aws_route_table.private[pair[0].key].id
       destination_cidr_block    = pair[1].destination_cidr_block
       vpc_peering_connection_id = aws_vpc_peering_connection.this[pair[1].key].id
@@ -215,7 +215,7 @@ resource "aws_route" "peer" {
     for value in local.peering_subnets : value.key => value
   }
 
-  route_table_id            = value.route_table_id
-  destination_cidr_block    = value.destination_cidr_block
-  vpc_peering_connection_id = value.vpc_connection_id
+  route_table_id            = each.value.route_table_id
+  destination_cidr_block    = each.value.destination_cidr_block
+  vpc_peering_connection_id = each.value.vpc_peering_connection_id
 }

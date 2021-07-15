@@ -190,7 +190,7 @@ resource "aws_vpc_peering_connection" "this" {
   peer_owner_id = each.value.peer_owner_id
   peer_vpc_id   = each.value.peer_vpc_id
   vpc_id        = aws_vpc.this.id
-  auto_accept   = false
+  auto_accept   = true
 
   requester {
     allow_remote_vpc_dns_resolution = true
@@ -223,7 +223,7 @@ resource "aws_vpc_peering_connection_accepter" "peer" {
   }
 
   vpc_peering_connection_id = data.aws_vpc_peering_connections.this["peer"].ids
-  auto_accept               = false
+  auto_accept               = true
 
   tags = {
     Side = "Accepter"

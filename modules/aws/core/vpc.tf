@@ -202,7 +202,7 @@ resource "aws_vpc_peering_connection" "this" {
   }
 }
 
-data "aws_vpc_peering_connections" "this" {
+data "aws_vpc_peering_connection" "this" {
   for_each = {
     for s in ["peer"] :
     s => s
@@ -222,7 +222,7 @@ resource "aws_vpc_peering_connection_accepter" "peer" {
     if var.vpc_peer_enabled
   }
 
-  vpc_peering_connection_id = data.aws_vpc_peering_connections.this["peer"].ids
+  vpc_peering_connection_id = data.aws_vpc_peering_connection.this["peer"].id
   auto_accept               = true
 
   tags = {

@@ -49,14 +49,14 @@ variable "vpc_peering_config" {
   default = []
 }
 
+variable "requester_account" {
+  description = "Requester account, only used on the accept side"
+  type        = string
+  default     = ""
+}
+
 variable "vpc_peer_enabled" {
   description = "Should vpc peering be enabled"
   type        = bool
   default     = false
-}
-
-variable "vpc_peering_connection_id" {
-  description = "The vpc peering connection id to peer with"
-  type        = string
-  default     = ""
 }

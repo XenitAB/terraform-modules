@@ -196,6 +196,18 @@ resource "aws_vpc_peering_connection" "this" {
   }
 }
 
+data "aws_vpc_peering_connections" "this" {
+  for_each = {
+    for s in ["peer"] :
+    s => s
+    if var.vpc_peer_enabled
+  }
+  filter {
+    values = [var.requester_account]
+    name   = "requester-vpc-info.owner-id"
+  }
+}
+
 # Accepter's side of the connection.
 resource "aws_vpc_peering_connection_accepter" "peer" {
   for_each = {
@@ -204,7 +216,7 @@ resource "aws_vpc_peering_connection_accepter" "peer" {
     if var.vpc_peer_enabled
   }
 
-  vpc_peering_connection_id = var.vpc_peering_connection_id
+  vpc_peering_connection_id = data.aws_vpc_peering_connections.this["peer"].ids
   auto_accept               = false
 
   tags = {

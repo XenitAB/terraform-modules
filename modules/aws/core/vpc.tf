@@ -1,5 +1,14 @@
 locals {
   public_subnet_name_prefix = "public"
+
+  peering_subnets = [
+    for pair in setproduct(var.vpc_config.private_subnets, var.vpc_peering_config) : {
+      key                       = "${pair[1].name}-${pair[0].name}-${pair[0].availability_zone_index}"
+      route_table_id            = aws_route_table.private[pair[0].key].id
+      destination_cidr_block    = pair[1].destination_cidr_block
+      vpc_peering_connection_id = aws_vpc_peering_connection.this[pair[1].key].id
+    }
+  ]
 }
 
 resource "aws_vpc" "this" {
@@ -166,29 +175,31 @@ resource "aws_route_table_association" "private" {
 # VPC Peering
 resource "aws_vpc_peering_connection" "this" {
   for_each = {
-    for s in ["peering"] :
-    s => s
-    if var.vpc_peering_enabled
+    for value in var.vpc_peering_config :
+    value.name => value
   }
 
-  peer_owner_id = var.vpc_peering_config.peer_owner_id
-  peer_vpc_id   = var.vpc_peering_config.peer_vpc_id
+  peer_owner_id = each.value.peer_owner_id
+  peer_vpc_id   = each.value.peer_vpc_id
   vpc_id        = aws_vpc.this.id
   auto_accept   = false
 
   requester {
     allow_remote_vpc_dns_resolution = true
   }
+
+  tags = {
+    "Name" = each.key
+    "Side" = "Requester"
+  }
 }
 
 resource "aws_route" "peer" {
   for_each = {
-    for subnet in var.vpc_config.private_subnets :
-    "${subnet.name_prefix}-${subnet.availability_zone_index}" => subnet
-    if var.vpc_peering_enabled
+    for value in local.peering_subnets : value.key => value
   }
 
-  route_table_id            = aws_route_table.private[each.key].id
-  destination_cidr_block    = var.vpc_peering_config.destination_cidr_block
-  vpc_peering_connection_id = aws_vpc_peering_connection.this["peering"].id
+  route_table_id            = value.route_table_id
+  destination_cidr_block    = value.destination_cidr_block
+  vpc_peering_connection_id = value.vpc_connection_id
 }

@@ -31,22 +31,13 @@ variable "vpc_config" {
   })
 }
 
-variable "vpc_peering_enabled" {
-  description = "If true vpc peering will be configured"
-  type        = bool
-  default     = true
-}
-
 variable "vpc_peering_config" {
   description = "VPC Peering configuration"
-  type = object({
+  type = list(object({
+    name                   = string
     peer_owner_id          = string
     peer_vpc_id            = string
     destination_cidr_block = string
-  })
-  default = {
-    destination_cidr_block = ""
-    peer_owner_id          = ""
-    peer_vpc_id            = ""
-  }
+  }))
+  default = []
 }

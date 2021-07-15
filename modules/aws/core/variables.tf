@@ -60,3 +60,9 @@ variable "vpc_peer_enabled" {
   type        = bool
   default     = false
 }
+
+variable "internet_gateway_enabled" {
+  description = "Should internet gateway be created"
+  type        = bool
+  default     = true
+}

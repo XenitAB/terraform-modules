@@ -200,6 +200,50 @@ resource "kubernetes_network_policy" "allow_scraping" {
   }
 }
 
+resource "kubernetes_network_policy" "allow_webhook" {
+  metadata {
+    name      = "allow-webhook"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {
+        app = "gatekeeper"
+        control-plane = "controller-manager"
+      }
+    }
+
+    policy_types = ["Ingress"]
+
+    ingress {
+      from {
+        ip_block {
+          cidr = "192.0.2.0/24" # Egress CIDR block of AKS API Server
+        }
+      }
+
+      from {
+        namespace_selector {
+          match_labels = {
+            name = "kube-system"
+          }
+        }
+        pod_selector {
+          match_labels = {
+            component = "tunnel"
+          }
+        }
+      }
+
+      ports {
+        port = "webhook-server"
+        protocol = "TCP"
+      }
+    }
+  }
+}
+
 resource "kubernetes_network_policy" "allow_api_server" {
   metadata {
     name      = "allow-api-server"

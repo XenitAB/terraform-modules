@@ -114,6 +114,9 @@ resource "kubernetes_network_policy" "allow_scraping" {
   }
 }
 
+# Currently traffic has to be opened up to all IPs as
+# it is not possible to dynamically find the IP of the
+# api server, nor possible to limit egress based on DNS
 resource "kubernetes_network_policy" "allow_api_server" {
   metadata {
     name      = "allow-api-server"
@@ -135,7 +138,7 @@ resource "kubernetes_network_policy" "allow_api_server" {
     egress {
       to {
         ip_block {
-          cidr = "10.0.0.1/32"
+          cidr = "0.0.0.0/0"
         }
       }
 

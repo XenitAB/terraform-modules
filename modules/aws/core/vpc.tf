@@ -16,7 +16,7 @@ locals {
       route_table_id         = aws_route_table.private["${pair[0].name_prefix}-${pair[0].availability_zone_index}"].id
       destination_cidr_block = pair[1].destination_cidr_block
       # vpc_peering_connection_id = aws_vpc_peering_connection.this[pair[1].name].id
-      vpc_peering_connection_id = data.aws_vpc_peering_connection.this["peer"].id
+      vpc_peering_connection_id = data.aws_vpc_peering_connection.this[pair[1].name].id
     }
   ]
 }
@@ -241,7 +241,7 @@ resource "aws_vpc_peering_connection_accepter" "peer" {
     value.name => value
   }
 
-  vpc_peering_connection_id = data.aws_vpc_peering_connection.this["peer"].id
+  vpc_peering_connection_id = data.aws_vpc_peering_connection.this[each.value.name].id
   auto_accept               = true
 
   tags = {

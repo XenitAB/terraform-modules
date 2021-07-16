@@ -38,7 +38,13 @@ variable "vpc_config" {
   })
 }
 
-variable "vpc_peering_config" {
+variable "vpc_peer_enabled" {
+  description = "Should vpc peering be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "vpc_peering_config_requester" {
   description = "VPC Peering configuration"
   type = list(object({
     name                   = string
@@ -49,17 +55,16 @@ variable "vpc_peering_config" {
   default = []
 }
 
-variable "requester_account" {
-  description = "Requester account, only used on the accept side"
-  type        = string
-  default     = ""
+variable "vpc_peering_config_accepter" {
+  description = "VPC Peering configuration"
+  type = list(object({
+    name                   = string
+    peer_owner_id          = string
+    destination_cidr_block = string
+  }))
+  default = []
 }
 
-variable "vpc_peer_enabled" {
-  description = "Should vpc peering be enabled"
-  type        = bool
-  default     = false
-}
 
 variable "internet_gateway_enabled" {
   description = "Should internet gateway be created"

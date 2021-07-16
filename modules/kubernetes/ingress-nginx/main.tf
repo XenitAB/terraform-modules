@@ -175,6 +175,25 @@ resource "kubernetes_network_policy" "allow_webhook" {
     policy_types = ["Ingress"]
 
     ingress {
+      from {
+        namespace_selector {
+          match_labels = {
+            name = "kube-system"
+          }
+        }
+        pod_selector {
+          match_labels = {
+            component = "tunnel"
+          }
+        }
+      }
+
+      from {
+        ip_block {
+          cidr = "192.0.2.0/24" # Egress CIDR block of AKS API Server
+        }
+      }
+
       ports {
         port = "webhook"
         protocol = "TCP"

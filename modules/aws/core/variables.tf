@@ -38,12 +38,6 @@ variable "vpc_config" {
   })
 }
 
-variable "vpc_peer_enabled" {
-  description = "Should vpc peering be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "vpc_peering_config_requester" {
   description = "VPC Peering configuration"
   type = list(object({

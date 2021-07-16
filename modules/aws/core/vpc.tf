@@ -219,14 +219,14 @@ resource "aws_route" "peering_requester" {
 # Accepter's side of vpc peering
 data "aws_vpc_peering_connection" "this" {
   for_each = {
-    for s in ["peer"] :
-    s => s
-    if var.vpc_peer_enabled
+    for value in var.vpc_peering_config_accepter :
+    value.name => value
   }
+
   peer_vpc_id = aws_vpc.this.id
   #status      = "pending-acceptance"
   filter {
-    values = [var.vpc_peering_config_accepter.peer_owner_id]
+    values = [each.value.peer_owner_id]
     name   = "requester-vpc-info.owner-id"
   }
   filter {
@@ -237,9 +237,8 @@ data "aws_vpc_peering_connection" "this" {
 
 resource "aws_vpc_peering_connection_accepter" "peer" {
   for_each = {
-    for s in ["peer"] :
-    s => s
-    if var.vpc_peer_enabled
+    for value in var.vpc_peering_config_accepter :
+    value.name => value
   }
 
   vpc_peering_connection_id = data.aws_vpc_peering_connection.this["peer"].id

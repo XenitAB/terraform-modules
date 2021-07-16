@@ -32,6 +32,14 @@ module "core" {
       },
     ]
   }
-  vpc_peering_enabled = false
-  dns_zone            = "foobar.com"
+  vpc_peering_config_requester = [
+    {
+      name                   = "tenant1-dev"
+      peer_owner_id          = "account-id"
+      peer_vpc_id            = "vpc-1234"
+      destination_cidr_block = "10.0.0.0/24"
+    },
+  ]
+  dns_zone         = "foobar.com"
+  dns_zone_enabled = true
 }

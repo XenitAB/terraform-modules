@@ -1,5 +1,31 @@
+/**
+  * # Vpc
+  *
+  * Currently dns lookup between VPC isn't configured.
+  * If this is needed add aws_vpc_peering_connection_options.
+  *
+  */
+
 locals {
   public_subnet_name_prefix = "public"
+
+  requester_peering_subnets = [
+    for pair in setproduct(var.vpc_config.private_subnets, var.vpc_peering_config_requester) : {
+      key                       = "${pair[1].name}-${pair[0].name_prefix}-${pair[0].availability_zone_index}"
+      route_table_id            = aws_route_table.private["${pair[0].name_prefix}-${pair[0].availability_zone_index}"].id
+      destination_cidr_block    = pair[1].destination_cidr_block
+      vpc_peering_connection_id = aws_vpc_peering_connection.this[pair[1].name].id
+    }
+  ]
+
+  accepter_peering_subnets = [
+    for pair in setproduct(var.vpc_config.private_subnets, var.vpc_peering_config_accepter) : {
+      key                       = "${pair[1].name}-${pair[0].name_prefix}-${pair[0].availability_zone_index}"
+      route_table_id            = aws_route_table.private["${pair[0].name_prefix}-${pair[0].availability_zone_index}"].id
+      destination_cidr_block    = pair[1].destination_cidr_block
+      vpc_peering_connection_id = data.aws_vpc_peering_connection.this[pair[1].name].id
+    }
+  ]
 }
 
 resource "aws_vpc" "this" {
@@ -14,6 +40,12 @@ resource "aws_vpc" "this" {
 }
 
 resource "aws_internet_gateway" "this" {
+  for_each = {
+    for s in ["internet"] :
+    s => s
+    if length(var.vpc_config.public_subnets) != 0
+  }
+
   vpc_id = aws_vpc.this.id
 
   tags = {
@@ -94,7 +126,7 @@ resource "aws_route" "public" {
 
   route_table_id         = aws_route_table.public[each.key].id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.this.id
+  gateway_id             = aws_internet_gateway.this["internet"].id
 }
 
 resource "aws_route_table_association" "public" {
@@ -166,29 +198,73 @@ resource "aws_route_table_association" "private" {
 # VPC Peering
 resource "aws_vpc_peering_connection" "this" {
   for_each = {
-    for s in ["peering"] :
-    s => s
-    if var.vpc_peering_enabled
+    for value in var.vpc_peering_config_requester :
+    value.name => value
   }
 
-  peer_owner_id = var.vpc_peering_config.peer_owner_id
-  peer_vpc_id   = var.vpc_peering_config.peer_vpc_id
+  peer_owner_id = each.value.peer_owner_id
+  peer_vpc_id   = each.value.peer_vpc_id
   vpc_id        = aws_vpc.this.id
   auto_accept   = false
 
-  requester {
-    allow_remote_vpc_dns_resolution = true
+  tags = {
+    "Name" = each.key
+    "Side" = "Requester"
   }
 }
 
-resource "aws_route" "peer" {
+resource "aws_route" "peering_requester" {
   for_each = {
-    for subnet in var.vpc_config.private_subnets :
-    "${subnet.name_prefix}-${subnet.availability_zone_index}" => subnet
-    if var.vpc_peering_enabled
+    for value in local.requester_peering_subnets : value.key => value
   }
 
-  route_table_id            = aws_route_table.private[each.key].id
-  destination_cidr_block    = var.vpc_peering_config.destination_cidr_block
-  vpc_peering_connection_id = aws_vpc_peering_connection.this["peering"].id
+  route_table_id            = each.value.route_table_id
+  destination_cidr_block    = each.value.destination_cidr_block
+  vpc_peering_connection_id = each.value.vpc_peering_connection_id
+}
+
+# Accepter's side of vpc peering
+data "aws_vpc_peering_connection" "this" {
+  for_each = {
+    for value in var.vpc_peering_config_accepter :
+    value.name => value
+  }
+
+  peer_vpc_id = aws_vpc.this.id
+  #status      = "pending-acceptance"
+  filter {
+    values = [each.value.peer_owner_id]
+    name   = "requester-vpc-info.owner-id"
+  }
+  filter {
+    values = ["pending-acceptance", "active"]
+    name   = "status-code"
+  }
+}
+
+resource "aws_vpc_peering_connection_accepter" "peer" {
+  for_each = {
+    for value in var.vpc_peering_config_accepter :
+    value.name => value
+  }
+
+  vpc_peering_connection_id = data.aws_vpc_peering_connection.this[each.value.name].id
+  auto_accept               = true
+
+  tags = {
+    Side = "Accepter"
+  }
+}
+
+resource "aws_route" "peering_accepter" {
+  for_each = {
+    for value in local.accepter_peering_subnets : value.key => value
+  }
+  depends_on = [
+    aws_vpc_peering_connection_accepter.peer
+  ]
+
+  route_table_id            = each.value.route_table_id
+  destination_cidr_block    = each.value.destination_cidr_block
+  vpc_peering_connection_id = each.value.vpc_peering_connection_id
 }

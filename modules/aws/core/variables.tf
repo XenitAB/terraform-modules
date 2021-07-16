@@ -39,7 +39,7 @@ variable "vpc_config" {
 }
 
 variable "vpc_peering_config_requester" {
-  description = "VPC Peering configuration"
+  description = "VPC Peering configuration requester"
   type = list(object({
     name                   = string
     peer_owner_id          = string
@@ -50,18 +50,11 @@ variable "vpc_peering_config_requester" {
 }
 
 variable "vpc_peering_config_accepter" {
-  description = "VPC Peering configuration"
+  description = "VPC Peering configuration accepter"
   type = list(object({
     name                   = string
     peer_owner_id          = string
     destination_cidr_block = string
   }))
   default = []
-}
-
-
-variable "internet_gateway_enabled" {
-  description = "Should internet gateway be created"
-  type        = bool
-  default     = true
 }

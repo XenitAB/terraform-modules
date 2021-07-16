@@ -50,11 +50,10 @@ No modules.
 | <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | The DNS Zone host name | `string` | `""` | no |
 | <a name="input_dns_zone_enabled"></a> [dns\_zone\_enabled](#input\_dns\_zone\_enabled) | Should dns zone be enabled | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
-| <a name="input_internet_gateway_enabled"></a> [internet\_gateway\_enabled](#input\_internet\_gateway\_enabled) | Should internet gateway be created | `bool` | `true` | no |
 | <a name="input_name"></a> [name](#input\_name) | Common name for the deploy | `string` | n/a | yes |
 | <a name="input_vpc_config"></a> [vpc\_config](#input\_vpc\_config) | The configuration of the VPC | <pre>object({<br>    cidr_block = string<br>    public_subnets = list(object({<br>      cidr_block = string<br>      tags       = map(string)<br>    }))<br>    private_subnets = list(object({<br>      name_prefix             = string<br>      cidr_block              = string<br>      availability_zone_index = number<br>      public_routing_enabled  = bool<br>      tags                    = map(string)<br>    }))<br>  })</pre> | n/a | yes |
-| <a name="input_vpc_peering_config_accepter"></a> [vpc\_peering\_config\_accepter](#input\_vpc\_peering\_config\_accepter) | VPC Peering configuration | <pre>list(object({<br>    name                   = string<br>    peer_owner_id          = string<br>    destination_cidr_block = string<br>  }))</pre> | `[]` | no |
-| <a name="input_vpc_peering_config_requester"></a> [vpc\_peering\_config\_requester](#input\_vpc\_peering\_config\_requester) | VPC Peering configuration | <pre>list(object({<br>    name                   = string<br>    peer_owner_id          = string<br>    peer_vpc_id            = string<br>    destination_cidr_block = string<br>  }))</pre> | `[]` | no |
+| <a name="input_vpc_peering_config_accepter"></a> [vpc\_peering\_config\_accepter](#input\_vpc\_peering\_config\_accepter) | VPC Peering configuration accepter | <pre>list(object({<br>    name                   = string<br>    peer_owner_id          = string<br>    destination_cidr_block = string<br>  }))</pre> | `[]` | no |
+| <a name="input_vpc_peering_config_requester"></a> [vpc\_peering\_config\_requester](#input\_vpc\_peering\_config\_requester) | VPC Peering configuration requester | <pre>list(object({<br>    name                   = string<br>    peer_owner_id          = string<br>    peer_vpc_id            = string<br>    destination_cidr_block = string<br>  }))</pre> | `[]` | no |
 
 ## Outputs
 

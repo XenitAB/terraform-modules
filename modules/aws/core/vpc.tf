@@ -43,7 +43,7 @@ resource "aws_internet_gateway" "this" {
   for_each = {
     for s in ["internet"] :
     s => s
-    if var.internet_gateway_enabled
+    if length(var.vpc_config.public_subnets) != 0
   }
 
   vpc_id = aws_vpc.this.id

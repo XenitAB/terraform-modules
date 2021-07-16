@@ -8,7 +8,7 @@ This module is used for governance on a global level and not using any specific 
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 1.6.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.67.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.68.0 |
 | <a name="requirement_pal"></a> [pal](#requirement\_pal) | 0.2.4 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
 
@@ -17,7 +17,7 @@ This module is used for governance on a global level and not using any specific 
 | Name | Version |
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 1.6.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.67.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.68.0 |
 | <a name="provider_pal"></a> [pal](#provider\_pal) | 0.2.4 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.1.0 |
 
@@ -56,10 +56,10 @@ No modules.
 | [azuread_service_principal.aad_sp](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/service_principal) | resource |
 | [azuread_service_principal.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/service_principal) | resource |
 | [azuread_service_principal.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/service_principal) | resource |
-| [azurerm_role_assignment.sub_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/2.67.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.sub_owner](https://registry.terraform.io/providers/hashicorp/azurerm/2.67.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.sub_reader](https://registry.terraform.io/providers/hashicorp/azurerm/2.67.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azurerm/2.67.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.sub_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/2.68.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.sub_owner](https://registry.terraform.io/providers/hashicorp/azurerm/2.68.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.sub_reader](https://registry.terraform.io/providers/hashicorp/azurerm/2.68.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azurerm/2.68.0/docs/resources/role_assignment) | resource |
 | [pal_management_partner.owner_spn](https://registry.terraform.io/providers/xenitab/pal/0.2.4/docs/resources/management_partner) | resource |
 | [random_password.owner_spn](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) | resource |
 | [azuread_application.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/data-sources/application) | data source |
@@ -67,7 +67,7 @@ No modules.
 | [azuread_group.all_owner](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/data-sources/group) | data source |
 | [azuread_group.all_reader](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/data-sources/group) | data source |
 | [azuread_service_principal.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/data-sources/service_principal) | data source |
-| [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.67.0/docs/data-sources/subscription) | data source |
+| [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.68.0/docs/data-sources/subscription) | data source |
 
 ## Inputs
 

@@ -208,6 +208,7 @@ data "aws_vpc_peering_connection" "this" {
     s => s
     if var.vpc_peer_enabled
   }
+  status = "pending-acceptance"
   filter {
     values = [var.requester_account]
     name   = "requester-vpc-info.owner-id"

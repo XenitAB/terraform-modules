@@ -208,7 +208,8 @@ data "aws_vpc_peering_connection" "this" {
     s => s
     if var.vpc_peer_enabled
   }
-  status = "pending-acceptance"
+  peer_vpc_id = aws_vpc.this.id
+  status      = "pending-acceptance"
   filter {
     values = [var.requester_account]
     name   = "requester-vpc-info.owner-id"
@@ -224,7 +225,7 @@ resource "aws_vpc_peering_connection_accepter" "peer" {
   }
 
   vpc_peering_connection_id = data.aws_vpc_peering_connection.this["peer"].id
-  auto_accept               = false
+  auto_accept               = true
 
   tags = {
     Side = "Accepter"

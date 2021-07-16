@@ -192,16 +192,13 @@ resource "aws_vpc_peering_connection" "this" {
   vpc_id        = aws_vpc.this.id
   auto_accept   = false
 
-  requester {
-    allow_remote_vpc_dns_resolution = true
-  }
-
   tags = {
     "Name" = each.key
     "Side" = "Requester"
   }
 }
 
+# Accepter's side of vpc peering
 data "aws_vpc_peering_connection" "this" {
   for_each = {
     for s in ["peer"] :
@@ -209,14 +206,17 @@ data "aws_vpc_peering_connection" "this" {
     if var.vpc_peer_enabled
   }
   peer_vpc_id = aws_vpc.this.id
-  status      = "pending-acceptance"
+  #status      = "pending-acceptance"
   filter {
     values = [var.requester_account]
     name   = "requester-vpc-info.owner-id"
   }
+  filter {
+    values = ["pending-acceptance", "active"]
+    name   = "status-code"
+  }
 }
 
-# Accepter's side of the connection.
 resource "aws_vpc_peering_connection_accepter" "peer" {
   for_each = {
     for s in ["peer"] :

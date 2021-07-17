@@ -31,7 +31,6 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
-#tf-latest-version:ignore
 resource "helm_release" "ingress_healthz" {
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "nginx"

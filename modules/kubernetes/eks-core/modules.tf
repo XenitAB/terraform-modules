@@ -15,25 +15,51 @@ module "opa_gatekeeper" {
   cloud_provider      = "aws"
 }
 
-#module "fluxcd_v2_github" {
-#  for_each = {
-#    for s in ["fluxcd-v2"] :
-#    s => s
-#    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "github"
-#  }
-#
-#  source = "../../kubernetes/fluxcd-v2-github"
-#
-#  github_owner = var.fluxcd_v2_config.github.owner
-#  environment  = var.environment
-#  namespaces = [for ns in var.namespaces : {
-#    name = ns.name
-#    flux = {
-#      enabled = ns.flux.enabled
-#      repo    = ns.flux.github.repo
-#    }
-#  }]
-#}
+# FluxCD v2
+module "fluxcd_v2_azure_devops" {
+  for_each = {
+    for s in ["fluxcd-v2"] :
+    s => s
+    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "azure-devops"
+  }
+
+  source = "../../kubernetes/fluxcd-v2-azdo"
+
+  azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
+  azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
+  azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
+  environment       = var.environment
+  namespaces = [for ns in var.namespaces : {
+    name = ns.name
+    flux = {
+      enabled     = ns.flux.enabled
+      create_crds = ns.flux.create_crds
+      org         = ns.flux.azure_devops.org
+      proj        = ns.flux.azure_devops.proj
+      repo        = ns.flux.azure_devops.repo
+    }
+  }]
+}
+
+module "fluxcd_v2_github" {
+  for_each = {
+    for s in ["fluxcd-v2"] :
+    s => s
+    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "github"
+  }
+
+  source = "../../kubernetes/fluxcd-v2-github"
+
+  github_owner = var.fluxcd_v2_config.github.owner
+  environment  = var.environment
+  namespaces = [for ns in var.namespaces : {
+    name = ns.name
+    flux = {
+      enabled = ns.flux.enabled
+      repo    = ns.flux.github.repo
+    }
+  }]
+}
 
 module "linkerd" {
   depends_on = [module.opa_gatekeeper, module.cert_manager]

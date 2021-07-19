@@ -77,7 +77,7 @@ resource "helm_release" "xenit_proxy" {
   chart      = "nginx"
   name       = "xenit-proxy"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "9.3.7"
+  version    = "9.3.8"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     cloud_provider       = var.cloud_provider
     aws_config           = var.aws_config

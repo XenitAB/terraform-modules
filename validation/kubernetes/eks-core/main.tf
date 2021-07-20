@@ -32,20 +32,18 @@ module "eks_core" {
   cluster_autoscaler_config = {
     role_arn = "foobar"
   }
-  #fluxcd_v2_config = {
-  #  type = "github"
-  #  github = {
-  #    owner = ""
-  #  }
-  #  azure_devops = {
-  #    pat  = ""
-  #    org  = ""
-  #    proj = ""
-  #  }
-  #}
-  #external_secrets_config = {
-  #  role_arn = "foobar"
-  #}
+  fluxcd_v2_config = {
+    type = "github"
+    github = {
+      owner = ""
+    }
+    azure_devops = {
+      pat  = ""
+      org  = ""
+      proj = ""
+    }
+  }
+
   aad_groups = {
     view = {
       test = {

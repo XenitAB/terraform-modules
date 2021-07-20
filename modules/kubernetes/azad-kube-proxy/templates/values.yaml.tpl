@@ -74,3 +74,6 @@ ingress:
   - secretName: azad-kube-proxy-cert
     hosts:
     - "${fqdn}"
+
+podAnnotations:
+  secret.reloader.stakater.com/reload: "azad-kube-proxy"

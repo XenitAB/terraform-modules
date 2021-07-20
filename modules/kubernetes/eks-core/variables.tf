@@ -20,13 +20,14 @@ variable "namespaces" {
       name   = string
       labels = map(string)
       flux = object({
-        enabled = bool
-        github = object({
-          repo = string
-        })
+        enabled     = bool
+        create_crds = bool
         azure_devops = object({
           org  = string
           proj = string
+          repo = string
+        })
+        github = object({
           repo = string
         })
       })
@@ -78,26 +79,26 @@ variable "kubernetes_network_policy_default_deny" {
 #  }
 #}
 
-#variable "fluxcd_v2_enabled" {
-#  description = "Should fluxcd-v2 be enabled"
-#  type        = bool
-#  default     = true
-#}
-#
-#variable "fluxcd_v2_config" {
-#  description = "Configuration for fluxcd-v2"
-#  type = object({
-#    type = string
-#    github = object({
-#      owner = string
-#    })
-#    azure_devops = object({
-#      pat  = string
-#      org  = string
-#      proj = string
-#    })
-#  })
-#}
+variable "fluxcd_v2_enabled" {
+  description = "Should fluxcd-v2 be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "fluxcd_v2_config" {
+  description = "Configuration for fluxcd-v2"
+  type = object({
+    type = string
+    github = object({
+      owner = string
+    })
+    azure_devops = object({
+      pat  = string
+      org  = string
+      proj = string
+    })
+  })
+}
 
 variable "opa_gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"

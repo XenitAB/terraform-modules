@@ -87,6 +87,25 @@ module "ingress_nginx" {
   cloud_provider = "aws"
 }
 
+# ingress-nginx-private
+module "ingress_nginx_private" {
+  depends_on = [module.opa_gatekeeper, module.linkerd]
+
+  for_each = {
+    for s in ["ingress-nginx"] :
+    s => s
+    if var.ingress_nginx_enabled && var.ingress_config.internal_load_balancer
+  }
+
+  source = "../../kubernetes/ingress-nginx"
+
+  cloud_provider         = "aws"
+  http_snippet           = var.ingress_config.http_snippet
+  linkerd_enabled        = var.linkerd_enabled
+  internal_load_balancer = var.ingress_config.internal_load_balancer
+  name_override          = var.ingress_config.name_override
+}
+
 module "ingress_healthz" {
   depends_on = [module.opa_gatekeeper]
 

@@ -203,10 +203,14 @@ variable "ingress_nginx_enabled" {
 variable "ingress_config" {
   description = "Ingress configuration"
   type = object({
-    http_snippet = string
+    http_snippet           = string
+    name_override          = string
+    internal_load_balancer = bool
   })
   default = {
-    http_snippet = ""
+    http_snippet           = ""
+    name_override          = "ingress-nginx"
+    internal_load_balancer = false
   }
 }
 

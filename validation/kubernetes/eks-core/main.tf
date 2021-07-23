@@ -71,6 +71,12 @@ module "eks_core" {
     }
   }
 
+  ingress_config = {
+    http_snippet           = ""
+    internal_load_balancer = true
+    name_override          = ""
+  }
+
   prometheus_enabled = true
   prometheus_config = {
     remote_write_enabled = true

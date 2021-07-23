@@ -13,6 +13,13 @@ controller:
   # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
   dnsPolicy: ClusterFirstWithHostNet
   hostNetwork: true
+
+  %{ if internal_load_balancer }
+  containerPort:
+    http: 1080
+    https: 1443
+
+  %{ endif }
   %{ endif }
 
   service:

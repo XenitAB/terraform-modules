@@ -67,3 +67,46 @@ resource "helm_release" "ingress_nginx_extras" {
     value = var.default_certificate.dns_zone
   }
 }
+
+/* If the svc isn't created nginx creates error logs
+* https://github.com/kubernetes/ingress-nginx/issues/2599
+* https://github.com/kubernetes/ingress-nginx/issues/2599
+*/
+resource "kubernetes_service" "private" {
+  for_each = {
+    for s in ["ingress-svc"] :
+    s => s
+    if var.internal_load_balancer && var.cloud_provider == "aws"
+  }
+
+  depends_on = [
+    kubernetes_namespace.this
+  ]
+
+  wait_for_load_balancer = false
+  metadata {
+    name      = "ingress-nginx-${var.name_override}-controller"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+  spec {
+    selector = {
+      "app.kubernetes.io/name"      = var.name_override
+      "app.kubernetes.io/instance"  = "ingress-nginx"
+      "app.kubernetes.io/component" = "controller"
+    }
+    port {
+      name        = "http"
+      port        = 80
+      protocol    = "TCP"
+      target_port = "http"
+    }
+    port {
+      name        = "https"
+      port        = 443
+      protocol    = "TCP"
+      target_port = "https"
+    }
+
+    type = "ClusterIP"
+  }
+}

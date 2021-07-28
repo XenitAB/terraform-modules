@@ -153,18 +153,18 @@ variable "ingress_nginx_enabled" {
 variable "ingress_config" {
   description = "Ingress configuration"
   type = object({
-    http_snippet           = string
-    name_override          = string
-    internal_load_balancer = bool
-    multiple_ingress       = bool
-    default_ingress_class  = bool
+    http_snippet                  = string
+    name_override                 = string
+    internal_load_balancer        = bool
+    multiple_ingress              = bool
+    private_default_ingress_class = bool
   })
   default = {
-    http_snippet           = ""
-    name_override          = "ingress-nginx"
-    internal_load_balancer = false
-    multiple_ingress       = false
-    default_ingress_class  = false
+    http_snippet                  = ""
+    name_override                 = "ingress-nginx"
+    internal_load_balancer        = false
+    multiple_ingress              = false
+    private_default_ingress_class = false
   }
 }
 

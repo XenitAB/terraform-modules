@@ -72,11 +72,11 @@ module "eks_core" {
   }
 
   ingress_config = {
-    http_snippet           = ""
-    internal_load_balancer = true
-    name_override          = ""
-    multiple_ingress       = false
-    default_ingress_class  = false
+    http_snippet                  = ""
+    internal_load_balancer        = true
+    name_override                 = ""
+    multiple_ingress              = false
+    private_default_ingress_class = false
   }
 
   prometheus_enabled = true

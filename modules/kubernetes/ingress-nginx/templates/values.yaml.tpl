@@ -59,7 +59,7 @@ controller:
 
   metrics:
     enabled: true
-  %{ if provider == "aws" && multiple_ingress }
+  %{ if provider == "aws" && multiple_ingress && internal_load_balancer }
     port: 10354
 
   containerPort:

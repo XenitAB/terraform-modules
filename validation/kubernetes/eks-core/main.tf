@@ -75,6 +75,8 @@ module "eks_core" {
     http_snippet           = ""
     internal_load_balancer = true
     name_override          = ""
+    multiple_ingress       = false
+    default_ingress_class  = false
   }
 
   prometheus_enabled = true

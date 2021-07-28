@@ -15,6 +15,18 @@ variable "internal_load_balancer" {
   default     = false
 }
 
+variable "multiple_ingress" {
+  description = "If true the cluster will support both private & public ingress"
+  type        = bool
+  default     = false
+}
+
+variable "default_ingress_class" {
+  description = "If true the ingressClass defined will be the default one"
+  type        = bool
+  default     = false
+}
+
 variable "http_snippet" {
   description = "Configure helm ingress http-snippet"
   type        = string

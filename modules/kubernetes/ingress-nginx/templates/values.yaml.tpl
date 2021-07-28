@@ -7,19 +7,19 @@ controller:
 
   ingressClass: ${ingress_class}
 
+  %{ if multiple_ingress }
+  # https://github.com/kubernetes/ingress-nginx/issues/5593#issuecomment-647538272
+  ingressClassResource:
+    enabled: true
+    default: ${default_ingress_class}
+  %{ endif }
+
   %{ if provider == "aws" }
   # Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
   # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
   # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
   dnsPolicy: ClusterFirstWithHostNet
   hostNetwork: true
-
-  %{ if internal_load_balancer }
-  containerPort:
-    http: 1080
-    https: 1443
-
-  %{ endif }
   %{ endif }
 
   service:
@@ -59,8 +59,12 @@ controller:
 
   metrics:
     enabled: true
-  %{ if provider == "aws" && internal_load_balancer }
+  %{ if provider == "aws" && multiple_ingress }
     port: 10354
+
+  containerPort:
+    http: 1080
+    https: 1443
 
   admissionWebhooks:
     port: 2443

@@ -157,9 +157,11 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider  = "azure"
-  http_snippet    = var.ingress_config.http_snippet
-  linkerd_enabled = var.linkerd_enabled
+  cloud_provider        = "azure"
+  http_snippet          = var.ingress_config.http_snippet
+  linkerd_enabled       = var.linkerd_enabled
+  multiple_ingress      = var.ingress_config.multiple_ingress
+  default_ingress_class = var.ingress_config.default_ingress_class
 }
 
 # ingress-nginx-private
@@ -177,8 +179,10 @@ module "ingress_nginx_private" {
   cloud_provider         = "azure"
   http_snippet           = var.ingress_config.http_snippet
   linkerd_enabled        = var.linkerd_enabled
-  internal_load_balancer = var.ingress_config.internal_load_balancer
   name_override          = var.ingress_config.name_override
+  internal_load_balancer = var.ingress_config.internal_load_balancer
+  multiple_ingress       = var.ingress_config.multiple_ingress
+  default_ingress_class  = var.ingress_config.default_ingress_class
 }
 
 # ingress-healthz

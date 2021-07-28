@@ -84,7 +84,9 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider = "aws"
+  cloud_provider        = "aws"
+  multiple_ingress      = var.ingress_config.multiple_ingress
+  default_ingress_class = var.ingress_config.default_ingress_class
 }
 
 # ingress-nginx-private
@@ -94,7 +96,7 @@ module "ingress_nginx_private" {
   for_each = {
     for s in ["ingress-nginx"] :
     s => s
-    if var.ingress_nginx_enabled && var.ingress_config.internal_load_balancer
+    if var.ingress_nginx_enabled && var.ingress_config.multiple_ingress
   }
 
   source = "../../kubernetes/ingress-nginx"
@@ -104,6 +106,8 @@ module "ingress_nginx_private" {
   linkerd_enabled        = var.linkerd_enabled
   internal_load_balancer = var.ingress_config.internal_load_balancer
   name_override          = var.ingress_config.name_override
+  multiple_ingress       = var.ingress_config.multiple_ingress
+  default_ingress_class  = var.ingress_config.default_ingress_class
 }
 
 module "ingress_healthz" {

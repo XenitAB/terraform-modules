@@ -20,6 +20,8 @@ module "eks" {
   environment     = "dev"
   name            = "eks"
   eks_name_suffix = 1
+
+  eks_authorized_ips = ["0.0.0.0/0"]
   eks_config = {
     kubernetes_version = "1.20.4"
     cidr_block         = "10.0.16.0/20"

@@ -37,7 +37,8 @@ resource "aws_eks_cluster" "this" { #tfsec:ignore:AWS067
   version  = var.eks_config.kubernetes_version
 
   vpc_config {
-    subnet_ids = [for s in data.aws_subnet.cluster : s.id] #tfsec:ignore:AWS069 tfsec:ignore:AWS068
+    subnet_ids          = [for s in data.aws_subnet.cluster : s.id] #tfsec:ignore:AWS069 tfsec:ignore:AWS068
+    public_access_cidrs = var.eks_authorized_ips
   }
 
   encryption_config {

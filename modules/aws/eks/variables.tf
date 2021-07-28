@@ -14,6 +14,11 @@ variable "eks_name_suffix" {
   default     = 1
 }
 
+variable "eks_authorized_ips" {
+  description = "Authorized IPs to access EKS API"
+  type        = list(string)
+}
+
 variable "eks_config" {
   description = "The EKS Config"
   type = object({

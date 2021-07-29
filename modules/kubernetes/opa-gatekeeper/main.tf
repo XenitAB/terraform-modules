@@ -136,7 +136,7 @@ resource "helm_release" "gatekeeper_templates" {
   chart      = "gatekeeper-library-templates"
   name       = "gatekeeper-library-templates"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.7.1"
+  version    = "v0.7.3"
   values     = [local.values]
 }
 
@@ -147,6 +147,6 @@ resource "helm_release" "gatekeeper_constraints" {
   chart      = "gatekeeper-library-constraints"
   name       = "gatekeeper-library-constraints"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.7.1"
+  version    = "v0.7.3"
   values     = [local.values]
 }

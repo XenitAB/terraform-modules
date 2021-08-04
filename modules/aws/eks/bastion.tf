@@ -28,7 +28,7 @@ resource "aws_security_group" "bastion" {
   vpc_id      = data.aws_subnet.public.vpc_id
 
   ingress {
-    from_port   = 6222
+    from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = var.eks_authorized_ips
@@ -54,6 +54,7 @@ resource "aws_network_interface" "bastion" {
   }
 }
 
+# Do we rather want to generate the key in tf and store in the paramater
 data "aws_ssm_parameter" "bastion_public_key" {
   name = "bastion-public-ssh-key"
 }
@@ -68,10 +69,13 @@ resource "aws_instance" "bastion" {
   instance_type = "t2.micro"
 
   network_interface {
-    network_interface_id  = aws_network_interface.bastion.id
-    device_index          = 0
-    delete_on_termination = true
+    network_interface_id = aws_network_interface.bastion.id
+    device_index         = 0
   }
 
   key_name = aws_key_pair.bastion.key_name
+
+  # Install some needed tools
+  user_data = file("${path.module}/file/startup.sh")
+
 }

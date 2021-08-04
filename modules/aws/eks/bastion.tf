@@ -64,6 +64,15 @@ resource "aws_key_pair" "bastion" {
   public_key = data.aws_ssm_parameter.bastion_public_key.value
 }
 
+data "aws_iam_role" "eks_admin" {
+  name = "eks-admin"
+}
+
+resource "aws_iam_instance_profile" "bastion" {
+  name = "bastion-eks"
+  role = data.aws_iam_role.eks_admin.name
+}
+
 resource "aws_instance" "bastion" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
@@ -75,7 +84,7 @@ resource "aws_instance" "bastion" {
 
   key_name = aws_key_pair.bastion.key_name
 
-  # Install some needed tools
   user_data = file("${path.module}/file/startup.sh")
 
+  iam_instance_profile = aws_iam_instance_profile.bastion.id
 }

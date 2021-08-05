@@ -1,9 +1,9 @@
-data "aws_ami" "ubuntu" {
+data "aws_ami" "aws_linux" {
   most_recent = true
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+    values = ["amzn2-ami-hvm-*-x86_64-ebs"]
   }
 
   filter {
@@ -11,7 +11,7 @@ data "aws_ami" "ubuntu" {
     values = ["hvm"]
   }
 
-  owners = ["099720109477"] # Canonical
+  owners = ["amazon"] # AWS
 }
 
 data "aws_subnet" "public" {
@@ -74,7 +74,7 @@ resource "aws_iam_instance_profile" "bastion" {
 }
 
 resource "aws_instance" "bastion" {
-  ami           = data.aws_ami.ubuntu.id
+  ami           = data.aws_ami.aws_linux.id
   instance_type = "t2.micro"
 
   network_interface {
@@ -84,7 +84,11 @@ resource "aws_instance" "bastion" {
 
   key_name = aws_key_pair.bastion.key_name
 
-  user_data = file("${path.module}/file/startup.sh")
+  #user_data = file("${path.module}/file/startup.sh")
+  user_data = templatefile("${path.module}/templates/startup.sh.tpl", {
+    region  = data.aws_region.current.name,
+    account = data.aws_caller_identity.current.account_id,
+  })
 
   iam_instance_profile = aws_iam_instance_profile.bastion.id
 }

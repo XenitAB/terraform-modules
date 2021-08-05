@@ -25,7 +25,7 @@ mkdir $EC2HOME/.kube/
 kubectl completion bash > $EC2HOME/.kube/completion.bash.inc
 helm completion bash > $EC2HOME/.kube/helm-completion.bash.inc
 kustomize completion bash > $EC2HOME/.kube/kustomize-completion.bash.inc
-chown -r ec2-user:ec2-user $EC2HOME/.kube
+chown -R ec2-user:ec2-user $EC2HOME/.kube
 
 # Config bashrc ec2-user
 cat <<EOF >> $EC2HOME/.bashrc
@@ -44,7 +44,9 @@ mkdir $EC2HOME/.aws
 
 cat <<EOF >> $EC2HOME/.aws/config
 [profile xkf]
-role_arn = arn:aws:iam::${account}:role/eks-admin
+role_arn = arn:aws:iam::${account}:role/eks-admin-ec2
 credential_source = Ec2InstanceMetadata
 region = ${region}
 EOF
+
+chown -R ec2-user:ec2-user $EC2HOME/.aws

@@ -43,7 +43,7 @@ No modules.
 | <a name="input_datadog_site"></a> [datadog\_site](#input\_datadog\_site) | Site to connect Datadog agent | `string` | `"datadoghq.eu"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Cluster environment | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | Cluster location | `string` | n/a | yes |
-| <a name="input_namespace_include"></a> [namespace\_include](#input\_namespace\_include) | The namespace that should be checked by Datadog, example: kube\_namespace:<NAMESPACE> kube\_namespace:<NAMESPACE2> | `list(string)` | n/a | yes |
+| <a name="input_namespace_include"></a> [namespace\_include](#input\_namespace\_include) | The namespace that should be checked by Datadog, example: kube\_namespace:NAMESPACE kube\_namespace:NAMESPACE2 | `list(string)` | n/a | yes |
 
 ## Outputs
 

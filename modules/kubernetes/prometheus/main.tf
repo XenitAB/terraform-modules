@@ -11,7 +11,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.3.2"
+      version = "2.4.1"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -39,7 +39,7 @@ resource "helm_release" "prometheus" {
   chart      = "kube-prometheus-stack"
   name       = "prometheus"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "16.14.1"
+  version    = "17.2.2"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     cloud_provider = var.cloud_provider
   })]
@@ -56,7 +56,7 @@ resource "helm_release" "metrics_server" {
   chart      = "metrics-server"
   name       = "metrics-server"
   namespace  = "kube-system"
-  version    = "5.9.0"
+  version    = "5.9.2"
   values     = [templatefile("${path.module}/templates/values-metrics-server.yaml.tpl", {})]
 }
 

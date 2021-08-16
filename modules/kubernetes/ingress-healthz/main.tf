@@ -12,7 +12,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.3.2"
+      version = "2.4.1"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -36,7 +36,7 @@ resource "helm_release" "ingress_healthz" {
   chart      = "nginx"
   name       = "ingress-healthz"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "9.3.8"
+  version    = "9.4.2"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     environment     = var.environment
     dns_zone        = var.dns_zone

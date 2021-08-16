@@ -90,7 +90,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.3.2"
+      version = "2.4.1"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -123,7 +123,7 @@ resource "helm_release" "gatekeeper" {
   chart      = "gatekeeper"
   name       = "gatekeeper"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "3.5.1"
+  version    = "3.5.2"
   values = [templatefile("${path.module}/templates/gatekeeper-values.yaml.tpl", {
     provider = var.cloud_provider
   })]

@@ -12,7 +12,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.3.2"
+      version = "2.4.1"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -36,7 +36,7 @@ resource "helm_release" "falco" {
   chart      = "falco"
   name       = "falco"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "1.15.3"
+  version    = "1.15.7"
   values     = [templatefile("${path.module}/templates/falco-values.yaml.tpl", {})]
 }
 
@@ -45,6 +45,6 @@ resource "helm_release" "falco_exporter" {
   chart      = "falco-exporter"
   name       = "falco-exporter"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "0.5.1"
+  version    = "0.5.2"
   values     = [templatefile("${path.module}/templates/falco-exporter-values.yaml.tpl", {})]
 }

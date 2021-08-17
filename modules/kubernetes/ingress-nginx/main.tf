@@ -41,6 +41,13 @@ resource "helm_release" "ingress_nginx" {
     provider               = var.cloud_provider,
     ingress_class          = join("-", compact(["nginx", var.name_override])),
     internal_load_balancer = var.internal_load_balancer,
+    default_certificate    = {
+      enabled = var.default_certificate.enabled
+      dns_zone = var.default_certificate.dns_zone
+      namespaced_name = "ingress-nginx/ingress-nginx"
+    }
+    extra_config           = var.extra_config
+    extra_headers          = var.extra_headers
     linkerd_enabled        = var.linkerd_enabled
   })]
 }

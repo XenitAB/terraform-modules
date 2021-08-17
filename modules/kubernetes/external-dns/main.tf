@@ -37,7 +37,7 @@ resource "helm_release" "external_dns" {
   chart      = "external-dns"
   name       = "external-dns"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "5.4.0"
+  version    = "5.4.1"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     provider     = var.dns_provider,
     sources      = var.sources,

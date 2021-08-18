@@ -22,8 +22,8 @@ azureIdentities:
 %{ endfor }
 
 tolerations:
-  - key: "CriticalAddonsOnly"
-   operator: "Exists"
+- key: "CriticalAddonsOnly"
+  operator: "Exists"
 %{ if tolerate_all_taints }
-  - operator: "Exists"
+- operator: "Exists"
 %{ endif }

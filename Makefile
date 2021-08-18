@@ -68,23 +68,22 @@ tfsec:
 validate:
 	set -e
 
-	tf_validate () {(set -e
-		cd $$1
-		rm -f .terraform.lock.hcl
-		terraform init 1>/dev/null
-		set +e
-		OUTPUT=$$(terraform validate 2>&1)
-		EXIT_CODE=$$?
+	tf_validate () {
+		rm -f $$1/.terraform.lock.hcl
+		terraform -chdir=$$1 init 1>/dev/null 2>&1
+		TEMP_FILE=$$(mktemp)
+		
 		set -e
-		if [[ $$EXIT_CODE -ne 0 ]]; then
-			echo terraform-validate: $$1 failed
-			echo "$$OUTPUT"
-			exit $$EXIT_CODE
+		if ! terraform -chdir=$$1 validate 1>$${TEMP_FILE} 2>&1; then
+			echo terraform-validate: $$1 failed 1>&2
+			cat $${TEMP_FILE} 1>&2
+			rm $${TEMP_FILE}
+			return 1
 		fi
 
+		rm $${TEMP_FILE}
 		echo terraform-validate: $$1 succeeded
-		exit $$EXIT_CODE
-	)}
+	}
 
 	export -f tf_validate
 

@@ -20,3 +20,10 @@ azureIdentities:
       name: "${namespace.name}"
       selector: "${namespace.name}"
 %{ endfor }
+
+tolerations:
+  - key: "CriticalAddonsOnly"
+   operator: "Exists"
+%{ if tolerate_all_taints }
+  - operator: "Exists"
+%{ endif }

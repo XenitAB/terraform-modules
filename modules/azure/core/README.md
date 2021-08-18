@@ -58,4 +58,9 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_network_security_groups"></a> [network\_security\_groups](#output\_network\_security\_groups) | Output for Azure Network Security Groups |
+| <a name="output_route_tables"></a> [route\_tables](#output\_route\_tables) | Output for Azure Routing Tables |
+| <a name="output_subnets"></a> [subnets](#output\_subnets) | Output for Azure Virtual Network Subnets |
+| <a name="output_virtual_network"></a> [virtual\_network](#output\_virtual\_network) | Output for Azure Virtual Network |

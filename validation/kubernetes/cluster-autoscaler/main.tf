@@ -12,10 +12,10 @@ module "cluster_autoscaler" {
     helm       = helm
   }
 
-  cluster_name   = "foo"
+  cluster_name   = "test-cluster"
   cloud_provider = "azure"
   aws_config = {
-    role_arn = "bar"
-    region   = "baz"
+    role_arn = "some-arn"
+    region   = "some-region"
   }
 }

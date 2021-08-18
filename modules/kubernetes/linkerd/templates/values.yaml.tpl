@@ -40,7 +40,7 @@ enablePodAntiAffinity: true
 
 # proxy configuration
 proxy:
-  # A better default for log collectors that require strucutured data
+  # A better default for log collectors that require structured data
   logFormat: json
   resources:
     cpu:

@@ -6,8 +6,8 @@ output "virtual_network" {
 output "subnets" {
   description = "Output for Azure Virtual Network Subnets"
   value = {
-    this = azurerm_subnet.this
-    aks  = azurerm_subnet.aks
+    standard = azurerm_subnet.this
+    aks      = azurerm_subnet.aks
   }
 }
 

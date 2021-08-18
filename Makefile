@@ -68,7 +68,7 @@ tfsec:
 validate:
 	set -e
 
-	tf_validate () {
+	tf_validate () {(set -e
 		cd $$1
 		rm -f .terraform.lock.hcl
 		terraform init 1>/dev/null
@@ -84,7 +84,7 @@ validate:
 
 		echo terraform-validate: $$1 succeeded
 		exit $$EXIT_CODE
-	}
+	)}
 
 	export -f tf_validate
 

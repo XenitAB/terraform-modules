@@ -51,3 +51,19 @@ resource "helm_release" "ingress_nginx" {
     linkerd_enabled        = var.linkerd_enabled
   })]
 }
+
+resource "helm_release" "ingress_nginx_extras" {
+  chart     = "${path.module}/charts/ingress-nginx-extras"
+  name      = "ingress-nginx-extras"
+  namespace = kubernetes_namespace.this.metadata[0].name
+
+  set {
+    name  = "defaultCertificate.enabled"
+    value = var.default_certificate.enabled
+  }
+
+  set {
+    name  = "defaultCertificate.dnsZone"
+    value = var.default_certificate.dns_zone
+  }
+}

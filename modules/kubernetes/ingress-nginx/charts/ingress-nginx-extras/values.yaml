@@ -1,0 +1,6 @@
+nameOverride: ""
+fullnameOverride: ""
+
+defaultCertificate:
+  enabled: false
+  dnsZone: ""

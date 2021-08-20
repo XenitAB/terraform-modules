@@ -41,6 +41,29 @@ resource "helm_release" "ingress_nginx" {
     provider               = var.cloud_provider,
     ingress_class          = join("-", compact(["nginx", var.name_override])),
     internal_load_balancer = var.internal_load_balancer,
-    linkerd_enabled        = var.linkerd_enabled
+    default_certificate = {
+      enabled         = var.default_certificate.enabled
+      dns_zone        = var.default_certificate.dns_zone
+      namespaced_name = "ingress-nginx/ingress-nginx"
+    }
+    extra_config    = var.extra_config
+    extra_headers   = var.extra_headers
+    linkerd_enabled = var.linkerd_enabled
   })]
+}
+
+resource "helm_release" "ingress_nginx_extras" {
+  chart     = "${path.module}/charts/ingress-nginx-extras"
+  name      = "ingress-nginx-extras"
+  namespace = kubernetes_namespace.this.metadata[0].name
+
+  set {
+    name  = "defaultCertificate.enabled"
+    value = var.default_certificate.enabled
+  }
+
+  set {
+    name  = "defaultCertificate.dnsZone"
+    value = var.default_certificate.dns_zone
+  }
 }

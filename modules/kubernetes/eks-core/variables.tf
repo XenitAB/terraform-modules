@@ -183,12 +183,6 @@ variable "velero_config" {
   })
 }
 
-variable "falco_enabled" {
-  description = "Should Falco be enabled"
-  type        = bool
-  default     = true
-}
-
 variable "reloader_enabled" {
   description = "Should Reloader be enabled"
   type        = bool

@@ -291,7 +291,7 @@ variable "xenit_config" {
 variable "falco_enabled" {
   description = "Should Falco be enabled"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "linkerd_enabled" {

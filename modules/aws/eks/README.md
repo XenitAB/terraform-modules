@@ -3,7 +3,7 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.50.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.54.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | 3.1.0 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 3.1.0 |
 
@@ -11,8 +11,8 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.50.0 |
-| <a name="provider_aws.eks_admin"></a> [aws.eks\_admin](#provider\_aws.eks\_admin) | 3.50.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.54.0 |
+| <a name="provider_aws.eks_admin"></a> [aws.eks\_admin](#provider\_aws.eks\_admin) | 3.54.0 |
 | <a name="provider_null"></a> [null](#provider\_null) | 3.1.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 3.1.0 |
 
@@ -30,23 +30,23 @@
 
 | Name | Type |
 |------|------|
-| [aws_eks_addon.core_dns](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/resources/eks_addon) | resource |
-| [aws_eks_addon.kube_proxy](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/resources/eks_addon) | resource |
-| [aws_eks_cluster.this](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/resources/eks_cluster) | resource |
-| [aws_eks_node_group.this](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/resources/eks_node_group) | resource |
-| [aws_iam_openid_connect_provider.this](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/resources/iam_openid_connect_provider) | resource |
-| [aws_launch_template.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/resources/launch_template) | resource |
+| [aws_eks_addon.core_dns](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/resources/eks_addon) | resource |
+| [aws_eks_addon.kube_proxy](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/resources/eks_addon) | resource |
+| [aws_eks_cluster.this](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/resources/eks_cluster) | resource |
+| [aws_eks_node_group.this](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/resources/eks_node_group) | resource |
+| [aws_iam_openid_connect_provider.this](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/resources/iam_openid_connect_provider) | resource |
+| [aws_launch_template.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/resources/launch_template) | resource |
 | [null_resource.update_eks_cni](https://registry.terraform.io/providers/hashicorp/null/3.1.0/docs/resources/resource) | resource |
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/data-sources/caller_identity) | data source |
-| [aws_eks_cluster_auth.this](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/data-sources/eks_cluster_auth) | data source |
-| [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.cluster_autoscaler](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.external_dns](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.velero](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.xenit](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/data-sources/region) | data source |
-| [aws_subnet.cluster](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/data-sources/subnet) | data source |
-| [aws_subnet.node](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/data-sources/subnet) | data source |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/data-sources/caller_identity) | data source |
+| [aws_eks_cluster_auth.this](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/data-sources/eks_cluster_auth) | data source |
+| [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.cluster_autoscaler](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.external_dns](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.velero](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.xenit](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/data-sources/region) | data source |
+| [aws_subnet.cluster](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/data-sources/subnet) | data source |
+| [aws_subnet.node](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/data-sources/subnet) | data source |
 | [tls_certificate.thumbprint](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/data-sources/certificate) | data source |
 
 ## Inputs

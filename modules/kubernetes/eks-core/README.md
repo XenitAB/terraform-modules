@@ -7,21 +7,21 @@ This module is used to configure EKS clusters.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.50.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.2.0 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 4.12.2 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.54.0 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.2.2 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | 4.13.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.2.0 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.11.2 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.3.2 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.11.3 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.4.1 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.50.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.54.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.2.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.3.2 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.4.1 |
 
 ## Modules
 
@@ -47,25 +47,25 @@ This module is used to configure EKS clusters.
 | Name | Type |
 |------|------|
 | [helm_release.aks_core_extras](https://registry.terraform.io/providers/hashicorp/helm/2.2.0/docs/resources/release) | resource |
-| [kubernetes_cluster_role.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.list_namespaces](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role_binding.cluster_admin](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_cluster_role_binding.cluster_view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_cluster_role_binding.edit_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_cluster_role_binding.view_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_namespace.service_accounts](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/namespace) | resource |
-| [kubernetes_namespace.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/namespace) | resource |
-| [kubernetes_network_policy.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/network_policy) | resource |
-| [kubernetes_role_binding.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.sa_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.sa_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/role_binding) | resource |
-| [kubernetes_service_account.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.3.2/docs/resources/service_account) | resource |
-| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/data-sources/region) | data source |
-| [aws_route53_zone.this](https://registry.terraform.io/providers/hashicorp/aws/3.50.0/docs/data-sources/route53_zone) | data source |
+| [kubernetes_cluster_role.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.list_namespaces](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role_binding.cluster_admin](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_cluster_role_binding.cluster_view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_cluster_role_binding.edit_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_cluster_role_binding.view_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_namespace.service_accounts](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/namespace) | resource |
+| [kubernetes_namespace.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/namespace) | resource |
+| [kubernetes_network_policy.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/network_policy) | resource |
+| [kubernetes_role_binding.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.sa_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.sa_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/role_binding) | resource |
+| [kubernetes_service_account.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/service_account) | resource |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/data-sources/region) | data source |
+| [aws_route53_zone.this](https://registry.terraform.io/providers/hashicorp/aws/3.54.0/docs/data-sources/route53_zone) | data source |
 
 ## Inputs
 

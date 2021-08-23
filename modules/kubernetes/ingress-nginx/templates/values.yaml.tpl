@@ -23,11 +23,24 @@ controller:
     %{ endif }
 
   config:
+    %{~ for key, value in extra_config ~}
+    ${key}: "${value}"
+    %{~ endfor ~}
     server-tokens: "false"
-    %{ if http_snippet != "" }
+    %{~ if http_snippet != "" ~}
     http-snippet: |
       ${http_snippet}
-    %{ endif }
+    %{~ endif ~}
+
+  addHeaders:
+    %{~ for key, value in extra_headers ~}
+    ${key}: "${value}"
+    %{~ endfor ~}
+
+  %{ if default_certificate.enabled }
+  extraArgs:
+    default-ssl-certificate: "${default_certificate.namespaced_name}"
+  %{ endif }
 
   %{ if linkerd_enabled }
   podAnnotations:

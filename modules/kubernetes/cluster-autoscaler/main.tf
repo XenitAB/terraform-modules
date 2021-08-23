@@ -10,7 +10,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.3.2"
+      version = "2.4.1"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -38,7 +38,7 @@ resource "helm_release" "cluster_autoscaler" {
   chart      = "cluster-autoscaler"
   name       = "cluster-autoscaler"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "9.9.2"
+  version    = "9.10.4"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     provider     = var.cloud_provider,
     cluster_name = var.cluster_name

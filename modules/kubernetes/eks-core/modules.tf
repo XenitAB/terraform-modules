@@ -161,6 +161,30 @@ module "velero" {
   }
 }
 
+module "falco" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["falco"] :
+    s => s
+    if var.falco_enabled
+  }
+
+  source = "../../kubernetes/falco"
+}
+
+module "reloader" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["reloader"] :
+    s => s
+    if var.reloader_enabled
+  }
+
+  source = "../../kubernetes/reloader"
+}
+
 module "azad_kube_proxy" {
   for_each = {
     for s in ["azad-kube-proxy"] :

@@ -298,3 +298,17 @@ module "xenit" {
   thanos_receiver_fqdn = var.xenit_config.thanos_receiver
   loki_api_fqdn        = var.xenit_config.loki_api
 }
+
+module "goldpinger" {
+  depends_on = [module.opa_gatekeeper, module.linkerd]
+
+  for_each = {
+    for s in ["goldpinger"] :
+    s => s
+    if var.goldpinger_enabled
+  }
+
+  source = "../../kubernetes/goldpinger"
+
+  linkerd_enabled = var.linkerd_enabled
+}

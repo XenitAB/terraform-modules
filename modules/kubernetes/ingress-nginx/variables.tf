@@ -21,8 +21,32 @@ variable "http_snippet" {
   default     = ""
 }
 
+variable "default_certificate" {
+  description = "If enalbed and configured nginx will be configured with a default certificate."
+  type = object({
+    enabled  = bool,
+    dns_zone = string,
+  })
+  default = {
+    enabled  = false,
+    dns_zone = "",
+  }
+}
+
 variable "linkerd_enabled" {
   description = "Should linkerd be enabled"
   type        = bool
   default     = false
+}
+
+variable "extra_config" {
+  description = "Extra config to add to Ingress NGINX"
+  type        = map(string)
+  default     = {}
+}
+
+variable "extra_headers" {
+  description = "Addtional headers to be added"
+  type        = map(string)
+  default     = {}
 }

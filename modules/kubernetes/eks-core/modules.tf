@@ -1,5 +1,5 @@
 locals {
-  excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns", "external-secrets", "calico-system"]
+  excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns", "falco", "reloader", "external-secrets", "calico-system"]
 }
 
 module "opa_gatekeeper" {
@@ -161,6 +161,30 @@ module "velero" {
   }
 }
 
+module "falco" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["falco"] :
+    s => s
+    if var.falco_enabled
+  }
+
+  source = "../../kubernetes/falco"
+}
+
+module "reloader" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["reloader"] :
+    s => s
+    if var.reloader_enabled
+  }
+
+  source = "../../kubernetes/reloader"
+}
+
 module "azad_kube_proxy" {
   for_each = {
     for s in ["azad-kube-proxy"] :
@@ -273,4 +297,18 @@ module "xenit" {
   }
   thanos_receiver_fqdn = var.xenit_config.thanos_receiver
   loki_api_fqdn        = var.xenit_config.loki_api
+}
+
+module "goldpinger" {
+  depends_on = [module.opa_gatekeeper, module.linkerd]
+
+  for_each = {
+    for s in ["goldpinger"] :
+    s => s
+    if var.goldpinger_enabled
+  }
+
+  source = "../../kubernetes/goldpinger"
+
+  linkerd_enabled = var.linkerd_enabled
 }

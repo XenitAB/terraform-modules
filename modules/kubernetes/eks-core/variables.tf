@@ -183,6 +183,12 @@ variable "velero_config" {
   })
 }
 
+variable "reloader_enabled" {
+  description = "Should Reloader be enabled"
+  type        = bool
+  default     = true
+}
+
 variable "azad_kube_proxy_enabled" {
   description = "Should azad-kube-proxy be enabled"
   type        = bool
@@ -285,7 +291,7 @@ variable "xenit_config" {
 variable "falco_enabled" {
   description = "Should Falco be enabled"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "linkerd_enabled" {

@@ -69,11 +69,8 @@ module "aks_core" {
   }
 
   ingress_config = {
-    http_snippet                  = ""
-    internal_load_balancer        = false
-    name_override                 = ""
-    multiple_ingress              = false
-    private_default_ingress_class = false
+    http_snippet           = ""
+    public_private_enabled = false
   }
 
   prometheus_enabled = true

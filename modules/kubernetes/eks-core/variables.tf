@@ -150,6 +150,18 @@ variable "ingress_nginx_enabled" {
   default     = true
 }
 
+variable "ingress_config" {
+  description = "Ingress configuration"
+  type = object({
+    http_snippet           = string
+    public_private_enabled = bool
+  })
+  default = {
+    http_snippet           = ""
+    public_private_enabled = false
+  }
+}
+
 variable "ingress_healthz_enabled" {
   description = "Should ingress-healthz be enabled"
   type        = bool

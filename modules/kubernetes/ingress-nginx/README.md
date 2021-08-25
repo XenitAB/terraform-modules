@@ -27,6 +27,8 @@ No modules.
 |------|------|
 | [helm_release.ingress_nginx](https://registry.terraform.io/providers/hashicorp/helm/2.2.0/docs/resources/release) | resource |
 | [helm_release.ingress_nginx_extras](https://registry.terraform.io/providers/hashicorp/helm/2.2.0/docs/resources/release) | resource |
+| [helm_release.ingress_nginx_private](https://registry.terraform.io/providers/hashicorp/helm/2.2.0/docs/resources/release) | resource |
+| [helm_release.ingress_nginx_public](https://registry.terraform.io/providers/hashicorp/helm/2.2.0/docs/resources/release) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/namespace) | resource |
 
 ## Inputs
@@ -38,9 +40,8 @@ No modules.
 | <a name="input_extra_config"></a> [extra\_config](#input\_extra\_config) | Extra config to add to Ingress NGINX | `map(string)` | `{}` | no |
 | <a name="input_extra_headers"></a> [extra\_headers](#input\_extra\_headers) | Addtional headers to be added | `map(string)` | `{}` | no |
 | <a name="input_http_snippet"></a> [http\_snippet](#input\_http\_snippet) | Configure helm ingress http-snippet | `string` | `""` | no |
-| <a name="input_internal_load_balancer"></a> [internal\_load\_balancer](#input\_internal\_load\_balancer) | If true ingress controller will create a non public load balancer | `bool` | `false` | no |
 | <a name="input_linkerd_enabled"></a> [linkerd\_enabled](#input\_linkerd\_enabled) | Should linkerd be enabled | `bool` | `false` | no |
-| <a name="input_name_override"></a> [name\_override](#input\_name\_override) | Name of ingress controller and ingress class | `string` | `""` | no |
+| <a name="input_public_private_enabled"></a> [public\_private\_enabled](#input\_public\_private\_enabled) | Should ingress controllers for both public and private be created? | `bool` | `false` | no |
 
 ## Outputs
 

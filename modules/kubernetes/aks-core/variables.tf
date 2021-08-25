@@ -203,10 +203,12 @@ variable "ingress_nginx_enabled" {
 variable "ingress_config" {
   description = "Ingress configuration"
   type = object({
-    http_snippet = string
+    http_snippet           = string
+    public_private_enabled = bool
   })
   default = {
-    http_snippet = ""
+    http_snippet           = ""
+    public_private_enabled = false
   }
 }
 

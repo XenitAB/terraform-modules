@@ -84,7 +84,10 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider = "aws"
+  cloud_provider         = "aws"
+  http_snippet           = var.ingress_config.http_snippet
+  linkerd_enabled        = var.linkerd_enabled
+  public_private_enabled = var.ingress_config.public_private_enabled
 }
 
 module "ingress_healthz" {

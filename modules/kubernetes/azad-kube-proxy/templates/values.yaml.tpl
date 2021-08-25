@@ -60,7 +60,6 @@ autoscaling:
 ingress:
   enabled: true
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/whitelist-source-range: "${allowed_ips_csv}"
   hosts:

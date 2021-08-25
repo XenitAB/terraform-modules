@@ -1,11 +1,14 @@
-nameOverride: ${name_override}
-
 controller:
   replicaCount: 3
 
   priorityClassName: platform-medium
 
   ingressClass: ${ingress_class}
+
+  # https://github.com/kubernetes/ingress-nginx/issues/5593#issuecomment-647538272
+  ingressClassResource:
+    enabled: true
+    default: ${default_ingress_class}
 
   %{ if provider == "aws" }
   # Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
@@ -52,3 +55,34 @@ controller:
 
   metrics:
     enabled: true
+  %{ if provider == "aws" && internal_load_balancer }
+    port: 10354
+
+  containerPort:
+    http: 1080
+    https: 1443
+
+  admissionWebhooks:
+    port: 2443
+
+  extraArgs:
+    # Port to use for the healthz endpoint. (default 10254)
+    healthz-port: 10354
+    http-port: 1080
+    https-port: 1443
+    # Port to use for exposing the default server (catch-all). (default 8181)
+    default-server-port: 8282
+    # Port to use for expose the ingress controller Go profiler when it is enabled. (default 10245)
+    profiler-port: 10345
+    # Port to use for the lua HTTP endpoint configuration. (default 10246)
+    status-port: 10346
+    # Port to use for the lua TCP/UDP endpoint configuration. (default 10247)
+    stream-port: 10347
+
+  livenessProbe:
+    httpGet:
+      port: 10354
+  readinessProbe:
+    httpGet:
+      port: 10354
+  %{ endif }

@@ -10,20 +10,25 @@ controller:
     enabled: true
     default: ${default_ingress_class}
 
-  %{ if provider == "aws" }
+  %{~ if provider == "aws" ~}
   # Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
   # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
   # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
   dnsPolicy: ClusterFirstWithHostNet
   hostNetwork: true
-  %{ endif }
+  %{~ endif ~}
 
   service:
     externalTrafficPolicy: Local
-    %{ if internal_load_balancer }
+    %{~ if provider == "aws" || internal_load_balancer ~}
     annotations:
-      service.beta.kubernetes.io/${provider}-load-balancer-internal: true
-    %{ endif }
+      %{~ if internal_load_balancer ~}
+      service.beta.kubernetes.io/${provider}-load-balancer-internal: "true"
+      %{~ endif ~}
+      %{~ if provider == "aws" ~}
+      service.beta.kubernetes.io/aws-load-balancer-type: nlb
+      %{~ endif ~}
+    %{~ endif ~}
 
   config:
     %{~ for key, value in extra_config ~}
@@ -40,22 +45,22 @@ controller:
     ${key}: "${value}"
     %{~ endfor ~}
 
-  %{ if default_certificate.enabled }
+  %{~ if default_certificate.enabled ~}
   extraArgs:
     default-ssl-certificate: "${default_certificate.namespaced_name}"
-  %{ endif }
+  %{~ endif ~}
 
-  %{ if linkerd_enabled }
+  %{~ if linkerd_enabled ~}
   podAnnotations:
     linkerd.io/inject: "ingress"
     # It's required to skip inbound ports for the ingress or whitelist of IPs won't work:
     # https://github.com/linkerd/linkerd2/issues/3334#issuecomment-565135188
     config.linkerd.io/skip-inbound-ports: "80,443"
-  %{ endif }
+  %{~ endif ~}
 
   metrics:
     enabled: true
-  %{ if provider == "aws" && internal_load_balancer }
+  %{~ if provider == "aws" && internal_load_balancer ~}
     port: 10354
 
   containerPort:
@@ -85,4 +90,4 @@ controller:
   readinessProbe:
     httpGet:
       port: 10354
-  %{ endif }
+  %{~ endif ~}

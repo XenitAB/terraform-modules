@@ -5,12 +5,10 @@ controller:
 
   ingressClass: ${ingress_class}
 
-  %{ if multiple_ingress }
   # https://github.com/kubernetes/ingress-nginx/issues/5593#issuecomment-647538272
   ingressClassResource:
     enabled: true
     default: ${default_ingress_class}
-  %{ endif }
 
   %{ if provider == "aws" }
   # Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
@@ -57,7 +55,7 @@ controller:
 
   metrics:
     enabled: true
-  %{ if provider == "aws" && multiple_ingress && internal_load_balancer }
+  %{ if provider == "aws" && internal_load_balancer }
     port: 10354
 
   containerPort:

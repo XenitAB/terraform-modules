@@ -83,7 +83,7 @@ module "aks_core" {
 
     alertmanager_enabled = false
 
-    tenant_id = ""
+    tenant_id          = ""
     resource_selector  = ["platform"]
     namespace_selector = ["platform"]
   }

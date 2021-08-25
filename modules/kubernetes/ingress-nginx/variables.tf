@@ -1,36 +1,18 @@
-variable "name_override" {
-  description = "Name of ingress controller and ingress class"
-  type        = string
-  default     = ""
-}
-
 variable "cloud_provider" {
   description = "Cloud provider used for load balancer"
   type        = string
-}
-
-variable "internal_load_balancer" {
-  description = "If true ingress controller will create a non public load balancer"
-  type        = bool
-  default     = false
-}
-
-variable "multiple_ingress" {
-  description = "If true the cluster will support both private & public ingress"
-  type        = bool
-  default     = false
-}
-
-variable "default_ingress_class" {
-  description = "If true the ingressClass defined will be the default one"
-  type        = bool
-  default     = false
 }
 
 variable "http_snippet" {
   description = "Configure helm ingress http-snippet"
   type        = string
   default     = ""
+}
+
+variable "public_private_enabled" {
+  description = "Should ingress controllers for both public and private be created?"
+  type        = bool
+  default     = false
 }
 
 variable "default_certificate" {

@@ -1,5 +1,3 @@
-nameOverride: ${name_override}
-
 controller:
   replicaCount: 3
 

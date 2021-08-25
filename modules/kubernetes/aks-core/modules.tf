@@ -157,31 +157,10 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider   = "azure"
-  http_snippet     = var.ingress_config.http_snippet
-  linkerd_enabled  = var.linkerd_enabled
-  multiple_ingress = var.ingress_config.multiple_ingress
-}
-
-# ingress-nginx-private
-module "ingress_nginx_private" {
-  depends_on = [module.opa_gatekeeper, module.linkerd]
-
-  for_each = {
-    for s in ["ingress-nginx"] :
-    s => s
-    if var.ingress_nginx_enabled && var.ingress_config.internal_load_balancer
-  }
-
-  source = "../../kubernetes/ingress-nginx"
-
   cloud_provider         = "azure"
   http_snippet           = var.ingress_config.http_snippet
   linkerd_enabled        = var.linkerd_enabled
-  name_override          = var.ingress_config.name_override
-  internal_load_balancer = var.ingress_config.internal_load_balancer
-  multiple_ingress       = var.ingress_config.multiple_ingress
-  default_ingress_class  = var.ingress_config.private_default_ingress_class
+  public_private_enabled = var.ingress_config.public_private_enabled
 }
 
 # ingress-healthz

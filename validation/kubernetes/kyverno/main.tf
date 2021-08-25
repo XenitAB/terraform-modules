@@ -9,7 +9,7 @@ module "kyverno" {
 
   providers = {
     kubernetes = kubernetes
-    helm = helm
+    helm       = helm
   }
 
   excluded_namespaces = ["foobar"]

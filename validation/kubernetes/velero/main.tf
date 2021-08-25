@@ -9,10 +9,10 @@ module "velero" {
 
   providers = {
     kubernetes = kubernetes
-    helm = helm
+    helm       = helm
   }
 
-  cloud_provider                  = "azure"
+  cloud_provider = "azure"
   azure_config = {
     subscription_id           = "id"
     resource_group            = "name"

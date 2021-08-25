@@ -57,7 +57,7 @@ module "aks" {
         "test" = "test"
       }
       flux = {
-        enabled      = true
+        enabled = true
         repo    = "repo"
       }
     }

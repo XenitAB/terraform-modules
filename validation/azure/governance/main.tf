@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     pal = {
-      source  = "xenitab/pal"
+      source = "xenitab/pal"
     }
   }
 }
@@ -18,7 +18,7 @@ module "governance" {
   source = "../../../modules/azure/governance"
 
   accept_deprecation = "yes"
-  environment = "dev"
+  environment        = "dev"
   regions = [
     {
       location       = "West Europe"

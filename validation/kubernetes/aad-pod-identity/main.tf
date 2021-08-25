@@ -9,7 +9,7 @@ module "aad_pod_identity" {
 
   providers = {
     kubernetes = kubernetes
-    helm = helm
+    helm       = helm
   }
 
   aad_pod_identity = {

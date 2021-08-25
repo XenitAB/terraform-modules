@@ -30,6 +30,7 @@ jobs:
           terraform_version: 0.15.3
       - name: Run fmt
         run: |
+          sudo apt-get install parallel
           make fmt
       - name: Check if working tree is dirty
         run: |

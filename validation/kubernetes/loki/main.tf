@@ -13,9 +13,9 @@ module "loki" {
   source = "../../../modules/kubernetes/loki"
 
   providers = {
-    azurerm = azurerm
+    azurerm    = azurerm
     kubernetes = kubernetes
-    helm    = helm
+    helm       = helm
   }
 
   environment    = "dev"

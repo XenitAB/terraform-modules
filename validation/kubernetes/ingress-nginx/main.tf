@@ -13,5 +13,5 @@ module "ingress_nginx" {
   }
 
   cloud_provider = "bar"
-  http_snippet = "foo"
+  http_snippet   = "foo"
 }

@@ -6,18 +6,20 @@ all: fmt lint docs tfsec validate
 .SILENT:
 fmt:
 	set -e
-	echo fmt: Start
-	MODULE_GROUPS=$$(find modules -mindepth 1 -maxdepth 1 -type d)
-	for MODULE_GROUP in $${MODULE_GROUPS}; do
-		MODULES=$$(find $${MODULE_GROUP} -mindepth 1 -maxdepth 1 -type d)
-		for MODULE in $$MODULES; do
-			echo fmt: $${MODULE}
-			terraform fmt -recursive $${MODULE}
-			terraform fmt -recursive $${MODULE/modules/validation}
-		done
-	done
-	echo fmt: Success
 
+	tf_fmt () {
+		set -e
+		echo fmt: $${1}
+		terraform fmt -recursive $${1}
+		terraform fmt -recursive $${1/modules/validation}
+	}
+
+	export -f tf_fmt
+
+	TF_MODULES=$$(find modules -maxdepth 2 -mindepth 2 -type d)
+
+	PARALLEL_JOBS=10
+	printf '%s\n' $${TF_MODULES[@]} | parallel --halt now,fail=1 -j$${PARALLEL_JOBS} "tf_fmt {}"
 
 .SILENT:
 lint:

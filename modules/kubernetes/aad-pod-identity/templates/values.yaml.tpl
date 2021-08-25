@@ -9,6 +9,13 @@ nmi:
   prometheusPort: 9090
   priorityClassName: "platform-high"
 
+  tolerations:
+  - key: "CriticalAddonsOnly"
+    operator: "Exists"
+  %{ if tolerate_all_taints }
+  - operator: "Exists"
+  %{ endif }
+
 azureIdentities:
 %{ for namespace in namespaces ~}
   "${namespace.name}":
@@ -20,3 +27,4 @@ azureIdentities:
       name: "${namespace.name}"
       selector: "${namespace.name}"
 %{ endfor }
+

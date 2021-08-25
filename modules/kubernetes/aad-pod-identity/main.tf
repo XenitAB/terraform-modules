@@ -37,7 +37,8 @@ resource "helm_release" "aad_pod_identity" {
   version    = "4.0.0"
   namespace  = kubernetes_namespace.this.metadata[0].name
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    namespaces       = var.namespaces,
-    aad_pod_identity = var.aad_pod_identity
+    namespaces          = var.namespaces,
+    aad_pod_identity    = var.aad_pod_identity
+    tolerate_all_taints = var.tolerate_all_taints
   })]
 }

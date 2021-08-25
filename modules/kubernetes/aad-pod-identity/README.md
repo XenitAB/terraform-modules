@@ -34,6 +34,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_aad_pod_identity"></a> [aad\_pod\_identity](#input\_aad\_pod\_identity) | Configuration for aad pod identity | <pre>map(object({<br>    id        = string<br>    client_id = string<br>  }))</pre> | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | Namespaces to create AzureIdentity and AzureIdentityBindings in. | <pre>list(<br>    object({<br>      name = string<br>    })<br>  )</pre> | n/a | yes |
+| <a name="input_tolerate_all_taints"></a> [tolerate\_all\_taints](#input\_tolerate\_all\_taints) | If true the nmi daemonset will schedule on all nodes no matter the taints on the nodes. | `bool` | `false` | no |
 
 ## Outputs
 

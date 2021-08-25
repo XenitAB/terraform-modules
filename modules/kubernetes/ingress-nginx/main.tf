@@ -36,20 +36,20 @@ resource "helm_release" "ingress_nginx" {
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "3.35.0"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    http_snippet           = var.http_snippet,
-    name_override          = var.name_override,
-    provider               = var.cloud_provider,
-    ingress_class          = join("-", compact(["nginx", var.name_override])),
-    internal_load_balancer = var.internal_load_balancer,
+    http_snippet           = var.http_snippet
+    name_override          = var.name_override
+    provider               = var.cloud_provider
+    ingress_class          = join("-", compact(["nginx", var.name_override]))
+    internal_load_balancer = var.internal_load_balancer
     default_certificate = {
       enabled         = var.default_certificate.enabled
       dns_zone        = var.default_certificate.dns_zone
       namespaced_name = "ingress-nginx/ingress-nginx"
-    },
-    extra_config          = var.extra_config,
-    extra_headers         = var.extra_headers,
-    linkerd_enabled       = var.linkerd_enabled,
-    multiple_ingress      = var.multiple_ingress,
+    }
+    extra_config          = var.extra_config
+    extra_headers         = var.extra_headers
+    linkerd_enabled       = var.linkerd_enabled
+    multiple_ingress      = var.multiple_ingress
     default_ingress_class = var.default_ingress_class
   })]
 }

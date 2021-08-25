@@ -9,6 +9,6 @@ module "csi_secrets_store_provider_azure" {
 
   providers = {
     kubernetes = kubernetes
-    helm = helm
+    helm       = helm
   }
 }

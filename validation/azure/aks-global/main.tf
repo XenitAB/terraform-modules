@@ -27,7 +27,7 @@ module "aks_global" {
         "test" = "test"
       }
       flux = {
-        enabled      = true
+        enabled = true
         repo    = "repo"
       }
     }

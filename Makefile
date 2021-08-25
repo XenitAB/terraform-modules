@@ -12,7 +12,8 @@ fmt:
 		MODULES=$$(find $${MODULE_GROUP} -mindepth 1 -maxdepth 1 -type d)
 		for MODULE in $$MODULES; do
 			echo fmt: $${MODULE}
-			terraform fmt $${MODULE}
+			terraform fmt -recursive $${MODULE}
+			terraform fmt -recursive $${MODULE/modules/validation}
 		done
 	done
 	echo fmt: Success

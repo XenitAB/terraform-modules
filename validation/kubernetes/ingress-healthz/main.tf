@@ -13,5 +13,5 @@ module "ingress_healthz" {
   }
 
   environment = "dev"
-  dns_zone = "foo.bar.com"
+  dns_zone    = "foo.bar.com"
 }

@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     pal = {
-      source  = "xenitab/pal"
+      source = "xenitab/pal"
     }
   }
 }
@@ -17,7 +17,7 @@ provider "pal" {}
 module "governance-global" {
   source = "../../../modules/azure/governance-global"
 
-  environment = "dev"
+  environment                  = "dev"
   subscription_name            = "xks"
   owner_service_principal_name = "test"
   resource_group_configs = [

@@ -9,6 +9,6 @@ module "reloader" {
 
   providers = {
     kubernetes = kubernetes
-    helm = helm
+    helm       = helm
   }
 }

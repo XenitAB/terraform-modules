@@ -9,6 +9,6 @@ module "external_secrets" {
 
   providers = {
     kubernetes = kubernetes
-    helm = helm
+    helm       = helm
   }
 }

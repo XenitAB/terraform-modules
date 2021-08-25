@@ -9,6 +9,6 @@ module "falco" {
 
   providers = {
     kubernetes = kubernetes
-    helm = helm
+    helm       = helm
   }
 }

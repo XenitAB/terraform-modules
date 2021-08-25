@@ -9,9 +9,9 @@ module "cert_manager" {
 
   providers = {
     kubernetes = kubernetes
-    helm = helm
+    helm       = helm
   }
 
-  cloud_provider = "azure"
+  cloud_provider     = "azure"
   notification_email = "example@example.com"
 }

@@ -9,6 +9,6 @@ module "goldpinger" {
 
   providers = {
     kubernetes = kubernetes
-    helm = helm
+    helm       = helm
   }
 }

@@ -11,17 +11,17 @@ module "fluxcd_v1" {
 
   azure_devops_pat = "foo"
   azure_devops_org = "bar"
-  environment = "dev"
+  environment      = "dev"
 
   namespaces = [
     {
       name = "team1"
       flux = {
-        enabled      = true
+        enabled = true
         azure_devops = {
-          org     = "org"
+          org  = "org"
           proj = "proj"
-          repo    = "repo"
+          repo = "repo"
         }
       }
     }

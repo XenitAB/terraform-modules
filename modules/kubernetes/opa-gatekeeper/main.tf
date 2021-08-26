@@ -124,7 +124,7 @@ resource "helm_release" "gatekeeper" {
   chart      = "gatekeeper"
   name       = "gatekeeper"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "3.5.2"
+  version    = "3.5.2-patch.1"
   values = [templatefile("${path.module}/templates/gatekeeper-values.yaml.tpl", {
     provider = var.cloud_provider
   })]

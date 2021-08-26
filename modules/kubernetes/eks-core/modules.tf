@@ -16,16 +16,6 @@ module "opa_gatekeeper" {
     var.opa_gatekeeper_config.additional_constraints,
     [
       {
-        kind               = "AzureIdentityFormat"
-        name               = "azure-identity-format"
-        enforcement_action = ""
-        match = {
-          kinds      = []
-          namespaces = []
-        }
-        parameters = {}
-      },
-      {
         kind               = "K8sPodPriorityClass"
         name               = "pod-priority-class"
         enforcement_action = ""

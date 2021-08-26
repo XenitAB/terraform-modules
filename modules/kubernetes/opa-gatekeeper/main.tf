@@ -120,6 +120,8 @@ resource "kubernetes_namespace" "this" {
 
 resource "helm_release" "gatekeeper" {
   #repository = "https://open-policy-agent.github.io/gatekeeper/charts"
+
+  # temporary chart repo, change back when new version released with the following change: https://github.com/open-policy-agent/gatekeeper/pull/1438
   repository = "https://simongottschlag.github.io/gatekeeper/charts"
   chart      = "gatekeeper"
   name       = "gatekeeper"
@@ -128,6 +130,12 @@ resource "helm_release" "gatekeeper" {
   values = [templatefile("${path.module}/templates/gatekeeper-values.yaml.tpl", {
     provider = var.cloud_provider
   })]
+
+  # can be removed when moved from temporary chart repo
+  set {
+    name  = "image.release"
+    value = "v3.5.2"
+  }
 }
 
 resource "helm_release" "gatekeeper_templates" {

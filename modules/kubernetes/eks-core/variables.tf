@@ -106,28 +106,28 @@ variable "opa_gatekeeper_enabled" {
   default     = true
 }
 
-#variable "opa_gatekeeper_config" {
-#  description = "Configuration for OPA Gatekeeper"
-#  type = object({
-#    additional_excluded_namespaces = list(string)
-#    enable_default_constraints     = bool
-#    additional_constraints = list(object({
-#      excluded_namespaces = list(string)
-#      processes           = list(string)
-#    }))
-#    enable_default_assigns = bool
-#    additional_assigns = list(object({
-#      name = string
-#    }))
-#  })
-#  default = {
-#    additional_excluded_namespaces = []
-#    enable_default_constraints     = true
-#    additional_constraints         = []
-#    enable_default_assigns         = true
-#    additional_assigns             = []
-#  }
-#}
+variable "opa_gatekeeper_config" {
+  description = "Configuration for OPA Gatekeeper"
+  type = object({
+    additional_excluded_namespaces = list(string)
+    enable_default_constraints     = bool
+    additional_constraints = list(object({
+      excluded_namespaces = list(string)
+      processes           = list(string)
+    }))
+    enable_default_assigns = bool
+    additional_assigns = list(object({
+      name = string
+    }))
+  })
+  default = {
+    additional_excluded_namespaces = []
+    enable_default_constraints     = true
+    additional_constraints         = []
+    enable_default_assigns         = true
+    additional_assigns             = []
+  }
+}
 
 variable "cert_manager_enabled" {
   description = "Should Cert Manager be enabled"

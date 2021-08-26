@@ -119,7 +119,8 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "gatekeeper" {
-  repository = "https://open-policy-agent.github.io/gatekeeper/charts"
+  #repository = "https://open-policy-agent.github.io/gatekeeper/charts"
+  repository = "https://simongottschlag.github.io/gatekeeper/charts"
   chart      = "gatekeeper"
   name       = "gatekeeper"
   namespace  = kubernetes_namespace.this.metadata[0].name

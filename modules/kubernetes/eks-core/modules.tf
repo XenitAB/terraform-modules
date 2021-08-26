@@ -11,8 +11,27 @@ module "opa_gatekeeper" {
 
   source = "../../kubernetes/opa-gatekeeper"
 
-  excluded_namespaces = local.excluded_namespaces
-  cloud_provider      = "aws"
+  enable_default_constraints = var.opa_gatekeeper_config.enable_default_constraints
+  additional_constraints = concat(
+    var.opa_gatekeeper_config.additional_constraints,
+    [
+      {
+        kind               = "K8sPodPriorityClass"
+        name               = "pod-priority-class"
+        enforcement_action = ""
+        match = {
+          kinds      = []
+          namespaces = []
+        }
+        parameters = {
+          permittedClassNames = ["platform-high", "platform-medium", "platform-low", "tenant-high", "tenant-medium", "tenant-low"]
+        }
+      },
+    ]
+  )
+  enable_default_assigns = var.opa_gatekeeper_config.enable_default_assigns
+  excluded_namespaces    = concat(var.opa_gatekeeper_config.additional_excluded_namespaces, local.excluded_namespaces)
+  cloud_provider         = "aws"
 }
 
 # FluxCD v2

@@ -36,7 +36,8 @@ unique suffix to distinguish the resources.
 | Name | Yes | Name of the resource, try to convey the purpose or use. |
 | Environment | Yes | Environment the resource is deployed in. |
 | Module | Yes | The name of the Terraform module which has created the resource. |
-| Cluster | If Applicable | If the resources is specific to an EKS cluster the cluster name should be entered here. |
+| Cluster | No | If the resources is specific to an EKS cluster the cluster name should be entered here. |
+| Application | No | Name of the application the resource may be tightly linked to. |
 
 Resources that are global and require unique names should contain enough unique components to mitigate any name conflicts caused by multi region
 deployments. This is especially important for IAM resources. Ontop of this the resources should also include the tags according to the standard above

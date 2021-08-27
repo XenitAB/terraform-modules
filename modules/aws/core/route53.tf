@@ -7,8 +7,10 @@ resource "aws_route53_zone" "this" {
     if var.dns_zone_enabled
   }
 
-  tags = {
-    Name        = var.dns_zone
-    Environment = var.environment
-  }
+  tags = merge(
+    {
+      Name        = var.dns_zone
+    },
+    local.global_tags
+  )
 }

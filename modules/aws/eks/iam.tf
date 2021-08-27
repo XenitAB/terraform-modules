@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "cluster_autoscaler" {
 module "cluster_autoscaler" {
   source = "../irsa"
 
-  name = "cluster-autoscaler-${var.name}${var.eks_name_suffix}"
+  name = "${data.aws_region.current.name}-${var.environment}-cluster-autoscaler-${var.name}${var.eks_name_suffix}"
   oidc_providers = [
     {
       url = aws_iam_openid_connect_provider.this.url
@@ -60,7 +60,7 @@ data "aws_iam_policy_document" "cert_manager" {
 module "cert_manager" {
   source = "../irsa"
 
-  name = "cert-manager-${var.name}${var.eks_name_suffix}"
+  name = "${data.aws_region.current.name}-${var.environment}-cert-manager-${var.name}${var.eks_name_suffix}"
   oidc_providers = [
     {
       url = aws_iam_openid_connect_provider.this.url
@@ -95,7 +95,7 @@ data "aws_iam_policy_document" "external_dns" {
 module "external_dns" {
   source = "../irsa"
 
-  name = "external-dns-${var.name}${var.eks_name_suffix}"
+  name = "${data.aws_region.current.name}-${var.environment}-external-dns-${var.name}${var.eks_name_suffix}"
   oidc_providers = [
     {
       url = aws_iam_openid_connect_provider.this.url
@@ -143,7 +143,7 @@ data "aws_iam_policy_document" "velero" {
 module "velero" {
   source = "../irsa"
 
-  name = "velero-${var.name}${var.eks_name_suffix}"
+  name = "${data.aws_region.current.name}-${var.environment}-velero-${var.name}${var.eks_name_suffix}"
   oidc_providers = [
     {
       url = aws_iam_openid_connect_provider.this.url
@@ -176,7 +176,7 @@ data "aws_iam_policy_document" "xenit" {
 module "xenit" {
   source = "../irsa"
 
-  name = "xenit-${var.name}${var.eks_name_suffix}"
+  name = "${data.aws_region.current.name}-${var.environment}-xenit-${var.name}${var.eks_name_suffix}"
   oidc_providers = [
     {
       url = aws_iam_openid_connect_provider.this.url

@@ -10,11 +10,7 @@ nmi:
   priorityClassName: "platform-high"
 
   tolerations:
-  - key: "CriticalAddonsOnly"
-    operator: "Exists"
-  %{ if tolerate_all_taints }
   - operator: "Exists"
-  %{ endif }
 
 azureIdentities:
 %{ for namespace in namespaces ~}

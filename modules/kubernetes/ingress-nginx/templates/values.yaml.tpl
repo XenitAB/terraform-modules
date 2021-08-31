@@ -50,12 +50,19 @@ controller:
     default-ssl-certificate: "${default_certificate.namespaced_name}"
   %{~ endif ~}
 
-  %{~ if linkerd_enabled ~}
+  %{~ if datadog_enabled || linkerd_enabled ~}
   podAnnotations:
+    %{~ if datadog_enabled ~}
+    ad.datadoghq.com/controller.check_names: '["nginx_ingress_controller"]'
+    ad.datadoghq.com/controller.init_configs: '[{}]'
+    ad.datadoghq.com/controller.instances: '[{"prometheus_url": "http://%%host%%:10254/metrics"}]'
+    %{~ endif ~}
+    %{~ if linkerd_enabled ~}
     linkerd.io/inject: "ingress"
     # It's required to skip inbound ports for the ingress or whitelist of IPs won't work:
     # https://github.com/linkerd/linkerd2/issues/3334#issuecomment-565135188
     config.linkerd.io/skip-inbound-ports: "80,443"
+    %{~ endif ~}
   %{~ endif ~}
 
   metrics:

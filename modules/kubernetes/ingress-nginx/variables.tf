@@ -33,6 +33,12 @@ variable "linkerd_enabled" {
   default     = false
 }
 
+variable "datadog_enabled" {
+  description = "Should datadog be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "extra_config" {
   description = "Extra config to add to Ingress NGINX"
   type        = map(string)

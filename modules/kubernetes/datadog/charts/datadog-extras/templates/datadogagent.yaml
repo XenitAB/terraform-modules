@@ -48,6 +48,9 @@ spec:
     priorityClassName: platform-low
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"
+    config:
+      clusterChecksEnabled: true
+    replicas: 2
   features:
     kubeStateMetricsCore:
       enabled: true

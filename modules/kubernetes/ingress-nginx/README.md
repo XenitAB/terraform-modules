@@ -36,6 +36,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cloud_provider"></a> [cloud\_provider](#input\_cloud\_provider) | Cloud provider used for load balancer | `string` | n/a | yes |
+| <a name="input_datadog_enabled"></a> [datadog\_enabled](#input\_datadog\_enabled) | Should datadog be enabled | `bool` | `false` | no |
 | <a name="input_default_certificate"></a> [default\_certificate](#input\_default\_certificate) | If enalbed and configured nginx will be configured with a default certificate. | <pre>object({<br>    enabled  = bool,<br>    dns_zone = string,<br>  })</pre> | <pre>{<br>  "dns_zone": "",<br>  "enabled": false<br>}</pre> | no |
 | <a name="input_extra_config"></a> [extra\_config](#input\_extra\_config) | Extra config to add to Ingress NGINX | `map(string)` | `{}` | no |
 | <a name="input_extra_headers"></a> [extra\_headers](#input\_extra\_headers) | Addtional headers to be added | `map(string)` | `{}` | no |

@@ -54,6 +54,7 @@ resource "helm_release" "ingress_nginx" {
     extra_config          = var.extra_config
     extra_headers         = var.extra_headers
     linkerd_enabled       = var.linkerd_enabled
+    datadog_enabled       = var.datadog_enabled
     default_ingress_class = false
   })]
 }
@@ -83,6 +84,7 @@ resource "helm_release" "ingress_nginx_public" {
     extra_config          = var.extra_config
     extra_headers         = var.extra_headers
     linkerd_enabled       = var.linkerd_enabled
+    datadog_enabled       = var.datadog_enabled
     default_ingress_class = true
   })]
 }
@@ -112,6 +114,7 @@ resource "helm_release" "ingress_nginx_private" {
     extra_config          = var.extra_config
     extra_headers         = var.extra_headers
     linkerd_enabled       = var.linkerd_enabled
+    datadog_enabled       = var.datadog_enabled
     default_ingress_class = false
   })]
 }

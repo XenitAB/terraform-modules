@@ -151,7 +151,7 @@ resource "aws_subnet" "private" {
   availability_zone = data.aws_availability_zones.available.names[each.value.availability_zone_index]
 
   tags = merge(
-    each.value.object.tags,
+    each.value.tags,
     {
       Name        = each.key,
     },

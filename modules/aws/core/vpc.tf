@@ -61,11 +61,11 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = merge(
+    local.global_tags,
     each.value.object.tags,
     {
       Name        = each.key,
     },
-    local.global_tags
   )
 }
 
@@ -78,10 +78,10 @@ resource "aws_eip" "public" {
   vpc = true
 
   tags = merge(
+    local.global_tags,
     {
       Name        = each.key
     },
-    local.global_tags
   )
 }
 
@@ -95,10 +95,10 @@ resource "aws_nat_gateway" "public" {
   subnet_id     = aws_subnet.public[each.key].id
 
   tags = merge(
+    local.global_tags,
     {
       Name        = each.key
     },
-    local.global_tags
   )
 }
 
@@ -111,10 +111,10 @@ resource "aws_route_table" "public" {
   vpc_id = aws_vpc.this.id
 
   tags = merge(
+    local.global_tags,
     {
       Name        = each.key
     },
-    local.global_tags
   )
 }
 
@@ -151,11 +151,11 @@ resource "aws_subnet" "private" {
   availability_zone = data.aws_availability_zones.available.names[each.value.availability_zone_index]
 
   tags = merge(
+    local.global_tags,
     each.value.tags,
     {
       Name        = each.key,
     },
-    local.global_tags
   )
 }
 
@@ -168,10 +168,10 @@ resource "aws_route_table" "private" {
   vpc_id = aws_vpc.this.id
 
   tags = merge(
+    local.global_tags,
     {
       Name        = each.key
     },
-    local.global_tags
   )
 }
 
@@ -210,11 +210,11 @@ resource "aws_vpc_peering_connection" "this" {
   auto_accept   = false
 
   tags = merge(
+    local.global_tags,
     {
       Name        = each.key
       Side = "Requester"
     },
-    local.global_tags
   )
 }
 
@@ -257,11 +257,11 @@ resource "aws_vpc_peering_connection_accepter" "peer" {
   auto_accept               = true
 
   tags = merge(
+    local.global_tags,
     {
       Name = each.key
       Side = "Accepter"
     },
-    local.global_tags
   )
 }
 

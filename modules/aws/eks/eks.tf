@@ -32,7 +32,7 @@ data "aws_subnet" "cluster" {
 resource "aws_eks_cluster" "this" { #tfsec:ignore:AWS067
   provider = aws.eks_admin
 
-  name     = "${var.name}${var.eks_name_suffix}-${var.environment}"
+  name     = "${var.environment}-${var.name}${var.eks_name_suffix}"
   role_arn = var.cluster_role_arn
   version  = var.eks_config.kubernetes_version
 

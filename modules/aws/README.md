@@ -17,8 +17,8 @@ new contributors in how resources should be named. Any changes to this guide sho
 ### Names and tags
 
 A quirk of AWS is that there are some resources that are global and other that are regional. On top of that there are resources that get automatically
-generated IDs and others that use the given name as a unique ID. That name may either have to be unique within the account, within that AWS region or
-across all AWS regions.
+generated IDs and others that use the given name as a unique ID. That name may either have to be unique within the account or across all AWS accounts
+in all regions.
 
 Global resources with unique names:
 * IAM Roles

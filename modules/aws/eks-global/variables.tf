@@ -11,7 +11,7 @@ variable "name" {
 variable "name_prefix" {
   description = "Prefix to add to unique names such as S3 buckets and IAM roles"
   type        = string
-  default     = "xkf"
+  default     = "xks"
 }
 
 variable "unique_suffix" {

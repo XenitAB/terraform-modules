@@ -4,16 +4,16 @@ resource "aws_kms_key" "velero" {
   enable_key_rotation     = true
 
   tags = merge(
+    local.global_tags,
     {
       Name = "Velero Encrytion"
       Application = "velero",
     },
-    local.global_tags
   )
 }
 
 resource "aws_s3_bucket" "velero" { #tfsec:ignore:AWS002
-  bucket = "${var.name}-${var.environment}-${var.unique_suffix}-velero"
+  bucket = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}-velero-${var.unique_suffix}"
   acl    = "private"
 
   versioning {
@@ -30,9 +30,9 @@ resource "aws_s3_bucket" "velero" { #tfsec:ignore:AWS002
   }
 
   tags = merge(
+    local.global_tags,
     {
       Application = "velero",
     },
-    local.global_tags
   )
 }

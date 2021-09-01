@@ -49,20 +49,21 @@ resource "aws_eks_cluster" "this" { #tfsec:ignore:AWS067
     }
   }
 
-  tags = {
-    Name        = "${var.name}${var.eks_name_suffix}-${var.environment}"
-    Environment = var.environment
-  }
+  tags = local.global_tags
 }
 
 resource "aws_eks_addon" "kube_proxy" {
   cluster_name = aws_eks_cluster.this.name
   addon_name   = "kube-proxy"
+
+  tags = local.global_tags
 }
 
 resource "aws_eks_addon" "core_dns" {
   cluster_name = aws_eks_cluster.this.name
   addon_name   = "coredns"
+
+  tags = local.global_tags
 }
 
 data "tls_certificate" "thumbprint" {
@@ -73,6 +74,8 @@ resource "aws_iam_openid_connect_provider" "this" {
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = [data.tls_certificate.thumbprint.certificates[0].sha1_fingerprint]
   url             = aws_eks_cluster.this.identity[0].oidc[0].issuer
+
+  tags = local.global_tags
 }
 
 data "aws_eks_cluster_auth" "this" {
@@ -135,6 +138,8 @@ resource "aws_launch_template" "eks_node_group" {
     api_server_url = aws_eks_cluster.this.endpoint
     node_group     = "${aws_eks_cluster.this.name}-${each.value.name}"
   }))
+
+  tags = local.global_tags
 }
 
 resource "aws_eks_node_group" "this" {
@@ -163,10 +168,7 @@ resource "aws_eks_node_group" "this" {
     version = aws_launch_template.eks_node_group[each.key].latest_version
   }
 
-  tags = {
-    Name        = "${aws_eks_cluster.this.name}-${each.value.name}"
-    Environment = var.environment
-  }
+  tags = local.global_tags
 
   lifecycle {
     ignore_changes = [scaling_config[0].desired_size]

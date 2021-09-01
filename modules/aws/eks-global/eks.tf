@@ -1,3 +1,16 @@
+# EKS Encrytion
+resource "aws_kms_key" "eks_encryption" {
+  description         = "Used for EKS secret encryption"
+  enable_key_rotation = true
+
+  tags = merge(
+    local.global_tags,
+    {
+      Name = "EKS Encrytion"
+    },
+  )
+}
+
 # EKS Admin
 data "aws_iam_policy_document" "eks_admin_permission" {
   statement {
@@ -65,22 +78,26 @@ data "aws_iam_policy_document" "eks_admin_assume" {
 }
 
 resource "aws_iam_policy" "eks_admin" {
-  name        = "eks-admin"
+  name        = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}-admin"
   description = "EKS Admin Role Plocy"
   policy      = data.aws_iam_policy_document.eks_admin_permission.json
+
+  tags = local.global_tags
 }
 
 resource "aws_iam_role" "eks_admin" {
-  name               = "eks-admin"
+  name               = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}-admin"
   assume_role_policy = data.aws_iam_policy_document.eks_admin_assume.json
   managed_policy_arns = [
     aws_iam_policy.eks_admin.arn,
   ]
+
+  tags = local.global_tags
 }
 
 # EKS Cluster
 resource "aws_iam_role" "eks_cluster" {
-  name = "${var.name}-cluster"
+  name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}-cluster"
 
   assume_role_policy = jsonencode({
     Statement = [{
@@ -95,11 +112,13 @@ resource "aws_iam_role" "eks_cluster" {
   managed_policy_arns = [
     "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
   ]
+
+  tags = local.global_tags
 }
 
 # EKS Node Group
 resource "aws_iam_role" "eks_node_group" {
-  name = "${var.name}-node-group"
+  name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}-node-group"
 
   assume_role_policy = jsonencode({
     Statement = [{
@@ -116,4 +135,6 @@ resource "aws_iam_role" "eks_node_group" {
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
   ]
+
+  tags = local.global_tags
 }

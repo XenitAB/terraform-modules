@@ -7,5 +7,6 @@ module "fluxcd_v2_azdo" {
   azure_devops_org  = "foo"
   azure_devops_proj = "bar"
   environment       = "dev"
+  cluster_id        = "foobar"
   namespaces        = []
 }

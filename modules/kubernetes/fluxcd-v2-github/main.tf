@@ -230,7 +230,7 @@ resource "github_repository_file" "tenant" {
     repo        = "ssh://git@github.com/${data.github_repository.tenant[each.key].full_name}.git",
     branch      = var.branch,
     name        = each.key,
-    cluster_id = var.cluster_id,
+    environment = var.environment,
   })
   overwrite_on_create = true
 }

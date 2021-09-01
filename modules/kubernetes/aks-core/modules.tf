@@ -61,7 +61,7 @@ module "fluxcd_v1_azure_devops" {
   azure_devops_org    = var.fluxcd_v1_config.azure_devops.org
   flux_status_enabled = var.fluxcd_v1_config.flux_status_enabled
   branch              = var.fluxcd_v1_config.branch
-  cluster_id       = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
+  environment         = var.environment
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = ns.flux
@@ -81,7 +81,8 @@ module "fluxcd_v2_azure_devops" {
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
   azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
-  cluster_id       = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
+  environment       = var.environment
+  cluster_id        = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {
@@ -105,6 +106,7 @@ module "fluxcd_v2_github" {
 
   github_owner = var.fluxcd_v2_config.github.owner
   environment  = var.environment
+  cluster_id   = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {

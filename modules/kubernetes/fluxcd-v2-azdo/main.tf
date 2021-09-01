@@ -191,7 +191,7 @@ resource "azuredevops_git_repository_file" "tenant" {
     repo        = "${local.azdo_proxy_url}/${var.azure_devops_org}/${each.value.flux.proj}/_git/${each.value.flux.repo}"
     branch      = var.branch,
     name        = each.key,
-    cluster_id = var.cluster_id,
+    environment = var.environment,
     create_crds = each.value.flux.create_crds
   })
   overwrite_on_create = true

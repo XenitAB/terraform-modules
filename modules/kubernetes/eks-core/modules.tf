@@ -47,7 +47,8 @@ module "fluxcd_v2_azure_devops" {
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
   azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
-  cluster_id       = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
+  environment       = var.environment
+  cluster_id        = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {
@@ -70,7 +71,8 @@ module "fluxcd_v2_github" {
   source = "../../kubernetes/fluxcd-v2-github"
 
   github_owner = var.fluxcd_v2_config.github.owner
-  cluster_id       = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
+  environment  = var.environment
+  cluster_id   = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {

@@ -3,6 +3,11 @@ variable "github_owner" {
   type        = string
 }
 
+variable "environment" {
+  description = "Environment name of the cluster"
+  type        = string
+}
+
 variable "cluster_id" {
   description = "Environment name of the cluster"
   type        = string

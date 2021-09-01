@@ -47,7 +47,7 @@ module "fluxcd_v2_azure_devops" {
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
   azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
-  environment       = var.environment
+  cluster_id       = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {
@@ -70,7 +70,7 @@ module "fluxcd_v2_github" {
   source = "../../kubernetes/fluxcd-v2-github"
 
   github_owner = var.fluxcd_v2_config.github.owner
-  environment  = var.environment
+  cluster_id       = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {
@@ -137,7 +137,7 @@ module "external_dns" {
   source = "../../kubernetes/external-dns"
 
   dns_provider = "aws"
-  txt_owner_id = "${var.environment}-${var.name}${var.aks_name_suffix}"
+  txt_owner_id = "${var.environment}-${var.name}${var.eks_name_suffix}"
   aws_config = {
     region   = data.aws_region.current.name
     role_arn = var.external_dns_config.role_arn

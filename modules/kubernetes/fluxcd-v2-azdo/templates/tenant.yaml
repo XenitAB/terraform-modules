@@ -46,7 +46,7 @@ metadata:
 spec:
   serviceAccountName: flux
   interval: 5m
-  path: ./tenant/${environment}
+  path: ./tenant/${cluster_id}
   sourceRef:
     kind: GitRepository
     name: ${name}

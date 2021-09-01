@@ -60,7 +60,7 @@
 | <a name="input_eks_name_suffix"></a> [eks\_name\_suffix](#input\_eks\_name\_suffix) | The suffix for the eks clusters | `number` | `1` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Common name for the environment | `string` | n/a | yes |
-| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Prefix to add to unique names such as S3 buckets and IAM roles | `string` | `"xkf"` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Prefix to add to unique names such as S3 buckets and IAM roles | `string` | `"xks"` | no |
 | <a name="input_node_group_role_arn"></a> [node\_group\_role\_arn](#input\_node\_group\_role\_arn) | IAM role to attach to EKS node groups | `string` | n/a | yes |
 | <a name="input_velero_config"></a> [velero\_config](#input\_velero\_config) | Configuration for Velero | <pre>object({<br>    s3_bucket_id  = string<br>    s3_bucket_arn = string<br>  })</pre> | n/a | yes |
 

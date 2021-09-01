@@ -11,12 +11,12 @@ This directory contains all the AWS Terraform modules.
 
 ## Style Guide
 
-This section covers AWS specific standards that all modules shoudl try to follow to decrease the risk of annoying problems in the future, and to guide
+This section covers AWS specific standards that all modules should try to follow to decrease the risk of annoying problems in the future, and to guide
 new contributors in how resources should be named. Any changes to this guide should be done together with updating the Terraform.
 
 ### Names and tags
 
-A quirk of AWS is that there are some resources that are global and other that are regional. Ontop of that there are resources that get automatically
+A quirk of AWS is that there are some resources that are global and other that are regional. On top of that there are resources that get automatically
 generated IDs and others that use the given name as a unique ID. That name may either have to be unique within the account, within that AWS region or
 across all AWS regions.
 
@@ -40,7 +40,7 @@ resources of this kind. Try to make sure that the values are unique enough that 
 | Application | No | Name of the application the resource may be tightly linked to. |
 
 Resources that are global and require unique names should contain enough unique components to mitigate any name conflicts caused by multi region
-deployments. This is especially important for IAM resources. Ontop of this the resources should also include the tags according to the standard above
+deployments. This is especially important for IAM resources. On top of this the resources should also include the tags according to the standard above
 but without the name. IAM resources should follow the same naming convention to reduce confusion and mitigate future issues. Keep in mind when naming
 things that the name limit of IAM resources is 128 characters. Each IAM resource should follow the same convention, starting with a name prefix, the
 region, and the environment.

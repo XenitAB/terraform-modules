@@ -6,7 +6,7 @@ resource "aws_kms_key" "velero" {
   tags = merge(
     local.global_tags,
     {
-      Name = "Velero Encrytion"
+      Name        = "Velero Encrytion"
       Application = "velero",
     },
   )

@@ -64,7 +64,7 @@ resource "aws_subnet" "public" {
     local.global_tags,
     each.value.object.tags,
     {
-      Name        = each.key,
+      Name = each.key,
     },
   )
 }
@@ -80,7 +80,7 @@ resource "aws_eip" "public" {
   tags = merge(
     local.global_tags,
     {
-      Name        = each.key
+      Name = each.key
     },
   )
 }
@@ -97,7 +97,7 @@ resource "aws_nat_gateway" "public" {
   tags = merge(
     local.global_tags,
     {
-      Name        = each.key
+      Name = each.key
     },
   )
 }
@@ -113,7 +113,7 @@ resource "aws_route_table" "public" {
   tags = merge(
     local.global_tags,
     {
-      Name        = each.key
+      Name = each.key
     },
   )
 }
@@ -154,7 +154,7 @@ resource "aws_subnet" "private" {
     local.global_tags,
     each.value.tags,
     {
-      Name        = each.key,
+      Name = each.key,
     },
   )
 }
@@ -170,7 +170,7 @@ resource "aws_route_table" "private" {
   tags = merge(
     local.global_tags,
     {
-      Name        = each.key
+      Name = each.key
     },
   )
 }
@@ -212,7 +212,7 @@ resource "aws_vpc_peering_connection" "this" {
   tags = merge(
     local.global_tags,
     {
-      Name        = each.key
+      Name = each.key
       Side = "Requester"
     },
   )

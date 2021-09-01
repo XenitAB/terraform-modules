@@ -6,14 +6,6 @@ output "kube_config" {
     cluster_ca_certificate = base64decode(aws_eks_cluster.this.certificate_authority[0].data)
     token                  = data.aws_eks_cluster_auth.this.token
   }
-
-  # Due to the way EKS works there is no way that other actions against the cluster
-  # will work unless the critical addons are in a healthy state.
-  depends_on = [
-    aws_eks_addon.kube_proxy,
-    aws_eks_addon.core_dns,
-    aws_eks_node_group.this,
-  ]
 }
 
 output "cluster_autoscaler_config" {

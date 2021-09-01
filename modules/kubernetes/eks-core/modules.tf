@@ -137,7 +137,7 @@ module "external_dns" {
   source = "../../kubernetes/external-dns"
 
   dns_provider = "aws"
-  txt_owner_id = var.environment # TODO: Add "name" definition to eks-core as well
+  txt_owner_id = "${var.environment}-${var.name}${var.aks_name_suffix}"
   aws_config = {
     region   = data.aws_region.current.name
     role_arn = var.external_dns_config.role_arn

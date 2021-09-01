@@ -5,7 +5,6 @@
   *
   */
 
-
 terraform {
   required_version = "0.15.3"
   required_providers {
@@ -18,4 +17,12 @@ terraform {
 
 data "aws_availability_zones" "available" {
   state = "available"
+}
+
+locals {
+  global_tags = {
+    Name        = var.name
+    Environment = var.environment
+    Module      = "core"
+  }
 }

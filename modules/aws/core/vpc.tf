@@ -33,10 +33,7 @@ resource "aws_vpc" "this" {
   enable_dns_support   = true
   enable_dns_hostnames = true
 
-  tags = {
-    Name        = var.name
-    Environment = var.environment
-  }
+  tags = local.global_tags
 }
 
 resource "aws_internet_gateway" "this" {
@@ -48,10 +45,7 @@ resource "aws_internet_gateway" "this" {
 
   vpc_id = aws_vpc.this.id
 
-  tags = {
-    Name        = var.name
-    Environment = var.environment
-  }
+  tags = local.global_tags
 }
 
 # public subnets with NAT
@@ -67,11 +61,11 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = merge(
+    local.global_tags,
     each.value.object.tags,
     {
-      Name        = each.key,
-      Environment = var.environment
-    }
+      Name = each.key,
+    },
   )
 }
 
@@ -83,10 +77,12 @@ resource "aws_eip" "public" {
 
   vpc = true
 
-  tags = {
-    Name        = each.key
-    Environment = var.environment
-  }
+  tags = merge(
+    local.global_tags,
+    {
+      Name = each.key
+    },
+  )
 }
 
 resource "aws_nat_gateway" "public" {
@@ -98,10 +94,12 @@ resource "aws_nat_gateway" "public" {
   allocation_id = aws_eip.public[each.key].id
   subnet_id     = aws_subnet.public[each.key].id
 
-  tags = {
-    Name        = each.key
-    Environment = var.environment
-  }
+  tags = merge(
+    local.global_tags,
+    {
+      Name = each.key
+    },
+  )
 }
 
 resource "aws_route_table" "public" {
@@ -112,10 +110,12 @@ resource "aws_route_table" "public" {
 
   vpc_id = aws_vpc.this.id
 
-  tags = {
-    Name        = each.key
-    Environment = var.environment
-  }
+  tags = merge(
+    local.global_tags,
+    {
+      Name = each.key
+    },
+  )
 }
 
 resource "aws_route" "public" {
@@ -151,11 +151,11 @@ resource "aws_subnet" "private" {
   availability_zone = data.aws_availability_zones.available.names[each.value.availability_zone_index]
 
   tags = merge(
+    local.global_tags,
     each.value.tags,
     {
-      Name        = each.key,
-      Environment = var.environment
-    }
+      Name = each.key,
+    },
   )
 }
 
@@ -167,10 +167,12 @@ resource "aws_route_table" "private" {
 
   vpc_id = aws_vpc.this.id
 
-  tags = {
-    Name        = each.key
-    Environment = var.environment
-  }
+  tags = merge(
+    local.global_tags,
+    {
+      Name = each.key
+    },
+  )
 }
 
 resource "aws_route" "private" {
@@ -207,10 +209,13 @@ resource "aws_vpc_peering_connection" "this" {
   vpc_id        = aws_vpc.this.id
   auto_accept   = false
 
-  tags = {
-    "Name" = each.key
-    "Side" = "Requester"
-  }
+  tags = merge(
+    local.global_tags,
+    {
+      Name = each.key
+      Side = "Requester"
+    },
+  )
 }
 
 resource "aws_route" "peering_requester" {
@@ -251,9 +256,13 @@ resource "aws_vpc_peering_connection_accepter" "peer" {
   vpc_peering_connection_id = data.aws_vpc_peering_connection.this[each.value.name].id
   auto_accept               = true
 
-  tags = {
-    Side = "Accepter"
-  }
+  tags = merge(
+    local.global_tags,
+    {
+      Name = each.key
+      Side = "Accepter"
+    },
+  )
 }
 
 resource "aws_route" "peering_accepter" {

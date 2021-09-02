@@ -72,13 +72,9 @@ variable "vmss_disk_size_gb" {
   default     = 128
 }
 
-variable "vmss_subnet_config" {
-  description = "The subnet configuration for the VMSS instances"
-  type = object({
-    name                 = string
-    virtual_network_name = string
-    resource_group_name  = string
-  })
+variable "vmss_subnet_id" {
+  description = "The subnet id for the VMSS instances"
+  type        = string
 }
 
 variable "unique_suffix" {

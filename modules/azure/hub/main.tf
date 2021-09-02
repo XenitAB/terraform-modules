@@ -45,11 +45,14 @@ resource "azurerm_nat_gateway" "this" {
   name                    = "natgw-${var.environment}-${var.location_short}-${var.name}"
   resource_group_name     = data.azurerm_resource_group.this.name
   location                = data.azurerm_resource_group.this.location
-  public_ip_prefix_ids    = [azurerm_public_ip_prefix.this.id]
   sku_name                = "Standard"
   idle_timeout_in_minutes = 10
 }
 
+resource "azurerm_nat_gateway_public_ip_prefix_association" "this" {
+  nat_gateway_id      = azurerm_nat_gateway.this.id
+  public_ip_prefix_id = azurerm_public_ip_prefix.this.id
+}
 
 resource "azurerm_subnet" "this" {
   for_each = {

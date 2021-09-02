@@ -35,7 +35,6 @@ No modules.
 | [azurerm_image.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/data-sources/image) | data source |
 | [azurerm_key_vault.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/data-sources/key_vault) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/data-sources/resource_group) | data source |
-| [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/data-sources/subnet) | data source |
 
 ## Inputs
 
@@ -54,7 +53,7 @@ No modules.
 | <a name="input_vmss_disk_size_gb"></a> [vmss\_disk\_size\_gb](#input\_vmss\_disk\_size\_gb) | The disk size (in GB) for the VMSS instances | `number` | `128` | no |
 | <a name="input_vmss_instances"></a> [vmss\_instances](#input\_vmss\_instances) | The number of instances | `number` | `1` | no |
 | <a name="input_vmss_sku"></a> [vmss\_sku](#input\_vmss\_sku) | The SKU for VMSS instances | `string` | `"Standard_F4s_v2"` | no |
-| <a name="input_vmss_subnet_config"></a> [vmss\_subnet\_config](#input\_vmss\_subnet\_config) | The subnet configuration for the VMSS instances | <pre>object({<br>    name                 = string<br>    virtual_network_name = string<br>    resource_group_name  = string<br>  })</pre> | n/a | yes |
+| <a name="input_vmss_subnet_id"></a> [vmss\_subnet\_id](#input\_vmss\_subnet\_id) | The subnet id for the VMSS instances | `string` | n/a | yes |
 | <a name="input_vmss_zones"></a> [vmss\_zones](#input\_vmss\_zones) | The zones to place the VMSS instances | `list(string)` | <pre>[<br>  "1",<br>  "2",<br>  "3"<br>]</pre> | no |
 
 ## Outputs

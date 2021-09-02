@@ -13,9 +13,5 @@ module "azpagent" {
   name                             = "azpagent"
   azure_pipelines_agent_image_name = "azp-agent-2020-11-16T22-24-11Z"
   vmss_sku                         = "Standard_B2s"
-  vmss_subnet_config = {
-    name                 = "sn-dev-we-hub-servers"
-    virtual_network_name = "vnet-dev-we-hub"
-    resource_group_name  = "rg-dev-we-hub"
-  }
+  vmss_subnet_id                   = "some_id"
 }

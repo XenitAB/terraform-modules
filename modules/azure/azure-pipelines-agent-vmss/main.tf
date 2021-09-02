@@ -27,12 +27,6 @@ data "azurerm_resource_group" "this" {
   name = local.resource_group_name
 }
 
-data "azurerm_subnet" "this" {
-  name                 = var.vmss_subnet_config.name
-  virtual_network_name = var.vmss_subnet_config.virtual_network_name
-  resource_group_name  = var.vmss_subnet_config.resource_group_name
-}
-
 data "azurerm_key_vault" "this" {
   name                = local.keyvault_name
   resource_group_name = local.keyvault_resource_group_name
@@ -90,7 +84,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "this" {
     ip_configuration {
       name      = "ipconfig-01"
       primary   = true
-      subnet_id = data.azurerm_subnet.this.id
+      subnet_id = var.vmss_subnet_id
     }
   }
 

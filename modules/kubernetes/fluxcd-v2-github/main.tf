@@ -73,18 +73,18 @@ resource "tls_private_key" "cluster" {
 }
 
 data "flux_install" "this" {
-  target_path = "clusters/${var.environment}"
+  target_path = "clusters/${var.cluster_id}"
 }
 
 data "flux_sync" "this" {
   url         = "ssh://git@github.com/${var.github_owner}/${var.cluster_repo}.git"
-  target_path = "clusters/${var.environment}"
+  target_path = "clusters/${var.cluster_id}"
   branch      = var.branch
   interval    = 1
 }
 
 resource "github_repository_deploy_key" "cluster" {
-  title      = "flux-${var.environment}"
+  title      = "flux-${var.cluster_id}"
   repository = data.github_repository.cluster.name
   key        = tls_private_key.cluster.public_key_openssh
   read_only  = true
@@ -154,9 +154,9 @@ resource "kubernetes_secret" "cluster" {
 resource "github_repository_file" "cluster_tenants" {
   repository = data.github_repository.cluster.name
   branch     = var.branch
-  file       = "clusters/${var.environment}/tenants.yaml"
+  file       = "clusters/${var.cluster_id}/tenants.yaml"
   content = templatefile("${path.module}/templates/cluster-tenants.yaml", {
-    environment = var.environment
+    cluster_id = var.cluster_id
   })
   overwrite_on_create = true
 }
@@ -190,7 +190,7 @@ resource "github_repository_deploy_key" "tenant" {
     if ns.flux.enabled
   }
 
-  title      = "flux-${var.environment}"
+  title      = "flux-${var.cluster_id}"
   repository = data.github_repository.tenant[each.key].name
   key        = tls_private_key.tenant[each.key].public_key_openssh
   read_only  = true
@@ -225,7 +225,7 @@ resource "github_repository_file" "tenant" {
 
   repository = data.github_repository.cluster.name
   branch     = var.branch
-  file       = "tenants/${var.environment}/${each.key}.yaml"
+  file       = "tenants/${var.cluster_id}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {
     repo        = "ssh://git@github.com/${data.github_repository.tenant[each.key].full_name}.git",
     branch      = var.branch,

@@ -5,5 +5,6 @@ module "fluxcd_v2" {
 
   github_owner = "foo"
   environment  = "dev"
+  cluster_id   = "foobar"
   namespaces   = []
 }

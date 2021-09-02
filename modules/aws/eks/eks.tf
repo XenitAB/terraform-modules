@@ -57,6 +57,8 @@ resource "aws_eks_addon" "kube_proxy" {
   addon_name   = "kube-proxy"
 
   tags = local.global_tags
+
+  depends_on = [aws_eks_node_group.this]
 }
 
 resource "aws_eks_addon" "core_dns" {
@@ -64,6 +66,8 @@ resource "aws_eks_addon" "core_dns" {
   addon_name   = "coredns"
 
   tags = local.global_tags
+
+  depends_on = [aws_eks_node_group.this]
 }
 
 data "tls_certificate" "thumbprint" {

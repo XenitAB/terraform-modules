@@ -29,7 +29,7 @@ terraform {
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
-      version = "0.3.0"
+      version = "0.4.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"

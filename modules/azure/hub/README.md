@@ -30,6 +30,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [azurerm_nat_gateway.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/resources/nat_gateway) | resource |
+| [azurerm_nat_gateway_public_ip_prefix_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/resources/nat_gateway_public_ip_prefix_association) | resource |
 | [azurerm_network_security_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/resources/network_security_group) | resource |
 | [azurerm_public_ip_prefix.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/resources/public_ip_prefix) | resource |
 | [azurerm_role_assignment.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/resources/role_assignment) | resource |

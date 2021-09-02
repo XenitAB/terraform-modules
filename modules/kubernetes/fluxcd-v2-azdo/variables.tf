@@ -19,6 +19,11 @@ variable "environment" {
   type        = string
 }
 
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}
+
 variable "namespaces" {
   description = "The namespaces to configure flux with"
   type = list(

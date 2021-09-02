@@ -160,6 +160,7 @@ module "ingress_nginx" {
   cloud_provider         = "azure"
   http_snippet           = var.ingress_config.http_snippet
   linkerd_enabled        = var.linkerd_enabled
+  datadog_enabled        = var.datadog_enabled
   public_private_enabled = var.ingress_config.public_private_enabled
 }
 
@@ -279,7 +280,7 @@ module "datadog" {
   datadog_site      = var.datadog_config.datadog_site
   api_key           = var.datadog_config.api_key
   app_key           = var.datadog_config.app_key
-  namespace_include = var.namespaces[*].name
+  namespace_include = compact(concat(var.namespaces[*].name, var.datadog_config.extra_namespaces))
 }
 
 # falco

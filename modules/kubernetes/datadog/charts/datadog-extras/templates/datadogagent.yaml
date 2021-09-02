@@ -22,6 +22,7 @@ spec:
       logsConfigContainerCollectAll: true
     apm:
       enabled: true
+      hostPort: 8126
     env:
       - name: DD_CONTAINER_EXCLUDE_LOGS
         value: "name:datadog-agent"

@@ -49,8 +49,3 @@ output "xenit_config" {
     role_arn = module.xenit.role_arn
   }
 }
-
-output "aws_eks_core_dns_addon" {
-  description = "Core DNS addon"
-  value       = aws_eks_addon.core_dns
-}

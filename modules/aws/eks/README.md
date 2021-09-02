@@ -68,6 +68,7 @@
 
 | Name | Description |
 |------|-------------|
+| <a name="output_aws_eks_core_dns_addon"></a> [aws\_eks\_core\_dns\_addon](#output\_aws\_eks\_core\_dns\_addon) | Core DNS addon |
 | <a name="output_cert_manager_config"></a> [cert\_manager\_config](#output\_cert\_manager\_config) | Configuration for Cert Manager |
 | <a name="output_cluster_autoscaler_config"></a> [cluster\_autoscaler\_config](#output\_cluster\_autoscaler\_config) | Configuration for Cluster Autoscaler |
 | <a name="output_external_dns_config"></a> [external\_dns\_config](#output\_external\_dns\_config) | Configuration for External DNS |

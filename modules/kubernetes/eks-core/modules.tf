@@ -112,7 +112,7 @@ module "ingress_nginx" {
 }
 
 module "ingress_healthz" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.ingress_nginx]
 
   for_each = {
     for s in ["ingress-healthz"] :
@@ -210,6 +210,8 @@ module "reloader" {
 }
 
 module "azad_kube_proxy" {
+  depends_on = [module.ingress_nginx]
+
   for_each = {
     for s in ["azad-kube-proxy"] :
     s => s

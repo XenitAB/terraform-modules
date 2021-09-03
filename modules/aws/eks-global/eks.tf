@@ -53,6 +53,7 @@ data "aws_iam_policy_document" "eks_admin_permission" {
       "iam:DetachRolePolicy",
       "iam:DeleteRole",
       "iam:CreateRole",
+      "iam:CreateServiceLinkedRole",
       "iam:AttachRolePolicy",
       "kms:ListKeys",
       "kms:DescribeKey",

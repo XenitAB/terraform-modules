@@ -313,6 +313,8 @@ module "reloader" {
 
 # azad-kube-proxy
 module "azad_kube_proxy" {
+  depends_on = [module.ingress_nginx]
+
   for_each = {
     for s in ["azad-kube-proxy"] :
     s => s

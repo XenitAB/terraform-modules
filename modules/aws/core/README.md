@@ -7,13 +7,13 @@ This module is used to configure a standard public/private VPC and accompanying 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.55.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.58.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.55.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.58.0 |
 
 ## Modules
 
@@ -23,25 +23,25 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_eip.public](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/eip) | resource |
-| [aws_internet_gateway.this](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/internet_gateway) | resource |
-| [aws_nat_gateway.public](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/nat_gateway) | resource |
-| [aws_route.peering_accepter](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/route) | resource |
-| [aws_route.peering_requester](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/route) | resource |
-| [aws_route.private](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/route) | resource |
-| [aws_route.public](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/route) | resource |
-| [aws_route53_zone.this](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/route53_zone) | resource |
-| [aws_route_table.private](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/route_table) | resource |
-| [aws_route_table.public](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/route_table) | resource |
-| [aws_route_table_association.private](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/route_table_association) | resource |
-| [aws_route_table_association.public](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/route_table_association) | resource |
-| [aws_subnet.private](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/subnet) | resource |
-| [aws_subnet.public](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/subnet) | resource |
-| [aws_vpc.this](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/vpc) | resource |
-| [aws_vpc_peering_connection.this](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/vpc_peering_connection) | resource |
-| [aws_vpc_peering_connection_accepter.peer](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/resources/vpc_peering_connection_accepter) | resource |
-| [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/data-sources/availability_zones) | data source |
-| [aws_vpc_peering_connection.this](https://registry.terraform.io/providers/hashicorp/aws/3.55.0/docs/data-sources/vpc_peering_connection) | data source |
+| [aws_eip.public](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/eip) | resource |
+| [aws_internet_gateway.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/internet_gateway) | resource |
+| [aws_nat_gateway.public](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/nat_gateway) | resource |
+| [aws_route.peering_accepter](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/route) | resource |
+| [aws_route.peering_requester](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/route) | resource |
+| [aws_route.private](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/route) | resource |
+| [aws_route.public](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/route) | resource |
+| [aws_route53_zone.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/route53_zone) | resource |
+| [aws_route_table.private](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/route_table) | resource |
+| [aws_route_table.public](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/route_table) | resource |
+| [aws_route_table_association.private](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/route_table_association) | resource |
+| [aws_route_table_association.public](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/route_table_association) | resource |
+| [aws_subnet.private](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/subnet) | resource |
+| [aws_subnet.public](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/subnet) | resource |
+| [aws_vpc.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/vpc) | resource |
+| [aws_vpc_peering_connection.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/vpc_peering_connection) | resource |
+| [aws_vpc_peering_connection_accepter.peer](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/vpc_peering_connection_accepter) | resource |
+| [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/availability_zones) | data source |
+| [aws_vpc_peering_connection.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/vpc_peering_connection) | data source |
 
 ## Inputs
 

@@ -8,10 +8,10 @@ This module is used to create AKS clusters.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 1.6.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.72.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.2.2 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 4.13.0 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.2.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.76.0 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.3.0 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | 4.14.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.3.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.11.3 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.4.1 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
@@ -20,8 +20,8 @@ This module is used to create AKS clusters.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.72.0 |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.2.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.76.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.3.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.4.1 |
 
 ## Modules
@@ -52,7 +52,7 @@ This module is used to create AKS clusters.
 
 | Name | Type |
 |------|------|
-| [helm_release.aks_core_extras](https://registry.terraform.io/providers/hashicorp/helm/2.2.0/docs/resources/release) | resource |
+| [helm_release.aks_core_extras](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
 | [kubernetes_cluster_role.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.list_namespaces](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/cluster_role) | resource |
@@ -71,8 +71,8 @@ This module is used to create AKS clusters.
 | [kubernetes_role_binding.sa_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/role_binding) | resource |
 | [kubernetes_service_account.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/service_account) | resource |
-| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/data-sources/client_config) | data source |
-| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/data-sources/resource_group) | data source |
+| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.76.0/docs/data-sources/client_config) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.76.0/docs/data-sources/resource_group) | data source |
 
 ## Inputs
 

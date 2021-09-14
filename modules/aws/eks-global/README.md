@@ -28,6 +28,7 @@ No modules.
 | [aws_kms_key.eks_encryption](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/kms_key) | resource |
 | [aws_kms_key.velero](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/kms_key) | resource |
 | [aws_s3_bucket.velero](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket_public_access_block.velero](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/s3_bucket_public_access_block) | resource |
 | [azuread_group.cluster_admin](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group) | resource |
 | [azuread_group.cluster_view](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group) | resource |
 | [azuread_group.edit](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group) | resource |

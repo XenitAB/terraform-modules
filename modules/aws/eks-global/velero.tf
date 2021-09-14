@@ -12,7 +12,8 @@ resource "aws_kms_key" "velero" {
   )
 }
 
-resource "aws_s3_bucket" "velero" { #tfsec:ignore:AWS002
+#tfsec:ignore:AWS002
+resource "aws_s3_bucket" "velero" {
   bucket = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}-velero-${var.unique_suffix}"
   acl    = "private"
 
@@ -35,4 +36,12 @@ resource "aws_s3_bucket" "velero" { #tfsec:ignore:AWS002
       Application = "velero",
     },
   )
+}
+
+resource "aws_s3_bucket_public_access_block" "velero" {
+  bucket                  = aws_s3_bucket.velero.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }

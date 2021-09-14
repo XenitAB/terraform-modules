@@ -9,7 +9,7 @@ jobs:
       - name: Setup TFLint
         uses: lablabs/setup-tflint@v1.1.0
         with:
-          tflint_version: v0.30.0
+          tflint_version: v0.32.1
       - name: Install azurerm plugin
         run: |
           mkdir -p .tflint.d/plugins
@@ -46,8 +46,8 @@ jobs:
         uses: actions/checkout@master
       - name: Setup terraform-docs
         env:
-          TERRAFORM_DOCS_VERSION: "v0.14.1"
-          TERRAFORM_DOCS_SHA: "f0a46b13c126f06eba44178f901bb7b6b5f61a8b89e07a88988c6f45e5fcce19"
+          TERRAFORM_DOCS_VERSION: "v0.15.0"
+          TERRAFORM_DOCS_SHA: "e0b399d9dc2eb97853a7e12f1ae678e7160cae4c811646ce70169a8d611f6cf9"
         run: |
           wget https://github.com/terraform-docs/terraform-docs/releases/download/${TERRAFORM_DOCS_VERSION}/terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz
           DOWNLOAD_TERRAFORM_DOCS_SHA=$(openssl sha1 -sha256 terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz | awk '{print $2}')
@@ -77,8 +77,8 @@ jobs:
         uses: actions/checkout@master
       - name: Setup tfsec
         env:
-          TFSEC_VERSION: "v0.43.0"
-          TFSEC_SHA: "7eba972bf0efa0a0a530a046a23a07606420f8e87327819fdd3eacd01c618d03"
+          TFSEC_VERSION: "v0.58.9"
+          TFSEC_SHA: "1e1902a67149e15f7ee52c3b4335b75a24623ec2f18faed1ae25cb368d5fadde"
         run: |
           wget https://github.com/tfsec/tfsec/releases/download/${TFSEC_VERSION}/tfsec-linux-amd64
           DOWNLOAD_TFSEC_SHA=$(openssl sha1 -sha256 tfsec-linux-amd64 | awk '{print $2}')

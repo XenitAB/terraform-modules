@@ -10,7 +10,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.4.1"
+      version = "2.5.0"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -38,7 +38,7 @@ resource "helm_release" "cert_manager" {
   chart      = "cert-manager"
   name       = "cert-manager"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v1.5.1"
+  version    = "v1.5.3"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     provider   = var.cloud_provider,
     aws_config = var.aws_config,

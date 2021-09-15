@@ -15,7 +15,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.4.1"
+      version = "2.5.0"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -50,7 +50,7 @@ resource "helm_release" "datadog_operator" {
   name       = "datadog-operator"
   namespace  = kubernetes_namespace.this.metadata[0].name
 
-  version = "0.6.3"
+  version = "0.7.0"
   set {
     name  = "apiKey"
     value = var.api_key

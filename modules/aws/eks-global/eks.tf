@@ -15,6 +15,7 @@ resource "aws_kms_key" "eks_encryption" {
 data "aws_iam_policy_document" "eks_admin_permission" {
   statement {
     effect = "Allow"
+    #tfsec:ignore:AWS099
     actions = [
       "eks:*",
       "ec2:RunInstances",
@@ -59,8 +60,9 @@ data "aws_iam_policy_document" "eks_admin_permission" {
       "kms:DescribeKey",
       "kms:CreateGrant",
     ]
+    #tfsec:ignore:AWS099
     resources = [
-      "*" #tfsec:ignore:AWS097
+      "*"
     ]
   }
 }

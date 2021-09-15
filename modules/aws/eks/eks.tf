@@ -29,15 +29,17 @@ data "aws_subnet" "cluster" {
   }
 }
 
-resource "aws_eks_cluster" "this" { #tfsec:ignore:AWS067
+#tfsec:ignore:AWS067
+resource "aws_eks_cluster" "this" {
   provider = aws.eks_admin
 
   name     = "${var.environment}-${var.name}${var.eks_name_suffix}"
   role_arn = var.cluster_role_arn
   version  = var.eks_config.kubernetes_version
 
+  #tfsec:ignore:AWS069 tfsec:ignore:AWS068
   vpc_config {
-    subnet_ids              = [for s in data.aws_subnet.cluster : s.id] #tfsec:ignore:AWS069 tfsec:ignore:AWS068
+    subnet_ids              = [for s in data.aws_subnet.cluster : s.id]
     endpoint_private_access = true
     public_access_cidrs     = var.eks_authorized_ips #tfsec:ignore:AWS068
   }

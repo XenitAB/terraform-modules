@@ -329,3 +329,25 @@ variable "csi_secrets_store_provider_aws_enabled" {
   type        = bool
   default     = true
 }
+
+variable "datadog_enabled" {
+  description = "Should Datadog be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "datadog_config" {
+  description = "Datadog configuration"
+  type = object({
+    datadog_site     = string
+    api_key          = string
+    app_key          = string
+    extra_namespaces = list(string)
+  })
+  default = {
+    datadog_site     = ""
+    api_key          = ""
+    app_key          = ""
+    extra_namespaces = [""]
+  }
+}

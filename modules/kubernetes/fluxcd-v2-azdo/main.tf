@@ -21,15 +21,15 @@ terraform {
   required_providers {
     helm = {
       source  = "hashicorp/helm"
-      version = "2.2.0"
+      version = "2.3.0"
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.2.2"
+      version = "0.3.0"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
-      version = "0.3.0"
+      version = "0.5.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
@@ -99,13 +99,13 @@ data "azuredevops_git_repository" "cluster" {
 }
 
 data "flux_install" "this" {
-  target_path = "clusters/${var.environment}"
+  target_path = "clusters/${var.cluster_id}"
 }
 
 data "flux_sync" "this" {
   url                = "${local.azdo_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
   branch             = var.branch
-  target_path        = "clusters/${var.environment}"
+  target_path        = "clusters/${var.cluster_id}"
   git_implementation = "libgit2"
 }
 
@@ -168,9 +168,9 @@ resource "azuredevops_git_repository_file" "kustomize" {
 
 resource "azuredevops_git_repository_file" "cluster_tenants" {
   repository_id = data.azuredevops_git_repository.cluster.id
-  file          = "clusters/${var.environment}/tenants.yaml"
+  file          = "clusters/${var.cluster_id}/tenants.yaml"
   content = templatefile("${path.module}/templates/cluster-tenants.yaml", {
-    environment = var.environment
+    cluster_id = var.cluster_id
   })
   branch              = "refs/heads/${var.branch}"
   overwrite_on_create = true
@@ -186,7 +186,7 @@ resource "azuredevops_git_repository_file" "tenant" {
 
   repository_id = data.azuredevops_git_repository.cluster.id
   branch        = "refs/heads/${var.branch}"
-  file          = "tenants/${var.environment}/${each.key}.yaml"
+  file          = "tenants/${var.cluster_id}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {
     repo        = "${local.azdo_proxy_url}/${var.azure_devops_org}/${each.value.flux.proj}/_git/${each.value.flux.repo}"
     branch      = var.branch,

@@ -8,6 +8,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./tenants/${environment}
+  path: ./tenants/${cluster_id}
   prune: true
   validation: client

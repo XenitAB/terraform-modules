@@ -10,7 +10,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.54.0"
+      version = "3.58.0"
     }
     random = {
       source  = "hashicorp/random"
@@ -22,11 +22,11 @@ terraform {
     }
     github = {
       source  = "integrations/github"
-      version = "4.13.0"
+      version = "4.14.0"
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.2.2"
+      version = "0.3.0"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
@@ -34,7 +34,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.2.0"
+      version = "2.3.0"
     }
   }
 }

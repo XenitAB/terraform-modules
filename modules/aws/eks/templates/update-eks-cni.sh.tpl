@@ -1,5 +1,5 @@
 TMPDIR=$(mktemp -d) && \
-KUBECONFIG="$TMPDIR/config" && \
+export KUBECONFIG="$TMPDIR/config" && \
 kubectl config set clusters.cluster-admin.server ${api_server_url} && \
 kubectl config set clusters.cluster-admin.certificate-authority-data ${b64_cluster_ca} && \
 kubectl config set users.cluster-admin.token ${token} && \

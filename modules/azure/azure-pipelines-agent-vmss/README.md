@@ -11,14 +11,14 @@ Follow this guide to setup the agent pool (manually): https://docs.microsoft.com
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.72.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.76.0 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.72.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.76.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 3.1.0 |
 
 ## Modules
@@ -29,13 +29,12 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_key_vault_secret.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/resources/key_vault_secret) | resource |
-| [azurerm_linux_virtual_machine_scale_set.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/resources/linux_virtual_machine_scale_set) | resource |
+| [azurerm_key_vault_secret.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.76.0/docs/resources/key_vault_secret) | resource |
+| [azurerm_linux_virtual_machine_scale_set.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.76.0/docs/resources/linux_virtual_machine_scale_set) | resource |
 | [tls_private_key.this](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/resources/private_key) | resource |
-| [azurerm_image.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/data-sources/image) | data source |
-| [azurerm_key_vault.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/data-sources/key_vault) | data source |
-| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/data-sources/resource_group) | data source |
-| [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.72.0/docs/data-sources/subnet) | data source |
+| [azurerm_image.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.76.0/docs/data-sources/image) | data source |
+| [azurerm_key_vault.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.76.0/docs/data-sources/key_vault) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.76.0/docs/data-sources/resource_group) | data source |
 
 ## Inputs
 
@@ -54,7 +53,7 @@ No modules.
 | <a name="input_vmss_disk_size_gb"></a> [vmss\_disk\_size\_gb](#input\_vmss\_disk\_size\_gb) | The disk size (in GB) for the VMSS instances | `number` | `128` | no |
 | <a name="input_vmss_instances"></a> [vmss\_instances](#input\_vmss\_instances) | The number of instances | `number` | `1` | no |
 | <a name="input_vmss_sku"></a> [vmss\_sku](#input\_vmss\_sku) | The SKU for VMSS instances | `string` | `"Standard_F4s_v2"` | no |
-| <a name="input_vmss_subnet_config"></a> [vmss\_subnet\_config](#input\_vmss\_subnet\_config) | The subnet configuration for the VMSS instances | <pre>object({<br>    name                 = string<br>    virtual_network_name = string<br>    resource_group_name  = string<br>  })</pre> | n/a | yes |
+| <a name="input_vmss_subnet_id"></a> [vmss\_subnet\_id](#input\_vmss\_subnet\_id) | The subnet id for the VMSS instances | `string` | n/a | yes |
 | <a name="input_vmss_zones"></a> [vmss\_zones](#input\_vmss\_zones) | The zones to place the VMSS instances | `list(string)` | <pre>[<br>  "1",<br>  "2",<br>  "3"<br>]</pre> | no |
 
 ## Outputs

@@ -5,6 +5,12 @@ output "kube_config" {
     host                   = aws_eks_cluster.this.endpoint
     cluster_ca_certificate = base64decode(aws_eks_cluster.this.certificate_authority[0].data)
     token                  = data.aws_eks_cluster_auth.this.token
+
+    # Ugly workaround to force the addons to be installed before starting with the core module
+    dummy_data = {
+      core_dns      = aws_eks_addon.core_dns
+      aws_eks_addon = aws_eks_addon.kube_proxy
+    }
   }
 }
 

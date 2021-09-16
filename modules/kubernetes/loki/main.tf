@@ -13,7 +13,7 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "2.72.0"
+      version = "2.76.0"
       source  = "hashicorp/azurerm"
     }
     kubernetes = {
@@ -22,7 +22,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.2.0"
+      version = "2.3.0"
     }
   }
 }
@@ -31,6 +31,7 @@ data "azurerm_resource_group" "this" {
   name = local.resource_group_name
 }
 
+#tfsec:ignore:AZU012
 resource "azurerm_storage_account" "loki" {
   name                     = local.storage_account_name
   resource_group_name      = data.azurerm_resource_group.this.name

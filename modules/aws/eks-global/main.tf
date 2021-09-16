@@ -3,7 +3,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.54.0"
+      version = "3.58.0"
     }
     azuread = {
       version = "1.6.0"
@@ -13,3 +13,13 @@ terraform {
 }
 
 data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+
+locals {
+  global_tags = {
+    Name        = var.name
+    Environment = var.environment
+    Module      = "eks-global"
+  }
+}

@@ -1,5 +1,5 @@
 locals {
-  excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns", "falco", "reloader", "external-secrets", "calico-system"]
+  excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns", "falco", "reloader", "external-secrets", "calico-system", "csi-secrets-store-provider-aws"]
 }
 
 module "opa_gatekeeper" {
@@ -48,6 +48,7 @@ module "fluxcd_v2_azure_devops" {
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
   azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
   environment       = var.environment
+  cluster_id        = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {
@@ -71,6 +72,7 @@ module "fluxcd_v2_github" {
 
   github_owner = var.fluxcd_v2_config.github.owner
   environment  = var.environment
+  cluster_id   = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {
@@ -110,7 +112,7 @@ module "ingress_nginx" {
 }
 
 module "ingress_healthz" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.ingress_nginx]
 
   for_each = {
     for s in ["ingress-healthz"] :
@@ -137,7 +139,7 @@ module "external_dns" {
   source = "../../kubernetes/external-dns"
 
   dns_provider = "aws"
-  txt_owner_id = var.environment # TODO: Add "name" definition to eks-core as well
+  txt_owner_id = "${var.environment}-${var.name}${var.eks_name_suffix}"
   aws_config = {
     region   = data.aws_region.current.name
     role_arn = var.external_dns_config.role_arn
@@ -208,6 +210,8 @@ module "reloader" {
 }
 
 module "azad_kube_proxy" {
+  depends_on = [module.ingress_nginx]
+
   for_each = {
     for s in ["azad-kube-proxy"] :
     s => s

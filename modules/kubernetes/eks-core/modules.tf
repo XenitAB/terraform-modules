@@ -321,7 +321,7 @@ module "datadog" {
 
   source = "../../kubernetes/datadog"
 
-  location          = var.location_short
+  location          = data.aws_region.current.name
   environment       = var.environment
   datadog_site      = var.datadog_config.datadog_site
   api_key           = var.datadog_config.api_key

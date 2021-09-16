@@ -50,7 +50,7 @@ resource "helm_release" "datadog_operator" {
   name       = "datadog-operator"
   namespace  = kubernetes_namespace.this.metadata[0].name
 
-  version = "0.6.3"
+  version = "0.7.0"
   set {
     name  = "apiKey"
     value = var.api_key

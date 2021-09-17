@@ -33,10 +33,16 @@ No modules.
 | [azuread_group.cluster_view](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group) | resource |
 | [azuread_group.edit](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group) | resource |
 | [azuread_group.view](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group) | resource |
+| [azuread_group_member.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group_member) | resource |
+| [azuread_group_member.resource_group_owner](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group_member) | resource |
+| [azuread_group_member.resource_group_reader](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/resources/group_member) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.eks_admin_assume](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.eks_admin_permission](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/region) | data source |
+| [azuread_group.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/data-sources/group) | data source |
+| [azuread_group.resource_group_owner](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/data-sources/group) | data source |
+| [azuread_group.resource_group_reader](https://registry.terraform.io/providers/hashicorp/azuread/1.6.0/docs/data-sources/group) | data source |
 
 ## Inputs
 

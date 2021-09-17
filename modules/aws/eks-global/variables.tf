@@ -29,6 +29,12 @@ variable "namespaces" {
   )
 }
 
+variable "azure_ad_group_prefix" {
+  description = "Prefix for Azure AD Groups"
+  type        = string
+  default     = "az"
+}
+
 variable "group_name_separator" {
   description = "Separator for group names"
   type        = string

@@ -16,7 +16,7 @@ module "eks-global" {
   namespaces = [
     {
       delegate_resource_group = true
-      name = "team1"
+      name                    = "team1"
     }
   ]
 }

@@ -23,7 +23,7 @@ variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes"
   type = list(
     object({
-      name = string
+      name                    = string
       delegate_resource_group = bool
     })
   )

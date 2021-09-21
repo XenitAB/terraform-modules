@@ -296,6 +296,8 @@ module "falco" {
   }
 
   source = "../../kubernetes/falco"
+
+  cloud_provider = "azure"
 }
 
 # Reloader

@@ -11,4 +11,6 @@ module "falco" {
     kubernetes = kubernetes
     helm       = helm
   }
+
+  cloud_provider = "bar"
 }

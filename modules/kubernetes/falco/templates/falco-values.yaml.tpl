@@ -5,9 +5,11 @@ auditLog:
 docker:
   enabled: false
 
+%{~ if provider == "aws" ~}
 # Use EBPF instead of kernel module
 ebpf:
   enabled: true
+%{~ endif ~}
 
 falco:
   grpc:

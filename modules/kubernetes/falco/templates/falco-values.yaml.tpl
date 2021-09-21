@@ -1,11 +1,11 @@
 auditLog:
   enabled: false
 
+%{~ if provider == "azure" ~}
 # AKS does not use docker anymore
 docker:
   enabled: false
 
-%{~ if provider == "azure" ~}
 # Use EBPF instead of kernel module
 ebpf:
   enabled: true

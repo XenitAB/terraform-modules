@@ -1,5 +1,20 @@
 locals {
-  excluded_namespaces = ["kube-system", "gatekeeper-system", "cert-manager", "ingress-nginx", "velero", "flux-system", "external-dns", "falco", "reloader", "external-secrets", "calico-system", "csi-secrets-store-provider-aws", "datadog"]
+  excluded_namespaces = [
+    "calico-system",
+    "cert-manager",
+    "csi-secrets-store-provider-aws",
+    "datadog",
+    "external-dns",
+    "external-secrets",
+    "falco",
+    "flux-system",
+    "gatekeeper-system",
+    "ingress-nginx",
+    "kube-system",
+    "prometheus",
+    "reloader",
+    "velero",
+  ]
 }
 
 module "opa_gatekeeper" {

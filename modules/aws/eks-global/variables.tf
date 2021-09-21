@@ -23,9 +23,16 @@ variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes"
   type = list(
     object({
-      name = string
+      name                    = string
+      delegate_resource_group = bool
     })
   )
+}
+
+variable "azure_ad_group_prefix" {
+  description = "Prefix for Azure AD Groups"
+  type        = string
+  default     = "az"
 }
 
 variable "group_name_separator" {

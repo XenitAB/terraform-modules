@@ -5,7 +5,7 @@ auditLog:
 docker:
   enabled: false
 
-%{~ if provider == "aws" ~}
+%{~ if provider == "azure" ~}
 # Use EBPF instead of kernel module
 ebpf:
   enabled: true

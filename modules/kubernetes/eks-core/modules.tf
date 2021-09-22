@@ -211,6 +211,8 @@ module "falco" {
   }
 
   source = "../../kubernetes/falco"
+
+  cloud_provider = "aws"
 }
 
 module "reloader" {

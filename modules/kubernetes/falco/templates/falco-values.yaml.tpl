@@ -1,6 +1,7 @@
 auditLog:
   enabled: false
 
+%{~ if provider == "azure" ~}
 # AKS does not use docker anymore
 docker:
   enabled: false
@@ -8,6 +9,7 @@ docker:
 # Use EBPF instead of kernel module
 ebpf:
   enabled: true
+%{~ endif ~}
 
 falco:
   grpc:

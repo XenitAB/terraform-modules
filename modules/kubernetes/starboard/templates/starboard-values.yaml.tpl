@@ -10,7 +10,7 @@ trivy:
   mode: ClientServer
   severity: CRITICAL
   ignoreUnfixed: true
-  serverURL: "https://trivy.trivy.svc.cluster.local:4975"
+  serverURL: "http://trivy.trivy.svc.cluster.local:4954"
 
 # TODO insert logic for AWS IAM ECR access config
 # https://aquasecurity.github.io/starboard/v0.12.0/integrations/managed-registries/

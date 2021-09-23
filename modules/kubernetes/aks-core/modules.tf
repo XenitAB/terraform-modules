@@ -15,7 +15,7 @@ locals {
     "linkerd",
     "linkerd-cni",
     "reloader",
-    "starboard",
+    "starboard-operator",
     "tigera-operator",
     "velero",
   ]

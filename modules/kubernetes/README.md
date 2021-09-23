@@ -30,6 +30,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`linkerd`](linkerd/README.md)
 - [`goldpinger`](goldpinger/README.md)
 - [`cluster-autoscaler`](cluster-autoscaler/README.md)
+- [`starboard`](starboard/README.md)
 
 ## Style Guide
 

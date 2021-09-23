@@ -397,3 +397,9 @@ variable "goldpinger_enabled" {
   type        = bool
   default     = true
 }
+
+variable "starboard_enabled" {
+  description = "Should Starboard be enabled"
+  type        = bool
+  default     = true
+}

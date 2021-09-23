@@ -432,3 +432,17 @@ module "goldpinger" {
   linkerd_enabled = var.linkerd_enabled
 }
 
+# starboard
+module "starboard" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["starboard"] :
+    s => s
+    if var.starboard_enabled
+  }
+
+  source = "../../kubernetes/starboard"
+
+  cloud_provider = "azure"
+}

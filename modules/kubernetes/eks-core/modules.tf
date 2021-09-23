@@ -13,6 +13,7 @@ locals {
     "kube-system",
     "prometheus",
     "reloader",
+    "starboard",
     "velero",
   ]
 }

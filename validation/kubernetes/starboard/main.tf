@@ -4,7 +4,7 @@ provider "kubernetes" {}
 
 provider "helm" {}
 
-module "falco" {
+module "starboard" {
   source = "../../../modules/kubernetes/starboard"
 
   providers = {

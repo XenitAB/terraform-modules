@@ -18,8 +18,6 @@ podEnv:
       secretKeyRef:
         name: azad-kube-proxy
         key: TENANT_ID
-  - name: AZURE_AD_GROUP_PREFIX
-    value: ""
   - name: TLS_ENABLED
     value: "false"
   - name: PORT

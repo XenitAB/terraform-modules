@@ -1,5 +1,6 @@
 application:
   port: 8080
+  metricsPort: 8081
   scheme: HTTP
 
 podEnv:

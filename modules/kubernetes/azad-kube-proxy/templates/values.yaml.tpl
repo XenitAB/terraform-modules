@@ -1,5 +1,6 @@
 application:
   port: 8080
+  metricsPort: 8081
   scheme: HTTP
 
 podEnv:
@@ -20,8 +21,6 @@ podEnv:
         key: TENANT_ID
   - name: TLS_ENABLED
     value: "false"
-  - name: PORT
-    value: "8080"
   - name: GROUP_IDENTIFIER
     value: "OBJECTID"
   - name: AZURE_AD_GROUP_PREFIX

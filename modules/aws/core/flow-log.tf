@@ -1,0 +1,78 @@
+data "aws_region" "current" {}
+
+resource "aws_flow_log" "this" {
+  for_each = {
+    for s in ["flowlog"] :
+    s => s
+    if var.flow_log_enabled
+  }
+
+  iam_role_arn    = aws_iam_role.this[each.key].arn
+  log_destination = aws_cloudwatch_log_group.this[each.key].arn
+  traffic_type    = "ALL"
+  vpc_id          = aws_vpc.this.id
+}
+
+resource "aws_cloudwatch_log_group" "this" {
+  for_each = {
+    for s in ["flowlog"] :
+    s => s
+    if var.flow_log_enabled
+  }
+  name = "${data.aws_region.current.name}-${var.environment}-${var.name}-cloudwatch"
+}
+
+resource "aws_iam_role" "this" {
+  for_each = {
+    for s in ["flowlog"] :
+    s => s
+    if var.flow_log_enabled
+  }
+  name = "${data.aws_region.current.name}-${var.environment}-${var.name}-cloudwatch"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "vpc-flow-logs.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy" "this" {
+  for_each = {
+    for s in ["flowlog"] :
+    s => s
+    if var.flow_log_enabled
+  }
+
+  name = "this"
+  role = aws_iam_role.this[each.key].id
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogGroups",
+        "logs:DescribeLogStreams"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}

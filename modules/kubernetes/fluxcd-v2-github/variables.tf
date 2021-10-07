@@ -1,5 +1,5 @@
-variable "github_owner" {
-  description = "Owner of GitHub repositories"
+variable "github_org" {
+  description = "Org of GitHub repositories"
   type        = string
 }
 

@@ -123,7 +123,7 @@ module "fluxcd_v2_github" {
 
   source = "../../kubernetes/fluxcd-v2-github"
 
-  github_owner = var.fluxcd_v2_config.github.owner
+  github_org = var.fluxcd_v2_config.github.org
   environment  = var.environment
   cluster_id   = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
   namespaces = [for ns in var.namespaces : {

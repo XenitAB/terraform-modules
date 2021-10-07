@@ -19,9 +19,13 @@ terraform {
   required_version = "0.15.3"
 
   required_providers {
-    tls = {
-      source  = "hashicorp/tls"
-      version = "3.1.0"
+    helm = {
+      source  = "hashicorp/helm"
+      version = "2.3.0"
+    }
+    flux = {
+      source  = "fluxcd/flux"
+      version = "0.3.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
@@ -31,10 +35,6 @@ terraform {
       source  = "integrations/github"
       version = "4.14.0"
     }
-    flux = {
-      source  = "fluxcd/flux"
-      version = "0.3.0"
-    }
     kubectl = {
       source  = "gavinbunney/kubectl"
       version = "1.11.3"
@@ -43,33 +43,50 @@ terraform {
 }
 
 locals {
-  known_hosts = "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
+  git_auth_proxy_url = "http://git-auth-proxy.flux-system.svc.cluster.local"
 }
 
-resource "kubernetes_namespace" "flux_system" {
+resource "kubernetes_namespace" "this" {
   metadata {
     name = "flux-system"
     labels = {
-      name                = "flux-system"
-      "xkf.xenit.io/kind" = "platform"
+      name = "flux-system"
     }
   }
 
   lifecycle {
     ignore_changes = [
       metadata[0].labels,
+      metadata[0].annotations,
     ]
   }
 }
 
-# Cluster
-data "github_repository" "cluster" {
-  name = var.cluster_repo
+# Git Auth Proxy
+resource "helm_release" "git_auth_proxy" {
+  repository = "https://xenitab.github.io/git-auth-proxy/"
+  chart      = "git-auth-proxy"
+  name       = "git-auth-proxy"
+  namespace  = kubernetes_namespace.this.metadata[0].name
+  version    = "v0.5.0"
+  values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
+    github_org = var.github_org
+    app_id = ""
+    installation_id = ""
+    private_key = ""
+    cluster_repo      = var.cluster_repo,
+    tenants = [for ns in var.namespaces : {
+      repo : ns.flux.repo
+      namespace : ns.name
+      }
+      if ns.flux.enabled
+    ],
+  })]
 }
 
-resource "tls_private_key" "cluster" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
+# Cluster
+data "github_repository" "cluster" {
+  full_name = "${var.github_org}/${var.cluster_repo}"
 }
 
 data "flux_install" "this" {
@@ -77,87 +94,75 @@ data "flux_install" "this" {
 }
 
 data "flux_sync" "this" {
-  url         = "ssh://git@github.com/${var.github_owner}/${var.cluster_repo}.git"
-  target_path = "clusters/${var.cluster_id}"
+  url         = "${local.git_auth_proxy_url}/${var.github_org}/${var.cluster_repo}"
   branch      = var.branch
-  interval    = 1
-}
-
-resource "github_repository_deploy_key" "cluster" {
-  title      = "flux-${var.cluster_id}"
-  repository = data.github_repository.cluster.name
-  key        = tls_private_key.cluster.public_key_openssh
-  read_only  = true
-}
-
-resource "github_repository_file" "install" {
-  repository          = data.github_repository.cluster.name
-  branch              = var.branch
-  file                = data.flux_install.this.path
-  content             = data.flux_install.this.content
-  overwrite_on_create = true
-}
-
-resource "github_repository_file" "sync" {
-  repository          = data.github_repository.cluster.name
-  branch              = var.branch
-  file                = data.flux_sync.this.path
-  content             = data.flux_sync.this.content
-  overwrite_on_create = true
-}
-
-resource "github_repository_file" "kustomize" {
-  repository          = data.github_repository.cluster.name
-  branch              = var.branch
-  file                = data.flux_sync.this.kustomize_path
-  content             = data.flux_sync.this.kustomize_content
-  overwrite_on_create = true
+  target_path = "clusters/${var.cluster_id}"
 }
 
 data "kubectl_file_documents" "install" {
   content = data.flux_install.this.content
 }
 
-resource "kubectl_manifest" "install" {
-  for_each   = { for v in data.kubectl_file_documents.install.documents : sha1(v) => v }
-  depends_on = [kubernetes_namespace.flux_system]
-
-  yaml_body = each.value
-}
-
 data "kubectl_file_documents" "sync" {
   content = data.flux_sync.this.content
 }
 
-resource "kubectl_manifest" "sync" {
-  for_each   = { for v in data.kubectl_file_documents.sync.documents : sha1(v) => v }
-  depends_on = [kubectl_manifest.install, kubernetes_namespace.flux_system]
-
-  yaml_body = each.value
+locals {
+  install = [for v in data.kubectl_file_documents.install.documents : {
+    data : yamldecode(v)
+    content : v
+    }
+  ]
+  sync = [for v in data.kubectl_file_documents.sync.documents : {
+    data : yamldecode(v)
+    content : v
+    }
+  ]
 }
 
-resource "kubernetes_secret" "cluster" {
-  depends_on = [kubectl_manifest.install]
+resource "kubectl_manifest" "install" {
+  depends_on = [kubernetes_namespace.this]
+  for_each   = { for v in local.install : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+  yaml_body  = each.value
+}
 
-  metadata {
-    name      = data.flux_sync.this.name
-    namespace = data.flux_sync.this.namespace
-  }
+resource "kubectl_manifest" "sync" {
+  depends_on = [kubernetes_namespace.this]
+  for_each   = { for v in local.sync : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+  yaml_body  = each.value
+}
 
-  data = {
-    identity       = tls_private_key.cluster.private_key_pem
-    "identity.pub" = tls_private_key.cluster.public_key_pem
-    known_hosts    = local.known_hosts
-  }
+resource "github_repository_file" "install" {
+  repository          = data.github_repository.cluster.name
+  file                = data.flux_install.this.path
+  content             = data.flux_install.this.content
+  branch              = var.branch
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "sync" {
+  repository          = data.github_repository.cluster.name
+  file                = data.flux_sync.this.path
+  content             = data.flux_sync.this.content
+  branch              = var.branch
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "kustomize" {
+  repository          = data.github_repository.cluster.name
+  file                = data.flux_sync.this.kustomize_path
+  content             = file("${path.module}/templates/kustomization-override.yaml")
+  branch              = var.branch
+  overwrite_on_create = true
 }
 
 resource "github_repository_file" "cluster_tenants" {
   repository = data.github_repository.cluster.name
-  branch     = var.branch
   file       = "clusters/${var.cluster_id}/tenants.yaml"
   content = templatefile("${path.module}/templates/cluster-tenants.yaml", {
     cluster_id = var.cluster_id
   })
+  branch     = var.branch
   overwrite_on_create = true
 }
 
@@ -172,50 +177,6 @@ data "github_repository" "tenant" {
   name = each.value.flux.repo
 }
 
-resource "tls_private_key" "tenant" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
-
-resource "github_repository_deploy_key" "tenant" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  title      = "flux-${var.cluster_id}"
-  repository = data.github_repository.tenant[each.key].name
-  key        = tls_private_key.tenant[each.key].public_key_openssh
-  read_only  = true
-}
-
-resource "kubernetes_secret" "tenant" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-  depends_on = [kubectl_manifest.install]
-
-  metadata {
-    name      = "flux"
-    namespace = each.key
-  }
-
-  data = {
-    identity       = tls_private_key.tenant[each.key].private_key_pem
-    "identity.pub" = tls_private_key.tenant[each.key].public_key_pem
-    known_hosts    = local.known_hosts
-  }
-}
-
 resource "github_repository_file" "tenant" {
   for_each = {
     for ns in var.namespaces :
@@ -223,14 +184,15 @@ resource "github_repository_file" "tenant" {
     if ns.flux.enabled
   }
 
-  repository = data.github_repository.cluster.name
+  repository = data.github_repository.tenant[each.key].name
   branch     = var.branch
   file       = "tenants/${var.cluster_id}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {
-    repo        = "ssh://git@github.com/${data.github_repository.tenant[each.key].full_name}.git",
+    repo        = "${local.git_auth_proxy_url}/${data.github_repository.tenant[each.key].full_name}.git",
     branch      = var.branch,
     name        = each.key,
     environment = var.environment,
+    create_crds = false,
   })
   overwrite_on_create = true
 }

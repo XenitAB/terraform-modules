@@ -39,19 +39,11 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = "1.11.3"
     }
-    random = {
-      source  = "hashicorp/random"
-      version = "3.1.0"
-    }
   }
 }
 
 locals {
   azdo_proxy_url = "http://azdo-proxy.flux-system.svc.cluster.local"
-}
-
-data "azuredevops_project" "this" {
-  name = var.azure_devops_proj
 }
 
 resource "kubernetes_namespace" "this" {
@@ -90,6 +82,10 @@ resource "helm_release" "azdo_proxy" {
       if ns.flux.enabled
     ],
   })]
+}
+
+data "azuredevops_project" "this" {
+  name = var.azure_devops_proj
 }
 
 # Cluster

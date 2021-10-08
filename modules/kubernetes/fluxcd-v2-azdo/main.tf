@@ -43,7 +43,7 @@ terraform {
 }
 
 locals {
-  azdo_proxy_url = "http://azdo-proxy.flux-system.svc.cluster.local"
+  git_auth_proxy_url = "http://git-auth-proxy.flux-system.svc.cluster.local"
 }
 
 resource "kubernetes_namespace" "this" {
@@ -62,14 +62,14 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
-# Azdo Proxy
-resource "helm_release" "azdo_proxy" {
-  repository = "https://xenitab.github.io/azdo-proxy/"
-  chart      = "azdo-proxy"
-  name       = "azdo-proxy"
+# Git Auth Proxy
+resource "helm_release" "git_auth_proxy" {
+  repository = "https://xenitab.github.io/git-auth-proxy/"
+  chart      = "git-auth-proxy"
+  name       = "git-auth-proxy"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.4.2"
-  values = [templatefile("${path.module}/templates/azdo-proxy-values.yaml.tpl", {
+  version    = "v0.5.1"
+  values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
     azure_devops_pat  = var.azure_devops_pat,
     azure_devops_org  = var.azure_devops_org,
     azure_devops_proj = var.azure_devops_proj,
@@ -99,7 +99,7 @@ data "flux_install" "this" {
 }
 
 data "flux_sync" "this" {
-  url                = "${local.azdo_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
+  url                = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
   branch             = var.branch
   target_path        = "clusters/${var.cluster_id}"
   git_implementation = "libgit2"
@@ -184,7 +184,7 @@ resource "azuredevops_git_repository_file" "tenant" {
   branch        = "refs/heads/${var.branch}"
   file          = "tenants/${var.cluster_id}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {
-    repo        = "${local.azdo_proxy_url}/${var.azure_devops_org}/${each.value.flux.proj}/_git/${each.value.flux.repo}"
+    repo        = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${each.value.flux.proj}/_git/${each.value.flux.repo}"
     branch      = var.branch,
     name        = each.key,
     environment = var.environment,

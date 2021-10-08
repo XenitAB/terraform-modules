@@ -11,8 +11,12 @@ config: |
   {
     "organizations": [
       {
+        "provider": "azuredevops",
+        "azuredevops": {
+          "pat": "${azure_devops_pat}"
+         },
+        "host": "dev.azure.com",
         "name": "${azure_devops_org}",
-        "pat": "${azure_devops_pat}",
         "repositories": [
           %{ for tenant in tenants ~}
           {

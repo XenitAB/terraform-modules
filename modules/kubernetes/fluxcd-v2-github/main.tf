@@ -71,9 +71,9 @@ resource "helm_release" "git_auth_proxy" {
   version    = "v0.5.1"
   values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
     github_org = var.github_org
-    app_id = ""
-    installation_id = ""
-    private_key = ""
+    app_id = tonumber(var.github_app_id)
+    installation_id = tonumber(var.github_installation_id)
+    private_key = base64encode(var.github_private_key)
     cluster_repo      = var.cluster_repo,
     tenants = [for ns in var.namespaces : {
       repo : ns.flux.repo
@@ -167,16 +167,6 @@ resource "github_repository_file" "cluster_tenants" {
 }
 
 # Tenants
-data "github_repository" "tenant" {
-  for_each = {
-    for ns in var.namespaces :
-    ns.name => ns
-    if ns.flux.enabled
-  }
-
-  name = each.value.flux.repo
-}
-
 resource "github_repository_file" "tenant" {
   for_each = {
     for ns in var.namespaces :
@@ -184,11 +174,11 @@ resource "github_repository_file" "tenant" {
     if ns.flux.enabled
   }
 
-  repository = data.github_repository.tenant[each.key].name
+  repository = data.github_repository.cluster.name
   branch     = var.branch
   file       = "tenants/${var.cluster_id}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {
-    repo        = "${local.git_auth_proxy_url}/${data.github_repository.tenant[each.key].full_name}.git",
+    repo        = "${local.git_auth_proxy_url}/${var.github_org}/${each.value.flux.repo}.git"
     branch      = var.branch,
     name        = each.key,
     environment = var.environment,

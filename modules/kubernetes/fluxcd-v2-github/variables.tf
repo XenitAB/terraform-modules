@@ -3,6 +3,21 @@ variable "github_org" {
   type        = string
 }
 
+variable "github_app_id" {
+  description = "ID of GitHub Application used by Git Auth Proxy"
+  type        = number
+}
+
+variable "github_installation_id" {
+  description = "Installation ID of GitHub Application used by Git Auth Proxy"
+  type        = number
+}
+
+variable "github_private_key" {
+  description = "Private Key for GitHub Application used by Git Auth Proxy"
+  type        = string
+}
+
 variable "environment" {
   description = "Environment name of the cluster"
   type        = string

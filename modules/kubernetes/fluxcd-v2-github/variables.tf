@@ -29,7 +29,7 @@ variable "namespaces" {
 variable "cluster_repo" {
   description = "Name of cluster repository"
   type        = string
-  default     = "fleet-infra"
+  default     = "xks-fleet-infra"
 }
 
 variable "branch" {

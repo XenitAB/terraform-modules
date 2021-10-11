@@ -68,13 +68,13 @@ resource "helm_release" "git_auth_proxy" {
   chart      = "git-auth-proxy"
   name       = "git-auth-proxy"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.5.1"
+  version    = "v0.5.2"
   values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
-    github_org = var.github_org
-    app_id = tonumber(var.github_app_id)
+    github_org      = var.github_org
+    app_id          = tonumber(var.github_app_id)
     installation_id = tonumber(var.github_installation_id)
-    private_key = base64encode(var.github_private_key)
-    cluster_repo      = var.cluster_repo,
+    private_key     = base64encode(var.github_private_key)
+    cluster_repo    = var.cluster_repo,
     tenants = [for ns in var.namespaces : {
       repo : ns.flux.repo
       namespace : ns.name
@@ -162,7 +162,7 @@ resource "github_repository_file" "cluster_tenants" {
   content = templatefile("${path.module}/templates/cluster-tenants.yaml", {
     cluster_id = var.cluster_id
   })
-  branch     = var.branch
+  branch              = var.branch
   overwrite_on_create = true
 }
 

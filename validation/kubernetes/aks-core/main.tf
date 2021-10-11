@@ -32,7 +32,10 @@ module "aks_core" {
   fluxcd_v2_config = {
     type = "github"
     github = {
-      owner = ""
+      org             = ""
+      app_id          = 0
+      installation_id = 0
+      private_key     = ""
     }
     azure_devops = {
       pat  = ""

@@ -22,14 +22,12 @@ config: |
         "repositories": [
           %{ for tenant in tenants ~}
           {
-            "project": "foo",
             "name": "${tenant.repo}",
             "namespaces": ["${tenant.namespace}"],
             "secretNameOverride": "flux"
           },
           %{ endfor }
           {
-            "project": "foo",
             "name": "${cluster_repo}",
             "namespaces": ["flux-system"],
             "secretNameOverride": "flux-system"

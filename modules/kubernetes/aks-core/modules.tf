@@ -123,12 +123,12 @@ module "fluxcd_v2_github" {
 
   source = "../../kubernetes/fluxcd-v2-github"
 
-  environment  = var.environment
-  cluster_id   = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
-  github_org = var.fluxcd_v2_config.github.org
-  github_app_id = var.fluxcd_v2_config.github.app_id
+  environment            = var.environment
+  cluster_id             = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
+  github_org             = var.fluxcd_v2_config.github.org
+  github_app_id          = var.fluxcd_v2_config.github.app_id
   github_installation_id = var.fluxcd_v2_config.github.installation_id
-  github_private_key = var.fluxcd_v2_config.github.private_key
+  github_private_key     = var.fluxcd_v2_config.github.private_key
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {

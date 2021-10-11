@@ -68,7 +68,7 @@ resource "helm_release" "git_auth_proxy" {
   chart      = "git-auth-proxy"
   name       = "git-auth-proxy"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.5.1"
+  version    = "v0.5.2"
   values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
     azure_devops_pat  = var.azure_devops_pat,
     azure_devops_org  = var.azure_devops_org,

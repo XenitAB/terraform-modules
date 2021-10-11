@@ -90,7 +90,10 @@ variable "fluxcd_v2_config" {
   type = object({
     type = string
     github = object({
-      owner = string
+      org             = string
+      app_id          = number
+      installation_id = number
+      private_key     = string
     })
     azure_devops = object({
       pat  = string

@@ -23,7 +23,6 @@ the bootstrap configuration.
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.3.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.11.3 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.4.1 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
 
 ## Providers
 
@@ -48,7 +47,7 @@ No modules.
 | [azuredevops_git_repository_file.kustomize](https://registry.terraform.io/providers/xenitab/azuredevops/0.5.0/docs/resources/git_repository_file) | resource |
 | [azuredevops_git_repository_file.sync](https://registry.terraform.io/providers/xenitab/azuredevops/0.5.0/docs/resources/git_repository_file) | resource |
 | [azuredevops_git_repository_file.tenant](https://registry.terraform.io/providers/xenitab/azuredevops/0.5.0/docs/resources/git_repository_file) | resource |
-| [helm_release.azdo_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
+| [helm_release.git_auth_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
 | [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.3/docs/resources/manifest) | resource |
 | [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.11.3/docs/resources/manifest) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.4.1/docs/resources/namespace) | resource |

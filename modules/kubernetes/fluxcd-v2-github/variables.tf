@@ -1,5 +1,20 @@
-variable "github_owner" {
-  description = "Owner of GitHub repositories"
+variable "github_org" {
+  description = "Org of GitHub repositories"
+  type        = string
+}
+
+variable "github_app_id" {
+  description = "ID of GitHub Application used by Git Auth Proxy"
+  type        = number
+}
+
+variable "github_installation_id" {
+  description = "Installation ID of GitHub Application used by Git Auth Proxy"
+  type        = number
+}
+
+variable "github_private_key" {
+  description = "Private Key for GitHub Application used by Git Auth Proxy"
   type        = string
 }
 
@@ -29,7 +44,7 @@ variable "namespaces" {
 variable "cluster_repo" {
   description = "Name of cluster repository"
   type        = string
-  default     = "fleet-infra"
+  default     = "xks-fleet-infra"
 }
 
 variable "branch" {

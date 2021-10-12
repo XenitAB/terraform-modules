@@ -11,19 +11,23 @@ config: |
   {
     "organizations": [
       {
-        "name": "${azure_devops_org}",
-        "pat": "${azure_devops_pat}",
+        "provider": "github",
+        "github": {
+          "appID": ${app_id},
+          "installationID": ${installation_id},
+          "privateKey": "${private_key}"
+        },
+        "host": "github.com",
+        "name": "${github_org}",
         "repositories": [
           %{ for tenant in tenants ~}
           {
-            "project": "${tenant.project}",
             "name": "${tenant.repo}",
             "namespaces": ["${tenant.namespace}"],
             "secretNameOverride": "flux"
           },
           %{ endfor }
           {
-            "project": "${azure_devops_proj}",
             "name": "${cluster_repo}",
             "namespaces": ["flux-system"],
             "secretNameOverride": "flux-system"

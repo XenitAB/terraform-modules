@@ -115,3 +115,9 @@ variable "cloud_provider" {
   type        = string
   default     = "azure"
 }
+
+variable "azad_kube_proxy_enabled" {
+  description = "Should azad_kube_proxy be enabled"
+  type        = bool
+  default     = false
+}

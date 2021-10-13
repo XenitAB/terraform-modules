@@ -315,3 +315,21 @@ spec:
       app.kubernetes.io/instance: goldpinger
       app.kubernetes.io/name: goldpinger
 {{- end }}
+{{- if .Values.enabledMonitors.azadKubeProxy }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: azad-kube-proxy
+  namespace: azad-kube-proxy
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: azad-kube-proxy
+      app.kubernetes.io/name: azad-kube-proxy
+  podMetricsEndpoints:
+    - path: /metrics
+      port: metrics
+{{- end }}

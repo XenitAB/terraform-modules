@@ -392,10 +392,11 @@ module "prometheus" {
   resource_selector  = var.prometheus_config.resource_selector
   namespace_selector = var.prometheus_config.namespace_selector
 
-  falco_enabled          = var.falco_enabled
-  opa_gatekeeper_enabled = var.opa_gatekeeper_enabled
-  linkerd_enabled        = var.linkerd_enabled
-  goldpinger_enabled     = var.goldpinger_enabled
+  falco_enabled           = var.falco_enabled
+  opa_gatekeeper_enabled  = var.opa_gatekeeper_enabled
+  linkerd_enabled         = var.linkerd_enabled
+  goldpinger_enabled      = var.goldpinger_enabled
+  azad_kube_proxy_enabled = var.azad_kube_proxy_enabled
 }
 
 # xenit

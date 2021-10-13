@@ -65,13 +65,22 @@ data "aws_iam_policy_document" "flow_log" {
   }
 }
 
-resource "aws_iam_role_policy" "flow_log" {
+resource "aws_iam_policy" "flow_log" {
   for_each = {
     for s in ["flowlog"] :
     s => s
     if var.flow_log_enabled
   }
   name   = "${data.aws_region.current.name}-${var.environment}-${var.name}-cloudwatch"
-  role   = aws_iam_role.flow_log[each.key].id
-  policy = data.aws_iam_policy_document.flow_log[each.key].arn.json
+  policy = data.aws_iam_policy_document.flow_log[each.key].json
+}
+
+resource "aws_iam_role_policy_attachment" "permissions" {
+  for_each = {
+    for s in ["flowlog"] :
+    s => s
+    if var.flow_log_enabled
+  }
+  policy_arn = aws_iam_policy.flow_log[each.key].arn
+  role       = aws_iam_role.flow_log[each.key].name
 }

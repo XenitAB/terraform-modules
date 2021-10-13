@@ -47,31 +47,31 @@ resource "aws_iam_role" "flow_log" {
 EOF
 }
 
-resource "aws_iam_role_policy" "flow_log" {
+data "aws_iam_policy_document" "flow_log" {
   for_each = {
     for s in ["flowlog"] :
     s => s
     if var.flow_log_enabled
   }
 
-  name = "flow_log"
-  role = aws_iam_role.flow_log[each.key].id
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "logs:CreateLogStream",
-        "logs:PutLogEvents",
-        "logs:DescribeLogGroups",
-        "logs:DescribeLogStreams"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
+  statement {
+    effect = "Allow"
+    actions = [
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "logs:DescribeLogStreams"
+    ]
+    resources = ["${aws_cloudwatch_log_group.this[each.key].arn}:log-stream:*"]
+  }
 }
-EOF
+
+resource "aws_iam_role_policy" "flow_log" {
+  for_each = {
+    for s in ["flowlog"] :
+    s => s
+    if var.flow_log_enabled
+  }
+  name   = "${data.aws_region.current.name}-${var.environment}-${var.name}-cloudwatch"
+  role   = aws_iam_role.flow_log[each.key].id
+  policy = data.aws_iam_policy_document.flow_log[each.key].arn.json
 }

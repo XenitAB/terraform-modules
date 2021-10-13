@@ -45,6 +45,8 @@ No modules.
 | [aws_vpc_peering_connection.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/vpc_peering_connection) | resource |
 | [aws_vpc_peering_connection_accepter.peer](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/vpc_peering_connection_accepter) | resource |
 | [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/availability_zones) | data source |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.flow_log](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/region) | data source |
 | [aws_vpc_peering_connection.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/vpc_peering_connection) | data source |
 

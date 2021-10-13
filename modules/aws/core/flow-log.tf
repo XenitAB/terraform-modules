@@ -7,7 +7,7 @@ resource "aws_flow_log" "this" {
     if var.flow_log_enabled
   }
 
-  iam_role_arn    = aws_iam_role.this[each.key].arn
+  iam_role_arn    = aws_iam_role.flow_log[each.key].arn
   log_destination = aws_cloudwatch_log_group.this[each.key].arn
   traffic_type    = "ALL"
   vpc_id          = aws_vpc.this.id
@@ -22,7 +22,7 @@ resource "aws_cloudwatch_log_group" "this" {
   name = "${data.aws_region.current.name}-${var.environment}-${var.name}-cloudwatch"
 }
 
-resource "aws_iam_role" "this" {
+resource "aws_iam_role" "flow_log" {
   for_each = {
     for s in ["flowlog"] :
     s => s
@@ -47,15 +47,15 @@ resource "aws_iam_role" "this" {
 EOF
 }
 
-resource "aws_iam_role_policy" "this" {
+resource "aws_iam_role_policy" "flow_log" {
   for_each = {
     for s in ["flowlog"] :
     s => s
     if var.flow_log_enabled
   }
 
-  name = "this"
-  role = aws_iam_role.this[each.key].id
+  name = "flow_log"
+  role = aws_iam_role.flow_log[each.key].id
 
   policy = <<EOF
 {
@@ -63,7 +63,6 @@ resource "aws_iam_role_policy" "this" {
   "Statement": [
     {
       "Action": [
-        "logs:CreateLogGroup",
         "logs:CreateLogStream",
         "logs:PutLogEvents",
         "logs:DescribeLogGroups",

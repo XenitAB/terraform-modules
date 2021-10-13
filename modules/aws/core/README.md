@@ -26,8 +26,8 @@ No modules.
 | [aws_cloudwatch_log_group.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/cloudwatch_log_group) | resource |
 | [aws_eip.public](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/eip) | resource |
 | [aws_flow_log.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/flow_log) | resource |
-| [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/iam_role_policy) | resource |
+| [aws_iam_role.flow_log](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy.flow_log](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/iam_role_policy) | resource |
 | [aws_internet_gateway.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/internet_gateway) | resource |
 | [aws_nat_gateway.public](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/nat_gateway) | resource |
 | [aws_route.peering_accepter](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/route) | resource |

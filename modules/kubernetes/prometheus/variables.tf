@@ -117,7 +117,7 @@ variable "cloud_provider" {
 }
 
 variable "azad_kube_proxy_enabled" {
-  description = "Should azad_kube_proxy be enabled"
+  description = "Should azad-kube-proxy be enabled"
   type        = bool
   default     = false
 }

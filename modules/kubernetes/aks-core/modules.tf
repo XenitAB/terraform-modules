@@ -18,6 +18,7 @@ locals {
     "starboard-operator",
     "tigera-operator",
     "velero",
+    "new-relic",
   ]
 }
 

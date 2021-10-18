@@ -1,3 +1,13 @@
+# Globally shared values across all sub charts
+global:
+  lowDataMode: true
+  cluster: ${cluster_name}
+  licenseKey: ${license_key}
+
+infrastructure:
+  enabled: false
+webhook:
+  enabled: false
 prometheus:
   enabled: true
 ksm:
@@ -7,11 +17,11 @@ kubeEvents:
 logging:
   enabled: true
 
-# Globally shared values across all sub charts
-global:
-  lowDataMode: true
-  cluster: ${cluster_name}
-  licenseKey: ${license_key}
+newrelic-logging:
+  priorityClassName: platform-high
 
-newrelic-infrastructure:
-  privileged: true
+nri-prometheus:
+  priorityClassName: platform-low
+
+nri-kube-events:
+  priorityClassName: platform-low

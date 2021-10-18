@@ -310,7 +310,7 @@ module "cluster_autoscaler" {
 
   source = "../../kubernetes/cluster-autoscaler"
 
-  cluster_name   = local.cluster_name
+  cluster_name   = "${var.name}${var.eks_name_suffix}"
   cloud_provider = "aws"
   aws_config = {
     region   = data.aws_region.current.name
@@ -390,6 +390,6 @@ module "new_relic" {
 
   source = "../../kubernetes/new-relic"
 
-  cluster_name = local.cluster_name
+  cluster_name = "${var.name}${var.eks_name_suffix}-${var.environment}-${data.aws_region.current.name}"
   license_key  = var.new_relic_config.license_key
 }

@@ -388,7 +388,7 @@ module "prometheus" {
 
   alertmanager_enabled = var.prometheus_config.alertmanager_enabled
 
-  cluster_name       = local.cluster_name
+  cluster_name       = "${var.name}${var.aks_name_suffix}"
   environment        = var.environment
   resource_selector  = var.prometheus_config.resource_selector
   namespace_selector = var.prometheus_config.namespace_selector
@@ -461,6 +461,6 @@ module "new_relic" {
 
   source = "../../kubernetes/new-relic"
 
-  cluster_name = local.cluster_name
+  cluster_name = "${var.name}${var.aks_name_suffix}-${var.environment}-${var.location_short}"
   license_key  = var.new_relic_config.license_key
 }

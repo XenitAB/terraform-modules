@@ -91,5 +91,6 @@ resource "helm_release" "prometheus_extras" {
     aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
     csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
     csi_secrets_store_provider_aws_enabled   = var.csi_secrets_store_provider_aws_enabled
+    azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
   })]
 }

@@ -296,6 +296,7 @@ module "prometheus" {
   aad_pod_identity_enabled                 = false
   csi_secrets_store_provider_azure_enabled = false
   csi_secrets_store_provider_aws_enabled   = var.csi_secrets_store_provider_aws_enabled
+  azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
 }
 
 module "cluster_autoscaler" {

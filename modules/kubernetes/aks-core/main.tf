@@ -46,6 +46,7 @@ terraform {
 locals {
   # Namespace to create service accounts in
   service_accounts_namespace = "service-accounts"
+  cluster_name               = "${var.name}${var.aks_name_suffix}"
 }
 
 data "azurerm_client_config" "current" {}

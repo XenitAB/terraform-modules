@@ -310,7 +310,7 @@ module "cluster_autoscaler" {
 
   source = "../../kubernetes/cluster-autoscaler"
 
-  cluster_name   = "${var.name}${var.eks_name_suffix}"
+  cluster_name   = local.cluster_name
   cloud_provider = "aws"
   aws_config = {
     region   = data.aws_region.current.name
@@ -379,4 +379,17 @@ module "goldpinger" {
   source = "../../kubernetes/goldpinger"
 
   linkerd_enabled = var.linkerd_enabled
+}
+
+module "new_relic" {
+  for_each = {
+    for s in ["new-relic"] :
+    s => s
+    if var.new_relic_enabled
+  }
+
+  source = "../../kubernetes/new-relic"
+
+  cluster_name = local.cluster_name
+  license_key  = var.new_relic_config.license_key
 }

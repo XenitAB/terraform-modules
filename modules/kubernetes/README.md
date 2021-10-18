@@ -31,6 +31,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`goldpinger`](goldpinger/README.md)
 - [`cluster-autoscaler`](cluster-autoscaler/README.md)
 - [`starboard`](starboard/README.md)
+- [`new-relic`](new-relic/README.md)
 
 ## Style Guide
 

@@ -387,7 +387,7 @@ module "prometheus" {
 
   alertmanager_enabled = var.prometheus_config.alertmanager_enabled
 
-  cluster_name       = "${var.name}${var.aks_name_suffix}"
+  cluster_name       = local.cluster_name
   environment        = var.environment
   resource_selector  = var.prometheus_config.resource_selector
   namespace_selector = var.prometheus_config.namespace_selector
@@ -449,4 +449,17 @@ module "starboard" {
   source = "../../kubernetes/starboard"
 
   cloud_provider = "azure"
+}
+
+module "new_relic" {
+  for_each = {
+    for s in ["new-relic"] :
+    s => s
+    if var.new_relic_enabled
+  }
+
+  source = "../../kubernetes/new-relic"
+
+  cluster_name = local.cluster_name
+  license_key  = var.new_relic_config.license_key
 }

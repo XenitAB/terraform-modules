@@ -406,3 +406,19 @@ variable "starboard_enabled" {
   type        = bool
   default     = true
 }
+
+variable "new_relic_enabled" {
+  description = "Should New Relic be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "new_relic_config" {
+  description = "Configuration for New Relic"
+  type = object({
+    license_key = string
+  })
+  default = {
+    license_key = ""
+  }
+}

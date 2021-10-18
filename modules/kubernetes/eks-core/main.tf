@@ -42,6 +42,7 @@ terraform {
 locals {
   # Namespace to create service accounts in
   service_accounts_namespace = "service-accounts"
+  cluster_name               = "${var.name}${var.eks_name_suffix}"
 }
 
 data "aws_region" "current" {}

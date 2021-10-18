@@ -392,4 +392,5 @@ module "new_relic" {
 
   cluster_name = "${var.name}${var.eks_name_suffix}-${var.environment}-${data.aws_region.current.name}"
   license_key  = var.new_relic_config.license_key
+  namespace_include = var.namespaces[*].name
 }

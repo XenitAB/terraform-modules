@@ -19,6 +19,8 @@ logging:
 
 newrelic-logging:
   priorityClassName: platform-high
+  fluentBit:
+    path: ${fluent_bit_path}
 
 nri-prometheus:
   priorityClassName: platform-low

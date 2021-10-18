@@ -25,6 +25,11 @@ terraform {
   }
 }
 
+locals {
+  namespace_paths = [for v in var.namespace_include : "/var/log/containers/*_${v}_*.log"]
+  fluent_bit_path = join(",", local.namespace_paths)
+}
+
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
@@ -45,5 +50,6 @@ resource "helm_release" "this" {
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     cluster_name = var.cluster_name
     license_key  = var.license_key
+    fluent_bit_path = local.fluent_bit_path
   })]
 }

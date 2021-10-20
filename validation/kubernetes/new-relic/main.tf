@@ -12,6 +12,7 @@ module "new_relic" {
     helm       = helm
   }
 
-  cluster_name = "foo"
-  license_key  = "bar"
+  cluster_name      = "foo"
+  license_key       = "bar"
+  namespace_include = ["foo"]
 }

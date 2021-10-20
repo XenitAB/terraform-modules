@@ -1,6 +1,17 @@
 name: check
 on: [pull_request]
 jobs:
+  changelog:
+    if: "!contains(github.event.pull_request.labels.*.name, 'ignore-changelog')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run a one-line script
+        run: |
+          if ! git diff --name-only $GITHUB_HEAD_REF | grep -q CHANGELOG.md ; then
+            echo 'Update CHANGELOG.md with PR reference'
+            exit 1
+          fi
   lint:
     runs-on: ubuntu-latest
     steps:

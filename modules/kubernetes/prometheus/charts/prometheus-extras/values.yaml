@@ -60,3 +60,8 @@ enabledMonitors:
   opaGatekeeper: false
   linkerd: false
   goldpinger: false
+  flux: false
+  aadPodIdentity: false
+  csiSecretsStorProviderAzure: false
+  csiSecretsStorProviderAws: false
+  azadKubeProxy: false

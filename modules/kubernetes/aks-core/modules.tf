@@ -18,6 +18,7 @@ locals {
     "starboard-operator",
     "tigera-operator",
     "velero",
+    "newrelic",
   ]
 }
 
@@ -449,4 +450,18 @@ module "starboard" {
   source = "../../kubernetes/starboard"
 
   cloud_provider = "azure"
+}
+
+module "new_relic" {
+  for_each = {
+    for s in ["new-relic"] :
+    s => s
+    if var.new_relic_enabled
+  }
+
+  source = "../../kubernetes/new-relic"
+
+  cluster_name      = "${var.name}${var.aks_name_suffix}-${var.environment}-${var.location_short}"
+  license_key       = var.new_relic_config.license_key
+  namespace_include = var.namespaces[*].name
 }

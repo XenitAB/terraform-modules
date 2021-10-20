@@ -380,3 +380,17 @@ module "goldpinger" {
 
   linkerd_enabled = var.linkerd_enabled
 }
+
+module "new_relic" {
+  for_each = {
+    for s in ["new-relic"] :
+    s => s
+    if var.new_relic_enabled
+  }
+
+  source = "../../kubernetes/new-relic"
+
+  cluster_name      = "${var.name}${var.eks_name_suffix}-${var.environment}-${data.aws_region.current.name}"
+  license_key       = var.new_relic_config.license_key
+  namespace_include = var.namespaces[*].name
+}

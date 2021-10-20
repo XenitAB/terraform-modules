@@ -10,7 +10,7 @@ jobs:
           fetch-depth: 0
       - name: Run a one-line script
         run: |
-          if ! git diff --name-only $GITHUB_HEAD_REF | grep -q CHANGELOG.md ; then
+          if ! git diff --name-only refs/remotes/origin/$GITHUB_HEAD_REF | grep -q CHANGELOG.md ; then
             echo 'Update CHANGELOG.md with PR reference'
             exit 1
           fi

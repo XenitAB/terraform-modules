@@ -6,6 +6,7 @@ variable "cluster_name" {
 variable "license_key" {
   description = "License key used to authenticate with New Relic"
   type        = string
+  sensitive   = true
 }
 
 variable "namespace_include" {

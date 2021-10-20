@@ -48,8 +48,8 @@ resource "helm_release" "this" {
   version    = "3.1.2"
 
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    cluster_name = var.cluster_name
-    license_key  = var.license_key
+    cluster_name    = var.cluster_name
+    license_key     = var.license_key
     fluent_bit_path = local.fluent_bit_path
   })]
 }

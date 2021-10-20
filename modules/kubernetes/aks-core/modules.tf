@@ -461,7 +461,7 @@ module "new_relic" {
 
   source = "../../kubernetes/new-relic"
 
-  cluster_name = "${var.name}${var.aks_name_suffix}-${var.environment}-${var.location_short}"
-  license_key  = var.new_relic_config.license_key
+  cluster_name      = "${var.name}${var.aks_name_suffix}-${var.environment}-${var.location_short}"
+  license_key       = var.new_relic_config.license_key
   namespace_include = var.namespaces[*].name
 }

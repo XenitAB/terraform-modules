@@ -40,6 +40,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the cluster to use in New Relic | `string` | n/a | yes |
 | <a name="input_license_key"></a> [license\_key](#input\_license\_key) | License key used to authenticate with New Relic | `string` | n/a | yes |
+| <a name="input_namespace_include"></a> [namespace\_include](#input\_namespace\_include) | The namespace that should be included in New Relic metrics and logs | `list(string)` | n/a | yes |
 
 ## Outputs
 

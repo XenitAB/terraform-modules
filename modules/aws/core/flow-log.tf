@@ -19,7 +19,7 @@ resource "aws_cloudwatch_log_group" "this" {
     s => s
     if var.flow_log_enabled
   }
-  name = "${data.aws_region.current.name}-${var.environment}-${var.name}-cloudwatch"
+  name = "${data.aws_region.current.name}-${var.environment}-${var.name}-flowlogs"
 }
 
 resource "aws_iam_role" "flow_log" {

@@ -27,6 +27,11 @@ variable "volume_claim_size" {
   default     = "5Gi"
 }
 
+variable "cloud_provider" {
+  description = "Name of cloud provider"
+  type        = string
+}
+
 variable "cluster_name" {
   description = "Name of the prometheus cluster"
   type        = string
@@ -61,7 +66,8 @@ variable "alertmanager_enabled" {
   default     = false
 }
 
-# Enable/Disable monitors
+# Opt in to additional monitors
+
 variable "falco_enabled" {
   description = "Should Falco be enabled"
   type        = bool
@@ -86,7 +92,7 @@ variable "goldpinger_enabled" {
   default     = false
 }
 
-variable "flux_system_enabled" {
+variable "flux_enabled" {
   description = "Should flux-system be enabled"
   type        = bool
   default     = false
@@ -110,8 +116,8 @@ variable "aad_pod_identity_enabled" {
   default     = false
 }
 
-variable "cloud_provider" {
-  description = "Cloud provider to use."
-  type        = string
-  default     = "azure"
+variable "azad_kube_proxy_enabled" {
+  description = "Should azad-kube-proxy be enabled"
+  type        = bool
+  default     = false
 }

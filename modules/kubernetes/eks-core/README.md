@@ -8,7 +8,7 @@ This module is used to configure EKS clusters.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.58.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.3.0 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.4.0 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 4.14.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.3.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.11.3 |
@@ -40,6 +40,7 @@ This module is used to configure EKS clusters.
 | <a name="module_ingress_healthz"></a> [ingress\_healthz](#module\_ingress\_healthz) | ../../kubernetes/ingress-healthz | n/a |
 | <a name="module_ingress_nginx"></a> [ingress\_nginx](#module\_ingress\_nginx) | ../../kubernetes/ingress-nginx | n/a |
 | <a name="module_linkerd"></a> [linkerd](#module\_linkerd) | ../../kubernetes/linkerd | n/a |
+| <a name="module_new_relic"></a> [new\_relic](#module\_new\_relic) | ../../kubernetes/new-relic | n/a |
 | <a name="module_opa_gatekeeper"></a> [opa\_gatekeeper](#module\_opa\_gatekeeper) | ../../kubernetes/opa-gatekeeper | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../../kubernetes/prometheus | n/a |
 | <a name="module_reloader"></a> [reloader](#module\_reloader) | ../../kubernetes/reloader | n/a |
@@ -90,7 +91,6 @@ This module is used to configure EKS clusters.
 | <a name="input_external_dns_config"></a> [external\_dns\_config](#input\_external\_dns\_config) | External DNS configuration | <pre>object({<br>    role_arn = string<br>  })</pre> | n/a | yes |
 | <a name="input_external_dns_enabled"></a> [external\_dns\_enabled](#input\_external\_dns\_enabled) | Should External DNS be enabled | `bool` | `true` | no |
 | <a name="input_falco_enabled"></a> [falco\_enabled](#input\_falco\_enabled) | Should Falco be enabled | `bool` | `false` | no |
-| <a name="input_flux_system_enabled"></a> [flux\_system\_enabled](#input\_flux\_system\_enabled) | Should flux-system be enabled | `bool` | `true` | no |
 | <a name="input_fluxcd_v2_config"></a> [fluxcd\_v2\_config](#input\_fluxcd\_v2\_config) | Configuration for fluxcd-v2 | <pre>object({<br>    type = string<br>    github = object({<br>      org             = string<br>      app_id          = number<br>      installation_id = number<br>      private_key     = string<br>    })<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_fluxcd_v2_enabled"></a> [fluxcd\_v2\_enabled](#input\_fluxcd\_v2\_enabled) | Should fluxcd-v2 be enabled | `bool` | `true` | no |
 | <a name="input_goldpinger_enabled"></a> [goldpinger\_enabled](#input\_goldpinger\_enabled) | Should goldpinger be enabled | `bool` | `true` | no |
@@ -101,6 +101,8 @@ This module is used to configure EKS clusters.
 | <a name="input_linkerd_enabled"></a> [linkerd\_enabled](#input\_linkerd\_enabled) | Should linkerd be enabled | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name to use for the deploy | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name   = string<br>      labels = map(string)<br>      flux = object({<br>        enabled     = bool<br>        create_crds = bool<br>        azure_devops = object({<br>          org  = string<br>          proj = string<br>          repo = string<br>        })<br>        github = object({<br>          repo = string<br>        })<br>      })<br>    })<br>  )</pre> | n/a | yes |
+| <a name="input_new_relic_config"></a> [new\_relic\_config](#input\_new\_relic\_config) | Configuration for New Relic | <pre>object({<br>    license_key = string<br>  })</pre> | <pre>{<br>  "license_key": ""<br>}</pre> | no |
+| <a name="input_new_relic_enabled"></a> [new\_relic\_enabled](#input\_new\_relic\_enabled) | Should New Relic be enabled | `bool` | `false` | no |
 | <a name="input_opa_gatekeeper_config"></a> [opa\_gatekeeper\_config](#input\_opa\_gatekeeper\_config) | Configuration for OPA Gatekeeper | <pre>object({<br>    additional_excluded_namespaces = list(string)<br>    enable_default_constraints     = bool<br>    additional_constraints = list(object({<br>      excluded_namespaces = list(string)<br>      processes           = list(string)<br>    }))<br>    enable_default_assigns = bool<br>    additional_assigns = list(object({<br>      name = string<br>    }))<br>  })</pre> | <pre>{<br>  "additional_assigns": [],<br>  "additional_constraints": [],<br>  "additional_excluded_namespaces": [],<br>  "enable_default_assigns": true,<br>  "enable_default_constraints": true<br>}</pre> | no |
 | <a name="input_opa_gatekeeper_enabled"></a> [opa\_gatekeeper\_enabled](#input\_opa\_gatekeeper\_enabled) | Should OPA Gatekeeper be enabled | `bool` | `true` | no |
 | <a name="input_prometheus_config"></a> [prometheus\_config](#input\_prometheus\_config) | Configuration for prometheus | <pre>object({<br>    remote_write_enabled = bool<br>    remote_write_url     = string<br>    tenant_id            = string<br><br>    volume_claim_enabled            = bool<br>    volume_claim_storage_class_name = string<br>    volume_claim_size               = string<br><br>    alertmanager_enabled = bool<br><br>    resource_selector  = list(string)<br>    namespace_selector = list(string)<br>  })</pre> | n/a | yes |

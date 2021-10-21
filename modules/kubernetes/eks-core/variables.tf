@@ -321,12 +321,6 @@ variable "goldpinger_enabled" {
   default     = true
 }
 
-variable "flux_system_enabled" {
-  description = "Should flux-system be enabled"
-  type        = bool
-  default     = true
-}
-
 variable "csi_secrets_store_provider_aws_enabled" {
   description = "Should csi-secrets-store-provider-aws be enabled"
   type        = bool
@@ -352,5 +346,21 @@ variable "datadog_config" {
     api_key          = ""
     app_key          = ""
     extra_namespaces = [""]
+  }
+}
+
+variable "new_relic_enabled" {
+  description = "Should New Relic be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "new_relic_config" {
+  description = "Configuration for New Relic"
+  type = object({
+    license_key = string
+  })
+  default = {
+    license_key = ""
   }
 }

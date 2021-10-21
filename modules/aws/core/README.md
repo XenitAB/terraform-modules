@@ -23,7 +23,12 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_cloudwatch_log_group.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/cloudwatch_log_group) | resource |
 | [aws_eip.public](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/eip) | resource |
+| [aws_flow_log.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/flow_log) | resource |
+| [aws_iam_policy.flow_log](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/iam_policy) | resource |
+| [aws_iam_role.flow_log](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.permissions](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_internet_gateway.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/internet_gateway) | resource |
 | [aws_nat_gateway.public](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/nat_gateway) | resource |
 | [aws_route.peering_accepter](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/route) | resource |
@@ -41,6 +46,8 @@ No modules.
 | [aws_vpc_peering_connection.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/vpc_peering_connection) | resource |
 | [aws_vpc_peering_connection_accepter.peer](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/resources/vpc_peering_connection_accepter) | resource |
 | [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/availability_zones) | data source |
+| [aws_iam_policy_document.flow_log](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/region) | data source |
 | [aws_vpc_peering_connection.this](https://registry.terraform.io/providers/hashicorp/aws/3.58.0/docs/data-sources/vpc_peering_connection) | data source |
 
 ## Inputs
@@ -50,6 +57,7 @@ No modules.
 | <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | The DNS Zone host name | `string` | `""` | no |
 | <a name="input_dns_zone_enabled"></a> [dns\_zone\_enabled](#input\_dns\_zone\_enabled) | Should dns zone be enabled | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
+| <a name="input_flow_log_enabled"></a> [flow\_log\_enabled](#input\_flow\_log\_enabled) | Should flow logs be enabled | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | Common name for the deploy | `string` | n/a | yes |
 | <a name="input_vpc_config"></a> [vpc\_config](#input\_vpc\_config) | The configuration of the VPC | <pre>object({<br>    cidr_block = string<br>    public_subnets = list(object({<br>      cidr_block = string<br>      tags       = map(string)<br>    }))<br>    private_subnets = list(object({<br>      name_prefix             = string<br>      cidr_block              = string<br>      availability_zone_index = number<br>      public_routing_enabled  = bool<br>      tags                    = map(string)<br>    }))<br>  })</pre> | n/a | yes |
 | <a name="input_vpc_peering_config_accepter"></a> [vpc\_peering\_config\_accepter](#input\_vpc\_peering\_config\_accepter) | VPC Peering configuration accepter | <pre>list(object({<br>    name                   = string<br>    peer_owner_id          = string<br>    destination_cidr_block = string<br>  }))</pre> | `[]` | no |

@@ -20,6 +20,12 @@ variable "dns_zone_enabled" {
   default     = false
 }
 
+variable "flow_log_enabled" {
+  description = "Should flow logs be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "vpc_config" {
   description = "The configuration of the VPC"
   type = object({

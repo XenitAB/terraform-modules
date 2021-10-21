@@ -8,8 +8,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Run a one-line script
+      - name: Check if CHANGELOG.md is updated
         run: |
+          set -ex
+          git diff --name-only refs/remotes/origin/$GITHUB_HEAD_REF | grep CHANGELOG.md
           if ! git diff --name-only refs/remotes/origin/$GITHUB_HEAD_REF | grep -q CHANGELOG.md ; then
             echo 'Update CHANGELOG.md with PR reference'
             exit 1

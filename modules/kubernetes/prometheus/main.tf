@@ -54,7 +54,7 @@ resource "helm_release" "metrics_server" {
   chart      = "metrics-server"
   name       = "metrics-server"
   namespace  = "kube-system"
-  version    = "5.9.2"
+  version    = "5.10.5"
   values     = [templatefile("${path.module}/templates/values-metrics-server.yaml.tpl", {})]
 }
 

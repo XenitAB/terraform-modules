@@ -5,7 +5,6 @@ locals {
     "csi-secrets-store-provider-aws",
     "datadog",
     "external-dns",
-    "external-secrets",
     "falco",
     "flux-system",
     "gatekeeper-system",

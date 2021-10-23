@@ -1,4 +1,6 @@
-# External Secrets
+# External Secrets [Deprecated]
+
+DEPRECATED: Use CSI secrets store provider for both AWS and Azure.
 
 Adds [`external-secrets`](https://github.com/external-secrets/kubernetes-external-secrets) to a Kubernetes clusters.
 

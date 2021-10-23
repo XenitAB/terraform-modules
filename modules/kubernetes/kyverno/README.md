@@ -1,3 +1,7 @@
+# Kyverno [Deprecated]
+
+DEPRECATED: Mutation features have now been implemented into OPA Gatekeeper.
+
 ## Requirements
 
 | Name | Version |

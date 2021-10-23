@@ -1,5 +1,7 @@
 /**
-  * # External Secrets
+  * # External Secrets [Deprecated]
+  *
+  * DEPRECATED: Use CSI secrets store provider for both AWS and Azure.
   *
   * Adds [`external-secrets`](https://github.com/external-secrets/kubernetes-external-secrets) to a Kubernetes clusters.
   */
@@ -35,6 +37,7 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+#tf-latest-version:ignore
 resource "helm_release" "external_secrets" {
   repository = "https://external-secrets.github.io/kubernetes-external-secrets/"
   chart      = "kubernetes-external-secrets"

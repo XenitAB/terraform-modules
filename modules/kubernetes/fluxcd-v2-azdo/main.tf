@@ -25,7 +25,7 @@ terraform {
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.4.0"
+      version = "0.5.1"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
@@ -33,11 +33,11 @@ terraform {
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.4.1"
+      version = "2.6.1"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
-      version = "1.11.3"
+      version = "1.13.0"
     }
   }
 }

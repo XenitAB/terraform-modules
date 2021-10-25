@@ -10,7 +10,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.4.1"
+      version = "2.6.1"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -36,7 +36,7 @@ resource "helm_release" "goldpinger" {
   chart      = "goldpinger"
   name       = "goldpinger"
   namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "4.2.1"
+  version    = "4.3.1"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     linkerd_enabled = var.linkerd_enabled
   })]

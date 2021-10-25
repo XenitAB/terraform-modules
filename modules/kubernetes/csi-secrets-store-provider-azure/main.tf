@@ -10,7 +10,7 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.4.1"
+      version = "2.6.1"
     }
     helm = {
       source  = "hashicorp/helm"
@@ -30,44 +30,10 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "csi_secrets_store_provider_azure" {
-  name       = "csi-secrets-store-provider-azure"
   repository = "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
   chart      = "csi-secrets-store-provider-azure"
-  version    = "0.2.0"
+  version    = "0.2.1"
+  name       = "csi-secrets-store-provider-azure"
   namespace  = kubernetes_namespace.this.metadata[0].name
-
-  set {
-    name  = "linux.tolerations[0].operator"
-    value = "Exists"
-  }
-
-  set {
-    name  = "linux.priorityClassName"
-    value = "platform-high"
-  }
-
-  set {
-    name  = "secrets-store-csi-driver.linux.metricsAddr"
-    value = ":8081"
-  }
-
-  set {
-    name  = "secrets-store-csi-driver.enableSecretRotation"
-    value = true
-  }
-
-  set {
-    name  = "secrets-store-csi-driver.linux.tolerations[0].operator"
-    value = "Exists"
-  }
-
-  set {
-    name  = "secrets-store-csi-driver.linux.priorityClassName"
-    value = "platform-high"
-  }
-
-  set {
-    name  = "secrets-store-csi-driver.syncSecret.enabled"
-    value = "true"
-  }
+  values     = [templatefile("${path.module}/templates/values.yaml.tpl", {})]
 }

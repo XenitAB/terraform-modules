@@ -19,8 +19,6 @@ This directory contains all the Kubernetes Terraform modules.
 - [`opa-gatekeeper`](opa-gatekeeper/README.md)
 - [`velero`](velero/README.md)
 - [`datadog`](datadog/README.md)
-- [`external-secrtest`](external-secrets/README.md)
-- [`kyverno`](kyverno/README.md)
 - [`falco`](falco/README.md)
 - [`reloader`](reloader/README.md)
 - [`azad-kube-proxy`](azad-kube-proxy/README.md)
@@ -32,6 +30,11 @@ This directory contains all the Kubernetes Terraform modules.
 - [`cluster-autoscaler`](cluster-autoscaler/README.md)
 - [`starboard`](starboard/README.md)
 - [`new-relic`](new-relic/README.md)
+
+### Deprecated
+
+- [`external-secrets`](external-secrets/README.md)
+- [`kyverno`](kyverno/README.md)
 
 ## Style Guide
 

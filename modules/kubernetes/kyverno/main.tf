@@ -1,3 +1,10 @@
+/**
+  * # Kyverno [Deprecated]
+  *
+  * DEPRECATED: Mutation features have now been implemented into OPA Gatekeeper.
+  *
+  */
+
 terraform {
   required_version = "0.15.3"
 
@@ -23,6 +30,7 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+#tf-latest-version:ignore
 resource "helm_release" "kyverno" {
   repository = "https://kyverno.github.io/kyverno/"
   chart      = "kyverno"

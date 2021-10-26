@@ -47,18 +47,19 @@ locals {
 }
 
 resource "kubernetes_namespace" "this" {
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes = [
+      metadata[0].labels,
+      metadata[0].annotations,
+    ]
+  }
+
   metadata {
     name = "flux-system"
     labels = {
       name = "flux-system"
     }
-  }
-
-  lifecycle {
-    ignore_changes = [
-      metadata[0].labels,
-      metadata[0].annotations,
-    ]
   }
 }
 
@@ -128,14 +129,22 @@ locals {
 
 resource "kubectl_manifest" "install" {
   depends_on = [kubernetes_namespace.this]
-  for_each   = { for v in local.install : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
-  yaml_body  = each.value
+  lifecycle {
+    prevent_destroy = true
+  }
+  for_each = { for v in local.install : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+
+  yaml_body = each.value
 }
 
 resource "kubectl_manifest" "sync" {
   depends_on = [kubernetes_namespace.this]
-  for_each   = { for v in local.sync : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
-  yaml_body  = each.value
+  lifecycle {
+    prevent_destroy = true
+  }
+  for_each = { for v in local.sync : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+
+  yaml_body = each.value
 }
 
 resource "azuredevops_git_repository_file" "install" {

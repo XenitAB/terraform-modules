@@ -96,6 +96,10 @@ terraform {
       source  = "hashicorp/helm"
       version = "2.3.0"
     }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "1.13.0"
+    }
   }
 }
 
@@ -116,6 +120,23 @@ resource "kubernetes_namespace" "this" {
     }
     name = "gatekeeper-system"
   }
+}
+
+data "helm_template" "opa_gatekeeper_crd" {
+  repository = "https://open-policy-agent.github.io/gatekeeper/charts"
+  chart      = "gatekeeper"
+  version    = "3.6.0"
+  name       = "gatekeeper"
+  include_crds = true
+}
+
+resource "kubectl_manifest" "opa_gatekeeper_crd" {
+  for_each =  { for k, v in data.helm_template.opa_gatekeeper_crd.manifests : k => v if trimprefix(k, "templates/") == k }
+  lifecycle {
+    prevent_destroy = true
+  }
+
+  yaml_body  = each.value
 }
 
 resource "helm_release" "gatekeeper" {

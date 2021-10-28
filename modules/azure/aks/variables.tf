@@ -31,6 +31,7 @@ variable "aks_config" {
     default_node_pool = object({
       orchestrator_version = string
       node_labels          = map(string)
+      max_surge            = number
     })
     additional_node_pools = list(object({
       name                 = string
@@ -42,6 +43,12 @@ variable "aks_config" {
       node_labels          = map(string)
     }))
   })
+}
+
+variable "aks_upgrade_channel" {
+  description = "What tier of Upgrade Channel to use"
+  type        = string
+  default = "none"
 }
 
 variable "ssh_public_key" {

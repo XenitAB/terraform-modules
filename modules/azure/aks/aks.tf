@@ -7,6 +7,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   kubernetes_version              = var.aks_config.kubernetes_version
   sku_tier                        = var.aks_config.sku_tier
   api_server_authorized_ip_ranges = var.aks_authorized_ips
+  automatic_channel_upgrade       = var.aks_upgrade_channel
 
   auto_scaler_profile {
     balance_similar_node_groups      = false
@@ -31,6 +32,9 @@ resource "azurerm_kubernetes_cluster" "this" {
     only_critical_addons_enabled = true
     type                         = "VirtualMachineScaleSets"
     vnet_subnet_id               = data.azurerm_subnet.this.id
+    upgrade_settings {
+      max_surge                  = var.aks_config.default_node_pool.max_surge
+    }
   }
 
   network_profile {

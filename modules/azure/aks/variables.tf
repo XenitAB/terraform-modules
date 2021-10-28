@@ -48,7 +48,7 @@ variable "aks_config" {
 variable "aks_upgrade_channel" {
   description = "What tier of Upgrade Channel to use"
   type        = string
-  default = "none"
+  default     = "none"
 }
 
 variable "ssh_public_key" {

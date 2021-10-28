@@ -33,7 +33,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     type                         = "VirtualMachineScaleSets"
     vnet_subnet_id               = data.azurerm_subnet.this.id
     upgrade_settings {
-      max_surge                  = var.aks_config.default_node_pool.max_surge
+      max_surge = var.aks_config.default_node_pool.max_surge
     }
   }
 

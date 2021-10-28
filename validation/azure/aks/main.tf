@@ -29,6 +29,7 @@ module "aks" {
       vm_size              = "Standard_B2s"
       min_count            = 1
       max_count            = 1
+      max_surge            = 1
       node_labels = {
         "test" = "test"
       }

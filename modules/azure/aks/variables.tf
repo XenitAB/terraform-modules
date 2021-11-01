@@ -28,10 +28,10 @@ variable "aks_config" {
   type = object({
     kubernetes_version = string
     sku_tier           = string
-    default_node_pool = object({
+    aks_upgrade_channel = string
+    default_node_pool  = object({
       orchestrator_version = string
       node_labels          = map(string)
-      max_surge            = number
     })
     additional_node_pools = list(object({
       name                 = string
@@ -41,14 +41,9 @@ variable "aks_config" {
       max_count            = number
       node_taints          = list(string)
       node_labels          = map(string)
+      max_surge            = number
     }))
   })
-}
-
-variable "aks_upgrade_channel" {
-  description = "What tier of Upgrade Channel to use"
-  type        = string
-  default     = "none"
 }
 
 variable "ssh_public_key" {

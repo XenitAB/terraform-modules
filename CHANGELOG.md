@@ -6,16 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-## 2021.10.4
-### Added
+### Changed
 
 - [#434] (https://github.com/XenitAB/terraform-modules/pull/434) Add config for AKS automatic_channel_upgrade & upgrade_settings
 
-### Changed
-
 - [#432](https://github.com/XenitAB/terraform-modules/pull/432) Add deletion protection to Flux components to prevent unwanted removal of critical components.
-
-
 
 ## 2021.10.3
 

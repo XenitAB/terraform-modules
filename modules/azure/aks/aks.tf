@@ -33,7 +33,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     type                         = "VirtualMachineScaleSets"
     vnet_subnet_id               = data.azurerm_subnet.this.id
     upgrade_settings {
-      max_surge = var.aks_config.default_node_pool.max_surge
+      max_surge = 1
     }
   }
 
@@ -90,6 +90,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   enable_auto_scaling   = true
   vnet_subnet_id        = data.azurerm_subnet.this.id
 
+
   node_taints = each.value.node_taints
 
   node_labels = merge({
@@ -109,4 +110,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
       node_count
     ]
   }
+   upgrade_settings {
+      max_surge = var.aks_config.additional_node_pools.max_surge
+    }
 }

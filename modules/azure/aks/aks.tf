@@ -111,6 +111,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
     ]
   }
   upgrade_settings {
-    max_surge = var.aks_config.additional_node_pools.max_surge
+    max_surge = each.value.max_surge
   }
 }

@@ -66,7 +66,7 @@ resource "kubernetes_network_policy" "tenant" {
       { for k, v in each.value.labels : k => v },
       { "name" = each.value.name }
     )
-    name      = "default-deny"
+    name      = "deny-default"
     namespace = each.value.name
   }
 

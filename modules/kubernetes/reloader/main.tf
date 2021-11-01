@@ -30,6 +30,126 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+resource "kubernetes_network_policy" "deny_default" {
+  metadata {
+    name      = "deny-default"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {}
+    }
+
+    policy_types = ["Ingress", "Egress"]
+
+    ingress {
+      from {
+        pod_selector {}
+      }
+    }
+
+    egress {
+      to {
+        namespace_selector {}
+        pod_selector {
+          match_labels = {
+            k8s-app = "kube-dns"
+          }
+        }
+      }
+
+      ports {
+        port     = 53
+        protocol = "UDP"
+      }
+    }
+
+    egress {
+      to {
+        pod_selector {}
+      }
+    }
+  }
+}
+
+resource "kubernetes_network_policy" "allow_scraping" {
+  metadata {
+    name      = "allow-scraping"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {
+        app = "reloader-reloader"
+        group = "com.stakater.platform"
+        provider = "stakater"
+        release = "reloader"
+      }
+    }
+
+    policy_types = ["Ingress"]
+
+    ingress {
+      from {
+        namespace_selector {
+          match_labels = {
+            name = "prometheus"
+          }
+        }
+        pod_selector {
+          match_labels = {
+            app = "prometheus"
+            "app.kubernetes.io/name" = "prometheus"
+          }
+        }
+      }
+
+      ports {
+        port = "metrics"
+        protocol = "TCP"
+      }
+    }
+  }
+}
+
+# Currently traffic has to be opened up to all IPs as
+# it is not possible to dynamically find the IP of the
+# api server, nor possible to limit egress based on DNS
+resource "kubernetes_network_policy" "allow_api_server" {
+  metadata {
+    name      = "allow-api-server"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  spec {
+    pod_selector {
+      match_labels = {
+        app = "reloader-reloader"
+        group = "com.stakater.platform"
+        provider = "stakater"
+        release = "reloader"
+      }
+    }
+
+    policy_types = ["Egress"]
+
+    egress {
+      to {
+        ip_block {
+          cidr = "0.0.0.0/0"
+        }
+      }
+
+      ports {
+        port     = 443
+        protocol = "TCP"
+      }
+    }
+  }
+}
+
 resource "helm_release" "reloader" {
   repository = "https://stakater.github.io/stakater-charts"
   chart      = "reloader"

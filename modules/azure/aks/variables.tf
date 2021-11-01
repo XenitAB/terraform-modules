@@ -26,10 +26,10 @@ variable "aks_name_suffix" {
 variable "aks_config" {
   description = "The Azure Kubernetes Service (AKS) configuration"
   type = object({
-    kubernetes_version = string
-    sku_tier           = string
+    kubernetes_version  = string
+    sku_tier            = string
     aks_upgrade_channel = string
-    default_node_pool  = object({
+    default_node_pool = object({
       orchestrator_version = string
       node_labels          = map(string)
     })

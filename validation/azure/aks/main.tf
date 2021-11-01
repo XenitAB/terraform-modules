@@ -22,8 +22,9 @@ module "aks" {
   aks_name_suffix = "1"
 
   aks_config = {
-    kubernetes_version = "1.18.8"
-    sku_tier           = "Standard"
+    kubernetes_version  = "1.18.8"
+    sku_tier            = "Standard"
+    aks_upgrade_channel = "none"
     default_node_pool = {
       orchestrator_version = "1.18.8"
       vm_size              = "Standard_B2s"
@@ -41,6 +42,7 @@ module "aks" {
         vm_size              = "Standard_B2s"
         min_count            = 1
         max_count            = 1
+        max_surge            = 1
         node_taints = [
           "test"
         ]

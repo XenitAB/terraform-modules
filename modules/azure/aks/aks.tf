@@ -6,8 +6,8 @@ resource "azurerm_kubernetes_cluster" "this" {
   dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
   kubernetes_version              = var.aks_config.kubernetes_version
   sku_tier                        = var.aks_config.sku_tier
+  automatic_channel_upgrade       = var.aks_config.aks_upgrade_channel
   api_server_authorized_ip_ranges = var.aks_authorized_ips
-  automatic_channel_upgrade       = var.aks_upgrade_channel
 
   auto_scaler_profile {
     balance_similar_node_groups      = false
@@ -110,7 +110,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
       node_count
     ]
   }
-   upgrade_settings {
-      max_surge = var.aks_config.additional_node_pools.max_surge
-    }
+  upgrade_settings {
+    max_surge = var.aks_config.additional_node_pools.max_surge
+  }
 }

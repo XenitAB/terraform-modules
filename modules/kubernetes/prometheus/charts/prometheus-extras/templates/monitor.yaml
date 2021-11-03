@@ -333,3 +333,37 @@ spec:
     - path: /metrics
       port: metrics
 {{- end }}
+{{- if .Values.enabledMonitors.csiSecretsStoreDriverAzure}}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: secrets-store-csi-driver-azure
+  namespace: secrets-store-csi-driver-azure
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: secrets-store-csi-driver-azure
+      app.kubernetes.io/name: secrets-store-csi-driver-azure
+  podMetricsEndpoints:
+    - path: /metrics
+      port: metrics
+{{- end }}
+{{- if .Values.enabledMonitors.csiSecretsStoreDriverAws}}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: secrets-store-csi-driver-aws
+  namespace: secrets-store-csi-driver-aws
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: secrets-store-csi-driver-aws
+      app.kubernetes.io/name: secrets-store-csi-driver-aws
+  podMetricsEndpoints:
+    - path: /metrics
+      port: metrics
+{{- end }}

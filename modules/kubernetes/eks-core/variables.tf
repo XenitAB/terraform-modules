@@ -209,6 +209,11 @@ variable "azad_kube_proxy_enabled" {
   type        = bool
   default     = false
 }
+variable "secrets_store_csi_driver_aws_enabled" {
+  description = "Should secrets-store-csi-driver-aws be enabled"
+  type        = bool
+  default     = false
+}
 
 variable "azad_kube_proxy_config" {
   description = "The azad-kube-proxy configuration"

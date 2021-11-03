@@ -85,7 +85,8 @@ module "aks_core" {
     volume_claim_storage_class_name = "default"
     volume_claim_size               = "5Gi"
 
-    alertmanager_enabled = false
+    alertmanager_enabled                   = false
+    secrets_store_csi_driver_azure_enabled = true
 
     tenant_id          = ""
     resource_selector  = ["platform"]

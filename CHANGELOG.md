@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#432](https://github.com/XenitAB/terraform-modules/pull/432) Add deletion protection to Flux components to prevent unwanted removal of critical components.
 
-- [#](WWW) Enable Prometheus for pod monitoring for secrets-store-csi-driver.
+- [#437](https://github.com/XenitAB/terraform-modules/pull/437) Enable Prometheus for pod monitoring for secrets-store-csi-driver.
 
 ## 2021.10.3
 

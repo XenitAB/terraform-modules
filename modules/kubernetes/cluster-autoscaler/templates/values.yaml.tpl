@@ -30,3 +30,6 @@ rbac:
     annotations:
       eks.amazonaws.com/role-arn: ${aws_config.role_arn}
 %{ endif }
+
+extraArgs:
+  skip-nodes-with-local-storage: false

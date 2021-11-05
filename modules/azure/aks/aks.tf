@@ -63,6 +63,11 @@ resource "azurerm_kubernetes_cluster" "this" {
     }
   }
 
+  auto_scaler_profile {
+    # Pods should not depend on local storage like EmptyDir or HostPath
+    skip_nodes_with_local_storage = false
+  }
+
   lifecycle {
     ignore_changes = [
       default_node_pool[0].node_count

@@ -35,6 +35,7 @@ controller:
     ${key}: "${value}"
     %{~ endfor ~}
     server-tokens: "false"
+    use-forwarded-headers: "true"
     %{~ if http_snippet != "" ~}
     http-snippet: |
       ${http_snippet}

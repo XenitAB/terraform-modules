@@ -35,6 +35,11 @@ controller:
     ${key}: "${value}"
     %{~ endfor ~}
     server-tokens: "false"
+    use-forwarded-headers: "true"
+    %{~ if datadog_enabled ~}
+    datadog-collector-host: "$HOST_IP"
+    enable-opentracing: "true"
+    %{~ endif ~}
     %{~ if http_snippet != "" ~}
     http-snippet: |
       ${http_snippet}
@@ -55,7 +60,7 @@ controller:
     %{~ if datadog_enabled ~}
     ad.datadoghq.com/controller.check_names: '["nginx_ingress_controller"]'
     ad.datadoghq.com/controller.init_configs: '[{}]'
-    ad.datadoghq.com/controller.instances: '[{"prometheus_url": "http://%%host%%:10254/metrics"}]'
+    ad.datadoghq.com/controller.instances: '[{"prometheus_url": "http://%%host%%:%%port_metrics%%/metrics"}]'
     %{~ endif ~}
     %{~ if linkerd_enabled ~}
     linkerd.io/inject: "ingress"
@@ -63,6 +68,15 @@ controller:
     # https://github.com/linkerd/linkerd2/issues/3334#issuecomment-565135188
     config.linkerd.io/skip-inbound-ports: "80,443"
     %{~ endif ~}
+  %{~ endif ~}
+
+  %{~ if datadog_enabled ~}
+  extraEnvs:
+  - name: HOST_IP
+    valueFrom:
+      fieldRef:
+        apiVersion: v1
+        fieldPath: status.hostIP
   %{~ endif ~}
 
   metrics:

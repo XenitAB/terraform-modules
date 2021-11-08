@@ -34,27 +34,27 @@ resource "kubernetes_service_account" "tenant" {
   }
 }
 
-#resource "kubernetes_limit_range" "tenant" {
-#  for_each = { for ns in var.namespaces : ns.name => ns }
-#
-#  metadata {
-#    name      = "default"
-#    namespace = each.key
-#  }
-#
-#  spec {
-#    limit {
-#      type = "Container"
-#      default_request = {
-#        cpu    = var.kubernetes_default_limit_range.default_request.cpu
-#        memory = var.kubernetes_default_limit_range.default_request.memory
-#      }
-#      default = {
-#        memory = var.kubernetes_default_limit_range.default.memory
-#      }
-#    }
-#  }
-#}
+resource "kubernetes_limit_range" "tenant" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+
+  metadata {
+    name      = "default"
+    namespace = each.key
+  }
+
+  spec {
+    limit {
+      type = "Container"
+      default_request = {
+        cpu    = var.kubernetes_default_limit_range.default_request.cpu
+        memory = var.kubernetes_default_limit_range.default_request.memory
+      }
+      default = {
+        memory = var.kubernetes_default_limit_range.default.memory
+      }
+    }
+  }
+}
 
 # Denys all traffic but except to coredns and inside of namespace.
 resource "kubernetes_network_policy" "tenant" {

@@ -60,7 +60,7 @@ controller:
     %{~ if datadog_enabled ~}
     ad.datadoghq.com/controller.check_names: '["nginx_ingress_controller"]'
     ad.datadoghq.com/controller.init_configs: '[{}]'
-    ad.datadoghq.com/controller.instances: '[{"prometheus_url": "http://%%host%%:10254/metrics"}]'
+    ad.datadoghq.com/controller.instances: '[{"prometheus_url": "http://%%host%%:%%port_metrics%%/metrics"}]'
     %{~ endif ~}
     %{~ if linkerd_enabled ~}
     linkerd.io/inject: "ingress"

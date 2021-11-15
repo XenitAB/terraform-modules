@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#448](https://github.com/XenitAB/terraform-modules/pull/448) [Breaking] Define namespaces that kube-state-metrics should gather metrics from.
+  This is a **breaking change** and will cause users that don't include all namespaces they want metrics from
+  in `kube_state_metrics_namepsaces_extras` to loose metrics.
+  The default values are set in aks-core/eks-core so they are adjusted to our current platform namespaces.
+  We hope this way of working can be improved in [future kube-state-metrics releases](https://github.com/kubernetes/kube-state-metrics/issues/1631)
+
 ### Fixed
 
 - [#445](https://github.com/XenitAB/terraform-modules/pull/445) Re-enable resource limit ranges in EKS.

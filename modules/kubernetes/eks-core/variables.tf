@@ -364,3 +364,9 @@ variable "new_relic_config" {
     license_key = ""
   }
 }
+
+variable "kube_state_metrics_namepsaces_extras" {
+  description = "Comma-separated list of namespaces to be enabled except the ones defined by default."
+  type        = list(string)
+  default     = []
+}

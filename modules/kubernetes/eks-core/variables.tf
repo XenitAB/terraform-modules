@@ -364,3 +364,9 @@ variable "new_relic_config" {
     license_key = ""
   }
 }
+
+variable "kube_state_metrics_namepsaces" {
+  description = "Comma-separated list of namespaces to be enabled. To get metrics from all namespaces use ''"
+  type        = string
+  default     = "azad-kube-proxy,calico-system,cert-manager,cluster-autoscaler,csi-secrets-store-provider-aws,external-dns,falco,flux-system,gatekeeper-system,goldpinger,ingress-healthz,ingress-nginx,kube-node-lease,kube-public,kube-system,prometheus,reloader,tigera-operator,xenit-system"
+}

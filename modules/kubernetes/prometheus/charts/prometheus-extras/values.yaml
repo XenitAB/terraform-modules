@@ -65,3 +65,5 @@ enabledMonitors:
   csiSecretsStorProviderAzure: false
   csiSecretsStorProviderAws: false
   azadKubeProxy: false
+  csiSecretsStoreDriverAzure: false
+  csiSecretsStoreDriverAws: false

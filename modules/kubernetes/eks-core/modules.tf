@@ -293,7 +293,6 @@ module "prometheus" {
   flux_enabled                           = var.fluxcd_v2_enabled
   csi_secrets_store_provider_aws_enabled = var.csi_secrets_store_provider_aws_enabled
   azad_kube_proxy_enabled                = var.azad_kube_proxy_enabled
-  secrets_store_csi_driver_aws_enabled   = var.secrets_store_csi_driver_aws_enabled
 }
 
 module "cluster_autoscaler" {

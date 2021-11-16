@@ -293,12 +293,6 @@ variable "azad_kube_proxy_enabled" {
   default     = false
 }
 
-variable "secrets_store_csi_driver_azure_enabled" {
-  description = "Should secrets-store-csi-driver-azure be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "azad_kube_proxy_config" {
   description = "The azad-kube-proxy configuration"
   type = object({

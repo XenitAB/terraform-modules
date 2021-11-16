@@ -90,7 +90,5 @@ resource "helm_release" "prometheus_extras" {
     csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
     csi_secrets_store_provider_aws_enabled   = var.csi_secrets_store_provider_aws_enabled
     azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
-    secrets_store_csi_driver_azure_enabled   = var.secrets_store_csi_driver_azure_enabled
-    secrets_store_csi_driver_aws_enabled     = var.secrets_store_csi_driver_aws_enabled
   })]
 }

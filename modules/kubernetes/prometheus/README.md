@@ -52,8 +52,6 @@ No modules.
 | <a name="input_remote_write_enabled"></a> [remote\_write\_enabled](#input\_remote\_write\_enabled) | If remote write should be enabled or not | `bool` | `true` | no |
 | <a name="input_remote_write_url"></a> [remote\_write\_url](#input\_remote\_write\_url) | The URL where to send prometheus remote\_write data | `string` | n/a | yes |
 | <a name="input_resource_selector"></a> [resource\_selector](#input\_resource\_selector) | Monitoring type labels to look for in Prometheus resources | `list(string)` | <pre>[<br>  "platform"<br>]</pre> | no |
-| <a name="input_secrets_store_csi_driver_aws_enabled"></a> [secrets\_store\_csi\_driver\_aws\_enabled](#input\_secrets\_store\_csi\_driver\_aws\_enabled) | Should secrets-store-csi-driver-aws be enabled | `bool` | `false` | no |
-| <a name="input_secrets_store_csi_driver_azure_enabled"></a> [secrets\_store\_csi\_driver\_azure\_enabled](#input\_secrets\_store\_csi\_driver\_azure\_enabled) | Should secrets-store-csi-driver-azure be enabled | `bool` | `false` | no |
 | <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | The tenant id label to apply to all metrics in remote write | `string` | `""` | no |
 | <a name="input_volume_claim_enabled"></a> [volume\_claim\_enabled](#input\_volume\_claim\_enabled) | If prometheus should store data localy | `bool` | `true` | no |
 | <a name="input_volume_claim_size"></a> [volume\_claim\_size](#input\_volume\_claim\_size) | Size of prometheus disk | `string` | `"5Gi"` | no |

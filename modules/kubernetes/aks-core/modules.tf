@@ -402,7 +402,6 @@ module "prometheus" {
   csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
   aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
   azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
-  secrets_store_csi_driver_azure_enabled   = var.secrets_store_csi_driver_azure_enabled
 }
 
 # xenit

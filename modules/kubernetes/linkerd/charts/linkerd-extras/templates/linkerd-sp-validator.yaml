@@ -4,6 +4,7 @@ metadata:
   name: linkerd-sp-validator
 spec:
   secretName: linkerd-sp-validator-k8s-tls
+  revisionHistoryLimit: 3
   duration: 8h
   renewBefore: 4h
   issuerRef:

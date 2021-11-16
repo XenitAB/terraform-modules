@@ -6,19 +6,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+- [#437](https://github.com/XenitAB/terraform-modules/pull/437) Enable Prometheus for pod monitoring for secrets-store-csi-driver.
+
+### Fixed
+
+- [#451](https://github.com/XenitAB/terraform-modules/pull/451) Set revision history for all certificates to limit the amount of certificate requests.
+
+## 2021.11.2
+
+### Changed
+
+- [#448](https://github.com/XenitAB/terraform-modules/pull/448) [Breaking] Define namespaces that kube-state-metrics should gather metrics from.
+  This is a **breaking change** and will cause users that don't include all namespaces they want metrics from
+  in `kube_state_metrics_namepsaces_extras` to loose metrics.
+  The default values are set in aks-core/eks-core so they are adjusted to our current platform namespaces.
+  We hope this way of working can be improved in [future kube-state-metrics releases](https://github.com/kubernetes/kube-state-metrics/issues/1631)
+
+### Fixed
+
+- [#445](https://github.com/XenitAB/terraform-modules/pull/445) Re-enable resource limit ranges in EKS.
+- [#441](https://github.com/XenitAB/terraform-modules/pull/441) Fix dependancy between tenant namespaces and resources in namespace.
+
+## 2021.11.1
+
 ### Changed
 
 - [#432](https://github.com/XenitAB/terraform-modules/pull/432) Add deletion protection to Flux components to prevent unwanted removal of critical components.
+- [#439](https://github.com/XenitAB/terraform-modules/pull/439) Add information about Azure AD Graph deprecation.
+- [#440](https://github.com/XenitAB/terraform-modules/pull/440) Allow scale down for nodes with local storage.
 
-- [#437](https://github.com/XenitAB/terraform-modules/pull/437) Enable Prometheus for pod monitoring for secrets-store-csi-driver.
+### Fixed
+
+- [#442](https://github.com/XenitAB/terraform-modules/pull/442) Fix Datadog monitoring of ingress-nginx and enable x-forwarded-for headers.
 
 ## 2021.10.3
 
 ### Fixed
 
 - [#431](https://github.com/XenitAB/terraform-modules/pull/431) Downgrade external-dns helm chart to 5.4.8 and external-dns to 0.9.0
-
-
 
 ## 2021.10.2
 

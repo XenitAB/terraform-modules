@@ -139,3 +139,27 @@ resource "kubernetes_role_binding" "sa_helm_release" {
     namespace = kubernetes_namespace.service_accounts.metadata[0].name
   }
 }
+
+resource "kubernetes_role_binding" "top" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+
+  metadata {
+    name      = "${each.value.name}-top"
+    namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
+
+    labels = {
+      "aad-group-name"    = var.aad_groups.edit[each.key].name
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "top"
+  }
+  subject {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "Group"
+    name      = var.aad_groups.edit[each.key].id
+  }
+}

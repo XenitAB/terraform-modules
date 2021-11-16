@@ -4,10 +4,11 @@ kind: Certificate
 metadata:
   name: ingress-nginx
 spec:
+  secretName: ingress-nginx
+  revisionHistoryLimit: 3
   dnsNames:
     - '*.{{ .Values.defaultCertificate.dnsZone }}'
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt
-  secretName: ingress-nginx
 {{- end }}

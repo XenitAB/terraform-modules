@@ -4,6 +4,7 @@ metadata:
   name: linkerd-proxy-injector
 spec:
   secretName: linkerd-proxy-injector-k8s-tls
+  revisionHistoryLimit: 3
   duration: 8h
   renewBefore: 4h
   issuerRef:

@@ -91,4 +91,5 @@ module "aks_core" {
     resource_selector  = ["platform"]
     namespace_selector = ["platform"]
   }
+  kube_state_metrics_namepsaces_extras = ["foo"]
 }

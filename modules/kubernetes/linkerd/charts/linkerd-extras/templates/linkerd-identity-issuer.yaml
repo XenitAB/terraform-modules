@@ -4,6 +4,7 @@ metadata:
   name: linkerd-identity-issuer
 spec:
   secretName: linkerd-identity-issuer
+  revisionHistoryLimit: 3
   duration: 8h
   renewBefore: 4h
   issuerRef:

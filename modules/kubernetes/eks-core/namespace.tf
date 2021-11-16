@@ -7,6 +7,15 @@ resource "kubernetes_namespace" "service_accounts" {
   }
 }
 
+resource "kubernetes_service_account" "tenant" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+
+  metadata {
+    name      = each.value.name
+    namespace = kubernetes_namespace.service_accounts.metadata[0].name
+  }
+}
+
 resource "kubernetes_namespace" "tenant" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
@@ -25,36 +34,27 @@ resource "kubernetes_namespace" "tenant" {
   }
 }
 
-resource "kubernetes_service_account" "tenant" {
+resource "kubernetes_limit_range" "tenant" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
-    name      = each.value.name
-    namespace = kubernetes_namespace.service_accounts.metadata[0].name
+    name      = "default"
+    namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
+  }
+
+  spec {
+    limit {
+      type = "Container"
+      default_request = {
+        cpu    = var.kubernetes_default_limit_range.default_request.cpu
+        memory = var.kubernetes_default_limit_range.default_request.memory
+      }
+      default = {
+        memory = var.kubernetes_default_limit_range.default.memory
+      }
+    }
   }
 }
-
-#resource "kubernetes_limit_range" "tenant" {
-#  for_each = { for ns in var.namespaces : ns.name => ns }
-#
-#  metadata {
-#    name      = "default"
-#    namespace = each.key
-#  }
-#
-#  spec {
-#    limit {
-#      type = "Container"
-#      default_request = {
-#        cpu    = var.kubernetes_default_limit_range.default_request.cpu
-#        memory = var.kubernetes_default_limit_range.default_request.memory
-#      }
-#      default = {
-#        memory = var.kubernetes_default_limit_range.default.memory
-#      }
-#    }
-#  }
-#}
 
 # Denys all traffic but except to coredns and inside of namespace.
 resource "kubernetes_network_policy" "tenant" {
@@ -70,7 +70,7 @@ resource "kubernetes_network_policy" "tenant" {
       { "name" = each.value.name }
     )
     name      = "default-deny"
-    namespace = each.value.name
+    namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
   }
 
   spec {

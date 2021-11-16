@@ -57,27 +57,27 @@ variable "kubernetes_network_policy_default_deny" {
   default     = false
 }
 
-#variable "kubernetes_default_limit_range" {
-#  description = "Default limit range for tenant namespaces"
-#  type = object({
-#    default_request = object({
-#      cpu    = string
-#      memory = string
-#    })
-#    default = object({
-#      memory = string
-#    })
-#  })
-#  default = {
-#    default_request = {
-#      cpu    = "50m"
-#      memory = "32Mi"
-#    }
-#    default = {
-#      memory = "256Mi"
-#    }
-#  }
-#}
+variable "kubernetes_default_limit_range" {
+  description = "Default limit range for tenant namespaces"
+  type = object({
+    default_request = object({
+      cpu    = string
+      memory = string
+    })
+    default = object({
+      memory = string
+    })
+  })
+  default = {
+    default_request = {
+      cpu    = "50m"
+      memory = "32Mi"
+    }
+    default = {
+      memory = "256Mi"
+    }
+  }
+}
 
 variable "fluxcd_v2_enabled" {
   description = "Should fluxcd-v2 be enabled"
@@ -363,4 +363,10 @@ variable "new_relic_config" {
   default = {
     license_key = ""
   }
+}
+
+variable "kube_state_metrics_namepsaces_extras" {
+  description = "Comma-separated list of namespaces to be enabled except the ones defined by default."
+  type        = list(string)
+  default     = []
 }

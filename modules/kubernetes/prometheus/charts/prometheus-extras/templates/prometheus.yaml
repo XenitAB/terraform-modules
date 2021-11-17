@@ -47,6 +47,9 @@ spec:
       headers:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      queueConfig:
+        maxShards: 1500
+        minBackoff: 100ms
   {{- end }}
   {{- if .Values.volumeClaim.enabled }}
   storage:

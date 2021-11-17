@@ -47,9 +47,10 @@ spec:
       headers:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      # Setting according to others observation
+      # https://github.com/prometheus/prometheus/pull/9634
       queueConfig:
-        maxShards: 1500
-        minBackoff: 100ms
+        maxBackoff: 5s
   {{- end }}
   {{- if .Values.volumeClaim.enabled }}
   storage:

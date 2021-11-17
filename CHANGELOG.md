@@ -16,6 +16,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#461](https://github.com/XenitAB/terraform-modules/pull/461) Set resource request for Prometheus and update remote write config.
 - [#460](https://github.com/XenitAB/terraform-modules/pull/460) Increase gatekeeper-audit memory request.
 
+### Deprecated
+
+- [#456](https://github.com/XenitAB/terraform-modules/pull/456) Deprecate goldpinger and remove it from aks-core and eks-core.
+
 ## 2021.11.4
 
 ### Fixed

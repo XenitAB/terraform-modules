@@ -59,7 +59,6 @@ enabledMonitors:
   falco: false
   opaGatekeeper: false
   linkerd: false
-  goldpinger: false
   flux: false
   aadPodIdentity: false
   csiSecretsStorProviderAzure: false

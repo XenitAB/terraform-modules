@@ -86,12 +86,6 @@ variable "linkerd_enabled" {
   default     = false
 }
 
-variable "goldpinger_enabled" {
-  description = "Should goldpinger be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "flux_enabled" {
   description = "Should flux-system be enabled"
   type        = bool

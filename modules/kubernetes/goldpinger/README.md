@@ -1,4 +1,4 @@
-# Goldpinger
+# Goldpinger [Deprecated]
 
 Adds [`Goldpinger`](https://github.com/bloomberg/goldpinger) to a Kubernetes clusters.
 

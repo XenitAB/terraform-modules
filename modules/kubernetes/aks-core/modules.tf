@@ -30,7 +30,6 @@ locals {
     "falco",
     "flux-system",
     "gatekeeper-system",
-    "goldpinger",
     "ingress-healthz",
     "ingress-nginx",
     "kube-node-lease",
@@ -418,7 +417,6 @@ module "prometheus" {
   falco_enabled                            = var.falco_enabled
   opa_gatekeeper_enabled                   = var.opa_gatekeeper_enabled
   linkerd_enabled                          = var.linkerd_enabled
-  goldpinger_enabled                       = var.goldpinger_enabled
   flux_enabled                             = var.fluxcd_v2_enabled
   csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
   aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
@@ -447,20 +445,6 @@ module "xenit" {
   }
   thanos_receiver_fqdn = var.xenit_config.thanos_receiver
   loki_api_fqdn        = var.xenit_config.loki_api
-}
-
-module "goldpinger" {
-  depends_on = [module.opa_gatekeeper, module.linkerd]
-
-  for_each = {
-    for s in ["goldpinger"] :
-    s => s
-    if var.goldpinger_enabled
-  }
-
-  source = "../../kubernetes/goldpinger"
-
-  linkerd_enabled = var.linkerd_enabled
 }
 
 # starboard

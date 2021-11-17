@@ -6,10 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Fixed
+
+- [#457](https://github.com/XenitAB/terraform-modules/pull/457) Increase Prometheus remote write max back off to mitigate DDOS.
+
+## 2021.11.3
+
 ### Changed
 
-- [#454](https://github.com/XenitAB/terraform-modules/pull/454) Set prometheus remote write queue config,
-  lowering default max shards and increasing default min back off.
+- [#454](https://github.com/XenitAB/terraform-modules/pull/454) Set prometheus remote write queue config, lowering default max shards and increasing default min back off.
 
 ### Fixed
 

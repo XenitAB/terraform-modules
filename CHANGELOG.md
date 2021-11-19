@@ -8,8 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#453](https://github.com/XenitAB/terraform-modules/pull/453) Add role for kubectl top pod
 
-<<<<<<< HEAD
-=======
 ### Fixed
 
 - [#459](https://github.com/XenitAB/terraform-modules/pull/459) Decrease Prometheus remote write max shards to reduce concurrent requests.
@@ -26,7 +24,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#454](https://github.com/XenitAB/terraform-modules/pull/454) Set prometheus remote write queue config, lowering default max shards and increasing default min back off.
 
->>>>>>> b92529f8bb97b80a97d34b12f5b3723e6d7da835
 ### Fixed
 
 - [#451](https://github.com/XenitAB/terraform-modules/pull/451) Set revision history for all certificates to limit the amount of certificate requests.

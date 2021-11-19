@@ -47,6 +47,13 @@ spec:
       headers:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      # Setting according to others observation
+      # https://github.com/prometheus/prometheus/pull/9634
+      # Check docs for more information about settings
+      # https://prometheus.io/docs/practices/remote_write/
+      queueConfig:
+        maxBackoff: 5s
+        maxShards: 100
   {{- end }}
   {{- if .Values.volumeClaim.enabled }}
   storage:

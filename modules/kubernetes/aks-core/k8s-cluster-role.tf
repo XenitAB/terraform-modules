@@ -55,7 +55,7 @@ resource "kubernetes_cluster_role" "top" {
     }
   }
   rule {
-    api_groups = ["rbac.authorization.k8s.io"]
+    api_groups = ["metrics.k8s.io"]
     resources  = ["pods"]
     verbs      = ["get", "list", "watch"]
   }

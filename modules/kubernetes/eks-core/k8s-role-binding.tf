@@ -152,7 +152,7 @@ resource "kubernetes_role_binding" "top" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = "top"
+    name      = kubernetes_cluster_role.top.metadata[0].name
   }
   subject {
     api_group = "rbac.authorization.k8s.io"

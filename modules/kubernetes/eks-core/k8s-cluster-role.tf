@@ -46,3 +46,17 @@ resource "kubernetes_cluster_role" "custom_resource_edit" {
     verbs     = ["*"]
   }
 }
+
+resource "kubernetes_cluster_role" "top" {
+  metadata {
+    name = "top"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  rule {
+    api_groups = ["metrics.k8s.io"]
+    resources  = ["pods"]
+    verbs      = ["get", "list", "watch"]
+  }
+}

@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#453](https://github.com/XenitAB/terraform-modules/pull/453) Add role for kubectl top pod
+
 ### Fixed
 
 - [#459](https://github.com/XenitAB/terraform-modules/pull/459) Decrease Prometheus remote write max shards to reduce concurrent requests.

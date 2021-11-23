@@ -52,7 +52,9 @@ spec:
       # Check docs for more information about settings
       # https://prometheus.io/docs/practices/remote_write/
       queueConfig:
+        capacity: 3000
         maxBackoff: 5s
+        maxSamplesPerSend: 1000
         maxShards: 100
   {{- end }}
   {{- if .Values.volumeClaim.enabled }}
@@ -64,6 +66,12 @@ spec:
           requests:
             storage: {{ .Values.volumeClaim.size }}
   {{- end }}
+  resources:
+    limits:
+      memory: 4Gi
+    requests:
+      cpu: 100m
+      memory: 1Gi
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:

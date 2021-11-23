@@ -26,7 +26,6 @@ This directory contains all the Kubernetes Terraform modules.
 - [`ingress-healthz`](ingress-healthz/README.md)
 - [`xenit`](xenit/README.md)
 - [`linkerd`](linkerd/README.md)
-- [`goldpinger`](goldpinger/README.md)
 - [`cluster-autoscaler`](cluster-autoscaler/README.md)
 - [`starboard`](starboard/README.md)
 - [`new-relic`](new-relic/README.md)
@@ -35,6 +34,7 @@ This directory contains all the Kubernetes Terraform modules.
 
 - [`external-secrets`](external-secrets/README.md)
 - [`kyverno`](kyverno/README.md)
+- [`goldpinger`](goldpinger/README.md)
 
 ## Style Guide
 

@@ -1,5 +1,5 @@
 /**
-  * # Goldpinger
+  * # Goldpinger [Deprecated]
   *
   * Adds [`Goldpinger`](https://github.com/bloomberg/goldpinger) to a Kubernetes clusters.
   */
@@ -31,6 +31,7 @@ resource "kubernetes_namespace" "this" {
 
 # Official Helm repo is deprecated to using fork.
 # https://github.com/bloomberg/goldpinger/issues/93
+#tf-latest-version:ignore
 resource "helm_release" "goldpinger" {
   repository = "https://okgolove.github.io/helm-charts/"
   chart      = "goldpinger"

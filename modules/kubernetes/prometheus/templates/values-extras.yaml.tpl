@@ -58,7 +58,6 @@ enabledMonitors:
   falco: ${falco_enabled}
   opaGatekeeper: ${opa_gatekeeper_enabled}
   linkerd: ${linkerd_enabled}
-  goldpinger: ${goldpinger_enabled}
   flux: ${flux_enabled}
   aadPodIdentity: ${aad_pod_identity_enabled}
   csiSecretsStorProviderAzure: ${csi_secrets_store_provider_azure_enabled}

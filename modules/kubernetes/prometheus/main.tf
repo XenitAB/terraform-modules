@@ -86,7 +86,6 @@ resource "helm_release" "prometheus_extras" {
     falco_enabled                            = var.falco_enabled
     opa_gatekeeper_enabled                   = var.opa_gatekeeper_enabled
     linkerd_enabled                          = var.linkerd_enabled
-    goldpinger_enabled                       = var.goldpinger_enabled
     flux_enabled                             = var.flux_enabled
     aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
     csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled

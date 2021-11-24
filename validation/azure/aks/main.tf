@@ -15,11 +15,12 @@ module "aks" {
     azurerm = azurerm
   }
 
-  environment     = "dev"
-  location_short  = "we"
-  name            = "xks"
-  core_name       = "core"
-  aks_name_suffix = "1"
+  environment                   = "dev"
+  location_short                = "we"
+  name                          = "xks"
+  core_name                     = "core"
+  aks_name_suffix               = "1"
+  aks_managed_identity_group_id = "1337"
 
   aks_config = {
     kubernetes_version = "1.18.8"

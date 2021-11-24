@@ -8,3 +8,11 @@ output "kube_config" {
     cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].cluster_ca_certificate)
   }
 }
+
+output "azure_metrics_identity" {
+  description = "MSI authentication identity for Azure Metrics"
+  value = {
+    client_id   = azurerm_user_assigned_identity.az_metrics.client_id
+    resource_id = azurerm_user_assigned_identity.az_metrics.id
+  }
+}

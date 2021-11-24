@@ -350,6 +350,13 @@ variable "prometheus_config" {
 
     resource_selector  = list(string)
     namespace_selector = list(string)
+
+    azure_key_vault_name = string
+    identity = object({
+      client_id   = string
+      resource_id = string
+      tenant_id   = string
+    })
   })
 }
 
@@ -357,36 +364,6 @@ variable "ingress_healthz_enabled" {
   description = "Should ingress-healthz be enabled"
   type        = bool
   default     = true
-}
-
-variable "xenit_enabled" {
-  description = "Should Platform be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "xenit_config" {
-  description = "Xenit Platform configuration"
-  type = object({
-    azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-    thanos_receiver = string
-    loki_api        = string
-  })
-  default = {
-    azure_key_vault_name = ""
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
-    thanos_receiver = ""
-    loki_api        = ""
-  }
 }
 
 variable "linkerd_enabled" {

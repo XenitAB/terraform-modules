@@ -1,0 +1,18 @@
+{{- if eq .Values.cloudProvider "azure" }}
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentity
+metadata:
+  name: prometheus
+spec:
+  type: 0
+  resourceID: {{ .Values.azureConfig.resourceID }}
+  clientID: {{ .Values.azureConfig.clientID }}
+---
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentityBinding
+metadata:
+  name: prometheus
+spec:
+  azureIdentity: prometheus
+  selector: prometheus
+{{- end }}

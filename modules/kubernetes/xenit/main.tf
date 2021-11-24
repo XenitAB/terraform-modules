@@ -1,6 +1,10 @@
 /**
   * # Xenit Platform Configuration
   *
+  * WARNING. This module is currently not used due to observations of SNAT port exhaustion occuring.
+  * The proxy should not be used until these issues have been resolved.
+  * https://www.danielstechblog.io/detecting-snat-port-exhaustion-on-azure-kubernetes-service/
+  *
   * This module is used to add Xenit Kubernetes Framework configuration to Kubernetes clusters.
   *
   * You need to configure a certificate in Azure KeyVault

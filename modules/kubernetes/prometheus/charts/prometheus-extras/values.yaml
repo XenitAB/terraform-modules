@@ -1,6 +1,16 @@
-# Default values for prometheus-extras.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+cloudProvider: ""
+secretName: "xenit-proxy-certificate"
+
+azureConfig:
+  resourceID: ""
+  clientID: ""
+  tenantID: ""
+  keyVaultName: ""
+  keyVaultSecretName: "xenit-proxy-certificate"
+
+awsConfig:
+  keyParameterName: "xenit-proxy-certificate-key"
+  crtParameterName: "xenit-proxy-certificate-crt"
 
 replicaCount: 2
 

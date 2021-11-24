@@ -6,6 +6,9 @@ metadata:
   name: prometheus-xks
   namespace: prometheus
 spec:
+  podMetadata:
+    labels:
+      aadpodidbinding: prometheus
   externalLabels:
     cluster_name: {{ .Values.externalLabels.clusterName }}
     environment: {{ .Values.externalLabels.environment }}
@@ -56,6 +59,9 @@ spec:
         maxBackoff: 5s
         maxSamplesPerSend: 1000
         maxShards: 100
+      tlsConfig:
+        certFile: /mnt/secrets-store/tls.crt
+        keyFile: /mnt/secrets-store/tls.key
   {{- end }}
   {{- if .Values.volumeClaim.enabled }}
   storage:
@@ -66,12 +72,6 @@ spec:
           requests:
             storage: {{ .Values.volumeClaim.size }}
   {{- end }}
-  resources:
-    limits:
-      memory: 4Gi
-    requests:
-      cpu: 100m
-      memory: 1Gi
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
@@ -97,6 +97,16 @@ spec:
     fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 1000
+  volumeMounts:
+    - mountPath: /mnt/secrets-store
+      name: secrets-store
+  volumes:
+    - name: secrets-store
+      csi:
+        driver: secrets-store.csi.k8s.io
+        readOnly: true
+        volumeAttributes:
+          secretProviderClass: prometheus
   {{- if .Values.alertmanager.enabled }}
   alerting:
     alertmanagers:

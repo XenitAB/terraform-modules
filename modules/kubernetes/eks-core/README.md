@@ -44,7 +44,6 @@ This module is used to configure EKS clusters.
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../../kubernetes/prometheus | n/a |
 | <a name="module_reloader"></a> [reloader](#module\_reloader) | ../../kubernetes/reloader | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../../kubernetes/velero | n/a |
-| <a name="module_xenit"></a> [xenit](#module\_xenit) | ../../kubernetes/xenit | n/a |
 
 ## Resources
 
@@ -113,8 +112,6 @@ This module is used to configure EKS clusters.
 | <a name="input_reloader_enabled"></a> [reloader\_enabled](#input\_reloader\_enabled) | Should Reloader be enabled | `bool` | `true` | no |
 | <a name="input_velero_config"></a> [velero\_config](#input\_velero\_config) | Velero configuration | <pre>object({<br>    role_arn     = string<br>    s3_bucket_id = string<br>  })</pre> | n/a | yes |
 | <a name="input_velero_enabled"></a> [velero\_enabled](#input\_velero\_enabled) | Should Velero be enabled | `bool` | `false` | no |
-| <a name="input_xenit_config"></a> [xenit\_config](#input\_xenit\_config) | Xenit Platform configuration | <pre>object({<br>    role_arn        = string<br>    thanos_receiver = string<br>    loki_api        = string<br>  })</pre> | <pre>{<br>  "loki_api": "",<br>  "role_arn": "",<br>  "thanos_receiver": ""<br>}</pre> | no |
-| <a name="input_xenit_enabled"></a> [xenit\_enabled](#input\_xenit\_enabled) | Should Platform be enabled | `bool` | `false` | no |
 
 ## Outputs
 

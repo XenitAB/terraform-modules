@@ -47,7 +47,6 @@ This module is used to create AKS clusters.
 | <a name="module_reloader"></a> [reloader](#module\_reloader) | ../../kubernetes/reloader | n/a |
 | <a name="module_starboard"></a> [starboard](#module\_starboard) | ../../kubernetes/starboard | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../../kubernetes/velero | n/a |
-| <a name="module_xenit"></a> [xenit](#module\_xenit) | ../../kubernetes/xenit | n/a |
 
 ## Resources
 
@@ -114,14 +113,12 @@ This module is used to create AKS clusters.
 | <a name="input_new_relic_enabled"></a> [new\_relic\_enabled](#input\_new\_relic\_enabled) | Should New Relic be enabled | `bool` | `false` | no |
 | <a name="input_opa_gatekeeper_config"></a> [opa\_gatekeeper\_config](#input\_opa\_gatekeeper\_config) | Configuration for OPA Gatekeeper | <pre>object({<br>    additional_excluded_namespaces = list(string)<br>    enable_default_constraints     = bool<br>    additional_constraints = list(object({<br>      excluded_namespaces = list(string)<br>      processes           = list(string)<br>    }))<br>    enable_default_assigns = bool<br>    additional_assigns = list(object({<br>      name = string<br>    }))<br>  })</pre> | <pre>{<br>  "additional_assigns": [],<br>  "additional_constraints": [],<br>  "additional_excluded_namespaces": [],<br>  "enable_default_assigns": true,<br>  "enable_default_constraints": true<br>}</pre> | no |
 | <a name="input_opa_gatekeeper_enabled"></a> [opa\_gatekeeper\_enabled](#input\_opa\_gatekeeper\_enabled) | Should OPA Gatekeeper be enabled | `bool` | `true` | no |
-| <a name="input_prometheus_config"></a> [prometheus\_config](#input\_prometheus\_config) | Configuration for prometheus | <pre>object({<br>    remote_write_enabled = bool<br>    remote_write_url     = string<br>    tenant_id            = string<br><br>    volume_claim_enabled            = bool<br>    volume_claim_storage_class_name = string<br>    volume_claim_size               = string<br><br>    alertmanager_enabled = bool<br><br>    resource_selector  = list(string)<br>    namespace_selector = list(string)<br>  })</pre> | n/a | yes |
+| <a name="input_prometheus_config"></a> [prometheus\_config](#input\_prometheus\_config) | Configuration for prometheus | <pre>object({<br>    remote_write_enabled = bool<br>    remote_write_url     = string<br>    tenant_id            = string<br><br>    volume_claim_enabled            = bool<br>    volume_claim_storage_class_name = string<br>    volume_claim_size               = string<br><br>    alertmanager_enabled = bool<br><br>    resource_selector  = list(string)<br>    namespace_selector = list(string)<br><br>    azure_key_vault_name = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>      tenant_id   = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_prometheus_enabled"></a> [prometheus\_enabled](#input\_prometheus\_enabled) | Should prometheus be enabled | `bool` | `true` | no |
 | <a name="input_reloader_enabled"></a> [reloader\_enabled](#input\_reloader\_enabled) | Should Reloader be enabled | `bool` | `true` | no |
 | <a name="input_starboard_enabled"></a> [starboard\_enabled](#input\_starboard\_enabled) | Should Starboard be enabled | `bool` | `true` | no |
 | <a name="input_velero_config"></a> [velero\_config](#input\_velero\_config) | Velero configuration | <pre>object({<br>    azure_storage_account_name      = string<br>    azure_storage_account_container = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_velero_enabled"></a> [velero\_enabled](#input\_velero\_enabled) | Should Velero be enabled | `bool` | `false` | no |
-| <a name="input_xenit_config"></a> [xenit\_config](#input\_xenit\_config) | Xenit Platform configuration | <pre>object({<br>    azure_key_vault_name = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>      tenant_id   = string<br>    })<br>    thanos_receiver = string<br>    loki_api        = string<br>  })</pre> | <pre>{<br>  "azure_key_vault_name": "",<br>  "identity": {<br>    "client_id": "",<br>    "resource_id": "",<br>    "tenant_id": ""<br>  },<br>  "loki_api": "",<br>  "thanos_receiver": ""<br>}</pre> | no |
-| <a name="input_xenit_enabled"></a> [xenit\_enabled](#input\_xenit\_enabled) | Should Platform be enabled | `bool` | `false` | no |
 
 ## Outputs
 

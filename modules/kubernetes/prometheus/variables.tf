@@ -1,3 +1,54 @@
+variable "cloud_provider" {
+  description = "Name of cloud provider"
+  type        = string
+}
+
+variable "azure_config" {
+  description = "Azure specific configuration"
+  type = object({
+    azure_key_vault_name = string
+    identity = object({
+      client_id   = string
+      resource_id = string
+      tenant_id   = string
+    })
+  })
+  default = {
+    azure_key_vault_name = ""
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
+  }
+}
+
+variable "aws_config" {
+  description = "AWS specific configuration"
+  type = object({
+    role_arn = string
+  })
+  default = {
+    role_arn = ""
+  }
+}
+
+variable "cluster_name" {
+  description = "Name of the prometheus cluster"
+  type        = string
+}
+
+variable "environment" {
+  description = "The environment in which the prometheus instance is deployed"
+  type        = string
+}
+
+variable "tenant_id" {
+  description = "The tenant id label to apply to all metrics in remote write"
+  type        = string
+  default     = ""
+}
+
 variable "remote_write_enabled" {
   description = "If remote write should be enabled or not"
   type        = bool
@@ -25,27 +76,6 @@ variable "volume_claim_size" {
   description = "Size of prometheus disk"
   type        = string
   default     = "5Gi"
-}
-
-variable "cloud_provider" {
-  description = "Name of cloud provider"
-  type        = string
-}
-
-variable "cluster_name" {
-  description = "Name of the prometheus cluster"
-  type        = string
-}
-
-variable "environment" {
-  description = "The environment in which the prometheus instance is deployed"
-  type        = string
-}
-
-variable "tenant_id" {
-  description = "The tenant id label to apply to all metrics in remote write"
-  type        = string
-  default     = ""
 }
 
 variable "resource_selector" {

@@ -1,3 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    {{- include "prometheus-extras.labels" . | nindent 4 }}
+    xkf.xenit.io/monitoring: platform
+  name: prometheus
+  namespace: prometheus
+spec:
+  podMetricsEndpoints:
+    - port: web
+  selector:
+    matchLabels:
+      app: prometheus
+---
 {{- if .Values.enabledMonitors.aadPodIdentity }}
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor

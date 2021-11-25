@@ -60,8 +60,8 @@ spec:
         maxSamplesPerSend: 1000
         maxShards: 100
       tlsConfig:
-        certFile: /mnt/secrets-store/tls.crt
-        keyFile: /mnt/secrets-store/tls.key
+        certFile: /mnt/tls/tls.crt
+        keyFile: /mnt/tls/tls.key
   {{- end }}
   {{- if .Values.volumeClaim.enabled }}
   storage:
@@ -100,6 +100,9 @@ spec:
   volumeMounts:
     - mountPath: /mnt/secrets-store
       name: secrets-store
+    - name: tls
+      mountPath: "/mnt/tls"
+      readOnly: true
   volumes:
     - name: secrets-store
       csi:
@@ -107,6 +110,9 @@ spec:
         readOnly: true
         volumeAttributes:
           secretProviderClass: prometheus
+    - name: tls
+      secret:
+        secretName: xenit-proxy-certificate
   {{- if .Values.alertmanager.enabled }}
   alerting:
     alertmanagers:

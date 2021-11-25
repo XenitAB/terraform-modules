@@ -1,7 +1,8 @@
-/* There are a number of metrics that AZ provides through an API.
-   We use a deployment inside kubernetes to gather it together with prometheus.
-   This terraform file gives access to those metrics to a specific managed identity.
-*/
+/**
+  There are a number of metrics that AZ provides through an API.
+  We use a deployment inside kubernetes to gather it together with prometheus.
+  This terraform file gives access to those metrics to a specific managed identity.
+  */
 
 resource "azurerm_user_assigned_identity" "az_metrics" {
   resource_group_name = data.azurerm_resource_group.this.name

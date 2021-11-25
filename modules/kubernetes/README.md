@@ -7,6 +7,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`aks-core`](aks-core/README.md)
 - [`eks-core`](eks-core/README.md)
 - [`aad-pod-identity`](aad-pod-identity/README.md)
+- [`az-metrics`](az-metrics/README.md)
 - [`cert-manager`](cert-manager/README.md)
 - [`csi-secrets-store-provider-azure`](csi-secrets-store-provider-azure/README.md)
 - [`csi-secrets-store-provider-aws`](csi-secrets-store-provider-aws/README.md)

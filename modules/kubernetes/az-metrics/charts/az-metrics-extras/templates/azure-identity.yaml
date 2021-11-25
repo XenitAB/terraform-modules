@@ -1,0 +1,18 @@
+{{ if and .Values.resourceID .Values.clientID }}
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentity
+metadata:
+  name: az-metrics
+spec:
+  type: 0
+  resourceID: {{ .Values.resourceID }}
+  clientID: {{ .Values.clientID }}
+---
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentityBinding
+metadata:
+  name: az-metrics
+spec:
+  azureIdentity: az-metrics
+  selector: az-metrics
+{{ end }}

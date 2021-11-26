@@ -16,5 +16,5 @@ module "prometheus" {
   cloud_provider                = "azure"
   cluster_name                  = "aks1"
   environment                   = "dev"
-  kube_state_metrics_namepsaces = ""
+  kube_state_metrics_namespaces = ""
 }

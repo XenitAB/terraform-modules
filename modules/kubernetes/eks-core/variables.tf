@@ -359,7 +359,7 @@ variable "new_relic_config" {
   }
 }
 
-variable "kube_state_metrics_namepsaces_extras" {
+variable "kube_state_metrics_namespaces_extras" {
   description = "Comma-separated list of namespaces to be enabled except the ones defined by default."
   type        = list(string)
   default     = []

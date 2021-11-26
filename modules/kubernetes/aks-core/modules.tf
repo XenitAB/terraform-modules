@@ -20,7 +20,7 @@ locals {
     "velero",
     "newrelic",
   ]
-  kube_state_metrics_namepsaces = [
+  kube_state_metrics_namespaces = [
     "aad-pod-identity",
     "azad-kube-proxy",
     "calico-system",
@@ -421,7 +421,7 @@ module "prometheus" {
   csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
   aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
   azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
-  kube_state_metrics_namepsaces            = join(",", concat(var.kube_state_metrics_namepsaces_extras, local.kube_state_metrics_namepsaces))
+  kube_state_metrics_namespaces            = join(",", concat(var.kube_state_metrics_namespaces_extras, local.kube_state_metrics_namespaces))
 }
 
 # xenit

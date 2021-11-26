@@ -14,7 +14,7 @@ locals {
     "reloader",
     "velero",
   ]
-  kube_state_metrics_namepsaces = [
+  kube_state_metrics_namespaces = [
     "azad-kube-proxy",
     "calico-system",
     "cert-manager",
@@ -311,7 +311,7 @@ module "prometheus" {
   flux_enabled                           = var.fluxcd_v2_enabled
   csi_secrets_store_provider_aws_enabled = var.csi_secrets_store_provider_aws_enabled
   azad_kube_proxy_enabled                = var.azad_kube_proxy_enabled
-  kube_state_metrics_namepsaces          = join(",", concat(var.kube_state_metrics_namepsaces_extras, local.kube_state_metrics_namepsaces))
+  kube_state_metrics_namespaces          = join(",", concat(var.kube_state_metrics_namespaces_extras, local.kube_state_metrics_namespaces))
 }
 
 module "cluster_autoscaler" {

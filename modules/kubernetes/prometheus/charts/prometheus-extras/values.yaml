@@ -33,6 +33,7 @@ volumeClaim:
   size: 5Gi
 
 remoteWrite:
+  authenticated: true
   url: ""
   headers: {}
 

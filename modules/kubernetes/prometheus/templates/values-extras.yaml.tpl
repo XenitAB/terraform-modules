@@ -11,6 +11,7 @@ volumeClaim:
   size: ${volume_claim_size}
 
 remoteWrite:
+  authenticated: ${remote_write_authenticated}
   url: ${remote_write_url}
   headers:
     THANOS-TENANT: ${tenant_id}

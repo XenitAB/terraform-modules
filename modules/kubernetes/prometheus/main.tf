@@ -78,7 +78,9 @@ resource "helm_release" "prometheus_extras" {
     environment    = var.environment
     tenant_id      = var.tenant_id
 
+    remote_write_authenticated = var.remote_write_authenticated
     remote_write_url     = var.remote_write_url
+
     volume_claim_storage_class_name = var.volume_claim_storage_class_name
     volume_claim_size               = var.volume_claim_size
 

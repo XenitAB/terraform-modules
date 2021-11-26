@@ -57,9 +57,11 @@ spec:
         maxBackoff: 5s
         maxSamplesPerSend: 1000
         maxShards: 100
+      {{- if .Values.remoteWrite.authenticated }}
       tlsConfig:
         certFile: /mnt/tls/tls.crt
         keyFile: /mnt/tls/tls.key
+      {{- end }}
 
   resources:
     {{- toYaml .Values.resources | nindent 4 }}
@@ -95,6 +97,7 @@ spec:
     fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 1000
+  {{- if .Values.remoteWrite.authenticated }}
   volumeMounts:
     - mountPath: /mnt/secrets-store
       name: secrets-store
@@ -111,3 +114,4 @@ spec:
     - name: tls
       secret:
         secretName: {{ .Values.secretName }}
+  {{- end }}

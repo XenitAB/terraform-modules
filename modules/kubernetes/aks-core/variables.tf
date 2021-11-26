@@ -338,21 +338,23 @@ variable "prometheus_enabled" {
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
-    remote_write_url     = string
-    tenant_id            = string
-
-    volume_claim_storage_class_name = string
-    volume_claim_size               = string
-
-    resource_selector  = list(string)
-    namespace_selector = list(string)
-
     azure_key_vault_name = string
     identity = object({
       client_id   = string
       resource_id = string
       tenant_id   = string
     })
+
+    tenant_id            = string
+
+    remote_write_authenticated = bool
+    remote_write_url     = string
+
+    volume_claim_storage_class_name = string
+    volume_claim_size               = string
+
+    resource_selector  = list(string)
+    namespace_selector = list(string)
   })
 }
 

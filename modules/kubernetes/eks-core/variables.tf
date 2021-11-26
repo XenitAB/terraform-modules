@@ -257,15 +257,13 @@ variable "prometheus_config" {
   type = object({
     role_arn = string
 
-    remote_write_enabled = bool
-    remote_write_url     = string
-    tenant_id            = string
+    tenant_id = string
 
-    volume_claim_enabled            = bool
+    remote_write_authenticated = bool
+    remote_write_url           = string
+
     volume_claim_storage_class_name = string
     volume_claim_size               = string
-
-    alertmanager_enabled = bool
 
     resource_selector  = list(string)
     namespace_selector = list(string)

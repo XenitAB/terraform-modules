@@ -407,12 +407,12 @@ module "prometheus" {
     }
   }
 
-  cluster_name       = "${var.name}${var.aks_name_suffix}"
-  environment        = var.environment
-  tenant_id            = var.prometheus_config.tenant_id
+  cluster_name = "${var.name}${var.aks_name_suffix}"
+  environment  = var.environment
+  tenant_id    = var.prometheus_config.tenant_id
 
   remote_write_authenticated = var.prometheus_config.remote_write_authenticated
-  remote_write_url     = var.prometheus_config.remote_write_url
+  remote_write_url           = var.prometheus_config.remote_write_url
 
   volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size

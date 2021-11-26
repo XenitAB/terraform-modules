@@ -52,7 +52,7 @@ variable "tenant_id" {
 variable "remote_write_authenticated" {
   description = "Adds TLS authentication to remote write configuration if true"
   type        = bool
-  default = true
+  default     = true
 }
 
 variable "remote_write_url" {

@@ -74,12 +74,12 @@ resource "helm_release" "prometheus_extras" {
     azure_config   = var.azure_config
     aws_config     = var.aws_config
 
-    cluster_name   = var.cluster_name
-    environment    = var.environment
-    tenant_id      = var.tenant_id
+    cluster_name = var.cluster_name
+    environment  = var.environment
+    tenant_id    = var.tenant_id
 
     remote_write_authenticated = var.remote_write_authenticated
-    remote_write_url     = var.remote_write_url
+    remote_write_url           = var.remote_write_url
 
     volume_claim_storage_class_name = var.volume_claim_storage_class_name
     volume_claim_size               = var.volume_claim_size

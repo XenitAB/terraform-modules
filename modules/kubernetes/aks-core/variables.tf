@@ -345,10 +345,10 @@ variable "prometheus_config" {
       tenant_id   = string
     })
 
-    tenant_id            = string
+    tenant_id = string
 
     remote_write_authenticated = bool
-    remote_write_url     = string
+    remote_write_url           = string
 
     volume_claim_storage_class_name = string
     volume_claim_size               = string

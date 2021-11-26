@@ -9,6 +9,7 @@ azureConfig:
   keyVaultSecretName: "xenit-proxy-certificate"
 
 awsConfig:
+  roleARN: ""
   keyParameterName: "xenit-proxy-certificate-key"
   crtParameterName: "xenit-proxy-certificate-crt"
 

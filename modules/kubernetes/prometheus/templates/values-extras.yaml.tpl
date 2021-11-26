@@ -6,6 +6,9 @@ azureConfig:
   tenantID: "${azure_config.identity.tenant_id}"
   keyVaultName: "${azure_config.azure_key_vault_name}"
 
+awsConfig:
+  roleARN: "${aws_config.role_arn}"
+
 volumeClaim:
   storageClassName: ${volume_claim_storage_class_name}
   size: ${volume_claim_size}

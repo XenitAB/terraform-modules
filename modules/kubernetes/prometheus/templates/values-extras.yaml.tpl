@@ -6,25 +6,14 @@ azureConfig:
   tenantID: "${azure_config.identity.tenant_id}"
   keyVaultName: "${azure_config.azure_key_vault_name}"
 
-remoteWrite:
-  enabled: ${remote_write_enabled}
-  url: ${remote_write_url}
-  %{ if tenant_id != "" }
-  headers:
-    THANOS-TENANT: ${tenant_id}
-  %{ endif }
-
 volumeClaim:
-  enabled: ${volume_claim_enabled}
   storageClassName: ${volume_claim_storage_class_name}
   size: ${volume_claim_size}
 
-resources:
-  requests:
-    memory: "250Mi"
-    cpu: "20m"
-  limits:
-    memory: "500Mi"
+remoteWrite:
+  url: ${remote_write_url}
+  headers:
+    THANOS-TENANT: ${tenant_id}
 
 externalLabels:
   clusterName: ${cluster_name}
@@ -37,22 +26,6 @@ prometheus:
         operator: In
         values: ${resource_selector}
   namespaceSelector:
-    matchExpressions:
-      - key: xkf.xenit.io/kind
-        operator: In
-        values: ${namespace_selector}
-
-alertmanager:
-  enabled: ${alertmanager_enabled}
-  ruleSelector:
-    matchExpressions:
-      - key: xkf.xenit.io/monitoring
-        operator: In
-        values: ${resource_selector}
-      - key: xkf.xenit.io/rule
-        operator: In
-        values: [prometheus]
-  ruleNamespaceSelector:
     matchExpressions:
       - key: xkf.xenit.io/kind
         operator: In

@@ -338,15 +338,11 @@ variable "prometheus_enabled" {
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
-    remote_write_enabled = bool
     remote_write_url     = string
     tenant_id            = string
 
-    volume_claim_enabled            = bool
     volume_claim_storage_class_name = string
     volume_claim_size               = string
-
-    alertmanager_enabled = bool
 
     resource_selector  = list(string)
     namespace_selector = list(string)

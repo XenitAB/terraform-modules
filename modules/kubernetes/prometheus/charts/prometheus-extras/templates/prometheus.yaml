@@ -1,10 +1,9 @@
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
+  name: prometheus-xks
   labels:
     {{- include "prometheus-extras.labels" . | nindent 4 }}
-  name: prometheus-xks
-  namespace: prometheus
 spec:
   podMetadata:
     labels:
@@ -42,7 +41,6 @@ spec:
   podMonitorNamespaceSelector:
     {{- toYaml . | nindent 4 }}
   {{- end }}
-  {{- if .Values.remoteWrite.enabled }}
   remoteWrite:
     - name: thanos
       url: {{ .Values.remoteWrite.url }}
@@ -62,8 +60,9 @@ spec:
       tlsConfig:
         certFile: /mnt/tls/tls.crt
         keyFile: /mnt/tls/tls.key
-  {{- end }}
-  {{- if .Values.volumeClaim.enabled }}
+
+  resources:
+    {{- toYaml .Values.resources | nindent 4 }}
   storage:
     volumeClaimTemplate:
       spec:
@@ -71,7 +70,6 @@ spec:
         resources:
           requests:
             storage: {{ .Values.volumeClaim.size }}
-  {{- end }}
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
@@ -112,19 +110,4 @@ spec:
           secretProviderClass: prometheus
     - name: tls
       secret:
-        secretName: xenit-proxy-certificate
-  {{- if .Values.alertmanager.enabled }}
-  alerting:
-    alertmanagers:
-    - name: alertmanager
-      namespace: monitor
-      port: web
-  {{- with .Values.alertmanager.ruleNamespaceSelector }}
-  ruleNamespaceSelector:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
-  {{- with .Values.alertmanager.ruleSelector }}
-  ruleSelector:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
-  {{- end }}
+        secretName: {{ .Values.secretName }}

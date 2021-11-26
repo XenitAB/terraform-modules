@@ -46,8 +46,7 @@ resource "helm_release" "prometheus" {
   })]
 }
 
-# Metrics server has to be added when running in EKS as it is not
-# installed by AWS as compared to AKS.
+# EKS will not install metrics server out of the box so it has to be added.
 resource "helm_release" "metrics_server" {
   for_each = {
     for s in ["metrics-server"] :
@@ -74,18 +73,14 @@ resource "helm_release" "prometheus_extras" {
     cloud_provider = var.cloud_provider
     azure_config   = var.azure_config
     aws_config     = var.aws_config
+
     cluster_name   = var.cluster_name
     environment    = var.environment
     tenant_id      = var.tenant_id
 
-    remote_write_enabled = var.remote_write_enabled
     remote_write_url     = var.remote_write_url
-
-    volume_claim_enabled            = var.volume_claim_enabled
     volume_claim_storage_class_name = var.volume_claim_storage_class_name
     volume_claim_size               = var.volume_claim_size
-
-    alertmanager_enabled = var.alertmanager_enabled
 
     resource_selector  = "[${join(", ", var.resource_selector)}]",
     namespace_selector = "[${join(", ", var.namespace_selector)}]",

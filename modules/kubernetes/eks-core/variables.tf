@@ -255,6 +255,8 @@ variable "prometheus_enabled" {
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
+    role_arn = string
+
     remote_write_enabled = bool
     remote_write_url     = string
     tenant_id            = string

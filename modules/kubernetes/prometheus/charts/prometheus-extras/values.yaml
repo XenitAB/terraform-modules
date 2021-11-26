@@ -21,21 +21,24 @@ service:
   type: ClusterIP
   port: 9090
 
-resources: {}
+resources:
+  requests:
+    memory: "250Mi"
+    cpu: "20m"
+  limits:
+    memory: "1Gi"
 
 volumeClaim:
-  enabled: true
   storageClassName: default
   size: 5Gi
+
+remoteWrite:
+  url: ""
+  headers: {}
 
 externalLabels:
   clusterName: aks1
   environment: dev
-
-remoteWrite:
-  enabled: true
-  url: ""
-  headers: {}
 
 prometheus:
   resourceSelector:
@@ -44,22 +47,6 @@ prometheus:
         operator: In
         values: [platform]
   namespaceSelector:
-    matchExpressions:
-      - key: xkf.xenit.io/kind
-        operator: In
-        values: [platform]
-
-alertmanager:
-  enabled: false
-  ruleSelector:
-    matchExpressions:
-      - key: xkf.xenit.io/monitoring
-        operator: In
-        values: [platform]
-      - key: xkf.xenit.io/rule
-        operator: In
-        values: [prometheus]
-  ruleNamespaceSelector:
     matchExpressions:
       - key: xkf.xenit.io/kind
         operator: In

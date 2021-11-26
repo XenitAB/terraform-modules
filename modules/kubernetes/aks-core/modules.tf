@@ -397,7 +397,7 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
-  cloud_provider     = "azure"
+  cloud_provider = "azure"
   azure_config = {
     azure_key_vault_name = var.prometheus_config.azure_key_vault_name
     identity = {
@@ -406,20 +406,17 @@ module "prometheus" {
       tenant_id   = var.prometheus_config.identity.tenant_id
     }
   }
+
   cluster_name       = "${var.name}${var.aks_name_suffix}"
   environment        = var.environment
-  resource_selector  = var.prometheus_config.resource_selector
-  namespace_selector = var.prometheus_config.namespace_selector
-
-  remote_write_enabled = var.prometheus_config.remote_write_enabled
-  remote_write_url     = var.prometheus_config.remote_write_url
   tenant_id            = var.prometheus_config.tenant_id
+  remote_write_url     = var.prometheus_config.remote_write_url
 
-  volume_claim_enabled            = var.prometheus_config.volume_claim_enabled
   volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
-  alertmanager_enabled = var.prometheus_config.alertmanager_enabled
+  resource_selector  = var.prometheus_config.resource_selector
+  namespace_selector = var.prometheus_config.namespace_selector
 
   falco_enabled                            = var.falco_enabled
   opa_gatekeeper_enabled                   = var.opa_gatekeeper_enabled

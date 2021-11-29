@@ -6,13 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+
 ### Added
 
 - [#437](https://github.com/XenitAB/terraform-modules/pull/437) Add podmonitor for secrets-store-csi-driver
-
-### Changed
-
-- [#467](https://github.com/XenitAB/terraform-modules/pull/467) This is a test entry
 
 ## 2021.11.6
 

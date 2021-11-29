@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#437](https://github.com/XenitAB/terraform-modules/pull/437) Add podmonitor for secrets-store-csi-driver
 
+### Changed
+
+- [#465](https://github.com/XenitAB/terraform-modules/pull/465) [Breaking] Move xenit credentials to Prometheus and remove Xenit proxy.
+
 ## 2021.11.6
 
 ### Added

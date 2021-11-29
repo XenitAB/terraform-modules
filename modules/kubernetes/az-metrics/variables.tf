@@ -7,3 +7,8 @@ variable "resource_id" {
   description = "The resource_id for aadpodidentity to the resource"
   type        = string
 }
+
+variable "subscription_id" {
+  description = "The subscription id where your kubernetes cluster is deployed"
+  type        = string
+}

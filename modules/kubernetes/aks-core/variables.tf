@@ -399,3 +399,8 @@ variable "az_metrics_config" {
     resource_id = string
   })
 }
+
+variable "subscription_id" {
+  description = "Current subscription id"
+  type        = string
+}

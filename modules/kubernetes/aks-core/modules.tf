@@ -188,8 +188,9 @@ module "az_metrics" {
 
   source = "../../kubernetes/az-metrics"
 
-  client_id   = var.az_metrics_config.client_id
-  resource_id = var.az_metrics_config.resource_id
+  client_id       = var.az_metrics_config.client_id
+  resource_id     = var.az_metrics_config.resource_id
+  subscription_id = var.subscription_id
 }
 
 # linkerd

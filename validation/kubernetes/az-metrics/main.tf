@@ -12,6 +12,7 @@ module "az_metrics" {
     helm       = helm
   }
 
-  client_id   = "1234"
-  resource_id = "5678"
+  client_id       = "1234"
+  resource_id     = "5678"
+  subscription_id = "0987"
 }

@@ -75,6 +75,8 @@ module "aks_core" {
     resource_id = "bar"
   }
 
+  subscription_id = "0987"
+
   ingress_config = {
     http_snippet           = ""
     public_private_enabled = false

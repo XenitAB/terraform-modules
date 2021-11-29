@@ -111,4 +111,4 @@ No modules.
 | <a name="output_namespaces"></a> [namespaces](#output\_namespaces) | Kubernetes namespaces |
 | <a name="output_ssh_public_key"></a> [ssh\_public\_key](#output\_ssh\_public\_key) | SSH public key to add to servers |
 | <a name="output_velero"></a> [velero](#output\_velero) | Velero configuration |
-| <a name="output_xenit"></a> [xenit](#output\_xenit) | Xenit Platform configuration |
+| <a name="output_xenit"></a> [xenit](#output\_xenit) | Configuration used by monitoring solution to get authentication credentials |

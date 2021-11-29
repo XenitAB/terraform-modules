@@ -23,8 +23,8 @@
 | <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../irsa | n/a |
 | <a name="module_cluster_autoscaler"></a> [cluster\_autoscaler](#module\_cluster\_autoscaler) | ../irsa | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../irsa | n/a |
+| <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../irsa | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../irsa | n/a |
-| <a name="module_xenit"></a> [xenit](#module\_xenit) | ../irsa | n/a |
 
 ## Resources
 
@@ -42,8 +42,8 @@
 | [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.cluster_autoscaler](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.external_dns](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.prometheus](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.velero](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.xenit](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/region) | data source |
 | [aws_subnet.cluster](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/subnet) | data source |
 | [aws_subnet.node](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/subnet) | data source |
@@ -72,5 +72,5 @@
 | <a name="output_cluster_autoscaler_config"></a> [cluster\_autoscaler\_config](#output\_cluster\_autoscaler\_config) | Configuration for Cluster Autoscaler |
 | <a name="output_external_dns_config"></a> [external\_dns\_config](#output\_external\_dns\_config) | Configuration for External DNS |
 | <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Kube config for the created EKS cluster |
+| <a name="output_prometheus_config"></a> [prometheus\_config](#output\_prometheus\_config) | Configuration for Prometheus |
 | <a name="output_velero_config"></a> [velero\_config](#output\_velero\_config) | Configuration for Velero |
-| <a name="output_xenit_config"></a> [xenit\_config](#output\_xenit\_config) | Configuration for Xenit proxy |

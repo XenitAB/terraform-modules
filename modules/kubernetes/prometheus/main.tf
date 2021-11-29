@@ -42,7 +42,7 @@ resource "helm_release" "prometheus" {
   namespace  = kubernetes_namespace.this.metadata[0].name
   version    = "17.2.2"
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    namespaces = var.kube_state_metrics_namepsaces
+    namespaces = var.kube_state_metrics_namespaces
   })]
 }
 

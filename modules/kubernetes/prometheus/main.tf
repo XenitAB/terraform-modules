@@ -34,6 +34,7 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+# Prometheus operator and other core monitoring components.
 resource "helm_release" "prometheus" {
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
@@ -45,6 +46,7 @@ resource "helm_release" "prometheus" {
   })]
 }
 
+# EKS will not install metrics server out of the box so it has to be added.
 resource "helm_release" "metrics_server" {
   for_each = {
     for s in ["metrics-server"] :
@@ -60,6 +62,7 @@ resource "helm_release" "metrics_server" {
   values     = [templatefile("${path.module}/templates/values-metrics-server.yaml.tpl", {})]
 }
 
+# Prometheus declaration and monitors for all of the platform applications.
 resource "helm_release" "prometheus_extras" {
   depends_on = [helm_release.prometheus]
 
@@ -67,18 +70,19 @@ resource "helm_release" "prometheus_extras" {
   name      = "prometheus-extras"
   namespace = kubernetes_namespace.this.metadata[0].name
   values = [templatefile("${path.module}/templates/values-extras.yaml.tpl", {
-    remote_write_enabled = var.remote_write_enabled
-    remote_write_url     = var.remote_write_url
-
-    volume_claim_enabled            = var.volume_claim_enabled
-    volume_claim_storage_class_name = var.volume_claim_storage_class_name
-    volume_claim_size               = var.volume_claim_size
+    cloud_provider = var.cloud_provider
+    azure_config   = var.azure_config
+    aws_config     = var.aws_config
 
     cluster_name = var.cluster_name
     environment  = var.environment
     tenant_id    = var.tenant_id
 
-    alertmanager_enabled = var.alertmanager_enabled
+    remote_write_authenticated = var.remote_write_authenticated
+    remote_write_url           = var.remote_write_url
+
+    volume_claim_storage_class_name = var.volume_claim_storage_class_name
+    volume_claim_size               = var.volume_claim_size
 
     resource_selector  = "[${join(", ", var.resource_selector)}]",
     namespace_selector = "[${join(", ", var.namespace_selector)}]",

@@ -31,7 +31,6 @@ locals {
     "prometheus",
     "reloader",
     "tigera-operator",
-    "xenit-system"
   ]
 }
 
@@ -289,19 +288,21 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
-  remote_write_enabled = var.prometheus_config.remote_write_enabled
-  remote_write_url     = var.prometheus_config.remote_write_url
-  tenant_id            = var.prometheus_config.tenant_id
+  cloud_provider = "aws"
+  aws_config = {
+    role_arn = var.prometheus_config.role_arn
+  }
 
-  volume_claim_enabled            = var.prometheus_config.volume_claim_enabled
+  cluster_name = "${var.name}${var.eks_name_suffix}"
+  environment  = var.environment
+  tenant_id    = var.prometheus_config.tenant_id
+
+  remote_write_authenticated = var.prometheus_config.remote_write_authenticated
+  remote_write_url           = var.prometheus_config.remote_write_url
+
   volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
-  alertmanager_enabled = var.prometheus_config.alertmanager_enabled
-
-  cloud_provider     = "aws"
-  cluster_name       = "${var.name}${var.eks_name_suffix}"
-  environment        = var.environment
   resource_selector  = var.prometheus_config.resource_selector
   namespace_selector = var.prometheus_config.namespace_selector
 
@@ -363,23 +364,6 @@ module "datadog" {
   api_key           = var.datadog_config.api_key
   app_key           = var.datadog_config.app_key
   namespace_include = compact(concat(var.namespaces[*].name, var.datadog_config.extra_namespaces))
-}
-
-module "xenit" {
-  for_each = {
-    for s in ["xenit"] :
-    s => s
-    if var.xenit_enabled
-  }
-
-  source = "../../kubernetes/xenit"
-
-  cloud_provider = "aws"
-  aws_config = {
-    role_arn = var.xenit_config.role_arn
-  }
-  thanos_receiver_fqdn = var.xenit_config.thanos_receiver
-  loki_api_fqdn        = var.xenit_config.loki_api
 }
 
 module "new_relic" {

@@ -255,15 +255,15 @@ variable "prometheus_enabled" {
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
-    remote_write_enabled = bool
-    remote_write_url     = string
-    tenant_id            = string
+    role_arn = string
 
-    volume_claim_enabled            = bool
+    tenant_id = string
+
+    remote_write_authenticated = bool
+    remote_write_url           = string
+
     volume_claim_storage_class_name = string
     volume_claim_size               = string
-
-    alertmanager_enabled = bool
 
     resource_selector  = list(string)
     namespace_selector = list(string)
@@ -281,26 +281,6 @@ variable "cluster_autoscaler_config" {
   type = object({
     role_arn = string
   })
-}
-
-variable "xenit_enabled" {
-  description = "Should Platform be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "xenit_config" {
-  description = "Xenit Platform configuration"
-  type = object({
-    role_arn        = string
-    thanos_receiver = string
-    loki_api        = string
-  })
-  default = {
-    role_arn        = ""
-    thanos_receiver = ""
-    loki_api        = ""
-  }
 }
 
 variable "falco_enabled" {

@@ -38,7 +38,6 @@ locals {
     "prometheus",
     "reloader",
     "tigera-operator",
-    "xenit-system",
   ]
 }
 
@@ -398,19 +397,26 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
-  remote_write_enabled = var.prometheus_config.remote_write_enabled
-  remote_write_url     = var.prometheus_config.remote_write_url
-  tenant_id            = var.prometheus_config.tenant_id
+  cloud_provider = "azure"
+  azure_config = {
+    azure_key_vault_name = var.prometheus_config.azure_key_vault_name
+    identity = {
+      client_id   = var.prometheus_config.identity.client_id
+      resource_id = var.prometheus_config.identity.resource_id
+      tenant_id   = var.prometheus_config.identity.tenant_id
+    }
+  }
 
-  volume_claim_enabled            = var.prometheus_config.volume_claim_enabled
+  cluster_name = "${var.name}${var.aks_name_suffix}"
+  environment  = var.environment
+  tenant_id    = var.prometheus_config.tenant_id
+
+  remote_write_authenticated = var.prometheus_config.remote_write_authenticated
+  remote_write_url           = var.prometheus_config.remote_write_url
+
   volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
-  alertmanager_enabled = var.prometheus_config.alertmanager_enabled
-
-  cloud_provider     = "azure"
-  cluster_name       = "${var.name}${var.aks_name_suffix}"
-  environment        = var.environment
   resource_selector  = var.prometheus_config.resource_selector
   namespace_selector = var.prometheus_config.namespace_selector
 
@@ -422,29 +428,6 @@ module "prometheus" {
   aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
   azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
   kube_state_metrics_namepsaces            = join(",", concat(var.kube_state_metrics_namepsaces_extras, local.kube_state_metrics_namepsaces))
-}
-
-# xenit
-module "xenit" {
-  for_each = {
-    for s in ["xenit"] :
-    s => s
-    if var.xenit_enabled
-  }
-
-  source = "../../kubernetes/xenit"
-
-  cloud_provider = "azure"
-  azure_config = {
-    azure_key_vault_name = var.xenit_config.azure_key_vault_name
-    identity = {
-      client_id   = var.xenit_config.identity.client_id
-      resource_id = var.xenit_config.identity.resource_id
-      tenant_id   = var.xenit_config.identity.tenant_id
-    }
-  }
-  thanos_receiver_fqdn = var.xenit_config.thanos_receiver
-  loki_api_fqdn        = var.xenit_config.loki_api
 }
 
 # starboard

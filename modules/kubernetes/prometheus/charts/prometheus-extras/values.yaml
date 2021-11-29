@@ -1,6 +1,17 @@
-# Default values for prometheus-extras.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+cloudProvider: ""
+secretName: "xenit-proxy-certificate"
+
+azureConfig:
+  resourceID: ""
+  clientID: ""
+  tenantID: ""
+  keyVaultName: ""
+  keyVaultSecretName: "xenit-proxy-certificate"
+
+awsConfig:
+  roleARN: ""
+  keyParameterName: "xenit-proxy-certificate-key"
+  crtParameterName: "xenit-proxy-certificate-crt"
 
 replicaCount: 2
 
@@ -11,21 +22,25 @@ service:
   type: ClusterIP
   port: 9090
 
-resources: {}
+resources:
+  requests:
+    memory: "500Mi"
+    cpu: "20m"
+  limits:
+    memory: "2Gi"
 
 volumeClaim:
-  enabled: true
   storageClassName: default
   size: 5Gi
+
+remoteWrite:
+  authenticated: true
+  url: ""
+  headers: {}
 
 externalLabels:
   clusterName: aks1
   environment: dev
-
-remoteWrite:
-  enabled: true
-  url: ""
-  headers: {}
 
 prometheus:
   resourceSelector:
@@ -34,22 +49,6 @@ prometheus:
         operator: In
         values: [platform]
   namespaceSelector:
-    matchExpressions:
-      - key: xkf.xenit.io/kind
-        operator: In
-        values: [platform]
-
-alertmanager:
-  enabled: false
-  ruleSelector:
-    matchExpressions:
-      - key: xkf.xenit.io/monitoring
-        operator: In
-        values: [platform]
-      - key: xkf.xenit.io/rule
-        operator: In
-        values: [prometheus]
-  ruleNamespaceSelector:
     matchExpressions:
       - key: xkf.xenit.io/kind
         operator: In

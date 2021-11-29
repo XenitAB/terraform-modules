@@ -1,35 +1,36 @@
-variable "remote_write_enabled" {
-  description = "If remote write should be enabled or not"
-  type        = bool
-  default     = true
-}
-
-variable "remote_write_url" {
-  description = "The URL where to send prometheus remote_write data"
-  type        = string
-}
-
-variable "volume_claim_enabled" {
-  description = "If prometheus should store data localy"
-  type        = bool
-  default     = true
-}
-
-variable "volume_claim_storage_class_name" {
-  description = "StorageClass name that your pvc will use"
-  type        = string
-  default     = "default"
-}
-
-variable "volume_claim_size" {
-  description = "Size of prometheus disk"
-  type        = string
-  default     = "5Gi"
-}
-
 variable "cloud_provider" {
   description = "Name of cloud provider"
   type        = string
+}
+
+variable "azure_config" {
+  description = "Azure specific configuration"
+  type = object({
+    azure_key_vault_name = string
+    identity = object({
+      client_id   = string
+      resource_id = string
+      tenant_id   = string
+    })
+  })
+  default = {
+    azure_key_vault_name = ""
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
+  }
+}
+
+variable "aws_config" {
+  description = "AWS specific configuration"
+  type = object({
+    role_arn = string
+  })
+  default = {
+    role_arn = ""
+  }
 }
 
 variable "cluster_name" {
@@ -48,6 +49,29 @@ variable "tenant_id" {
   default     = ""
 }
 
+variable "remote_write_authenticated" {
+  description = "Adds TLS authentication to remote write configuration if true"
+  type        = bool
+  default     = true
+}
+
+variable "remote_write_url" {
+  description = "The URL where to send prometheus remote_write data"
+  type        = string
+}
+
+variable "volume_claim_storage_class_name" {
+  description = "StorageClass name that your pvc will use"
+  type        = string
+  default     = "default"
+}
+
+variable "volume_claim_size" {
+  description = "Size of prometheus disk"
+  type        = string
+  default     = "5Gi"
+}
+
 variable "resource_selector" {
   description = "Monitoring type labels to look for in Prometheus resources"
   type        = list(string)
@@ -58,12 +82,6 @@ variable "namespace_selector" {
   description = "Kind labels to look for in namespaces"
   type        = list(string)
   default     = ["platform"]
-}
-
-variable "alertmanager_enabled" {
-  description = "If alertmanager should be setup or not"
-  type        = bool
-  default     = false
 }
 
 # Opt in to additional monitors

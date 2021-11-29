@@ -71,7 +71,7 @@ output "velero" {
 }
 
 output "xenit" {
-  description = "Xenit Platform configuration"
+  description = "Configuration used by monitoring solution to get authentication credentials"
   value = {
     azure_key_vault_name = data.azurerm_key_vault.core.name
     identity = {

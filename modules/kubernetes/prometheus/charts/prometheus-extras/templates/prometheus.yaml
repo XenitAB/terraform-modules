@@ -1,13 +1,15 @@
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
-  name: prometheus-xks
+  name: xks
   labels:
     {{- include "prometheus-extras.labels" . | nindent 4 }}
 spec:
+  {{- if eq .Values.cloudProvider "azure" }}
   podMetadata:
     labels:
       aadpodidbinding: prometheus
+  {{- end }}
   externalLabels:
     cluster_name: {{ .Values.externalLabels.clusterName }}
     environment: {{ .Values.externalLabels.environment }}
@@ -81,7 +83,7 @@ spec:
                 - key: prometheus
                   operator: In
                   values:
-                    - prometheus-xks
+                    - xks
             topologyKey: kubernetes.io/hostname
           weight: 100
         - podAffinityTerm:
@@ -90,7 +92,7 @@ spec:
                 - key: prometheus
                   operator: In
                   values:
-                    - prometheus-xks
+                    - xks
             topologyKey: topology.kubernetes.io/zone
           weight: 100
   securityContext:

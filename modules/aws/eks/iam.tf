@@ -155,7 +155,7 @@ module "velero" {
   policy_json                = data.aws_iam_policy_document.velero.json
 }
 
-data "aws_iam_policy_document" "xenit" {
+data "aws_iam_policy_document" "prometheus" {
   statement {
     effect = "Allow"
     actions = [
@@ -173,17 +173,17 @@ data "aws_iam_policy_document" "xenit" {
   }
 }
 
-module "xenit" {
+module "prometheus" {
   source = "../irsa"
 
-  name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}-xenit"
+  name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}-prometheus"
   oidc_providers = [
     {
       url = aws_iam_openid_connect_provider.this.url
       arn = aws_iam_openid_connect_provider.this.arn
     }
   ]
-  kubernetes_namespace       = "xenit-system"
-  kubernetes_service_account = "xenit-proxy"
-  policy_json                = data.aws_iam_policy_document.xenit.json
+  kubernetes_namespace       = "prometheus"
+  kubernetes_service_account = "prometheus"
+  policy_json                = data.aws_iam_policy_document.prometheus.json
 }

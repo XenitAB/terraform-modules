@@ -43,9 +43,9 @@ output "velero_config" {
   }
 }
 
-output "xenit_config" {
-  description = "Configuration for Xenit proxy"
+output "prometheus_config" {
+  description = "Configuration for Prometheus"
   value = {
-    role_arn = module.xenit.role_arn
+    role_arn = module.prometheus.role_arn
   }
 }

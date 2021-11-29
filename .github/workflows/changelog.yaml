@@ -1,4 +1,4 @@
-name: "Checking for Expected Latest Version"
+name: changelog
 on:
   pull_request:
       types: [opened, synchronize, reopened, ready_for_review, labeled, unlabeled]

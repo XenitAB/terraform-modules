@@ -15,7 +15,5 @@ module "standardized_repository_settings" {
 
   repository_visibility = "private"
 
-  github_token = "ghp_thisisfake"
-
   required_status_checks = ["test", "ci"]
 }

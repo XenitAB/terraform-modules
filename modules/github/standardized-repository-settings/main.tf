@@ -32,12 +32,14 @@ resource "github_repository" "this" {
   has_issues             = true
   has_wiki               = false
   visibility             = var.repository_visibility
+  vulnerability_alerts   = var.vulnerability_alerts
 }
 
 resource "github_branch_protection" "this" {
-  repository_id  = github_repository.this
-  pattern        = "main"
-  enforce_admins = true
+  repository_id          = github_repository.this
+  pattern                = "main"
+  enforce_admins         = true
+  require_signed_commits = true
   required_pull_request_reviews {
     required_approving_review_count = 1
   }

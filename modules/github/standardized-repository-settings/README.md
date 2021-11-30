@@ -48,6 +48,7 @@ No modules.
 | <a name="input_repository_name"></a> [repository\_name](#input\_repository\_name) | Name of the repository | `string` | n/a | yes |
 | <a name="input_repository_visibility"></a> [repository\_visibility](#input\_repository\_visibility) | The visibility of the repository ('private' or 'public') | `string` | `"private"` | no |
 | <a name="input_required_status_checks"></a> [required\_status\_checks](#input\_required\_status\_checks) | Status checks that need to pass to merge a PR to the main branch | `list(string)` | <pre>[<br>  "test"<br>]</pre> | no |
+| <a name="input_vulnerability_alerts"></a> [vulnerability\_alerts](#input\_vulnerability\_alerts) | Whether to enable GitHub's default vulnerability checks via Dependabot | `bool` | `true` | no |
 
 ## Outputs
 

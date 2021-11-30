@@ -50,7 +50,7 @@ resource "helm_release" "az_metrics" {
   depends_on = [
     helm_release.az_metrics_extras
   ]
-  chart     = "${path.module}/charts/az-metrics-extras"
+  chart     = "${path.module}/charts/az-metrics-exporter"
   name      = "az-metrics"
   namespace = kubernetes_namespace.this.metadata[0].name
 

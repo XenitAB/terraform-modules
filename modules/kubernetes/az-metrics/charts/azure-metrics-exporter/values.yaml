@@ -54,7 +54,7 @@ aadpodidbinding:
   name: az-metrics
   enabled: true
 
-servicemonitor:
+podmonitor:
   loadBalancer: true
   kubernetes: true
 

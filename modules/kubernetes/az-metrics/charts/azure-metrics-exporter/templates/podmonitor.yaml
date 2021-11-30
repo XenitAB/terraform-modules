@@ -1,13 +1,14 @@
-{{- if .Values.servicemonitor.loadBalancer }}
+{{- if or .Values.podmonitor.loadBalancer .Values.servicemonitor.kubernetes }}
 apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+kind: PodMonitor
 metadata:
   labels:
     {{- include "azure-metrics-exporter.labels" . | nindent 4 }}
     xkf.xenit.io/monitoring: platform
   name: {{ include "azure-metrics-exporter.fullname" . }}-loadbalancers
 spec:
-  endpoints:
+  podMetricsEndpoints:
+  {{- if .Values.podmonitor.loadBalancer }}
   - interval: 60s
     port: http
     path: /probe/metrics/list
@@ -26,21 +27,8 @@ spec:
         - SnatConnectionCount
         - AllocatedSnatPorts
         - UsedSnatPorts
-  selector:
-    matchLabels:
-      {{- include "azure-metrics-exporter.labels" . | nindent 6 }}
-{{- end }}
----
-{{- if .Values.servicemonitor.kubernetes }}
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  labels:
-    {{- include "azure-metrics-exporter.labels" . | nindent 4 }}
-    xkf.xenit.io/monitoring: platform
-  name: {{ include "azure-metrics-exporter.fullname" . }}-kubernetes
-spec:
-  endpoints:
+  {{- end }}
+  {{- if .Values.podmonitor.kubernetes }}
   - interval: 60s
     port: http
     path: /probe/metrics/list
@@ -60,7 +48,8 @@ spec:
         - cluster_autoscaler_scale_down_in_cooldown
         - cluster_autoscaler_unneeded_nodes_count
         - cluster_autoscaler_unschedulable_pods_count
+  {{- end }}
   selector:
     matchLabels:
-      {{- include "azure-metrics-exporter.labels" . | nindent 6 }}
+      {{- include "azure-metrics-exporter.selectorLabels" . | nindent 6 }}
 {{- end }}

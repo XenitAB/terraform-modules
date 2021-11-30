@@ -53,93 +53,77 @@ resource "github_branch_default" "this" {
   branch     = "main"
 }
 
-resource "github_issue_label" "automation_label" {
-  repository  = github_repository.this
-  name        = "automation"
-  color       = "63DC57"
-  description = "Issue or PR that is created by non-human"
-}
+resource "github_issue_label" "this" {
+  for_each = {
+    automation = {
+      name        = "automation"
+      color       = "63DC57"
+      description = "Issue or PR that is created by non-human"
+    },
+    backlog = {
+      name        = "backlog"
+      color       = "B099EF"
+      description = "Will be done at a later date"
+    },
+    breaking_change = {
+      name        = "breaking change"
+      color       = "B60205"
+      description = "Breaking change"
+    },
+    bug = {
+      name        = "bug"
+      color       = "D73A4A"
+      description = "Something isn't working"
 
-resource "github_issue_label" "backlog_label" {
+    },
+    documentation = {
+      name        = "documentation"
+      color       = "0075CA"
+      description = "Improvements or additions to documentation"
+    },
+    duplicate = {
+      name        = "duplicate"
+      color       = "CFD3D7"
+      description = "This issue or pull request already exists"
+    },
+    enhancement = {
+      name        = "enhancement"
+      color       = "A2EEEF"
+      description = "This issue or pull request already exists"
+    },
+    good_first_issue = {
+      name        = "good first issue"
+      color       = "7057FF"
+      description = "Good for newcomers"
+    },
+    help_wanted = {
+      name        = "help wanted"
+      color       = "008672"
+      description = "Extra attention is needed"
+    },
+    ignore_changelog = {
+      name        = "ignore changelog"
+      color       = "221BD0"
+      description = "Should not be mentioned in changelog"
+    },
+    invalid = {
+      name        = "invalid"
+      color       = "E4E669"
+      description = "This doesn't seem right"
+    },
+    question = {
+      name        = "question"
+      color       = "D876E3"
+      description = "Further information is requested"
+    },
+    wontfix = {
+      name        = "wontfix"
+      color       = "FFFFFF"
+      description = "This will not be worked on"
+    }
+  }
   repository  = github_repository.this
-  name        = "backlog"
-  color       = "B099EF"
-  description = "Will be done at a later date"
-}
-
-resource "github_issue_label" "breaking_change_label" {
-  repository  = github_repository.this
-  name        = "breaking change"
-  color       = "B60205"
-  description = "Breaking change"
-}
-
-resource "github_issue_label" "bug_label" {
-  repository  = github_repository.this
-  name        = "bug"
-  color       = "D73A4A"
-  description = "Something isn't working"
-}
-
-resource "github_issue_label" "documentation_label" {
-  repository  = github_repository.this
-  name        = "documentation"
-  color       = "0075CA"
-  description = "Improvements or additions to documentation"
-}
-
-resource "github_issue_label" "duplicate_label" {
-  repository  = github_repository.this
-  name        = "duplicate"
-  color       = "CFD3D7"
-  description = "This issue or pull request already exists"
-}
-
-resource "github_issue_label" "enhancement_label" {
-  repository  = github_repository.this
-  name        = "enhancement"
-  color       = "A2EEEF"
-  description = "This issue or pull request already exists"
-}
-
-resource "github_issue_label" "good_first_issue_label" {
-  repository  = github_repository.this
-  name        = "good first issue"
-  color       = "7057FF"
-  description = "Good for newcomers"
-}
-
-resource "github_issue_label" "help_wanted_label" {
-  repository  = github_repository.this
-  name        = "help wanted"
-  color       = "008672"
-  description = "Extra attention is needed"
-}
-
-resource "github_issue_label" "ignore_changelog_label" {
-  repository  = github_repository.this
-  name        = "ignore changelog"
-  color       = "221BD0"
-  description = "Should not be mentioned in changelog"
-}
-
-resource "github_issue_label" "invalid_label" {
-  repository  = github_repository.this
-  name        = "invalid"
-  color       = "E4E669"
-  description = "This doesn't seem right"
-}
-
-resource "github_issue_label" "question_label" {
-  repository  = github_repository.this
-  name        = "question"
-  color       = "D876E3"
-  description = "Further information is requested"
-}
-
-resource "github_issue_label" "wontfix_label" {
-  repository  = github_repository.this
-  name        = "wontfix"
-  color       = "FFFFFF"
-  description = "This will not be worked on"
+  name        = each.value.name
+  color       = each.value.color
+  description = each.value.description
 }

@@ -24,19 +24,7 @@ No modules.
 |------|------|
 | [github_branch_default.this](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/branch_default) | resource |
 | [github_branch_protection.this](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/branch_protection) | resource |
-| [github_issue_label.automation_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
-| [github_issue_label.backlog_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
-| [github_issue_label.breaking_change_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
-| [github_issue_label.bug_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
-| [github_issue_label.documentation_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
-| [github_issue_label.duplicate_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
-| [github_issue_label.enhancement_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
-| [github_issue_label.good_first_issue_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
-| [github_issue_label.help_wanted_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
-| [github_issue_label.ignore_changelog_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
-| [github_issue_label.invalid_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
-| [github_issue_label.question_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
-| [github_issue_label.wontfix_label](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
+| [github_issue_label.this](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/issue_label) | resource |
 | [github_repository.this](https://registry.terraform.io/providers/integrations/github/4.18.0/docs/resources/repository) | resource |
 
 ## Inputs

@@ -15,7 +15,7 @@ terraform {
 }
 
 provider "github" {
-  owner = "XenitAB"
+  owner = var.owner
   token = var.github_token
 }
 
@@ -23,7 +23,7 @@ resource "github_repository" "this" {
   name        = var.repository_name
   description = var.repository_description
 
-  allow_auto_merge       = false
+  allow_auto_merge       = true
   allow_merge_commit     = true
   allow_rebase_merge     = true
   allow_squash_merge     = true

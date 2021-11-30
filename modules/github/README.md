@@ -1,4 +1,4 @@
-# AWS Terraform modules
+# GitHub Terraform modules
 
 This directory contains all the GitHub Terraform modules.
 

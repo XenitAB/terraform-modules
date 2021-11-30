@@ -31,11 +31,12 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "reloader" {
-  repository = "https://stakater.github.io/stakater-charts"
-  chart      = "reloader"
-  name       = "reloader"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.0.102"
+  repository  = "https://stakater.github.io/stakater-charts"
+  chart       = "reloader"
+  name        = "reloader"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "v0.0.102"
+  max_history = 3
 
   set {
     name  = "reloader.deployment.priorityClassName"

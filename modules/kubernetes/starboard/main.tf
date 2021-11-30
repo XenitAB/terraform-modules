@@ -45,20 +45,22 @@ resource "kubernetes_namespace" "trivy" {
 }
 
 resource "helm_release" "starboard" {
-  repository = "https://aquasecurity.github.io/helm-charts/"
-  chart      = "starboard-operator"
-  name       = "starboard-operator"
-  namespace  = kubernetes_namespace.starboard.metadata[0].name
-  version    = "0.7.0"
+  repository  = "https://aquasecurity.github.io/helm-charts/"
+  chart       = "starboard-operator"
+  name        = "starboard-operator"
+  namespace   = kubernetes_namespace.starboard.metadata[0].name
+  version     = "0.7.0"
+  max_history = 3
   values = [templatefile("${path.module}/templates/starboard-values.yaml.tpl", {
     provider = var.cloud_provider
   })]
 }
 
 resource "helm_release" "trivy" {
-  repository = "https://aquasecurity.github.io/helm-charts/"
-  chart      = "trivy"
-  name       = "trivy"
-  namespace  = kubernetes_namespace.trivy.metadata[0].name
-  version    = "0.4.4"
+  repository  = "https://aquasecurity.github.io/helm-charts/"
+  chart       = "trivy"
+  name        = "trivy"
+  namespace   = kubernetes_namespace.trivy.metadata[0].name
+  version     = "0.4.4"
+  max_history = 3
 }

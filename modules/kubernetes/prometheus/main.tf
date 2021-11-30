@@ -36,11 +36,12 @@ resource "kubernetes_namespace" "this" {
 
 # Prometheus operator and other core monitoring components.
 resource "helm_release" "prometheus" {
-  repository = "https://prometheus-community.github.io/helm-charts"
-  chart      = "kube-prometheus-stack"
-  name       = "prometheus"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "17.2.2"
+  repository  = "https://prometheus-community.github.io/helm-charts"
+  chart       = "kube-prometheus-stack"
+  name        = "prometheus"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "17.2.2"
+  max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     namespaces = var.kube_state_metrics_namespaces
   })]
@@ -54,21 +55,23 @@ resource "helm_release" "metrics_server" {
     if var.cloud_provider == "aws"
   }
 
-  repository = "https://charts.bitnami.com/bitnami"
-  chart      = "metrics-server"
-  name       = "metrics-server"
-  namespace  = "kube-system"
-  version    = "5.10.5"
-  values     = [templatefile("${path.module}/templates/values-metrics-server.yaml.tpl", {})]
+  repository  = "https://charts.bitnami.com/bitnami"
+  chart       = "metrics-server"
+  name        = "metrics-server"
+  namespace   = "kube-system"
+  version     = "5.10.5"
+  max_history = 3
+  values      = [templatefile("${path.module}/templates/values-metrics-server.yaml.tpl", {})]
 }
 
 # Prometheus declaration and monitors for all of the platform applications.
 resource "helm_release" "prometheus_extras" {
   depends_on = [helm_release.prometheus]
 
-  chart     = "${path.module}/charts/prometheus-extras"
-  name      = "prometheus-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
+  chart       = "${path.module}/charts/prometheus-extras"
+  name        = "prometheus-extras"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
   values = [templatefile("${path.module}/templates/values-extras.yaml.tpl", {
     cloud_provider = var.cloud_provider
     azure_config   = var.azure_config

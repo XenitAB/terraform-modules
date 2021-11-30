@@ -195,11 +195,12 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
 # Tmp use edge version until 2.11.0 is released where we will get the helm chart feature we need.
 #tf-latest-version:ignore
 resource "helm_release" "linkerd_cni" {
-  repository = "https://helm.linkerd.io/edge"
-  chart      = "linkerd2-cni"
-  name       = "linkerd-cni"
-  namespace  = kubernetes_namespace.cni.metadata[0].name
-  version    = "21.7.5"
+  repository  = "https://helm.linkerd.io/edge"
+  chart       = "linkerd2-cni"
+  name        = "linkerd-cni"
+  namespace   = kubernetes_namespace.cni.metadata[0].name
+  version     = "21.7.5"
+  max_history = 3
 
   values = [
     templatefile("${path.module}/templates/values-cni.yaml.tpl", {}),
@@ -213,19 +214,21 @@ resource "helm_release" "linkerd_extras" {
     kubernetes_secret.webhook_issuer_tls
   ]
 
-  chart     = "${path.module}/charts/linkerd-extras"
-  name      = "linkerd-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
+  chart       = "${path.module}/charts/linkerd-extras"
+  name        = "linkerd-extras"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
 }
 
 resource "helm_release" "linkerd" {
   depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
 
-  repository = "https://helm.linkerd.io/stable"
-  chart      = "linkerd2"
-  name       = "linkerd"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "2.10.2"
+  repository  = "https://helm.linkerd.io/stable"
+  chart       = "linkerd2"
+  name        = "linkerd"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "2.10.2"
+  max_history = 3
   values = [
     templatefile("${path.module}/templates/values.yaml.tpl", {
       linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem),
@@ -238,11 +241,12 @@ resource "helm_release" "linkerd" {
 resource "helm_release" "linkerd_viz" {
   depends_on = [helm_release.linkerd]
 
-  repository = "https://helm.linkerd.io/stable"
-  chart      = "linkerd-viz"
-  name       = "linkerd-viz"
-  namespace  = kubernetes_namespace.viz.metadata[0].name
-  version    = "2.10.2"
+  repository  = "https://helm.linkerd.io/stable"
+  chart       = "linkerd-viz"
+  name        = "linkerd-viz"
+  namespace   = kubernetes_namespace.viz.metadata[0].name
+  version     = "2.10.2"
+  max_history = 3
   values = [
     templatefile("${path.module}/templates/values-viz.yaml.tpl", {}),
   ]

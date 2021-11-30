@@ -30,10 +30,11 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "csi_secrets_store_provider_azure" {
-  repository = "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
-  chart      = "csi-secrets-store-provider-azure"
-  version    = "0.2.1"
-  name       = "csi-secrets-store-provider-azure"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  values     = [templatefile("${path.module}/templates/values.yaml.tpl", {})]
+  repository  = "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
+  chart       = "csi-secrets-store-provider-azure"
+  version     = "0.2.1"
+  name        = "csi-secrets-store-provider-azure"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
+  values      = [templatefile("${path.module}/templates/values.yaml.tpl", {})]
 }

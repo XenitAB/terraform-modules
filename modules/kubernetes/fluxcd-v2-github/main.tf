@@ -65,11 +65,12 @@ resource "kubernetes_namespace" "this" {
 
 # Git Auth Proxy
 resource "helm_release" "git_auth_proxy" {
-  repository = "https://xenitab.github.io/git-auth-proxy/"
-  chart      = "git-auth-proxy"
-  name       = "git-auth-proxy"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.5.2"
+  repository  = "https://xenitab.github.io/git-auth-proxy/"
+  chart       = "git-auth-proxy"
+  name        = "git-auth-proxy"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "v0.5.2"
+  max_history = 3
   values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
     github_org      = var.github_org
     app_id          = tonumber(var.github_app_id)

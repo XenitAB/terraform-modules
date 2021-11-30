@@ -33,11 +33,12 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "external_dns" {
-  repository = "https://charts.bitnami.com/bitnami"
-  chart      = "external-dns"
-  name       = "external-dns"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "5.4.8"
+  repository  = "https://charts.bitnami.com/bitnami"
+  chart       = "external-dns"
+  name        = "external-dns"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "5.4.8"
+  max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     provider     = var.dns_provider,
     sources      = var.sources,
@@ -50,9 +51,10 @@ resource "helm_release" "external_dns" {
 resource "helm_release" "external_dns_extras" {
   depends_on = [helm_release.external_dns]
 
-  chart     = "${path.module}/charts/external-dns-extras"
-  name      = "external-dns-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
+  chart       = "${path.module}/charts/external-dns-extras"
+  name        = "external-dns-extras"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
 
   set {
     name  = "resourceID"

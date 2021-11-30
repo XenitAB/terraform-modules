@@ -32,11 +32,12 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "ingress_healthz" {
-  repository = "https://charts.bitnami.com/bitnami"
-  chart      = "nginx"
-  name       = "ingress-healthz"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "9.5.10"
+  repository  = "https://charts.bitnami.com/bitnami"
+  chart       = "nginx"
+  name        = "ingress-healthz"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "9.5.10"
+  max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     environment     = var.environment
     dns_zone        = var.dns_zone

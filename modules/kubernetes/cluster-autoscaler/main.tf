@@ -34,11 +34,12 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "cluster_autoscaler" {
-  repository = "https://kubernetes.github.io/autoscaler"
-  chart      = "cluster-autoscaler"
-  name       = "cluster-autoscaler"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "9.10.7"
+  repository  = "https://kubernetes.github.io/autoscaler"
+  chart       = "cluster-autoscaler"
+  name        = "cluster-autoscaler"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "9.10.7"
+  max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     provider     = var.cloud_provider,
     cluster_name = var.cluster_name

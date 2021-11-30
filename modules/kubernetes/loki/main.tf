@@ -59,11 +59,12 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "minio" {
-  name       = "loki-minio"
-  repository = "https://helm.min.io/"
-  chart      = "minio"
-  version    = "8.0.10"
-  namespace  = kubernetes_namespace.this.metadata[0].name
+  name        = "loki-minio"
+  repository  = "https://helm.min.io/"
+  chart       = "minio"
+  version     = "8.0.10"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
 
   values = [
     templatefile("${path.module}/templates/minio-values.yaml.tpl", {}),
@@ -81,11 +82,12 @@ resource "helm_release" "minio" {
 }
 
 resource "helm_release" "loki_stack" {
-  name       = "loki"
-  repository = "https://grafana.github.io/loki/charts"
-  chart      = "loki-stack"
-  version    = "2.1.2"
-  namespace  = kubernetes_namespace.this.metadata[0].name
+  name        = "loki"
+  repository  = "https://grafana.github.io/loki/charts"
+  chart       = "loki-stack"
+  version     = "2.1.2"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
 
   values = [
     templatefile("${path.module}/templates/loki-stack-values.yaml.tpl", {}),

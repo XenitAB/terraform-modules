@@ -45,12 +45,13 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "datadog_operator" {
-  repository = "https://helm.datadoghq.com"
-  chart      = "datadog-operator"
-  name       = "datadog-operator"
-  namespace  = kubernetes_namespace.this.metadata[0].name
+  repository  = "https://helm.datadoghq.com"
+  chart       = "datadog-operator"
+  name        = "datadog-operator"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "0.7.0"
+  max_history = 3
 
-  version = "0.7.0"
   set {
     name  = "apiKey"
     value = var.api_key
@@ -68,8 +69,9 @@ resource "helm_release" "datadog_operator" {
 resource "helm_release" "datadog_extras" {
   depends_on = [helm_release.datadog_operator]
 
-  chart     = "${path.module}/charts/datadog-extras"
-  name      = "datadog-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
-  values    = [local.values]
+  chart       = "${path.module}/charts/datadog-extras"
+  name        = "datadog-extras"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
+  values      = [local.values]
 }

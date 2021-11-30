@@ -6,6 +6,7 @@ This repository contains the Xenit Terraform modules.
 
 - [`aws`](modules/aws/README.md)
 - [`azure`](modules/azure/README.md)
+- [`github`](modules/github/README.md)
 - [`kubernetes`](modules/kubernetes/README.md)
 
 ## Contributing
@@ -20,6 +21,7 @@ apply to that provider. Following the standards below however will help you avoi
 
 Every resource name should be lowercase and snakecased. No other format should be used in the resource names. The role assignment for a cluster admin
 is named `cluster_admin` and not `clusterAdmin`.
+
 ```terraform
 resource "azurerm_role_assignment" "cluster_admin" {
   scope = azurerm_kubernetes_cluster.this.id
@@ -31,6 +33,7 @@ resource "azurerm_role_assignment" "cluster_admin" {
 Resources that only have a single instance and no fitting name that distinguishes it should use the name `this`. The reasoning is that it is more DRY
 than reporting the resource type like `aks` which other people may do. However if there is a fitting name please use it. Additionally please do not
 have to resources of the same type where one of them is called `this` and the other has a specific name, instead give both resources a specific name.
+
 ```terraform
 resource "azurerm_kubernetes_cluster" "this" {
   name                            = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"

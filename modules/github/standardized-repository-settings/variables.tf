@@ -10,7 +10,7 @@ variable "repository_description" {
 }
 
 variable "repository_visibility" {
-  description = "The visibility of the repository"
+  description = "The visibility of the repository ('private' or 'public')"
   type        = string
   default     = "private"
 }
@@ -22,7 +22,7 @@ variable "github_token" {
 }
 
 variable "required_status_checks" {
-  description = "Status checks that need to pass to merge a PR to this repository"
+  description = "Status checks that need to pass to merge a PR to the main branch"
   type        = list(string)
   default     = ["test"]
 }

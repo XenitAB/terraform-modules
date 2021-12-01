@@ -26,6 +26,7 @@ This module is used to create AKS clusters.
 
 ## Modules
 
+<<<<<<< HEAD
 | Name                                                                                                                                         | Source                                            | Version |
 | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ------- |
 | <a name="module_aad_pod_identity"></a> [aad\_pod\_identity](#module\_aad\_pod\_identity)                                                     | ../../kubernetes/aad-pod-identity                 | n/a     |
@@ -48,6 +49,30 @@ This module is used to create AKS clusters.
 | <a name="module_reloader"></a> [reloader](#module\_reloader)                                                                                 | ../../kubernetes/reloader                         | n/a     |
 | <a name="module_starboard"></a> [starboard](#module\_starboard)                                                                              | ../../kubernetes/starboard                        | n/a     |
 | <a name="module_velero"></a> [velero](#module\_velero)                                                                                       | ../../kubernetes/velero                           | n/a     |
+=======
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_aad_pod_identity"></a> [aad\_pod\_identity](#module\_aad\_pod\_identity) | ../../kubernetes/aad-pod-identity | n/a |
+| <a name="module_azad_kube_proxy"></a> [azad\_kube\_proxy](#module\_azad\_kube\_proxy) | ../../kubernetes/azad-kube-proxy | n/a |
+| <a name="module_azure_metrics"></a> [azure\_metrics](#module\_azure\_metrics) | ../../kubernetes/azure-metrics | n/a |
+| <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../../kubernetes/cert-manager | n/a |
+| <a name="module_csi_secrets_store_provider_azure"></a> [csi\_secrets\_store\_provider\_azure](#module\_csi\_secrets\_store\_provider\_azure) | ../../kubernetes/csi-secrets-store-provider-azure | n/a |
+| <a name="module_datadog"></a> [datadog](#module\_datadog) | ../../kubernetes/datadog | n/a |
+| <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../../kubernetes/external-dns | n/a |
+| <a name="module_falco"></a> [falco](#module\_falco) | ../../kubernetes/falco | n/a |
+| <a name="module_fluxcd_v1_azure_devops"></a> [fluxcd\_v1\_azure\_devops](#module\_fluxcd\_v1\_azure\_devops) | ../../kubernetes/fluxcd-v1 | n/a |
+| <a name="module_fluxcd_v2_azure_devops"></a> [fluxcd\_v2\_azure\_devops](#module\_fluxcd\_v2\_azure\_devops) | ../../kubernetes/fluxcd-v2-azdo | n/a |
+| <a name="module_fluxcd_v2_github"></a> [fluxcd\_v2\_github](#module\_fluxcd\_v2\_github) | ../../kubernetes/fluxcd-v2-github | n/a |
+| <a name="module_ingress_healthz"></a> [ingress\_healthz](#module\_ingress\_healthz) | ../../kubernetes/ingress-healthz | n/a |
+| <a name="module_ingress_nginx"></a> [ingress\_nginx](#module\_ingress\_nginx) | ../../kubernetes/ingress-nginx | n/a |
+| <a name="module_linkerd"></a> [linkerd](#module\_linkerd) | ../../kubernetes/linkerd | n/a |
+| <a name="module_new_relic"></a> [new\_relic](#module\_new\_relic) | ../../kubernetes/new-relic | n/a |
+| <a name="module_opa_gatekeeper"></a> [opa\_gatekeeper](#module\_opa\_gatekeeper) | ../../kubernetes/opa-gatekeeper | n/a |
+| <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../../kubernetes/prometheus | n/a |
+| <a name="module_reloader"></a> [reloader](#module\_reloader) | ../../kubernetes/reloader | n/a |
+| <a name="module_starboard"></a> [starboard](#module\_starboard) | ../../kubernetes/starboard | n/a |
+| <a name="module_velero"></a> [velero](#module\_velero) | ../../kubernetes/velero | n/a |
+>>>>>>> 7857aee (Change name to azure-metrics instead of az-metrics)
 
 ## Resources
 
@@ -128,10 +153,10 @@ This module is used to create AKS clusters.
 | <a name="input_aad_pod_identity_config"></a> [aad\_pod\_identity\_config](#input\_aad\_pod\_identity\_config) | Configuration for aad pod identity | <pre>map(object({<br>    id        = string<br>    client_id = string<br>  }))</pre> | n/a | yes |
 | <a name="input_aad_pod_identity_enabled"></a> [aad\_pod\_identity\_enabled](#input\_aad\_pod\_identity\_enabled) | Should aad-pod-identity be enabled | `bool` | `true` | no |
 | <a name="input_aks_name_suffix"></a> [aks\_name\_suffix](#input\_aks\_name\_suffix) | The suffix for the aks clusters | `number` | n/a | yes |
-| <a name="input_az_metrics_config"></a> [az\_metrics\_config](#input\_az\_metrics\_config) | AZ Metrics configuration | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |
-| <a name="input_az_metrics_enabled"></a> [az\_metrics\_enabled](#input\_az\_metrics\_enabled) | Should AZ Metrics be enabled | `bool` | `true` | no |
 | <a name="input_azad_kube_proxy_config"></a> [azad\_kube\_proxy\_config](#input\_azad\_kube\_proxy\_config) | The azad-kube-proxy configuration | <pre>object({<br>    fqdn                  = string<br>    dashboard             = string<br>    azure_ad_group_prefix = string<br>    allowed_ips           = list(string)<br>    azure_ad_app = object({<br>      client_id     = string<br>      client_secret = string<br>      tenant_id     = string<br>    })<br>    k8dash_config = object({<br>      client_id     = string<br>      client_secret = string<br>      scope         = string<br>    })<br>  })</pre> | <pre>{<br>  "allowed_ips": [],<br>  "azure_ad_app": {<br>    "client_id": "",<br>    "client_secret": "",<br>    "tenant_id": ""<br>  },<br>  "azure_ad_group_prefix": "",<br>  "dashboard": "",<br>  "fqdn": "",<br>  "k8dash_config": {<br>    "client_id": "",<br>    "client_secret": "",<br>    "scope": ""<br>  }<br>}</pre> | no |
 | <a name="input_azad_kube_proxy_enabled"></a> [azad\_kube\_proxy\_enabled](#input\_azad\_kube\_proxy\_enabled) | Should azad-kube-proxy be enabled | `bool` | `false` | no |
+| <a name="input_azure_metrics_config"></a> [azure\_metrics\_config](#input\_azure\_metrics\_config) | AZ Metrics configuration | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |
+| <a name="input_azure_metrics_enabled"></a> [azure\_metrics\_enabled](#input\_azure\_metrics\_enabled) | Should AZ Metrics be enabled | `bool` | `true` | no |
 | <a name="input_cert_manager_config"></a> [cert\_manager\_config](#input\_cert\_manager\_config) | Cert Manager configuration | <pre>object({<br>    notification_email = string<br>    dns_zone           = string<br>  })</pre> | n/a | yes |
 | <a name="input_cert_manager_enabled"></a> [cert\_manager\_enabled](#input\_cert\_manager\_enabled) | Should Cert Manager be enabled | `bool` | `true` | no |
 | <a name="input_csi_secrets_store_provider_azure_enabled"></a> [csi\_secrets\_store\_provider\_azure\_enabled](#input\_csi\_secrets\_store\_provider\_azure\_enabled) | Should csi-secrets-store-provider-azure be enabled | `bool` | `true` | no |

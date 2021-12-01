@@ -4,8 +4,8 @@ provider "kubernetes" {}
 
 provider "helm" {}
 
-module "az_metrics" {
-  source = "../../../modules/kubernetes/az-metrics"
+module "azure_metrics" {
+  source = "../../../modules/kubernetes/azure-metrics"
 
   providers = {
     kubernetes = kubernetes

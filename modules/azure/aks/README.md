@@ -38,14 +38,14 @@ No modules.
 | [azurerm_kubernetes_cluster_node_pool.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/kubernetes_cluster_node_pool) | resource |
 | [azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.az_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.az_metrics_aks_reader](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.az_metrics_lb_reader](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.azure_metrics_aks_reader](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.azure_metrics_lb_reader](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.cluster_admin](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
-| [azurerm_user_assigned_identity.az_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/user_assigned_identity) | resource |
+| [azurerm_user_assigned_identity.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/data-sources/client_config) | data source |
 | [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/data-sources/resource_group) | data source |
@@ -72,5 +72,5 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_az_metrics_identity"></a> [az\_metrics\_identity](#output\_az\_metrics\_identity) | MSI authentication identity for Azure Metrics |
+| <a name="output_azure_metrics_identity"></a> [azure\_metrics\_identity](#output\_azure\_metrics\_identity) | MSI authentication identity for Azure Metrics |
 | <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Kube config for the created AKS cluster |

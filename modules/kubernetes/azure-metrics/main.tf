@@ -1,5 +1,5 @@
 /**
-  * # AZ-metrics (az-metrics)
+  * # azure-metrics (azure-metrics)
   *
   * This module is used to query azure for metrics that we use to monitor our AKS clusters.
   * We are using: https://github.com/webdevops/azure-metrics-exporter to gather the metrics.
@@ -23,16 +23,16 @@ terraform {
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name                = "az-metrics"
+      name                = "azure-metrics"
       "xkf.xenit.io/kind" = "platform"
     }
-    name = "az-metrics"
+    name = "azure-metrics"
   }
 }
 
-resource "helm_release" "az_metrics_extras" {
-  chart     = "${path.module}/charts/az-metrics-extras"
-  name      = "az-metrics-extras"
+resource "helm_release" "azure_metrics_extras" {
+  chart     = "${path.module}/charts/azure-metrics-extras"
+  name      = "azure-metrics-extras"
   namespace = kubernetes_namespace.this.metadata[0].name
 
   set {
@@ -46,12 +46,12 @@ resource "helm_release" "az_metrics_extras" {
   }
 }
 
-resource "helm_release" "az_metrics" {
+resource "helm_release" "azure_metrics" {
   depends_on = [
-    helm_release.az_metrics_extras
+    helm_release.azure_metrics_extras
   ]
-  chart     = "${path.module}/charts/az-metrics-exporter"
-  name      = "az-metrics"
+  chart     = "${path.module}/charts/azure-metrics-exporter"
+  name      = "azure-metrics"
   namespace = kubernetes_namespace.this.metadata[0].name
 
   set {

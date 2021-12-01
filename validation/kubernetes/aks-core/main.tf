@@ -70,7 +70,7 @@ module "aks_core" {
       name = "name"
     }
   }
-  az_metrics_config = {
+  azure_metrics_config = {
     client_id   = "foo"
     resource_id = "bar"
   }

@@ -1,4 +1,4 @@
-# AZ-metrics (az-metrics)
+# azure-metrics (azure-metrics)
 
 This module is used to query azure for metrics that we use to monitor our AKS clusters.
 We are using: https://github.com/webdevops/azure-metrics-exporter to gather the metrics.
@@ -26,8 +26,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [helm_release.az_metrics](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
-| [helm_release.az_metrics_extras](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
+| [helm_release.azure_metrics](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
+| [helm_release.azure_metrics_extras](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.6.1/docs/resources/namespace) | resource |
 
 ## Inputs

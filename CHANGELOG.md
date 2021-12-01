@@ -17,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- [#463](https://github.com/XenitAB/terraform-modules/pull/463) Add az-metrics to monitor azure specific metrics.
+- [#463](https://github.com/XenitAB/terraform-modules/pull/463) Add azure-metrics to monitor azure specific metrics.
 
 ## 2021.11.7
 

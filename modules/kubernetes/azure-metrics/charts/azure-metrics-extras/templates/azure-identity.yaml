@@ -2,7 +2,7 @@
 apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentity
 metadata:
-  name: az-metrics
+  name: azure-metrics
 spec:
   type: 0
   resourceID: {{ .Values.resourceID }}
@@ -11,8 +11,8 @@ spec:
 apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentityBinding
 metadata:
-  name: az-metrics
+  name: azure-metrics
 spec:
-  azureIdentity: az-metrics
-  selector: az-metrics
+  azureIdentity: azure-metrics
+  selector: azure-metrics
 {{ end }}

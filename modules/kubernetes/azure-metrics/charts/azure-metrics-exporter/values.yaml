@@ -51,7 +51,7 @@ tolerations: []
 affinity: {}
 
 aadpodidbinding:
-  name: az-metrics
+  name: azure-metrics
   enabled: true
 
 podmonitor:

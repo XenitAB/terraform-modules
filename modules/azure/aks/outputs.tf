@@ -9,7 +9,7 @@ output "kube_config" {
   }
 }
 
-output "azure_metrics_identity" {
+output "az_metrics_identity" {
   description = "MSI authentication identity for Azure Metrics"
   value = {
     client_id   = azurerm_user_assigned_identity.az_metrics.client_id

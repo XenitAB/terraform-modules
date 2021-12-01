@@ -190,7 +190,7 @@ module "az_metrics" {
 
   client_id       = var.az_metrics_config.client_id
   resource_id     = var.az_metrics_config.resource_id
-  subscription_id = var.subscription_id
+  subscription_id = data.azurerm_client_config.current.subscription_id
 }
 
 # linkerd

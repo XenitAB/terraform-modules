@@ -13,10 +13,6 @@ This directory contains all the Azure Terraform modules.
 - [`governance-regional`](governance-regional/README.md)
 - [`hub`](hub/README.md)
 
-### Deprecated
-
-- [`governance`](governance/README.md)
-
 ## Style Guide
 
 TBD

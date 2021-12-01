@@ -1,15 +1,3 @@
-variable "owner" {
-  description = "Owner of this repository"
-  type        = string
-  default     = "XenitAB"
-}
-
-variable "github_token" {
-  description = "Token used to access GitHub"
-  type        = string
-  sensitive   = true
-}
-
 variable "repository_name" {
   description = "Name of the repository"
   type        = string

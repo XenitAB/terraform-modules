@@ -31,8 +31,6 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_github_token"></a> [github\_token](#input\_github\_token) | Token used to access GitHub | `string` | n/a | yes |
-| <a name="input_owner"></a> [owner](#input\_owner) | Owner of this repository | `string` | `"XenitAB"` | no |
 | <a name="input_repository_description"></a> [repository\_description](#input\_repository\_description) | Description for this repository | `string` | `"No description"` | no |
 | <a name="input_repository_name"></a> [repository\_name](#input\_repository\_name) | Name of the repository | `string` | n/a | yes |
 | <a name="input_repository_visibility"></a> [repository\_visibility](#input\_repository\_visibility) | The visibility of the repository ('private' or 'public') | `string` | `"private"` | no |

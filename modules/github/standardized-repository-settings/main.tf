@@ -14,11 +14,6 @@ terraform {
   }
 }
 
-provider "github" {
-  owner = var.owner
-  token = var.github_token
-}
-
 resource "github_repository" "this" {
   name        = var.repository_name
   description = var.repository_description

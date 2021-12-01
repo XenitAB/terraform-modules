@@ -31,7 +31,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_repository_description"></a> [repository\_description](#input\_repository\_description) | Description for this repository | `string` | `"No description"` | no |
+| <a name="input_repository_description"></a> [repository\_description](#input\_repository\_description) | Description for this repository | `string` | n/a | yes |
 | <a name="input_repository_name"></a> [repository\_name](#input\_repository\_name) | Name of the repository | `string` | n/a | yes |
 | <a name="input_repository_visibility"></a> [repository\_visibility](#input\_repository\_visibility) | The visibility of the repository ('private' or 'public') | `string` | `"private"` | no |
 | <a name="input_required_status_checks"></a> [required\_status\_checks](#input\_required\_status\_checks) | Status checks that need to pass to merge a PR to the main branch | `list(string)` | <pre>[<br>  "test"<br>]</pre> | no |

@@ -6,7 +6,6 @@ variable "repository_name" {
 variable "repository_description" {
   description = "Description for this repository"
   type        = string
-  default     = "No description"
 }
 
 variable "repository_visibility" {

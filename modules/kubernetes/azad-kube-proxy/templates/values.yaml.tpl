@@ -25,25 +25,6 @@ podEnv:
     value: "OBJECTID"
   - name: AZURE_AD_GROUP_PREFIX
     value: "${azure_ad_group_prefix}"
-%{ if dashboard == "k8dash" }
-  - name: DASHBOARD
-    value: "K8DASH"
-  - name: K8DASH_CLIENT_ID
-    valueFrom:
-      secretKeyRef:
-        name: azad-kube-proxy
-        key: K8DASH_CLIENT_ID
-  - name: K8DASH_CLIENT_SECRET
-    valueFrom:
-      secretKeyRef:
-        name: azad-kube-proxy
-        key: K8DASH_CLIENT_SECRET
-  - name: K8DASH_SCOPE
-    valueFrom:
-      secretKeyRef:
-        name: azad-kube-proxy
-        key: K8DASH_SCOPE
-%{ endif }
 
 secret:
   create: false

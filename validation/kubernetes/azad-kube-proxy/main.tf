@@ -12,7 +12,7 @@ module "azad_kube_proxy" {
     helm       = helm
   }
 
-  fqdn      = "k8s.example.com"
+  fqdn = "k8s.example.com"
 
   azure_ad_app = {
     client_id     = "00000000-0000-0000-0000-000000000000"

@@ -368,7 +368,6 @@ module "azad_kube_proxy" {
   source = "../../kubernetes/azad-kube-proxy"
 
   fqdn                  = var.azad_kube_proxy_config.fqdn
-  dashboard             = var.azad_kube_proxy_config.dashboard
   azure_ad_group_prefix = var.azad_kube_proxy_config.azure_ad_group_prefix
   allowed_ips           = var.azad_kube_proxy_config.allowed_ips
 
@@ -376,12 +375,6 @@ module "azad_kube_proxy" {
     client_id     = var.azad_kube_proxy_config.azure_ad_app.client_id
     client_secret = var.azad_kube_proxy_config.azure_ad_app.client_secret
     tenant_id     = var.azad_kube_proxy_config.azure_ad_app.tenant_id
-  }
-
-  k8dash_config = {
-    client_id     = var.azad_kube_proxy_config.k8dash_config.client_id
-    client_secret = var.azad_kube_proxy_config.k8dash_config.client_secret
-    scope         = var.azad_kube_proxy_config.k8dash_config.scope
   }
 }
 

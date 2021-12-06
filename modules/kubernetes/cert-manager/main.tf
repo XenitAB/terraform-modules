@@ -34,11 +34,12 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "cert_manager" {
-  repository = "https://charts.jetstack.io"
-  chart      = "cert-manager"
-  name       = "cert-manager"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v1.5.1"
+  repository  = "https://charts.jetstack.io"
+  chart       = "cert-manager"
+  name        = "cert-manager"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "v1.5.1"
+  max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     provider   = var.cloud_provider,
     aws_config = var.aws_config,
@@ -48,9 +49,10 @@ resource "helm_release" "cert_manager" {
 resource "helm_release" "cert_manager_extras" {
   depends_on = [helm_release.cert_manager]
 
-  chart     = "${path.module}/charts/cert-manager-extras"
-  name      = "cert-manager-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
+  chart       = "${path.module}/charts/cert-manager-extras"
+  name        = "cert-manager-extras"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
 
   set {
     name  = "notificationEmail"

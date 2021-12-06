@@ -110,11 +110,12 @@ resource "kubernetes_secret" "this" {
 }
 
 resource "helm_release" "azad_kube_proxy" {
-  depends_on = [kubernetes_secret.this]
-  repository = "https://xenitab.github.io/azad-kube-proxy"
-  chart      = "azad-kube-proxy"
-  name       = "azad-kube-proxy"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.0.30"
-  values     = [local.values]
+  depends_on  = [kubernetes_secret.this]
+  repository  = "https://xenitab.github.io/azad-kube-proxy"
+  chart       = "azad-kube-proxy"
+  name        = "azad-kube-proxy"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "v0.0.30"
+  max_history = 3
+  values      = [local.values]
 }

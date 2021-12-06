@@ -30,11 +30,12 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "csi_secrets_store_driver" {
-  name       = "secrets-store-csi-driver"
-  repository = "https://raw.githubusercontent.com/kubernetes-sigs/secrets-store-csi-driver/master/charts"
-  chart      = "secrets-store-csi-driver"
-  version    = "0.2.0"
-  namespace  = kubernetes_namespace.this.metadata[0].name
+  name        = "secrets-store-csi-driver"
+  repository  = "https://raw.githubusercontent.com/kubernetes-sigs/secrets-store-csi-driver/master/charts"
+  chart       = "secrets-store-csi-driver"
+  version     = "0.2.0"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
 
   set {
     name  = "linux.metricsAddr"
@@ -65,7 +66,8 @@ resource "helm_release" "csi_secrets_store_driver" {
 resource "helm_release" "csi_secrets_store_provider_aws" {
   depends_on = [helm_release.csi_secrets_store_driver]
 
-  chart     = "${path.module}/charts/csi-secrets-store-provider-aws"
-  name      = "csi-secrets-store-provider-aws"
-  namespace = kubernetes_namespace.this.metadata[0].name
+  chart       = "${path.module}/charts/csi-secrets-store-provider-aws"
+  name        = "csi-secrets-store-provider-aws"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
 }

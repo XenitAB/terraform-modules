@@ -112,11 +112,12 @@ resource "kubernetes_secret" "azdo_proxy" {
 
 #tf-latest-version:ignore
 resource "helm_release" "azdo_proxy" {
-  repository = "https://xenitab.github.io/azdo-proxy/"
-  chart      = "azdo-proxy"
-  version    = "v0.3.2"
-  name       = kubernetes_namespace.azdo_proxy.metadata[0].name
-  namespace  = kubernetes_namespace.azdo_proxy.metadata[0].name
+  repository  = "https://xenitab.github.io/azdo-proxy/"
+  chart       = "azdo-proxy"
+  version     = "v0.3.2"
+  name        = kubernetes_namespace.azdo_proxy.metadata[0].name
+  namespace   = kubernetes_namespace.azdo_proxy.metadata[0].name
+  max_history = 3
 
   set {
     name  = "configSecretName"
@@ -131,10 +132,11 @@ resource "helm_release" "fluxcd" {
     if ns.flux.enabled
   }
 
-  name      = "${each.key}-fluxcd"
-  chart     = "${path.module}/charts/flux"
-  version   = "v1.7.0"
-  namespace = each.key
+  name        = "${each.key}-fluxcd"
+  chart       = "${path.module}/charts/flux"
+  version     = "v1.7.0"
+  namespace   = each.key
+  max_history = 3
 
   values = [
     templatefile("${path.module}/templates/fluxcd-values.yaml.tpl", {
@@ -174,11 +176,12 @@ resource "helm_release" "helm_operator" {
     ns.name => ns
   }
 
-  repository = "https://charts.fluxcd.io"
-  chart      = "helm-operator"
-  version    = "1.4.0"
-  name       = "helm-operator"
-  namespace  = each.key
+  repository  = "https://charts.fluxcd.io"
+  chart       = "helm-operator"
+  version     = "1.4.0"
+  name        = "helm-operator"
+  namespace   = each.key
+  max_history = 3
 
   values = [templatefile("${path.module}/templates/helm-operator-values.yaml.tpl", { namespace = each.key })]
 

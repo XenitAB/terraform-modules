@@ -14,6 +14,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#469](https://github.com/XenitAB/terraform-modules/pull/469) Remove deprecated modules azure/governance, kubernetes/external-secrets, and kubernetes/kyverno.
 
+### Changed
+
+- [#470](https://github.com/XenitAB/terraform-modules/pull/470) Set max history for Helm releases to reduce the amount of secrets created.
+
 ## 2021.11.7
 
 ### Added

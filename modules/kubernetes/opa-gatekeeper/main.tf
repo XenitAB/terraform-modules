@@ -119,11 +119,12 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "gatekeeper" {
-  repository = "https://open-policy-agent.github.io/gatekeeper/charts"
-  chart      = "gatekeeper"
-  name       = "gatekeeper"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "3.6.0"
+  repository  = "https://open-policy-agent.github.io/gatekeeper/charts"
+  chart       = "gatekeeper"
+  name        = "gatekeeper"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "3.6.0"
+  max_history = 3
   values = [templatefile("${path.module}/templates/gatekeeper-values.yaml.tpl", {
     provider = var.cloud_provider
   })]
@@ -132,21 +133,23 @@ resource "helm_release" "gatekeeper" {
 resource "helm_release" "gatekeeper_templates" {
   depends_on = [helm_release.gatekeeper]
 
-  repository = "https://xenitab.github.io/gatekeeper-library/"
-  chart      = "gatekeeper-library-templates"
-  name       = "gatekeeper-library-templates"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.7.3"
-  values     = [local.values]
+  repository  = "https://xenitab.github.io/gatekeeper-library/"
+  chart       = "gatekeeper-library-templates"
+  name        = "gatekeeper-library-templates"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "v0.7.3"
+  max_history = 3
+  values      = [local.values]
 }
 
 resource "helm_release" "gatekeeper_constraints" {
   depends_on = [helm_release.gatekeeper, helm_release.gatekeeper_templates]
 
-  repository = "https://xenitab.github.io/gatekeeper-library/"
-  chart      = "gatekeeper-library-constraints"
-  name       = "gatekeeper-library-constraints"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "v0.7.3"
-  values     = [local.values]
+  repository  = "https://xenitab.github.io/gatekeeper-library/"
+  chart       = "gatekeeper-library-constraints"
+  name        = "gatekeeper-library-constraints"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "v0.7.3"
+  max_history = 3
+  values      = [local.values]
 }

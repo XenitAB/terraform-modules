@@ -10,7 +10,8 @@
 # `kubectl get pods --all-namespaces -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name,PRIORITY:.spec.priorityClassName`
 
 resource "helm_release" "aks_core_extras" {
-  chart     = "${path.module}/charts/aks-core-extras"
-  name      = "aks-core-extras-extras"
-  namespace = "default"
+  chart       = "${path.module}/charts/aks-core-extras"
+  name        = "aks-core-extras-extras"
+  namespace   = "default"
+  max_history = 3
 }

@@ -32,21 +32,23 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "falco" {
-  repository = "https://falcosecurity.github.io/charts"
-  chart      = "falco"
-  name       = "falco"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "1.15.7"
+  repository  = "https://falcosecurity.github.io/charts"
+  chart       = "falco"
+  name        = "falco"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "1.15.7"
+  max_history = 3
   values = [templatefile("${path.module}/templates/falco-values.yaml.tpl", {
     provider = var.cloud_provider
   })]
 }
 
 resource "helm_release" "falco_exporter" {
-  repository = "https://falcosecurity.github.io/charts"
-  chart      = "falco-exporter"
-  name       = "falco-exporter"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "0.5.2"
-  values     = [templatefile("${path.module}/templates/falco-exporter-values.yaml.tpl", {})]
+  repository  = "https://falcosecurity.github.io/charts"
+  chart       = "falco-exporter"
+  name        = "falco-exporter"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "0.5.2"
+  max_history = 3
+  values      = [templatefile("${path.module}/templates/falco-exporter-values.yaml.tpl", {})]
 }

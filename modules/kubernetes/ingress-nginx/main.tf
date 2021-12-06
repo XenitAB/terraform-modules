@@ -36,11 +36,12 @@ resource "helm_release" "ingress_nginx" {
     if var.public_private_enabled == false
   }
 
-  repository = "https://kubernetes.github.io/ingress-nginx"
-  chart      = "ingress-nginx"
-  name       = "ingress-nginx"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "3.35.0"
+  repository  = "https://kubernetes.github.io/ingress-nginx"
+  chart       = "ingress-nginx"
+  name        = "ingress-nginx"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "3.35.0"
+  max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet
     provider               = var.cloud_provider
@@ -66,11 +67,12 @@ resource "helm_release" "ingress_nginx_public" {
     if var.public_private_enabled
   }
 
-  repository = "https://kubernetes.github.io/ingress-nginx"
-  chart      = "ingress-nginx"
-  name       = "ingress-nginx-public"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "3.35.0"
+  repository  = "https://kubernetes.github.io/ingress-nginx"
+  chart       = "ingress-nginx"
+  name        = "ingress-nginx-public"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "3.35.0"
+  max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet
     provider               = var.cloud_provider
@@ -96,11 +98,12 @@ resource "helm_release" "ingress_nginx_private" {
     if var.public_private_enabled
   }
 
-  repository = "https://kubernetes.github.io/ingress-nginx"
-  chart      = "ingress-nginx"
-  name       = "ingress-nginx-private"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "3.35.0"
+  repository  = "https://kubernetes.github.io/ingress-nginx"
+  chart       = "ingress-nginx"
+  name        = "ingress-nginx-private"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "3.35.0"
+  max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet
     provider               = var.cloud_provider
@@ -120,9 +123,10 @@ resource "helm_release" "ingress_nginx_private" {
 }
 
 resource "helm_release" "ingress_nginx_extras" {
-  chart     = "${path.module}/charts/ingress-nginx-extras"
-  name      = "ingress-nginx-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
+  chart       = "${path.module}/charts/ingress-nginx-extras"
+  name        = "ingress-nginx-extras"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
 
   set {
     name  = "defaultCertificate.enabled"

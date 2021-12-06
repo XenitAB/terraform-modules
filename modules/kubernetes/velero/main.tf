@@ -30,11 +30,12 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "velero" {
-  repository = "https://vmware-tanzu.github.io/helm-charts"
-  chart      = "velero"
-  name       = "velero"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "2.23.6"
+  repository  = "https://vmware-tanzu.github.io/helm-charts"
+  chart       = "velero"
+  name        = "velero"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "2.23.6"
+  max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     cloud_provider = var.cloud_provider,
     azure_config   = var.azure_config,
@@ -45,9 +46,10 @@ resource "helm_release" "velero" {
 resource "helm_release" "velero_extras" {
   depends_on = [helm_release.velero]
 
-  chart     = "${path.module}/charts/velero-extras"
-  name      = "velero-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
+  chart       = "${path.module}/charts/velero-extras"
+  name        = "velero-extras"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
 
   set {
     name  = "resourceID"

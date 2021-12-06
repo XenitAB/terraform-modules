@@ -32,8 +32,6 @@ This directory contains all the Kubernetes Terraform modules.
 
 ### Deprecated
 
-- [`external-secrets`](external-secrets/README.md)
-- [`kyverno`](kyverno/README.md)
 - [`goldpinger`](goldpinger/README.md)
 
 ## Style Guide

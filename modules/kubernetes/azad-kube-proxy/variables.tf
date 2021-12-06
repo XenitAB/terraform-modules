@@ -8,31 +8,6 @@ variable "azure_ad_app" {
   sensitive = true
 }
 
-variable "dashboard" {
-  description = "What dashboard to use with azad-kube-proxy"
-  type        = string
-  default     = "k8dash"
-  validation {
-    condition     = var.dashboard == "none" || var.dashboard == "k8dash"
-    error_message = "Supported inputs are 'none' and 'k8dash'."
-  }
-}
-
-variable "k8dash_config" {
-  description = "The k8dash configuration if chosen as dashboard"
-  type = object({
-    client_id     = string
-    client_secret = string
-    scope         = string
-  })
-  sensitive = true
-  default = {
-    client_id     = ""
-    client_secret = ""
-    scope         = ""
-  }
-}
-
 variable "allowed_ips" {
   description = "The external IPs allowed through the ingress to azad-kube-proxy"
   type        = list(string)

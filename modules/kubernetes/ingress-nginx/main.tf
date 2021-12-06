@@ -36,11 +36,11 @@ resource "helm_release" "ingress_nginx" {
     if var.public_private_enabled == false
   }
 
-  repository = "https://kubernetes.github.io/ingress-nginx"
-  chart      = "ingress-nginx"
-  name       = "ingress-nginx"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "3.40.0"
+  repository  = "https://kubernetes.github.io/ingress-nginx"
+  chart       = "ingress-nginx"
+  name        = "ingress-nginx"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "3.40.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet
@@ -52,12 +52,12 @@ resource "helm_release" "ingress_nginx" {
       dns_zone        = var.default_certificate.dns_zone
       namespaced_name = "ingress-nginx/ingress-nginx"
     }
-    extra_config          = var.extra_config
-    extra_headers         = var.extra_headers
-    linkerd_enabled       = var.linkerd_enabled
-    datadog_enabled       = var.datadog_enabled
+    extra_config                      = var.extra_config
+    extra_headers                     = var.extra_headers
+    linkerd_enabled                   = var.linkerd_enabled
+    datadog_enabled                   = var.datadog_enabled
     allow_snippet_annotations_enabled = var.allow_snippet_annotations_enabled
-    default_ingress_class = false
+    default_ingress_class             = false
   })]
 }
 
@@ -68,11 +68,11 @@ resource "helm_release" "ingress_nginx_public" {
     if var.public_private_enabled
   }
 
-  repository = "https://kubernetes.github.io/ingress-nginx"
-  chart      = "ingress-nginx"
-  name       = "ingress-nginx-public"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "3.40.0"
+  repository  = "https://kubernetes.github.io/ingress-nginx"
+  chart       = "ingress-nginx"
+  name        = "ingress-nginx-public"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "3.40.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet
@@ -84,12 +84,12 @@ resource "helm_release" "ingress_nginx_public" {
       dns_zone        = var.default_certificate.dns_zone
       namespaced_name = "ingress-nginx/ingress-nginx"
     }
-    extra_config          = var.extra_config
-    extra_headers         = var.extra_headers
-    linkerd_enabled       = var.linkerd_enabled
-    datadog_enabled       = var.datadog_enabled
+    extra_config                      = var.extra_config
+    extra_headers                     = var.extra_headers
+    linkerd_enabled                   = var.linkerd_enabled
+    datadog_enabled                   = var.datadog_enabled
     allow_snippet_annotations_enabled = var.allow_snippet_annotations_enabled
-    default_ingress_class = true
+    default_ingress_class             = true
   })]
 }
 
@@ -100,11 +100,11 @@ resource "helm_release" "ingress_nginx_private" {
     if var.public_private_enabled
   }
 
-  repository = "https://kubernetes.github.io/ingress-nginx"
-  chart      = "ingress-nginx"
-  name       = "ingress-nginx-private"
-  namespace  = kubernetes_namespace.this.metadata[0].name
-  version    = "3.40.0"
+  repository  = "https://kubernetes.github.io/ingress-nginx"
+  chart       = "ingress-nginx"
+  name        = "ingress-nginx-private"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "3.40.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet

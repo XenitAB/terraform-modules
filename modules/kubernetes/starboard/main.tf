@@ -7,6 +7,9 @@
   * Trivy is used as a server to store aqua security image vulnerability database.
   * Staboard is used to trigger image and config scans on newly created replicasets and
   * generates a CR with a report that both admins and developers can use to improve there setup.
+  *
+  * [`starboard-exporter`](https://github.com/giantswarm/starboard-exporter) is used to gather
+  * trivy metrics from starboard CRD:s.
   */
 
 terraform {
@@ -54,6 +57,15 @@ resource "helm_release" "starboard" {
   values = [templatefile("${path.module}/templates/starboard-values.yaml.tpl", {
     provider = var.cloud_provider
   })]
+}
+
+resource "helm_release" "starboard_exporter" {
+  depends_on = [helm_release.starboard]
+
+  chart       = "${path.module}/charts/starboard-exporter"
+  name        = "starboard-exporter"
+  namespace   = kubernetes_namespace.starboard.metadata[0].name
+  max_history = 3
 }
 
 resource "helm_release" "trivy" {

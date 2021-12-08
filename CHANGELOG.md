@@ -8,7 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- [#471](https://github.com/XenitAB/terraform-modules/pull/471) Update azad-kube-proxy from v0.0.27 to v0.0.30 and remove dashboard (k8dash/skooner)
+- [#471](https://github.com/XenitAB/terraform-modules/pull/471) Update azad-kube-proxy from v0.0.27 to v0.0.30 and remove dashboard (k8dash/skooner).
+
+### Added
+
+- [#473](https://github.com/XenitAB/terraform-modules/pull/473) Add starboard-exporter to gather trivy metrics from starboard CRD:s.
 
 ### Removed
 

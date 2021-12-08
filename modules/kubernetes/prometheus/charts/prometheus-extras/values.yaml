@@ -63,3 +63,4 @@ enabledMonitors:
   csiSecretsStorProviderAzure: false
   csiSecretsStorProviderAws: false
   azadKubeProxy: false
+  starboard: false

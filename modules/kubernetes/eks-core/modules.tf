@@ -305,6 +305,7 @@ module "prometheus" {
   flux_enabled                           = var.fluxcd_v2_enabled
   csi_secrets_store_provider_aws_enabled = var.csi_secrets_store_provider_aws_enabled
   azad_kube_proxy_enabled                = var.azad_kube_proxy_enabled
+  starboard_enabled                      = var.starboard_enabled
   kube_state_metrics_namespaces          = join(",", concat(var.kube_state_metrics_namespaces_extras, local.kube_state_metrics_namespaces))
 }
 

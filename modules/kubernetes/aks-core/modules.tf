@@ -176,6 +176,23 @@ module "aad_pod_identity" {
   }]
 }
 
+# AZ Metrics
+module "azure_metrics" {
+  depends_on = [module.opa_gatekeeper, module.aad_pod_identity]
+
+  for_each = {
+    for s in ["azure-metrics"] :
+    s => s
+    if var.azure_metrics_enabled
+  }
+
+  source = "../../kubernetes/azure-metrics"
+
+  client_id       = var.azure_metrics_config.client_id
+  resource_id     = var.azure_metrics_config.resource_id
+  subscription_id = data.azurerm_client_config.current.subscription_id
+}
+
 # linkerd
 module "linkerd" {
   depends_on = [module.opa_gatekeeper, module.cert_manager]

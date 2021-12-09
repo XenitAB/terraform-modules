@@ -24,10 +24,10 @@ service:
 
 resources:
   requests:
-    memory: "500Mi"
+    memory: "1Gi"
     cpu: "20m"
   limits:
-    memory: "2Gi"
+    memory: "8Gi"
 
 volumeClaim:
   storageClassName: default

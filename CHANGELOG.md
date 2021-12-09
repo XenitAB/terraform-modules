@@ -19,6 +19,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#463](https://github.com/XenitAB/terraform-modules/pull/463) Add azure-metrics to monitor azure specific metrics.
 
+### Fixed
+
+- [#474](https://github.com/XenitAB/terraform-modules/pull/474) Adjust prometheus resource requests to fix OOM Kill.
+
 ## 2021.11.7
 
 ### Added

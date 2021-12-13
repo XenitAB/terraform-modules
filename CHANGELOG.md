@@ -17,6 +17,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#472](https://github.com/XenitAB/terraform-modules/pull/472) [Breaking] Update ingress-nginx to 3.40.0
   and disable allow-snippet-annotations by default. Add [annotation-value-word-blocklist](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#annotation-value-word-blocklist)
   to mitigate [CVE-2021-25742](https://github.com/kubernetes/ingress-nginx/issues/7837).
+  The config allow_snippet_annotations_enabled only applies to annotations that contain -snippet,
+  for [example http-snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#http-snippet).
 
 ### Removed
 

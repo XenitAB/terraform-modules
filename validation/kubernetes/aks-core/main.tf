@@ -70,6 +70,10 @@ module "aks_core" {
       name = "name"
     }
   }
+  azure_metrics_config = {
+    client_id   = "foo"
+    resource_id = "bar"
+  }
 
   ingress_config = {
     http_snippet           = ""

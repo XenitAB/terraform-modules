@@ -81,3 +81,8 @@ output "xenit" {
     }
   }
 }
+
+output "aks_managed_identity_group_id" {
+  description = "The group id of aks managed identity"
+  value       = azuread_group.aks_managed_identity.id
+}

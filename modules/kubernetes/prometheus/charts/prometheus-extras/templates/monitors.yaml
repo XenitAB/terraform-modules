@@ -12,7 +12,69 @@ spec:
     matchLabels:
       app: prometheus
 ---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    xkf.xenit.io/monitoring: platform
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  endpoints:
+  - interval: 60s
+    path: /metrics
+    scrapeTimeout: 30s
+    targetPort: 9402
+  jobLabel: cert-manager
+  namespaceSelector:
+    matchNames:
+    - cert-manager
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/name: cert-manager
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    xkf.xenit.io/monitoring: platform
+  name: external-dns
+  namespace: external-dns
+spec:
+  endpoints:
+  - path: /metrics
+    port: http
+  namespaceSelector:
+    matchNames:
+    - external-dns
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: external-dns
+      app.kubernetes.io/name: external-dns
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    xkf.xenit.io/monitoring: platform
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+spec:
+  endpoints:
+  - interval: 30s
+    port: metrics
+  namespaceSelector:
+    matchNames:
+    - ingress-nginx
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: ingress-nginx
+      app.kubernetes.io/name: ingress-nginx
 {{- if .Values.enabledMonitors.aadPodIdentity }}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
@@ -47,31 +109,8 @@ spec:
     - path: /metrics
       port: metrics
 {{- end }}
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  labels:
-    xkf.xenit.io/monitoring: platform
-  name: cert-manager
-  namespace: cert-manager
-spec:
-  endpoints:
-  - interval: 60s
-    path: /metrics
-    scrapeTimeout: 30s
-    targetPort: 9402
-  jobLabel: cert-manager
-  namespaceSelector:
-    matchNames:
-    - cert-manager
-  selector:
-    matchLabels:
-      app.kubernetes.io/component: controller
-      app.kubernetes.io/instance: cert-manager
-      app.kubernetes.io/name: cert-manager
----
 {{- if .Values.enabledMonitors.csiSecretsStorProviderAzure }}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
@@ -88,8 +127,8 @@ spec:
     - path: /metrics
       port: "8081"
 {{- end }}
----
 {{- if .Values.enabledMonitors.csiSecretsStorProviderAws }}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
@@ -106,27 +145,8 @@ spec:
     - path: /metrics
       port: "8081"
 {{- end }}
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  labels:
-    xkf.xenit.io/monitoring: platform
-  name: external-dns
-  namespace: external-dns
-spec:
-  endpoints:
-  - path: /metrics
-    port: http
-  namespaceSelector:
-    matchNames:
-    - external-dns
-  selector:
-    matchLabels:
-      app.kubernetes.io/instance: external-dns
-      app.kubernetes.io/name: external-dns
----
 {{- if .Values.enabledMonitors.flux }}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
@@ -202,26 +222,6 @@ spec:
       app.kubernetes.io/instance: git-auth-proxy
       app.kubernetes.io/name: git-auth-proxy
 {{- end }}
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  labels:
-    xkf.xenit.io/monitoring: platform
-  name: ingress-nginx-controller
-  namespace: ingress-nginx
-spec:
-  endpoints:
-  - interval: 30s
-    port: metrics
-  namespaceSelector:
-    matchNames:
-    - ingress-nginx
-  selector:
-    matchLabels:
-      app.kubernetes.io/component: controller
-      app.kubernetes.io/instance: ingress-nginx
-      app.kubernetes.io/name: ingress-nginx
 {{- if .Values.enabledMonitors.falco }}
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -327,6 +327,7 @@ spec:
       port: metrics
 {{- end }}
 {{- if .Values.enabledMonitors.csiSecretsStorProviderAzure }}
+----
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
@@ -344,6 +345,7 @@ spec:
       port: metrics
 {{- end }}
 {{- if .Values.enabledMonitors.csiSecretsStorProviderAws }}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:

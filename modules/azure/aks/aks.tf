@@ -57,6 +57,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     availability_zones           = ["1", "2", "3"]
     enable_auto_scaling          = false
     only_critical_addons_enabled = true
+    enable_host_encryption       = true
 
     orchestrator_version = var.aks_config.default_node_pool.orchestrator_version
     node_count           = 1
@@ -82,8 +83,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
   vnet_subnet_id        = data.azurerm_subnet.this.id
 
-  availability_zones  = ["1", "2", "3"]
-  enable_auto_scaling = true
+  availability_zones     = ["1", "2", "3"]
+  enable_auto_scaling    = true
+  enable_host_encryption = true
 
   orchestrator_version = each.value.orchestrator_version
   vm_size              = each.value.vm_size

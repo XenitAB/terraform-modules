@@ -13,6 +13,7 @@ resource "azurerm_route" "this" {
   for_each = {
     for route in local.routes :
     route.name => route
+    if route.next_hop_type == "VirtualAppliance"
   }
 
   name                   = each.value.route.name
@@ -21,6 +22,20 @@ resource "azurerm_route" "this" {
   address_prefix         = each.value.route.address_prefix
   next_hop_type          = each.value.route.next_hop_type
   next_hop_in_ip_address = each.value.route.next_hop_in_ip_address
+}
+
+resource "azurerm_route" "not_virtual_appliance" {
+  for_each = {
+    for route in local.routes :
+    route.name => route
+    if route.next_hop_type != "VirtualAppliance"
+  }
+
+  name                = each.value.route.name
+  resource_group_name = data.azurerm_resource_group.this.name
+  route_table_name    = azurerm_route_table.this[each.value.subnet_name].name
+  address_prefix      = each.value.route.address_prefix
+  next_hop_type       = each.value.route.next_hop_type
 }
 
 resource "azurerm_subnet_route_table_association" "this" {

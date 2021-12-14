@@ -13,7 +13,7 @@ resource "azurerm_route" "this" {
   for_each = {
     for route in local.routes :
     route.name => route
-    if route.next_hop_type == "VirtualAppliance"
+    if route.route.next_hop_type == "VirtualAppliance"
   }
 
   name                   = each.value.route.name
@@ -31,7 +31,7 @@ resource "azurerm_route" "not_virtual_appliance" {
   for_each = {
     for route in local.routes :
     route.name => route
-    if route.next_hop_type != "VirtualAppliance"
+    if route.route.next_hop_type != "VirtualAppliance"
   }
 
   name                = each.value.route.name

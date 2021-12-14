@@ -334,3 +334,9 @@ variable "kube_state_metrics_namespaces_extras" {
   type        = list(string)
   default     = []
 }
+
+variable "starboard_enabled" {
+  description = "Should Starboard be enabled"
+  type        = bool
+  default     = false
+}

@@ -139,3 +139,9 @@ variable "kube_state_metrics_namespaces" {
   description = "Comma-separated list of namespaces to be enabled. To get metrics from all namespaces use ''"
   type        = string
 }
+
+variable "starboard_enabled" {
+  description = "Should starboard be enabled"
+  type        = bool
+  default     = false
+}

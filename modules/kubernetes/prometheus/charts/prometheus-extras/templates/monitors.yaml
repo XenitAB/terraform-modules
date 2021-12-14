@@ -362,3 +362,25 @@ spec:
     - path: /metrics
       port: metrics
 {{- end }}
+{{- if .Values.enabledMonitors.starboard }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    xkf.xenit.io/monitoring: platform
+  name: starboard-exporter
+  namespace: starboard-operator
+spec:
+  endpoints:
+  - interval: 30s
+    path: /metrics
+    port: metrics
+  namespaceSelector:
+    matchNames:
+    - starboard-operator
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: starboard-exporter
+      app.kubernetes.io/name: starboard-exporter
+{{- end }}

@@ -1,0 +1,28 @@
+registry:
+  domain: docker.io
+image:
+  name: "giantswarm/starboard-exporter"
+  tag: "0.1.2"
+pod:
+  user:
+    id: 1000
+  group:
+    id: 1000
+
+exporter:
+  vulnerabilityReports:
+    targetLabels:
+      # - image_namespace
+      # - image_repository
+      # - image_tag
+      # - vulnerability_id
+
+monitoring:
+  serviceMonitor:
+    enabled: true
+
+  grafanaDashboard:
+    enabled: true
+
+networkpolicy:
+  enabled: false

@@ -40,8 +40,18 @@ variable "aks_config" {
       max_count            = number
       node_taints          = list(string)
       node_labels          = map(string)
+      spot_enabled         = bool
+      spot_max_price       = number
     }))
   })
+
+  # Spot max price is set when spot is enabled
+  validation {
+    condition = alltrue([
+      for np in var.aks_config.additional_node_pools : (!np.spot_enabled && np.spot_max_price == null) || (np.spot_enabled && np.spot_max_price != null)
+    ])
+    error_message = "The spot_max_price cannot be null when spot_enabled is true."
+  }
 }
 
 variable "ssh_public_key" {

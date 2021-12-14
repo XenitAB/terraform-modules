@@ -51,7 +51,7 @@ variable "extra_headers" {
   default     = {}
 }
 
-variable "allow_snippet_annotations_enabled" {
+variable "allow_snippet_annotations" {
   description = "Should allow-snippet-annotations be enabled"
   type        = bool
   default     = false

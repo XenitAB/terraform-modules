@@ -76,9 +76,9 @@ module "aks_core" {
   }
 
   ingress_config = {
-    http_snippet                      = ""
-    public_private_enabled            = false
-    allow_snippet_annotations_enabled = false
+    http_snippet              = ""
+    public_private_enabled    = false
+    allow_snippet_annotations = false
   }
 
   prometheus_enabled = true

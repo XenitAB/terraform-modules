@@ -35,7 +35,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_allow_snippet_annotations_enabled"></a> [allow\_snippet\_annotations\_enabled](#input\_allow\_snippet\_annotations\_enabled) | Should allow-snippet-annotations be enabled | `bool` | `false` | no |
+| <a name="input_allow_snippet_annotations"></a> [allow\_snippet\_annotations](#input\_allow\_snippet\_annotations) | Should allow-snippet-annotations be enabled | `bool` | `false` | no |
 | <a name="input_cloud_provider"></a> [cloud\_provider](#input\_cloud\_provider) | Cloud provider used for load balancer | `string` | n/a | yes |
 | <a name="input_datadog_enabled"></a> [datadog\_enabled](#input\_datadog\_enabled) | Should datadog be enabled | `bool` | `false` | no |
 | <a name="input_default_certificate"></a> [default\_certificate](#input\_default\_certificate) | If enalbed and configured nginx will be configured with a default certificate. | <pre>object({<br>    enabled  = bool,<br>    dns_zone = string,<br>  })</pre> | <pre>{<br>  "dns_zone": "",<br>  "enabled": false<br>}</pre> | no |

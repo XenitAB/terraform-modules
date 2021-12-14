@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Fixed
+
+- [#478](https://github.com/XenitAB/terraform-modules/pull/478) Ingress if allow-snippet-annotations == true there is no annotation-value-word-blocklist defined.
+
 ## 2021.12.1
 
 ### Changed

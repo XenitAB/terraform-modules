@@ -1,5 +1,11 @@
 #tfsec:ignore:AZU009
 resource "azurerm_kubernetes_cluster" "this" {
+  lifecycle {
+    ignore_changes = [
+      default_node_pool[0].node_count
+    ]
+  }
+
   name                            = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
   location                        = data.azurerm_resource_group.this.location
   resource_group_name             = data.azurerm_resource_group.this.name
@@ -11,19 +17,6 @@ resource "azurerm_kubernetes_cluster" "this" {
   auto_scaler_profile {
     # Pods should not depend on local storage like EmptyDir or HostPath
     skip_nodes_with_local_storage = false
-  }
-
-  default_node_pool {
-    name                         = "default"
-    orchestrator_version         = var.aks_config.default_node_pool.orchestrator_version
-    node_labels                  = var.aks_config.default_node_pool.node_labels
-    node_count                   = 1
-    vm_size                      = "Standard_D2as_v4"
-    availability_zones           = ["1", "2", "3"]
-    enable_auto_scaling          = false
-    only_critical_addons_enabled = true
-    type                         = "VirtualMachineScaleSets"
-    vnet_subnet_id               = data.azurerm_subnet.this.id
   }
 
   network_profile {
@@ -56,46 +49,48 @@ resource "azurerm_kubernetes_cluster" "this" {
     }
   }
 
-  lifecycle {
-    ignore_changes = [
-      default_node_pool[0].node_count
-    ]
+  default_node_pool {
+    name           = "default"
+    vnet_subnet_id = data.azurerm_subnet.this.id
+
+    type                         = "VirtualMachineScaleSets"
+    availability_zones           = ["1", "2", "3"]
+    enable_auto_scaling          = false
+    only_critical_addons_enabled = true
+
+    orchestrator_version = var.aks_config.default_node_pool.orchestrator_version
+    node_count           = 1
+    vm_size              = "Standard_D2as_v4"
+
+    node_labels = var.aks_config.default_node_pool.node_labels
   }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "this" {
+  lifecycle {
+    ignore_changes = [
+      node_count
+    ]
+  }
+
   for_each = {
     for nodePool in var.aks_config.additional_node_pools :
     nodePool.name => nodePool
   }
 
   name                  = each.value.name
-  orchestrator_version  = each.value.orchestrator_version
   kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
-  vm_size               = each.value.vm_size
-  node_count            = each.value.min_count
-  min_count             = each.value.min_count
-  max_count             = each.value.max_count
-  enable_auto_scaling   = true
   vnet_subnet_id        = data.azurerm_subnet.this.id
 
+  availability_zones  = ["1", "2", "3"]
+  enable_auto_scaling = true
+
+  orchestrator_version = each.value.orchestrator_version
+  vm_size              = each.value.vm_size
+  node_count           = each.value.min_count
+  min_count            = each.value.min_count
+  max_count            = each.value.max_count
+
   node_taints = each.value.node_taints
-
-  node_labels = merge({
-    "node-pool" = each.value.name
-    },
-    each.value.node_labels
-  )
-
-  availability_zones = [
-    "1",
-    "2",
-    "3"
-  ]
-
-  lifecycle {
-    ignore_changes = [
-      node_count
-    ]
-  }
+  node_labels = merge({ "node-pool" = each.value.name }, each.value.node_labels)
 }

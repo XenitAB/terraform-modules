@@ -28,6 +28,7 @@ No modules.
 | [azurerm_network_security_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/network_security_group) | resource |
 | [azurerm_role_assignment.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_definition.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/role_definition) | resource |
+| [azurerm_route.not_virtual_appliance](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/route) | resource |
 | [azurerm_route.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/route) | resource |
 | [azurerm_route_table.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/route_table) | resource |
 | [azurerm_storage_account.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.82.0/docs/resources/storage_account) | resource |

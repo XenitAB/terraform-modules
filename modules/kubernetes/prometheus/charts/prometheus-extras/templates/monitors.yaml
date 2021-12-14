@@ -327,7 +327,7 @@ spec:
       port: metrics
 {{- end }}
 {{- if .Values.enabledMonitors.csiSecretsStorProviderAzure }}
-----
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:

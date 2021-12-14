@@ -140,11 +140,12 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider         = "aws"
-  http_snippet           = var.ingress_config.http_snippet
-  linkerd_enabled        = var.linkerd_enabled
-  datadog_enabled        = var.datadog_enabled
-  public_private_enabled = var.ingress_config.public_private_enabled
+  cloud_provider            = "aws"
+  http_snippet              = var.ingress_config.http_snippet
+  linkerd_enabled           = var.linkerd_enabled
+  datadog_enabled           = var.datadog_enabled
+  public_private_enabled    = var.ingress_config.public_private_enabled
+  allow_snippet_annotations = var.ingress_config.allow_snippet_annotations
 }
 
 module "ingress_healthz" {

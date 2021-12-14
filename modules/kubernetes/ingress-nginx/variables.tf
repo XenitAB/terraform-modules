@@ -50,3 +50,9 @@ variable "extra_headers" {
   type        = map(string)
   default     = {}
 }
+
+variable "allow_snippet_annotations" {
+  description = "Should allow-snippet-annotations be enabled"
+  type        = bool
+  default     = false
+}

@@ -90,6 +90,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   node_count           = each.value.min_count
   min_count            = each.value.min_count
   max_count            = each.value.max_count
+  priority             = each.value.spot_enabled ? "Spot" : "Regular"
+  spot_max_price       = each.value.spot_max_price
 
   node_taints = each.value.node_taints
   node_labels = merge({ "node-pool" = each.value.name }, each.value.node_labels)

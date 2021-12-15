@@ -47,6 +47,8 @@ module "aks" {
         node_labels = {
           "test" = "test"
         }
+        spot_enabled   = false
+        spot_max_price = null
       }
     ]
   }

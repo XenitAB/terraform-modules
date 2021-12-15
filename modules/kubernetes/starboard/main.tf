@@ -60,12 +60,14 @@ resource "helm_release" "starboard" {
 }
 
 resource "helm_release" "starboard_exporter" {
-  depends_on = [helm_release.starboard]
-
-  chart       = "${path.module}/charts/starboard-exporter"
+  depends_on  = [helm_release.starboard]
+  repository  = "https://giantswarm.github.io/giantswarm-catalog/"
+  chart       = "starboard-exporter"
   name        = "starboard-exporter"
+  version     = "0.1.4"
   namespace   = kubernetes_namespace.starboard.metadata[0].name
   max_history = 3
+  values      = [file("${path.module}/templates/starboard-exporter-values.yaml")]
 }
 
 resource "helm_release" "trivy" {

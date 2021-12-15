@@ -90,9 +90,10 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   node_count           = each.value.min_count
   min_count            = each.value.min_count
   max_count            = each.value.max_count
+  eviction_policy      = each.value.spot_enabled ? "Delete" : null
   priority             = each.value.spot_enabled ? "Spot" : "Regular"
   spot_max_price       = each.value.spot_max_price
 
-  node_taints = each.value.node_taints
-  node_labels = merge({ "node-pool" = each.value.name }, each.value.node_labels)
+  node_taints = each.value.spot_enabled ? concat(each.value.node_taints, ["kubernetes.azure.com/scalesetpriority=spot:NoSchedule"]) : each.value.node_taints
+  node_labels = each.value.spot_enabled ? merge(each.value.node_labels, { "node-pool" = each.value.name, "kubernetes.azure.com/scalesetpriority" = "spot" }) : merge(each.value.node_labels, { "node-pool" = each.value.name })
 }

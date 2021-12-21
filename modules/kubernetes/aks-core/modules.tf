@@ -19,6 +19,7 @@ locals {
     "tigera-operator",
     "velero",
     "newrelic",
+    "grafana-agent",
   ]
   kube_state_metrics_namespaces = [
     "aad-pod-identity",
@@ -38,6 +39,7 @@ locals {
     "prometheus",
     "reloader",
     "tigera-operator",
+    "grafana-agent",
   ]
 }
 
@@ -343,6 +345,19 @@ module "datadog" {
   api_key           = var.datadog_config.api_key
   app_key           = var.datadog_config.app_key
   namespace_include = compact(concat(var.namespaces[*].name, var.datadog_config.extra_namespaces))
+}
+
+# grafana-agent
+module "grafana_agent" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["grafana-agent"] :
+    s => s
+    if var.grafana_agent_enabled
+  }
+
+  source = "../../kubernetes/grafana-agent"
 }
 
 # falco

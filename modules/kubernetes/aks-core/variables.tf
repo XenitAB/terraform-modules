@@ -277,6 +277,12 @@ variable "datadog_config" {
   }
 }
 
+variable "grafana_agent_enabled" {
+  description = "Should Grafana-Agent be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "falco_enabled" {
   description = "Should Falco be enabled"
   type        = bool

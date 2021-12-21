@@ -30,4 +30,9 @@ resource "helm_release" "grafana_agent_operator" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "0.1.4"
   max_history = 3
+
+  set {
+    name  = "kubeletService.namespace"
+    value = kubernetes_namespace.this.metadata[0].name
+  }
 }

@@ -1,0 +1,35 @@
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: MetricsInstance
+metadata:
+  name: primary
+  namespace: {{ .Release.Namespace }}
+  labels:
+    agent: grafana-agent-metrics
+spec:
+  remoteWrite:
+    - url: {{ .Values.remote.metricsUrl }}
+      basicAuth:
+        username:
+          name: {{ .Values.credentialsSecretName }}
+          key: metrics_username
+        password:
+          name: {{ .Values.credentialsSecretName }}
+          key: metrics_password
+  serviceMonitorNamespaceSelector:
+    matchLabels:
+      xkf.xenit.io/kind: tenant
+  serviceMonitorSelector:
+    matchLabels:
+      xkf.xenit.io/monitoring: tenant
+  podMonitorNamespaceSelector:
+    matchLabels:
+      xkf.xenit.io/kind: tenant
+  podMonitorSelector:
+    matchLabels:
+      xkf.xenit.io/monitoring: tenant
+  probeNamespaceSelector:
+    matchLabels:
+      xkf.xenit.io/kind: tenant
+  probeSelector:
+    matchLabels:
+      xkf.xenit.io/monitoring: tenant

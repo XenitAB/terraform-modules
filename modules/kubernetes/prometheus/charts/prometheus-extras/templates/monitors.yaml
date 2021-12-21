@@ -373,7 +373,7 @@ metadata:
   namespace: starboard-operator
 spec:
   endpoints:
-  - interval: 30s
+  - interval: 1m
     path: /metrics
     port: metrics
   namespaceSelector:

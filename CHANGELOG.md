@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#486](https://github.com/XenitAB/terraform-modules/pull/486) Enable the option to create AKS node pools backed by spot instances.
 - [#481](https://github.com/XenitAB/terraform-modules/pull/481) Use upstream starboard exporter.
+- [#492](https://github.com/XenitAB/terraform-modules/pull/492) Increase scrape interval starboard-exporter metric.
 
 ## 2021.12.3
 

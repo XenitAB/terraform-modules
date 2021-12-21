@@ -1,3 +1,50 @@
+# Azure AD Kubernetes API Proxy
+Adds [`grafana-agent`](https://grafana.com/docs/agent/latest/) (the operator) to a Kubernetes clusters.
+
+## Using the module (from aks-core)
+
+### Azure KeyVault
+
+```shell
+METRICS_USERNAME="usr"
+METRICS_PASSWORD="pw"
+LOGS_USERNAME="usr"
+LOGS_PASSWORD="pw"
+
+JSON_FMT='{"metrics_username":"%s","metrics_password":"%s","logs_username":"%s","logs_password":"%s"}'
+KV_SECRET=$(printf "${JSON_FMT}" "${METRICS_USERNAME}" "${METRICS_PASSWORD}" "${LOGS_USERNAME}" "${LOGS_PASSWORD}")
+az keyvault secret set --vault-name [keyvault name] --name grafana-agent-credentials --value "${KV_SECRET}"
+```
+
+### Terraform example
+
+```terraform
+data "azurerm_key_vault_secret" "grafana_agent_credentials" {
+  key_vault_id = data.azurerm_key_vault.core.id
+  name         = "grafana-agent-credentials"
+}
+
+module "aks_core" {
+  source = "github.com/xenitab/terraform-modules//modules/kubernetes/aks-core?ref=[ref]"
+
+  [...]
+
+  grafana_agent_enabled = true
+  grafana_agent_config = {
+    remote_write_urls = {
+      metrics = "https://prometheus-foobar.grafana.net/api/prom/push"
+      logs    = "https://logs-foobar.grafana.net/api/prom/push"
+    }
+    credentials = {
+      metrics_username = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).metrics_username
+      metrics_password = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).metrics_password
+      logs_username    = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).logs_username
+      logs_password    = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).logs_password
+    }
+  }
+}
+```
+
 ## Requirements
 
 | Name | Version |

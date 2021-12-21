@@ -45,3 +45,4 @@ enabledMonitors:
   csiSecretsStorProviderAws: ${csi_secrets_store_provider_aws_enabled}
   azadKubeProxy: ${azad_kube_proxy_enabled}
   starboard: ${starboard_enabled}
+  grafanaAgent: ${grafana_agent_enabled}

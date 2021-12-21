@@ -283,6 +283,35 @@ variable "grafana_agent_enabled" {
   default     = false
 }
 
+variable "grafana_agent_config" {
+  description = "The Grafan-Agent configuration"
+  sensitive   = true
+  type = object({
+    remote_write_urls = object({
+      metrics = string
+      logs    = string
+    })
+    credentials = object({
+      metrics_username = string
+      metrics_password = string
+      logs_username    = string
+      logs_password    = string
+    })
+  })
+  default = {
+    remote_write_urls = {
+      metrics = ""
+      logs    = ""
+    }
+    credentials = {
+      metrics_username = ""
+      metrics_password = ""
+      logs_username    = ""
+      logs_password    = ""
+    }
+  }
+}
+
 variable "falco_enabled" {
   description = "Should Falco be enabled"
   type        = bool

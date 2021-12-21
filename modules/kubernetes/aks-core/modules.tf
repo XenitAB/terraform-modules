@@ -358,6 +358,21 @@ module "grafana_agent" {
   }
 
   source = "../../kubernetes/grafana-agent"
+
+  remote_write_urls = {
+    metrics = var.grafana_agent_config.remote_write_urls.metrics
+    logs    = var.grafana_agent_config.remote_write_urls.logs
+  }
+
+  credentials = {
+    metrics_username = var.grafana_agent_config.credentials.metrics_username
+    metrics_password = var.grafana_agent_config.credentials.metrics_password
+    logs_username    = var.grafana_agent_config.credentials.logs_username
+    logs_password    = var.grafana_agent_config.credentials.logs_password
+  }
+
+  cluster_name = "${var.name}${var.aks_name_suffix}"
+  environment  = var.environment
 }
 
 # falco

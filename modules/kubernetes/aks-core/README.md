@@ -39,6 +39,7 @@ This module is used to create AKS clusters.
 | <a name="module_fluxcd_v1_azure_devops"></a> [fluxcd\_v1\_azure\_devops](#module\_fluxcd\_v1\_azure\_devops) | ../../kubernetes/fluxcd-v1 | n/a |
 | <a name="module_fluxcd_v2_azure_devops"></a> [fluxcd\_v2\_azure\_devops](#module\_fluxcd\_v2\_azure\_devops) | ../../kubernetes/fluxcd-v2-azdo | n/a |
 | <a name="module_fluxcd_v2_github"></a> [fluxcd\_v2\_github](#module\_fluxcd\_v2\_github) | ../../kubernetes/fluxcd-v2-github | n/a |
+| <a name="module_grafana_agent"></a> [grafana\_agent](#module\_grafana\_agent) | ../../kubernetes/grafana-agent | n/a |
 | <a name="module_ingress_healthz"></a> [ingress\_healthz](#module\_ingress\_healthz) | ../../kubernetes/ingress-healthz | n/a |
 | <a name="module_ingress_nginx"></a> [ingress\_nginx](#module\_ingress\_nginx) | ../../kubernetes/ingress-nginx | n/a |
 | <a name="module_linkerd"></a> [linkerd](#module\_linkerd) | ../../kubernetes/linkerd | n/a |
@@ -102,6 +103,8 @@ This module is used to create AKS clusters.
 | <a name="input_fluxcd_v1_enabled"></a> [fluxcd\_v1\_enabled](#input\_fluxcd\_v1\_enabled) | Should fluxcd-v1 be enabled | `bool` | `false` | no |
 | <a name="input_fluxcd_v2_config"></a> [fluxcd\_v2\_config](#input\_fluxcd\_v2\_config) | Configuration for fluxcd-v2 | <pre>object({<br>    type = string<br>    github = object({<br>      org             = string<br>      app_id          = number<br>      installation_id = number<br>      private_key     = string<br>    })<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_fluxcd_v2_enabled"></a> [fluxcd\_v2\_enabled](#input\_fluxcd\_v2\_enabled) | Should fluxcd-v2 be enabled | `bool` | `true` | no |
+| <a name="input_grafana_agent_config"></a> [grafana\_agent\_config](#input\_grafana\_agent\_config) | The Grafan-Agent configuration | <pre>object({<br>    remote_write_urls = object({<br>      metrics = string<br>      logs    = string<br>    })<br>    credentials = object({<br>      metrics_username = string<br>      metrics_password = string<br>      logs_username    = string<br>      logs_password    = string<br>    })<br>  })</pre> | <pre>{<br>  "credentials": {<br>    "logs_password": "",<br>    "logs_username": "",<br>    "metrics_password": "",<br>    "metrics_username": ""<br>  },<br>  "remote_write_urls": {<br>    "logs": "",<br>    "metrics": ""<br>  }<br>}</pre> | no |
+| <a name="input_grafana_agent_enabled"></a> [grafana\_agent\_enabled](#input\_grafana\_agent\_enabled) | Should Grafana-Agent be enabled | `bool` | `false` | no |
 | <a name="input_ingress_config"></a> [ingress\_config](#input\_ingress\_config) | Ingress configuration | <pre>object({<br>    http_snippet              = string<br>    public_private_enabled    = bool<br>    allow_snippet_annotations = bool<br>  })</pre> | <pre>{<br>  "allow_snippet_annotations": false,<br>  "http_snippet": "",<br>  "public_private_enabled": false<br>}</pre> | no |
 | <a name="input_ingress_healthz_enabled"></a> [ingress\_healthz\_enabled](#input\_ingress\_healthz\_enabled) | Should ingress-healthz be enabled | `bool` | `true` | no |
 | <a name="input_ingress_nginx_enabled"></a> [ingress\_nginx\_enabled](#input\_ingress\_nginx\_enabled) | Should Ingress NGINX be enabled | `bool` | `true` | no |

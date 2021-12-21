@@ -38,12 +38,11 @@ resource "kubernetes_secret" "this" {
 }
 
 locals {
-  container_filter_include = join(" ", formatlist("kube_namespace:%s", var.namespace_include))
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
     credentials_secret_name  = kubernetes_secret.this.metadata[0].name
     remote_write_metrics_url = var.remote_write_urls.metrics
     remote_write_logs_url    = var.remote_write_urls.logs
-    environment              = var.environment_short
+    environment              = var.environment
     cluster_name             = var.cluster_name
   })
 }

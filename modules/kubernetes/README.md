@@ -30,6 +30,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`cluster-autoscaler`](cluster-autoscaler/README.md)
 - [`starboard`](starboard/README.md)
 - [`new-relic`](new-relic/README.md)
+- [`grafana-agent`](grafana-agent/README.md)
 
 ### Deprecated
 

@@ -99,5 +99,6 @@ resource "helm_release" "prometheus_extras" {
     csi_secrets_store_provider_aws_enabled   = var.csi_secrets_store_provider_aws_enabled
     azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
     starboard_enabled                        = var.starboard_enabled
+    grafana_agent_enabled                    = var.grafana_agent_enabled
   })]
 }

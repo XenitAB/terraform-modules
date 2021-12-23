@@ -1,0 +1,24 @@
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: GrafanaAgent
+metadata:
+  name: grafana-agent
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: grafana-agent
+spec:
+  image: {{ .Values.image }}
+  logLevel: info
+  serviceAccountName: grafana-agent
+  priorityClassName: platform-medium
+  metrics:
+    instanceSelector:
+      matchLabels:
+        agent: grafana-agent-metrics
+    replicas: {{ .Values.replicas }}
+    externalLabels:
+      environment: {{ .Values.environment }}
+      clusterName: {{ .Values.clusterName }}
+  logs:
+    instanceSelector:
+      matchLabels:
+        agent: grafana-agent-logs

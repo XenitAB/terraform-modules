@@ -19,6 +19,7 @@ locals {
     "tigera-operator",
     "velero",
     "newrelic",
+    "grafana-agent",
   ]
   kube_state_metrics_namespaces = [
     "aad-pod-identity",
@@ -38,6 +39,7 @@ locals {
     "prometheus",
     "reloader",
     "tigera-operator",
+    "grafana-agent",
   ]
 }
 
@@ -343,6 +345,37 @@ module "datadog" {
   api_key           = var.datadog_config.api_key
   app_key           = var.datadog_config.app_key
   namespace_include = compact(concat(var.namespaces[*].name, var.datadog_config.extra_namespaces))
+}
+
+# grafana-agent
+module "grafana_agent" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["grafana-agent"] :
+    s => s
+    if var.grafana_agent_enabled
+  }
+
+  source = "../../kubernetes/grafana-agent"
+
+  remote_write_urls = {
+    metrics = var.grafana_agent_config.remote_write_urls.metrics
+    logs    = var.grafana_agent_config.remote_write_urls.logs
+    traces  = var.grafana_agent_config.remote_write_urls.traces
+  }
+
+  credentials = {
+    metrics_username = var.grafana_agent_config.credentials.metrics_username
+    metrics_password = var.grafana_agent_config.credentials.metrics_password
+    logs_username    = var.grafana_agent_config.credentials.logs_username
+    logs_password    = var.grafana_agent_config.credentials.logs_password
+    traces_username  = var.grafana_agent_config.credentials.traces_username
+    traces_password  = var.grafana_agent_config.credentials.traces_password
+  }
+
+  cluster_name = "${var.name}${var.aks_name_suffix}"
+  environment  = var.environment
 }
 
 # falco

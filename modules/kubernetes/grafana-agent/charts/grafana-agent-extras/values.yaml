@@ -1,0 +1,10 @@
+image: grafana/agent:v0.21.2
+replicas: 2
+environment: dev
+clusterName: aks1
+credentialsSecretName: grafana-agent-credentials
+
+remote:
+  metricsUrl: ""
+  logsUrl: ""
+  tracesUrl: ""

@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#491](https://github.com/XenitAB/terraform-modules/pull/491) Add Grafana Agent for observability with Grafana Cloud
+
 ### Changed
 
 - [#486](https://github.com/XenitAB/terraform-modules/pull/486) Enable the option to create AKS node pools backed by spot instances.

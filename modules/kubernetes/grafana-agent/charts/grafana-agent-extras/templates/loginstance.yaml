@@ -1,0 +1,23 @@
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: LogsInstance
+metadata:
+  name: primary
+  namespace: {{ .Release.Namespace }}
+  labels:
+    agent: grafana-agent-logs
+spec:
+  clients:
+    - url: {{ .Values.remote.logsUrl }}
+      basicAuth:
+        username:
+          name: {{ .Values.credentialsSecretName }}
+          key: logs_username
+        password:
+          name: {{ .Values.credentialsSecretName }}
+          key: logs_password
+  podLogsNamespaceSelector:
+    matchLabels:
+      xkf.xenit.io/kind: tenant
+  podLogsSelector:
+    matchLabels:
+      xkf.xenit.io/monitoring: tenant

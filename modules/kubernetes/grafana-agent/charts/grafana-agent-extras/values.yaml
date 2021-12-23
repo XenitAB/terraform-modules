@@ -5,6 +5,6 @@ clusterName: aks1
 credentialsSecretName: grafana-agent-credentials
 
 remote:
-  metricsUrl: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
-  logsUrl: https://logs-prod-eu-west-0.grafana.net/loki/api/v1/push
-  tracesUrl: tempo-eu-west-0.grafana.net:443
+  metricsUrl: ""
+  logsUrl: ""
+  tracesUrl: ""

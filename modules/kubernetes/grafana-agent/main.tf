@@ -11,9 +11,11 @@
  * METRICS_PASSWORD="pw"
  * LOGS_USERNAME="usr"
  * LOGS_PASSWORD="pw"
+ * TRACES_USERNAME="usr"
+ * TRACES_PASSWORD="pw"
  * 
- * JSON_FMT='{"metrics_username":"%s","metrics_password":"%s","logs_username":"%s","logs_password":"%s"}'
- * KV_SECRET=$(printf "${JSON_FMT}" "${METRICS_USERNAME}" "${METRICS_PASSWORD}" "${LOGS_USERNAME}" "${LOGS_PASSWORD}")
+ * JSON_FMT='{"metrics_username":"%s","metrics_password":"%s","logs_username":"%s","logs_password":"%s","traces_username":"%s","traces_password":"%s"}'
+ * KV_SECRET=$(printf "${JSON_FMT}" "${METRICS_USERNAME}" "${METRICS_PASSWORD}" "${LOGS_USERNAME}" "${LOGS_PASSWORD}" "${TRACES_USERNAME}" "${TRACES_PASSWORD}")
  * az keyvault secret set --vault-name [keyvault name] --name grafana-agent-credentials --value "${KV_SECRET}"
  * ```
  *
@@ -35,12 +37,15 @@
  *     remote_write_urls = {
  *       metrics = "https://prometheus-foobar.grafana.net/api/prom/push"
  *       logs    = "https://logs-foobar.grafana.net/api/prom/push"
+ *       traces  = "tempo-eu-west-0.grafana.net:443"
  *     }
  *     credentials = {
  *       metrics_username = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).metrics_username
  *       metrics_password = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).metrics_password
  *       logs_username    = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).logs_username
  *       logs_password    = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).logs_password
+ *       traces_username  = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).traces_username
+ *       traces_password  = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).traces_password
  *     }
  *   }
  * }
@@ -84,6 +89,8 @@ resource "kubernetes_secret" "this" {
     metrics_password = var.credentials.metrics_password
     logs_username    = var.credentials.logs_username
     logs_password    = var.credentials.logs_password
+    traces_username  = var.credentials.traces_username
+    traces_password  = var.credentials.traces_password
   }
 }
 
@@ -92,6 +99,7 @@ locals {
     credentials_secret_name  = kubernetes_secret.this.metadata[0].name
     remote_write_metrics_url = var.remote_write_urls.metrics
     remote_write_logs_url    = var.remote_write_urls.logs
+    remote_write_traces_url  = var.remote_write_urls.traces
     environment              = var.environment
     cluster_name             = var.cluster_name
   })

@@ -10,9 +10,11 @@ METRICS_USERNAME="usr"
 METRICS_PASSWORD="pw"
 LOGS_USERNAME="usr"
 LOGS_PASSWORD="pw"
+TRACES_USERNAME="usr"
+TRACES_PASSWORD="pw"
 
-JSON_FMT='{"metrics_username":"%s","metrics_password":"%s","logs_username":"%s","logs_password":"%s"}'
-KV_SECRET=$(printf "${JSON_FMT}" "${METRICS_USERNAME}" "${METRICS_PASSWORD}" "${LOGS_USERNAME}" "${LOGS_PASSWORD}")
+JSON_FMT='{"metrics_username":"%s","metrics_password":"%s","logs_username":"%s","logs_password":"%s","traces_username":"%s","traces_password":"%s"}'
+KV_SECRET=$(printf "${JSON_FMT}" "${METRICS_USERNAME}" "${METRICS_PASSWORD}" "${LOGS_USERNAME}" "${LOGS_PASSWORD}" "${TRACES_USERNAME}" "${TRACES_PASSWORD}")
 az keyvault secret set --vault-name [keyvault name] --name grafana-agent-credentials --value "${KV_SECRET}"
 ```
 
@@ -34,12 +36,15 @@ module "aks_core" {
     remote_write_urls = {
       metrics = "https://prometheus-foobar.grafana.net/api/prom/push"
       logs    = "https://logs-foobar.grafana.net/api/prom/push"
+      traces  = "tempo-eu-west-0.grafana.net:443"
     }
     credentials = {
       metrics_username = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).metrics_username
       metrics_password = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).metrics_password
       logs_username    = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).logs_username
       logs_password    = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).logs_password
+      traces_username  = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).traces_username
+      traces_password  = jsondecode(data.azurerm_key_vault_secret.grafana_agent_credentials.value).traces_password
     }
   }
 }
@@ -78,9 +83,9 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | the cluster name | `string` | n/a | yes |
-| <a name="input_credentials"></a> [credentials](#input\_credentials) | grafana-agent credentials | <pre>object({<br>    metrics_username = string<br>    metrics_password = string<br>    logs_username    = string<br>    logs_password    = string<br>  })</pre> | n/a | yes |
+| <a name="input_credentials"></a> [credentials](#input\_credentials) | grafana-agent credentials | <pre>object({<br>    metrics_username = string<br>    metrics_password = string<br>    logs_username    = string<br>    logs_password    = string<br>    traces_username  = string<br>    traces_password  = string<br>  })</pre> | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | the name of the environment | `string` | n/a | yes |
-| <a name="input_remote_write_urls"></a> [remote\_write\_urls](#input\_remote\_write\_urls) | the remote write urls | <pre>object({<br>    metrics = string<br>    logs    = string<br>  })</pre> | <pre>{<br>  "logs": "https://logs-prod-eu-west-0.grafana.net/loki/api/v1/push",<br>  "metrics": "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push"<br>}</pre> | no |
+| <a name="input_remote_write_urls"></a> [remote\_write\_urls](#input\_remote\_write\_urls) | the remote write urls | <pre>object({<br>    metrics = string<br>    logs    = string<br>    traces  = string<br>  })</pre> | <pre>{<br>  "logs": "https://logs-prod-eu-west-0.grafana.net/loki/api/v1/push",<br>  "metrics": "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push",<br>  "traces": "tempo-eu-west-0.grafana.net:443"<br>}</pre> | no |
 
 ## Outputs
 

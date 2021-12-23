@@ -290,24 +290,30 @@ variable "grafana_agent_config" {
     remote_write_urls = object({
       metrics = string
       logs    = string
+      traces  = string
     })
     credentials = object({
       metrics_username = string
       metrics_password = string
       logs_username    = string
       logs_password    = string
+      traces_username  = string
+      traces_password  = string
     })
   })
   default = {
     remote_write_urls = {
       metrics = ""
       logs    = ""
+      traces  = ""
     }
     credentials = {
       metrics_username = ""
       metrics_password = ""
       logs_username    = ""
       logs_password    = ""
+      traces_username  = ""
+      traces_password  = ""
     }
   }
 }

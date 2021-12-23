@@ -7,6 +7,9 @@ metadata:
     app: grafana-agent
 spec:
   image: {{ .Values.image }}
+  podMetadata:
+    annotations:
+      reloader.stakater.com/auto: "true"
   logLevel: info
   serviceAccountName: grafana-agent
   priorityClassName: platform-medium

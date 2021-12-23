@@ -362,6 +362,7 @@ module "grafana_agent" {
   remote_write_urls = {
     metrics = var.grafana_agent_config.remote_write_urls.metrics
     logs    = var.grafana_agent_config.remote_write_urls.logs
+    traces  = var.grafana_agent_config.remote_write_urls.traces
   }
 
   credentials = {
@@ -369,6 +370,8 @@ module "grafana_agent" {
     metrics_password = var.grafana_agent_config.credentials.metrics_password
     logs_username    = var.grafana_agent_config.credentials.logs_username
     logs_password    = var.grafana_agent_config.credentials.logs_password
+    traces_username  = var.grafana_agent_config.credentials.traces_username
+    traces_password  = var.grafana_agent_config.credentials.traces_password
   }
 
   cluster_name = "${var.name}${var.aks_name_suffix}"

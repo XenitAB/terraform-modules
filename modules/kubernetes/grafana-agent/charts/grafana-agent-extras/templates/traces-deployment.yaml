@@ -62,7 +62,7 @@ spec:
             - mountPath: /etc/agent
               name: grafana-agent-traces
           resources: {}
-      serviceAccount: grafana-agent-traces
+      serviceAccount: grafana-agent
       volumes:
         - configMap:
             name: grafana-agent-traces

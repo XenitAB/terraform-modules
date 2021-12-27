@@ -329,12 +329,6 @@ variable "new_relic_config" {
   }
 }
 
-variable "kube_state_metrics_namespaces_extras" {
-  description = "Comma-separated list of namespaces to be enabled except the ones defined by default."
-  type        = list(string)
-  default     = []
-}
-
 variable "starboard_enabled" {
   description = "Should Starboard be enabled"
   type        = bool

@@ -21,26 +21,6 @@ locals {
     "newrelic",
     "grafana-agent",
   ]
-  kube_state_metrics_namespaces = [
-    "aad-pod-identity",
-    "azad-kube-proxy",
-    "calico-system",
-    "cert-manager",
-    "csi-secrets-store-provider-azure",
-    "external-dns",
-    "falco",
-    "flux-system",
-    "gatekeeper-system",
-    "ingress-healthz",
-    "ingress-nginx",
-    "kube-node-lease",
-    "kube-public",
-    "kube-system",
-    "prometheus",
-    "reloader",
-    "tigera-operator",
-    "grafana-agent",
-  ]
 }
 
 # OPA Gatekeeper
@@ -472,7 +452,6 @@ module "prometheus" {
   aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
   azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
   starboard_enabled                        = var.starboard_enabled
-  kube_state_metrics_namespaces            = join(",", concat(var.kube_state_metrics_namespaces_extras, local.kube_state_metrics_namespaces))
 }
 
 # starboard

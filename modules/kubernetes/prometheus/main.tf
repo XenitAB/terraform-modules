@@ -42,9 +42,7 @@ resource "helm_release" "prometheus" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "17.2.2"
   max_history = 3
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    namespaces = var.kube_state_metrics_namespaces
-  })]
+  values      = [templatefile("${path.module}/templates/values.yaml.tpl", {})]
 }
 
 # EKS will not install metrics server out of the box so it has to be added.

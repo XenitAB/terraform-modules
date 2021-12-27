@@ -14,24 +14,6 @@ locals {
     "reloader",
     "velero",
   ]
-  kube_state_metrics_namespaces = [
-    "azad-kube-proxy",
-    "calico-system",
-    "cert-manager",
-    "cluster-autoscaler",
-    "csi-secrets-store-provider-aws",
-    "external-dns",
-    "falco,flux-system",
-    "gatekeeper-system",
-    "ingress-healthz",
-    "ingress-nginx",
-    "kube-node-lease",
-    "kube-public",
-    "kube-system",
-    "prometheus",
-    "reloader",
-    "tigera-operator",
-  ]
 }
 
 module "opa_gatekeeper" {
@@ -307,7 +289,6 @@ module "prometheus" {
   csi_secrets_store_provider_aws_enabled = var.csi_secrets_store_provider_aws_enabled
   azad_kube_proxy_enabled                = var.azad_kube_proxy_enabled
   starboard_enabled                      = var.starboard_enabled
-  kube_state_metrics_namespaces          = join(",", concat(var.kube_state_metrics_namespaces_extras, local.kube_state_metrics_namespaces))
 }
 
 module "cluster_autoscaler" {

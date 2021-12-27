@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#497](https://github.com/XenitAB/terraform-modules/pull/497) Remove namespaces config option for kube-state-metrics.
+- [#498](https://github.com/XenitAB/terraform-modules/pull/498) Set AKS cluster autoscaler expander strategy to least waste.
 
 ## 2021.12.4
 

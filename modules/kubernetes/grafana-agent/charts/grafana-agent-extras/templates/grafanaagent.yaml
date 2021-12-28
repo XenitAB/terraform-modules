@@ -16,8 +16,8 @@ spec:
         agent: grafana-agent-metrics
     replicas: {{ .Values.replicas }}
     externalLabels:
+      cluster: {{ .Values.clusterName }}
       environment: {{ .Values.environment }}
-      clusterName: {{ .Values.clusterName }}
   logs:
     instanceSelector:
       matchLabels:

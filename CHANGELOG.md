@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2021.12.6
+
 ### Changed
 
 - [#502](https://github.com/XenitAB/terraform-modules/pull/502) Add externalLabels to logs for Grafana Agent

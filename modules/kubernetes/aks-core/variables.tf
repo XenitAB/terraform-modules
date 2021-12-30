@@ -429,6 +429,12 @@ variable "azure_metrics_enabled" {
   default     = true
 }
 
+variable "vpa_enabled" {
+  description = "Should VPA be enabled"
+  type        = bool
+  default     = true
+}
+
 variable "azure_metrics_config" {
   description = "AZ Metrics configuration"
   type = object({

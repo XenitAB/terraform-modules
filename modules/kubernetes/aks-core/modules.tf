@@ -469,6 +469,19 @@ module "starboard" {
   cloud_provider = "azure"
 }
 
+# vpa
+module "vpa" {
+  depends_on = [module.opa_gatekeeper, module.prometheus]
+
+  for_each = {
+    for s in ["vpa"] :
+    s => s
+    if var.vpa_enabled
+  }
+
+  source = "../../kubernetes/vpa"
+}
+
 module "new_relic" {
   for_each = {
     for s in ["new-relic"] :

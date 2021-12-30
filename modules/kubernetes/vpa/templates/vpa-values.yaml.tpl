@@ -11,11 +11,7 @@ recommender:
     prometheus-address: http://prometheus-operated.prometheus.svc.cluster.local:9090
     storage: prometheus
     # How much time back prometheus have to be queried to get historical metrics
-    history-length: 8
-  replicaCount: 1
-  # recommender.podDisruptionBudget -- This is the setting for the pod disruption budget
-  podDisruptionBudget: {}
-    # maxUnavailable: 1
+    # history-length: 8
   image:
     # recommender.image.repository -- The location of the recommender image
     repository: k8s.gcr.io/autoscaling/vpa-recommender

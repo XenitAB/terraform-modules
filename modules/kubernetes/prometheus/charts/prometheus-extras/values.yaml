@@ -64,3 +64,4 @@ enabledMonitors:
   csiSecretsStorProviderAws: false
   azadKubeProxy: false
   starboard: false
+  grafanaAgent: false

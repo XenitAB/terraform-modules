@@ -31,7 +31,6 @@ kube-state-metrics:
     enabled: false
   metricLabelsAllowlist:
     - "namespaces=[xkf.xenit.io/kind]"
-  namespaces: ${namespaces}
 
 commonLabels:
   xkf.xenit.io/monitoring: platform

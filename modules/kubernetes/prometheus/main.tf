@@ -42,9 +42,7 @@ resource "helm_release" "prometheus" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "17.2.2"
   max_history = 3
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    namespaces = var.kube_state_metrics_namespaces
-  })]
+  values      = [templatefile("${path.module}/templates/values.yaml.tpl", {})]
 }
 
 # EKS will not install metrics server out of the box so it has to be added.
@@ -99,5 +97,6 @@ resource "helm_release" "prometheus_extras" {
     csi_secrets_store_provider_aws_enabled   = var.csi_secrets_store_provider_aws_enabled
     azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
     starboard_enabled                        = var.starboard_enabled
+    grafana_agent_enabled                    = var.grafana_agent_enabled
   })]
 }

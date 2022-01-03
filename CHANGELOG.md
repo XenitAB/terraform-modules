@@ -6,6 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2021.12.6
+
+### Changed
+
+- [#502](https://github.com/XenitAB/terraform-modules/pull/502) Add externalLabels to logs for Grafana Agent
+
+## 2021.12.5
+
+### Changed
+
+- [#497](https://github.com/XenitAB/terraform-modules/pull/497) Remove namespaces config option for kube-state-metrics.
+- [#498](https://github.com/XenitAB/terraform-modules/pull/498) Set AKS cluster autoscaler expander strategy to least waste.
+
+## 2021.12.4
+
+### Added
+
+- [#491](https://github.com/XenitAB/terraform-modules/pull/491) Add Grafana Agent for observability with Grafana Cloud
+
 ### Changed
 
 - [#486](https://github.com/XenitAB/terraform-modules/pull/486) Enable the option to create AKS node pools backed by spot instances.

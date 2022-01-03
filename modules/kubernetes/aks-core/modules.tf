@@ -19,25 +19,7 @@ locals {
     "tigera-operator",
     "velero",
     "newrelic",
-  ]
-  kube_state_metrics_namespaces = [
-    "aad-pod-identity",
-    "azad-kube-proxy",
-    "calico-system",
-    "cert-manager",
-    "csi-secrets-store-provider-azure",
-    "external-dns",
-    "falco",
-    "flux-system",
-    "gatekeeper-system",
-    "ingress-healthz",
-    "ingress-nginx",
-    "kube-node-lease",
-    "kube-public",
-    "kube-system",
-    "prometheus",
-    "reloader",
-    "tigera-operator",
+    "grafana-agent",
   ]
 }
 
@@ -345,6 +327,37 @@ module "datadog" {
   namespace_include = compact(concat(var.namespaces[*].name, var.datadog_config.extra_namespaces))
 }
 
+# grafana-agent
+module "grafana_agent" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["grafana-agent"] :
+    s => s
+    if var.grafana_agent_enabled
+  }
+
+  source = "../../kubernetes/grafana-agent"
+
+  remote_write_urls = {
+    metrics = var.grafana_agent_config.remote_write_urls.metrics
+    logs    = var.grafana_agent_config.remote_write_urls.logs
+    traces  = var.grafana_agent_config.remote_write_urls.traces
+  }
+
+  credentials = {
+    metrics_username = var.grafana_agent_config.credentials.metrics_username
+    metrics_password = var.grafana_agent_config.credentials.metrics_password
+    logs_username    = var.grafana_agent_config.credentials.logs_username
+    logs_password    = var.grafana_agent_config.credentials.logs_password
+    traces_username  = var.grafana_agent_config.credentials.traces_username
+    traces_password  = var.grafana_agent_config.credentials.traces_password
+  }
+
+  cluster_name = "${var.name}${var.aks_name_suffix}"
+  environment  = var.environment
+}
+
 # falco
 module "falco" {
   depends_on = [module.opa_gatekeeper]
@@ -439,7 +452,6 @@ module "prometheus" {
   aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
   azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
   starboard_enabled                        = var.starboard_enabled
-  kube_state_metrics_namespaces            = join(",", concat(var.kube_state_metrics_namespaces_extras, local.kube_state_metrics_namespaces))
 }
 
 # starboard

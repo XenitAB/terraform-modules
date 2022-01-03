@@ -384,3 +384,19 @@ spec:
       app.kubernetes.io/instance: starboard-exporter
       app.kubernetes.io/name: starboard-exporter
 {{- end }}
+{{- if .Values.enabledMonitors.grafanaAgent }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: grafana-agent
+  namespace: grafana-agent
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: grafana-agent
+  podMetricsEndpoints:
+    - port: http-metrics
+{{- end }}

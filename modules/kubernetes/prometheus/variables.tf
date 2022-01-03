@@ -134,10 +134,10 @@ variable "azad_kube_proxy_enabled" {
   default     = false
 }
 
-# This should be removed, https://github.com/kubernetes/kube-state-metrics/issues/1631
-variable "kube_state_metrics_namespaces" {
-  description = "Comma-separated list of namespaces to be enabled. To get metrics from all namespaces use ''"
-  type        = string
+variable "grafana_agent_enabled" {
+  description = "Should grafana-agent be enabled"
+  type        = bool
+  default     = false
 }
 
 variable "starboard_enabled" {

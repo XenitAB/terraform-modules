@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#504](https://github.com/XenitAB/terraform-modules/pull/504) Give developers access to starboards report.
 
+### Changed
+
+- [#492](https://github.com/XenitAB/terraform-modules/pull/492) Increase scrape interval starboard-exporter metric.
+
 ## 2021.12.6
 
 ### Changed

@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#504](https://github.com/XenitAB/terraform-modules/pull/504) Give developers access to starboards report.
+
 ## 2021.12.6
 
 ### Changed

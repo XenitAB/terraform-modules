@@ -60,3 +60,23 @@ resource "kubernetes_cluster_role" "top" {
     verbs      = ["get", "list", "watch"]
   }
 }
+
+resource "kubernetes_cluster_role" "starboard_reports" {
+  for_each = {
+    for s in ["starboard"] :
+    s => s
+    if var.starboard_enabled
+  }
+
+  metadata {
+    name = "starboard-reports"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  rule {
+    api_groups = ["aquasecurity.github.io"]
+    resources  = ["vulnerabilityreports", "configauditreports"]
+    verbs      = ["get", "list", "watch", "update", "delete"]
+  }
+}

@@ -3,6 +3,7 @@
   *
   * Adds [`VPA`](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler) using
   * [`FairwindsOps`](https://github.com/FairwindsOps/charts/tree/master/stable/vpa) helm chart to deploy VPA.
+  * VPA recommender is the only feature enabled, it's not possible to auto update deployments from VPA.
   */
 
 terraform {

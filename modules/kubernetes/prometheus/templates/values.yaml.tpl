@@ -54,3 +54,7 @@ prometheusOperator:
 
 prometheus-node-exporter:
   priorityClassName: "platform-high"
+  prometheus:
+    monitor:
+      additionalLabels:
+        xkf.xenit.io/monitoring: platform

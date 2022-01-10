@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#510](https://github.com/XenitAB/terraform-modules/pull/510) Run prometheus in agent mode.
+
 ## 2022.01.1
 
 ### Added

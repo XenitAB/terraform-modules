@@ -31,8 +31,6 @@ kube-state-metrics:
     enabled: false
   metricLabelsAllowlist:
     - "namespaces=[xkf.xenit.io/kind]"
-  #selfMonitor:
-  #  enabled: true
   prometheus:
     monitor:
       additionalLabels:

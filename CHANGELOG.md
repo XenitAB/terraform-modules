@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- [#510](https://github.com/XenitAB/terraform-modules/pull/510) Run prometheus in agent mode.
+- [#510](https://github.com/XenitAB/terraform-modules/pull/510) [Breaking] Run prometheus in agent mode and update kube-prometheus-stack to v30.0.0.
 
 ## 2022.01.1
 

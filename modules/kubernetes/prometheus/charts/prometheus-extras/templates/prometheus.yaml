@@ -10,6 +10,19 @@ spec:
     labels:
       aadpodidbinding: prometheus
   {{- end }}
+  containers:
+    - name: prometheus
+      args:
+        - --config.file=/etc/prometheus/config_out/prometheus.env.yaml
+        - --storage.agent.path=/prometheus
+        - --enable-feature=agent
+        - --web.enable-lifecycle
+        - --web.console.templates=/etc/prometheus/consoles
+        - --web.console.libraries=/etc/prometheus/console_libraries
+        - --web.route-prefix=/
+        - --web.config.file=/etc/prometheus/web_config/web-config.yaml
+  enableFeatures:
+    - agent
   externalLabels:
     cluster_name: {{ .Values.externalLabels.clusterName }}
     environment: {{ .Values.externalLabels.environment }}

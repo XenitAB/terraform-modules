@@ -27,7 +27,7 @@ resources:
     memory: "1Gi"
     cpu: "20m"
   limits:
-    memory: "8Gi"
+    memory: "3Gi"
 
 volumeClaim:
   storageClassName: default

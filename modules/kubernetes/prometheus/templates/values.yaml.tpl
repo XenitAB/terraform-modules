@@ -31,6 +31,10 @@ kube-state-metrics:
     enabled: false
   metricLabelsAllowlist:
     - "namespaces=[xkf.xenit.io/kind]"
+  prometheus:
+    monitor:
+      additionalLabels:
+        xkf.xenit.io/monitoring: platform
 
 commonLabels:
   xkf.xenit.io/monitoring: platform
@@ -48,3 +52,7 @@ prometheusOperator:
 
 prometheus-node-exporter:
   priorityClassName: "platform-high"
+  prometheus:
+    monitor:
+      additionalLabels:
+        xkf.xenit.io/monitoring: platform

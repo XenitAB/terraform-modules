@@ -46,3 +46,4 @@ enabledMonitors:
   azadKubeProxy: ${azad_kube_proxy_enabled}
   starboard: ${starboard_enabled}
   grafanaAgent: ${grafana_agent_enabled}
+  vpa: ${vpa_enabled}

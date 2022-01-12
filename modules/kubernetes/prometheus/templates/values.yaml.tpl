@@ -61,6 +61,11 @@ kube-state-metrics:
     - validatingwebhookconfigurations
     - volumeattachments
     - verticalpodautoscalers # not a default resource, see also: https://github.com/kubernetes/kube-state-metrics#enabling-verticalpodautoscalers
+  prometheus:
+    monitor:
+      additionalLabels:
+        xkf.xenit.io/monitoring: platform
+
 
 commonLabels:
   xkf.xenit.io/monitoring: platform
@@ -78,3 +83,7 @@ prometheusOperator:
 
 prometheus-node-exporter:
   priorityClassName: "platform-high"
+  prometheus:
+    monitor:
+      additionalLabels:
+        xkf.xenit.io/monitoring: platform

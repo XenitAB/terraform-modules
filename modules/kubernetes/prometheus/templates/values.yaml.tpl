@@ -31,6 +31,7 @@ kube-state-metrics:
     enabled: false
   metricLabelsAllowlist:
     - "namespaces=[xkf.xenit.io/kind]"
+  %{ if vpa_enabled }
   # specificly add verticalpodautoscalers to collectors
   collectors:
     - certificatesigningrequests
@@ -61,6 +62,7 @@ kube-state-metrics:
     - validatingwebhookconfigurations
     - volumeattachments
     - verticalpodautoscalers # not a default resource, see also: https://github.com/kubernetes/kube-state-metrics#enabling-verticalpodautoscalers
+  %{ endif }
   prometheus:
     monitor:
       additionalLabels:

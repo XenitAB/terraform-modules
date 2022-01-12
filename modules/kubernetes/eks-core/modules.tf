@@ -289,6 +289,7 @@ module "prometheus" {
   csi_secrets_store_provider_aws_enabled = var.csi_secrets_store_provider_aws_enabled
   azad_kube_proxy_enabled                = var.azad_kube_proxy_enabled
   starboard_enabled                      = var.starboard_enabled
+  vpa_enabled                            = var.vpa_enabled
 }
 
 module "cluster_autoscaler" {

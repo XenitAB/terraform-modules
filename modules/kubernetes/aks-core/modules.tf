@@ -452,6 +452,7 @@ module "prometheus" {
   aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
   azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
   starboard_enabled                        = var.starboard_enabled
+  vpa_enabled                              = var.vpa_enabled
 }
 
 # starboard

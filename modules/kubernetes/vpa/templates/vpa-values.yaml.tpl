@@ -5,7 +5,6 @@ recommender:
   enabled: true
   # recommender.extraArgs -- A set of key-value flags to be passed to the recommender
   extraArgs:
-    v: "4"
     pod-recommendation-min-cpu-millicores: 15
     pod-recommendation-min-memory-mb: 24
     prometheus-address: http://prometheus-operated.prometheus.svc.cluster.local:9090

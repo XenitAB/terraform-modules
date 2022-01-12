@@ -334,3 +334,9 @@ variable "starboard_enabled" {
   type        = bool
   default     = false
 }
+
+variable "vpa_enabled" {
+  description = "Should VPA be enabled"
+  type        = bool
+  default     = true
+}

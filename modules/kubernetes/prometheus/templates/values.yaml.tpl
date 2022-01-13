@@ -31,10 +31,43 @@ kube-state-metrics:
     enabled: false
   metricLabelsAllowlist:
     - "namespaces=[xkf.xenit.io/kind]"
+  %{ if vpa_enabled }
+  # specificly add verticalpodautoscalers to collectors
+  collectors:
+    - certificatesigningrequests
+    - configmaps
+    - cronjobs
+    - daemonsets
+    - deployments
+    - endpoints
+    - horizontalpodautoscalers
+    - ingresses
+    - jobs
+    - limitranges
+    - mutatingwebhookconfigurations
+    - namespaces
+    - networkpolicies
+    - nodes
+    - persistentvolumeclaims
+    - persistentvolumes
+    - poddisruptionbudgets
+    - pods
+    - replicasets
+    - replicationcontrollers
+    - resourcequotas
+    - secrets
+    - services
+    - statefulsets
+    - storageclasses
+    - validatingwebhookconfigurations
+    - volumeattachments
+    - verticalpodautoscalers # not a default resource, see also: https://github.com/kubernetes/kube-state-metrics#enabling-verticalpodautoscalers
+  %{ endif }
   prometheus:
     monitor:
       additionalLabels:
         xkf.xenit.io/monitoring: platform
+
 
 commonLabels:
   xkf.xenit.io/monitoring: platform

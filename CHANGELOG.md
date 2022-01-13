@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#506](https://github.com/XenitAB/terraform-modules/pull/506) Add VPA (Vertical Pod Autoscaling) as a module.
+
 ### Changed
 
 - [#510](https://github.com/XenitAB/terraform-modules/pull/510) [Breaking] Run prometheus in agent mode and update kube-prometheus-stack to v30.0.0.

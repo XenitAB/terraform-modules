@@ -289,6 +289,7 @@ module "prometheus" {
   csi_secrets_store_provider_aws_enabled = var.csi_secrets_store_provider_aws_enabled
   azad_kube_proxy_enabled                = var.azad_kube_proxy_enabled
   starboard_enabled                      = var.starboard_enabled
+  vpa_enabled                            = var.vpa_enabled
 }
 
 module "cluster_autoscaler" {
@@ -340,6 +341,19 @@ module "datadog" {
   api_key           = var.datadog_config.api_key
   app_key           = var.datadog_config.app_key
   namespace_include = compact(concat(var.namespaces[*].name, var.datadog_config.extra_namespaces))
+}
+
+# vpa
+module "vpa" {
+  depends_on = [module.opa_gatekeeper, module.prometheus]
+
+  for_each = {
+    for s in ["vpa"] :
+    s => s
+    if var.vpa_enabled
+  }
+
+  source = "../../kubernetes/vpa"
 }
 
 module "new_relic" {

@@ -15,7 +15,7 @@ recommender:
     # recommender.image.repository -- The location of the recommender image
     repository: k8s.gcr.io/autoscaling/vpa-recommender
     # recommender.image.pullPolicy -- The pull policy for the recommender image. Recommend not changing this
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
     # recommender.image.tag -- Overrides the image tag whose default is the chart appVersion
     tag: ""
   resources:

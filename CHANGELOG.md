@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.01.2
+
 ### Added
 
 - [#506](https://github.com/XenitAB/terraform-modules/pull/506) Add VPA (Vertical Pod Autoscaling) as a module.

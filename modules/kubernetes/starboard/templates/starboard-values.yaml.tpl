@@ -8,9 +8,15 @@ trivy:
   # mode is the Trivy client mode. Either Standalone or ClientServer. Depending
   # on the active mode other settings might be applicable or required.
   mode: ClientServer
-  severity: CRITICAL
+  severity: MEDIUM,HIGH,CRITICAL
   ignoreUnfixed: true
   serverURL: "http://trivy.trivy.svc.cluster.local:4954"
 
 # TODO insert logic for AWS IAM ECR access config
 # https://aquasecurity.github.io/starboard/v0.12.0/integrations/managed-registries/
+
+operator:
+  # configAuditScannerEnabled the flag to enable configuration audit scanner
+  configAuditScannerEnabled: false
+  # kubernetesBenchmarkEnabled the flag to enable CIS Kubernetes Benchmark scanner
+  kubernetesBenchmarkEnabled: false

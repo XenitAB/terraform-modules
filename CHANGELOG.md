@@ -13,6 +13,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#510](https://github.com/XenitAB/terraform-modules/pull/510) [Breaking] Run prometheus in agent mode and update kube-prometheus-stack to v30.0.0.
+- [#514](https://github.com/XenitAB/terraform-modules/pull/514) Starboard enable scanning of MEDIUM,HIGH,CRITICAL severity CVE:s
+  and disable configAuditScannerEnabled and kubernetesBenchmarkEnabled.
 
 ## 2022.01.1
 

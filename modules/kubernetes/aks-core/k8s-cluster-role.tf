@@ -76,7 +76,7 @@ resource "kubernetes_cluster_role" "starboard_reports" {
   }
   rule {
     api_groups = ["aquasecurity.github.io"]
-    resources  = ["vulnerabilityreports", "configauditreports"]
+    resources  = ["vulnerabilityreports"]
     verbs      = ["get", "list", "watch", "update", "delete"]
   }
 }

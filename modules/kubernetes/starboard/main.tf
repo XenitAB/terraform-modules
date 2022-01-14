@@ -52,7 +52,7 @@ resource "helm_release" "starboard" {
   chart       = "starboard-operator"
   name        = "starboard-operator"
   namespace   = kubernetes_namespace.starboard.metadata[0].name
-  version     = "0.7.0"
+  version     = "0.8.2"
   max_history = 3
   values = [templatefile("${path.module}/templates/starboard-values.yaml.tpl", {
     provider = var.cloud_provider
@@ -75,6 +75,6 @@ resource "helm_release" "trivy" {
   chart       = "trivy"
   name        = "trivy"
   namespace   = kubernetes_namespace.trivy.metadata[0].name
-  version     = "0.4.4"
+  version     = "0.4.9"
   max_history = 3
 }

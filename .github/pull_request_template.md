@@ -24,5 +24,5 @@ Completion workflow:
 
 - [ ] Ensure all pull request comments are addressed
 - [ ] Rebase your branch against main branch
-- [ ] Ensure that all checks passes with the latest changes on main branch
+- [ ] Ensure that all checks pass with the latest changes on main branch
 - Merge the pull request.

@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.01.3
+
 ### Changed
 
 - [#517](https://github.com/XenitAB/terraform-modules/pull/517) Change VPA storage from prometheus to checkpoint.

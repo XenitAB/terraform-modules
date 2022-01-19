@@ -71,8 +71,8 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/component: controller
-      app.kubernetes.io/instance: ingress-nginx
       app.kubernetes.io/name: ingress-nginx
+      function: metrics
 {{- if .Values.enabledMonitors.aadPodIdentity }}
 ---
 apiVersion: monitoring.coreos.com/v1

@@ -85,6 +85,9 @@ controller:
 
   metrics:
     enabled: true
+    service:
+      labels:
+        function: metrics
   %{~ if provider == "aws" && internal_load_balancer ~}
     port: 10354
 

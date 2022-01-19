@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#517](https://github.com/XenitAB/terraform-modules/pull/517) Change VPA storage from prometheus to checkpoint.
 
+### Fixed
+
+- [#519](https://github.com/XenitAB/terraform-modules/pull/519) Fix nginx ingress service monitor selector when running multiple controllers.
+
 ## 2022.01.2
 
 ### Added

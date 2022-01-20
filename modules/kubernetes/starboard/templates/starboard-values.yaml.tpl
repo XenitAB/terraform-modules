@@ -20,3 +20,7 @@ operator:
   configAuditScannerEnabled: false
   # kubernetesBenchmarkEnabled the flag to enable CIS Kubernetes Benchmark scanner
   kubernetesBenchmarkEnabled: false
+  # vulnerabilityScannerScanOnlyCurrentRevisions the flag to only create vulnerability scans on the current revision of a deployment.
+  vulnerabilityScannerScanOnlyCurrentRevisions: true
+  # vulnerabilityScannerReportTTL the flag to set how long a vulnerability report should exist. "" means that the vulnerabilityScannerReportTTL feature is disabled
+  vulnerabilityScannerReportTTL: "25h"

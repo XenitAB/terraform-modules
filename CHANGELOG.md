@@ -10,6 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#522](https://github.com/XenitAB/terraform-modules/pull/522) Add  networkpolicy for datadog and grafana-agent to tenant namespace.
 
+### Changed
+
+- [#523](https://github.com/XenitAB/terraform-modules/pull/523) Update starboard to 0.14.0, only scan the latest deployments
+  and set a TTL on the vulnerability reports to be recreated after 25 hours.
+
 ## 2022.01.3
 
 ### Changed

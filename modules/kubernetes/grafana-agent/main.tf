@@ -13,7 +13,7 @@
  * LOGS_PASSWORD="pw"
  * TRACES_USERNAME="usr"
  * TRACES_PASSWORD="pw"
- * 
+ *
  * JSON_FMT='{"metrics_username":"%s","metrics_password":"%s","logs_username":"%s","logs_password":"%s","traces_username":"%s","traces_password":"%s"}'
  * KV_SECRET=$(printf "${JSON_FMT}" "${METRICS_USERNAME}" "${METRICS_PASSWORD}" "${LOGS_USERNAME}" "${LOGS_PASSWORD}" "${TRACES_USERNAME}" "${TRACES_PASSWORD}")
  * az keyvault secret set --vault-name [keyvault name] --name grafana-agent-credentials --value "${KV_SECRET}"
@@ -110,7 +110,7 @@ resource "helm_release" "grafana_agent_operator" {
   chart       = "grafana-agent-operator"
   name        = "grafana-agent-operator"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "0.1.4"
+  version     = "0.1.5"
   max_history = 3
 
   set {

@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#523](https://github.com/XenitAB/terraform-modules/pull/523) Update starboard to 0.14.0, only scan the latest deployments
   and set a TTL on the vulnerability reports to be recreated after 25 hours.
+- [#524](https://github.com/XenitAB/terraform-modules/pull/524) Update grafana-agent to 0.1.5
 
 ## 2022.01.3
 

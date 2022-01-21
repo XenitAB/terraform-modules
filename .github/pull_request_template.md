@@ -1,9 +1,5 @@
 <!--
-    If you are changing an existing module or resource, describe why that configuration is no longer acceptable. If you are fixing a misconfiguration, make sure to describe both the intended result and the actual (faulty) result.
--->
-
-<!--
-    If you are adding a module or resources, describe what usage will be supported when this change is applied.
+    If you are adding a module or resources, describe what usage will be supported when this change is applied. If you are changing an existing module or resource, describe why that configuration is no longer acceptable. If you are fixing a misconfiguration, make sure to describe both the intended result and the actual (faulty) result.
 -->
 
 <!--
@@ -22,7 +18,8 @@ Fixes #NNN <!-- This will close the issue automatically when you merge -->
 
 Completion workflow:
 
-- [ ] Ensure all pull request comments are addressed
+- [ ] Module docs reflect these changes
+- [ ] All pull request comments are addressed
 - [ ] Rebase your branch against main branch
-- [ ] Ensure that all checks pass with the latest changes on main branch
+- [ ] All checks pass with the latest changes on main branch
 - Merge the pull request.

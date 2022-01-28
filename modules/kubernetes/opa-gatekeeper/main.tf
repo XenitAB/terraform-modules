@@ -137,7 +137,7 @@ resource "helm_release" "gatekeeper_templates" {
   chart       = "gatekeeper-library-templates"
   name        = "gatekeeper-library-templates"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v0.7.5"
+  version     = "v0.8.0"
   max_history = 3
   values      = [local.values]
 }

@@ -1,9 +1,9 @@
 resources:
   requests:
     cpu: 25m
-    memory: 100Mi
-tolerations:
-  - operator: "Exists"
+    memory: 80Mi
+  limits:
+    memory: 120Mi
 
 kubeletService:
   namespace:  ${namespace}

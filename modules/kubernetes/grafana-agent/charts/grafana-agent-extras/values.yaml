@@ -8,3 +8,8 @@ remote:
   metricsUrl: ""
   logsUrl: ""
   tracesUrl: ""
+
+resources:
+  requests:
+    cpu: 25m
+    memory: 100Mi

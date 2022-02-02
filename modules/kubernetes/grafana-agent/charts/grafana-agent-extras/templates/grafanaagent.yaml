@@ -24,7 +24,7 @@ spec:
         agent: grafana-agent-logs
   resources:
     requests:
-      cpu: {{ .Values.resources.requests.cpu }}
-      memory: {{ .Values.resources.requests.memory }}
+      cpu: {{ .Values.agent.resources.requests.cpu }}
+      memory: {{ .Values.agent.resources.requests.memory }}
   tolerations:
     - operator: "Exists"

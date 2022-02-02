@@ -61,7 +61,10 @@ spec:
           volumeMounts:
             - mountPath: /etc/agent
               name: grafana-agent-traces
-          resources: {}
+          resources:
+            requests:
+              cpu: {{ .Values.traces.resources.requests.cpu }}
+              memory: {{ .Values.traces.resources.requests.memory }}
       serviceAccount: grafana-agent
       volumes:
         - configMap:

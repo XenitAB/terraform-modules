@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#531](https://github.com/XenitAB/terraform-modules/pull/531) Make prefix configurable for Azure role definition names
+
 ## 2022.01.4
 
 ### Changed
@@ -15,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- [#513](https://github.com/XenitAB/terraform-modules/pull/513) EKS opinionated module ```eks-core``` added.
+- [#513](https://github.com/XenitAB/terraform-modules/pull/513) EKS opinionated module `eks-core` added.
 
 ## 2022.01.3
 

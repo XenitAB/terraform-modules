@@ -59,3 +59,9 @@ variable "azure_ad_group_prefix" {
   type        = string
   default     = "az"
 }
+
+variable "azure_role_definition_prefix" {
+  description = "Prefix for Azure Role Definition names"
+  type        = string
+  default     = "role"
+}

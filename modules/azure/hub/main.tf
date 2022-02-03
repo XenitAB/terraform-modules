@@ -114,7 +114,7 @@ resource "azurerm_virtual_network_peering" "this" {
 }
 
 resource "azurerm_role_definition" "service_endpoint_join" {
-  name  = "role-${var.environment}-${var.location_short}-${var.name}-serviceEndpointJoin"
+  name  = "${var.azure_role_definition_prefix}-${var.environment}-${var.location_short}-${var.name}-serviceEndpointJoin"
   scope = azurerm_virtual_network.this.id
 
   permissions {

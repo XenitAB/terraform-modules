@@ -422,7 +422,6 @@ resource "aws_vpc_peering_connection_accepter" "peer" {
     local.global_tags,
     {
       Name = each.key
-      Side = "Accepter"
     },
   )
 }
@@ -438,4 +437,58 @@ resource "aws_route" "peering_accepter" {
   route_table_id            = each.value.route_table_id
   destination_cidr_block    = each.value.destination_cidr_block
   vpc_peering_connection_id = each.value.vpc_peering_connection_id
+}
+
+# The subnets with the "private" name prefix are locked down by default. If access to 
+# the private subnets is needed, create an additional ACL outside this module that 
+# overrides the ACL below.
+resource "aws_network_acl" "private" {
+  subnet_ids = [
+    for subnet in aws_subnet.private :
+    subnet.id
+    if contains(local.private_subnets.*.cidr_block, subnet.cidr_block)
+  ]
+
+  vpc_id = aws_vpc.this.id
+  ingress {
+    protocol  = "-1"
+    rule_no   = 100
+    action    = "deny"
+    from_port = 0
+    to_port   = 0
+  }
+
+  tags = merge(
+    local.global_tags,
+    {
+      Name = local.private_subnet_name_prefix
+    },
+  )
+}
+
+# The ACL below will allow access to the subnets with the "public" name prefix from the
+# subnets where the EKS nodes are running to allow egress internet traffic from the Pods.
+resource "aws_network_acl" "public" {
+  for_each = {
+    for ix, node_subnet in concat(local.eks1_nodes_subnets, local.eks2_nodes_subnets) :
+    "${local.public_subnet_name_prefix}-${ix}" => node_subnet.cidr_block
+  }
+  subnet_ids = [for k, subnet in aws_subnet.public : subnet.id]
+  vpc_id     = aws_vpc.this.id
+
+  ingress {
+    protocol   = "-1"
+    rule_no    = 100
+    action     = "allow"
+    from_port  = 0
+    to_port    = 0
+    cidr_block = each.value
+  }
+
+  tags = merge(
+    local.global_tags,
+    {
+      Name = each.key
+    },
+  )
 }

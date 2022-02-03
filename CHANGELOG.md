@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#530](https://github.com/XenitAB/terraform-modules/pull/530) Add networks ACLs to `eks-core` to lock down access to the `private` and `public` subnets.
+
 ## 2022.01.4
 
 ### Changed

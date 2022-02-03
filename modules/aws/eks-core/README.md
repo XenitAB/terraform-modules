@@ -31,6 +31,8 @@ No modules.
 | [aws_iam_role_policy_attachment.permissions](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_internet_gateway.this](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/internet_gateway) | resource |
 | [aws_nat_gateway.public](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/nat_gateway) | resource |
+| [aws_network_acl.private](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/network_acl) | resource |
+| [aws_network_acl.public](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/network_acl) | resource |
 | [aws_route.peering_accepter](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/route) | resource |
 | [aws_route.peering_requester](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/route) | resource |
 | [aws_route.private](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/route) | resource |

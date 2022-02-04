@@ -1,7 +1,7 @@
 installCRDs: true
 
 global:
-  priorityClassName: "platform-low"
+  priorityClassName: "platform-medium"
 
 %{ if provider == "azure" }
 podLabels:

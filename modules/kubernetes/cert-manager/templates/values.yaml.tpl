@@ -20,3 +20,13 @@ webhook:
   securePort: 10260
   hostNetwork: true
 %{ endif }
+
+webhook.resources:
+  requests:
+    cpu: 30m
+    memory: 100Mi
+
+cainjector.resources:
+  requests:
+    cpu: 25m
+    memory: 250Mi

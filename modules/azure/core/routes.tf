@@ -43,8 +43,8 @@ resource "azurerm_route" "not_virtual_appliance" {
 
 resource "azurerm_subnet_route_table_association" "this" {
   for_each = {
-    for route in local.routes :
-    route.name => route
+    for route in var.route_config :
+    route.subnet_name => route
   }
 
   subnet_id      = azurerm_subnet.this["sn-${var.environment}-${var.location_short}-${var.name}-${each.value.subnet_name}"].id

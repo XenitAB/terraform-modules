@@ -95,13 +95,17 @@ resource "kubernetes_secret" "this" {
 }
 
 locals {
-  values = templatefile("${path.module}/templates/values.yaml.tpl", {
+  extras_values = templatefile("${path.module}/templates/extras-values.yaml.tpl", {
     credentials_secret_name  = kubernetes_secret.this.metadata[0].name
     remote_write_metrics_url = var.remote_write_urls.metrics
     remote_write_logs_url    = var.remote_write_urls.logs
     remote_write_traces_url  = var.remote_write_urls.traces
     environment              = var.environment
     cluster_name             = var.cluster_name
+  })
+
+  operator_values = templatefile("${path.module}/templates/operator-values.yaml.tpl", {
+    namespace = kubernetes_namespace.this.metadata[0].name
   })
 }
 
@@ -113,10 +117,7 @@ resource "helm_release" "grafana_agent_operator" {
   version     = "0.1.4"
   max_history = 3
 
-  set {
-    name  = "kubeletService.namespace"
-    value = kubernetes_namespace.this.metadata[0].name
-  }
+  values = [local.operator_values]
 }
 
 resource "helm_release" "grafana_agent_extras" {
@@ -126,5 +127,5 @@ resource "helm_release" "grafana_agent_extras" {
   name        = "grafana-agent-extras"
   namespace   = kubernetes_namespace.this.metadata[0].name
   max_history = 3
-  values      = [local.values]
+  values      = [local.extras_values]
 }

@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 
-- [#532](https://github.com/XenitAB/terraform-modules/pull/532) Fix bug in route table association (does **not** affect XKF by default)
+- [#532](https://github.com/XenitAB/terraform-modules/pull/532) [Breaking] Fix bug in route table association (does **not** affect XKF by default)
 
 ## 2022.01.4
 

@@ -17,6 +17,7 @@ spec:
       labels:
         name: grafana-agent-traces
     spec:
+      priorityClassName: "platform-medium"
       containers:
         - args:
             - -config.file=/etc/agent/agent.yaml

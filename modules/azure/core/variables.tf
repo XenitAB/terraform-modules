@@ -71,6 +71,12 @@ variable "azure_ad_group_prefix" {
   default     = "az"
 }
 
+variable "azure_role_definition_prefix" {
+  description = "Prefix for Azure Role Definition names"
+  type        = string
+  default     = "role"
+}
+
 variable "enable_storage_account" {
   description = "Should a storage account be created in the core resource group? (used for diagnostics)"
   type        = bool

@@ -1,7 +1,7 @@
 installCRDs: true
 
 global:
-  priorityClassName: "platform-low"
+  priorityClassName: "platform-medium"
 
 %{ if provider == "azure" }
 podLabels:
@@ -20,3 +20,17 @@ webhook:
   securePort: 10260
   hostNetwork: true
 %{ endif }
+
+requests:
+  cpu: 15m
+  memory: 150Mi
+
+webhook.resources:
+  requests:
+    cpu: 30m
+    memory: 100Mi
+
+cainjector.resources:
+  requests:
+    cpu: 25m
+    memory: 250Mi

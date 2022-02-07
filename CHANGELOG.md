@@ -12,8 +12,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
+- [#531](https://github.com/XenitAB/terraform-modules/pull/531) Make prefix configurable for Azure role definition names
+- [#533](https://github.com/XenitAB/terraform-modules/pull/533) Update cert manager version to 1.6.1
+
+### Fixed
+
+- [#532](https://github.com/XenitAB/terraform-modules/pull/532) [Breaking] Fix bug in route table association (does **not** affect XKF by default)
+- [#527](https://github.com/XenitAB/terraform-modules/pull/527) Add kubernetes resource definitions for grafana-agent-operator.
+  
+## 2022.01.4
+
+### Changed
+
 - [#523](https://github.com/XenitAB/terraform-modules/pull/523) Update starboard to 0.14.0, only scan the latest deployments
   and set a TTL on the vulnerability reports to be recreated after 25 hours.
+
+### Added
+
+- [#513](https://github.com/XenitAB/terraform-modules/pull/513) EKS opinionated module `eks-core` added.
 
 ## 2022.01.3
 

@@ -7,10 +7,172 @@
   */
 
 locals {
-  public_subnet_name_prefix = "public"
+  public_subnet_name_prefix       = "public"
+  private_subnet_name_prefix      = "private"
+  eks1_nodes_subnet_name_prefix   = "eks1-nodes"
+  eks2_nodes_subnet_name_prefix   = "eks2-nodes"
+  eks1_cluster_subnet_name_prefix = "eks1-cluster"
+  eks2_cluster_subnet_name_prefix = "eks2-cluster"
+
+  cidr_host  = cidrhost(var.cidr_block, 0)
+  cidr_host2 = cidrhost(var.cidr_block, 9216)
+
+  eks1_nodes_subnets = [
+    {
+      name_prefix             = local.eks1_nodes_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host}/18", 4, 3)
+      availability_zone_index = 0
+      public_routing_enabled  = true
+      tags = {
+        "kubernetes.io/cluster/eks1-${var.environment}" = "shared"
+      }
+    },
+    {
+      name_prefix             = local.eks1_nodes_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host}/18", 4, 4)
+      availability_zone_index = 1
+      public_routing_enabled  = true
+      tags = {
+        "kubernetes.io/cluster/eks1-${var.environment}" = "shared"
+      }
+    },
+    {
+      name_prefix             = local.eks1_nodes_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host}/18", 4, 5)
+      availability_zone_index = 2
+      public_routing_enabled  = true
+      tags = {
+        "kubernetes.io/cluster/eks1-${var.environment}" = "shared"
+      }
+    },
+  ]
+  eks1_cluster_subnets = [
+    {
+      name_prefix             = local.eks1_cluster_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host2}/24", 4, 0)
+      availability_zone_index = 0
+      public_routing_enabled  = false
+      tags                    = {}
+    },
+    {
+      name_prefix             = local.eks1_cluster_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host2}/24", 4, 1)
+      availability_zone_index = 1
+      public_routing_enabled  = false
+      tags                    = {}
+    },
+  ]
+
+  eks2_nodes_subnets = [
+    {
+      name_prefix             = local.eks2_nodes_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host}/18", 4, 6)
+      availability_zone_index = 0
+      public_routing_enabled  = true
+      tags = {
+        "kubernetes.io/cluster/eks2-${var.environment}" = "shared"
+      }
+    },
+    {
+      name_prefix             = local.eks2_nodes_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host}/18", 4, 7)
+      availability_zone_index = 1
+      public_routing_enabled  = true
+      tags = {
+        "kubernetes.io/cluster/eks2-${var.environment}" = "shared"
+      }
+    },
+    {
+      name_prefix             = local.eks2_nodes_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host}/18", 4, 8)
+      availability_zone_index = 2
+      public_routing_enabled  = true
+      tags = {
+        "kubernetes.io/cluster/eks2-${var.environment}" = "shared"
+      }
+    },
+  ]
+
+  eks2_cluster_subnets = [
+    {
+      name_prefix             = local.eks2_cluster_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host2}/24", 4, 2)
+      availability_zone_index = 0
+      public_routing_enabled  = false
+      tags                    = {}
+    },
+    {
+      name_prefix             = local.eks2_cluster_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host2}/24", 4, 3)
+      availability_zone_index = 1
+      public_routing_enabled  = false
+      tags                    = {}
+    },
+  ]
+
+  private_subnets = [
+    {
+      name_prefix             = local.private_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host2}/24", 4, 4)
+      availability_zone_index = 0
+      public_routing_enabled  = false
+      tags = {
+        "kubernetes.io/role/internal-elb" = "1"
+      }
+    },
+    {
+      name_prefix             = local.private_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host2}/24", 4, 5)
+      availability_zone_index = 1
+      public_routing_enabled  = false
+      tags = {
+        "kubernetes.io/role/internal-elb" = "1"
+      }
+    },
+    {
+      name_prefix             = local.private_subnet_name_prefix
+      cidr_block              = cidrsubnet("${local.cidr_host2}/24", 4, 6)
+      availability_zone_index = 2
+      public_routing_enabled  = false
+      tags = {
+        "kubernetes.io/role/internal-elb" = "1"
+      }
+    },
+  ]
+  vpc_config = {
+    cidr_block = var.cidr_block
+    public_subnets = [
+      {
+        cidr_block = cidrsubnet("${local.cidr_host}/18", 4, 0)
+        tags = {
+          "kubernetes.io/role/elb" = "1"
+        }
+      },
+      {
+        cidr_block = cidrsubnet("${local.cidr_host}/18", 4, 1)
+        tags = {
+          "kubernetes.io/role/elb" = "1"
+        }
+      },
+      {
+        cidr_block = cidrsubnet("${local.cidr_host}/18", 4, 2)
+        tags = {
+          "kubernetes.io/role/elb" = "1"
+        }
+      },
+    ]
+    private_subnets = concat(
+      local.eks1_nodes_subnets,
+      local.eks1_cluster_subnets,
+      local.eks2_nodes_subnets,
+      local.eks2_cluster_subnets,
+      local.private_subnets
+    )
+  }
+
 
   requester_peering_subnets = [
-    for pair in setproduct(var.vpc_config.private_subnets, var.vpc_peering_config_requester) : {
+    for pair in setproduct(local.vpc_config.private_subnets, var.vpc_peering_config_requester) : {
       key                       = "${pair[1].name}-${pair[0].name_prefix}-${pair[0].availability_zone_index}"
       route_table_id            = aws_route_table.private["${pair[0].name_prefix}-${pair[0].availability_zone_index}"].id
       destination_cidr_block    = pair[1].destination_cidr_block
@@ -19,7 +181,7 @@ locals {
   ]
 
   accepter_peering_subnets = [
-    for pair in setproduct(var.vpc_config.private_subnets, var.vpc_peering_config_accepter) : {
+    for pair in setproduct(local.vpc_config.private_subnets, var.vpc_peering_config_accepter) : {
       key                       = "${pair[1].name}-${pair[0].name_prefix}-${pair[0].availability_zone_index}"
       route_table_id            = aws_route_table.private["${pair[0].name_prefix}-${pair[0].availability_zone_index}"].id
       destination_cidr_block    = pair[1].destination_cidr_block
@@ -29,7 +191,7 @@ locals {
 }
 
 resource "aws_vpc" "this" {
-  cidr_block           = var.vpc_config.cidr_block
+  cidr_block           = local.vpc_config.cidr_block
   enable_dns_support   = true
   enable_dns_hostnames = true
 
@@ -40,7 +202,7 @@ resource "aws_internet_gateway" "this" {
   for_each = {
     for s in ["internet"] :
     s => s
-    if length(var.vpc_config.public_subnets) != 0
+    if length(local.vpc_config.public_subnets) != 0
   }
 
   vpc_id = aws_vpc.this.id
@@ -51,7 +213,7 @@ resource "aws_internet_gateway" "this" {
 # public subnets with NAT
 resource "aws_subnet" "public" {
   for_each = {
-    for idx, subnet in var.vpc_config.public_subnets :
+    for idx, subnet in local.vpc_config.public_subnets :
     "${local.public_subnet_name_prefix}-${idx}" => { index : idx, object : subnet }
   }
 
@@ -71,7 +233,7 @@ resource "aws_subnet" "public" {
 
 resource "aws_eip" "public" {
   for_each = {
-    for idx, subnet in var.vpc_config.public_subnets :
+    for idx, subnet in local.vpc_config.public_subnets :
     "${local.public_subnet_name_prefix}-${idx}" => subnet
   }
 
@@ -87,7 +249,7 @@ resource "aws_eip" "public" {
 
 resource "aws_nat_gateway" "public" {
   for_each = {
-    for idx, subnet in var.vpc_config.public_subnets :
+    for idx, subnet in local.vpc_config.public_subnets :
     "${local.public_subnet_name_prefix}-${idx}" => subnet
   }
 
@@ -104,7 +266,7 @@ resource "aws_nat_gateway" "public" {
 
 resource "aws_route_table" "public" {
   for_each = {
-    for idx, subnet in var.vpc_config.public_subnets :
+    for idx, subnet in local.vpc_config.public_subnets :
     "${local.public_subnet_name_prefix}-${idx}" => subnet
   }
 
@@ -120,7 +282,7 @@ resource "aws_route_table" "public" {
 
 resource "aws_route" "public" {
   for_each = {
-    for idx, subnet in var.vpc_config.public_subnets :
+    for idx, subnet in local.vpc_config.public_subnets :
     "${local.public_subnet_name_prefix}-${idx}" => subnet
   }
 
@@ -131,7 +293,7 @@ resource "aws_route" "public" {
 
 resource "aws_route_table_association" "public" {
   for_each = {
-    for idx, subnet in var.vpc_config.public_subnets :
+    for idx, subnet in local.vpc_config.public_subnets :
     "${local.public_subnet_name_prefix}-${idx}" => subnet
   }
 
@@ -142,7 +304,7 @@ resource "aws_route_table_association" "public" {
 # Private subnets with egress routing through NAT
 resource "aws_subnet" "private" {
   for_each = {
-    for subnet in var.vpc_config.private_subnets :
+    for subnet in local.vpc_config.private_subnets :
     "${subnet.name_prefix}-${subnet.availability_zone_index}" => subnet
   }
 
@@ -161,7 +323,7 @@ resource "aws_subnet" "private" {
 
 resource "aws_route_table" "private" {
   for_each = {
-    for subnet in var.vpc_config.private_subnets :
+    for subnet in local.vpc_config.private_subnets :
     "${subnet.name_prefix}-${subnet.availability_zone_index}" => subnet
   }
 
@@ -177,7 +339,7 @@ resource "aws_route_table" "private" {
 
 resource "aws_route" "private" {
   for_each = {
-    for subnet in var.vpc_config.private_subnets :
+    for subnet in local.vpc_config.private_subnets :
     "${subnet.name_prefix}-${subnet.availability_zone_index}" => subnet
     if subnet.public_routing_enabled
   }
@@ -189,7 +351,7 @@ resource "aws_route" "private" {
 
 resource "aws_route_table_association" "private" {
   for_each = {
-    for subnet in var.vpc_config.private_subnets :
+    for subnet in local.vpc_config.private_subnets :
     "${subnet.name_prefix}-${subnet.availability_zone_index}" => subnet
   }
 

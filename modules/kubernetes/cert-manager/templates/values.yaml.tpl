@@ -21,6 +21,10 @@ webhook:
   hostNetwork: true
 %{ endif }
 
+requests:
+  cpu: 15m
+  memory: 150Mi
+
 webhook.resources:
   requests:
     cpu: 30m

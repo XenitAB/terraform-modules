@@ -54,3 +54,10 @@ ingress:
 
 podAnnotations:
   secret.reloader.stakater.com/reload: "azad-kube-proxy"
+
+resources:
+  limits:
+    memory: 70Mi
+  requests:
+    cpu: 10m
+    memory: 32Mi

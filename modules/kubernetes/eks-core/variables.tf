@@ -340,3 +340,9 @@ variable "vpa_enabled" {
   type        = bool
   default     = true
 }
+
+variable "grafana_agent_enabled" {
+  description = "Should Grafana-Agent be enabled"
+  type        = bool
+  default     = false
+}

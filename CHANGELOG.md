@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#531](https://github.com/XenitAB/terraform-modules/pull/531) Make prefix configurable for Azure role definition names
+- [#533](https://github.com/XenitAB/terraform-modules/pull/533) Update cert manager version to 1.6.1
 
 ### Fixed
 

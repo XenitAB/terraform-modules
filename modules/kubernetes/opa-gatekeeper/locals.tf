@@ -8,6 +8,15 @@ locals {
     },
     {
       name = "container-read-only-root-fs"
+    },
+    {
+      name = "init-container-disallow-privilege-escalation"
+    },
+    {
+      name = "init-container-drop-net-raw"
+    },
+    {
+      name = "init-container-read-only-root-fs"
     }
   ]
   default_constraints = [

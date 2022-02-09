@@ -10,8 +10,8 @@ resource "azurerm_subnet" "this" {
   virtual_network_name                           = azurerm_virtual_network.this.name
   address_prefixes                               = [each.value.subnet_cidr]
   service_endpoints                              = each.value.subnet_service_endpoints
-  enforce_private_link_endpoint_network_policies = false
-  enforce_private_link_service_network_policies  = false
+  enforce_private_link_endpoint_network_policies = local.subnet_private_endpoints[each.value.subnet_short_name]
+  enforce_private_link_service_network_policies  = local.subnet_private_endpoints[each.value.subnet_short_name]
 }
 
 resource "azurerm_subnet" "aks" {
@@ -26,6 +26,6 @@ resource "azurerm_subnet" "aks" {
   virtual_network_name                           = azurerm_virtual_network.this.name
   address_prefixes                               = [each.value.subnet_cidr]
   service_endpoints                              = each.value.subnet_service_endpoints
-  enforce_private_link_endpoint_network_policies = false
-  enforce_private_link_service_network_policies  = false
+  enforce_private_link_endpoint_network_policies = local.subnet_private_endpoints[each.value.subnet_short_name]
+  enforce_private_link_service_network_policies  = local.subnet_private_endpoints[each.value.subnet_short_name]
 }

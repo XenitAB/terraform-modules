@@ -120,7 +120,7 @@ controller:
       port: 10354
   %{~ endif ~}
 
-affinity:
+  affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
         - podAffinityTerm:

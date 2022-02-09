@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
+- [#541](https://github.com/XenitAB/terraform-modules/pull/541) add support to enable private endpoints on subnets
 - [#549](https://github.com/XenitAB/terraform-modules/pull/549) Add resource requests & limits for goldilocks.
 - [#548](https://github.com/XenitAB/terraform-modules/pull/548) Enable grafana-agent in Prometheus.
 

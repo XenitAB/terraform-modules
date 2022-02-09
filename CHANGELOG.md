@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.02.1
+
 ### Added
 
 - [#522](https://github.com/XenitAB/terraform-modules/pull/522) Add  networkpolicy for datadog and grafana-agent to tenant namespace.

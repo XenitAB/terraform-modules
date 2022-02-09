@@ -119,3 +119,16 @@ controller:
     httpGet:
       port: 10354
   %{~ endif ~}
+
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - ingress-nginx
+            topologyKey: topology.kubernetes.io/zone
+          weight: 100

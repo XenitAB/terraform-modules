@@ -49,3 +49,10 @@ output "prometheus_config" {
     role_arn = module.prometheus.role_arn
   }
 }
+
+output "starboard_config" {
+  description = "Configuration for Starboard"
+  value = {
+    role_arn = module.starboard_ecr.role_arn
+  }
+}

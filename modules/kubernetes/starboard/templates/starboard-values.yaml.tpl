@@ -24,3 +24,6 @@ operator:
   vulnerabilityScannerScanOnlyCurrentRevisions: true
   # vulnerabilityScannerReportTTL the flag to set how long a vulnerability report should exist. "" means that the vulnerabilityScannerReportTTL feature is disabled
   vulnerabilityScannerReportTTL: "25h"
+
+serviceAccount:
+  annotations: {}

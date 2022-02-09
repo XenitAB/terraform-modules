@@ -62,3 +62,9 @@ variable "velero_config" {
     s3_bucket_arn = string
   })
 }
+
+variable "starboard_enabled" {
+  description = "Should starboard be enaled"
+  type        = bool
+  default     = false
+}

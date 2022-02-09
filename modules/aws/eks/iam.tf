@@ -187,3 +187,35 @@ module "prometheus" {
   kubernetes_service_account = "prometheus"
   policy_json                = data.aws_iam_policy_document.prometheus.json
 }
+
+data "aws_iam_policy_document" "starboard_ecr_read_only" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:*",
+    ]
+    resources = ["arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"]
+  }
+}
+
+module "starboard_ecr" {
+  source = "../irsa"
+
+  for_each = {
+    for s in ["starboard"] :
+    s => s
+    if var.starboard_enabled
+  }
+
+  name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}-starboard-ecr"
+  oidc_providers = [
+    for v in var.oidc_urls :
+    {
+      url = aws_iam_openid_connect_provider.this.url
+      arn = aws_iam_openid_connect_provider.this.arn
+    }
+  ]
+  kubernetes_namespace       = "starboard-operator"
+  kubernetes_service_account = "starboard-operator"
+  policy_json                = data.aws_iam_policy_document.starboard_ecr_read_only.json
+}

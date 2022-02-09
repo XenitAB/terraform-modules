@@ -209,7 +209,6 @@ module "starboard_ecr" {
 
   name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}-starboard-ecr"
   oidc_providers = [
-    for v in var.oidc_urls :
     {
       url = aws_iam_openid_connect_provider.this.url
       arn = aws_iam_openid_connect_provider.this.arn

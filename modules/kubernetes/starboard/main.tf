@@ -56,6 +56,7 @@ resource "helm_release" "starboard" {
   max_history = 3
   values = [templatefile("${path.module}/templates/starboard-values.yaml.tpl", {
     provider = var.cloud_provider
+    role_arn = var.role_arn
   })]
 }
 

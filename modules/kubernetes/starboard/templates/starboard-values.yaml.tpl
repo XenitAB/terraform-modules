@@ -25,7 +25,7 @@ operator:
   # vulnerabilityScannerReportTTL the flag to set how long a vulnerability report should exist. "" means that the vulnerabilityScannerReportTTL feature is disabled
   vulnerabilityScannerReportTTL: "25h"
 
-%{~ if cloud_provider == "aws" ~}
+%{~ if provider == "aws" ~}
 serviceAccount:
   annotations:
     eks.amazonaws.com/role-arn: ${role_arn}

@@ -118,8 +118,9 @@ controller:
   readinessProbe:
     httpGet:
       port: 10354
+  %{~ endif ~}
 
-  affinity:
+affinity:
     podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
         - weight: 100
@@ -138,4 +139,3 @@ controller:
               values:
               - controller
           topologyKey: "topology.kubernetes.io/zone"
-  %{~ endif ~}

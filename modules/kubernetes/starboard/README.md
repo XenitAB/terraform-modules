@@ -44,6 +44,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cloud_provider"></a> [cloud\_provider](#input\_cloud\_provider) | Cloud provider used for starboard | `string` | n/a | yes |
+| <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | role arn used to download ECR images, this only applies to AWS | `string` | `""` | no |
 
 ## Outputs
 

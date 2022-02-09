@@ -335,6 +335,13 @@ variable "starboard_enabled" {
   default     = false
 }
 
+variable "starboard_config" {
+  description = "Configuration for starboard"
+  type = object({
+    role_arn = string
+  })
+}
+
 variable "vpa_enabled" {
   description = "Should VPA be enabled"
   type        = bool

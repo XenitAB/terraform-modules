@@ -305,6 +305,7 @@ module "starboard" {
   source = "../../kubernetes/starboard"
 
   cloud_provider = "aws"
+  role_arn       = starboard_config.role_arn
 }
 
 module "cluster_autoscaler" {

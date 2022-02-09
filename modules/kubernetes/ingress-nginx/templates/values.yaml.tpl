@@ -122,20 +122,13 @@ controller:
 
 affinity:
     podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-        - labelSelector:
-            matchExpressions:
-            - key: app.kubernetes.io/name
-              operator: In
-              values:
-              - ingress-nginx
-            - key: app.kubernetes.io/instance
-              operator: In
-              values:
-              - ingress-nginx
-            - key: app.kubernetes.io/component
-              operator: In
-              values:
-              - controller
-          topologyKey: "topology.kubernetes.io/zone"
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - ingress-nginx
+            topologyKey: topology.kubernetes.io/zone
+          weight: 100

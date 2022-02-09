@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+- [#540](https://github.com/XenitAB/terraform-modules/pull/540) Add podAntiAffinity to spread pods on nodes based on avalibility zones.
+
 ## 2022.02.1
 
 ### Added

@@ -18,9 +18,6 @@ kind: ServiceAccount
 metadata:
   name: node-local-dns
   namespace: kube-system
-  labels:
-    kubernetes.io/cluster-service: "true"
-    addonmanager.kubernetes.io/mode: Reconcile
 ---
 apiVersion: v1
 kind: Service
@@ -29,8 +26,6 @@ metadata:
   namespace: kube-system
   labels:
     k8s-app: kube-dns
-    kubernetes.io/cluster-service: "true"
-    addonmanager.kubernetes.io/mode: Reconcile
     kubernetes.io/name: "KubeDNSUpstream"
 spec:
   ports:
@@ -50,8 +45,6 @@ kind: ConfigMap
 metadata:
   name: node-local-dns
   namespace: kube-system
-  labels:
-    addonmanager.kubernetes.io/mode: Reconcile
 data:
   Corefile: |
     cluster.local:53 {
@@ -108,8 +101,6 @@ metadata:
   namespace: kube-system
   labels:
     k8s-app: node-local-dns
-    kubernetes.io/cluster-service: "true"
-    addonmanager.kubernetes.io/mode: Reconcile
 spec:
   updateStrategy:
     rollingUpdate:
@@ -121,9 +112,6 @@ spec:
     metadata:
       labels:
         k8s-app: node-local-dns
-      annotations:
-        prometheus.io/port: "9253"
-        prometheus.io/scrape: "true"
     spec:
       priorityClassName: system-node-critical
       serviceAccountName: node-local-dns
@@ -200,11 +188,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    prometheus.io/port: "9253"
-    prometheus.io/scrape: "true"
-  labels:
-    k8s-app: node-local-dns
   name: node-local-dns
   namespace: kube-system
 spec:

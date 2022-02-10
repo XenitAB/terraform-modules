@@ -5,7 +5,7 @@ metadata:
   labels:
     xkf.xenit.io/monitoring: platform
   name: node-local-dns
-  namespace: kube-system
+  namespace: prometheus
 spec:
   endpoints:
     - interval: 60s

@@ -193,6 +193,8 @@ kind: Service
 metadata:
   name: node-local-dns
   namespace: kube-system
+  labels:
+    k8s-app: node-local-dns
   annotations:
     prometheus.io/port: "9253"
     prometheus.io/scrape: "true"

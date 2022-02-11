@@ -33,6 +33,7 @@ module "aks" {
       node_labels = {
         "test" = "test"
       }
+      os_disk_type = "Ephemeral"
     }
     additional_node_pools = [
       {
@@ -47,8 +48,10 @@ module "aks" {
         node_labels = {
           "test" = "test"
         }
-        spot_enabled   = false
-        spot_max_price = null
+        os_disk_type    = "Ephemeral"
+        os_disk_size_gb = 128
+        spot_enabled    = false
+        spot_max_price  = null
       }
     ]
   }

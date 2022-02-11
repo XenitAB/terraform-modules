@@ -31,6 +31,7 @@ variable "aks_config" {
     default_node_pool = object({
       orchestrator_version = string
       node_labels          = map(string)
+      os_disk_type         = string
     })
     additional_node_pools = list(object({
       name                 = string
@@ -40,6 +41,7 @@ variable "aks_config" {
       max_count            = number
       node_taints          = list(string)
       node_labels          = map(string)
+      os_disk_type         = string
       spot_enabled         = bool
       spot_max_price       = number
     }))

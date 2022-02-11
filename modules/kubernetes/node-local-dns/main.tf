@@ -25,6 +25,13 @@ data "kubernetes_namespace" "this" {
   }
 }
 
+data "kubernetes_service" "this" {
+  metadata {
+    name      = "kube-dns"
+    namespace = data.kubernetes_namespace.this.metadata[0].name
+  }
+}
+
 resource "helm_release" "this" {
   chart       = "${path.module}/charts/node-local-dns"
   name        = "node-local-dns"
@@ -33,6 +40,6 @@ resource "helm_release" "this" {
 
   set {
     name  = "dnsServer"
-    value = var.dns_server
+    value = data.kubernetes_service.this.spec.cluster_ip
   }
 }

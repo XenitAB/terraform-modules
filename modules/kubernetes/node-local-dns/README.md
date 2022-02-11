@@ -27,12 +27,11 @@ No modules.
 |------|------|
 | [helm_release.this](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.6.1/docs/data-sources/namespace) | data source |
+| [kubernetes_service.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.6.1/docs/data-sources/service) | data source |
 
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_dns_server"></a> [dns\_server](#input\_dns\_server) | Core DNS server IP | `string` | `"10.0.0.10"` | no |
+No inputs.
 
 ## Outputs
 

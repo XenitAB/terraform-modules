@@ -32,6 +32,7 @@ variable "aks_config" {
       orchestrator_version = string
       node_labels          = map(string)
       os_disk_type         = string
+      os_disk_size_gb      = number
     })
     additional_node_pools = list(object({
       name                 = string
@@ -42,6 +43,7 @@ variable "aks_config" {
       node_taints          = list(string)
       node_labels          = map(string)
       os_disk_type         = string
+      os_disk_size_gb      = number
       spot_enabled         = bool
       spot_max_price       = number
     }))

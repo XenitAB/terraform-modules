@@ -40,6 +40,6 @@ resource "helm_release" "this" {
 
   set {
     name  = "dnsServer"
-    value = data.kubernetes_service.this.spec.cluster_ip
+    value = data.kubernetes_service.this.spec[0].cluster_ip
   }
 }

@@ -26,7 +26,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [helm_release.this](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
-| [kubernetes_namespace.kube_system](https://registry.terraform.io/providers/hashicorp/kubernetes/2.6.1/docs/data-sources/namespace) | data source |
+| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.6.1/docs/data-sources/namespace) | data source |
 
 ## Inputs
 

@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#542](https://github.com/XenitAB/terraform-modules/pull/542) Add node local DNS to resolve throughput issues related to slow DNS queries.
 
+### Fixed
+
+- [#545](https://github.com/XenitAB/terraform-modules/pull/545) Set prometheus disk size to 10Gi.
+
 ## 2022.02.2
 
 ### Added

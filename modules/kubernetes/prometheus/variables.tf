@@ -69,7 +69,7 @@ variable "volume_claim_storage_class_name" {
 variable "volume_claim_size" {
   description = "Size of prometheus disk"
   type        = string
-  default     = "5Gi"
+  default     = "10Gi"
 }
 
 variable "resource_selector" {

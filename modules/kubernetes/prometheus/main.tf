@@ -100,5 +100,6 @@ resource "helm_release" "prometheus_extras" {
     azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
     starboard_enabled                        = var.starboard_enabled
     grafana_agent_enabled                    = var.grafana_agent_enabled
+    node_local_dns_enabled                   = var.node_local_dns_enabled
   })]
 }

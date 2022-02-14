@@ -151,3 +151,9 @@ variable "vpa_enabled" {
   type        = bool
   default     = false
 }
+
+variable "node_local_dns_enabled" {
+  description = "Should node local DNS be enabled"
+  type        = bool
+  default     = false
+}

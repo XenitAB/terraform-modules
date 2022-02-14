@@ -32,6 +32,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`vpa`](vpa/README.md)
 - [`new-relic`](new-relic/README.md)
 - [`grafana-agent`](grafana-agent/README.md)
+- [`node-local-dns`](node-local-dns/README.md)
 
 ### Deprecated
 

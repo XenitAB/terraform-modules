@@ -65,3 +65,4 @@ enabledMonitors:
   azadKubeProxy: false
   starboard: false
   grafanaAgent: false
+  nodeLocalDNS: false

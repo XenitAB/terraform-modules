@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#542](https://github.com/XenitAB/terraform-modules/pull/542) Add node-local-dns
 
+## 2022.02.2
+
+### Added
+
+- [#543](https://github.com/XenitAB/terraform-modules/pull/543) [Breaking] Allow setting os_disk_type on kubernetes node pools. We recommend setting Ephemeral.
+
 ### Fixed
 
 - [#540](https://github.com/XenitAB/terraform-modules/pull/540) Add podAntiAffinity to Ingress-nginx.

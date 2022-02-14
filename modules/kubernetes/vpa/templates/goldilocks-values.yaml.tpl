@@ -10,7 +10,12 @@ controller:
       - apiGroups:
           - 'batch'
         resources:
-          - '*'
+          limits:
+            cpu: 50m
+            memory: 100Mi
+          requests:
+            cpu: 25m
+            memory: 32Mi
         verbs:
           - 'get'
           - 'list'

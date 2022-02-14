@@ -442,3 +442,9 @@ variable "azure_metrics_config" {
     resource_id = string
   })
 }
+
+variable "node_local_dns_enabled" {
+  description = "Should VPA be enabled"
+  type        = bool
+  default     = false
+}

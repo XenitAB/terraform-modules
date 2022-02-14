@@ -453,6 +453,7 @@ module "prometheus" {
   azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
   starboard_enabled                        = var.starboard_enabled
   vpa_enabled                              = var.vpa_enabled
+  node_local_dns_enabled                   = var.node_local_dns_enabled
 }
 
 # starboard
@@ -495,4 +496,17 @@ module "new_relic" {
   cluster_name      = "${var.name}${var.aks_name_suffix}-${var.environment}-${var.location_short}"
   license_key       = var.new_relic_config.license_key
   namespace_include = var.namespaces[*].name
+}
+
+# node-local-dns
+module "node_local_dns" {
+  depends_on = [module.opa_gatekeeper, module.prometheus]
+
+  for_each = {
+    for s in ["node-local-dns"] :
+    s => s
+    if var.node_local_dns_enabled
+  }
+
+  source = "../../kubernetes/node-local-dns"
 }

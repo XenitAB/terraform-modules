@@ -60,8 +60,6 @@ resource "azurerm_kubernetes_cluster" "this" {
     availability_zones           = ["1", "2", "3"]
     enable_auto_scaling          = false
     only_critical_addons_enabled = true
-    os_disk_type                 = var.aks_config.default_node_pool.os_disk_type
-    os_disk_size_gb              = var.aks_config.default_node_pool.os_disk_size_gb
 
     orchestrator_version = var.aks_config.default_node_pool.orchestrator_version
     node_count           = 1

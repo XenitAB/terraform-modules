@@ -33,8 +33,6 @@ module "aks" {
       node_labels = {
         "test" = "test"
       }
-      os_disk_type    = "Ephemeral"
-      os_disk_size_gb = 60
     }
     additional_node_pools = [
       {

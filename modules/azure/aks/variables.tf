@@ -31,8 +31,6 @@ variable "aks_config" {
     default_node_pool = object({
       orchestrator_version = string
       node_labels          = map(string)
-      os_disk_type         = string
-      os_disk_size_gb      = number
     })
     additional_node_pools = list(object({
       name                 = string

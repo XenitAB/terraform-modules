@@ -31,7 +31,7 @@ resources:
 
 volumeClaim:
   storageClassName: default
-  size: 5Gi
+  size: 10Gi
 
 remoteWrite:
   authenticated: true

@@ -10,7 +10,7 @@ spec:
     - port: web
   selector:
     matchLabels:
-      app: prometheus
+      app.kubernetes.io/name: prometheus
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor

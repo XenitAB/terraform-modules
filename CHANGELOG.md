@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#549](https://github.com/XenitAB/terraform-modules/pull/549) Add resource requests & limits for goldilocks.
 - [#548](https://github.com/XenitAB/terraform-modules/pull/548) Enable grafana-agent in Prometheus.
+- [#551](https://github.com/XenitAB/terraform-modules/pull/551) Fix pod label selector for Prometheus monitor.
 
 ## 2022.02.3
 

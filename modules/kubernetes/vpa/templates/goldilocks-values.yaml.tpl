@@ -15,3 +15,10 @@ controller:
           - 'get'
           - 'list'
           - 'watch'
+  resources:
+    limits:
+      cpu: 50m
+      memory: 100Mi
+    requests:
+      cpu: 25m
+      memory: 32Mi

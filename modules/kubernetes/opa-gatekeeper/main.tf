@@ -113,6 +113,8 @@ resource "kubernetes_namespace" "this" {
       name                             = "gatekeeper-system"
       "admission.gatekeeper.sh/ignore" = "no-self-managing"
       "xkf.xenit.io/kind"              = "platform"
+      "control-plane"                  = "controller-manager"
+      "gatekeeper.sh/system"           = "yes"
     }
     name = "gatekeeper-system"
   }

@@ -31,11 +31,11 @@ kube-state-metrics:
     enabled: false
   metricLabelsAllowlist:
     - "namespaces=[xkf.xenit.io/kind]"
-  %{ if vpa_enabled }
-  # specificly add verticalpodautoscalers to collectors
   collectors:
+    # Disable collection of configmaps and secrets to reduce amount of metrics
+    #- configmaps
+    #- secrets
     - certificatesigningrequests
-    - configmaps
     - cronjobs
     - daemonsets
     - deployments
@@ -55,12 +55,13 @@ kube-state-metrics:
     - replicasets
     - replicationcontrollers
     - resourcequotas
-    - secrets
     - services
     - statefulsets
     - storageclasses
     - validatingwebhookconfigurations
     - volumeattachments
+  # Specificly add verticalpodautoscalers to collectors
+  %{ if vpa_enabled }
     - verticalpodautoscalers # not a default resource, see also: https://github.com/kubernetes/kube-state-metrics#enabling-verticalpodautoscalers
   %{ endif }
   prometheus:

@@ -189,7 +189,7 @@ resource "kubernetes_role_binding" "starboard_reports" {
   }
 }
 
-resource "kubernetes_role_binding" "get-node" {
+resource "kubernetes_role_binding" "get_node" {
   for_each = { for ns in var.namespaces : ns.name => ns }
   metadata {
     name      = "${each.value.name}-get-node"
@@ -202,7 +202,7 @@ resource "kubernetes_role_binding" "get-node" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.get-node.metadata[0].name
+    name      = kubernetes_cluster_role.get_node.metadata[0].name
   }
   subject {
     api_group = "rbac.authorization.k8s.io"

@@ -81,7 +81,7 @@ resource "kubernetes_cluster_role" "starboard_reports" {
   }
 }
 
-resource "kubernetes_cluster_role" "get-node" {
+resource "kubernetes_cluster_role" "get_node" {
   metadata {
     name = "get-node"
     labels = {

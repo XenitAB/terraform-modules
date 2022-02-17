@@ -10,6 +10,11 @@ locals {
     }
   ]
 
+  # If subnet is not defined in var.subnet_private_endpoints default it to false
+  subnet_private_endpoints = {
+    for subnet in local.subnets : subnet.subnet_short_name => try(var.subnet_private_endpoints[subnet.subnet_short_name], false)
+  }
+
   peerings = [
     for peering_config in var.peering_config : {
       name           = "${var.environment}-${var.location_short}-${var.name}-${peering_config.name}"

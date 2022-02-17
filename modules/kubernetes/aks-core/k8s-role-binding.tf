@@ -188,3 +188,25 @@ resource "kubernetes_role_binding" "starboard_reports" {
     name      = var.aad_groups.edit[each.key].id
   }
 }
+
+resource "kubernetes_role_binding" "get-node" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+  metadata {
+    name      = "${each.value.name}-get-node"
+    namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
+    labels = {
+      "aad-group-name"    = var.aad_groups.edit[each.key].name
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = kubernetes_cluster_role.get-node.metadata[0].name
+  }
+  subject {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "Group"
+    name      = var.aad_groups.edit[each.key].id
+  }
+}

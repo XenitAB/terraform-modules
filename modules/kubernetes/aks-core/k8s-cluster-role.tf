@@ -80,3 +80,17 @@ resource "kubernetes_cluster_role" "starboard_reports" {
     verbs      = ["get", "list", "watch", "update", "delete"]
   }
 }
+
+resource "kubernetes_cluster_role" "get_node" {
+  metadata {
+    name = "get-node"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  rule {
+    api_groups = ["metrics.k8s.io"]
+    resources  = ["nodes"]
+    verbs      = ["get", "list", "watch"]
+  }
+}

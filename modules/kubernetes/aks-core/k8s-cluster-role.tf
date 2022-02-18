@@ -41,6 +41,7 @@ resource "kubernetes_cluster_role" "custom_resource_edit" {
       "notification.toolkit.fluxcd.io",
       "datadogmetrics.datadoghq.com",
       "datadogmonitors.datadoghq.com",
+      "secrets-store.csi.x-k8s.io",
     ]
     resources = ["*"]
     verbs     = ["*"]

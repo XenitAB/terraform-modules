@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#548](https://github.com/XenitAB/terraform-modules/pull/548) Enable grafana-agent in Prometheus.
 - [#558](https://github.com/XenitAB/terraform-modules/pull/558) Add ClusterRole `kubectl get nodes` to tenants.
 - [#560](https://github.com/XenitAB/terraform-modules/pull/560) Add SecretProviderClass CRD to ClusterRole `custom_resource_edit`.
+- [#563](https://github.com/XenitAB/terraform-modules/pull/563) Upgrade azurerm provider in aks to 2.97.0
 
 ### Changed
 

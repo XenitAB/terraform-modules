@@ -3,12 +3,13 @@ controller:
 
   priorityClassName: platform-medium
 
-  ingressClass: ${ingress_class}
-
-  # https://github.com/kubernetes/ingress-nginx/issues/5593#issuecomment-647538272
   ingressClassResource:
-    enabled: true
+    name: ${ingress_class}
     default: ${default_ingress_class}
+    controllerValue: "k8s.io/ingress-${ingress_class}"
+  
+  # Should eventually be removed as ingress class annotations are deprecated
+  ingressClass: ${ingress_class}
 
   %{~ if provider == "aws" ~}
   # Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.

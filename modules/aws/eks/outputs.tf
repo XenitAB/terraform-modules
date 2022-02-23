@@ -53,6 +53,6 @@ output "prometheus_config" {
 output "starboard_config" {
   description = "Configuration for Starboard"
   value = {
-    role_arn = module.starboard_ecr.role_arn
+    role_arn = module.starboard_ecr["starboard"].role_arn
   }
 }

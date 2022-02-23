@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Fixed
+
+- [#570](https://github.com/XenitAB/terraform-modules/pull/570) Only add network policy for Datadog / Grafana-Agent if default deny is true
+
 ## 2022.02.4
 
 ### Added
@@ -49,7 +53,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- [#522](https://github.com/XenitAB/terraform-modules/pull/522) Add  networkpolicy for datadog and grafana-agent to tenant namespace.
+- [#522](https://github.com/XenitAB/terraform-modules/pull/522) Add networkpolicy for datadog and grafana-agent to tenant namespace.
 
 ### Changed
 

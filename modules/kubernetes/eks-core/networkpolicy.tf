@@ -2,7 +2,7 @@ resource "kubernetes_network_policy" "allow_egress_datadog" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
-    if var.datadog_enabled
+    if var.datadog_enabled && var.kubernetes_network_policy_default_deny
   }
 
   metadata {
@@ -45,7 +45,7 @@ resource "kubernetes_network_policy" "allow_egress_ingress_grafana_agent" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
-    if var.grafana_agent_enabled
+    if var.grafana_agent_enabled && var.kubernetes_network_policy_default_deny
   }
 
   metadata {

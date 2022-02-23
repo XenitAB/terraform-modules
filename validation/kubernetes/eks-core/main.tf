@@ -80,6 +80,12 @@ module "eks_core" {
     allow_snippet_annotations = false
   }
 
+  starboard_enabled = true
+
+  starboard_config = {
+    role_arn = "arn1234"
+  }
+
   prometheus_enabled = true
   prometheus_config = {
     role_arn = "foo"

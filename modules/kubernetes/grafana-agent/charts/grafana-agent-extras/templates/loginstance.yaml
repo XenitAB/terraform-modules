@@ -19,8 +19,9 @@ spec:
           name: {{ .Values.credentialsSecretName }}
           key: logs_password
   podLogsNamespaceSelector:
-    matchLabels:
-      xkf.xenit.io/kind: tenant
+    matchExpressions:
+      - key: "xkf.xenit.io/kind"
+        operator: "Exists"
   podLogsSelector:
     matchLabels:
       xkf.xenit.io/monitoring: tenant

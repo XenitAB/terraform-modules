@@ -22,6 +22,8 @@ module "grafana_agent" {
     traces_password  = "bar"
   }
 
-  cluster_name = "aks1"
-  environment  = "dev"
+  cluster_name      = "aks1"
+  environment       = "dev"
+  vpa_enabled       = false
+  tenant_namespaces = ["foobar"]
 }

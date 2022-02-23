@@ -41,12 +41,12 @@ variable "vpa_enabled" {
   default     = false
 }
 
-variable "tenant_namespaces" {
-  description = "A list of the tenant namespaces used by kube-state-metrics"
+variable "namespace_include" {
+  description = "A list of the namespaces that kube-state-metrics should create metrics for"
   type        = list(string)
 
   validation {
-    condition     = length(var.tenant_namespaces) > 0
-    error_message = "The tenant_namespaces needs to at least contain one namespace in the list."
+    condition     = length(var.namespace_include) > 0
+    error_message = "The namespace_include needs to at least contain one namespace in the list."
   }
 }

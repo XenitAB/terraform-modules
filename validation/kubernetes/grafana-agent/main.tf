@@ -25,5 +25,5 @@ module "grafana_agent" {
   cluster_name      = "aks1"
   environment       = "dev"
   vpa_enabled       = false
-  tenant_namespaces = ["foobar"]
+  namespace_include = ["foobar"]
 }

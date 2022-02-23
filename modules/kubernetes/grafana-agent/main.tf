@@ -109,8 +109,8 @@ locals {
   })
 
   kube_state_metrics_values = templatefile("${path.module}/templates/kube-state-metrics-values.yaml.tpl", {
-    vpa_enabled           = var.vpa_enabled
-    tenant_namespaces_csv = join(",", var.tenant_namespaces)
+    vpa_enabled    = var.vpa_enabled
+    namespaces_csv = join(",", var.namespace_include)
   })
 }
 

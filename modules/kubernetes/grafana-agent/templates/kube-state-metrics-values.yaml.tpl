@@ -3,7 +3,7 @@ podSecurityPolicy:
   enabled: false
 metricLabelsAllowlist:
   - "namespaces=[xkf.xenit.io/kind]"
-namespaces: ${tenant_namespaces_csv}
+namespaces: ${namespaces_csv}
 collectors:
   # Disable collection of configmaps and secrets to reduce amount of metrics
   #- configmaps

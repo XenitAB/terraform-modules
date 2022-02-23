@@ -38,7 +38,7 @@ resource "helm_release" "cert_manager" {
   chart       = "cert-manager"
   name        = "cert-manager"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v1.6.1"
+  version     = "v1.7.1"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     provider   = var.cloud_provider,

@@ -192,9 +192,12 @@ data "aws_iam_policy_document" "starboard_ecr_read_only" {
   statement {
     effect = "Allow"
     actions = [
-      "ecr:*",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:BatchGetImage",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:GetAuthorizationToken"
     ]
-    resources = ["arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"]
+    resources = ["*"]
   }
 }
 

@@ -238,7 +238,7 @@ module "trivy_ecr" {
       arn = aws_iam_openid_connect_provider.this.arn
     }
   ]
-  kubernetes_namespace       = "trivy"
+  kubernetes_namespace       = "starboard-operator"
   kubernetes_service_account = "trivy"
   policy_json                = data.aws_iam_policy_document.starboard_ecr_read_only.json
 }

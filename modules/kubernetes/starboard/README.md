@@ -38,7 +38,6 @@ No modules.
 | [helm_release.trivy](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
 | [helm_release.trivy_extras](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
 | [kubernetes_namespace.starboard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.6.1/docs/resources/namespace) | resource |
-| [kubernetes_namespace.trivy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.6.1/docs/resources/namespace) | resource |
 
 ## Inputs
 

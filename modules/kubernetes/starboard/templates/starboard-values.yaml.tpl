@@ -10,7 +10,7 @@ trivy:
   mode: ClientServer
   severity: MEDIUM,HIGH,CRITICAL
   ignoreUnfixed: true
-  serverURL: "http://trivy.trivy.svc.cluster.local:4954"
+  serverURL: "http://trivy.starboard-operator.svc.cluster.local:4954"
   # The trivy image have to match with the trivy server
   imageRef: docker.io/aquasec/trivy:0.23.0
 

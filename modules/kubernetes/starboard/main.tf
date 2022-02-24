@@ -37,16 +37,6 @@ resource "kubernetes_namespace" "starboard" {
   }
 }
 
-resource "kubernetes_namespace" "trivy" {
-  metadata {
-    labels = {
-      name                = "trivy"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "trivy"
-  }
-}
-
 resource "helm_release" "starboard" {
   repository  = "https://aquasecurity.github.io/helm-charts/"
   chart       = "starboard-operator"
@@ -75,7 +65,7 @@ resource "helm_release" "trivy" {
   repository  = "https://aquasecurity.github.io/helm-charts/"
   chart       = "trivy"
   name        = "trivy"
-  namespace   = kubernetes_namespace.trivy.metadata[0].name
+  namespace   = kubernetes_namespace.starboard.metadata[0].name
   version     = "0.4.10" # TODO update to 0.4.11 when released
   max_history = 3
   values = [templatefile("${path.module}/templates/trivy-values.yaml.tpl", {
@@ -88,7 +78,7 @@ resource "helm_release" "trivy" {
 resource "helm_release" "trivy_extras" {
   chart     = "${path.module}/charts/trivy-extras"
   name      = "trivy-extras"
-  namespace = kubernetes_namespace.trivy.metadata[0].name
+  namespace = kubernetes_namespace.starboard.metadata[0].name
 
   set {
     name  = "resourceID"

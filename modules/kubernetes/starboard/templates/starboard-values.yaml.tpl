@@ -31,5 +31,5 @@ operator:
 %{~ if provider == "aws" ~}
 serviceAccount:
   annotations:
-    eks.amazonaws.com/role-arn: ${role_arn}
+    eks.amazonaws.com/role-arn: ${starboard_role_arn}
 %{~ endif ~}

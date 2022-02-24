@@ -55,8 +55,8 @@ resource "helm_release" "starboard" {
   version     = "0.9.1"
   max_history = 3
   values = [templatefile("${path.module}/templates/starboard-values.yaml.tpl", {
-    provider = var.cloud_provider
-    role_arn = var.starboard_role_arn
+    provider           = var.cloud_provider
+    starboard_role_arn = var.starboard_role_arn
   })]
 }
 
@@ -79,7 +79,7 @@ resource "helm_release" "trivy" {
   version     = "0.4.10" # TODO update to 0.4.11 when released
   max_history = 3
   values = [templatefile("${path.module}/templates/trivy-values.yaml.tpl", {
-    provider = var.cloud_provider
-    role_arn = var.trivy_role_arn
+    provider       = var.cloud_provider
+    trivy_role_arn = var.trivy_role_arn
   })]
 }

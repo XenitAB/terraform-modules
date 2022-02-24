@@ -83,7 +83,8 @@ module "eks_core" {
   starboard_enabled = true
 
   starboard_config = {
-    role_arn = "arn1234"
+    starboard_role_arn = "arn1234"
+    trivy_role_arn     = "arn1234"
   }
 
   prometheus_enabled = true

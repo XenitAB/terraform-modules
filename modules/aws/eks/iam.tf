@@ -221,3 +221,24 @@ module "starboard_ecr" {
   kubernetes_service_account = "starboard-operator"
   policy_json                = data.aws_iam_policy_document.starboard_ecr_read_only.json
 }
+
+module "trivy_ecr" {
+  source = "../irsa"
+
+  for_each = {
+    for s in ["trivy"] :
+    s => s
+    if var.starboard_enabled
+  }
+
+  name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}-trivy-ecr"
+  oidc_providers = [
+    {
+      url = aws_iam_openid_connect_provider.this.url
+      arn = aws_iam_openid_connect_provider.this.arn
+    }
+  ]
+  kubernetes_namespace       = "trivy"
+  kubernetes_service_account = "trivy"
+  policy_json                = data.aws_iam_policy_document.starboard_ecr_read_only.json
+}

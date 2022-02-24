@@ -336,9 +336,10 @@ variable "starboard_enabled" {
 }
 
 variable "starboard_config" {
-  description = "Configuration for starboard"
+  description = "Configuration for starboard & trivy"
   type = object({
-    role_arn = string
+    starboard_role_arn = string
+    trivy_role_arn     = string
   })
 }
 

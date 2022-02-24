@@ -25,6 +25,7 @@
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../irsa | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../irsa | n/a |
 | <a name="module_starboard_ecr"></a> [starboard\_ecr](#module\_starboard\_ecr) | ../irsa | n/a |
+| <a name="module_trivy_ecr"></a> [trivy\_ecr](#module\_trivy\_ecr) | ../irsa | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../irsa | n/a |
 
 ## Resources

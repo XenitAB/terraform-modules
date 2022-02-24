@@ -1,7 +1,6 @@
 postInstall:
   labelNamespace:
     enabled: false
-experimentalEnableMutation: true
 controllerManager:
   %{~ if provider == "aws" ~}
   hostNetwork: true
@@ -23,3 +22,5 @@ audit:
   metricsPort: 8013
   healthPort: 8014
   %{~ endif ~}
+psp:
+  enabled: false

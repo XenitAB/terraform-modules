@@ -33,3 +33,10 @@ serviceAccount:
   annotations:
     eks.amazonaws.com/role-arn: ${starboard_role_arn}
 %{~ endif ~}
+
+%{~ if provider == "azure" ~}
+starboard:
+  # scanJobPodTemplateLabels comma-separated representation of the labels which the user wants the scanner pods to be
+  # labeled with. Example: `foo=bar,env=stage` will labeled the scanner pods with the labels `foo: bar` and `env: stage`
+  scanJobPodTemplateLabels: "aadpodidbinding=trivy"
+%{~ endif ~}

@@ -83,3 +83,20 @@ resource "helm_release" "trivy" {
     trivy_role_arn = var.trivy_role_arn
   })]
 }
+
+// If cloudPoriveer == Azure
+resource "helm_release" "trivy_extras" {
+  chart     = "${path.module}/charts/trivy-extras"
+  name      = "trivy-extras"
+  namespace = kubernetes_namespace.trivy.metadata[0].name
+
+  set {
+    name  = "resourceID"
+    value = var.resource_id
+  }
+
+  set {
+    name  = "clientID"
+    value = var.client_id
+  }
+}

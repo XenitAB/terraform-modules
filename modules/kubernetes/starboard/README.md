@@ -36,6 +36,7 @@ No modules.
 | [helm_release.starboard](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
 | [helm_release.starboard_exporter](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
 | [helm_release.trivy](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
+| [helm_release.trivy_extras](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
 | [kubernetes_namespace.starboard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.6.1/docs/resources/namespace) | resource |
 | [kubernetes_namespace.trivy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.6.1/docs/resources/namespace) | resource |
 
@@ -43,7 +44,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_client_id"></a> [client\_id](#input\_client\_id) | Azure specific, the client\_id for aadpodidentity with access to ACR | `string` | `""` | no |
 | <a name="input_cloud_provider"></a> [cloud\_provider](#input\_cloud\_provider) | Cloud provider used for starboard | `string` | n/a | yes |
+| <a name="input_resource_id"></a> [resource\_id](#input\_resource\_id) | Azure specific, the resource\_id for aadpodidentity to the resource | `string` | `""` | no |
 | <a name="input_starboard_role_arn"></a> [starboard\_role\_arn](#input\_starboard\_role\_arn) | starboard role arn used to download ECR images, this only applies to AWS | `string` | `""` | no |
 | <a name="input_trivy_role_arn"></a> [trivy\_role\_arn](#input\_trivy\_role\_arn) | trivy role arn used to download ECR images, this only applies to AWS | `string` | `""` | no |
 

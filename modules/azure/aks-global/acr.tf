@@ -53,3 +53,21 @@ resource "azurerm_role_assignment" "acr_reader" {
   role_definition_name = "Reader"
   principal_id         = data.azuread_group.acr_reader.id
 }
+
+resource "azurerm_user_assigned_identity" "trivy" {
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
+  name                = "uai-${var.environment}-${var.location_short}-${var.name}-trivy"
+}
+
+resource "azurerm_role_assignment" "trivy_managed" {
+  scope                = azurerm_user_assigned_identity.trivy.id
+  role_definition_name = "Managed Identity Operator"
+  principal_id         = azurerm_user_assigned_identity.trivy.principal_id
+}
+
+resource "azurerm_role_assignment" "trivy_acr" {
+  scope                = azurerm_container_registry.acr.id
+  role_definition_name = "AcrPull"
+  principal_id         = azurerm_user_assigned_identity.trivy.principal_id
+}

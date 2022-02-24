@@ -56,6 +56,8 @@ No modules.
 | [azurerm_role_assignment.external_dns_msi](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.external_dns_rg_read](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.external_storage_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.trivy_acr](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.trivy_managed](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.velero_msi](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.velero_rg_read](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/role_assignment) | resource |
@@ -63,6 +65,7 @@ No modules.
 | [azurerm_storage_container.velero](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/storage_container) | resource |
 | [azurerm_user_assigned_identity.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.external_dns](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/user_assigned_identity) | resource |
+| [azurerm_user_assigned_identity.trivy](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.velero](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/2.97.0/docs/resources/user_assigned_identity) | resource |
 | [random_password.helm_operator](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) | resource |
@@ -111,5 +114,6 @@ No modules.
 | <a name="output_helm_operator_credentials"></a> [helm\_operator\_credentials](#output\_helm\_operator\_credentials) | Credentials meant to be used by Helm Operator |
 | <a name="output_namespaces"></a> [namespaces](#output\_namespaces) | Kubernetes namespaces |
 | <a name="output_ssh_public_key"></a> [ssh\_public\_key](#output\_ssh\_public\_key) | SSH public key to add to servers |
+| <a name="output_trivy_identity"></a> [trivy\_identity](#output\_trivy\_identity) | MSI authentication identity for Trivy image scaning |
 | <a name="output_velero"></a> [velero](#output\_velero) | Velero configuration |
 | <a name="output_xenit"></a> [xenit](#output\_xenit) | Configuration used by monitoring solution to get authentication credentials |

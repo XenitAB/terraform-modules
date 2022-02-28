@@ -16,20 +16,23 @@ spec:
           name: {{ .Values.credentialsSecretName }}
           key: metrics_password
   serviceMonitorNamespaceSelector:
-    matchLabels:
-      xkf.xenit.io/kind: tenant
+    matchExpressions:
+      - key: "xkf.xenit.io/kind"
+        operator: "Exists"
   serviceMonitorSelector:
     matchLabels:
       xkf.xenit.io/monitoring: tenant
   podMonitorNamespaceSelector:
-    matchLabels:
-      xkf.xenit.io/kind: tenant
+    matchExpressions:
+      - key: "xkf.xenit.io/kind"
+        operator: "Exists"
   podMonitorSelector:
     matchLabels:
       xkf.xenit.io/monitoring: tenant
   probeNamespaceSelector:
-    matchLabels:
-      xkf.xenit.io/kind: tenant
+    matchExpressions:
+      - key: "xkf.xenit.io/kind"
+        operator: "Exists"
   probeSelector:
     matchLabels:
       xkf.xenit.io/monitoring: tenant

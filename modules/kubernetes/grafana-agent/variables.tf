@@ -34,3 +34,19 @@ variable "environment" {
   description = "the name of the environment"
   type        = string
 }
+
+variable "vpa_enabled" {
+  description = "Should vpa be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "namespace_include" {
+  description = "A list of the namespaces that kube-state-metrics should create metrics for"
+  type        = list(string)
+
+  validation {
+    condition     = length(var.namespace_include) > 0
+    error_message = "The namespace_include needs to at least contain one namespace in the list."
+  }
+}

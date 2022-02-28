@@ -300,6 +300,7 @@ variable "grafana_agent_config" {
       traces_username  = string
       traces_password  = string
     })
+    extra_namespaces = list(string)
   })
   default = {
     remote_write_urls = {
@@ -315,6 +316,7 @@ variable "grafana_agent_config" {
       traces_username  = ""
       traces_password  = ""
     }
+    extra_namespaces = []
   }
 }
 

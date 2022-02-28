@@ -107,6 +107,11 @@ locals {
   operator_values = templatefile("${path.module}/templates/operator-values.yaml.tpl", {
     namespace = kubernetes_namespace.this.metadata[0].name
   })
+
+  kube_state_metrics_values = templatefile("${path.module}/templates/kube-state-metrics-values.yaml.tpl", {
+    vpa_enabled    = var.vpa_enabled
+    namespaces_csv = join(",", var.namespace_include)
+  })
 }
 
 resource "helm_release" "grafana_agent_operator" {
@@ -128,4 +133,16 @@ resource "helm_release" "grafana_agent_extras" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   max_history = 3
   values      = [local.extras_values]
+}
+
+
+resource "helm_release" "kube_state_metrics" {
+  repository  = "https://prometheus-community.github.io/helm-charts"
+  chart       = "kube-state-metrics"
+  name        = "kube-state-metrics"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "4.5.0"
+  max_history = 3
+
+  values = [local.kube_state_metrics_values]
 }

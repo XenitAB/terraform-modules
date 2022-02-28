@@ -3,7 +3,7 @@ resources:
     cpu: 25m
     memory: 80Mi
   limits:
-    memory: 120Mi
+    memory: 256Mi
 
 kubeletService:
   namespace:  ${namespace}

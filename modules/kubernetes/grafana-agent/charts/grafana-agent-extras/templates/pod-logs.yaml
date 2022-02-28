@@ -9,5 +9,8 @@ spec:
     matchLabels:
       app.kubernetes.io/component: controller
       app.kubernetes.io/name: ingress-nginx
-  pipelineStages:
+  namespaceSelector:
+    matchNames:
+    - ingress-nginx
+   pipelineStages:
     - cri: {}

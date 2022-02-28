@@ -76,6 +76,12 @@ resource "helm_release" "trivy" {
 
 // If cloudPoriveer == Azure
 resource "helm_release" "trivy_extras" {
+  for_each = {
+    for s in ["trivy_extras"] :
+    s => s
+    if var.cloud_provider == "azure"
+  }
+
   chart     = "${path.module}/charts/trivy-extras"
   name      = "trivy-extras"
   namespace = kubernetes_namespace.starboard.metadata[0].name

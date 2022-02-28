@@ -15,8 +15,8 @@ If you are running on AWS we also install [Metrics server](https://aws.amazon.co
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.1.1 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.1.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.3.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.6.1 |
 
 ## Modules
 

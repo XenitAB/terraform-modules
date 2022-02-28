@@ -74,7 +74,6 @@ resource "helm_release" "trivy" {
   })]
 }
 
-// If cloudPoriveer == Azure
 resource "helm_release" "trivy_extras" {
   for_each = {
     for s in ["trivy_extras"] :

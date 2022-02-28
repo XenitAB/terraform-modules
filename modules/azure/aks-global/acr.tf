@@ -63,7 +63,7 @@ resource "azurerm_user_assigned_identity" "trivy" {
 resource "azurerm_role_assignment" "trivy_managed" {
   scope                = azurerm_user_assigned_identity.trivy.id
   role_definition_name = "Managed Identity Operator"
-  principal_id         = azurerm_user_assigned_identity.trivy.principal_id
+  principal_id         = azuread_group.aks_managed_identity.id
 }
 
 resource "azurerm_role_assignment" "trivy_acr" {

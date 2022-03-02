@@ -30,6 +30,7 @@
 
 | Name | Type |
 |------|------|
+| [aws_cloudwatch_log_group.this](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/cloudwatch_log_group) | resource |
 | [aws_eks_addon.core_dns](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/eks_addon) | resource |
 | [aws_eks_addon.kube_proxy](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/eks_addon) | resource |
 | [aws_eks_cluster.this](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/eks_cluster) | resource |
@@ -54,6 +55,7 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aws_kms_key_arn"></a> [aws\_kms\_key\_arn](#input\_aws\_kms\_key\_arn) | eks secrets customer master key | `string` | n/a | yes |
+| <a name="input_cloudwatch_aws_kms_key_arn"></a> [cloudwatch\_aws\_kms\_key\_arn](#input\_cloudwatch\_aws\_kms\_key\_arn) | cloudwatch encryption | `string` | n/a | yes |
 | <a name="input_cluster_role_arn"></a> [cluster\_role\_arn](#input\_cluster\_role\_arn) | IAM role to attach to EKS cluster | `string` | n/a | yes |
 | <a name="input_eks_authorized_ips"></a> [eks\_authorized\_ips](#input\_eks\_authorized\_ips) | Authorized IPs to access EKS API | `list(string)` | n/a | yes |
 | <a name="input_eks_config"></a> [eks\_config](#input\_eks\_config) | The EKS Config | <pre>object({<br>    kubernetes_version = string<br>    cidr_block         = string<br>    node_groups = list(object({<br>      name            = string<br>      release_version = string<br>      min_size        = number<br>      max_size        = number<br>      instance_types  = list(string)<br>    }))<br>  })</pre> | n/a | yes |

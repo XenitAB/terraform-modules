@@ -37,6 +37,8 @@ resource "aws_eks_cluster" "this" {
   role_arn = var.cluster_role_arn
   version  = var.eks_config.kubernetes_version
 
+  enabled_cluster_log_types = ["api", "audit"]
+
   #tfsec:ignore:AWS069 tfsec:ignore:AWS068
   vpc_config {
     subnet_ids              = [for s in data.aws_subnet.cluster : s.id]
@@ -50,6 +52,14 @@ resource "aws_eks_cluster" "this" {
       key_arn = var.aws_kms_key_arn
     }
   }
+
+  tags = local.global_tags
+}
+
+resource "aws_cloudwatch_log_group" "this" {
+  name              = "/aws/eks/${aws_eks_cluster.this.name}/cluster"
+  retention_in_days = 30
+  kms_key_id        = var.cloudwatch_aws_kms_key_arn
 
   tags = local.global_tags
 }

@@ -80,7 +80,7 @@ resource "aws_kms_key" "cloudwatch_encryption" {
     },
     {
       "Effect": "Allow",
-      "Principal": { "Service": "logs.${var.region}.amazonaws.com" },
+      "Principal": { "Service": "logs.${data.aws_region.current.name}.amazonaws.com" },
       "Action": [
         "kms:Encrypt*",
         "kms:Decrypt*",
@@ -109,7 +109,7 @@ EOF
 resource "aws_cloudwatch_log_group" "this" {
   name              = "/aws/eks/${local.eks_cluster_name}}/cluster"
   retention_in_days = var.eks_cloudwatch_retention_period
-  kms_key_id        = var.cloudwatch_aws_kms_key_arn
+  kms_key_id        = aws_kms_key.cloudwatch_encryption.arn
 
   tags = local.global_tags
 }

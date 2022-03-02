@@ -36,6 +36,7 @@
 | [aws_eks_cluster.this](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/eks_cluster) | resource |
 | [aws_eks_node_group.this](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/eks_node_group) | resource |
 | [aws_iam_openid_connect_provider.this](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/iam_openid_connect_provider) | resource |
+| [aws_kms_key.cloudwatch_encryption](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/kms_key) | resource |
 | [aws_launch_template.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/launch_template) | resource |
 | [null_resource.update_eks_cni](https://registry.terraform.io/providers/hashicorp/null/3.1.0/docs/resources/resource) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/caller_identity) | data source |
@@ -55,7 +56,6 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aws_kms_key_arn"></a> [aws\_kms\_key\_arn](#input\_aws\_kms\_key\_arn) | eks secrets customer master key | `string` | n/a | yes |
-| <a name="input_cloudwatch_aws_kms_key_arn"></a> [cloudwatch\_aws\_kms\_key\_arn](#input\_cloudwatch\_aws\_kms\_key\_arn) | cloudwatch encryption | `string` | n/a | yes |
 | <a name="input_cluster_role_arn"></a> [cluster\_role\_arn](#input\_cluster\_role\_arn) | IAM role to attach to EKS cluster | `string` | n/a | yes |
 | <a name="input_eks_authorized_ips"></a> [eks\_authorized\_ips](#input\_eks\_authorized\_ips) | Authorized IPs to access EKS API | `list(string)` | n/a | yes |
 | <a name="input_eks_cloudwatch_retention_period"></a> [eks\_cloudwatch\_retention\_period](#input\_eks\_cloudwatch\_retention\_period) | cloudwatch | `number` | `30` | no |

@@ -55,11 +55,6 @@ variable "aws_kms_key_arn" {
   type        = string
 }
 
-variable "cloudwatch_aws_kms_key_arn" {
-  description = "cloudwatch encryption"
-  type        = string
-}
-
 variable "velero_config" {
   description = "Configuration for Velero"
   type = object({

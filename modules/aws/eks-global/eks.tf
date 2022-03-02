@@ -11,19 +11,6 @@ resource "aws_kms_key" "eks_encryption" {
   )
 }
 
-# CloudWatch Encrytion
-resource "aws_kms_key" "cloudwatch_encryption" {
-  description         = "Used for cloudwatch encryption"
-  enable_key_rotation = true
-
-  tags = merge(
-    local.global_tags,
-    {
-      Name = "CloudWatch Encrytion"
-    },
-  )
-}
-
 # EKS Admin
 data "aws_iam_policy_document" "eks_admin_permission" {
   statement {

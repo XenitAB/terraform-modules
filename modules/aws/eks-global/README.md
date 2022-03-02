@@ -25,7 +25,6 @@ No modules.
 | [aws_iam_role.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/iam_role) | resource |
 | [aws_iam_role.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/iam_role) | resource |
 | [aws_iam_role.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/iam_role) | resource |
-| [aws_kms_key.cloudwatch_encryption](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/kms_key) | resource |
 | [aws_kms_key.eks_encryption](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/kms_key) | resource |
 | [aws_kms_key.velero](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/kms_key) | resource |
 | [aws_s3_bucket.velero](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/s3_bucket) | resource |
@@ -64,7 +63,6 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_aad_groups"></a> [aad\_groups](#output\_aad\_groups) | Azure AD groups |
-| <a name="output_cloudwatch_encryption_key_arn"></a> [cloudwatch\_encryption\_key\_arn](#output\_cloudwatch\_encryption\_key\_arn) | KMS key to be used for Cloudwatch secret encryption |
 | <a name="output_cluster_role_arn"></a> [cluster\_role\_arn](#output\_cluster\_role\_arn) | EKS cluster IAM role |
 | <a name="output_eks_admin_role_arn"></a> [eks\_admin\_role\_arn](#output\_eks\_admin\_role\_arn) | ARN for IAM role that should be used to create an EKS cluster |
 | <a name="output_eks_encryption_key_arn"></a> [eks\_encryption\_key\_arn](#output\_eks\_encryption\_key\_arn) | KMS key to be used for EKS secret encryption |

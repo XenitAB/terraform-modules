@@ -26,11 +26,6 @@ output "eks_encryption_key_arn" {
   value       = aws_kms_key.eks_encryption.arn
 }
 
-output "cloudwatch_encryption_key_arn" {
-  description = "KMS key to be used for Cloudwatch secret encryption"
-  value       = aws_kms_key.cloudwatch_encryption.arn
-}
-
 output "aad_groups" {
   description = "Azure AD groups"
   value       = local.aad_groups

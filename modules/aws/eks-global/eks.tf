@@ -11,7 +11,7 @@ resource "aws_kms_key" "eks_encryption" {
   )
 }
 
-# EKS Encrytion
+# CloudWatch Encrytion
 resource "aws_kms_key" "cloudwatch_encryption" {
   description         = "Used for cloudwatch encryption"
   enable_key_rotation = true
@@ -19,7 +19,7 @@ resource "aws_kms_key" "cloudwatch_encryption" {
   tags = merge(
     local.global_tags,
     {
-      Name = "EKS Encrytion"
+      Name = "CloudWatch Encrytion"
     },
   )
 }

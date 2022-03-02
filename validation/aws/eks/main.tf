@@ -35,10 +35,9 @@ module "eks" {
       },
     ]
   }
-  cluster_role_arn           = "arn:partition:service:region:account-id:resource-id"
-  node_group_role_arn        = "arn:partition:service:region:account-id:resource-id"
-  aws_kms_key_arn            = "arn:partition:service:region:account-id:resource-id"
-  cloudwatch_aws_kms_key_arn = "arn:partition:service:region:account-id:resource-id"
+  cluster_role_arn    = "arn:partition:service:region:account-id:resource-id"
+  node_group_role_arn = "arn:partition:service:region:account-id:resource-id"
+  aws_kms_key_arn     = "arn:partition:service:region:account-id:resource-id"
 
   velero_config = {
     s3_bucket_arn = ""

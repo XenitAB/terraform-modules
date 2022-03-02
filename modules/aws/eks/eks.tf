@@ -91,7 +91,7 @@ resource "aws_kms_key" "cloudwatch_encryption" {
       "Resource": "*",
       "Condition": {
         "ArnEquals": {
-            "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:${data.aws_caller_identity.current.account_id}:log-group:/aws/eks/${local.eks_cluster_name}}/cluster"
+            "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:${data.aws_caller_identity.current.account_id}:log-group:/aws/eks/${local.eks_cluster_name}/cluster"
         }
       }
     }
@@ -107,7 +107,7 @@ EOF
   )
 }
 resource "aws_cloudwatch_log_group" "this" {
-  name              = "/aws/eks/${local.eks_cluster_name}}/cluster"
+  name              = "/aws/eks/${local.eks_cluster_name}/cluster"
   retention_in_days = var.eks_cloudwatch_retention_period
   kms_key_id        = aws_kms_key.cloudwatch_encryption.arn
 

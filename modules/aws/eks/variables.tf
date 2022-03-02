@@ -64,7 +64,7 @@ variable "velero_config" {
 }
 
 variable "eks_cloudwatch_retention_period" {
-  description = "cloudwatch "
+  description = "eks cloudwatch retention period"
   type        = number
   default     = 30
 }

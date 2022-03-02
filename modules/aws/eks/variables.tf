@@ -67,3 +67,9 @@ variable "velero_config" {
     s3_bucket_arn = string
   })
 }
+
+variable "eks_cloudwatch_retention_period" {
+  description = "cloudwatch "
+  type        = number
+  default     = 30
+}

@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#565](https://github.com/XenitAB/terraform-modules/pull/565) [Breaking] Update Ingress Nginx major version.
 - [#573](https://github.com/XenitAB/terraform-modules/pull/573) Update External DNS version.
 - [#568](https://github.com/XenitAB/terraform-modules/pull/568) Add kube-state-metrics for tenant namespaces to grafana-agent
+- [#577](https://github.com/XenitAB/terraform-modules/pull/577) Add ingress-nginx metrics and logs scraping to grafana-agent
 - [#579](https://github.com/XenitAB/terraform-modules/pull/579) Send EKS audit and API logs to cloudwatch
 
 ### Fixed

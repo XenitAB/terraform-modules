@@ -53,7 +53,8 @@ resource "aws_eks_cluster" "this" {
     }
   }
 
-  tags = local.global_tags
+  tags       = local.global_tags
+  depends_on = [aws_cloudwatch_log_group.this]
 }
 
 resource "aws_cloudwatch_log_group" "this" {

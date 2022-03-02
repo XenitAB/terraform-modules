@@ -11,12 +11,6 @@ trivy:
   severity: MEDIUM,HIGH,CRITICAL
   ignoreUnfixed: true
   serverURL: "http://trivy.starboard-operator.svc.cluster.local:4954"
-  # The trivy image have to match with the trivy server
-  imageRef: docker.io/aquasec/trivy:0.23.0
-
-
-# TODO insert logic for AWS IAM ECR access config
-# https://aquasecurity.github.io/starboard/v0.12.0/integrations/managed-registries/
 
 operator:
   # configAuditScannerEnabled the flag to enable configuration audit scanner

@@ -91,7 +91,7 @@ resource "aws_kms_key" "cloudwatch_encryption" {
       "Resource": "*",
       "Condition": {
         "ArnEquals": {
-            "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:${data.aws_caller_identity.current.account_id}:log-group:/aws/eks/${local.eks_cluster_name}/cluster"
+            "kms:EncryptionContext:aws:logs:arn": "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/eks/${local.eks_cluster_name}/cluster"
         }
       }
     }

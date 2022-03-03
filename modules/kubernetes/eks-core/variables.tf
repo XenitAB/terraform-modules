@@ -335,6 +335,14 @@ variable "starboard_enabled" {
   default     = false
 }
 
+variable "starboard_config" {
+  description = "Configuration for starboard & trivy"
+  type = object({
+    starboard_role_arn = string
+    trivy_role_arn     = string
+  })
+}
+
 variable "vpa_enabled" {
   description = "Should VPA be enabled"
   type        = bool

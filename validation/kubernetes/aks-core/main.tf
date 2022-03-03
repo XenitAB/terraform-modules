@@ -75,6 +75,12 @@ module "aks_core" {
     resource_id = "bar"
   }
 
+  starboard_enabled = true
+  starboard_config = {
+    client_id   = "foo"
+    resource_id = "bar"
+  }
+
   ingress_config = {
     http_snippet              = ""
     public_private_enabled    = false

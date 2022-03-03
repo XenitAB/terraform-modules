@@ -24,6 +24,8 @@
 | <a name="module_cluster_autoscaler"></a> [cluster\_autoscaler](#module\_cluster\_autoscaler) | ../irsa | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../irsa | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../irsa | n/a |
+| <a name="module_starboard_ecr"></a> [starboard\_ecr](#module\_starboard\_ecr) | ../irsa | n/a |
+| <a name="module_trivy_ecr"></a> [trivy\_ecr](#module\_trivy\_ecr) | ../irsa | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../irsa | n/a |
 
 ## Resources
@@ -43,6 +45,7 @@
 | [aws_iam_policy_document.cluster_autoscaler](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.external_dns](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.prometheus](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.starboard_ecr_read_only](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.velero](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/region) | data source |
 | [aws_subnet.cluster](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/data-sources/subnet) | data source |
@@ -62,6 +65,7 @@
 | <a name="input_name"></a> [name](#input\_name) | Common name for the environment | `string` | n/a | yes |
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Prefix to add to unique names such as S3 buckets and IAM roles | `string` | `"xks"` | no |
 | <a name="input_node_group_role_arn"></a> [node\_group\_role\_arn](#input\_node\_group\_role\_arn) | IAM role to attach to EKS node groups | `string` | n/a | yes |
+| <a name="input_starboard_enabled"></a> [starboard\_enabled](#input\_starboard\_enabled) | Should starboard be enaled | `bool` | `false` | no |
 | <a name="input_velero_config"></a> [velero\_config](#input\_velero\_config) | Configuration for Velero | <pre>object({<br>    s3_bucket_id  = string<br>    s3_bucket_arn = string<br>  })</pre> | n/a | yes |
 
 ## Outputs
@@ -73,4 +77,5 @@
 | <a name="output_external_dns_config"></a> [external\_dns\_config](#output\_external\_dns\_config) | Configuration for External DNS |
 | <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Kube config for the created EKS cluster |
 | <a name="output_prometheus_config"></a> [prometheus\_config](#output\_prometheus\_config) | Configuration for Prometheus |
+| <a name="output_starboard_config"></a> [starboard\_config](#output\_starboard\_config) | Configuration for Starboard |
 | <a name="output_velero_config"></a> [velero\_config](#output\_velero\_config) | Configuration for Velero |

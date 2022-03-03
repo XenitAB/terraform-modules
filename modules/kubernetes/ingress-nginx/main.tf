@@ -57,6 +57,7 @@ resource "helm_release" "ingress_nginx" {
     linkerd_enabled           = var.linkerd_enabled
     datadog_enabled           = var.datadog_enabled
     allow_snippet_annotations = var.allow_snippet_annotations
+    deny_default_annotation_blocker = var.deny_default_annotation_blocker
     default_ingress_class     = true
   })]
 }

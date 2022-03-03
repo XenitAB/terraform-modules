@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- [#580](https://github.com/XenitAB/terraform-modules/pull/581) Add config to allow annotations and block default values.
+- [#581](https://github.com/XenitAB/terraform-modules/pull/581) Add config to allow annotations and block default values.
 - [#571](https://github.com/XenitAB/terraform-modules/pull/571) Add storageClass in AKS to enable StandardSSD_ZRS.
 
 ### Changed

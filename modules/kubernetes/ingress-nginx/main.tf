@@ -84,12 +84,13 @@ resource "helm_release" "ingress_nginx_public" {
       dns_zone        = var.default_certificate.dns_zone
       namespaced_name = "ingress-nginx/ingress-nginx"
     }
-    extra_config              = var.extra_config
-    extra_headers             = var.extra_headers
-    linkerd_enabled           = var.linkerd_enabled
-    datadog_enabled           = var.datadog_enabled
-    allow_snippet_annotations = var.allow_snippet_annotations
-    default_ingress_class     = true
+    extra_config                    = var.extra_config
+    extra_headers                   = var.extra_headers
+    linkerd_enabled                 = var.linkerd_enabled
+    datadog_enabled                 = var.datadog_enabled
+    allow_snippet_annotations       = var.allow_snippet_annotations
+    deny_default_annotation_blocker = var.deny_default_annotation_blocker
+    default_ingress_class           = true
   })]
 }
 
@@ -116,12 +117,13 @@ resource "helm_release" "ingress_nginx_private" {
       dns_zone        = var.default_certificate.dns_zone
       namespaced_name = "ingress-nginx/ingress-nginx"
     }
-    extra_config              = var.extra_config
-    extra_headers             = var.extra_headers
-    linkerd_enabled           = var.linkerd_enabled
-    datadog_enabled           = var.datadog_enabled
-    allow_snippet_annotations = var.allow_snippet_annotations
-    default_ingress_class     = false
+    extra_config                    = var.extra_config
+    extra_headers                   = var.extra_headers
+    linkerd_enabled                 = var.linkerd_enabled
+    datadog_enabled                 = var.datadog_enabled
+    allow_snippet_annotations       = var.allow_snippet_annotations
+    deny_default_annotation_blocker = var.deny_default_annotation_blocker
+    default_ingress_class           = false
   })]
 }
 

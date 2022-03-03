@@ -7,7 +7,7 @@ controller:
     name: ${ingress_class}
     default: ${default_ingress_class}
     controllerValue: "k8s.io/ingress-${ingress_class}"
-  
+
   # Should eventually be removed as ingress class annotations are deprecated
   ingressClass: ${ingress_class}
 
@@ -47,6 +47,10 @@ controller:
     %{~ endif ~}
     allow-snippet-annotations: ${allow_snippet_annotations}
     %{~ if !allow_snippet_annotations ~}
+    annotation-value-word-blocklist: load_module,lua_package,_by_lua,location,root,proxy_pass,serviceaccount,{,},',\
+    %{~ endif ~}
+    deny-default-annotation-blocker: ${deny-default-annotation-blocker}
+    %{~ if allow_snippet_annotations && deny-default-annotation-blocker ~}
     annotation-value-word-blocklist: load_module,lua_package,_by_lua,location,root,proxy_pass,serviceaccount,{,},',\
     %{~ endif ~}
 

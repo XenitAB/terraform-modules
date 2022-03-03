@@ -56,3 +56,9 @@ variable "allow_snippet_annotations" {
   type        = bool
   default     = false
 }
+
+variable "deny_default_annotation_blocker" {
+  description = "Should deny-default-annotation-blocker be enabled"
+  type        = bool
+  default     = false
+}

@@ -49,8 +49,7 @@ controller:
     %{~ if !allow_snippet_annotations ~}
     annotation-value-word-blocklist: load_module,lua_package,_by_lua,location,root,proxy_pass,serviceaccount,{,},',\
     %{~ endif ~}
-    deny-default-annotation-blocker: ${deny-default-annotation-blocker}
-    %{~ if allow_snippet_annotations && deny-default-annotation-blocker ~}
+    %{~ if deny_default_annotation_blocker ~}
     annotation-value-word-blocklist: load_module,lua_package,_by_lua,location,root,proxy_pass,serviceaccount,{,},',\
     %{~ endif ~}
 

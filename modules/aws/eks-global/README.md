@@ -21,6 +21,8 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_cloudwatch_log_group.eks1](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/cloudwatch_log_group) | resource |
+| [aws_cloudwatch_log_group.eks2](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/cloudwatch_log_group) | resource |
 | [aws_iam_policy.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/iam_policy) | resource |
 | [aws_iam_role.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/iam_role) | resource |
 | [aws_iam_role.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/iam_role) | resource |

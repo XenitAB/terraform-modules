@@ -20,7 +20,7 @@ variable "eks_name_suffix" {
   default     = 1
   validation {
     condition     = length(var.eks_name_suffix) > 3
-    error_message = "The eks_name_suffix can only be 1 or 2"
+    error_message = "The eks_name_suffix can only be 1 or 2."
   }
 }
 

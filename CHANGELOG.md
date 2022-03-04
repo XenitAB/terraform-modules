@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
+- [#537](https://github.com/XenitAB/terraform-modules/pull/537) Support private repository scanning with starboard in AWS & Azure.
 - [#565](https://github.com/XenitAB/terraform-modules/pull/565) [Breaking] Update Ingress Nginx major version.
 - [#573](https://github.com/XenitAB/terraform-modules/pull/573) Update External DNS version.
 - [#568](https://github.com/XenitAB/terraform-modules/pull/568) Add kube-state-metrics for tenant namespaces to grafana-agent

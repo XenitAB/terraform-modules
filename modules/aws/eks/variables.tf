@@ -72,3 +72,9 @@ variable "enabled_cluster_log_types" {
   type        = list(string)
   default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 }
+
+variable "starboard_enabled" {
+  description = "Should starboard be enaled"
+  type        = bool
+  default     = false
+}

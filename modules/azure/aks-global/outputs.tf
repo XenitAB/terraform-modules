@@ -82,6 +82,14 @@ output "xenit" {
   }
 }
 
+output "trivy_identity" {
+  description = "MSI authentication identity for Trivy image scaning"
+  value = {
+    client_id   = azurerm_user_assigned_identity.trivy.client_id
+    resource_id = azurerm_user_assigned_identity.trivy.id
+  }
+}
+
 output "aks_managed_identity_group_id" {
   description = "The group id of aks managed identity"
   value       = azuread_group.aks_managed_identity.id

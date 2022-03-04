@@ -37,25 +37,16 @@ resource "kubernetes_namespace" "starboard" {
   }
 }
 
-resource "kubernetes_namespace" "trivy" {
-  metadata {
-    labels = {
-      name                = "trivy"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "trivy"
-  }
-}
-
 resource "helm_release" "starboard" {
   repository  = "https://aquasecurity.github.io/helm-charts/"
   chart       = "starboard-operator"
   name        = "starboard-operator"
   namespace   = kubernetes_namespace.starboard.metadata[0].name
-  version     = "0.9.0"
+  version     = "0.9.1"
   max_history = 3
   values = [templatefile("${path.module}/templates/starboard-values.yaml.tpl", {
-    provider = var.cloud_provider
+    provider           = var.cloud_provider
+    starboard_role_arn = var.starboard_role_arn
   })]
 }
 
@@ -74,7 +65,33 @@ resource "helm_release" "trivy" {
   repository  = "https://aquasecurity.github.io/helm-charts/"
   chart       = "trivy"
   name        = "trivy"
-  namespace   = kubernetes_namespace.trivy.metadata[0].name
-  version     = "0.4.9"
+  namespace   = kubernetes_namespace.starboard.metadata[0].name
+  version     = "0.4.11"
   max_history = 3
+  values = [templatefile("${path.module}/templates/trivy-values.yaml.tpl", {
+    provider       = var.cloud_provider
+    trivy_role_arn = var.trivy_role_arn
+  })]
+}
+
+resource "helm_release" "trivy_extras" {
+  for_each = {
+    for s in ["trivy_extras"] :
+    s => s
+    if var.cloud_provider == "azure"
+  }
+
+  chart     = "${path.module}/charts/trivy-extras"
+  name      = "trivy-extras"
+  namespace = kubernetes_namespace.starboard.metadata[0].name
+
+  set {
+    name  = "resourceID"
+    value = var.resource_id
+  }
+
+  set {
+    name  = "clientID"
+    value = var.client_id
+  }
 }

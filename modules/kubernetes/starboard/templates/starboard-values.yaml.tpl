@@ -10,10 +10,7 @@ trivy:
   mode: ClientServer
   severity: MEDIUM,HIGH,CRITICAL
   ignoreUnfixed: true
-  serverURL: "http://trivy.trivy.svc.cluster.local:4954"
-
-# TODO insert logic for AWS IAM ECR access config
-# https://aquasecurity.github.io/starboard/v0.12.0/integrations/managed-registries/
+  serverURL: "http://trivy.starboard-operator.svc.cluster.local:4954"
 
 operator:
   # configAuditScannerEnabled the flag to enable configuration audit scanner
@@ -24,3 +21,16 @@ operator:
   vulnerabilityScannerScanOnlyCurrentRevisions: true
   # vulnerabilityScannerReportTTL the flag to set how long a vulnerability report should exist. "" means that the vulnerabilityScannerReportTTL feature is disabled
   vulnerabilityScannerReportTTL: "25h"
+
+%{~ if provider == "aws" ~}
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: ${starboard_role_arn}
+%{~ endif ~}
+
+%{~ if provider == "azure" ~}
+starboard:
+  # scanJobPodTemplateLabels comma-separated representation of the labels which the user wants the scanner pods to be
+  # labeled with. Example: `foo=bar,env=stage` will labeled the scanner pods with the labels `foo: bar` and `env: stage`
+  scanJobPodTemplateLabels: "aadpodidbinding=trivy"
+%{~ endif ~}

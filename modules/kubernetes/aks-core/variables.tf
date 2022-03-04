@@ -409,6 +409,14 @@ variable "starboard_enabled" {
   default     = true
 }
 
+variable "starboard_config" {
+  description = "Configuration for starboard"
+  type = object({
+    client_id   = string
+    resource_id = string
+  })
+}
+
 variable "new_relic_enabled" {
   description = "Should New Relic be enabled"
   type        = bool

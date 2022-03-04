@@ -292,6 +292,23 @@ module "prometheus" {
   vpa_enabled                            = var.vpa_enabled
 }
 
+# starboard
+module "starboard" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["starboard"] :
+    s => s
+    if var.starboard_enabled
+  }
+
+  source = "../../kubernetes/starboard"
+
+  cloud_provider     = "aws"
+  starboard_role_arn = var.starboard_config.starboard_role_arn
+  trivy_role_arn     = var.starboard_config.trivy_role_arn
+}
+
 module "cluster_autoscaler" {
   depends_on = [module.opa_gatekeeper]
 

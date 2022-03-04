@@ -206,7 +206,7 @@ module "ingress_nginx" {
   datadog_enabled                 = var.datadog_enabled
   public_private_enabled          = var.ingress_config.public_private_enabled
   allow_snippet_annotations       = var.ingress_config.allow_snippet_annotations
-  deny_default_annotation_blocker = var.deny_default_annotation_blocker
+  deny_default_annotation_blocker = var.ingress_config.deny_default_annotation_blocker
 
 }
 

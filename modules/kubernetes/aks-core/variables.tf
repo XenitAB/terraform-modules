@@ -209,11 +209,13 @@ variable "ingress_config" {
     http_snippet              = string
     public_private_enabled    = bool
     allow_snippet_annotations = bool
+    deny_default_annotation_blocker = bool
   })
   default = {
     http_snippet              = ""
     public_private_enabled    = false
     allow_snippet_annotations = false
+    deny_default_annotation_blocker = false
   }
 }
 

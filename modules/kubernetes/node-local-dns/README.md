@@ -15,7 +15,6 @@ This module is used to add [`node-local-dns`](https://kubernetes.io/docs/tasks/a
 | Name | Version |
 |------|---------|
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.3.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.6.1 |
 
 ## Modules
 
@@ -26,12 +25,12 @@ No modules.
 | Name | Type |
 |------|------|
 | [helm_release.this](https://registry.terraform.io/providers/hashicorp/helm/2.3.0/docs/resources/release) | resource |
-| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.6.1/docs/data-sources/namespace) | data source |
-| [kubernetes_service.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.6.1/docs/data-sources/service) | data source |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_dns_ip"></a> [dns\_ip](#input\_dns\_ip) | Central DNS IP | `string` | `"10.0.0.10"` | no |
 
 ## Outputs
 

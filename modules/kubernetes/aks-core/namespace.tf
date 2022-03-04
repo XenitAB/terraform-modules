@@ -7,6 +7,19 @@ resource "kubernetes_namespace" "service_accounts" {
   }
 }
 
+data "kubernetes_namespace" "this" {
+  metadata {
+    name = "kube-system"
+  }
+}
+
+data "kubernetes_service" "this" {
+  metadata {
+    name      = "kube-dns"
+    namespace = data.kubernetes_namespace.this.metadata[0].name
+  }
+}
+
 resource "kubernetes_service_account" "tenant" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
@@ -92,7 +105,7 @@ resource "kubernetes_network_policy" "tenant" {
           }
         }
         ip_block {
-          cidr = "10.0.0.10/32"
+          cidr = "${data.kubernetes_service.this.spec[0].cluster_ip}/32"
         }
       }
 

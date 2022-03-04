@@ -19,7 +19,7 @@ variable "eks_name_suffix" {
   type        = number
   default     = 1
   validation {
-    condition     = length(var.eks_name_suffix) > 3
+    condition     = var.eks_name_suffix < 3
     error_message = "The eks_name_suffix can only be 1 or 2."
   }
 }
@@ -65,12 +65,6 @@ variable "velero_config" {
     s3_bucket_id  = string
     s3_bucket_arn = string
   })
-}
-
-variable "eks_cloudwatch_retention_period" {
-  description = "eks cloudwatch retention period"
-  type        = number
-  default     = 30
 }
 
 variable "enabled_cluster_log_types" {

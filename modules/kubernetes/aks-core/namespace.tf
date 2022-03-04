@@ -91,6 +91,8 @@ resource "kubernetes_network_policy" "tenant" {
             k8s-app = "kube-dns"
           }
         }
+      }
+      to {
         ip_block {
           cidr = "10.0.0.10/32"
         }

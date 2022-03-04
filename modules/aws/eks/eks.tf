@@ -37,7 +37,7 @@ resource "aws_eks_cluster" "this" {
   role_arn = var.cluster_role_arn
   version  = var.eks_config.kubernetes_version
 
-  enabled_cluster_log_types = var.enabled_cluster_log_types
+  //enabled_cluster_log_types = var.enabled_cluster_log_types
 
   #tfsec:ignore:AWS069 tfsec:ignore:AWS068
   vpc_config {

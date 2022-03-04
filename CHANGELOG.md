@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - [#570](https://github.com/XenitAB/terraform-modules/pull/570) Only add network policy for Datadog / Grafana-Agent if default deny is true
+- [#582](https://github.com/XenitAB/terraform-modules/pull/582) Add the coreDNS ip to tenant networkpolicy CIDR block to work with node-local-dns.
 
 ## 2022.02.4
 

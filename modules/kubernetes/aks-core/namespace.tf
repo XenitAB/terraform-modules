@@ -91,11 +91,18 @@ resource "kubernetes_network_policy" "tenant" {
             k8s-app = "kube-dns"
           }
         }
+        ip_block {
+          cidr = "10.0.0.10/32"
+        }
       }
 
       ports {
         port     = 53
         protocol = "UDP"
+      }
+      ports {
+        port     = 53
+        protocol = "TCP"
       }
     }
 

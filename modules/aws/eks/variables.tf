@@ -68,3 +68,9 @@ variable "eks_cloudwatch_retention_period" {
   type        = number
   default     = 30
 }
+
+variable "enabled_cluster_log_types" {
+  description = "Which EKS controller logs should be saved"
+  type        = list(string)
+  default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+}

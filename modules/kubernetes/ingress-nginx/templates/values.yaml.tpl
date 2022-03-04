@@ -46,9 +46,7 @@ controller:
       ${http_snippet}
     %{~ endif ~}
     allow-snippet-annotations: ${allow_snippet_annotations}
-    %{~ if deny_default_annotation_blocker ~}
     annotation-value-word-blocklist: load_module,lua_package,_by_lua,location,root,proxy_pass,serviceaccount,{,},',\
-    %{~ endif ~}
 
   addHeaders:
     %{~ for key, value in extra_headers ~}

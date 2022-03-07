@@ -2,21 +2,6 @@ data "azuread_service_principal" "owner_spn" {
   display_name = var.owner_service_principal_name
 }
 
-resource "random_password" "aad_sp" {
-  for_each = {
-    for rg in var.resource_group_configs :
-    rg.common_name => rg
-    if rg.delegate_service_principal == true
-  }
-  length           = 48
-  special          = true
-  override_special = "!-_="
-
-  keepers = {
-    service_principal = var.azuread_apps.rg_contributor[each.key].service_principal_object_id
-  }
-}
-
 resource "azuread_application_password" "aad_sp" {
   for_each = {
     for rg in var.resource_group_configs :
@@ -25,7 +10,6 @@ resource "azuread_application_password" "aad_sp" {
   }
 
   application_object_id = var.azuread_apps.rg_contributor[each.key].application_object_id
-  value                 = random_password.aad_sp[each.key].result
   end_date              = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {
@@ -34,7 +18,6 @@ resource "azuread_application_password" "aad_sp" {
     ]
   }
 }
-
 
 resource "azurerm_role_assignment" "aad_sp" {
   for_each = {
@@ -59,7 +42,7 @@ resource "pal_management_partner" "aad_sp" {
 
   tenant_id     = data.azurerm_subscription.current.tenant_id
   client_id     = var.azuread_apps.rg_contributor[each.key].application_id
-  client_secret = random_password.aad_sp[each.key].result
+  client_secret = azuread_application_password.aad_sp[each.key].value
   partner_id    = var.partner_id
   overwrite     = true
 }
@@ -77,7 +60,7 @@ resource "azurerm_key_vault_secret" "aad_sp" {
     tenantId       = data.azurerm_subscription.current.tenant_id
     subscriptionId = data.azurerm_subscription.current.subscription_id
     clientId       = var.azuread_apps.rg_contributor[each.key].application_id
-    clientSecret   = random_password.aad_sp[each.value.common_name].result
+    clientSecret   = azuread_application_password.aad_sp[each.value.common_name].value
   })
   key_vault_id = azurerm_key_vault.delegate_kv[var.core_name].id
   content_type = "application/json"

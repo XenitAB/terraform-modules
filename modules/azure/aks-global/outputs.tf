@@ -46,7 +46,7 @@ output "helm_operator_credentials" {
   sensitive   = true
   value = {
     client_id = azuread_service_principal.helm_operator.application_id
-    secret    = random_password.helm_operator.result
+    secret    = azuread_application_password.helm_operator.value
   }
 }
 

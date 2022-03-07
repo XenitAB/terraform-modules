@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 variable "environment" {
   description = "Environment name of the cluster"
   type        = string
@@ -37,6 +38,8 @@ variable "fleet_infra" {
     repo = string
   })
 =======
+=======
+>>>>>>> fe36c7a... Add initial config
 variable "azure_devops_pat" {
   description = "PAT to authenticate with Azure DevOps"
   type        = string
@@ -80,8 +83,11 @@ variable "github_private_key" {
   default     = "null"
 }
 
+<<<<<<< HEAD
 =======
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+>>>>>>> fe36c7a... Add initial config
 variable "environment" {
   description = "Environment name of the cluster"
   type        = string
@@ -90,6 +96,7 @@ variable "environment" {
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
+<<<<<<< HEAD
 >>>>>>> Add initial config
 }
 
@@ -120,12 +127,15 @@ variable "fleet_infra" {
     proj = string
     repo = string
   })
+=======
+>>>>>>> fe36c7a... Add initial config
 }
 
 variable "namespaces" {
   description = "The namespaces to configure flux with"
   type = list(
     object({
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       name        = string
@@ -148,6 +158,18 @@ variable "namespaces" {
     })
   )
 <<<<<<< HEAD
+=======
+      name = string
+      flux = object({
+        enabled     = bool
+        create_crds = bool
+        org         = string
+        proj        = string
+        repo        = string
+      })
+    })
+  )
+>>>>>>> fe36c7a... Add initial config
 }
 
 variable "cluster_repo" {
@@ -161,7 +183,10 @@ variable "branch" {
   type        = string
   default     = "main"
 }
+<<<<<<< HEAD
 >>>>>>> Add initial config
 =======
 }
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+>>>>>>> fe36c7a... Add initial config

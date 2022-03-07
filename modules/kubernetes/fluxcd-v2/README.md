@@ -74,6 +74,7 @@ No modules.
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_credentials"></a> [credentials](#input\_credentials) | List of credentials for Git Providers. | <pre>list(object({<br>    type = string # azuredevops or github<br>    azure_devops = object({<br>      org = string<br>      pat = string<br>    })<br>    github = object({<br>      org             = string<br>      app_id          = number<br>      installation_id = number<br>      private_key     = string<br>    })<br>  }))</pre> | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name of the cluster | `string` | n/a | yes |
@@ -82,10 +83,13 @@ No modules.
 =======
 =======
 >>>>>>> fe36c7a... Add initial config
+=======
+>>>>>>> d074599... Add initial config
 | <a name="input_azure_devops_org"></a> [azure\_devops\_org](#input\_azure\_devops\_org) | Azure DevOps organization for bootstrap repository | `string` | `"null"` | no |
 | <a name="input_azure_devops_pat"></a> [azure\_devops\_pat](#input\_azure\_devops\_pat) | PAT to authenticate with Azure DevOps | `string` | `"null"` | no |
 | <a name="input_azure_devops_proj"></a> [azure\_devops\_proj](#input\_azure\_devops\_proj) | Azure DevOps project for bootstrap repository | `string` | `"null"` | no |
 | <a name="input_branch"></a> [branch](#input\_branch) | Branch to point source controller towards | `string` | `"main"` | no |
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> make fmt & docs
@@ -101,11 +105,17 @@ No modules.
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name of the cluster | `string` | n/a | yes |
 <<<<<<< HEAD
 >>>>>>> fe36c7a... Add initial config
+=======
+| <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
+| <a name="input_cluster_repo"></a> [cluster\_repo](#input\_cluster\_repo) | Name of cluster repository | `string` | `"fleet-infra"` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | Environment name of the cluster | `string` | n/a | yes |
+>>>>>>> d074599... Add initial config
 | <a name="input_github_app_id"></a> [github\_app\_id](#input\_github\_app\_id) | ID of GitHub Application used by Git Auth Proxy | `number` | `"null"` | no |
 | <a name="input_github_installation_id"></a> [github\_installation\_id](#input\_github\_installation\_id) | Installation ID of GitHub Application used by Git Auth Proxy | `number` | `"null"` | no |
 | <a name="input_github_org"></a> [github\_org](#input\_github\_org) | Org of GitHub repositories | `string` | `"null"` | no |
 | <a name="input_github_private_key"></a> [github\_private\_key](#input\_github\_private\_key) | Private Key for GitHub Application used by Git Auth Proxy | `string` | `"null"` | no |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled     = bool<br>        create_crds = bool<br>        org         = string<br>        proj        = string<br>        repo        = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Add initial config
 =======
@@ -118,6 +128,8 @@ No modules.
 | <a name="input_fleet_infra"></a> [fleet\_infra](#input\_fleet\_infra) | Configuration for Flux bootstrap repository. | <pre>object({<br>    type = string<br>    org  = string<br>    proj = string<br>    repo = string<br>  })</pre> | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name        = string<br>      create_crds = bool<br>      org         = string<br>      proj        = string<br>      repo        = string<br>    })<br>  )</pre> | n/a | yes |
 >>>>>>> a69675f... make fmt & docs
+=======
+>>>>>>> d074599... Add initial config
 
 ## Outputs
 

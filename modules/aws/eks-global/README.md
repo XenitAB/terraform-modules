@@ -21,6 +21,8 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_cloudwatch_log_group.eks1](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/cloudwatch_log_group) | resource |
+| [aws_cloudwatch_log_group.eks2](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/cloudwatch_log_group) | resource |
 | [aws_iam_policy.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/iam_policy) | resource |
 | [aws_iam_role.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/iam_role) | resource |
 | [aws_iam_role.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/3.63.0/docs/resources/iam_role) | resource |
@@ -49,6 +51,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
+| <a name="input_eks_cloudwatch_retention_period"></a> [eks\_cloudwatch\_retention\_period](#input\_eks\_cloudwatch\_retention\_period) | eks cloudwatch retention period | `number` | `30` | no |
 | <a name="input_eks_group_name_prefix"></a> [eks\_group\_name\_prefix](#input\_eks\_group\_name\_prefix) | Prefix for EKS Azure AD groups | `string` | `"eks"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environemnt | `string` | n/a | yes |
 | <a name="input_group_name_separator"></a> [group\_name\_separator](#input\_group\_name\_separator) | Separator for group names | `string` | `"-"` | no |

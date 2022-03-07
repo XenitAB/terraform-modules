@@ -51,3 +51,9 @@ variable "eks_group_name_prefix" {
   type        = string
   default     = "eks"
 }
+
+variable "eks_cloudwatch_retention_period" {
+  description = "eks cloudwatch retention period"
+  type        = number
+  default     = 30
+}

@@ -8,7 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- [#581](https://github.com/XenitAB/terraform-modules/pull/581) Add config to allow annotations and block default values.
 - [#571](https://github.com/XenitAB/terraform-modules/pull/571) Add storageClass in AKS to enable StandardSSD_ZRS.
 
 ### Changed
@@ -21,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 
+- [#581](https://github.com/XenitAB/terraform-modules/pull/581) Add config to allow annotations and block default values.
 - [#570](https://github.com/XenitAB/terraform-modules/pull/570) Only add network policy for Datadog / Grafana-Agent if default deny is true
 - [#582](https://github.com/XenitAB/terraform-modules/pull/582) Add the coreDNS ip to tenant networkpolicy CIDR block to work with node-local-dns.
   Use variable for node-local-dns.

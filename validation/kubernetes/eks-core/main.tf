@@ -75,9 +75,10 @@ module "eks_core" {
   }
 
   ingress_config = {
-    http_snippet              = ""
-    public_private_enabled    = false
-    allow_snippet_annotations = false
+    http_snippet                    = ""
+    public_private_enabled          = false
+    allow_snippet_annotations       = false
+    deny_default_annotation_blocker = false
   }
 
   starboard_enabled = true

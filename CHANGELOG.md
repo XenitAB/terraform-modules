@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - [#587](https://github.com/XenitAB/terraform-modules/pull/587) Fix space error in grafana-agent podLogs
+- [#585](https://github.com/XenitAB/terraform-modules/pull/585) [Breaking] Upgrade Azure AD provider to v2
 
 ## 2022.03.1
 

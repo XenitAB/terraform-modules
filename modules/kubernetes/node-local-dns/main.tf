@@ -19,27 +19,14 @@ terraform {
   }
 }
 
-data "kubernetes_namespace" "this" {
-  metadata {
-    name = "kube-system"
-  }
-}
-
-data "kubernetes_service" "this" {
-  metadata {
-    name      = "kube-dns"
-    namespace = data.kubernetes_namespace.this.metadata[0].name
-  }
-}
-
 resource "helm_release" "this" {
   chart       = "${path.module}/charts/node-local-dns"
   name        = "node-local-dns"
-  namespace   = data.kubernetes_namespace.this.metadata[0].name
+  namespace   = "kube-system"
   max_history = 3
 
   set {
     name  = "dnsServer"
-    value = data.kubernetes_service.this.spec[0].cluster_ip
+    value = var.dns_ip
   }
 }

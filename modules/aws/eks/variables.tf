@@ -18,6 +18,10 @@ variable "eks_name_suffix" {
   description = "The suffix for the eks clusters"
   type        = number
   default     = 1
+  validation {
+    condition     = var.eks_name_suffix < 3
+    error_message = "The eks_name_suffix can only be 1 or 2."
+  }
 }
 
 variable "eks_authorized_ips" {
@@ -61,6 +65,12 @@ variable "velero_config" {
     s3_bucket_id  = string
     s3_bucket_arn = string
   })
+}
+
+variable "enabled_cluster_log_types" {
+  description = "Which EKS controller logs should be saved"
+  type        = list(string)
+  default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 }
 
 variable "starboard_enabled" {

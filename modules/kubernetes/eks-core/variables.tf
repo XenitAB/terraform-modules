@@ -156,14 +156,16 @@ variable "ingress_nginx_enabled" {
 variable "ingress_config" {
   description = "Ingress configuration"
   type = object({
-    http_snippet              = string
-    public_private_enabled    = bool
-    allow_snippet_annotations = bool
+    http_snippet                    = string
+    public_private_enabled          = bool
+    allow_snippet_annotations       = bool
+    deny_default_annotation_blocker = bool
   })
   default = {
-    http_snippet              = ""
-    public_private_enabled    = false
-    allow_snippet_annotations = false
+    http_snippet                    = ""
+    public_private_enabled          = false
+    allow_snippet_annotations       = false
+    deny_default_annotation_blocker = false
   }
 }
 

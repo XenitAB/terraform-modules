@@ -20,6 +20,7 @@ terraform {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   required_version = ">= 1.1.7"
 =======
   required_version = "0.15.3"
@@ -30,6 +31,9 @@ terraform {
 =======
   required_version = ">= 1.1.7"
 >>>>>>> 3d1e125... Fix tf version
+=======
+  required_version = "0.15.3"
+>>>>>>> Add initial config
 =======
   required_version = "0.15.3"
 >>>>>>> Add initial config
@@ -76,6 +80,7 @@ locals {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   fleet_infra_name   = "fleet-infra"
   branch_name        = "main"
 =======
@@ -118,6 +123,8 @@ locals {
   fleet_infra_name   = "fleet-infra"
   branch_name        = "main"
 >>>>>>> make fmt & docs
+=======
+>>>>>>> Add initial config
 }
 
 resource "kubernetes_namespace" "this" {
@@ -154,6 +161,7 @@ resource "helm_release" "git_auth_proxy" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     credentials = var.credentials
     # TODO: change to not be fleet infra aware, instead it should just be one of the repositories
     fleet_infra = var.fleet_infra
@@ -167,6 +175,8 @@ resource "helm_release" "git_auth_proxy" {
 >>>>>>> fe36c7a... Add initial config
 =======
 >>>>>>> d074599... Add initial config
+=======
+>>>>>>> Add initial config
 =======
 >>>>>>> Add initial config
     azure_devops_pat  = var.azure_devops_pat,
@@ -184,6 +194,7 @@ resource "helm_release" "git_auth_proxy" {
       }
       if ns.flux.enabled
     ],
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -252,6 +263,16 @@ resource "helm_release" "git_auth_proxy" {
 # Cluster
 <<<<<<< HEAD
 >>>>>>> Add initial config
+=======
+  })]
+}
+
+data "azuredevops_project" "this" {
+  name = var.azure_devops_proj
+}
+
+# Cluster
+>>>>>>> Add initial config
 data "azuredevops_git_repository" "cluster" {
   project_id = data.azuredevops_project.this.id
   name       = var.cluster_repo
@@ -261,6 +282,7 @@ data "github_repository" "cluster" {
   full_name = "${var.github_org}/${var.cluster_repo}"
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -279,11 +301,14 @@ data "github_repository" "cluster" {
 >>>>>>> Add initial config
 =======
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+>>>>>>> Add initial config
 data "flux_install" "this" {
   target_path = "clusters/${var.cluster_id}"
 }
 
 data "flux_sync" "this" {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -303,6 +328,8 @@ data "flux_sync" "this" {
 >>>>>>> fe36c7a... Add initial config
 =======
 >>>>>>> d074599... Add initial config
+=======
+>>>>>>> Add initial config
 =======
 >>>>>>> Add initial config
   url                = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
@@ -318,6 +345,7 @@ data "flux_sync" "this" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Add initial config
 =======
   # local var based on fleet infra type
@@ -357,6 +385,8 @@ data "flux_sync" "this" {
   # local var based on fleet infra type
   git_implementation = var.fleet_infra.type == "azuredevops" ? "libgit2" : "git2go"
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+>>>>>>> Add initial config
 }
 
 data "kubectl_file_documents" "install" {
@@ -408,6 +438,7 @@ resource "kubectl_manifest" "sync" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Initial change of config to use one module - fluxcd-v2
 =======
@@ -445,6 +476,8 @@ data "azuredevops_git_repository" "cluster" {
 >>>>>>> Add initial config
 =======
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+>>>>>>> Add initial config
 resource "azuredevops_git_repository_file" "install" {
   repository_id       = data.azuredevops_git_repository.cluster.id
   file                = data.flux_install.this.path
@@ -479,6 +512,7 @@ resource "azuredevops_git_repository_file" "cluster_tenants" {
   overwrite_on_create = true
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -540,6 +574,8 @@ data "github_repository" "cluster" {
 >>>>>>> Add initial config
 =======
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+>>>>>>> Add initial config
 resource "github_repository_file" "install" {
   repository          = data.github_repository.cluster.name
   file                = data.flux_install.this.path
@@ -582,11 +618,14 @@ resource "github_repository_file" "cluster_tenants" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> fe36c7a... Add initial config
 =======
 >>>>>>> d074599... Add initial config
+=======
+>>>>>>> Add initial config
 =======
 >>>>>>> Add initial config
 # Tenants
@@ -613,6 +652,7 @@ resource "azuredevops_git_repository_file" "tenant" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Add initial config
 =======
 >>>>>>> Initial change of config to use one module - fluxcd-v2
@@ -628,6 +668,8 @@ resource "azuredevops_git_repository_file" "tenant" {
 >>>>>>> Add initial config
 =======
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+>>>>>>> Add initial config
 resource "github_repository_file" "tenant" {
   for_each = {
     for ns in var.namespaces :
@@ -640,6 +682,7 @@ resource "github_repository_file" "tenant" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     if ns.flux.type == "github"
 =======
     if ns.flux.enabled
@@ -665,6 +708,9 @@ resource "github_repository_file" "tenant" {
 =======
     if ns.flux.type == "github"
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+    if ns.flux.enabled
+>>>>>>> Add initial config
   }
 
   repository = data.github_repository.cluster.name
@@ -683,6 +729,7 @@ resource "github_repository_file" "tenant" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     create_crds = each.value.flux.create_crds,
 =======
     create_crds = false,
@@ -708,6 +755,9 @@ resource "github_repository_file" "tenant" {
 =======
     create_crds = each.value.flux.create_crds,
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+    create_crds = false,
+>>>>>>> Add initial config
   })
   overwrite_on_create = true
 }

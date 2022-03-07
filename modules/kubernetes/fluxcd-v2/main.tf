@@ -48,8 +48,11 @@ terraform {
 
 locals {
   git_auth_proxy_url = "http://git-auth-proxy.flux-system.svc.cluster.local"
+<<<<<<< HEAD
   fleet_infra_name   = "fleet-infra"
   branch_name        = "main"
+=======
+>>>>>>> Add initial config
 }
 
 resource "kubernetes_namespace" "this" {
@@ -78,6 +81,7 @@ resource "helm_release" "git_auth_proxy" {
   version     = "v0.5.2"
   max_history = 3
   values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
+<<<<<<< HEAD
     credentials = var.credentials
     # TODO: change to not be fleet infra aware, instead it should just be one of the repositories
     fleet_infra = var.fleet_infra
@@ -86,17 +90,64 @@ resource "helm_release" "git_auth_proxy" {
 }
 
 # Cluster
+=======
+    azure_devops_pat  = var.azure_devops_pat,
+    azure_devops_org  = var.azure_devops_org,
+    azure_devops_proj = var.azure_devops_proj,
+    cluster_repo      = var.cluster_repo,
+    github_org        = var.github_org
+    app_id            = tonumber(var.github_app_id)
+    installation_id   = tonumber(var.github_installation_id)
+    private_key       = base64encode(var.github_private_key)
+    tenants = [for ns in var.namespaces : {
+      project : ns.flux.proj
+      repo : ns.flux.repo
+      namespace : ns.name
+      }
+      if ns.flux.enabled
+    ],
+  })]
+}
+
+data "azuredevops_project" "this" {
+  name = var.azure_devops_proj
+}
+
+# Cluster
+data "azuredevops_git_repository" "cluster" {
+  project_id = data.azuredevops_project.this.id
+  name       = var.cluster_repo
+}
+
+data "github_repository" "cluster" {
+  full_name = "${var.github_org}/${var.cluster_repo}"
+}
+
+>>>>>>> Add initial config
 data "flux_install" "this" {
   target_path = "clusters/${var.cluster_id}"
 }
 
 data "flux_sync" "this" {
+<<<<<<< HEAD
   # local var based on fleet infra type
   url         = var.fleet_infra.type == "azuredevops" ? "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}" : "${local.git_auth_proxy_url}/${var.github_org}/${var.cluster_repo}"
   branch      = local.branch_name
   target_path = "clusters/${var.cluster_id}"
   # local var based on fleet infra type
   git_implementation = var.fleet_infra.type == "azuredevops" ? "libgit2" : "git2go"
+=======
+  url                = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
+  branch             = var.branch
+  target_path        = "clusters/${var.cluster_id}"
+  git_implementation = "libgit2"
+}
+
+data "flux_sync" "this" {
+  url         = "${local.git_auth_proxy_url}/${var.github_org}/${var.cluster_repo}"
+  branch      = var.branch
+  target_path = "clusters/${var.cluster_id}"
+>>>>>>> Add initial config
 }
 
 data "kubectl_file_documents" "install" {
@@ -140,6 +191,7 @@ resource "kubectl_manifest" "sync" {
   yaml_body = each.value
 }
 
+<<<<<<< HEAD
 # Azure DevOps
 data "azuredevops_project" "this" {
   name = var.azure_devops_proj
@@ -149,6 +201,8 @@ data "azuredevops_git_repository" "cluster" {
   name       = var.cluster_repo
 }
 
+=======
+>>>>>>> Add initial config
 resource "azuredevops_git_repository_file" "install" {
   repository_id       = data.azuredevops_git_repository.cluster.id
   file                = data.flux_install.this.path
@@ -183,6 +237,7 @@ resource "azuredevops_git_repository_file" "cluster_tenants" {
   overwrite_on_create = true
 }
 
+<<<<<<< HEAD
 resource "azuredevops_git_repository_file" "tenant" {
   for_each = {
     for ns in var.namespaces :
@@ -208,6 +263,8 @@ data "github_repository" "cluster" {
   full_name = "${var.github_org}/${var.cluster_repo}"
 }
 
+=======
+>>>>>>> Add initial config
 resource "github_repository_file" "install" {
   repository          = data.github_repository.cluster.name
   file                = data.flux_install.this.path
@@ -242,11 +299,39 @@ resource "github_repository_file" "cluster_tenants" {
   overwrite_on_create = true
 }
 
+<<<<<<< HEAD
+=======
+# Tenants
+resource "azuredevops_git_repository_file" "tenant" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.flux.enabled
+  }
+
+  repository_id = data.azuredevops_git_repository.cluster.id
+  branch        = "refs/heads/${var.branch}"
+  file          = "tenants/${var.cluster_id}/${each.key}.yaml"
+  content = templatefile("${path.module}/templates/tenant.yaml", {
+    repo        = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${each.value.flux.proj}/_git/${each.value.flux.repo}"
+    branch      = var.branch,
+    name        = each.key,
+    environment = var.environment,
+    create_crds = each.value.flux.create_crds
+  })
+  overwrite_on_create = true
+}
+
+>>>>>>> Add initial config
 resource "github_repository_file" "tenant" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
+<<<<<<< HEAD
     if ns.flux.type == "github"
+=======
+    if ns.flux.enabled
+>>>>>>> Add initial config
   }
 
   repository = data.github_repository.cluster.name
@@ -257,7 +342,11 @@ resource "github_repository_file" "tenant" {
     branch      = var.branch,
     name        = each.key,
     environment = var.environment,
+<<<<<<< HEAD
     create_crds = each.value.flux.create_crds,
+=======
+    create_crds = false,
+>>>>>>> Add initial config
   })
   overwrite_on_create = true
 }

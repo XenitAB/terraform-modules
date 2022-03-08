@@ -12,5 +12,5 @@ spec:
   namespaceSelector:
     matchNames:
     - ingress-nginx
-   pipelineStages:
+  pipelineStages:
     - cri: {}

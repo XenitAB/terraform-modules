@@ -49,6 +49,7 @@ variable "namespaces" {
         create_crds = bool
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> make fmt & docs
         type        = string # azuredevops or github
@@ -57,13 +58,18 @@ variable "namespaces" {
         repo        = string
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
         type = string # azuredevops or github
         org = string
         proj = string # only used for azuredevops
         repo = string
+<<<<<<< HEAD
 >>>>>>> Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> make fmt & docs
+=======
+>>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
       })
     })
   )
@@ -142,6 +148,7 @@ variable "fluxcd_v2_config" {
     azure_devops = object({
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       org = string
       pat = string
 =======
@@ -152,6 +159,10 @@ variable "fluxcd_v2_config" {
       org = string
       pat = string
 >>>>>>> make fmt & docs
+=======
+      org  = string
+      pat  = string
+>>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
     })
     github = object({
       org             = string
@@ -166,6 +177,7 @@ variable "fluxcd_v2_config" {
     type = string # azuredevops or github
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     org  = string
 =======
     org = string
@@ -173,6 +185,9 @@ variable "fluxcd_v2_config" {
 =======
     org  = string
 >>>>>>> make fmt & docs
+=======
+    org = string
+>>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
     proj = string
     repo = string
   })

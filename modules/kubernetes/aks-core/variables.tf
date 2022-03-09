@@ -47,17 +47,15 @@ variable "namespaces" {
       flux = object({
         enabled     = bool
         create_crds = bool
-        azure_devops = object({
-          org  = string
-          proj = string
-          repo = string
-        })
-        github = object({
-          repo = string
-        })
+        type = string # azuredevops or github
+        org = string
+        proj = string # only used for azuredevops
+        repo = string
       })
     })
   )
+
+  # add validation for type and flux parameters
 }
 
 variable "kubernetes_network_policy_default_deny" {
@@ -124,19 +122,28 @@ variable "fluxcd_v2_enabled" {
 
 variable "fluxcd_v2_config" {
   description = "Configuration for fluxcd-v2"
-  type = object({
-    type = string
+
+  # Credentials to be passed to Git Auth Proxy
+  credentials = list(object({
+    type = string # azuredevops or github
+    azure_devops = object({
+      org  = string
+      pat  = string
+    })
     github = object({
       org             = string
       app_id          = number
       installation_id = number
       private_key     = string
     })
-    azure_devops = object({
-      pat  = string
-      org  = string
-      proj = string
-    })
+  }))
+
+  # Flux Bootstrap Repository
+  fleet_infra = object({
+    type = string # azuredevops or github
+    org = string
+    proj = string
+    repo = string
   })
 }
 

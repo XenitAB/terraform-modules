@@ -90,53 +90,25 @@ module "fluxcd_v1_azure_devops" {
 }
 
 # FluxCD v2
-module "fluxcd_v2_azure_devops" {
+module "fluxcd_v2" {
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s
-    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "azure-devops"
+    if var.fluxcd_v2_enabled
   }
 
   source = "../../kubernetes/fluxcd-v2-azdo"
 
   environment       = var.environment
   cluster_id        = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
-  azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
-  azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
-  azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
-  namespaces = [for ns in var.namespaces : {
+  credentials = var.fluxcd_v2_config.credentials
+  fleet_infra = var.fluxcd_v2_config.fleet_infra
+  namespaces = [for ns in var.namespaces : ns => ns if ns.flux.enabled  {
     name = ns.name
-    flux = {
-      enabled     = ns.flux.enabled
-      create_crds = ns.flux.create_crds
-      org         = ns.flux.azure_devops.org
-      proj        = ns.flux.azure_devops.proj
-      repo        = ns.flux.azure_devops.repo
-    }
-  }]
-}
-
-module "fluxcd_v2_github" {
-  for_each = {
-    for s in ["fluxcd-v2"] :
-    s => s
-    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "github"
-  }
-
-  source = "../../kubernetes/fluxcd-v2-github"
-
-  environment            = var.environment
-  cluster_id             = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
-  github_org             = var.fluxcd_v2_config.github.org
-  github_app_id          = var.fluxcd_v2_config.github.app_id
-  github_installation_id = var.fluxcd_v2_config.github.installation_id
-  github_private_key     = var.fluxcd_v2_config.github.private_key
-  namespaces = [for ns in var.namespaces : {
-    name = ns.name
-    flux = {
-      enabled = ns.flux.enabled
-      repo    = ns.flux.github.repo
-    }
+    create_crds = ns.flux.create_crds
+    org = ns.flux.org
+    proj = ns.flux.proj
+    repo = ns.flux.repo
   }]
 }
 

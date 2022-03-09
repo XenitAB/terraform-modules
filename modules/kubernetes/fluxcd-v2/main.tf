@@ -74,6 +74,7 @@ locals {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   fleet_infra_name   = "fleet-infra"
   branch_name        = "main"
 =======
@@ -108,6 +109,10 @@ locals {
 >>>>>>> f8311b7... make fmt & docs
 =======
 >>>>>>> Add initial config
+=======
+  fleet_infra_name = "fleet-infra"
+  branch_name = "main"
+>>>>>>> Initial change of config to use one module - fluxcd-v2
 }
 
 resource "kubernetes_namespace" "this" {
@@ -136,6 +141,7 @@ resource "helm_release" "git_auth_proxy" {
   version     = "v0.5.2"
   max_history = 3
   values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -225,14 +231,17 @@ resource "helm_release" "git_auth_proxy" {
 <<<<<<< HEAD
 >>>>>>> d074599... Add initial config
 =======
+=======
+    credentials = var.credentials
+    # TODO: change to not be fleet infra aware, instead it should just be one of the repositories
+    fleet_infra = var.fleet_infra
+    tenants = var.namespaces
+>>>>>>> Initial change of config to use one module - fluxcd-v2
   })]
 }
 
-data "azuredevops_project" "this" {
-  name = var.azure_devops_proj
-}
-
 # Cluster
+<<<<<<< HEAD
 >>>>>>> Add initial config
 data "azuredevops_git_repository" "cluster" {
   project_id = data.azuredevops_project.this.id
@@ -259,11 +268,14 @@ data "github_repository" "cluster" {
 >>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> Add initial config
+=======
+>>>>>>> Initial change of config to use one module - fluxcd-v2
 data "flux_install" "this" {
   target_path = "clusters/${var.cluster_id}"
 }
 
 data "flux_sync" "this" {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -328,6 +340,14 @@ data "flux_sync" "this" {
 >>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> Add initial config
+=======
+  # local var based on fleet infra type
+  url                = var.fleet_infra.type == "azuredevops" ? "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}" : "${local.git_auth_proxy_url}/${var.github_org}/${var.cluster_repo}"
+  branch             = local.branch_name
+  target_path        = "clusters/${var.cluster_id}"
+  # local var based on fleet infra type
+  git_implementation = var.fleet_infra.type == "azuredevops" ? "libgit2" : "git2go"
+>>>>>>> Initial change of config to use one module - fluxcd-v2
 }
 
 data "kubectl_file_documents" "install" {
@@ -378,12 +398,15 @@ resource "kubectl_manifest" "sync" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
+=======
+>>>>>>> Initial change of config to use one module - fluxcd-v2
 # Azure DevOps
 data "azuredevops_project" "this" {
   name = var.azure_devops_proj
@@ -393,6 +416,7 @@ data "azuredevops_git_repository" "cluster" {
   name       = var.cluster_repo
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -410,6 +434,8 @@ data "azuredevops_git_repository" "cluster" {
 >>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> Add initial config
+=======
+>>>>>>> Initial change of config to use one module - fluxcd-v2
 resource "azuredevops_git_repository_file" "install" {
   repository_id       = data.azuredevops_git_repository.cluster.id
   file                = data.flux_install.this.path
@@ -451,12 +477,15 @@ resource "azuredevops_git_repository_file" "cluster_tenants" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
+=======
+>>>>>>> Initial change of config to use one module - fluxcd-v2
 resource "azuredevops_git_repository_file" "tenant" {
   for_each = {
     for ns in var.namespaces :
@@ -485,6 +514,7 @@ data "github_repository" "cluster" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add initial config
 =======
@@ -499,6 +529,8 @@ data "github_repository" "cluster" {
 >>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> Add initial config
+=======
+>>>>>>> Initial change of config to use one module - fluxcd-v2
 resource "github_repository_file" "install" {
   repository          = data.github_repository.cluster.name
   file                = data.flux_install.this.path
@@ -533,6 +565,7 @@ resource "github_repository_file" "cluster_tenants" {
   overwrite_on_create = true
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -584,10 +617,13 @@ resource "azuredevops_git_repository_file" "tenant" {
 >>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> Add initial config
+=======
+>>>>>>> Initial change of config to use one module - fluxcd-v2
 resource "github_repository_file" "tenant" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -617,6 +653,9 @@ resource "github_repository_file" "tenant" {
 =======
     if ns.flux.enabled
 >>>>>>> Add initial config
+=======
+    if ns.flux.type == "github"
+>>>>>>> Initial change of config to use one module - fluxcd-v2
   }
 
   repository = data.github_repository.cluster.name
@@ -634,6 +673,7 @@ resource "github_repository_file" "tenant" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     create_crds = each.value.flux.create_crds,
 =======
     create_crds = false,
@@ -656,6 +696,9 @@ resource "github_repository_file" "tenant" {
 =======
     create_crds = false,
 >>>>>>> Add initial config
+=======
+    create_crds = each.value.flux.create_crds,
+>>>>>>> Initial change of config to use one module - fluxcd-v2
   })
   overwrite_on_create = true
 }

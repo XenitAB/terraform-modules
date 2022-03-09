@@ -47,10 +47,17 @@ variable "namespaces" {
       flux = object({
         enabled     = bool
         create_crds = bool
+<<<<<<< HEAD
         type        = string # azuredevops or github
         org         = string
         proj        = string # only used for azuredevops
         repo        = string
+=======
+        type = string # azuredevops or github
+        org = string
+        proj = string # only used for azuredevops
+        repo = string
+>>>>>>> Initial change of config to use one module - fluxcd-v2
       })
     })
   )
@@ -127,8 +134,13 @@ variable "fluxcd_v2_config" {
   credentials = list(object({
     type = string # azuredevops or github
     azure_devops = object({
+<<<<<<< HEAD
       org = string
       pat = string
+=======
+      org  = string
+      pat  = string
+>>>>>>> Initial change of config to use one module - fluxcd-v2
     })
     github = object({
       org             = string
@@ -141,7 +153,11 @@ variable "fluxcd_v2_config" {
   # Flux Bootstrap Repository
   fleet_infra = object({
     type = string # azuredevops or github
+<<<<<<< HEAD
     org  = string
+=======
+    org = string
+>>>>>>> Initial change of config to use one module - fluxcd-v2
     proj = string
     repo = string
   })

@@ -112,7 +112,7 @@ locals {
       }
       parameters = {
         allowedCapabilities      = [""]
-        requiredDropCapabilities = ["NET_RAW"]
+        requiredDropCapabilities = ["NET_RAW", "CAP_SYS_ADMIN"]
       }
     },
     {

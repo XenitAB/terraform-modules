@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 variable "environment" {
   description = "Environment name of the cluster"
   type        = string
@@ -78,6 +79,8 @@ variable "github_private_key" {
   default     = "null"
 }
 
+=======
+>>>>>>> Initial change of config to use one module - fluxcd-v2
 variable "environment" {
   description = "Environment name of the cluster"
   type        = string
@@ -87,6 +90,33 @@ variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
 >>>>>>> Add initial config
+}
+
+variable "credentials" {
+  description = "List of credentials for Git Providers."
+  type = list(object({
+    type = string # azuredevops or github
+    azure_devops = object({
+      org  = string
+      pat  = string
+    })
+    github = object({
+      org             = string
+      app_id          = number
+      installation_id = number
+      private_key     = string
+    })
+  }))
+}
+
+variable "fleet_infra" {
+  description = "Configuration for Flux bootstrap repository."
+  type = object({
+    type = string
+    org = string
+    proj = string
+    repo = string
+  })
 }
 
 variable "namespaces" {
@@ -104,15 +134,13 @@ variable "namespaces" {
 }
 =======
       name = string
-      flux = object({
-        enabled     = bool
-        create_crds = bool
-        org         = string
-        proj        = string
-        repo        = string
-      })
+      create_crds = bool
+      org         = string
+      proj        = string
+      repo        = string
     })
   )
+<<<<<<< HEAD
 }
 
 variable "cluster_repo" {
@@ -127,3 +155,6 @@ variable "branch" {
   default     = "main"
 }
 >>>>>>> Add initial config
+=======
+}
+>>>>>>> Initial change of config to use one module - fluxcd-v2

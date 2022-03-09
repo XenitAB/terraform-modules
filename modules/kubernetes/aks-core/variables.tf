@@ -55,6 +55,7 @@ variable "namespaces" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> make fmt & docs
 =======
@@ -78,10 +79,13 @@ variable "namespaces" {
 >>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+>>>>>>> Initial change of config to use one module - fluxcd-v2
         type = string # azuredevops or github
         org = string
         proj = string # only used for azuredevops
         repo = string
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -100,6 +104,8 @@ variable "namespaces" {
 >>>>>>> Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> make fmt & docs
+=======
+>>>>>>> Initial change of config to use one module - fluxcd-v2
       })
     })
   )
@@ -174,6 +180,7 @@ variable "fluxcd_v2_config" {
 
   # Credentials to be passed to Git Auth Proxy
 <<<<<<< HEAD
+<<<<<<< HEAD
     type = string # azuredevops or github
     azure_devops = object({
 <<<<<<< HEAD
@@ -220,6 +227,13 @@ variable "fluxcd_v2_config" {
       org = string
       pat = string
 >>>>>>> make fmt & docs
+=======
+  credentials = list(object({
+    type = string # azuredevops or github
+    azure_devops = object({
+      org  = string
+      pat  = string
+>>>>>>> Initial change of config to use one module - fluxcd-v2
     })
     github = object({
       org             = string
@@ -227,6 +241,7 @@ variable "fluxcd_v2_config" {
       installation_id = number
       private_key     = string
     })
+<<<<<<< HEAD
 <<<<<<< HEAD
 
   # Flux Bootstrap Repository
@@ -259,12 +274,18 @@ variable "fluxcd_v2_config" {
     proj = string
     repo = string
 =======
+=======
+>>>>>>> Initial change of config to use one module - fluxcd-v2
   }))
 
   # Flux Bootstrap Repository
   fleet_infra = object({
     type = string # azuredevops or github
+<<<<<<< HEAD
     org  = string
+=======
+    org = string
+>>>>>>> Initial change of config to use one module - fluxcd-v2
     proj = string
     repo = string
   })

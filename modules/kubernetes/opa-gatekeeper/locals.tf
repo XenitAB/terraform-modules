@@ -116,6 +116,19 @@ locals {
       }
     },
     {
+      kind               = "K8sPSPSeccomp"
+      name               = "psp-capabilities"
+      enforcement_action = ""
+      match = {
+        kinds      = []
+        namespaces = []
+      }
+      parameters = {
+        allowedProfiles       = [""]
+        allowedLocalhostFiles = ["*"]
+      }
+    },
+    {
       kind               = "K8sBlockNodePort"
       name               = "block-node-port"
       enforcement_action = ""

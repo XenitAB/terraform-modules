@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#593](https://github.com/XenitAB/terraform-modules/pull/593) Change Prometheus remote write settings to align with best practices.
+
 ## 2022.03.2
 
 ### Changed

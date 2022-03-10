@@ -68,10 +68,10 @@ spec:
       # Check docs for more information about settings
       # https://prometheus.io/docs/practices/remote_write/
       queueConfig:
-        capacity: 3000
+        capacity: 2500
         maxBackoff: 5s
-        maxSamplesPerSend: 1000
-        maxShards: 100
+        maxSamplesPerSend: 500
+        maxShards: 50
       {{- if .Values.remoteWrite.authenticated }}
       tlsConfig:
         certFile: /mnt/tls/tls.crt

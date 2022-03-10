@@ -126,6 +126,7 @@ data "aws_subnet" "node" {
 }
 
 # Required to override the default max pod limit set by default based on instance type
+#tfsec:ignore:aws-autoscaling-enforce-http-token-imds
 resource "aws_launch_template" "eks_node_group" {
   for_each = {
     for node_group in var.eks_config.node_groups :

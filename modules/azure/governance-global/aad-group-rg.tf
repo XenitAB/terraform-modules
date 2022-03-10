@@ -7,6 +7,7 @@ resource "azuread_group" "rg_owner" {
 
   display_name            = "${var.azure_ad_group_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.value.common_name}${var.group_name_separator}owner"
   prevent_duplicate_names = true
+  security_enabled        = true
 }
 
 # AAD Group for Resource Group Contributors
@@ -18,6 +19,7 @@ resource "azuread_group" "rg_contributor" {
 
   display_name            = "${var.azure_ad_group_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.value.common_name}${var.group_name_separator}contributor"
   prevent_duplicate_names = true
+  security_enabled        = true
 }
 
 
@@ -30,4 +32,5 @@ resource "azuread_group" "rg_reader" {
 
   display_name            = "${var.azure_ad_group_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.value.common_name}${var.group_name_separator}reader"
   prevent_duplicate_names = true
+  security_enabled        = true
 }

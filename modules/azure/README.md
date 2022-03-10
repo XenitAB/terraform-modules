@@ -33,31 +33,24 @@ Create and delegate access to the `owner` service principal:
 - Grant service principal the following permissions:
   - API Permissions: (Application)
     - `Group.ReadWrite.All` (`Microsoft Graph`)
-    - `Application.ReadWrite.All` (`Azure Active Directory Graph` - it's under the `Supported legacy APIs` section - see the note below)
+    - `Application.ReadWrite.All` (`Microsoft Graph`)
   - API Permissions: `Grant admin consent for <Tenant>`
   - Subscription permissions on all the subscriptions: `Owner`
   - The service principal also needs to be member of the `User administrator` role
+	
+### Migrating to Azure AD v2 provider
 
-Note regarding Azure Active Directory Graph: The AAD Graph has been deprecated and it's not possible to add it using the UI anymore. It will be completely decomissioned soon, but if you need it please add the following to your Azure AD App manifest:
+If you are using the Azure AD v1 provider and start using the v2 provider, please follow the below steps:
+	
+  - Add API permission `Application.ReadWrite.All` (`Microsoft Graph`) to the service principal(s)
+	- Remove the following from the state: module.governance_global.data.azuread_application.owner_spn (related [issue](https://github.com/hashicorp/terraform-provider-azuread/issues/541))
+		```shell
+	  make state-remove ENV=dev DIR=governance
+	  confirm: governance/dev
+	  regexp: data.azuread_application
+	  ```
+  - Run plan / apply, validate that only `random_password` resources are removed
+  - Remove service principal(s) from the `User administrator` role
+  - Remove the `Application.ReadWrite.All` (`Azure Active Directory Graph`) permission and admin consent from the service principal(s)	
+  - Remove the `Directory.ReadWrite.All` (`Azure Active Directory Graph`) permission and admin consent from the service principal(s) if it exists	
 
-```json
-{
-  "...",
-	"requiredResourceAccess": [
-		{
-			"resourceAppId": "00000002-0000-0000-c000-000000000000",
-			"resourceAccess": [
-				{
-					"id": "1cda74f2-2616-4834-b122-5cb1b07f8a59",
-					"type": "Role"
-				},
-				{
-					"id": "78c8a3c8-a07e-4b9e-af1b-b5ccab50a175",
-					"type": "Role"
-				}
-			]
-		}
-	],
-  "..."
-}
-```

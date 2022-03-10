@@ -10,6 +10,7 @@ resource "azuread_group" "acr_push" {
 
   display_name            = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrpush"
   prevent_duplicate_names = true
+  security_enabled        = true
 }
 
 # ACR Pull Azure AD group will grant pull permissions to the Container Registry
@@ -22,6 +23,7 @@ resource "azuread_group" "acr_pull" {
 
   display_name            = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrpull"
   prevent_duplicate_names = true
+  security_enabled        = true
 }
 
 # ACR Reader Azure AD group will grant ARM (to view Container Registry in Azure Portal) and pull permissions to the Container Registry
@@ -34,6 +36,7 @@ resource "azuread_group" "acr_reader" {
 
   display_name            = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrreader"
   prevent_duplicate_names = true
+  security_enabled        = true
 }
 
 # Grant ACR Push permissions to the resource group service principal

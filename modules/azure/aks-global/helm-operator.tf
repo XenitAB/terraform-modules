@@ -6,19 +6,8 @@ resource "azuread_service_principal" "helm_operator" {
   application_id = azuread_application.helm_operator.application_id
 }
 
-resource "random_password" "helm_operator" {
-  length           = 48
-  special          = true
-  override_special = "!-_="
-
-  keepers = {
-    service_principal = azuread_service_principal.helm_operator.id
-  }
-}
-
 resource "azuread_application_password" "helm_operator" {
   application_object_id = azuread_application.helm_operator.id
-  value                 = random_password.helm_operator.result
   end_date              = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {

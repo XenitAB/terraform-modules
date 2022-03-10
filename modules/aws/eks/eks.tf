@@ -140,6 +140,9 @@ resource "aws_launch_template" "eks_node_group" {
       volume_size = 20
     }
   }
+  metadata_options {
+    http_tokens = "required"
+  }  
   user_data = base64encode(templatefile("${path.module}/templates/userdata.sh.tpl", {
     cluster_name   = aws_eks_cluster.this.name,
     b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,

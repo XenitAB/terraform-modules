@@ -124,7 +124,7 @@ locals {
         namespaces = []
       }
       parameters = {
-        allowedProfiles       = [""]
+        allowedProfiles       = ["*"]
         allowedLocalhostFiles = ["*"]
       }
     },

@@ -34,10 +34,6 @@ This directory contains all the Kubernetes Terraform modules.
 - [`grafana-agent`](grafana-agent/README.md)
 - [`node-local-dns`](node-local-dns/README.md)
 
-### Deprecated
-
-- [`goldpinger`](goldpinger/README.md)
-
 ## Style Guide
 
 TBD

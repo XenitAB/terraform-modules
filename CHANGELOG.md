@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.03.2
+
 ### Changed
 
 - [#589](https://github.com/XenitAB/terraform-modules/pull/589) Update git-auth-proxy to 0.6.0 to include case-insensitive path matching.

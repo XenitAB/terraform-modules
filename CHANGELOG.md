@@ -15,6 +15,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#594](https://github.com/XenitAB/terraform-modules/pull/594) Remove deprecated goldpinger module.
 
+### Deprecated
+
+- [#597](https://github.com/XenitAB/terraform-modules/pull/597) Deprecate New Relic module.
+
 ## 2022.03.2
 
 ### Changed

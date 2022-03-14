@@ -31,7 +31,7 @@ data "azurerm_resource_group" "this" {
   name = local.resource_group_name
 }
 
-#tfsec:ignore:AZU012
+#tfsec:ignore:azure-storage-queue-services-logging-enabled
 resource "azurerm_storage_account" "loki" {
   name                     = local.storage_account_name
   resource_group_name      = data.azurerm_resource_group.this.name

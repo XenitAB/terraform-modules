@@ -12,8 +12,8 @@ module "datadog" {
     helm       = helm
   }
 
-  api_key           = "key"    #tfsec:ignore:GEN003
-  app_key           = "appkey" #tfsec:ignore:GEN003
+  api_key           = "key"    #tfsec:ignore:general-secrets-no-plaintext-exposure
+  app_key           = "appkey" #tfsec:ignore:general-secrets-no-plaintext-exposure
   location          = "foo"
   environment       = "bar"
   namespace_include = ["ns1", "ns2"]

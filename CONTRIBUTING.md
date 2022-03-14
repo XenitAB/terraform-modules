@@ -21,16 +21,6 @@ but instead install it as the command `gmake`.
 brew install make
 ```
 
-Install tflint azure plugin
-```
-ARCH="linux" # or 'darwin' if macOS
-mkdir -p $HOME/.tflint.d/plugins
-cd $HOME/.tflint.d/plugins
-wget https://github.com/terraform-linters/tflint-ruleset-azurerm/releases/download/v0.6.0/tflint-ruleset-azurerm_${ARCH}_amd64.zip
-unzip tflint-ruleset-azurerm_${ARCH}_amd64.zip
-rm tflint-ruleset-azurerm_${ARCH}_amd64.zip
-```
-
 ## Development
 
 Eeach PR has a set of checks that are required to pass before it can be merged. This is to ensure consitency and stability in each

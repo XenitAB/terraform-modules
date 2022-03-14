@@ -90,23 +90,23 @@ variable "unique_suffix" {
 variable "github_organization_kvsecret" {
   description = "The Azure KeyVault Secret containing the GitHub Organization name"
   type        = string
-  default     = "github-organization" #tfsec:ignore:GEN001
+  default     = "github-organization" #tfsec:ignore:general-secrets-no-plaintext-exposure
 }
 
 variable "github_app_id_kvsecret" {
   description = "The Azure KeyVault Secret containing the GitHub App ID"
   type        = string
-  default     = "github-app-id" #tfsec:ignore:GEN001
+  default     = "github-app-id" #tfsec:ignore:general-secrets-no-plaintext-exposure
 }
 
 variable "github_installation_id_kvsecret" {
   description = "The Azure KeyVault Secret containing the GitHub App Installation ID"
   type        = string
-  default     = "github-installation-id" #tfsec:ignore:GEN001
+  default     = "github-installation-id" #tfsec:ignore:general-secrets-no-plaintext-exposure
 }
 
 variable "github_private_key_kvsecret" {
   description = "The AzureKey Vault Secret containing the GitHub App Private Key"
   type        = string
-  default     = "github-private-key" #tfsec:ignore:GEN001
+  default     = "github-private-key" #tfsec:ignore:general-secrets-no-plaintext-exposure
 }

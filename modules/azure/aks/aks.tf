@@ -1,4 +1,4 @@
-#tfsec:ignore:AZU009
+#tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging
 resource "azurerm_kubernetes_cluster" "this" {
   lifecycle {
     ignore_changes = [
@@ -63,7 +63,9 @@ resource "azurerm_kubernetes_cluster" "this" {
 
     orchestrator_version = var.aks_config.default_node_pool.orchestrator_version
     node_count           = 1
-    vm_size              = "Standard_D2as_v4"
+    # This is a bug in tflint
+    # tflint-ignore: azurerm_kubernetes_cluster_default_node_pool_invalid_vm_size
+    vm_size = "Standard_D2as_v4"
 
     node_labels = var.aks_config.default_node_pool.node_labels
   }

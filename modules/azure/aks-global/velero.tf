@@ -1,4 +1,4 @@
-#tfsec:ignore:AZU012
+#tfsec:ignore:azure-storage-queue-services-logging-enabled
 resource "azurerm_storage_account" "velero" {
   name                     = "strg${var.environment}${var.location_short}${var.name}velero${var.unique_suffix}"
   resource_group_name      = data.azurerm_resource_group.this.name

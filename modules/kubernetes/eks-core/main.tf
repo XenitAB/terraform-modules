@@ -18,23 +18,23 @@ terraform {
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.6.1"
+      version = "2.8.0"
     }
     github = {
       source  = "integrations/github"
-      version = "4.17.0"
+      version = "4.21.0"
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.5.1"
+      version = "0.11.2"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
-      version = "1.13.0"
+      version = "1.13.1"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.3.0"
+      version = "2.4.1"
     }
   }
 }

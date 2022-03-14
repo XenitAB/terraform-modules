@@ -9,11 +9,11 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "2.82.0"
+      version = "2.99.0"
       source  = "hashicorp/azurerm"
     }
     azuread = {
-      version = "2.18.0"
+      version = "2.19.1"
       source  = "hashicorp/azuread"
     }
     random = {
@@ -21,7 +21,7 @@ terraform {
       source  = "hashicorp/random"
     }
     pal = {
-      version = "0.2.4"
+      version = "0.2.5"
       source  = "xenitab/pal"
     }
   }

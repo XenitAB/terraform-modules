@@ -11,6 +11,7 @@ trivy:
   severity: MEDIUM,HIGH,CRITICAL
   ignoreUnfixed: true
   serverURL: "http://trivy.starboard-operator.svc.cluster.local:4954"
+  imageRef: docker.io/aquasec/trivy:0.24.3
 
 operator:
   # configAuditScannerEnabled the flag to enable configuration audit scanner

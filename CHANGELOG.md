@@ -12,6 +12,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#574](https://github.com/XenitAB/terraform-modules/pull/574) [Breaking] Update cert-manager version.
 - [#595](https://github.com/XenitAB/terraform-modules/pull/595) Update Terraform provider versions.
 
+### Fix
+
+- [#600](https://github.com/XenitAB/terraform-modules/pull/600) Hardcode trivy starboard image to 0.24.3
+
 ### Removed
 
 - [#594](https://github.com/XenitAB/terraform-modules/pull/594) Remove deprecated goldpinger module.

@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fix
 
 - [#600](https://github.com/XenitAB/terraform-modules/pull/600) Hardcode trivy starboard image to 0.24.3 and update trivy helm chart.
+- [#601](https://github.com/XenitAB/terraform-modules/pull/601) Fix api-group for get nodes role.
 
 ### Removed
 

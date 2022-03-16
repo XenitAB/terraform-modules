@@ -8,17 +8,20 @@ metadata:
 spec:
   clients:
     - url: {{ .Values.remote.logsUrl }}
-      tenantId: {{ .Values.tenantId }}
       externalLabels:
         cluster: {{ .Values.clusterName }}
         environment: {{ .Values.environment }}
-      tlsConfig:
-        certFile: /mnt/secret-store/tls.crt
-        keyFile: /mnt/secret-store/tls.key
+      basicAuth:
+        username:
+          name: {{ .Values.credentialsSecretName }}
+          key: logs_username
+        password:
+          name: {{ .Values.credentialsSecretName }}
+          key: logs_password
   podLogsNamespaceSelector:
     matchExpressions:
       - key: "xkf.xenit.io/kind"
         operator: "Exists"
   podLogsSelector:
     matchLabels:
-      xkf.xenit.io/monitoring: platform
+      xkf.xenit.io/monitoring: tenant

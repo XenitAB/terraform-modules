@@ -1,8 +1,12 @@
 environment: ${environment}
 clusterName: ${cluster_name}
-credentialsSecretName: ${credentials_secret_name}
+cloudProvider: "${cloud_provider}"
 
 remote:
-  metricsUrl: ${remote_write_metrics_url}
-  logsUrl: ${remote_write_logs_url}
-  tracesUrl: ${remote_write_traces_url}
+  logsUrl:  "${remote_logs_url}"
+
+azureConfig:
+  resourceID: "${azure_config.identity.resource_id}"
+  clientID: "${azure_config.identity.client_id}"
+  tenantID: "${azure_config.identity.tenant_id}"
+  keyVaultName: "${azure_config.azure_key_vault_name}"

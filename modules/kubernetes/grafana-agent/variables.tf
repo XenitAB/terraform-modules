@@ -1,30 +1,3 @@
-variable "remote_write_urls" {
-  description = "the remote write urls"
-  type = object({
-    metrics = string
-    logs    = string
-    traces  = string
-  })
-  default = {
-    metrics = ""
-    logs    = ""
-    traces  = ""
-  }
-}
-
-variable "credentials" {
-  description = "grafana-agent credentials"
-  type = object({
-    metrics_username = string
-    metrics_password = string
-    logs_username    = string
-    logs_password    = string
-    traces_username  = string
-    traces_password  = string
-  })
-  sensitive = true
-}
-
 variable "cluster_name" {
   description = "the cluster name"
   type        = string
@@ -35,18 +8,31 @@ variable "environment" {
   type        = string
 }
 
-variable "vpa_enabled" {
-  description = "Should vpa be enabled"
-  type        = bool
-  default     = false
+variable "cloud_provider" {
+  description = "Name of cloud provider"
+  type        = string
+}
+variable "remote_logs_url" {
+  description = "The remote URL to send logs to"
+  type        = string
 }
 
-variable "namespace_include" {
-  description = "A list of the namespaces that kube-state-metrics should create metrics for"
-  type        = list(string)
-
-  validation {
-    condition     = length(var.namespace_include) > 0
-    error_message = "The namespace_include needs to at least contain one namespace in the list."
+variable "azure_config" {
+  description = "Azure specific configuration"
+  type = object({
+    azure_key_vault_name = string
+    identity = object({
+      client_id   = string
+      resource_id = string
+      tenant_id   = string
+    })
+  })
+  default = {
+    azure_key_vault_name = ""
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
   }
 }

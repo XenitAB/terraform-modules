@@ -333,8 +333,8 @@ variable "vpa_enabled" {
   default     = true
 }
 
-variable "grafana_agent_enabled" {
-  description = "Should Grafana-Agent be enabled"
+variable "grafana_agent_tenant_enabled" {
+  description = "Should Grafana-Agent be enabled for tenant. 'grafana_agent_enabled' must also be set to 'true'"
   type        = bool
   default     = false
 }

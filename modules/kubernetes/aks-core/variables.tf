@@ -278,13 +278,31 @@ variable "datadog_config" {
 }
 
 variable "grafana_agent_enabled" {
-  description = "Should Grafana-Agent be enabled"
+  description = "Should Grafana Agent be enabled for platform"
+  type        = bool
+  default     = true
+}
+
+variable "grafana_agent_config" {
+  description = "Configuration for Grafana Agent"
+  type = object({
+    remote_logs_url      = string
+    azure_key_vault_name = string
+    identity = object({
+      client_id   = string
+      resource_id = string
+      tenant_id   = string
+    })
+  })
+}
+variable "grafana_agent_tenant_enabled" {
+  description = "Should Grafana Agent be enabled for tenant. 'grafana_agent_enabled' must also be set to 'true'"
   type        = bool
   default     = false
 }
 
-variable "grafana_agent_config" {
-  description = "The Grafan-Agent configuration"
+variable "grafana_agent_tenant_config" {
+  description = "The Grafana Agent configuration for tenants"
   sensitive   = true
   type = object({
     remote_write_urls = object({

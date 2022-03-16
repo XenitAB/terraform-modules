@@ -31,6 +31,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`starboard`](starboard/README.md)
 - [`vpa`](vpa/README.md)
 - [`grafana-agent`](grafana-agent/README.md)
+- [`grafana-agent-tenant`](grafana-agent-tenant/README.md)
 - [`node-local-dns`](node-local-dns/README.md)
 
 ### Deprecated

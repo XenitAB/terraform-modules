@@ -107,4 +107,14 @@ module "aks_core" {
     resource_selector  = ["platform"]
     namespace_selector = ["platform"]
   }
+
+  grafana_agent_config = {
+    azure_key_vault_name = "kv"
+    identity = {
+      client_id   = "cid"
+      resource_id = "rid"
+      tenant_id   = "tid"
+    }
+    remote_logs_url = "url"
+  }
 }

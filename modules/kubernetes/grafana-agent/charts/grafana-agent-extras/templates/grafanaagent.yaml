@@ -28,3 +28,19 @@ spec:
       memory: {{ .Values.agent.resources.requests.memory }}
   tolerations:
     - operator: "Exists"
+  podMetadata:
+    labels:
+      aadpodidbinding: grafana-agent
+  containers:
+    - name: grafana-agent
+      volumeMounts:
+        - name: secret-store
+          mountPath: "/mnt/secret-store"
+          readOnly: true
+  volumes:
+    - name: secret-store
+      csi:
+        driver: secrets-store.csi.k8s.io
+        readOnly: true
+        volumeAttributes:
+          secretProviderClass: xenit-proxy-certificate

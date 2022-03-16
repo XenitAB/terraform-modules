@@ -90,7 +90,7 @@ resource "kubernetes_cluster_role" "get_node" {
     }
   }
   rule {
-    api_groups = ["metrics.k8s.io"]
+    api_groups = [""]
     resources  = ["nodes"]
     verbs      = ["get", "list", "watch"]
   }

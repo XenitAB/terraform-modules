@@ -66,7 +66,7 @@ resource "helm_release" "trivy" {
   chart       = "trivy"
   name        = "trivy"
   namespace   = kubernetes_namespace.starboard.metadata[0].name
-  version     = "0.4.11"
+  version     = "0.4.12"
   max_history = 3
   values = [templatefile("${path.module}/templates/trivy-values.yaml.tpl", {
     provider       = var.cloud_provider

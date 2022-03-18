@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: grafana-agent-traces
+  name: grafana-agent-tenant-traces
   namespace: {{ .Release.Namespace }}
 data:
   agent.yaml: |

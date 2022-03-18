@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   annotations:
     reloader.stakater.com/auto: "true"
-  name: grafana-agent-traces
+  name: grafana-agent-tenant-traces
   namespace: {{ .Release.Namespace }}
 spec:
   minReadySeconds: 10
@@ -11,11 +11,11 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      name: grafana-agent-traces
+      name: grafana-agent-tenant-traces
   template:
     metadata:
       labels:
-        name: grafana-agent-traces
+        name: grafana-agent-tenant-traces
     spec:
       priorityClassName: "platform-medium"
       containers:
@@ -61,7 +61,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /etc/agent
-              name: grafana-agent-traces
+              name: grafana-agent-tenant-traces
           resources:
             requests:
               cpu: {{ .Values.traces.resources.requests.cpu }}
@@ -69,5 +69,5 @@ spec:
       serviceAccount: grafana-agent
       volumes:
         - configMap:
-            name: grafana-agent-traces
-          name: grafana-agent-traces
+            name: grafana-agent-tenant-traces
+          name: grafana-agent-tenant-traces

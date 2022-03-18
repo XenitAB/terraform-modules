@@ -1,0 +1,30 @@
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: GrafanaAgent
+metadata:
+  name: grafana-agent-tenant
+  namespace: { { .Release.Namespace } }
+  labels:
+    app: grafana-agent-tenant
+spec:
+  image: { { .Values.image } }
+  logLevel: info
+  serviceAccountName: grafana-agent
+  priorityClassName: platform-medium
+  metrics:
+    instanceSelector:
+      matchLabels:
+        agent: grafana-agent-tenant-metrics
+    replicas: { { .Values.replicas } }
+    externalLabels:
+      cluster: { { .Values.clusterName } }
+      environment: { { .Values.environment } }
+  logs:
+    instanceSelector:
+      matchLabels:
+        agent: grafana-agent-tenant-logs
+  resources:
+    requests:
+      cpu: { { .Values.agent.resources.requests.cpu } }
+      memory: { { .Values.agent.resources.requests.memory } }
+  tolerations:
+    - operator: "Exists"

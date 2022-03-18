@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: grafana-agent-traces
-  name: grafana-agent-traces
+    name: grafana-agent-tenant-traces
+  name: grafana-agent-tenant-traces
   namespace: {{ .Release.Namespace }}
 spec:
   ports:
@@ -27,4 +27,4 @@ spec:
       protocol: TCP
       targetPort: jaeger
   selector:
-    name: grafana-agent-traces
+    name: grafana-agent-tenant-traces

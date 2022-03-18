@@ -1,10 +1,10 @@
 apiVersion: monitoring.grafana.com/v1alpha1
 kind: LogsInstance
 metadata:
-  name: primary
+  name: tenant
   namespace: {{ .Release.Namespace }}
   labels:
-    agent: grafana-agent-logs
+    agent: grafana-agent-tenant-logs
 spec:
   clients:
     - url: {{ .Values.remote.logsUrl }}

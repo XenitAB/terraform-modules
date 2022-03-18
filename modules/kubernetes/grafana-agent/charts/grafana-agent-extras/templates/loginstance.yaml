@@ -1,10 +1,12 @@
 apiVersion: monitoring.grafana.com/v1alpha1
 kind: LogsInstance
 metadata:
-  name: primary
+  name: platform
   namespace: {{ .Release.Namespace }}
   labels:
-    agent: grafana-agent-logs
+  labels:
+    {{- include "grafana-agent-extras.labels" . | nindent 4 }}
+    agent: grafana-agent-platform-logs
 spec:
   clients:
     - url: {{ .Values.remote.logsUrl }}
@@ -15,10 +17,6 @@ spec:
       tlsConfig:
         certFile: /mnt/secret-store/tls.crt
         keyFile: /mnt/secret-store/tls.key
-  podLogsNamespaceSelector:
-    matchExpressions:
-      - key: "xkf.xenit.io/kind"
-        operator: "Exists"
   podLogsSelector:
     matchLabels:
       xkf.xenit.io/monitoring: platform

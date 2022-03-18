@@ -1,27 +1,21 @@
 apiVersion: monitoring.grafana.com/v1alpha1
 kind: GrafanaAgent
 metadata:
-  name: grafana-agent
+  name: grafana-agent-platform
   namespace: {{ .Release.Namespace }}
   labels:
-    app: grafana-agent
+  labels:
+    {{- include "grafana-agent-extras.labels" . | nindent 4 }}
+    app: grafana-agent-platform
 spec:
   image: {{ .Values.image }}
   logLevel: info
   serviceAccountName: grafana-agent
   priorityClassName: platform-medium
-  metrics:
-    instanceSelector:
-      matchLabels:
-        agent: grafana-agent-metrics
-    replicas: {{ .Values.replicas }}
-    externalLabels:
-      cluster: {{ .Values.clusterName }}
-      environment: {{ .Values.environment }}
   logs:
     instanceSelector:
       matchLabels:
-        agent: grafana-agent-logs
+        agent: grafana-agent-platform-logs
   resources:
     requests:
       cpu: {{ .Values.agent.resources.requests.cpu }}
@@ -43,4 +37,4 @@ spec:
         driver: secrets-store.csi.k8s.io
         readOnly: true
         volumeAttributes:
-          secretProviderClass: xenit-proxy-certificate
+          secretProviderClass: grafana-agent

@@ -14,3 +14,11 @@ azureConfig:
   tenantID: ""
   keyVaultName: ""
   keyVaultSecretName: "xenit-proxy-certificate"
+
+# The resource values specified for agent will apply both to grafana-agent and grafana-agent-logs
+# since it is not possible to configure different values for those two
+agent:
+  resources:
+    requests:
+      cpu: 25m
+      memory: 100Mi

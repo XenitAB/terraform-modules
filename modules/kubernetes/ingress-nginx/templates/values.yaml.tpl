@@ -7,9 +7,13 @@ controller:
     name: ${ingress_class}
     default: ${default_ingress_class}
     controllerValue: "k8s.io/ingress-${ingress_class}"
-  
+
   # Should eventually be removed as ingress class annotations are deprecated
   ingressClass: ${ingress_class}
+
+  %{~ if public_private_enabled ~}
+  electionID: ingress-controller-leader-${ingress_class}
+  %{~ endif ~}
 
   %{~ if provider == "aws" ~}
   # Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.

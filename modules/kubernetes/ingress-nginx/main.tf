@@ -47,6 +47,7 @@ resource "helm_release" "ingress_nginx" {
     provider               = var.cloud_provider
     ingress_class          = "nginx"
     internal_load_balancer = false
+    public_private_enabled = var.public_private_enabled
     default_certificate = {
       enabled         = var.default_certificate.enabled
       dns_zone        = var.default_certificate.dns_zone
@@ -79,6 +80,7 @@ resource "helm_release" "ingress_nginx_public" {
     provider               = var.cloud_provider
     ingress_class          = "nginx-public"
     internal_load_balancer = false
+    public_private_enabled = var.public_private_enabled
     default_certificate = {
       enabled         = var.default_certificate.enabled
       dns_zone        = var.default_certificate.dns_zone
@@ -111,6 +113,7 @@ resource "helm_release" "ingress_nginx_private" {
     provider               = var.cloud_provider
     ingress_class          = "nginx-private"
     internal_load_balancer = true
+    public_private_enabled = var.public_private_enabled
     default_certificate = {
       enabled         = var.default_certificate.enabled
       dns_zone        = var.default_certificate.dns_zone

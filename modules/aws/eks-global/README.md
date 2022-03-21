@@ -2,7 +2,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.1.7 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.63.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.19.1 |
 

@@ -50,7 +50,7 @@ The [Linkerd CNI](https://linkerd.io/2.10/features/cni/) is required to if the l
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.1.7 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.4.1 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.8.0 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 3.1.0 |

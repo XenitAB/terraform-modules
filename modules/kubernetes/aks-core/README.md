@@ -6,7 +6,7 @@ This module is used to create AKS clusters.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.1.7 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.19.1 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.99.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.11.2 |
@@ -20,9 +20,9 @@ This module is used to create AKS clusters.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.99.0 |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.4.1 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.8.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.82.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.3.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.6.1 |
 
 ## Modules
 

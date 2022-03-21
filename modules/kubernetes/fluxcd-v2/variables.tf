@@ -20,6 +20,7 @@ variable "credentials" {
       org = string
       pat = string
 <<<<<<< HEAD
+<<<<<<< HEAD
     })
     github = object({
       org             = string
@@ -141,6 +142,8 @@ variable "credentials" {
     azure_devops = object({
       org  = string
       pat  = string
+=======
+>>>>>>> a69675f... make fmt & docs
     })
     github = object({
       org             = string
@@ -155,7 +158,7 @@ variable "fleet_infra" {
   description = "Configuration for Flux bootstrap repository."
   type = object({
     type = string
-    org = string
+    org  = string
     proj = string
     repo = string
   })
@@ -165,6 +168,7 @@ variable "namespaces" {
   description = "The namespaces to configure flux with"
   type = list(
     object({
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -181,6 +185,9 @@ variable "namespaces" {
 =======
       name        = string
 >>>>>>> make fmt & docs
+=======
+      name        = string
+>>>>>>> a69675f... make fmt & docs
       create_crds = bool
       org         = string
       proj        = string

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AKS Core
 
 This module is used to create AKS clusters.
@@ -140,9 +141,14 @@ This module is used to create AKS clusters.
 
 No outputs.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> make fmt & docs
 =======
 >>>>>>> make fmt & docs
 =======
 >>>>>>> Fix readme
+=======
+=======
+>>>>>>> make fmt & docs
+>>>>>>> a69675f... make fmt & docs

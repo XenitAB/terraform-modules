@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fix
 
 - [#606](https://github.com/XenitAB/terraform-modules/pull/606) Fix electionID on ingress-nginx when using private and public ingress-nginx.
+- [#608](https://github.com/XenitAB/terraform-modules/pull/608) Include node-local-dns IP in default-deny networkpolicy CIDR block.
 
 ## 2022.03.3
 

@@ -4,7 +4,6 @@ metadata:
   name: grafana-agent-platform
   namespace: {{ .Release.Namespace }}
   labels:
-  labels:
     {{- include "grafana-agent-extras.labels" . | nindent 4 }}
     app: grafana-agent-platform
 spec:

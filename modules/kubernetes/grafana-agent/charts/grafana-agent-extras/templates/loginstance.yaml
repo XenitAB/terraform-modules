@@ -14,9 +14,6 @@ spec:
       externalLabels:
         cluster: {{ .Values.clusterName }}
         environment: {{ .Values.environment }}
-      tlsConfig:
-        certFile: /mnt/tls/tls.crt
-        keyFile: /mnt/tls/tls.key
   podLogsSelector:
     matchLabels:
       xkf.xenit.io/monitoring: platform

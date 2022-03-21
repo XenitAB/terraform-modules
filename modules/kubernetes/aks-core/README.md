@@ -3,6 +3,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 <<<<<<< HEAD
@@ -170,4 +171,6 @@ This module is used to create AKS clusters.
 No outputs.
 =======
 >>>>>>> make fmt & docs
+>>>>>>> make fmt & docs
+=======
 >>>>>>> make fmt & docs

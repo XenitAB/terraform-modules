@@ -56,6 +56,7 @@ variable "namespaces" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> make fmt & docs
 =======
@@ -64,10 +65,13 @@ variable "namespaces" {
 >>>>>>> f8311b7... make fmt & docs
 =======
 >>>>>>> make fmt & docs
+=======
+>>>>>>> make fmt & docs
         type        = string # azuredevops or github
         org         = string
         proj        = string # only used for azuredevops
         repo        = string
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -106,6 +110,8 @@ variable "namespaces" {
 >>>>>>> make fmt & docs
 =======
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+>>>>>>> make fmt & docs
       })
     })
   )
@@ -231,9 +237,14 @@ variable "fluxcd_v2_config" {
   credentials = list(object({
     type = string # azuredevops or github
     azure_devops = object({
+<<<<<<< HEAD
       org  = string
       pat  = string
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+      org = string
+      pat = string
+>>>>>>> make fmt & docs
     })
     github = object({
       org             = string
@@ -282,10 +293,14 @@ variable "fluxcd_v2_config" {
   fleet_infra = object({
     type = string # azuredevops or github
 <<<<<<< HEAD
+<<<<<<< HEAD
     org  = string
 =======
     org = string
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+    org  = string
+>>>>>>> make fmt & docs
     proj = string
     repo = string
   })

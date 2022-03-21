@@ -25,4 +25,4 @@ spec:
     labels:
       aadpodidbinding: grafana-agent
   secrets:
-    - name: tls
+    - xenit-proxy-certificate

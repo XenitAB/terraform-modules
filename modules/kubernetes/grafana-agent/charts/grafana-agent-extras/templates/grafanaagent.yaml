@@ -25,19 +25,7 @@ spec:
   podMetadata:
     labels:
       aadpodidbinding: grafana-agent
-  volumeMounts:
-    - mountPath: /mnt/secrets-store
-      name: secrets-store
-    - name: tls
-      mountPath: "/mnt/tls"
-      readOnly: true
   volumes:
-    - name: secrets-store
-      csi:
-        driver: secrets-store.csi.k8s.io
-        readOnly: true
-        volumeAttributes:
-          secretProviderClass: grafana-agent
     - name: tls
       secret:
         secretName: {{ .Values.secretName }}

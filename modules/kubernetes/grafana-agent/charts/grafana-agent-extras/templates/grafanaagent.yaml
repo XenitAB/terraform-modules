@@ -24,7 +24,5 @@ spec:
   podMetadata:
     labels:
       aadpodidbinding: grafana-agent
-  volumes:
+  secrets:
     - name: tls
-      secret:
-        secretName: {{ .Values.secretName }}

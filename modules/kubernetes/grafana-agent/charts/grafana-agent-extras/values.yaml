@@ -4,6 +4,7 @@ replicas: 2
 environment: ""
 clusterName: aks1
 cloudProvider: ""
+secretName: "xenit-proxy-certificate"
 
 remote:
   logsUrl: ""

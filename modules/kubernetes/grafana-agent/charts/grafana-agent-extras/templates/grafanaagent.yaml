@@ -25,12 +25,12 @@ spec:
   podMetadata:
     labels:
       aadpodidbinding: grafana-agent
-  containers:
-    - name: grafana-agent
-      volumeMounts:
-        - name: secret-store
-          mountPath: "/mnt/secret-store"
-          readOnly: true
+  volumeMounts:
+    - mountPath: /mnt/secrets-store
+      name: secrets-store
+    - name: tls
+      mountPath: "/mnt/tls"
+      readOnly: true
   volumes:
     - name: secret-store
       csi:
@@ -38,3 +38,6 @@ spec:
         readOnly: true
         volumeAttributes:
           secretProviderClass: grafana-agent
+    - name: tls
+      secret:
+        secretName: {{ .Values.secretName }}

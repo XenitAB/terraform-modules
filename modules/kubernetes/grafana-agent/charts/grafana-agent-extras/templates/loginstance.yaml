@@ -15,8 +15,8 @@ spec:
         cluster: {{ .Values.clusterName }}
         environment: {{ .Values.environment }}
       tlsConfig:
-        certFile: /mnt/secret-store/tls.crt
-        keyFile: /mnt/secret-store/tls.key
+        certFile: /mnt/tls/tls.crt
+        keyFile: /mnt/tls/tls.key
   podLogsSelector:
     matchLabels:
       xkf.xenit.io/monitoring: platform

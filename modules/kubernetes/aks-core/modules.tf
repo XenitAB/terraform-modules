@@ -102,6 +102,7 @@ module "fluxcd_v2" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   environment = var.environment
   cluster_id  = "${var.location_short}-${var.environment}-${var.name}-${var.aks_name_suffix}"
   credentials = var.fluxcd_v2_config.credentials
@@ -163,15 +164,26 @@ module "fluxcd_v2" {
     proj        = ns.flux.proj
     repo        = ns.flux.repo
 =======
+=======
+  environment = var.environment
+  cluster_id  = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
+>>>>>>> f8311b7... make fmt & docs
   credentials = var.fluxcd_v2_config.credentials
   fleet_infra = var.fluxcd_v2_config.fleet_infra
-  namespaces = [for ns in var.namespaces : ns => ns if ns.flux.enabled  {
-    name = ns.name
+  namespaces  = [for ns in var.namespaces : ns => ns if ns.flux.enabled  {
+
+    name        = ns.name
     create_crds = ns.flux.create_crds
+<<<<<<< HEAD
     org = ns.flux.org
     proj = ns.flux.proj
     repo = ns.flux.repo
 >>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
+=======
+    org         = ns.flux.org
+    proj        = ns.flux.proj
+    repo        = ns.flux.repo
+>>>>>>> f8311b7... make fmt & docs
   }]
 >>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
 }

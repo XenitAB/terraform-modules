@@ -32,7 +32,7 @@ spec:
       mountPath: "/mnt/tls"
       readOnly: true
   volumes:
-    - name: secret-store
+    - name: secrets-store
       csi:
         driver: secrets-store.csi.k8s.io
         readOnly: true

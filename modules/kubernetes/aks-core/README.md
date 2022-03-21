@@ -1,4 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+>>>>>>> make fmt & docs
 
 # AKS Core
 

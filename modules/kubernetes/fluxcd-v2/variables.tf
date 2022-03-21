@@ -13,8 +13,8 @@ variable "credentials" {
   type = list(object({
     type = string # azuredevops or github
     azure_devops = object({
-      org  = string
-      pat  = string
+      org = string
+      pat = string
     })
     github = object({
       org             = string
@@ -29,7 +29,7 @@ variable "fleet_infra" {
   description = "Configuration for Flux bootstrap repository."
   type = object({
     type = string
-    org = string
+    org  = string
     proj = string
     repo = string
   })
@@ -39,7 +39,7 @@ variable "namespaces" {
   description = "The namespaces to configure flux with"
   type = list(
     object({
-      name = string
+      name        = string
       create_crds = bool
       org         = string
       proj        = string

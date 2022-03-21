@@ -50,6 +50,7 @@ locals {
   git_auth_proxy_url = "http://git-auth-proxy.flux-system.svc.cluster.local"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   fleet_infra_name   = "fleet-infra"
   branch_name        = "main"
 =======
@@ -58,6 +59,10 @@ locals {
   fleet_infra_name = "fleet-infra"
   branch_name = "main"
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+  fleet_infra_name   = "fleet-infra"
+  branch_name        = "main"
+>>>>>>> make fmt & docs
 }
 
 resource "kubernetes_namespace" "this" {
@@ -116,8 +121,12 @@ resource "helm_release" "git_auth_proxy" {
     credentials = var.credentials
     # TODO: change to not be fleet infra aware, instead it should just be one of the repositories
     fleet_infra = var.fleet_infra
+<<<<<<< HEAD
     tenants = var.namespaces
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+    tenants     = var.namespaces
+>>>>>>> make fmt & docs
   })]
 }
 
@@ -162,9 +171,9 @@ data "flux_sync" "this" {
 >>>>>>> Add initial config
 =======
   # local var based on fleet infra type
-  url                = var.fleet_infra.type == "azuredevops" ? "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}" : "${local.git_auth_proxy_url}/${var.github_org}/${var.cluster_repo}"
-  branch             = local.branch_name
-  target_path        = "clusters/${var.cluster_id}"
+  url         = var.fleet_infra.type == "azuredevops" ? "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}" : "${local.git_auth_proxy_url}/${var.github_org}/${var.cluster_repo}"
+  branch      = local.branch_name
+  target_path = "clusters/${var.cluster_id}"
   # local var based on fleet infra type
   git_implementation = var.fleet_infra.type == "azuredevops" ? "libgit2" : "git2go"
 >>>>>>> Initial change of config to use one module - fluxcd-v2

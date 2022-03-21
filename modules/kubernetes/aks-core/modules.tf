@@ -107,18 +107,19 @@ module "fluxcd_v2" {
     if var.fluxcd_v2_enabled
   }
 
-  source = "../../kubernetes/fluxcd-v2-azdo"
+  source = "../../kubernetes/fluxcd-v2"
 
-  environment       = var.environment
-  cluster_id        = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
+  environment = var.environment
+  cluster_id  = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
   credentials = var.fluxcd_v2_config.credentials
   fleet_infra = var.fluxcd_v2_config.fleet_infra
-  namespaces = [for ns in var.namespaces : ns => ns if ns.flux.enabled  {
-    name = ns.name
+  namespaces  = [for ns in var.namespaces : ns => ns if ns.flux.enabled  {
+
+    name        = ns.name
     create_crds = ns.flux.create_crds
-    org = ns.flux.org
-    proj = ns.flux.proj
-    repo = ns.flux.repo
+    org         = ns.flux.org
+    proj        = ns.flux.proj
+    repo        = ns.flux.repo
   }]
 }
 

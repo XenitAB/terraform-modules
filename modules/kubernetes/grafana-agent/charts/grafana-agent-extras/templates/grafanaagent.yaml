@@ -24,5 +24,3 @@ spec:
   podMetadata:
     labels:
       aadpodidbinding: grafana-agent
-  secrets:
-    - xenit-proxy-certificate

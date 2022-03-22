@@ -50,7 +50,3 @@ variable "namespace_include" {
     error_message = "The namespace_include needs to at least contain one namespace in the list."
   }
 }
-variable "ingress_nginx_metrics" {
-  description = "Will be set with extra_namespaces in main.tf "
-  type        = bool
-}

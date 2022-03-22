@@ -95,12 +95,12 @@ resource "kubernetes_secret" "this" {
 }
 
 locals {
-  ingress_nginx_metrics = {
-    for_each = {
-      for s in [var.grafana_agent_config.extra_namespaces] :
-      s => s
-      if contains([var.grafana_agent_config.extra_namespaces], "ingress-nginx")
-  } }
+  for_each = {
+    for s in [var.grafana_agent_config.extra_namespaces] :
+    s => s
+    if contains([var.grafana_agent_config.extra_namespaces], "ingress-nginx")
+  }
+  ingress_nginx_metrics = true
 
   extras_values = templatefile("${path.module}/templates/extras-values.yaml.tpl", {
     credentials_secret_name  = kubernetes_secret.this.metadata[0].name

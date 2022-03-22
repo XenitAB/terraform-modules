@@ -48,7 +48,7 @@ resource "helm_release" "grafana_agent_operator" {
   chart       = "grafana-agent-operator"
   name        = "grafana-agent-operator"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "0.1.5"
+  version     = "0.1.6"
   max_history = 3
 
   values = [local.operator_values]

@@ -96,9 +96,9 @@ resource "kubernetes_secret" "this" {
 
 locals {
   for_each = {
-    for s in [var.grafana_agent_config.extra_namespaces] :
+    for s in [var.namespace_include] :
     s => s
-    if contains([var.grafana_agent_config.extra_namespaces], "ingress-nginx")
+    if contains([var.namespace_include], "ingress-nginx")
   }
   ingress_nginx_metrics = true
 
@@ -109,6 +109,7 @@ locals {
     remote_write_traces_url  = var.remote_write_urls.traces
     environment              = var.environment
     cluster_name             = var.cluster_name
+    ingress_nginx_metrics    = var.ingress_nginx_metrics
   })
 
   operator_values = templatefile("${path.module}/templates/operator-values.yaml.tpl", {

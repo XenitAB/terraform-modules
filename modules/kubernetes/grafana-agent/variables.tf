@@ -51,6 +51,6 @@ variable "namespace_include" {
   }
 }
 variable "ingress_nginx_metrics" {
-  type    = bool
-  default = true
+  description = "Will be set with extra_namespaces in main.tf "
+  type        = bool
 }

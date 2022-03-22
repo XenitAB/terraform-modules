@@ -26,4 +26,5 @@ module "grafana_agent" {
   environment       = "dev"
   vpa_enabled       = false
   namespace_include = ["foobar"]
+  extra_namespaces  = [ingress]
 }

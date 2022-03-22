@@ -25,11 +25,6 @@ variable "credentials" {
   sensitive = true
 }
 
-variable "extra_namespaces" {
-  description = "namespace to disable in grafana"
-  type        = list(string)
-}
-
 variable "cluster_name" {
   description = "the cluster name"
   type        = string
@@ -54,9 +49,4 @@ variable "namespace_include" {
     condition     = length(var.namespace_include) > 0
     error_message = "The namespace_include needs to at least contain one namespace in the list."
   }
-}
-variable "ingress_nginx_metrics" {
-  description = "Will be set with extra_namespaces in main.tf "
-  type        = bool
-  default     = false
 }

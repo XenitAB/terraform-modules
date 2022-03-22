@@ -25,6 +25,11 @@ variable "credentials" {
   sensitive = true
 }
 
+variable "extra_namespaces" {
+  description = "namespace to disable in grafana"
+  type        = list(string)
+}
+
 variable "cluster_name" {
   description = "the cluster name"
   type        = string

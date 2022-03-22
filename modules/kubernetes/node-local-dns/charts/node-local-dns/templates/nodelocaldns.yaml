@@ -52,6 +52,7 @@ data:
         cache {
                 success 9984 30
                 denial 9984 5
+                prefetch 3 60s 15%
         }
         reload
         loop
@@ -86,7 +87,9 @@ data:
         }
     .:53 {
         errors
-        cache 30
+        cache {
+                prefetch 10 60s 15%
+        }
         reload
         loop
         bind {{ .Values.localdns }} {{ .Values.dnsServer }}

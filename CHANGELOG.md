@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#606](https://github.com/XenitAB/terraform-modules/pull/606) Fix electionID on ingress-nginx when using private and public ingress-nginx.
 - [#608](https://github.com/XenitAB/terraform-modules/pull/608) Include node-local-dns IP in default-deny networkpolicy CIDR block.
 - [#611](https://github.com/XenitAB/terraform-modules/pull/611) Add option to turn off ingress-nginx metrics in grafana.
+- [#610](https://github.com/XenitAB/terraform-modules/pull/610) Add prefetch dns config to node-local-dns.
 
 ### Changed
 

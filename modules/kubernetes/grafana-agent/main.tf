@@ -102,11 +102,10 @@ locals {
     remote_write_traces_url  = var.remote_write_urls.traces
     environment              = var.environment
     cluster_name             = var.cluster_name
-    extra_namespaces         = var.extra_namespaces
     for_each = {
-      for s in [var.extra_namespaces] :
+      for s in [var.grafana_agent_config.extra_namespaces] :
       s => s
-      if contains([var.extra_namespaces], "ingress-nginx")
+      if contains([var.grafana_agent_config.extra_namespaces], "ingress-nginx")
     }
     ingress_nginx_metrics = true
   })

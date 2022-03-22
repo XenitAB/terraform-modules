@@ -357,6 +357,7 @@ module "grafana_agent" {
   environment       = var.environment
   vpa_enabled       = var.vpa_enabled
   namespace_include = compact(concat(var.namespaces[*].name, var.grafana_agent_config.extra_namespaces))
+  extra_namespaces  = var.grafana_agent_config.extra_namespaces
 }
 
 # falco

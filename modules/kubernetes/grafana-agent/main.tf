@@ -103,9 +103,9 @@ locals {
     environment              = var.environment
     cluster_name             = var.cluster_name
     for_each = {
-      for s in [var.grafana_agent_config.extra_namespaces] :
+      for s in [var.extra_namespaces] :
       s => s
-      if contains([var.grafana_agent_config.extra_namespaces], "ingress-nginx")
+      if contains([var.extra_namespaces], "ingress-nginx")
     }
     ingress_nginx_metrics = true
   })

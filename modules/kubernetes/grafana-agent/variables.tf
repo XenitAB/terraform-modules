@@ -11,7 +11,11 @@ variable "remote_write_urls" {
     traces  = ""
   }
 }
-
+variable "extra_namespaces" {
+  type        = list(string)
+  description = "help"
+  default     = [""]
+}
 variable "credentials" {
   description = "grafana-agent credentials"
   type = object({

@@ -95,6 +95,10 @@ resource "kubernetes_secret" "this" {
 }
 
 locals {
+  #inge = [for s in [var.extra_namespaces] : ingress_nginx_metrics]
+
+  ingress_nginx_metrics = [contains(var.extra_namespaces, "ingress-nginx")]
+
   extras_values = templatefile("${path.module}/templates/extras-values.yaml.tpl", {
     credentials_secret_name  = kubernetes_secret.this.metadata[0].name
     remote_write_metrics_url = var.remote_write_urls.metrics
@@ -102,13 +106,7 @@ locals {
     remote_write_traces_url  = var.remote_write_urls.traces
     environment              = var.environment
     cluster_name             = var.cluster_name
-    ingress_nginx_metrics    = false
-    #for_each = {
-    #  for s in [var.extra_namespaces] :
-    #  s => s
-    #  if contains([var.extra_namespaces], "ingress-nginx")
-    #}
-    #ingress_nginx_metrics = true
+    ingress_nginx_metrics    = var.ingress_nginx_metrics
   })
 
   operator_values = templatefile("${path.module}/templates/operator-values.yaml.tpl", {

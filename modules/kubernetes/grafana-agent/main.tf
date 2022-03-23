@@ -108,7 +108,7 @@ locals {
     #  s => s
     #  if contains([var.extra_namespaces], "ingress-nginx")
     #}
-    ingress_nginx_metrics = true
+    #ingress_nginx_metrics = true
   })
 
   operator_values = templatefile("${path.module}/templates/operator-values.yaml.tpl", {

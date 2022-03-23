@@ -17,12 +17,6 @@ variable "extra_namespaces" {
   default     = [""]
 }
 
-variable "ingress_nginx_metrics" {
-  description = "help"
-  type        = bool
-  default     = false
-}
-
 variable "credentials" {
   description = "grafana-agent credentials"
   type = object({

@@ -13,8 +13,8 @@ variable "remote_write_urls" {
 }
 variable "extra_namespaces" {
   type        = list(string)
-  description = "help"
-  default     = [""]
+  description = "List of namespaces that should be enabled"
+  default     = ["ingress-nginx"]
 }
 
 variable "credentials" {

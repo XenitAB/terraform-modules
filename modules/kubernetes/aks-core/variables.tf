@@ -316,7 +316,7 @@ variable "grafana_agent_config" {
       traces_username  = ""
       traces_password  = ""
     }
-    extra_namespaces = []
+    extra_namespaces = ["ingress-nginx"]
   }
 }
 

@@ -96,7 +96,7 @@ resource "kubernetes_secret" "this" {
 
 locals {
 
-  enable_nginx = tostring(contains([var.extra_namespaces], "ingress-nginx"))
+  enable_nginx = tostring(contains(var.extra_namespaces, "ingress-nginx"))
 
   extras_values = templatefile("${path.module}/templates/extras-values.yaml.tpl", {
     credentials_secret_name  = kubernetes_secret.this.metadata[0].name

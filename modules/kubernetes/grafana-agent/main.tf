@@ -102,11 +102,12 @@ locals {
     remote_write_traces_url  = var.remote_write_urls.traces
     environment              = var.environment
     cluster_name             = var.cluster_name
-    for_each = {
-      for s in [var.extra_namespaces] :
-      s => s
-      if contains([var.extra_namespaces], "ingress-nginx")
-    }
+    ingress_nginx_metrics    = false
+    #for_each = {
+    #  for s in [var.extra_namespaces] :
+    #  s => s
+    #  if contains([var.extra_namespaces], "ingress-nginx")
+    #}
     ingress_nginx_metrics = true
   })
 

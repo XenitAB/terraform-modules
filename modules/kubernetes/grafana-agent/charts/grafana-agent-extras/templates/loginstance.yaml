@@ -14,6 +14,14 @@ spec:
       externalLabels:
         cluster: {{ .Values.clusterName }}
         environment: {{ .Values.environment }}
+      tlsConfig:
+        keySecret:
+          key: {{ .Values.client.key }}
+          name: xenit-proxy"
+        cert:
+          Secret:
+            key: {{ .Values.client.cert }}
+            name: xenit-proxy
   podLogsSelector:
     matchLabels:
       xkf.xenit.io/monitoring: platform

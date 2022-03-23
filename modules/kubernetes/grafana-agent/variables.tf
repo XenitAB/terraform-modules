@@ -21,6 +21,7 @@ variable "azure_config" {
   description = "Azure specific configuration"
   type = object({
     azure_key_vault_name = string
+    resource_group_name  = string
     identity = object({
       client_id   = string
       resource_id = string
@@ -29,6 +30,7 @@ variable "azure_config" {
   })
   default = {
     azure_key_vault_name = ""
+    resource_group_name  = ""
     identity = {
       client_id   = ""
       resource_id = ""

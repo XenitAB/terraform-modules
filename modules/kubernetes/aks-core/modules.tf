@@ -342,6 +342,7 @@ module "grafana_agent" {
   remote_logs_url = var.grafana_agent_config.remote_logs_url
   azure_config = {
     azure_key_vault_name = var.grafana_agent_config.azure_key_vault_name
+    resource_group_name  = data.azurerm_resource_group.this.name
     identity = {
       client_id   = var.grafana_agent_config.identity.client_id
       resource_id = var.grafana_agent_config.identity.resource_id

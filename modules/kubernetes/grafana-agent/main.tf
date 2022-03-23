@@ -8,6 +8,10 @@ terraform {
   required_version = "0.15.3"
 
   required_providers {
+    azurerm = {
+      version = "2.99.0"
+      source  = "hashicorp/azurerm"
+    }
     kubernetes = {
       source  = "hashicorp/kubernetes"
       version = "2.8.0"
@@ -19,6 +23,7 @@ terraform {
   }
 }
 
+
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
@@ -29,6 +34,16 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+data "azurerm_key_vault" "core" {
+  name                = var.azure_config.azure_key_vault_name
+  resource_group_name = var.azure_config.resource_group_name
+}
+
+data "azurerm_key_vault_certificate_data" "xenit_proxy" {
+  name         = "xenit-proxy-certificate"
+  key_vault_id = data.azurerm_key_vault.core.id
+}
+
 locals {
   extras_values = templatefile("${path.module}/templates/extras-values.yaml.tpl", {
     environment     = var.environment
@@ -36,6 +51,8 @@ locals {
     cloud_provider  = var.cloud_provider
     remote_logs_url = var.remote_logs_url
     azure_config    = var.azure_config
+    client_key      = data.azurerm_key_vault_certificate_data.xenit_proxy.key
+    client_cert     = data.azurerm_key_vault_certificate_data.xenit_proxy.pem
   })
 
   operator_values = templatefile("${path.module}/templates/operator-values.yaml.tpl", {

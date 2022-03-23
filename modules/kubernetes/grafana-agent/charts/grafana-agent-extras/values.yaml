@@ -9,6 +9,10 @@ secretName: "xenit-proxy-certificate"
 remote:
   logsUrl: ""
 
+client:
+  key: ""
+  cert: ""
+
 azureConfig:
   resourceID: ""
   clientID: ""

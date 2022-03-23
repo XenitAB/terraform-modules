@@ -107,7 +107,6 @@ locals {
     remote_write_traces_url  = var.remote_write_urls.traces
     environment              = var.environment
     cluster_name             = var.cluster_name
-    ingress_nginx_metrics    = var.ingress_nginx_metrics
   })
 
   operator_values = templatefile("${path.module}/templates/operator-values.yaml.tpl", {

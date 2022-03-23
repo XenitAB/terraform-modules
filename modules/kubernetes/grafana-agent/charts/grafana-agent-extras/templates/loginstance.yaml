@@ -19,7 +19,7 @@ spec:
           key: {{ .Values.client.key }}
           name: xenit-proxy"
         cert:
-          Secret:
+          secret:
             key: {{ .Values.client.cert }}
             name: xenit-proxy
   podLogsSelector:

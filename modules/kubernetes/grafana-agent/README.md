@@ -6,6 +6,7 @@ Adds [`grafana-agent`](https://grafana.com/docs/agent/latest/) (the operator) to
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.99.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.4.1 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.8.0 |
 
@@ -13,7 +14,7 @@ Adds [`grafana-agent`](https://grafana.com/docs/agent/latest/) (the operator) to
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.99.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.4.1 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.8.0 |
 
@@ -28,8 +29,8 @@ No modules.
 | [helm_release.grafana_agent_extras](https://registry.terraform.io/providers/hashicorp/helm/2.4.1/docs/resources/release) | resource |
 | [helm_release.grafana_agent_operator](https://registry.terraform.io/providers/hashicorp/helm/2.4.1/docs/resources/release) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/namespace) | resource |
-| [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault) | data source |
-| [azurerm_key_vault_certificate_data.xenit_proxy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_certificate_data) | data source |
+| [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/data-sources/key_vault) | data source |
+| [azurerm_key_vault_certificate_data.xenit_proxy](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/data-sources/key_vault_certificate_data) | data source |
 
 ## Inputs
 

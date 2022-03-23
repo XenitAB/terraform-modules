@@ -358,7 +358,7 @@ module "grafana_agent" {
   vpa_enabled           = var.vpa_enabled
   namespace_include     = compact(concat(var.namespaces[*].name, var.grafana_agent_config.extra_namespaces))
   extra_namespaces      = var.grafana_agent_config.extra_namespaces
-  ingress_nginx_metrics = var.ingress_nginx_metrics
+  ingress_nginx_metrics = var.grafana_agent.ingress_nginx_metrics
 }
 
 # falco

@@ -95,10 +95,11 @@ resource "kubernetes_secret" "this" {
 }
 
 locals {
-  #inge = [for s in [var.extra_namespaces] : ingress_nginx_metrics]
-
-  ingress_nginx_metrics = [contains(var.extra_namespaces, "ingress-nginx")]
-
+  ingress_nginx_metrics = {
+    for s in var.extra_namespaces :
+    s => s
+    if contains([var.extra_namespaces], "ingress-nginx")
+  }
   extras_values = templatefile("${path.module}/templates/extras-values.yaml.tpl", {
     credentials_secret_name  = kubernetes_secret.this.metadata[0].name
     remote_write_metrics_url = var.remote_write_urls.metrics

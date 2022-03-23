@@ -87,7 +87,6 @@ No modules.
 | <a name="input_credentials"></a> [credentials](#input\_credentials) | grafana-agent credentials | <pre>object({<br>    metrics_username = string<br>    metrics_password = string<br>    logs_username    = string<br>    logs_password    = string<br>    traces_username  = string<br>    traces_password  = string<br>  })</pre> | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | the name of the environment | `string` | n/a | yes |
 | <a name="input_extra_namespaces"></a> [extra\_namespaces](#input\_extra\_namespaces) | help | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
-| <a name="input_ingress_nginx_metrics"></a> [ingress\_nginx\_metrics](#input\_ingress\_nginx\_metrics) | help | `bool` | n/a | yes |
 | <a name="input_namespace_include"></a> [namespace\_include](#input\_namespace\_include) | A list of the namespaces that kube-state-metrics should create metrics for | `list(string)` | n/a | yes |
 | <a name="input_remote_write_urls"></a> [remote\_write\_urls](#input\_remote\_write\_urls) | the remote write urls | <pre>object({<br>    metrics = string<br>    logs    = string<br>    traces  = string<br>  })</pre> | <pre>{<br>  "logs": "",<br>  "metrics": "",<br>  "traces": ""<br>}</pre> | no |
 | <a name="input_vpa_enabled"></a> [vpa\_enabled](#input\_vpa\_enabled) | Should vpa be enabled | `bool` | `false` | no |

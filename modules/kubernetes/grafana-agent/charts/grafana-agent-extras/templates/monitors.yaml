@@ -1,4 +1,4 @@
-{{ if ingressNginx }}
+{{ if .Values.ingressNginx }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:

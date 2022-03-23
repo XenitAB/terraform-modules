@@ -318,6 +318,7 @@ variable "grafana_agent_config" {
       traces_password  = ""
     }
     extra_namespaces = []
+    ingress_nginx_metrics = false
   }
 }
 

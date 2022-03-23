@@ -20,6 +20,7 @@ variable "extra_namespaces" {
 variable "ingress_nginx_metrics" {
   description = "help"
   type        = bool
+  default     = false
 }
 
 variable "credentials" {

@@ -180,7 +180,7 @@ spec:
             type: FileOrCreate
         - name: kube-dns-config
           configMap:
-            name: kube-dns
+            name: coredns
             optional: true
         - name: config-volume
           configMap:

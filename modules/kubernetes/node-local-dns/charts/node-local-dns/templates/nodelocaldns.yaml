@@ -89,6 +89,7 @@ data:
         errors
         cache {
                 prefetch 10 5m 50%
+                serve_stale
         }
         reload
         loop

@@ -6,7 +6,7 @@ This module is used to create core resources like virtual network for the subscr
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.19.1 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.99.0 |
 

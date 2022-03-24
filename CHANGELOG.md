@@ -16,6 +16,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#608](https://github.com/XenitAB/terraform-modules/pull/608) Include node-local-dns IP in default-deny networkpolicy CIDR block.
 - [#611](https://github.com/XenitAB/terraform-modules/pull/611) Add option to turn off ingress-nginx metrics in grafana.
 
+### Changed
+
+- [#607](https://github.com/XenitAB/terraform-modules/pull/607) [Breaking] Upgrade terraform to 1.1.7.
+- [#616](https://github.com/XenitAB/terraform-modules/pull/616) Require Terraform version >= 1.1.7 instead of explicit version.
+
 ## 2022.03.3
 
 ### Changed

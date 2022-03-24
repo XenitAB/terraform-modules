@@ -71,7 +71,7 @@ metadata:
   labels:
     {{- include "azure-metrics-exporter.labels" . | nindent 4 }}
     xkf.xenit.io/monitoring: platform
-  name: {{ include "azure-metrics-exporter.fullname" . }}-kubernetes
+  name: {{ include "azure-metrics-exporter.fullname" . }}
 spec:
   podMetricsEndpoints:
   - interval: 60s

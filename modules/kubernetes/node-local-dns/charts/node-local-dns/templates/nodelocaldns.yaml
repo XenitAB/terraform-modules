@@ -87,8 +87,8 @@ data:
     .:53 {
         errors
         cache {
-                prefetch 10 1m 25%
-                serve_stale 10m
+                prefetch 10
+                serve_stale
         }
         reload
         loop

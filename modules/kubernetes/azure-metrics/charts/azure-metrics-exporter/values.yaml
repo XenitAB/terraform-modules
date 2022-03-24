@@ -6,7 +6,7 @@ image:
   repository: webdevops/azure-metrics-exporter
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "21.8.3"
+  tag: "22.3.0"
 
 imagePullSecrets: []
 nameOverride: ""

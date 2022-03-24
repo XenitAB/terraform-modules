@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#607](https://github.com/XenitAB/terraform-modules/pull/607) [Breaking] Upgrade terraform to 1.1.7.
 - [#616](https://github.com/XenitAB/terraform-modules/pull/616) Require Terraform version >= 1.1.7 instead of explicit version.
+- [#612](https://github.com/XenitAB/terraform-modules/pull/612) Update azure-metrics to 22.3.0 and gather more metrics.
 
 ## 2022.03.3
 

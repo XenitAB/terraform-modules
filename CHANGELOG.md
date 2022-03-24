@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#618](https://github.com/XenitAB/terraform-modules/pull/618) Create new EKS and AKS node pools before deleting existing node pools.
+- [#614](https://github.com/XenitAB/terraform-modules/pull/614) Upgrade AWS provider to 4.6.0
 
 ## 2022.03.4
 

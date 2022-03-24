@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#607](https://github.com/XenitAB/terraform-modules/pull/607) [Breaking] Upgrade terraform to 1.1.7.
+- [#616](https://github.com/XenitAB/terraform-modules/pull/607) Require Terraform version >= 1.1.7 instead of explicit version.
 
 ## 2022.03.3
 

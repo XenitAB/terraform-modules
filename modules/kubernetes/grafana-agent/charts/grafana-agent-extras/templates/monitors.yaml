@@ -1,3 +1,4 @@
+{{ if .Values.ingressNginx }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -17,3 +18,4 @@ spec:
       app.kubernetes.io/component: controller
       app.kubernetes.io/name: ingress-nginx
       function: metrics
+{{ end }}

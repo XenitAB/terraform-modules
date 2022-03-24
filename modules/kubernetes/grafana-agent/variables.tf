@@ -11,6 +11,11 @@ variable "remote_write_urls" {
     traces  = ""
   }
 }
+variable "extra_namespaces" {
+  type        = list(string)
+  description = "List of namespaces that should be enabled"
+  default     = ["ingress-nginx"]
+}
 
 variable "credentials" {
   description = "grafana-agent credentials"

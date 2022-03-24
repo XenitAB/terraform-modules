@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#612](https://github.com/XenitAB/terraform-modules/pull/612) Update azure-metrics to 22.3.0 and gather more metrics.
+
 ### Fix
 
 - [#606](https://github.com/XenitAB/terraform-modules/pull/606) Fix electionID on ingress-nginx when using private and public ingress-nginx.

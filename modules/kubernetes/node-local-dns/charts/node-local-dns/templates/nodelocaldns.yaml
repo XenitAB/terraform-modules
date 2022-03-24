@@ -86,7 +86,10 @@ data:
         }
     .:53 {
         errors
-        cache 30
+        cache {
+                prefetch 10
+                serve_stale
+        }
         reload
         loop
         bind {{ .Values.localdns }} {{ .Values.dnsServer }}
@@ -177,7 +180,7 @@ spec:
             type: FileOrCreate
         - name: kube-dns-config
           configMap:
-            name: kube-dns
+            name: coredns
             optional: true
         - name: config-volume
           configMap:

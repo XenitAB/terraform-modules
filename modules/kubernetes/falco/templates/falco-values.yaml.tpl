@@ -79,4 +79,4 @@ customRules:
   # Possibly detect CVE-2022-23648
   rules_strange_volume_mounts.yaml: |-
     - macro: strange_folder_mount
-      condition: (container.mount.dest[/../../*] != "N/A")
+      condition: (container.mount.dest[/../*] != "N/A")

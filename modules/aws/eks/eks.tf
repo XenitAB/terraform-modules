@@ -180,7 +180,8 @@ resource "aws_eks_node_group" "this" {
   tags = local.global_tags
 
   lifecycle {
-    ignore_changes = [scaling_config[0].desired_size]
+    create_before_destroy = true
+    ignore_changes        = [scaling_config[0].desired_size]
   }
 
   timeouts {

@@ -45,7 +45,10 @@ customRules:
         (container.image.repository = "docker.io/bitnami/external-dns") or
         (container.image.repository = "squat/configmap-to-disk") or
         (container.image.repository = "stakater/reloader") or
-        (container.image.repository = "gcr.io/datadoghq/agent")
+        (container.image.repository = "gcr.io/datadoghq/agent") or
+        (container.image.repository = "quay.io/prometheus/prometheus") or
+        (container.image.repository = "k8s.gcr.io/ingress-nginx/controller") or
+        (container.image.repository = "gcr.io/datadoghq/cluster-agent")
 
   # Applications which spawn a docker or kubectl client
   # Kustomize controller runs kubectl and kustomize
@@ -74,7 +77,8 @@ customRules:
   rules_user_known_write_below_etc_activities.yaml: |-
     - macro: user_known_write_below_etc_activities
       condition: >
-        (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front")
+        (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front") or
+        (container.image.repository = "gcr.io/datadoghq/agent")
 
   # Launch Privileged Container
   rules_launch_privileged_container.yaml: |-

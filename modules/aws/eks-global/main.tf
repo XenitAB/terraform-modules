@@ -3,7 +3,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.63.0"
+      version = "4.6.0"
     }
     azuread = {
       version = "2.19.1"

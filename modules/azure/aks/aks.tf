@@ -73,6 +73,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 
 resource "azurerm_kubernetes_cluster_node_pool" "this" {
   lifecycle {
+    create_before_destroy = true
     ignore_changes = [
       node_count
     ]

@@ -75,8 +75,3 @@ customRules:
     - macro: user_known_write_below_etc_activities
       condition: >
         (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front")
-
-  # Possibly detect CVE-2022-23648
-  rules_strange_volume_mounts.yaml: |-
-    - macro: strange_folder_mount
-      condition: (container.mount.dest[/../*] != "N/A")

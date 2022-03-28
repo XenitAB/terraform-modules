@@ -75,3 +75,14 @@ customRules:
     - macro: user_known_write_below_etc_activities
       condition: >
         (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front")
+
+  # Launch Privileged Container
+  rules_launch_privileged_container.yaml: |-
+    - macro: Launch Privileged Container
+      condition: >
+        (container.image.repository = "mcr.microsoft.com/oss/calico/node") or
+        (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/secrets-store/driver") or
+        (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/azuredisk-csi") or
+        (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/azurefile-csi") or
+        (container.image.repository = "mcr.microsoft.com/oss/kubernetes/kube-proxy") or
+        (container.image.repository = "k8s.gcr.io/dns/k8s-dns-node-cache")

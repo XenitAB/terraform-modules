@@ -36,19 +36,33 @@ customRules:
         (container.image.repository = "docker.io/fluxcd/flux") or
         (container.image.repository = "ghcr.io/fluxcd/kustomize-controller") or
         (container.image.repository = "ghcr.io/fluxcd/helm-controller") or
+        (container.image.repository = "ghcr.io/fluxcd/notification-controller") or
+        (container.image.repository = "ghcr.io/xenitab/git-auth-proxy") or
         (container.image.repository = "docker.io/grafana/loki") or
         (container.image.repository = "grafana/fluent-bit-plugin-loki") or
         (container.image.repository = "ghcr.io/xenitab/azad-kube-proxy") or
         (container.image.repository = "cr.l5d.io/linkerd/controller") or
         (container.image.repository = "mcr.microsoft.com/oss/azure/aad-pod-identity/nmi") or
         (container.image.repository = "quay.io/jetstack/cert-manager-cainjector") or
+        (container.image.repository = "quay.io/jetstack/cert-manager-controller") or
+        (container.image.repository = "quay.io/jetstack/cert-manager-webhook") or
         (container.image.repository = "docker.io/bitnami/external-dns") or
         (container.image.repository = "squat/configmap-to-disk") or
         (container.image.repository = "stakater/reloader") or
         (container.image.repository = "gcr.io/datadoghq/agent") or
         (container.image.repository = "quay.io/prometheus/prometheus") or
+        (container.image.repository = "quay.io/prometheus-operator/prometheus-operator") or
         (container.image.repository = "k8s.gcr.io/ingress-nginx/controller") or
-        (container.image.repository = "gcr.io/datadoghq/cluster-agent")
+        (container.image.repository = "gcr.io/datadoghq/cluster-agent") or
+        (container.image.repository = "public.ecr.aws/aws-secrets-manager/secrets-store-csi-driver-provider-aws") or
+        (container.image.repository = "k8s.gcr.io/sig-storage/csi-node-driver-registrar") or
+        (container.image.repository = "openpolicyagent/gatekeeper") or
+        (container.image.repository = "quay.io/fairwinds/goldilocks") or
+        (container.image.repository = "k8s.gcr.io/autoscaling/vpa-recommender") or
+        (container.image.repository = "docker.io/bitnami/external-dns") or
+        (container.image.repository = "docker.io/giantswarm/starboard-exporter") or
+        (container.image.repository = "docker.io/aquasec/starboard-operator") or
+        (container.image.repository = "k8s.gcr.io/autoscaling/cluster-autoscaler")
 
   # Applications which spawn a docker or kubectl client
   # Kustomize controller runs kubectl and kustomize
@@ -89,4 +103,7 @@ customRules:
         (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/azuredisk-csi") or
         (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/azurefile-csi") or
         (container.image.repository = "mcr.microsoft.com/oss/kubernetes/kube-proxy") or
-        (container.image.repository = "k8s.gcr.io/dns/k8s-dns-node-cache")
+        (container.image.repository = "602401143452.dkr.ecr.eu-west-1.amazonaws.com/eks/kube-proxy") or
+        (container.image.repository = "k8s.gcr.io/sig-storage/csi-node-driver-registrar") or
+        (container.image.repository = "k8s.gcr.io/dns/k8s-dns-node-cache") or
+        (container.image.repository = "docker.io/falcosecurity/falco")

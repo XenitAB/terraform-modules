@@ -107,3 +107,18 @@ customRules:
         (container.image.repository = "k8s.gcr.io/sig-storage/csi-node-driver-registrar") or
         (container.image.repository = "k8s.gcr.io/dns/k8s-dns-node-cache") or
         (container.image.repository = "docker.io/falcosecurity/falco")
+
+  macro_strange_mount.yaml: |-
+    macro: strange_mount
+      condition: (container.mount.dest[/../*] != "N/A")
+
+  rule_launch_sensitive_volume_container.yaml: |-
+    desc: >
+      Detect the initial process started by a container that has a mount from a sensitive host directory
+      (i.e. /proc). Exceptions are made for known trusted images.
+    condition: >
+      container_started and container
+      and strange_mount
+    output: Container with sensitive mount started (user=%user.name user_loginuid=%user.loginuid command=%proc.cmdline %container.info image=%container.image.repository:%container.image.tag mounts=%container.mounts)
+    priority: INFO
+    tags: [container, cis, mitre_lateral_movement]

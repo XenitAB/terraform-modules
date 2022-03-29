@@ -5,11 +5,11 @@ auditLog:
 # AKS does not use docker anymore
 docker:
   enabled: false
+%{~ endif ~}
 
 # Use EBPF instead of kernel module
 ebpf:
   enabled: true
-%{~ endif ~}
 
 falco:
   grpc:

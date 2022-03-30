@@ -8,3 +8,6 @@ trivy:
   labels:
     aadpodidbinding: trivy
   %{~ endif ~}
+
+persistence:
+  storageClass: ${volume_claim_storage_class_name}

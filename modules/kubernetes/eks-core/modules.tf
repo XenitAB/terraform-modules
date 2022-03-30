@@ -304,9 +304,10 @@ module "starboard" {
 
   source = "../../kubernetes/starboard"
 
-  cloud_provider     = "aws"
-  starboard_role_arn = var.starboard_config.starboard_role_arn
-  trivy_role_arn     = var.starboard_config.trivy_role_arn
+  cloud_provider                  = "aws"
+  starboard_role_arn              = var.starboard_config.starboard_role_arn
+  trivy_role_arn                  = var.starboard_config.trivy_role_arn
+  volume_claim_storage_class_name = "gp2"
 }
 
 module "cluster_autoscaler" {

@@ -471,9 +471,10 @@ module "starboard" {
 
   source = "../../kubernetes/starboard"
 
-  cloud_provider = "azure"
-  client_id      = var.starboard_config.client_id
-  resource_id    = var.starboard_config.resource_id
+  cloud_provider                  = "azure"
+  client_id                       = var.starboard_config.client_id
+  resource_id                     = var.starboard_config.resource_id
+  volume_claim_storage_class_name = "managed-csi-zrs"
 }
 
 # vpa

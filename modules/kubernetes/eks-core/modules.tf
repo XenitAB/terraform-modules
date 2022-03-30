@@ -276,7 +276,7 @@ module "prometheus" {
   remote_write_authenticated = var.prometheus_config.remote_write_authenticated
   remote_write_url           = var.prometheus_config.remote_write_url
 
-  volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
+  volume_claim_storage_class_name = "gp2"
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
   resource_selector  = var.prometheus_config.resource_selector

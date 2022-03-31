@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#622](https://github.com/XenitAB/terraform-modules/pull/622) [Breaking] Hardcode prometheus and trivy storage class.
+
 ### Fix
 
 - [#614](https://github.com/XenitAB/terraform-modules/pull/620) Fix broken cluster autoscaler

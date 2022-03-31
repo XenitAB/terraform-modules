@@ -252,8 +252,7 @@ variable "prometheus_config" {
     remote_write_authenticated = bool
     remote_write_url           = string
 
-    volume_claim_storage_class_name = string
-    volume_claim_size               = string
+    volume_claim_size = string
 
     resource_selector  = list(string)
     namespace_selector = list(string)

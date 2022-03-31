@@ -107,4 +107,14 @@ module "aks_core" {
     resource_selector  = ["platform"]
     namespace_selector = ["platform"]
   }
+  promtail_enabled = true
+  promtail_config = {
+    azure_key_vault_name = "foobar"
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
+    loki_address = "value"
+  }
 }

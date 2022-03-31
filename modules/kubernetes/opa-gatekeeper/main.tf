@@ -126,7 +126,9 @@ resource "helm_release" "gatekeeper" {
   version     = "3.7.1"
   max_history = 3
   values = [templatefile("${path.module}/templates/gatekeeper-values.yaml.tpl", {
-    provider = var.cloud_provider
+    provider             = var.cloud_provider
+    keyvault_secret_name = "xenit-proxy-certificate"
+    k8s_secret_name      = "xenit-proxy-certificate"
   })]
 }
 

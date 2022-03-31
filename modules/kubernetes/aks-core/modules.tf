@@ -19,6 +19,7 @@ locals {
     "tigera-operator",
     "velero",
     "grafana-agent",
+    "promtail",
   ]
 }
 
@@ -457,6 +458,24 @@ module "prometheus" {
   vpa_enabled                              = var.vpa_enabled
   node_local_dns_enabled                   = var.node_local_dns_enabled
   grafana_agent_enabled                    = var.grafana_agent_enabled
+}
+
+module "promtail" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["promtail"] :
+    s => s
+    if var.promtail_enabled
+  }
+
+  source         = "../../kubernetes/promtail"
+  cloud_provider = "azure"
+  loki_address   = var.promtail_config.loki_address
+  azure_config = {
+    azure_key_vault_name = var.promtail_config.azure_key_vault_name
+    identity             = var.promtail_config.identity
+  }
 }
 
 # starboard

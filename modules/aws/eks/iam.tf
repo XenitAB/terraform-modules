@@ -155,7 +155,7 @@ module "velero" {
   policy_json                = data.aws_iam_policy_document.velero.json
 }
 
-data "aws_iam_policy_document" "prometheus" {
+data "aws_iam_policy_document" "xenit_proxy_certificate" {
   statement {
     effect = "Allow"
     actions = [
@@ -185,7 +185,22 @@ module "prometheus" {
   ]
   kubernetes_namespace       = "prometheus"
   kubernetes_service_account = "prometheus"
-  policy_json                = data.aws_iam_policy_document.prometheus.json
+  policy_json                = data.aws_iam_policy_document.xenit_proxy_certificate.json
+}
+
+module "promtail" {
+  source = "../irsa"
+
+  name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}-promtail"
+  oidc_providers = [
+    {
+      url = aws_iam_openid_connect_provider.this.url
+      arn = aws_iam_openid_connect_provider.this.arn
+    }
+  ]
+  kubernetes_namespace       = "promtail"
+  kubernetes_service_account = "promtail"
+  policy_json                = data.aws_iam_policy_document.xenit_proxy_certificate.json
 }
 
 data "aws_iam_policy_document" "starboard_ecr_read_only" {

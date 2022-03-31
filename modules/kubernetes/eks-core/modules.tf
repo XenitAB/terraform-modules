@@ -252,6 +252,24 @@ module "azad_kube_proxy" {
   }
 }
 
+# Promtail
+module "promtail" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["promtail"] :
+    s => s
+    if var.promtail_enabled
+  }
+
+  source         = "../../kubernetes/promtail"
+  loki_address   = var.promtail_config.loki_address
+  cloud_provider = "aws"
+  aws_config = {
+    role_arn = var.promtail_config.role_arn
+  }
+}
+
 # Prometheus
 module "prometheus" {
   depends_on = [module.opa_gatekeeper]

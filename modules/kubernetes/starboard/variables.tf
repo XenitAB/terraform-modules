@@ -26,3 +26,9 @@ variable "resource_id" {
   type        = string
   default     = ""
 }
+
+variable "volume_claim_storage_class_name" {
+  description = "StorageClass name that your pvc will use"
+  type        = string
+  default     = "default"
+}

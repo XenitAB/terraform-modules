@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fix
 
 - [#620](https://github.com/XenitAB/terraform-modules/pull/620) Fix broken cluster autoscaler
+- [#623](https://github.com/XenitAB/terraform-modules/pull/623) Falco AWS disable docker
 
 ## 2022.03.5
 

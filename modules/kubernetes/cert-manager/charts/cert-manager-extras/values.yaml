@@ -3,15 +3,4 @@ fullnameOverride: ""
 notificationEmail: ""
 acmeServer: ""
 
-cloudProvider: ""
-
-azureConfig:
-  resourceGroupName: ""
-  clientID: ""
-  subscriptionID: ""
-  hostedZoneName: ""
-  resourceID: ""
-
-awsConfig:
-  region: ""
-  hostedZoneID: ""
+ingressPublicPrivateEnabled: false

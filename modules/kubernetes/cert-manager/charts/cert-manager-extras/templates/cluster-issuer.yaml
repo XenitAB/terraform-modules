@@ -1,21 +1,3 @@
-{{- if eq .Values.cloudProvider "azure" }}
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentity
-metadata:
-  name: cert-manager
-spec:
-  type: 0
-  resourceID: {{ .Values.azureConfig.resourceID }}
-  clientID: {{ .Values.azureConfig.clientID }}
----
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentityBinding
-metadata:
-  name: cert-manager
-spec:
-  azureIdentity: cert-manager
-  selector: cert-manager
-{{- end }}
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -29,16 +11,9 @@ spec:
       name: letsencrypt-cluster-issuer-account-key
     solvers:
     - selector: {}
-      dns01:
-        {{- if eq .Values.cloudProvider "azure" }}
-        azureDNS:
-          environment: AzurePublicCloud
-          subscriptionID: {{ .Values.azureConfig.subscriptionID }}
-          resourceGroupName: {{ .Values.azureConfig.resourceGroupName }}
-          hostedZoneName: {{ .Values.azureConfig.hostedZoneName }}
-        {{- end }}
-        {{- if eq .Values.cloudProvider "aws" }}
-        route53:
-          region: {{ .Values.awsConfig.region }}
-          hostedZoneID: {{ .Values.awsConfig.hostedZoneID }}
+      http01:
+        {{- if .Values.ingressPublicPrivateEnabled }}
+        class: nginx-public
+        {{ else }}
+        class: nginx
         {{- end }}

@@ -41,8 +41,7 @@ resource "helm_release" "cert_manager" {
   version     = "v1.7.1"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider   = var.cloud_provider,
-    aws_config = var.aws_config,
+    provider = var.cloud_provider,
   })]
 }
 
@@ -63,44 +62,8 @@ resource "helm_release" "cert_manager_extras" {
     name  = "acmeServer"
     value = var.acme_server
   }
-
   set {
-    name  = "cloudProvider"
-    value = var.cloud_provider
-  }
-
-  set {
-    name  = "azureConfig.resourceGroupName"
-    value = var.azure_config.resource_group_name
-  }
-
-  set {
-    name  = "azureConfig.clientID"
-    value = var.azure_config.client_id
-  }
-
-  set {
-    name  = "azureConfig.subscriptionID"
-    value = var.azure_config.subscription_id
-  }
-
-  set {
-    name  = "azureConfig.resourceID"
-    value = var.azure_config.resource_id
-  }
-
-  set {
-    name  = "azureConfig.hostedZoneName"
-    value = var.azure_config.hosted_zone_name
-  }
-
-  set {
-    name  = "awsConfig.region"
-    value = var.aws_config.region
-  }
-
-  set {
-    name  = "awsConfig.hostedZoneID"
-    value = var.aws_config.hosted_zone_id
+    name  = "acmeServer"
+    value = var.ingress_public_private_enabled
   }
 }

@@ -1,11 +1,48 @@
 config:
   lokiAddress: "${loki_address}"
+  snippets:
+    extraClientConfigs: |
+      tls_config:
+        cert_file: /mnt/tls/tls.crt
+        key_file: /mnt/tls/tls.key
+
+extraClientConfigs:
+  tls_config:
+    cert_file: /mnt/tls/tls.crt
+    key_file: /mnt/tls/tls.key
+
+defaultVolumes:
+  - name: pods
+    hostPath:
+      path: /var/log/pods
+
+defaultVolumeMounts:
+  - name: pods
+    mountPath: /var/log/pods
+    readOnly: true
 
   %{~ if provider == "azure" ~}
 podLabels:
   aadpodidbinding: promtail
-  %{~ endif ~}
+ %{~ endif ~}
 
+extraVolumes:
+  - name: secrets-store
+    csi:
+      driver: secrets-store.csi.k8s.io
+      readOnly: true
+      volumeAttributes:
+        secretProviderClass: promtail
+  - name: tls
+    secret:
+      secretName: "${k8s_secret_name}"  
+
+extraVolumeMounts:
+  - name: secrets-store
+    mountPath: /mnt/secrets-store
+  - name: tls
+    mountPath: "/mnt/tls"
+    readOnly: true
 
   %{~ if provider == "aws" ~}
 serviceAccount:

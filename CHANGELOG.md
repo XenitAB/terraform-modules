@@ -17,6 +17,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#620](https://github.com/XenitAB/terraform-modules/pull/620) Fix broken cluster autoscaler
 - [#623](https://github.com/XenitAB/terraform-modules/pull/623) Falco AWS disable docker
 
+### Deprecated
+
+- [#627](https://github.com/XenitAB/terraform-modules/pull/627) Deprecate loki and xenit modules.
+
 ## 2022.03.5
 
 ### Changed

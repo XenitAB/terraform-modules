@@ -16,7 +16,6 @@ This directory contains all the Kubernetes Terraform modules.
 - [`fluxcd-v2-azdo`](fluxcd-v2-azdo/README.md)
 - [`fluxcd-v2-github`](fluxcd-v2-github/README.md)
 - [`ingress-nginx`](ingress-nginx/README.md)
-- [`loki`](loki/README.md)
 - [`opa-gatekeeper`](opa-gatekeeper/README.md)
 - [`velero`](velero/README.md)
 - [`datadog`](datadog/README.md)
@@ -25,7 +24,6 @@ This directory contains all the Kubernetes Terraform modules.
 - [`azad-kube-proxy`](azad-kube-proxy/README.md)
 - [`prometheus`](prometheus/README.md)
 - [`ingress-healthz`](ingress-healthz/README.md)
-- [`xenit`](xenit/README.md)
 - [`linkerd`](linkerd/README.md)
 - [`cluster-autoscaler`](cluster-autoscaler/README.md)
 - [`starboard`](starboard/README.md)
@@ -35,6 +33,8 @@ This directory contains all the Kubernetes Terraform modules.
 
 ### Deprecated
 
+- [`loki`](loki/README.md)
+- [`xenit`](xenit/README.md)
 - [`new-relic`](new-relic/README.md)
 
 ## Style Guide

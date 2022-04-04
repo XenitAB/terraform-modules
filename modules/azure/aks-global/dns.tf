@@ -8,8 +8,12 @@ resource "azurerm_dns_zone" "this" {
 }
 
 moved {
+  for_each = {
+    for dns in var.dns_zone :
+    dns => dns
+  }
   from = azurerm_dns_zone.this
-  to   = azurerm_dns_zone.this["sand.unbox.xenit.io"]
+  to   = azurerm_dns_zone.this[each.key]
 }
 
 resource "azurerm_user_assigned_identity" "external_dns" {

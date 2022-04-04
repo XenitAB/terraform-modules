@@ -265,6 +265,9 @@ module "promtail" {
   source         = "../../kubernetes/promtail"
   loki_address   = var.promtail_config.loki_address
   cloud_provider = "aws"
+  cluster_name   = "${var.name}${var.eks_name_suffix}"
+  environment    = var.environment
+  tenant_id      = var.prometheus_config.tenant_id
   aws_config = {
     role_arn = var.promtail_config.role_arn
   }

@@ -5,6 +5,13 @@ config:
       tls_config:
         cert_file: /mnt/tls/tls.crt
         key_file: /mnt/tls/tls.key
+    
+    pipelineStages:
+      - cri: {}
+      - static_labels:
+        tenant: "${tenant_id}"
+        environment: "${environment}"
+        cluster: "${cluster_name}"
 
 extraClientConfigs:
   tls_config:

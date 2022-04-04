@@ -3,6 +3,20 @@ variable "cloud_provider" {
   type        = string
 }
 
+variable "cluster_name" {
+  description = "Name of the K8S cluster"
+  type        = string
+}
+
+variable "environment" {
+  description = "The environment in which the promtail instance is deployed"
+  type        = string
+}
+
+variable "tenant_id" {
+  description = "The tenant id"
+  type        = string
+}
 
 variable "aws_config" {
   description = "AWS specific configuration"

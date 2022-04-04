@@ -55,6 +55,9 @@ resource "helm_release" "promtail" {
 
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     provider        = var.cloud_provider
+    tenant_id       = var.tenant_id
+    environment     = var.environment
+    cluster_name    = var.cluster_name
     k8s_secret_name = local.k8s_secret_name
     loki_address    = var.loki_address
     azure_config    = local.azure_config

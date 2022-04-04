@@ -12,6 +12,17 @@ config:
           tenant: "${tenant_id}"
           environment: "${environment}"
           cluster: "${cluster_name}"
+
+  %{~ if length(excluded_namespaces) > 0 ~}
+    extraRelabelConfigs: |
+  %{~ for namespace in excluded_namespaces ~}
+      - action: drop
+        regex: ${namespace}
+        source_labels:
+          - __meta_kubernetes_namespace
+  %{~ endfor ~}
+  %{~ endif ~}
+
          
 defaultVolumes:
   - name: pods

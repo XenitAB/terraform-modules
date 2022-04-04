@@ -18,6 +18,11 @@ variable "tenant_id" {
   type        = string
 }
 
+variable "excluded_namespaces" {
+  description = "Namespaces to not ship logs from"
+  type        = list(string)
+  default     = []
+}
 variable "aws_config" {
   description = "AWS specific configuration"
   type = object({

@@ -54,14 +54,15 @@ resource "helm_release" "promtail" {
   max_history = 3
 
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider        = var.cloud_provider
-    tenant_id       = var.tenant_id
-    environment     = var.environment
-    cluster_name    = var.cluster_name
-    k8s_secret_name = local.k8s_secret_name
-    loki_address    = var.loki_address
-    azure_config    = local.azure_config
-    aws_config      = local.aws_config
+    provider            = var.cloud_provider
+    tenant_id           = var.tenant_id
+    environment         = var.environment
+    cluster_name        = var.cluster_name
+    excluded_namespaces = var.excluded_namespaces
+    k8s_secret_name     = local.k8s_secret_name
+    loki_address        = var.loki_address
+    azure_config        = local.azure_config
+    aws_config          = local.aws_config
   })]
 }
 

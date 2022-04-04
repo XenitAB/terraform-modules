@@ -91,7 +91,7 @@ resource "helm_release" "cert_manager_extras" {
 
   set {
     name  = "azureConfig.hostedZoneName"
-    value = var.azure_config.hosted_zone_name
+    value = "{${join(",", var.azure_config.hosted_zone_name)}}"
   }
 
   set {

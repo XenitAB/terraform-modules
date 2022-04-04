@@ -18,14 +18,14 @@ variable "azure_config" {
   description = "Azure specific configuration"
   type = object({
     subscription_id     = string,
-    hosted_zone_name    = string,
+    hosted_zone_name    = list(string),
     resource_group_name = string,
     client_id           = string,
     resource_id         = string,
   })
   default = {
     subscription_id     = "",
-    hosted_zone_name    = "",
+    hosted_zone_name    = [""],
     resource_group_name = "",
     client_id           = "",
     resource_id         = "",

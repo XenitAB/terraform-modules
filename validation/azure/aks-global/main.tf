@@ -33,6 +33,6 @@ module "aks_global" {
     }
   ]
 
-  dns_zone           = "example.io"
+  dns_zone           = ["example.io"]
   aks_authorized_ips = ["0.0.0.0/0"]
 }

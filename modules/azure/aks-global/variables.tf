@@ -34,8 +34,8 @@ variable "namespaces" {
 }
 
 variable "dns_zone" {
-  description = "The DNS Zone to create"
-  type        = string
+  description = "List of DNS Zone to create"
+  type        = list(string)
 }
 
 variable "aks_authorized_ips" {

@@ -7,11 +7,6 @@ resource "azurerm_dns_zone" "this" {
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
-moved {
-  from = azurerm_dns_zone.this
-  to   = azurerm_dns_zone.this[0]
-}
-
 resource "azurerm_user_assigned_identity" "external_dns" {
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location

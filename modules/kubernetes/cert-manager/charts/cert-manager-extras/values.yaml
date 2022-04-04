@@ -9,7 +9,7 @@ azureConfig:
   resourceGroupName: ""
   clientID: ""
   subscriptionID: ""
-  hostedZoneName: ""
+  hostedZoneName: []
   resourceID: ""
 
 awsConfig:

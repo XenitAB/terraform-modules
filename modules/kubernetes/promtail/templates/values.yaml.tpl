@@ -160,4 +160,5 @@ extraObjects:
       selector:
         app.kubernetes.io/instance: promtail
         app.kubernetes.io/name: promtail
+
     

@@ -14,7 +14,7 @@ config:
           cluster: "${cluster_name}"
 
   %{~ if length(excluded_namespaces) > 0 ~}
-    extraRelabelConfigs: |
+    extraRelabelConfigs:
   %{~ for namespace in excluded_namespaces ~}
       - action: drop
         regex: ${namespace}
@@ -34,12 +34,12 @@ defaultVolumeMounts:
     mountPath: /var/log/pods
     readOnly: true
 
-resources: 
-  limits:
-    memory: 200Mi
-  requests:
-    cpu: 50m
-    memory: 100Mi
+# resources:
+#   limits:
+#     memory: 200Mi
+#   requests:
+#     cpu: 50m
+#     memory: 100Mi
  
   %{~ if provider == "azure" ~}
 podLabels:

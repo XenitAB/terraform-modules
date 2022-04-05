@@ -65,4 +65,3 @@ resource "helm_release" "promtail" {
     aws_config          = local.aws_config
   })]
 }
-

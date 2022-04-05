@@ -9,8 +9,8 @@ variable "name" {
 }
 
 variable "dns_zone" {
-  description = "The DNS Zone host name"
-  type        = string
+  description = "The list of DNS Zone host names"
+  type        = list(string)
 }
 
 variable "cidr_block" {

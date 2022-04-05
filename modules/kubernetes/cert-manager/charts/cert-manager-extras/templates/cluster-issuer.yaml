@@ -28,6 +28,7 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-cluster-issuer-account-key
     solvers:
+    {{- if eq .Values.cloudProvider "azure" }}
     {{- range $value := $.Values.azureConfig.hostedZoneName }}
     - selector:
         dnsZones:
@@ -38,4 +39,16 @@ spec:
             subscriptionID: {{ $.Values.azureConfig.subscriptionID }}
             resourceGroupName: {{ $.Values.azureConfig.resourceGroupName }}
             hostedZoneName: {{ . | quote }}
+    {{- end }}
+    {{- end }}
+    {{- if eq .Values.cloudProvider "aws" }}
+    {{- range $key, $val := $.Values.awsConfig.zones }}
+    - selector:
+        dnsZones:
+          - {{ $val.name | quote }}
+      dns01:
+        route53:
+          region: {{ $.Values.awsConfig.region }}
+          hostedZoneID: {{ $val.hostedZoneID | quote }}
+    {{- end }}
     {{- end }}

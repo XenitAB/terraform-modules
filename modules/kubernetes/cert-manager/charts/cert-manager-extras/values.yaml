@@ -14,4 +14,6 @@ azureConfig:
 
 awsConfig:
   region: ""
-  hostedZoneID: ""
+  zones:
+    - hostedZoneID: ""
+      name: ""

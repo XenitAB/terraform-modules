@@ -1,10 +1,10 @@
 resource "aws_route53_zone" "this" {
-  name = var.dns_zone
-
   for_each = {
-    for s in ["zone"] :
-    s => s
+    for dns in var.dns_zone :
+    dns => dns
   }
+
+  name = each.key
 
   tags = merge(
     local.global_tags,

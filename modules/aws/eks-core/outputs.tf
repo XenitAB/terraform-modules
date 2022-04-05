@@ -12,3 +12,10 @@ output "private_subnets_ids" {
   ]
 }
 
+
+output "dns_zones" {
+  value = {
+    for dns in aws_route53_zone.this :
+    dns.name => dns.zone_id
+  }
+}

@@ -142,7 +142,7 @@ variable "cert_manager_config" {
   description = "Cert Manager configuration"
   type = object({
     notification_email = string
-    dns_zone           = string
+    dns_zones          = map(string, string)
     role_arn           = string
   })
 }

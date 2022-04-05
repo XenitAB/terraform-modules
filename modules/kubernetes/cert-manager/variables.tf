@@ -36,12 +36,12 @@ variable "aws_config" {
   description = "AWS specific configuration"
   type = object({
     region         = string,
-    hosted_zone_id = string,
+    hosted_zone_id = map(string, string)
     role_arn       = string,
   })
   default = {
     region         = "",
-    hosted_zone_id = "",
+    hosted_zone_id = {},
     role_arn       = "",
   }
 }

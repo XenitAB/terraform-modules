@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#624](https://github.com/XenitAB/terraform-modules/pull/624) Add Promtail for platform logs in Azure.
+
 ### Changed
 
 - [#622](https://github.com/XenitAB/terraform-modules/pull/622) [Breaking] Hardcode prometheus and trivy storage class.

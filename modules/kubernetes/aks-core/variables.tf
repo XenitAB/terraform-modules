@@ -409,6 +409,11 @@ variable "promtail_config" {
   })
 }
 
+variable "ingress_healthz_dns_zone" {
+  description = "The ingress-healthz dns zone that should be used"
+  type        = string
+}
+
 variable "ingress_healthz_enabled" {
   description = "Should ingress-healthz be enabled"
   type        = bool

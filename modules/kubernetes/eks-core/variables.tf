@@ -239,7 +239,7 @@ variable "azad_kube_proxy_config" {
 variable "promtail_enabled" {
   description = "Should promtail be enabled"
   type        = bool
-  default     = true
+  default     = false
 }
 variable "promtail_config" {
   description = "Configuration for promtail"

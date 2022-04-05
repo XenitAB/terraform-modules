@@ -458,7 +458,7 @@ module "prometheus" {
   vpa_enabled                              = var.vpa_enabled
   node_local_dns_enabled                   = var.node_local_dns_enabled
   grafana_agent_enabled                    = var.grafana_agent_enabled
-  promtail_enabled                         = true
+  promtail_enabled                         = var.promtail_enabled
 }
 
 module "promtail" {

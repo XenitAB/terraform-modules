@@ -26,8 +26,11 @@ module "eks_core" {
   cert_manager_enabled = true
   cert_manager_config = {
     notification_email = "foo"
-    dns_zone           = "bar"
-    role_arn           = "foobar"
+    dns_zone = {
+      "example.com" : "zone_id123",
+      "example.io" : "zone_id456",
+    }
+    role_arn = "foobar"
   }
   cluster_autoscaler_config = {
     role_arn = "foobar"

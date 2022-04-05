@@ -10,5 +10,5 @@ module "core" {
   environment = "dev"
   name        = "eks-core"
   cidr_block  = "10.0.0.0/18"
-  dns_zone    = "foobar.com"
+  dns_zone    = ["foobar.com"]
 }

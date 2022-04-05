@@ -9,7 +9,7 @@ resource "aws_route53_zone" "this" {
   tags = merge(
     local.global_tags,
     {
-      Name = var.dns_zone
+      Name = each.key
     },
   )
 }

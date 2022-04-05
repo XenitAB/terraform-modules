@@ -13,16 +13,17 @@ config:
           environment: "${environment}"
           cluster: "${cluster_name}"
 
-  %{~ if length(excluded_namespaces) > 0 ~}
     extraRelabelConfigs:
+      - action: drop
+        regex: ingress-nginx
+        source_labels:
+          - __meta_kubernetes_namespace
   %{~ for namespace in excluded_namespaces ~}
       - action: drop
         regex: ${namespace}
         source_labels:
           - __meta_kubernetes_namespace
   %{~ endfor ~}
-  %{~ endif ~}
-
          
 defaultVolumes:
   - name: pods

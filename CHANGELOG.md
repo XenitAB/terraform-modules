@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- [#624](https://github.com/XenitAB/terraform-modules/pull/624) Add Promtail for platform logs in Azure .
+- [#624](https://github.com/XenitAB/terraform-modules/pull/624) Add Promtail for platform logs in Azure.
 
 ### Changed
 

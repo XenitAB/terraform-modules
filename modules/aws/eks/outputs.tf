@@ -50,6 +50,13 @@ output "prometheus_config" {
   }
 }
 
+output "promtail_config" {
+  description = "Configuration for Promtail"
+  value = {
+    role_arn = module.promtail.role_arn
+  }
+}
+
 output "starboard_config" {
   description = "Configuration for Starboard"
   value = {

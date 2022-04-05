@@ -236,6 +236,19 @@ variable "azad_kube_proxy_config" {
   }
 }
 
+variable "promtail_enabled" {
+  description = "Should promtail be enabled"
+  type        = bool
+  default     = false
+}
+variable "promtail_config" {
+  description = "Configuration for promtail"
+  type = object({
+    role_arn     = string
+    loki_address = string
+  })
+}
+
 variable "prometheus_enabled" {
   description = "Should prometheus be enabled"
   type        = bool

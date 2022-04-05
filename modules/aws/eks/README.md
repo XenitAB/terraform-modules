@@ -24,6 +24,7 @@
 | <a name="module_cluster_autoscaler"></a> [cluster\_autoscaler](#module\_cluster\_autoscaler) | ../irsa | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../irsa | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../irsa | n/a |
+| <a name="module_promtail"></a> [promtail](#module\_promtail) | ../irsa | n/a |
 | <a name="module_starboard_ecr"></a> [starboard\_ecr](#module\_starboard\_ecr) | ../irsa | n/a |
 | <a name="module_trivy_ecr"></a> [trivy\_ecr](#module\_trivy\_ecr) | ../irsa | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../irsa | n/a |
@@ -44,9 +45,9 @@
 | [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.cluster_autoscaler](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.external_dns](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.prometheus](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.starboard_ecr_read_only](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.velero](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.xenit_proxy_certificate](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/region) | data source |
 | [aws_subnet.cluster](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/subnet) | data source |
 | [aws_subnet.node](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/subnet) | data source |
@@ -78,5 +79,6 @@
 | <a name="output_external_dns_config"></a> [external\_dns\_config](#output\_external\_dns\_config) | Configuration for External DNS |
 | <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Kube config for the created EKS cluster |
 | <a name="output_prometheus_config"></a> [prometheus\_config](#output\_prometheus\_config) | Configuration for Prometheus |
+| <a name="output_promtail_config"></a> [promtail\_config](#output\_promtail\_config) | Configuration for Promtail |
 | <a name="output_starboard_config"></a> [starboard\_config](#output\_starboard\_config) | Configuration for Starboard |
 | <a name="output_velero_config"></a> [velero\_config](#output\_velero\_config) | Configuration for Velero |

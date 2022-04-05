@@ -390,6 +390,25 @@ variable "prometheus_config" {
   })
 }
 
+variable "promtail_enabled" {
+  description = "Should promtail be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "promtail_config" {
+  description = "Configuration for promtail"
+  type = object({
+    azure_key_vault_name = string
+    identity = object({
+      client_id   = string
+      resource_id = string
+      tenant_id   = string
+    })
+    loki_address = string
+  })
+}
+
 variable "ingress_healthz_enabled" {
   description = "Should ingress-healthz be enabled"
   type        = bool

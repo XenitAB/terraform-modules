@@ -21,7 +21,7 @@ terraform {
 
 locals {
   namespace       = "promtail"
-  k8s_secret_name = "xenit-proxy-certificate"
+  k8s_secret_name = "xenit-proxy-certificate" #tfsec:ignore:general-secrets-no-plaintext-exposure
   aws_config = {
     key_parameter_name = "xenit-proxy-certificate-key"
     crt_parameter_name = "xenit-proxy-certificate-crt"

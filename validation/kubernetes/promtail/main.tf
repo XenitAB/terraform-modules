@@ -4,7 +4,7 @@ provider "kubernetes" {}
 
 provider "helm" {}
 
-module "prometheus" {
+module "promtail" {
   source = "../../../modules/kubernetes/promtail"
 
   providers = {

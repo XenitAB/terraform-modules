@@ -18,12 +18,12 @@ config:
         regex: ingress-nginx
         source_labels:
           - __meta_kubernetes_namespace
-  %{~ for namespace in excluded_namespaces ~}
+      %{~ for namespace in excluded_namespaces ~}
       - action: drop
         regex: ${namespace}
         source_labels:
           - __meta_kubernetes_namespace
-  %{~ endfor ~}
+      %{~ endfor ~}
          
 defaultVolumes:
   - name: pods
@@ -44,10 +44,10 @@ resources:
     cpu: 50m
     memory: 100Mi
  
-  %{~ if provider == "azure" ~}
+%{~ if provider == "azure" ~}
 podLabels:
   aadpodidbinding: promtail
- %{~ endif ~}
+%{~ endif ~}
 
 extraVolumes:
   - name: secrets-store
@@ -67,11 +67,11 @@ extraVolumeMounts:
     mountPath: "/mnt/tls"
     readOnly: true
 
-  %{~ if provider == "aws" ~}
+%{~ if provider == "aws" ~}
 serviceAccount:
   annotations:
      "eks.amazonaws.com/role-arn": "${aws_config.role_arn}"
-  %{~ endif ~}
+%{~ endif ~}
 
 extraObjects: 
   %{~ if provider == "aws" ~}
@@ -79,8 +79,6 @@ extraObjects:
     kind: SecretProviderClass
     metadata:
       name: promtail
-      labels:
-        {{- include "promtail.labels" . | nindent 4 }}
     spec:
       provider: "aws"
       parameters:

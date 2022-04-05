@@ -422,3 +422,27 @@ spec:
     matchLabels:
       k8s-app: node-local-dns
 {{- end }}
+{{- if .Values.enabledMonitors.promtail }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    xkf.xenit.io/monitoring: platform
+  name: promtail
+  namespace: promtail
+spec:
+  endpoints:
+    - port: http-metrics
+      interval: 60s
+      path: /metrics
+      scrapeTimeout: 30s
+  namespaceSelector:
+    matchNames:
+    - promtail
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: promtail
+      app.kubernetes.io/name: promtail
+{{- end }}
+

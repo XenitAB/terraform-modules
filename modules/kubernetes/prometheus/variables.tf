@@ -157,3 +157,9 @@ variable "node_local_dns_enabled" {
   type        = bool
   default     = false
 }
+
+variable "promtail_enabled" {
+  description = "Should promtail be enabled"
+  type        = bool
+  default     = false
+}

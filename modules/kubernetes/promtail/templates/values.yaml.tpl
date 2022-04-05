@@ -140,3 +140,23 @@ extraObjects:
       azureIdentity: promtail
       selector: promtail
   %{~ endif ~}
+
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: promtail-metrics
+      namespace: "${namespace}"
+      labels:
+        app.kubernetes.io/instance: promtail
+        app.kubernetes.io/name: promtail
+    spec:
+      clusterIP: None
+      ports:
+        - name: http-metrics
+          port: 3101
+          targetPort: http-metrics
+          protocol: TCP
+      selector:
+        app.kubernetes.io/instance: promtail
+        app.kubernetes.io/name: promtail
+    

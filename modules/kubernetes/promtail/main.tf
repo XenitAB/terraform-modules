@@ -58,6 +58,7 @@ resource "helm_release" "promtail" {
     tenant_id           = var.tenant_id
     environment         = var.environment
     cluster_name        = var.cluster_name
+    namespace           = local.namespace
     excluded_namespaces = var.excluded_namespaces
     k8s_secret_name     = local.k8s_secret_name
     loki_address        = var.loki_address

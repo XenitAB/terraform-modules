@@ -34,12 +34,14 @@ defaultVolumeMounts:
     mountPath: /var/log/pods
     readOnly: true
 
-# resources:
-#   limits:
-#     memory: 200Mi
-#   requests:
-#     cpu: 50m
-#     memory: 100Mi
+priorityClassName: "platform-high"
+
+resources:
+  limits:
+    memory: 200Mi
+  requests:
+    cpu: 50m
+    memory: 100Mi
  
   %{~ if provider == "azure" ~}
 podLabels:

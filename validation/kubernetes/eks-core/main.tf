@@ -26,7 +26,7 @@ module "eks_core" {
   cert_manager_enabled = true
   cert_manager_config = {
     notification_email = "foo"
-    dns_zone = {
+    dns_zones = {
       "example.com" : "zone_id123",
       "example.io" : "zone_id456",
     }
@@ -82,6 +82,8 @@ module "eks_core" {
     public_private_enabled    = false
     allow_snippet_annotations = false
   }
+
+  ingress_healthz_dns_zone = "foobar.examle.io"
 
   starboard_enabled = true
 

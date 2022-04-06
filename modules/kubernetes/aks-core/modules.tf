@@ -221,7 +221,7 @@ module "ingress_healthz" {
   source = "../../kubernetes/ingress-healthz"
 
   environment     = var.environment
-  dns_zone        = "${var.environment}.${var.ingress_healthz_dns_zone}"
+  dns_zone        = var.ingress_healthz_dns_zone
   linkerd_enabled = var.linkerd_enabled
 }
 

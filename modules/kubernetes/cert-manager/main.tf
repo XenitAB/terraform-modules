@@ -20,8 +20,8 @@ terraform {
 }
 
 locals {
-  namespace            = "cert-manager"
-  aks_hosted_zone_name = "{${join(",", var.azure_config.hosted_zone_name)}}"
+  namespace              = "cert-manager"
+  azure_hosted_zone_name = "{${join(",", var.azure_config.hosted_zone_name)}}"
 }
 
 resource "kubernetes_namespace" "this" {
@@ -54,11 +54,11 @@ resource "helm_release" "cert_manager_extras" {
   name        = "cert-manager-extras"
   namespace   = kubernetes_namespace.this.metadata[0].name
   max_history = 3
-  values = [templatefile("${path.module}/templates/cert-manager-values.yaml.tpl", {
+  values = [templatefile("${path.module}/templates/cert-manager-extras-values.yaml.tpl", {
     notificationEmail   = var.notification_email,
     acmeServer          = var.acme_server,
     cloudProvider       = var.cloud_provider,
-    azureConfig         = var.azureConfig,
+    azureConfig         = var.azure_config,
     azureHostedZoneName = local.azure_hosted_zone_name,
     awsConfig           = var.aws_config,
   })]

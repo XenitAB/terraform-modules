@@ -13,9 +13,9 @@ azureConfig:
   resourceID: "${azureConfig.resource_id}"
 
 awsConfig:
-  region: "${aws_config.region}"
+  region: "${awsConfig.region}"
   zones:
-  %{~ for name, zone_id in aws_config.hosted_zone_id ~}
+  %{~ for name, zone_id in awsConfig.hosted_zone_id ~}
     - hostedZoneID: ${zone_id}
       name: ${name}
   %{~ endfor ~}

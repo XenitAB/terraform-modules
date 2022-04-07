@@ -21,7 +21,7 @@ terraform {
 
 locals {
   namespace              = "cert-manager"
-  azure_hosted_zone_name = "{${join(",", var.azure_config.hosted_zone_name)}}"
+  azure_hosted_zone_name = "[${join(",", var.azure_config.hosted_zone_name)}]"
 }
 
 resource "kubernetes_namespace" "this" {

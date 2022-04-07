@@ -25,7 +25,7 @@ variable "azure_config" {
   })
   default = {
     subscription_id     = "",
-    hosted_zone_name    = [""],
+    hosted_zone_name    = [],
     resource_group_name = "",
     client_id           = "",
     resource_id         = "",

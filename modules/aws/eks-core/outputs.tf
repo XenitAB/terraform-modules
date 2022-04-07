@@ -11,12 +11,3 @@ output "private_subnets_ids" {
     if contains(local.private_subnets.*.cidr_block, subnet.cidr_block)
   ]
 }
-
-
-output "dns_zones" {
-  description = "The zone id and names of the dns zones that we create"
-  value = {
-    for dns in aws_route53_zone.this :
-    dns.name => dns.zone_id
-  }
-}

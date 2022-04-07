@@ -79,6 +79,7 @@ This module is used to configure EKS clusters.
 | [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/role_binding) | resource |
 | [kubernetes_service_account.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/service_account) | resource |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/region) | data source |
+| [aws_route53_zone.this](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/route53_zone) | data source |
 
 ## Inputs
 

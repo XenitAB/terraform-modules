@@ -14,6 +14,18 @@ locals {
     "reloader",
     "velero",
   ]
+  dns_zones = {
+    for dns in data.aws_route53_zone.this :
+    dns.name => dns.zone_id
+  }
+}
+
+data "aws_route53_zone" "this" {
+  for_each = {
+    for dns in var.cert_manager_config.dns_zones :
+    dns => dns
+  }
+  name = each.key
 }
 
 module "opa_gatekeeper" {
@@ -179,7 +191,7 @@ module "cert_manager" {
   cloud_provider = "aws"
   aws_config = {
     region         = data.aws_region.current.name
-    hosted_zone_id = var.cert_manager_config.dns_zones
+    hosted_zone_id = local.dns_zones
     role_arn       = var.cert_manager_config.role_arn
   }
   notification_email = var.cert_manager_config.notification_email

@@ -59,7 +59,7 @@ resource "helm_release" "cert_manager_extras" {
     acmeServer          = var.acme_server,
     cloudProvider       = var.cloud_provider,
     azureConfig         = var.azure_config,
-    azureHostedZoneName = var.azure_config.hosted_zone_name
+    azureHostedZoneName = local.azure_hosted_zone_name
     awsConfig           = var.aws_config,
   })]
 }

@@ -66,6 +66,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_dns_zones"></a> [dns\_zones](#output\_dns\_zones) | n/a |
+| <a name="output_dns_zones"></a> [dns\_zones](#output\_dns\_zones) | The zone id and names of the dns zones that we create |
 | <a name="output_private_subnets_ids"></a> [private\_subnets\_ids](#output\_private\_subnets\_ids) | The ids of the of private subnets created by this module |
 | <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | The id of the VPC created by this module |

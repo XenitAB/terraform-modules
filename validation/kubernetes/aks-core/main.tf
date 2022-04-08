@@ -29,7 +29,6 @@ module "aks_core" {
     notification_email = "foo"
     dns_zone           = ["bar", "faa"]
   }
-  ingress_healthz_dns_zone = "example.com"
   fluxcd_v2_config = {
     type = "github"
     github = {

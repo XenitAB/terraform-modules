@@ -139,7 +139,7 @@ variable "cert_manager_enabled" {
 }
 
 variable "cert_manager_config" {
-  description = "Cert Manager configuration"
+  description = "Cert Manager configuration, the first item in the list is the main domain"
   type = object({
     notification_email = string
     dns_zones          = list(string)
@@ -165,11 +165,6 @@ variable "ingress_config" {
     public_private_enabled    = false
     allow_snippet_annotations = false
   }
-}
-
-variable "ingress_healthz_dns_zone" {
-  description = "The ingress-healthz dns zone that should be used"
-  type        = string
 }
 
 variable "ingress_healthz_enabled" {

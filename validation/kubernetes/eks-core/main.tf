@@ -80,8 +80,6 @@ module "eks_core" {
     allow_snippet_annotations = false
   }
 
-  ingress_healthz_dns_zone = "foobar.examle.io"
-
   starboard_enabled = true
 
   starboard_config = {

@@ -14,6 +14,18 @@ locals {
     "reloader",
     "velero",
   ]
+  dns_zone = {
+    for dns in data.aws_route53_zone.this :
+    dns.name => dns.zone_id
+  }
+}
+
+data "aws_route53_zone" "this" {
+  for_each = {
+    for dns in var.cert_manager_config.dns_zone :
+    dns => dns
+  }
+  name = each.key
 }
 
 module "opa_gatekeeper" {
@@ -142,7 +154,7 @@ module "ingress_healthz" {
   source = "../../kubernetes/ingress-healthz"
 
   environment     = var.environment
-  dns_zone        = var.cert_manager_config.dns_zone
+  dns_zone        = var.cert_manager_config.dns_zone[0]
   linkerd_enabled = var.linkerd_enabled
 }
 
@@ -179,7 +191,7 @@ module "cert_manager" {
   cloud_provider = "aws"
   aws_config = {
     region         = data.aws_region.current.name
-    hosted_zone_id = data.aws_route53_zone.this.zone_id
+    hosted_zone_id = local.dns_zone
     role_arn       = var.cert_manager_config.role_arn
   }
   notification_email = var.cert_manager_config.notification_email

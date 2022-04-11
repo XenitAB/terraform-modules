@@ -55,7 +55,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | CIDR block of the VPC. The prefix length of the CIDR block must be 18 or less | `string` | n/a | yes |
-| <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | The DNS Zone host name | `string` | n/a | yes |
+| <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | The list of DNS Zone host names | `list(string)` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deployment | `string` | n/a | yes |
 | <a name="input_flow_log_enabled"></a> [flow\_log\_enabled](#input\_flow\_log\_enabled) | Should flow logs be enabled | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | Deployment name | `string` | n/a | yes |

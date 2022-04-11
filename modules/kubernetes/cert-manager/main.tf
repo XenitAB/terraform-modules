@@ -20,7 +20,8 @@ terraform {
 }
 
 locals {
-  namespace = "cert-manager"
+  namespace               = "cert-manager"
+  azure_hosted_zone_names = "[${join(",", var.azure_config.hosted_zone_names)}]"
 }
 
 resource "kubernetes_namespace" "this" {
@@ -53,54 +54,12 @@ resource "helm_release" "cert_manager_extras" {
   name        = "cert-manager-extras"
   namespace   = kubernetes_namespace.this.metadata[0].name
   max_history = 3
-
-  set {
-    name  = "notificationEmail"
-    value = var.notification_email
-  }
-
-  set {
-    name  = "acmeServer"
-    value = var.acme_server
-  }
-
-  set {
-    name  = "cloudProvider"
-    value = var.cloud_provider
-  }
-
-  set {
-    name  = "azureConfig.resourceGroupName"
-    value = var.azure_config.resource_group_name
-  }
-
-  set {
-    name  = "azureConfig.clientID"
-    value = var.azure_config.client_id
-  }
-
-  set {
-    name  = "azureConfig.subscriptionID"
-    value = var.azure_config.subscription_id
-  }
-
-  set {
-    name  = "azureConfig.resourceID"
-    value = var.azure_config.resource_id
-  }
-
-  set {
-    name  = "azureConfig.hostedZoneName"
-    value = var.azure_config.hosted_zone_name
-  }
-
-  set {
-    name  = "awsConfig.region"
-    value = var.aws_config.region
-  }
-
-  set {
-    name  = "awsConfig.hostedZoneID"
-    value = var.aws_config.hosted_zone_id
-  }
+  values = [templatefile("${path.module}/templates/cert-manager-extras-values.yaml.tpl", {
+    notificationEmail    = var.notification_email,
+    acmeServer           = var.acme_server,
+    cloudProvider        = var.cloud_provider,
+    azureConfig          = var.azure_config,
+    azureHostedZoneNames = local.azure_hosted_zone_names
+    awsConfig            = var.aws_config,
+  })]
 }

@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#622](https://github.com/XenitAB/terraform-modules/pull/622) [Breaking] Hardcode prometheus and trivy storage class.
 - [#617](https://github.com/XenitAB/terraform-modules/pull/617) Upgrade falco to 0.31.1
 - [#536](https://github.com/XenitAB/terraform-modules/pull/536) Update OPA Gatekeeper Helm charts
+- [#626](https://github.com/XenitAB/terraform-modules/pull/626) [Breaking] Add support for multiple DNS zones.
 
 ### Fix
 

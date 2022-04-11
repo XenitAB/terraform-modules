@@ -1,5 +1,9 @@
 resource "azurerm_dns_zone" "this" {
-  name                = var.dns_zone
+  for_each = {
+    for dns in var.dns_zone :
+    dns => dns
+  }
+  name                = each.key
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
@@ -16,7 +20,11 @@ resource "azurerm_role_assignment" "external_dns_msi" {
 }
 
 resource "azurerm_role_assignment" "external_dns_contributor" {
-  scope                = azurerm_dns_zone.this.id
+  for_each = {
+    for dns in var.dns_zone :
+    dns => dns
+  }
+  scope                = azurerm_dns_zone.this[each.key].id
   role_definition_name = "Contributor"
   principal_id         = azurerm_user_assigned_identity.external_dns.principal_id
 }

@@ -11,4 +11,3 @@ output "private_subnets_ids" {
     if contains(local.private_subnets.*.cidr_block, subnet.cidr_block)
   ]
 }
-

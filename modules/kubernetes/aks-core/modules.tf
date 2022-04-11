@@ -221,7 +221,7 @@ module "ingress_healthz" {
   source = "../../kubernetes/ingress-healthz"
 
   environment     = var.environment
-  dns_zone        = var.cert_manager_config.dns_zone
+  dns_zone        = var.cert_manager_config.dns_zone[0]
   linkerd_enabled = var.linkerd_enabled
 }
 
@@ -263,7 +263,7 @@ module "cert_manager" {
   notification_email = var.cert_manager_config.notification_email
   cloud_provider     = "azure"
   azure_config = {
-    hosted_zone_name    = var.cert_manager_config.dns_zone
+    hosted_zone_names   = var.cert_manager_config.dns_zone
     resource_group_name = data.azurerm_resource_group.this.name
     subscription_id     = data.azurerm_client_config.current.subscription_id
     client_id           = var.external_dns_config.client_id

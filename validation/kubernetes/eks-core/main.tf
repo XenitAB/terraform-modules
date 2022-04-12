@@ -7,7 +7,8 @@ provider "aws" {
 module "eks_core" {
   source = "../../../modules/kubernetes/eks-core"
 
-  namespaces = []
+  namespaces                  = []
+  promtail_exclude_namespaces = []
 
   environment     = "dev"
   name            = "foo"

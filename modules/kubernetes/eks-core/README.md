@@ -117,6 +117,7 @@ This module is used to configure EKS clusters.
 | <a name="input_prometheus_enabled"></a> [prometheus\_enabled](#input\_prometheus\_enabled) | Should prometheus be enabled | `bool` | `true` | no |
 | <a name="input_promtail_config"></a> [promtail\_config](#input\_promtail\_config) | Configuration for promtail | <pre>object({<br>    role_arn     = string<br>    loki_address = string<br>  })</pre> | n/a | yes |
 | <a name="input_promtail_enabled"></a> [promtail\_enabled](#input\_promtail\_enabled) | Should promtail be enabled | `bool` | `false` | no |
+| <a name="input_promtail_exclude_namespaces"></a> [promtail\_exclude\_namespaces](#input\_promtail\_exclude\_namespaces) | Promtail will ship logs for all namespaces except for the ones in this variable. | `list(string)` | n/a | yes |
 | <a name="input_reloader_enabled"></a> [reloader\_enabled](#input\_reloader\_enabled) | Should Reloader be enabled | `bool` | `true` | no |
 | <a name="input_starboard_config"></a> [starboard\_config](#input\_starboard\_config) | Configuration for starboard & trivy | <pre>object({<br>    starboard_role_arn = string<br>    trivy_role_arn     = string<br>  })</pre> | n/a | yes |
 | <a name="input_starboard_enabled"></a> [starboard\_enabled](#input\_starboard\_enabled) | Should Starboard be enabled | `bool` | `false` | no |

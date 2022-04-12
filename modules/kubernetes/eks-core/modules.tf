@@ -280,7 +280,7 @@ module "promtail" {
   cluster_name        = "${var.name}${var.eks_name_suffix}"
   environment         = var.environment
   tenant_id           = var.prometheus_config.tenant_id
-  excluded_namespaces = var.namespaces[*].name
+  excluded_namespaces = var.promtail_exclude_namespaces
 
   aws_config = {
     role_arn = var.promtail_config.role_arn

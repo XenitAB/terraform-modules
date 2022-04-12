@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#536](https://github.com/XenitAB/terraform-modules/pull/536) Update OPA Gatekeeper Helm charts
 - [#626](https://github.com/XenitAB/terraform-modules/pull/626) [Breaking] Add support for multiple DNS zones.
 - [#590](https://github.com/XenitAB/terraform-modules/pull/590) Drop CAP_SYS_ADMIN through OPA and use gatekeeper-library v0.10.0.
+- [#631](https://github.com/XenitAB/terraform-modules/pull/631) Use gatekeeper-library v0.11.0.
 
 ### Fix
 

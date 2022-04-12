@@ -13,7 +13,7 @@ locals {
       name = "init-container-disallow-privilege-escalation"
     },
     {
-      name = "init-container-capabilities"
+      name = "init-container-drop-capabilities"
     },
     {
       name = "init-container-read-only-root-fs"

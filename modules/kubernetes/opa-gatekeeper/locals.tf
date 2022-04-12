@@ -4,7 +4,7 @@ locals {
       name = "container-disallow-privilege-escalation"
     },
     {
-      name = "container-drop-net-raw"
+      name = "container-drop-capabilities"
     },
     {
       name = "container-read-only-root-fs"
@@ -13,7 +13,7 @@ locals {
       name = "init-container-disallow-privilege-escalation"
     },
     {
-      name = "init-container-drop-net-raw"
+      name = "init-container-drop-capabilities"
     },
     {
       name = "init-container-read-only-root-fs"
@@ -112,7 +112,7 @@ locals {
       }
       parameters = {
         allowedCapabilities      = [""]
-        requiredDropCapabilities = ["NET_RAW"]
+        requiredDropCapabilities = ["NET_RAW", "CAP_SYS_ADMIN"]
       }
     },
     {

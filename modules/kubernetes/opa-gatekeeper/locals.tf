@@ -4,7 +4,7 @@ locals {
       name = "container-disallow-privilege-escalation"
     },
     {
-      name = "container-drop-net-raw"
+      name = "container-drop-capabilities"
     },
     {
       name = "container-read-only-root-fs"
@@ -13,7 +13,7 @@ locals {
       name = "init-container-disallow-privilege-escalation"
     },
     {
-      name = "init-container-drop-net-raw"
+      name = "init-container-capabilities"
     },
     {
       name = "init-container-read-only-root-fs"

@@ -35,11 +35,6 @@ variable "namespaces" {
   )
 }
 
-variable "promtail_exclude_namespaces" {
-  description = "Promtail will ship logs for all namespaces except for the ones in this variable."
-  type        = list(string)
-}
-
 variable "aad_groups" {
   description = "Configuration for aad groups"
   type = object({
@@ -249,8 +244,9 @@ variable "promtail_enabled" {
 variable "promtail_config" {
   description = "Configuration for promtail"
   type = object({
-    role_arn     = string
-    loki_address = string
+    role_arn            = string
+    loki_address        = string
+    excluded_namespaces = list(string)
   })
 }
 

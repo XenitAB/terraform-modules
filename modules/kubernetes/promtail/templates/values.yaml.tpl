@@ -24,16 +24,6 @@ config:
         source_labels:
           - __meta_kubernetes_namespace
       %{~ endfor ~}
-         
-defaultVolumes:
-  - name: pods
-    hostPath:
-      path: /var/log/pods
-
-defaultVolumeMounts:
-  - name: pods
-    mountPath: /var/log/pods
-    readOnly: true
 
 priorityClassName: "platform-high"
 
@@ -82,20 +72,19 @@ extraObjects:
     spec:
       provider: "aws"
       parameters:
-       objects: |
-         - objectName: "${aws_config.key_parameter_name}"
-           objectType: "ssmparameter"
-         - objectName: "${aws_config.crt_parameter_name}"
-           objectType: "ssmparameter"
-     secretObjects:
-       - secretName: "${k8s_secret_name}"
-         type: kubernetes.io/tls
-         data:
-           - objectName: "${aws_config.key_parameter_name}"
-             key: tls.key
-           - objectName: "${aws_config.crt_parameter_name}"
-             key: tls.crt
-    
+        objects: |
+          - objectName: "${aws_config.key_parameter_name}"
+            objectType: "ssmparameter"
+          - objectName: "${aws_config.crt_parameter_name}"
+            objectType: "ssmparameter"
+      secretObjects:
+        - secretName: "${k8s_secret_name}"
+          type: kubernetes.io/tls
+          data:
+            - objectName: "${aws_config.key_parameter_name}"
+              key: tls.key
+            - objectName: "${aws_config.crt_parameter_name}"
+              key: tls.crt
   %{~ endif ~}
   %{~ if provider == "azure" ~}
   - apiVersion: secrets-store.csi.x-k8s.io/v1alpha1

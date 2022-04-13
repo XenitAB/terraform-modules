@@ -13,6 +13,7 @@ locals {
     "prometheus",
     "reloader",
     "velero",
+    "promtail"
   ]
   dns_zone = {
     for dns in data.aws_route53_zone.this :
@@ -280,7 +281,7 @@ module "promtail" {
   cluster_name        = "${var.name}${var.eks_name_suffix}"
   environment         = var.environment
   tenant_id           = var.prometheus_config.tenant_id
-  excluded_namespaces = var.promtail_exclude_namespaces
+  excluded_namespaces = var.promtail_config.excluded_namespaces
 
   aws_config = {
     role_arn = var.promtail_config.role_arn

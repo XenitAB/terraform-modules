@@ -7,8 +7,7 @@ provider "aws" {
 module "eks_core" {
   source = "../../../modules/kubernetes/eks-core"
 
-  namespaces                  = []
-  promtail_exclude_namespaces = []
+  namespaces = []
 
   environment     = "dev"
   name            = "foo"
@@ -106,8 +105,8 @@ module "eks_core" {
 
   promtail_enabled = true
   promtail_config = {
-    role_arn     = "foo"
-    loki_address = "value"
+    role_arn            = "foo"
+    loki_address        = "value"
+    excluded_namespaces = []
   }
-
 }

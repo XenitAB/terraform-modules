@@ -7,12 +7,11 @@ provider "azurerm" {
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
 
-  name                        = "baz"
-  aks_name_suffix             = 1
-  location_short              = "foo"
-  environment                 = "bar"
-  namespaces                  = []
-  promtail_exclude_namespaces = []
+  name            = "baz"
+  aks_name_suffix = 1
+  location_short  = "foo"
+  environment     = "bar"
+  namespaces      = []
   external_dns_config = {
     client_id   = "foo"
     resource_id = "bar"
@@ -116,6 +115,7 @@ module "aks_core" {
       resource_id = ""
       tenant_id   = ""
     }
-    loki_address = "value"
+    excluded_namespaces = []
+    loki_address        = "value"
   }
 }

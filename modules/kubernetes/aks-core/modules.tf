@@ -475,7 +475,7 @@ module "promtail" {
   cluster_name        = "${var.name}${var.aks_name_suffix}"
   environment         = var.environment
   tenant_id           = var.prometheus_config.tenant_id
-  excluded_namespaces = var.promtail_exclude_namespaces
+  excluded_namespaces = var.promtail_config.excluded_namespaces
 
   loki_address = var.promtail_config.loki_address
   azure_config = {

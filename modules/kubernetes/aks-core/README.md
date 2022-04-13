@@ -1,9 +1,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 <<<<<<< HEAD
 >>>>>>> make fmt & docs
+
+=======
+>>>>>>> Fix readme
 
 # AKS Core
 

@@ -18,6 +18,7 @@
 terraform {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   required_version = ">= 1.1.7"
 =======
   required_version = "0.15.3"
@@ -25,6 +26,9 @@ terraform {
 =======
   required_version = "0.15.3"
 >>>>>>> d074599... Add initial config
+=======
+  required_version = ">= 1.1.7"
+>>>>>>> 3d1e125... Fix tf version
 
   required_providers {
     helm = {

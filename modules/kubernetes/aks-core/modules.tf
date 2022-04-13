@@ -176,12 +176,20 @@ module "fluxcd_v2" {
 =======
 =======
   environment = var.environment
+<<<<<<< HEAD
   cluster_id  = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
 >>>>>>> f8311b7... make fmt & docs
+=======
+  cluster_id  = "${var.location_short}-${var.environment}-${var.name}-${var.aks_name_suffix}"
+>>>>>>> 43b269c... Fix for loop
   credentials = var.fluxcd_v2_config.credentials
   fleet_infra = var.fluxcd_v2_config.fleet_infra
-  namespaces  = [for ns in var.namespaces : ns => ns if ns.flux.enabled  {
-
+  namespaces = {
+    for_each = {
+      for ns in var.namespaces :
+      ns => ns
+      if ns.flux.enabled
+    }
     name        = ns.name
     create_crds = ns.flux.create_crds
 <<<<<<< HEAD
@@ -193,9 +201,14 @@ module "fluxcd_v2" {
     org         = ns.flux.org
     proj        = ns.flux.proj
     repo        = ns.flux.repo
+<<<<<<< HEAD
 >>>>>>> f8311b7... make fmt & docs
   }]
 >>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
+=======
+
+  }
+>>>>>>> 43b269c... Fix for loop
 }
 
 # AAD-Pod-Identity

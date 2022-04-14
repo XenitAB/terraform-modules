@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Removed
+
+- [#633](https://github.com/XenitAB/terraform-modules/pull/633) Remove deperecated modules xenit, loki, and new-relic.
+
 ## 2022.04.1
 
 ### Added

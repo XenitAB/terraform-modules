@@ -1,4 +1,5 @@
-#tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging
+# azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
+#tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
   lifecycle {
     ignore_changes = [
@@ -37,12 +38,9 @@ resource "azurerm_kubernetes_cluster" "this" {
     type = "SystemAssigned"
   }
 
-  role_based_access_control {
-    enabled = true
-    azure_active_directory {
-      managed                = true
-      admin_group_object_ids = [var.aad_groups.cluster_admin.id]
-    }
+  azure_active_directory_role_based_access_control {
+    managed                = true
+    admin_group_object_ids = [var.aad_groups.cluster_admin.id]
   }
 
   linux_profile {
@@ -57,7 +55,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     vnet_subnet_id = data.azurerm_subnet.this.id
 
     type                         = "VirtualMachineScaleSets"
-    availability_zones           = ["1", "2", "3"]
+    zones                        = ["1", "2", "3"]
     enable_auto_scaling          = false
     only_critical_addons_enabled = true
 
@@ -88,7 +86,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
   vnet_subnet_id        = data.azurerm_subnet.this.id
 
-  availability_zones  = ["1", "2", "3"]
+  zones               = ["1", "2", "3"]
   enable_auto_scaling = true
 
   os_disk_type         = each.value.os_disk_type

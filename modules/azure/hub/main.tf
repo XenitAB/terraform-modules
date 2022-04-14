@@ -13,7 +13,7 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "2.99.0"
+      version = "3.1.0"
       source  = "hashicorp/azurerm"
     }
     azuread = {
@@ -39,6 +39,7 @@ resource "azurerm_public_ip_prefix" "this" {
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
   prefix_length       = var.nat_gateway_public_ip_prefix_length
+  zones               = ["1", "2", "3"]
 }
 
 resource "azurerm_nat_gateway" "this" {

@@ -63,7 +63,7 @@ variable "namespaces" {
 variable "kubernetes_network_policy_default_deny" {
   description = "If network policies should by default deny cross namespace traffic"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "kubernetes_default_limit_range" {

@@ -32,12 +32,6 @@ This directory contains all the Kubernetes Terraform modules.
 - [`node-local-dns`](node-local-dns/README.md)
 - [`promtail`](promtail/README.md)
 
-### Deprecated
-
-- [`loki`](loki/README.md)
-- [`xenit`](xenit/README.md)
-- [`new-relic`](new-relic/README.md)
-
 ## Style Guide
 
 TBD

@@ -351,3 +351,9 @@ variable "grafana_agent_enabled" {
   type        = bool
   default     = false
 }
+
+variable "node_local_dns_enabled" {
+  description = "Should VPA be enabled"
+  type        = bool
+  default     = true
+}

@@ -409,3 +409,15 @@ module "vpa" {
 
   source = "../../kubernetes/vpa"
 }
+
+module "node_local_dns" {
+  depends_on = [module.opa_gatekeeper, module.prometheus]
+
+  for_each = {
+    for s in ["node-local-dns"] :
+    s => s
+    if var.node_local_dns_enabled
+  }
+
+  source = "../../kubernetes/node-local-dns"
+}

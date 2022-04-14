@@ -408,6 +408,16 @@ variable "promtail_config" {
     loki_address        = string
     excluded_namespaces = list(string)
   })
+  default = {
+    azure_key_vault_name = ""
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
+    loki_address        = ""
+    excluded_namespaces = []
+  }
 }
 
 variable "ingress_healthz_enabled" {

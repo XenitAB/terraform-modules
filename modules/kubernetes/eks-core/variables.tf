@@ -248,6 +248,11 @@ variable "promtail_config" {
     loki_address        = string
     excluded_namespaces = list(string)
   })
+  default = {
+    role_arn            = ""
+    loki_address        = ""
+    excluded_namespaces = []
+  }
 }
 
 variable "prometheus_enabled" {

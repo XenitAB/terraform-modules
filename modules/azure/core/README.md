@@ -8,14 +8,14 @@ This module is used to create core resources like virtual network for the subscr
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.19.1 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 2.99.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.19.1 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.99.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.1.0 |
 
 ## Modules
 
@@ -25,21 +25,21 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_network_security_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/network_security_group) | resource |
-| [azurerm_role_assignment.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_definition.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/role_definition) | resource |
-| [azurerm_route.not_virtual_appliance](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/route) | resource |
-| [azurerm_route.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/route) | resource |
-| [azurerm_route_table.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/route_table) | resource |
-| [azurerm_storage_account.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/storage_account) | resource |
-| [azurerm_subnet.aks](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/subnet) | resource |
-| [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/subnet) | resource |
-| [azurerm_subnet_network_security_group_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/subnet_network_security_group_association) | resource |
-| [azurerm_subnet_route_table_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/subnet_route_table_association) | resource |
-| [azurerm_virtual_network.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/virtual_network) | resource |
-| [azurerm_virtual_network_peering.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/virtual_network_peering) | resource |
+| [azurerm_network_security_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/network_security_group) | resource |
+| [azurerm_role_assignment.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_definition.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/role_definition) | resource |
+| [azurerm_route.not_virtual_appliance](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/route) | resource |
+| [azurerm_route.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/route) | resource |
+| [azurerm_route_table.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/route_table) | resource |
+| [azurerm_storage_account.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/storage_account) | resource |
+| [azurerm_subnet.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/subnet) | resource |
+| [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/subnet) | resource |
+| [azurerm_subnet_network_security_group_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/subnet_network_security_group_association) | resource |
+| [azurerm_subnet_route_table_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/subnet_route_table_association) | resource |
+| [azurerm_virtual_network.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/virtual_network) | resource |
+| [azurerm_virtual_network_peering.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/virtual_network_peering) | resource |
 | [azuread_group.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/data-sources/group) | data source |
-| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/data-sources/resource_group) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/data-sources/resource_group) | data source |
 
 ## Inputs
 

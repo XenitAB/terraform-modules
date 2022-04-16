@@ -90,7 +90,7 @@ variable "azad_kube_proxy_config" {
   type = object({
     enabled             = bool
     cluster_name_prefix = string
-    proxy_url_override  = ""
+    proxy_url_override  = string
   })
   default = {
     enabled             = false

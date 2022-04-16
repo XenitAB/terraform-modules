@@ -35,13 +35,9 @@ resource "azuread_application" "azad_kube_proxy" {
   required_resource_access {
     resource_app_id = data.azuread_application_published_app_ids.well_known.result.MicrosoftGraph
 
-    # resource_access {
-    #   id   = azuread_service_principal.msgraph.app_role_ids["Directory.Read.All"]
-    #   type = "Role"
-    # }
     resource_access {
-      id   = azuread_service_principal.msgraph.oauth2_permission_scope_ids["Directory.Read.All"]
-      type = "Scope"
+      id   = azuread_service_principal.msgraph.app_role_ids["Directory.Read.All"]
+      type = "Role"
     }
   }
 

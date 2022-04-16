@@ -18,6 +18,7 @@ This module is used to create resources that are used by AKS clusters.
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.19.1 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.1.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.1.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 3.1.0 |
 
 ## Modules
@@ -28,8 +29,12 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [azuread_app_role_assignment.azad_kube_proxy_msgraph_directory_read_all](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/app_role_assignment) | resource |
+| [azuread_application.azad_kube_proxy](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application) | resource |
 | [azuread_application.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application) | resource |
+| [azuread_application_password.azad_kube_proxy](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application_password) | resource |
 | [azuread_application_password.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application_password) | resource |
+| [azuread_application_pre_authorized.azad_kube_proxy_azure_cli](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application_pre_authorized) | resource |
 | [azuread_group.aks_managed_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
 | [azuread_group.cluster_admin](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
 | [azuread_group.cluster_view](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
@@ -40,7 +45,9 @@ No modules.
 | [azuread_group_member.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group_member) | resource |
 | [azuread_group_member.resource_group_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group_member) | resource |
 | [azuread_group_member.resource_group_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group_member) | resource |
+| [azuread_service_principal.azad_kube_proxy](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/service_principal) | resource |
 | [azuread_service_principal.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/service_principal) | resource |
+| [azuread_service_principal.msgraph](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/service_principal) | resource |
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/container_registry) | resource |
 | [azurerm_dns_zone.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/dns_zone) | resource |
 | [azurerm_key_vault_access_policy.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/key_vault_access_policy) | resource |
@@ -67,7 +74,9 @@ No modules.
 | [azurerm_user_assigned_identity.trivy](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.velero](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/user_assigned_identity) | resource |
+| [random_uuid.azad_kube_proxy_oauth2_permission_scope_user_impersonation](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/uuid) | resource |
 | [tls_private_key.ssh_key](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/resources/private_key) | resource |
+| [azuread_application_published_app_ids.well_known](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/data-sources/application_published_app_ids) | data source |
 | [azuread_group.acr_pull](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/data-sources/group) | data source |
 | [azuread_group.acr_push](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/data-sources/group) | data source |
 | [azuread_group.acr_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/data-sources/group) | data source |
@@ -84,6 +93,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_aks_authorized_ips"></a> [aks\_authorized\_ips](#input\_aks\_authorized\_ips) | Authorized IPs to access AKS API | `list(string)` | n/a | yes |
 | <a name="input_aks_group_name_prefix"></a> [aks\_group\_name\_prefix](#input\_aks\_group\_name\_prefix) | Prefix for AKS Azure AD groups | `string` | `"aks"` | no |
+| <a name="input_azad_kube_proxy_config"></a> [azad\_kube\_proxy\_config](#input\_azad\_kube\_proxy\_config) | Azure AD Kubernetes Proxy configuration | <pre>object({<br>    cluster_name_prefix = string<br>    proxy_url_override  = string<br>  })</pre> | <pre>{<br>  "cluster_name_prefix": "aks",<br>  "proxy_url_override": ""<br>}</pre> | no |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The name for the core infrastructure | `string` | n/a | yes |
 | <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | List of DNS Zone to create | `list(string)` | n/a | yes |
@@ -107,6 +117,7 @@ No modules.
 | <a name="output_aks_authorized_ips"></a> [aks\_authorized\_ips](#output\_aks\_authorized\_ips) | IP addresses authorized for API communication to Azure Kubernetes Service |
 | <a name="output_aks_managed_identity_group_id"></a> [aks\_managed\_identity\_group\_id](#output\_aks\_managed\_identity\_group\_id) | The group id of aks managed identity |
 | <a name="output_aks_public_ip_prefix_ids"></a> [aks\_public\_ip\_prefix\_ids](#output\_aks\_public\_ip\_prefix\_ids) | Azure Kubernetes Service IP Prefixes |
+| <a name="output_azad_kube_proxy"></a> [azad\_kube\_proxy](#output\_azad\_kube\_proxy) | The Azure AD Application config for azad-kube-proxy |
 | <a name="output_dns_zone"></a> [dns\_zone](#output\_dns\_zone) | DNS Zone to be used with external-dns |
 | <a name="output_external_dns_identity"></a> [external\_dns\_identity](#output\_external\_dns\_identity) | MSI authentication identity for External DNS |
 | <a name="output_helm_operator_credentials"></a> [helm\_operator\_credentials](#output\_helm\_operator\_credentials) | Credentials meant to be used by Helm Operator |

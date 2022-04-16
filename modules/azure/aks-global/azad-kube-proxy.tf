@@ -65,5 +65,5 @@ resource "azuread_service_principal" "azad_kube_proxy" {
 resource "azuread_service_principal_delegated_permission_grant" "azad_kube_proxy" {
   service_principal_object_id          = azuread_service_principal.azad_kube_proxy.object_id
   resource_service_principal_object_id = azuread_service_principal.msgraph.object_id
-  claim_values                         = ["Directory.Read.All"]
+  claim_values                         = ["openid", "Directory.Read.All"]
 }

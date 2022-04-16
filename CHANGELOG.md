@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#639](https://github.com/XenitAB/terraform-modules/pull/639) Create Azure AD Application for azad-kube-proxy using aks-global
+
 ### Changed
 
 - [#635](https://github.com/XenitAB/terraform-modules/pull/635) Upgrade azurerm provider to v3.1.0.

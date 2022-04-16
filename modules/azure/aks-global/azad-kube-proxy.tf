@@ -35,9 +35,13 @@ resource "azuread_application" "azad_kube_proxy" {
   required_resource_access {
     resource_app_id = data.azuread_application_published_app_ids.well_known.result.MicrosoftGraph
 
+    # resource_access {
+    #   id   = azuread_service_principal.msgraph.app_role_ids["Directory.Read.All"]
+    #   type = "Role"
+    # }
     resource_access {
-      id   = azuread_service_principal.msgraph.app_role_ids["Directory.Read.All"]
-      type = "Role"
+      id   = azuread_service_principal.msgraph.oauth2_permission_scope_ids["Directory.Read.All"]
+      type = "Scope"
     }
   }
 
@@ -58,12 +62,12 @@ resource "azuread_application_pre_authorized" "azad_kube_proxy_azure_cli" {
   permission_ids        = [random_uuid.azad_kube_proxy_oauth2_permission_scope_user_impersonation.result]
 }
 
-resource "azuread_service_principal" "azad_kube_proxy" {
-  application_id = azuread_application.azad_kube_proxy.application_id
-}
+# resource "azuread_service_principal" "azad_kube_proxy" {
+#   application_id = azuread_application.azad_kube_proxy.application_id
+# }
 
-resource "azuread_service_principal_delegated_permission_grant" "azad_kube_proxy" {
-  service_principal_object_id          = azuread_service_principal.azad_kube_proxy.object_id
-  resource_service_principal_object_id = azuread_service_principal.msgraph.object_id
-  claim_values                         = ["openid", "Directory.Read.All"]
-}
+# resource "azuread_service_principal_delegated_permission_grant" "azad_kube_proxy" {
+#   service_principal_object_id          = azuread_service_principal.azad_kube_proxy.object_id
+#   resource_service_principal_object_id = azuread_service_principal.msgraph.object_id
+#   claim_values                         = ["openid", "Directory.Read.All"]
+# }

@@ -20,10 +20,6 @@ resource "azuread_application" "azad_kube_proxy" {
   api {
     requested_access_token_version = 2
 
-    known_client_applications = [
-      data.azuread_application_published_app_ids.well_known.result.MicrosoftAzureCli
-    ]
-
     oauth2_permission_scope {
       admin_consent_description  = "Allow the application to access azad-kube-proxy on behalf of the signed-in user."
       admin_consent_display_name = "Access azad-kube-proxy"
@@ -56,8 +52,8 @@ resource "azuread_application_password" "azad_kube_proxy" {
   application_object_id = azuread_application.azad_kube_proxy.object_id
 }
 
-# resource "azuread_application_pre_authorized" "azad_kube_proxy_azure_cli" {
-#   application_object_id = azuread_application.azad_kube_proxy.object_id
-#   authorized_app_id     = "04b07795-8ddb-461a-bbee-02f9e1bf7b46" # Azure CLI
-#   permission_ids        = [random_uuid.azad_kube_proxy_oauth2_permission_scope_user_impersonation.result]
-# }
+resource "azuread_application_pre_authorized" "azad_kube_proxy_azure_cli" {
+  application_object_id = azuread_application.azad_kube_proxy.object_id
+  authorized_app_id     = data.azuread_application_published_app_ids.well_known.result.MicrosoftAzureCli
+  permission_ids        = [random_uuid.azad_kube_proxy_oauth2_permission_scope_user_impersonation.result]
+}

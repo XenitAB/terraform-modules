@@ -57,3 +57,13 @@ resource "azuread_application_pre_authorized" "azad_kube_proxy_azure_cli" {
   authorized_app_id     = data.azuread_application_published_app_ids.well_known.result.MicrosoftAzureCli
   permission_ids        = [random_uuid.azad_kube_proxy_oauth2_permission_scope_user_impersonation.result]
 }
+
+resource "azuread_service_principal" "azad_kube_proxy" {
+  application_id = azuread_application.azad_kube_proxy.application_id
+}
+
+resource "azuread_service_principal_delegated_permission_grant" "azad_kube_proxy" {
+  service_principal_object_id          = azuread_service_principal.azad_kube_proxy.object_id
+  resource_service_principal_object_id = azuread_service_principal.msgraph.object_id
+  claim_values                         = ["Directory.Read.All"]
+}

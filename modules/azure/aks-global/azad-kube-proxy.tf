@@ -41,7 +41,7 @@ resource "azuread_application_password" "azad_kube_proxy" {
     if var.azad_kube_proxy_config.enabled
   }
 
-  application_object_id = azuread_application.azad_kube_proxy.object_id
+  application_object_id = azuread_application.azad_kube_proxy["azad-kube-proxy"].object_id
 }
 
 resource "azuread_application_pre_authorized" "azad_kube_proxy_azure_cli" {
@@ -51,7 +51,7 @@ resource "azuread_application_pre_authorized" "azad_kube_proxy_azure_cli" {
     if var.azad_kube_proxy_config.enabled
   }
 
-  application_object_id = azuread_application.azad_kube_proxy.object_id
+  application_object_id = azuread_application.azad_kube_proxy["azad-kube-proxy"].object_id
   authorized_app_id     = "04b07795-8ddb-461a-bbee-02f9e1bf7b46" # Azure CLI
-  permission_ids        = azuread_application.azad_kube_proxy.oauth2_permission_scope_ids
+  permission_ids        = azuread_application.azad_kube_proxy["azad-kube-proxy"].oauth2_permission_scope_ids
 }

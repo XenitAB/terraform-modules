@@ -62,8 +62,8 @@ resource "azuread_service_principal" "azad_kube_proxy" {
   application_id = azuread_application.azad_kube_proxy.application_id
 }
 
-resource "azuread_service_principal_delegated_permission_grant" "azad_kube_proxy" {
-  service_principal_object_id          = azuread_service_principal.azad_kube_proxy.object_id
-  resource_service_principal_object_id = azuread_service_principal.msgraph.object_id
-  claim_values                         = ["Directory.Read.All"]
+resource "azuread_app_role_assignment" "azad_kube_proxy_msgraph_directory_read_all" {
+  app_role_id         = azuread_service_principal.msgraph.app_role_ids["Directory.Read.All"]
+  principal_object_id = azuread_service_principal.azad_kube_proxy.object_id
+  resource_object_id  = azuread_service_principal.msgraph.object_id
 }

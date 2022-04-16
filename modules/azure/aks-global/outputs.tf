@@ -94,3 +94,15 @@ output "aks_managed_identity_group_id" {
   description = "The group id of aks managed identity"
   value       = azuread_group.aks_managed_identity.id
 }
+
+output "azad_kube_proxy" {
+  description = "The Azure AD Application config for azad-kube-proxy"
+  value = {
+    azure_ad_app = {
+      client_id     = azuread_application.azad_kube_proxy["azad-kube-proxy"].application_id
+      client_secret = azuread_application_password.azad_kube_proxy["azad-kube-proxy"].value
+      tenant_id     = data.azurerm_client_config.current.tenant_id
+    }
+  }
+  sensitive = true
+}

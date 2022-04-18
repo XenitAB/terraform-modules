@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#635](https://github.com/XenitAB/terraform-modules/pull/635) Upgrade azurerm provider to v3.1.0.
+- [#637](https://github.com/XenitAB/terraform-modules/pull/637) [Breaking] Add tenant namespace default deny network policy by default.
 
 ### Removed
 

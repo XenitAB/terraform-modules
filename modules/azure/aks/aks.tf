@@ -68,7 +68,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     node_labels = var.aks_config.default_node_pool.node_labels
 
     kubelet_config {
-      pod_max_pid = 5000
+      pod_max_pid = 0
     }
   }
 }

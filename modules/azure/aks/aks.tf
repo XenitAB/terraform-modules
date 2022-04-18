@@ -66,6 +66,10 @@ resource "azurerm_kubernetes_cluster" "this" {
     vm_size = "Standard_D2as_v4"
 
     node_labels = var.aks_config.default_node_pool.node_labels
+
+    kubelet_config {
+      pod_max_pid = 5000
+    }
   }
 }
 
@@ -102,4 +106,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
 
   node_taints = each.value.spot_enabled ? concat(each.value.node_taints, ["kubernetes.azure.com/scalesetpriority=spot:NoSchedule"]) : each.value.node_taints
   node_labels = each.value.spot_enabled ? merge(each.value.node_labels, { "node-pool" = each.value.name, "kubernetes.azure.com/scalesetpriority" = "spot" }) : merge(each.value.node_labels, { "node-pool" = each.value.name })
+
+  kubelet_config {
+    pod_max_pid = 5000
+  }
 }

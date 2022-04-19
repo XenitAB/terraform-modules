@@ -27,6 +27,11 @@ config:
 
 priorityClassName: "platform-high"
 
+# Tolerate everything
+tolerations:
+  - operator: Exists
+    effect: NoSchedule
+
 resources:
   limits:
     memory: 200Mi

@@ -15,7 +15,7 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "2.99.0"
+      version = "3.1.0"
       source  = "hashicorp/azurerm"
     }
     tls = {
@@ -129,6 +129,6 @@ resource "azurerm_key_vault_access_policy" "this" {
   object_id = azurerm_linux_virtual_machine_scale_set.this.identity[0].principal_id
 
   secret_permissions = [
-    "get",
+    "Get",
   ]
 }

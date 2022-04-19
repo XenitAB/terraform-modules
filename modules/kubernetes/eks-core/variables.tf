@@ -54,7 +54,7 @@ variable "aad_groups" {
 variable "kubernetes_network_policy_default_deny" {
   description = "If network policies should by default deny cross namespace traffic"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "kubernetes_default_limit_range" {
@@ -248,6 +248,11 @@ variable "promtail_config" {
     loki_address        = string
     excluded_namespaces = list(string)
   })
+  default = {
+    role_arn            = ""
+    loki_address        = ""
+    excluded_namespaces = []
+  }
 }
 
 variable "prometheus_enabled" {

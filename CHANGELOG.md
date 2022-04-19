@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#635](https://github.com/XenitAB/terraform-modules/pull/635) Upgrade azurerm provider to v3.1.0.
+- [#637](https://github.com/XenitAB/terraform-modules/pull/637) [Breaking] Add tenant namespace default deny network policy by default.
+- [#638](https://github.com/XenitAB/terraform-modules/pull/638) Set default empty config for `promtail_config` in `aks-core` and `eks-core`
+
+### Removed
+
+- [#633](https://github.com/XenitAB/terraform-modules/pull/633) Remove deperecated modules xenit, loki, and new-relic.
+
+## 2022.04.1
+
 ### Added
 
 - [#624](https://github.com/XenitAB/terraform-modules/pull/624) Add Promtail for platform logs in Azure.

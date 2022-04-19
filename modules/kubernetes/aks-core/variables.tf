@@ -61,7 +61,7 @@ variable "namespaces" {
 variable "kubernetes_network_policy_default_deny" {
   description = "If network policies should by default deny cross namespace traffic"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "kubernetes_default_limit_range" {
@@ -415,6 +415,16 @@ variable "promtail_config" {
     loki_address        = string
     excluded_namespaces = list(string)
   })
+  default = {
+    azure_key_vault_name = ""
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
+    loki_address        = ""
+    excluded_namespaces = []
+  }
 }
 
 variable "ingress_healthz_enabled" {

@@ -9,7 +9,7 @@ config:
     pipelineStages:
       - cri: {}
       - static_labels:
-          tenant: "${tenant_id}"
+          tenant_id: "${tenant_id}"
           environment: "${environment}"
           cluster: "${cluster_name}"
 

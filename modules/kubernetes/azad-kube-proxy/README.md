@@ -1,61 +1,22 @@
 # Azure AD Kubernetes API Proxy
 Adds [`azad-kube-proxy`](https://github.com/XenitAB/azad-kube-proxy) to a Kubernetes clusters.
 
-## Configuring Azure AD Applications
+# Terraform example (aks-core)
 
-### Azure AD App: azad-kube-proxy
-
-```shell
-ENVIRONMENT="dev"
-TENANT_ID=$(az account show --output tsv --query tenantId)
-AZ_APP_NAME="aks-${ENVIRONMENT}"
-AZ_APP_URI="https://aks.${ENVIRONMENT}.example.com"
-AZ_APP_ID=$(az ad app create --display-name ${AZ_APP_NAME} --identifier-uris ${AZ_APP_URI} --query appId -o tsv)
-AZ_APP_OBJECT_ID=$(az ad app show --id ${AZ_APP_ID} --output tsv --query objectId)
-AZ_APP_PERMISSION_ID=$(az ad app show --id ${AZ_APP_ID} --output tsv --query "oauth2Permissions[0].id")
-az rest --method PATCH --uri "https://graph.microsoft.com/beta/applications/${AZ_APP_OBJECT_ID}" --body '{"api":{"requestedAccessTokenVersion": 2}}'
-# Add Azure CLI as allowed client
-az rest --method PATCH --uri "https://graph.microsoft.com/beta/applications/${AZ_APP_OBJECT_ID}" --body "{\"api\":{\"preAuthorizedApplications\":[{\"appId\":\"04b07795-8ddb-461a-bbee-02f9e1bf7b46\",\"permissionIds\":[\"${AZ_APP_PERMISSION_ID}\"]}]}}"
-# This tag will enable discovery using kubectl azad-proxy discover
-az rest --method PATCH --uri "https://graph.microsoft.com/beta/applications/${AZ_APP_OBJECT_ID}" --body '{"tags":["azad-kube-proxy"]}'
-AZ_APP_SECRET=$(az ad sp credential reset --name ${AZ_APP_ID} --credential-description "azad-kube-proxy" --output tsv --query password)
-az ad app permission add --id ${AZ_APP_ID} --api 00000003-0000-0000-c000-000000000000 --api-permissions 7ab1d382-f21e-4acd-a863-ba3e13f7da61=Role
-az ad app permission admin-consent --id ${AZ_APP_ID}
-```
-
-### Azure KeyVault
-
-```shell
-JSON_FMT='{"client_id":"%s","client_secret":"%s","tenant_id":"%s"}'
-KV_SECRET=$(printf "${JSON_FMT}" "${AZ_APP_ID}" "${AZ_APP_SECRET}" "${TENANT_ID}")
-az keyvault secret set --vault-name <keyvault name> --name azad-kube-proxy --value "${KV_SECRET}"
-```
-
-## Terraform example (aks-core)
-
-```terraform
-data "azurerm_key_vault_secret" "azad_kube_proxy" {
-  key_vault_id = data.azurerm_key_vault.core.id
-  name         = "azad-kube-proxy"
-}
-
-module "aks_core" {
+module "aks\_core" {
   source = "github.com/xenitab/terraform-modules//modules/kubernetes/aks-core?ref=[ref]"
 
   [...]
 
-  azad_kube_proxy_enabled = true
-  azad_kube_proxy_config = {
-    fqdn                  = "aks.${var.dns_zone}"
-    azure_ad_group_prefix = var.aks_group_name_prefix
-    allowed_ips           = var.aks_authorized_ips
-    azure_ad_app = {
-      client_id     = jsondecode(data.azurerm_key_vault_secret.azad_kube_proxy.value).client_id
-      client_secret = jsondecode(data.azurerm_key_vault_secret.azad_kube_proxy.value).client_secret
-      tenant_id     = jsondecode(data.azurerm_key_vault_secret.azad_kube_proxy.value).tenant_id
-    }
+  azad\_kube\_proxy\_enabled = true
+  azad\_kube\_proxy\_config = {
+    fqdn                  = "aks.${var.dns\_zone}"
+    azure\_ad\_group\_prefix = var.aks\_group\_name\_prefix
+    allowed\_ips           = var.aks\_authorized\_ips
+    azure\_ad\_app          = module.aks\_global.azad\_kube\_proxy.azure\_ad\_app
   }
 }
+```
 ```
 
 ## Requirements

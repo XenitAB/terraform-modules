@@ -394,7 +394,7 @@ module "datadog" {
   datadog_site      = var.datadog_config.datadog_site
   api_key           = var.datadog_config.api_key
   app_key           = var.datadog_config.app_key
-  namespace_include = compact(concat(var.namespaces[*].name, var.datadog_config.extra_namespaces))
+  namespace_include = var.datadog_config.namespaces
 }
 
 # vpa

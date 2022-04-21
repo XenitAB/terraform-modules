@@ -57,6 +57,7 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_azad_kube_proxy_config"></a> [azad\_kube\_proxy\_config](#input\_azad\_kube\_proxy\_config) | Azure AD Kubernetes Proxy configuration | <pre>object({<br>    cluster_name_prefix = string<br>    proxy_url_override  = string<br>  })</pre> | <pre>{<br>  "cluster_name_prefix": "eks",<br>  "proxy_url_override": ""<br>}</pre> | no |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
+| <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | List of DNS Zone to create | `list(string)` | n/a | yes |
 | <a name="input_eks_cloudwatch_retention_period"></a> [eks\_cloudwatch\_retention\_period](#input\_eks\_cloudwatch\_retention\_period) | eks cloudwatch retention period | `number` | `30` | no |
 | <a name="input_eks_group_name_prefix"></a> [eks\_group\_name\_prefix](#input\_eks\_group\_name\_prefix) | Prefix for EKS Azure AD groups | `string` | `"eks"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environemnt | `string` | n/a | yes |
@@ -72,6 +73,7 @@
 | Name | Description |
 |------|-------------|
 | <a name="output_aad_groups"></a> [aad\_groups](#output\_aad\_groups) | Azure AD groups |
+| <a name="output_azad_kube_proxy"></a> [azad\_kube\_proxy](#output\_azad\_kube\_proxy) | The Azure AD Application config for azad-kube-proxy |
 | <a name="output_cluster_role_arn"></a> [cluster\_role\_arn](#output\_cluster\_role\_arn) | EKS cluster IAM role |
 | <a name="output_eks_admin_role_arn"></a> [eks\_admin\_role\_arn](#output\_eks\_admin\_role\_arn) | ARN for IAM role that should be used to create an EKS cluster |
 | <a name="output_eks_encryption_key_arn"></a> [eks\_encryption\_key\_arn](#output\_eks\_encryption\_key\_arn) | KMS key to be used for EKS secret encryption |

@@ -58,6 +58,11 @@ variable "eks_cloudwatch_retention_period" {
   default     = 30
 }
 
+variable "dns_zone" {
+  description = "List of DNS Zone to create"
+  type        = list(string)
+}
+
 variable "azad_kube_proxy_config" {
   description = "Azure AD Kubernetes Proxy configuration"
   type = object({

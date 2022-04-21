@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#638](https://github.com/XenitAB/terraform-modules/pull/638) Set default empty config for `promtail_config` in `aks-core` and `eks-core`
 - [#642](https://github.com/XenitAB/terraform-modules/pull/642) Add toleration for Promtail to make it run on all nodes.
 - [#643](https://github.com/XenitAB/terraform-modules/pull/643) Change tenant label name for Promtail.
+- [#644](https://github.com/XenitAB/terraform-modules/pull/644) Update OPA Gatekeeper Library to v0.12.0.
 
 ### Removed
 

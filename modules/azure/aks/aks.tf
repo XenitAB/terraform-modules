@@ -1,18 +1,12 @@
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
-  lifecycle {
-    ignore_changes = [
-      default_node_pool[0].node_count
-    ]
-  }
-
   name                            = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
   location                        = data.azurerm_resource_group.this.location
   resource_group_name             = data.azurerm_resource_group.this.name
   dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
-  kubernetes_version              = var.aks_config.kubernetes_version
-  sku_tier                        = var.aks_config.sku_tier
+  kubernetes_version              = var.aks_config.version
+  sku_tier                        = var.aks_config.production_grade ? "Paid" : "Free"
   api_server_authorized_ip_ranges = var.aks_authorized_ips
 
   auto_scaler_profile {
@@ -53,30 +47,21 @@ resource "azurerm_kubernetes_cluster" "this" {
   default_node_pool {
     name           = "default"
     vnet_subnet_id = data.azurerm_subnet.this.id
+    zones          = ["1", "2", "3"]
 
-    type                         = "VirtualMachineScaleSets"
-    zones                        = ["1", "2", "3"]
-    enable_auto_scaling          = false
-    only_critical_addons_enabled = true
-
-    orchestrator_version = var.aks_config.default_node_pool.orchestrator_version
-    node_count           = 1
+    orchestrator_version = var.aks_config.version
     # This is a bug in tflint
     # tflint-ignore: azurerm_kubernetes_cluster_default_node_pool_invalid_vm_size
-    vm_size = "Standard_D2as_v4"
-
-    node_labels = var.aks_config.default_node_pool.node_labels
+    vm_size                      = var.aks_default_node_pool_vm_size
+    os_disk_type                 = "Ephemeral"
+    os_disk_size_gb              = local.vm_skus_disk_size_gb[var.aks_default_node_pool_vm_size]
+    enable_auto_scaling          = false
+    node_count                   = var.aks_config.production_grade ? 2 : 1
+    only_critical_addons_enabled = true
   }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "this" {
-  lifecycle {
-    create_before_destroy = true
-    ignore_changes = [
-      node_count
-    ]
-  }
-
   for_each = {
     for nodePool in var.aks_config.additional_node_pools :
     nodePool.name => nodePool
@@ -85,15 +70,13 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   name                  = each.value.name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
   vnet_subnet_id        = data.azurerm_subnet.this.id
+  zones                 = ["1", "2", "3"]
 
-  zones               = ["1", "2", "3"]
-  enable_auto_scaling = true
-
-  os_disk_type         = each.value.os_disk_type
-  os_disk_size_gb      = each.value.os_disk_size_gb
-  orchestrator_version = each.value.orchestrator_version
+  enable_auto_scaling  = true
+  os_disk_type         = "Ephemeral"
+  os_disk_size_gb      = local.vm_skus_disk_size_gb[each.value.vm_size]
+  orchestrator_version = each.value.version
   vm_size              = each.value.vm_size
-  node_count           = each.value.min_count
   min_count            = each.value.min_count
   max_count            = each.value.max_count
   eviction_policy      = each.value.spot_enabled ? "Delete" : null
@@ -102,4 +85,65 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
 
   node_taints = each.value.spot_enabled ? concat(each.value.node_taints, ["kubernetes.azure.com/scalesetpriority=spot:NoSchedule"]) : each.value.node_taints
   node_labels = each.value.spot_enabled ? merge(each.value.node_labels, { "node-pool" = each.value.name, "kubernetes.azure.com/scalesetpriority" = "spot" }) : merge(each.value.node_labels, { "node-pool" = each.value.name })
+
+  upgrade_settings {
+    max_surge = "33%"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# Replace this with a datasource when availible in the AzureRM provider.
+locals {
+  vm_skus_disk_size_gb = {
+    "Standard_D2ds_v5"  = 75
+    "Standard_D4ds_v5"  = 150
+    "Standard_D8ds_v5"  = 300
+    "Standard_D16ds_v5" = 600
+    "Standard_D32ds_v5" = 1200
+    "Standard_D48ds_v5" = 1800
+    "Standard_D64ds_v5" = 2400
+    "Standard_D96ds_v5" = 3600
+
+    "Standard_D2ads_v5"  = 75
+    "Standard_D4ads_v5"  = 150
+    "Standard_D8ads_v5"  = 300
+    "Standard_D16ads_v5" = 600
+    "Standard_D32ads_v5" = 1200
+    "Standard_D48ads_v5" = 1800
+    "Standard_D64ads_v5" = 2400
+    "Standard_D96ads_v5" = 3600
+
+    "Standard_E2ds_v5"   = 75
+    "Standard_E4ds_v5"   = 150
+    "Standard_E8ds_v5"   = 300
+    "Standard_E16ds_v5"  = 600
+    "Standard_E20ds_v5"  = 750
+    "Standard_E32ds_v5"  = 1200
+    "Standard_E48ds_v5"  = 1800
+    "Standard_E64ds_v5"  = 2400
+    "Standard_E96ds_v5"  = 3600
+    "Standard_E104ds_v5" = 3800
+
+    "Standard_E2ads_v5"  = 75
+    "Standard_E4ads_v5"  = 150
+    "Standard_E8ads_v5"  = 300
+    "Standard_E16ads_v5" = 600
+    "Standard_E20ads_v5" = 750
+    "Standard_E32ads_v5" = 1200
+    "Standard_E48ads_v5" = 1800
+    "Standard_E64ads_v5" = 2400
+    "Standard_E96ads_v5" = 3600
+
+    "Standard_F2s_v2"  = 32
+    "Standard_F4s_v2"  = 64
+    "Standard_F8s_v2"  = 128
+    "Standard_F16s_v2" = 256
+    "Standard_F32s_v2" = 512
+    "Standard_F48s_v2" = 768
+    "Standard_F64s_v2" = 1024
+    "Standard_F72s_v2" = 1520
+  }
 }

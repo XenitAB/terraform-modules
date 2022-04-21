@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.04.2
+
 ### Added
 
 - [#639](https://github.com/XenitAB/terraform-modules/pull/639) Create Azure AD Application for azad-kube-proxy using aks-global

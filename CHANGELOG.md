@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#648](https://github.com/XenitAB/terraform-modules/pull/648) [Breaking] Make it possible to exclude namespaces from Datadog
 
+### Added
+
+- [#646](https://github.com/XenitAB/terraform-modules/pull/646) [Breaking] Create Azure AD Application for azad-kube-proxy using eks-global
+
 ## 2022.04.2
 
 ### Added

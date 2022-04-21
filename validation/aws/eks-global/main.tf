@@ -19,4 +19,6 @@ module "eks-global" {
       name                    = "team1"
     }
   ]
+
+  dns_zone = ["foo", "bar"]
 }

@@ -57,3 +57,15 @@ variable "eks_cloudwatch_retention_period" {
   type        = number
   default     = 30
 }
+
+variable "azad_kube_proxy_config" {
+  description = "Azure AD Kubernetes Proxy configuration"
+  type = object({
+    cluster_name_prefix = string
+    proxy_url_override  = string
+  })
+  default = {
+    cluster_name_prefix = "eks"
+    proxy_url_override  = ""
+  }
+}

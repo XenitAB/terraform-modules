@@ -326,6 +326,7 @@ module "prometheus" {
   azad_kube_proxy_enabled                = var.azad_kube_proxy_enabled
   starboard_enabled                      = var.starboard_enabled
   vpa_enabled                            = var.vpa_enabled
+  promtail_enabled                       = var.promtail_enabled
 }
 
 # starboard

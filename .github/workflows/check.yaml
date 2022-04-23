@@ -9,7 +9,7 @@ jobs:
       - name: Setup TFLint
         uses: lablabs/setup-tflint@v1.1.0
         with:
-          tflint_version: v0.34.1
+          tflint_version: v0.35.0
       - name: Run lint
         run: |
           make lint
@@ -71,8 +71,8 @@ jobs:
         uses: actions/checkout@master
       - name: Setup tfsec
         env:
-          TFSEC_VERSION: "v1.8.0"
-          TFSEC_SHA: "6f0ffcc204a73991fb2b47561bbdf473e98a9566036c0f36b95d9574fd5ab4ce"
+          TFSEC_VERSION: "v1.18.0"
+          TFSEC_SHA: "15bc4bec72b8e7bffa283fc1be4c55f6fc35eaa4a09d49126f58d9be6f4bb9ad"
         run: |
           wget https://github.com/tfsec/tfsec/releases/download/${TFSEC_VERSION}/tfsec-linux-amd64
           DOWNLOAD_TFSEC_SHA=$(openssl sha1 -sha256 tfsec-linux-amd64 | awk '{print $2}')

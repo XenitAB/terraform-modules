@@ -23,7 +23,7 @@ module "aks" {
   aks_managed_identity_group_id = "1337"
 
   aks_config = {
-    version          = "1.18.8"
+    version          = "1.21.9"
     production_grade = false
     default_node_pool = {
       node_labels = {
@@ -33,7 +33,7 @@ module "aks" {
     node_pools = [
       {
         name      = "pool1"
-        version   = "1.18.8"
+        version   = "1.21.9"
         vm_size   = "Standard_B2s"
         min_count = 1
         max_count = 1

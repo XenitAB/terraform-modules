@@ -42,6 +42,20 @@ variable "eks_config" {
       max_size       = number
     }))
   })
+
+  validation {
+    condition = alltrue([
+      for np in concat(var.eks_config.node_pools, [{ version : var.eks_config.version }]) : can(regex("^1.(20|21|22)", np.version))
+    ])
+    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.20, 1.21, 1.22."
+  }
+
+  validation {
+    condition = alltrue([
+      for np in var.eks_config.node_pools : split(".", np.version)[1] <= split(".", var.eks_config.version)[1] && split(".", split("-", np.version)[0])[2] <= split(".", var.eks_config.version)[2]
+    ])
+    error_message = "The node Kubernetes version should not be newer than the cluster version, upgrade the cluster first."
+  }
 }
 
 variable "cluster_role_arn" {

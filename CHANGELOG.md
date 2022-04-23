@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#651](https://github.com/XenitAB/terraform-modules/pull/651) OPA add seccomp profile and disable default mount of SA token.
 - [#645](https://github.com/XenitAB/terraform-modules/pull/645) [Breaking] Refactor AKS node configuration with default values.
 - [#659](https://github.com/XenitAB/terraform-modules/pull/659) [Breaking] Bring AKS and EKS config inline with each other.
+- [#653](https://github.com/XenitAB/terraform-modules/pull/653) Add validation of Kubernetes version in EKS and AKS.
 
 ### Fix
 

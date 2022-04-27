@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#651](https://github.com/XenitAB/terraform-modules/pull/651) OPA add seccomp profile and disable default mount of SA token.
+
 ### Fix
 
 - [#658](https://github.com/XenitAB/terraform-modules/pull/658) Remove 'use-forwarded-headers: "true"' from ingress-nginx

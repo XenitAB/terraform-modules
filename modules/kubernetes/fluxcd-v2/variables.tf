@@ -8,6 +8,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Fix code
 variable "environment" {
   description = "Environment name of the cluster"
   type        = string
@@ -30,6 +33,9 @@ variable "credentials" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Fix code
     })
     github = object({
       org             = string
@@ -48,6 +54,7 @@ variable "fleet_infra" {
     proj = string
     repo = string
   })
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> fe36c7a... Add initial config
@@ -57,6 +64,9 @@ variable "fleet_infra" {
 >>>>>>> Add initial config
 =======
 >>>>>>> Add initial config
+=======
+}
+>>>>>>> Fix code
 variable "azure_devops_pat" {
   description = "PAT to authenticate with Azure DevOps"
   type        = string
@@ -79,24 +89,22 @@ variable "azure_devops_proj" {
 variable "github_org" {
   description = "Org of GitHub repositories"
   type        = string
-  default     = "null"
 }
 
 variable "github_app_id" {
   description = "ID of GitHub Application used by Git Auth Proxy"
   type        = number
-  default     = "null"
 }
 
 variable "github_installation_id" {
   description = "Installation ID of GitHub Application used by Git Auth Proxy"
   type        = number
-  default     = "null"
 }
 
 variable "github_private_key" {
   description = "Private Key for GitHub Application used by Git Auth Proxy"
   type        = string
+<<<<<<< HEAD
   default     = "null"
 }
 
@@ -289,6 +297,10 @@ variable "fleet_infra" {
     repo = string
   })
 }
+=======
+}
+
+>>>>>>> Fix code
 
 variable "namespaces" {
   description = "The namespaces to configure flux with"
@@ -304,6 +316,9 @@ variable "namespaces" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Fix code
       name        = string
       create_crds = bool
       org         = string
@@ -312,6 +327,7 @@ variable "namespaces" {
     })
   )
 }
+<<<<<<< HEAD
 =======
       name = string
 =======
@@ -378,6 +394,8 @@ variable "namespaces" {
 >>>>>>> Add initial config
 }
 
+=======
+>>>>>>> Fix code
 variable "cluster_repo" {
   description = "Name of cluster repository"
   type        = string
@@ -389,6 +407,7 @@ variable "branch" {
   type        = string
   default     = "main"
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -417,3 +436,5 @@ variable "branch" {
 =======
 }
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+>>>>>>> Fix code

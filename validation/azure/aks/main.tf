@@ -23,34 +23,28 @@ module "aks" {
   aks_managed_identity_group_id = "1337"
 
   aks_config = {
-    kubernetes_version = "1.18.8"
-    sku_tier           = "Standard"
+    version          = "1.18.8"
+    production_grade = false
     default_node_pool = {
-      orchestrator_version = "1.18.8"
-      vm_size              = "Standard_B2s"
-      min_count            = 1
-      max_count            = 1
       node_labels = {
         "test" = "test"
       }
     }
     additional_node_pools = [
       {
-        name                 = "node-pool"
-        orchestrator_version = "1.18.8"
-        vm_size              = "Standard_B2s"
-        min_count            = 1
-        max_count            = 1
+        name      = "pool1"
+        version   = "1.18.8"
+        vm_size   = "Standard_B2s"
+        min_count = 1
+        max_count = 1
         node_taints = [
           "test"
         ]
         node_labels = {
           "test" = "test"
         }
-        os_disk_type    = "Ephemeral"
-        os_disk_size_gb = 128
-        spot_enabled    = false
-        spot_max_price  = null
+        spot_enabled   = false
+        spot_max_price = null
       }
     ]
   }

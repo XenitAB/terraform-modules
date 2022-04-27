@@ -4,6 +4,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
+>>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
 variable "environment" {
   description = "Environment name of the cluster"
   type        = string
@@ -24,6 +29,9 @@ variable "credentials" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
     })
     github = object({
       org             = string
@@ -124,6 +132,8 @@ variable "credentials" {
       pat  = string
 =======
 >>>>>>> make fmt & docs
+=======
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
     })
     github = object({
       org             = string
@@ -216,6 +226,9 @@ variable "namespaces" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
       name        = string
       create_crds = bool
       org         = string
@@ -231,6 +244,7 @@ variable "namespaces" {
 >>>>>>> make fmt & docs
 =======
       name        = string
+<<<<<<< HEAD
 >>>>>>> a69675f... make fmt & docs
 =======
       name        = string
@@ -244,12 +258,16 @@ variable "namespaces" {
 <<<<<<< HEAD
 =======
       name = string
+=======
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
+>>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
       create_crds = bool
       org         = string
       proj        = string
       repo        = string
     })
   )
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> fe36c7a... Add initial config
 =======
@@ -262,6 +280,9 @@ variable "namespaces" {
   )
 <<<<<<< HEAD
 >>>>>>> d074599... Add initial config
+=======
+<<<<<<< HEAD
+>>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
 }
 
 variable "cluster_repo" {
@@ -282,6 +303,7 @@ variable "branch" {
 }
 >>>>>>> Initial change of config to use one module - fluxcd-v2
 =======
+<<<<<<< HEAD
 >>>>>>> fe36c7a... Add initial config
 =======
 }
@@ -291,3 +313,7 @@ variable "branch" {
 =======
 }
 >>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
+=======
+}
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
+>>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7

@@ -103,6 +103,11 @@ module "fluxcd_v2" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
+>>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
   environment = var.environment
   cluster_id  = "${var.location_short}-${var.environment}-${var.name}-${var.aks_name_suffix}"
   credentials = var.fluxcd_v2_config.credentials
@@ -118,6 +123,7 @@ module "fluxcd_v2" {
     org         = ns.flux.org
     proj        = ns.flux.proj
     repo        = ns.flux.repo
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   environment       = var.environment
@@ -150,6 +156,7 @@ module "fluxcd_v2" {
   }
 >>>>>>> Fix for loop
 =======
+<<<<<<< HEAD
 =======
   environment = var.environment
   cluster_id  = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
@@ -199,6 +206,11 @@ module "fluxcd_v2" {
 
   }
 >>>>>>> 43b269c... Fix for loop
+=======
+
+  }
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
+>>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
 }
 
 # AAD-Pod-Identity

@@ -17,7 +17,11 @@ the bootstrap configuration.
 
 | Name | Version |
 |------|---------|
+<<<<<<< HEAD
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
+=======
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 0.15.3 |
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
 | <a name="requirement_azuredevops"></a> [azuredevops](#requirement\_azuredevops) | 0.5.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.5.1 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 4.17.0 |
@@ -76,11 +80,17 @@ No modules.
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
+>>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_credentials"></a> [credentials](#input\_credentials) | List of credentials for Git Providers. | <pre>list(object({<br>    type = string # azuredevops or github<br>    azure_devops = object({<br>      org = string<br>      pat = string<br>    })<br>    github = object({<br>      org             = string<br>      app_id          = number<br>      installation_id = number<br>      private_key     = string<br>    })<br>  }))</pre> | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name of the cluster | `string` | n/a | yes |
 | <a name="input_fleet_infra"></a> [fleet\_infra](#input\_fleet\_infra) | Configuration for Flux bootstrap repository. | <pre>object({<br>    type = string<br>    org  = string<br>    proj = string<br>    repo = string<br>  })</pre> | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name        = string<br>      create_crds = bool<br>      org         = string<br>      proj        = string<br>      repo        = string<br>    })<br>  )</pre> | n/a | yes |
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> fe36c7a... Add initial config
@@ -127,6 +137,7 @@ No modules.
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name        = string<br>      create_crds = bool<br>      org         = string<br>      proj        = string<br>      repo        = string<br>    })<br>  )</pre> | n/a | yes |
 >>>>>>> make fmt & docs
 =======
+<<<<<<< HEAD
 >>>>>>> fe36c7a... Add initial config
 =======
 | <a name="input_fleet_infra"></a> [fleet\_infra](#input\_fleet\_infra) | Configuration for Flux bootstrap repository. | <pre>object({<br>    type = string<br>    org  = string<br>    proj = string<br>    repo = string<br>  })</pre> | n/a | yes |
@@ -138,6 +149,9 @@ No modules.
 | <a name="input_fleet_infra"></a> [fleet\_infra](#input\_fleet\_infra) | Configuration for Flux bootstrap repository. | <pre>object({<br>    type = string<br>    org  = string<br>    proj = string<br>    repo = string<br>  })</pre> | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name        = string<br>      create_crds = bool<br>      org         = string<br>      proj        = string<br>      repo        = string<br>    })<br>  )</pre> | n/a | yes |
 >>>>>>> f8311b7... make fmt & docs
+=======
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
+>>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
 
 ## Outputs
 

@@ -137,7 +137,6 @@ variable "fluxcd_v2_config" {
   description = "Configuration for fluxcd-v2"
 
   # Credentials to be passed to Git Auth Proxy
-  credentials = list(object({
     type = string # azuredevops or github
     azure_devops = object({
 <<<<<<< HEAD
@@ -159,10 +158,8 @@ variable "fluxcd_v2_config" {
       installation_id = number
       private_key     = string
     })
-  }))
 
   # Flux Bootstrap Repository
-  fleet_infra = object({
     type = string # azuredevops or github
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -175,7 +172,6 @@ variable "fluxcd_v2_config" {
 >>>>>>> make fmt & docs
     proj = string
     repo = string
-  })
 }
 
 variable "aad_pod_identity_enabled" {

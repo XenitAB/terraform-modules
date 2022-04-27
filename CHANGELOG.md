@@ -6,11 +6,39 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Fix
+
+- [#658](https://github.com/XenitAB/terraform-modules/pull/658) Remove 'use-forwarded-headers: "true"' from ingress-nginx
+
+## 2022.04.3
+
+### Changed
+
+- [#648](https://github.com/XenitAB/terraform-modules/pull/648) [Breaking] Make it possible to exclude namespaces from Datadog
+- [#656](https://github.com/XenitAB/terraform-modules/pull/656) Update Ingress Nginx version to mitigate security disclosure.
+
+### Fix
+
+- [#650](https://github.com/XenitAB/terraform-modules/pull/650) Make it possible to enable Promtail metrics in eks-core
+
+### Added
+
+- [#647](https://github.com/XenitAB/terraform-modules/pull/647) [Breaking] Create Azure AD Application for azad-kube-proxy using eks-global.
+
+## 2022.04.2
+
+### Added
+
+- [#639](https://github.com/XenitAB/terraform-modules/pull/639) Create Azure AD Application for azad-kube-proxy using aks-global
+
 ### Changed
 
 - [#635](https://github.com/XenitAB/terraform-modules/pull/635) Upgrade azurerm provider to v3.1.0.
 - [#637](https://github.com/XenitAB/terraform-modules/pull/637) [Breaking] Add tenant namespace default deny network policy by default.
 - [#638](https://github.com/XenitAB/terraform-modules/pull/638) Set default empty config for `promtail_config` in `aks-core` and `eks-core`
+- [#642](https://github.com/XenitAB/terraform-modules/pull/642) Add toleration for Promtail to make it run on all nodes.
+- [#643](https://github.com/XenitAB/terraform-modules/pull/643) Change tenant label name for Promtail.
+- [#644](https://github.com/XenitAB/terraform-modules/pull/644) Update OPA Gatekeeper Library to v0.12.0.
 
 ### Removed
 

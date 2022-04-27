@@ -9,7 +9,7 @@ config:
     pipelineStages:
       - cri: {}
       - static_labels:
-          tenant: "${tenant_id}"
+          tenant_id: "${tenant_id}"
           environment: "${environment}"
           cluster: "${cluster_name}"
 
@@ -26,6 +26,11 @@ config:
       %{~ endfor ~}
 
 priorityClassName: "platform-high"
+
+# Tolerate everything
+tolerations:
+  - operator: Exists
+    effect: NoSchedule
 
 resources:
   limits:

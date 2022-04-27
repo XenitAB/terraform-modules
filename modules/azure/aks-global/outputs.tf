@@ -94,3 +94,11 @@ output "aks_managed_identity_group_id" {
   description = "The group id of aks managed identity"
   value       = azuread_group.aks_managed_identity.id
 }
+
+output "azad_kube_proxy" {
+  description = "The Azure AD Application config for azad-kube-proxy"
+  value = {
+    azure_ad_app = module.azad_kube_proxy.data
+  }
+  sensitive = true
+}

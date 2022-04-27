@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#651](https://github.com/XenitAB/terraform-modules/pull/651) OPA add seccomp profile and disable default mount of SA token.
+- [#645](https://github.com/XenitAB/terraform-modules/pull/645) [Breaking] Refactor AKS node configuration with default values.
+- [#659](https://github.com/XenitAB/terraform-modules/pull/659) [Breaking] Bring AKS and EKS config inline with each other.
 
 ### Fix
 
@@ -20,7 +22,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#648](https://github.com/XenitAB/terraform-modules/pull/648) [Breaking] Make it possible to exclude namespaces from Datadog
 - [#656](https://github.com/XenitAB/terraform-modules/pull/656) Update Ingress Nginx version to mitigate security disclosure.
-- [#645](https://github.com/XenitAB/terraform-modules/pull/645) [Breaking] Refactor AKS node configuration with default values.
 
 ### Fix
 

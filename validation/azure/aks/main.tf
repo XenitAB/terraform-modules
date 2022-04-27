@@ -30,7 +30,7 @@ module "aks" {
         "test" = "test"
       }
     }
-    additional_node_pools = [
+    node_pools = [
       {
         name      = "pool1"
         version   = "1.18.8"

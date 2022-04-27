@@ -47,61 +47,10 @@ variable "namespaces" {
       flux = object({
         enabled     = bool
         create_crds = bool
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> make fmt & docs
-=======
->>>>>>> a69675f... make fmt & docs
-=======
->>>>>>> f8311b7... make fmt & docs
-=======
-=======
->>>>>>> make fmt & docs
-=======
->>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
->>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
         type        = string # azuredevops or github
         org         = string
         proj        = string # only used for azuredevops
         repo        = string
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
-=======
->>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
-        type = string # azuredevops or github
-        org = string
-        proj = string # only used for azuredevops
-        repo = string
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> make fmt & docs
-=======
-<<<<<<< HEAD
->>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> a69675f... make fmt & docs
-=======
->>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> f8311b7... make fmt & docs
-=======
->>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
->>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
       })
     })
   )
@@ -112,7 +61,7 @@ variable "namespaces" {
 variable "kubernetes_network_policy_default_deny" {
   description = "If network policies should by default deny cross namespace traffic"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "kubernetes_default_limit_range" {
@@ -175,50 +124,11 @@ variable "fluxcd_v2_config" {
   description = "Configuration for fluxcd-v2"
 
   # Credentials to be passed to Git Auth Proxy
-<<<<<<< HEAD
-    type = string # azuredevops or github
-    azure_devops = object({
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      org = string
-      pat = string
-=======
-      org  = string
-      pat  = string
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
-      org = string
-      pat = string
->>>>>>> make fmt & docs
-=======
-<<<<<<< HEAD
-      org  = string
-      pat  = string
->>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
-=======
-      org = string
-      pat = string
->>>>>>> a69675f... make fmt & docs
-=======
-      org  = string
-      pat  = string
->>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
-=======
-      org = string
-      pat = string
->>>>>>> f8311b7... make fmt & docs
-=======
   credentials = list(object({
     type = string # azuredevops or github
     azure_devops = object({
       org = string
       pat = string
->>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
->>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
     })
     github = object({
       org             = string
@@ -226,38 +136,6 @@ variable "fluxcd_v2_config" {
       installation_id = number
       private_key     = string
     })
-<<<<<<< HEAD
-
-  # Flux Bootstrap Repository
-    type = string # azuredevops or github
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    org  = string
-=======
-    org = string
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
-    org  = string
->>>>>>> make fmt & docs
-=======
-    org = string
->>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
-=======
-    org  = string
->>>>>>> a69675f... make fmt & docs
-=======
-    org = string
->>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
-=======
-    org  = string
->>>>>>> f8311b7... make fmt & docs
-    proj = string
-    repo = string
-=======
   }))
 
   # Flux Bootstrap Repository
@@ -267,7 +145,6 @@ variable "fluxcd_v2_config" {
     proj = string
     repo = string
   })
->>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
 }
 
 variable "aad_pod_identity_enabled" {
@@ -320,10 +197,10 @@ variable "cert_manager_enabled" {
 }
 
 variable "cert_manager_config" {
-  description = "Cert Manager configuration, the first item in the list is the main domain"
+  description = "Cert Manager configuration"
   type = object({
     notification_email = string
-    dns_zone           = list(string)
+    dns_zone           = string
   })
 }
 
@@ -394,16 +271,16 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
-    datadog_site = string
-    api_key      = string
-    app_key      = string
-    namespaces   = list(string)
+    datadog_site     = string
+    api_key          = string
+    app_key          = string
+    extra_namespaces = list(string)
   })
   default = {
-    datadog_site = ""
-    api_key      = ""
-    app_key      = ""
-    namespaces   = [""]
+    datadog_site     = ""
+    api_key          = ""
+    app_key          = ""
+    extra_namespaces = [""]
   }
 }
 
@@ -430,7 +307,6 @@ variable "grafana_agent_config" {
       traces_username  = string
       traces_password  = string
     })
-    extra_namespaces = list(string)
   })
   default = {
     remote_write_urls = {
@@ -446,7 +322,6 @@ variable "grafana_agent_config" {
       traces_username  = ""
       traces_password  = ""
     }
-    extra_namespaces = ["ingress-nginx"]
   }
 }
 
@@ -513,41 +388,12 @@ variable "prometheus_config" {
     remote_write_authenticated = bool
     remote_write_url           = string
 
-    volume_claim_size = string
+    volume_claim_storage_class_name = string
+    volume_claim_size               = string
 
     resource_selector  = list(string)
     namespace_selector = list(string)
   })
-}
-
-variable "promtail_enabled" {
-  description = "Should promtail be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "promtail_config" {
-  description = "Configuration for promtail"
-  type = object({
-    azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-    loki_address        = string
-    excluded_namespaces = list(string)
-  })
-  default = {
-    azure_key_vault_name = ""
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
-    loki_address        = ""
-    excluded_namespaces = []
-  }
 }
 
 variable "ingress_healthz_enabled" {
@@ -568,12 +414,20 @@ variable "starboard_enabled" {
   default     = true
 }
 
-variable "starboard_config" {
-  description = "Configuration for starboard"
+variable "new_relic_enabled" {
+  description = "Should New Relic be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "new_relic_config" {
+  description = "Configuration for New Relic"
   type = object({
-    client_id   = string
-    resource_id = string
+    license_key = string
   })
+  default = {
+    license_key = ""
+  }
 }
 
 variable "azure_metrics_enabled" {

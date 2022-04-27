@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
->>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
 variable "environment" {
   description = "Environment name of the cluster"
   type        = string
@@ -26,12 +15,6 @@ variable "credentials" {
     azure_devops = object({
       org = string
       pat = string
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
     })
     github = object({
       org             = string
@@ -50,11 +33,7 @@ variable "fleet_infra" {
     proj = string
     repo = string
   })
-=======
-=======
->>>>>>> fe36c7a... Add initial config
-=======
->>>>>>> d074599... Add initial config
+}
 variable "azure_devops_pat" {
   description = "PAT to authenticate with Azure DevOps"
   type        = string
@@ -77,158 +56,28 @@ variable "azure_devops_proj" {
 variable "github_org" {
   description = "Org of GitHub repositories"
   type        = string
-  default     = "null"
 }
 
 variable "github_app_id" {
   description = "ID of GitHub Application used by Git Auth Proxy"
   type        = number
-  default     = "null"
 }
 
 variable "github_installation_id" {
   description = "Installation ID of GitHub Application used by Git Auth Proxy"
   type        = number
-  default     = "null"
 }
 
 variable "github_private_key" {
   description = "Private Key for GitHub Application used by Git Auth Proxy"
   type        = string
-  default     = "null"
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> fe36c7a... Add initial config
-=======
->>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> d074599... Add initial config
-=======
->>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
-variable "environment" {
-  description = "Environment name of the cluster"
-  type        = string
-}
-
-variable "cluster_id" {
-  description = "Unique identifier of the cluster across regions and instances."
-  type        = string
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Add initial config
-}
-
-variable "credentials" {
-  description = "List of credentials for Git Providers."
-  type = list(object({
-    type = string # azuredevops or github
-    azure_devops = object({
-      org  = string
-      pat  = string
-=======
->>>>>>> make fmt & docs
-=======
->>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
-    })
-    github = object({
-      org             = string
-      app_id          = number
-      installation_id = number
-      private_key     = string
-    })
-  }))
-}
-
-variable "fleet_infra" {
-  description = "Configuration for Flux bootstrap repository."
-  type = object({
-    type = string
-    org  = string
-    proj = string
-    repo = string
-  })
-=======
->>>>>>> fe36c7a... Add initial config
-}
-
-variable "credentials" {
-  description = "List of credentials for Git Providers."
-  type = list(object({
-    type = string # azuredevops or github
-    azure_devops = object({
-      org  = string
-      pat  = string
-=======
->>>>>>> a69675f... make fmt & docs
-    })
-    github = object({
-      org             = string
-      app_id          = number
-      installation_id = number
-      private_key     = string
-    })
-  }))
-}
-
-variable "fleet_infra" {
-  description = "Configuration for Flux bootstrap repository."
-  type = object({
-    type = string
-    org  = string
-    proj = string
-    repo = string
-  })
-=======
->>>>>>> d074599... Add initial config
-}
-
-variable "credentials" {
-  description = "List of credentials for Git Providers."
-  type = list(object({
-    type = string # azuredevops or github
-    azure_devops = object({
-      org  = string
-      pat  = string
-=======
->>>>>>> f8311b7... make fmt & docs
-    })
-    github = object({
-      org             = string
-      app_id          = number
-      installation_id = number
-      private_key     = string
-    })
-  }))
-}
-
-variable "fleet_infra" {
-  description = "Configuration for Flux bootstrap repository."
-  type = object({
-    type = string
-    org  = string
-    proj = string
-    repo = string
-  })
-}
 
 variable "namespaces" {
   description = "The namespaces to configure flux with"
   type = list(
     object({
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
       name        = string
       create_crds = bool
       org         = string
@@ -237,54 +86,6 @@ variable "namespaces" {
     })
   )
 }
-=======
-      name = string
-=======
-      name        = string
->>>>>>> make fmt & docs
-=======
-      name        = string
-<<<<<<< HEAD
->>>>>>> a69675f... make fmt & docs
-=======
-      name        = string
->>>>>>> f8311b7... make fmt & docs
-      create_crds = bool
-      org         = string
-      proj        = string
-      repo        = string
-    })
-  )
-<<<<<<< HEAD
-=======
-      name = string
-=======
->>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
->>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
-      create_crds = bool
-      org         = string
-      proj        = string
-      repo        = string
-    })
-  )
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> fe36c7a... Add initial config
-=======
-      name = string
-      create_crds = bool
-      org         = string
-      proj        = string
-      repo        = string
-    })
-  )
-<<<<<<< HEAD
->>>>>>> d074599... Add initial config
-=======
-<<<<<<< HEAD
->>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
-}
-
 variable "cluster_repo" {
   description = "Name of cluster repository"
   type        = string
@@ -296,24 +97,3 @@ variable "branch" {
   type        = string
   default     = "main"
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Add initial config
-=======
-}
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
-<<<<<<< HEAD
->>>>>>> fe36c7a... Add initial config
-=======
-}
->>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> d074599... Add initial config
-=======
-}
->>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
-=======
-}
->>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
->>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7

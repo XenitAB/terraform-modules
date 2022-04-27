@@ -97,19 +97,9 @@ module "fluxcd_v2" {
     if var.fluxcd_v2_enabled
   }
 
-  source = "../../kubernetes/fluxcd-v2"
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
->>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
+  source      = "../../kubernetes/fluxcd-v2"
   environment = var.environment
-  cluster_id  = "${var.location_short}-${var.environment}-${var.name}-${var.aks_name_suffix}"
+  cluster_id  = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
   credentials = var.fluxcd_v2_config.credentials
   fleet_infra = var.fluxcd_v2_config.fleet_infra
   namespaces = {
@@ -123,96 +113,8 @@ module "fluxcd_v2" {
     org         = ns.flux.org
     proj        = ns.flux.proj
     repo        = ns.flux.repo
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  environment       = var.environment
-  cluster_id        = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  environment = var.environment
-  cluster_id  = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
->>>>>>> make fmt & docs
-  credentials = var.fluxcd_v2_config.credentials
-  fleet_infra = var.fluxcd_v2_config.fleet_infra
-  namespaces  = [for ns in var.namespaces : ns => ns if ns.flux.enabled  {
-
-    name        = ns.name
-    create_crds = ns.flux.create_crds
-<<<<<<< HEAD
-    org = ns.flux.org
-    proj = ns.flux.proj
-    repo = ns.flux.repo
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
-    org         = ns.flux.org
-    proj        = ns.flux.proj
-    repo        = ns.flux.repo
->>>>>>> make fmt & docs
-  }]
-=======
-
   }
->>>>>>> Fix for loop
-=======
-<<<<<<< HEAD
-=======
-  environment = var.environment
-  cluster_id  = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
->>>>>>> a69675f... make fmt & docs
-  credentials = var.fluxcd_v2_config.credentials
-  fleet_infra = var.fluxcd_v2_config.fleet_infra
-  namespaces  = [for ns in var.namespaces : ns => ns if ns.flux.enabled  {
-
-    name        = ns.name
-    create_crds = ns.flux.create_crds
-    org         = ns.flux.org
-    proj        = ns.flux.proj
-    repo        = ns.flux.repo
-=======
-=======
-  environment = var.environment
-<<<<<<< HEAD
-  cluster_id  = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
->>>>>>> f8311b7... make fmt & docs
-=======
-  cluster_id  = "${var.location_short}-${var.environment}-${var.name}-${var.aks_name_suffix}"
->>>>>>> 43b269c... Fix for loop
-  credentials = var.fluxcd_v2_config.credentials
-  fleet_infra = var.fluxcd_v2_config.fleet_infra
-  namespaces = {
-    for_each = {
-      for ns in var.namespaces :
-      ns => ns
-      if ns.flux.enabled
-    }
-    name        = ns.name
-    create_crds = ns.flux.create_crds
-<<<<<<< HEAD
-    org = ns.flux.org
-    proj = ns.flux.proj
-    repo = ns.flux.repo
->>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
-=======
-    org         = ns.flux.org
-    proj        = ns.flux.proj
-    repo        = ns.flux.repo
-<<<<<<< HEAD
->>>>>>> f8311b7... make fmt & docs
-  }]
->>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
-=======
-
-  }
->>>>>>> 43b269c... Fix for loop
-=======
-
-  }
->>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
->>>>>>> 5cc20b9b5477fe042c0d4f82783a798800cd1fe7
 }
-
 # AAD-Pod-Identity
 module "aad_pod_identity" {
   depends_on = [kubernetes_namespace.tenant, module.opa_gatekeeper]

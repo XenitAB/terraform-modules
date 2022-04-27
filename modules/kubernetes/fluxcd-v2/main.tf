@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * # Flux V2
  *
@@ -42,15 +43,31 @@ terraform {
 =======
   required_version = ">= 1.1.7"
 >>>>>>> Fix tf version
+=======
+terraform {
+  required_version = ">= 1.1.7"
+>>>>>>> Fix lint, docs and fmt
 
   required_providers {
     helm = {
       source  = "hashicorp/helm"
+<<<<<<< HEAD
       version = "2.3.0"
     }
     flux = {
       source  = "fluxcd/flux"
       version = "0.5.1"
+=======
+      version = "2.4.1"
+    }
+    flux = {
+      source  = "fluxcd/flux"
+      version = "0.11.2"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.8.0"
+>>>>>>> Fix lint, docs and fmt
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
@@ -58,6 +75,7 @@ terraform {
     }
     github = {
       source  = "integrations/github"
+<<<<<<< HEAD
       version = "4.17.0"
     }
     kubernetes = {
@@ -67,10 +85,18 @@ terraform {
     kubectl = {
       source  = "gavinbunney/kubectl"
       version = "1.13.0"
+=======
+      version = "4.21.0"
+    }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "1.13.1"
+>>>>>>> Fix lint, docs and fmt
     }
   }
 }
 
+<<<<<<< HEAD
 locals {
   git_auth_proxy_url = "http://git-auth-proxy.flux-system.svc.cluster.local"
 <<<<<<< HEAD
@@ -141,6 +167,8 @@ locals {
   branch_name        = "main"
 >>>>>>> make fmt & docs
 =======
+=======
+>>>>>>> Fix lint, docs and fmt
 locals {
   git_auth_proxy_url = "http://git-auth-proxy.flux-system.svc.cluster.local"
 >>>>>>> Fix code
@@ -339,6 +367,7 @@ data "flux_install" "this" {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 data "flux_sync" "this" {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -368,13 +397,16 @@ data "flux_sync" "this" {
 =======
 data "flux_sync" "azdo" {
 >>>>>>> Fix code
+=======
+data "flux_sync" "this" {
+>>>>>>> Fix lint, docs and fmt
   url                = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
   branch             = var.branch
   target_path        = "clusters/${var.cluster_id}"
   git_implementation = "libgit2"
 }
 
-data "flux_sync" "git" {
+data "flux_sync" "this" {
   url         = "${local.git_auth_proxy_url}/${var.github_org}/${var.cluster_repo}"
   branch      = var.branch
   target_path = "clusters/${var.cluster_id}"

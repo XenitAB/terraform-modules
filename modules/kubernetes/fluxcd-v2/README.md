@@ -1,6 +1,7 @@
 ## Requirements
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 | Name | Version |
 |------|---------|
 <<<<<<< HEAD
@@ -21,17 +22,28 @@
 =======
 No requirements.
 >>>>>>> Fix code
+=======
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
+| <a name="requirement_azuredevops"></a> [azuredevops](#requirement\_azuredevops) | 0.5.0 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.11.2 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | 4.21.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.4.1 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.13.1 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.8.0 |
+>>>>>>> Fix lint, docs and fmt
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuredevops"></a> [azuredevops](#provider\_azuredevops) | n/a |
-| <a name="provider_flux"></a> [flux](#provider\_flux) | n/a |
-| <a name="provider_github"></a> [github](#provider\_github) | n/a |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | n/a |
-| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | n/a |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a |
+| <a name="provider_azuredevops"></a> [azuredevops](#provider\_azuredevops) | 0.5.0 |
+| <a name="provider_flux"></a> [flux](#provider\_flux) | 0.11.2 |
+| <a name="provider_github"></a> [github](#provider\_github) | 4.21.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.4.1 |
+| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.13.1 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.8.0 |
 
 ## Modules
 
@@ -41,27 +53,27 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azuredevops_git_repository_file.cluster_tenants](https://registry.terraform.io/providers/hashicorp/azuredevops/latest/docs/resources/git_repository_file) | resource |
-| [azuredevops_git_repository_file.install](https://registry.terraform.io/providers/hashicorp/azuredevops/latest/docs/resources/git_repository_file) | resource |
-| [azuredevops_git_repository_file.kustomize](https://registry.terraform.io/providers/hashicorp/azuredevops/latest/docs/resources/git_repository_file) | resource |
-| [azuredevops_git_repository_file.sync](https://registry.terraform.io/providers/hashicorp/azuredevops/latest/docs/resources/git_repository_file) | resource |
-| [azuredevops_git_repository_file.tenant](https://registry.terraform.io/providers/hashicorp/azuredevops/latest/docs/resources/git_repository_file) | resource |
-| [github_repository_file.cluster_tenants](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_file) | resource |
-| [github_repository_file.install](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_file) | resource |
-| [github_repository_file.kustomize](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_file) | resource |
-| [github_repository_file.sync](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_file) | resource |
-| [github_repository_file.tenant](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_file) | resource |
-| [helm_release.git_auth_proxy](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
-| [kubectl_manifest.install](https://registry.terraform.io/providers/hashicorp/kubectl/latest/docs/resources/manifest) | resource |
-| [kubectl_manifest.sync](https://registry.terraform.io/providers/hashicorp/kubectl/latest/docs/resources/manifest) | resource |
-| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
-| [azuredevops_git_repository.cluster](https://registry.terraform.io/providers/hashicorp/azuredevops/latest/docs/data-sources/git_repository) | data source |
-| [azuredevops_project.this](https://registry.terraform.io/providers/hashicorp/azuredevops/latest/docs/data-sources/project) | data source |
-| [flux_install.this](https://registry.terraform.io/providers/hashicorp/flux/latest/docs/data-sources/install) | data source |
-| [flux_sync.this](https://registry.terraform.io/providers/hashicorp/flux/latest/docs/data-sources/sync) | data source |
-| [github_repository.cluster](https://registry.terraform.io/providers/hashicorp/github/latest/docs/data-sources/repository) | data source |
-| [kubectl_file_documents.install](https://registry.terraform.io/providers/hashicorp/kubectl/latest/docs/data-sources/file_documents) | data source |
-| [kubectl_file_documents.sync](https://registry.terraform.io/providers/hashicorp/kubectl/latest/docs/data-sources/file_documents) | data source |
+| [azuredevops_git_repository_file.cluster_tenants](https://registry.terraform.io/providers/xenitab/azuredevops/0.5.0/docs/resources/git_repository_file) | resource |
+| [azuredevops_git_repository_file.install](https://registry.terraform.io/providers/xenitab/azuredevops/0.5.0/docs/resources/git_repository_file) | resource |
+| [azuredevops_git_repository_file.kustomize](https://registry.terraform.io/providers/xenitab/azuredevops/0.5.0/docs/resources/git_repository_file) | resource |
+| [azuredevops_git_repository_file.sync](https://registry.terraform.io/providers/xenitab/azuredevops/0.5.0/docs/resources/git_repository_file) | resource |
+| [azuredevops_git_repository_file.tenant](https://registry.terraform.io/providers/xenitab/azuredevops/0.5.0/docs/resources/git_repository_file) | resource |
+| [github_repository_file.cluster_tenants](https://registry.terraform.io/providers/integrations/github/4.21.0/docs/resources/repository_file) | resource |
+| [github_repository_file.install](https://registry.terraform.io/providers/integrations/github/4.21.0/docs/resources/repository_file) | resource |
+| [github_repository_file.kustomize](https://registry.terraform.io/providers/integrations/github/4.21.0/docs/resources/repository_file) | resource |
+| [github_repository_file.sync](https://registry.terraform.io/providers/integrations/github/4.21.0/docs/resources/repository_file) | resource |
+| [github_repository_file.tenant](https://registry.terraform.io/providers/integrations/github/4.21.0/docs/resources/repository_file) | resource |
+| [helm_release.git_auth_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.4.1/docs/resources/release) | resource |
+| [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/resources/manifest) | resource |
+| [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/resources/manifest) | resource |
+| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/namespace) | resource |
+| [azuredevops_git_repository.cluster](https://registry.terraform.io/providers/xenitab/azuredevops/0.5.0/docs/data-sources/git_repository) | data source |
+| [azuredevops_project.this](https://registry.terraform.io/providers/xenitab/azuredevops/0.5.0/docs/data-sources/project) | data source |
+| [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/0.11.2/docs/data-sources/install) | data source |
+| [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/0.11.2/docs/data-sources/sync) | data source |
+| [github_repository.cluster](https://registry.terraform.io/providers/integrations/github/4.21.0/docs/data-sources/repository) | data source |
+| [kubectl_file_documents.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/data-sources/file_documents) | data source |
+| [kubectl_file_documents.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/data-sources/file_documents) | data source |
 
 ## Inputs
 
@@ -147,6 +159,7 @@ No modules.
 >>>>>>> Add initial config
 =======
 | <a name="input_fleet_infra"></a> [fleet\_infra](#input\_fleet\_infra) | Configuration for Flux bootstrap repository. | <pre>object({<br>    type = string<br>    org  = string<br>    proj = string<br>    repo = string<br>  })</pre> | n/a | yes |
+<<<<<<< HEAD
 >>>>>>> Fix code
 | <a name="input_github_app_id"></a> [github\_app\_id](#input\_github\_app\_id) | ID of GitHub Application used by Git Auth Proxy | `number` | `"null"` | no |
 | <a name="input_github_installation_id"></a> [github\_installation\_id](#input\_github\_installation\_id) | Installation ID of GitHub Application used by Git Auth Proxy | `number` | `"null"` | no |
@@ -188,6 +201,12 @@ No modules.
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name        = string<br>      create_crds = bool<br>      org         = string<br>      proj        = string<br>      repo        = string<br>    })<br>  )</pre> | n/a | yes |
 >>>>>>> make fmt & docs
 =======
+=======
+| <a name="input_github_app_id"></a> [github\_app\_id](#input\_github\_app\_id) | ID of GitHub Application used by Git Auth Proxy | `number` | n/a | yes |
+| <a name="input_github_installation_id"></a> [github\_installation\_id](#input\_github\_installation\_id) | Installation ID of GitHub Application used by Git Auth Proxy | `number` | n/a | yes |
+| <a name="input_github_org"></a> [github\_org](#input\_github\_org) | Org of GitHub repositories | `string` | n/a | yes |
+| <a name="input_github_private_key"></a> [github\_private\_key](#input\_github\_private\_key) | Private Key for GitHub Application used by Git Auth Proxy | `string` | n/a | yes |
+>>>>>>> Fix lint, docs and fmt
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name        = string<br>      create_crds = bool<br>      org         = string<br>      proj        = string<br>      repo        = string<br>    })<br>  )</pre> | n/a | yes |
 >>>>>>> Fix code
 

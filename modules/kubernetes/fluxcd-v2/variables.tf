@@ -1,5 +1,8 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
 variable "environment" {
   description = "Environment name of the cluster"
   type        = string
@@ -17,6 +20,7 @@ variable "credentials" {
     azure_devops = object({
       org = string
       pat = string
+<<<<<<< HEAD
 <<<<<<< HEAD
     })
     github = object({
@@ -102,6 +106,8 @@ variable "credentials" {
       pat  = string
 =======
 >>>>>>> make fmt & docs
+=======
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
     })
     github = object({
       org             = string
@@ -128,6 +134,7 @@ variable "namespaces" {
     object({
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       name        = string
       create_crds = bool
       org         = string
@@ -141,12 +148,16 @@ variable "namespaces" {
 =======
       name        = string
 >>>>>>> make fmt & docs
+=======
+      name        = string
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
       create_crds = bool
       org         = string
       proj        = string
       repo        = string
     })
   )
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -165,3 +176,6 @@ variable "branch" {
 =======
 }
 >>>>>>> Initial change of config to use one module - fluxcd-v2
+=======
+}
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230

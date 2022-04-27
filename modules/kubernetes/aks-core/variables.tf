@@ -49,12 +49,16 @@ variable "namespaces" {
         create_crds = bool
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> make fmt & docs
+=======
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
         type        = string # azuredevops or github
         org         = string
         proj        = string # only used for azuredevops
         repo        = string
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
         type = string # azuredevops or github
@@ -64,6 +68,8 @@ variable "namespaces" {
 >>>>>>> Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> make fmt & docs
+=======
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
       })
     })
   )
@@ -137,6 +143,7 @@ variable "fluxcd_v2_config" {
   description = "Configuration for fluxcd-v2"
 
   # Credentials to be passed to Git Auth Proxy
+<<<<<<< HEAD
     type = string # azuredevops or github
     azure_devops = object({
 <<<<<<< HEAD
@@ -151,6 +158,13 @@ variable "fluxcd_v2_config" {
       org = string
       pat = string
 >>>>>>> make fmt & docs
+=======
+  credentials = list(object({
+    type = string # azuredevops or github
+    azure_devops = object({
+      org = string
+      pat = string
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
     })
     github = object({
       org             = string
@@ -158,6 +172,7 @@ variable "fluxcd_v2_config" {
       installation_id = number
       private_key     = string
     })
+<<<<<<< HEAD
 
   # Flux Bootstrap Repository
     type = string # azuredevops or github
@@ -172,6 +187,17 @@ variable "fluxcd_v2_config" {
 >>>>>>> make fmt & docs
     proj = string
     repo = string
+=======
+  }))
+
+  # Flux Bootstrap Repository
+  fleet_infra = object({
+    type = string # azuredevops or github
+    org  = string
+    proj = string
+    repo = string
+  })
+>>>>>>> 7c88e12739d0f0afdbc8fa241f6064ea40ac3230
 }
 
 variable "aad_pod_identity_enabled" {

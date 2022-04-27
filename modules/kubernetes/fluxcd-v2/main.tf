@@ -1,3 +1,34 @@
+terraform {
+  required_version = ">= 1.1.7"
+
+  required_providers {
+    helm = {
+      source  = "hashicorp/helm"
+      version = "2.4.1"
+    }
+    flux = {
+      source  = "fluxcd/flux"
+      version = "0.11.2"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.8.0"
+    }
+    azuredevops = {
+      source  = "xenitab/azuredevops"
+      version = "0.5.0"
+    }
+    github = {
+      source  = "integrations/github"
+      version = "4.21.0"
+    }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "1.13.1"
+    }
+  }
+}
+
 locals {
   git_auth_proxy_url = "http://git-auth-proxy.flux-system.svc.cluster.local"
 }
@@ -64,14 +95,14 @@ data "flux_install" "this" {
   target_path = "clusters/${var.cluster_id}"
 }
 
-data "flux_sync" "azdo" {
+data "flux_sync" "this" {
   url                = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
   branch             = var.branch
   target_path        = "clusters/${var.cluster_id}"
   git_implementation = "libgit2"
 }
 
-data "flux_sync" "git" {
+data "flux_sync" "this" {
   url         = "${local.git_auth_proxy_url}/${var.github_org}/${var.cluster_repo}"
   branch      = var.branch
   target_path = "clusters/${var.cluster_id}"

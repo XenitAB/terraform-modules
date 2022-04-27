@@ -17,6 +17,12 @@ locals {
     },
     {
       name = "init-container-read-only-root-fs"
+    },
+    {
+      name = "pod-serviceaccount-token-false"
+    },
+    {
+      name = "pod-default-seccomp"
     }
   ]
   default_constraints = [

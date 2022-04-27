@@ -9,7 +9,7 @@ module "fluxcd_v2" {
   github_org             = "foo"
   github_app_id          = 123
   github_installation_id = 123
-  github_private_key     = "foo"#tfsec:ignore:
+  github_private_key     = "foo" #tfsec:ignore:general-secrets-no-plaintext-exposure
   environment            = "dev"
   cluster_id             = "foobar"
   namespaces             = []

@@ -35,7 +35,7 @@ variable "aks_config" {
     version = string
     # Enables paid SKU for AKS and makes the default node pool HA
     production_grade = bool
-    additional_node_pools = list(object({
+    node_pools = list(object({
       name           = string
       version        = string
       vm_size        = string
@@ -50,28 +50,28 @@ variable "aks_config" {
 
   validation {
     condition = alltrue([
-      for np in var.aks_config.additional_node_pools : length(np.name) <= 12
+      for np in var.aks_config.node_pools : length(np.name) <= 12
     ])
     error_message = "The name value cannot be longer than 12 characters."
   }
 
   validation {
     condition = alltrue([
-      for np in var.aks_config.additional_node_pools : can(regex("^[a-z0-9]+$", np.name))
+      for np in var.aks_config.node_pools : can(regex("^[a-z0-9]+$", np.name))
     ])
     error_message = "The name value has to be lowercase alphanumeric."
   }
 
   validation {
     condition = alltrue([
-      for np in var.aks_config.additional_node_pools : can(regex("^[a-z]", np.name))
+      for np in var.aks_config.node_pools : can(regex("^[a-z]", np.name))
     ])
     error_message = "The name value has to begin with a lowercase letter."
   }
 
   validation {
     condition = alltrue([
-      for np in var.aks_config.additional_node_pools : can(regex("[12]$", np.name))
+      for np in var.aks_config.node_pools : can(regex("[12]$", np.name))
     ])
     error_message = "The name value should end with a 1 or 2 to enable blue green pool creation."
   }
@@ -79,7 +79,7 @@ variable "aks_config" {
   # Spot max price is set when spot is enabled
   validation {
     condition = alltrue([
-      for np in var.aks_config.additional_node_pools : (!np.spot_enabled && np.spot_max_price == null) || (np.spot_enabled && np.spot_max_price != null)
+      for np in var.aks_config.node_pools : (!np.spot_enabled && np.spot_max_price == null) || (np.spot_enabled && np.spot_max_price != null)
     ])
     error_message = "The spot_max_price cannot be null when spot_enabled is true."
   }

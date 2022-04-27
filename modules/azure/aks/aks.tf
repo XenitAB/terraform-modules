@@ -63,7 +63,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 
 resource "azurerm_kubernetes_cluster_node_pool" "this" {
   for_each = {
-    for nodePool in var.aks_config.additional_node_pools :
+    for nodePool in var.aks_config.node_pools :
     nodePool.name => nodePool
   }
 

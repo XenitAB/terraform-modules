@@ -185,5 +185,15 @@ locals {
       }
       parameters = {}
     },
+    {
+      kind               = "K8sRequireIngressClass"
+      name               = "require-ingress-class"
+      enforcement_action = ""
+      match = {
+        kinds      = []
+        namespaces = []
+      }
+      parameters = {}
+    },
   ]
 }

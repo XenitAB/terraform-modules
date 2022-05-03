@@ -1,4 +1,4 @@
-resource "kubernetes_cluster_role_binding" "get-nodes" {
+resource "kubernetes_cluster_role_binding" "get_nodes" {
   depends_on = [kubernetes_namespace.tenant]
   for_each   = { for ns in var.namespaces : ns.name => ns }
 

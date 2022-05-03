@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fix
 
+- [#661](https://github.com/XenitAB/terraform-modules/pull/661) Fix cluster-role-binding for get-nodes role.
 - [#658](https://github.com/XenitAB/terraform-modules/pull/658) Remove 'use-forwarded-headers: "true"' from ingress-nginx
 
 ## 2022.04.3

@@ -17,6 +17,10 @@ terraform {
       source  = "hashicorp/helm"
       version = "2.4.1"
     }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "1.14.0"
+    }
   }
 }
 
@@ -34,14 +38,40 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+data "helm_template" "prometheus" {
+  repository   = "https://prometheus-community.github.io/helm-charts"
+  chart        = "kube-prometheus-stack"
+  name         = "prometheus"
+  version      = "30.0.0"
+  include_crds = true
+}
+
+data "kubectl_file_documents" "prometheus" {
+  content = data.helm_template.prometheus.manifest
+}
+
+resource "kubectl_manifest" "prometheus" {
+  for_each = {
+    for k, v in data.kubectl_file_documents.prometheus.manifests :
+    k => v
+    if can(regex("^/apis/apiextensions.k8s.io/v1/customresourcedefinitions/", k))
+  }
+  server_side_apply = true
+  apply_only        = true
+  yaml_body         = each.value
+}
+
 # Prometheus operator and other core monitoring components.
 resource "helm_release" "prometheus" {
+  depends_on = [kubectl_manifest.prometheus]
+
   repository  = "https://prometheus-community.github.io/helm-charts"
   chart       = "kube-prometheus-stack"
   name        = "prometheus"
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "30.0.0"
   max_history = 3
+  skip_crds   = true
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     vpa_enabled = var.vpa_enabled,
   })]

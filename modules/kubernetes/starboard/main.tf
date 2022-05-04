@@ -24,6 +24,10 @@ terraform {
       source  = "hashicorp/helm"
       version = "2.4.1"
     }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "1.14.0"
+    }
   }
 }
 
@@ -37,6 +41,29 @@ resource "kubernetes_namespace" "starboard" {
   }
 }
 
+data "helm_template" "starboard" {
+  repository   = "https://aquasecurity.github.io/helm-charts/"
+  chart        = "starboard-operator"
+  name         = "starboard-operator"
+  version      = "0.9.1"
+  include_crds = true
+}
+
+data "kubectl_file_documents" "starboard" {
+  content = data.helm_template.starboard.manifest
+}
+
+resource "kubectl_manifest" "starboard" {
+  for_each = {
+    for k, v in data.kubectl_file_documents.starboard.manifests :
+    k => v
+    if can(regex("^/apis/apiextensions.k8s.io/v1/customresourcedefinitions/", k))
+  }
+  server_side_apply = true
+  apply_only        = true
+  yaml_body         = each.value
+}
+
 resource "helm_release" "starboard" {
   repository  = "https://aquasecurity.github.io/helm-charts/"
   chart       = "starboard-operator"
@@ -44,6 +71,7 @@ resource "helm_release" "starboard" {
   namespace   = kubernetes_namespace.starboard.metadata[0].name
   version     = "0.9.1"
   max_history = 3
+  skip_crds   = true
   values = [templatefile("${path.module}/templates/starboard-values.yaml.tpl", {
     provider           = var.cloud_provider
     starboard_role_arn = var.starboard_role_arn

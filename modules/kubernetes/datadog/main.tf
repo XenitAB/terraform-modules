@@ -21,6 +21,10 @@ terraform {
       source  = "hashicorp/helm"
       version = "2.4.1"
     }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "1.14.0"
+    }
   }
 }
 
@@ -44,7 +48,32 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+data "helm_template" "datadog_operator" {
+  repository   = "https://helm.datadoghq.com"
+  chart        = "datadog-operator"
+  name         = "datadog-operator"
+  version      = "0.7.0"
+  api_versions = ["apiextensions.k8s.io/v1/CustomResourceDefinition"]
+}
+
+data "kubectl_file_documents" "datadog_operator" {
+  content = data.helm_template.datadog_operator.manifest
+}
+
+resource "kubectl_manifest" "datadog_operator" {
+  for_each = {
+    for k, v in data.kubectl_file_documents.datadog_operator.manifests :
+    k => v
+    if can(regex("^/apis/apiextensions.k8s.io/v1/customresourcedefinitions/", k))
+  }
+  server_side_apply = true
+  apply_only        = true
+  yaml_body         = each.value
+}
+
 resource "helm_release" "datadog_operator" {
+  depends_on = [kubectl_manifest.datadog_operator]
+
   repository  = "https://helm.datadoghq.com"
   chart       = "datadog-operator"
   name        = "datadog-operator"

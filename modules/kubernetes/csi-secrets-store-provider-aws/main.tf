@@ -16,6 +16,10 @@ terraform {
       source  = "hashicorp/helm"
       version = "2.4.1"
     }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "1.14.0"
+    }
   }
 }
 
@@ -29,13 +33,39 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
+data "helm_template" "csi_secrets_store_driver" {
+  repository   = "https://raw.githubusercontent.com/kubernetes-sigs/secrets-store-csi-driver/master/charts"
+  chart        = "secrets-store-csi-driver"
+  name         = "secrets-store-csi-driver"
+  version      = "0.2.0"
+  include_crds = true
+}
+
+data "kubectl_file_documents" "csi_secrets_store_driver" {
+  content = data.helm_template.csi_secrets_store_driver.manifest
+}
+
+resource "kubectl_manifest" "csi_secrets_store_driver" {
+  for_each = {
+    for k, v in data.kubectl_file_documents.csi_secrets_store_driver.manifests :
+    k => v
+    if can(regex("^/apis/apiextensions.k8s.io/v1/customresourcedefinitions/", k))
+  }
+  server_side_apply = true
+  apply_only        = true
+  yaml_body         = each.value
+}
+
 resource "helm_release" "csi_secrets_store_driver" {
-  name        = "secrets-store-csi-driver"
+  depends_on = [kubectl_manifest.csi_secrets_store_driver]
+
   repository  = "https://raw.githubusercontent.com/kubernetes-sigs/secrets-store-csi-driver/master/charts"
   chart       = "secrets-store-csi-driver"
+  name        = "secrets-store-csi-driver"
   version     = "0.2.0"
   namespace   = kubernetes_namespace.this.metadata[0].name
   max_history = 3
+  skip_crds   = true
 
   set {
     name  = "linux.metricsAddr"

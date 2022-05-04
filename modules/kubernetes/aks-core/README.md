@@ -12,7 +12,7 @@ This module is used to create AKS clusters.
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.11.2 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 4.21.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.4.1 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.13.1 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.8.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
 

@@ -13,11 +13,11 @@ config:
           environment: "${environment}"
           cluster: "${cluster_name}"
       - match:
-          selector: '{namespace="ingress-nginx"} |~ "^([\w\.]+) - ([^ ]*) \[(.*)\] "([^ ]*) ([^ ]*) ([^ ]*)" ([2-3][0-9][0-9]) .*"'
+          selector: '{namespace="ingress-nginx"} |~ `^([\w\.]+) - ([^ ]*) \[(.*)\] \"([^ ]*) ([^ ]*) ([^ ]*)" ([2-3][0-9][0-9]) .*`'
           action: drop
           drop_counter_reason: nginx_ok
 
-   extraRelabelConfigs:
+    extraRelabelConfigs:
       %{~ for namespace in excluded_namespaces ~}
       - action: drop
         regex: ${namespace}

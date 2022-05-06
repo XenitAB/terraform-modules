@@ -52,6 +52,8 @@ controller:
     %{~ if allow_snippet_annotations ~}
     annotation-value-word-blocklist: load_module,lua_package,_by_lua,location,root,proxy_pass,serviceaccount,{,},',\
     %{~ endif ~}
+    data:
+      enable-opentracing: "true"
 
   addHeaders:
     %{~ for key, value in extra_headers ~}
@@ -123,6 +125,11 @@ controller:
     httpGet:
       port: 10354
   %{~ endif ~}
+
+  extraModules:
+  ## Modules, which are mounted into the core nginx image
+    - name: opentelemetry
+      image: k8s.gcr.io/ingress-nginx/opentelemetry:v20220415-controller-v1.2.0-beta.0-2-g81c2afd97@sha256:ce61e2cf0b347dffebb2dcbf57c33891d2217c1bad9c0959c878e5be671ef941
 
   affinity:
     podAntiAffinity:

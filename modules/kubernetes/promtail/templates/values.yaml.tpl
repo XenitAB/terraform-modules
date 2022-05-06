@@ -13,7 +13,6 @@ config:
           environment: "${environment}"
           cluster: "${cluster_name}"
       - match:
-          # Drop 2xx and 3xx from the Nginx access log
           selector: '{namespace="ingress-nginx"} |~ "^([\w\.]+) - ([^ ]*) \[(.*)\] "([^ ]*) ([^ ]*) ([^ ]*)" ([2-3][0-9][0-9]) .*"'
           action: drop
           drop_counter_reason: nginx_ok

@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#659](https://github.com/XenitAB/terraform-modules/pull/659) [Breaking] Bring AKS and EKS config inline with each other.
 - [#653](https://github.com/XenitAB/terraform-modules/pull/653) Add validation of Kubernetes version in EKS and AKS.
 - [#662](https://github.com/XenitAB/terraform-modules/pull/662) Modify FluxV2 installation to never remove applied resource.
+- [#663](https://github.com/XenitAB/terraform-modules/pull/663) Set max history to Helm releases missing configuration.
 
 ### Fix
 

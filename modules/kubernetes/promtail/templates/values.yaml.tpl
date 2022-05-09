@@ -12,12 +12,21 @@ config:
           tenant_id: "${tenant_id}"
           environment: "${environment}"
           cluster: "${cluster_name}"
+      
+      # Drop 2xx and 3xx from ingress-nginx since it it generates a lot of log messages. Example:
+      # xxx.xxx.xxx.xxx - - [04/May/2022:13:12:50 +0000] "POST /api/v1/receive HTTP/2.0" 200 0 "-" "Prometheus/2.35.0" 
+      # 35234 0.004 [monitor-router-receiver-remote-write] [] 10.244.34.149:19291 0 0.004 200 0156a072a34b23dc09bcfcfe87991c7b
+      - match:
+          selector: '{namespace="ingress-nginx"}'
+          stages:
+          - regex:
+              expression: '^(?P<_>[\w\.]+) - (?P<_>[^ ]*) \[(?P<_>.*)\] "(?P<_>[^ ]*) (?P<_>[^ ]*) (?P<_>[^ ]*)" (?P<nginx_status>[\d]+).*'
+      - drop:
+          source: nginx_status
+          expression: "[2-3][0-9][0-9]"
+          drop_counter_reason: nginx_ok
 
     extraRelabelConfigs:
-      - action: drop
-        regex: ingress-nginx
-        source_labels:
-          - __meta_kubernetes_namespace
       %{~ for namespace in excluded_namespaces ~}
       - action: drop
         regex: ${namespace}

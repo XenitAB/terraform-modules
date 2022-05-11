@@ -23,6 +23,11 @@ controller:
   hostNetwork: true
   %{~ endif ~}
 
+  ## Override NGINX template
+  customTemplate:
+    configMapName: "nginx-config"
+    configMapKey: "ingress-template"
+
   service:
     externalTrafficPolicy: Local
     %{~ if provider == "aws" || internal_load_balancer ~}

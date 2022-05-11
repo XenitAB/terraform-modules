@@ -206,6 +206,10 @@ module "ingress_nginx" {
   datadog_enabled           = var.datadog_enabled
   public_private_enabled    = var.ingress_config.public_private_enabled
   allow_snippet_annotations = var.ingress_config.allow_snippet_annotations
+  default_certificate       = {
+    enabled = true
+    dns_zone = var.cert_manager_config.dns_zone[0]
+  }
 }
 
 # ingress-healthz

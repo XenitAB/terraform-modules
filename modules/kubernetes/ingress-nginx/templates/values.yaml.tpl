@@ -26,7 +26,7 @@ controller:
   ## Override NGINX template
   customTemplate:
     configMapName: "nginx-config"
-    configMapKey: "ingress-template"
+    configMapKey: "main-template"
 
   service:
     externalTrafficPolicy: Local

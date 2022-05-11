@@ -24,9 +24,9 @@ controller:
   %{~ endif ~}
 
   ## Override NGINX template
-  customTemplate:
-    configMapName: "nginx-config"
-    configMapKey: "main-template"
+  #customTemplate:
+  #  configMapName: "nginx-config"
+  #  configMapKey: "main-template"
 
   service:
     externalTrafficPolicy: Local

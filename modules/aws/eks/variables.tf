@@ -44,6 +44,10 @@ variable "eks_config" {
   })
 
   validation {
+    condition     = can(regex("^([0-9]\\d*)\\.([0-9]\\d*)$", var.eks_config.version))
+    error_message = "Control plane version must only include major and minor version."
+  }
+  validation {
     condition = alltrue([
       for np in concat(var.eks_config.node_pools, [{ version : var.eks_config.version }]) : can(regex("^1.(20|21|22)", np.version))
     ])
@@ -52,7 +56,7 @@ variable "eks_config" {
 
   validation {
     condition = alltrue([
-      for np in var.eks_config.node_pools : split(".", np.version)[1] <= split(".", var.eks_config.version)[1] && split(".", split("-", np.version)[0])[2] <= split(".", var.eks_config.version)[2]
+      for np in var.eks_config.node_pools : split(".", np.version)[1] <= split(".", var.eks_config.version)[1]
     ])
     error_message = "The node Kubernetes version should not be newer than the cluster version, upgrade the cluster first."
   }

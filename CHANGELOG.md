@@ -6,15 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.05.2
+
 ### Changed
 
 - [#666](https://github.com/XenitAB/terraform-modules/pull/666) Enable ingress-nginx logs in promtail.
 - [#670](https://github.com/XenitAB/terraform-modules/pull/670) Ingress-nginx default wildcard certificate enabled.
-- [#672](https://github.com/XenitAB/terraform-modules/pull/672) Fix EKS version validation
 
 ### Fix
 
 - [#671](https://github.com/XenitAB/terraform-modules/pull/671) [Breaking] Governance delegate-se from regional to global module.
+- [#672](https://github.com/XenitAB/terraform-modules/pull/672) Fix EKS version validation
 
 ## 2022.05.1
 

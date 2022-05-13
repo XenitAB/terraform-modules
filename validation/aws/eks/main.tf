@@ -23,7 +23,7 @@ module "eks" {
 
   eks_authorized_ips = ["0.0.0.0/0"]
   eks_config = {
-    version    = "1.21.5"
+    version    = "1.21"
     cidr_block = "10.0.16.0/20"
     node_pools = [
       {

@@ -371,8 +371,16 @@ module "cluster_autoscaler" {
   }
 }
 
+module "csi_secrets_store_provider_aws_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://raw.githubusercontent.com/kubernetes-sigs/secrets-store-csi-driver/master/charts"
+  chart_name       = "secrets-store-csi-driver"
+  chart_version    = "0.2.0"
+}
+
 module "csi_secrets_store_provider_aws" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.csi_secrets_store_provider_aws_crd, module.opa_gatekeeper]
 
   for_each = {
     for s in ["csi-secrets-store-provider-aws"] :

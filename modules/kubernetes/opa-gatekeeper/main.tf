@@ -96,10 +96,6 @@ terraform {
       source  = "hashicorp/helm"
       version = "2.4.1"
     }
-    kubectl = {
-      source  = "gavinbunney/kubectl"
-      version = "1.14.0"
-    }
   }
 }
 
@@ -122,32 +118,7 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
-data "helm_template" "gatekeeper" {
-  repository   = "https://open-policy-agent.github.io/gatekeeper/charts"
-  chart        = "gatekeeper"
-  name         = "gatekeeper"
-  version      = "3.7.1"
-  include_crds = true
-}
-
-data "kubectl_file_documents" "gatekeeper" {
-  content = data.helm_template.gatekeeper.manifest
-}
-
-resource "kubectl_manifest" "gatekeeper" {
-  for_each = {
-    for k, v in data.kubectl_file_documents.gatekeeper.manifests :
-    k => v
-    if can(regex("^/apis/apiextensions.k8s.io/v1/customresourcedefinitions/", k))
-  }
-  server_side_apply = true
-  apply_only        = true
-  yaml_body         = each.value
-}
-
 resource "helm_release" "gatekeeper" {
-  depends_on = [kubectl_manifest.gatekeeper]
-
   repository  = "https://open-policy-agent.github.io/gatekeeper/charts"
   chart       = "gatekeeper"
   name        = "gatekeeper"

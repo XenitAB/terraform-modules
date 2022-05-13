@@ -65,10 +65,6 @@ terraform {
       source  = "hashicorp/helm"
       version = "2.4.1"
     }
-    kubectl = {
-      source  = "gavinbunney/kubectl"
-      version = "1.14.0"
-    }
   }
 }
 
@@ -122,32 +118,7 @@ locals {
   })
 }
 
-data "helm_template" "grafana_agent_operator" {
-  repository   = "https://grafana.github.io/helm-charts"
-  chart        = "grafana-agent-operator"
-  name         = "grafana-agent-operator"
-  version      = "0.1.5"
-  include_crds = true
-}
-
-data "kubectl_file_documents" "grafana_agent_operator" {
-  content = data.helm_template.grafana_agent_operator.manifest
-}
-
-resource "kubectl_manifest" "grafana_agent_operator" {
-  for_each = {
-    for k, v in data.kubectl_file_documents.grafana_agent_operator.manifests :
-    k => v
-    if can(regex("^/apis/apiextensions.k8s.io/v1/customresourcedefinitions/", k))
-  }
-  server_side_apply = true
-  apply_only        = true
-  yaml_body         = each.value
-}
-
 resource "helm_release" "grafana_agent_operator" {
-  depends_on = [kubectl_manifest.grafana_agent_operator]
-
   repository  = "https://grafana.github.io/helm-charts"
   chart       = "grafana-agent-operator"
   name        = "grafana-agent-operator"

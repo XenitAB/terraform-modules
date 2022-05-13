@@ -24,7 +24,17 @@ locals {
 }
 
 # OPA Gatekeeper
+module "opa_gatekeeper_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://open-policy-agent.github.io/gatekeeper/charts"
+  chart_name       = "gatekeeper"
+  chart_version    = "3.7.1"
+}
+
 module "opa_gatekeeper" {
+  depends_on = [module.opa_gatekeeper_crd]
+
   for_each = {
     for s in ["opa-gatekeeper"] :
     s => s
@@ -141,8 +151,16 @@ module "fluxcd_v2_github" {
 }
 
 # AAD-Pod-Identity
+module "aad_pod_identity_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
+  chart_name       = "aad-pod-identity"
+  chart_version    = "4.0.0"
+}
+
 module "aad_pod_identity" {
-  #depends_on = [kubernetes_namespace.tenant, module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.aad_pod_identity_crd]
 
   for_each = {
     for s in ["aad-pod-identity"] :
@@ -160,7 +178,7 @@ module "aad_pod_identity" {
 
 # AZ Metrics
 module "azure_metrics" {
-  depends_on = [module.opa_gatekeeper, module.aad_pod_identity]
+  depends_on = [module.opa_gatekeeper, module.aad_pod_identity_crd]
 
   for_each = {
     for s in ["azure-metrics"] :
@@ -177,7 +195,7 @@ module "azure_metrics" {
 
 # linkerd
 module "linkerd" {
-  depends_on = [module.opa_gatekeeper, module.cert_manager]
+  depends_on = [module.opa_gatekeeper, module.cert_manager_crd]
 
   for_each = {
     for s in ["linkerd"] :
@@ -232,7 +250,7 @@ module "ingress_healthz" {
 
 # External DNS
 module "external_dns" {
-  depends_on = [module.opa_gatekeeper, module.aad_pod_identity]
+  depends_on = [module.opa_gatekeeper, module.aad_pod_identity_crd]
 
   for_each = {
     for s in ["external-dns"] :
@@ -254,8 +272,19 @@ module "external_dns" {
 }
 
 # Cert Manager
+module "cert_manager_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://charts.jetstack.io"
+  chart_name       = "cert-manager"
+  chart_version    = "v1.7.1"
+  values = {
+    "installCRDs" = "true"
+  }
+}
+
 module "cert_manager" {
-  #depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.cert_manager_crd]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -300,8 +329,16 @@ module "velero" {
 }
 
 # csi-secrets-store-provider-azure
+module "csi_secrets_store_provider_azure_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
+  chart_name       = "csi-secrets-store-provider-azure"
+  chart_version    = "0.2.1"
+}
+
 module "csi_secrets_store_provider_azure" {
-  #depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.csi_secrets_store_provider_azure_crd]
 
   for_each = {
     for s in ["csi-secrets-store-provider-azure"] :
@@ -313,8 +350,16 @@ module "csi_secrets_store_provider_azure" {
 }
 
 # datadog
+module "datadog_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://helm.datadoghq.com"
+  chart_name       = "datadog-operator"
+  chart_version    = "0.7.0"
+}
+
 module "datadog" {
-  #depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.datadog_crd]
 
   for_each = {
     for s in ["datadog"] :
@@ -333,8 +378,16 @@ module "datadog" {
 }
 
 # grafana-agent
+module "grafana_agent_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://grafana.github.io/helm-charts"
+  chart_name       = "grafana-agent-operator"
+  chart_version    = "0.1.5"
+}
+
 module "grafana_agent" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.grafana_agent_crd]
 
   for_each = {
     for s in ["grafana-agent"] :
@@ -418,8 +471,16 @@ module "azad_kube_proxy" {
 }
 
 # Prometheus
+module "prometheus_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://prometheus-community.github.io/helm-charts"
+  chart_name       = "kube-prometheus-stack"
+  chart_version    = "30.0.0"
+}
+
 module "prometheus" {
-  #depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.prometheus_crd]
 
   for_each = {
     for s in ["prometheus"] :
@@ -490,8 +551,16 @@ module "promtail" {
 }
 
 # starboard
+module "starboard_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://aquasecurity.github.io/helm-charts/"
+  chart_name       = "starboard-operator"
+  chart_version    = "0.9.1"
+}
+
 module "starboard" {
-  #depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.starboard_crd]
 
   for_each = {
     for s in ["starboard"] :
@@ -508,8 +577,16 @@ module "starboard" {
 }
 
 # vpa
+module "vpa_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://charts.fairwinds.com/stable"
+  chart_name       = "goldilocks"
+  chart_version    = "5.1.0"
+}
+
 module "vpa" {
-  #depends_on = [module.opa_gatekeeper, module.prometheus]
+  depends_on = [module.opa_gatekeeper, module.vpa_crd]
 
   for_each = {
     for s in ["vpa"] :
@@ -522,7 +599,7 @@ module "vpa" {
 
 # node-local-dns
 module "node_local_dns" {
-  depends_on = [module.opa_gatekeeper, module.prometheus]
+  depends_on = [module.opa_gatekeeper]
 
   for_each = {
     for s in ["node-local-dns"] :

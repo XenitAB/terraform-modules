@@ -30,10 +30,14 @@ This module is used to create resources that are used by AKS clusters.
 
 | Name | Type |
 |------|------|
+| [azuread_application.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application) | resource |
+| [azuread_application_password.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application_password) | resource |
 | [azuread_group_member.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group_member) | resource |
+| [azuread_group_member.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group_member) | resource |
 | [azuread_group_member.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group_member) | resource |
 | [azuread_group_member.resource_group_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group_member) | resource |
 | [azuread_group_member.resource_group_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group_member) | resource |
+| [azuread_service_principal.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/service_principal) | resource |
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/container_registry) | resource |
 | [azurerm_key_vault_access_policy.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/key_vault_secret) | resource |

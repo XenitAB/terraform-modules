@@ -18,11 +18,6 @@ variable "subscription_name" {
   type        = string
 }
 
-variable "core_name" {
-  description = "The name for the core infrastructure"
-  type        = string
-}
-
 variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes"
   type = list(
@@ -36,18 +31,6 @@ variable "namespaces" {
 variable "dns_zone" {
   description = "List of DNS Zone to create"
   type        = list(string)
-}
-
-variable "unique_suffix" {
-  description = "Unique suffix that is used in globally unique resources names"
-  type        = string
-  default     = ""
-}
-
-variable "azure_ad_group_prefix" {
-  description = "Prefix for Azure AD Groups"
-  type        = string
-  default     = "az"
 }
 
 variable "service_principal_name_prefix" {

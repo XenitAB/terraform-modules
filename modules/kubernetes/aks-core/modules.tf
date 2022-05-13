@@ -142,7 +142,7 @@ module "fluxcd_v2_github" {
 
 # AAD-Pod-Identity
 module "aad_pod_identity" {
-  depends_on = [kubernetes_namespace.tenant, module.opa_gatekeeper]
+  #depends_on = [kubernetes_namespace.tenant, module.opa_gatekeeper]
 
   for_each = {
     for s in ["aad-pod-identity"] :
@@ -255,7 +255,7 @@ module "external_dns" {
 
 # Cert Manager
 module "cert_manager" {
-  depends_on = [module.opa_gatekeeper]
+  #depends_on = [module.opa_gatekeeper]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -301,7 +301,7 @@ module "velero" {
 
 # csi-secrets-store-provider-azure
 module "csi_secrets_store_provider_azure" {
-  depends_on = [module.opa_gatekeeper]
+  #depends_on = [module.opa_gatekeeper]
 
   for_each = {
     for s in ["csi-secrets-store-provider-azure"] :
@@ -314,7 +314,7 @@ module "csi_secrets_store_provider_azure" {
 
 # datadog
 module "datadog" {
-  depends_on = [module.opa_gatekeeper]
+  #depends_on = [module.opa_gatekeeper]
 
   for_each = {
     for s in ["datadog"] :
@@ -419,7 +419,7 @@ module "azad_kube_proxy" {
 
 # Prometheus
 module "prometheus" {
-  depends_on = [module.opa_gatekeeper]
+  #depends_on = [module.opa_gatekeeper]
 
   for_each = {
     for s in ["prometheus"] :
@@ -491,7 +491,7 @@ module "promtail" {
 
 # starboard
 module "starboard" {
-  depends_on = [module.opa_gatekeeper]
+  #depends_on = [module.opa_gatekeeper]
 
   for_each = {
     for s in ["starboard"] :
@@ -509,7 +509,7 @@ module "starboard" {
 
 # vpa
 module "vpa" {
-  depends_on = [module.opa_gatekeeper, module.prometheus]
+  #depends_on = [module.opa_gatekeeper, module.prometheus]
 
   for_each = {
     for s in ["vpa"] :

@@ -33,5 +33,5 @@ module "aks_global" {
     }
   ]
 
-  dns_zone           = ["example.io"]
+  dns_zone = ["example.io"]
 }

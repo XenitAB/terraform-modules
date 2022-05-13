@@ -3,6 +3,11 @@ variable "environment" {
   type        = string
 }
 
+variable "subscription_name" {
+  description = "The commonName for the subscription"
+  type        = string
+}
+
 variable "location" {
   description = "The location for the subscription"
   type        = string
@@ -11,6 +16,12 @@ variable "location" {
 variable "location_short" {
   description = "The location shortname for the subscription"
   type        = string
+}
+
+variable "azure_ad_group_prefix" {
+  description = "Prefix for Azure AD Groups"
+  type        = string
+  default     = "az"
 }
 
 variable "owner_service_principal_name" {

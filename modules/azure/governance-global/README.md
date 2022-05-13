@@ -35,9 +35,6 @@ No modules.
 | [azuread_group.acr_pull](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
 | [azuread_group.acr_push](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
 | [azuread_group.acr_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
-| [azuread_group.rg_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
-| [azuread_group.rg_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
-| [azuread_group.rg_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
 | [azuread_group.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
 | [azuread_group.sub_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
 | [azuread_group.sub_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |

@@ -17,8 +17,6 @@ module "aks_global" {
   location_short    = "we"
   name              = "xks"
   subscription_name = "xks"
-  core_name         = "core"
-  unique_suffix     = "1234"
   namespaces = [
     {
       name                    = "team1"

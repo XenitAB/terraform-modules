@@ -33,12 +33,6 @@ variable "dns_zone" {
   type        = list(string)
 }
 
-variable "service_principal_name_prefix" {
-  description = "Prefix for service principals"
-  type        = string
-  default     = "sp"
-}
-
 variable "aks_group_name_prefix" {
   description = "Prefix for AKS Azure AD groups"
   type        = string

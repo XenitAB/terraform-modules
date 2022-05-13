@@ -38,6 +38,23 @@ variable "dns_zone" {
   type        = list(string)
 }
 
+variable "aks_authorized_ips" {
+  description = "Authorized IPs to access AKS API"
+  type        = list(string)
+}
+
+variable "public_ip_prefix_configuration" {
+  description = "Configuration for public IP prefix"
+  type = object({
+    count         = number
+    prefix_length = number
+  })
+  default = {
+    count         = 2
+    prefix_length = 30
+  }
+}
+
 variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string
@@ -60,4 +77,16 @@ variable "aks_group_name_prefix" {
   description = "Prefix for AKS Azure AD groups"
   type        = string
   default     = "aks"
+}
+
+variable "azad_kube_proxy_config" {
+  description = "Azure AD Kubernetes Proxy configuration"
+  type = object({
+    cluster_name_prefix = string
+    proxy_url_override  = string
+  })
+  default = {
+    cluster_name_prefix = "aks"
+    proxy_url_override  = ""
+  }
 }

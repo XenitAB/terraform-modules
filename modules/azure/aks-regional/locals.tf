@@ -1,0 +1,35 @@
+
+locals{
+  aks_public_ip_prefix_ids = [for prefix in azurerm_public_ip_prefix.aks : prefix.id]
+  aks_public_ip_prefix_ips = [for prefix in azurerm_public_ip_prefix.aks : prefix.ip_prefix]
+  key_vault_default_permissions = {
+    key_permissions = [
+      "Backup",
+      "Create",
+      "Decrypt",
+      "Delete",
+      "Encrypt",
+      "Get",
+      "Import",
+      "List",
+      "Purge",
+      "Recover",
+      "Restore",
+      "Sign",
+      "UnwrapKey",
+      "Update",
+      "Verify",
+      "WrapKey"
+    ]
+    secret_permissions = [
+      "Backup",
+      "Delete",
+      "Get",
+      "List",
+      "Purge",
+      "Recover",
+      "Restore",
+      "Set"
+    ]
+  }
+}

@@ -20,17 +20,17 @@ resource "azurerm_role_assignment" "aks" {
 
 # Add data source for the Azure AD Group for AcrPull
 data "azuread_group" "acr_pull" {
-  display_name = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrpull"
+  display_name = "${var.aks_group_name_prefix}-${var.subscription_name}-${var.environment}-acrpull"
 }
 
 # Add data source for the Azure AD Group for AcrPush
 data "azuread_group" "acr_push" {
-  display_name = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrpush"
+  display_name = "${var.aks_group_name_prefix}-${var.subscription_name}-${var.environment}-acrpush"
 }
 
 # Add data source for the Azure AD Group for AcrReader
 data "azuread_group" "acr_reader" {
-  display_name = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrreader"
+  display_name = "${var.aks_group_name_prefix}-${var.subscription_name}-${var.environment}-acrreader"
 }
 
 # Assign AcrPull permissions to the Azure AD Group for AcrPull

@@ -10,8 +10,8 @@ provider "random" {}
 
 provider "tls" {}
 
-module "aks_global" {
-  source = "../../../modules/azure/aks-global"
+module "aks_regional" {
+  source = "../../../modules/azure/aks-regional"
 
   environment       = "dev"
   location_short    = "we"
@@ -34,4 +34,5 @@ module "aks_global" {
   ]
 
   dns_zone           = ["example.io"]
+  aks_authorized_ips = ["0.0.0.0/0"]
 }

@@ -3,11 +3,6 @@ output "aad_groups" {
   value       = local.aad_groups
 }
 
-output "aad_pod_identity" {
-  description = "aad-pod-identity user assigned identities"
-  value       = local.aad_pod_identity
-}
-
 output "namespaces" {
   description = "Kubernetes namespaces"
   value       = var.namespaces

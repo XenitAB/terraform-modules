@@ -11,6 +11,11 @@ output "aks_authorized_ips" {
   )
 }
 
+output "aad_pod_identity" {
+  description = "aad-pod-identity user assigned identities"
+  value       = local.aad_pod_identity
+}
+
 output "aks_public_ip_prefix_ids" {
   description = "Azure Kubernetes Service IP Prefixes"
   value       = local.aks_public_ip_prefix_ids

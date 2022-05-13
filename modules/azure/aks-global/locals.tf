@@ -1,8 +1,4 @@
 locals {
-  aad_pod_identity = {
-    for k, v in azurerm_user_assigned_identity.aad_pod_identity :
-    k => { id = v.id, client_id = v.client_id }
-  }
   aad_groups = {
     view                 = { for k, v in azuread_group.view : k => { id = v.id, name = v.display_name } }
     edit                 = { for k, v in azuread_group.edit : k => { id = v.id, name = v.display_name } }

@@ -89,6 +89,7 @@ This module is used to create resources that are used by AKS clusters.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_aad_pod_identity"></a> [aad\_pod\_identity](#output\_aad\_pod\_identity) | aad-pod-identity user assigned identities |
 | <a name="output_acr_name"></a> [acr\_name](#output\_acr\_name) | Azure Container Registry Name |
 | <a name="output_aks_authorized_ips"></a> [aks\_authorized\_ips](#output\_aks\_authorized\_ips) | IP addresses authorized for API communication to Azure Kubernetes Service |
 | <a name="output_aks_public_ip_prefix_ids"></a> [aks\_public\_ip\_prefix\_ids](#output\_aks\_public\_ip\_prefix\_ids) | Azure Kubernetes Service IP Prefixes |

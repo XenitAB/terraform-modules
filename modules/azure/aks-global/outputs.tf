@@ -13,15 +13,6 @@ output "dns_zone" {
   value       = var.dns_zone
 }
 
-output "helm_operator_credentials" {
-  description = "Credentials meant to be used by Helm Operator"
-  sensitive   = true
-  value = {
-    client_id = azuread_service_principal.helm_operator.application_id
-    secret    = azuread_application_password.helm_operator.value
-  }
-}
-
 output "external_dns_identity" {
   description = "MSI authentication identity for External DNS"
   value = {

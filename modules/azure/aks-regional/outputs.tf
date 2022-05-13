@@ -50,6 +50,15 @@ output "xenit" {
   }
 }
 
+output "helm_operator_credentials" {
+  description = "Credentials meant to be used by Helm Operator"
+  sensitive   = true
+  value = {
+    client_id = azuread_service_principal.helm_operator.application_id
+    secret    = azuread_application_password.helm_operator.value
+  }
+}
+
 output "trivy_identity" {
   description = "MSI authentication identity for Trivy image scaning"
   value = {

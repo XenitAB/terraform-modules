@@ -28,7 +28,7 @@ output "aks_managed_identity_group_id" {
 output "azuread_group_view_id" {
   description = "The group id of azure ad group edit"
   value = {
-    for edit in azuread_group.view :
+    for view in azuread_group.view :
     view.key => view.id
   }
 }

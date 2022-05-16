@@ -57,9 +57,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_aks_group_name_prefix"></a> [aks\_group\_name\_prefix](#input\_aks\_group\_name\_prefix) | Prefix for AKS Azure AD groups | `string` | `"aks"` | no |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
-| <a name="input_delegate_acr"></a> [delegate\_acr](#input\_delegate\_acr) | Should Azure Container Registry delegation be configured? | `bool` | `true` | no |
 | <a name="input_delegate_sub_groups"></a> [delegate\_sub\_groups](#input\_delegate\_sub\_groups) | Should the subscription groups be delegated to global groups (example: az-sub-[subName]-all-owner) | `bool` | `true` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_group_name_separator"></a> [group\_name\_separator](#input\_group\_name\_separator) | Separator for group names | `string` | `"-"` | no |
@@ -74,3 +72,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_azuread_apps"></a> [azuread\_apps](#output\_azuread\_apps) | Output for Azure AD applications |
+| <a name="output_azuread_group_edit_id"></a> [azuread\_group\_edit\_id](#output\_azuread\_group\_edit\_id) | The group id of azure ad group edit |
+| <a name="output_azuread_groups"></a> [azuread\_groups](#output\_azuread\_groups) | Output for Azure AD Groups |

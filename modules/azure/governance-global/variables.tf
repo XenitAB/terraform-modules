@@ -25,12 +25,6 @@ variable "azure_ad_group_prefix" {
   default     = "az"
 }
 
-variable "aks_group_name_prefix" {
-  description = "Prefix for AKS Azure AD groups"
-  type        = string
-  default     = "aks"
-}
-
 variable "service_principal_name_prefix" {
   description = "Prefix for service principals"
   type        = string
@@ -45,12 +39,6 @@ variable "partner_id" {
 
 variable "delegate_sub_groups" {
   description = "Should the subscription groups be delegated to global groups (example: az-sub-[subName]-all-owner)"
-  type        = bool
-  default     = true
-}
-
-variable "delegate_acr" {
-  description = "Should Azure Container Registry delegation be configured?"
   type        = bool
   default     = true
 }

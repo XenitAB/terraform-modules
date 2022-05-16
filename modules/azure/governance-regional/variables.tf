@@ -131,6 +131,6 @@ variable "delegate_acr" {
 }
 
 variable "service_principal_object_id" {
-  type = map(string)
+  type        = map(string)
   description = "object ID of service_principle"
 }

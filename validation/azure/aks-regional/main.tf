@@ -19,7 +19,6 @@ module "aks_regional" {
   subscription_name             = "xks"
   core_name                     = "core"
   unique_suffix                 = "1234"
-  aks_managed_identity_group_id = "1337"
   namespaces = [
     {
       name                    = "team1"

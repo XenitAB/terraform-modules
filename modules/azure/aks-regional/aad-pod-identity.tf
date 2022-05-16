@@ -16,7 +16,7 @@ resource "azurerm_role_assignment" "aad_pod_identity" {
   }
   scope                = azurerm_user_assigned_identity.aad_pod_identity[each.key].id
   role_definition_name = "Managed Identity Operator"
-  principal_id         = module.aks-global.aks_managed_identity_group_id
+  principal_id         = data.azuread_group.aks_managed_identity.id
 }
 
 resource "azuread_group_member" "aad_pod_identity" {

@@ -95,9 +95,9 @@ variable "aks_managed_identity_group_id" {
   type = string
 }
 variable "azuread_group_view_ids" {
-  type = list(string)
+  type = map(string)
 }
 
 variable "azuread_group_edit_ids" {
-  type = list(string)
+  type = map(string)
 }

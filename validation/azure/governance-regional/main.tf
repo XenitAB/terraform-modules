@@ -21,6 +21,7 @@ module "governance-regional" {
   location_short               = "we"
   location                     = "West Europe"
   core_name                    = "core"
+  subscription_name            = "xks"
   owner_service_principal_name = "test"
   resource_group_configs = [
     {

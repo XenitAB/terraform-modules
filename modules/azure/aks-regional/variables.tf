@@ -90,3 +90,15 @@ variable "azad_kube_proxy_config" {
     proxy_url_override  = ""
   }
 }
+
+variable "aks_managed_identity_group_id" {
+  description = "The group id of aks managed identity"
+}
+
+variable "azuread_group_view_id" {
+  description = "The group id of azure ad group edit"
+}
+
+variable "azuread_group_edit_id" {
+  description = "The group id of azure ad group edit"
+}

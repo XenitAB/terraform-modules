@@ -1,5 +1,5 @@
 resource "azuread_group" "service_endpoint_join" {
-  display_name            = "${var.azure_ad_group_prefix}-sub-${var.subscription_name}-${var.environment}-serviceEndpointJoin"
+  display_name            = "${var.azure_ad_group_prefix}-sub-${var.subscription_name}-${var.environment}-${location_short}-serviceEndpointJoin"
   prevent_duplicate_names = true
   security_enabled        = true
 }

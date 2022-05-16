@@ -15,7 +15,7 @@ resource "azurerm_container_registry" "acr" {
 resource "azurerm_role_assignment" "aks" {
   scope                = azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"
-  principal_id         = var.aks_managed_identity_group_id
+  principal_id         = module.aks-global.aks_managed_identity_group_id
 }
 
 # Add data source for the Azure AD Group for AcrPull
@@ -63,7 +63,7 @@ resource "azurerm_user_assigned_identity" "trivy" {
 resource "azurerm_role_assignment" "trivy_managed" {
   scope                = azurerm_user_assigned_identity.trivy.id
   role_definition_name = "Managed Identity Operator"
-  principal_id         = var.aks_managed_identity_group_id
+  principal_id         = module.aks-global.aks_managed_identity_group_id
 }
 
 resource "azurerm_role_assignment" "trivy_acr" {

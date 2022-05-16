@@ -57,6 +57,8 @@ No modules.
 |------|-------------|
 | <a name="output_aad_groups"></a> [aad\_groups](#output\_aad\_groups) | Azure AD groups |
 | <a name="output_aks_managed_identity_group_id"></a> [aks\_managed\_identity\_group\_id](#output\_aks\_managed\_identity\_group\_id) | The group id of aks managed identity |
+| <a name="output_azuread_group_edit_id"></a> [azuread\_group\_edit\_id](#output\_azuread\_group\_edit\_id) | The group id of azure ad group edit |
+| <a name="output_azuread_group_view_id"></a> [azuread\_group\_view\_id](#output\_azuread\_group\_view\_id) | The group id of azure ad group edit |
 | <a name="output_dns_zone"></a> [dns\_zone](#output\_dns\_zone) | DNS Zone to be used with external-dns |
 | <a name="output_external_dns_identity"></a> [external\_dns\_identity](#output\_external\_dns\_identity) | MSI authentication identity for External DNS |
 | <a name="output_namespaces"></a> [namespaces](#output\_namespaces) | Kubernetes namespaces |

@@ -8,7 +8,7 @@ resource "azuread_group" "acr_push" {
     if var.delegate_acr
   }
 
-  display_name            = "${var.aks_group_name_prefix}-${var.subscription_name}-${var.environment}-${location_short}-acrpush"
+  display_name            = "${var.aks_group_name_prefix}-${var.subscription_name}-${var.environment}-${var.location_short}-acrpush"
   prevent_duplicate_names = true
   security_enabled        = true
 }
@@ -21,7 +21,7 @@ resource "azuread_group" "acr_pull" {
     if var.delegate_acr
   }
 
-  display_name            = "${var.aks_group_name_prefix}-${var.subscription_name}-${var.environment}-${location_short}-acrpull"
+  display_name            = "${var.aks_group_name_prefix}-${var.subscription_name}-${var.environment}-${var.location_short}-acrpull"
   prevent_duplicate_names = true
   security_enabled        = true
 }
@@ -34,7 +34,7 @@ resource "azuread_group" "acr_reader" {
     if var.delegate_acr
   }
 
-  display_name            = "${var.aks_group_name_prefix}-${var.subscription_name}-${var.environment}-${location_short}-acrreader"
+  display_name            = "${var.aks_group_name_prefix}-${var.subscription_name}-${var.environment}-${var.location_short}-acrreader"
   prevent_duplicate_names = true
   security_enabled        = true
 }

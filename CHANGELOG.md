@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fix
 
+- [#674](https://github.com/XenitAB/terraform-modules/pull/674) [Breaking] Fix support for multi-region
 - [#671](https://github.com/XenitAB/terraform-modules/pull/671) [Breaking] Governance delegate-se from regional to global module.
 - [#672](https://github.com/XenitAB/terraform-modules/pull/672) Fix EKS version validation
 

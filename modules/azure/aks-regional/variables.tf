@@ -91,7 +91,7 @@ variable "azad_kube_proxy_config" {
   }
 }
 
-variable "aks_managed_identity_id" {
+variable "aks_managed_identity_group_id" {
   type        = string
   description = "The group id of aks managed identity"
 }

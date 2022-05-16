@@ -20,8 +20,6 @@ module "aks_regional" {
   core_name                     = "core"
   unique_suffix                 = "1234"
   aks_managed_identity_group_id = "1337"
-  azuread_group_edit_id         = "1337"
-  azuread_group_view_id         = "1337"
   namespaces = [
     {
       name                    = "team1"

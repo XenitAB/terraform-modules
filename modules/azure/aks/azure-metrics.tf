@@ -13,7 +13,7 @@ resource "azurerm_user_assigned_identity" "azure_metrics" {
 resource "azurerm_role_assignment" "azure_metrics" {
   scope                = azurerm_user_assigned_identity.azure_metrics.id
   role_definition_name = "Managed Identity Operator"
-  principal_id         = aks_managed_identity_group_id.id
+  principal_id         = var.aks_managed_identity_group_id
 }
 
 resource "azurerm_role_assignment" "azure_metrics_aks_reader" {

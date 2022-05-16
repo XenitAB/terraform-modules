@@ -25,7 +25,7 @@ resource "azurerm_user_assigned_identity" "velero" {
 resource "azurerm_role_assignment" "velero_msi" {
   scope                = azurerm_user_assigned_identity.velero.id
   role_definition_name = "Managed Identity Operator"
-  principal_id         = var.aks_managed_identity_group_id.id
+  principal_id         = var.aks_managed_identity_group_id
 }
 
 resource "azurerm_role_assignment" "external_storage_contributor" {

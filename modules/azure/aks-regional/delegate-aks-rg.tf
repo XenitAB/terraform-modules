@@ -34,7 +34,7 @@ resource "azuread_group_member" "resource_group_owner" {
     ns.name => ns
     if ns.delegate_resource_group == true
   }
-  group_object_id  = var.azuread_group.edit[each.key].id
+  group_object_id  = var.azuread_group_edit_id
   member_object_id = data.azuread_group.resource_group_owner[each.key].id
 }
 
@@ -44,7 +44,7 @@ resource "azuread_group_member" "resource_group_contributor" {
     ns.name => ns
     if ns.delegate_resource_group == true
   }
-  group_object_id  = var.azuread_group.edit[each.key].id
+  group_object_id  = var.azuread_group_edit_id
   member_object_id = data.azuread_group.resource_group_contributor[each.key].id
 }
 
@@ -54,6 +54,6 @@ resource "azuread_group_member" "resource_group_reader" {
     ns.name => ns
     if ns.delegate_resource_group == true
   }
-  group_object_id  = var.azuread_group.view[each.key].id
+  group_object_id  = var.azuread_group_view_id
   member_object_id = data.azuread_group.resource_group_reader[each.key].id
 }

@@ -92,15 +92,15 @@ variable "azad_kube_proxy_config" {
 }
 
 variable "aks_managed_identity_group_id" {
-  type = string
+  type        = string
   description = "ID of group"
 }
 variable "azuread_group_view_ids" {
-  type = map(string)
+  type        = map(string)
   description = "IDs of groups"
 }
 
 variable "azuread_group_edit_ids" {
-  type = map(string)
+  type        = map(string)
   description = "IDs of groups"
 }

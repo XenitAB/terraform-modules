@@ -117,3 +117,20 @@ variable "azuread_apps" {
     })
   })
 }
+
+variable "aks_group_name_prefix" {
+  description = "Prefix for AKS Azure AD groups"
+  type        = string
+  default     = "aks"
+}
+
+variable "delegate_acr" {
+  description = "Should Azure Container Registry delegation be configured?"
+  type        = bool
+  default     = true
+}
+
+variable "service_principal_object_id" {
+  type = map(string)
+  description = "object ID of service_principle"
+}

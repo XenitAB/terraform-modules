@@ -23,6 +23,7 @@ module "governance-regional" {
   core_name                    = "core"
   subscription_name            = "xks"
   owner_service_principal_name = "test"
+  service_principal_object_id  = { "test" = "test" }
   resource_group_configs = [
     {
       common_name                = "core",

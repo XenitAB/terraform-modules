@@ -8,7 +8,7 @@ resource "azuread_group" "acr_push" {
     if var.delegate_acr
   }
 
-  display_name            = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrpush"
+  display_name            = "${var.aks_group_name_prefix}-${var.subscription_name}-${var.environment}-acrpush"
   prevent_duplicate_names = true
   security_enabled        = true
 }
@@ -21,7 +21,7 @@ resource "azuread_group" "acr_pull" {
     if var.delegate_acr
   }
 
-  display_name            = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrpull"
+  display_name            = "${var.aks_group_name_prefix}-${var.subscription_name}-${var.environment}-acrpull"
   prevent_duplicate_names = true
   security_enabled        = true
 }
@@ -34,7 +34,7 @@ resource "azuread_group" "acr_reader" {
     if var.delegate_acr
   }
 
-  display_name            = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrreader"
+  display_name            = "${var.aks_group_name_prefix}-${var.subscription_name}-${var.environment}-acrreader"
   prevent_duplicate_names = true
   security_enabled        = true
 }
@@ -47,7 +47,7 @@ resource "azuread_group_member" "acr_spn" {
     if rg.delegate_aks == true && var.delegate_acr
   }
   group_object_id  = azuread_group.acr_push["delegate_acr"].id
-  member_object_id = azuread_service_principal.aad_sp[each.key].object_id
+  member_object_id = var.service_principal_object_id[each.key]
 }
 
 # Grant ACR Push permissions to the resource group owners

@@ -90,3 +90,14 @@ variable "azad_kube_proxy_config" {
     proxy_url_override  = ""
   }
 }
+
+variable "aks_managed_identity_group_id" {
+  type = string
+}
+variable "azuread_group_view_ids" {
+  type = list(string)
+}
+
+variable "azuread_group_edit_ids" {
+  type = list(string)
+}

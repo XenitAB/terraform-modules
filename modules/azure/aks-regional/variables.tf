@@ -95,3 +95,13 @@ variable "aks_managed_identity_group_id" {
   description = "The group id of aks managed identity"
   type        = string
 }
+
+variable "azuread_group_view_id" {
+  description = "The group id of azure ad group edit"
+  type        = list(string)
+}
+
+variable "azuread_group_edit_id" {
+  description = "The group id of azure ad group edit"
+  type        = list(string)
+}

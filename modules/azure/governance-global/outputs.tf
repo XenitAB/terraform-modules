@@ -1,4 +1,4 @@
-output "azuread_group_edit_id" {
+output "azuread_service_principal_object_id" {
   description = "The group id of azure ad group edit"
   value = {
     for sp in azuread_service_principal.aad_sp :

@@ -72,5 +72,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_azuread_apps"></a> [azuread\_apps](#output\_azuread\_apps) | Output for Azure AD applications |
-| <a name="output_azuread_group_edit_id"></a> [azuread\_group\_edit\_id](#output\_azuread\_group\_edit\_id) | The group id of azure ad group edit |
 | <a name="output_azuread_groups"></a> [azuread\_groups](#output\_azuread\_groups) | Output for Azure AD Groups |
+| <a name="output_azuread_service_principal_object_id"></a> [azuread\_service\_principal\_object\_id](#output\_azuread\_service\_principal\_object\_id) | The group id of azure ad group edit |

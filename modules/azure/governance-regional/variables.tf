@@ -130,6 +130,12 @@ variable "delegate_acr" {
   default     = true
 }
 
+variable "service_principal_name_prefix" {
+  description = "Prefix for service principals"
+  type        = string
+  default     = "sp"
+}
+
 variable "service_principal_object_id" {
   type        = map(string)
   description = "object ID of service_principle"

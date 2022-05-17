@@ -66,5 +66,8 @@ output "azuread_apps" {
 
 output "aad_sp_passwords" {
   description = "Application password per resource group."
-  value       = azuread_application_password.aad_sp
+  value = {
+    for key, value in azuread_application_password.aad_sp :
+    key => value.value
+  }
 }

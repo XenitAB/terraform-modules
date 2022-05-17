@@ -18,7 +18,6 @@ This module is used for governance on a regional level and not using any specifi
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.19.1 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.1.0 |
-| <a name="provider_pal"></a> [pal](#provider\_pal) | 0.2.5 |
 
 ## Modules
 
@@ -28,7 +27,6 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azuread_application_password.aad_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application_password) | resource |
 | [azuread_application_password.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application_password) | resource |
 | [azuread_application_password.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application_password) | resource |
 | [azurerm_key_vault.delegate_kv](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/key_vault) | resource |
@@ -47,7 +45,6 @@ No modules.
 | [azurerm_role_assignment.rg_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.rg_owner](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.rg_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/resources/role_assignment) | resource |
-| [pal_management_partner.aad_sp](https://registry.terraform.io/providers/xenitab/pal/0.2.5/docs/resources/management_partner) | resource |
 | [azuread_service_principal.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/data-sources/service_principal) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/data-sources/client_config) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.1.0/docs/data-sources/subscription) | data source |
@@ -56,6 +53,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_aad_sp_passwords"></a> [aad\_sp\_passwords](#input\_aad\_sp\_passwords) | Application password per resource group. | `map(string)` | n/a | yes |
 | <a name="input_azuread_apps"></a> [azuread\_apps](#input\_azuread\_apps) | Azure AD applications from global | <pre>object({<br>    delegate_kv = map(object({<br>      display_name                = string<br>      application_object_id       = string<br>      application_id              = string<br>      service_principal_object_id = string<br>    }))<br>    rg_contributor = map(object({<br>      display_name                = string<br>      application_object_id       = string<br>      application_id              = string<br>      service_principal_object_id = string<br>    }))<br>    sub_reader = object({<br>      display_name                = string<br>      application_object_id       = string<br>      application_id              = string<br>      service_principal_object_id = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_azuread_groups"></a> [azuread\_groups](#input\_azuread\_groups) | Azure AD groups from global | <pre>object({<br>    rg_owner = map(object({<br>      id = string<br>    }))<br>    rg_contributor = map(object({<br>      id = string<br>    }))<br>    rg_reader = map(object({<br>      id = string<br>    }))<br>    sub_owner = object({<br>      id = string<br>    })<br>    sub_contributor = object({<br>      id = string<br>    })<br>    sub_reader = object({<br>      id = string<br>    })<br>    service_endpoint_join = object({<br>      id = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The commonName for the core infrastructure | `string` | n/a | yes |

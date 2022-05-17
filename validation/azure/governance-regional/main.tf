@@ -132,4 +132,5 @@ module "governance-regional" {
       service_principal_object_id = "00000000-0000-0000-0000-000000000000"
     }
   }
+  aad_sp_passwords = { "test" = "test" }
 }

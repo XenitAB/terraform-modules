@@ -2,9 +2,6 @@ data "azuread_service_principal" "owner_spn" {
   display_name = var.owner_service_principal_name
 }
 
-// Global?
-
-
 resource "azurerm_role_assignment" "aad_sp" {
   for_each = {
     for rg in var.resource_group_configs :

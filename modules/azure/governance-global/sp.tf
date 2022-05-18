@@ -66,7 +66,7 @@ resource "azuread_application_password" "aad_sp" {
     if rg.delegate_service_principal == true
   }
 
-  application_object_id = azuread_group.rg_contributor[each.key].id
+  application_object_id = azuread_application.aad_app[each.key].object_id
   end_date              = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {
@@ -87,7 +87,7 @@ resource "pal_management_partner" "aad_sp" {
   }
 
   tenant_id     = data.azurerm_subscription.current.tenant_id
-  client_id     = azuread_group.rg_contributor[each.key].id
+  client_id     = azuread_application.aad_app[each.key].application_id
   client_secret = azuread_application_password.aad_sp[each.key].value
   partner_id    = var.partner_id
   overwrite     = true

@@ -135,6 +135,7 @@ This module is used to create AKS clusters.
 | <a name="input_starboard_enabled"></a> [starboard\_enabled](#input\_starboard\_enabled) | Should Starboard be enabled | `bool` | `true` | no |
 | <a name="input_velero_config"></a> [velero\_config](#input\_velero\_config) | Velero configuration | <pre>object({<br>    azure_storage_account_name      = string<br>    azure_storage_account_container = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_velero_enabled"></a> [velero\_enabled](#input\_velero\_enabled) | Should Velero be enabled | `bool` | `false` | no |
+| <a name="input_volume_claim_storage_class_name"></a> [volume\_claim\_storage\_class\_name](#input\_volume\_claim\_storage\_class\_name) | Storage class used by PVCs | `string` | `"managed-csi-zrs"` | no |
 | <a name="input_vpa_enabled"></a> [vpa\_enabled](#input\_vpa\_enabled) | Should VPA be enabled | `bool` | `true` | no |
 
 ## Outputs

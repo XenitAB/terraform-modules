@@ -471,3 +471,9 @@ variable "node_local_dns_enabled" {
   type        = bool
   default     = false
 }
+
+variable "volume_claim_storage_class_name" {
+  description = "Storage class used by PVCs"
+  type        = string
+  default     = "managed-csi-zrs"
+}

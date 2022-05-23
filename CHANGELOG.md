@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#678](https://github.com/XenitAB/terraform-modules/pull/678) Update OPA to 3.8.1, gatekeeper-library to 0.12.1 and add k8srequireingressclass constraint.
+
 ## 2022.05.2
 
 ### Changed

@@ -58,7 +58,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     enable_auto_scaling          = false
     node_count                   = var.aks_config.production_grade ? 2 : 1
     only_critical_addons_enabled = true
-    
+
     kubelet_config {
       pod_max_pid = 0
     }

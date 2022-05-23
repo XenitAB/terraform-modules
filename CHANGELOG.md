@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#678](https://github.com/XenitAB/terraform-modules/pull/678) Update OPA to 3.8.1, gatekeeper-library to 0.12.1 and add k8srequireingressclass constraint.
+- [#561](https://github.com/XenitAB/terraform-modules/pull/561) [Breaking] Add kubelet_disk_type as a config to AKS additional_node_pools. this allows us to use `Temporary` disk types.
 
 ## 2022.05.2
 

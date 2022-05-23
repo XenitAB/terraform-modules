@@ -36,15 +36,16 @@ variable "aks_config" {
     # Enables paid SKU for AKS and makes the default node pool HA
     production_grade = bool
     node_pools = list(object({
-      name           = string
-      version        = string
-      vm_size        = string
-      min_count      = number
-      max_count      = number
-      spot_enabled   = bool
-      spot_max_price = number
-      node_taints    = list(string)
-      node_labels    = map(string)
+      name              = string
+      version           = string
+      vm_size           = string
+      kubelet_disk_type = string
+      min_count         = number
+      max_count         = number
+      spot_enabled      = bool
+      spot_max_price    = number
+      node_taints       = list(string)
+      node_labels       = map(string)
     }))
   })
 

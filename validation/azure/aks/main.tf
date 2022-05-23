@@ -35,6 +35,7 @@ module "aks" {
         name      = "pool1"
         version   = "1.21.9"
         vm_size   = "Standard_B2s"
+        kubelet_disk_type = "Temporary"
         min_count = 1
         max_count = 1
         node_taints = [

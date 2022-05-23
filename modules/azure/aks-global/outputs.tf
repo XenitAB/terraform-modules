@@ -95,6 +95,14 @@ output "aks_managed_identity_group_id" {
   value       = azuread_group.aks_managed_identity.id
 }
 
+output "azure_metrics_identity" {
+  description = "MSI authentication identity for Azure Metrics"
+  value = {
+    client_id   = azurerm_user_assigned_identity.azure_metrics.client_id
+    resource_id = azurerm_user_assigned_identity.azure_metrics.id
+  }
+}
+
 output "user_assigned_identity_id" {
   description = "User Assigned Identity for Azure Metrics"
   value       = azurerm_user_assigned_identity.azure_metrics.id

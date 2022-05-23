@@ -108,6 +108,7 @@ No modules.
 | <a name="output_aks_authorized_ips"></a> [aks\_authorized\_ips](#output\_aks\_authorized\_ips) | IP addresses authorized for API communication to Azure Kubernetes Service |
 | <a name="output_aks_managed_identity_group_id"></a> [aks\_managed\_identity\_group\_id](#output\_aks\_managed\_identity\_group\_id) | The group id of aks managed identity |
 | <a name="output_aks_public_ip_prefix_ids"></a> [aks\_public\_ip\_prefix\_ids](#output\_aks\_public\_ip\_prefix\_ids) | Azure Kubernetes Service IP Prefixes |
+| <a name="output_azure_metrics_identity"></a> [azure\_metrics\_identity](#output\_azure\_metrics\_identity) | MSI authentication identity for Azure Metrics |
 | <a name="output_dns_zone"></a> [dns\_zone](#output\_dns\_zone) | DNS Zone to be used with external-dns |
 | <a name="output_external_dns_identity"></a> [external\_dns\_identity](#output\_external\_dns\_identity) | MSI authentication identity for External DNS |
 | <a name="output_helm_operator_credentials"></a> [helm\_operator\_credentials](#output\_helm\_operator\_credentials) | Credentials meant to be used by Helm Operator |

@@ -84,3 +84,15 @@ variable "aks_group_name_prefix" {
   type        = string
   default     = "aks"
 }
+
+variable "azad_kube_proxy_config" {
+  description = "Azure AD Kubernetes Proxy configuration"
+  type = object({
+    cluster_name_prefix = string
+    proxy_url_override  = string
+  })
+  default = {
+    cluster_name_prefix = "aks"
+    proxy_url_override  = ""
+  }
+}

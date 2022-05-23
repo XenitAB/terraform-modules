@@ -264,16 +264,16 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
-    datadog_site     = string
-    api_key          = string
-    app_key          = string
-    extra_namespaces = list(string)
+    datadog_site = string
+    api_key      = string
+    app_key      = string
+    namespaces   = list(string)
   })
   default = {
-    datadog_site     = ""
-    api_key          = ""
-    app_key          = ""
-    extra_namespaces = [""]
+    datadog_site = ""
+    api_key      = ""
+    app_key      = ""
+    namespaces   = [""]
   }
 }
 
@@ -408,6 +408,16 @@ variable "promtail_config" {
     loki_address        = string
     excluded_namespaces = list(string)
   })
+  default = {
+    azure_key_vault_name = ""
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
+    loki_address        = ""
+    excluded_namespaces = []
+  }
 }
 
 variable "ingress_healthz_enabled" {

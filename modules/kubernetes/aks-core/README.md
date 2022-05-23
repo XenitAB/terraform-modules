@@ -12,7 +12,7 @@ This module is used to create AKS clusters.
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.11.2 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 4.21.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.4.1 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.13.1 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.8.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
 
@@ -58,7 +58,7 @@ This module is used to create AKS clusters.
 |------|------|
 | [helm_release.aks_core_extras](https://registry.terraform.io/providers/hashicorp/helm/2.4.1/docs/resources/release) | resource |
 | [kubernetes_cluster_role.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.get_node](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.get_nodes](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.list_namespaces](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.starboard_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/cluster_role) | resource |
@@ -66,6 +66,7 @@ This module is used to create AKS clusters.
 | [kubernetes_cluster_role_binding.cluster_admin](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_cluster_role_binding.cluster_view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_cluster_role_binding.edit_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_cluster_role_binding.get_nodes](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_cluster_role_binding.view_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_limit_range.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/limit_range) | resource |
 | [kubernetes_namespace.service_accounts](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/namespace) | resource |
@@ -75,7 +76,6 @@ This module is used to create AKS clusters.
 | [kubernetes_network_policy.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/network_policy) | resource |
 | [kubernetes_role_binding.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.get_node](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.sa_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.sa_helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/role_binding) | resource |
@@ -102,7 +102,7 @@ This module is used to create AKS clusters.
 | <a name="input_cert_manager_config"></a> [cert\_manager\_config](#input\_cert\_manager\_config) | Cert Manager configuration, the first item in the list is the main domain | <pre>object({<br>    notification_email = string<br>    dns_zone           = list(string)<br>  })</pre> | n/a | yes |
 | <a name="input_cert_manager_enabled"></a> [cert\_manager\_enabled](#input\_cert\_manager\_enabled) | Should Cert Manager be enabled | `bool` | `true` | no |
 | <a name="input_csi_secrets_store_provider_azure_enabled"></a> [csi\_secrets\_store\_provider\_azure\_enabled](#input\_csi\_secrets\_store\_provider\_azure\_enabled) | Should csi-secrets-store-provider-azure be enabled | `bool` | `true` | no |
-| <a name="input_datadog_config"></a> [datadog\_config](#input\_datadog\_config) | Datadog configuration | <pre>object({<br>    datadog_site     = string<br>    api_key          = string<br>    app_key          = string<br>    extra_namespaces = list(string)<br>  })</pre> | <pre>{<br>  "api_key": "",<br>  "app_key": "",<br>  "datadog_site": "",<br>  "extra_namespaces": [<br>    ""<br>  ]<br>}</pre> | no |
+| <a name="input_datadog_config"></a> [datadog\_config](#input\_datadog\_config) | Datadog configuration | <pre>object({<br>    datadog_site = string<br>    api_key      = string<br>    app_key      = string<br>    namespaces   = list(string)<br>  })</pre> | <pre>{<br>  "api_key": "",<br>  "app_key": "",<br>  "datadog_site": "",<br>  "namespaces": [<br>    ""<br>  ]<br>}</pre> | no |
 | <a name="input_datadog_enabled"></a> [datadog\_enabled](#input\_datadog\_enabled) | Should Datadog be enabled | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_external_dns_config"></a> [external\_dns\_config](#input\_external\_dns\_config) | External DNS configuration | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |
@@ -128,7 +128,7 @@ This module is used to create AKS clusters.
 | <a name="input_opa_gatekeeper_enabled"></a> [opa\_gatekeeper\_enabled](#input\_opa\_gatekeeper\_enabled) | Should OPA Gatekeeper be enabled | `bool` | `true` | no |
 | <a name="input_prometheus_config"></a> [prometheus\_config](#input\_prometheus\_config) | Configuration for prometheus | <pre>object({<br>    azure_key_vault_name = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>      tenant_id   = string<br>    })<br><br>    tenant_id = string<br><br>    remote_write_authenticated = bool<br>    remote_write_url           = string<br><br>    volume_claim_size = string<br><br>    resource_selector  = list(string)<br>    namespace_selector = list(string)<br>  })</pre> | n/a | yes |
 | <a name="input_prometheus_enabled"></a> [prometheus\_enabled](#input\_prometheus\_enabled) | Should prometheus be enabled | `bool` | `true` | no |
-| <a name="input_promtail_config"></a> [promtail\_config](#input\_promtail\_config) | Configuration for promtail | <pre>object({<br>    azure_key_vault_name = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>      tenant_id   = string<br>    })<br>    loki_address        = string<br>    excluded_namespaces = list(string)<br>  })</pre> | n/a | yes |
+| <a name="input_promtail_config"></a> [promtail\_config](#input\_promtail\_config) | Configuration for promtail | <pre>object({<br>    azure_key_vault_name = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>      tenant_id   = string<br>    })<br>    loki_address        = string<br>    excluded_namespaces = list(string)<br>  })</pre> | <pre>{<br>  "azure_key_vault_name": "",<br>  "excluded_namespaces": [],<br>  "identity": {<br>    "client_id": "",<br>    "resource_id": "",<br>    "tenant_id": ""<br>  },<br>  "loki_address": ""<br>}</pre> | no |
 | <a name="input_promtail_enabled"></a> [promtail\_enabled](#input\_promtail\_enabled) | Should promtail be enabled | `bool` | `false` | no |
 | <a name="input_reloader_enabled"></a> [reloader\_enabled](#input\_reloader\_enabled) | Should Reloader be enabled | `bool` | `true` | no |
 | <a name="input_starboard_config"></a> [starboard\_config](#input\_starboard\_config) | Configuration for starboard | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |

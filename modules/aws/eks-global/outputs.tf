@@ -30,3 +30,11 @@ output "aad_groups" {
   description = "Azure AD groups"
   value       = local.aad_groups
 }
+
+output "azad_kube_proxy" {
+  description = "The Azure AD Application config for azad-kube-proxy"
+  value = {
+    azure_ad_app = module.azad_kube_proxy.data
+  }
+  sensitive = true
+}

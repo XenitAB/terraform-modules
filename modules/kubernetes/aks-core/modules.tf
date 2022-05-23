@@ -206,6 +206,11 @@ module "ingress_nginx" {
   datadog_enabled           = var.datadog_enabled
   public_private_enabled    = var.ingress_config.public_private_enabled
   allow_snippet_annotations = var.ingress_config.allow_snippet_annotations
+
+  default_certificate = {
+    enabled  = true
+    dns_zone = var.cert_manager_config.dns_zone[0]
+  }
 }
 
 # ingress-healthz
@@ -324,7 +329,7 @@ module "datadog" {
   datadog_site      = var.datadog_config.datadog_site
   api_key           = var.datadog_config.api_key
   app_key           = var.datadog_config.app_key
-  namespace_include = compact(concat(var.namespaces[*].name, var.datadog_config.extra_namespaces))
+  namespace_include = var.datadog_config.namespaces
 }
 
 # grafana-agent

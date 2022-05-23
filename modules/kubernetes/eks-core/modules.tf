@@ -29,7 +29,17 @@ data "aws_route53_zone" "this" {
   name = each.key
 }
 
+module "opa_gatekeeper_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://open-policy-agent.github.io/gatekeeper/charts"
+  chart_name       = "gatekeeper"
+  chart_version    = "3.7.1"
+}
+
 module "opa_gatekeeper" {
+  depends_on = [module.opa_gatekeeper_crd]
+
   for_each = {
     for s in ["opa-gatekeeper"] :
     s => s
@@ -183,8 +193,19 @@ module "external_dns" {
   }
 }
 
+module "cert_manager_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://charts.jetstack.io"
+  chart_name       = "cert-manager"
+  chart_version    = "v1.7.1"
+  values = {
+    "installCRDs" = "true"
+  }
+}
+
 module "cert_manager" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.cert_manager_crd]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -294,8 +315,16 @@ module "promtail" {
 }
 
 # Prometheus
+module "prometheus_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://prometheus-community.github.io/helm-charts"
+  chart_name       = "kube-prometheus-stack"
+  chart_version    = "30.0.0"
+}
+
 module "prometheus" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.prometheus_crd]
 
   for_each = {
     for s in ["prometheus"] :
@@ -335,8 +364,16 @@ module "prometheus" {
 }
 
 # starboard
+module "starboard_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://aquasecurity.github.io/helm-charts/"
+  chart_name       = "starboard-operator"
+  chart_version    = "0.9.1"
+}
+
 module "starboard" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.starboard_crd]
 
   for_each = {
     for s in ["starboard"] :
@@ -374,7 +411,7 @@ module "cluster_autoscaler" {
 module "csi_secrets_store_provider_aws_crd" {
   source = "../../kubernetes/helm-crd"
 
-  chart_repository = "https://raw.githubusercontent.com/kubernetes-sigs/secrets-store-csi-driver/master/charts"
+  chart_repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
   chart_name       = "secrets-store-csi-driver"
   chart_version    = "0.2.0"
 }
@@ -392,8 +429,16 @@ module "csi_secrets_store_provider_aws" {
 }
 
 # datadog
+module "datadog_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://helm.datadoghq.com"
+  chart_name       = "datadog-operator"
+  chart_version    = "0.7.0"
+}
+
 module "datadog" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.datadog_crd]
 
   for_each = {
     for s in ["datadog"] :
@@ -412,8 +457,16 @@ module "datadog" {
 }
 
 # vpa
+module "vpa_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://charts.fairwinds.com/stable"
+  chart_name       = "goldilocks"
+  chart_version    = "5.1.0"
+}
+
 module "vpa" {
-  depends_on = [module.opa_gatekeeper, module.prometheus]
+  depends_on = [module.opa_gatekeeper, module.vpa_crd]
 
   for_each = {
     for s in ["vpa"] :

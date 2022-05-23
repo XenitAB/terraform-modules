@@ -30,7 +30,7 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "csi_secrets_store_driver" {
-  repository  = "https://raw.githubusercontent.com/kubernetes-sigs/secrets-store-csi-driver/master/charts"
+  repository  = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
   chart       = "secrets-store-csi-driver"
   name        = "secrets-store-csi-driver"
   version     = "0.2.0"

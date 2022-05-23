@@ -6,14 +6,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.05.2
+
+### Changed
+
+- [#666](https://github.com/XenitAB/terraform-modules/pull/666) Enable ingress-nginx logs in promtail.
+- [#670](https://github.com/XenitAB/terraform-modules/pull/670) Ingress-nginx default wildcard certificate enabled.
+
+### Fix
+
+- [#671](https://github.com/XenitAB/terraform-modules/pull/671) [Breaking] Governance delegate-se from regional to global module.
+- [#672](https://github.com/XenitAB/terraform-modules/pull/672) Fix EKS version validation
+
+## 2022.05.1
+
 ### Changed
 
 - [#651](https://github.com/XenitAB/terraform-modules/pull/651) OPA add seccomp profile and disable default mount of SA token.
 - [#645](https://github.com/XenitAB/terraform-modules/pull/645) [Breaking] Refactor AKS node configuration with default values.
 - [#659](https://github.com/XenitAB/terraform-modules/pull/659) [Breaking] Bring AKS and EKS config inline with each other.
+- [#653](https://github.com/XenitAB/terraform-modules/pull/653) Add validation of Kubernetes version in EKS and AKS.
+- [#662](https://github.com/XenitAB/terraform-modules/pull/662) Modify FluxV2 installation to never remove applied resource.
+- [#663](https://github.com/XenitAB/terraform-modules/pull/663) Set max history to Helm releases missing configuration.
 
 ### Fix
 
+- [#661](https://github.com/XenitAB/terraform-modules/pull/661) Fix cluster-role-binding for get-nodes role.
 - [#658](https://github.com/XenitAB/terraform-modules/pull/658) Remove 'use-forwarded-headers: "true"' from ingress-nginx
 
 ## 2022.04.3

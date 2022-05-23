@@ -15,12 +15,14 @@ module "aks" {
     azurerm = azurerm
   }
 
-  environment                   = "dev"
-  location_short                = "we"
-  name                          = "xks"
-  core_name                     = "core"
-  aks_name_suffix               = "1"
-  aks_managed_identity_group_id = "1337"
+  environment                         = "dev"
+  location_short                      = "we"
+  name                                = "xks"
+  core_name                           = "core"
+  aks_name_suffix                     = "1"
+  aks_managed_identity_group_id       = "1337"
+  user_assigned_identity_id           = "123"
+  user_assigned_identity_principal_id = "34256"
 
   aks_config = {
     version          = "1.21.9"

@@ -31,6 +31,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`grafana-agent`](grafana-agent/README.md)
 - [`node-local-dns`](node-local-dns/README.md)
 - [`promtail`](promtail/README.md)
+- [`helm-crd`](helm-crd/README.md)
 
 ## Style Guide
 

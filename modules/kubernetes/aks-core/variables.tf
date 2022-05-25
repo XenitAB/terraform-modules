@@ -442,10 +442,15 @@ variable "starboard_enabled" {
 variable "starboard_config" {
   description = "Configuration for starboard"
   type = object({
-    client_id                       = string
-    resource_id                     = string
-    volume_claim_storage_class_name = string
+    client_id   = string
+    resource_id = string
   })
+}
+
+variable "starboard_volume_claim_storage_class_name" {
+  description = "Configuration for starboard volume claim storage class name"
+  type        = string
+  default     = "managed-csi-zrs"
 }
 
 variable "azure_metrics_enabled" {

@@ -77,9 +77,8 @@ module "aks_core" {
 
   starboard_enabled = true
   starboard_config = {
-    client_id                       = "foo"
-    resource_id                     = "bar"
-    volume_claim_storage_class_name = "managed-csi"
+    client_id   = "foo"
+    resource_id = "bar"
   }
 
   ingress_config = {

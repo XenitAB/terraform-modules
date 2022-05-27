@@ -8,17 +8,7 @@ provider "azuread" {}
 module "eks-global" {
   source = "../../../modules/aws/eks-global"
 
-  environment       = "dev"
-  name              = "eks"
-  subscription_name = "xks"
-  unique_suffix     = 1337
-
-  namespaces = [
-    {
-      delegate_resource_group = true
-      name                    = "team1"
-    }
-  ]
-
-  dns_zone = ["foo", "bar"]
+  environment   = "dev"
+  name          = "eks"
+  unique_suffix = 1337
 }

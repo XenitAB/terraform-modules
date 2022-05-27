@@ -84,3 +84,9 @@ variable "aks_group_name_prefix" {
   type        = string
   default     = "aks"
 }
+
+variable "aks_managed_identity" {
+  description = "AKS Azure AD managed identity"
+  type        = string
+}
+

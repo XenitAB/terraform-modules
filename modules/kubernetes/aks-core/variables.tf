@@ -377,18 +377,19 @@ variable "prometheus_config" {
       resource_id = string
       tenant_id   = string
     })
-
-    tenant_id = string
-
+    tenant_id                  = string
     remote_write_authenticated = bool
     remote_write_url           = string
-
-    volume_claim_storage_class_name = string
-    volume_claim_size               = string
-
-    resource_selector  = list(string)
-    namespace_selector = list(string)
+    volume_claim_size          = string
+    resource_selector          = list(string)
+    namespace_selector         = list(string)
   })
+}
+
+variable "prometheus_volume_claim_storage_class_name" {
+  description = "Configuration for prometheus volume claim storage class name"
+  type        = string
+  default     = "managed-csi-zrs"
 }
 
 variable "promtail_enabled" {

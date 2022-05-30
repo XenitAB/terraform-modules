@@ -148,3 +148,8 @@ variable "aks_managed_identity_group_id" {
   description = "The group id of aks managed identity"
   type        = string
 }
+
+variable "aks_log_analytics_id" {
+  description = "The log analytics workspace id where to store the AKS resource logs"
+  type        = string
+}

@@ -62,6 +62,56 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 }
 
+resource "azurerm_monitor_diagnostic_setting" "this" {
+  name                           = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  target_resource_id             = azurerm_kubernetes_cluster.this.id
+  log_analytics_workspace_id     = var.aks_log_analytics_id
+
+  log {
+    category = "kube-scheduler"
+    enabled  = true
+
+    retention_policy {
+      enabled = true
+      days    = 7
+    }
+  }
+
+  log {
+    category = "kube-controller-manager"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+    }
+  }
+
+  log {
+    category = "cluster-autoscaler"
+    enabled  = true
+
+    retention_policy {
+      enabled = true
+      days    = 7
+    }
+  }
+
+  log {
+    category = "kube-audit"
+    enabled  = true
+
+    retention_policy {
+      enabled = true
+      days    = 30
+    }
+  }
+
+  log {
+    category = "kube-apiserver"
+    enabled  = true
+  }
+}
+
 resource "azurerm_kubernetes_cluster_node_pool" "this" {
   for_each = {
     for nodePool in var.aks_config.node_pools :

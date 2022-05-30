@@ -108,6 +108,26 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
   }
 
   log {
+    category = "csi-snapshot-controller"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "csi-azuredisk-controller"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
     category = "guard"
     enabled  = false
 

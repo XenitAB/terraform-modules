@@ -41,6 +41,8 @@
 | [aws_launch_template.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/resources/launch_template) | resource |
 | [null_resource.update_eks_cni](https://registry.terraform.io/providers/hashicorp/null/3.1.0/docs/resources/resource) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/caller_identity) | data source |
+| [aws_eks_addon_version.core_dns](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/eks_addon_version) | data source |
+| [aws_eks_addon_version.kube_proxy](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/eks_addon_version) | data source |
 | [aws_eks_cluster_auth.this](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/eks_cluster_auth) | data source |
 | [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.cluster_autoscaler](https://registry.terraform.io/providers/hashicorp/aws/4.6.0/docs/data-sources/iam_policy_document) | data source |

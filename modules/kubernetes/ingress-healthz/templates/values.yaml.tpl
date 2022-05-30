@@ -27,7 +27,7 @@ service:
 
 ingress:
   enabled: true
-  hostname: ingress-healthz.${dns_zone}
+  hostname: ingress-healthz-${location_short}.${dns_zone}
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     %{ if linkerd_enabled }
@@ -37,7 +37,7 @@ ingress:
     %{ endif }
   extraTls:
     - hosts:
-        - ingress-healthz.${dns_zone}
+        - ingress-healthz-${location_short}.${dns_zone}
       secretName: ingress-healthz-cert
 
 %{ if linkerd_enabled }

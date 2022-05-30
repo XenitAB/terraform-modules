@@ -41,6 +41,7 @@ resource "helm_release" "ingress_healthz" {
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     environment     = var.environment
     dns_zone        = var.dns_zone
+    location_short  = var.location_short
     linkerd_enabled = var.linkerd_enabled
   })]
 }

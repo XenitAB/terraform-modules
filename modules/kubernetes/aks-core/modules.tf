@@ -260,6 +260,7 @@ module "ingress_healthz" {
 
   environment     = var.environment
   dns_zone        = var.cert_manager_config.dns_zone[0]
+  location_short  = var.location_short
   linkerd_enabled = var.linkerd_enabled
 }
 
@@ -522,7 +523,7 @@ module "prometheus" {
   remote_write_authenticated = var.prometheus_config.remote_write_authenticated
   remote_write_url           = var.prometheus_config.remote_write_url
 
-  volume_claim_storage_class_name = "managed-csi-zrs"
+  volume_claim_storage_class_name = var.prometheus_volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
   resource_selector  = var.prometheus_config.resource_selector
@@ -588,7 +589,7 @@ module "starboard" {
   cloud_provider                  = "azure"
   client_id                       = var.starboard_config.client_id
   resource_id                     = var.starboard_config.resource_id
-  volume_claim_storage_class_name = "managed-csi-zrs"
+  volume_claim_storage_class_name = var.starboard_volume_claim_storage_class_name
 }
 
 # vpa

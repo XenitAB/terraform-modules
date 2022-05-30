@@ -90,5 +90,6 @@ module "aks" {
       id   = "id"
       name = "name"
     }
+    aks_log_analytics_id = "id"
   }
 }

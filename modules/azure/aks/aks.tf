@@ -63,9 +63,9 @@ resource "azurerm_kubernetes_cluster" "this" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "this" {
-  name                           = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
-  target_resource_id             = azurerm_kubernetes_cluster.this.id
-  log_analytics_workspace_id     = var.aks_log_analytics_id
+  name                       = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  target_resource_id         = azurerm_kubernetes_cluster.this.id
+  log_analytics_workspace_id = var.aks_log_analytics_id
 
   log {
     category = "kube-scheduler"

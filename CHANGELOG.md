@@ -6,8 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.05.3
+
 ### Changed
 
+- [#664](https://github.com/XenitAB/terraform-modules/pull/664) Manage Helm chart CRDs outside of Helm.
 - [#678](https://github.com/XenitAB/terraform-modules/pull/678) Update OPA to 3.8.1, gatekeeper-library to 0.12.1 and add k8srequireingressclass constraint.
 - [#679](https://github.com/XenitAB/terraform-modules/pull/679) Update AzureRM provider version.
 - [#680](https://github.com/XenitAB/terraform-modules/pull/680) Disable AKS run command.
@@ -20,7 +23,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#666](https://github.com/XenitAB/terraform-modules/pull/666) Enable ingress-nginx logs in promtail.
 - [#670](https://github.com/XenitAB/terraform-modules/pull/670) Ingress-nginx default wildcard certificate enabled.
-- [#664](https://github.com/XenitAB/terraform-modules/pull/664) Manage Helm chart CRDs outside of Helm.
 
 ### Fix
 

@@ -138,6 +138,16 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
   }
 
   log {
+    category = "kube-audit-admin"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
     category = "kube-apiserver"
     enabled  = true
     retention_policy {

@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#679](https://github.com/XenitAB/terraform-modules/pull/679) Update AzureRM provider version.
 - [#680](https://github.com/XenitAB/terraform-modules/pull/680) Disable AKS run command.
 - [#682](https://github.com/XenitAB/terraform-modules/pull/680) Fix CRD server side apply conflicts.
+- [#683](https://github.com/XenitAB/terraform-modules/pull/680) Fix datadog cluster agent pdb.
 
 ## 2022.05.2
 

@@ -46,6 +46,7 @@ spec:
             path: /var/run
           name: var-run
   clusterAgent:
+    replicas: 2
     priorityClassName: platform-low
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"

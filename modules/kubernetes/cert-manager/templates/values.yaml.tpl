@@ -1,5 +1,3 @@
-installCRDs: true
-
 global:
   priorityClassName: "platform-medium"
 

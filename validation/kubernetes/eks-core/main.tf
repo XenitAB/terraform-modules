@@ -102,11 +102,4 @@ module "eks_core" {
     resource_selector  = ["platform"]
     namespace_selector = ["platform"]
   }
-
-  promtail_enabled = true
-  promtail_config = {
-    role_arn            = "foo"
-    loki_address        = "value"
-    excluded_namespaces = []
-  }
 }

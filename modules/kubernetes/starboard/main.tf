@@ -44,6 +44,7 @@ resource "helm_release" "starboard" {
   namespace   = kubernetes_namespace.starboard.metadata[0].name
   version     = "0.9.1"
   max_history = 3
+  skip_crds   = true
   values = [templatefile("${path.module}/templates/starboard-values.yaml.tpl", {
     provider           = var.cloud_provider
     starboard_role_arn = var.starboard_role_arn
@@ -82,9 +83,10 @@ resource "helm_release" "trivy_extras" {
     if var.cloud_provider == "azure"
   }
 
-  chart     = "${path.module}/charts/trivy-extras"
-  name      = "trivy-extras"
-  namespace = kubernetes_namespace.starboard.metadata[0].name
+  chart       = "${path.module}/charts/trivy-extras"
+  name        = "trivy-extras"
+  namespace   = kubernetes_namespace.starboard.metadata[0].name
+  max_history = 3
 
   set {
     name  = "resourceID"

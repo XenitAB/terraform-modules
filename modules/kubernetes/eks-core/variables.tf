@@ -248,6 +248,11 @@ variable "promtail_config" {
     loki_address        = string
     excluded_namespaces = list(string)
   })
+  default = {
+    role_arn            = ""
+    loki_address        = ""
+    excluded_namespaces = []
+  }
 }
 
 variable "prometheus_enabled" {
@@ -313,16 +318,16 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
-    datadog_site     = string
-    api_key          = string
-    app_key          = string
-    extra_namespaces = list(string)
+    datadog_site = string
+    api_key      = string
+    app_key      = string
+    namespaces   = list(string)
   })
   default = {
-    datadog_site     = ""
-    api_key          = ""
-    app_key          = ""
-    extra_namespaces = [""]
+    datadog_site = ""
+    api_key      = ""
+    app_key      = ""
+    namespaces   = [""]
   }
 }
 

@@ -29,7 +29,17 @@ data "aws_route53_zone" "this" {
   name = each.key
 }
 
+module "opa_gatekeeper_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://open-policy-agent.github.io/gatekeeper/charts"
+  chart_name       = "gatekeeper"
+  chart_version    = "3.7.1"
+}
+
 module "opa_gatekeeper" {
+  depends_on = [module.opa_gatekeeper_crd]
+
   for_each = {
     for s in ["opa-gatekeeper"] :
     s => s
@@ -141,6 +151,11 @@ module "ingress_nginx" {
   datadog_enabled           = var.datadog_enabled
   public_private_enabled    = var.ingress_config.public_private_enabled
   allow_snippet_annotations = var.ingress_config.allow_snippet_annotations
+
+  default_certificate = {
+    enabled  = true
+    dns_zone = var.cert_manager_config.dns_zone[0]
+  }
 }
 
 module "ingress_healthz" {
@@ -178,8 +193,19 @@ module "external_dns" {
   }
 }
 
+module "cert_manager_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://charts.jetstack.io"
+  chart_name       = "cert-manager"
+  chart_version    = "v1.7.1"
+  values = {
+    "installCRDs" = "true"
+  }
+}
+
 module "cert_manager" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.cert_manager_crd]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -289,8 +315,16 @@ module "promtail" {
 }
 
 # Prometheus
+module "prometheus_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://prometheus-community.github.io/helm-charts"
+  chart_name       = "kube-prometheus-stack"
+  chart_version    = "30.0.0"
+}
+
 module "prometheus" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.prometheus_crd]
 
   for_each = {
     for s in ["prometheus"] :
@@ -326,11 +360,20 @@ module "prometheus" {
   azad_kube_proxy_enabled                = var.azad_kube_proxy_enabled
   starboard_enabled                      = var.starboard_enabled
   vpa_enabled                            = var.vpa_enabled
+  promtail_enabled                       = var.promtail_enabled
 }
 
 # starboard
+module "starboard_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://aquasecurity.github.io/helm-charts/"
+  chart_name       = "starboard-operator"
+  chart_version    = "0.9.1"
+}
+
 module "starboard" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.starboard_crd]
 
   for_each = {
     for s in ["starboard"] :
@@ -365,8 +408,16 @@ module "cluster_autoscaler" {
   }
 }
 
+module "csi_secrets_store_provider_aws_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
+  chart_name       = "secrets-store-csi-driver"
+  chart_version    = "0.2.0"
+}
+
 module "csi_secrets_store_provider_aws" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.csi_secrets_store_provider_aws_crd, module.opa_gatekeeper]
 
   for_each = {
     for s in ["csi-secrets-store-provider-aws"] :
@@ -378,8 +429,16 @@ module "csi_secrets_store_provider_aws" {
 }
 
 # datadog
+module "datadog_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://helm.datadoghq.com"
+  chart_name       = "datadog-operator"
+  chart_version    = "0.7.0"
+}
+
 module "datadog" {
-  depends_on = [module.opa_gatekeeper]
+  depends_on = [module.opa_gatekeeper, module.datadog_crd]
 
   for_each = {
     for s in ["datadog"] :
@@ -394,12 +453,20 @@ module "datadog" {
   datadog_site      = var.datadog_config.datadog_site
   api_key           = var.datadog_config.api_key
   app_key           = var.datadog_config.app_key
-  namespace_include = compact(concat(var.namespaces[*].name, var.datadog_config.extra_namespaces))
+  namespace_include = var.datadog_config.namespaces
 }
 
 # vpa
+module "vpa_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  chart_repository = "https://charts.fairwinds.com/stable"
+  chart_name       = "goldilocks"
+  chart_version    = "5.1.0"
+}
+
 module "vpa" {
-  depends_on = [module.opa_gatekeeper, module.prometheus]
+  depends_on = [module.opa_gatekeeper, module.vpa_crd]
 
   for_each = {
     for s in ["vpa"] :

@@ -95,7 +95,6 @@ resource "kubernetes_secret" "this" {
 }
 
 locals {
-
   enable_nginx = tostring(contains(var.extra_namespaces, "ingress-nginx"))
 
   extras_values = templatefile("${path.module}/templates/extras-values.yaml.tpl", {
@@ -126,8 +125,8 @@ resource "helm_release" "grafana_agent_operator" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "0.1.5"
   max_history = 3
-
-  values = [local.operator_values]
+  skip_crds   = true
+  values      = [local.operator_values]
 }
 
 resource "helm_release" "grafana_agent_extras" {
@@ -148,6 +147,5 @@ resource "helm_release" "kube_state_metrics" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "4.5.0"
   max_history = 3
-
-  values = [local.kube_state_metrics_values]
+  values      = [local.kube_state_metrics_values]
 }

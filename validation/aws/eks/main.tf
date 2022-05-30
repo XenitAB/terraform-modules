@@ -23,15 +23,15 @@ module "eks" {
 
   eks_authorized_ips = ["0.0.0.0/0"]
   eks_config = {
-    kubernetes_version = "1.20.4"
-    cidr_block         = "10.0.16.0/20"
-    node_groups = [
+    version    = "1.21"
+    cidr_block = "10.0.16.0/20"
+    node_pools = [
       {
-        name            = "standard"
-        release_version = "1.20.4"
-        min_size        = 1
-        max_size        = 3
-        instance_types  = ["t3.large"]
+        name           = "standard"
+        version        = "1.21.5-20220309"
+        min_size       = 1
+        max_size       = 3
+        instance_types = ["t3.large"]
       },
     ]
   }

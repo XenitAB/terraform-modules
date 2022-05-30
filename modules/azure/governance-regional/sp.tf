@@ -60,7 +60,7 @@ resource "azurerm_key_vault_secret" "aad_sp" {
     tenantId       = data.azurerm_subscription.current.tenant_id
     subscriptionId = data.azurerm_subscription.current.subscription_id
     clientId       = var.azuread_apps.rg_contributor[each.key].application_id
-    clientSecret   = azuread_application_password.aad_sp[each.value.common_name].value
+    clientSecret   = var.aad_sp_passwords[each.value.common_name]
   })
   key_vault_id = azurerm_key_vault.delegate_kv[var.core_name].id
   content_type = "application/json"

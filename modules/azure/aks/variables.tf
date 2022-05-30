@@ -148,3 +148,11 @@ variable "aks_managed_identity_group_id" {
   description = "The group id of aks managed identity"
   type        = string
 }
+
+variable "azure_metrics_identity" {
+  description = "MSI authentication identity for Azure Metrics"
+  type = object({
+    id           = string
+    principal_id = string
+  })
+}

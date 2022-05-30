@@ -374,6 +374,12 @@ variable "prometheus_enabled" {
   default     = true
 }
 
+variable "prometheus_volume_claim_storage_class_name" {
+  description = "Configuration for prometheus volume claim storage class name"
+  type        = string
+  default     = "managed-csi-zrs"
+}
+
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
@@ -442,6 +448,13 @@ variable "starboard_enabled" {
   description = "Should Starboard be enabled"
   type        = bool
   default     = true
+}
+
+
+variable "starboard_volume_claim_storage_class_name" {
+  description = "Configuration for starboard volume claim storage class name"
+  type        = string
+  default     = "managed-csi-zrs"
 }
 
 variable "starboard_config" {

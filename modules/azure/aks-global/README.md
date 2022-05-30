@@ -65,6 +65,7 @@ This module is used to create resources that are used by AKS clusters.
 | [azurerm_storage_account.velero](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/storage_account) | resource |
 | [azurerm_storage_container.velero](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/storage_container) | resource |
 | [azurerm_user_assigned_identity.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/user_assigned_identity) | resource |
+| [azurerm_user_assigned_identity.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.external_dns](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.trivy](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.velero](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/user_assigned_identity) | resource |
@@ -112,6 +113,7 @@ This module is used to create resources that are used by AKS clusters.
 | <a name="output_aks_managed_identity_group_id"></a> [aks\_managed\_identity\_group\_id](#output\_aks\_managed\_identity\_group\_id) | The group id of aks managed identity |
 | <a name="output_aks_public_ip_prefix_ids"></a> [aks\_public\_ip\_prefix\_ids](#output\_aks\_public\_ip\_prefix\_ids) | Azure Kubernetes Service IP Prefixes |
 | <a name="output_azad_kube_proxy"></a> [azad\_kube\_proxy](#output\_azad\_kube\_proxy) | The Azure AD Application config for azad-kube-proxy |
+| <a name="output_azure_metrics_identity"></a> [azure\_metrics\_identity](#output\_azure\_metrics\_identity) | MSI authentication identity for Azure Metrics |
 | <a name="output_dns_zone"></a> [dns\_zone](#output\_dns\_zone) | DNS Zone to be used with external-dns |
 | <a name="output_external_dns_identity"></a> [external\_dns\_identity](#output\_external\_dns\_identity) | MSI authentication identity for External DNS |
 | <a name="output_helm_operator_credentials"></a> [helm\_operator\_credentials](#output\_helm\_operator\_credentials) | Credentials meant to be used by Helm Operator |

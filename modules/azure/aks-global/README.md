@@ -47,6 +47,7 @@ This module is used to create resources that are used by AKS clusters.
 | [azurerm_dns_zone.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/dns_zone) | resource |
 | [azurerm_key_vault_access_policy.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/key_vault_secret) | resource |
+| [azurerm_log_analytics_workspace.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/log_analytics_workspace) | resource |
 | [azurerm_public_ip_prefix.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/public_ip_prefix) | resource |
 | [azurerm_role_assignment.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.acr_pull](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |

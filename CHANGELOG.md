@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#678](https://github.com/XenitAB/terraform-modules/pull/678) Update OPA to 3.8.1, gatekeeper-library to 0.12.1 and add k8srequireingressclass constraint.
 - [#679](https://github.com/XenitAB/terraform-modules/pull/679) Update AzureRM provider version.
 - [#680](https://github.com/XenitAB/terraform-modules/pull/680) Disable AKS run command.
+- [#654](https://github.com/XenitAB/terraform-modules/pull/654) AWS specify last addon version in EKS.
 
 ## 2022.05.2
 
@@ -47,10 +48,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#648](https://github.com/XenitAB/terraform-modules/pull/648) [Breaking] Make it possible to exclude namespaces from Datadog
 - [#656](https://github.com/XenitAB/terraform-modules/pull/656) Update Ingress Nginx version to mitigate security disclosure.
-
-### Fix
-
-- [#650](https://github.com/XenitAB/terraform-modules/pull/650) Make it possible to enable Promtail metrics in eks-core
 
 ### Fix
 

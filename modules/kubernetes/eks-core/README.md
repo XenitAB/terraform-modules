@@ -11,7 +11,7 @@ This module is used to configure EKS clusters.
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.11.2 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 4.21.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.4.1 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.13.1 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.8.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
 
@@ -29,9 +29,12 @@ This module is used to configure EKS clusters.
 |------|--------|---------|
 | <a name="module_azad_kube_proxy"></a> [azad\_kube\_proxy](#module\_azad\_kube\_proxy) | ../../kubernetes/azad-kube-proxy | n/a |
 | <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../../kubernetes/cert-manager | n/a |
+| <a name="module_cert_manager_crd"></a> [cert\_manager\_crd](#module\_cert\_manager\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_cluster_autoscaler"></a> [cluster\_autoscaler](#module\_cluster\_autoscaler) | ../../kubernetes/cluster-autoscaler | n/a |
 | <a name="module_csi_secrets_store_provider_aws"></a> [csi\_secrets\_store\_provider\_aws](#module\_csi\_secrets\_store\_provider\_aws) | ../../kubernetes/csi-secrets-store-provider-aws | n/a |
+| <a name="module_csi_secrets_store_provider_aws_crd"></a> [csi\_secrets\_store\_provider\_aws\_crd](#module\_csi\_secrets\_store\_provider\_aws\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_datadog"></a> [datadog](#module\_datadog) | ../../kubernetes/datadog | n/a |
+| <a name="module_datadog_crd"></a> [datadog\_crd](#module\_datadog\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../../kubernetes/external-dns | n/a |
 | <a name="module_falco"></a> [falco](#module\_falco) | ../../kubernetes/falco | n/a |
 | <a name="module_fluxcd_v2_azure_devops"></a> [fluxcd\_v2\_azure\_devops](#module\_fluxcd\_v2\_azure\_devops) | ../../kubernetes/fluxcd-v2-azdo | n/a |
@@ -40,12 +43,16 @@ This module is used to configure EKS clusters.
 | <a name="module_ingress_nginx"></a> [ingress\_nginx](#module\_ingress\_nginx) | ../../kubernetes/ingress-nginx | n/a |
 | <a name="module_linkerd"></a> [linkerd](#module\_linkerd) | ../../kubernetes/linkerd | n/a |
 | <a name="module_opa_gatekeeper"></a> [opa\_gatekeeper](#module\_opa\_gatekeeper) | ../../kubernetes/opa-gatekeeper | n/a |
+| <a name="module_opa_gatekeeper_crd"></a> [opa\_gatekeeper\_crd](#module\_opa\_gatekeeper\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../../kubernetes/prometheus | n/a |
+| <a name="module_prometheus_crd"></a> [prometheus\_crd](#module\_prometheus\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_promtail"></a> [promtail](#module\_promtail) | ../../kubernetes/promtail | n/a |
 | <a name="module_reloader"></a> [reloader](#module\_reloader) | ../../kubernetes/reloader | n/a |
 | <a name="module_starboard"></a> [starboard](#module\_starboard) | ../../kubernetes/starboard | n/a |
+| <a name="module_starboard_crd"></a> [starboard\_crd](#module\_starboard\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../../kubernetes/velero | n/a |
 | <a name="module_vpa"></a> [vpa](#module\_vpa) | ../../kubernetes/vpa | n/a |
+| <a name="module_vpa_crd"></a> [vpa\_crd](#module\_vpa\_crd) | ../../kubernetes/helm-crd | n/a |
 
 ## Resources
 

@@ -35,7 +35,7 @@ resource "aws_eks_cluster" "this" {
 
   name     = "${var.environment}-${var.name}${var.eks_name_suffix}"
   role_arn = var.cluster_role_arn
-  version  = var.eks_config.kubernetes_version
+  version  = var.eks_config.version
 
   enabled_cluster_log_types = var.enabled_cluster_log_types
 
@@ -143,8 +143,7 @@ data "aws_subnet" "node" {
 #tfsec:ignore:aws-autoscaling-enforce-http-token-imds
 resource "aws_launch_template" "eks_node_group" {
   for_each = {
-    for node_group in var.eks_config.node_groups :
-    node_group.name => node_group
+    for np in var.eks_config.node_pools : np.name => np
   }
 
   name                   = "${aws_eks_cluster.this.name}-${each.value.name}"
@@ -168,8 +167,7 @@ resource "aws_launch_template" "eks_node_group" {
 resource "aws_eks_node_group" "this" {
   provider = aws.eks_admin
   for_each = {
-    for node_group in var.eks_config.node_groups :
-    node_group.name => node_group
+    for np in var.eks_config.node_pools : np.name => np
   }
   depends_on = [null_resource.update_eks_cni]
 
@@ -177,7 +175,7 @@ resource "aws_eks_node_group" "this" {
   node_group_name = "${aws_eks_cluster.this.name}-${each.value.name}"
   node_role_arn   = var.node_group_role_arn
   instance_types  = each.value.instance_types
-  release_version = each.value.release_version
+  release_version = each.value.version
   scaling_config {
     desired_size = each.value.min_size
     min_size     = each.value.min_size

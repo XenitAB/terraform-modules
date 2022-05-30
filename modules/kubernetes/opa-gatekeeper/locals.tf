@@ -17,6 +17,12 @@ locals {
     },
     {
       name = "init-container-read-only-root-fs"
+    },
+    {
+      name = "pod-serviceaccount-token-false"
+    },
+    {
+      name = "pod-default-seccomp"
     }
   ]
   default_constraints = [
@@ -172,6 +178,16 @@ locals {
     {
       kind               = "K8sExternalIPs"
       name               = "external-ips"
+      enforcement_action = ""
+      match = {
+        kinds      = []
+        namespaces = []
+      }
+      parameters = {}
+    },
+    {
+      kind               = "K8sRequireIngressClass"
+      name               = "k8srequireingressclass"
       enforcement_action = ""
       match = {
         kinds      = []

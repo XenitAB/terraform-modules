@@ -24,3 +24,5 @@ audit:
   %{~ endif ~}
 psp:
   enabled: false
+upgradeCRDs:
+  enabled: false

@@ -40,7 +40,6 @@ controller:
     ${key}: "${value}"
     %{~ endfor ~}
     server-tokens: "false"
-    use-forwarded-headers: "true"
     %{~ if datadog_enabled ~}
     datadog-collector-host: "$HOST_IP"
     enable-opentracing: "true"

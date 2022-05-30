@@ -8,6 +8,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   kubernetes_version              = var.aks_config.version
   sku_tier                        = var.aks_config.production_grade ? "Paid" : "Free"
   api_server_authorized_ip_ranges = var.aks_authorized_ips
+  run_command_enabled             = false
 
   auto_scaler_profile {
     # Pods should not depend on local storage like EmptyDir or HostPath

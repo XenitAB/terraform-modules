@@ -40,6 +40,7 @@ resource "helm_release" "vpa" {
   namespace   = kubernetes_namespace.vpa.metadata[0].name
   version     = "0.5.0"
   max_history = 3
+  skip_crds   = true
   values      = [templatefile("${path.module}/templates/vpa-values.yaml.tpl", {})]
 }
 

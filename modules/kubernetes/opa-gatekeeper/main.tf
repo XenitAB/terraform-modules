@@ -125,6 +125,7 @@ resource "helm_release" "gatekeeper" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "3.8.1"
   max_history = 3
+  skip_crds   = true
   values = [templatefile("${path.module}/templates/gatekeeper-values.yaml.tpl", {
     provider = var.cloud_provider
   })]

@@ -20,17 +20,13 @@ terraform {
   }
 }
 
-locals {
-  namespace = "prometheus"
-}
-
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
-      name                = local.namespace
+      name                = "prometheus"
       "xkf.xenit.io/kind" = "platform"
     }
-    name = local.namespace
+    name = "prometheus"
   }
 }
 
@@ -42,6 +38,7 @@ resource "helm_release" "prometheus" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "30.0.0"
   max_history = 3
+  skip_crds   = true
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     vpa_enabled = var.vpa_enabled,
   })]

@@ -83,6 +83,37 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
 
     retention_policy {
       enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "cloud-controller-manager"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "csi-azurefile-controller"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "guard"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
     }
   }
 
@@ -109,6 +140,20 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
   log {
     category = "kube-apiserver"
     enabled  = true
+    retention_policy {
+      enabled = true
+      days    = 7
+    }
+  }
+
+  metric {
+    category = "AllMetrics"
+    enabled  = false
+
+    retention_policy {
+      days    = 0
+      enabled = false
+    }
   }
 }
 

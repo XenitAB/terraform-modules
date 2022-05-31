@@ -1,3 +1,8 @@
+# Calculate the ID because a datasource would force recreation of role assignments.
+locals {
+  aks_resource_group_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_kubernetes_cluster.this.node_resource_group}"
+}
+
 resource "azurerm_role_assignment" "view" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
@@ -34,13 +39,13 @@ resource "azuread_group_member" "aks_managed_identity" {
 }
 
 resource "azurerm_role_assignment" "aks_managed_identity_noderg_managed_identity_operator" {
-  scope                = data.azurerm_resource_group.aks.id
+  scope                = local.aks_resource_group_id
   role_definition_name = "Managed Identity Operator"
   principal_id         = var.aad_groups.aks_managed_identity.id
 }
 
 resource "azurerm_role_assignment" "aks_managed_identity_noderg_virtual_machine_contributor" {
-  scope                = data.azurerm_resource_group.aks.id
+  scope                = local.aks_resource_group_id
   role_definition_name = "Virtual Machine Contributor"
   principal_id         = var.aad_groups.aks_managed_identity.id
 }

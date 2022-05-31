@@ -37,7 +37,7 @@ terraform {
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
-      version = "1.13.1"
+      version = "1.14.0"
     }
   }
 }
@@ -48,7 +48,6 @@ locals {
 
 resource "kubernetes_namespace" "this" {
   lifecycle {
-    prevent_destroy = true
     ignore_changes = [
       metadata[0].labels,
       metadata[0].annotations,
@@ -130,22 +129,18 @@ locals {
 
 resource "kubectl_manifest" "install" {
   depends_on = [kubernetes_namespace.this]
-  lifecycle {
-    prevent_destroy = true
-  }
-  for_each = { for v in local.install : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+  for_each   = { for v in local.install : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
 
-  yaml_body = each.value
+  apply_only = true
+  yaml_body  = each.value
 }
 
 resource "kubectl_manifest" "sync" {
   depends_on = [kubernetes_namespace.this]
-  lifecycle {
-    prevent_destroy = true
-  }
-  for_each = { for v in local.sync : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+  for_each   = { for v in local.sync : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
 
-  yaml_body = each.value
+  apply_only = true
+  yaml_body  = each.value
 }
 
 resource "azuredevops_git_repository_file" "install" {

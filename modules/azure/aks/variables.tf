@@ -23,34 +23,77 @@ variable "aks_name_suffix" {
   type        = number
 }
 
+variable "aks_default_node_pool_vm_size" {
+  description = "The VM size of the AKS clusters default node pool. Do not override unless explicitly required."
+  type        = string
+  default     = "Standard_D2ds_v5"
+}
+
 variable "aks_config" {
   description = "The Azure Kubernetes Service (AKS) configuration"
   type = object({
-    kubernetes_version = string
-    sku_tier           = string
-    default_node_pool = object({
-      orchestrator_version = string
-      node_labels          = map(string)
-    })
-    additional_node_pools = list(object({
-      name                 = string
-      orchestrator_version = string
-      vm_size              = string
-      min_count            = number
-      max_count            = number
-      node_taints          = list(string)
-      node_labels          = map(string)
-      os_disk_type         = string
-      os_disk_size_gb      = number
-      spot_enabled         = bool
-      spot_max_price       = number
+    version = string
+    # Enables paid SKU for AKS and makes the default node pool HA
+    production_grade = bool
+    node_pools = list(object({
+      name           = string
+      version        = string
+      vm_size        = string
+      min_count      = number
+      max_count      = number
+      spot_enabled   = bool
+      spot_max_price = number
+      node_taints    = list(string)
+      node_labels    = map(string)
     }))
   })
+
+  validation {
+    condition = alltrue([
+      for np in concat(var.aks_config.node_pools, [{ version : var.aks_config.version }]) : can(regex("^1.(20|21|22)", np.version))
+    ])
+    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.20, 1.21, 1.22."
+  }
+
+  validation {
+    condition = alltrue([
+      for np in var.aks_config.node_pools : split(".", np.version)[1] <= split(".", var.aks_config.version)[1] && split(".", np.version)[2] <= split(".", var.aks_config.version)[2]
+    ])
+    error_message = "The node Kubernetes version should not be newer than the cluster version, upgrade the cluster first."
+  }
+
+  validation {
+    condition = alltrue([
+      for np in var.aks_config.node_pools : length(np.name) <= 12
+    ])
+    error_message = "The name value cannot be longer than 12 characters."
+  }
+
+  validation {
+    condition = alltrue([
+      for np in var.aks_config.node_pools : can(regex("^[a-z0-9]+$", np.name))
+    ])
+    error_message = "The name value has to be lowercase alphanumeric."
+  }
+
+  validation {
+    condition = alltrue([
+      for np in var.aks_config.node_pools : can(regex("^[a-z]", np.name))
+    ])
+    error_message = "The name value has to begin with a lowercase letter."
+  }
+
+  validation {
+    condition = alltrue([
+      for np in var.aks_config.node_pools : can(regex("[12]$", np.name))
+    ])
+    error_message = "The name value should end with a 1 or 2 to enable blue green pool creation."
+  }
 
   # Spot max price is set when spot is enabled
   validation {
     condition = alltrue([
-      for np in var.aks_config.additional_node_pools : (!np.spot_enabled && np.spot_max_price == null) || (np.spot_enabled && np.spot_max_price != null)
+      for np in var.aks_config.node_pools : (!np.spot_enabled && np.spot_max_price == null) || (np.spot_enabled && np.spot_max_price != null)
     ])
     error_message = "The spot_max_price cannot be null when spot_enabled is true."
   }

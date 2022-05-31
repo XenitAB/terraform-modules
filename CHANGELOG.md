@@ -6,8 +6,47 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#684](https://github.com/XenitAB/terraform-modules/pull/684) Update aad pod identity.
+
+## 2022.05.3
+
+### Changed
+
+- [#664](https://github.com/XenitAB/terraform-modules/pull/664) Manage Helm chart CRDs outside of Helm.
+- [#678](https://github.com/XenitAB/terraform-modules/pull/678) Update OPA to 3.8.1, gatekeeper-library to 0.12.1 and add k8srequireingressclass constraint.
+- [#679](https://github.com/XenitAB/terraform-modules/pull/679) Update AzureRM provider version.
+- [#680](https://github.com/XenitAB/terraform-modules/pull/680) Disable AKS run command.
+- [#682](https://github.com/XenitAB/terraform-modules/pull/680) Fix CRD server side apply conflicts.
+- [#683](https://github.com/XenitAB/terraform-modules/pull/680) Fix datadog cluster agent pdb.
+
+## 2022.05.2
+
+### Changed
+
+- [#666](https://github.com/XenitAB/terraform-modules/pull/666) Enable ingress-nginx logs in promtail.
+- [#670](https://github.com/XenitAB/terraform-modules/pull/670) Ingress-nginx default wildcard certificate enabled.
+
 ### Fix
 
+- [#671](https://github.com/XenitAB/terraform-modules/pull/671) [Breaking] Governance delegate-se from regional to global module.
+- [#672](https://github.com/XenitAB/terraform-modules/pull/672) Fix EKS version validation
+
+## 2022.05.1
+
+### Changed
+
+- [#651](https://github.com/XenitAB/terraform-modules/pull/651) OPA add seccomp profile and disable default mount of SA token.
+- [#645](https://github.com/XenitAB/terraform-modules/pull/645) [Breaking] Refactor AKS node configuration with default values.
+- [#659](https://github.com/XenitAB/terraform-modules/pull/659) [Breaking] Bring AKS and EKS config inline with each other.
+- [#653](https://github.com/XenitAB/terraform-modules/pull/653) Add validation of Kubernetes version in EKS and AKS.
+- [#662](https://github.com/XenitAB/terraform-modules/pull/662) Modify FluxV2 installation to never remove applied resource.
+- [#663](https://github.com/XenitAB/terraform-modules/pull/663) Set max history to Helm releases missing configuration.
+
+### Fix
+
+- [#661](https://github.com/XenitAB/terraform-modules/pull/661) Fix cluster-role-binding for get-nodes role.
 - [#658](https://github.com/XenitAB/terraform-modules/pull/658) Remove 'use-forwarded-headers: "true"' from ingress-nginx
 
 ## 2022.04.3

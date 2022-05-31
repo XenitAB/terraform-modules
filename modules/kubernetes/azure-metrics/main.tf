@@ -31,9 +31,10 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "azure_metrics_extras" {
-  chart     = "${path.module}/charts/azure-metrics-extras"
-  name      = "azure-metrics-extras"
-  namespace = kubernetes_namespace.this.metadata[0].name
+  chart       = "${path.module}/charts/azure-metrics-extras"
+  name        = "azure-metrics-extras"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
 
   set {
     name  = "resourceID"
@@ -47,12 +48,12 @@ resource "helm_release" "azure_metrics_extras" {
 }
 
 resource "helm_release" "azure_metrics" {
-  depends_on = [
-    helm_release.azure_metrics_extras
-  ]
-  chart     = "${path.module}/charts/azure-metrics-exporter"
-  name      = "azure-metrics"
-  namespace = kubernetes_namespace.this.metadata[0].name
+  depends_on = [helm_release.azure_metrics_extras]
+
+  chart       = "${path.module}/charts/azure-metrics-exporter"
+  name        = "azure-metrics"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  max_history = 3
 
   set {
     name  = "subscription"

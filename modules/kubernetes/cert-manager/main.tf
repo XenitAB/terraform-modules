@@ -41,6 +41,7 @@ resource "helm_release" "cert_manager" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "v1.7.1"
   max_history = 3
+  skip_crds   = true
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     provider   = var.cloud_provider,
     aws_config = var.aws_config,

@@ -320,7 +320,7 @@ module "prometheus_crd" {
 
   chart_repository = "https://prometheus-community.github.io/helm-charts"
   chart_name       = "kube-prometheus-stack"
-  chart_version    = "30.0.0"
+  chart_version    = "35.4.2"
 }
 
 module "prometheus" {
@@ -414,7 +414,7 @@ module "csi_secrets_store_provider_aws_crd" {
 
   chart_repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
   chart_name       = "secrets-store-csi-driver"
-  chart_version    = "0.2.0"
+  chart_version    = "1.1.2"
 }
 
 module "csi_secrets_store_provider_aws" {
@@ -435,7 +435,7 @@ module "datadog_crd" {
 
   chart_repository = "https://helm.datadoghq.com"
   chart_name       = "datadog-operator"
-  chart_version    = "0.7.0"
+  chart_version    = "0.8.0"
 }
 
 module "datadog" {

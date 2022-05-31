@@ -7,7 +7,7 @@ resource "azurerm_user_assigned_identity" "xenit" {
 resource "azurerm_role_assignment" "xenit" {
   scope                = azurerm_user_assigned_identity.xenit.id
   role_definition_name = "Managed Identity Operator"
-  principal_id         = azuread_group.aks_managed_identity.id
+  principal_id         = var.aks_managed_identity
 }
 
 resource "azurerm_key_vault_access_policy" "xenit" {

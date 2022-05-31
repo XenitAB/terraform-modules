@@ -102,3 +102,8 @@ variable "azad_kube_proxy_config" {
     proxy_url_override  = ""
   }
 }
+
+variable "aks_managed_identity" {
+  description = "AKS Azure AD managed identity"
+  type        = string
+}

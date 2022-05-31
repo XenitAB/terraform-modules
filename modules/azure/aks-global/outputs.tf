@@ -1,8 +1,3 @@
-output "aad_groups" {
-  description = "Azure AD groups"
-  value       = local.aad_groups
-}
-
 output "aad_pod_identity" {
   description = "aad-pod-identity user assigned identities"
   value       = local.aad_pod_identity
@@ -92,7 +87,7 @@ output "trivy_identity" {
 
 output "aks_managed_identity_group_id" {
   description = "The group id of aks managed identity"
-  value       = azuread_group.aks_managed_identity.id
+  value       = var.aks_managed_identity
 }
 
 output "azad_kube_proxy" {

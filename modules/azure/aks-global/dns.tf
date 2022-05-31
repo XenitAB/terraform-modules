@@ -16,7 +16,7 @@ resource "azurerm_user_assigned_identity" "external_dns" {
 resource "azurerm_role_assignment" "external_dns_msi" {
   scope                = azurerm_user_assigned_identity.external_dns.id
   role_definition_name = "Managed Identity Operator"
-  principal_id         = azuread_group.aks_managed_identity.id
+  principal_id         = var.aks_managed_identity
 }
 
 resource "azurerm_role_assignment" "external_dns_contributor" {

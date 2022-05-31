@@ -32,6 +32,7 @@ module "aks_global" {
       }
     }
   ]
+  aks_managed_identity = "id"
 
   dns_zone           = ["example.io"]
   aks_authorized_ips = ["0.0.0.0/0"]

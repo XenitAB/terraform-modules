@@ -12,6 +12,7 @@ This directory contains all the Azure Terraform modules.
 - [`governance-global`](governance-global/README.md)
 - [`governance-regional`](governance-regional/README.md)
 - [`hub`](hub/README.md)
+- [`xks-global`](xks-global/README.md)
 
 ## Style Guide
 
@@ -37,20 +38,21 @@ Create and delegate access to the `owner` service principal:
   - API Permissions: `Grant admin consent for <Tenant>`
   - Subscription permissions on all the subscriptions: `Owner`
   - The service principal also needs to be member of the `User administrator` role
-	
+
 ### Migrating to Azure AD v2 provider
 
 If you are using the Azure AD v1 provider and start using the v2 provider, please follow the below steps:
-	
-  - Add API permission `Application.ReadWrite.All` (`Microsoft Graph`) to the service principal(s)
-	- Remove the following from the state: module.governance_global.data.azuread_application.owner_spn (related [issue](https://github.com/hashicorp/terraform-provider-azuread/issues/541))
-		```shell
-	  make state-remove ENV=dev DIR=governance
-	  confirm: governance/dev
-	  regexp: data.azuread_application
-	  ```
-  - Run plan / apply, validate that only `random_password` resources are removed
-  - Remove service principal(s) from the `User administrator` role
-  - Remove the `Application.ReadWrite.All` (`Azure Active Directory Graph`) permission and admin consent from the service principal(s)	
-  - Remove the `Directory.ReadWrite.All` (`Azure Active Directory Graph`) permission and admin consent from the service principal(s) if it exists	
 
+- Add API permission `Application.ReadWrite.All` (`Microsoft Graph`) to the service principal(s)
+  - Remove the following from the state: module.governance_global.data.azuread_application.owner_spn (related [issue](https://github.com/hashicorp/terraform-provider-azuread/issues/541))
+
+  ```shell
+   make state-remove ENV=dev DIR=governance
+   confirm: governance/dev
+   regexp: data.azuread_application
+   ```
+
+- Run plan / apply, validate that only `random_password` resources are removed
+- Remove service principal(s) from the `User administrator` role
+- Remove the `Application.ReadWrite.All` (`Azure Active Directory Graph`) permission and admin consent from the service principal(s)
+- Remove the `Directory.ReadWrite.All` (`Azure Active Directory Graph`) permission and admin consent from the service principal(s) if it exists

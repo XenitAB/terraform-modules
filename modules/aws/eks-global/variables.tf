@@ -46,12 +46,6 @@ variable "subscription_name" {
   type        = string
 }
 
-variable "eks_group_name_prefix" {
-  description = "Prefix for EKS Azure AD groups"
-  type        = string
-  default     = "eks"
-}
-
 variable "eks_cloudwatch_retention_period" {
   description = "eks cloudwatch retention period"
   type        = number

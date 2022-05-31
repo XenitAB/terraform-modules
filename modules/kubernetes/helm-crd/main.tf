@@ -42,6 +42,8 @@ resource "kubectl_manifest" "this" {
     if can(regex("^/apis/apiextensions.k8s.io/v1/customresourcedefinitions/", k))
   }
   server_side_apply = true
-  apply_only        = true
-  yaml_body         = each.value
+  # Required while migrating to kubectl managed CRDs
+  force_conflicts = true
+  apply_only      = true
+  yaml_body       = each.value
 }

@@ -1,5 +1,3 @@
-
-# https://kubernetes.io/docs/reference/access-authn-authz/rbac
 apiVersion: v1
 kind: ServiceAccount
 metadata:

@@ -334,7 +334,7 @@ module "csi_secrets_store_provider_azure_crd" {
 
   chart_repository = "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
   chart_name       = "csi-secrets-store-provider-azure"
-  chart_version    = "0.2.1"
+  chart_version    = "1.0.1"
 }
 
 module "csi_secrets_store_provider_azure" {

@@ -47,11 +47,12 @@ variable "eks_config" {
     condition     = can(regex("^([0-9]\\d*)\\.([0-9]\\d*)$", var.eks_config.version))
     error_message = "Control plane version must only include major and minor version."
   }
+
   validation {
     condition = alltrue([
-      for np in concat(var.eks_config.node_pools, [{ version : var.eks_config.version }]) : can(regex("^1.(20|21|22)", np.version))
+      for np in concat(var.eks_config.node_pools, [{ version : var.eks_config.version }]) : can(regex("^1.(21|22)", np.version))
     ])
-    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.20, 1.21, 1.22."
+    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.21, 1.22."
   }
 
   validation {

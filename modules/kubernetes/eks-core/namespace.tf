@@ -95,10 +95,23 @@ resource "kubernetes_network_policy" "tenant" {
           }
         }
       }
-
+      to {
+        ip_block {
+          cidr = "${var.node_local_dns_dns_ip}/32"
+        }
+      }
+      to {
+        ip_block {
+          cidr = "169.254.20.10/32"
+        }
+      }
       ports {
         port     = 53
         protocol = "UDP"
+      }
+      ports {
+        port     = 53
+        protocol = "TCP"
       }
     }
 

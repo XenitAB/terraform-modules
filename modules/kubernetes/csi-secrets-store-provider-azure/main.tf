@@ -31,7 +31,7 @@ resource "kubernetes_namespace" "this" {
 
 resource "helm_release" "csi_secrets_store_provider_azure" {
   repository  = "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
-  version     = "0.2.1"
+  version     = "1.0.1"
   chart       = "csi-secrets-store-provider-azure"
   name        = "csi-secrets-store-provider-azure"
   namespace   = kubernetes_namespace.this.metadata[0].name

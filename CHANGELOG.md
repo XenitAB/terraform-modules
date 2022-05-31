@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#684](https://github.com/XenitAB/terraform-modules/pull/684) Update aad pod identity.
 - [#685](https://github.com/XenitAB/terraform-modules/pull/685) Update csi secrets store.
+- [#686](https://github.com/XenitAB/terraform-modules/pull/686) Update Datadog Operator, Kube Prometheus Stack and Metrics Server.
 
 ## 2022.05.3
 

@@ -356,3 +356,15 @@ variable "grafana_agent_enabled" {
   type        = bool
   default     = false
 }
+
+variable "node_local_dns_enabled" {
+  description = "Should node local dns be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "node_local_dns_dns_ip" {
+  description = "Should node local dns be enabled"
+  type        = string
+  default     = "172.20.0.10"
+}

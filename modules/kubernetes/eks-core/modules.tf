@@ -360,6 +360,7 @@ module "prometheus" {
   azad_kube_proxy_enabled                = var.azad_kube_proxy_enabled
   starboard_enabled                      = var.starboard_enabled
   vpa_enabled                            = var.vpa_enabled
+  node_local_dns_enabled                 = var.node_local_dns_enabled
   promtail_enabled                       = var.promtail_enabled
 }
 
@@ -475,4 +476,17 @@ module "vpa" {
   }
 
   source = "../../kubernetes/vpa"
+}
+
+module "node_local_dns" {
+  depends_on = [module.opa_gatekeeper, module.prometheus]
+
+  for_each = {
+    for s in ["node-local-dns"] :
+    s => s
+    if var.node_local_dns_enabled
+  }
+
+  source = "../../kubernetes/node-local-dns"
+  dns_ip = var.node_local_dns_dns_ip
 }

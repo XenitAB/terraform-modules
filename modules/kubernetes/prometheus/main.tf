@@ -36,7 +36,7 @@ resource "helm_release" "prometheus" {
   chart       = "kube-prometheus-stack"
   name        = "prometheus"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "30.0.0"
+  version     = "35.4.2"
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
@@ -56,7 +56,7 @@ resource "helm_release" "metrics_server" {
   chart       = "metrics-server"
   name        = "metrics-server"
   namespace   = "kube-system"
-  version     = "5.10.5"
+  version     = "6.0.4"
   max_history = 3
   values      = [templatefile("${path.module}/templates/values-metrics-server.yaml.tpl", {})]
 }

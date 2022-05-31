@@ -102,7 +102,7 @@ resource "kubernetes_network_policy" "tenant" {
       }
       to {
         ip_block {
-          cidr = "169.254.25.10/32"
+          cidr = "169.254.20.10/32"
         }
       }
       ports {

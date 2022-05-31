@@ -413,7 +413,7 @@ module "csi_secrets_store_provider_aws_crd" {
 
   chart_repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
   chart_name       = "secrets-store-csi-driver"
-  chart_version    = "0.2.0"
+  chart_version    = "1.1.2"
 }
 
 module "csi_secrets_store_provider_aws" {

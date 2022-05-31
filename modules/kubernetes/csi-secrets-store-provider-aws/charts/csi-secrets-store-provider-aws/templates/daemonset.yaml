@@ -25,7 +25,7 @@ spec:
       containers:
         - name: provider-aws-installer
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           args:
               - --provider-volume=/etc/kubernetes/secrets-store-csi-providers
           resources:

@@ -1,3 +1,9 @@
+data "azurerm_subnet" "this" {
+  name                 = "sn-${var.environment}-${var.location_short}-${var.core_name}-${var.name}${var.aks_name_suffix}"
+  virtual_network_name = "vnet-${var.environment}-${var.location_short}-${var.core_name}"
+  resource_group_name  = "rg-${var.environment}-${var.location_short}-${var.core_name}"
+}
+
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {

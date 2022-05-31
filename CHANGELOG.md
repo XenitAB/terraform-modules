@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#636](https://github.com/XenitAB/terraform-modules/pull/636) Make Node Local DNS enabled by default in AWS and Azure.
 - [#688](https://github.com/XenitAB/terraform-modules/pull/688) Fix Kubernetes version check and update supported versions.
+- [#689](https://github.com/XenitAB/terraform-modules/pull/689) Change to calculate AKS resource group instead of using a datasource.
 
 ## 2022.05.4
 

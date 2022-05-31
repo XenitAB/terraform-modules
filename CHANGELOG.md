@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.05.4
+
 ### Changed
 
 - [#684](https://github.com/XenitAB/terraform-modules/pull/684) Update aad pod identity.

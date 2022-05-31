@@ -487,5 +487,5 @@ module "node_local_dns" {
   }
 
   source = "../../kubernetes/node-local-dns"
-  dns_ip = "172.20.0.10"
+  dns_ip = var.node_local_dns_dns_ip
 }

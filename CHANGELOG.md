@@ -6,9 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Fix
+
+- [#690](https://github.com/XenitAB/terraform-modules/pull/690) Helm metrics-server extraArgs as list.
+
+### Changed
+
+- [#636](https://github.com/XenitAB/terraform-modules/pull/636) Make Node Local DNS enabled by default in AWS and Azure.
+- [#688](https://github.com/XenitAB/terraform-modules/pull/688) Fix Kubernetes version check and update supported versions.
+- [#654](https://github.com/XenitAB/terraform-modules/pull/654) AWS specify last addon version in EKS.
+
+## 2022.05.4
+
 ### Changed
 
 - [#684](https://github.com/XenitAB/terraform-modules/pull/684) Update aad pod identity.
+- [#685](https://github.com/XenitAB/terraform-modules/pull/685) Update csi secrets store.
+- [#686](https://github.com/XenitAB/terraform-modules/pull/686) Update Datadog Operator, Kube Prometheus Stack and Metrics Server.
 
 ## 2022.05.3
 

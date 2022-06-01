@@ -453,5 +453,5 @@ variable "azure_metrics_config" {
 variable "node_local_dns_enabled" {
   description = "Should VPA be enabled"
   type        = bool
-  default     = false
+  default     = true
 }

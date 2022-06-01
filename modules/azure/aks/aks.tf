@@ -84,8 +84,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   priority             = each.value.spot_enabled ? "Spot" : "Regular"
   spot_max_price       = each.value.spot_max_price
 
-  node_taints = each.value.spot_enabled ? concat(each.value.node_taints, ["kubernetes.azure.com/scalesetpriority=spot:NoSchedule"]) : each.value.node_taints
-  node_labels = each.value.spot_enabled ? merge(each.value.node_labels, { "node-pool" = each.value.name, "kubernetes.azure.com/scalesetpriority" = "spot" }) : merge(each.value.node_labels, { "node-pool" = each.value.name })
+  node_taints = each.value.node_taints
+  node_labels = merge({ "xkf.xenit.io/node-ttl" = "168h" }, each.value.node_labels, { "node-pool" = each.value.name })
 
   upgrade_settings {
     max_surge = "33%"

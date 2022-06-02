@@ -47,23 +47,21 @@ variable "namespaces" {
       flux = object({
         enabled     = bool
         create_crds = bool
-        azure_devops = object({
-          org  = string
-          proj = string
-          repo = string
-        })
-        github = object({
-          repo = string
-        })
+        type        = string # azuredevops or github
+        org         = string
+        proj        = string # only used for azuredevops
+        repo        = string
       })
     })
   )
+
+  # add validation for type and flux parameters
 }
 
 variable "kubernetes_network_policy_default_deny" {
   description = "If network policies should by default deny cross namespace traffic"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "kubernetes_default_limit_range" {
@@ -122,21 +120,32 @@ variable "fluxcd_v2_enabled" {
   default     = true
 }
 
-variable "fluxcd_v2_config" {
-  description = "Configuration for fluxcd-v2"
-  type = object({
-    type = string
-    github = object({
-      org             = string
-      app_id          = number
-      installation_id = number
-      private_key     = string
-    })
-    azure_devops = object({
-      pat  = string
-      org  = string
-      proj = string
-    })
+variable "fluxcd_v2_credentials" {
+  description = "List of credentials for Git Providers."
+    type = list(object({
+      type = string # azuredevops or github
+        azure_devops = object({
+          azure_devops_org  = string
+          azure_devops_pat  = string
+          azure_devops_proj = string
+        }),
+        github = object({
+          github_org             = string
+          github_app_id          = number
+          github_installation_id = number
+          github_private_key     = string
+        })
+    }))
+}
+
+variable "fluxcd_v2_fleet_infra" {
+  description = "Configuration for Flux bootstrap repository."
+  # Flux Bootstrap Repository
+  fleet_infra = object({
+    type = string # azuredevops or github
+    org  = string
+    proj = string
+    repo = string
   })
 }
 
@@ -190,10 +199,10 @@ variable "cert_manager_enabled" {
 }
 
 variable "cert_manager_config" {
-  description = "Cert Manager configuration, the first item in the list is the main domain"
+  description = "Cert Manager configuration"
   type = object({
     notification_email = string
-    dns_zone           = list(string)
+    dns_zone           = string
   })
 }
 
@@ -264,16 +273,16 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
-    datadog_site = string
-    api_key      = string
-    app_key      = string
-    namespaces   = list(string)
+    datadog_site     = string
+    api_key          = string
+    app_key          = string
+    extra_namespaces = list(string)
   })
   default = {
-    datadog_site = ""
-    api_key      = ""
-    app_key      = ""
-    namespaces   = [""]
+    datadog_site     = ""
+    api_key          = ""
+    app_key          = ""
+    extra_namespaces = [""]
   }
 }
 
@@ -300,7 +309,6 @@ variable "grafana_agent_config" {
       traces_username  = string
       traces_password  = string
     })
-    extra_namespaces = list(string)
   })
   default = {
     remote_write_urls = {
@@ -316,7 +324,6 @@ variable "grafana_agent_config" {
       traces_username  = ""
       traces_password  = ""
     }
-    extra_namespaces = ["ingress-nginx"]
   }
 }
 
@@ -383,41 +390,12 @@ variable "prometheus_config" {
     remote_write_authenticated = bool
     remote_write_url           = string
 
-    volume_claim_size = string
+    volume_claim_storage_class_name = string
+    volume_claim_size               = string
 
     resource_selector  = list(string)
     namespace_selector = list(string)
   })
-}
-
-variable "promtail_enabled" {
-  description = "Should promtail be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "promtail_config" {
-  description = "Configuration for promtail"
-  type = object({
-    azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-    loki_address        = string
-    excluded_namespaces = list(string)
-  })
-  default = {
-    azure_key_vault_name = ""
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
-    loki_address        = ""
-    excluded_namespaces = []
-  }
 }
 
 variable "ingress_healthz_enabled" {
@@ -438,12 +416,20 @@ variable "starboard_enabled" {
   default     = true
 }
 
-variable "starboard_config" {
-  description = "Configuration for starboard"
+variable "new_relic_enabled" {
+  description = "Should New Relic be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "new_relic_config" {
+  description = "Configuration for New Relic"
   type = object({
-    client_id   = string
-    resource_id = string
+    license_key = string
   })
+  default = {
+    license_key = ""
+  }
 }
 
 variable "azure_metrics_enabled" {
@@ -471,3 +457,4 @@ variable "node_local_dns_enabled" {
   type        = bool
   default     = true
 }
+

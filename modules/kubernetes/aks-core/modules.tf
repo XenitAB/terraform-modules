@@ -100,56 +100,30 @@ module "fluxcd_v1_azure_devops" {
 }
 
 # FluxCD v2
-module "fluxcd_v2_azure_devops" {
+module "fluxcd_v2" {
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s
-    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "azure-devops"
+    if var.fluxcd_v2_enabled
   }
-
-  source = "../../kubernetes/fluxcd-v2-azdo"
-
-  environment       = var.environment
-  cluster_id        = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
-  azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
-  azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
-  azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
-  namespaces = [for ns in var.namespaces : {
-    name = ns.name
-    flux = {
-      enabled     = ns.flux.enabled
-      create_crds = ns.flux.create_crds
-      org         = ns.flux.azure_devops.org
-      proj        = ns.flux.azure_devops.proj
-      repo        = ns.flux.azure_devops.repo
+  source      = "../../kubernetes/fluxcd-v2"
+  environment = var.environment
+  cluster_id  = "${var.location_short}-${var.environment}-${var.name}-${var.aks_name_suffix}"
+  credentials = var.fluxcd_v2_config.credentials
+  fleet_infra = var.fluxcd_v2_config.fleet_infra
+  namespaces = {
+    for_each = {
+      for ns in var.namespaces :
+      ns => ns
+      if ns.flux.enabled
     }
-  }]
-}
-
-module "fluxcd_v2_github" {
-  for_each = {
-    for s in ["fluxcd-v2"] :
-    s => s
-    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "github"
+    name        = ns.name
+    create_crds = ns.flux.create_crds
+    org         = ns.flux.org
+    proj        = ns.flux.proj
+    repo        = ns.flux.repo
   }
-
-  source = "../../kubernetes/fluxcd-v2-github"
-
-  environment            = var.environment
-  cluster_id             = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
-  github_org             = var.fluxcd_v2_config.github.org
-  github_app_id          = var.fluxcd_v2_config.github.app_id
-  github_installation_id = var.fluxcd_v2_config.github.installation_id
-  github_private_key     = var.fluxcd_v2_config.github.private_key
-  namespaces = [for ns in var.namespaces : {
-    name = ns.name
-    flux = {
-      enabled = ns.flux.enabled
-      repo    = ns.flux.github.repo
-    }
-  }]
 }
-
 # AAD-Pod-Identity
 module "aad_pod_identity_crd" {
   source = "../../kubernetes/helm-crd"
@@ -507,7 +481,7 @@ module "prometheus" {
   remote_write_authenticated = var.prometheus_config.remote_write_authenticated
   remote_write_url           = var.prometheus_config.remote_write_url
 
-  volume_claim_storage_class_name = "managed-csi-zrs"
+  volume_claim_storage_class_name = var.prometheus_config.volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
   resource_selector  = var.prometheus_config.resource_selector
@@ -570,10 +544,11 @@ module "starboard" {
 
   source = "../../kubernetes/starboard"
 
-  cloud_provider                  = "azure"
-  client_id                       = var.starboard_config.client_id
-  resource_id                     = var.starboard_config.resource_id
-  volume_claim_storage_class_name = "managed-csi-zrs"
+  cloud_provider = "azure"
+  client_id      = var.starboard_config.client_id
+  resource_id    = var.starboard_config.resource_id
+
+  volume_claim_storage_class_name = var.starboard_volume_claim_storage_class_name
 }
 
 # vpa

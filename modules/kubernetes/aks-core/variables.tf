@@ -58,6 +58,7 @@ variable "namespaces" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> make fmt & docs
 =======
@@ -70,10 +71,13 @@ variable "namespaces" {
 >>>>>>> make fmt & docs
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
         type        = string # azuredevops or github
         org         = string
         proj        = string # only used for azuredevops
         repo        = string
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -118,6 +122,8 @@ variable "namespaces" {
 >>>>>>> make fmt & docs
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
       })
     })
   )
@@ -192,6 +198,7 @@ variable "fluxcd_v2_config" {
   description = "Configuration for fluxcd-v2"
 
   # Credentials to be passed to Git Auth Proxy
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -335,6 +342,26 @@ variable "fluxcd_v2_fleet_infra" {
 =======
     org  = string
 >>>>>>> make fmt & docs
+=======
+  credentials = list(object({
+    type = string # azuredevops or github
+    azure_devops = object({
+      org = string
+      pat = string
+    })
+    github = object({
+      org             = string
+      app_id          = number
+      installation_id = number
+      private_key     = string
+    })
+  }))
+
+  # Flux Bootstrap Repository
+  fleet_infra = object({
+    type = string # azuredevops or github
+    org  = string
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
     proj = string
     repo = string
   })

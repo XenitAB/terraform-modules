@@ -1,29 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> make fmt & docs
-
-=======
->>>>>>> Fix readme
-
-=======
->>>>>>> Add
-
-=======
->>>>>>> make fmt & docs
-=======
->>>>>>> Fix readme
-=======
->>>>>>> Fix code
-
 # AKS Core
 
 This module is used to create AKS clusters.

@@ -13,6 +13,7 @@ module "fluxcd_v2" {
   environment            = "dev"
   cluster_id             = "foobar"
   namespaces             = []
+<<<<<<< HEAD
   credentials = [{
     azure_devops = {
       org = "value"
@@ -32,4 +33,6 @@ module "fluxcd_v2" {
     proj = "proj"
     repo = "repo"
   }
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 }

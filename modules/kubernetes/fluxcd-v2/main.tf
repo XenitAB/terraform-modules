@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * # Flux V2
  *
@@ -47,10 +48,15 @@ terraform {
 terraform {
   required_version = ">= 1.1.7"
 >>>>>>> Fix lint, docs and fmt
+=======
+terraform {
+  required_version = ">= 1.1.7"
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 
   required_providers {
     helm = {
       source  = "hashicorp/helm"
+<<<<<<< HEAD
 <<<<<<< HEAD
       version = "2.3.0"
     }
@@ -58,6 +64,8 @@ terraform {
       source  = "fluxcd/flux"
       version = "0.5.1"
 =======
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
       version = "2.4.1"
     }
     flux = {
@@ -67,7 +75,10 @@ terraform {
     kubernetes = {
       source  = "hashicorp/kubernetes"
       version = "2.8.0"
+<<<<<<< HEAD
 >>>>>>> Fix lint, docs and fmt
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
@@ -75,6 +86,7 @@ terraform {
     }
     github = {
       source  = "integrations/github"
+<<<<<<< HEAD
 <<<<<<< HEAD
       version = "4.17.0"
     }
@@ -86,16 +98,22 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = "1.13.0"
 =======
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
       version = "4.21.0"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
       version = "1.13.1"
+<<<<<<< HEAD
 >>>>>>> Fix lint, docs and fmt
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
     }
   }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 locals {
   git_auth_proxy_url = "http://git-auth-proxy.flux-system.svc.cluster.local"
@@ -172,6 +190,10 @@ locals {
 locals {
   git_auth_proxy_url = "http://git-auth-proxy.flux-system.svc.cluster.local"
 >>>>>>> Fix code
+=======
+locals {
+  git_auth_proxy_url = "http://git-auth-proxy.flux-system.svc.cluster.local"
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 }
 
 resource "kubernetes_namespace" "this" {
@@ -212,6 +234,7 @@ resource "helm_release" "git_auth_proxy" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     credentials = var.credentials
     # TODO: change to not be fleet infra aware, instead it should just be one of the repositories
     fleet_infra = var.fleet_infra
@@ -232,6 +255,8 @@ resource "helm_release" "git_auth_proxy" {
 >>>>>>> Add initial config
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
     azure_devops_pat  = var.azure_devops_pat,
     azure_devops_org  = var.azure_devops_org,
     azure_devops_proj = var.azure_devops_proj,
@@ -240,6 +265,7 @@ resource "helm_release" "git_auth_proxy" {
     app_id            = tonumber(var.github_app_id)
     installation_id   = tonumber(var.github_installation_id)
     private_key       = base64encode(var.github_private_key)
+<<<<<<< HEAD
 =======
     azure_devops_pat  = var.credentials.azure_devops_pat,
     azure_devops_org  = var.credentials.azure_devops_org,
@@ -250,6 +276,8 @@ resource "helm_release" "git_auth_proxy" {
     installation_id   = tonumber(var.credentials.github_installation_id)
     private_key       = base64encode(var.credentials.github_private_key)
 >>>>>>> mend
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
     tenants = [for ns in var.namespaces : {
       project : ns.flux.proj
       repo : ns.flux.repo
@@ -257,6 +285,7 @@ resource "helm_release" "git_auth_proxy" {
       }
       if ns.flux.enabled
     ],
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -300,6 +329,8 @@ resource "helm_release" "git_auth_proxy" {
 >>>>>>> make fmt & docs
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
   })]
 }
 
@@ -308,6 +339,7 @@ data "azuredevops_project" "this" {
 }
 
 # Cluster
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> d074599... Add initial config
@@ -338,6 +370,8 @@ data "azuredevops_project" "this" {
 >>>>>>> Add initial config
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 data "azuredevops_git_repository" "cluster" {
   project_id = data.azuredevops_project.this.id
   name       = var.cluster_repo
@@ -347,6 +381,7 @@ data "github_repository" "cluster" {
   full_name = "${var.github_org}/${var.cluster_repo}"
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -373,10 +408,13 @@ data "github_repository" "cluster" {
 >>>>>>> Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 data "flux_install" "this" {
   target_path = "clusters/${var.cluster_id}"
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -415,12 +453,16 @@ data "flux_sync" "this" {
 =======
 data "flux_sync" "azdo" {
 >>>>>>> mend
+=======
+data "flux_sync" "this" {
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
   url                = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
   branch             = var.branch
   target_path        = "clusters/${var.cluster_id}"
   git_implementation = "libgit2"
 }
 
+<<<<<<< HEAD
 data "flux_sync" "git" {
   url         = "${local.git_auth_proxy_url}/${var.github_org}/${var.cluster_repo}"
   branch      = var.branch
@@ -506,42 +548,81 @@ locals {
     }
   ]
   sync_azdo = [for v in data.kubectl_file_documents.sync_azdo.documents : {
+=======
+data "flux_sync" "this" {
+  url         = "${local.git_auth_proxy_url}/${var.github_org}/${var.cluster_repo}"
+  branch      = var.branch
+  target_path = "clusters/${var.cluster_id}"
+}
+
+data "kubectl_file_documents" "install" {
+  content = data.flux_install.this.content
+}
+
+data "kubectl_file_documents" "sync" {
+  content = data.flux_sync.this.content
+}
+
+locals {
+  install = [for v in data.kubectl_file_documents.install.documents : {
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
     data : yamldecode(v)
     content : v
     }
   ]
+<<<<<<< HEAD
   install_git = [for v in data.kubectl_file_documents.install_git.documents : {
     data : yamldecode(v)
     content : v
     }
   ]
   sync_git = [for v in data.kubectl_file_documents.sync_git.documents : {
+=======
+  sync = [for v in data.kubectl_file_documents.sync.documents : {
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
     data : yamldecode(v)
     content : v
     }
   ]
 }
 
+<<<<<<< HEAD
 resource "kubectl_manifest" "install_azdo" {
+=======
+resource "kubectl_manifest" "install" {
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
   depends_on = [kubernetes_namespace.this]
   lifecycle {
     prevent_destroy = true
   }
+<<<<<<< HEAD
   for_each = { for v in local.install_azdo : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+=======
+  for_each = { for v in local.install : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 
   yaml_body = each.value
 }
 
+<<<<<<< HEAD
 resource "kubectl_manifest" "sync_azdo" {
+=======
+resource "kubectl_manifest" "sync" {
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
   depends_on = [kubernetes_namespace.this]
   lifecycle {
     prevent_destroy = true
   }
+<<<<<<< HEAD
   for_each = { for v in local.sync_azdo : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+=======
+  for_each = { for v in local.sync : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 
   yaml_body = each.value
 }
 
+<<<<<<< HEAD
 resource "kubectl_manifest" "install_git" {
   depends_on = [kubernetes_namespace.this]
   lifecycle {
@@ -619,6 +700,8 @@ data "azuredevops_git_repository" "cluster" {
 >>>>>>> Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 resource "azuredevops_git_repository_file" "install" {
   repository_id       = data.azuredevops_git_repository.cluster.id
   file                = data.flux_install.this.path
@@ -629,15 +712,24 @@ resource "azuredevops_git_repository_file" "install" {
 
 resource "azuredevops_git_repository_file" "sync" {
   repository_id       = data.azuredevops_git_repository.cluster.id
+<<<<<<< HEAD
   file                = data.flux_sync.azdo.path
   content             = data.flux_sync.azdo.content
+=======
+  file                = data.flux_sync.this.path
+  content             = data.flux_sync.this.content
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
   branch              = "refs/heads/${var.branch}"
   overwrite_on_create = true
 }
 
 resource "azuredevops_git_repository_file" "kustomize" {
   repository_id       = data.azuredevops_git_repository.cluster.id
+<<<<<<< HEAD
   file                = data.flux_sync.azdo.kustomize_path
+=======
+  file                = data.flux_sync.this.kustomize_path
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
   content             = file("${path.module}/templates/kustomization-override.yaml")
   branch              = "refs/heads/${var.branch}"
   overwrite_on_create = true
@@ -653,6 +745,7 @@ resource "azuredevops_git_repository_file" "cluster_tenants" {
   overwrite_on_create = true
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -726,6 +819,8 @@ data "github_repository" "cluster" {
 >>>>>>> Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 resource "github_repository_file" "install" {
   repository          = data.github_repository.cluster.name
   file                = data.flux_install.this.path
@@ -736,15 +831,24 @@ resource "github_repository_file" "install" {
 
 resource "github_repository_file" "sync" {
   repository          = data.github_repository.cluster.name
+<<<<<<< HEAD
   file                = data.flux_sync.git.path
   content             = data.flux_sync.git.content
+=======
+  file                = data.flux_sync.this.path
+  content             = data.flux_sync.this.content
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
   branch              = var.branch
   overwrite_on_create = true
 }
 
 resource "github_repository_file" "kustomize" {
   repository          = data.github_repository.cluster.name
+<<<<<<< HEAD
   file                = data.flux_sync.git.kustomize_path
+=======
+  file                = data.flux_sync.this.kustomize_path
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
   content             = file("${path.module}/templates/kustomization-override.yaml")
   branch              = var.branch
   overwrite_on_create = true
@@ -771,6 +875,7 @@ resource "github_repository_file" "cluster_tenants" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> fe36c7a... Add initial config
@@ -782,6 +887,8 @@ resource "github_repository_file" "cluster_tenants" {
 >>>>>>> Add initial config
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 # Tenants
 resource "azuredevops_git_repository_file" "tenant" {
   for_each = {
@@ -808,6 +915,7 @@ resource "azuredevops_git_repository_file" "tenant" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Add initial config
 =======
 >>>>>>> Initial change of config to use one module - fluxcd-v2
@@ -829,6 +937,8 @@ resource "azuredevops_git_repository_file" "tenant" {
 >>>>>>> Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 resource "github_repository_file" "tenant" {
   for_each = {
     for ns in var.namespaces :
@@ -844,6 +954,7 @@ resource "github_repository_file" "tenant" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     if ns.flux.type == "github"
 =======
     if ns.flux.enabled
@@ -878,6 +989,9 @@ resource "github_repository_file" "tenant" {
 =======
     if ns.flux.enabled
 >>>>>>> Fix code
+=======
+    if ns.flux.enabled
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
   }
   repository = data.github_repository.cluster.name
   branch     = var.branch
@@ -887,6 +1001,7 @@ resource "github_repository_file" "tenant" {
     branch      = var.branch,
     name        = each.key,
     environment = var.environment,
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -935,3 +1050,9 @@ resource "github_repository_file" "tenant" {
   })
   overwrite_on_create = true
 }
+=======
+    create_crds = false,
+  })
+  overwrite_on_create = true
+}
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1

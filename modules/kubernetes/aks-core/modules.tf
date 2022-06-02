@@ -108,6 +108,7 @@ module "fluxcd_v2" {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   source = "../../kubernetes/fluxcd-v2"
 
 <<<<<<< HEAD
@@ -243,6 +244,11 @@ module "fluxcd_v2" {
 =======
   cluster_id  = "${var.location_short}-${var.environment}-${var.name}-${var.aks_name_suffix}"
 >>>>>>> Fix for loop
+=======
+  source      = "../../kubernetes/fluxcd-v2"
+  environment = var.environment
+  cluster_id  = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
   credentials = var.fluxcd_v2_config.credentials
   fleet_infra = var.fluxcd_v2_config.fleet_infra
   namespaces = {
@@ -253,6 +259,7 @@ module "fluxcd_v2" {
     }
     name        = ns.name
     create_crds = ns.flux.create_crds
+<<<<<<< HEAD
 <<<<<<< HEAD
     org = ns.flux.org
     proj = ns.flux.proj
@@ -277,8 +284,13 @@ module "fluxcd_v2" {
 =======
   }
 >>>>>>> Fix code
+=======
+    org         = ns.flux.org
+    proj        = ns.flux.proj
+    repo        = ns.flux.repo
+  }
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 }
-
 # AAD-Pod-Identity
 module "aad_pod_identity_crd" {
   source = "../../kubernetes/helm-crd"

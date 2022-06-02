@@ -32,3 +32,7 @@ data "azurerm_resource_group" "this" {
 }
 
 data "azurerm_client_config" "current" {}
+
+data "azurerm_resource_group" "log" {
+  name = "rg-${var.environment}-${var.location_short}-log"
+}

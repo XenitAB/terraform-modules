@@ -91,5 +91,6 @@ module "aks" {
       name = "name"
     }
   }
-  aks_log_analytics_id = "id"
+  log_analytics_id       = "id"
+  log_storage_account_id = "id"
 }

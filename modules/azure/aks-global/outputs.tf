@@ -103,7 +103,12 @@ output "azad_kube_proxy" {
   sensitive = true
 }
 
-output "aks_log_analytics_id" {
-  description = "The log analytics workspace id where to store the AKS resource logs"
-  value       = azurerm_log_analytics_workspace.aks.id
+output "log_analytics_id" {
+  description = "The log analytics workspace id where to store resource logs"
+  value       = azurerm_log_analytics_workspace.log.id
+}
+
+output "log_storage_account_id" {
+  description = "The storage account id for long term storage of logs"
+  value       = azurerm_storage_account.log.id
 }

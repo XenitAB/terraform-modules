@@ -14,4 +14,5 @@ resource "azurerm_storage_account" "log" {
   account_tier             = "Standard"
   account_replication_type = "ZRS"
   min_tls_version          = "TLS1_2"
+  is_hns_enabled           = true
 }

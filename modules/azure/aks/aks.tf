@@ -188,9 +188,9 @@ resource "azurerm_monitor_diagnostic_setting" "log_analytics" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "log_storage_account" {
-  name                       = "storage-account-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
-  target_resource_id         = azurerm_kubernetes_cluster.this.id
-  storage_account_id         = var.log_storage_account_id
+  name               = "storage-account-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  target_resource_id = azurerm_kubernetes_cluster.this.id
+  storage_account_id = var.log_storage_account_id
 
   log {
     category = "kube-scheduler"

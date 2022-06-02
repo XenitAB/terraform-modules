@@ -12,4 +12,5 @@ resource "azurerm_storage_account" "this" {
   account_replication_type = "GRS"
   account_kind             = "StorageV2"
   min_tls_version          = "TLS1_2"
+  is_hns_enabled           = true
 }

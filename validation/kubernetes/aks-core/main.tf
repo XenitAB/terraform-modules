@@ -29,6 +29,7 @@ module "aks_core" {
     notification_email = "foo"
     dns_zone           = ["bar", "faa"]
   }
+<<<<<<< HEAD
   fluxcd_v2_credentials = {
     type = "github"
 
@@ -50,6 +51,30 @@ module "aks_core" {
     org  = "Foo"
     proj = "Bar"
     repo = "Foobar"
+=======
+  fluxcd_v2_config = {
+    credentials = ({
+      type = "github"
+
+      github = ({
+        org             = ""
+        app_id          = 0
+        installation_id = 0
+        private_key     = ""
+      })
+      azure_devops = ({
+        pat  = ""
+        org  = ""
+        proj = ""
+      })
+      fleet_infra = ({
+        type = "github"
+        org  = "Foo"
+        proj = "Bar"
+        repo = "Foobar"
+      })
+    })
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
   }
 
   aad_groups = {

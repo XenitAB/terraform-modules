@@ -9,8 +9,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 variable "environment" {
   description = "Environment name of the cluster"
   type        = string
@@ -26,6 +29,7 @@ variable "credentials" {
   type = list(object({
     type = string # azuredevops or github
     azure_devops = object({
+<<<<<<< HEAD
 <<<<<<< HEAD
       org = string
       pat = string
@@ -48,6 +52,16 @@ variable "credentials" {
       github_app_id          = number
       github_installation_id = number
       github_private_key     = string
+=======
+      org = string
+      pat = string
+    })
+    github = object({
+      org             = string
+      app_id          = number
+      installation_id = number
+      private_key     = string
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
     })
   }))
 }
@@ -60,6 +74,7 @@ variable "fleet_infra" {
     proj = string
     repo = string
   })
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -74,6 +89,9 @@ variable "fleet_infra" {
 }
 <<<<<<< HEAD
 >>>>>>> Fix code
+=======
+}
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 variable "azure_devops_pat" {
   description = "PAT to authenticate with Azure DevOps"
   type        = string
@@ -112,6 +130,7 @@ variable "github_private_key" {
   description = "Private Key for GitHub Application used by Git Auth Proxy"
   type        = string
 <<<<<<< HEAD
+<<<<<<< HEAD
   default     = "null"
 }
 
@@ -310,6 +329,10 @@ variable "fleet_infra" {
 >>>>>>> Fix code
 =======
 >>>>>>> mend
+=======
+}
+
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 
 variable "namespaces" {
   description = "The namespaces to configure flux with"
@@ -326,8 +349,11 @@ variable "namespaces" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
       name        = string
       create_crds = bool
       org         = string
@@ -336,6 +362,7 @@ variable "namespaces" {
     })
   )
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
       name = string
@@ -408,6 +435,8 @@ variable "namespaces" {
 >>>>>>> Fix code
 =======
 >>>>>>> mend
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1
 variable "cluster_repo" {
   description = "Name of cluster repository"
   type        = string
@@ -419,6 +448,7 @@ variable "branch" {
   type        = string
   default     = "main"
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -450,3 +480,5 @@ variable "branch" {
 >>>>>>> Initial change of config to use one module - fluxcd-v2
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> cab92489584e7be1daf1b04ec0d09a5fabf676d1

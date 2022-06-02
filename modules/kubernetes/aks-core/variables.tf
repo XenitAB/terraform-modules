@@ -47,77 +47,10 @@ variable "namespaces" {
       flux = object({
         enabled     = bool
         create_crds = bool
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> make fmt & docs
-=======
->>>>>>> a69675f... make fmt & docs
-=======
->>>>>>> f8311b7... make fmt & docs
-=======
->>>>>>> make fmt & docs
-=======
->>>>>>> make fmt & docs
-=======
->>>>>>> Fix code
         type        = string # azuredevops or github
         org         = string
         proj        = string # only used for azuredevops
         repo        = string
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> Initial change of config to use one module - fluxcd-v2
-        type = string # azuredevops or github
-        org = string
-        proj = string # only used for azuredevops
-        repo = string
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> make fmt & docs
-=======
->>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> a69675f... make fmt & docs
-=======
->>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> f8311b7... make fmt & docs
-=======
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> make fmt & docs
-=======
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> make fmt & docs
-=======
->>>>>>> Fix code
       })
     })
   )
@@ -187,78 +120,6 @@ variable "fluxcd_v2_enabled" {
   default     = true
 }
 
-<<<<<<< HEAD
-variable "fluxcd_v2_config" {
-  description = "Configuration for fluxcd-v2"
-
-  # Credentials to be passed to Git Auth Proxy
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    type = string # azuredevops or github
-    azure_devops = object({
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      org = string
-      pat = string
-=======
-      org  = string
-      pat  = string
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
-      org = string
-      pat = string
->>>>>>> make fmt & docs
-=======
-      org  = string
-      pat  = string
->>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
-=======
-      org = string
-      pat = string
->>>>>>> a69675f... make fmt & docs
-=======
-      org  = string
-      pat  = string
->>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
-=======
-      org = string
-      pat = string
->>>>>>> f8311b7... make fmt & docs
-=======
-=======
->>>>>>> Fix code
-  credentials = list(object({
-    type = string # azuredevops or github
-    azure_devops = object({
-<<<<<<< HEAD
-      org  = string
-      pat  = string
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
-      org = string
-      pat = string
-<<<<<<< HEAD
->>>>>>> make fmt & docs
-=======
-  credentials = list(object({
-    type = string # azuredevops or github
-    azure_devops = object({
-<<<<<<< HEAD
-      org  = string
-      pat  = string
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
-      org = string
-      pat = string
->>>>>>> make fmt & docs
-=======
->>>>>>> Fix code
-=======
 variable "fluxcd_v2_credentials" {
   description = "List of credentials for Git Providers."
   type = list(object({
@@ -267,7 +128,6 @@ variable "fluxcd_v2_credentials" {
       azure_devops_org  = string
       azure_devops_pat  = string
       azure_devops_proj = string
->>>>>>> mend
     })
     github = object({
       github_org             = string
@@ -275,73 +135,18 @@ variable "fluxcd_v2_credentials" {
       github_installation_id = number
       github_private_key     = string
     })
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+  }
+  }
 
-  # Flux Bootstrap Repository
-    type = string # azuredevops or github
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    org  = string
-=======
-    org = string
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
-    org  = string
->>>>>>> make fmt & docs
-=======
-    org = string
->>>>>>> 115a386... Initial change of config to use one module - fluxcd-v2
-=======
-    org  = string
->>>>>>> a69675f... make fmt & docs
-=======
-    org = string
->>>>>>> dfd9823... Initial change of config to use one module - fluxcd-v2
-=======
-    org  = string
->>>>>>> f8311b7... make fmt & docs
-    proj = string
-    repo = string
-=======
-=======
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> Fix code
-  }))
-}
-
-<<<<<<< HEAD
+variable "fluxcd_v2_fleet_infra" {
+  description = "Configuration for Flux bootstrap repository."
   # Flux Bootstrap Repository
   fleet_infra = object({
     type = string # azuredevops or github
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-variable "fluxcd_v2_fleet_infra" {
-  description = "Configuration for Flux bootstrap repository."
-  type = object({
-    type = string
->>>>>>> mend
     org  = string
-=======
-    org = string
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
-    org  = string
->>>>>>> make fmt & docs
     proj = string
     repo = string
   })
-<<<<<<< HEAD
->>>>>>> Initial change of config to use one module - fluxcd-v2
-=======
->>>>>>> Fix code
 }
 
 variable "aad_pod_identity_enabled" {
@@ -650,13 +455,6 @@ variable "azure_metrics_config" {
 variable "node_local_dns_enabled" {
   description = "Should VPA be enabled"
   type        = bool
-<<<<<<< HEAD
   default     = true
 }
-=======
-  default     = false
-}
-<<<<<<< HEAD
->>>>>>> Fix code
-=======
->>>>>>> mend
+

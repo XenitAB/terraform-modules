@@ -23,6 +23,7 @@
 >>>>>>> Fix readme
 =======
 >>>>>>> Fix code
+
 # AKS Core
 
 This module is used to create AKS clusters.
@@ -170,18 +171,5 @@ This module is used to create AKS clusters.
 | <a name="input_vpa_enabled"></a> [vpa\_enabled](#input\_vpa\_enabled) | Should VPA be enabled | `bool` | `true` | no |
 
 ## Outputs
-<<<<<<< HEAD
-=======
 
 No outputs.
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> make fmt & docs
->>>>>>> make fmt & docs
-=======
->>>>>>> make fmt & docs
-=======
->>>>>>> Fix readme
-=======
->>>>>>> Fix code

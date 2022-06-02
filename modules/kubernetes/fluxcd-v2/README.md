@@ -64,16 +64,21 @@ No modules.
 | [github_repository_file.sync](https://registry.terraform.io/providers/integrations/github/4.21.0/docs/resources/repository_file) | resource |
 | [github_repository_file.tenant](https://registry.terraform.io/providers/integrations/github/4.21.0/docs/resources/repository_file) | resource |
 | [helm_release.git_auth_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.4.1/docs/resources/release) | resource |
-| [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/resources/manifest) | resource |
-| [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/resources/manifest) | resource |
+| [kubectl_manifest.install_azdo](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/resources/manifest) | resource |
+| [kubectl_manifest.install_git](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/resources/manifest) | resource |
+| [kubectl_manifest.sync_azdo](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/resources/manifest) | resource |
+| [kubectl_manifest.sync_git](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/resources/manifest) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/namespace) | resource |
 | [azuredevops_git_repository.cluster](https://registry.terraform.io/providers/xenitab/azuredevops/0.5.0/docs/data-sources/git_repository) | data source |
 | [azuredevops_project.this](https://registry.terraform.io/providers/xenitab/azuredevops/0.5.0/docs/data-sources/project) | data source |
 | [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/0.11.2/docs/data-sources/install) | data source |
-| [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/0.11.2/docs/data-sources/sync) | data source |
+| [flux_sync.azdo](https://registry.terraform.io/providers/fluxcd/flux/0.11.2/docs/data-sources/sync) | data source |
+| [flux_sync.git](https://registry.terraform.io/providers/fluxcd/flux/0.11.2/docs/data-sources/sync) | data source |
 | [github_repository.cluster](https://registry.terraform.io/providers/integrations/github/4.21.0/docs/data-sources/repository) | data source |
-| [kubectl_file_documents.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/data-sources/file_documents) | data source |
-| [kubectl_file_documents.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/data-sources/file_documents) | data source |
+| [kubectl_file_documents.install_azdo](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/data-sources/file_documents) | data source |
+| [kubectl_file_documents.install_git](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/data-sources/file_documents) | data source |
+| [kubectl_file_documents.sync_azdo](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/data-sources/file_documents) | data source |
+| [kubectl_file_documents.sync_git](https://registry.terraform.io/providers/gavinbunney/kubectl/1.13.1/docs/data-sources/file_documents) | data source |
 
 ## Inputs
 

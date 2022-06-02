@@ -26,6 +26,7 @@ variable "credentials" {
   type = list(object({
     type = string # azuredevops or github
     azure_devops = object({
+<<<<<<< HEAD
       org = string
       pat = string
 <<<<<<< HEAD
@@ -36,12 +37,17 @@ variable "credentials" {
 <<<<<<< HEAD
 =======
 >>>>>>> Fix code
+=======
+      azure_devops_org  = string
+      azure_devops_pat  = string
+      azure_devops_proj = string
+>>>>>>> mend
     })
     github = object({
-      org             = string
-      app_id          = number
-      installation_id = number
-      private_key     = string
+      github_org             = string
+      github_app_id          = number
+      github_installation_id = number
+      github_private_key     = string
     })
   }))
 }
@@ -66,6 +72,7 @@ variable "fleet_infra" {
 >>>>>>> Add initial config
 =======
 }
+<<<<<<< HEAD
 >>>>>>> Fix code
 variable "azure_devops_pat" {
   description = "PAT to authenticate with Azure DevOps"
@@ -301,6 +308,8 @@ variable "fleet_infra" {
 }
 
 >>>>>>> Fix code
+=======
+>>>>>>> mend
 
 variable "namespaces" {
   description = "The namespaces to configure flux with"
@@ -394,8 +403,11 @@ variable "namespaces" {
 >>>>>>> Add initial config
 }
 
+<<<<<<< HEAD
 =======
 >>>>>>> Fix code
+=======
+>>>>>>> mend
 variable "cluster_repo" {
   description = "Name of cluster repository"
   type        = string

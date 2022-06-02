@@ -211,6 +211,7 @@ resource "helm_release" "git_auth_proxy" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     credentials = var.credentials
     # TODO: change to not be fleet infra aware, instead it should just be one of the repositories
     fleet_infra = var.fleet_infra
@@ -239,6 +240,16 @@ resource "helm_release" "git_auth_proxy" {
     app_id            = tonumber(var.github_app_id)
     installation_id   = tonumber(var.github_installation_id)
     private_key       = base64encode(var.github_private_key)
+=======
+    azure_devops_pat  = var.credentials.azure_devops_pat,
+    azure_devops_org  = var.credentials.azure_devops_org,
+    azure_devops_proj = var.credentials.azure_devops_proj,
+    cluster_repo      = var.credentials.cluster_repo,
+    github_org        = var.credentials.github_org
+    app_id            = tonumber(var.credentials.github_app_id)
+    installation_id   = tonumber(var.credentials.github_installation_id)
+    private_key       = base64encode(var.credentials.github_private_key)
+>>>>>>> mend
     tenants = [for ns in var.namespaces : {
       project : ns.flux.proj
       repo : ns.flux.repo
@@ -368,6 +379,7 @@ data "flux_install" "this" {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 data "flux_sync" "this" {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -400,13 +412,16 @@ data "flux_sync" "azdo" {
 =======
 data "flux_sync" "this" {
 >>>>>>> Fix lint, docs and fmt
+=======
+data "flux_sync" "azdo" {
+>>>>>>> mend
   url                = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
   branch             = var.branch
   target_path        = "clusters/${var.cluster_id}"
   git_implementation = "libgit2"
 }
 
-data "flux_sync" "this" {
+data "flux_sync" "git" {
   url         = "${local.git_auth_proxy_url}/${var.github_org}/${var.cluster_repo}"
   branch      = var.branch
   target_path = "clusters/${var.cluster_id}"
@@ -468,43 +483,81 @@ data "flux_sync" "this" {
 >>>>>>> Fix code
 }
 
-data "kubectl_file_documents" "install" {
+data "kubectl_file_documents" "install_azdo" {
   content = data.flux_install.this.content
 }
 
-data "kubectl_file_documents" "sync" {
-  content = data.flux_sync.this.content
+data "kubectl_file_documents" "sync_azdo" {
+  content = data.flux_sync.azdo.content
+}
+
+data "kubectl_file_documents" "install_git" {
+  content = data.flux_install.this.content
+}
+
+data "kubectl_file_documents" "sync_git" {
+  content = data.flux_sync.git.content
 }
 
 locals {
-  install = [for v in data.kubectl_file_documents.install.documents : {
+  install_azdo = [for v in data.kubectl_file_documents.install_azdo.documents : {
     data : yamldecode(v)
     content : v
     }
   ]
-  sync = [for v in data.kubectl_file_documents.sync.documents : {
+  sync_azdo = [for v in data.kubectl_file_documents.sync_azdo.documents : {
+    data : yamldecode(v)
+    content : v
+    }
+  ]
+  install_git = [for v in data.kubectl_file_documents.install_git.documents : {
+    data : yamldecode(v)
+    content : v
+    }
+  ]
+  sync_git = [for v in data.kubectl_file_documents.sync_git.documents : {
     data : yamldecode(v)
     content : v
     }
   ]
 }
 
-resource "kubectl_manifest" "install" {
+resource "kubectl_manifest" "install_azdo" {
   depends_on = [kubernetes_namespace.this]
   lifecycle {
     prevent_destroy = true
   }
-  for_each = { for v in local.install : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+  for_each = { for v in local.install_azdo : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
 
   yaml_body = each.value
 }
 
-resource "kubectl_manifest" "sync" {
+resource "kubectl_manifest" "sync_azdo" {
   depends_on = [kubernetes_namespace.this]
   lifecycle {
     prevent_destroy = true
   }
-  for_each = { for v in local.sync : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+  for_each = { for v in local.sync_azdo : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+
+  yaml_body = each.value
+}
+
+resource "kubectl_manifest" "install_git" {
+  depends_on = [kubernetes_namespace.this]
+  lifecycle {
+    prevent_destroy = true
+  }
+  for_each = { for v in local.install_git : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
+
+  yaml_body = each.value
+}
+
+resource "kubectl_manifest" "sync_git" {
+  depends_on = [kubernetes_namespace.this]
+  lifecycle {
+    prevent_destroy = true
+  }
+  for_each = { for v in local.sync_git : lower(join("/", compact([v.data.apiVersion, v.data.kind, lookup(v.data.metadata, "namespace", ""), v.data.metadata.name]))) => v.content }
 
   yaml_body = each.value
 }
@@ -576,15 +629,15 @@ resource "azuredevops_git_repository_file" "install" {
 
 resource "azuredevops_git_repository_file" "sync" {
   repository_id       = data.azuredevops_git_repository.cluster.id
-  file                = data.flux_sync.this.path
-  content             = data.flux_sync.this.content
+  file                = data.flux_sync.azdo.path
+  content             = data.flux_sync.azdo.content
   branch              = "refs/heads/${var.branch}"
   overwrite_on_create = true
 }
 
 resource "azuredevops_git_repository_file" "kustomize" {
   repository_id       = data.azuredevops_git_repository.cluster.id
-  file                = data.flux_sync.this.kustomize_path
+  file                = data.flux_sync.azdo.kustomize_path
   content             = file("${path.module}/templates/kustomization-override.yaml")
   branch              = "refs/heads/${var.branch}"
   overwrite_on_create = true
@@ -683,15 +736,15 @@ resource "github_repository_file" "install" {
 
 resource "github_repository_file" "sync" {
   repository          = data.github_repository.cluster.name
-  file                = data.flux_sync.this.path
-  content             = data.flux_sync.this.content
+  file                = data.flux_sync.git.path
+  content             = data.flux_sync.git.content
   branch              = var.branch
   overwrite_on_create = true
 }
 
 resource "github_repository_file" "kustomize" {
   repository          = data.github_repository.cluster.name
-  file                = data.flux_sync.this.kustomize_path
+  file                = data.flux_sync.git.kustomize_path
   content             = file("${path.module}/templates/kustomization-override.yaml")
   branch              = var.branch
   overwrite_on_create = true

@@ -13,4 +13,23 @@ module "fluxcd_v2" {
   environment            = "dev"
   cluster_id             = "foobar"
   namespaces             = []
+  credentials = [{
+    azure_devops = {
+      org = "value"
+      pat = "value"
+    }
+    github = {
+      app_id          = 1
+      installation_id = 1
+      org             = "value"
+      private_key     = "value"
+    }
+    type = "github"
+  }]
+  fleet_infra = {
+    type = "github"
+    org  = "org"
+    proj = "proj"
+    repo = "repo"
+  }
 }

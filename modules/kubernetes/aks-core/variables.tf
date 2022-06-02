@@ -187,6 +187,7 @@ variable "fluxcd_v2_enabled" {
   default     = true
 }
 
+<<<<<<< HEAD
 variable "fluxcd_v2_config" {
   description = "Configuration for fluxcd-v2"
 
@@ -257,12 +258,22 @@ variable "fluxcd_v2_config" {
 >>>>>>> make fmt & docs
 =======
 >>>>>>> Fix code
+=======
+variable "fluxcd_v2_credentials" {
+  description = "List of credentials for Git Providers."
+  type = list(object({
+    type = string # azuredevops or github
+    azure_devops = object({
+      azure_devops_org  = string
+      azure_devops_pat  = string
+      azure_devops_proj = string
+>>>>>>> mend
     })
     github = object({
-      org             = string
-      app_id          = number
-      installation_id = number
-      private_key     = string
+      github_org             = string
+      github_app_id          = number
+      github_installation_id = number
+      github_private_key     = string
     })
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -303,12 +314,20 @@ variable "fluxcd_v2_config" {
 =======
 >>>>>>> Fix code
   }))
+}
 
+<<<<<<< HEAD
   # Flux Bootstrap Repository
   fleet_infra = object({
     type = string # azuredevops or github
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+variable "fluxcd_v2_fleet_infra" {
+  description = "Configuration for Flux bootstrap repository."
+  type = object({
+    type = string
+>>>>>>> mend
     org  = string
 =======
     org = string
@@ -637,4 +656,7 @@ variable "node_local_dns_enabled" {
 =======
   default     = false
 }
+<<<<<<< HEAD
 >>>>>>> Fix code
+=======
+>>>>>>> mend

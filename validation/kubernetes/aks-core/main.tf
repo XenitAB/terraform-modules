@@ -29,28 +29,27 @@ module "aks_core" {
     notification_email = "foo"
     dns_zone           = ["bar", "faa"]
   }
-  fluxcd_v2_config = {
-    credentials = ({
-      type = "github"
+  fluxcd_v2_credentials = {
+    type = "github"
 
-      github = ({
-        org             = ""
-        app_id          = 0
-        installation_id = 0
-        private_key     = ""
-      })
-      azure_devops = ({
-        pat  = ""
-        org  = ""
-        proj = ""
-      })
-      fleet_infra = ({
-        type = "github"
-        org  = "Foo"
-        proj = "Bar"
-        repo = "Foobar"
-      })
+    github = ({
+      github_org             = ""
+      github_app_id          = 0
+      github_installation_id = 0
+      github_private_key     = ""
     })
+    azure_devops = ({
+      azure_devops_org  = ""
+      azure_devops_pat  = ""
+      azure_devops_proj = ""
+    })
+  }
+
+  fluxcd_v2_fleet_infra = {
+    type = "github"
+    org  = "Foo"
+    proj = "Bar"
+    repo = "Foobar"
   }
 
   aad_groups = {
@@ -85,10 +84,6 @@ module "aks_core" {
   }
 
   starboard_enabled = true
-  starboard_config = {
-    client_id   = "foo"
-    resource_id = "bar"
-  }
 
   ingress_config = {
     http_snippet              = ""

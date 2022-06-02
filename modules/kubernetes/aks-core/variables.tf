@@ -122,21 +122,21 @@ variable "fluxcd_v2_enabled" {
 
 variable "fluxcd_v2_credentials" {
   description = "List of credentials for Git Providers."
-  type = list(object({
-    type = string # azuredevops or github
-    azure_devops = object({
-      azure_devops_org  = string
-      azure_devops_pat  = string
-      azure_devops_proj = string
-    })
-    github = object({
-      github_org             = string
-      github_app_id          = number
-      github_installation_id = number
-      github_private_key     = string
-    })
-  }
-  }
+    type = list(object({
+      type = string # azuredevops or github
+        azure_devops = object({
+          azure_devops_org  = string
+          azure_devops_pat  = string
+          azure_devops_proj = string
+        }),
+        github = object({
+          github_org             = string
+          github_app_id          = number
+          github_installation_id = number
+          github_private_key     = string
+        })
+    }))
+}
 
 variable "fluxcd_v2_fleet_infra" {
   description = "Configuration for Flux bootstrap repository."

@@ -609,3 +609,15 @@ module "node_local_dns" {
 
   source = "../../kubernetes/node-local-dns"
 }
+
+module "node_ttl" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["node-ttl"] :
+    s => s
+    if var.node_ttl_enabled
+  }
+
+  source = "../../kubernetes/node-ttl"
+}

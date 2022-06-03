@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#636](https://github.com/XenitAB/terraform-modules/pull/636) Make Node Local DNS enabled by default in AWS and Azure.
 - [#688](https://github.com/XenitAB/terraform-modules/pull/688) Fix Kubernetes version check and update supported versions.
 - [#654](https://github.com/XenitAB/terraform-modules/pull/654) AWS specify last addon version in EKS.
+- [#694](https://github.com/XenitAB/terraform-modules/pull/694) Change nginx-controller to use json as log output.
 
 ## 2022.05.4
 

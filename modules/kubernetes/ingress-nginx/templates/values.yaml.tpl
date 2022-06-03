@@ -52,6 +52,8 @@ controller:
     %{~ if allow_snippet_annotations ~}
     annotation-value-word-blocklist: load_module,lua_package,_by_lua,location,root,proxy_pass,serviceaccount,{,},',\
     %{~ endif ~}
+    log-format-escape-json: "true"
+    log-format-upstream: '{"http.url":"$request_uri","http.version":"$server_protocol","http.status_code":"$status","http.method":"$request_method","http.referer":"$http_referer","http.useragent":"$http_user_agent","time_local":"$time_local","remote_addr":"$remote_addr","remote_user":"$remote_user","body_bytes_sent":"$body_bytes_sent","request_time":"$request_time","response_content_type":"$sent_http_content_type","X-Forwarded-For":"$proxy_add_x_forwarded_for"}'
 
   addHeaders:
     %{~ for key, value in extra_headers ~}

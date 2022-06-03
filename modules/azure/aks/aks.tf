@@ -60,9 +60,9 @@ resource "azurerm_kubernetes_cluster" "this" {
     node_count                   = var.aks_config.production_grade ? 2 : 1
     only_critical_addons_enabled = true
 
-    kubelet_config {
-      pod_max_pid = 0
-    }
+    #kubelet_config {
+    #  pod_max_pid = 0
+    #}
   }
 }
 

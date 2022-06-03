@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#690](https://github.com/XenitAB/terraform-modules/pull/690) Helm metrics-server extraArgs as list.
 
+### Added
+
+- [#692](https://github.com/XenitAB/terraform-modules/pull/692) Add Node TTL to EKS and AKS.
+
 ### Changed
 
 - [#636](https://github.com/XenitAB/terraform-modules/pull/636) Make Node Local DNS enabled by default in AWS and Azure.

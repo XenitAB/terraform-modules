@@ -40,6 +40,7 @@ variable "eks_config" {
       instance_types = list(string)
       min_size       = number
       max_size       = number
+      node_labels    = map(string)
     }))
   })
 

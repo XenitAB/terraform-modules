@@ -31,6 +31,8 @@ spec:
       - name: DD_CONTAINER_EXCLUDE
         value: "kube_namespace:.*"
     config:
+      podLabelsAsTags:
+        env: {{ .Values.environment }}
       kubelet:
         tlsVerify: false
       criSocket:

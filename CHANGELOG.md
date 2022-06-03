@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fix
 
 - [#690](https://github.com/XenitAB/terraform-modules/pull/690) Helm metrics-server extraArgs as list.
+- [#691](https://github.com/XenitAB/terraform-modules/pull/691) Set default environment in datadog agent.
 
 ### Changed
 

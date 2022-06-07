@@ -92,7 +92,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   node_labels = merge({ "xkf.xenit.io/node-ttl" = "168h" }, each.value.node_labels, { "node-pool" = each.value.name })
 
   kubelet_config {
-    pod_max_pid = 5000
+    pod_max_pid = 1000
   }
 
   upgrade_settings {

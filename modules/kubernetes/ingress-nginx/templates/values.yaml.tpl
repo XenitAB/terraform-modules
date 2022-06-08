@@ -66,9 +66,9 @@ controller:
   %{~ if datadog_enabled || linkerd_enabled ~}
   podAnnotations:
     %{~ if datadog_enabled ~}
-    ad.datadoghq.com/controller.check_names: '["nginx", "nginx_ingress_controller"]'
-    ad.datadoghq.com/controller.init_configs: '[{}]'
-    ad.datadoghq.com/controller.instances: '[{"prometheus_url": "http://%%host%%:%%port_metrics%%/metrics"}]'
+    ad.datadoghq.com/nginx-ingress-controller.check_names: '["nginx", "nginx_ingress_controller"]'
+    ad.datadoghq.com/nginx-ingress-controller.init_configs: '[{}]'
+    ad.datadoghq.com/nginx-ingress-controller.instances: '[{"prometheus_url": "http://%%host%%:%%port_metrics%%/metrics"}]'
     ad.datadoghq.com/nginx-ingress-controller.logs: '[{"service": "controller", "source":"nginx-ingress-controller"}]'
     %{~ endif ~}
     %{~ if linkerd_enabled ~}

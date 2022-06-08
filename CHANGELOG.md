@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#690](https://github.com/XenitAB/terraform-modules/pull/690) Helm metrics-server extraArgs as list.
 - [#697](https://github.com/XenitAB/terraform-modules/pull/697) Set default environment in datadog agent.
 - [#700](https://github.com/XenitAB/terraform-modules/pull/700) Fix node-ttl OCI registry.
+- [#701](https://github.com/XenitAB/terraform-modules/pull/701) Datadog nginx-ingress-controller log config.
 
 ### Added
 

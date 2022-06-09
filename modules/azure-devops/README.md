@@ -4,4 +4,4 @@ This directory contains all the Azure DevOps Terraform modules.
 
 ## Modules
 
-- [`core`](core/README.md)
+- [`azdo`](azdo/README.md)

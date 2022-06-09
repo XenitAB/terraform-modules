@@ -42,9 +42,7 @@ No modules.
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The name of the core infra | `string` | n/a | yes |
 | <a name="input_display_name"></a> [display\_name](#input\_display\_name) | The display name for the Azure AD application. | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
-| <a name="input_location"></a> [location](#input\_location) | The name of the location | `string` | n/a | yes |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The short name of the location | `string` | n/a | yes |
-| <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The name of the subscription | `string` | n/a | yes |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | n/a | yes |
 
 ## Outputs

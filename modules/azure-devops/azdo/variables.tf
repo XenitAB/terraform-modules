@@ -13,18 +13,8 @@ variable "environment" {
   type        = string
 }
 
-variable "location" {
-  description = "The name of the location"
-  type        = string
-}
-
 variable "location_short" {
   description = "The short name of the location"
-  type        = string
-}
-
-variable "subscription_name" {
-  description = "The name of the subscription"
   type        = string
 }
 

@@ -8,6 +8,7 @@ This repository contains the Xenit Terraform modules.
 - [`azure`](modules/azure/README.md)
 - [`azure-ad`](modules/azure-ad/README.md)
 - [`kubernetes`](modules/kubernetes/README.md)
+- [`azure-devops`](modules/azure-devops/README.md)
 
 ## Contributing
 

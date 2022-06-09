@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - [#692](https://github.com/XenitAB/terraform-modules/pull/692) [Breaking] Add Node TTL to EKS and AKS.
+- [#705](https://github.com/XenitAB/terraform-modules/pull/705) New Azure DevOps module.
 
 ### Changed
 

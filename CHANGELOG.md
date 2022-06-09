@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#654](https://github.com/XenitAB/terraform-modules/pull/654) AWS specify last addon version in EKS.
 - [#698](https://github.com/XenitAB/terraform-modules/pull/698) Add premium ZRS storage class to AKS.
 - [#699](https://github.com/XenitAB/terraform-modules/pull/698) Update Helm Terraform provider to support OCI charts.
+- [#707](https://github.com/XenitAB/terraform-modules/pull/707) Update bitnami/nginx helm chart to 12.0.3 for ingress-healthz.
 
 ## 2022.05.4
 

@@ -195,20 +195,6 @@ module "azure_metrics" {
 }
 
 # linkerd
-module "linkerd_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  for_each = {
-    for s in ["linkerd"] :
-    s => s
-    if var.linkerd_enabled
-  }
-
-  chart_repository = "https://helm.linkerd.io/stable"
-  chart_name       = "linkerd2"
-  chart_version    = "2.11.2"
-}
-
 module "linkerd" {
   depends_on = [module.opa_gatekeeper, module.cert_manager_crd]
 

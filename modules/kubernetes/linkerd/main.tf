@@ -192,8 +192,6 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
 }
 
 # Install linkerd-cni helm chart
-# Tmp use edge version until 2.11.0 is released where we will get the helm chart feature we need.
-#tf-latest-version:ignore
 resource "helm_release" "linkerd_cni" {
   repository  = "https://helm.linkerd.io/stable"
   chart       = "linkerd2-cni"

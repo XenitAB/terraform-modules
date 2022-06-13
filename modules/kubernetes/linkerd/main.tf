@@ -221,11 +221,11 @@ resource "helm_release" "linkerd_extras" {
 resource "helm_release" "linkerd" {
   depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
 
-  repository  = "https://helm.linkerd.io/stable"
+  repository  = "https://helm.linkerd.io/edge"
   chart       = "linkerd2"
   name        = "linkerd"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "2.11.2"
+  version     = "22.6.1"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values.yaml.tpl", {

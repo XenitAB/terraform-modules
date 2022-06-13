@@ -20,6 +20,7 @@ locals {
     "velero",
     "grafana-agent",
     "promtail",
+    "prometheus",
   ]
 }
 

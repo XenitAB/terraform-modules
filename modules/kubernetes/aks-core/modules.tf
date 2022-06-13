@@ -205,7 +205,7 @@ module "linkerd_crd" {
   }
 
   chart_repository = "https://helm.linkerd.io/stable"
-  chart_name       = "linkerd"
+  chart_name       = "linkerd2"
   chart_version    = "2.11.2"
 }
 

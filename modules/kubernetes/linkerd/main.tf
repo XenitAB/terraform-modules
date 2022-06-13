@@ -225,7 +225,7 @@ resource "helm_release" "linkerd" {
   chart       = "linkerd2"
   name        = "linkerd"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "22.6.1"
+  version     = "edge-22.6.1"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values.yaml.tpl", {

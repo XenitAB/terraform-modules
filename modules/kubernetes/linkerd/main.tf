@@ -222,7 +222,7 @@ resource "helm_release" "linkerd" {
   depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
 
   repository  = "https://helm.linkerd.io/edge"
-  chart       = "linkerd2"
+  chart       = "linkerd-control-plane"
   name        = "linkerd"
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "edge-22.6.1"

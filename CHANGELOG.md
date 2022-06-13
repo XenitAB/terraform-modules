@@ -6,14 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#640](https://github.com/XenitAB/terraform-modules/pull/640) [Breaking] AKS set kubelet config default max pod pid.
+
+## 2022.06.1
+
 ### Fix
 
 - [#690](https://github.com/XenitAB/terraform-modules/pull/690) Helm metrics-server extraArgs as list.
 - [#697](https://github.com/XenitAB/terraform-modules/pull/697) Set default environment in datadog agent.
+- [#700](https://github.com/XenitAB/terraform-modules/pull/700) Fix node-ttl OCI registry.
+- [#701](https://github.com/XenitAB/terraform-modules/pull/701) Datadog nginx-ingress-controller log config.
+- [#703](https://github.com/XenitAB/terraform-modules/pull/703) Exclude prometheus ns from gatekeeper config.
 
 ### Added
 
-- [#692](https://github.com/XenitAB/terraform-modules/pull/692) Add Node TTL to EKS and AKS.
+- [#692](https://github.com/XenitAB/terraform-modules/pull/692) [Breaking] Add Node TTL to EKS and AKS.
 
 ### Changed
 
@@ -21,7 +30,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#688](https://github.com/XenitAB/terraform-modules/pull/688) Fix Kubernetes version check and update supported versions.
 - [#654](https://github.com/XenitAB/terraform-modules/pull/654) AWS specify last addon version in EKS.
 - [#698](https://github.com/XenitAB/terraform-modules/pull/698) Add premium ZRS storage class to AKS.
-- [#640](https://github.com/XenitAB/terraform-modules/pull/640) [Breaking] AKS set kubelet config default max pod pid.
+- [#699](https://github.com/XenitAB/terraform-modules/pull/698) Update Helm Terraform provider to support OCI charts.
+- [#707](https://github.com/XenitAB/terraform-modules/pull/707) Update bitnami/nginx helm chart to 12.0.3 for ingress-healthz.
 
 ## 2022.05.4
 

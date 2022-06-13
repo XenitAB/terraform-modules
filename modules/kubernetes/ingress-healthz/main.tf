@@ -16,7 +16,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.4.1"
+      version = "2.5.1"
     }
   }
 }
@@ -36,7 +36,7 @@ resource "helm_release" "ingress_healthz" {
   chart       = "nginx"
   name        = "ingress-healthz"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "9.5.10"
+  version     = "12.0.3"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     environment     = var.environment

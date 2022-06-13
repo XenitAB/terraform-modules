@@ -14,7 +14,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.4.1"
+      version = "2.5.1"
     }
   }
 }
@@ -30,10 +30,9 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "this" {
-  repository  = "oci://ghcr.io/xenitab/helm-charts/node-ttl"
-  chart       = "node-ttl"
+  chart       = "oci://ghcr.io/xenitab/helm-charts/node-ttl"
   name        = "node-ttl"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "0.0.3"
+  version     = "v0.0.3"
   max_history = 3
 }

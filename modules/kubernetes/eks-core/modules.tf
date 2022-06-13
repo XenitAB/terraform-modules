@@ -123,8 +123,22 @@ module "fluxcd_v2_github" {
 }
 
 # linkerd
+module "linkerd_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  for_each = {
+    for s in ["linkerd"] :
+    s => s
+    if var.linkerd_enabled
+  }
+
+  chart_repository = "https://helm.linkerd.io/edge"
+  chart_name       = "linkerd"
+  chart_version    = "edge-22.06.1"
+}
+
 module "linkerd" {
-  depends_on = [module.opa_gatekeeper, module.cert_manager]
+  depends_on = [module.opa_gatekeeper, module.cert_manager, module.linkerd_crd]
 
   for_each = {
     for s in ["linkerd"] :

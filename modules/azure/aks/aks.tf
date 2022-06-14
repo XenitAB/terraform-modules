@@ -402,8 +402,8 @@ resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
     enabled  = false
 
     retention_policy {
-      enabled = true
-      days    = 30
+      enabled = false
+      days    = 0
     }
   }
 
@@ -412,8 +412,8 @@ resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
     enabled  = true
 
     retention_policy {
-      enabled = false
-      days    = 0
+      enabled = true
+      days    = 30
     }
   }
 

@@ -243,7 +243,7 @@ resource "helm_release" "linkerd_viz" {
   chart       = "linkerd-viz"
   name        = "linkerd-viz"
   namespace   = kubernetes_namespace.viz.metadata[0].name
-  version     = "edge-22.6.1"
+  version     = "30.2.4-edge"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values-viz.yaml.tpl", {}),

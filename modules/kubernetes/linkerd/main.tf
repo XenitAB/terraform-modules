@@ -239,11 +239,11 @@ resource "helm_release" "linkerd" {
 resource "helm_release" "linkerd_viz" {
   depends_on = [helm_release.linkerd]
 
-  repository  = "https://helm.linkerd.io/stable"
+  repository  = "https://helm.linkerd.io/edge"
   chart       = "linkerd-viz"
   name        = "linkerd-viz"
   namespace   = kubernetes_namespace.viz.metadata[0].name
-  version     = "2.11.2"
+  version     = "edge-22.6.1"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values-viz.yaml.tpl", {}),

@@ -65,11 +65,11 @@ data "aws_eks_addon_version" "kube_proxy" {
 resource "aws_eks_addon" "kube_proxy" {
   depends_on = [aws_eks_node_group.this]
 
-  cluster_name  = aws_eks_cluster.this.name
-  addon_name    = "kube-proxy"
-  addon_version = data.aws_eks_addon_version.kube_proxy.version
-
-  tags = local.global_tags
+  cluster_name      = aws_eks_cluster.this.name
+  addon_name        = "kube-proxy"
+  addon_version     = data.aws_eks_addon_version.kube_proxy.version
+  resolve_conflicts = "OVERWRITE"
+  tags              = local.global_tags
 }
 
 data "aws_eks_addon_version" "core_dns" {
@@ -81,11 +81,11 @@ data "aws_eks_addon_version" "core_dns" {
 resource "aws_eks_addon" "core_dns" {
   depends_on = [aws_eks_node_group.this]
 
-  cluster_name  = aws_eks_cluster.this.name
-  addon_name    = "coredns"
-  addon_version = data.aws_eks_addon_version.core_dns.version
-
-  tags = local.global_tags
+  cluster_name      = aws_eks_cluster.this.name
+  addon_name        = "coredns"
+  addon_version     = data.aws_eks_addon_version.core_dns.version
+  resolve_conflicts = "OVERWRITE"
+  tags              = local.global_tags
 }
 
 data "tls_certificate" "thumbprint" {

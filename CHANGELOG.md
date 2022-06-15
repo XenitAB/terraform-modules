@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#640](https://github.com/XenitAB/terraform-modules/pull/640) [Breaking] AKS set kubelet config default max pod pid to 1000.
 - [#709](https://github.com/XenitAB/terraform-modules/pull/709) [Breaking] Upgrade linkerd CNI to 2.11.2 and control-plane to edge-22.6.1.
+- [#710](https://github.com/XenitAB/terraform-modules/pull/710) Increase Prometheus resource request and limit.
 
 ## 2022.06.1
 

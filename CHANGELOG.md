@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.06.2
+
 ### Changed
 
 - [#640](https://github.com/XenitAB/terraform-modules/pull/640) [Breaking] AKS set kubelet config default max pod pid to 1000.

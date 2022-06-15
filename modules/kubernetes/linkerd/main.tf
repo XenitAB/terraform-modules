@@ -192,14 +192,12 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
 }
 
 # Install linkerd-cni helm chart
-# Tmp use edge version until 2.11.0 is released where we will get the helm chart feature we need.
-#tf-latest-version:ignore
 resource "helm_release" "linkerd_cni" {
-  repository  = "https://helm.linkerd.io/edge"
+  repository  = "https://helm.linkerd.io/stable"
   chart       = "linkerd2-cni"
   name        = "linkerd-cni"
   namespace   = kubernetes_namespace.cni.metadata[0].name
-  version     = "21.7.5"
+  version     = "2.11.2"
   max_history = 3
 
   values = [
@@ -223,11 +221,11 @@ resource "helm_release" "linkerd_extras" {
 resource "helm_release" "linkerd" {
   depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
 
-  repository  = "https://helm.linkerd.io/stable"
-  chart       = "linkerd2"
+  repository  = "https://helm.linkerd.io/edge"
+  chart       = "linkerd-control-plane"
   name        = "linkerd"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "2.10.2"
+  version     = "1.4.3-edge"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values.yaml.tpl", {
@@ -241,11 +239,11 @@ resource "helm_release" "linkerd" {
 resource "helm_release" "linkerd_viz" {
   depends_on = [helm_release.linkerd]
 
-  repository  = "https://helm.linkerd.io/stable"
+  repository  = "https://helm.linkerd.io/edge"
   chart       = "linkerd-viz"
   name        = "linkerd-viz"
   namespace   = kubernetes_namespace.viz.metadata[0].name
-  version     = "2.10.2"
+  version     = "30.2.4-edge"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values-viz.yaml.tpl", {}),

@@ -1,4 +1,7 @@
 controller:
+  image:
+    chroot: true
+
   replicaCount: 3
 
   priorityClassName: platform-medium

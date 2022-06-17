@@ -3,12 +3,12 @@ data "azurerm_resource_group" "log" {
 }
 
 data "azurerm_log_analytics_workspace" "log" {
-  name                = "log-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
+  name                = "log-${var.environment}-${var.location_short}-${var.core_name}-${var.unique_suffix}"
   resource_group_name = data.azurerm_resource_group.log.name
 }
 
 data "azurerm_storage_account" "log" {
-  name                = "log${var.environment}${var.location_short}${var.name}${var.unique_suffix}"
+  name                = "log${var.environment}${var.location_short}${var.core_name}${var.unique_suffix}"
   resource_group_name = data.azurerm_resource_group.log.name
 }
 

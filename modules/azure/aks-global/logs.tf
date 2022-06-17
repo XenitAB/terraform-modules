@@ -29,7 +29,7 @@ resource "azurerm_eventhub_namespace" "this" {
 resource "azurerm_eventhub_namespace_authorization_rule" "this" {
   name                = "diagnostic-${var.environment}-${var.location_short}-${var.name}"
   namespace_name      = azurerm_eventhub_namespace.this.name
-  resource_group_name = azurerm_eventhub_namespace.resource_group_name
+  resource_group_name = azurerm_eventhub_namespace.this.resource_group_name
 
   listen = false
   send   = true
@@ -39,7 +39,7 @@ resource "azurerm_eventhub_namespace_authorization_rule" "this" {
 resource "azurerm_eventhub" "this" {
   name                = "audit-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
   namespace_name      = azurerm_eventhub_namespace.this.name
-  resource_group_name = azurerm_eventhub_namespace.resource_group_name
+  resource_group_name = azurerm_eventhub_namespace.this.resource_group_name
   partition_count     = 2
   message_retention   = 1
 }

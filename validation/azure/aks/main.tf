@@ -95,4 +95,5 @@ module "aks" {
       name = "name"
     }
   }
+  log_storage_account_id = "id"
 }

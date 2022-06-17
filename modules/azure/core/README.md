@@ -31,6 +31,7 @@ No modules.
 | [azurerm_route.not_virtual_appliance](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/route) | resource |
 | [azurerm_route.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/route) | resource |
 | [azurerm_route_table.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/route_table) | resource |
+| [azurerm_storage_account.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/storage_account) | resource |
 | [azurerm_storage_account.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/storage_account) | resource |
 | [azurerm_subnet.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/subnet) | resource |
@@ -39,6 +40,7 @@ No modules.
 | [azurerm_virtual_network.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/virtual_network) | resource |
 | [azurerm_virtual_network_peering.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/virtual_network_peering) | resource |
 | [azuread_group.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/data-sources/group) | data source |
+| [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/resource_group) | data source |
 
 ## Inputs

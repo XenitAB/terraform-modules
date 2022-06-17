@@ -156,3 +156,9 @@ variable "azure_metrics_identity" {
     principal_id = string
   })
 }
+
+variable "aks_audit_log_retention" {
+  description = "The aks audit log retention in days, 0 = infinite"
+  type        = number
+  default     = 7
+}

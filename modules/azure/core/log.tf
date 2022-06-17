@@ -7,7 +7,7 @@ resource "azurerm_log_analytics_workspace" "log" {
   resource_group_name = data.azurerm_resource_group.log.name
   location            = data.azurerm_resource_group.log.location
   sku                 = "PerGB2018"
-  retention_in_days   = 2
+  retention_in_days   = 30
 }
 
 #tfsec:ignore:azure-storage-queue-services-logging-enabled

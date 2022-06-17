@@ -50,6 +50,7 @@ No modules.
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/client_config) | data source |
 | [azurerm_log_analytics_workspace.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/log_analytics_workspace) | data source |
 | [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/resource_group) | data source |
+| [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/resource_group) | data source |
 | [azurerm_storage_account.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/storage_account) | data source |
 | [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/subnet) | data source |

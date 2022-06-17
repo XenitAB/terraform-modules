@@ -36,6 +36,7 @@ No modules.
 | [azuread_group_member.aks_managed_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group_member) | resource |
 | [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/kubernetes_cluster) | resource |
 | [azurerm_kubernetes_cluster_node_pool.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/kubernetes_cluster_node_pool) | resource |
+| [azurerm_monitor_diagnostic_setting.log_analytics_control_plane](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_monitor_diagnostic_setting.log_storage_account_audit](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |
@@ -47,6 +48,7 @@ No modules.
 | [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/client_config) | data source |
+| [azurerm_log_analytics_workspace.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/log_analytics_workspace) | data source |
 | [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/resource_group) | data source |
 | [azurerm_storage_account.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/storage_account) | data source |

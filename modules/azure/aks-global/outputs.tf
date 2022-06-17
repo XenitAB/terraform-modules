@@ -115,7 +115,7 @@ output "log_storage_account_id" {
 
 output "log_eventhub_name" {
   description = "The eventhub name for k8s logs"
-  value       = azurerm_eventhub.this.id
+  value       = azurerm_eventhub.this.name
 }
 
 output "log_eventhub_authorization_rule_id" {

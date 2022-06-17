@@ -112,3 +112,13 @@ output "log_storage_account_id" {
   description = "The storage account id for long term storage of logs"
   value       = azurerm_storage_account.log.id
 }
+
+output "log_eventhub_name" {
+  description = "The eventhub name for k8s logs"
+  value       = azurerm_eventhub.this.id
+}
+
+output "log_eventhub_authorization_rule_id" {
+  description = "The authoritzation rule id for event hub"
+  value       = azurerm_eventhub_namespace_authorization_rule.this.id
+}

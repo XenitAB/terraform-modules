@@ -45,6 +45,9 @@ This module is used to create resources that are used by AKS clusters.
 | [azuread_service_principal.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/service_principal) | resource |
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/container_registry) | resource |
 | [azurerm_dns_zone.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/dns_zone) | resource |
+| [azurerm_eventhub.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/eventhub) | resource |
+| [azurerm_eventhub_namespace.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/eventhub_namespace) | resource |
+| [azurerm_eventhub_namespace_authorization_rule.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/eventhub_namespace_authorization_rule) | resource |
 | [azurerm_key_vault_access_policy.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_log_analytics_workspace.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/log_analytics_workspace) | resource |
@@ -118,6 +121,8 @@ This module is used to create resources that are used by AKS clusters.
 | <a name="output_external_dns_identity"></a> [external\_dns\_identity](#output\_external\_dns\_identity) | MSI authentication identity for External DNS |
 | <a name="output_helm_operator_credentials"></a> [helm\_operator\_credentials](#output\_helm\_operator\_credentials) | Credentials meant to be used by Helm Operator |
 | <a name="output_log_analytics_id"></a> [log\_analytics\_id](#output\_log\_analytics\_id) | The log analytics workspace id where to store resource logs |
+| <a name="output_log_eventhub_authorization_rule_id"></a> [log\_eventhub\_authorization\_rule\_id](#output\_log\_eventhub\_authorization\_rule\_id) | The authoritzation rule id for event hub |
+| <a name="output_log_eventhub_name"></a> [log\_eventhub\_name](#output\_log\_eventhub\_name) | The eventhub name for k8s logs |
 | <a name="output_log_storage_account_id"></a> [log\_storage\_account\_id](#output\_log\_storage\_account\_id) | The storage account id for long term storage of logs |
 | <a name="output_namespaces"></a> [namespaces](#output\_namespaces) | Kubernetes namespaces |
 | <a name="output_ssh_public_key"></a> [ssh\_public\_key](#output\_ssh\_public\_key) | SSH public key to add to servers |

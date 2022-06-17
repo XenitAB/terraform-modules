@@ -38,6 +38,7 @@ No modules.
 | [azurerm_kubernetes_cluster_node_pool.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/kubernetes_cluster_node_pool) | resource |
 | [azurerm_monitor_diagnostic_setting.log_analytics](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_monitor_diagnostic_setting.log_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_monitor_diagnostic_setting.log_storage_account_audit](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |

@@ -1,3 +1,7 @@
+data "azurerm_resource_group" "log" {
+  name = "rg-${var.environment}-${var.location_short}-log"
+}
+
 data "azurerm_log_analytics_workspace" "log" {
   name                = "log-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
   resource_group_name = data.azurerm_resource_group.log.name
@@ -5,7 +9,7 @@ data "azurerm_log_analytics_workspace" "log" {
 
 data "azurerm_storage_account" "log" {
   name                = "log${var.environment}${var.location_short}${var.name}${var.unique_suffix}"
-  resource_group_name = data.azurerm_resource_group.this.name
+  resource_group_name = data.azurerm_resource_group.log.name
 }
 
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec

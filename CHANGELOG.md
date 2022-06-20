@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#714](https://github.com/XenitAB/terraform-modules/pull/714) Ingress-nginx helm chart 4.1.4 and use the chroot functionality.
-- [#716](https://github.com/XenitAB/terraform-modules/pull/716) Set resource requests for datadog-cluster-agent, starboard-operator, ingress-nginx and goldilocks-controller.
+- [#716](https://github.com/XenitAB/terraform-modules/pull/716) Set resource requests for datadog-cluster-agent, starboard-operator, ingress-nginx, external-dns and goldilocks-controller.
 
 ### Fixed
 

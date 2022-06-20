@@ -23,5 +23,9 @@ module "xks_global" {
     }
   ]
 
+  dns_zone = ["example.io"]
+
   group_name_prefix = "aks"
+  location          = "Sweden Central"
+  location_short    = "sc"
 }

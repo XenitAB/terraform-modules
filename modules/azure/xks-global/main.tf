@@ -5,5 +5,32 @@ terraform {
       version = "2.19.1"
       source  = "hashicorp/azuread"
     }
+    azurerm = {
+      version = "3.8.0"
+      source  = "hashicorp/azurerm"
+    }
   }
+}
+
+resource "azurerm_resource_group" "this" {
+  name     = "rg-${var.environment}-global"
+  location = var.location
+  tags = {
+    "Environment"   = var.environment,
+    "LocationShort" = var.location_short,
+    "description"   = "Global resources",
+  }
+}
+
+resource "azurerm_management_lock" "rg" {
+  for_each = {
+    for l in ["rg"] :
+    l => l
+    if var.lock_resource_group
+  }
+
+  name       = "DoNotDelete"
+  scope      = azurerm_resource_group.this.id
+  lock_level = "CanNotDelete"
+  notes      = "This Resource Group can't be deleted without first removing the lock."
 }

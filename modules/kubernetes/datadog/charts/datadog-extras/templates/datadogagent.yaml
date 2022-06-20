@@ -50,6 +50,11 @@ spec:
   clusterAgent:
     replicas: 2
     priorityClassName: platform-low
+    config:
+      resources:
+        requests:
+          cpu: 60m
+          memory: 200Mi
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"
   features:

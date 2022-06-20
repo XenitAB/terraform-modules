@@ -94,10 +94,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   upgrade_settings {
     max_surge = "33%"
   }
-
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 # Replace this with a datasource when availible in the AzureRM provider.

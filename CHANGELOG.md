@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#716](https://github.com/XenitAB/terraform-modules/pull/716) Set resource requests for datadog-cluster-agent, starboard-operator, ingress-nginx, external-dns, azure-metrics and goldilocks-controller.
 - [#717](https://github.com/XenitAB/terraform-modules/pull/717) Remove force conflicts from CRD resource.
+- [#718](https://github.com/XenitAB/terraform-modules/pull/718) Remove node pool create before destroy.
 
 ## 2022.06.2
 

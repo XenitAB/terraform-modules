@@ -36,7 +36,7 @@ starboard:
   scanJobPodTemplateLabels: "aadpodidbinding=trivy"
 %{~ endif ~}
 
-resources: {}
+resources:
   requests:
     cpu: 15m
     memory: 200Mi

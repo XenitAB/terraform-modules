@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#714](https://github.com/XenitAB/terraform-modules/pull/714) Ingress-nginx helm chart 4.1.4 and use the chroot functionality.
 
+### Fixed
+
+- [#717](https://github.com/XenitAB/terraform-modules/pull/717) Remove force conflicts from CRD resource.
+
 ## 2022.06.2
 
 ### Changed

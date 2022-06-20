@@ -10,8 +10,8 @@ provider "random" {}
 
 provider "tls" {}
 
-module "aks_global" {
-  source = "../../../modules/azure/aks-global"
+module "aks_regional" {
+  source = "../../../modules/azure/aks-regional"
 
   environment       = "dev"
   location_short    = "we"

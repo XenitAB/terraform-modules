@@ -5,7 +5,7 @@ This directory contains all the Azure Terraform modules.
 ## Modules
 
 - [`aks`](aks/README.md)
-- [`aks-global`](aks-global/README.md)
+- [`aks-regional`](aks-regional/README.md)
 - [`azure-pipelines-agent-vmss`](azure-pipelines-agent-vmss/README.md)
 - [`core`](core/README.md)
 - [`github-runner`](github-runner/README.md)

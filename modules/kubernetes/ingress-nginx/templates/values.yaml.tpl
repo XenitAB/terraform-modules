@@ -4,6 +4,11 @@ controller:
 
   replicaCount: 3
 
+  resources:
+    requests:
+      cpu: 100m
+      memory: 110Mi
+
   priorityClassName: platform-medium
 
   ingressClassResource:

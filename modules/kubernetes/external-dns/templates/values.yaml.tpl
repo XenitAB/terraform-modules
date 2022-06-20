@@ -28,3 +28,8 @@ registry: "txt"
 txtOwnerId: "${txt_owner_id}"
 
 priorityClassName: "platform-low"
+
+resources:
+  requests:
+    cpu: 15m
+    memory: 78Mi

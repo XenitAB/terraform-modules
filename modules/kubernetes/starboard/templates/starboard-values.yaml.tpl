@@ -35,3 +35,8 @@ starboard:
   # labeled with. Example: `foo=bar,env=stage` will labeled the scanner pods with the labels `foo: bar` and `env: stage`
   scanJobPodTemplateLabels: "aadpodidbinding=trivy"
 %{~ endif ~}
+
+resources: {}
+  requests:
+    cpu: 15m
+    memory: 200Mi

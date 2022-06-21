@@ -113,7 +113,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
 resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
   name               = "log-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
   target_resource_id = azurerm_kubernetes_cluster.this.id
-  storage_account_id = data.azurerm_storage_account.log
+  storage_account_id = data.azurerm_storage_account.log.id
 
   log {
     category = "kube-scheduler"
@@ -238,7 +238,7 @@ resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
 resource "azurerm_monitor_diagnostic_setting" "log_analytics_control_plane" {
   name                       = "control-plane-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
   target_resource_id         = azurerm_kubernetes_cluster.this.id
-  log_analytics_workspace_id = data.azurerm_log_analytics_workspace.log
+  log_analytics_workspace_id = data.azurerm_log_analytics_workspace.log.id
 
   log {
     category = "kube-scheduler"

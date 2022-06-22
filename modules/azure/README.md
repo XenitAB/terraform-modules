@@ -14,7 +14,7 @@ This directory contains all the Azure Terraform modules.
 - [`governance-regional`](governance-regional/README.md)
 - [`hub`](hub/README.md)
 - [`xks-global`](xks-global/README.md)
-- [`xks-global-data`](xks-global-data/README.md)
+- [`xks-global-data`](xks-global-data /README.md)
 
 ## Style Guide
 

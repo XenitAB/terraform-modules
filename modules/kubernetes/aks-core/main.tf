@@ -55,5 +55,5 @@ data "azurerm_resource_group" "this" {
 }
 
 data "azurerm_resource_group" "global" {
-  name = "rg-${var.environment}-global"
+  name = "rg-${var.environment}-${var.location_short}-aks-global"
 }

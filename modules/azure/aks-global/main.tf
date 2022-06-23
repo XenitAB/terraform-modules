@@ -9,7 +9,7 @@ terraform {
 }
 
 resource "azurerm_resource_group" "this" {
-  name     = "rg-${var.environment}-global"
+  name     = "rg-${var.environment}-${var.location_short}-aks-global"
   location = var.location
   tags = {
     "Environment"   = var.environment,

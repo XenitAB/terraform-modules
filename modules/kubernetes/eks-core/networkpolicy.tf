@@ -1,4 +1,4 @@
-resource "kubernetes_network_policy" "allow_egress_datadog" {
+resource "kubernetes_network_policy" "allow_egress_ingress_datadog" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
@@ -6,7 +6,7 @@ resource "kubernetes_network_policy" "allow_egress_datadog" {
   }
 
   metadata {
-    name      = "allow-egress-datadog-tracing"
+    name      = "allow-ingress-egress-datadog-tracing"
     namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
 
     labels = {
@@ -16,7 +16,7 @@ resource "kubernetes_network_policy" "allow_egress_datadog" {
 
   spec {
     pod_selector {}
-    policy_types = ["Egress"]
+    policy_types = ["Egress", "Ingress"]
 
     egress {
       to {
@@ -36,6 +36,15 @@ resource "kubernetes_network_policy" "allow_egress_datadog" {
       ports {
         port     = "8126"
         protocol = "TCP"
+      }
+    }
+    ingress {
+      from {
+        namespace_selector {
+          match_labels = {
+            "name" = "datadog"
+          }
+        }
       }
     }
   }

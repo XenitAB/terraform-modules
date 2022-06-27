@@ -3,6 +3,12 @@ variable "location_short" {
   type        = string
 }
 
+variable "global_location_short" {
+  description = "The Azure region short namewhere the global resources resides. If not set, location_short will be used"
+  type        = string
+  default     = null
+}
+
 variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string

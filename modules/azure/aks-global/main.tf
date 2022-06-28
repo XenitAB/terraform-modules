@@ -5,11 +5,15 @@ terraform {
       version = "3.8.0"
       source  = "hashicorp/azurerm"
     }
+    azuread = {
+      version = "2.19.1"
+      source  = "hashicorp/azuread"
+    }
   }
 }
 
 resource "azurerm_resource_group" "this" {
-  name     = "rg-${var.environment}-${var.location_short}-aks-global"
+  name     = "rg-${var.environment}-${var.location_short}-global"
   location = var.location
   tags = {
     "Environment"   = var.environment,

@@ -107,3 +107,8 @@ variable "aks_managed_identity" {
   description = "AKS Azure AD managed identity"
   type        = string
 }
+
+variable "global_location_short" {
+  description = "The Azure region short name where the global resources resides."
+  type        = string
+}

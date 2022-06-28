@@ -17,6 +17,10 @@ resource "azuread_application_password" "helm_operator" {
   }
 }
 
+data "azuread_group" "acr_pull" {
+  display_name = "${var.aks_group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}acrpull"
+}
+
 resource "azuread_group_member" "helm_operator" {
   group_object_id  = data.azuread_group.acr_pull.id
   member_object_id = azuread_service_principal.helm_operator.object_id

@@ -46,7 +46,6 @@ terraform {
 locals {
   # Namespace to create service accounts in
   service_accounts_namespace = "service-accounts"
-  global_location_short      = var.global_location_short != null ? var.global_location_short : var.location_short
 }
 
 data "azurerm_client_config" "current" {}
@@ -56,5 +55,5 @@ data "azurerm_resource_group" "this" {
 }
 
 data "azurerm_resource_group" "global" {
-  name = "rg-${var.environment}-${local.global_location_short}-aks-global"
+  name = "rg-${var.environment}-${var.global_location_short}-global"
 }

@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#717](https://github.com/XenitAB/terraform-modules/pull/717) Remove force conflicts from CRD resource.
 - [#718](https://github.com/XenitAB/terraform-modules/pull/718) Remove node pool create before destroy.
 - [#719](https://github.com/XenitAB/terraform-modules/pull/719) Update Flux v1 helm operator rbac to v1.
+- [#726](https://github.com/XenitAB/terraform-modules/pull/726) Flux v1 to use git-auth-proxy instead of azdo-proxy url.
 
 ## 2022.06.2
 

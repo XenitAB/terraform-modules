@@ -3,7 +3,8 @@ data "azurerm_dns_zone" "this" {
     for dns in var.dns_zone :
     dns => dns
   }
-  name = each.key
+  name                = each.key
+  resource_group_name = data.azurerm_resource_group.global.name
 }
 
 resource "azurerm_user_assigned_identity" "external_dns" {

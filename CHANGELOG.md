@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
+- [#691](https://github.com/XenitAB/terraform-modules/pull/691) [Breaking] Refactor modules to support multi region setup.
 - [#714](https://github.com/XenitAB/terraform-modules/pull/714) Ingress-nginx helm chart 4.1.4 and use the chroot functionality.
 - [#721](https://github.com/XenitAB/terraform-modules/pull/721) Allow datadog ingress by default to tenant namespace.
 - [#724](https://github.com/XenitAB/terraform-modules/pull/724) Upgrade azad-kube-proxy to 0.0.34.

@@ -64,7 +64,7 @@ resource "kubernetes_namespace" "this" {
 
 # Git Auth Proxy
 resource "helm_release" "git_auth_proxy" {
-  chart       = "oci://ghcr.io/xenitab/helm-charts/git-auth-proxy/"
+  chart       = "oci://ghcr.io/xenitab/helm-charts/git-auth-proxy"
   name        = "git-auth-proxy"
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "v0.7.0"

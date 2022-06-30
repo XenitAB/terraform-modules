@@ -21,11 +21,11 @@ terraform {
 
 resource "kubernetes_namespace" "this" {
   metadata {
+    name = "node-ttl"
     labels = {
       name                = "node-ttl"
       "xkf.xenit.io/kind" = "platform"
     }
-    name = "node-ttl"
   }
 }
 
@@ -35,4 +35,5 @@ resource "helm_release" "this" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "v0.0.3"
   max_history = 3
+  values      = [templatefile("${path.module}/templates/values.yaml.tpl", {})]
 }

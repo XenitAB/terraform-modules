@@ -12,10 +12,10 @@ priorityClassName: "platform-high"
 
 resources:
   requests:
-    cpu: 100m
-    memory: 300Mi
+    cpu: 10m
+    memory: 100Mi
   limits:
-    memory: 600Mi
+    memory: 300Mi
 
 securityContext:
   runAsNonRoot: true
@@ -33,3 +33,9 @@ rbac:
 
 extraArgs:
   skip-nodes-with-local-storage: false
+  skip-nodes-with-system-pods: false
+  scale-down-unneeded-time: 5m
+  expander: least-waste
+
+image:
+  tag: ${tag}

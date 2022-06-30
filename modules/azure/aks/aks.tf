@@ -13,9 +13,13 @@ resource "azurerm_kubernetes_cluster" "this" {
   auto_scaler_profile {
     # Pods should not depend on local storage like EmptyDir or HostPath
     skip_nodes_with_local_storage = false
+    # Possible for kube-system pods to run on non default nodes
+    skip_nodes_with_system_pods = false
     # Selects the node pool which would result in the least amount of waste.
     # TODO: When supported we should make use of multiple expanders #499
     expander = "least-waste"
+    # We want the autoscaler to be faster to remove unneeded nodes
+    scale_down_unneeded = "5m"
   }
 
   network_profile {

@@ -33,3 +33,6 @@ rbac:
 
 extraArgs:
   skip-nodes-with-local-storage: false
+
+image:
+  tag: ${tag}

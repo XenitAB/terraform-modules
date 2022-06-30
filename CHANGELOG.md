@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#721](https://github.com/XenitAB/terraform-modules/pull/721) Allow datadog ingress by default to tenant namespace.
 - [#724](https://github.com/XenitAB/terraform-modules/pull/724) Upgrade azad-kube-proxy to 0.0.34.
 - [#727](https://github.com/XenitAB/terraform-modules/pull/727) Upgrade git-auth-proxy to v0.7.2.
+- [#730](https://github.com/XenitAB/terraform-modules/pull/727) Update cluster autoscaler and set correct version in AWS.
 
 ### Fixed
 

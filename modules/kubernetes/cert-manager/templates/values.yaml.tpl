@@ -23,12 +23,14 @@ requests:
   cpu: 15m
   memory: 150Mi
 
-webhook.resources:
-  requests:
-    cpu: 30m
-    memory: 100Mi
+webhook:
+  resources:
+    requests:
+      cpu: 30m
+      memory: 100Mi
 
-cainjector.resources:
-  requests:
-    cpu: 25m
-    memory: 250Mi
+cainjector:
+  resources:
+    requests:
+      cpu: 25m
+      memory: 250Mi

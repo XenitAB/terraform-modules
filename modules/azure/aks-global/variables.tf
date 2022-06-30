@@ -55,6 +55,12 @@ variable "public_ip_prefix_configuration" {
   }
 }
 
+variable "public_ip_prefix_name_override" {
+  description = "Override the default public ip prefix name - the last digit"
+  type        = string
+  default     = ""
+}
+
 variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string

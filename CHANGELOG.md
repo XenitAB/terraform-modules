@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#728](https://github.com/XenitAB/terraform-modules/pull/728) Add the possibility to override public ip prefix name in aks global.
+
 ### Changed
 
 - [#714](https://github.com/XenitAB/terraform-modules/pull/714) Ingress-nginx helm chart 4.1.4 and use the chroot functionality.

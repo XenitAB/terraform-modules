@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.06.3
+
 ### Added
 
 - [#728](https://github.com/XenitAB/terraform-modules/pull/728) Add the possibility to override public ip prefix name in aks global.

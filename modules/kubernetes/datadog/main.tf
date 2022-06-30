@@ -32,6 +32,10 @@ locals {
     environment              = var.environment
     container_filter_include = local.container_filter_include
   })
+  values_datadog_operator = templatefile("${path.module}/templates/datadog-operator-values.yaml.tpl", {
+    api_key = var.api_key
+    app_key = var.app_key
+  })
 }
 
 resource "kubernetes_namespace" "this" {
@@ -51,19 +55,7 @@ resource "helm_release" "datadog_operator" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "0.8.0"
   max_history = 3
-
-  set {
-    name  = "apiKey"
-    value = var.api_key
-  }
-  set {
-    name  = "appKey"
-    value = var.app_key
-  }
-  set {
-    name  = "datadogMonitor.enabled"
-    value = true
-  }
+  values      = [local.values_datadog_operator]
 }
 
 resource "helm_release" "datadog_extras" {

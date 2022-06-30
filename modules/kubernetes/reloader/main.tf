@@ -42,4 +42,12 @@ resource "helm_release" "reloader" {
     name  = "reloader.deployment.priorityClassName"
     value = "platform-low"
   }
+  set {
+    name  = "reloader.deployment.resources.requests.cpu"
+    value = "15m"
+  }
+  set {
+    name  = "reloader.deployment.resources.requests.memory"
+    value = "50Mi"
+  }
 }

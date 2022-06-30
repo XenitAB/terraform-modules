@@ -26,6 +26,10 @@ prometheus:
   enabled: false
 
 kube-state-metrics:
+  resources:
+    requests:
+      cpu: 15m
+      memory: 50Mi
   priorityClassName: "platform-low"
   podSecurityPolicy:
     enabled: false

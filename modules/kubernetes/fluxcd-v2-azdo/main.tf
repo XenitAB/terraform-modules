@@ -64,11 +64,10 @@ resource "kubernetes_namespace" "this" {
 
 # Git Auth Proxy
 resource "helm_release" "git_auth_proxy" {
-  repository  = "https://xenitab.github.io/git-auth-proxy/"
-  chart       = "git-auth-proxy"
+  chart       = "oci://ghcr.io/xenitab/helm-charts/git-auth-proxy"
   name        = "git-auth-proxy"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v0.6.0"
+  version     = "v0.7.2"
   max_history = 3
   values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
     azure_devops_pat  = var.azure_devops_pat,

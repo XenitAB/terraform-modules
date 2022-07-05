@@ -5,7 +5,7 @@ resource "azurerm_container_registry" "acr" {
   name                = "acr${var.environment}${var.location_short}${var.name}${var.unique_suffix}"
   resource_group_name = resource.azurerm_resource_group.this.name
   location            = resource.azurerm_resource_group.this.location
-  sku                 = var.acr_sku
+  sku                 = "Basic"
   admin_enabled       = false
 }
 

@@ -64,6 +64,10 @@ resource "helm_release" "datadog_operator" {
     name  = "datadogMonitor.enabled"
     value = true
   }
+  set {
+    name  = "installCRDs"
+    value = false
+  }
 }
 
 resource "helm_release" "datadog_extras" {

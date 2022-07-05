@@ -31,22 +31,6 @@ resource "azurerm_role_assignment" "aad_sp" {
   principal_id         = var.azuread_apps.rg_contributor[each.key].service_principal_object_id
 }
 
-resource "pal_management_partner" "aad_sp" {
-  depends_on = [azuread_application_password.aad_sp]
-
-  for_each = {
-    for rg in var.resource_group_configs :
-    rg.common_name => rg
-    if rg.delegate_service_principal == true && var.partner_id != ""
-  }
-
-  tenant_id     = data.azurerm_subscription.current.tenant_id
-  client_id     = var.azuread_apps.rg_contributor[each.key].application_id
-  client_secret = azuread_application_password.aad_sp[each.key].value
-  partner_id    = var.partner_id
-  overwrite     = true
-}
-
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "aad_sp" {
   for_each = {

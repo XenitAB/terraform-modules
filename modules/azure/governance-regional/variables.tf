@@ -33,7 +33,7 @@ variable "resource_group_configs" {
       delegate_service_endpoint  = bool # Delegate Service Endpoint permissions
       delegate_service_principal = bool # Delegate Service Principal
       lock_resource_group        = bool # Adds management_lock (CanNotDelete) to the resource group
-      disable_unique_suffix      = bool # Disable unique_suffix in name of key vault
+      disable_unique_suffix      = bool # Disable unique_suffix on resource names
       tags                       = map(string)
     })
   )

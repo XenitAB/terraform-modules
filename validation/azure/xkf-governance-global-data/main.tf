@@ -3,7 +3,7 @@ terraform {}
 provider "azuread" {}
 
 module "xks_global" {
-  source = "../../../modules/azure/xkf-global-data"
+  source = "../../../modules/azure/xkf-governance-global-data"
 
   cloud_provider    = "azure"
   environment       = "dev"

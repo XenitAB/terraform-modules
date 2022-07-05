@@ -6,7 +6,8 @@ resource "azurerm_key_vault" "delegate_kv" {
     if rg.delegate_key_vault == true
   }
 
-  name                     = join("-", compact(["kv-${var.environment}-${var.location_short}-${each.value.common_name}", var.unique_suffix]))
+  name = each.value.disable_unique_suffix == true ? join("-", compact(["kv-${var.environment}-${var.location_short}-${each.value.common_name}", var.unique_suffix])) : join("-", compact(["kv-${var.environment}-${var.location_short}-${each.value.common_name}", var.unique_suffix]))
+
   location                 = azurerm_resource_group.rg[each.key].location
   resource_group_name      = azurerm_resource_group.rg[each.key].name
   tenant_id                = data.azurerm_client_config.current.tenant_id

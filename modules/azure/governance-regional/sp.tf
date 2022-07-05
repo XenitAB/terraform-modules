@@ -2,23 +2,6 @@ data "azuread_service_principal" "owner_spn" {
   display_name = var.owner_service_principal_name
 }
 
-resource "azuread_application_password" "aad_sp" {
-  for_each = {
-    for rg in var.resource_group_configs :
-    rg.common_name => rg
-    if rg.delegate_service_principal == true
-  }
-
-  application_object_id = var.azuread_apps.rg_contributor[each.key].application_object_id
-  end_date              = timeadd(timestamp(), "87600h") # 10 years
-
-  lifecycle {
-    ignore_changes = [
-      end_date
-    ]
-  }
-}
-
 resource "azurerm_role_assignment" "aad_sp" {
   for_each = {
     for rg in var.resource_group_configs :

@@ -44,16 +44,6 @@ variable "subscription_name" {
   type        = string
 }
 
-variable "acr_sku" {
-  description = "Azure Container Registry service tiers"
-  type        = string
-  default     = "Basic"
-  validation {
-    condition     = can(regex("Basic|Standard|Premium", var.acr_sku))
-    error_message = "ACR SKU not valid. Must be one of Basic, Standard or Premium."
-  }
-}
-
 variable "group_name_separator" {
   description = "Separator for group names"
   type        = string

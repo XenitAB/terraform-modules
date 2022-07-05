@@ -27,6 +27,7 @@ module "governance-global" {
       delegate_key_vault         = true,
       delegate_service_endpoint  = false,
       delegate_service_principal = false,
+      disable_unique_suffix      = false,
       tags = {
         "description" = "Core infrastructure"
       }
@@ -37,6 +38,7 @@ module "governance-global" {
       delegate_key_vault         = true,
       delegate_service_endpoint  = false,
       delegate_service_principal = false,
+      disable_unique_suffix      = false,
       tags = {
         "description" = "Hub for SPOF infra"
       }
@@ -47,6 +49,7 @@ module "governance-global" {
       delegate_key_vault         = true,
       delegate_service_endpoint  = false,
       delegate_service_principal = false,
+      disable_unique_suffix      = false,
       tags = {
         "description" = "Azure Pipelines Agent"
       }
@@ -57,6 +60,7 @@ module "governance-global" {
       delegate_key_vault         = true,
       delegate_service_endpoint  = false,
       delegate_service_principal = false,
+      disable_unique_suffix      = false,
       tags = {
         "description" = "Azure Kubernetes Service"
       }
@@ -67,6 +71,7 @@ module "governance-global" {
       delegate_key_vault         = true,
       delegate_service_endpoint  = true,
       delegate_service_principal = true,
+      disable_unique_suffix      = true,
       tags = {
         "description" = "team1"
       }

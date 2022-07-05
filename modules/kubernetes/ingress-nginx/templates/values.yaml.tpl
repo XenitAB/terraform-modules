@@ -1,5 +1,13 @@
 controller:
+  image:
+    chroot: true
+
   replicaCount: 3
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 110Mi
 
   priorityClassName: platform-medium
 
@@ -66,9 +74,10 @@ controller:
   %{~ if datadog_enabled || linkerd_enabled ~}
   podAnnotations:
     %{~ if datadog_enabled ~}
-    ad.datadoghq.com/controller.check_names: '["nginx_ingress_controller"]'
-    ad.datadoghq.com/controller.init_configs: '[{}]'
+    ad.datadoghq.com/controller.check_names: '["nginx", "nginx_ingress_controller"]'
+    ad.datadoghq.com/controller.init_configs: '[{},{}]'
     ad.datadoghq.com/controller.instances: '[{"prometheus_url": "http://%%host%%:%%port_metrics%%/metrics"}]'
+    ad.datadoghq.com/controller.logs: '[{"service": "controller", "source": "nginx-ingress-controller"}]'
     %{~ endif ~}
     %{~ if linkerd_enabled ~}
     linkerd.io/inject: "ingress"

@@ -17,8 +17,8 @@ controller:
           - 'watch'
   resources:
     limits:
-      cpu: 50m
-      memory: 100Mi
+      cpu: 100m
+      memory: 300Mi
     requests:
-      cpu: 25m
-      memory: 32Mi
+      cpu: 60m
+      memory: 200Mi

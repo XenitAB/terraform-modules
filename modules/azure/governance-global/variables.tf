@@ -64,6 +64,7 @@ variable "resource_group_configs" {
       delegate_key_vault         = bool # Delegate KeyVault creation
       delegate_service_endpoint  = bool # Delegate Service Endpoint permissions
       delegate_service_principal = bool # Delegate Service Principal
+      disable_unique_suffix      = bool # Disable unique_suffix on resource names
       tags                       = map(string)
     })
   )

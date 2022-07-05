@@ -30,6 +30,7 @@ module "governance-regional" {
       delegate_service_endpoint  = false,
       delegate_service_principal = false,
       lock_resource_group        = false,
+      disable_unique_suffix      = false,
       tags = {
         "description" = "Core infrastructure"
       }
@@ -41,6 +42,7 @@ module "governance-regional" {
       delegate_service_endpoint  = false,
       delegate_service_principal = false,
       lock_resource_group        = false,
+      disable_unique_suffix      = false,
       tags = {
         "description" = "Hub for SPOF infra"
       }
@@ -52,6 +54,7 @@ module "governance-regional" {
       delegate_service_endpoint  = false,
       delegate_service_principal = false,
       lock_resource_group        = false,
+      disable_unique_suffix      = false,
       tags = {
         "description" = "Azure Pipelines Agent"
       }
@@ -63,6 +66,7 @@ module "governance-regional" {
       delegate_service_endpoint  = false,
       delegate_service_principal = false,
       lock_resource_group        = false,
+      disable_unique_suffix      = false,
       tags = {
         "description" = "Azure Kubernetes Service"
       }
@@ -74,6 +78,7 @@ module "governance-regional" {
       delegate_service_endpoint  = true,
       delegate_service_principal = true,
       lock_resource_group        = true,
+      disable_unique_suffix      = true,
       tags = {
         "description" = "team1"
       }

@@ -6,11 +6,53 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#735](https://github.com/XenitAB/terraform-modules/pull/735) [Breaking] Add the possibility to ignore unique suffix in key-vault creation.
+
+### Changed
+
+- [#736](https://github.com/XenitAB/terraform-modules/pull/736) Update FluxV1 and Helm Operator.
+
+## 2022.06.3
+
+### Added
+
+- [#728](https://github.com/XenitAB/terraform-modules/pull/728) Add the possibility to override public ip prefix name in aks global.
+
+### Changed
+
+- [#714](https://github.com/XenitAB/terraform-modules/pull/714) Ingress-nginx helm chart 4.1.4 and use the chroot functionality.
+- [#721](https://github.com/XenitAB/terraform-modules/pull/721) Allow datadog ingress by default to tenant namespace.
+- [#724](https://github.com/XenitAB/terraform-modules/pull/724) Upgrade azad-kube-proxy to 0.0.34.
+- [#727](https://github.com/XenitAB/terraform-modules/pull/727) Upgrade git-auth-proxy to v0.7.2.
+- [#732](https://github.com/XenitAB/terraform-modules/pull/732) Set resource request and limits to Node TTL.
+
+### Fixed
+
+- [#716](https://github.com/XenitAB/terraform-modules/pull/716) Set resource requests for datadog-cluster-agent, starboard-operator, ingress-nginx, external-dns, azure-metrics and goldilocks-controller.
+- [#717](https://github.com/XenitAB/terraform-modules/pull/717) Remove force conflicts from CRD resource.
+- [#718](https://github.com/XenitAB/terraform-modules/pull/718) Remove node pool create before destroy.
+- [#719](https://github.com/XenitAB/terraform-modules/pull/719) Update Flux v1 helm operator rbac to v1.
+- [#733](https://github.com/XenitAB/terraform-modules/pull/733) Add resource definitions for datadog agent, cert-manager, reloader, prometheus kube-state-metrics.
+
+## 2022.06.2
+
+### Changed
+
+- [#640](https://github.com/XenitAB/terraform-modules/pull/640) [Breaking] AKS set kubelet config default max pod pid to 1000.
+- [#709](https://github.com/XenitAB/terraform-modules/pull/709) [Breaking] Upgrade linkerd CNI to 2.11.2 and control-plane to edge-22.6.1.
+- [#710](https://github.com/XenitAB/terraform-modules/pull/710) Increase Prometheus resource request and limit.
+- [#712](https://github.com/XenitAB/terraform-modules/pull/712) Set resoleve conflicts to overwrite for EKS addons.
+
+## 2022.06.1
+
 ### Fix
 
 - [#690](https://github.com/XenitAB/terraform-modules/pull/690) Helm metrics-server extraArgs as list.
 - [#697](https://github.com/XenitAB/terraform-modules/pull/697) Set default environment in datadog agent.
 - [#700](https://github.com/XenitAB/terraform-modules/pull/700) Fix node-ttl OCI registry.
+- [#701](https://github.com/XenitAB/terraform-modules/pull/701) Datadog nginx-ingress-controller log config.
 - [#703](https://github.com/XenitAB/terraform-modules/pull/703) Exclude prometheus ns from gatekeeper config.
 
 ### Added
@@ -24,6 +66,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#654](https://github.com/XenitAB/terraform-modules/pull/654) AWS specify last addon version in EKS.
 - [#698](https://github.com/XenitAB/terraform-modules/pull/698) Add premium ZRS storage class to AKS.
 - [#699](https://github.com/XenitAB/terraform-modules/pull/698) Update Helm Terraform provider to support OCI charts.
+- [#707](https://github.com/XenitAB/terraform-modules/pull/707) Update bitnami/nginx helm chart to 12.0.3 for ingress-healthz.
 
 ## 2022.05.4
 

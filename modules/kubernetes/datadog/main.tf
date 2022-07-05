@@ -32,6 +32,10 @@ locals {
     environment              = var.environment
     container_filter_include = local.container_filter_include
   })
+  values_datadog_operator = templatefile("${path.module}/templates/datadog-operator-values.yaml.tpl", {
+    api_key = var.api_key
+    app_key = var.app_key
+  })
 }
 
 resource "kubernetes_namespace" "this" {
@@ -68,6 +72,8 @@ resource "helm_release" "datadog_operator" {
     name  = "installCRDs"
     value = false
   }
+
+  values      = [local.values_datadog_operator]
 }
 
 resource "helm_release" "datadog_extras" {

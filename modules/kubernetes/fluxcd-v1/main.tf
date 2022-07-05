@@ -132,9 +132,10 @@ resource "helm_release" "fluxcd" {
     if ns.flux.enabled
   }
 
+  repository  = "https://charts.fluxcd.io"
+  version     = "v1.13.1"
+  chart       = "flux"
   name        = "${each.key}-fluxcd"
-  chart       = "${path.module}/charts/flux"
-  version     = "v1.7.0"
   namespace   = each.key
   max_history = 3
 
@@ -178,7 +179,7 @@ resource "helm_release" "helm_operator" {
 
   repository  = "https://charts.fluxcd.io"
   chart       = "helm-operator"
-  version     = "1.4.0"
+  version     = "1.4.2"
   name        = "helm-operator"
   namespace   = each.key
   max_history = 3

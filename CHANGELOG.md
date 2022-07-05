@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#735](https://github.com/XenitAB/terraform-modules/pull/735) [Breaking] Add the possibility to ignore unique suffix in key-vault creation.
 
+### Changed
+
+- [#736](https://github.com/XenitAB/terraform-modules/pull/736) Update FluxV1 and Helm Operator.
+
 ## 2022.06.3
 
 ### Added

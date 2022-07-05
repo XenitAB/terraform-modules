@@ -1,5 +1,6 @@
 appKey: ${app_key}
 apiKey: ${api_key}
+installCRDs: false
 datadogMonitor:
   enabled: true
 resources:

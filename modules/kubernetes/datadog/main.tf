@@ -55,24 +55,6 @@ resource "helm_release" "datadog_operator" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "0.8.0"
   max_history = 3
-
-  set {
-    name  = "apiKey"
-    value = var.api_key
-  }
-  set {
-    name  = "appKey"
-    value = var.app_key
-  }
-  set {
-    name  = "datadogMonitor.enabled"
-    value = true
-  }
-  set {
-    name  = "installCRDs"
-    value = false
-  }
-
   values      = [local.values_datadog_operator]
 }
 

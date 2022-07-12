@@ -237,8 +237,6 @@ resource "helm_release" "linkerd" {
 
 # Install linkerd viz extension https://github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz
 resource "helm_release" "linkerd_viz" {
-  depends_on = [helm_release.linkerd]
-
   repository  = "https://helm.linkerd.io/edge"
   chart       = "linkerd-viz"
   name        = "linkerd-viz"

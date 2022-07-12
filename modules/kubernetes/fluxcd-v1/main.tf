@@ -112,7 +112,7 @@ resource "kubernetes_secret" "azdo_proxy" {
 
 #tf-latest-version:ignore
 resource "helm_release" "azdo_proxy" {
-  repository  = "https://xenitab.github.io/azdo-proxy/"
+  repository  = "https://xenitab.github.io/git-auth-proxy/"
   chart       = "azdo-proxy"
   version     = "v0.3.2"
   name        = kubernetes_namespace.azdo_proxy.metadata[0].name

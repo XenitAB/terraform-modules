@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#735](https://github.com/XenitAB/terraform-modules/pull/735) [Breaking] Add the possibility to ignore unique suffix in key-vault creation.
 - [#739](https://github.com/XenitAB/terraform-modules/pull/739) Enable tenants to read VPA config in there namespace.
+- [#740](https://github.com/XenitAB/terraform-modules/pull/740) [Breaking] Make AWS assume EKS Admin role configurable.
 
 ### Changed
 

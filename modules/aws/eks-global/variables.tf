@@ -74,3 +74,8 @@ variable "azad_kube_proxy_config" {
     proxy_url_override  = ""
   }
 }
+
+variable "eks_admin_assume_principal_ids" {
+  description = "ThePrincipal IDs that are allowed to assume EKS Admin role"
+  type        = list(string)
+}

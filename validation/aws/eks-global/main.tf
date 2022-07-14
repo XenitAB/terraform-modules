@@ -21,4 +21,6 @@ module "eks-global" {
   ]
 
   dns_zone = ["foo", "bar"]
+
+  eks_admin_assume_principal_ids = ["arn:aws:iam::341111893174:role/aws-reserved/sso.amazonaws.com/eu-west-1/AWSReservedSSO_AdministratorAccess_*"]
 }

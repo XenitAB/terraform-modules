@@ -43,7 +43,6 @@
 | [azuread_group_member.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group_member) | resource |
 | [azuread_group_member.resource_group_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group_member) | resource |
 | [azuread_group_member.resource_group_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group_member) | resource |
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.eks_admin_assume](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.eks_admin_permission](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/region) | data source |
@@ -58,6 +57,7 @@
 | <a name="input_azad_kube_proxy_config"></a> [azad\_kube\_proxy\_config](#input\_azad\_kube\_proxy\_config) | Azure AD Kubernetes Proxy configuration | <pre>object({<br>    cluster_name_prefix = string<br>    proxy_url_override  = string<br>  })</pre> | <pre>{<br>  "cluster_name_prefix": "eks",<br>  "proxy_url_override": ""<br>}</pre> | no |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
 | <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | List of DNS Zone to create | `list(string)` | n/a | yes |
+| <a name="input_eks_admin_assume_principal_ids"></a> [eks\_admin\_assume\_principal\_ids](#input\_eks\_admin\_assume\_principal\_ids) | ThePrincipal IDs that are allowed to assume EKS Admin role | `list(string)` | n/a | yes |
 | <a name="input_eks_cloudwatch_retention_period"></a> [eks\_cloudwatch\_retention\_period](#input\_eks\_cloudwatch\_retention\_period) | eks cloudwatch retention period | `number` | `30` | no |
 | <a name="input_eks_group_name_prefix"></a> [eks\_group\_name\_prefix](#input\_eks\_group\_name\_prefix) | Prefix for EKS Azure AD groups | `string` | `"eks"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environemnt | `string` | n/a | yes |

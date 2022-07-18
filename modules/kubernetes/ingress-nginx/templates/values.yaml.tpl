@@ -40,6 +40,7 @@ controller:
       %{~ endif ~}
       %{~ if provider == "aws" ~}
       service.beta.kubernetes.io/aws-load-balancer-type: nlb
+      %{~ endif ~}
       %{~ if external_dns_hostname != "" ~}
       external-dns.alpha.kubernetes.io/hostname: ${external_dns_hostname}
       %{~ endif ~}

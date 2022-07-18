@@ -107,4 +107,5 @@ module "aks_core" {
     resource_selector  = ["platform"]
     namespace_selector = ["platform"]
   }
+  external_dns_hostname = "foobar.com"
 }

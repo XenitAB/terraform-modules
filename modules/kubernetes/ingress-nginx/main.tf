@@ -126,7 +126,7 @@ resource "helm_release" "ingress_nginx_private" {
     linkerd_enabled           = var.linkerd_enabled
     datadog_enabled           = var.datadog_enabled
     allow_snippet_annotations = var.allow_snippet_annotations
-    external_dns_hostname     = var.external_dns_ingress
+    external_dns_hostname     = var.external_dns_hostname
     default_ingress_class     = false
   })]
 }

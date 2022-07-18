@@ -209,11 +209,13 @@ variable "ingress_config" {
     http_snippet              = string
     public_private_enabled    = bool
     allow_snippet_annotations = bool
+    external_dns_hostname     = string
   })
   default = {
     http_snippet              = ""
     public_private_enabled    = false
     allow_snippet_annotations = false
+    external_dns_hostname     = ""
   }
 }
 

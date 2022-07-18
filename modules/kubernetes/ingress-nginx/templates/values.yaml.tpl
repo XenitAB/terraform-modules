@@ -33,13 +33,16 @@ controller:
 
   service:
     externalTrafficPolicy: Local
-    %{~ if provider == "aws" || internal_load_balancer ~}
+    %{~ if provider == "aws" || internal_load_balancer || external_dns_hostname != "" ~}
     annotations:
       %{~ if internal_load_balancer ~}
       service.beta.kubernetes.io/${provider}-load-balancer-internal: "true"
       %{~ endif ~}
       %{~ if provider == "aws" ~}
       service.beta.kubernetes.io/aws-load-balancer-type: nlb
+      %{~ endif ~}
+      %{~ if external_dns_hostname != "" ~}
+      external-dns.alpha.kubernetes.io/hostname: ${external_dns_hostname}
       %{~ endif ~}
     %{~ endif ~}
 

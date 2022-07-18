@@ -56,3 +56,9 @@ variable "allow_snippet_annotations" {
   type        = bool
   default     = false
 }
+
+variable "external_dns_hostname" {
+  description = "Hostname for external-dns to use"
+  type        = string
+  default     = ""
+}

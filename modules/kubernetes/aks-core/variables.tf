@@ -217,7 +217,7 @@ variable "ingress_config" {
   }
 }
 
-variable "external_dns_hostname" {
+variable "external_dns_ingress" {
   description = "hostname for ingress-nginx to use for external-dns"
   type        = string
   default     = ""

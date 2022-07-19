@@ -597,8 +597,8 @@ module "vpa_crd" {
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://charts.fairwinds.com/stable"
-  chart_name       = "goldilocks"
-  chart_version    = "5.1.0"
+  chart_name       = "vpa"
+  chart_version    = "0.5.0"
 }
 
 module "vpa" {

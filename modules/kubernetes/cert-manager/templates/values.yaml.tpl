@@ -4,6 +4,11 @@ global:
 %{ if provider == "azure" }
 podLabels:
   aadpodidbinding: cert-manager
+webhook:
+  resources:
+    requests:
+      cpu: 30m
+      memory: 100Mi
 %{ endif }
 %{ if provider == "aws" }
 serviceAccount:
@@ -17,12 +22,6 @@ securityContext:
 webhook:
   securePort: 10260
   hostNetwork: true
-  resources:
-    requests:
-      cpu: 30m
-      memory: 100Mi
-%{ else }
-webhook:
   resources:
     requests:
       cpu: 30m

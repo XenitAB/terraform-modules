@@ -17,17 +17,21 @@ securityContext:
 webhook:
   securePort: 10260
   hostNetwork: true
-%{ endif }
-
-requests:
-  cpu: 15m
-  memory: 150Mi
-
+  resources:
+    requests:
+      cpu: 30m
+      memory: 100Mi
+%{ else }
 webhook:
   resources:
     requests:
       cpu: 30m
       memory: 100Mi
+%{ endif }
+
+requests:
+  cpu: 15m
+  memory: 150Mi
 
 cainjector:
   resources:

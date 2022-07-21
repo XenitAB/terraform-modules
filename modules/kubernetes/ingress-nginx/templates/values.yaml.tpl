@@ -1,8 +1,6 @@
 controller:
-  %{~ if provider != "aws" ~}
   image:
     chroot: true
-  %{~ endif ~}
 
   replicaCount: 3
 

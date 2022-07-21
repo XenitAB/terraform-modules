@@ -123,7 +123,7 @@ resource "helm_release" "gatekeeper" {
   chart       = "gatekeeper"
   name        = "gatekeeper"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "3.8.1"
+  version     = "3.9.0"
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/gatekeeper-values.yaml.tpl", {
@@ -138,7 +138,7 @@ resource "helm_release" "gatekeeper_templates" {
   chart       = "gatekeeper-library-templates"
   name        = "gatekeeper-library-templates"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v0.12.1"
+  version     = "v0.13.0"
   max_history = 3
   values      = [local.values]
 }
@@ -150,7 +150,7 @@ resource "helm_release" "gatekeeper_constraints" {
   chart       = "gatekeeper-library-constraints"
   name        = "gatekeeper-library-constraints"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v0.12.1"
+  version     = "v0.13.0"
   max_history = 3
   values      = [local.values]
 }

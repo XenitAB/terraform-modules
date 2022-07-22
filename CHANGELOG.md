@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#746](https://github.com/XenitAB/terraform-modules/pull/746) Install VPA crd from correct helm chart.
 - [#747](https://github.com/XenitAB/terraform-modules/pull/747) Cert-manager AWS webhook config was broken due to replica of yaml config in helm.
+- [#751](https://github.com/XenitAB/terraform-modules/pull/751) Use the separate linkerd-crds helm chart.
 
 ## 2022.07.1
 

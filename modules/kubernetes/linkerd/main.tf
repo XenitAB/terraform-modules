@@ -197,7 +197,7 @@ resource "helm_release" "linkerd_crds" {
   chart       = "linkerd-crds"
   name        = "linkerd-crds"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "1.2.0-edge"
+  version     = "1.1.1-edge"
   max_history = 3
 
 

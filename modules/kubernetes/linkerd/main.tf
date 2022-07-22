@@ -227,7 +227,6 @@ resource "helm_release" "linkerd" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "1.5.4-edge"
   max_history = 3
-  client_only = true
   values = [
     templatefile("${path.module}/templates/values.yaml.tpl", {
       linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem),

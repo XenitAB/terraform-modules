@@ -19,6 +19,7 @@ data "helm_template" "this" {
   name         = var.chart_name
   version      = var.chart_version
   include_crds = true
+  validate     = true
   api_versions = ["apiextensions.k8s.io/v1/CustomResourceDefinition"]
 
   dynamic "set" {

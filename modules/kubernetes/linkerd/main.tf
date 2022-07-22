@@ -235,7 +235,7 @@ resource "helm_release" "linkerd_extras" {
 }
 
 resource "helm_release" "linkerd" {
-  depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
+  depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni, helm_release.linkerd]
 
   repository  = "https://helm.linkerd.io/edge"
   chart       = "linkerd-control-plane"

@@ -200,6 +200,10 @@ resource "helm_release" "linkerd_crds" {
   version     = "1.1.1-edge"
   max_history = 3
 
+  set {
+    name  = "installGatewayApi"
+    value = false
+  }
 
 }
 

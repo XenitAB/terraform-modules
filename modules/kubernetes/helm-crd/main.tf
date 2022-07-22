@@ -30,6 +30,11 @@ data "helm_template" "this" {
       value = set.value
     }
   }
+  lifecycle {
+    ignore_changes = [
+      metadata[0].labels,
+    ]
+  }
 }
 
 data "kubectl_file_documents" "this" {

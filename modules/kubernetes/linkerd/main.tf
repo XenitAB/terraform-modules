@@ -191,6 +191,22 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
   type = "kubernetes.io/tls"
 }
 
+# Install linkerd-crds helm chart
+resource "helm_release" "linkerd_crds" {
+  repository  = "https://helm.linkerd.io/edge"
+  chart       = "linkerd-crds"
+  name        = "linkerd-crds"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "1.1.1-edge"
+  max_history = 3
+
+  set {
+    name  = "installGatewayApi"
+    value = false
+  }
+
+}
+
 # Install linkerd-cni helm chart
 resource "helm_release" "linkerd_cni" {
   repository  = "https://helm.linkerd.io/stable"

@@ -191,6 +191,18 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
   type = "kubernetes.io/tls"
 }
 
+# Install linkerd-crds helm chart
+resource "helm_release" "linkerd_crds" {
+  repository  = "https://helm.linkerd.io/edge"
+  chart       = "linkerd-crds"
+  name        = "linkerd-crds"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "1.2.0-edge"
+  max_history = 3
+
+
+}
+
 # Install linkerd-cni helm chart
 resource "helm_release" "linkerd_cni" {
   repository  = "https://helm.linkerd.io/stable"
@@ -219,7 +231,7 @@ resource "helm_release" "linkerd_extras" {
 }
 
 resource "helm_release" "linkerd" {
-  depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
+  depends_on = [helm_release.linkerd_crds, helm_release.linkerd_extras, helm_release.linkerd_cni]
 
   repository  = "https://helm.linkerd.io/edge"
   chart       = "linkerd-control-plane"

@@ -90,10 +90,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   kubelet_config {
     pod_max_pid = 1000
   }
-
-  upgrade_settings {
-    max_surge = "33%"
-  }
 }
 
 # Replace this with a datasource when availible in the AzureRM provider.

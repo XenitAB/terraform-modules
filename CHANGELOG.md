@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - [#744](https://github.com/XenitAB/terraform-modules/pull/744) Add configurable external_dns_hostname annotation for ingress-nginx.
+- [#753](https://github.com/XenitAB/terraform-modules/pull/753) Add support for kubernetes version 1.23.
 
 ### Changed
 

@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#745](https://github.com/XenitAB/terraform-modules/pull/745) Update ingress-nginx to 4.2.0 and disable chroot image in AWS.
+- [#748](https://github.com/XenitAB/terraform-modules/pull/748) Enable chroot image on AWS and set a custom internal-logger-address when running in AWS and multiple internal_load_balancer.
 
 ### Fixed
 

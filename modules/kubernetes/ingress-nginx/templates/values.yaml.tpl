@@ -127,6 +127,8 @@ controller:
     status-port: 10346
     # Port to use for the lua TCP/UDP endpoint configuration. (default 10247)
     stream-port: 10347
+    # Port to use for the internal syslog server when chroot is enabled. (default 127.0.0.1:11514)
+    internal-logger-address: 127.0.0.1:11515
 
   livenessProbe:
     httpGet:

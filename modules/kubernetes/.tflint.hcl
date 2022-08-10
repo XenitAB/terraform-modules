@@ -1,12 +1,12 @@
 plugin "azurerm" {
   enabled = true
-  version = "0.14.0"
+  version = "0.17.1"
   source  = "github.com/terraform-linters/tflint-ruleset-azurerm"
 }
 
 plugin "aws" {
   enabled = true
-  version = "0.12.0"
+  version = "0.15.0"
   source  = "github.com/terraform-linters/tflint-ruleset-aws"
 }
 

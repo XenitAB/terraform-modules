@@ -71,8 +71,8 @@ jobs:
         uses: actions/checkout@master
       - name: Setup tfsec
         env:
-          TFSEC_VERSION: "v1.8.0"
-          TFSEC_SHA: "6f0ffcc204a73991fb2b47561bbdf473e98a9566036c0f36b95d9574fd5ab4ce"
+          TFSEC_VERSION: "v1.27.1"
+          TFSEC_SHA: "edf06ce4897a3113dda6393b31345aea8b70626dac4c67df87ef0b69fd6c83f0"
         run: |
           wget https://github.com/tfsec/tfsec/releases/download/${TFSEC_VERSION}/tfsec-linux-amd64
           DOWNLOAD_TFSEC_SHA=$(openssl sha1 -sha256 tfsec-linux-amd64 | awk '{print $2}')

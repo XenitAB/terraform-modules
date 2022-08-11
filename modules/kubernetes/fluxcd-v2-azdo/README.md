@@ -17,7 +17,7 @@ the bootstrap configuration.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.6 |
 | <a name="requirement_azuredevops"></a> [azuredevops](#requirement\_azuredevops) | 0.5.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.11.2 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.5.1 |

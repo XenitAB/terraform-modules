@@ -6,7 +6,7 @@ This module is used to configure the Azure AD Application used by [`azad-kube-pr
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.6 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.19.1 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
 

@@ -32,7 +32,7 @@ jobs:
         run: |
           set -xe
           export PATH=${PATH}:~/.local/bin
-          RESULT=$(tf-latest-version modules)
+          RESULT=$(tf-latest-version --path ./)
           # Needed as set-output truncates multiline strings
           # https://github.community/t/set-output-truncates-multiline-strings/16852/4
           RESULT="${RESULT//'%'/'%25'}"

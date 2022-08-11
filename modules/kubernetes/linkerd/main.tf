@@ -192,6 +192,7 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
 }
 
 # Install linkerd-cni helm chart
+#tf-latest-version:ignore
 resource "helm_release" "linkerd_cni" {
   repository  = "https://helm.linkerd.io/stable"
   chart       = "linkerd2-cni"
@@ -218,6 +219,7 @@ resource "helm_release" "linkerd_extras" {
   max_history = 3
 }
 
+#tf-latest-version:ignore
 resource "helm_release" "linkerd" {
   depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
 
@@ -236,6 +238,7 @@ resource "helm_release" "linkerd" {
 }
 
 # Install linkerd viz extension https://github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz
+#tf-latest-version:ignore
 resource "helm_release" "linkerd_viz" {
   depends_on = [helm_release.linkerd]
 

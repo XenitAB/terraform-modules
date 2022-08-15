@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#756](https://github.com/XenitAB/terraform-modules/pull/756) Update terraform and tooling.
+- [#759](https://github.com/XenitAB/terraform-modules/pull/759) Update Terraform tls provider to 4.0.1.
 
 ### Fixed
 

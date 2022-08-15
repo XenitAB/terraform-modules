@@ -63,7 +63,7 @@ terraform {
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "3.1.0"
+      version = "4.0.1"
     }
   }
 }
@@ -123,7 +123,6 @@ resource "tls_private_key" "linkerd_trust_anchor" {
 
 # More information regarding creating the trust anchor: https://linkerd.io/2.10/tasks/automatically-rotating-control-plane-tls-credentials/#cert-manager-as-an-on-cluster-ca
 resource "tls_self_signed_cert" "linkerd_trust_anchor" {
-  key_algorithm         = tls_private_key.linkerd_trust_anchor.algorithm
   private_key_pem       = tls_private_key.linkerd_trust_anchor.private_key_pem
   validity_period_hours = 87600
   early_renewal_hours   = 78840
@@ -161,7 +160,6 @@ resource "tls_private_key" "webhook_issuer_tls" {
 
 # More information regarding the webhook issuer: https://linkerd.io/2.10/tasks/automatically-rotating-webhook-tls-credentials/#save-the-signing-key-pair-as-a-secret
 resource "tls_self_signed_cert" "webhook_issuer_tls" {
-  key_algorithm         = tls_private_key.webhook_issuer_tls.algorithm
   private_key_pem       = tls_private_key.webhook_issuer_tls.private_key_pem
   validity_period_hours = 87600
   early_renewal_hours   = 78840

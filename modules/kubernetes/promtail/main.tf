@@ -55,7 +55,7 @@ resource "helm_release" "promtail" {
 
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     provider            = var.cloud_provider
-    tenant_id           = var.tenant_id
+    region              = var.region
     environment         = var.environment
     cluster_name        = var.cluster_name
     namespace           = local.namespace

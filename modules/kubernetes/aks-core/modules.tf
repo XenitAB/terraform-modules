@@ -520,6 +520,8 @@ module "prometheus" {
   cluster_name = "${var.name}${var.aks_name_suffix}"
   environment  = var.environment
   tenant_id    = var.prometheus_config.tenant_id
+  region       = var.location_short
+
 
   remote_write_authenticated = var.prometheus_config.remote_write_authenticated
   remote_write_url           = var.prometheus_config.remote_write_url
@@ -557,7 +559,7 @@ module "promtail" {
   cloud_provider      = "azure"
   cluster_name        = "${var.name}${var.aks_name_suffix}"
   environment         = var.environment
-  tenant_id           = var.prometheus_config.tenant_id
+  region              = var.location_short
   excluded_namespaces = var.promtail_config.excluded_namespaces
 
   loki_address = var.promtail_config.loki_address

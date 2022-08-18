@@ -16,4 +16,5 @@ module "prometheus" {
   cloud_provider   = "azure"
   cluster_name     = "aks1"
   environment      = "dev"
+  region           = "sc"
 }

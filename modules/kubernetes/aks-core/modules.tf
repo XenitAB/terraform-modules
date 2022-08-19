@@ -278,7 +278,7 @@ module "external_dns" {
   source = "../../kubernetes/external-dns"
 
   dns_provider = "azure"
-  txt_owner_id = "${var.environment}-${var.name}${var.aks_name_suffix}"
+  txt_owner_id = "${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
   azure_config = {
     tenant_id       = data.azurerm_client_config.current.tenant_id
     subscription_id = data.azurerm_client_config.current.subscription_id

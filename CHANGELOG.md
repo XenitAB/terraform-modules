@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.08.2
+
+### Changed
+
+- [#691](https://github.com/XenitAB/terraform-modules/pull/691) [Breaking] Refactor modules to support multi region setup.
+
 ## 2022.08.1
 
 ### Changed
@@ -49,7 +55,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#741](https://github.com/XenitAB/terraform-modules/pull/741) Update linkerd control-plane to 1.5.4-edge.
 - [#738](https://github.com/XenitAB/terraform-modules/pull/738) Disable datadog-operator crd installation.
 - [#736](https://github.com/XenitAB/terraform-modules/pull/736) Update FluxV1 and Helm Operator.
-- [#691](https://github.com/XenitAB/terraform-modules/pull/691) [Breaking] Refactor modules to support multi region setup.
 
 ## 2022.06.3
 

@@ -321,7 +321,7 @@ module "promtail" {
   cloud_provider      = "aws"
   cluster_name        = "${var.name}${var.eks_name_suffix}"
   environment         = var.environment
-  tenant_id           = var.prometheus_config.tenant_id
+  region              = data.aws_region.current.name
   excluded_namespaces = var.promtail_config.excluded_namespaces
 
   aws_config = {
@@ -357,6 +357,7 @@ module "prometheus" {
   cluster_name = "${var.name}${var.eks_name_suffix}"
   environment  = var.environment
   tenant_id    = var.prometheus_config.tenant_id
+  region       = data.aws_region.current.name
 
   remote_write_authenticated = var.prometheus_config.remote_write_authenticated
   remote_write_url           = var.prometheus_config.remote_write_url

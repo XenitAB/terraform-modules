@@ -16,7 +16,7 @@ module "promtail" {
   cloud_provider      = "azure"
   cluster_name        = "c1"
   environment         = "prod"
-  tenant_id           = "t1"
+  region              = "sc"
   excluded_namespaces = ["ns1", "ns2"]
 
 }

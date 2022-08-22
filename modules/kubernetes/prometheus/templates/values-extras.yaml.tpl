@@ -22,6 +22,7 @@ remoteWrite:
 externalLabels:
   clusterName: ${cluster_name}
   environment: ${environment}
+  region: ${region}
 
 prometheus:
   resourceSelector:

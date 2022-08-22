@@ -22,6 +22,7 @@ module "governance-regional" {
   location                     = "West Europe"
   core_name                    = "core"
   owner_service_principal_name = "test"
+  aad_sp_passwords             = { "key" = "pwd" }
   resource_group_configs = [
     {
       common_name                = "core",

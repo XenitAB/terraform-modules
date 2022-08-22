@@ -3,6 +3,11 @@ variable "location_short" {
   type        = string
 }
 
+variable "global_location_short" {
+  description = "The Azure region short name where the global resources resides."
+  type        = string
+}
+
 variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string
@@ -374,6 +379,12 @@ variable "prometheus_enabled" {
   default     = true
 }
 
+variable "prometheus_volume_claim_storage_class_name" {
+  description = "Configuration for prometheus volume claim storage class name"
+  type        = string
+  default     = "managed-csi-zrs"
+}
+
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
@@ -442,6 +453,13 @@ variable "starboard_enabled" {
   description = "Should Starboard be enabled"
   type        = bool
   default     = true
+}
+
+
+variable "starboard_volume_claim_storage_class_name" {
+  description = "Configuration for starboard volume claim storage class name"
+  type        = string
+  default     = "managed-csi-zrs"
 }
 
 variable "starboard_config" {

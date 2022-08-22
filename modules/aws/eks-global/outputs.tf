@@ -26,11 +26,6 @@ output "eks_encryption_key_arn" {
   value       = aws_kms_key.eks_encryption.arn
 }
 
-output "aad_groups" {
-  description = "Azure AD groups"
-  value       = local.aad_groups
-}
-
 output "azad_kube_proxy" {
   description = "The Azure AD Application config for azad-kube-proxy"
   value = {

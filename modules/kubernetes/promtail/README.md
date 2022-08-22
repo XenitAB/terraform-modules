@@ -39,7 +39,7 @@ No modules.
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment in which the promtail instance is deployed | `string` | n/a | yes |
 | <a name="input_excluded_namespaces"></a> [excluded\_namespaces](#input\_excluded\_namespaces) | Namespaces to not ship logs from | `list(string)` | `[]` | no |
 | <a name="input_loki_address"></a> [loki\_address](#input\_loki\_address) | The address of the Loki instance to send logs to | `string` | n/a | yes |
-| <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | The tenant id | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | The region in which the promtail instance is deployed | `string` | n/a | yes |
 
 ## Outputs
 

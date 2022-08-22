@@ -261,6 +261,7 @@ module "ingress_healthz" {
 
   environment     = var.environment
   dns_zone        = var.cert_manager_config.dns_zone[0]
+  location_short  = var.location_short
   linkerd_enabled = var.linkerd_enabled
 }
 
@@ -277,11 +278,11 @@ module "external_dns" {
   source = "../../kubernetes/external-dns"
 
   dns_provider = "azure"
-  txt_owner_id = "${var.environment}-${var.name}${var.aks_name_suffix}"
+  txt_owner_id = "${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
   azure_config = {
     tenant_id       = data.azurerm_client_config.current.tenant_id
     subscription_id = data.azurerm_client_config.current.subscription_id
-    resource_group  = data.azurerm_resource_group.this.name
+    resource_group  = data.azurerm_resource_group.global.name
     client_id       = var.external_dns_config.client_id
     resource_id     = var.external_dns_config.resource_id
   }
@@ -314,7 +315,7 @@ module "cert_manager" {
   cloud_provider     = "azure"
   azure_config = {
     hosted_zone_names   = var.cert_manager_config.dns_zone
-    resource_group_name = data.azurerm_resource_group.this.name
+    resource_group_name = data.azurerm_resource_group.global.name
     subscription_id     = data.azurerm_client_config.current.subscription_id
     client_id           = var.external_dns_config.client_id
     resource_id         = var.external_dns_config.resource_id
@@ -519,11 +520,13 @@ module "prometheus" {
   cluster_name = "${var.name}${var.aks_name_suffix}"
   environment  = var.environment
   tenant_id    = var.prometheus_config.tenant_id
+  region       = var.location_short
+
 
   remote_write_authenticated = var.prometheus_config.remote_write_authenticated
   remote_write_url           = var.prometheus_config.remote_write_url
 
-  volume_claim_storage_class_name = "managed-csi-zrs"
+  volume_claim_storage_class_name = var.prometheus_volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
   resource_selector  = var.prometheus_config.resource_selector
@@ -556,7 +559,7 @@ module "promtail" {
   cloud_provider      = "azure"
   cluster_name        = "${var.name}${var.aks_name_suffix}"
   environment         = var.environment
-  tenant_id           = var.prometheus_config.tenant_id
+  region              = var.location_short
   excluded_namespaces = var.promtail_config.excluded_namespaces
 
   loki_address = var.promtail_config.loki_address
@@ -589,7 +592,7 @@ module "starboard" {
   cloud_provider                  = "azure"
   client_id                       = var.starboard_config.client_id
   resource_id                     = var.starboard_config.resource_id
-  volume_claim_storage_class_name = "managed-csi-zrs"
+  volume_claim_storage_class_name = var.starboard_volume_claim_storage_class_name
 }
 
 # vpa

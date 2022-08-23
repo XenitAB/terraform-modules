@@ -3,7 +3,7 @@ data "azurerm_resource_group" "log" {
 }
 
 data "azurerm_storage_account" "log" {
-  name                = "log${var.environment}${var.location_short}${var.core_name}${var.unique_suffix}"
+  name                = "log${var.environment}${var.location_short}${var.name}${var.unique_suffix}"
   resource_group_name = data.azurerm_resource_group.log.name
 }
 
@@ -161,7 +161,7 @@ locals {
 resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
   name               = "log-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
   target_resource_id = azurerm_kubernetes_cluster.this.id
-  storage_account_id = data.azurerm_storage_account.log
+  storage_account_id = data.azurerm_storage_account.log.id
 
   log {
     category = "kube-scheduler"

@@ -1,3 +1,12 @@
+data "azurerm_resource_group" "log" {
+  name = "rg-${var.environment}-${var.location_short}-log"
+}
+
+data "azurerm_storage_account" "log" {
+  name                = "log${var.environment}${var.location_short}${var.core_name}${var.unique_suffix}"
+  resource_group_name = data.azurerm_resource_group.log.name
+}
+
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
@@ -146,5 +155,130 @@ locals {
     "Standard_F48s_v2" = 768
     "Standard_F64s_v2" = 1024
     "Standard_F72s_v2" = 1520
+  }
+}
+
+resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
+  name               = "log-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  target_resource_id = azurerm_kubernetes_cluster.this.id
+  storage_account_id = data.azurerm_storage_account.log
+
+  log {
+    category = "kube-scheduler"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "kube-controller-manager"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "cloud-controller-manager"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "csi-azurefile-controller"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "csi-snapshot-controller"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "csi-azuredisk-controller"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "guard"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "cluster-autoscaler"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "kube-audit"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "kube-audit-admin"
+    enabled  = true
+
+    retention_policy {
+      enabled = true
+      days    = var.aks_audit_log_retention
+    }
+  }
+
+  log {
+    category = "kube-apiserver"
+    enabled  = false
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  metric {
+    category = "AllMetrics"
+    enabled  = false
+
+    retention_policy {
+      days    = 0
+      enabled = false
+    }
   }
 }

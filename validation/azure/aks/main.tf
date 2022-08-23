@@ -20,6 +20,7 @@ module "aks" {
   name                          = "xks"
   core_name                     = "core"
   aks_name_suffix               = "1"
+  unique_suffix                 = 1337
   aks_managed_identity_group_id = "1337"
   azure_metrics_identity = {
     id           = "id"

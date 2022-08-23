@@ -2,14 +2,6 @@ data "azurerm_resource_group" "log" {
   name = "rg-${var.environment}-${var.location_short}-log"
 }
 
-resource "azurerm_log_analytics_workspace" "log" {
-  name                = "log-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
-  resource_group_name = data.azurerm_resource_group.log.name
-  location            = data.azurerm_resource_group.log.location
-  sku                 = "PerGB2018"
-  retention_in_days   = 30
-}
-
 #tfsec:ignore:azure-storage-queue-services-logging-enabled
 resource "azurerm_storage_account" "log" {
   name                     = "log${var.environment}${var.location_short}${var.name}${var.unique_suffix}"

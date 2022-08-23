@@ -25,7 +25,6 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_log_analytics_workspace.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/log_analytics_workspace) | resource |
 | [azurerm_network_security_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/network_security_group) | resource |
 | [azurerm_role_assignment.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_definition.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_definition) | resource |

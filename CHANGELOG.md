@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-<<<<<<< HEAD
+### Added
+
+- [#715](https://github.com/XenitAB/terraform-modules/pull/715) Long term storage of AKS audit logs and short term log collection of AKS controle-plane logs.
+
 ## 2022.08.2
 
 ### Changed
@@ -62,11 +65,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - [#728](https://github.com/XenitAB/terraform-modules/pull/728) Add the possibility to override public ip prefix name in aks global.
-=======
-### Added
-
-- [#715](https://github.com/XenitAB/terraform-modules/pull/715) Long term storage of AKS audit logs and short term log collection of AKS controle-plane logs.
->>>>>>> bc2287d (AKS audit logs for storage account)
 
 ### Changed
 

@@ -17,6 +17,7 @@ module "aks" {
 
   environment                   = "dev"
   location_short                = "we"
+  global_location_short         = "we"
   name                          = "xks"
   core_name                     = "core"
   aks_name_suffix               = "1"

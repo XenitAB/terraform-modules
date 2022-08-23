@@ -1,9 +1,9 @@
 data "azurerm_resource_group" "log" {
-  name = "rg-${var.environment}-${var.location_short}-log"
+  name = "rg-${var.environment}-${var.global_location_short}-log"
 }
 
 data "azurerm_storage_account" "log" {
-  name                = "log${var.environment}${var.location_short}${var.name}${var.unique_suffix}"
+  name                = "log${var.environment}${var.global_location_short}${var.name}${var.unique_suffix}"
   resource_group_name = data.azurerm_resource_group.log.name
 }
 

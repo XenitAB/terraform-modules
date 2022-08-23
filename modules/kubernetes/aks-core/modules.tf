@@ -347,7 +347,7 @@ module "velero" {
 module "csi_secrets_store_provider_azure_crd" {
   source = "../../kubernetes/helm-crd"
 
-  chart_repository = "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
+  chart_repository = "https://azure.github.io/secrets-store-csi-driver-provider-azure/charts"
   chart_name       = "csi-secrets-store-provider-azure"
   chart_version    = "1.0.1"
 }

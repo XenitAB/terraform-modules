@@ -126,7 +126,7 @@ resource "tls_self_signed_cert" "linkerd_trust_anchor" {
   key_algorithm         = tls_private_key.linkerd_trust_anchor.algorithm
   private_key_pem       = tls_private_key.linkerd_trust_anchor.private_key_pem
   validity_period_hours = 87600
-  early_renewal_hours   = 78840
+  early_renewal_hours   = 8760
   is_ca_certificate     = true
 
   subject {
@@ -164,7 +164,7 @@ resource "tls_self_signed_cert" "webhook_issuer_tls" {
   key_algorithm         = tls_private_key.webhook_issuer_tls.algorithm
   private_key_pem       = tls_private_key.webhook_issuer_tls.private_key_pem
   validity_period_hours = 87600
-  early_renewal_hours   = 78840
+  early_renewal_hours   = 8760
   is_ca_certificate     = true
 
   subject {

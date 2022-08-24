@@ -6,6 +6,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+<<<<<<< HEAD
+=======
+### Added
+
+- [#715](https://github.com/XenitAB/terraform-modules/pull/715) Long term storage of AKS audit logs.
+
+### Fixed
+
+- [#764](https://github.com/XenitAB/terraform-modules/pull/764) Fix Linkerd cert expiring 8 years too early.
+
+## 2022.08.2
+
+### Changed
+
+- [#691](https://github.com/XenitAB/terraform-modules/pull/691) [Breaking] Refactor modules to support multi region setup.
+
+## 2022.08.1
+
+### Changed
+
+- [#756](https://github.com/XenitAB/terraform-modules/pull/756) Update terraform and tooling.
+- [#759](https://github.com/XenitAB/terraform-modules/pull/759) Update Terraform tls provider to 4.0.1.
+- [#760](https://github.com/XenitAB/terraform-modules/pull/760) Move secrets-store-csi-driver-provider-azure helm chart location.
+
+### Fixed
+
+- [#743](https://github.com/XenitAB/terraform-modules/pull/743) Add cert permissions to group owners.
+
+>>>>>>> ea9b09c (Fix Linkerd cert expiring 8 years too early (#764))
 ## 2022.07.2
 
 ### Added

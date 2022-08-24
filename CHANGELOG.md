@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - [#715](https://github.com/XenitAB/terraform-modules/pull/715) Long term storage of AKS audit logs.
+- [#767](https://github.com/XenitAB/terraform-modules/pull/767) Helm-crd-oci module to support helm charts located in OCI.
 
 ### Fixed
 

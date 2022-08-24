@@ -20,6 +20,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#766](https://github.com/XenitAB/terraform-modules/pull/766) Skip Linkerd proxy for Ingress Nginx webhook.
 - [#768](https://github.com/XenitAB/terraform-modules/pull/768) Use linkerd-fork OCI helm charts and update linkerd to 2.12.0.
 
+### Fixed
+
+- [#764](https://github.com/XenitAB/terraform-modules/pull/764) Fix Linkerd cert expiring 8 years too early.
+
 ## 2022.08.2
 
 ### Changed

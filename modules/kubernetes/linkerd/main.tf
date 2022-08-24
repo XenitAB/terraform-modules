@@ -193,11 +193,10 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
 
 # Install linkerd-cni helm chart
 resource "helm_release" "linkerd_cni" {
-  repository  = "https://helm.linkerd.io/stable"
-  chart       = "linkerd2-cni"
+  chart       = "oci://ghcr.io/xenitab/helm-charts/linkerd2-cni"
   name        = "linkerd-cni"
   namespace   = kubernetes_namespace.cni.metadata[0].name
-  version     = "2.11.3"
+  version     = "2.12.0"
   max_history = 3
 
   values = [
@@ -221,11 +220,10 @@ resource "helm_release" "linkerd_extras" {
 resource "helm_release" "linkerd" {
   depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
 
-  repository  = "https://helm.linkerd.io/edge"
-  chart       = "linkerd-control-plane"
+  chart       = "oci://ghcr.io/xenitab/helm-charts/linkerd-control-plane"
   name        = "linkerd"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "1.5.4-edge"
+  version     = "2.12.0"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values.yaml.tpl", {
@@ -239,11 +237,10 @@ resource "helm_release" "linkerd" {
 resource "helm_release" "linkerd_viz" {
   depends_on = [helm_release.linkerd]
 
-  repository  = "https://helm.linkerd.io/stable"
-  chart       = "linkerd-viz"
+  chart       = "oci://ghcr.io/xenitab/helm-charts/linkerd-viz"
   name        = "linkerd-viz"
   namespace   = kubernetes_namespace.viz.metadata[0].name
-  version     = "2.11.3"
+  version     = "2.12.0"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values-viz.yaml.tpl", {}),

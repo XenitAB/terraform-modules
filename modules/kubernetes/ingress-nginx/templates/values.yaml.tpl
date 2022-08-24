@@ -86,7 +86,7 @@ controller:
     linkerd.io/inject: "ingress"
     # It's required to skip inbound ports for the ingress or whitelist of IPs won't work:
     # https://github.com/linkerd/linkerd2/issues/3334#issuecomment-565135188
-    config.linkerd.io/skip-inbound-ports: "80,443"
+    config.linkerd.io/skip-inbound-ports: "80,443,8443"
     %{~ endif ~}
   %{~ endif ~}
 

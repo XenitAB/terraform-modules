@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#764](https://github.com/XenitAB/terraform-modules/pull/764) Fix Linkerd cert expiring 8 years too early.
 - [#765](https://github.com/XenitAB/terraform-modules/pull/764) Replace Linkerd image registry with ghcr.
+- [#766](https://github.com/XenitAB/terraform-modules/pull/766) Skip Linkerd proxy for Ingress Nginx webhook.
 
 ## 2022.08.2
 

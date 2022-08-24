@@ -204,8 +204,8 @@ module "linkerd_crd" {
     if var.linkerd_enabled
   }
 
-  chart_name    = "oci://ghcr.io/xenitab/helm-charts/linkerd-crds"
-  name          = "linkerd-crd"
+  chart         = "oci://ghcr.io/xenitab/helm-charts/linkerd-crds"
+  chart_name    = "linkerd-crd"
   chart_version = "2.12.0"
 }
 

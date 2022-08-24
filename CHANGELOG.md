@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#715](https://github.com/XenitAB/terraform-modules/pull/715) Long term storage of AKS audit logs.
 
+### Fixed
+
+- [#764](https://github.com/XenitAB/terraform-modules/pull/764) Fix Linkerd cert expiring 8 years too early.
+
 ## 2022.08.2
 
 ### Changed

@@ -196,7 +196,7 @@ module "azure_metrics" {
 
 # linkerd
 module "linkerd_crd" {
-  source = "../../kubernetes/helm-crd"
+  source = "../../kubernetes/helm-crd-oci"
 
   for_each = {
     for s in ["linkerd"] :
@@ -204,9 +204,9 @@ module "linkerd_crd" {
     if var.linkerd_enabled
   }
 
-  chart_repository = "https://helm.linkerd.io/edge"
-  chart_name       = "linkerd-crds"
-  chart_version    = "1.1.1-edge"
+  chart_name    = "oci://ghcr.io/xenitab/helm-charts/linkerd-crds"
+  name          = "linkerd-crd"
+  chart_version = "2.12.0"
 }
 
 module "linkerd" {

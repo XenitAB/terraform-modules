@@ -206,7 +206,7 @@ module "linkerd_crd" {
 
   chart_repository = "https://helm.linkerd.io/edge"
   chart_name       = "linkerd-crds"
-  chart_version    = "1.1.1-edge"
+  chart_version    = "2.12.0"
 }
 
 module "linkerd" {

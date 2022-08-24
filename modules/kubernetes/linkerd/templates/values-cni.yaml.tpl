@@ -3,6 +3,8 @@ installNamespace: false
 tolerations:
   - operator: "Exists"
 
+cniPluginImage: "ghcr.io/linkerd/cni-plugin"
+
 extraInitContainers:
   - name: wait-for-other-cni
     image: busybox:1.33

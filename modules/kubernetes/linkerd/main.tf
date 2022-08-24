@@ -239,7 +239,7 @@ resource "helm_release" "linkerd" {
 resource "helm_release" "linkerd_viz" {
   depends_on = [helm_release.linkerd]
 
-  repository  = "https://helm.linkerd.io/edge"
+  repository  = "https://helm.linkerd.io/stable"
   chart       = "linkerd-viz"
   name        = "linkerd-viz"
   namespace   = kubernetes_namespace.viz.metadata[0].name

@@ -14,7 +14,7 @@ terraform {
 }
 
 data "helm_template" "this" {
-  chart        = var.chart_name
+  chart        = var.chart
   name         = var.chart_name
   version      = var.chart_version
   include_crds = true

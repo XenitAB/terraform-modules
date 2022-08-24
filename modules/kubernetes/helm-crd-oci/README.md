@@ -29,6 +29,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_chart"></a> [chart](#input\_chart) | Helm Chart OCI URI | `string` | n/a | yes |
 | <a name="input_chart_name"></a> [chart\_name](#input\_chart\_name) | Helm Chart repository | `string` | n/a | yes |
 | <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Helm Chart repository | `string` | n/a | yes |
 | <a name="input_values"></a> [values](#input\_values) | Extra values to pass when templating | `map(any)` | `{}` | no |

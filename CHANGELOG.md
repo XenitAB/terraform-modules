@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#715](https://github.com/XenitAB/terraform-modules/pull/715) Long term storage of AKS audit logs.
+
 ## 2022.08.2
 
 ### Changed

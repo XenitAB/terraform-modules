@@ -40,6 +40,8 @@ enablePodAntiAffinity: true
 
 # proxy configuration
 proxy:
+  image:
+    name: ghcr.io/linkerd/proxy
   # A better default for log collectors that require structured data
   logFormat: json
   resources:
@@ -50,6 +52,7 @@ proxy:
       request: 20Mi
 
 # controller configuration
+controllerImage: ghcr.io/linkerd/controller
 controllerReplicas: 3
 controllerResources: &controller_resources
   cpu: &controller_resources_cpu
@@ -76,3 +79,13 @@ webhookFailurePolicy: Fail
 
 # service profile validator configuration
 spValidatorResources: *controller_resources
+
+policyController:
+  image:
+    name: ghcr.io/linkerd/policy-controller
+debugContainer:
+  image:
+    name: ghcr.io/linkerd/debug
+proxyInit:
+  image:
+    name: ghcr.io/linkerd/proxy-init

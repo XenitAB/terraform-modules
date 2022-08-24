@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+<<<<<<< HEAD
+=======
+### Added
+
+- [#715](https://github.com/XenitAB/terraform-modules/pull/715) Long term storage of AKS audit logs.
+
+### Fixed
+
+- [#764](https://github.com/XenitAB/terraform-modules/pull/764) Fix Linkerd cert expiring 8 years too early.
+- [#765](https://github.com/XenitAB/terraform-modules/pull/764) Replace Linkerd image registry with ghcr.
+
+## 2022.08.2
+
+### Changed
+
+- [#691](https://github.com/XenitAB/terraform-modules/pull/691) [Breaking] Refactor modules to support multi region setup.
+
+>>>>>>> dcda004 (Replace linkerd image registry with ghcr (#765))
 ## 2022.08.1
 
 ### Changed

@@ -197,7 +197,7 @@ resource "helm_release" "linkerd_cni" {
   chart       = "linkerd2-cni"
   name        = "linkerd-cni"
   namespace   = kubernetes_namespace.cni.metadata[0].name
-  version     = "2.12.0"
+  version     = "30.3.0"
   max_history = 3
 
   values = [
@@ -225,7 +225,7 @@ resource "helm_release" "linkerd" {
   chart       = "linkerd-control-plane"
   name        = "linkerd"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "2.12.0"
+  version     = "1.9.0"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values.yaml.tpl", {
@@ -243,7 +243,7 @@ resource "helm_release" "linkerd_viz" {
   chart       = "linkerd-viz"
   name        = "linkerd-viz"
   namespace   = kubernetes_namespace.viz.metadata[0].name
-  version     = "2.12.0"
+  version     = "30.3.0"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values-viz.yaml.tpl", {}),

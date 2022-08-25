@@ -193,10 +193,10 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
 #tf-latest-version:ignore
 resource "helm_release" "linkerd_cni" {
   repository  = "https://helm.linkerd.io/stable"
-  chart       = "linkerd2-cni"
+  chart       = "linkerd-control-plane"
   name        = "linkerd-cni"
   namespace   = kubernetes_namespace.cni.metadata[0].name
-  version     = "2.11.3"
+  version     = "30.3.0"
   max_history = 3
 
   values = [
@@ -221,11 +221,11 @@ resource "helm_release" "linkerd_extras" {
 resource "helm_release" "linkerd" {
   depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
 
-  repository  = "https://helm.linkerd.io/edge"
+  repository  = "https://helm.linkerd.io/stable"
   chart       = "linkerd-control-plane"
   name        = "linkerd"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "1.5.4-edge"
+  version     = "1.9.0"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values.yaml.tpl", {
@@ -244,7 +244,7 @@ resource "helm_release" "linkerd_viz" {
   chart       = "linkerd-viz"
   name        = "linkerd-viz"
   namespace   = kubernetes_namespace.viz.metadata[0].name
-  version     = "2.11.3"
+  version     = "30.3.0"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values-viz.yaml.tpl", {}),

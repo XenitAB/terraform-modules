@@ -27,7 +27,11 @@ service:
 
 ingress:
   enabled: true
+  %{ if location_short == "" }
+  hostname: ingress-healthz.${dns_zone}
+  %{ else }
   hostname: ingress-healthz-${location_short}.${dns_zone}
+  %{ endif }
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     %{ if linkerd_enabled }
@@ -37,7 +41,11 @@ ingress:
     %{ endif }
   extraTls:
     - hosts:
+       %{ if location_short == "" }
+        - ingress-healthz.${dns_zone}
+       %{ else }
         - ingress-healthz-${location_short}.${dns_zone}
+       %{ endif }
       secretName: ingress-healthz-cert
 
 %{ if linkerd_enabled }

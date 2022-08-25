@@ -193,7 +193,7 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
 #tf-latest-version:ignore
 resource "helm_release" "linkerd_cni" {
   repository  = "https://helm.linkerd.io/stable"
-  chart       = "linkerd-control-plane"
+  chart       = "linkerd2-cni"
   name        = "linkerd-cni"
   namespace   = kubernetes_namespace.cni.metadata[0].name
   version     = "30.3.0"

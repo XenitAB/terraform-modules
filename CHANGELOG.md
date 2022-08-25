@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#766](https://github.com/XenitAB/terraform-modules/pull/766) Skip Linkerd proxy for Ingress Nginx webhook.
 - [#768](https://github.com/XenitAB/terraform-modules/pull/768) Use linkerd-fork OCI helm charts and update linkerd to 2.12.0.
 - [#771](https://github.com/XenitAB/terraform-modules/pull/771) Make region optinal in ingress-health fqdn.
+- [#772](https://github.com/XenitAB/terraform-modules/pull/772) Use correct linkerd-cni chart name.
 
 ## 2022.08.2
 

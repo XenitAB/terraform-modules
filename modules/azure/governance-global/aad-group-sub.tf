@@ -1,7 +1,7 @@
 # AAD Group for Subscription Owners
 resource "azuread_group" "sub_owner" {
   display_name            = "${var.azure_ad_group_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}owner"
-  prevent_duplicate_names = true
+  prevent_duplicate_names = false
   security_enabled        = true
 }
 
@@ -14,7 +14,7 @@ resource "azurerm_role_assignment" "sub_owner" {
 # AAD Group for Subscription Contributors
 resource "azuread_group" "sub_contributor" {
   display_name            = "${var.azure_ad_group_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}contributor"
-  prevent_duplicate_names = true
+  prevent_duplicate_names = false
   security_enabled        = true
 }
 
@@ -27,7 +27,7 @@ resource "azurerm_role_assignment" "sub_contributor" {
 # AAD Group for Subscription Readers
 resource "azuread_group" "sub_reader" {
   display_name            = "${var.azure_ad_group_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}reader"
-  prevent_duplicate_names = true
+  prevent_duplicate_names = false
   security_enabled        = true
 }
 

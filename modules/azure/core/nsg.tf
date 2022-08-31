@@ -8,6 +8,12 @@ resource "azurerm_network_security_group" "this" {
   name                = "nsg-${var.environment}-${var.location_short}-${var.name}-${each.value.subnet_short_name}"
   location            = data.azurerm_resource_group.this.location
   resource_group_name = data.azurerm_resource_group.this.name
+  
+  lifecycle {
+    ignore_changes = [
+      tags,
+    ]
+  }
 }
 
 resource "azurerm_subnet_network_security_group_association" "this" {

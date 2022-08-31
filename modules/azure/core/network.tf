@@ -4,6 +4,12 @@ resource "azurerm_virtual_network" "this" {
   location            = data.azurerm_resource_group.this.location
   address_space       = var.vnet_config.address_space
   dns_servers         = var.vnet_config.dns_servers
+  
+  lifecycle {
+    ignore_changes = [
+      tags,
+    ]
+  }
 }
 
 resource "azurerm_virtual_network_peering" "this" {

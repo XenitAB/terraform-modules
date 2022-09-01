@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#774](https://github.com/XenitAB/terraform-modules/pull/774) [Breaking] Add extra_config to ingress nginx config object.
+
 ## 2022.08.3
 
 ### Added

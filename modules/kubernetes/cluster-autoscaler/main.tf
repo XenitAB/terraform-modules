@@ -54,6 +54,6 @@ resource "helm_release" "cluster_autoscaler" {
     provider     = var.cloud_provider,
     cluster_name = var.cluster_name
     aws_config   = var.aws_config
-    tag          = local.tags["${data.kubectl_server_version.current.major}.${data.kubectl_server_version.current.major}"]
+    tag          = local.tags["${data.kubectl_server_version.current.major}.${data.kubectl_server_version.current.minor}"]
   })]
 }

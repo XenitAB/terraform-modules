@@ -78,6 +78,7 @@ module "eks_core" {
     http_snippet              = ""
     public_private_enabled    = false
     allow_snippet_annotations = false
+    extra_config              = {}
   }
 
   starboard_enabled = true

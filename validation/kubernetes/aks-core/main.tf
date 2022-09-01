@@ -86,6 +86,7 @@ module "aks_core" {
     http_snippet              = ""
     public_private_enabled    = false
     allow_snippet_annotations = false
+    extra_config              = {}
   }
 
   prometheus_enabled = true

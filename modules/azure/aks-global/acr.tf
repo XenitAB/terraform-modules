@@ -3,8 +3,8 @@
 # Create Azure Container Registry
 resource "azurerm_container_registry" "acr" {
   name                = "acr${var.environment}${var.location_short}${var.name}${var.unique_suffix}"
-  resource_group_name = data.azurerm_resource_group.this.name
-  location            = data.azurerm_resource_group.this.location
+  resource_group_name = resource.azurerm_resource_group.this.name
+  location            = resource.azurerm_resource_group.this.location
   sku                 = "Basic"
   admin_enabled       = false
 }
@@ -15,7 +15,7 @@ resource "azurerm_container_registry" "acr" {
 resource "azurerm_role_assignment" "aks" {
   scope                = azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"
-  principal_id         = azuread_group.aks_managed_identity.id
+  principal_id         = var.aks_managed_identity
 }
 
 # Add data source for the Azure AD Group for AcrPull
@@ -52,22 +52,4 @@ resource "azurerm_role_assignment" "acr_reader" {
   scope                = azurerm_container_registry.acr.id
   role_definition_name = "Reader"
   principal_id         = data.azuread_group.acr_reader.id
-}
-
-resource "azurerm_user_assigned_identity" "trivy" {
-  resource_group_name = data.azurerm_resource_group.this.name
-  location            = data.azurerm_resource_group.this.location
-  name                = "uai-${var.environment}-${var.location_short}-${var.name}-trivy"
-}
-
-resource "azurerm_role_assignment" "trivy_managed" {
-  scope                = azurerm_user_assigned_identity.trivy.id
-  role_definition_name = "Managed Identity Operator"
-  principal_id         = azuread_group.aks_managed_identity.id
-}
-
-resource "azurerm_role_assignment" "trivy_acr" {
-  scope                = azurerm_container_registry.acr.id
-  role_definition_name = "AcrPull"
-  principal_id         = azurerm_user_assigned_identity.trivy.principal_id
 }

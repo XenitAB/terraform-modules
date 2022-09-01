@@ -43,6 +43,11 @@ variable "environment" {
   type        = string
 }
 
+variable "region" {
+  description = "The region in which the prometheus instance is deployed"
+  type        = string
+}
+
 variable "tenant_id" {
   description = "The tenant id label to apply to all metrics in remote write"
   type        = string

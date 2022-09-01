@@ -196,7 +196,7 @@ module "azure_metrics" {
 
 # linkerd
 module "linkerd_crd" {
-  source = "../../kubernetes/helm-crd"
+  source = "../../kubernetes/helm-crd-oci"
 
   for_each = {
     for s in ["linkerd"] :
@@ -204,9 +204,9 @@ module "linkerd_crd" {
     if var.linkerd_enabled
   }
 
-  chart_repository = "https://helm.linkerd.io/edge"
-  chart_name       = "linkerd-crds"
-  chart_version    = "1.1.1-edge"
+  chart         = "oci://ghcr.io/xenitab/helm-charts/linkerd-crds"
+  chart_name    = "linkerd-crd"
+  chart_version = "2.12.0"
 }
 
 module "linkerd" {
@@ -239,6 +239,8 @@ module "ingress_nginx" {
   datadog_enabled           = var.datadog_enabled
   public_private_enabled    = var.ingress_config.public_private_enabled
   allow_snippet_annotations = var.ingress_config.allow_snippet_annotations
+  external_dns_hostname     = var.external_dns_hostname
+  extra_config              = var.ingress_config.extra_config
 
   default_certificate = {
     enabled  = true
@@ -260,6 +262,7 @@ module "ingress_healthz" {
 
   environment     = var.environment
   dns_zone        = var.cert_manager_config.dns_zone[0]
+  location_short  = var.location_short
   linkerd_enabled = var.linkerd_enabled
 }
 
@@ -276,11 +279,11 @@ module "external_dns" {
   source = "../../kubernetes/external-dns"
 
   dns_provider = "azure"
-  txt_owner_id = "${var.environment}-${var.name}${var.aks_name_suffix}"
+  txt_owner_id = "${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
   azure_config = {
     tenant_id       = data.azurerm_client_config.current.tenant_id
     subscription_id = data.azurerm_client_config.current.subscription_id
-    resource_group  = data.azurerm_resource_group.this.name
+    resource_group  = data.azurerm_resource_group.global.name
     client_id       = var.external_dns_config.client_id
     resource_id     = var.external_dns_config.resource_id
   }
@@ -313,7 +316,7 @@ module "cert_manager" {
   cloud_provider     = "azure"
   azure_config = {
     hosted_zone_names   = var.cert_manager_config.dns_zone
-    resource_group_name = data.azurerm_resource_group.this.name
+    resource_group_name = data.azurerm_resource_group.global.name
     subscription_id     = data.azurerm_client_config.current.subscription_id
     client_id           = var.external_dns_config.client_id
     resource_id         = var.external_dns_config.resource_id
@@ -347,7 +350,7 @@ module "velero" {
 module "csi_secrets_store_provider_azure_crd" {
   source = "../../kubernetes/helm-crd"
 
-  chart_repository = "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
+  chart_repository = "https://azure.github.io/secrets-store-csi-driver-provider-azure/charts"
   chart_name       = "csi-secrets-store-provider-azure"
   chart_version    = "1.0.1"
 }
@@ -518,11 +521,13 @@ module "prometheus" {
   cluster_name = "${var.name}${var.aks_name_suffix}"
   environment  = var.environment
   tenant_id    = var.prometheus_config.tenant_id
+  region       = var.location_short
+
 
   remote_write_authenticated = var.prometheus_config.remote_write_authenticated
   remote_write_url           = var.prometheus_config.remote_write_url
 
-  volume_claim_storage_class_name = "managed-csi-zrs"
+  volume_claim_storage_class_name = var.prometheus_volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
   resource_selector  = var.prometheus_config.resource_selector
@@ -555,7 +560,7 @@ module "promtail" {
   cloud_provider      = "azure"
   cluster_name        = "${var.name}${var.aks_name_suffix}"
   environment         = var.environment
-  tenant_id           = var.prometheus_config.tenant_id
+  region              = var.location_short
   excluded_namespaces = var.promtail_config.excluded_namespaces
 
   loki_address = var.promtail_config.loki_address
@@ -588,7 +593,7 @@ module "starboard" {
   cloud_provider                  = "azure"
   client_id                       = var.starboard_config.client_id
   resource_id                     = var.starboard_config.resource_id
-  volume_claim_storage_class_name = "managed-csi-zrs"
+  volume_claim_storage_class_name = var.starboard_volume_claim_storage_class_name
 }
 
 # vpa
@@ -596,8 +601,8 @@ module "vpa_crd" {
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://charts.fairwinds.com/stable"
-  chart_name       = "goldilocks"
-  chart_version    = "5.1.0"
+  chart_name       = "vpa"
+  chart_version    = "0.5.0"
 }
 
 module "vpa" {

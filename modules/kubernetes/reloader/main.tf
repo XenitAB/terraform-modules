@@ -6,7 +6,7 @@
   */
 
 terraform {
-  required_version = ">= 1.1.7"
+  required_version = ">= 1.2.6"
 
   required_providers {
     kubernetes = {
@@ -41,5 +41,13 @@ resource "helm_release" "reloader" {
   set {
     name  = "reloader.deployment.priorityClassName"
     value = "platform-low"
+  }
+  set {
+    name  = "reloader.deployment.resources.requests.cpu"
+    value = "15m"
+  }
+  set {
+    name  = "reloader.deployment.resources.requests.memory"
+    value = "50Mi"
   }
 }

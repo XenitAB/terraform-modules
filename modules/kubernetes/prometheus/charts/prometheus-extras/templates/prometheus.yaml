@@ -26,6 +26,7 @@ spec:
   externalLabels:
     cluster_name: {{ .Values.externalLabels.clusterName }}
     environment: {{ .Values.externalLabels.environment }}
+    region: {{ .Values.externalLabels.region }}
     {{- if .Values.externalLabels.tenantId }}
     tenant_id: {{ .Values.externalLabels.tenantId }}
     {{- end }}

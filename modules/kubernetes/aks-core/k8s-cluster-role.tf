@@ -95,3 +95,17 @@ resource "kubernetes_cluster_role" "get_nodes" {
     verbs      = ["get", "list", "watch"]
   }
 }
+
+resource "kubernetes_cluster_role" "get_vpa" {
+  metadata {
+    name = "get-vpa"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  rule {
+    api_groups = ["autoscaling.k8s.io"]
+    resources  = ["verticalpodautoscalers"]
+    verbs      = ["get", "list", "watch"]
+  }
+}

@@ -33,6 +33,7 @@ variable "resource_group_configs" {
       delegate_service_endpoint  = bool # Delegate Service Endpoint permissions
       delegate_service_principal = bool # Delegate Service Principal
       lock_resource_group        = bool # Adds management_lock (CanNotDelete) to the resource group
+      disable_unique_suffix      = bool # Disable unique_suffix on resource names
       tags                       = map(string)
     })
   )
@@ -40,12 +41,6 @@ variable "resource_group_configs" {
 
 variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
-  type        = string
-  default     = ""
-}
-
-variable "partner_id" {
-  description = "Azure partner id to link service principal with"
   type        = string
   default     = ""
 }
@@ -105,4 +100,9 @@ variable "azuread_apps" {
       service_principal_object_id = string
     })
   })
+}
+
+variable "aad_sp_passwords" {
+  description = "Application password per resource group."
+  type        = map(string)
 }

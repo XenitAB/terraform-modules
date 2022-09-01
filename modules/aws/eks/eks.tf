@@ -112,7 +112,7 @@ data "aws_eks_cluster_auth" "this" {
 # and then it installs the Calico CNI.
 resource "null_resource" "update_eks_cni" {
   triggers = {
-    script_hash = "${sha256(local.cni_script_check)}"
+    script_hash = sha256(local.cni_script_check)
   }
 
   provisioner "local-exec" {

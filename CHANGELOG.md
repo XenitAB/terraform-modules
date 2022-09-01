@@ -8,6 +8,82 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
+- [#774](https://github.com/XenitAB/terraform-modules/pull/774) [Breaking] Add extra_config to ingress nginx config object.
+
+### Fixed
+
+- [#730](https://github.com/XenitAB/terraform-modules/pull/727) Update cluster autoscaler and set correct version in AWS.
+
+## 2022.08.3
+
+### Added
+
+- [#715](https://github.com/XenitAB/terraform-modules/pull/715) Long term storage of AKS audit logs.
+- [#767](https://github.com/XenitAB/terraform-modules/pull/767) Helm-crd-oci module to support helm charts located in OCI.
+
+### Fixed
+
+- [#764](https://github.com/XenitAB/terraform-modules/pull/764) Fix Linkerd cert expiring 8 years too early.
+- [#765](https://github.com/XenitAB/terraform-modules/pull/764) Replace Linkerd image registry with ghcr.
+- [#766](https://github.com/XenitAB/terraform-modules/pull/766) Skip Linkerd proxy for Ingress Nginx webhook.
+- [#768](https://github.com/XenitAB/terraform-modules/pull/768) Use linkerd-fork OCI helm charts and update linkerd to 2.12.0.
+- [#771](https://github.com/XenitAB/terraform-modules/pull/771) Make region optinal in ingress-health fqdn.
+- [#772](https://github.com/XenitAB/terraform-modules/pull/772) Use correct linkerd-cni chart name.
+
+## 2022.08.2
+
+### Changed
+
+- [#691](https://github.com/XenitAB/terraform-modules/pull/691) [Breaking] Refactor modules to support multi region setup.
+
+## 2022.08.1
+
+### Changed
+
+- [#756](https://github.com/XenitAB/terraform-modules/pull/756) Update terraform and tooling.
+- [#759](https://github.com/XenitAB/terraform-modules/pull/759) Update Terraform tls provider to 4.0.1.
+- [#760](https://github.com/XenitAB/terraform-modules/pull/760) Move secrets-store-csi-driver-provider-azure helm chart location.
+
+### Fixed
+
+- [#743](https://github.com/XenitAB/terraform-modules/pull/743) Add cert permissions to group owners.
+
+## 2022.07.2
+
+### Added
+
+- [#744](https://github.com/XenitAB/terraform-modules/pull/744) Add configurable external_dns_hostname annotation for ingress-nginx.
+- [#753](https://github.com/XenitAB/terraform-modules/pull/753) Add support for kubernetes version 1.23.
+
+### Changed
+
+- [#745](https://github.com/XenitAB/terraform-modules/pull/745) Update ingress-nginx to 4.2.0 and disable chroot image in AWS.
+- [#748](https://github.com/XenitAB/terraform-modules/pull/748) Enable chroot image on AWS and set a custom internal-logger-address when running in AWS and multiple internal_load_balancer.
+- [#749](https://github.com/XenitAB/terraform-modules/pull/749) Update gatekeeper to 3.9.0.
+
+### Fixed
+
+- [#746](https://github.com/XenitAB/terraform-modules/pull/746) Install VPA crd from correct helm chart.
+- [#747](https://github.com/XenitAB/terraform-modules/pull/747) Cert-manager AWS webhook config was broken due to replica of yaml config in helm.
+
+## 2022.07.1
+
+### Added
+
+- [#735](https://github.com/XenitAB/terraform-modules/pull/735) [Breaking] Add the possibility to ignore unique suffix in key-vault creation.
+- [#739](https://github.com/XenitAB/terraform-modules/pull/739) Enable tenants to read VPA config in there namespace.
+- [#740](https://github.com/XenitAB/terraform-modules/pull/740) [Breaking] Make AWS assume EKS Admin role configurable.
+
+### Changed
+
+- [#741](https://github.com/XenitAB/terraform-modules/pull/741) Update linkerd control-plane to 1.5.4-edge.
+- [#738](https://github.com/XenitAB/terraform-modules/pull/738) Disable datadog-operator crd installation.
+- [#736](https://github.com/XenitAB/terraform-modules/pull/736) Update FluxV1 and Helm Operator.
+
+## 2022.06.3
+
+### Added
+
 - [#728](https://github.com/XenitAB/terraform-modules/pull/728) Add the possibility to override public ip prefix name in aks global.
 
 ### Changed
@@ -16,7 +92,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#721](https://github.com/XenitAB/terraform-modules/pull/721) Allow datadog ingress by default to tenant namespace.
 - [#724](https://github.com/XenitAB/terraform-modules/pull/724) Upgrade azad-kube-proxy to 0.0.34.
 - [#727](https://github.com/XenitAB/terraform-modules/pull/727) Upgrade git-auth-proxy to v0.7.2.
-- [#730](https://github.com/XenitAB/terraform-modules/pull/727) Update cluster autoscaler and set correct version in AWS.
+- [#732](https://github.com/XenitAB/terraform-modules/pull/732) Set resource request and limits to Node TTL.
 
 ### Fixed
 
@@ -24,6 +100,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#717](https://github.com/XenitAB/terraform-modules/pull/717) Remove force conflicts from CRD resource.
 - [#718](https://github.com/XenitAB/terraform-modules/pull/718) Remove node pool create before destroy.
 - [#719](https://github.com/XenitAB/terraform-modules/pull/719) Update Flux v1 helm operator rbac to v1.
+- [#733](https://github.com/XenitAB/terraform-modules/pull/733) Add resource definitions for datadog agent, cert-manager, reloader, prometheus kube-state-metrics.
 
 ## 2022.06.2
 

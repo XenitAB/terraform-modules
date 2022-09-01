@@ -5,7 +5,7 @@
   */
 
 terraform {
-  required_version = ">= 1.1.7"
+  required_version = ">= 1.2.6"
 
   required_providers {
     kubernetes = {
@@ -40,7 +40,7 @@ resource "helm_release" "ingress_nginx" {
   chart       = "ingress-nginx"
   name        = "ingress-nginx"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "4.1.4"
+  version     = "4.2.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet
@@ -58,6 +58,7 @@ resource "helm_release" "ingress_nginx" {
     linkerd_enabled           = var.linkerd_enabled
     datadog_enabled           = var.datadog_enabled
     allow_snippet_annotations = var.allow_snippet_annotations
+    external_dns_hostname     = var.external_dns_hostname
     default_ingress_class     = true
   })]
 }
@@ -73,7 +74,7 @@ resource "helm_release" "ingress_nginx_public" {
   chart       = "ingress-nginx"
   name        = "ingress-nginx-public"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "4.1.4"
+  version     = "4.2.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet
@@ -91,6 +92,7 @@ resource "helm_release" "ingress_nginx_public" {
     linkerd_enabled           = var.linkerd_enabled
     datadog_enabled           = var.datadog_enabled
     allow_snippet_annotations = var.allow_snippet_annotations
+    external_dns_hostname     = var.external_dns_hostname
     default_ingress_class     = true
   })]
 }
@@ -106,7 +108,7 @@ resource "helm_release" "ingress_nginx_private" {
   chart       = "ingress-nginx"
   name        = "ingress-nginx-private"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "4.1.4"
+  version     = "4.2.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet
@@ -124,6 +126,7 @@ resource "helm_release" "ingress_nginx_private" {
     linkerd_enabled           = var.linkerd_enabled
     datadog_enabled           = var.datadog_enabled
     allow_snippet_annotations = var.allow_snippet_annotations
+    external_dns_hostname     = var.external_dns_hostname
     default_ingress_class     = false
   })]
 }

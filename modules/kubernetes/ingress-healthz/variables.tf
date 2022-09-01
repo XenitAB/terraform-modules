@@ -13,3 +13,8 @@ variable "linkerd_enabled" {
   type        = bool
   default     = false
 }
+variable "location_short" {
+  description = "Region short name"
+  type        = string
+  default     = ""
+}

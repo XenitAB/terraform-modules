@@ -3,6 +3,11 @@ variable "location_short" {
   type        = string
 }
 
+variable "global_location_short" {
+  description = "The Azure region short name where the global resources resides."
+  type        = string
+}
+
 variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string
@@ -209,12 +214,20 @@ variable "ingress_config" {
     http_snippet              = string
     public_private_enabled    = bool
     allow_snippet_annotations = bool
+    extra_config              = map(string)
   })
   default = {
     http_snippet              = ""
     public_private_enabled    = false
     allow_snippet_annotations = false
+    extra_config              = {}
   }
+}
+
+variable "external_dns_hostname" {
+  description = "hostname for ingress-nginx to use for external-dns"
+  type        = string
+  default     = ""
 }
 
 variable "external_dns_enabled" {
@@ -368,6 +381,12 @@ variable "prometheus_enabled" {
   default     = true
 }
 
+variable "prometheus_volume_claim_storage_class_name" {
+  description = "Configuration for prometheus volume claim storage class name"
+  type        = string
+  default     = "managed-csi-zrs"
+}
+
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
@@ -436,6 +455,13 @@ variable "starboard_enabled" {
   description = "Should Starboard be enabled"
   type        = bool
   default     = true
+}
+
+
+variable "starboard_volume_claim_storage_class_name" {
+  description = "Configuration for starboard volume claim storage class name"
+  type        = string
+  default     = "managed-csi-zrs"
 }
 
 variable "starboard_config" {

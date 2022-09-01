@@ -5,7 +5,7 @@
   */
 
 terraform {
-  required_version = ">= 1.1.7"
+  required_version = ">= 1.2.6"
 
   required_providers {
     azurerm = {
@@ -52,4 +52,8 @@ data "azurerm_client_config" "current" {}
 
 data "azurerm_resource_group" "this" {
   name = "rg-${var.environment}-${var.location_short}-${var.name}"
+}
+
+data "azurerm_resource_group" "global" {
+  name = "rg-${var.environment}-${var.global_location_short}-global"
 }

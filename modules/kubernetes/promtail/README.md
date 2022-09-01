@@ -6,7 +6,7 @@ Adds [Promtail](https://github.com/grafana/helm-charts/tree/main/charts/promtail
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.6 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.5.1 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.8.0 |
 
@@ -39,7 +39,7 @@ No modules.
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment in which the promtail instance is deployed | `string` | n/a | yes |
 | <a name="input_excluded_namespaces"></a> [excluded\_namespaces](#input\_excluded\_namespaces) | Namespaces to not ship logs from | `list(string)` | `[]` | no |
 | <a name="input_loki_address"></a> [loki\_address](#input\_loki\_address) | The address of the Loki instance to send logs to | `string` | n/a | yes |
-| <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | The tenant id | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | The region in which the promtail instance is deployed | `string` | n/a | yes |
 
 ## Outputs
 

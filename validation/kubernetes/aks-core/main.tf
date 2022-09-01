@@ -7,11 +7,12 @@ provider "azurerm" {
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
 
-  name            = "baz"
-  aks_name_suffix = 1
-  location_short  = "foo"
-  environment     = "bar"
-  namespaces      = []
+  name                  = "baz"
+  aks_name_suffix       = 1
+  location_short        = "foo"
+  global_location_short = "sc"
+  environment           = "bar"
+  namespaces            = []
   external_dns_config = {
     client_id   = "foo"
     resource_id = "bar"
@@ -85,6 +86,7 @@ module "aks_core" {
     http_snippet              = ""
     public_private_enabled    = false
     allow_snippet_annotations = false
+    extra_config              = {}
   }
 
   prometheus_enabled = true
@@ -107,4 +109,5 @@ module "aks_core" {
     resource_selector  = ["platform"]
     namespace_selector = ["platform"]
   }
+  external_dns_hostname = "foobar.com"
 }

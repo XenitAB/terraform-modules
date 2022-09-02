@@ -1,9 +1,3 @@
-auditLog:
-  enabled: false
-
-docker:
-  enabled: false
-
 # Use EBPF instead of kernel module
 ebpf:
   enabled: true
@@ -23,6 +17,16 @@ falco:
       - log
 
 priorityClassName: platform-high
+
+scc:
+  # -- Create OpenShift's Security Context Constraint.
+  create: false
+
+collectors:
+  docker:
+    enabled: false
+  crio:
+    enabled: false
 
 customRules:
   # Applications which are expected to communicate with the Kubernetes API

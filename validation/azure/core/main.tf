@@ -13,6 +13,7 @@ module "core" {
   location_short    = "we"
   subscription_name = "xks"
   name              = "core"
+  unique_suffix     = ""
   vnet_config = {
     address_space = ["10.180.0.0/16"]
     dns_servers   = []

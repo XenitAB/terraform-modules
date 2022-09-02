@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#778](https://github.com/XenitAB/terraform-modules/pull/778) Upgrade AWS calico to 3.24.
 - [#776](https://github.com/XenitAB/terraform-modules/pull/776) [Breaking] Remove default value for unique_suffix in Azure core module.
 - [#775](https://github.com/XenitAB/terraform-modules/pull/775) Update falco helm chart to 2.0.16.
-- [#777](https://github.com/XenitAB/terraform-modules/pull/777) [Breaking] Update flux 2.0 to v0.33.0 which bumps the source controller from v1beta1 to v1betav2.
+- [#777](https://github.com/XenitAB/terraform-modules/pull/777) Update Flux 2.0 to v0.33.0 which bumps the source controller from v1beta1 to v1betav2.
 
 ## 2022.08.3
 

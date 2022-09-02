@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
+- [#778](https://github.com/XenitAB/terraform-modules/pull/778) Upgrade AWS calico to 3.24.
 - [#776](https://github.com/XenitAB/terraform-modules/pull/776) [Breaking] Remove default value for unique_suffix in Azure core module.
 
 ## 2022.08.3

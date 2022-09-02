@@ -1,6 +1,6 @@
 # Use EBPF instead of kernel module
-ebpf:
-  enabled: true
+driver:
+  kind: ebpf
 
 falco:
   grpc:

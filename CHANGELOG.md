@@ -14,6 +14,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#730](https://github.com/XenitAB/terraform-modules/pull/727) Update cluster autoscaler and set correct version in AWS.
 
+### Changed
+
+- [#776](https://github.com/XenitAB/terraform-modules/pull/776) [Breaking] Remove default value for unique_suffix in Azure core module.
+
 ## 2022.08.3
 
 ### Added

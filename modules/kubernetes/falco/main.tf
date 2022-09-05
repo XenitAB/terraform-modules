@@ -32,12 +32,13 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "falco" {
-  repository  = "https://falcosecurity.github.io/charts"
-  chart       = "falco"
-  name        = "falco"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "2.0.16"
-  max_history = 3
+  repository   = "https://falcosecurity.github.io/charts"
+  chart        = "falco"
+  name         = "falco"
+  namespace    = kubernetes_namespace.this.metadata[0].name
+  version      = "2.0.16"
+  max_history  = 3
+  force_update = true
   values = [templatefile("${path.module}/templates/falco-values.yaml.tpl", {
     provider = var.cloud_provider
   })]

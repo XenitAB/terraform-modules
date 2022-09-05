@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - [#774](https://github.com/XenitAB/terraform-modules/pull/774) [Breaking] Add extra_config to ingress nginx config object.
+- [#780](https://github.com/XenitAB/terraform-modules/pull/780) Add AWS CSI driver to EKS cluster.
 
 ### Changed
 

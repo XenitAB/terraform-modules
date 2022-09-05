@@ -97,11 +97,12 @@ data "aws_eks_addon_version" "ebs_csi_driver" {
 resource "aws_eks_addon" "ebs_csi_driver" {
   depends_on = [aws_eks_node_group.this]
 
-  cluster_name      = aws_eks_cluster.this.name
-  addon_name        = "aws-ebs-csi-driver"
-  addon_version     = data.aws_eks_addon_version.ebs_csi_driver.version
-  resolve_conflicts = "OVERWRITE"
-  tags              = local.global_tags
+  cluster_name             = aws_eks_cluster.this.name
+  addon_name               = "aws-ebs-csi-driver"
+  addon_version            = data.aws_eks_addon_version.ebs_csi_driver.version
+  resolve_conflicts        = "OVERWRITE"
+  service_account_role_arn = "TODO"
+  tags                     = local.global_tags
 }
 
 data "tls_certificate" "thumbprint" {

@@ -1,5 +1,5 @@
 locals {
-  calico_version = "v3.24"
+  calico_version = "v3.19"
   cni_script = templatefile("${path.module}/templates/update-eks-cni.sh.tpl", {
     b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
     api_server_url = aws_eks_cluster.this.endpoint

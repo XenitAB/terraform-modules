@@ -53,12 +53,22 @@ resource "aws_iam_role" "this" {
 }
 
 resource "aws_iam_policy" "permissions" {
+  for_each = {
+    for s in ["policy-attachment"] :
+    s => s
+    if var.policy_json != ""
+  }
   name   = var.name
   policy = var.policy_json
 }
 
 resource "aws_iam_role_policy_attachment" "permissions" {
-  policy_arn = aws_iam_policy.permissions.arn
+  for_each = {
+    for s in ["policy-attachment"] :
+    s => s
+    if var.policy_json != ""
+  }
+  policy_arn = aws_iam_policy.permissions[0].arn
   role       = aws_iam_role.this.name
 }
 

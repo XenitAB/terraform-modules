@@ -28,6 +28,6 @@ variable "policy_json" {
 
 variable "extra_policy_permissions_arn" {
   description = "Permissions to apply to the created role"
-  type        = list(string)
+  type        = set(string)
   default     = []
 }

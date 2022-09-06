@@ -35,7 +35,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_extra_policy_permissions_arn"></a> [extra\_policy\_permissions\_arn](#input\_extra\_policy\_permissions\_arn) | Permissions to apply to the created role | `list(string)` | `[]` | no |
+| <a name="input_extra_policy_permissions_arn"></a> [extra\_policy\_permissions\_arn](#input\_extra\_policy\_permissions\_arn) | Permissions to apply to the created role | `set(string)` | `[]` | no |
 | <a name="input_kubernetes_namespace"></a> [kubernetes\_namespace](#input\_kubernetes\_namespace) | Name of Kubernetes Namespace to trust | `string` | n/a | yes |
 | <a name="input_kubernetes_service_account"></a> [kubernetes\_service\_account](#input\_kubernetes\_service\_account) | Name of Kubernetes Service Account to trust | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Name of created IAM role and policy | `string` | n/a | yes |

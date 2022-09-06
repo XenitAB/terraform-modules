@@ -60,6 +60,12 @@ resource "azurerm_kubernetes_cluster" "this" {
     node_count                   = var.aks_config.production_grade ? 2 : 1
     only_critical_addons_enabled = true
   }
+  
+  lifecycle {
+    ignore_changes = [
+      tags,
+    ]
+  }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "this" {

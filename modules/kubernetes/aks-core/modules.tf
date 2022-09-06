@@ -196,7 +196,7 @@ module "azure_metrics" {
 
 # linkerd
 module "linkerd_crd" {
-  source = "../../kubernetes/helm-crd"
+  source = "../../kubernetes/helm-crd-oci"
 
   for_each = {
     for s in ["linkerd"] :

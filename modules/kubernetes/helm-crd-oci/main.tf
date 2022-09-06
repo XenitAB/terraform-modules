@@ -1,0 +1,46 @@
+terraform {
+  required_version = ">= 1.1.7"
+
+  required_providers {
+    helm = {
+      source  = "hashicorp/helm"
+      version = "2.5.1"
+    }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "1.14.0"
+    }
+  }
+}
+
+data "helm_template" "this" {
+  chart        = var.chart
+  name         = var.chart_name
+  version      = var.chart_version
+  include_crds = true
+  api_versions = ["apiextensions.k8s.io/v1/CustomResourceDefinition"]
+
+  dynamic "set" {
+    for_each = var.values
+
+    content {
+      name  = set.key
+      value = set.value
+    }
+  }
+}
+
+data "kubectl_file_documents" "this" {
+  content = data.helm_template.this.manifest
+}
+
+resource "kubectl_manifest" "this" {
+  for_each = {
+    for k, v in data.kubectl_file_documents.this.manifests :
+    k => v
+    if can(regex("^/apis/apiextensions.k8s.io/v1/customresourcedefinitions/", k))
+  }
+  server_side_apply = true
+  apply_only        = true
+  yaml_body         = each.value
+}

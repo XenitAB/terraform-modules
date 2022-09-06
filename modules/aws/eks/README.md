@@ -22,6 +22,7 @@
 |------|--------|---------|
 | <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../irsa | n/a |
 | <a name="module_cluster_autoscaler"></a> [cluster\_autoscaler](#module\_cluster\_autoscaler) | ../irsa | n/a |
+| <a name="module_eks_ebs_csi_driver"></a> [eks\_ebs\_csi\_driver](#module\_eks\_ebs\_csi\_driver) | ../irsa | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../irsa | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../irsa | n/a |
 | <a name="module_promtail"></a> [promtail](#module\_promtail) | ../irsa | n/a |

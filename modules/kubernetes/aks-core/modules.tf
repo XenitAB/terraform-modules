@@ -239,6 +239,8 @@ module "ingress_nginx" {
   datadog_enabled           = var.datadog_enabled
   public_private_enabled    = var.ingress_config.public_private_enabled
   allow_snippet_annotations = var.ingress_config.allow_snippet_annotations
+  extra_config              = var.ingress_config.extra_config
+  extra_headers              = var.ingress_config.extra_headers
 
   default_certificate = {
     enabled  = true

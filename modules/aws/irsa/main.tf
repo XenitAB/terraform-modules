@@ -63,7 +63,7 @@ resource "aws_iam_role_policy_attachment" "permissions" {
 }
 
 resource "aws_iam_role_policy_attachment" "extra_policy_permissions" {
-  for_each = var.extra_policy_permissions_arn
+  for_each   = var.extra_policy_permissions_arn
   policy_arn = each.value
   role       = aws_iam_role.this.name
 }

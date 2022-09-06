@@ -195,19 +195,19 @@ module "azure_metrics" {
 }
 
 # linkerd
-module "linkerd_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  for_each = {
-    for s in ["linkerd"] :
-    s => s
-    if var.linkerd_enabled
-  }
-
-  chart_repository = "https://helm.linkerd.io/edge"
-  chart_name       = "linkerd-crds"
-  chart_version    = "1.1.1-edge"
-}
+#module "linkerd_crd" {
+#  source = "../../kubernetes/helm-crd"
+#
+#  for_each = {
+#    for s in ["linkerd"] :
+#    s => s
+#    if var.linkerd_enabled
+#  }
+#
+#  chart_repository = "https://helm.linkerd.io/edge"
+#  chart_name       = "linkerd-crds"
+#  chart_version    = "1.1.1-edge"
+#}
 
 module "linkerd" {
   depends_on = [module.opa_gatekeeper, module.cert_manager_crd, module.linkerd_crd]

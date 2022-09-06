@@ -27,7 +27,6 @@
 | [aws_iam_policy.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_policy) | resource |
 | [aws_iam_role.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_role) | resource |
 | [aws_iam_role.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_role) | resource |
-| [aws_iam_role.eks_ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_role) | resource |
 | [aws_iam_role.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_role) | resource |
 | [aws_kms_key.eks_encryption](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/kms_key) | resource |
 | [aws_kms_key.velero](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/kms_key) | resource |
@@ -60,7 +59,6 @@
 | <a name="output_azad_kube_proxy"></a> [azad\_kube\_proxy](#output\_azad\_kube\_proxy) | The Azure AD Application config for azad-kube-proxy |
 | <a name="output_cluster_role_arn"></a> [cluster\_role\_arn](#output\_cluster\_role\_arn) | EKS cluster IAM role |
 | <a name="output_eks_admin_role_arn"></a> [eks\_admin\_role\_arn](#output\_eks\_admin\_role\_arn) | ARN for IAM role that should be used to create an EKS cluster |
-| <a name="output_eks_ebs_csi_arn"></a> [eks\_ebs\_csi\_arn](#output\_eks\_ebs\_csi\_arn) | EKS EBS CSI driver IAM role |
 | <a name="output_eks_encryption_key_arn"></a> [eks\_encryption\_key\_arn](#output\_eks\_encryption\_key\_arn) | KMS key to be used for EKS secret encryption |
 | <a name="output_node_group_role_arn"></a> [node\_group\_role\_arn](#output\_node\_group\_role\_arn) | EKS node grouop IAM role |
 | <a name="output_velero_config"></a> [velero\_config](#output\_velero\_config) | ARN of velero s3 backup bucket |

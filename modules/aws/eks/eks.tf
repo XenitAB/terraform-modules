@@ -101,7 +101,7 @@ resource "aws_eks_addon" "ebs_csi_driver" {
   addon_name               = "aws-ebs-csi-driver"
   addon_version            = data.aws_eks_addon_version.ebs_csi_driver.version
   resolve_conflicts        = "OVERWRITE"
-  service_account_role_arn = var.eks_ebs_csi_arn
+  service_account_role_arn = "TODO"
   tags                     = local.global_tags
 }
 

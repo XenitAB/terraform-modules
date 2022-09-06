@@ -74,11 +74,6 @@ variable "node_group_role_arn" {
   type        = string
 }
 
-variable "eks_ebs_csi_arn" {
-  description = "EKS EBS CSI driver IAM role"
-  type        = string
-}
-
 variable "aws_kms_key_arn" {
   description = "eks secrets customer master key"
   type        = string

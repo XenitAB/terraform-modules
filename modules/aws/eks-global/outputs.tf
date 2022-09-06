@@ -13,11 +13,6 @@ output "node_group_role_arn" {
   value       = aws_iam_role.eks_node_group.arn
 }
 
-output "eks_ebs_csi_arn" {
-  description = "EKS EBS CSI driver IAM role"
-  value       = aws_iam_role.eks_ebs_csi.arn
-}
-
 output "velero_config" {
   description = "ARN of velero s3 backup bucket"
   value = {

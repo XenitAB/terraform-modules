@@ -28,6 +28,7 @@ No modules.
 | [aws_iam_policy.permissions](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_policy) | resource |
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.permissions](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.policy_permissions](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_policy_document.assume](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
@@ -38,7 +39,8 @@ No modules.
 | <a name="input_kubernetes_service_account"></a> [kubernetes\_service\_account](#input\_kubernetes\_service\_account) | Name of Kubernetes Service Account to trust | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Name of created IAM role and policy | `string` | n/a | yes |
 | <a name="input_oidc_providers"></a> [oidc\_providers](#input\_oidc\_providers) | OIDC provider configuration | <pre>list(object({<br>    url = string<br>    arn = string<br>  }))</pre> | n/a | yes |
-| <a name="input_policy_json"></a> [policy\_json](#input\_policy\_json) | Permissions to apply to the created role | `string` | n/a | yes |
+| <a name="input_policy_json"></a> [policy\_json](#input\_policy\_json) | Permissions to apply to the created role | `string` | `""` | no |
+| <a name="input_policy_permissions_arn"></a> [policy\_permissions\_arn](#input\_policy\_permissions\_arn) | Permissions to apply to the created role | `set(string)` | `[]` | no |
 
 ## Outputs
 

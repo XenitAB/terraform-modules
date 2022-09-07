@@ -88,6 +88,23 @@ resource "aws_eks_addon" "core_dns" {
   tags              = local.global_tags
 }
 
+data "aws_eks_addon_version" "ebs_csi_driver" {
+  addon_name         = "aws-ebs-csi-driver"
+  kubernetes_version = aws_eks_cluster.this.version
+  most_recent        = true
+}
+
+resource "aws_eks_addon" "ebs_csi_driver" {
+  depends_on = [aws_eks_node_group.this]
+
+  cluster_name             = aws_eks_cluster.this.name
+  addon_name               = "aws-ebs-csi-driver"
+  addon_version            = data.aws_eks_addon_version.ebs_csi_driver.version
+  resolve_conflicts        = "OVERWRITE"
+  service_account_role_arn = module.eks_ebs_csi_driver.role_arn
+  tags                     = local.global_tags
+}
+
 data "tls_certificate" "thumbprint" {
   url = aws_eks_cluster.this.identity[0].oidc[0].issuer
 }

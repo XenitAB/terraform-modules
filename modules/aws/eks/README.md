@@ -22,6 +22,7 @@
 |------|--------|---------|
 | <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../irsa | n/a |
 | <a name="module_cluster_autoscaler"></a> [cluster\_autoscaler](#module\_cluster\_autoscaler) | ../irsa | n/a |
+| <a name="module_eks_ebs_csi_driver"></a> [eks\_ebs\_csi\_driver](#module\_eks\_ebs\_csi\_driver) | ../irsa | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../irsa | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../irsa | n/a |
 | <a name="module_promtail"></a> [promtail](#module\_promtail) | ../irsa | n/a |
@@ -34,6 +35,7 @@
 | Name | Type |
 |------|------|
 | [aws_eks_addon.core_dns](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/eks_addon) | resource |
+| [aws_eks_addon.ebs_csi_driver](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/eks_addon) | resource |
 | [aws_eks_addon.kube_proxy](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/eks_addon) | resource |
 | [aws_eks_cluster.this](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/eks_cluster) | resource |
 | [aws_eks_node_group.this](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/eks_node_group) | resource |
@@ -42,6 +44,7 @@
 | [null_resource.update_eks_cni](https://registry.terraform.io/providers/hashicorp/null/3.1.0/docs/resources/resource) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/caller_identity) | data source |
 | [aws_eks_addon_version.core_dns](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/eks_addon_version) | data source |
+| [aws_eks_addon_version.ebs_csi_driver](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/eks_addon_version) | data source |
 | [aws_eks_addon_version.kube_proxy](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/eks_addon_version) | data source |
 | [aws_eks_cluster_auth.this](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/eks_cluster_auth) | data source |
 | [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/iam_policy_document) | data source |

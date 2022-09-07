@@ -6,3 +6,4 @@ resources:
   requests:
     cpu: 15m
     memory: 50Mi
+installCRDs: false

@@ -13,6 +13,11 @@ variable "name" {
   type        = string
 }
 
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
+  type        = string
+}
+
 variable "core_name" {
   description = "The commonName for the core infrastructure"
   type        = string
@@ -147,4 +152,18 @@ variable "namespaces" {
 variable "aks_managed_identity_group_id" {
   description = "The group id of aks managed identity"
   type        = string
+}
+
+variable "azure_metrics_identity" {
+  description = "MSI authentication identity for Azure Metrics"
+  type = object({
+    id           = string
+    principal_id = string
+  })
+}
+
+variable "aks_audit_log_retention" {
+  description = "The aks audit log retention in days, 0 = infinite"
+  type        = number
+  default     = 180
 }

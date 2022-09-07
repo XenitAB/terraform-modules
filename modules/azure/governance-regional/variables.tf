@@ -45,12 +45,6 @@ variable "unique_suffix" {
   default     = ""
 }
 
-variable "partner_id" {
-  description = "Azure partner id to link service principal with"
-  type        = string
-  default     = ""
-}
-
 variable "key_vault_purge_protection_enabled" {
   description = "If true purge protection will be enabled to all key vaults"
   type        = bool
@@ -106,4 +100,9 @@ variable "azuread_apps" {
       service_principal_object_id = string
     })
   })
+}
+
+variable "aad_sp_passwords" {
+  description = "Application password per resource group."
+  type        = map(string)
 }

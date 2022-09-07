@@ -2,10 +2,10 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.6 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.9.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | 3.1.0 |
-| <a name="requirement_tls"></a> [tls](#requirement\_tls) | 3.1.0 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.1 |
 
 ## Providers
 
@@ -14,7 +14,7 @@
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.9.0 |
 | <a name="provider_aws.eks_admin"></a> [aws.eks\_admin](#provider\_aws.eks\_admin) | 4.9.0 |
 | <a name="provider_null"></a> [null](#provider\_null) | 3.1.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | 3.1.0 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.1 |
 
 ## Modules
 
@@ -22,6 +22,7 @@
 |------|--------|---------|
 | <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../irsa | n/a |
 | <a name="module_cluster_autoscaler"></a> [cluster\_autoscaler](#module\_cluster\_autoscaler) | ../irsa | n/a |
+| <a name="module_eks_ebs_csi_driver"></a> [eks\_ebs\_csi\_driver](#module\_eks\_ebs\_csi\_driver) | ../irsa | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../irsa | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../irsa | n/a |
 | <a name="module_promtail"></a> [promtail](#module\_promtail) | ../irsa | n/a |
@@ -34,6 +35,7 @@
 | Name | Type |
 |------|------|
 | [aws_eks_addon.core_dns](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/eks_addon) | resource |
+| [aws_eks_addon.ebs_csi_driver](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/eks_addon) | resource |
 | [aws_eks_addon.kube_proxy](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/eks_addon) | resource |
 | [aws_eks_cluster.this](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/eks_cluster) | resource |
 | [aws_eks_node_group.this](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/eks_node_group) | resource |
@@ -42,6 +44,7 @@
 | [null_resource.update_eks_cni](https://registry.terraform.io/providers/hashicorp/null/3.1.0/docs/resources/resource) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/caller_identity) | data source |
 | [aws_eks_addon_version.core_dns](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/eks_addon_version) | data source |
+| [aws_eks_addon_version.ebs_csi_driver](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/eks_addon_version) | data source |
 | [aws_eks_addon_version.kube_proxy](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/eks_addon_version) | data source |
 | [aws_eks_cluster_auth.this](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/eks_cluster_auth) | data source |
 | [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/iam_policy_document) | data source |
@@ -53,7 +56,7 @@
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/region) | data source |
 | [aws_subnet.cluster](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/subnet) | data source |
 | [aws_subnet.node](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/subnet) | data source |
-| [tls_certificate.thumbprint](https://registry.terraform.io/providers/hashicorp/tls/3.1.0/docs/data-sources/certificate) | data source |
+| [tls_certificate.thumbprint](https://registry.terraform.io/providers/hashicorp/tls/4.0.1/docs/data-sources/certificate) | data source |
 
 ## Inputs
 

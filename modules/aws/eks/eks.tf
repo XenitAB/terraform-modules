@@ -1,5 +1,5 @@
 locals {
-  calico_version = "v3.19"
+  calico_version = "v3.24"
   cni_script = templatefile("${path.module}/templates/update-eks-cni.sh.tpl", {
     b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
     api_server_url = aws_eks_cluster.this.endpoint
@@ -88,6 +88,23 @@ resource "aws_eks_addon" "core_dns" {
   tags              = local.global_tags
 }
 
+data "aws_eks_addon_version" "ebs_csi_driver" {
+  addon_name         = "aws-ebs-csi-driver"
+  kubernetes_version = aws_eks_cluster.this.version
+  most_recent        = true
+}
+
+resource "aws_eks_addon" "ebs_csi_driver" {
+  depends_on = [aws_eks_node_group.this]
+
+  cluster_name             = aws_eks_cluster.this.name
+  addon_name               = "aws-ebs-csi-driver"
+  addon_version            = data.aws_eks_addon_version.ebs_csi_driver.version
+  resolve_conflicts        = "OVERWRITE"
+  service_account_role_arn = module.eks_ebs_csi_driver.role_arn
+  tags                     = local.global_tags
+}
+
 data "tls_certificate" "thumbprint" {
   url = aws_eks_cluster.this.identity[0].oidc[0].issuer
 }
@@ -112,7 +129,7 @@ data "aws_eks_cluster_auth" "this" {
 # and then it installs the Calico CNI.
 resource "null_resource" "update_eks_cni" {
   triggers = {
-    script_hash = "${sha256(local.cni_script_check)}"
+    script_hash = sha256(local.cni_script_check)
   }
 
   provisioner "local-exec" {

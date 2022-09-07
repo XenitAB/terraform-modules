@@ -24,4 +24,11 @@ variable "kubernetes_service_account" {
 variable "policy_json" {
   description = "Permissions to apply to the created role"
   type        = string
+  default     = ""
+}
+
+variable "policy_permissions_arn" {
+  description = "Permissions to apply to the created role"
+  type        = set(string)
+  default     = []
 }

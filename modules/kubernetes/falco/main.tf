@@ -7,7 +7,7 @@
   */
 
 terraform {
-  required_version = ">= 1.1.7"
+  required_version = ">= 1.2.6"
 
   required_providers {
     kubernetes = {
@@ -36,7 +36,7 @@ resource "helm_release" "falco" {
   chart       = "falco"
   name        = "falco"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "1.17.4"
+  version     = "2.0.16"
   max_history = 3
   values = [templatefile("${path.module}/templates/falco-values.yaml.tpl", {
     provider = var.cloud_provider
@@ -48,7 +48,7 @@ resource "helm_release" "falco_exporter" {
   chart       = "falco-exporter"
   name        = "falco-exporter"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "0.8.0"
+  version     = "0.8.2"
   max_history = 3
   values      = [templatefile("${path.module}/templates/falco-exporter-values.yaml.tpl", {})]
 }

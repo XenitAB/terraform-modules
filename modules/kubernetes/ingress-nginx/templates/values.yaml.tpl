@@ -1,8 +1,6 @@
 controller:
-  %{~ if provider != "aws" ~}
   image:
     chroot: true
-  %{~ endif ~}
 
   replicaCount: 3
 
@@ -88,7 +86,7 @@ controller:
     linkerd.io/inject: "ingress"
     # It's required to skip inbound ports for the ingress or whitelist of IPs won't work:
     # https://github.com/linkerd/linkerd2/issues/3334#issuecomment-565135188
-    config.linkerd.io/skip-inbound-ports: "80,443"
+    config.linkerd.io/skip-inbound-ports: "80,443,8443"
     %{~ endif ~}
   %{~ endif ~}
 
@@ -129,6 +127,8 @@ controller:
     status-port: 10346
     # Port to use for the lua TCP/UDP endpoint configuration. (default 10247)
     stream-port: 10347
+    # Port to use for the internal syslog server when chroot is enabled. (default 127.0.0.1:11514)
+    internal-logger-address: 127.0.0.1:11515
 
   livenessProbe:
     httpGet:

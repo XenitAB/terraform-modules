@@ -13,10 +13,11 @@ variable "environment" {
   type        = string
 }
 
-variable "tenant_id" {
-  description = "The tenant id"
+variable "region" {
+  description = "The region in which the promtail instance is deployed"
   type        = string
 }
+
 
 variable "excluded_namespaces" {
   description = "Namespaces to not ship logs from"

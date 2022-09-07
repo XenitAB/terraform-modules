@@ -58,3 +58,37 @@ resource "azuread_service_principal" "aad_sp" {
 
   application_id = azuread_application.aad_app[each.key].application_id
 }
+
+resource "azuread_application_password" "aad_sp" {
+  for_each = {
+    for rg in var.resource_group_configs :
+    rg.common_name => rg
+    if rg.delegate_service_principal == true
+  }
+
+  application_object_id = azuread_application.aad_app[each.key].object_id
+  end_date              = timeadd(timestamp(), "87600h") # 10 years
+
+  lifecycle {
+    ignore_changes = [
+      end_date
+    ]
+  }
+}
+
+
+resource "pal_management_partner" "aad_sp" {
+  depends_on = [azuread_application_password.aad_sp]
+
+  for_each = {
+    for rg in var.resource_group_configs :
+    rg.common_name => rg
+    if rg.delegate_service_principal == true && var.partner_id != ""
+  }
+
+  tenant_id     = data.azurerm_subscription.current.tenant_id
+  client_id     = azuread_application.aad_app[each.key].application_id
+  client_secret = azuread_application_password.aad_sp[each.key].value
+  partner_id    = var.partner_id
+  overwrite     = true
+}

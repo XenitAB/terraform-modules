@@ -28,5 +28,23 @@ locals {
       "Restore",
       "Set"
     ]
+    certificate_permissions = [
+      "Backup",
+      "Create",
+      "Delete",
+      "DeleteIssuers",
+      "Get",
+      "GetIssuers",
+      "Import",
+      "List",
+      "ListIssuers",
+      "ManageContacts",
+      "ManageIssuers",
+      "Purge",
+      "Recover",
+      "Restore",
+      "SetIssuers",
+      "Update"
+    ]
   }
 }

@@ -257,3 +257,18 @@ module "trivy_ecr" {
   kubernetes_service_account = "trivy"
   policy_json                = data.aws_iam_policy_document.starboard_ecr_read_only.json
 }
+
+module "eks_ebs_csi_driver" {
+  source = "../irsa"
+
+  name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}-eks_ebs_csi"
+  oidc_providers = [
+    {
+      url = aws_iam_openid_connect_provider.this.url
+      arn = aws_iam_openid_connect_provider.this.arn
+    }
+  ]
+  kubernetes_namespace       = "kube-system"
+  kubernetes_service_account = "ebs-csi-controller-sa"
+  policy_permissions_arn     = ["arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"]
+}

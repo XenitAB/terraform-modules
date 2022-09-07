@@ -6,6 +6,54 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.09.1
+
+### Added
+
+- [#774](https://github.com/XenitAB/terraform-modules/pull/774) [Breaking] Add extra_config to ingress nginx config object.
+- [#780](https://github.com/XenitAB/terraform-modules/pull/780) Add AWS CSI driver to EKS cluster.
+
+### Changed
+
+- [#778](https://github.com/XenitAB/terraform-modules/pull/778) Upgrade AWS calico to 3.24.
+- [#776](https://github.com/XenitAB/terraform-modules/pull/776) [Breaking] Remove default value for unique_suffix in Azure core module.
+- [#775](https://github.com/XenitAB/terraform-modules/pull/775) Update falco helm chart to 2.0.16.
+- [#777](https://github.com/XenitAB/terraform-modules/pull/777) Update Flux 2.0 to v0.33.0 which bumps the source controller from v1beta1 to v1betav2.
+
+## 2022.08.3
+
+### Added
+
+- [#715](https://github.com/XenitAB/terraform-modules/pull/715) Long term storage of AKS audit logs.
+- [#767](https://github.com/XenitAB/terraform-modules/pull/767) Helm-crd-oci module to support helm charts located in OCI.
+
+### Fixed
+
+- [#764](https://github.com/XenitAB/terraform-modules/pull/764) Fix Linkerd cert expiring 8 years too early.
+- [#765](https://github.com/XenitAB/terraform-modules/pull/764) Replace Linkerd image registry with ghcr.
+- [#766](https://github.com/XenitAB/terraform-modules/pull/766) Skip Linkerd proxy for Ingress Nginx webhook.
+- [#768](https://github.com/XenitAB/terraform-modules/pull/768) Use linkerd-fork OCI helm charts and update linkerd to 2.12.0.
+- [#771](https://github.com/XenitAB/terraform-modules/pull/771) Make region optinal in ingress-health fqdn.
+- [#772](https://github.com/XenitAB/terraform-modules/pull/772) Use correct linkerd-cni chart name.
+
+## 2022.08.2
+
+### Changed
+
+- [#691](https://github.com/XenitAB/terraform-modules/pull/691) [Breaking] Refactor modules to support multi region setup.
+
+## 2022.08.1
+
+### Changed
+
+- [#756](https://github.com/XenitAB/terraform-modules/pull/756) Update terraform and tooling.
+- [#759](https://github.com/XenitAB/terraform-modules/pull/759) Update Terraform tls provider to 4.0.1.
+- [#760](https://github.com/XenitAB/terraform-modules/pull/760) Move secrets-store-csi-driver-provider-azure helm chart location.
+
+### Fixed
+
+- [#743](https://github.com/XenitAB/terraform-modules/pull/743) Add cert permissions to group owners.
+
 ## 2022.07.2
 
 ### Added
@@ -16,7 +64,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#745](https://github.com/XenitAB/terraform-modules/pull/745) Update ingress-nginx to 4.2.0 and disable chroot image in AWS.
-- [#748](https://github.com/XenitAB/terraform-modules/pull/748) Update gatekeeper to 3.9.0.
+- [#748](https://github.com/XenitAB/terraform-modules/pull/748) Enable chroot image on AWS and set a custom internal-logger-address when running in AWS and multiple internal_load_balancer.
+- [#749](https://github.com/XenitAB/terraform-modules/pull/749) Update gatekeeper to 3.9.0.
 
 ### Fixed
 

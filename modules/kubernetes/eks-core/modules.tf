@@ -166,6 +166,7 @@ module "ingress_nginx" {
   datadog_enabled           = var.datadog_enabled
   public_private_enabled    = var.ingress_config.public_private_enabled
   allow_snippet_annotations = var.ingress_config.allow_snippet_annotations
+  extra_config              = var.ingress_config.extra_config
 
   default_certificate = {
     enabled  = true
@@ -321,7 +322,7 @@ module "promtail" {
   cloud_provider      = "aws"
   cluster_name        = "${var.name}${var.eks_name_suffix}"
   environment         = var.environment
-  tenant_id           = var.prometheus_config.tenant_id
+  region              = data.aws_region.current.name
   excluded_namespaces = var.promtail_config.excluded_namespaces
 
   aws_config = {
@@ -357,6 +358,7 @@ module "prometheus" {
   cluster_name = "${var.name}${var.eks_name_suffix}"
   environment  = var.environment
   tenant_id    = var.prometheus_config.tenant_id
+  region       = data.aws_region.current.name
 
   remote_write_authenticated = var.prometheus_config.remote_write_authenticated
   remote_write_url           = var.prometheus_config.remote_write_url

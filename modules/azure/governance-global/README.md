@@ -6,7 +6,7 @@ This module is used for governance on a global level and not using any specific 
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.6 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.19.1 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.8.0 |
 | <a name="requirement_pal"></a> [pal](#requirement\_pal) | 0.2.5 |
@@ -31,6 +31,7 @@ No modules.
 | [azuread_application.aad_app](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application) | resource |
 | [azuread_application.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application) | resource |
 | [azuread_application.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application) | resource |
+| [azuread_application_password.aad_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application_password) | resource |
 | [azuread_application_password.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/application_password) | resource |
 | [azuread_group.acr_pull](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
 | [azuread_group.acr_push](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/resources/group) | resource |
@@ -62,6 +63,7 @@ No modules.
 | [azurerm_role_assignment.sub_owner](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.sub_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/role_assignment) | resource |
+| [pal_management_partner.aad_sp](https://registry.terraform.io/providers/xenitab/pal/0.2.5/docs/resources/management_partner) | resource |
 | [pal_management_partner.owner_spn](https://registry.terraform.io/providers/xenitab/pal/0.2.5/docs/resources/management_partner) | resource |
 | [azuread_application.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/data-sources/application) | data source |
 | [azuread_group.all_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/data-sources/group) | data source |
@@ -90,5 +92,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_aad_sp_passwords"></a> [aad\_sp\_passwords](#output\_aad\_sp\_passwords) | Application password per resource group. |
 | <a name="output_azuread_apps"></a> [azuread\_apps](#output\_azuread\_apps) | Output for Azure AD applications |
 | <a name="output_azuread_groups"></a> [azuread\_groups](#output\_azuread\_groups) | Output for Azure AD Groups |

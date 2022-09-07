@@ -5,7 +5,7 @@
   */
 
 terraform {
-  required_version = ">= 1.1.7"
+  required_version = ">= 1.2.6"
 
   required_providers {
     aws = {
@@ -26,7 +26,7 @@ terraform {
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.11.2"
+      version = "0.17.0"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"

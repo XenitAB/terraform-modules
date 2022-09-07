@@ -50,7 +50,7 @@
   */
 
 terraform {
-  required_version = ">= 1.1.7"
+  required_version = ">= 1.2.6"
 
   required_providers {
     kubernetes = {
@@ -63,7 +63,7 @@ terraform {
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "3.1.0"
+      version = "4.0.1"
     }
   }
 }
@@ -123,10 +123,9 @@ resource "tls_private_key" "linkerd_trust_anchor" {
 
 # More information regarding creating the trust anchor: https://linkerd.io/2.10/tasks/automatically-rotating-control-plane-tls-credentials/#cert-manager-as-an-on-cluster-ca
 resource "tls_self_signed_cert" "linkerd_trust_anchor" {
-  key_algorithm         = tls_private_key.linkerd_trust_anchor.algorithm
   private_key_pem       = tls_private_key.linkerd_trust_anchor.private_key_pem
   validity_period_hours = 87600
-  early_renewal_hours   = 78840
+  early_renewal_hours   = 8760
   is_ca_certificate     = true
 
   subject {
@@ -161,10 +160,9 @@ resource "tls_private_key" "webhook_issuer_tls" {
 
 # More information regarding the webhook issuer: https://linkerd.io/2.10/tasks/automatically-rotating-webhook-tls-credentials/#save-the-signing-key-pair-as-a-secret
 resource "tls_self_signed_cert" "webhook_issuer_tls" {
-  key_algorithm         = tls_private_key.webhook_issuer_tls.algorithm
   private_key_pem       = tls_private_key.webhook_issuer_tls.private_key_pem
   validity_period_hours = 87600
-  early_renewal_hours   = 78840
+  early_renewal_hours   = 8760
   is_ca_certificate     = true
 
   subject {
@@ -192,12 +190,13 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
 }
 
 # Install linkerd-cni helm chart
+#tf-latest-version:ignore
 resource "helm_release" "linkerd_cni" {
   repository  = "https://helm.linkerd.io/stable"
   chart       = "linkerd2-cni"
   name        = "linkerd-cni"
   namespace   = kubernetes_namespace.cni.metadata[0].name
-  version     = "2.11.3"
+  version     = "30.3.0"
   max_history = 3
 
   values = [
@@ -218,14 +217,15 @@ resource "helm_release" "linkerd_extras" {
   max_history = 3
 }
 
+#tf-latest-version:ignore
 resource "helm_release" "linkerd" {
   depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
 
-  repository  = "https://helm.linkerd.io/edge"
+  repository  = "https://helm.linkerd.io/stable"
   chart       = "linkerd-control-plane"
   name        = "linkerd"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "1.5.4-edge"
+  version     = "1.9.0"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values.yaml.tpl", {
@@ -236,6 +236,7 @@ resource "helm_release" "linkerd" {
 }
 
 # Install linkerd viz extension https://github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz
+#tf-latest-version:ignore
 resource "helm_release" "linkerd_viz" {
   depends_on = [helm_release.linkerd]
 
@@ -243,7 +244,7 @@ resource "helm_release" "linkerd_viz" {
   chart       = "linkerd-viz"
   name        = "linkerd-viz"
   namespace   = kubernetes_namespace.viz.metadata[0].name
-  version     = "2.11.3"
+  version     = "30.3.0"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values-viz.yaml.tpl", {}),

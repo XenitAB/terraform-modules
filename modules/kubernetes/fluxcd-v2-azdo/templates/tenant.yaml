@@ -24,7 +24,7 @@ subjects:
   name: flux
   namespace: ${name}
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta1
+apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
   name: ${name}

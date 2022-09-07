@@ -78,11 +78,12 @@ resource "azurerm_key_vault_access_policy" "ap_sub_aad_group_owner" {
     if rg.delegate_key_vault == true
   }
 
-  key_vault_id       = azurerm_key_vault.delegate_kv[each.key].id
-  tenant_id          = data.azurerm_client_config.current.tenant_id
-  object_id          = var.azuread_groups.sub_owner.id
-  key_permissions    = local.key_vault_default_permissions.key_permissions
-  secret_permissions = local.key_vault_default_permissions.secret_permissions
+  key_vault_id            = azurerm_key_vault.delegate_kv[each.key].id
+  tenant_id               = data.azurerm_client_config.current.tenant_id
+  object_id               = var.azuread_groups.sub_owner.id
+  key_permissions         = local.key_vault_default_permissions.key_permissions
+  secret_permissions      = local.key_vault_default_permissions.secret_permissions
+  certificate_permissions = local.key_vault_default_permissions.certificate_permissions
 }
 
 resource "azurerm_key_vault_access_policy" "ap_sub_aad_group_contributor" {

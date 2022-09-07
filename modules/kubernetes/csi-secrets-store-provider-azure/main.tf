@@ -5,7 +5,7 @@
   */
 
 terraform {
-  required_version = ">= 1.1.7"
+  required_version = ">= 1.2.6"
 
   required_providers {
     kubernetes = {
@@ -30,7 +30,7 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "csi_secrets_store_provider_azure" {
-  repository  = "https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts"
+  repository  = "https://azure.github.io/secrets-store-csi-driver-provider-azure/charts"
   version     = "1.0.1"
   chart       = "csi-secrets-store-provider-azure"
   name        = "csi-secrets-store-provider-azure"

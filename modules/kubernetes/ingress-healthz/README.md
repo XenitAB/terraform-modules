@@ -8,7 +8,7 @@ automatic DNS creation and certificate creation, without depending on the stabil
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.6 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.5.1 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.8.0 |
 
@@ -37,6 +37,7 @@ No modules.
 | <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | DNS Zone to create ingress sub domain under | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment ingress-healthz is deployed in | `string` | n/a | yes |
 | <a name="input_linkerd_enabled"></a> [linkerd\_enabled](#input\_linkerd\_enabled) | Should linkerd be enabled | `bool` | `false` | no |
+| <a name="input_location_short"></a> [location\_short](#input\_location\_short) | Region short name | `string` | `""` | no |
 
 ## Outputs
 

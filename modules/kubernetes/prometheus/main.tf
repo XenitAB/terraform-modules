@@ -6,7 +6,7 @@
   */
 
 terraform {
-  required_version = ">= 1.1.7"
+  required_version = ">= 1.2.6"
 
   required_providers {
     kubernetes = {
@@ -76,6 +76,7 @@ resource "helm_release" "prometheus_extras" {
 
     cluster_name = var.cluster_name
     environment  = var.environment
+    region       = var.region
     tenant_id    = var.tenant_id
 
     remote_write_authenticated = var.remote_write_authenticated

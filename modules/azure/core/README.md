@@ -6,7 +6,7 @@ This module is used to create core resources like virtual network for the subscr
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.6 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.19.1 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.8.0 |
 
@@ -31,6 +31,7 @@ No modules.
 | [azurerm_route.not_virtual_appliance](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/route) | resource |
 | [azurerm_route.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/route) | resource |
 | [azurerm_route_table.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/route_table) | resource |
+| [azurerm_storage_account.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/storage_account) | resource |
 | [azurerm_storage_account.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/storage_account) | resource |
 | [azurerm_subnet.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/subnet) | resource |
@@ -39,6 +40,7 @@ No modules.
 | [azurerm_virtual_network.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/virtual_network) | resource |
 | [azurerm_virtual_network_peering.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/resources/virtual_network_peering) | resource |
 | [azuread_group.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azuread/2.19.1/docs/data-sources/group) | data source |
+| [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.8.0/docs/data-sources/resource_group) | data source |
 
 ## Inputs
@@ -56,7 +58,7 @@ No modules.
 | <a name="input_route_config"></a> [route\_config](#input\_route\_config) | Route configuration. Not applied to AKS subnets | <pre>list(object({<br>    subnet_name = string # Short name for the subnet<br>    routes = list(object({<br>      name                   = string # Name of the route<br>      address_prefix         = string # Example: 192.168.0.0/24<br>      next_hop_type          = string # VirtualNetworkGateway, VnetLocal, Internet, VirtualAppliance and None<br>      next_hop_in_ip_address = string # Only set if next_hop_type is VirtualAppliance<br>    }))<br><br>  }))</pre> | `[]` | no |
 | <a name="input_subnet_private_endpoints"></a> [subnet\_private\_endpoints](#input\_subnet\_private\_endpoints) | Enable private enpoint for specific subnet names | `map(bool)` | `{}` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The subscription commonName to use for the deploy | `string` | n/a | yes |
-| <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
+| <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | n/a | yes |
 | <a name="input_vnet_config"></a> [vnet\_config](#input\_vnet\_config) | Address spaces used by virtual network | <pre>object({<br>    address_space = list(string)<br>    dns_servers   = list(string)<br>    subnets = list(object({<br>      name              = string<br>      cidr              = string<br>      service_endpoints = list(string)<br>      aks_subnet        = bool<br>    }))<br>  })</pre> | n/a | yes |
 
 ## Outputs

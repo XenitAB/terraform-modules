@@ -270,5 +270,5 @@ module "eks_ebs_csi_driver" {
   ]
   kubernetes_namespace         = "kube-system"
   kubernetes_service_account   = "ebs-csi-controller-sa"
-  extra_policy_permissions_arn = ["arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"]
+  policy_permissions_arn       = ["arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"]
 }

@@ -54,7 +54,7 @@ resource "aws_iam_role" "this" {
 
 resource "aws_iam_policy" "permissions" {
   for_each = {
-    for s in ["policy-attachment"] :
+    for s in ["policy-permission"] :
     s => s
     if var.policy_json != ""
   }
@@ -68,12 +68,12 @@ resource "aws_iam_role_policy_attachment" "permissions" {
     s => s
     if var.policy_json != ""
   }
-  policy_arn = aws_iam_policy.permissions[0].arn
+  policy_arn = aws_iam_policy.permissions["policy-permission"].arn
   role       = aws_iam_role.this.name
 }
 
-resource "aws_iam_role_policy_attachment" "extra_policy_permissions" {
-  for_each   = var.extra_policy_permissions_arn
+resource "aws_iam_role_policy_attachment" "policy_permissions" {
+  for_each   = var.policy_permissions_arn
   policy_arn = each.value
   role       = aws_iam_role.this.name
 }

@@ -14,8 +14,8 @@ module "eks" {
       arn = ""
     }
   ]
-  kubernetes_namespace         = "foo"
-  kubernetes_service_account   = "bar"
-  policy_json                  = "{\"foo\": \"bar\"}"
-  policy_permissions_arn = ["arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"]
+  kubernetes_namespace       = "foo"
+  kubernetes_service_account = "bar"
+  policy_json                = "{\"foo\": \"bar\"}"
+  policy_permissions_arn     = ["arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"]
 }

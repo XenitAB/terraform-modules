@@ -4,7 +4,7 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.6 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.9.0 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.19.1 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.28.1 |
 
 ## Providers
 

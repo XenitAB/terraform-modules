@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#784](https://github.com/XenitAB/terraform-modules/pull/784) Add support for kubernetes version 1.24.
+
 ## 2022.09.1
 
 ### Added

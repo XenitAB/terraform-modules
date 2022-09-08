@@ -8,3 +8,8 @@ output "kube_config" {
     cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].cluster_ca_certificate)
   }
 }
+
+output "kube_config_path" {
+  description = "Kube config path for the created AKS cluster"
+  value = local_file.kube_config.filename
+}

@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- [#785](https://github.com/XenitAB/terraform-modules/pull/785) [Breaking] Add support for kubernetes version 1.24 for AKS and login through a local file.
+- [#786](https://github.com/XenitAB/terraform-modules/pull/786) [Breaking] Add support for kubernetes version 1.24 for AKS and login through a local file.
 
 ### Changed
 

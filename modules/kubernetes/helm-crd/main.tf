@@ -44,4 +44,5 @@ resource "kubectl_manifest" "this" {
   server_side_apply = true
   apply_only        = true
   yaml_body         = each.value
+  force_conflicts = true
 }

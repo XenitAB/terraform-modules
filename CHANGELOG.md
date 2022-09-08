@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#785](https://github.com/XenitAB/terraform-modules/pull/785) [Breaking] Add support for kubernetes version 1.24 for AKS and login through a local file.
+
 ### Changed
 
 - [#783](https://github.com/XenitAB/terraform-modules/pull/783) Upgrade azurerm and azuread providers.

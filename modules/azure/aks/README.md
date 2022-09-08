@@ -24,6 +24,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.28.1 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.21.1 |
+| <a name="provider_local"></a> [local](#provider\_local) | n/a |
 
 ## Modules
 
@@ -46,6 +47,7 @@ No modules.
 | [azurerm_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azurerm/3.21.1/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/3.21.1/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/3.21.1/docs/resources/role_assignment) | resource |
+| [local_file.kube_config](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.21.1/docs/data-sources/client_config) | data source |
 | [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.21.1/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.21.1/docs/data-sources/resource_group) | data source |

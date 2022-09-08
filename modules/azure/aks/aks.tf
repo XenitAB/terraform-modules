@@ -71,6 +71,13 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 }
 
+# Should be changed to sensitive_file
+resource "local_file" "kube_config" {
+    description = "Contains the "
+    content     = "azurerm_kubernetes_cluster.this.kube_admin_config_raw"
+    filename    = "${path.module}/config"
+}
+
 resource "azurerm_kubernetes_cluster_node_pool" "this" {
   for_each = {
     for nodePool in var.aks_config.node_pools :

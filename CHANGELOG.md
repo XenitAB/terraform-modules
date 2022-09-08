@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#787](https://github.com/XenitAB/terraform-modules/pull/787) Add support for kubernetes 1.24 in Azure.
+
 ### Changed
 
 - [#783](https://github.com/XenitAB/terraform-modules/pull/783) Upgrade azurerm and azuread providers.

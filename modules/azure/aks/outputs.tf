@@ -9,7 +9,7 @@ locals {
 
 output "kube_config" {
   description = "Kube config for the created AKS cluster"
-  sensitive   = false
+  sensitive   = true
   value = {
     host                   = local.host
     cluster_ca_certificate = base64decode(local.auth_data)

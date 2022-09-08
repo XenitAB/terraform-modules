@@ -28,7 +28,7 @@ module "aks" {
   }
 
   aks_config = {
-    version          = "1.21.9"
+    version          = "1.24.3"
     production_grade = false
     default_node_pool = {
       node_labels = {
@@ -38,7 +38,7 @@ module "aks" {
     node_pools = [
       {
         name      = "pool1"
-        version   = "1.21.9"
+        version   = "1.24.3"
         vm_size   = "Standard_B2s"
         min_count = 1
         max_count = 1

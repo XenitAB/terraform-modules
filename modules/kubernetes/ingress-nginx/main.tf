@@ -97,6 +97,22 @@ resource "helm_release" "ingress_nginx_public" {
   })]
 }
 
+resource "kubernetes_namespace" "private" {
+  for_each = {
+    for s in ["ingress-nginx-private"] :
+    s => s
+    if var.public_private_enabled
+  }
+
+  metadata {
+    labels = {
+      name                = "ingress-nginx-private"
+      "xkf.xenit.io/kind" = "platform"
+    }
+    name = "ingress-nginx-private"
+  }
+}
+
 resource "helm_release" "ingress_nginx_private" {
   for_each = {
     for s in ["ingress-nginx-private"] :
@@ -107,7 +123,7 @@ resource "helm_release" "ingress_nginx_private" {
   repository  = "https://kubernetes.github.io/ingress-nginx"
   chart       = "ingress-nginx"
   name        = "ingress-nginx-private"
-  namespace   = kubernetes_namespace.this.metadata[0].name
+  namespace   = kubernetes_namespace.private.metadata[0].name
   version     = "4.2.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {

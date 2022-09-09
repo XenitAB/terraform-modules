@@ -96,4 +96,7 @@ module "aks" {
       name = "name"
     }
   }
+
+  log_eventhub_name= "eventhub1"
+  log_eventhub_authorization_rule_id = "12345"
 }

@@ -167,3 +167,13 @@ variable "aks_audit_log_retention" {
   type        = number
   default     = 180
 }
+
+variable "log_eventhub_name" {
+  description = "The eventhub name for k8s logs"
+  type        = string
+}
+
+variable "log_eventhub_authorization_rule_id" {
+  description = "The authoritzation rule id for event hub"
+  type        = string
+}

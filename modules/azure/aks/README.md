@@ -36,6 +36,7 @@ No modules.
 | [azuread_group_member.aks_managed_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/kubernetes_cluster) | resource |
 | [azurerm_kubernetes_cluster_node_pool.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/kubernetes_cluster_node_pool) | resource |
+| [azurerm_monitor_diagnostic_setting.log_eventhub_audit](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_monitor_diagnostic_setting.log_storage_account_audit](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/role_assignment) | resource |
@@ -69,6 +70,8 @@ No modules.
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The commonName for the core infrastructure | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name | `string` | n/a | yes |
+| <a name="input_log_eventhub_authorization_rule_id"></a> [log\_eventhub\_authorization\_rule\_id](#input\_log\_eventhub\_authorization\_rule\_id) | The authoritzation rule id for event hub | `string` | n/a | yes |
+| <a name="input_log_eventhub_name"></a> [log\_eventhub\_name](#input\_log\_eventhub\_name) | The eventhub name for k8s logs | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The commonName to use for the deploy | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes | <pre>list(<br>    object({<br>      name                    = string<br>      delegate_resource_group = bool<br>    })<br>  )</pre> | n/a | yes |
 | <a name="input_ssh_public_key"></a> [ssh\_public\_key](#input\_ssh\_public\_key) | SSH public key to add to servers | `string` | n/a | yes |

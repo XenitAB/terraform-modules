@@ -123,7 +123,7 @@ resource "helm_release" "ingress_nginx_private" {
   repository  = "https://kubernetes.github.io/ingress-nginx"
   chart       = "ingress-nginx"
   name        = "ingress-nginx-private"
-  namespace   = kubernetes_namespace.private.metadata[0].name
+  namespace   = kubernetes_namespace.private["ingress-nginx-private"].metadata[0].name
   version     = "4.2.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {

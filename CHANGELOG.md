@@ -13,7 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#783](https://github.com/XenitAB/terraform-modules/pull/783) Upgrade azurerm and azuread providers.
-- [#789](https://github.com/XenitAB/terraform-modules/pull/789) Image gallery support for Azure Pipelines module.
+- [#789](https://github.com/XenitAB/terraform-modules/pull/789) [Breaking] Image gallery support for Azure Pipelines module.
 
 ## 2022.09.1
 

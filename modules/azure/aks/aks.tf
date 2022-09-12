@@ -1,10 +1,10 @@
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
-  name                            = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  name                            = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix != null ? var.aks_name_suffix : ""}"
   location                        = data.azurerm_resource_group.this.location
   resource_group_name             = data.azurerm_resource_group.this.name
-  dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix != null ? var.aks_name_suffix : ""}"
   kubernetes_version              = var.aks_config.version
   sku_tier                        = var.aks_config.production_grade ? "Paid" : "Free"
   api_server_authorized_ip_ranges = var.aks_authorized_ips

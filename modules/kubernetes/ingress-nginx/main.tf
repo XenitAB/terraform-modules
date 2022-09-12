@@ -40,7 +40,7 @@ resource "helm_release" "ingress_nginx" {
   chart       = "ingress-nginx"
   name        = "ingress-nginx"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "4.2.0"
+  version     = "4.2.5"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet
@@ -74,7 +74,7 @@ resource "helm_release" "ingress_nginx_public" {
   chart       = "ingress-nginx"
   name        = "ingress-nginx-public"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "4.2.0"
+  version     = "4.2.5"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet
@@ -108,7 +108,7 @@ resource "helm_release" "ingress_nginx_private" {
   chart       = "ingress-nginx"
   name        = "ingress-nginx-private"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "4.2.0"
+  version     = "4.2.5"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     http_snippet           = var.http_snippet

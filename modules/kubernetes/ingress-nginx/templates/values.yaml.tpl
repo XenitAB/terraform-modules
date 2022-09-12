@@ -21,6 +21,7 @@ controller:
 
   %{~ if public_private_enabled ~}
   electionID: ingress-controller-leader-${ingress_class}
+  ingressClassByName: true
   %{~ endif ~}
 
   %{~ if provider == "aws" ~}

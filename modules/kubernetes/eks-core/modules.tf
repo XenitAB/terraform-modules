@@ -9,7 +9,6 @@ locals {
     "flux-system",
     "gatekeeper-system",
     "ingress-nginx",
-    "ingress-nginx-private",
     "kube-system",
     "prometheus",
     "reloader",

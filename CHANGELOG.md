@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - [#788](https://github.com/XenitAB/terraform-modules/pull/788) Stop role assignment recreation on AKS cluster update.
+- [#793](https://github.com/XenitAB/terraform-modules/pull/793) Downgrade AWS calico to 3.19 and upgrade ingress-nginx config and version.
 
 ## 2022.09.1
 

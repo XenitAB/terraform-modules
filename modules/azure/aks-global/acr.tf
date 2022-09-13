@@ -2,7 +2,7 @@
 
 # Create Azure Container Registry
 resource "azurerm_container_registry" "acr" {
-  name                = "acr${var.environment}${var.location_short}${var.name}${var.unique_suffix}"
+  name                = join("-", compact(["acr${var.environment}${var.location_short}${var.name}", var.disable_unique_suffix ? "" : var.unique_suffix]))
   resource_group_name = resource.azurerm_resource_group.this.name
   location            = resource.azurerm_resource_group.this.location
   sku                 = "Basic"

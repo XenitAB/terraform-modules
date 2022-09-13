@@ -79,6 +79,7 @@ module "eks_core" {
     public_private_enabled    = false
     allow_snippet_annotations = false
     extra_config              = {}
+    extra_headers             = {}
   }
 
   starboard_enabled = true

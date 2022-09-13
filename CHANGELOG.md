@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - [#787](https://github.com/XenitAB/terraform-modules/pull/787) Add support for kubernetes 1.24 in Azure.
+- [#797](https://github.com/XenitAB/terraform-modules/pull/797) [Breaking] Add option to configure extra headers in Ingress NGINX.
 
 ### Changed
 

@@ -7,7 +7,7 @@ resource "azurerm_eventhub_namespace" "this" {
   name                = "log-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
   location            = data.azurerm_resource_group.log.location
   resource_group_name = data.azurerm_resource_group.log.name
-  sku                 = "Basic"
+  sku                 = "Standard"
   capacity            = 1
 }
 

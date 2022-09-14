@@ -505,3 +505,9 @@ variable "node_ttl_enabled" {
   type        = bool
   default     = false
 }
+
+variable "cilium_enabled" {
+  description = "Should Cilium be enabled"
+  type        = bool
+  default     = false
+}

@@ -24,6 +24,17 @@ locals {
   ]
 }
 
+module "cilium" {
+  for_each = {
+    for s in ["linkerd"] :
+    s => s
+    if var.linkerd_enabled
+  }
+
+  source = "../../kubernetes/cilium"
+}
+
+
 # OPA Gatekeeper
 module "opa_gatekeeper_crd" {
   source = "../../kubernetes/helm-crd"
@@ -34,7 +45,7 @@ module "opa_gatekeeper_crd" {
 }
 
 module "opa_gatekeeper" {
-  depends_on = [module.opa_gatekeeper_crd]
+  depends_on = [module.opa_gatekeeper_crd, module.cilium]
 
   for_each = {
     for s in ["opa-gatekeeper"] :

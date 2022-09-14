@@ -141,7 +141,7 @@ resource "kubernetes_role_binding" "sa_helm_release" {
 }
 
 resource "kubernetes_role_binding" "sa_custom_resource" {
-  for_each   = { for ns in var.namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "sa-${each.value.name}-custom-resource"

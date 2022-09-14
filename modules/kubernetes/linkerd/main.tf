@@ -129,15 +129,15 @@ resource "tls_self_signed_cert" "linkerd_trust_anchor" {
   is_ca_certificate     = true
 
   subject {
-    common_name = "root.linkerd.cluster.local"
-    country = ""
-    locality = ""
-    organization = ""
+    common_name         = "root.linkerd.cluster.local"
+    country             = ""
+    locality            = ""
+    organization        = ""
     organizational_unit = ""
-    postal_code = ""
-    province = ""
-    serial_number = ""
-    street_address = []
+    postal_code         = ""
+    province            = ""
+    serial_number       = ""
+    street_address      = []
   }
 
   allowed_uses = [
@@ -174,15 +174,15 @@ resource "tls_self_signed_cert" "webhook_issuer_tls" {
   is_ca_certificate     = true
 
   subject {
-    common_name = "webhook.linkerd.cluster.local"
-    country = ""
-    locality = ""
-    organization = ""
+    common_name         = "webhook.linkerd.cluster.local"
+    country             = ""
+    locality            = ""
+    organization        = ""
     organizational_unit = ""
-    postal_code = ""
-    province = ""
-    serial_number = ""
-    street_address = []
+    postal_code         = ""
+    province            = ""
+    serial_number       = ""
+    street_address      = []
   }
 
   allowed_uses = [

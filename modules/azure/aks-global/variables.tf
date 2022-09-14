@@ -69,6 +69,6 @@ variable "azad_kube_proxy_config" {
 }
 
 variable "disable_unique_suffix" {
-  type = bool
+  type    = bool
   default = false
 }

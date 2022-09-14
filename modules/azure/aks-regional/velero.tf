@@ -1,6 +1,6 @@
 #tfsec:ignore:azure-storage-queue-services-logging-enabled
 resource "azurerm_storage_account" "velero" {
-  name                = join("-", compact(["strg${var.environment}${var.location_short}${var.name}velero", var.disable_unique_suffix ? "" : var.unique_suffix]))
+  name                            = join("-", compact(["strg${var.environment}${var.location_short}${var.name}velero", var.disable_unique_suffix ? "" : var.unique_suffix]))
   resource_group_name             = data.azurerm_resource_group.this.name
   location                        = data.azurerm_resource_group.this.location
   account_tier                    = "Standard"

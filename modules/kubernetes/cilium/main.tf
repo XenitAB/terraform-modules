@@ -29,7 +29,7 @@ resource "helm_release" "this" {
   repository  = "https://helm.cilium.io/"
   chart       = "cilium"
   name        = "cilium"
-  namespace   = kubernetes_namespace.cni.metadata[0].name
+  namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "1.12.1"
   max_history = 3
 

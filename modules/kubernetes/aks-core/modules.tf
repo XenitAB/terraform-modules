@@ -26,9 +26,9 @@ locals {
 
 module "cilium" {
   for_each = {
-    for s in ["linkerd"] :
+    for s in ["cilium"] :
     s => s
-    if var.linkerd_enabled
+    if var.cilium_enabled
   }
 
   source = "../../kubernetes/cilium"
@@ -37,6 +37,8 @@ module "cilium" {
 
 # OPA Gatekeeper
 module "opa_gatekeeper_crd" {
+  depends_on = [module.cilium]
+
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://open-policy-agent.github.io/gatekeeper/charts"
@@ -45,13 +47,13 @@ module "opa_gatekeeper_crd" {
 }
 
 module "opa_gatekeeper" {
-  depends_on = [module.opa_gatekeeper_crd, module.cilium]
+  depends_on = [module.opa_gatekeeper_crd]
 
   for_each = {
     for s in ["opa-gatekeeper"] :
     s => s
     if var.opa_gatekeeper_enabled
-  }
+  }helm
 
   source = "../../kubernetes/opa-gatekeeper"
 

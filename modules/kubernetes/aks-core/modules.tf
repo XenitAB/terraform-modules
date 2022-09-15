@@ -37,7 +37,6 @@ module "cilium" {
 
 # OPA Gatekeeper
 module "opa_gatekeeper_crd" {
-  depends_on = [module.cilium]
   source     = "../../kubernetes/helm-crd"
 
   chart_repository = "https://open-policy-agent.github.io/gatekeeper/charts"
@@ -46,7 +45,7 @@ module "opa_gatekeeper_crd" {
 }
 
 module "opa_gatekeeper" {
-  depends_on = [module.opa_gatekeeper_crd]
+  depends_on = [module.opa_gatekeeper_crd, module.cilium]
 
   for_each = {
     for s in ["opa-gatekeeper"] :

@@ -215,12 +215,14 @@ variable "ingress_config" {
     public_private_enabled    = bool
     allow_snippet_annotations = bool
     extra_config              = map(string)
+    extra_headers             = map(string)
   })
   default = {
     http_snippet              = ""
     public_private_enabled    = false
     allow_snippet_annotations = false
     extra_config              = {}
+    extra_headers             = {}
   }
 }
 

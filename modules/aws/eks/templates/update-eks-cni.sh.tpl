@@ -7,4 +7,3 @@ kubectl config set contexts.cluster-admin.cluster cluster-admin && \
 kubectl config set contexts.cluster-admin.user cluster-admin && \
 kubectl config set contexts.cluster-admin.namespace kube-system && \
 kubectl --context=cluster-admin delete ds aws-node -n kube-system --ignore-not-found=true
-kubectl --context=cluster-admin apply -f https://docs.projectcalico.org/archive/${calico_version}/manifests/calico-vxlan.yaml

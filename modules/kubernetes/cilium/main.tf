@@ -13,23 +13,11 @@ terraform {
   }
 }
 
-# Create namespaces
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = "cilium"
-      "xkf.xenit.io/kind" = "platform"
-      "control-plane"     = "true"
-    }
-    name = "cilium"
-  }
-}
-
 resource "helm_release" "this" {
   repository  = "https://helm.cilium.io/"
   chart       = "cilium"
   name        = "cilium"
-  namespace   = kubernetes_namespace.this.metadata[0].name
+  namespace   = "kube-system"
   version     = "1.12.1"
   max_history = 3
 

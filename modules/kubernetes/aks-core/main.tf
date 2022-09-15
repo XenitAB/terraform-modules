@@ -43,11 +43,6 @@ terraform {
   }
 }
 
-locals {
-  # Namespace to create service accounts in
-  service_accounts_namespace = "service-accounts"
-}
-
 data "azurerm_client_config" "current" {}
 
 data "azurerm_resource_group" "this" {

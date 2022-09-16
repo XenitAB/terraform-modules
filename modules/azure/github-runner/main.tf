@@ -66,11 +66,6 @@ data "azurerm_key_vault_secret" "github_secrets" {
   key_vault_id = data.azurerm_key_vault.this.id
 }
 
-data "azurerm_image" "this" {
-  name                = var.github_runner_image_name
-  resource_group_name = local.github_runner_image_resource_group_name
-}
-
 resource "azurerm_linux_virtual_machine_scale_set" "this" {
   name                            = "vmss-${var.environment}-${var.location_short}-${var.name}"
   resource_group_name             = data.azurerm_resource_group.this.name
@@ -88,7 +83,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "this" {
     public_key = tls_private_key.this.public_key_openssh
   }
 
-  source_image_id = data.azurerm_image.this.id
+  source_image_id = var.source_image_id
 
   os_disk {
     caching              = "ReadOnly"

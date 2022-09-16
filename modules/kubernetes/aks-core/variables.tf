@@ -523,4 +523,12 @@ variable "control_plane_config" {
       tenant_id   = string
     })
   })
+  default = {
+    azure_key_vault_name = ""
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
+  }
 }

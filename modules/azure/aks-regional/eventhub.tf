@@ -28,3 +28,25 @@ resource "azurerm_eventhub" "this" {
   partition_count     = 2
   message_retention   = 1
 }
+
+## TODO, it shoulden't be a root account.
+#tfsec:ignore:AZU023
+resource "azurerm_key_vault_secret" "eventhub_connection_string" {
+  name = "eventhub-connectionstring-${var.environment}-${var.location_short}"
+  value = azurerm_eventhub_namespace.this.default_primary_connection_string
+  key_vault_id = data.azurerm_key_vault.core.id
+}
+
+#tfsec:ignore:AZU023
+resource "azurerm_key_vault_secret" "eventhub_topic" {
+  name = "eventhub-topic-${var.environment}-${var.location_short}"
+  value = azurerm_eventhub.this.name
+  key_vault_id = data.azurerm_key_vault.core.id
+}
+
+#tfsec:ignore:AZU023
+resource "azurerm_key_vault_secret" "eventhub_topic" {
+  name = "eventhub-topic-${var.environment}-${var.location_short}"
+  value = "${azurerm_eventhub.this.name}.servicebus.windows.net:9093"
+  key_vault_id = data.azurerm_key_vault.core.id
+}

@@ -31,8 +31,6 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "helm_release" "vector" {
-  depends_on = [helm_release.prometheus]
-
   chart       = "${path.module}/charts/vector"
   name        = "vector"
   namespace   = kubernetes_namespace.this.metadata[0].name
@@ -40,6 +38,5 @@ resource "helm_release" "vector" {
   values = [templatefile("${path.module}/templates/values-extras.yaml.tpl", {
     cloud_provider = var.cloud_provider
     azure_config   = var.azure_config
-    tenant_id      = var.tenant_id
   })]
 }

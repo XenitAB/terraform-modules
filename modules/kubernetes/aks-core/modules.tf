@@ -548,11 +548,11 @@ module "prometheus" {
   promtail_enabled                         = var.promtail_enabled
 }
 
-module "control-plane" {
+module "control_plane" {
   depends_on = [module.opa_gatekeeper]
 
   for_each = {
-    for s in ["prometheus"] :
+    for s in ["control_plane"] :
     s => s
     if var.control_plane_enabled
   }

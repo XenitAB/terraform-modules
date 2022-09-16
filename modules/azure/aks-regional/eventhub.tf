@@ -47,6 +47,6 @@ resource "azurerm_key_vault_secret" "eventhub_topic" {
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "eventhub_hostname" {
   name = "eventhub-hostname-${var.environment}-${var.location_short}"
-  value = "${azurerm_eventhub.this.name}.servicebus.windows.net:9093"
+  value = "${azurerm_eventhub_namespace.this.name}.servicebus.windows.net:9093"
   key_vault_id = data.azurerm_key_vault.core.id
 }

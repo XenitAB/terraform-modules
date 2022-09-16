@@ -42,3 +42,9 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+resources:
+  {}
+  # requests:
+  #   cpu: 15m
+  #   memory: 25Mi

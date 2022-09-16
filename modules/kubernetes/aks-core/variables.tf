@@ -505,3 +505,22 @@ variable "node_ttl_enabled" {
   type        = bool
   default     = false
 }
+
+
+variable "control_plane_enabled" {
+  description = "Should Control plan be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "control_plane_config" {
+  description = "Configuration for control plane log"
+  type = object({
+    azure_key_vault_name = string
+    identity = object({
+      client_id   = string
+      resource_id = string
+      tenant_id   = string
+    })
+  })
+}

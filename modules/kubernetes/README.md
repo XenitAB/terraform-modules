@@ -32,6 +32,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`node-local-dns`](node-local-dns/README.md)
 - [`node-ttl`](node-ttl/README.md)
 - [`promtail`](promtail/README.md)
+- [`control-plane-logs`](control-plane-logs/README.md)
 - [`helm-crd`](helm-crd/README.md)
 - [`helm-crd-oci`](helm-crd-oci/README.md)
 

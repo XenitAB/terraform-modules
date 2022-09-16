@@ -1,0 +1,11 @@
+cloudProvider: ""
+secretName: "vector"
+
+azureConfig:
+  resourceID: ""
+  clientID: ""
+  tenantID: ""
+  keyVaultName: ""
+  hostnameKeyVaultSecretName: ""
+  topicKeyVaultSecretName: ""
+  connectionStringKeyVaultSecretName: ""

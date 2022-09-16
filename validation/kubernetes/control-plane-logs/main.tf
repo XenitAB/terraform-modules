@@ -12,5 +12,5 @@ module "control-plane-logs" {
     helm       = helm
   }
 
-  cloud_provider   = "azure"
+  cloud_provider = "azure"
 }

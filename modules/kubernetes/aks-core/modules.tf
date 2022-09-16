@@ -561,7 +561,7 @@ module "control-plane" {
 
   cloud_provider = "azure"
   azure_config = {
-    azure_key_vault_name = var.pcontrol_plane_config.azure_key_vault_name
+    azure_key_vault_name = var.control_plane_config.azure_key_vault_name
     identity = {
       client_id   = var.control_plane_config.identity.client_id
       resource_id = var.control_plane_config.identity.resource_id

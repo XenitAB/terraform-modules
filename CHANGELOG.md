@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#787](https://github.com/XenitAB/terraform-modules/pull/787) Add support for kubernetes 1.24 in Azure.
 - [#797](https://github.com/XenitAB/terraform-modules/pull/797) [Breaking] Add option to configure extra headers in Ingress NGINX.
 - [#796](https://github.com/XenitAB/terraform-modules/pull/796) Add custom resource edit rights to tenant service account.
+- [#791](https://github.com/XenitAB/terraform-modules/pull/791) Add control-plane output solution for Azure.
 
 ### Changed
 

@@ -77,29 +77,6 @@ module "opa_gatekeeper" {
   cloud_provider         = "azure"
 }
 
-# FluxCD v1
-module "fluxcd_v1_azure_devops" {
-  depends_on = [kubernetes_namespace.tenant, module.opa_gatekeeper]
-
-  for_each = {
-    for s in ["fluxcd-v1"] :
-    s => s
-    if var.fluxcd_v1_enabled
-  }
-
-  source = "../../kubernetes/fluxcd-v1"
-
-  azure_devops_pat    = var.fluxcd_v1_config.azure_devops.pat
-  azure_devops_org    = var.fluxcd_v1_config.azure_devops.org
-  flux_status_enabled = var.fluxcd_v1_config.flux_status_enabled
-  branch              = var.fluxcd_v1_config.branch
-  environment         = var.environment
-  namespaces = [for ns in var.namespaces : {
-    name = ns.name
-    flux = ns.flux
-  }]
-}
-
 # FluxCD v2
 module "fluxcd_v2_azure_devops" {
   for_each = {

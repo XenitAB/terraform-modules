@@ -12,7 +12,6 @@ This directory contains all the Kubernetes Terraform modules.
 - [`csi-secrets-store-provider-azure`](csi-secrets-store-provider-azure/README.md)
 - [`csi-secrets-store-provider-aws`](csi-secrets-store-provider-aws/README.md)
 - [`external-dns`](external-dns/README.md)
-- [`fluxcd-v1`](fluxcd-v1/README.md)
 - [`fluxcd-v2-azdo`](fluxcd-v2-azdo/README.md)
 - [`fluxcd-v2-github`](fluxcd-v2-github/README.md)
 - [`ingress-nginx`](ingress-nginx/README.md)
@@ -34,6 +33,10 @@ This directory contains all the Kubernetes Terraform modules.
 - [`promtail`](promtail/README.md)
 - [`helm-crd`](helm-crd/README.md)
 - [`helm-crd-oci`](helm-crd-oci/README.md)
+
+## Deprecated
+
+- [`fluxcd-v1`](fluxcd-v1/README.md)
 
 ## Style Guide
 

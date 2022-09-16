@@ -93,34 +93,6 @@ variable "kubernetes_default_limit_range" {
   }
 }
 
-variable "fluxcd_v1_enabled" {
-  description = "Should fluxcd-v1 be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "fluxcd_v1_config" {
-  description = "Configuration for fluxcd-v1"
-  type = object({
-    flux_status_enabled = bool
-    branch              = string
-    azure_devops = object({
-      pat  = string
-      org  = string
-      proj = string
-    })
-  })
-  default = {
-    flux_status_enabled = false
-    branch              = "main"
-    azure_devops = {
-      pat  = ""
-      org  = ""
-      proj = ""
-    }
-  }
-}
-
 variable "fluxcd_v2_enabled" {
   description = "Should fluxcd-v2 be enabled"
   type        = bool

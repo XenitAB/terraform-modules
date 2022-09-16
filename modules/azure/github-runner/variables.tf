@@ -31,15 +31,9 @@ variable "keyvault_resource_group_name" {
   default     = ""
 }
 
-variable "github_runner_image_name" {
-  description = "The Azure Pipelines agent image name"
+variable "source_image_id" {
+  description = "The Azure Pipelines agent image id"
   type        = string
-}
-
-variable "github_runner_image_resource_group_name" {
-  description = "The Azure Pipelines agent image resource group name"
-  type        = string
-  default     = ""
 }
 
 variable "vmss_admin_username" {

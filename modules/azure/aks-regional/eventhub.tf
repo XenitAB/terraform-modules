@@ -35,6 +35,7 @@ resource "azurerm_key_vault_secret" "eventhub_connection_string" {
   name         = "eventhub-connectionstring"
   value        = azurerm_eventhub_namespace.this.default_primary_connection_string
   key_vault_id = data.azurerm_key_vault.core.id
+  content_type = "string"
 }
 
 #tfsec:ignore:AZU023
@@ -42,6 +43,7 @@ resource "azurerm_key_vault_secret" "eventhub_topic" {
   name         = "eventhub-topic"
   value        = azurerm_eventhub.this.name
   key_vault_id = data.azurerm_key_vault.core.id
+  content_type = "string"
 }
 
 #tfsec:ignore:AZU023
@@ -49,4 +51,5 @@ resource "azurerm_key_vault_secret" "eventhub_hostname" {
   name         = "eventhub-hostname"
   value        = "${azurerm_eventhub_namespace.this.name}.servicebus.windows.net:9093"
   key_vault_id = data.azurerm_key_vault.core.id
+  content_type = "string"
 }

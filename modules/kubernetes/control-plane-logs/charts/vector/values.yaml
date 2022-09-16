@@ -1,5 +1,5 @@
 cloudProvider: ""
-secretName: "vector"
+secretName: "msg-queue"
 
 azureConfig:
   resourceID: ""

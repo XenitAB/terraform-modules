@@ -39,17 +39,17 @@ spec:
             - name: HOST
               valueFrom:
                 secretKeyRef:
-                  name: eventhub
+                  name: "{{ .Values.secretName }}"
                   key: hostname
             - name: TOPIC
               valueFrom:
                 secretKeyRef:
-                  name: eventhub
+                  name: "{{ .Values.secretName }}"
                   key: topic
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: eventhub
+                  name: "{{ .Values.secretName }}"
                   key: connectionstring
           volumeMounts:
             - name: secret
@@ -81,4 +81,4 @@ spec:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: eventhub
+              secretProviderClass: vector

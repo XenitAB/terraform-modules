@@ -21,6 +21,16 @@ resource "azurerm_eventhub_namespace_authorization_rule" "aks" {
   manage = false
 }
 
+resource "azurerm_eventhub_namespace_authorization_rule" "listen" {
+  name                = "listen-${var.environment}-${var.location_short}-${var.name}"
+  namespace_name      = azurerm_eventhub_namespace.this.name
+  resource_group_name = azurerm_eventhub_namespace.this.resource_group_name
+
+  listen = true
+  send   = false
+  manage = false
+}
+
 resource "azurerm_eventhub" "this" {
   name                = "audit-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
   namespace_name      = azurerm_eventhub_namespace.this.name
@@ -29,16 +39,7 @@ resource "azurerm_eventhub" "this" {
   message_retention   = 1
 }
 
-resource "azurerm_eventhub_namespace_authorization_rule" "listen" {
-  name                = "listen-${var.environment}-${var.location_short}-${var.name}"
-  namespace_name      = azurerm_eventhub.this.name
-  resource_group_name = azurerm_eventhub.this.resource_group_name
-
-  listen = true
-  send   = false
-  manage = false
-}
-
+## TODO, it shoulden't be a root account.
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "eventhub_connection_string" {
   name         = "eventhub-connectionstring"

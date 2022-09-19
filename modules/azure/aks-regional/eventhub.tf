@@ -39,7 +39,6 @@ resource "azurerm_eventhub" "this" {
   message_retention   = 1
 }
 
-## TODO, it shoulden't be a root account.
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "eventhub_connection_string" {
   name         = "eventhub-connectionstring"

@@ -1,7 +1,7 @@
 resource "azurerm_role_assignment" "view" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
-  role_definition_name = "Azure Kubernetes Service View Role"
+  role_definition_name = "Azure Kubernetes Service Cluster User Role"
   scope                = azurerm_kubernetes_cluster.this.id
   principal_id         = var.aad_groups.view[each.key].id
 }
@@ -9,7 +9,7 @@ resource "azurerm_role_assignment" "view" {
 resource "azurerm_role_assignment" "edit" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
-  role_definition_name = "Azure Kubernetes Service Edit Role"
+  role_definition_name = "Azure Kubernetes Service Cluster User Role"
   scope                = azurerm_kubernetes_cluster.this.id
   principal_id         = var.aad_groups.edit[each.key].id
 }

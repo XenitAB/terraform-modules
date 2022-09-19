@@ -28,6 +28,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#800](https://github.com/XenitAB/terraform-modules/pull/800) Deprecate FLuxcd v1 module.
 
+### Removed
+
+- [#806](https://github.com/XenitAB/terraform-modules/pull/806) [Breaking] Remove creation of service accounts for tenant namespaces.
+
 ## 2022.09.1
 
 ### Added

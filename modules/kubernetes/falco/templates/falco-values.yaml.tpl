@@ -33,8 +33,6 @@ customRules:
   rules_user_known_k8s_api_callers.yaml: |-
     - macro: user_known_contact_k8s_api_server_activities
       condition: >
-        (container.image.repository = "docker.io/fluxcd/helm-operator") or
-        (container.image.repository = "docker.io/fluxcd/flux") or
         (container.image.repository = "ghcr.io/fluxcd/kustomize-controller") or
         (container.image.repository = "ghcr.io/fluxcd/helm-controller") or
         (container.image.repository = "ghcr.io/fluxcd/notification-controller") or
@@ -72,8 +70,6 @@ customRules:
   rules_user_known_k8s_client_container.yaml: |-
     - macro: user_known_k8s_client_container_parens
       condition: >
-        (container.image.repository = "docker.io/fluxcd/helm-operator") or
-        (container.image.repository = "docker.io/fluxcd/flux") or
         (container.image.repository = "ghcr.io/fluxcd/kustomize-controller") or
         (container.image.repository = "mcr.microsoft.com/aks/hcp/hcp-tunnel-front")
 

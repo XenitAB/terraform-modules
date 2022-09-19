@@ -30,11 +30,7 @@ This module is used to create resources that are used by AKS clusters.
 
 | Name | Type |
 |------|------|
-| [azuread_application.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/application) | resource |
-| [azuread_application_password.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/application_password) | resource |
 | [azuread_group_member.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
-| [azuread_group_member.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
-| [azuread_service_principal.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/service_principal) | resource |
 | [azurerm_key_vault_access_policy.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_public_ip_prefix.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/public_ip_prefix) | resource |
@@ -57,7 +53,6 @@ This module is used to create resources that are used by AKS clusters.
 | [azurerm_user_assigned_identity.velero](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/user_assigned_identity) | resource |
 | [tls_private_key.ssh_key](https://registry.terraform.io/providers/hashicorp/tls/4.0.1/docs/resources/private_key) | resource |
-| [azuread_group.acr_pull](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
 | [azuread_group.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/data-sources/client_config) | data source |
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/data-sources/container_registry) | data source |
@@ -71,7 +66,6 @@ This module is used to create resources that are used by AKS clusters.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aks_authorized_ips"></a> [aks\_authorized\_ips](#input\_aks\_authorized\_ips) | Authorized IPs to access AKS API | `list(string)` | n/a | yes |
-| <a name="input_aks_group_name_prefix"></a> [aks\_group\_name\_prefix](#input\_aks\_group\_name\_prefix) | Prefix for AKS Azure AD groups | `string` | `"aks"` | no |
 | <a name="input_aks_managed_identity"></a> [aks\_managed\_identity](#input\_aks\_managed\_identity) | AKS Azure AD managed identity | `string` | n/a | yes |
 | <a name="input_azad_kube_proxy_config"></a> [azad\_kube\_proxy\_config](#input\_azad\_kube\_proxy\_config) | Azure AD Kubernetes Proxy configuration | <pre>object({<br>    cluster_name_prefix = string<br>    proxy_url_override  = string<br>  })</pre> | <pre>{<br>  "cluster_name_prefix": "aks",<br>  "proxy_url_override": ""<br>}</pre> | no |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
@@ -85,7 +79,6 @@ This module is used to create resources that are used by AKS clusters.
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes | <pre>list(<br>    object({<br>      name                    = string<br>      delegate_resource_group = bool<br>    })<br>  )</pre> | n/a | yes |
 | <a name="input_public_ip_prefix_configuration"></a> [public\_ip\_prefix\_configuration](#input\_public\_ip\_prefix\_configuration) | Configuration for public IP prefix | <pre>object({<br>    count         = number<br>    prefix_length = number<br>  })</pre> | <pre>{<br>  "count": 2,<br>  "prefix_length": 30<br>}</pre> | no |
 | <a name="input_public_ip_prefix_name_override"></a> [public\_ip\_prefix\_name\_override](#input\_public\_ip\_prefix\_name\_override) | Override the default public ip prefix name - the last digit | `string` | `""` | no |
-| <a name="input_service_principal_name_prefix"></a> [service\_principal\_name\_prefix](#input\_service\_principal\_name\_prefix) | Prefix for service principals | `string` | `"sp"` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
 
@@ -101,7 +94,6 @@ This module is used to create resources that are used by AKS clusters.
 | <a name="output_azure_metrics_identity"></a> [azure\_metrics\_identity](#output\_azure\_metrics\_identity) | MSI authentication identity for Azure Metrics |
 | <a name="output_dns_zone"></a> [dns\_zone](#output\_dns\_zone) | DNS Zone to be used with external-dns |
 | <a name="output_external_dns_identity"></a> [external\_dns\_identity](#output\_external\_dns\_identity) | MSI authentication identity for External DNS |
-| <a name="output_helm_operator_credentials"></a> [helm\_operator\_credentials](#output\_helm\_operator\_credentials) | Credentials meant to be used by Helm Operator |
 | <a name="output_namespaces"></a> [namespaces](#output\_namespaces) | Kubernetes namespaces |
 | <a name="output_ssh_public_key"></a> [ssh\_public\_key](#output\_ssh\_public\_key) | SSH public key to add to servers |
 | <a name="output_trivy_identity"></a> [trivy\_identity](#output\_trivy\_identity) | MSI authentication identity for Trivy image scaning |

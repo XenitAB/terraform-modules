@@ -79,18 +79,6 @@ variable "azure_ad_group_prefix" {
   default     = "az"
 }
 
-variable "service_principal_name_prefix" {
-  description = "Prefix for service principals"
-  type        = string
-  default     = "sp"
-}
-
-variable "aks_group_name_prefix" {
-  description = "Prefix for AKS Azure AD groups"
-  type        = string
-  default     = "aks"
-}
-
 variable "azad_kube_proxy_config" {
   description = "Azure AD Kubernetes Proxy configuration"
   type = object({

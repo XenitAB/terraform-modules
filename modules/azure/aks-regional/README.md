@@ -37,7 +37,8 @@ This module is used to create resources that are used by AKS clusters.
 | [azuread_service_principal.helm_operator](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/service_principal) | resource |
 | [azurerm_eventhub.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/eventhub) | resource |
 | [azurerm_eventhub_namespace.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/eventhub_namespace) | resource |
-| [azurerm_eventhub_namespace_authorization_rule.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/eventhub_namespace_authorization_rule) | resource |
+| [azurerm_eventhub_namespace_authorization_rule.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/eventhub_namespace_authorization_rule) | resource |
+| [azurerm_eventhub_namespace_authorization_rule.listen](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/eventhub_namespace_authorization_rule) | resource |
 | [azurerm_key_vault_access_policy.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_secret.eventhub_connection_string](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.eventhub_hostname](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_secret) | resource |

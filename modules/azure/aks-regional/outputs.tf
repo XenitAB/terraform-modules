@@ -110,5 +110,5 @@ output "log_eventhub_name" {
 
 output "log_eventhub_authorization_rule_id" {
   description = "The authoritzation rule id for event hub"
-  value       = azurerm_eventhub_namespace_authorization_rule.this.id
+  value       = azurerm_eventhub_namespace_authorization_rule.aks.id
 }

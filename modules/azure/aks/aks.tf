@@ -1,3 +1,9 @@
+data "azurerm_subnet" "this" {
+  name                 = "sn-${var.environment}-${var.location_short}-${var.core_name}-${var.name}${var.aks_name_suffix}"
+  virtual_network_name = "vnet-${var.environment}-${var.location_short}-${var.core_name}"
+  resource_group_name  = "rg-${var.environment}-${var.location_short}-${var.core_name}"
+}
+
 data "azurerm_resource_group" "log" {
   name = "rg-${var.environment}-${var.location_short}-log"
 }
@@ -230,181 +236,26 @@ resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
   }
 }
 
-resource "azurerm_monitor_diagnostic_setting" "log_eventhub_audit" {
-  name                           = "eventhub-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}-audit"
-  target_resource_id             = azurerm_kubernetes_cluster.this.id
-  eventhub_name                  = var.log_eventhub_name
-  eventhub_authorization_rule_id = var.log_eventhub_authorization_rule_id
+# This is a work around to stop any update of the AKS cluster to force a recreation of the role assignments.
+# The reason this works is a bit tricky, but it gets Terraform to not reload the resource group data source.
+# https://github.com/hashicorp/terraform-provider-azurerm/issues/15557#issuecomment-1050654295
 
-  log {
-    category = "kube-scheduler"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "kube-controller-manager"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "cloud-controller-manager"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "csi-azurefile-controller"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "csi-snapshot-controller"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "csi-azuredisk-controller"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "guard"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "cluster-autoscaler"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "kube-audit"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "kube-audit-admin"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 1
-    }
-  }
-
-  log {
-    category = "kube-apiserver"
-    enabled  = false
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  metric {
-    category = "AllMetrics"
-    enabled  = false
-
-    retention_policy {
-      days    = 0
-      enabled = false
-    }
-  }
+locals {
+  node_resource_group = azurerm_kubernetes_cluster.this.node_resource_group
 }
 
-# Replace this with a datasource when availible in the AzureRM provider.
-locals {
-  vm_skus_disk_size_gb = {
-    "Standard_D2ds_v5"  = 75
-    "Standard_D4ds_v5"  = 150
-    "Standard_D8ds_v5"  = 300
-    "Standard_D16ds_v5" = 600
-    "Standard_D32ds_v5" = 1200
-    "Standard_D48ds_v5" = 1800
-    "Standard_D64ds_v5" = 2400
-    "Standard_D96ds_v5" = 3600
+data "azurerm_resource_group" "aks" {
+  name = local.node_resource_group
+}
 
-    "Standard_D2ads_v5"  = 75
-    "Standard_D4ads_v5"  = 150
-    "Standard_D8ads_v5"  = 300
-    "Standard_D16ads_v5" = 600
-    "Standard_D32ads_v5" = 1200
-    "Standard_D48ads_v5" = 1800
-    "Standard_D64ads_v5" = 2400
-    "Standard_D96ads_v5" = 3600
+resource "azurerm_role_assignment" "aks_managed_identity_noderg_managed_identity_operator" {
+  scope                = data.azurerm_resource_group.aks.id
+  role_definition_name = "Managed Identity Operator"
+  principal_id         = var.aad_groups.aks_managed_identity.id
+}
 
-    "Standard_E2ds_v5"   = 75
-    "Standard_E4ds_v5"   = 150
-    "Standard_E8ds_v5"   = 300
-    "Standard_E16ds_v5"  = 600
-    "Standard_E20ds_v5"  = 750
-    "Standard_E32ds_v5"  = 1200
-    "Standard_E48ds_v5"  = 1800
-    "Standard_E64ds_v5"  = 2400
-    "Standard_E96ds_v5"  = 3600
-    "Standard_E104ds_v5" = 3800
-
-    "Standard_E2ads_v5"  = 75
-    "Standard_E4ads_v5"  = 150
-    "Standard_E8ads_v5"  = 300
-    "Standard_E16ads_v5" = 600
-    "Standard_E20ads_v5" = 750
-    "Standard_E32ads_v5" = 1200
-    "Standard_E48ads_v5" = 1800
-    "Standard_E64ads_v5" = 2400
-    "Standard_E96ads_v5" = 3600
-
-    "Standard_F2s_v2"  = 32
-    "Standard_F4s_v2"  = 64
-    "Standard_F8s_v2"  = 128
-    "Standard_F16s_v2" = 256
-    "Standard_F32s_v2" = 512
-    "Standard_F48s_v2" = 768
-    "Standard_F64s_v2" = 1024
-    "Standard_F72s_v2" = 1520
-  }
+resource "azurerm_role_assignment" "aks_managed_identity_noderg_virtual_machine_contributor" {
+  scope                = data.azurerm_resource_group.aks.id
+  role_definition_name = "Virtual Machine Contributor"
+  principal_id         = var.aad_groups.aks_managed_identity.id
 }

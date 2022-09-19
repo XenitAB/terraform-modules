@@ -6,11 +6,6 @@
   *
   * vector.toml includes the config how to connect to it's different endpoints.
   * Vector supports unit testing, and to verfiy it's config you can run `vector test vector.toml`.
-  *
-  * If you need to update the vector.toml you need to perform the following
-  * manuall task to regenerate the secret located in the templates file
-  * cat vector.toml |base64 -w 0
-  * All the variabels in vector.toml is read in through environment variabels in the deployment.
   */
 
 terraform {

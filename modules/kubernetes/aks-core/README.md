@@ -41,7 +41,6 @@ This module is used to create AKS clusters.
 | <a name="module_datadog_crd"></a> [datadog\_crd](#module\_datadog\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../../kubernetes/external-dns | n/a |
 | <a name="module_falco"></a> [falco](#module\_falco) | ../../kubernetes/falco | n/a |
-| <a name="module_fluxcd_v1_azure_devops"></a> [fluxcd\_v1\_azure\_devops](#module\_fluxcd\_v1\_azure\_devops) | ../../kubernetes/fluxcd-v1 | n/a |
 | <a name="module_fluxcd_v2_azure_devops"></a> [fluxcd\_v2\_azure\_devops](#module\_fluxcd\_v2\_azure\_devops) | ../../kubernetes/fluxcd-v2-azdo | n/a |
 | <a name="module_fluxcd_v2_github"></a> [fluxcd\_v2\_github](#module\_fluxcd\_v2\_github) | ../../kubernetes/fluxcd-v2-github | n/a |
 | <a name="module_grafana_agent"></a> [grafana\_agent](#module\_grafana\_agent) | ../../kubernetes/grafana-agent | n/a |
@@ -128,8 +127,6 @@ This module is used to create AKS clusters.
 | <a name="input_external_dns_enabled"></a> [external\_dns\_enabled](#input\_external\_dns\_enabled) | Should External DNS be enabled | `bool` | `true` | no |
 | <a name="input_external_dns_hostname"></a> [external\_dns\_hostname](#input\_external\_dns\_hostname) | hostname for ingress-nginx to use for external-dns | `string` | `""` | no |
 | <a name="input_falco_enabled"></a> [falco\_enabled](#input\_falco\_enabled) | Should Falco be enabled | `bool` | `true` | no |
-| <a name="input_fluxcd_v1_config"></a> [fluxcd\_v1\_config](#input\_fluxcd\_v1\_config) | Configuration for fluxcd-v1 | <pre>object({<br>    flux_status_enabled = bool<br>    branch              = string<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | <pre>{<br>  "azure_devops": {<br>    "org": "",<br>    "pat": "",<br>    "proj": ""<br>  },<br>  "branch": "main",<br>  "flux_status_enabled": false<br>}</pre> | no |
-| <a name="input_fluxcd_v1_enabled"></a> [fluxcd\_v1\_enabled](#input\_fluxcd\_v1\_enabled) | Should fluxcd-v1 be enabled | `bool` | `false` | no |
 | <a name="input_fluxcd_v2_config"></a> [fluxcd\_v2\_config](#input\_fluxcd\_v2\_config) | Configuration for fluxcd-v2 | <pre>object({<br>    type = string<br>    github = object({<br>      org             = string<br>      app_id          = number<br>      installation_id = number<br>      private_key     = string<br>    })<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_fluxcd_v2_enabled"></a> [fluxcd\_v2\_enabled](#input\_fluxcd\_v2\_enabled) | Should fluxcd-v2 be enabled | `bool` | `true` | no |
 | <a name="input_global_location_short"></a> [global\_location\_short](#input\_global\_location\_short) | The Azure region short name where the global resources resides. | `string` | n/a | yes |

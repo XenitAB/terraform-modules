@@ -338,7 +338,7 @@ resource "azurerm_monitor_diagnostic_setting" "log_eventhub_audit" {
 
     retention_policy {
       enabled = false
-      days    = 1
+      days    = 0
     }
   }
 

@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#789](https://github.com/XenitAB/terraform-modules/pull/789) [Breaking] Image gallery support for Azure Pipelines module.
 - [#801](https://github.com/XenitAB/terraform-modules/pull/801) [Breaking] Image gallery support for Github Runners module.
 - [#802](https://github.com/XenitAB/terraform-modules/pull/802) Ignore commit message changes in Flux installations.
+- [#807](https://github.com/XenitAB/terraform-modules/pull/807) Increase NGINX Ingress min availible from one to two.
 
 ### Fixed
 

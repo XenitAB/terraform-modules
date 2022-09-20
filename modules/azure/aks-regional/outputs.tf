@@ -99,7 +99,7 @@ output "log_eventhub_name" {
   value       = azurerm_eventhub.this.name
 }
 
-output "eventhub_hostname" {
+output "log_eventhub_hostname" {
   description = "The eventhub hostname for k8s logs"
   value       = "${azurerm_eventhub_namespace.this.name}.servicebus.windows.net:9093"
 }

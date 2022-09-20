@@ -1,13 +1,14 @@
 cloudProvider: ""
 secretName: "msg-queue"
+configMapName: "vector"
 
 azureConfig:
   resourceID: ""
   clientID: ""
   tenantID: ""
   keyVaultName: ""
-  hostnameKeyVaultSecretName: "eventhub-hostname"
-  topicKeyVaultSecretName: "eventhub-topic"
+  hostname: ""
+  topic: ""
   connectionStringKeyVaultSecretName: "eventhub-connectionstring"
 
 aadpodidbinding:

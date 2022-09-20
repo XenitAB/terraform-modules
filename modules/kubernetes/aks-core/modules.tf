@@ -544,6 +544,8 @@ module "control_plane" {
       resource_id = var.control_plane_logs_config.identity.resource_id
       tenant_id   = var.control_plane_logs_config.identity.tenant_id
     }
+    eventhub_hostname = var.control_plane_logs_config.eventhub_hostname
+    eventhub_name     = var.control_plane_logs_config.eventhub_name
   }
 }
 

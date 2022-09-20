@@ -37,8 +37,6 @@ This module is used to create resources that are used by AKS clusters.
 | [azurerm_eventhub_namespace_authorization_rule.listen](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/eventhub_namespace_authorization_rule) | resource |
 | [azurerm_key_vault_access_policy.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_secret.eventhub_connection_string](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_secret) | resource |
-| [azurerm_key_vault_secret.eventhub_hostname](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_secret) | resource |
-| [azurerm_key_vault_secret.eventhub_topic](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_public_ip_prefix.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/public_ip_prefix) | resource |
 | [azurerm_role_assignment.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/role_assignment) | resource |
@@ -101,6 +99,7 @@ This module is used to create resources that are used by AKS clusters.
 | <a name="output_azad_kube_proxy"></a> [azad\_kube\_proxy](#output\_azad\_kube\_proxy) | The Azure AD Application config for azad-kube-proxy |
 | <a name="output_azure_metrics_identity"></a> [azure\_metrics\_identity](#output\_azure\_metrics\_identity) | MSI authentication identity for Azure Metrics |
 | <a name="output_dns_zone"></a> [dns\_zone](#output\_dns\_zone) | DNS Zone to be used with external-dns |
+| <a name="output_eventhub_hostname"></a> [eventhub\_hostname](#output\_eventhub\_hostname) | The eventhub hostname for k8s logs |
 | <a name="output_external_dns_identity"></a> [external\_dns\_identity](#output\_external\_dns\_identity) | MSI authentication identity for External DNS |
 | <a name="output_log_eventhub_authorization_rule_id"></a> [log\_eventhub\_authorization\_rule\_id](#output\_log\_eventhub\_authorization\_rule\_id) | The authoritzation rule id for event hub |
 | <a name="output_log_eventhub_name"></a> [log\_eventhub\_name](#output\_log\_eventhub\_name) | The eventhub name for k8s logs |

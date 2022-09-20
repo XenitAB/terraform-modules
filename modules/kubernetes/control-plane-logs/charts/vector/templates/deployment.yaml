@@ -38,13 +38,13 @@ spec:
           env:
             - name: HOST
               valueFrom:
-                secretKeyRef:
-                  name: "{{ .Values.secretName }}"
+                configMapKeyRef:
+                  name: {{ .Values.configMapName }}
                   key: hostname
             - name: TOPIC
               valueFrom:
-                secretKeyRef:
-                  name: "{{ .Values.secretName }}"
+                configMapKeyRef:
+                  name: {{ .Values.configMapName }}
                   key: topic
             - name: PASSWORD
               valueFrom:
@@ -75,7 +75,7 @@ spec:
       volumes:
         - name: secret
           configMap:
-            name: vector
+            name: {{ .Values.configMapName }}
         - name: secret-store
           csi:
             driver: secrets-store.csi.k8s.io

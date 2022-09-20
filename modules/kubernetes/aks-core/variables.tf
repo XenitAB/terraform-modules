@@ -494,6 +494,8 @@ variable "control_plane_logs_config" {
       resource_id = string
       tenant_id   = string
     })
+    eventhub_hostname = string
+    eventhub_name     = string
   })
   default = {
     azure_key_vault_name = ""
@@ -502,5 +504,7 @@ variable "control_plane_logs_config" {
       resource_id = ""
       tenant_id   = ""
     }
+    eventhub_hostname = ""
+    eventhub_name     = ""
   }
 }

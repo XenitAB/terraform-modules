@@ -1,11 +1,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: vector
+  name: {{ .Values.configMapName }}
   namespace: controle-plane-logs
   labels:
     {{- include "vector.labels" . | nindent 4 }}
 data:
+  hostname: {{ .Values.azureConfig.hostname }}
+  topic: {{ .Values.azureConfig.topic }}
   vector.toml: |
     ## Kafka source
     [sources.in_azure_events]

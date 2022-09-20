@@ -525,6 +525,30 @@ module "prometheus" {
   promtail_enabled                         = var.promtail_enabled
 }
 
+module "control_plane_logs" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["control_plane_logs"] :
+    s => s
+    if var.control_plane_logs_enabled
+  }
+
+  source = "../../kubernetes/control-plane-logs"
+
+  cloud_provider = "azure"
+  azure_config = {
+    azure_key_vault_name = var.control_plane_logs_config.azure_key_vault_name
+    identity = {
+      client_id   = var.control_plane_logs_config.identity.client_id
+      resource_id = var.control_plane_logs_config.identity.resource_id
+      tenant_id   = var.control_plane_logs_config.identity.tenant_id
+    }
+    eventhub_hostname = var.control_plane_logs_config.eventhub_hostname
+    eventhub_name     = var.control_plane_logs_config.eventhub_name
+  }
+}
+
 module "promtail" {
   depends_on = [module.opa_gatekeeper]
 

@@ -236,9 +236,136 @@ resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
   }
 }
 
+resource "azurerm_monitor_diagnostic_setting" "log_eventhub_audit" {
+  name                           = "eventhub-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}-audit"
+  target_resource_id             = azurerm_kubernetes_cluster.this.id
+  eventhub_name                  = var.log_eventhub_name
+  eventhub_authorization_rule_id = var.log_eventhub_authorization_rule_id
+
+  log {
+    category = "kube-scheduler"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "kube-controller-manager"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "cloud-controller-manager"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "csi-azurefile-controller"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "csi-snapshot-controller"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "csi-azuredisk-controller"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "guard"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "cluster-autoscaler"
+    enabled  = true
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "kube-audit"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "kube-audit-admin"
+    enabled  = false
+
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  log {
+    category = "kube-apiserver"
+    enabled  = false
+    retention_policy {
+      enabled = false
+      days    = 0
+    }
+  }
+
+  metric {
+    category = "AllMetrics"
+    enabled  = false
+
+    retention_policy {
+      days    = 0
+      enabled = false
+    }
+  }
+}
+
 # This is a work around to stop any update of the AKS cluster to force a recreation of the role assignments.
 # The reason this works is a bit tricky, but it gets Terraform to not reload the resource group data source.
 # https://github.com/hashicorp/terraform-provider-azurerm/issues/15557#issuecomment-1050654295
+
 locals {
   node_resource_group = azurerm_kubernetes_cluster.this.node_resource_group
 }

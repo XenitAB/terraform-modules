@@ -142,6 +142,12 @@ resource "github_repository_file" "install" {
   content             = data.flux_install.this.content
   branch              = var.branch
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [
+      commit_message,
+    ]
+  }
 }
 
 resource "github_repository_file" "sync" {
@@ -150,6 +156,12 @@ resource "github_repository_file" "sync" {
   content             = data.flux_sync.this.content
   branch              = var.branch
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [
+      commit_message,
+    ]
+  }
 }
 
 resource "github_repository_file" "kustomize" {
@@ -158,6 +170,12 @@ resource "github_repository_file" "kustomize" {
   content             = file("${path.module}/templates/kustomization-override.yaml")
   branch              = var.branch
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [
+      commit_message,
+    ]
+  }
 }
 
 resource "github_repository_file" "cluster_tenants" {
@@ -168,6 +186,12 @@ resource "github_repository_file" "cluster_tenants" {
   })
   branch              = var.branch
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [
+      commit_message,
+    ]
+  }
 }
 
 # Tenants
@@ -189,4 +213,10 @@ resource "github_repository_file" "tenant" {
     create_crds = false,
   })
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [
+      commit_message,
+    ]
+  }
 }

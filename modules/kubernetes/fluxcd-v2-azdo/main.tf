@@ -148,6 +148,12 @@ resource "azuredevops_git_repository_file" "install" {
   content             = data.flux_install.this.content
   branch              = "refs/heads/${var.branch}"
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [
+      commit_message,
+    ]
+  }
 }
 
 resource "azuredevops_git_repository_file" "sync" {
@@ -156,6 +162,12 @@ resource "azuredevops_git_repository_file" "sync" {
   content             = data.flux_sync.this.content
   branch              = "refs/heads/${var.branch}"
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [
+      commit_message,
+    ]
+  }
 }
 
 resource "azuredevops_git_repository_file" "kustomize" {
@@ -164,6 +176,12 @@ resource "azuredevops_git_repository_file" "kustomize" {
   content             = file("${path.module}/templates/kustomization-override.yaml")
   branch              = "refs/heads/${var.branch}"
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [
+      commit_message,
+    ]
+  }
 }
 
 resource "azuredevops_git_repository_file" "cluster_tenants" {
@@ -174,6 +192,12 @@ resource "azuredevops_git_repository_file" "cluster_tenants" {
   })
   branch              = "refs/heads/${var.branch}"
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [
+      commit_message,
+    ]
+  }
 }
 
 # Tenants
@@ -195,4 +219,10 @@ resource "azuredevops_git_repository_file" "tenant" {
     create_crds = each.value.flux.create_crds
   })
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [
+      commit_message,
+    ]
+  }
 }

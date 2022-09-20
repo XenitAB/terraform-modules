@@ -14,7 +14,7 @@ variable "azure_config" {
     })
     eventhub_hostname = string
     eventhub_name     = string
-   })
+  })
   default = {
     azure_key_vault_name = ""
     identity = {

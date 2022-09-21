@@ -28,16 +28,6 @@ data "aws_route53_zone" "this" {
   name = each.key
 }
 
-module "cilium" {
-  for_each = {
-    for s in ["cilium"] :
-    s => s
-    if var.cilium_enabled
-  }
-
-  source = "../../kubernetes/cilium"
-}
-
 module "opa_gatekeeper_crd" {
   source = "../../kubernetes/helm-crd"
 
@@ -47,7 +37,7 @@ module "opa_gatekeeper_crd" {
 }
 
 module "opa_gatekeeper" {
-  depends_on = [module.opa_gatekeeper_crd, module.cilium]
+  depends_on = [module.opa_gatekeeper_crd]
 
   for_each = {
     for s in ["opa-gatekeeper"] :
@@ -528,10 +518,4 @@ module "node_ttl" {
   }
 
   source = "../../kubernetes/node-ttl"
-}
-
-variable "cilium_enabled" {
-  description = "Should Cilium be enabled"
-  type        = bool
-  default     = false
 }

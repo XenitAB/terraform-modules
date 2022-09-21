@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.09.2
+
 ### Added
 
 - [#787](https://github.com/XenitAB/terraform-modules/pull/787) Add support for kubernetes 1.24 in Azure.

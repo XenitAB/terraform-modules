@@ -99,7 +99,7 @@ module "eks_core" {
     remote_write_url           = "https://my-receiver.com"
 
     volume_claim_storage_class_name = "default"
-    volume_claim_size               = "5Gi"
+    volume_claim_size               = "15Gi"
 
     resource_selector  = ["platform"]
     namespace_selector = ["platform"]

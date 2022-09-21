@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#801](https://github.com/XenitAB/terraform-modules/pull/801) [Breaking] Image gallery support for Github Runners module.
 - [#802](https://github.com/XenitAB/terraform-modules/pull/802) Ignore commit message changes in Flux installations.
 - [#807](https://github.com/XenitAB/terraform-modules/pull/807) Increase NGINX Ingress min availible from one to two.
+- [#808](https://github.com/XenitAB/terraform-modules/pull/808) Increase prometheus default disk size to 15Gi.
 
 ### Fixed
 

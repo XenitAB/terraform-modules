@@ -1,21 +1,3 @@
-resource "kubernetes_namespace" "service_accounts" {
-  metadata {
-    labels = {
-      name = local.service_accounts_namespace
-    }
-    name = local.service_accounts_namespace
-  }
-}
-
-resource "kubernetes_service_account" "tenant" {
-  for_each = { for ns in var.namespaces : ns.name => ns }
-
-  metadata {
-    name      = each.value.name
-    namespace = kubernetes_namespace.service_accounts.metadata[0].name
-  }
-}
-
 resource "kubernetes_namespace" "tenant" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 

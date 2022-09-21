@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#810](https://github.com/XenitAB/terraform-modules/pull/810) Upgrade terraform to 1.3.0.
+- [#810](https://github.com/XenitAB/terraform-modules/pull/810) Update provider versions.
 
 ## 2022.09.2
 

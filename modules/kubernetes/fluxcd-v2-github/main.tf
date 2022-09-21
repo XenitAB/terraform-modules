@@ -21,7 +21,7 @@ terraform {
   required_providers {
     helm = {
       source  = "hashicorp/helm"
-      version = "2.5.1"
+      version = "2.6.0"
     }
     flux = {
       source  = "fluxcd/flux"
@@ -29,7 +29,7 @@ terraform {
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.8.0"
+      version = "2.13.1"
     }
     github = {
       source  = "integrations/github"

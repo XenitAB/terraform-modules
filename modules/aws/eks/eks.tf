@@ -1,15 +1,36 @@
 locals {
   cni_script = templatefile("${path.module}/templates/update-eks-cni.sh.tpl", {
-    b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
-    api_server_url = aws_eks_cluster.this.endpoint
-    token          = data.aws_eks_cluster_auth.this.token
+    b64_cluster_ca   = aws_eks_cluster.this.certificate_authority[0].data,
+    api_server_url   = aws_eks_cluster.this.endpoint
+    token            = data.aws_eks_cluster_auth.this.token
+    cilium_manifests = base64encode(data.helm_template.cilium.manifest)
   })
   # The new token would cause the script to change all the time, this is just used to calculate the trigger hash
   cni_script_check = templatefile("${path.module}/templates/update-eks-cni.sh.tpl", {
-    b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
-    api_server_url = aws_eks_cluster.this.endpoint
-    token          = "foobar"
+    b64_cluster_ca   = aws_eks_cluster.this.certificate_authority[0].data,
+    api_server_url   = aws_eks_cluster.this.endpoint
+    token            = "foobar"
+    cilium_manifests = base64encode(data.helm_template.cilium.manifest)
   })
+}
+
+data "helm_template" "cilium" {
+  name       = "cilium"
+  namespace  = "kube-system"
+  repository = "https://helm.cilium.io/"
+
+  chart   = "cilium"
+  version = "1.12.1"
+
+  set {
+    name  = "egressMasqueradeInterfaces"
+    value = "eth0"
+  }
+
+  set {
+    name  = "nodeinit.enabled"
+    value = false
+  }
 }
 
 data "aws_subnet" "cluster" {

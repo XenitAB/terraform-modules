@@ -7,3 +7,5 @@ kubectl config set contexts.cluster-admin.cluster cluster-admin && \
 kubectl config set contexts.cluster-admin.user cluster-admin && \
 kubectl config set contexts.cluster-admin.namespace kube-system && \
 kubectl --context=cluster-admin delete ds aws-node -n kube-system --ignore-not-found=true
+echo "${cilium_manifests}" | base64 -d > cilium.yaml && \
+kubectl --context=cluster-admin apply -f cilium.yaml

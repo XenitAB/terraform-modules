@@ -3,6 +3,7 @@ controller:
     chroot: true
 
   replicaCount: 3
+  minAvailable: 2
 
   resources:
     requests:

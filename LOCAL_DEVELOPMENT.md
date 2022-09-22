@@ -14,7 +14,7 @@ chown <user>:<group> /opt/tfenv
 ```
 
 ```shell
-TF_VERSION=1.2.6
+TF_VERSION=1.3.0
 tfenv install ${TF_VERSION}
 tfenv use ${TF_VERSION}
 ```

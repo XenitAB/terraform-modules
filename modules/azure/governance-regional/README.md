@@ -6,7 +6,7 @@ This module is used for governance on a regional level and not using any specifi
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.6 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.28.1 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.22.0 |
 | <a name="requirement_pal"></a> [pal](#requirement\_pal) | 0.2.5 |

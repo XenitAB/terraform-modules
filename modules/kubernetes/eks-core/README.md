@@ -6,7 +6,7 @@ This module is used to configure EKS clusters.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.6 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.9.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.17.0 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 4.21.0 |

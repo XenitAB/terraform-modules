@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#810](https://github.com/XenitAB/terraform-modules/pull/810) Upgrade terraform to 1.3.0.
 - [#810](https://github.com/XenitAB/terraform-modules/pull/810) Update provider versions.
 
+### Fixed
+
+- [#815](https://github.com/XenitAB/terraform-modules/pull/815) Make datadog tolerate all node taints.
+
 ## 2022.09.2
 
 ### Added

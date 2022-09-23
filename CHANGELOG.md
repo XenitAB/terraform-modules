@@ -13,6 +13,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#814](https://github.com/XenitAB/terraform-modules/pull/814) Possible to use data source as policy input to Irsa.
 - [#813](https://github.com/XenitAB/terraform-modules/pull/813) [Breaking] Use Cilium as CNI implementation for AWS.
 
+### Fixed
+
+- [#815](https://github.com/XenitAB/terraform-modules/pull/815) Make datadog tolerate all node taints.
+
 ## 2022.09.2
 
 ### Added

@@ -3,17 +3,19 @@ data "helm_template" "cilium" {
   namespace  = "kube-system"
   repository = "https://helm.cilium.io/"
   chart      = "cilium"
-  version    = "1.12.1"
+  version    = local.cilium_version
   values = [
     file("${path.module}/values/cilium.yaml"),
   ]
 }
 
 locals {
+  cilium_version = "1.12.1"
   cni_script = templatefile("${path.module}/templates/update-eks-cni.sh.tpl", {
     b64_cluster_ca  = aws_eks_cluster.this.certificate_authority[0].data,
     api_server_url  = aws_eks_cluster.this.endpoint
     token           = data.aws_eks_cluster_auth.this.token
+    cilium_version  = local.cilium_version
     cilium_manifest = base64encode(data.helm_template.cilium.manifest)
   })
   # The new token would cause the script to change all the time, this is just used to calculate the trigger hash
@@ -21,6 +23,7 @@ locals {
     b64_cluster_ca  = aws_eks_cluster.this.certificate_authority[0].data,
     api_server_url  = aws_eks_cluster.this.endpoint
     token           = "foobar"
+    cilium_version  = local.cilium_version
     cilium_manifest = base64encode(data.helm_template.cilium.manifest)
   })
 }
@@ -141,6 +144,7 @@ data "aws_eks_cluster_auth" "this" {
 resource "null_resource" "update_eks_cni" {
   triggers = {
     script_hash = sha256(local.cni_script_check)
+    values_hash = sha256(file("${path.module}/values/cilium.yaml"))
   }
 
   provisioner "local-exec" {

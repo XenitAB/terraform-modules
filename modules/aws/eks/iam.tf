@@ -27,6 +27,7 @@ module "cluster_autoscaler" {
   kubernetes_namespace       = "cluster-autoscaler"
   kubernetes_service_account = "cluster-autoscaler"
   policy_json                = data.aws_iam_policy_document.cluster_autoscaler.json
+  policy_json_create         = true
 }
 
 data "aws_iam_policy_document" "cert_manager" {
@@ -70,6 +71,7 @@ module "cert_manager" {
   kubernetes_namespace       = "cert-manager"
   kubernetes_service_account = "cert-manager"
   policy_json                = data.aws_iam_policy_document.cert_manager.json
+  policy_json_create         = true
 }
 
 data "aws_iam_policy_document" "external_dns" {
@@ -105,6 +107,7 @@ module "external_dns" {
   kubernetes_namespace       = "external-dns"
   kubernetes_service_account = "external-dns"
   policy_json                = data.aws_iam_policy_document.external_dns.json
+  policy_json_create         = true
 }
 
 data "aws_iam_policy_document" "velero" {
@@ -153,6 +156,7 @@ module "velero" {
   kubernetes_namespace       = "velero"
   kubernetes_service_account = "velero"
   policy_json                = data.aws_iam_policy_document.velero.json
+  policy_json_create         = true
 }
 
 data "aws_iam_policy_document" "xenit_proxy_certificate" {
@@ -186,6 +190,7 @@ module "prometheus" {
   kubernetes_namespace       = "prometheus"
   kubernetes_service_account = "prometheus"
   policy_json                = data.aws_iam_policy_document.xenit_proxy_certificate.json
+  policy_json_create         = true
 }
 
 module "promtail" {
@@ -201,6 +206,7 @@ module "promtail" {
   kubernetes_namespace       = "promtail"
   kubernetes_service_account = "promtail"
   policy_json                = data.aws_iam_policy_document.xenit_proxy_certificate.json
+  policy_json_create         = true
 }
 
 data "aws_iam_policy_document" "starboard_ecr_read_only" {
@@ -235,6 +241,7 @@ module "starboard_ecr" {
   kubernetes_namespace       = "starboard-operator"
   kubernetes_service_account = "starboard-operator"
   policy_json                = data.aws_iam_policy_document.starboard_ecr_read_only.json
+  policy_json_create         = true
 }
 
 module "trivy_ecr" {
@@ -256,6 +263,7 @@ module "trivy_ecr" {
   kubernetes_namespace       = "starboard-operator"
   kubernetes_service_account = "trivy"
   policy_json                = data.aws_iam_policy_document.starboard_ecr_read_only.json
+  policy_json_create         = true
 }
 
 module "eks_ebs_csi_driver" {
@@ -271,4 +279,5 @@ module "eks_ebs_csi_driver" {
   kubernetes_namespace       = "kube-system"
   kubernetes_service_account = "ebs-csi-controller-sa"
   policy_permissions_arn     = ["arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"]
+  policy_json_create         = false
 }

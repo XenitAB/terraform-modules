@@ -56,7 +56,7 @@ resource "aws_iam_policy" "permissions" {
   for_each = {
     for s in ["policy-permission"] :
     s => s
-    if var.policy_json != ""
+    if var.policy_json_create
   }
   name   = var.name
   policy = var.policy_json
@@ -66,7 +66,7 @@ resource "aws_iam_role_policy_attachment" "permissions" {
   for_each = {
     for s in ["policy-attachment"] :
     s => s
-    if var.policy_json != ""
+    if var.policy_json_create
   }
   policy_arn = aws_iam_policy.permissions["policy-permission"].arn
   role       = aws_iam_role.this.name

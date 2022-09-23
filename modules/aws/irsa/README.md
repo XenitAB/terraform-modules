@@ -40,6 +40,7 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | Name of created IAM role and policy | `string` | n/a | yes |
 | <a name="input_oidc_providers"></a> [oidc\_providers](#input\_oidc\_providers) | OIDC provider configuration | <pre>list(object({<br>    url = string<br>    arn = string<br>  }))</pre> | n/a | yes |
 | <a name="input_policy_json"></a> [policy\_json](#input\_policy\_json) | Permissions to apply to the created role | `string` | `""` | no |
+| <a name="input_policy_json_create"></a> [policy\_json\_create](#input\_policy\_json\_create) | Create AWS IAM policy from the policy document | `bool` | n/a | yes |
 | <a name="input_policy_permissions_arn"></a> [policy\_permissions\_arn](#input\_policy\_permissions\_arn) | Permissions to apply to the created role | `set(string)` | `[]` | no |
 
 ## Outputs

@@ -8,16 +8,16 @@ This module is used for governance on a regional level and not using any specifi
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.28.1 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.22.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.24.0 |
 | <a name="requirement_pal"></a> [pal](#requirement\_pal) | 0.2.5 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | 3.4.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.28.1 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.22.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.24.0 |
 
 ## Modules
 
@@ -29,25 +29,25 @@ No modules.
 |------|------|
 | [azuread_application_password.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/application_password) | resource |
 | [azuread_application_password.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/application_password) | resource |
-| [azurerm_key_vault.delegate_kv](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault) | resource |
-| [azurerm_key_vault_access_policy.ap_kvreader_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_access_policy) | resource |
-| [azurerm_key_vault_access_policy.ap_owner_spn](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_access_policy) | resource |
-| [azurerm_key_vault_access_policy.ap_rg_aad_group](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_access_policy) | resource |
-| [azurerm_key_vault_access_policy.ap_rg_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_access_policy) | resource |
-| [azurerm_key_vault_access_policy.ap_sub_aad_group_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_access_policy) | resource |
-| [azurerm_key_vault_access_policy.ap_sub_aad_group_owner](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_access_policy) | resource |
-| [azurerm_key_vault_secret.aad_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_secret) | resource |
-| [azurerm_key_vault_secret.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_secret) | resource |
-| [azurerm_key_vault_secret.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/key_vault_secret) | resource |
-| [azurerm_management_lock.rg](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/management_lock) | resource |
-| [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/resource_group) | resource |
-| [azurerm_role_assignment.aad_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.rg_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.rg_owner](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.rg_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/resources/role_assignment) | resource |
+| [azurerm_key_vault.delegate_kv](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/key_vault) | resource |
+| [azurerm_key_vault_access_policy.ap_kvreader_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_access_policy.ap_owner_spn](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_access_policy.ap_rg_aad_group](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_access_policy.ap_rg_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_access_policy.ap_sub_aad_group_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_access_policy.ap_sub_aad_group_owner](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_secret.aad_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/key_vault_secret) | resource |
+| [azurerm_key_vault_secret.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/key_vault_secret) | resource |
+| [azurerm_key_vault_secret.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/key_vault_secret) | resource |
+| [azurerm_management_lock.rg](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/management_lock) | resource |
+| [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/resource_group) | resource |
+| [azurerm_role_assignment.aad_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.rg_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.rg_owner](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.rg_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/resources/role_assignment) | resource |
 | [azuread_service_principal.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/service_principal) | data source |
-| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/data-sources/client_config) | data source |
-| [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.22.0/docs/data-sources/subscription) | data source |
+| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/data-sources/client_config) | data source |
+| [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.24.0/docs/data-sources/subscription) | data source |
 
 ## Inputs
 

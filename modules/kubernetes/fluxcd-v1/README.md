@@ -15,17 +15,17 @@ Will be deprecated as soon as Flux v2 module is finished and tested.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.5.1 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.8.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | 3.1.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.6.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.13.1 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | 3.4.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.5.1 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.8.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.1.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.6.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.13.1 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.4.3 |
 
 ## Modules
 
@@ -35,12 +35,12 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [helm_release.azdo_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.5.1/docs/resources/release) | resource |
-| [helm_release.fluxcd](https://registry.terraform.io/providers/hashicorp/helm/2.5.1/docs/resources/release) | resource |
-| [helm_release.helm_operator](https://registry.terraform.io/providers/hashicorp/helm/2.5.1/docs/resources/release) | resource |
-| [kubernetes_namespace.azdo_proxy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/namespace) | resource |
-| [kubernetes_secret.azdo_proxy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.8.0/docs/resources/secret) | resource |
-| [random_password.azdo_proxy](https://registry.terraform.io/providers/hashicorp/random/3.1.0/docs/resources/password) | resource |
+| [helm_release.azdo_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
+| [helm_release.fluxcd](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
+| [helm_release.helm_operator](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
+| [kubernetes_namespace.azdo_proxy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/namespace) | resource |
+| [kubernetes_secret.azdo_proxy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/secret) | resource |
+| [random_password.azdo_proxy](https://registry.terraform.io/providers/hashicorp/random/3.4.3/docs/resources/password) | resource |
 
 ## Inputs
 

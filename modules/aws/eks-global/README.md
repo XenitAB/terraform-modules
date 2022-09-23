@@ -3,14 +3,14 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.9.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.31.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.28.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.9.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.31.0 |
 
 ## Modules
 
@@ -22,22 +22,22 @@
 
 | Name | Type |
 |------|------|
-| [aws_cloudwatch_log_group.eks1](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/cloudwatch_log_group) | resource |
-| [aws_cloudwatch_log_group.eks2](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/cloudwatch_log_group) | resource |
-| [aws_iam_policy.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_policy) | resource |
-| [aws_iam_role.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_role) | resource |
-| [aws_iam_role.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_role) | resource |
-| [aws_iam_role.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/iam_role) | resource |
-| [aws_kms_key.eks_encryption](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/kms_key) | resource |
-| [aws_kms_key.velero](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/kms_key) | resource |
-| [aws_s3_bucket.velero](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/s3_bucket) | resource |
-| [aws_s3_bucket_acl.velero](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/s3_bucket_acl) | resource |
-| [aws_s3_bucket_public_access_block.velero](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/s3_bucket_public_access_block) | resource |
-| [aws_s3_bucket_server_side_encryption_configuration.velero](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
-| [aws_s3_bucket_versioning.velero](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/resources/s3_bucket_versioning) | resource |
-| [aws_iam_policy_document.eks_admin_assume](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.eks_admin_permission](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/4.9.0/docs/data-sources/region) | data source |
+| [aws_cloudwatch_log_group.eks1](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/cloudwatch_log_group) | resource |
+| [aws_cloudwatch_log_group.eks2](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/cloudwatch_log_group) | resource |
+| [aws_iam_policy.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/iam_policy) | resource |
+| [aws_iam_role.eks_admin](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/iam_role) | resource |
+| [aws_iam_role.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/iam_role) | resource |
+| [aws_iam_role.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/iam_role) | resource |
+| [aws_kms_key.eks_encryption](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/kms_key) | resource |
+| [aws_kms_key.velero](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/kms_key) | resource |
+| [aws_s3_bucket.velero](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket_acl.velero](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/s3_bucket_acl) | resource |
+| [aws_s3_bucket_public_access_block.velero](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/s3_bucket_public_access_block) | resource |
+| [aws_s3_bucket_server_side_encryption_configuration.velero](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
+| [aws_s3_bucket_versioning.velero](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/s3_bucket_versioning) | resource |
+| [aws_iam_policy_document.eks_admin_assume](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.eks_admin_permission](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/region) | data source |
 
 ## Inputs
 

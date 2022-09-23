@@ -21,18 +21,18 @@ variable "kubernetes_service_account" {
   type        = string
 }
 
+# The below variable is introduced to make it possible to optionally create an AWS IAM policy
+# in combination with being able to populate the policy_json from a data source
+# tflint-ignore: aws_iam_policy_sid_invalid_characters
+variable "policy_json_create" {
+  description = "Create AWS IAM policy from the policy document"
+  type        = bool
+}
+
 variable "policy_json" {
   description = "Permissions to apply to the created role"
   type        = string
   default     = ""
-}
-
-# The below variable is introduced to make it possible to optionally create an AWS IAM policy
-# in combination with being able to populate the policy_json from a data source
-variable "policy_json_create" {
-  description = "Create AWS IAM policy from the policy document in policy_json"
-  type        = bool
-  default     = true
 }
 
 variable "policy_permissions_arn" {
@@ -40,3 +40,4 @@ variable "policy_permissions_arn" {
   type        = set(string)
   default     = []
 }
+

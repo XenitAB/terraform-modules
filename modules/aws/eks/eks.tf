@@ -1,19 +1,30 @@
+data "helm_template" "cilium" {
+  name       = "cilium"
+  namespace  = "kube-system"
+  repository = "https://helm.cilium.io/"
+  chart      = "cilium"
+  version    = "1.12.1"
+  values = [
+    file("${path.module}/values/cilium.yaml"),
+  ]
+}
+
 locals {
-  calico_version = "v3.19"
   cni_script = templatefile("${path.module}/templates/update-eks-cni.sh.tpl", {
-    b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
-    api_server_url = aws_eks_cluster.this.endpoint
-    token          = data.aws_eks_cluster_auth.this.token
-    calico_version = local.calico_version
+    b64_cluster_ca  = aws_eks_cluster.this.certificate_authority[0].data,
+    api_server_url  = aws_eks_cluster.this.endpoint
+    token           = data.aws_eks_cluster_auth.this.token
+    cilium_manifest = base64encode(data.helm_template.cilium.manifest)
   })
   # The new token would cause the script to change all the time, this is just used to calculate the trigger hash
   cni_script_check = templatefile("${path.module}/templates/update-eks-cni.sh.tpl", {
-    b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
-    api_server_url = aws_eks_cluster.this.endpoint
-    token          = "foobar"
-    calico_version = local.calico_version
+    b64_cluster_ca  = aws_eks_cluster.this.certificate_authority[0].data,
+    api_server_url  = aws_eks_cluster.this.endpoint
+    token           = "foobar"
+    cilium_manifest = base64encode(data.helm_template.cilium.manifest)
   })
 }
+
 
 data "aws_subnet" "cluster" {
   for_each = {
@@ -126,7 +137,7 @@ data "aws_eks_cluster_auth" "this" {
 # This is a sad dirty trick as there is no way to opt-out
 # of EKS installing the VPC CNI. EKS will not try to create
 # the daemonset again after you delete. First it deletes the AWS CNI
-# and then it installs the Calico CNI.
+# and then it installs the Cilium CNI.
 resource "null_resource" "update_eks_cni" {
   triggers = {
     script_hash = sha256(local.cni_script_check)

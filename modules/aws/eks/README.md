@@ -4,6 +4,7 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.31.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.5.1 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | 3.1.1 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.3 |
 
@@ -13,6 +14,7 @@
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.31.0 |
 | <a name="provider_aws.eks_admin"></a> [aws.eks\_admin](#provider\_aws.eks\_admin) | 4.31.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.5.1 |
 | <a name="provider_null"></a> [null](#provider\_null) | 3.1.1 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.3 |
 
@@ -56,6 +58,7 @@
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/region) | data source |
 | [aws_subnet.cluster](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/subnet) | data source |
 | [aws_subnet.node](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/subnet) | data source |
+| [helm_template.cilium](https://registry.terraform.io/providers/hashicorp/helm/2.5.1/docs/data-sources/template) | data source |
 | [tls_certificate.thumbprint](https://registry.terraform.io/providers/hashicorp/tls/4.0.3/docs/data-sources/certificate) | data source |
 
 ## Inputs

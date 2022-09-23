@@ -1,0 +1,16 @@
+prometheus:
+  enabled: true
+
+operator:
+  prometheus:
+    enabled: true
+
+hubble:
+  relay:
+    enabled: true
+    prometheus:
+      enabled: true
+  ui:
+    enabled: true
+
+egressMasqueradeInterfaces: "eth0"

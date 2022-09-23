@@ -27,6 +27,14 @@ variable "policy_json" {
   default     = ""
 }
 
+# The below variable is introduced to make it possible to optionally create an AWS IAM policy
+# in combination with being able to populate the policy_json from a data source
+variable "policy_json_create" {
+  description = "Create AWS IAM policy from the policy document in policy_json"
+  type        = bool
+  default     = true
+}
+
 variable "policy_permissions_arn" {
   description = "Permissions to apply to the created role"
   type        = set(string)

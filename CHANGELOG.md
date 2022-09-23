@@ -8,8 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- [#810](https://github.com/XenitAB/terraform-modules/pull/810) Upgrade terraform to 1.3.0.
+- [#812](https://github.com/XenitAB/terraform-modules/pull/812) Upgrade terraform to 1.3.0.
 - [#810](https://github.com/XenitAB/terraform-modules/pull/810) Update provider versions.
+- [#814](https://github.com/XenitAB/terraform-modules/pull/814) Possible to use data source as policy input to Irsa.
 
 ## 2022.09.2
 

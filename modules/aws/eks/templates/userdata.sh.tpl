@@ -8,6 +8,6 @@ Content-Type: text/x-shellscript; charset="us-ascii"
 set -ex
 B64_CLUSTER_CA=${b64_cluster_ca}
 API_SERVER_URL=${api_server_url}
-/etc/eks/bootstrap.sh ${cluster_name} --kubelet-extra-args '--node-labels=eks.amazonaws.com/capacityType=ON_DEMAND,eks.amazonaws.com/nodegroup=${node_group}' --b64-cluster-ca $B64_CLUSTER_CA --apiserver-endpoint $API_SERVER_URL --use-max-pods false
+/etc/eks/bootstrap.sh ${cluster_name} --kubelet-extra-args '--register-with-taints=node.cilium.io/agent-not-ready=true:NoExecute --node-labels=eks.amazonaws.com/capacityType=ON_DEMAND,eks.amazonaws.com/nodegroup=${node_group}' --b64-cluster-ca $B64_CLUSTER_CA --apiserver-endpoint $API_SERVER_URL --use-max-pods false
 
 --==MYBOUNDARY==--

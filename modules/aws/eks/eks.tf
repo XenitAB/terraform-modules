@@ -18,12 +18,13 @@ locals {
     cilium_manifest = base64encode(data.helm_template.cilium.manifest)
   })
   # The new token would cause the script to change all the time, this is just used to calculate the trigger hash
+  # The Cilium manifests are also changing every time since CA certs are generated and hence the static "foobar"
   cni_script_check = templatefile("${path.module}/templates/update-eks-cni.sh.tpl", {
     b64_cluster_ca  = aws_eks_cluster.this.certificate_authority[0].data,
     api_server_url  = aws_eks_cluster.this.endpoint
     token           = "foobar"
     cilium_version  = local.cilium_version
-    cilium_manifest = base64encode(data.helm_template.cilium.manifest)
+    cilium_manifest = base64encode("foobar")
   })
 }
 
@@ -142,6 +143,7 @@ data "aws_eks_cluster_auth" "this" {
 resource "null_resource" "update_eks_cni" {
   triggers = {
     script_hash = sha256(local.cni_script_check)
+    values_hash = sha256(file("${path.module}/values/cilium.yaml"))
   }
 
   provisioner "local-exec" {

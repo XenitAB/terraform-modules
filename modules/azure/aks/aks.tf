@@ -71,9 +71,17 @@ resource "azurerm_kubernetes_cluster" "this" {
     vm_size                      = var.aks_default_node_pool_vm_size
     os_disk_type                 = "Ephemeral"
     os_disk_size_gb              = local.vm_skus_disk_size_gb[var.aks_default_node_pool_vm_size]
-    enable_auto_scaling          = false
-    node_count                   = var.aks_config.production_grade ? 2 : 1
     only_critical_addons_enabled = true
+
+    enable_auto_scaling = true
+    min_node_count      = var.aks_config.production_grade ? 2 : 1
+    max_node_count      = var.aks_config.production_grade ? 2 : 1
+  }
+
+  lifecycle {
+    ignore_changes = [
+      default_node_pool.node_count
+    ]
   }
 }
 
@@ -108,6 +116,12 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
 
   upgrade_settings {
     max_surge = "33%"
+  }
+
+  lifecycle {
+    ignore_changes = [
+      node_count
+    ]
   }
 }
 

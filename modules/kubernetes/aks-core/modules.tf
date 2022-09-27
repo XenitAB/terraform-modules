@@ -3,7 +3,6 @@ locals {
     "kube-system",
     "aad-pod-identity",
     "azdo-proxy",
-    "calico-system",
     "cert-manager",
     "csi-secrets-store-provider-azure",
     "datadog",

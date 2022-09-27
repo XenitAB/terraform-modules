@@ -15,13 +15,6 @@ locals {
     for subnet in local.subnets : subnet.subnet_short_name => try(var.subnet_private_endpoints[subnet.subnet_short_name], false)
   }
 
-  peerings = [
-    for peering_config in var.peering_config : {
-      name           = "${var.environment}-${var.location_short}-${var.name}-${peering_config.name}"
-      peering_config = peering_config
-    }
-  ]
-
   routes = flatten([
     for route_config in var.route_config : [
       for route in route_config.routes : {

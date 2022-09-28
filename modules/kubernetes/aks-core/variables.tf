@@ -524,3 +524,8 @@ variable "control_plane_logs_config" {
     eventhub_name     = ""
   }
 }
+variable "cilium_enabled" {
+  description = "Should Cilium be enabled"
+  type        = bool
+  default     = false
+}

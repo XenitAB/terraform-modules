@@ -34,8 +34,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   network_profile {
-    network_plugin    = "kubenet"
-    network_policy    = "calico"
+    network_plugin    = "none"
     load_balancer_sku = "standard"
     load_balancer_profile {
       outbound_ip_prefix_ids = [

@@ -168,3 +168,9 @@ variable "promtail_enabled" {
   type        = bool
   default     = false
 }
+
+variable "cilium_enabled" {
+  description = "Should promtail be enabled"
+  type        = bool
+  default     = false
+}

@@ -24,6 +24,17 @@ locals {
   ]
 }
 
+module "cilium" {
+  for_each = {
+    for s in ["cilium"] :
+    s => s
+    if var.cilium_enabled
+  }
+
+  source = "../../kubernetes/cilium"
+}
+
+
 # OPA Gatekeeper
 module "opa_gatekeeper_crd" {
   source = "../../kubernetes/helm-crd"
@@ -34,7 +45,7 @@ module "opa_gatekeeper_crd" {
 }
 
 module "opa_gatekeeper" {
-  depends_on = [module.opa_gatekeeper_crd]
+  depends_on = [module.opa_gatekeeper_crd, module.cilium]
 
   for_each = {
     for s in ["opa-gatekeeper"] :
@@ -79,6 +90,7 @@ module "opa_gatekeeper" {
 
 # FluxCD v2
 module "fluxcd_v2_azure_devops" {
+  depends_on = [module.cilium]
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s
@@ -105,6 +117,7 @@ module "fluxcd_v2_azure_devops" {
 }
 
 module "fluxcd_v2_github" {
+  depends_on = [module.cilium]
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s
@@ -187,7 +200,7 @@ module "linkerd_crd" {
 }
 
 module "linkerd" {
-  depends_on = [module.opa_gatekeeper, module.cert_manager_crd, module.linkerd_crd]
+  depends_on = [module.opa_gatekeeper, module.cert_manager_crd, module.linkerd_crd, module.cert_manager]
 
   for_each = {
     for s in ["linkerd"] :
@@ -525,6 +538,7 @@ module "prometheus" {
   node_local_dns_enabled                   = var.node_local_dns_enabled
   grafana_agent_enabled                    = var.grafana_agent_enabled
   promtail_enabled                         = var.promtail_enabled
+  cilium_enabled                           = var.cilium_enabled
 }
 
 module "control_plane_logs" {

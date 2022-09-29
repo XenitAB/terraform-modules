@@ -106,14 +106,3 @@ variable "aad_sp_passwords" {
   description = "Application password per resource group."
   type        = map(string)
 }
-
-variable "rg_owner_group_object_id" {
-  description = "The RG owner group object ID"
-  type        = string
-}
-
-variable "admin_group" {
-  description = "The admin group for XKS"
-  type        = string
-  default     = ""
-}

@@ -18,3 +18,8 @@ variable "location_short" {
   type        = string
   default     = ""
 }
+variable "public_private_enabled" {
+  description = "Is public private nginx enabled"
+  type        = bool
+  default     = true
+}

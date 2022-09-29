@@ -71,5 +71,5 @@ data "azuread_group" "admin_group" {
 resource "azuread_group_member" "admin_group" {
   # Add if statment
   group_object_id  = azuread_group.sub_owner.object_id
-  member_object_id = data.azuread_group.admin_group
+  member_object_id = data.azuread_group.admin_group.object_id
 }

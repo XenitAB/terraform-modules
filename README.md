@@ -43,8 +43,3 @@ resource "azurerm_kubernetes_cluster" "this" {
   dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
 }
 ```
-
-resource "azuread_group_member" "resource_group_owner" {
-  group_object_id  = "6b6129a9-751e-41fd-88fd-2575bede56ed" #az-sub-lz-xks-e2e-owner
-  member_object_id = "9e4a5b49-9b67-4752-a897-56fd66d1b9fa" #pleb
-}

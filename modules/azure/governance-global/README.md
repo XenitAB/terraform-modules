@@ -50,7 +50,7 @@ No modules.
 | [azuread_group_member.acr_reader_rg_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azuread_group_member.acr_reader_rg_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azuread_group_member.acr_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
-| [azuread_group_member.resource_group_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
+| [azuread_group_member.admin_group](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azuread_group_member.service_endpoint_join_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azuread_group_member.service_endpoint_join_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azuread_group_member.service_endpoint_join_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
@@ -67,6 +67,7 @@ No modules.
 | [pal_management_partner.aad_sp](https://registry.terraform.io/providers/xenitab/pal/0.2.5/docs/resources/management_partner) | resource |
 | [pal_management_partner.owner_spn](https://registry.terraform.io/providers/xenitab/pal/0.2.5/docs/resources/management_partner) | resource |
 | [azuread_application.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/application) | data source |
+| [azuread_group.admin_group](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
 | [azuread_group.all_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
 | [azuread_group.all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
 | [azuread_group.all_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |

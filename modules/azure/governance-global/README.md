@@ -95,3 +95,4 @@ No modules.
 | <a name="output_aad_sp_passwords"></a> [aad\_sp\_passwords](#output\_aad\_sp\_passwords) | Application password per resource group. |
 | <a name="output_azuread_apps"></a> [azuread\_apps](#output\_azuread\_apps) | Output for Azure AD applications |
 | <a name="output_azuread_groups"></a> [azuread\_groups](#output\_azuread\_groups) | Output for Azure AD Groups |
+| <a name="output_rg_owner_group_object_id"></a> [rg\_owner\_group\_object\_id](#output\_rg\_owner\_group\_object\_id) | The RG owner group object ID |

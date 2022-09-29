@@ -71,3 +71,8 @@ output "aad_sp_passwords" {
     key => value.value
   }
 }
+
+output "rg_owner_group_object_id" {
+  description = "The RG owner group object ID"
+  value       = azuread_group.rg_owner.object_id
+}

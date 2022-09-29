@@ -138,4 +138,6 @@ module "governance-regional" {
       service_principal_object_id = "00000000-0000-0000-0000-000000000000"
     }
   }
+
+  rg_owner_group_object_id = "00000000-0000-0000-0000-000000000000"
 }

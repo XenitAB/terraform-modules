@@ -63,3 +63,9 @@ resource "azuread_group_member" "sub_all_reader" {
   group_object_id  = azuread_group.sub_reader.object_id
   member_object_id = data.azuread_group.all_reader["delegate_sub_groups"].object_id
 }
+
+resource "azuread_group_member" "resource_group_owner" {
+  # Add if statment
+  group_object_id  = azuread_group.sub_owner.object_id
+  member_object_id = var.admin_group
+}

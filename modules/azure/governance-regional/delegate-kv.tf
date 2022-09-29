@@ -1,9 +1,3 @@
-resource "azuread_group_member" "resource_group_owner" {
-  # Add if statment
-  group_object_id  = var.rg_owner_group_object_id
-  member_object_id = var.admin_group
-}
-
 #tfsec:ignore:AZU020 tfsec:ignore:AZU021
 resource "azurerm_key_vault" "delegate_kv" {
   for_each = {

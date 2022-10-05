@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - [#815](https://github.com/XenitAB/terraform-modules/pull/815) Make datadog tolerate all node taints.
+- [#822](https://github.com/XenitAB/terraform-modules/pull/822) Update secrets-store.csi.x-k8s.io from v1alpha1 to v1.
 
 ## 2022.09.2
 

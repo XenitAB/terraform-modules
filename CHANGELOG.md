@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.10.1
+
 ### Changed
 
 - [#812](https://github.com/XenitAB/terraform-modules/pull/812) Upgrade terraform to 1.3.0.

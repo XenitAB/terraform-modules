@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## 2022.10.1
 
+### Added
+
+- [#823](https://github.com/XenitAB/terraform-modules/pull/823) Add secrets-store.csi.x-k8s.io to EKS tenants.
+
 ### Changed
 
 - [#812](https://github.com/XenitAB/terraform-modules/pull/812) Upgrade terraform to 1.3.0.
@@ -28,7 +32,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#797](https://github.com/XenitAB/terraform-modules/pull/797) [Breaking] Add option to configure extra headers in Ingress NGINX.
 - [#796](https://github.com/XenitAB/terraform-modules/pull/796) Add custom resource edit rights to tenant service account.
 - [#791](https://github.com/XenitAB/terraform-modules/pull/791) Add control-plane output solution for Azure.
-- [#823](https://github.com/XenitAB/terraform-modules/pull/823) Add secrets-store.csi.x-k8s.io to EKS tenants.
 
 ### Changed
 

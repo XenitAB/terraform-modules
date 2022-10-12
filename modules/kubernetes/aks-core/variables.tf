@@ -93,29 +93,27 @@ variable "kubernetes_default_limit_range" {
   }
 }
 
-variable "fluxcd_v2_enabled" {
-  description = "Should fluxcd-v2 be enabled"
-  type        = bool
-  default     = true
-}
-
 variable "fluxcd_v2_config" {
   description = "Configuration for fluxcd-v2"
   type = object({
-    type = string
-    github = object({
+    github = optional(object({
       org             = string
       app_id          = number
       installation_id = number
       private_key     = string
-    })
-    azure_devops = object({
+    }))
+    azure_devops = optional(object({
       pat  = string
       org  = string
       proj = string
-    })
+    }))
   })
+  validation {
+    condition     = (var.fluxcd_v2_config.github != null && var.fluxcd_v2_config.azure_devops == null) || (var.fluxcd_v2_config.github == null && var.fluxcd_v2_config.azure_devops != null)
+    error_message = "One and only one of fluxcd_v2_config.github or fluxcd_v2_config.azure_devops need to be set"
+  }
 }
+
 
 variable "aad_pod_identity_enabled" {
   description = "Should aad-pod-identity be enabled"

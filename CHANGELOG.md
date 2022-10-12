@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#827](https://github.com/XenitAB/terraform-modules/pull/827) VMSS source_image_reference provider bug workaround.
 
+### Changed
+
+- [#829](https://github.com/XenitAB/terraform-modules/pull/829) [Breaking]Make use of optional in object variables.
+
 ## 2022.10.1
 
 ### Added

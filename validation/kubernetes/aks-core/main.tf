@@ -31,13 +31,6 @@ module "aks_core" {
     dns_zone           = ["bar", "faa"]
   }
   fluxcd_v2_config = {
-    type = "github"
-    github = {
-      org             = ""
-      app_id          = 0
-      installation_id = 0
-      private_key     = ""
-    }
     azure_devops = {
       pat  = ""
       org  = ""

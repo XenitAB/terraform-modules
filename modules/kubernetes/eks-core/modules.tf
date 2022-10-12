@@ -76,7 +76,7 @@ module "fluxcd_v2_azure_devops" {
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s
-    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "azure-devops"
+    if var.fluxcd_v2_config.azure_devops != null
   }
 
   source = "../../kubernetes/fluxcd-v2-azdo"
@@ -102,7 +102,7 @@ module "fluxcd_v2_github" {
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s
-    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "github"
+    if var.fluxcd_v2_config.github != null
   }
 
   source = "../../kubernetes/fluxcd-v2-github"
@@ -373,7 +373,7 @@ module "prometheus" {
   falco_enabled                          = var.falco_enabled
   opa_gatekeeper_enabled                 = var.opa_gatekeeper_enabled
   linkerd_enabled                        = var.linkerd_enabled
-  flux_enabled                           = var.fluxcd_v2_enabled
+  flux_enabled                           = true
   csi_secrets_store_provider_aws_enabled = var.csi_secrets_store_provider_aws_enabled
   azad_kube_proxy_enabled                = var.azad_kube_proxy_enabled
   starboard_enabled                      = var.starboard_enabled

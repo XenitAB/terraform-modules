@@ -22,6 +22,8 @@ locals {
     "promtail",
     "prometheus",
   ]
+  grafana_agent_enabled = var.grafana_agent_config != null
+  datadog_enabled       = var.datadog_config != null
 }
 
 # OPA Gatekeeper
@@ -213,7 +215,7 @@ module "ingress_nginx" {
   cloud_provider            = "azure"
   http_snippet              = var.ingress_config.http_snippet
   linkerd_enabled           = var.linkerd_enabled
-  datadog_enabled           = var.datadog_enabled
+  datadog_enabled           = local.datadog_enabled
   public_private_enabled    = var.ingress_config.public_private_enabled
   allow_snippet_annotations = var.ingress_config.allow_snippet_annotations
   extra_config              = var.ingress_config.extra_config
@@ -360,7 +362,7 @@ module "datadog" {
   for_each = {
     for s in ["datadog"] :
     s => s
-    if var.datadog_enabled
+    if local.datadog_enabled
   }
 
   source = "../../kubernetes/datadog"
@@ -388,7 +390,7 @@ module "grafana_agent" {
   for_each = {
     for s in ["grafana-agent"] :
     s => s
-    if var.grafana_agent_enabled
+    if local.grafana_agent_enabled
   }
 
   source = "../../kubernetes/grafana-agent"
@@ -521,7 +523,7 @@ module "prometheus" {
   starboard_enabled                        = var.starboard_enabled
   vpa_enabled                              = var.vpa_enabled
   node_local_dns_enabled                   = var.node_local_dns_enabled
-  grafana_agent_enabled                    = var.grafana_agent_enabled
+  grafana_agent_enabled                    = local.grafana_agent_enabled
   promtail_enabled                         = var.promtail_enabled
 }
 

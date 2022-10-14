@@ -2,7 +2,7 @@ resource "kubernetes_network_policy" "allow_egress_ingress_datadog" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
-    if var.datadog_enabled && var.kubernetes_network_policy_default_deny
+    if local.datadog_enabled && var.kubernetes_network_policy_default_deny
   }
 
   metadata {

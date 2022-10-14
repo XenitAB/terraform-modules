@@ -310,12 +310,6 @@ variable "csi_secrets_store_provider_aws_enabled" {
   default     = true
 }
 
-variable "datadog_enabled" {
-  description = "Should Datadog be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
@@ -324,12 +318,7 @@ variable "datadog_config" {
     app_key      = string
     namespaces   = list(string)
   })
-  default = {
-    datadog_site = ""
-    api_key      = ""
-    app_key      = ""
-    namespaces   = [""]
-  }
+  default = null
 }
 
 variable "starboard_enabled" {

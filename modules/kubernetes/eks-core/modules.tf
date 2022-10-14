@@ -19,6 +19,7 @@ locals {
     for dns in data.aws_route53_zone.this :
     dns.name => dns.zone_id
   }
+  datadog_enabled = var.datadog_config != null
 }
 
 data "aws_route53_zone" "this" {
@@ -163,7 +164,7 @@ module "ingress_nginx" {
   cloud_provider            = "aws"
   http_snippet              = var.ingress_config.http_snippet
   linkerd_enabled           = var.linkerd_enabled
-  datadog_enabled           = var.datadog_enabled
+  datadog_enabled           = local.datadog_enabled
   public_private_enabled    = var.ingress_config.public_private_enabled
   allow_snippet_annotations = var.ingress_config.allow_snippet_annotations
   extra_config              = var.ingress_config.extra_config
@@ -462,7 +463,7 @@ module "datadog" {
   for_each = {
     for s in ["datadog"] :
     s => s
-    if var.datadog_enabled
+    if local.datadog_enabled
   }
 
   source = "../../kubernetes/datadog"

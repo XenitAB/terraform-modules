@@ -240,12 +240,6 @@ variable "csi_secrets_store_provider_azure_enabled" {
   default     = true
 }
 
-variable "datadog_enabled" {
-  description = "Should Datadog be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
@@ -254,22 +248,11 @@ variable "datadog_config" {
     app_key      = string
     namespaces   = list(string)
   })
-  default = {
-    datadog_site = ""
-    api_key      = ""
-    app_key      = ""
-    namespaces   = [""]
-  }
-}
-
-variable "grafana_agent_enabled" {
-  description = "Should Grafana-Agent be enabled"
-  type        = bool
-  default     = false
+  default = null
 }
 
 variable "grafana_agent_config" {
-  description = "The Grafan-Agent configuration"
+  description = "The Grafana Agent configuration"
   sensitive   = true
   type = object({
     remote_write_urls = object({
@@ -287,22 +270,7 @@ variable "grafana_agent_config" {
     })
     extra_namespaces = list(string)
   })
-  default = {
-    remote_write_urls = {
-      metrics = ""
-      logs    = ""
-      traces  = ""
-    }
-    credentials = {
-      metrics_username = ""
-      metrics_password = ""
-      logs_username    = ""
-      logs_password    = ""
-      traces_username  = ""
-      traces_password  = ""
-    }
-    extra_namespaces = ["ingress-nginx"]
-  }
+  default = null
 }
 
 variable "falco_enabled" {

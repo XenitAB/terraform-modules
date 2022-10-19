@@ -4,7 +4,7 @@ data "azurerm_resource_group" "log" {
 
 
 resource "azurerm_eventhub_namespace" "this" {
-  name                = "log-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
+  name                = var.unique_suffix == "" ? "log-${var.environment}-${var.location_short}-${var.name}" : "log-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
   location            = data.azurerm_resource_group.log.location
   resource_group_name = data.azurerm_resource_group.log.name
   sku                 = "Standard"
@@ -32,7 +32,7 @@ resource "azurerm_eventhub_namespace_authorization_rule" "listen" {
 }
 
 resource "azurerm_eventhub" "this" {
-  name                = "audit-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
+  name                = var.unique_suffix == "" ? "audit-${var.environment}-${var.location_short}-${var.name}" : "audit-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
   namespace_name      = azurerm_eventhub_namespace.this.name
   resource_group_name = azurerm_eventhub_namespace.this.resource_group_name
   partition_count     = 2

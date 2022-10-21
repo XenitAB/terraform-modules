@@ -12,10 +12,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [830](https://github.com/XenitAB/terraform-modules/pull/830) Add unique_suffix to core delegate azurerm_role_definition service_endpoint_join.
 - [832](https://github.com/XenitAB/terraform-modules/pull/832) Upgrade azurerm provider to 3.28.0.
 
-### Fixed
-
-- [#827](https://github.com/XenitAB/terraform-modules/pull/827) VMSS source_image_reference provider bug workaround.
-
 ## 2022.10.1
 
 ### Added

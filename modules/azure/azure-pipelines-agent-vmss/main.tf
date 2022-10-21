@@ -83,13 +83,10 @@ resource "azurerm_linux_virtual_machine_scale_set" "this" {
     }
   }
 
-  # source_image_reference is added here due to a bug in the provider. It makes the instances to
-  # be re-created even though is not used: https://github.com/hashicorp/terraform-provider-azurerm/issues/18661
   lifecycle {
     ignore_changes = [
       tags,
-      instances,
-      source_image_reference
+      instances
     ]
   }
 }

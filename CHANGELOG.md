@@ -5,10 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Calendar Versioning](https://calver.org/).
 
 ## Unreleased
+<https://github.com/XenitAB/terraform-modules/pull/832>
 
 ### Changed
 
 - [830](https://github.com/XenitAB/terraform-modules/pull/830) Add unique_suffix to core delegate azurerm_role_definition service_endpoint_join.
+- [832](https://github.com/XenitAB/terraform-modules/pull/832) Upgrade azurerm provider to 3.28.0.
 
 ### Fixed
 

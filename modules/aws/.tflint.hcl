@@ -15,7 +15,7 @@ rule "terraform_deprecated_interpolation" {
 }
 
 rule "terraform_deprecated_index" {
-  enabled = true
+  enabled = false
 }
 
 rule "terraform_unused_declarations" {

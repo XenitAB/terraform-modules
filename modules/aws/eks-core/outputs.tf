@@ -2,7 +2,7 @@ output "vpc_id" {
   description = "The id of the VPC created by this module"
   value       = aws_vpc.this.id
 }
-
+# tflint-ignore: terraform_deprecated_index
 output "private_subnets_ids" {
   description = "The ids of the of private subnets created by this module"
   value = [

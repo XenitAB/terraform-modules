@@ -27,14 +27,15 @@ variable "resource_group_configs" {
   description = "Resource group configuration"
   type = list(
     object({
-      common_name                = string
-      delegate_aks               = bool # Delegate aks permissions
-      delegate_key_vault         = bool # Delegate KeyVault creation
-      delegate_service_endpoint  = bool # Delegate Service Endpoint permissions
-      delegate_service_principal = bool # Delegate Service Principal
-      lock_resource_group        = bool # Adds management_lock (CanNotDelete) to the resource group
-      disable_unique_suffix      = bool # Disable unique_suffix on resource names
-      tags                       = map(string)
+      common_name                        = string
+      delegate_aks                       = bool # Delegate aks permissions
+      delegate_key_vault                 = bool # Delegate KeyVault creation
+      delegate_service_endpoint          = bool # Delegate Service Endpoint permissions
+      delegate_service_principal         = bool # Delegate Service Principal
+      lock_resource_group                = bool # Adds management_lock (CanNotDelete) to the resource group
+      disable_unique_suffix              = bool # Disable unique_suffix on resource names
+      key_vault_purge_protection_enabled = optional(bool, false)
+      tags                               = map(string)
     })
   )
 }
@@ -43,12 +44,6 @@ variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string
   default     = ""
-}
-
-variable "key_vault_purge_protection_enabled" {
-  description = "If true purge protection will be enabled to all key vaults"
-  type        = bool
-  default     = false
 }
 
 variable "azuread_groups" {

@@ -12,7 +12,7 @@ resource "azurerm_key_vault" "delegate_kv" {
   resource_group_name      = azurerm_resource_group.rg[each.key].name
   tenant_id                = data.azurerm_client_config.current.tenant_id
   sku_name                 = "standard"
-  purge_protection_enabled = var.key_vault_purge_protection_enabled
+  purge_protection_enabled = each.value.key_vault_purge_protection_enabled
 }
 
 resource "azurerm_key_vault_access_policy" "ap_owner_spn" {

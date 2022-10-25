@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#837](https://github.com/XenitAB/terraform-modules/pull/837) Update TFLint to 0.42.
 
+### Added
+
+- [#836](https://github.com/XenitAB/terraform-modules/pull/836) Make purge protection configurable per keyvault.
+
 ### Fixed
 
 - [#835](https://github.com/XenitAB/terraform-modules/pull/835) Make falco use priorityClassName again.

@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Fixed
+
+- [#835](https://github.com/XenitAB/terraform-modules/pull/835) Make falco use priorityClassName again.
+
 ## 2022.10.2
 
 ### Changed

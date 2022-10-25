@@ -8,6 +8,6 @@ output "private_subnets_ids" {
   value = [
     for subnet in aws_subnet.private :
     subnet.id
-    if contains[local.private_subnets.*.cidr_block, subnet.cidr_block]
+    if contains(local.private_subnets.*.cidr_block, subnet.cidr_block)
   ]
 }

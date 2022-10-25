@@ -61,7 +61,3 @@ rule "terraform_standard_module_structure" {
 rule "terraform_workspace_remote" {
   enabled = true
 }
-
-rule "aws_route_not_specified_target"{
-  enabled = true
-}

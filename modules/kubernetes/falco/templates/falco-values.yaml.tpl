@@ -16,7 +16,7 @@ falco:
     actions:
       - log
 
-priorityClassName: platform-high
+podPriorityClassName: platform-high
 
 scc:
   # -- Create OpenShift's Security Context Constraint.

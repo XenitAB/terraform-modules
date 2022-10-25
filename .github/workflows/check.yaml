@@ -9,7 +9,7 @@ jobs:
       - name: Setup TFLint
         uses: lablabs/setup-tflint@v1.1.0
         with:
-          tflint_version: v0.39.2
+          tflint_version: v0.42.1
       - name: Run lint
         run: |
           make lint

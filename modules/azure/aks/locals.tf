@@ -1,6 +1,8 @@
 # Replace this with a datasource when availible in the AzureRM provider.
 locals {
   vm_skus_disk_size_gb = {
+    # AMD64
+
     "Standard_D2ds_v5"  = 75
     "Standard_D4ds_v5"  = 150
     "Standard_D8ds_v5"  = 300
@@ -48,5 +50,30 @@ locals {
     "Standard_F48s_v2" = 768
     "Standard_F64s_v2" = 1024
     "Standard_F72s_v2" = 1520
+
+    # ARM64
+
+    "Standard_D2plds_v5"  = 75
+    "Standard_D4plds_v5"  = 150
+    "Standard_D8plds_v5"  = 300
+    "Standard_D16plds_v5" = 600
+    "Standard_D32plds_v5" = 1200
+    "Standard_D48plds_v5" = 1800
+    "Standard_D64plds_v5" = 2400
+
+    "Standard_D2pds_v5"  = 75
+    "Standard_D4pds_v5"  = 150
+    "Standard_D8pds_v5"  = 300
+    "Standard_D16pds_v5" = 600
+    "Standard_D32pds_v5" = 1200
+    "Standard_D48pds_v5" = 1800
+    "Standard_D64pds_v5" = 2400
+
+    "Standard_E2pds_v5"  = 75
+    "Standard_E4pds_v5"  = 150
+    "Standard_E8pds_v5"  = 300
+    "Standard_E16pds_v5" = 600
+    "Standard_E20pds_v5" = 750
+    "Standard_E32pds_v5" = 1200
   }
 }

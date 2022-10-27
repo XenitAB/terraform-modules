@@ -91,17 +91,12 @@ module "eks_core" {
 
   prometheus_enabled = true
   prometheus_config = {
-    role_arn = "foo"
-
-    tenant_id = ""
-
-    remote_write_authenticated = true
-    remote_write_url           = "https://my-receiver.com"
-
+    role_arn                        = "foo"
+    tenant_id                       = ""
+    remote_write_url                = "https://my-receiver.com"
     volume_claim_storage_class_name = "default"
     volume_claim_size               = "5Gi"
-
-    resource_selector  = ["platform"]
-    namespace_selector = ["platform"]
+    resource_selector               = ["platform"]
+    namespace_selector              = ["platform"]
   }
 }

@@ -98,17 +98,12 @@ module "aks_core" {
       resource_id = ""
       tenant_id   = ""
     }
-
-    tenant_id = ""
-
-    remote_write_authenticated = true
-    remote_write_url           = "https://my-receiver.com"
-
+    tenant_id                       = ""
+    remote_write_url                = "https://my-receiver.com"
     volume_claim_storage_class_name = "default"
     volume_claim_size               = "5Gi"
-
-    resource_selector  = ["platform"]
-    namespace_selector = ["platform"]
+    resource_selector               = ["platform"]
+    namespace_selector              = ["platform"]
   }
   external_dns_hostname = "foobar.com"
 }

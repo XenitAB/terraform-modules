@@ -113,7 +113,6 @@ spec:
     fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 1000
-  {{- if .Values.remoteWrite.authenticated }}
   volumeMounts:
     - mountPath: /mnt/secrets-store
       name: secrets-store
@@ -130,4 +129,3 @@ spec:
     - name: tls
       secret:
         secretName: {{ .Values.secretName }}
-  {{- end }}

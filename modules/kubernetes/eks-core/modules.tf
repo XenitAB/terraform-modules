@@ -361,14 +361,11 @@ module "prometheus" {
   tenant_id    = var.prometheus_config.tenant_id
   region       = data.aws_region.current.name
 
-  remote_write_authenticated = var.prometheus_config.remote_write_authenticated
-  remote_write_url           = var.prometheus_config.remote_write_url
-
+  remote_write_url                = var.prometheus_config.remote_write_url
   volume_claim_storage_class_name = "gp2"
   volume_claim_size               = var.prometheus_config.volume_claim_size
-
-  resource_selector  = var.prometheus_config.resource_selector
-  namespace_selector = var.prometheus_config.namespace_selector
+  resource_selector               = var.prometheus_config.resource_selector
+  namespace_selector              = var.prometheus_config.namespace_selector
 
   falco_enabled                          = var.falco_enabled
   opa_gatekeeper_enabled                 = var.opa_gatekeeper_enabled

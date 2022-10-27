@@ -355,31 +355,20 @@ variable "prometheus_enabled" {
   default     = true
 }
 
-variable "prometheus_volume_claim_storage_class_name" {
-  description = "Configuration for prometheus volume claim storage class name"
-  type        = string
-  default     = "managed-csi-zrs"
-}
-
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
+    tenant_id            = string
+    remote_write_url     = string
     azure_key_vault_name = string
     identity = object({
       client_id   = string
       resource_id = string
       tenant_id   = string
     })
-
-    tenant_id = string
-
-    remote_write_authenticated = bool
-    remote_write_url           = string
-
-    volume_claim_size = string
-
-    resource_selector  = list(string)
-    namespace_selector = list(string)
+    volume_claim_size  = optional(string, "10Gi")
+    resource_selector  = optional(list(string), ["platform"])
+    namespace_selector = optional(list(string), ["platform"])
   })
 }
 

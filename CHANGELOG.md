@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.10.3
+
 ### Changed
 
 - [#837](https://github.com/XenitAB/terraform-modules/pull/837) Update TFLint to 0.42.
@@ -23,7 +25,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Removed
 
 - [#839](https://github.com/XenitAB/terraform-modules/pull/839) Remove deprecated Flux V1 module.
-
 
 ## 2022.10.2
 

@@ -111,7 +111,7 @@ module "fluxcd_v2_azure_devops" {
   source = "../../kubernetes/fluxcd-v2-azdo"
 
   environment       = var.environment
-  cluster_id        = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
+  cluster_id = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix != null ? var.aks_name_suffix : ""}"
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
   azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
@@ -137,7 +137,7 @@ module "fluxcd_v2_github" {
   source = "../../kubernetes/fluxcd-v2-github"
 
   environment            = var.environment
-  cluster_id             = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix}"
+  cluster_id = "${var.location_short}-${var.environment}-${var.name}${var.aks_name_suffix != null ? var.aks_name_suffix : ""}"
   github_org             = var.fluxcd_v2_config.github.org
   github_app_id          = var.fluxcd_v2_config.github.app_id
   github_installation_id = var.fluxcd_v2_config.github.installation_id
@@ -196,7 +196,7 @@ module "azure_metrics" {
 
 # linkerd
 module "linkerd_crd" {
-  source = "../../kubernetes/helm-crd"
+  source = "../../kubernetes/helm-crd-oci"
 
   for_each = {
     for s in ["linkerd"] :
@@ -204,9 +204,9 @@ module "linkerd_crd" {
     if var.linkerd_enabled
   }
 
-  chart_repository = "https://helm.linkerd.io/edge"
-  chart_name       = "linkerd-crds"
-  chart_version    = "1.1.1-edge"
+  chart         = "oci://ghcr.io/xenitab/helm-charts/linkerd-crds"
+  chart_name    = "linkerd-crd"
+  chart_version = "2.12.0"
 }
 
 module "linkerd" {
@@ -240,6 +240,8 @@ module "ingress_nginx" {
   public_private_enabled    = var.ingress_config.public_private_enabled
   allow_snippet_annotations = var.ingress_config.allow_snippet_annotations
   external_dns_hostname     = var.external_dns_hostname
+  extra_config              = var.ingress_config.extra_config
+  extra_headers             = var.ingress_config.extra_headers
 
   default_certificate = {
     enabled  = true
@@ -277,7 +279,7 @@ module "external_dns" {
   source = "../../kubernetes/external-dns"
 
   dns_provider = "azure"
-  txt_owner_id = "${var.environment}-${var.name}${var.aks_name_suffix}"
+  txt_owner_id = "${var.environment}-${var.name}${var.aks_name_suffix != null ? var.aks_name_suffix : ""}"
   azure_config = {
     tenant_id       = data.azurerm_client_config.current.tenant_id
     subscription_id = data.azurerm_client_config.current.subscription_id
@@ -428,7 +430,7 @@ module "grafana_agent" {
     traces_password  = var.grafana_agent_config.credentials.traces_password
   }
 
-  cluster_name      = "${var.name}${var.aks_name_suffix}"
+  cluster_name = "${var.name}${var.aks_name_suffix != null ? var.aks_name_suffix : ""}"
   environment       = var.environment
   vpa_enabled       = var.vpa_enabled
   namespace_include = compact(concat(var.namespaces[*].name, var.grafana_agent_config.extra_namespaces))
@@ -516,7 +518,7 @@ module "prometheus" {
     }
   }
 
-  cluster_name = "${var.name}${var.aks_name_suffix}"
+  cluster_name = "${var.name}${var.aks_name_suffix != null ? var.aks_name_suffix : ""}"
   environment  = var.environment
   tenant_id    = var.prometheus_config.tenant_id
 
@@ -554,7 +556,7 @@ module "promtail" {
 
   source              = "../../kubernetes/promtail"
   cloud_provider      = "azure"
-  cluster_name        = "${var.name}${var.aks_name_suffix}"
+  cluster_name = "${var.name}${var.aks_name_suffix != null ? var.aks_name_suffix : ""}"
   environment         = var.environment
   tenant_id           = var.prometheus_config.tenant_id
   excluded_namespaces = var.promtail_config.excluded_namespaces

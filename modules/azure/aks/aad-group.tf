@@ -33,6 +33,14 @@ resource "azuread_group_member" "aks_managed_identity" {
   member_object_id = azurerm_kubernetes_cluster.this.kubelet_identity[0].object_id
 }
 
+locals {
+  node_resource_group = azurerm_kubernetes_cluster.this.node_resource_group
+}
+
+data "azurerm_resource_group" "aks" {
+  name = local.node_resource_group
+}
+
 resource "azurerm_role_assignment" "aks_managed_identity_noderg_managed_identity_operator" {
   scope                = data.azurerm_resource_group.aks.id
   role_definition_name = "Managed Identity Operator"

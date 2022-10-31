@@ -125,11 +125,19 @@ resource "tls_private_key" "linkerd_trust_anchor" {
 resource "tls_self_signed_cert" "linkerd_trust_anchor" {
   private_key_pem       = tls_private_key.linkerd_trust_anchor.private_key_pem
   validity_period_hours = 87600
-  early_renewal_hours   = 78840
+  early_renewal_hours   = 8760
   is_ca_certificate     = true
 
   subject {
     common_name = "root.linkerd.cluster.local"
+    country = ""
+    locality = ""
+    organization = ""
+    organizational_unit = ""
+    postal_code = ""
+    province = ""
+    serial_number = ""
+    street_address = []
   }
 
   allowed_uses = [
@@ -162,11 +170,19 @@ resource "tls_private_key" "webhook_issuer_tls" {
 resource "tls_self_signed_cert" "webhook_issuer_tls" {
   private_key_pem       = tls_private_key.webhook_issuer_tls.private_key_pem
   validity_period_hours = 87600
-  early_renewal_hours   = 78840
+  early_renewal_hours   = 8760
   is_ca_certificate     = true
 
   subject {
     common_name = "webhook.linkerd.cluster.local"
+    country = ""
+    locality = ""
+    organization = ""
+    organizational_unit = ""
+    postal_code = ""
+    province = ""
+    serial_number = ""
+    street_address = []
   }
 
   allowed_uses = [
@@ -196,7 +212,7 @@ resource "helm_release" "linkerd_cni" {
   chart       = "linkerd2-cni"
   name        = "linkerd-cni"
   namespace   = kubernetes_namespace.cni.metadata[0].name
-  version     = "2.11.3"
+  version     = "30.3.0"
   max_history = 3
 
   values = [
@@ -221,11 +237,11 @@ resource "helm_release" "linkerd_extras" {
 resource "helm_release" "linkerd" {
   depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
 
-  repository  = "https://helm.linkerd.io/edge"
+  repository  = "https://helm.linkerd.io/stable"
   chart       = "linkerd-control-plane"
   name        = "linkerd"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "1.5.4-edge"
+  version     = "1.9.0"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values.yaml.tpl", {
@@ -244,7 +260,7 @@ resource "helm_release" "linkerd_viz" {
   chart       = "linkerd-viz"
   name        = "linkerd-viz"
   namespace   = kubernetes_namespace.viz.metadata[0].name
-  version     = "2.11.3"
+  version     = "30.3.0"
   max_history = 3
   values = [
     templatefile("${path.module}/templates/values-viz.yaml.tpl", {}),

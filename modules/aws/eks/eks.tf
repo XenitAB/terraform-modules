@@ -206,7 +206,7 @@ resource "aws_eks_node_group" "this" {
     version = aws_launch_template.eks_node_group[each.key].latest_version
   }
 
-  labels = merge({ "xkf.xenit.io/node-ttl" = "168h" }, each.value.node_labels, { "node-pool" = each.value.name })
+  labels = merge({ "xkf.xenit.io/node-ttl" = "168h" }, each.value.node_labels, { "xkf.xenit.io/node-pool" = each.value.name })
 
   tags = local.global_tags
 

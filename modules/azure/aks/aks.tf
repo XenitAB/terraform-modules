@@ -1,5 +1,5 @@
 data "azurerm_subnet" "this" {
-  name                 = "sn-${var.environment}-${var.location_short}-${var.core_name}-${var.name}${var.aks_name_suffix}"
+  name                 = "sn-${var.environment}-${var.location_short}-${var.core_name}-${var.name}${local.aks_name_suffix}"
   virtual_network_name = "vnet-${var.environment}-${var.location_short}-${var.core_name}"
   resource_group_name  = "rg-${var.environment}-${var.location_short}-${var.core_name}"
 }
@@ -16,10 +16,10 @@ data "azurerm_storage_account" "log" {
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
-  name                            = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  name                            = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   location                        = data.azurerm_resource_group.this.location
   resource_group_name             = data.azurerm_resource_group.this.name
-  dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   kubernetes_version              = var.aks_config.version
   sku_tier                        = var.aks_config.production_grade ? "Paid" : "Free"
   api_server_authorized_ip_ranges = var.aks_authorized_ips
@@ -112,7 +112,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
-  name               = "log-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  name               = "log-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   target_resource_id = azurerm_kubernetes_cluster.this.id
   storage_account_id = data.azurerm_storage_account.log.id
 
@@ -237,7 +237,7 @@ resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "log_eventhub_audit" {
-  name                           = "eventhub-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}-audit"
+  name                           = "eventhub-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-audit"
   target_resource_id             = azurerm_kubernetes_cluster.this.id
   eventhub_name                  = var.log_eventhub_name
   eventhub_authorization_rule_id = var.log_eventhub_authorization_rule_id

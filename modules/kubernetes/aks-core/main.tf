@@ -52,3 +52,7 @@ data "azurerm_resource_group" "this" {
 data "azurerm_resource_group" "global" {
   name = "rg-${var.environment}-${var.global_location_short}-global"
 }
+
+locals {
+  aks_name_suffix = var.aks_name_suffix != null ? var.aks_name_suffix : ""
+}

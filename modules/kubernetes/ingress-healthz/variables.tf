@@ -19,7 +19,7 @@ variable "location_short" {
   default     = ""
 }
 variable "public_private_enabled" {
-  description = "Is public private nginx enabled"
+  description = "Should ingress controllers for both public and private be enabled?"
   type        = bool
   default     = false
 }

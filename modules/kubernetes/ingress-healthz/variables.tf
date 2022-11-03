@@ -21,5 +21,5 @@ variable "location_short" {
 variable "public_private_enabled" {
   description = "Is public private nginx enabled"
   type        = bool
-  default     = true
+  default     = false
 }

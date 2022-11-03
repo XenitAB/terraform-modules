@@ -4,7 +4,7 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.28.1 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.24.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.28.0 |
 
 ## Providers
 

@@ -6,6 +6,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Fixed
+
+- [#821](https://github.com/XenitAB/terraform-modules/pull/821) Default ingressClassName for ingress_healthz.
+
+## 2022.10.3
+
+### Changed
+
+- [#837](https://github.com/XenitAB/terraform-modules/pull/837) Update TFLint to 0.42.
+- [#838](https://github.com/XenitAB/terraform-modules/pull/838) Update git-auth-proxy to v0.8.1.
+- [#840](https://github.com/XenitAB/terraform-modules/pull/840) Add support for ARM VMs in AKS.
+- [#841](https://github.com/XenitAB/terraform-modules/pull/841) Change ACR SKU to Standard.
+
+### Added
+
+- [#836](https://github.com/XenitAB/terraform-modules/pull/836) Make purge protection configurable per keyvault.
+
+### Fixed
+
+- [#835](https://github.com/XenitAB/terraform-modules/pull/835) Make falco use priorityClassName again.
+
+### Removed
+
+- [#839](https://github.com/XenitAB/terraform-modules/pull/839) Remove deprecated Flux V1 module.
+
+## 2022.10.2
+
+### Changed
+
+- [830](https://github.com/XenitAB/terraform-modules/pull/830) Add unique_suffix to core delegate azurerm_role_definition service_endpoint_join.
+- [832](https://github.com/XenitAB/terraform-modules/pull/832) Upgrade azurerm provider to 3.28.0.
+
+## 2022.10.1
+
+### Added
+
+- [#823](https://github.com/XenitAB/terraform-modules/pull/823) Add secrets-store.csi.x-k8s.io to EKS tenants.
+
 ### Changed
 
 - [#812](https://github.com/XenitAB/terraform-modules/pull/812) Upgrade terraform to 1.3.0.
@@ -16,7 +54,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - [#815](https://github.com/XenitAB/terraform-modules/pull/815) Make datadog tolerate all node taints.
-- [#821](https://github.com/XenitAB/terraform-modules/pull/821) Default ingressClassName for ingress_healthz.
+- [#822](https://github.com/XenitAB/terraform-modules/pull/822) Update secrets-store.csi.x-k8s.io from v1alpha1 to v1.
 
 ## 2022.09.2
 

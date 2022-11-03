@@ -5,16 +5,16 @@ config:
       tls_config:
         cert_file: /mnt/tls/tls.crt
         key_file: /mnt/tls/tls.key
-    
+
     pipelineStages:
       - cri: {}
       - static_labels:
           region: "${region}"
           environment: "${environment}"
           cluster: "${cluster_name}"
-      
+
       # Drop 2xx and 3xx from ingress-nginx since it it generates a lot of log messages. Example:
-      # xxx.xxx.xxx.xxx - - [04/May/2022:13:12:50 +0000] "POST /api/v1/receive HTTP/2.0" 200 0 "-" "Prometheus/2.35.0" 
+      # xxx.xxx.xxx.xxx - - [04/May/2022:13:12:50 +0000] "POST /api/v1/receive HTTP/2.0" 200 0 "-" "Prometheus/2.35.0"
       # 35234 0.004 [monitor-router-receiver-remote-write] [] 10.244.34.149:19291 0 0.004 200 0156a072a34b23dc09bcfcfe87991c7b
       - match:
           selector: '{namespace="ingress-nginx"}'
@@ -47,7 +47,7 @@ resources:
   requests:
     cpu: 50m
     memory: 100Mi
- 
+
 %{~ if provider == "azure" ~}
 podLabels:
   aadpodidbinding: promtail
@@ -62,7 +62,7 @@ extraVolumes:
         secretProviderClass: promtail
   - name: tls
     secret:
-      secretName: "${k8s_secret_name}"  
+      secretName: "${k8s_secret_name}"
 
 extraVolumeMounts:
   - name: secrets-store
@@ -77,9 +77,9 @@ serviceAccount:
      "eks.amazonaws.com/role-arn": "${aws_config.role_arn}"
 %{~ endif ~}
 
-extraObjects: 
+extraObjects:
   %{~ if provider == "aws" ~}
-  - apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+  - apiVersion: secrets-store.csi.x-k8s.io/v1
     kind: SecretProviderClass
     metadata:
       name: promtail
@@ -101,7 +101,7 @@ extraObjects:
               key: tls.crt
   %{~ endif ~}
   %{~ if provider == "azure" ~}
-  - apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+  - apiVersion: secrets-store.csi.x-k8s.io/v1
     kind: SecretProviderClass
     metadata:
       name: promtail
@@ -162,4 +162,3 @@ extraObjects:
         app.kubernetes.io/instance: promtail
         app.kubernetes.io/name: promtail
 
-    

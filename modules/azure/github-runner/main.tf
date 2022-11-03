@@ -15,7 +15,7 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "3.24.0"
+      version = "3.28.0"
       source  = "hashicorp/azurerm"
     }
     tls = {

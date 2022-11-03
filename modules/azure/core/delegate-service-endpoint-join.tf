@@ -1,5 +1,5 @@
 resource "azurerm_role_definition" "service_endpoint_join" {
-  name  = "${var.azure_role_definition_prefix}-${var.environment}-${var.location_short}-${var.name}-serviceEndpointJoin"
+  name  = "${var.azure_role_definition_prefix}-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}-serviceEndpointJoin"
   scope = azurerm_virtual_network.this.id
 
   permissions {

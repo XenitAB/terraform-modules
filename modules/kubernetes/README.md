@@ -35,10 +35,6 @@ This directory contains all the Kubernetes Terraform modules.
 - [`helm-crd`](helm-crd/README.md)
 - [`helm-crd-oci`](helm-crd-oci/README.md)
 
-## Deprecated
-
-- [`fluxcd-v1`](fluxcd-v1/README.md)
-
 ## Style Guide
 
 TBD

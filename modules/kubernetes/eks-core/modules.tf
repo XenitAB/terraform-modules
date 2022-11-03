@@ -186,9 +186,10 @@ module "ingress_healthz" {
 
   source = "../../kubernetes/ingress-healthz"
 
-  environment     = var.environment
-  dns_zone        = var.cert_manager_config.dns_zone[0]
-  linkerd_enabled = var.linkerd_enabled
+  environment            = var.environment
+  dns_zone               = var.cert_manager_config.dns_zone[0]
+  linkerd_enabled        = var.linkerd_enabled
+  public_private_enabled = var.ingress_config.public_private_enabled
 }
 
 module "external_dns" {

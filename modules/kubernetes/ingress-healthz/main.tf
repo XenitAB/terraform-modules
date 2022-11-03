@@ -21,6 +21,10 @@ terraform {
   }
 }
 
+locals {
+  ingress_class_name = var.public_private_enabled == true ? "nginx-public" : "nginx"
+}
+
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
@@ -39,9 +43,10 @@ resource "helm_release" "ingress_healthz" {
   version     = "12.0.3"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    environment     = var.environment
-    dns_zone        = var.dns_zone
-    location_short  = var.location_short
-    linkerd_enabled = var.linkerd_enabled
+    environment        = var.environment
+    dns_zone           = var.dns_zone
+    location_short     = var.location_short
+    linkerd_enabled    = var.linkerd_enabled
+    ingress_class_name = local.ingress_class_name
   })]
 }

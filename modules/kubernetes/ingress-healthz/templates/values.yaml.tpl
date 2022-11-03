@@ -27,6 +27,7 @@ service:
 
 ingress:
   enabled: true
+  ingressClassName: ${ingress_class_name}
   %{ if location_short == "" }
   hostname: ingress-healthz.${dns_zone}
   %{ else }

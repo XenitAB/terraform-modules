@@ -22,7 +22,7 @@ terraform {
 }
 
 locals {
-  ingress_class_name = var.public_private_enabled == true ? "nginx" : "nginx-public"
+  ingress_class_name = var.public_private_enabled == true ? "nginx-public" : "nginx"
 }
 
 resource "kubernetes_namespace" "this" {

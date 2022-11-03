@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#838](https://github.com/XenitAB/terraform-modules/pull/838) Update git-auth-proxy to v0.8.1.
 - [#840](https://github.com/XenitAB/terraform-modules/pull/840) Add support for ARM VMs in AKS.
 - [#841](https://github.com/XenitAB/terraform-modules/pull/841) Change ACR SKU to Standard.
+- [#846](https://github.com/XenitAB/terraform-modules/pull/846) Add XKF prefix to node pool label.
 
 ### Added
 

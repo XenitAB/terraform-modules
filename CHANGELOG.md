@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#821](https://github.com/XenitAB/terraform-modules/pull/821) Default ingressClassName for ingress_healthz.
 - [#847](https://github.com/XenitAB/terraform-modules/pull/847) Fix linkerd certificate forced recreation.
 
+### Changed
+
+- [#848](https://github.com/XenitAB/terraform-modules/pull/848) Allow aks name suffix to be set to null.
+
 ## 2022.10.3
 
 ### Changed

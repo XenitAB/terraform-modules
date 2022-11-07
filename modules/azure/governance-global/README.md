@@ -50,6 +50,7 @@ No modules.
 | [azuread_group_member.acr_reader_rg_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azuread_group_member.acr_reader_rg_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azuread_group_member.acr_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
+| [azuread_group_member.admin_group](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azuread_group_member.service_endpoint_join_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azuread_group_member.service_endpoint_join_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azuread_group_member.service_endpoint_join_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
@@ -66,6 +67,7 @@ No modules.
 | [pal_management_partner.aad_sp](https://registry.terraform.io/providers/xenitab/pal/0.2.5/docs/resources/management_partner) | resource |
 | [pal_management_partner.owner_spn](https://registry.terraform.io/providers/xenitab/pal/0.2.5/docs/resources/management_partner) | resource |
 | [azuread_application.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/application) | data source |
+| [azuread_group.admin_group](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
 | [azuread_group.all_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
 | [azuread_group.all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
 | [azuread_group.all_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
@@ -76,6 +78,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_admin_group"></a> [admin\_group](#input\_admin\_group) | The admin group for XKS | `string` | `""` | no |
 | <a name="input_aks_group_name_prefix"></a> [aks\_group\_name\_prefix](#input\_aks\_group\_name\_prefix) | Prefix for AKS Azure AD groups | `string` | `"aks"` | no |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
 | <a name="input_delegate_acr"></a> [delegate\_acr](#input\_delegate\_acr) | Should Azure Container Registry delegation be configured? | `bool` | `true` | no |

@@ -56,6 +56,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#810](https://github.com/XenitAB/terraform-modules/pull/810) Update provider versions.
 - [#814](https://github.com/XenitAB/terraform-modules/pull/814) Possible to use data source as policy input to Irsa.
 - [#816](https://github.com/XenitAB/terraform-modules/pull/816) Update node local dns version.
+- [#820](https://github.com/XenitAB/terraform-modules/pull/820) If admin_group defined give access to subscription owner group.
 
 ### Fixed
 

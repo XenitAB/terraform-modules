@@ -69,3 +69,9 @@ variable "resource_group_configs" {
     })
   )
 }
+
+variable "admin_group" {
+  description = "The admin group for XKS"
+  type        = string
+  default     = ""
+}

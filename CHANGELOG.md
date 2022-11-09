@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
+- [#849](https://github.com/XenitAB/terraform-modules/pull/849) Bump azad-kube-proxy version to 0.0.36.
 - [#848](https://github.com/XenitAB/terraform-modules/pull/848) Allow aks name suffix to be set to null.
 
 ## 2022.10.3

@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#821](https://github.com/XenitAB/terraform-modules/pull/821) Default ingressClassName for ingress_healthz.
 - [#847](https://github.com/XenitAB/terraform-modules/pull/847) Fix linkerd certificate forced recreation.
+- [#850](https://github.com/XenitAB/terraform-modules/pull/850) Allow overriding ACR name.
 
 ### Changed
 

@@ -1,8 +1,6 @@
-# More info about Azure Container Registry Roles can be found here: https://docs.microsoft.com/en-us/azure/container-registry/container-registry-roles
-
 # Create Azure Container Registry
 resource "azurerm_container_registry" "acr" {
-  name                = "acr${var.environment}${var.location_short}${var.name}${var.unique_suffix}"
+  name                = var.acr_name_override == "" ? "acr${var.environment}${var.location_short}${var.name}${var.unique_suffix}" : var.acr_name_override
   resource_group_name = resource.azurerm_resource_group.this.name
   location            = resource.azurerm_resource_group.this.location
   sku                 = "Standard"
@@ -11,6 +9,8 @@ resource "azurerm_container_registry" "acr" {
 
 # Add AcrPull permission for the AKS Service Principal (Client)
 # This makes it possible for the AKS cluster to pull images without additional authentication
+
+# More info about Azure Container Registry Roles can be found here: https://docs.microsoft.com/en-us/azure/container-registry/container-registry-roles
 
 resource "azurerm_role_assignment" "aks" {
   scope                = azurerm_container_registry.acr.id

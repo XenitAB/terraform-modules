@@ -55,3 +55,9 @@ variable "aks_group_name_prefix" {
   type        = string
   default     = "aks"
 }
+
+variable "acr_name_override" {
+  description = "Override default name of ACR"
+  type        = string
+  default     = ""
+}

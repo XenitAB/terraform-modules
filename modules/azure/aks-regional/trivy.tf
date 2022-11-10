@@ -1,5 +1,5 @@
 data "azurerm_container_registry" "acr" {
-  name                = "acr${var.environment}${var.global_location_short}${var.name}${var.unique_suffix}"
+  name                = var.acr_name_override == "" ? "acr${var.environment}${var.location_short}${var.name}${var.unique_suffix}" : var.acr_name_override
   resource_group_name = data.azurerm_resource_group.global.name
 }
 

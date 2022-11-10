@@ -15,6 +15,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#849](https://github.com/XenitAB/terraform-modules/pull/849) Bump azad-kube-proxy version to 0.0.36.
 - [#848](https://github.com/XenitAB/terraform-modules/pull/848) Allow aks name suffix to be set to null.
+- [#841](https://github.com/XenitAB/terraform-modules/pull/841) Change ACR SKU to Standard.
+- [#846](https://github.com/XenitAB/terraform-modules/pull/846) Add XKF prefix to node pool label.
 
 ## 2022.10.3
 
@@ -23,8 +25,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#837](https://github.com/XenitAB/terraform-modules/pull/837) Update TFLint to 0.42.
 - [#838](https://github.com/XenitAB/terraform-modules/pull/838) Update git-auth-proxy to v0.8.1.
 - [#840](https://github.com/XenitAB/terraform-modules/pull/840) Add support for ARM VMs in AKS.
-- [#841](https://github.com/XenitAB/terraform-modules/pull/841) Change ACR SKU to Standard.
-- [#846](https://github.com/XenitAB/terraform-modules/pull/846) Add XKF prefix to node pool label.
 
 ### Added
 

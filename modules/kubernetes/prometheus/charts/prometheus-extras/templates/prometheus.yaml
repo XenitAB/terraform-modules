@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "prometheus-extras.labels" . | nindent 4 }}
 spec:
+  version: v2.40.1
   {{- if eq .Values.cloudProvider "azure" }}
   podMetadata:
     labels:

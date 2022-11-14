@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#848](https://github.com/XenitAB/terraform-modules/pull/848) Allow aks name suffix to be set to null.
 - [#841](https://github.com/XenitAB/terraform-modules/pull/841) Change ACR SKU to Standard.
 - [#846](https://github.com/XenitAB/terraform-modules/pull/846) Add XKF prefix to node pool label.
+- [#853](https://github.com/XenitAB/terraform-modules/pull/853) Upgrade azad-kube-proxy version.
 
 ## 2022.10.3
 

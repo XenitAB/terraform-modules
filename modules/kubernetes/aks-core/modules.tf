@@ -409,11 +409,12 @@ module "grafana_agent" {
     traces_password  = var.grafana_agent_config.credentials.traces_password
   }
 
-  cluster_name      = "${var.name}${local.aks_name_suffix}"
-  environment       = var.environment
-  vpa_enabled       = var.vpa_enabled
-  namespace_include = compact(concat(var.namespaces[*].name, var.grafana_agent_config.extra_namespaces))
-  extra_namespaces  = var.grafana_agent_config.extra_namespaces
+  cluster_name            = "${var.name}${local.aks_name_suffix}"
+  environment             = var.environment
+  vpa_enabled             = var.vpa_enabled
+  namespace_include       = compact(concat(var.namespaces[*].name, var.grafana_agent_config.extra_namespaces))
+  extra_namespaces        = var.grafana_agent_config.extra_namespaces
+  include_kubelet_metrics = var.grafana_agent_config.include_kubelet_metrics
 }
 
 # falco

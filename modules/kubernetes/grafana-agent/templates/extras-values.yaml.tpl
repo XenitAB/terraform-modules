@@ -8,3 +8,5 @@ remote:
   tracesUrl: ${remote_write_traces_url}
 
 ingressNginx: ${ingress_nginx_observability}
+includeKubeletMetrics: ${include_kubelet_metrics}
+kubeletMetricsNamespaces: ${kubelet_metrics_namespaces}

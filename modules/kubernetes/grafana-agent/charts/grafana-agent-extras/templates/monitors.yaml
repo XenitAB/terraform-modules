@@ -19,3 +19,82 @@ spec:
       app.kubernetes.io/name: ingress-nginx
       function: metrics
 {{ end }}
+{{ if .Values.includeKubeletMetrics }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    xkf.xenit.io/monitoring: tenant
+  name: kubelet-monitor
+  namespace: grafana-agent
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    honorLabels: true
+    port: https-metrics
+    relabelings:
+    - action: replace
+      sourceLabels:
+      - __metrics_path__
+      targetLabel: metrics_path
+    scheme: https
+    tlsConfig:
+      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      insecureSkipVerify: true
+    metricRelabelings:
+    %{~ for namespace in kubeletMetricsNamespaces ~}
+    - action: keep
+      regex: ${namespace}
+      source_labels:
+        - __meta_kubernetes_namespace
+    %{~ endfor ~}
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    honorLabels: true
+    path: /metrics/cadvisor
+    port: https-metrics
+    relabelings:
+    - action: replace
+      sourceLabels:
+      - __metrics_path__
+      targetLabel: metrics_path
+    scheme: https
+    tlsConfig:
+      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      insecureSkipVerify: true
+    metricRelabelings:
+    %{~ for namespace in kubeletMetricsNamespaces ~}
+    - action: keep
+      regex: ${namespace}
+      source_labels:
+        - __meta_kubernetes_namespace
+    %{~ endfor ~}
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    honorLabels: true
+    path: /metrics/probes
+    port: https-metrics
+    relabelings:
+    - action: replace
+      sourceLabels:
+      - __metrics_path__
+      targetLabel: metrics_path
+    metricRelabelings:
+    %{~ for namespace in kubeletMetricsNamespaces ~}
+    - action: keep
+      regex: ${namespace}
+      source_labels:
+        - __meta_kubernetes_namespace
+    %{~ endfor ~}
+    scheme: https
+    tlsConfig:
+      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      insecureSkipVerify: true
+  jobLabel: k8s-app
+  namespaceSelector:
+    matchNames:
+    - kube-system
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kubelet
+      k8s-app: kubelet
+{{ end }}

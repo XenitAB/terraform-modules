@@ -33,6 +33,9 @@ resource "azurerm_subnet_nat_gateway_association" "sn_cluster_nat_gw" {
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
+  depends_on = [
+    azurerm_nat_gateway.this
+  ]
   name                            = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   location                        = data.azurerm_resource_group.this.location
   resource_group_name             = data.azurerm_resource_group.this.name

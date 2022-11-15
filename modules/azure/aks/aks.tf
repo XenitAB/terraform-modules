@@ -14,10 +14,10 @@ data "azurerm_storage_account" "log" {
 }
 
 resource "azurerm_nat_gateway" "this" {
-  name                    = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
-  resource_group_name     = data.azurerm_resource_group.this.name
-  location                = data.azurerm_resource_group.this.location
-  zones                   = ["1", "2", "3"]
+  name                = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
+  zones               = ["1", "2", "3"]
 }
 
 resource "azurerm_nat_gateway_public_ip_prefix_association" "nat_ips" {
@@ -54,7 +54,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     network_plugin    = "kubenet"
     network_policy    = "calico"
     load_balancer_sku = "standard"
-    outbound_type      = "userAssignedNATGateway"
+    outbound_type     = "userAssignedNATGateway"
     nat_gateway_profile {
       idle_timeout_in_minutes = 4
     }

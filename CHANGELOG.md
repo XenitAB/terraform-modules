@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#856](https://github.com/XenitAB/terraform-modules/pull/856) Make AKS use NAT Gateway instead of SNAT.
+
 ## 2022.11.1
 
 ### Fixed

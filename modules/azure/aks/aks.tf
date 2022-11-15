@@ -13,6 +13,23 @@ data "azurerm_storage_account" "log" {
   resource_group_name = data.azurerm_resource_group.log.name
 }
 
+resource "azurerm_nat_gateway" "this" {
+  name                    = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  resource_group_name     = data.azurerm_resource_group.this.name
+  location                = data.azurerm_resource_group.this.location
+  zones                   = ["1", "2", "3"]
+}
+
+resource "azurerm_nat_gateway_public_ip_prefix_association" "nat_ips" {
+  nat_gateway_id      = azurerm_nat_gateway.this.id
+  public_ip_prefix_id = var.aks_public_ip_prefix_id
+}
+
+resource "azurerm_subnet_nat_gateway_association" "sn_cluster_nat_gw" {
+  subnet_id      = data.azurerm_subnet.this.id
+  nat_gateway_id = azurerm_nat_gateway.this.id
+}
+
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
@@ -37,10 +54,9 @@ resource "azurerm_kubernetes_cluster" "this" {
     network_plugin    = "kubenet"
     network_policy    = "calico"
     load_balancer_sku = "standard"
-    load_balancer_profile {
-      outbound_ip_prefix_ids = [
-        var.aks_public_ip_prefix_id
-      ]
+    outbound_type      = "userAssignedNATGateway"
+    nat_gateway_profile {
+      idle_timeout_in_minutes = 4
     }
   }
 
@@ -74,6 +90,12 @@ resource "azurerm_kubernetes_cluster" "this" {
     enable_auto_scaling          = false
     node_count                   = var.aks_config.production_grade ? 2 : 1
     only_critical_addons_enabled = true
+  }
+
+  lifecycle {
+    ignore_changes = [
+      network_profile[0].nat_gateway_profile
+    ]
   }
 }
 

@@ -57,7 +57,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     network_plugin    = "kubenet"
     network_policy    = "calico"
     load_balancer_sku = "standard"
-    outbound_type     = "userAssignedNATGateway"
+    outbound_type     = "managedNATGateway"
     nat_gateway_profile {
       idle_timeout_in_minutes = 4
     }

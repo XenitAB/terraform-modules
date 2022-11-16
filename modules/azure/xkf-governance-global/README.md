@@ -20,6 +20,10 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [azuread_directory_role_assignment.cluster_admin](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/directory_role_assignment) | resource |
+| [azuread_directory_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/directory_role_assignment) | resource |
+| [azuread_directory_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/directory_role_assignment) | resource |
+| [azuread_directory_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/directory_role_assignment) | resource |
 | [azuread_group.aks_managed_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group) | resource |
 | [azuread_group.cluster_admin](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group) | resource |
 | [azuread_group.cluster_view](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group) | resource |

@@ -44,3 +44,8 @@ variable "azure_ad_group_prefix" {
   default     = "az"
 }
 
+variable "directory_reader_enabled" {
+  description = "Assigns Directory Reader role to Kubernetes Azure AD groups if true"
+  type        = bool
+  default     = false
+}

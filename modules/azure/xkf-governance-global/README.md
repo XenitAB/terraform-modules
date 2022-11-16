@@ -42,6 +42,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
 | <a name="input_cloud_provider"></a> [cloud\_provider](#input\_cloud\_provider) | Current provider | `string` | n/a | yes |
+| <a name="input_directory_reader_enabled"></a> [directory\_reader\_enabled](#input\_directory\_reader\_enabled) | Assigns Directory Reader role to Kubernetes Azure AD groups if true | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environemnt | `string` | n/a | yes |
 | <a name="input_group_name_prefix"></a> [group\_name\_prefix](#input\_group\_name\_prefix) | Prefix for Azure AD groups | `string` | n/a | yes |
 | <a name="input_group_name_separator"></a> [group\_name\_separator](#input\_group\_name\_separator) | Separator for group names | `string` | `"-"` | no |

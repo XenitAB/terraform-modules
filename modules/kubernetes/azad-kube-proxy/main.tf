@@ -37,12 +37,6 @@ terraform {
 }
 
 locals {
-  aad_config = {
-    CLIENT_ID     = var.azure_ad_app.client_id
-    CLIENT_SECRET = var.azure_ad_app.client_secret
-    TENANT_ID     = var.azure_ad_app.tenant_id
-  }
-  secret_data = local.aad_config
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
     fqdn                  = var.fqdn,
     allowed_ips_csv       = join(",", var.allowed_ips),
@@ -66,7 +60,11 @@ resource "kubernetes_secret" "this" {
     namespace = kubernetes_namespace.this.metadata[0].name
   }
 
-  data = local.secret_data
+  data = {
+    CLIENT_ID     = var.azure_ad_app.client_id
+    CLIENT_SECRET = var.azure_ad_app.client_secret
+    TENANT_ID     = var.azure_ad_app.tenant_id
+  }
 }
 
 resource "helm_release" "azad_kube_proxy" {

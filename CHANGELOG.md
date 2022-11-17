@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#862](https://github.com/XenitAB/terraform-modules/pull/862) Simplify azad kube proxy locals.
+
 ## 2022.11.1
 
 ### Fixed

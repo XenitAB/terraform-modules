@@ -222,7 +222,7 @@ module "ingress_nginx" {
 
   default_certificate = {
     enabled  = true
-    dns_zone = var.cert_manager_config.dns_zone[0]
+    dns_zone = var.dns_zones[0]
   }
 }
 
@@ -239,7 +239,7 @@ module "ingress_healthz" {
   source = "../../kubernetes/ingress-healthz"
 
   environment            = var.environment
-  dns_zone               = var.cert_manager_config.dns_zone[0]
+  dns_zone               = var.dns_zones[0]
   location_short         = var.location_short
   linkerd_enabled        = var.linkerd_enabled
   public_private_enabled = var.ingress_config.public_private_enabled
@@ -456,7 +456,7 @@ module "azad_kube_proxy" {
 
   source = "../../kubernetes/azad-kube-proxy"
 
-  fqdn                  = var.azad_kube_proxy_config.fqdn
+  fqdn                  = "aks-${var.location_short}.${var.dns_zones[0]}"
   azure_ad_group_prefix = var.azad_kube_proxy_config.azure_ad_group_prefix
   allowed_ips           = var.azad_kube_proxy_config.allowed_ips
 

@@ -23,6 +23,11 @@ variable "aks_name_suffix" {
   type        = number
 }
 
+variable "dns_zones" {
+  description = "The list of DNS Zone host names"
+  type        = list(string)
+}
+
 variable "aad_groups" {
   description = "Configuration for aad groups"
   type = object({
@@ -328,7 +333,6 @@ variable "azad_kube_proxy_enabled" {
 variable "azad_kube_proxy_config" {
   description = "The azad-kube-proxy configuration"
   type = object({
-    fqdn                  = string
     azure_ad_group_prefix = string
     allowed_ips           = list(string)
     azure_ad_app = object({
@@ -338,7 +342,6 @@ variable "azad_kube_proxy_config" {
     })
   })
   default = {
-    fqdn                  = ""
     azure_ad_group_prefix = ""
     allowed_ips           = []
     azure_ad_app = {

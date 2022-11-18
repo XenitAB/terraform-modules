@@ -33,7 +33,7 @@ variable "namespaces" {
   )
 }
 
-variable "dns_zone" {
+variable "dns_zones" {
   description = "List of DNS Zone to create"
   type        = list(string)
 }

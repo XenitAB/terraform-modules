@@ -35,6 +35,6 @@ module "aks_regional" {
   ]
   aks_managed_identity = "id"
 
-  dns_zone           = ["example.io"]
+  dns_zones          = ["example.io"]
   aks_authorized_ips = ["0.0.0.0/0"]
 }

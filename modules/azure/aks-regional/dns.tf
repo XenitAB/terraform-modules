@@ -1,6 +1,6 @@
 data "azurerm_dns_zone" "this" {
   for_each = {
-    for dns in var.dns_zone :
+    for dns in var.dns_zones :
     dns => dns
   }
   name                = each.key
@@ -21,7 +21,7 @@ resource "azurerm_role_assignment" "external_dns_msi" {
 
 resource "azurerm_role_assignment" "external_dns_contributor" {
   for_each = {
-    for dns in var.dns_zone :
+    for dns in var.dns_zones :
     dns => dns
   }
   scope                = data.azurerm_dns_zone.this[each.key].id

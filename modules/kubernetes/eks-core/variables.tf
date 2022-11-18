@@ -29,6 +29,11 @@ variable "group_name_prefix" {
   type        = string
 }
 
+variable "dns_zones" {
+  description = "DNS Zone to create ingress sub domain under"
+  type        = list(string)
+}
+
 variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes."
   type = list(
@@ -158,7 +163,6 @@ variable "cert_manager_config" {
   description = "Cert Manager configuration, the first item in the list is the main domain"
   type = object({
     notification_email = string
-    dns_zone           = list(string)
     role_arn           = string
   })
 }

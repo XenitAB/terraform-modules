@@ -25,7 +25,7 @@ variable "eks_cloudwatch_retention_period" {
   default     = 30
 }
 
-variable "dns_zone" {
+variable "dns_zones" {
   description = "List of DNS Zone to create"
   type        = list(string)
 }

@@ -1,6 +1,6 @@
 resource "azurerm_dns_zone" "this" {
   for_each = {
-    for dns in var.dns_zone :
+    for dns in var.dns_zones :
     dns => dns
   }
   name                = each.key

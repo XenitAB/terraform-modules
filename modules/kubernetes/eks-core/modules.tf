@@ -298,7 +298,7 @@ module "azad_kube_proxy" {
 
   source = "../../kubernetes/azad-kube-proxy"
 
-  fqdn                  = var.azad_kube_proxy_config.fqdn
+  fqdn                  = "eks.${var.dns_zones[0]}"
   azure_ad_group_prefix = var.azad_kube_proxy_config.azure_ad_group_prefix
   allowed_ips           = var.azad_kube_proxy_config.allowed_ips
 

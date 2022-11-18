@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#866](https://github.com/XenitAB/terraform-modules/pull/866) Remove fqdn configuration for azad-kube-proxy from aks-core and eks-core.
+
 ## 2022.11.1
 
 ### Fixed

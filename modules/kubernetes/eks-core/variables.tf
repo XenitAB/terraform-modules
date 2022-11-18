@@ -8,9 +8,25 @@ variable "name" {
   type        = string
 }
 
+variable "subscription_name" {
+  description = "The commonName for the subscription"
+  type        = string
+}
+
 variable "eks_name_suffix" {
   description = "The suffix for the eks clusters"
   type        = number
+}
+
+variable "group_name_separator" {
+  description = "Separator for group names"
+  type        = string
+  default     = "-"
+}
+
+variable "group_name_prefix" {
+  description = "Prefix for Azure AD groups"
+  type        = string
 }
 
 variable "namespaces" {

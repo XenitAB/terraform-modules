@@ -3,6 +3,11 @@ variable "location_short" {
   type        = string
 }
 
+variable "subscription_name" {
+  description = "The commonName for the subscription"
+  type        = string
+}
+
 variable "global_location_short" {
   description = "The Azure region short name where the global resources resides."
   type        = string
@@ -10,6 +15,17 @@ variable "global_location_short" {
 
 variable "environment" {
   description = "The environment name to use for the deploy"
+  type        = string
+}
+
+variable "group_name_separator" {
+  description = "Separator for group names"
+  type        = string
+  default     = "-"
+}
+
+variable "group_name_prefix" {
+  description = "Prefix for Azure AD groups"
   type        = string
 }
 
@@ -328,9 +344,8 @@ variable "azad_kube_proxy_enabled" {
 variable "azad_kube_proxy_config" {
   description = "The azad-kube-proxy configuration"
   type = object({
-    fqdn                  = string
-    azure_ad_group_prefix = string
-    allowed_ips           = list(string)
+    fqdn        = string
+    allowed_ips = list(string)
     azure_ad_app = object({
       client_id     = string
       client_secret = string
@@ -338,9 +353,8 @@ variable "azad_kube_proxy_config" {
     })
   })
   default = {
-    fqdn                  = ""
-    azure_ad_group_prefix = ""
-    allowed_ips           = []
+    fqdn        = ""
+    allowed_ips = []
     azure_ad_app = {
       client_id     = ""
       client_secret = ""

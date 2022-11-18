@@ -25,6 +25,8 @@ podEnv:
     value: "OBJECTID"
   - name: AZURE_AD_GROUP_PREFIX
     value: "${azure_ad_group_prefix}"
+  - name: AZURE_AD_MAX_GROUP_COUNT
+    value: "200"
 
 secret:
   create: false

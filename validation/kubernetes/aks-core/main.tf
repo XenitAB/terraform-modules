@@ -12,6 +12,8 @@ module "aks_core" {
   location_short        = "foo"
   global_location_short = "sc"
   environment           = "bar"
+  subscription_name     = "baz"
+  group_name_prefix     = "aks"
   namespaces            = []
   external_dns_config = {
     client_id   = "foo"

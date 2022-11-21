@@ -9,9 +9,11 @@ module "eks_core" {
 
   namespaces = []
 
-  environment     = "dev"
-  name            = "foo"
-  eks_name_suffix = 1
+  environment       = "dev"
+  name              = "foo"
+  subscription_name = "baz"
+  group_name_prefix = "eks"
+  eks_name_suffix   = 1
 
   external_dns_enabled = true
   external_dns_config = {

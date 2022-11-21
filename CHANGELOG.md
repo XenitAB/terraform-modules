@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#861](https://github.com/XenitAB/terraform-modules/pull/861) Add support for kubernetes 1.24 in AWS.
 
+### Fixed
+
+- [#865](https://github.com/XenitAB/terraform-modules/pull/865) Make azad-kube-proxy AD group filter more specific.
+
 ## 2022.11.1
 
 ### Fixed

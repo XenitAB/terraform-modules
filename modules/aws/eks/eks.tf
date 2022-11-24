@@ -210,6 +210,15 @@ resource "aws_eks_node_group" "this" {
 
   tags = local.global_tags
 
+  dynamic "taint" {
+    for_each = each.value.node_taints
+    content {
+      key    = taint.value["key"]
+      value  = taint.value["value"]
+      effect = taint.value["effect"]
+    }
+  }
+
   lifecycle {
     ignore_changes = [scaling_config[0].desired_size]
   }

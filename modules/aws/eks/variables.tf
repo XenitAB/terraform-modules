@@ -41,6 +41,11 @@ variable "eks_config" {
       min_size       = number
       max_size       = number
       node_labels    = map(string)
+      node_taints = list(object({
+        key    = string
+        value  = string
+        effect = string
+      }))
     }))
   })
 
@@ -98,3 +103,4 @@ variable "starboard_enabled" {
   type        = bool
   default     = false
 }
+

@@ -33,6 +33,20 @@ module "eks" {
         max_size       = 3
         instance_types = ["t3.large"]
         node_labels    = {}
+        node_taints    = []
+      },
+      {
+        name           = "batch"
+        version        = "1.23.5-20220309"
+        min_size       = 1
+        max_size       = 3
+        instance_types = ["t3.large"]
+        node_labels    = {}
+        node_taints = [{
+          key    = "batch"
+          value  = "true"
+          effect = "NO_SCHEDULE"
+        }]
       },
     ]
   }

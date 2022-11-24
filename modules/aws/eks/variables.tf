@@ -98,3 +98,13 @@ variable "starboard_enabled" {
   type        = bool
   default     = false
 }
+
+variable "node_taints" {
+  description = "A list of taints for the node"
+  type = list(object({
+    key    = string
+    value  = string
+    effect = string
+  }))
+  default = null
+}

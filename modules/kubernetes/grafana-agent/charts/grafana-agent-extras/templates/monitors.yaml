@@ -43,12 +43,12 @@ spec:
       caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
       insecureSkipVerify: true
     metricRelabelings:
-    %{~ for namespace in kubeletMetricsNamespaces ~}
+    {{ range .Values.kubeletMetricsNamespaces }}
     - action: keep
-      regex: ${namespace}
-      source_labels:
+      regex: {{ . }}
+      sourceLabels:
         - __meta_kubernetes_namespace
-    %{~ endfor ~}
+    {{ end }}    
   - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
     honorLabels: true
     path: /metrics/cadvisor
@@ -63,12 +63,12 @@ spec:
       caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
       insecureSkipVerify: true
     metricRelabelings:
-    %{~ for namespace in kubeletMetricsNamespaces ~}
+    {{ range .Values.kubeletMetricsNamespaces }}
     - action: keep
-      regex: ${namespace}
-      source_labels:
+      regex: {{ . }}
+      sourceLabels:
         - __meta_kubernetes_namespace
-    %{~ endfor ~}
+    {{ end }}    
   - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
     honorLabels: true
     path: /metrics/probes
@@ -79,12 +79,12 @@ spec:
       - __metrics_path__
       targetLabel: metrics_path
     metricRelabelings:
-    %{~ for namespace in kubeletMetricsNamespaces ~}
+    {{ range .Values.kubeletMetricsNamespaces }}
     - action: keep
-      regex: ${namespace}
-      source_labels:
+      regex: {{ . }}
+      sourceLabels:
         - __meta_kubernetes_namespace
-    %{~ endfor ~}
+    {{ end }}    
     scheme: https
     tlsConfig:
       caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt

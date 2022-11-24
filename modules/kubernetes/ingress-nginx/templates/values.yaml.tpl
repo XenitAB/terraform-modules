@@ -10,7 +10,7 @@ controller:
       cpu: 100m
       memory: 110Mi
 
-  priorityClassName: platform-medium
+  priorityClassName: platform-high
 
   ingressClassResource:
     name: ${ingress_class}
@@ -146,9 +146,9 @@ controller:
         - podAffinityTerm:
             labelSelector:
               matchExpressions:
-                - key: app.kubernetes.io/name
+               - key: app.kubernetes.io/instance
                   operator: In
                   values:
-                    - ingress-nginx
+                    - ingress-${ingress_class}
             topologyKey: topology.kubernetes.io/zone
           weight: 100

@@ -41,6 +41,11 @@ variable "eks_config" {
       min_size       = number
       max_size       = number
       node_labels    = map(string)
+      node_taints = list(object({
+        key    = string
+        value  = string
+        effect = string
+      }))
     }))
   })
 
@@ -99,12 +104,3 @@ variable "starboard_enabled" {
   default     = false
 }
 
-variable "node_taints" {
-  description = "A list of taints for the node"
-  type = list(object({
-    key    = string
-    value  = string
-    effect = string
-  }))
-  default = null
-}

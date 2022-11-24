@@ -211,11 +211,11 @@ resource "aws_eks_node_group" "this" {
   tags = local.global_tags
 
   dynamic "taint" {
-    for_each = each.value.node_pools
+    for_each = each.value.node_taints
     content {
-      key    = each.value.node_pools.value["key"]
-      value  = each.value.node_pools.value["value"]
-      effect = each.value.node_pools.value["effect"]
+      key    = taint.value["key"]
+      value  = taint.value["value"]
+      effect = taint.value["effect"]
     }
   }
 

@@ -30,69 +30,99 @@ metadata:
   namespace: grafana-agent
 spec:
   endpoints:
-  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-    honorLabels: true
-    port: https-metrics
-    relabelings:
-    - action: replace
-      sourceLabels:
-      - __metrics_path__
-      targetLabel: metrics_path
-    scheme: https
-    tlsConfig:
-      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-      insecureSkipVerify: true
-    metricRelabelings:
-    {{ range .Values.kubeletMetricsNamespaces }}
-    - action: keep
-      regex: {{ . }}
-      sourceLabels:
-        - __meta_kubernetes_namespace
-    {{ end }}    
-  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-    honorLabels: true
-    path: /metrics/cadvisor
-    port: https-metrics
-    relabelings:
-    - action: replace
-      sourceLabels:
-      - __metrics_path__
-      targetLabel: metrics_path
-    scheme: https
-    tlsConfig:
-      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-      insecureSkipVerify: true
-    metricRelabelings:
-    {{ range .Values.kubeletMetricsNamespaces }}
-    - action: keep
-      regex: {{ . }}
-      sourceLabels:
-        - __meta_kubernetes_namespace
-    {{ end }}    
-  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-    honorLabels: true
-    path: /metrics/probes
-    port: https-metrics
-    relabelings:
-    - action: replace
-      sourceLabels:
-      - __metrics_path__
-      targetLabel: metrics_path
-    metricRelabelings:
-    {{ range .Values.kubeletMetricsNamespaces }}
-    - action: keep
-      regex: {{ . }}
-      sourceLabels:
-        - __meta_kubernetes_namespace
-    {{ end }}    
-    scheme: https
-    tlsConfig:
-      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-      insecureSkipVerify: true
+    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      honorLabels: true
+      metricRelabelings:
+        - action: keep
+          regex: .+
+          sourceLabels:
+            - container
+        {{ range .Values.kubeletMetricsNamespaces }}
+        - action: keep
+          regex: {{ . }}
+          sourceLabels:
+            - namespace
+        {{ end }}
+        - action: keep
+          regex: container_cpu_usage_seconds_total|container_network_transmit_bytes_total|container_network_receive_bytes_total|container_memory_swap|container_network_receive_packets_total|container_cpu_cfs_periods_total|container_cpu_cfs_throttled_periods_total|node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate|container_memory_working_set_bytes|container_memory_rss|container_network_receive_packets_dropped_total|container_start_time_seconds|container_network_transmit_packets_dropped_total|container_memory_cache|container_network_transmit_packets_total
+          sourceLabels:
+            - __name__
+        - action: labeldrop
+          regex: endpoint|id|image|job|metrics_path|service|name|instance
+      port: https-metrics
+      relabelings:
+        - action: replace
+          sourceLabels:
+            - __metrics_path__
+          targetLabel: metrics_path
+      scheme: https
+      tlsConfig:
+        caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecureSkipVerify: true
+    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      honorLabels: true
+      metricRelabelings:
+        - action: keep
+          regex: .+
+          sourceLabels:
+            - container
+        {{ range .Values.kubeletMetricsNamespaces }}
+        - action: keep
+          regex: {{ . }}
+          sourceLabels:
+            - namespace
+        {{ end }}
+        - action: keep
+          regex: container_cpu_usage_seconds_total|container_network_transmit_bytes_total|container_network_receive_bytes_total|container_memory_swap|container_network_receive_packets_total|container_cpu_cfs_periods_total|container_cpu_cfs_throttled_periods_total|node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate|container_memory_working_set_bytes|container_memory_rss|container_network_receive_packets_dropped_total|container_start_time_seconds|container_network_transmit_packets_dropped_total|container_memory_cache|container_network_transmit_packets_total
+          sourceLabels:
+            - __name__
+        - action: labeldrop
+          regex: endpoint|id|image|job|metrics_path|service|name|instance
+      path: /metrics/cadvisor
+      port: https-metrics
+      relabelings:
+        - action: replace
+          sourceLabels:
+            - __metrics_path__
+          targetLabel: metrics_path
+      scheme: https
+      tlsConfig:
+        caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecureSkipVerify: true
+    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      honorLabels: true
+      metricRelabelings:
+        - action: keep
+          regex: .+
+          sourceLabels:
+            - container
+        {{ range .Values.kubeletMetricsNamespaces }}
+        - action: keep
+          regex: {{ . }}
+          sourceLabels:
+            - namespace
+        {{ end }}
+        - action: keep
+          regex: container_cpu_usage_seconds_total|container_network_transmit_bytes_total|container_network_receive_bytes_total|container_memory_swap|container_network_receive_packets_total|container_cpu_cfs_periods_total|container_cpu_cfs_throttled_periods_total|node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate|container_memory_working_set_bytes|container_memory_rss|container_network_receive_packets_dropped_total|container_start_time_seconds|container_network_transmit_packets_dropped_total|container_memory_cache|container_network_transmit_packets_total
+          sourceLabels:
+            - __name__
+        - action: labeldrop
+          regex: endpoint|id|image|job|metrics_path|service|name|instance
+      path: /metrics/probes
+      port: https-metrics
+      relabelings:
+        - action: replace
+          sourceLabels:
+            - __metrics_path__
+          targetLabel: metrics_path
+      scheme: https
+      tlsConfig:
+        caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecureSkipVerify: true
   jobLabel: k8s-app
   namespaceSelector:
     matchNames:
-    - kube-system
+      - kube-system
   selector:
     matchLabels:
       app.kubernetes.io/name: kubelet

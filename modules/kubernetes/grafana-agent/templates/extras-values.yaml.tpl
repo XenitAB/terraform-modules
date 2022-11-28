@@ -9,8 +9,5 @@ remote:
 
 ingressNginx: ${ingress_nginx_observability}
 includeKubeletMetrics: ${include_kubelet_metrics}
-kubeletMetricsNamespaces:
-  %{~ for namespace in kubelet_metrics_namespaces ~}
-  - ${namespace}
-  %{~ endfor ~}
+kubeletMetricsNamespaces: ${kubelet_metrics_namespaces}
 

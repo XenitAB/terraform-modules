@@ -108,7 +108,7 @@ locals {
     cluster_name                = var.cluster_name
     ingress_nginx_observability = local.enable_nginx
     include_kubelet_metrics     = var.include_kubelet_metrics
-    kubelet_metrics_namespaces  = var.namespace_include
+    kubelet_metrics_namespaces  = join("|", var.namespace_include)
   })
 
   operator_values = templatefile("${path.module}/templates/operator-values.yaml.tpl", {

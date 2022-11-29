@@ -146,7 +146,7 @@ controller:
         - podAffinityTerm:
             labelSelector:
               matchExpressions:
-               - key: app.kubernetes.io/instance
+                - key: app.kubernetes.io/instance
                   operator: In
                   values:
                     - ingress-${ingress_class}

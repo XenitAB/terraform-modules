@@ -183,7 +183,7 @@ module "linkerd_crd" {
 
   chart         = "oci://ghcr.io/xenitab/helm-charts/linkerd-crds"
   chart_name    = "linkerd-crd"
-  chart_version = "2.12.0"
+  chart_version = "2.12.2"
 }
 
 module "linkerd" {

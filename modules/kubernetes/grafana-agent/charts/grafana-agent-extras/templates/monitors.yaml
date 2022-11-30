@@ -34,10 +34,6 @@ spec:
       honorLabels: true
       metricRelabelings:
         - action: keep
-          regex: .+
-          sourceLabels:
-            - container
-        - action: keep
           regex: {{ .Values.kubeletMetricsNamespaces }}
           sourceLabels:
             - namespace
@@ -46,7 +42,7 @@ spec:
           sourceLabels:
             - __name__
         - action: labeldrop
-          regex: endpoint|id|image|job|metrics_path|service|name|instance
+          regex: endpoint|id|job|metrics_path|service|name|instance
       port: https-metrics
       relabelings:
         - action: replace
@@ -61,10 +57,6 @@ spec:
       honorLabels: true
       metricRelabelings:
         - action: keep
-          regex: .+
-          sourceLabels:
-            - container
-        - action: keep
           regex: {{ .Values.kubeletMetricsNamespaces }}
           sourceLabels:
             - namespace
@@ -73,7 +65,7 @@ spec:
           sourceLabels:
             - __name__
         - action: labeldrop
-          regex: endpoint|id|image|job|metrics_path|service|name|instance
+          regex: endpoint|id|job|metrics_path|service|name|instance
       path: /metrics/cadvisor
       port: https-metrics
       relabelings:
@@ -89,10 +81,6 @@ spec:
       honorLabels: true
       metricRelabelings:
         - action: keep
-          regex: .+
-          sourceLabels:
-            - container
-        - action: keep
           regex: {{ .Values.kubeletMetricsNamespaces }}
           sourceLabels:
             - namespace
@@ -101,7 +89,7 @@ spec:
           sourceLabels:
             - __name__
         - action: labeldrop
-          regex: endpoint|id|image|job|metrics_path|service|name|instance
+          regex: endpoint|id|job|metrics_path|service|name|instance
       path: /metrics/probes
       port: https-metrics
       relabelings:

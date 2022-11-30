@@ -14,7 +14,7 @@ data "azurerm_storage_account" "log" {
 }
 
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
-#tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
+#tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions tfsec:ignore:azure-container-configured-network-policy
 resource "azurerm_kubernetes_cluster" "this" {
   name                            = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   location                        = data.azurerm_resource_group.this.location

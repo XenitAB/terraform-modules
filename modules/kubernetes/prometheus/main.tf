@@ -36,12 +36,17 @@ resource "helm_release" "prometheus" {
   chart       = "kube-prometheus-stack"
   name        = "prometheus"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "35.4.2"
+  version     = "42.1.1"
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     vpa_enabled = var.vpa_enabled,
   })]
+
+  # This is needed while upgrading past v40.x.x as it contains a label change which requires replacing the Node Exporter Daemon Set
+  # Should be removed in the future when not required.
+  # https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#from-39x-to-40x
+  force_update = true
 }
 
 # EKS will not install metrics server out of the box so it has to be added.

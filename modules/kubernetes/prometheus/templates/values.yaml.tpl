@@ -1,5 +1,10 @@
 # For more values see: https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
-# grafana is managed by the grafana-operator
+
+# We do not monitor anything in clusters.
+defaultRules:
+  create: false
+
+# Grafana is managed by the grafana-operator
 grafana:
   enabled: false
 
@@ -72,7 +77,6 @@ kube-state-metrics:
     monitor:
       additionalLabels:
         xkf.xenit.io/monitoring: platform
-
 
 commonLabels:
   xkf.xenit.io/monitoring: platform

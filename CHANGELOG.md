@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Fixed
+
+- [#871](https://github.com/XenitAB/terraform-modules/pull/871) Change ingress-nginx affinity match labels.
+
 ### Added
 
 - [#857](https://github.com/XenitAB/terraform-modules/pull/857) Grafana agent kubelet metrics.

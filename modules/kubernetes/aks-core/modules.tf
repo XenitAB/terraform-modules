@@ -376,6 +376,11 @@ module "datadog" {
 
 # grafana-agent
 module "grafana_agent_crd" {
+  for_each = {
+    for s in ["grafana-agent"] :
+    s => s
+    if var.grafana_agent_enabled
+  }
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://grafana.github.io/helm-charts"

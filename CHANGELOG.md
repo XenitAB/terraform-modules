@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#879](https://github.com/XenitAB/terraform-modules/pull/874) Update Promtail Helm chart to 6.6.2.
+
 ## 2022.12.1
 
 ### Added

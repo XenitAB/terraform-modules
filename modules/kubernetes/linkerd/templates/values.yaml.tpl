@@ -9,6 +9,8 @@ identity:
 identityTrustAnchorsPEM: |
   ${linkerd_trust_anchor_pem}
 
+priorityClassName: platform-high
+
 proxyInjector:
   namespaceSelector:
     matchExpressions:

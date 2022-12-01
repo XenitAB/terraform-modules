@@ -6,13 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-### Fixed
-
-- [#871](https://github.com/XenitAB/terraform-modules/pull/871) Change ingress-nginx affinity match labels.
+## 2022.12.1
 
 ### Added
 
 - [#857](https://github.com/XenitAB/terraform-modules/pull/857) Grafana agent kubelet metrics.
+
+### Fixed
+
+- [#871](https://github.com/XenitAB/terraform-modules/pull/871) Change ingress-nginx affinity match labels.
+- [#873](https://github.com/XenitAB/terraform-modules/pull/873) Add linkerd exception to default-deny networkpolicy.
+
+### Changed
+
+- [#874](https://github.com/XenitAB/terraform-modules/pull/874) Update linkerd to 2.12.2.
 
 ## 2022.11.2
 
@@ -24,8 +31,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - [#865](https://github.com/XenitAB/terraform-modules/pull/865) Make azad-kube-proxy AD group filter more specific.
-- [#873](https://github.com/XenitAB/terraform-modules/pull/873) Add linkerd exception to default-deny networkpolicy.
-- [#874](https://github.com/XenitAB/terraform-modules/pull/874) Update linkerd to 2.12.2.
 
 ## 2022.11.1
 

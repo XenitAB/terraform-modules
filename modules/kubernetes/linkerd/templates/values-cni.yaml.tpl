@@ -4,6 +4,7 @@ tolerations:
   - operator: "Exists"
 
 cniPluginImage: "ghcr.io/linkerd/cni-plugin"
+priorityClassName: platform-high
 
 extraInitContainers:
   - name: wait-for-other-cni

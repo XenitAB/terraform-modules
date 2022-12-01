@@ -40,5 +40,6 @@ collectors:
 prometheus:
   monitor:
     enabled: true
+    honorLabels: true
     additionalLabels:
       xkf.xenit.io/monitoring: tenant

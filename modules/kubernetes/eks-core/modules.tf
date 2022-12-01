@@ -338,7 +338,7 @@ module "prometheus_crd" {
 
   chart_repository = "https://prometheus-community.github.io/helm-charts"
   chart_name       = "kube-prometheus-stack"
-  chart_version    = "35.4.2"
+  chart_version    = "42.1.1"
 }
 
 module "prometheus" {

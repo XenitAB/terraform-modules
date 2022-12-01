@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#879](https://github.com/XenitAB/terraform-modules/pull/874) Update Promtail Helm chart to 6.6.2.
+- [#877](https://github.com/XenitAB/terraform-modules/pull/877) Update Kube Prometheus Stack to 42.1.1.
 
 ## 2022.12.1
 

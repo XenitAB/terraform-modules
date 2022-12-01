@@ -25,6 +25,7 @@ locals {
 }
 
 module "cilium" {
+  depends_on = [module.prometheus_crd]
   for_each = {
     for s in ["cilium"] :
     s => s
@@ -33,7 +34,6 @@ module "cilium" {
 
   source = "../../kubernetes/cilium"
 }
-
 
 # OPA Gatekeeper
 module "opa_gatekeeper_crd" {

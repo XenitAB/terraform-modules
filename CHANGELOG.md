@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - [#865](https://github.com/XenitAB/terraform-modules/pull/865) Make azad-kube-proxy AD group filter more specific.
+- [#874](https://github.com/XenitAB/terraform-modules/pull/874) Update linkerd to 2.12.2.
 
 ## 2022.11.1
 

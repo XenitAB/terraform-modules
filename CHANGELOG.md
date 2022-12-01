@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-2022.11.2
+### Added
+
+- [#857](https://github.com/XenitAB/terraform-modules/pull/857) Grafana agent kubelet metrics.
+
+## 2022.11.2
 
 ### Added
 

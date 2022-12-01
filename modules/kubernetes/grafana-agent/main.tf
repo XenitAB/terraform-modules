@@ -97,6 +97,8 @@ resource "kubernetes_secret" "this" {
 locals {
   enable_nginx = tostring(contains(var.extra_namespaces, "ingress-nginx"))
 
+  namespace_include = compact(concat(var.namespace_include, var.extra_namespaces))
+
   extras_values = templatefile("${path.module}/templates/extras-values.yaml.tpl", {
     credentials_secret_name     = kubernetes_secret.this.metadata[0].name
     remote_write_metrics_url    = var.remote_write_urls.metrics
@@ -105,7 +107,8 @@ locals {
     environment                 = var.environment
     cluster_name                = var.cluster_name
     ingress_nginx_observability = local.enable_nginx
-
+    include_kubelet_metrics     = var.include_kubelet_metrics
+    kubelet_metrics_namespaces  = join("|", var.namespace_include)
   })
 
   operator_values = templatefile("${path.module}/templates/operator-values.yaml.tpl", {
@@ -114,7 +117,7 @@ locals {
 
   kube_state_metrics_values = templatefile("${path.module}/templates/kube-state-metrics-values.yaml.tpl", {
     vpa_enabled    = var.vpa_enabled
-    namespaces_csv = join(",", var.namespace_include)
+    namespaces_csv = join(",", local.namespace_include)
   })
 }
 

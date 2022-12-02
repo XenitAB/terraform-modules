@@ -1,11 +1,10 @@
 config:
-  lokiAddress: "${loki_address}"
-  snippets:
-    extraClientConfigs: |
+  clients:
+    - url: "${loki_address}"
       tls_config:
         cert_file: /mnt/tls/tls.crt
         key_file: /mnt/tls/tls.key
-
+  snippets:
     pipelineStages:
       - cri: {}
       - static_labels:

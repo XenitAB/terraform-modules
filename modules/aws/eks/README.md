@@ -4,6 +4,7 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.31.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.6.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | 3.1.1 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.3 |
 
@@ -13,6 +14,7 @@
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.31.0 |
 | <a name="provider_aws.eks_admin"></a> [aws.eks\_admin](#provider\_aws.eks\_admin) | 4.31.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.6.0 |
 | <a name="provider_null"></a> [null](#provider\_null) | 3.1.1 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.3 |
 
@@ -41,6 +43,7 @@
 | [aws_eks_node_group.this](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/eks_node_group) | resource |
 | [aws_iam_openid_connect_provider.this](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/iam_openid_connect_provider) | resource |
 | [aws_launch_template.eks_node_group](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/launch_template) | resource |
+| [helm_release.cilium](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
 | [null_resource.update_eks_cni](https://registry.terraform.io/providers/hashicorp/null/3.1.1/docs/resources/resource) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/caller_identity) | data source |
 | [aws_eks_addon_version.core_dns](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/eks_addon_version) | data source |

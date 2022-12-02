@@ -68,4 +68,3 @@ enabledMonitors:
   grafanaAgent: false
   nodeLocalDNS: false
   promtail: false
-  cilium: false

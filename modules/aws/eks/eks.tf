@@ -1,17 +1,14 @@
 locals {
-  calico_version = "v3.19"
   cni_script = templatefile("${path.module}/templates/update-eks-cni.sh.tpl", {
     b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
     api_server_url = aws_eks_cluster.this.endpoint
     token          = data.aws_eks_cluster_auth.this.token
-    calico_version = local.calico_version
   })
   # The new token would cause the script to change all the time, this is just used to calculate the trigger hash
   cni_script_check = templatefile("${path.module}/templates/update-eks-cni.sh.tpl", {
     b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
     api_server_url = aws_eks_cluster.this.endpoint
     token          = "foobar"
-    calico_version = local.calico_version
   })
 }
 
@@ -125,8 +122,7 @@ data "aws_eks_cluster_auth" "this" {
 
 # This is a sad dirty trick as there is no way to opt-out
 # of EKS installing the VPC CNI. EKS will not try to create
-# the daemonset again after you delete. First it deletes the AWS CNI
-# and then it installs the Calico CNI.
+# the daemonset again after you delete. It deletes the AWS CNI
 resource "null_resource" "update_eks_cni" {
   triggers = {
     script_hash = sha256(local.cni_script_check)
@@ -154,6 +150,28 @@ data "aws_subnet" "node" {
       "${var.name}${var.eks_name_suffix}-nodes-${each.value}"
     ]
   }
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = aws_eks_cluster.this.endpoint
+    cluster_ca_certificate = base64decode(aws_eks_cluster.this.certificate_authority[0].data)
+    token                  = data.aws_eks_cluster_auth.this.token
+  }
+}
+
+resource "helm_release" "cilium" {
+  depends_on  = [null_resource.update_eks_cni]
+  name        = "cilium"
+  namespace   = "kube-system"
+  repository  = "https://helm.cilium.io/"
+  chart       = "cilium"
+  version     = "1.12.2"
+  timeout     = 600
+  max_history = 3
+  values = [
+    file("${path.module}/values/cilium.yaml"),
+  ]
 }
 
 # Required to override the default max pod limit set by default based on instance type

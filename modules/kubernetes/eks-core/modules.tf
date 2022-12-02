@@ -1,6 +1,5 @@
 locals {
   excluded_namespaces = [
-    "calico-system",
     "cert-manager",
     "csi-secrets-store-provider-aws",
     "datadog",

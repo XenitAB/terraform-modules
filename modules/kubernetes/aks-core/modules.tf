@@ -3,7 +3,6 @@ locals {
     "kube-system",
     "aad-pod-identity",
     "azdo-proxy",
-    "calico-system",
     "cert-manager",
     "csi-secrets-store-provider-azure",
     "datadog",
@@ -26,13 +25,7 @@ locals {
 
 module "cilium" {
   depends_on = [module.prometheus_crd]
-  for_each = {
-    for s in ["cilium"] :
-    s => s
-    if var.cilium_enabled
-  }
-
-  source = "../../kubernetes/cilium"
+  source     = "../../kubernetes/cilium"
 }
 
 # OPA Gatekeeper
@@ -538,7 +531,6 @@ module "prometheus" {
   node_local_dns_enabled                   = var.node_local_dns_enabled
   grafana_agent_enabled                    = var.grafana_agent_enabled
   promtail_enabled                         = var.promtail_enabled
-  cilium_enabled                           = var.cilium_enabled
 }
 
 module "control_plane_logs" {

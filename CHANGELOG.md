@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Fix
+
+- [#882](https://github.com/XenitAB/terraform-modules/pull/882) Platform workloads ignore taints and labels.
+
 ### Changed
 
 - [#877](https://github.com/XenitAB/terraform-modules/pull/877) Update Kube Prometheus Stack to 42.1.1.

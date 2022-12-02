@@ -26,3 +26,4 @@ psp:
   enabled: false
 upgradeCRDs:
   enabled: false
+mutatingWebhookReinvocationPolicy: IfNeeded

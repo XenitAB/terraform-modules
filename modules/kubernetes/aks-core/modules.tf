@@ -14,6 +14,7 @@ locals {
     "ingress-nginx",
     "linkerd",
     "linkerd-cni",
+    "linkerd-viz",
     "reloader",
     "starboard-operator",
     "tigera-operator",

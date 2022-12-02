@@ -28,6 +28,14 @@ collectors:
   crio:
     enabled: false
 
+# -- Tolerations to allow Falco to run on Kubernetes masters.
+tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+  - operator: Exists
+
 customRules:
   # Applications which are expected to communicate with the Kubernetes API
   rules_user_known_k8s_api_callers.yaml: |-

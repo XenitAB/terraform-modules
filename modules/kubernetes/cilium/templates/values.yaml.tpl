@@ -26,19 +26,11 @@ hubble:
       - flow
       - icmp
       - http
-    serviceMonitor:
-      enabled: true
-      labels:
-        xkf.xenit.io/monitoring: platform
 
   relay:
     enabled: true
     prometheus:
       enabled: true
-      serviceMonitor:
-        enabled: true
-        labels:
-          xkf.xenit.io/monitoring: platform
     priorityClassName: platform-medium
 
   ui:

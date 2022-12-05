@@ -6,11 +6,24 @@ operator:
     enabled: true
 
 hubble:
+  enabled: true
+  metrics:
+    enabled:
+      - dns:query;ignoreAAAA
+      - drop
+      - tcp
+      - flow
+      - icmp
+      - http
+
   relay:
     enabled: true
     prometheus:
       enabled: true
+    priorityClassName: system-cluster-critical
+
   ui:
     enabled: true
+    priorityClassName: system-cluster-critical
 
 egressMasqueradeInterfaces: "eth0"

@@ -39,9 +39,11 @@ hubble:
         enabled: true
         labels:
           xkf.xenit.io/monitoring: platform
+    priorityClassName: platform-medium
 
   ui:
     enabled: true
+    priorityClassName: platform-medium
 
 hostPort:
   enabled: true

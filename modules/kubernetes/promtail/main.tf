@@ -50,7 +50,7 @@ resource "helm_release" "promtail" {
   chart       = "promtail"
   name        = "promtail"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "3.11.0"
+  version     = "6.6.2"
   max_history = 3
 
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {

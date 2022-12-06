@@ -41,7 +41,7 @@ resource "kubernetes_cluster_role_binding" "cluster_view" {
 resource "kubernetes_cluster_role_binding" "get_node" {
   for_each = { for ns in var.namespaces : ns.name => ns }
   metadata {
-    name      = "${each.value.name}-get-node"
+    name = "${each.value.name}-get-node"
     labels = {
       "aad-group-name"    = var.aad_groups.edit[each.key].name
       "xkf.xenit.io/kind" = "platform"

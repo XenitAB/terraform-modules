@@ -82,9 +82,9 @@ resource "kubernetes_cluster_role" "starboard_reports" {
   }
 }
 
-resource "kubernetes_cluster_role" "get_node" {
+resource "kubernetes_cluster_role" "get_nodes" {
   metadata {
-    name = "get-node"
+    name = "get-nodes"
     labels = {
       "xkf.xenit.io/kind" = "platform"
     }

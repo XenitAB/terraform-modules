@@ -3,18 +3,10 @@ aksbyocni:
 
 prometheus:
   enabled: true
-  serviceMonitor:
-    enabled: true
-    labels:
-      xkf.xenit.io/monitoring: platform
 
 operator:
   prometheus:
     enabled: true
-    serviceMonitor:
-      enabled: true
-      labels:
-        xkf.xenit.io/monitoring: platform
 
 hubble:
   enabled: true

@@ -50,7 +50,7 @@ resource "kubernetes_cluster_role_binding" "get_nodes" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.get_node.metadata[0].name
+    name      = kubernetes_cluster_role.get_nodes.metadata[0].name
   }
   subject {
     api_group = "rbac.authorization.k8s.io"

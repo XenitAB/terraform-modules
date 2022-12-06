@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#878](https://github.com/XenitAB/terraform-modules/pull/878) Disable collecting API Server metrics.
 - [#879](https://github.com/XenitAB/terraform-modules/pull/879) Update Promtail Helm chart to 6.6.2.
 - [#881](https://github.com/XenitAB/terraform-modules/pull/881) Set OPA mutatingWebhookReinvocationPolicy: IfNeeded.
+- [#885](https://github.com/XenitAB/terraform-modules/pull/885) OPA mutatingWebhookCustomRules trigger ephemeralContainer.
 
 ## 2022.12.1
 

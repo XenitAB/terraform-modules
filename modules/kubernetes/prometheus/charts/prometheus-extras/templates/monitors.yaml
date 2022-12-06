@@ -75,88 +75,76 @@ spec:
       function: metrics
 ---
 apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+kind: PodMonitor
 metadata:
   name: cilium-agent
   namespace: prometheus
   labels:
     xkf.xenit.io/monitoring: platform
 spec:
-  endpoints:
-  - honorLabels: true
-    interval: 10s
-    path: /metrics
-    port: metrics
-  namespaceSelector:
-    matchNames:
-    - kube-system
   selector:
     matchLabels:
       k8s-app: cilium
-  targetLabels:
-  - k8s-app
+  podMetricsEndpoints:
+    - path: /metrics
+      port: prometheus
+  namespaceSelector:
+    matchNames:
+      - kube-system
 ---
 apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+kind: PodMonitor
 metadata:
   name: cilium-operator
   namespace: prometheus
   labels:
     xkf.xenit.io/monitoring: platform
 spec:
-  endpoints:
-  - honorLabels: true
-    interval: 10s
-    path: /metrics
-    port: metrics
-  namespaceSelector:
-    matchNames:
-    - kube-system
   selector:
     matchLabels:
-      io.cilium/app: operator
       name: cilium-operator
-  targetLabels:
-  - io.cilium/app
+  podMetricsEndpoints:
+    - path: /metrics
+      port: prometheus
+  namespaceSelector:
+    matchNames:
+      - kube-system
 ---
 apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+kind: PodMonitor
 metadata:
   name: hubble-relay
   namespace: prometheus
   labels:
     xkf.xenit.io/monitoring: platform
 spec:
-  endpoints:
-  - interval: 10s
-    path: /metrics
-    port: metrics
-  namespaceSelector:
-    matchNames:
-    - kube-system
   selector:
     matchLabels:
       k8s-app: hubble-relay
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  labels:
-    xkf.xenit.io/monitoring: platform
-  name: hubble
-  namespace: prometheus
-spec:
-  endpoints:
-  - honorLabels: true
-    interval: 10s
-    path: /metrics
-    port: hubble-metrics
+  podMetricsEndpoints:
+    - path: /metrics
+      port: prometheus
   namespaceSelector:
     matchNames:
-    - kube-system
+      - kube-system
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: hubble
+  namespace: prometheus
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
   selector:
     matchLabels:
-      k8s-app: hubble
+      k8s-app: cilium
+  podMetricsEndpoints:
+    - path: /metrics
+      port: hubble-metrics
+  namespaceSelector:
+    matchNames:
+      - kube-system
 {{- if .Values.enabledMonitors.aadPodIdentity }}
 ---
 apiVersion: monitoring.coreos.com/v1

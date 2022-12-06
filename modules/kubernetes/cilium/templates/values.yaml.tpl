@@ -29,16 +29,4 @@ hubble:
     enabled: true
     priorityClassName: platform-medium
 
-hostPort:
-  enabled: true
-
-nodePort:
-  enabled: true
-
-bpf:
-  masquerade: true
-
 kubeProxyReplacement: partial
-
-externalIPs:
-  enabled: true

@@ -88,6 +88,8 @@ spec:
   podMetricsEndpoints:
     - path: /metrics
       port: prometheus
+  podTargetLabels:
+  - k8s-app
   namespaceSelector:
     matchNames:
       - kube-system
@@ -106,6 +108,8 @@ spec:
   podMetricsEndpoints:
     - path: /metrics
       port: prometheus
+  podTargetLabels:
+  - k8s-app
   namespaceSelector:
     matchNames:
       - kube-system
@@ -124,6 +128,8 @@ spec:
   podMetricsEndpoints:
     - path: /metrics
       port: prometheus
+  podTargetLabels:
+  - k8s-app
   namespaceSelector:
     matchNames:
       - kube-system
@@ -142,6 +148,8 @@ spec:
   podMetricsEndpoints:
     - path: /metrics
       port: hubble-metrics
+  podTargetLabels:
+  - k8s-app
   namespaceSelector:
     matchNames:
       - kube-system

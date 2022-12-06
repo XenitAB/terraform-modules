@@ -38,15 +38,6 @@ mutatingWebhookCustomRules:
     - UPDATE
     resources:
     - '*'
-  - apiGroups:
-    - '*'
-    apiVersions:
-    - '*'
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - '*'
     - pods/ephemeralcontainers
     - pods/exec
     - pods/log

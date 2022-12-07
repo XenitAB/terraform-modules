@@ -27,3 +27,4 @@ hubble:
     priorityClassName: system-cluster-critical
 
 egressMasqueradeInterfaces: "eth0"
+localRedirectPolicy: true

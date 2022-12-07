@@ -30,3 +30,4 @@ hubble:
     priorityClassName: platform-medium
 
 kubeProxyReplacement: partial
+localRedirectPolicy: true

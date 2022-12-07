@@ -6,7 +6,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-2022.11.2
+### Fix
+
+- [#882](https://github.com/XenitAB/terraform-modules/pull/882) Platform workloads ignore taints and labels.
+- [#883](https://github.com/XenitAB/terraform-modules/pull/883) Fix promtail configuration.
+- [#884](https://github.com/XenitAB/terraform-modules/pull/884) Fix cluster-role-binding for get-nodes role in eks.
+
+### Changed
+
+- [#877](https://github.com/XenitAB/terraform-modules/pull/877) Update Kube Prometheus Stack to 42.1.1.
+- [#878](https://github.com/XenitAB/terraform-modules/pull/878) Disable collecting API Server metrics.
+- [#879](https://github.com/XenitAB/terraform-modules/pull/879) Update Promtail Helm chart to 6.6.2.
+- [#881](https://github.com/XenitAB/terraform-modules/pull/881) Set OPA mutatingWebhookReinvocationPolicy: IfNeeded.
+- [#885](https://github.com/XenitAB/terraform-modules/pull/885) OPA mutatingWebhookCustomRules trigger ephemeralContainer.
+
+## 2022.12.1
+
+### Added
+
+- [#857](https://github.com/XenitAB/terraform-modules/pull/857) Grafana agent kubelet metrics.
+
+### Fixed
+
+- [#871](https://github.com/XenitAB/terraform-modules/pull/871) Change ingress-nginx affinity match labels.
+- [#873](https://github.com/XenitAB/terraform-modules/pull/873) Add linkerd exception to default-deny networkpolicy.
+
+### Changed
+
+- [#874](https://github.com/XenitAB/terraform-modules/pull/874) Update linkerd to 2.12.2.
+
+## 2022.11.2
 
 ### Added
 

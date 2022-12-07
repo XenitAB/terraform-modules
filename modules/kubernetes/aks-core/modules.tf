@@ -183,7 +183,7 @@ module "linkerd_crd" {
 
   chart         = "oci://ghcr.io/xenitab/helm-charts/linkerd-crds"
   chart_name    = "linkerd-crd"
-  chart_version = "2.12.0"
+  chart_version = "2.12.2"
 }
 
 module "linkerd" {
@@ -414,11 +414,12 @@ module "grafana_agent" {
     traces_password  = var.grafana_agent_config.credentials.traces_password
   }
 
-  cluster_name      = "${var.name}${local.aks_name_suffix}"
-  environment       = var.environment
-  vpa_enabled       = var.vpa_enabled
-  namespace_include = compact(concat(var.namespaces[*].name, var.grafana_agent_config.extra_namespaces))
-  extra_namespaces  = var.grafana_agent_config.extra_namespaces
+  cluster_name            = "${var.name}${local.aks_name_suffix}"
+  environment             = var.environment
+  vpa_enabled             = var.vpa_enabled
+  namespace_include       = var.namespaces[*].name
+  extra_namespaces        = var.grafana_agent_config.extra_namespaces
+  include_kubelet_metrics = var.grafana_agent_config.include_kubelet_metrics
 }
 
 # falco
@@ -478,7 +479,7 @@ module "prometheus_crd" {
 
   chart_repository = "https://prometheus-community.github.io/helm-charts"
   chart_name       = "kube-prometheus-stack"
-  chart_version    = "35.4.2"
+  chart_version    = "42.1.1"
 }
 
 module "prometheus" {

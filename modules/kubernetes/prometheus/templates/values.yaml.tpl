@@ -1,5 +1,10 @@
 # For more values see: https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
-# grafana is managed by the grafana-operator
+
+# We do not monitor anything in clusters.
+defaultRules:
+  create: false
+
+# Grafana is managed by the grafana-operator
 grafana:
   enabled: false
 
@@ -10,6 +15,12 @@ kubeScheduler:
   enabled: false
 
 kubeEtcd:
+  enabled: false
+
+# We do not control the API Server so there is little value to monitor it.
+# Additionally metrics like apiserver_request_duration_seconds_bucket and apiserver_request_slo_duration_seconds_bucket produce large amounts of timeseries.
+# If this is enabled only the metrics that are actually needed should be kept. All other metrics should be dropped.
+kubeApiServer:
   enabled: false
 
 # Specific for AKS kube-proxy label
@@ -72,7 +83,6 @@ kube-state-metrics:
     monitor:
       additionalLabels:
         xkf.xenit.io/monitoring: platform
-
 
 commonLabels:
   xkf.xenit.io/monitoring: platform

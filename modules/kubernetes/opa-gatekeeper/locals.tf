@@ -87,8 +87,8 @@ locals {
       parameters = {}
     },
     {
-      kind               = "K8sPSPReadOnlyRootFilesystem"
-      name               = "psp-readonlyrootfilesystem"
+      kind               = "K8sPSPReadOnlyRootFilesystemXenit"
+      name               = "psp-readonlyrootfilesystemXenit"
       enforcement_action = ""
       match = {
         kinds      = []

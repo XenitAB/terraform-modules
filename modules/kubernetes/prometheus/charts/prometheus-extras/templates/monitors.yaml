@@ -109,7 +109,7 @@ spec:
     - path: /metrics
       port: prometheus
   podTargetLabels:
-  - k8s-app
+  - io.cilium/app
   namespaceSelector:
     matchNames:
       - kube-system

@@ -12,7 +12,8 @@ locals {
     "prometheus",
     "reloader",
     "velero",
-    "promtail"
+    "promtail",
+    "cilium-test", # https://github.com/cilium/cilium-cli/issues/1275
   ]
   dns_zone = {
     for dns in data.aws_route53_zone.this :

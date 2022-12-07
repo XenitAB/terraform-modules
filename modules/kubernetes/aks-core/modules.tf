@@ -20,6 +20,7 @@ locals {
     "grafana-agent",
     "promtail",
     "prometheus",
+    "cilium-test", # https://github.com/cilium/cilium-cli/issues/1275
   ]
 }
 

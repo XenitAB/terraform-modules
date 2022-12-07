@@ -121,7 +121,6 @@ spec:
     spec:
       priorityClassName: system-node-critical
       serviceAccountName: node-local-dns
-      hostNetwork: true
       dnsPolicy: Default # Don't use cluster DNS.
       tolerations:
         - key: "CriticalAddonsOnly"
@@ -145,6 +144,9 @@ spec:
               "/etc/Corefile",
               "-upstreamsvc",
               "kube-dns-upstream",
+              "-skipteardown=true",
+              "-setupinterface=false",
+              "-setupiptables=false"
             ]
           securityContext:
             privileged: true
@@ -209,3 +211,25 @@ spec:
       targetPort: 9253
   selector:
     k8s-app: node-local-dns
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumLocalRedirectPolicy
+metadata:
+  name: "nodelocaldns"
+  namespace: kube-system
+spec:
+  redirectFrontend:
+    serviceMatcher:
+      serviceName: kube-dns
+      namespace: kube-system
+  redirectBackend:
+    localEndpointSelector:
+      matchLabels:
+        k8s-app: node-local-dns
+    toPorts:
+      - port: "53"
+        name: dns
+        protocol: UDP
+      - port: "53"
+        name: dns-tcp
+        protocol: TCP

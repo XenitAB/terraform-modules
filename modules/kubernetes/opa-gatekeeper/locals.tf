@@ -19,6 +19,12 @@ locals {
       name = "init-container-read-only-root-fs"
     },
     {
+      name = "ephemeral-container-disallow-privilege-escalation"
+    },
+    {
+      name = "ephemeral-container-drop-capabilities"
+    },
+    {
       name = "pod-serviceaccount-token-false"
     },
     {

@@ -14,7 +14,7 @@ locals {
     calico_version = local.calico_version
   })
   node_labels = { for np in var.eks_config.node_pools : np.name => { for key, value in np.node_labels : "k8s.io/cluster-autoscaler/node-template/label/${key}" => value } }
-  node_taints = { for np in var.eks_config.node_taints : np.name => { for key, value in np.node_taints : "k8s.io/cluster-autoscaler/node-template/taint/${key}" => "${value}:${effect}" } }
+  node_taints = { for np in var.eks_config.node_pools : np.name => { for node_taint in np.node_taints : "k8s.io/cluster-autoscaler/node-template/taint/${node_taint["key"]}" => "${node_taint["value"]}:${node_taint["effect"]}" } }
 }
 
 data "aws_subnet" "cluster" {

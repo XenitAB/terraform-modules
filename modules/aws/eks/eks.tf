@@ -13,6 +13,7 @@ locals {
     token          = "foobar"
     calico_version = local.calico_version
   })
+  node_labels = {for np in var.eks_config.node_pools : np.name => {for key, value in np.node_labels: "k8s.io/cluster-autoscaler/node-template/label/${key}" => value}}
 }
 
 data "aws_subnet" "cluster" {
@@ -181,6 +182,9 @@ resource "aws_launch_template" "eks_node_group" {
   tags = local.global_tags
 }
 
+
+
+
 resource "aws_eks_node_group" "this" {
   provider = aws.eks_admin
   for_each = {
@@ -208,7 +212,10 @@ resource "aws_eks_node_group" "this" {
 
   labels = merge({ "xkf.xenit.io/node-ttl" = "168h" }, each.value.node_labels, { "xkf.xenit.io/node-pool" = each.value.name })
 
-  tags = local.global_tags
+  tags = merge(
+    local.global_tags,
+    local.node_labels[np.name]
+  )
 
   dynamic "taint" {
     for_each = each.value.node_taints

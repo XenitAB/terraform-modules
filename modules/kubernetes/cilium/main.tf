@@ -22,6 +22,9 @@ resource "helm_release" "this" {
   max_history = 3
 
   values = [
-    templatefile("${path.module}/templates/values.yaml.tpl", {}),
+    templatefile("${path.module}/templates/values.yaml.tpl", {
+      k8s_service_host = var.k8s_service_host,
+      k8s_service_port = var.k8s_service_port
+    }),
   ]
 }

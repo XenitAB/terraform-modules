@@ -11,5 +11,6 @@ module "cilium" {
     kubernetes = kubernetes
     helm       = helm
   }
-
+  k8s_service_host = "10.10.0.10"
+  k8s_service_port = 443
 }

@@ -29,5 +29,7 @@ hubble:
     enabled: true
     priorityClassName: platform-medium
 
-kubeProxyReplacement: partial
+kubeProxyReplacement: strict
+k8sServiceHost: ${k8s_service_host}
+k8sServicePort: ${k8s_service_port}
 localRedirectPolicy: true

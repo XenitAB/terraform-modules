@@ -170,7 +170,10 @@ resource "helm_release" "cilium" {
   timeout     = 600
   max_history = 3
   values = [
-    file("${path.module}/values/cilium.yaml"),
+    templatefile("${path.module}/templates/cilium.yaml.tpl", {
+      k8s_service_host = aws_eks_cluster.this.endpoint,
+      k8s_service_port = "443"
+    }),
   ]
 }
 

@@ -1,3 +1,17 @@
+locals {
+  remove_kubeproxy_script = templatefile("${path.module}/templates/remove-kubeproxy.sh.tpl", {
+    b64_cluster_ca = azurerm_kubernetes_cluster.this.kube_admin_config.0.cluster_ca_certificate,
+    api_server_url = azurerm_kubernetes_cluster.this.kube_admin_config.0.host
+    token          = azurerm_kubernetes_cluster.this.kube_admin_config.0.password
+  })
+  # The new token would cause the script to change all the time, this is just used to calculate the trigger hash
+  remove_kubeproxy_check = templatefile("${path.module}/templates/remove-kubeproxy.sh.tpl", {
+    b64_cluster_ca = azurerm_kubernetes_cluster.this.kube_admin_config.0.cluster_ca_certificate,
+    api_server_url = azurerm_kubernetes_cluster.this.kube_admin_config.0.host
+    token          = "foobar"
+  })
+}
+
 data "azurerm_subnet" "this" {
   name                 = "sn-${var.environment}-${var.location_short}-${var.core_name}-${var.name}${local.aks_name_suffix}"
   virtual_network_name = "vnet-${var.environment}-${var.location_short}-${var.core_name}"
@@ -76,11 +90,30 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 }
 
+resource "null_resource" "null_resource" {
+  triggers = {
+    script_hash = sha256(local.remove_kubeproxy_check)
+  }
+
+  provisioner "local-exec" {
+    interpreter = ["bash", "-c"]
+    command     = local.remove_kubeproxy_script
+  }
+
+  depends_on = [
+    azurerm_kubernetes_cluster.this
+  ]
+}
+
 resource "azurerm_kubernetes_cluster_node_pool" "this" {
   for_each = {
     for nodePool in var.aks_config.node_pools :
     nodePool.name => nodePool
   }
+
+  depends_on = [
+    null_resource.null_resource
+  ]
 
   name                  = each.value.name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id

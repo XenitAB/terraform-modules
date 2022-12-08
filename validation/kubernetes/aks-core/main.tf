@@ -14,6 +14,7 @@ module "aks_core" {
   environment           = "bar"
   subscription_name     = "baz"
   group_name_prefix     = "aks"
+  k8s_service_host      = "10.10.0.10"
   namespaces            = []
   external_dns_config = {
     client_id   = "foo"

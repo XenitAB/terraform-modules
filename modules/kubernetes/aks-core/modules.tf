@@ -25,8 +25,10 @@ locals {
 }
 
 module "cilium" {
-  depends_on = [module.prometheus_crd]
-  source     = "../../kubernetes/cilium"
+  depends_on       = [module.prometheus_crd]
+  source           = "../../kubernetes/cilium"
+  k8s_service_host = var.k8s_service_host
+  k8s_service_port = var.k8s_service_port
 }
 
 # OPA Gatekeeper

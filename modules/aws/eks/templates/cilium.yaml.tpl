@@ -28,3 +28,6 @@ hubble:
 
 egressMasqueradeInterfaces: "eth0"
 localRedirectPolicy: true
+kubeProxyReplacement: strict
+k8sServiceHost: ${k8s_service_host}
+k8sServicePort: ${k8s_service_port}

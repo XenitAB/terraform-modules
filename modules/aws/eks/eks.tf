@@ -183,9 +183,6 @@ resource "aws_launch_template" "eks_node_group" {
   tags = local.global_tags
 }
 
-
-
-
 resource "aws_eks_node_group" "this" {
   provider = aws.eks_admin
   for_each = {

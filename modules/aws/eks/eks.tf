@@ -214,7 +214,7 @@ resource "aws_eks_node_group" "this" {
 
   tags = merge(
     local.global_tags,
-    local.node_labels[np.name]
+    local.node_labels[each.key]
   )
 
   dynamic "taint" {

@@ -171,7 +171,7 @@ resource "helm_release" "cilium" {
   max_history = 3
   values = [
     templatefile("${path.module}/templates/cilium.yaml.tpl", {
-      k8s_service_host = aws_eks_cluster.this.endpoint,
+      k8s_service_host = trimprefix(aws_eks_cluster.this.endpoint, "https://")
       k8s_service_port = "443"
     }),
   ]

@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2022.12.2
+
 ### Fix
 
 - [#882](https://github.com/XenitAB/terraform-modules/pull/882) Platform workloads ignore taints and labels.
@@ -15,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- [#877](https://github.com/XenitAB/terraform-modules/pull/877) Update Kube Prometheus Stack to 42.1.1.
+- [#877](https://github.com/XenitAB/terraform-modules/pull/877) [Breaking] Update Kube Prometheus Stack to 42.1.1.
 - [#878](https://github.com/XenitAB/terraform-modules/pull/878) Disable collecting API Server metrics.
 - [#879](https://github.com/XenitAB/terraform-modules/pull/879) Update Promtail Helm chart to 6.6.2.
 - [#881](https://github.com/XenitAB/terraform-modules/pull/881) Set OPA mutatingWebhookReinvocationPolicy: IfNeeded.

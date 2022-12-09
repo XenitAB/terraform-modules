@@ -17,11 +17,15 @@ kubeScheduler:
 kubeEtcd:
   enabled: false
 
-# We do not control the API Server so there is little value to monitor it.
-# Additionally metrics like apiserver_request_duration_seconds_bucket and apiserver_request_slo_duration_seconds_bucket produce large amounts of timeseries.
-# If this is enabled only the metrics that are actually needed should be kept. All other metrics should be dropped.
 kubeApiServer:
-  enabled: false
+  enabled: true
+  serviceMonitor:
+    # The API Server generates a lot of metrics which are not useful in a managed Kubernetes cluster.
+    # To reduce the metrics stored we dop everything except specific metrics.
+    metricRelabelings:
+      - action: keep
+        regex: "kubernetes_build_info|apiserver_admission_.*"
+        sourceLabels: [__name__]
 
 # Specific for AKS kube-proxy label
 kubeProxy:

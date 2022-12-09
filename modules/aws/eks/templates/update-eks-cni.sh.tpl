@@ -6,4 +6,6 @@ kubectl config set users.cluster-admin.token ${token} && \
 kubectl config set contexts.cluster-admin.cluster cluster-admin && \
 kubectl config set contexts.cluster-admin.user cluster-admin && \
 kubectl config set contexts.cluster-admin.namespace kube-system && \
+kubectl --context=cluster-admin delete ds kube-proxy -n kube-system --ignore-not-found=true && \
+kubectl --context=cluster-admin delete cm kube-proxy -n kube-system --ignore-not-found=true && \
 kubectl --context=cluster-admin delete ds aws-node -n kube-system --ignore-not-found=true

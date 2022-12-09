@@ -8,8 +8,7 @@ output "kube_config" {
 
     # Ugly workaround to force the addons to be installed before starting with the core module
     dummy_data = {
-      core_dns      = aws_eks_addon.core_dns
-      aws_eks_addon = aws_eks_addon.kube_proxy
+      core_dns = aws_eks_addon.core_dns
     }
   }
 }

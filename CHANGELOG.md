@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#882](https://github.com/XenitAB/terraform-modules/pull/882) Platform workloads ignore taints and labels.
 - [#883](https://github.com/XenitAB/terraform-modules/pull/883) Fix promtail configuration.
 - [#884](https://github.com/XenitAB/terraform-modules/pull/884) Fix cluster-role-binding for get-nodes role in eks.
+- [#887](https://github.com/XenitAB/terraform-modules/pull/887) Add label and taint tags to eks node group.
 
 ### Changed
 

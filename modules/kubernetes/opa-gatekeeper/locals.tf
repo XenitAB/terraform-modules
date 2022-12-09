@@ -19,6 +19,12 @@ locals {
       name = "init-container-read-only-root-fs"
     },
     {
+      name = "ephemeral-container-disallow-privilege-escalation"
+    },
+    {
+      name = "ephemeral-container-drop-capabilities"
+    },
+    {
       name = "pod-serviceaccount-token-false"
     },
     {
@@ -87,8 +93,8 @@ locals {
       parameters = {}
     },
     {
-      kind               = "K8sPSPReadOnlyRootFilesystem"
-      name               = "psp-readonlyrootfilesystem"
+      kind               = "K8sPSPReadOnlyRootFilesystemXenit"
+      name               = "psp-readonlyrootfilesystemxenit"
       enforcement_action = ""
       match = {
         kinds      = []

@@ -14,7 +14,7 @@ extraInitContainers:
       - -xc
       - |
         for i in $(seq 1 180); do
-          test -f /host/etc/cni/net.d/10-calico.conflist && exit 0
+          test -f /host/etc/cni/net.d/05-cilium.conf && exit 0
           sleep 1
         done
         exit 1

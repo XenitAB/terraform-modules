@@ -16,7 +16,7 @@ serviceAccount:
     eks.amazonaws.com/role-arn: "${aws_config.role_arn}"
 securityContext:
   fsGroup: 1001
-# This has to be enabled because when using Calico
+# This has to be enabled because when using Calico (check if still valid when using Cilium?)
 # EKS will not be able to reach the webhook service.
 # https://cert-manager.io/docs/concepts/webhook/#webhook-connection-problems-on-aws-eks
 webhook:

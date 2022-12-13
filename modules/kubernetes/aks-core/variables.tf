@@ -81,6 +81,15 @@ variable "namespaces" {
   )
 }
 
+variable "k8s_service_host" {
+  type = string
+}
+
+variable "k8s_service_port" {
+  type    = number
+  default = 443
+}
+
 variable "kubernetes_network_policy_default_deny" {
   description = "If network policies should by default deny cross namespace traffic"
   type        = bool

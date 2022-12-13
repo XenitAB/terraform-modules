@@ -1,17 +1,14 @@
 locals {
-  calico_version = "v3.19"
   cni_script = templatefile("${path.module}/templates/update-eks-cni.sh.tpl", {
     b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
     api_server_url = aws_eks_cluster.this.endpoint
     token          = data.aws_eks_cluster_auth.this.token
-    calico_version = local.calico_version
   })
   # The new token would cause the script to change all the time, this is just used to calculate the trigger hash
   cni_script_check = templatefile("${path.module}/templates/update-eks-cni.sh.tpl", {
     b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
     api_server_url = aws_eks_cluster.this.endpoint
     token          = "foobar"
-    calico_version = local.calico_version
   })
   node_labels = { for np in var.eks_config.node_pools : np.name => { for key, value in np.node_labels : "k8s.io/cluster-autoscaler/node-template/label/${key}" => value } }
   node_taints = { for np in var.eks_config.node_pools : np.name => { for node_taint in np.node_taints : "k8s.io/cluster-autoscaler/node-template/taint/${node_taint["key"]}" => "${node_taint["value"]}:${node_taint["effect"]}" } }
@@ -62,16 +59,6 @@ data "aws_eks_addon_version" "kube_proxy" {
   addon_name         = "kube-proxy"
   kubernetes_version = aws_eks_cluster.this.version
   most_recent        = true
-}
-
-resource "aws_eks_addon" "kube_proxy" {
-  depends_on = [aws_eks_node_group.this]
-
-  cluster_name      = aws_eks_cluster.this.name
-  addon_name        = "kube-proxy"
-  addon_version     = data.aws_eks_addon_version.kube_proxy.version
-  resolve_conflicts = "OVERWRITE"
-  tags              = local.global_tags
 }
 
 data "aws_eks_addon_version" "core_dns" {
@@ -127,8 +114,7 @@ data "aws_eks_cluster_auth" "this" {
 
 # This is a sad dirty trick as there is no way to opt-out
 # of EKS installing the VPC CNI. EKS will not try to create
-# the daemonset again after you delete. First it deletes the AWS CNI
-# and then it installs the Calico CNI.
+# the daemonset again after you delete. It deletes the AWS CNI
 resource "null_resource" "update_eks_cni" {
   triggers = {
     script_hash = sha256(local.cni_script_check)
@@ -156,6 +142,31 @@ data "aws_subnet" "node" {
       "${var.name}${var.eks_name_suffix}-nodes-${each.value}"
     ]
   }
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = aws_eks_cluster.this.endpoint
+    cluster_ca_certificate = base64decode(aws_eks_cluster.this.certificate_authority[0].data)
+    token                  = data.aws_eks_cluster_auth.this.token
+  }
+}
+
+resource "helm_release" "cilium" {
+  depends_on  = [null_resource.update_eks_cni]
+  name        = "cilium"
+  namespace   = "kube-system"
+  repository  = "https://helm.cilium.io/"
+  chart       = "cilium"
+  version     = "1.12.2"
+  timeout     = 600
+  max_history = 3
+  values = [
+    templatefile("${path.module}/templates/cilium.yaml.tpl", {
+      k8s_service_host = trimprefix(aws_eks_cluster.this.endpoint, "https://")
+      k8s_service_port = "443"
+    }),
+  ]
 }
 
 # Required to override the default max pod limit set by default based on instance type

@@ -3,7 +3,6 @@ locals {
     "kube-system",
     "aad-pod-identity",
     "azdo-proxy",
-    "calico-system",
     "cert-manager",
     "csi-secrets-store-provider-azure",
     "datadog",
@@ -21,7 +20,15 @@ locals {
     "grafana-agent",
     "promtail",
     "prometheus",
+    "cilium-test", # https://github.com/cilium/cilium-cli/issues/1275
   ]
+}
+
+module "cilium" {
+  depends_on       = [module.prometheus_crd]
+  source           = "../../kubernetes/cilium"
+  k8s_service_host = var.k8s_service_host
+  k8s_service_port = var.k8s_service_port
 }
 
 # OPA Gatekeeper
@@ -34,7 +41,7 @@ module "opa_gatekeeper_crd" {
 }
 
 module "opa_gatekeeper" {
-  depends_on = [module.opa_gatekeeper_crd]
+  depends_on = [module.opa_gatekeeper_crd, module.cilium]
 
   for_each = {
     for s in ["opa-gatekeeper"] :
@@ -79,6 +86,7 @@ module "opa_gatekeeper" {
 
 # FluxCD v2
 module "fluxcd_v2_azure_devops" {
+  depends_on = [module.cilium]
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s
@@ -105,6 +113,7 @@ module "fluxcd_v2_azure_devops" {
 }
 
 module "fluxcd_v2_github" {
+  depends_on = [module.cilium]
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s
@@ -187,7 +196,7 @@ module "linkerd_crd" {
 }
 
 module "linkerd" {
-  depends_on = [module.opa_gatekeeper, module.cert_manager_crd, module.linkerd_crd]
+  depends_on = [module.opa_gatekeeper, module.cert_manager_crd, module.linkerd_crd, module.cert_manager]
 
   for_each = {
     for s in ["linkerd"] :

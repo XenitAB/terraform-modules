@@ -103,7 +103,6 @@ customRules:
   rules_launch_privileged_container.yaml: |-
     - macro: Launch Privileged Container
       condition: >
-        (container.image.repository = "mcr.microsoft.com/oss/calico/node") or
         (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/secrets-store/driver") or
         (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/azuredisk-csi") or
         (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/azurefile-csi") or

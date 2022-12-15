@@ -174,10 +174,11 @@ resource "aws_launch_template" "eks_node_group" {
     }
   }
   user_data = base64encode(templatefile("${path.module}/templates/userdata.sh.tpl", {
-    cluster_name   = aws_eks_cluster.this.name,
-    b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
-    api_server_url = aws_eks_cluster.this.endpoint
-    node_group     = "${aws_eks_cluster.this.name}-${each.value.name}"
+    cluster_name      = aws_eks_cluster.this.name,
+    b64_cluster_ca    = aws_eks_cluster.this.certificate_authority[0].data,
+    api_server_url    = aws_eks_cluster.this.endpoint
+    node_group        = "${aws_eks_cluster.this.name}-${each.value.name}"
+    extra_node_labels = each.value.node_labels
   }))
 
   tags = local.global_tags

@@ -29,6 +29,7 @@ No modules.
 | [helm_release.metrics_server](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
 | [helm_release.prometheus](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
 | [helm_release.prometheus_extras](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
+| [helm_release.x509_certificate_exporter](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/namespace) | resource |
 
 ## Inputs

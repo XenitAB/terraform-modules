@@ -461,7 +461,7 @@ spec:
       scrapeTimeout: 30s
       metricRelabelings:
         - action: labeldrop
-          regex: serial_number|issuer_CN|secret_key|secret_namespace|
+          regex: serial_number|issuer_CN|secret_key|secret_namespace|service|pod|instance|container
   namespaceSelector:
     matchNames:
     - prometheus

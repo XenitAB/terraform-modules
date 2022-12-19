@@ -459,6 +459,9 @@ spec:
       interval: 60s
       path: /metrics
       scrapeTimeout: 30s
+      metricRelabelings:
+        - action: labeldrop
+          regex: serial_number|issuer_CN|secret_key|secret_namespace|
   namespaceSelector:
     matchNames:
     - prometheus

@@ -8,4 +8,4 @@ prometheusRules:
 
 prometheusServiceMonitor:
   # -- Should a ServiceMonitor ressource be installed to scrape this exporter. For prometheus-operator (kube-prometheus) users.
-  create: true
+  create: false

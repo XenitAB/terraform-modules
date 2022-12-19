@@ -445,4 +445,24 @@ spec:
       app.kubernetes.io/instance: promtail
       app.kubernetes.io/name: promtail
 {{- end }}
-
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    xkf.xenit.io/monitoring: platform
+  name: x509-certificate-exporter
+  namespace: prometheus
+spec:
+  endpoints:
+    - port: metrics
+      interval: 60s
+      path: /metrics
+      scrapeTimeout: 30s
+  namespaceSelector:
+    matchNames:
+    - prometheus
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: x509-certificate-exporter
+      app.kubernetes.io/name: x509-certificate-exporter

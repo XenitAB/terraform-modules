@@ -111,7 +111,7 @@ resource "helm_release" "prometheus_extras" {
 # https://github.com/enix/x509-certificate-exporter
 resource "helm_release" "x509_certificate_exporter" {
   repository  = "https://charts.enix.io"
-  chart       = "enix/x509-certificate-exporter"
+  chart       = "x509-certificate-exporter"
   name        = "x509-certificate-exporter"
   namespace   = kubernetes_namespace.this.metadata[0].name
   version     = "3.6.0"

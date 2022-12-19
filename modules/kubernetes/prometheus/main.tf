@@ -107,3 +107,16 @@ resource "helm_release" "prometheus_extras" {
     promtail_enabled                         = var.promtail_enabled
   })]
 }
+
+# https://github.com/enix/x509-certificate-exporter
+resource "helm_release" "x509_certificate_exporter" {
+  repository  = "https://charts.enix.io"
+  chart       = "enix/x509-certificate-exporter"
+  name        = "x509-certificate-exporter"
+  namespace   = kubernetes_namespace.this.metadata[0].name
+  version     = "3.6.0"
+  max_history = 3
+  values = [templatefile("${path.module}/templates/values-x509.yaml.tpl", {
+    prometheus_namespace = kubernetes_namespace.this.metadata[0].name,
+  })]
+}

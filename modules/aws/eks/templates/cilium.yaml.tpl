@@ -26,20 +26,16 @@ hubble:
     enabled: true
     priorityClassName: system-cluster-critical
 
-egressMasqueradeInterfaces: "eth0"
 localRedirectPolicy: true
 kubeProxyReplacement: strict
 k8sServiceHost: ${k8s_service_host}
 k8sServicePort: ${k8s_service_port}
 
 nodePort:
-  # -- Enable the Cilium NodePort service implementation.
   enabled: true
 
 hostPort:
-  # -- Enable hostPort service support.
   enabled: true
 
 externalIPs:
-  # -- Enable ExternalIPs service support.
   enabled: true

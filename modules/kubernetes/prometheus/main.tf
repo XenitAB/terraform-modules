@@ -61,7 +61,7 @@ resource "helm_release" "metrics_server" {
   chart       = "metrics-server"
   name        = "metrics-server"
   namespace   = "kube-system"
-  version     = "6.0.4"
+  version     = "6.2.4"
   max_history = 3
   values      = [templatefile("${path.module}/templates/values-metrics-server.yaml.tpl", {})]
 }

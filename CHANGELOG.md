@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#892](https://github.com/XenitAB/terraform-modules/pull/892) Change the default Prometheus scrape interval to every minute.
+- [#896](https://github.com/XenitAB/terraform-modules/pull/896) Update external-dns and metrics-server.
 
 ## 2022.12.3
 

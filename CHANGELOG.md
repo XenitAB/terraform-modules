@@ -40,6 +40,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#907](https://github.com/XenitAB/terraform-modules/pull/907) Add node labels and taints as tags to ASG.
 
+### Added
+
+- [#897](https://github.com/XenitAB/terraform-modules/pull/897) Add Datadog APM ignore resources
+
 ## 2022.12.3
 
 ### Fix

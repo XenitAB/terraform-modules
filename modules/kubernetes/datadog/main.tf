@@ -26,11 +26,13 @@ terraform {
 
 locals {
   container_filter_include = join(" ", formatlist("kube_namespace:%s", var.namespace_include))
+  apm_ignore_resources     = join(",", formatlist("\"%s\"", var.apm_ignore_resources))
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
     datadog_site             = var.datadog_site
     location                 = var.location
     environment              = var.environment
     container_filter_include = local.container_filter_include
+    apm_ignore_resources     = local.apm_ignore_resources
   })
   values_datadog_operator = templatefile("${path.module}/templates/datadog-operator-values.yaml.tpl", {
     api_key = var.api_key

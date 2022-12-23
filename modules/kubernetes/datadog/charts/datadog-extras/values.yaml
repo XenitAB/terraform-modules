@@ -1,4 +1,5 @@
 site: ""
 clusterName: ""
 containerInclude: ""
+apmIgnoreResources: ""
 environment: ""

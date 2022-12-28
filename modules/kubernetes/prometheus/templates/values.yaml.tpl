@@ -26,6 +26,8 @@ kubeApiServer:
       - action: keep
         regex: "kubernetes_build_info|apiserver_admission_.*"
         sourceLabels: [__name__]
+      - action: labeldrop
+        regex: instance
 
 # Specific for AKS kube-proxy label
 kubeProxy:

@@ -234,3 +234,21 @@ resource "aws_eks_node_group" "this" {
     update = "15m"
   }
 }
+
+# EKS node group can't set tags, so we use the autoscaling_group_tag resource
+# See: https://github.com/aws/containers-roadmap/issues/608 for more information
+resource "aws_autoscaling_group_tag" "default_tags_asg_high" {
+  provider = aws.eks_admin
+  for_each = {
+    for np in var.eks_config.node_pools : np.name => np
+  }
+  depends_on = [aws_eks_node_group.this]
+
+  autoscaling_group_name = aws_eks_node_group.this[np].resources[0].autoscaling_groups[0].name
+
+  tags = merge(
+    local.global_tags,
+    local.node_labels[each.key],
+    local.node_taints[each.key],
+  )
+}

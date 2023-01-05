@@ -1,5 +1,7 @@
 cloudProvider: ${provider}
 
+tag: 1.26.0
+
 autoDiscovery:
   clusterName: ${cluster_name}
 

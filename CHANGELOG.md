@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#892](https://github.com/XenitAB/terraform-modules/pull/892) Change the default Prometheus scrape interval to every minute.
 - [#896](https://github.com/XenitAB/terraform-modules/pull/896) Update external-dns and metrics-server.
 - [#900](https://github.com/XenitAB/terraform-modules/pull/900) Trigger upgrade pipeline in xkf-templates at release
+- [#901](https://github.com/XenitAB/terraform-modules/pull/901) Update cluster-autoscaler to 1.26.
 
 ## 2022.12.3
 

@@ -1,7 +1,7 @@
 cloudProvider: ${provider}
 
 image:
-  tag: v1.26.0
+  tag: v1.24.0
 
 autoDiscovery:
   clusterName: ${cluster_name}

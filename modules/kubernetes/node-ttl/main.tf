@@ -33,7 +33,7 @@ resource "helm_release" "this" {
   chart       = "oci://ghcr.io/xenitab/helm-charts/node-ttl"
   name        = "node-ttl"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v0.0.3"
+  version     = "v0.0.4"
   max_history = 3
   values      = [templatefile("${path.module}/templates/values.yaml.tpl", {})]
 }

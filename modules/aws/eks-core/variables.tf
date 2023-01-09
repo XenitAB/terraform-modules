@@ -8,7 +8,7 @@ variable "name" {
   type        = string
 }
 
-variable "dns_zone" {
+variable "dns_zones" {
   description = "The list of DNS Zone host names"
   type        = list(string)
 }

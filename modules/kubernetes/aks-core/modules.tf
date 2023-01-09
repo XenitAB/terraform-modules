@@ -222,7 +222,7 @@ module "ingress_nginx" {
 
   default_certificate = {
     enabled  = true
-    dns_zone = var.cert_manager_config.dns_zone[0]
+    dns_zone = var.dns_zones[0]
   }
 }
 
@@ -239,7 +239,7 @@ module "ingress_healthz" {
   source = "../../kubernetes/ingress-healthz"
 
   environment            = var.environment
-  dns_zone               = var.cert_manager_config.dns_zone[0]
+  dns_zone               = var.dns_zones[0]
   location_short         = var.location_short
   linkerd_enabled        = var.linkerd_enabled
   public_private_enabled = var.ingress_config.public_private_enabled
@@ -294,7 +294,7 @@ module "cert_manager" {
   notification_email = var.cert_manager_config.notification_email
   cloud_provider     = "azure"
   azure_config = {
-    hosted_zone_names   = var.cert_manager_config.dns_zone
+    hosted_zone_names   = var.dns_zones
     resource_group_name = data.azurerm_resource_group.global.name
     subscription_id     = data.azurerm_client_config.current.subscription_id
     client_id           = var.external_dns_config.client_id

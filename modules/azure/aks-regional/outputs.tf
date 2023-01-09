@@ -21,9 +21,9 @@ output "aks_public_ip_prefix_ids" {
   value       = local.aks_public_ip_prefix_ids
 }
 
-output "dns_zone" {
+output "dns_zones" {
   description = "DNS Zone to be used with external-dns"
-  value       = var.dns_zone
+  value       = var.dns_zones
 }
 
 output "ssh_public_key" {

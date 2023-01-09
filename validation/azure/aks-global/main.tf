@@ -11,7 +11,7 @@ module "aks_global" {
   location             = "West Europe"
   location_short       = "we"
   name                 = "xks"
-  dns_zone             = ["example.io"]
+  dns_zones            = ["example.io"]
   subscription_name    = "xks"
   unique_suffix        = "1234"
   aks_managed_identity = "id"

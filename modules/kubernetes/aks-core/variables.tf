@@ -39,6 +39,11 @@ variable "aks_name_suffix" {
   type        = number
 }
 
+variable "dns_zones" {
+  description = "DNS Zone to create ingress sub domain under"
+  type        = list(string)
+}
+
 variable "aad_groups" {
   description = "Configuration for aad groups"
   type = object({
@@ -186,7 +191,6 @@ variable "cert_manager_config" {
   description = "Cert Manager configuration, the first item in the list is the main domain"
   type = object({
     notification_email = string
-    dns_zone           = list(string)
   })
 }
 

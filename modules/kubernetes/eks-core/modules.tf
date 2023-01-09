@@ -15,7 +15,7 @@ locals {
     "velero",
     "promtail"
   ]
-  dns_zone = {
+  route53_zones = {
     for dns in data.aws_route53_zone.this :
     dns.name => dns.zone_id
   }
@@ -23,8 +23,8 @@ locals {
 
 data "aws_route53_zone" "this" {
   for_each = {
-    for dns in var.cert_manager_config.dns_zone :
-    dns => dns
+    for zone in var.dns_zones :
+    zone => zone
   }
   name = each.key
 }
@@ -171,7 +171,7 @@ module "ingress_nginx" {
 
   default_certificate = {
     enabled  = true
-    dns_zone = var.cert_manager_config.dns_zone[0]
+    dns_zone = var.dns_zones[0]
   }
 }
 
@@ -187,7 +187,7 @@ module "ingress_healthz" {
   source = "../../kubernetes/ingress-healthz"
 
   environment            = var.environment
-  dns_zone               = var.cert_manager_config.dns_zone[0]
+  dns_zone               = var.dns_zones[0]
   linkerd_enabled        = var.linkerd_enabled
   public_private_enabled = var.ingress_config.public_private_enabled
 }
@@ -236,7 +236,7 @@ module "cert_manager" {
   cloud_provider = "aws"
   aws_config = {
     region         = data.aws_region.current.name
-    hosted_zone_id = local.dns_zone
+    hosted_zone_id = local.route53_zones
     role_arn       = var.cert_manager_config.role_arn
   }
   notification_email = var.cert_manager_config.notification_email

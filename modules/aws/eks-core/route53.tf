@@ -1,6 +1,6 @@
 resource "aws_route53_zone" "this" {
   for_each = {
-    for dns in var.dns_zone :
+    for dns in var.dns_zones :
     dns => dns
   }
 

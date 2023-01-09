@@ -44,7 +44,7 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_azad_kube_proxy_config"></a> [azad\_kube\_proxy\_config](#input\_azad\_kube\_proxy\_config) | Azure AD Kubernetes Proxy configuration | <pre>object({<br>    cluster_name_prefix = string<br>    proxy_url_override  = string<br>  })</pre> | <pre>{<br>  "cluster_name_prefix": "eks",<br>  "proxy_url_override": ""<br>}</pre> | no |
-| <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | List of DNS Zone to create | `list(string)` | n/a | yes |
+| <a name="input_dns_zones"></a> [dns\_zones](#input\_dns\_zones) | List of DNS Zone to create | `list(string)` | n/a | yes |
 | <a name="input_eks_admin_assume_principal_ids"></a> [eks\_admin\_assume\_principal\_ids](#input\_eks\_admin\_assume\_principal\_ids) | ThePrincipal IDs that are allowed to assume EKS Admin role | `list(string)` | n/a | yes |
 | <a name="input_eks_cloudwatch_retention_period"></a> [eks\_cloudwatch\_retention\_period](#input\_eks\_cloudwatch\_retention\_period) | eks cloudwatch retention period | `number` | `30` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environemnt | `string` | n/a | yes |

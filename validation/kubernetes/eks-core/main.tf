@@ -14,6 +14,7 @@ module "eks_core" {
   subscription_name = "baz"
   group_name_prefix = "eks"
   eks_name_suffix   = 1
+  dns_zones         = ["example.com", "example.io"]
 
   external_dns_enabled = true
   external_dns_config = {
@@ -28,7 +29,6 @@ module "eks_core" {
   cert_manager_enabled = true
   cert_manager_config = {
     notification_email = "foo"
-    dns_zone           = ["example.com", "example.io"]
     role_arn           = "foobar"
   }
   cluster_autoscaler_config = {

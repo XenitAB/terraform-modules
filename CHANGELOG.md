@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#900](https://github.com/XenitAB/terraform-modules/pull/900) Trigger upgrade pipeline in xkf-templates at release
 - [#902](https://github.com/XenitAB/terraform-modules/pull/902) Update cluster-autoscaler to 1.24.
 - [#903](https://github.com/XenitAB/terraform-modules/pull/903) Update Node TTL to v0.0.4.
+- [#905](https://github.com/XenitAB/terraform-modules/pull/905) Update Prometheus to v2.41.0.
 
 ## 2022.12.3
 

@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#894](https://github.com/XenitAB/terraform-modules/pull/894) Add x509-certificate-exporter helm chart.
+
 ### Changed
 
 - [#892](https://github.com/XenitAB/terraform-modules/pull/892) Change the default Prometheus scrape interval to every minute.

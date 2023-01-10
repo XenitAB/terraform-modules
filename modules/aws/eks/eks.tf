@@ -13,8 +13,51 @@ locals {
     token          = "foobar"
     calico_version = local.calico_version
   })
-  node_labels = { for np in var.eks_config.node_pools : np.name => { for key, value in np.node_labels : "k8s.io/cluster-autoscaler/node-template/label/${key}" => value } }
-  node_taints = { for np in var.eks_config.node_pools : np.name => { for node_taint in np.node_taints : "k8s.io/cluster-autoscaler/node-template/taint/${node_taint["key"]}" => "${node_taint["value"]}:${node_taint["effect"]}" } }
+
+
+  # This is not a great solution but is required to allow scaling from zero a node pool with additional labels and taints.
+  # Cluster autoscaler will not be able to determine which ASG to scale when a Pod has a node selector or taint if the ASG 
+  # count is zero and the tags are not set. In the future this should be evaluated if it is solved by AWS.
+  # https://docs.aws.amazon.com/eks/latest/userguide/autoscaling.html
+  node_labels = {
+    for np in var.eks_config.node_pools : np.name => merge({ "xkf.xenit.io/node-ttl" = "168h" }, np.node_labels, { "xkf.xenit.io/node-pool" = np.name })
+  }
+  node_label_args = {
+    for name, tags in local.node_labels : name => join(",", [for k, v in tags : "${k}=${v}"])
+  }
+  node_label_tags = {
+    for np in var.eks_config.node_pools : np.name => {
+      for key, value in local.node_labels[np.name] : "k8s.io/cluster-autoscaler/node-template/label/${key}" => value
+    }
+  }
+  asg_node_label_tags = flatten([
+    for name, tags in local.node_label_tags : [
+      for k, v in tags : {
+        id   = "${name}-${k}",
+        name = name,
+        key  = k,
+        value : v
+      }
+    ]
+  ])
+  node_taint_args = {
+    for np in var.eks_config.node_pools : np.name => join(",", [for taint in np.node_taints : "${taint.key}=${taint.value}:${replace(title(replace(lower(taint.effect), "_", " ")), " ", "")}"])
+  }
+  node_taint_tags = {
+    for np in var.eks_config.node_pools : np.name => {
+      for taint in np.node_taints : "k8s.io/cluster-autoscaler/node-template/taints/${taint.key}" => "${taint.value}:${replace(title(replace(lower(taint.effect), "_", " ")), " ", "")}"
+    }
+  }
+  asg_node_taint_tags = flatten([
+    for name, tags in local.node_taint_tags : [
+      for k, v in tags : {
+        id    = "${name}-${k}",
+        name  = name,
+        key   = k,
+        value = v,
+      }
+    ]
+  ])
 }
 
 data "aws_subnet" "cluster" {
@@ -166,6 +209,7 @@ resource "aws_launch_template" "eks_node_group" {
   }
 
   name                   = "${aws_eks_cluster.this.name}-${each.value.name}"
+  update_default_version = true
   vpc_security_group_ids = [aws_eks_cluster.this.vpc_config[0].cluster_security_group_id]
   block_device_mappings {
     device_name = "/dev/xvda"
@@ -176,15 +220,15 @@ resource "aws_launch_template" "eks_node_group" {
   user_data = base64encode(templatefile("${path.module}/templates/userdata.sh.tpl", {
     cluster_name   = aws_eks_cluster.this.name,
     b64_cluster_ca = aws_eks_cluster.this.certificate_authority[0].data,
-    api_server_url = aws_eks_cluster.this.endpoint
-    node_group     = "${aws_eks_cluster.this.name}-${each.value.name}"
+    api_server_url = aws_eks_cluster.this.endpoint,
+    node_labels    = join(",", ["eks.amazonaws.com/capacityType=ON_DEMAND,eks.amazonaws.com/nodegroup=${aws_eks_cluster.this.name}-${each.value.name}", local.node_label_args[each.value.name]]),
+    node_taints    = local.node_taint_args[each.value.name]
   }))
 
   tags = local.global_tags
 }
 
 resource "aws_eks_node_group" "this" {
-  provider = aws.eks_admin
   for_each = {
     for np in var.eks_config.node_pools : np.name => np
   }
@@ -208,13 +252,7 @@ resource "aws_eks_node_group" "this" {
     version = aws_launch_template.eks_node_group[each.key].latest_version
   }
 
-  labels = merge({ "xkf.xenit.io/node-ttl" = "168h" }, each.value.node_labels, { "xkf.xenit.io/node-pool" = each.value.name })
-
-  tags = merge(
-    local.global_tags,
-    local.node_labels[each.key],
-    local.node_taints[each.key],
-  )
+  labels = local.node_labels[each.key]
 
   dynamic "taint" {
     for_each = each.value.node_taints
@@ -225,6 +263,12 @@ resource "aws_eks_node_group" "this" {
     }
   }
 
+  tags = merge(
+    local.global_tags,
+    local.node_label_tags[each.key],
+    local.node_taint_tags[each.key],
+  )
+
   lifecycle {
     ignore_changes = [scaling_config[0].desired_size]
   }
@@ -232,5 +276,33 @@ resource "aws_eks_node_group" "this" {
   timeouts {
     create = "15m"
     update = "15m"
+  }
+}
+
+resource "aws_autoscaling_group_tag" "label" {
+  for_each = {
+    for tag in local.asg_node_label_tags : tag.id => tag
+  }
+
+  autoscaling_group_name = aws_eks_node_group.this[each.value.name].resources[0].autoscaling_groups[0].name
+
+  tag {
+    key                 = each.value.key
+    value               = each.value.value
+    propagate_at_launch = false
+  }
+}
+
+resource "aws_autoscaling_group_tag" "taint" {
+  for_each = {
+    for tag in local.asg_node_taint_tags : tag.id => tag
+  }
+
+  autoscaling_group_name = aws_eks_node_group.this[each.value.name].resources[0].autoscaling_groups[0].name
+
+  tag {
+    key                 = each.value.key
+    value               = each.value.value
+    propagate_at_launch = false
   }
 }

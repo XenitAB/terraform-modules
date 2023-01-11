@@ -54,12 +54,6 @@ variable "tenant_id" {
   default     = ""
 }
 
-variable "remote_write_authenticated" {
-  description = "Adds TLS authentication to remote write configuration if true"
-  type        = bool
-  default     = true
-}
-
 variable "remote_write_url" {
   description = "The URL where to send prometheus remote_write data"
   type        = string

@@ -8,7 +8,7 @@ This module is used to create AKS clusters.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.28.1 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.28.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.38.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.17.0 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 4.21.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.6.0 |
@@ -20,7 +20,7 @@ This module is used to create AKS clusters.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.28.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.38.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.6.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.13.1 |
 
@@ -94,9 +94,9 @@ This module is used to create AKS clusters.
 | [kubernetes_role_binding.vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
 | [kubernetes_storage_class.zrs_premium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.zrs_standard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/storage_class) | resource |
-| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.28.0/docs/data-sources/client_config) | data source |
-| [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/3.28.0/docs/data-sources/resource_group) | data source |
-| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.28.0/docs/data-sources/resource_group) | data source |
+| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/client_config) | data source |
+| [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/resource_group) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/resource_group) | data source |
 
 ## Inputs
 

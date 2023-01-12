@@ -644,4 +644,6 @@ module "node_ttl" {
   }
 
   source = "../../kubernetes/node-ttl"
+
+  status_config_map_namespace = "kube-system"
 }

@@ -30,7 +30,9 @@ No modules.
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_status_config_map_namespace"></a> [status\_config\_map\_namespace](#input\_status\_config\_map\_namespace) | Namespace where Cluster Autoscaler status ConfigMap is created | `string` | n/a | yes |
 
 ## Outputs
 

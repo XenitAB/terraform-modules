@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#909](https://github.com/XenitAB/terraform-modules/pull/909) Update Azure provider.
 
+### Fix
+
+- [#911](https://github.com/XenitAB/terraform-modules/pull/911) Fix Node TTL status ConfigMap namespace for AKS.
+
 ## 2023.01.1
 
 ### Added

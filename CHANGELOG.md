@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Fix
+
+- [#856](https://github.com/XenitAB/terraform-modules/pull/856) Update falco to v0.33.0 and falco-exporter to v0.8.0.
+
 ## 2023.01.2
 
 ### Changed

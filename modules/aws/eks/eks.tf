@@ -247,6 +247,10 @@ resource "aws_eks_node_group" "this" {
 
   subnet_ids = [for s in data.aws_subnet.node : s.id]
 
+  update_config {
+    max_unavailable_percentage = "33%"
+  }
+
   launch_template {
     id      = aws_launch_template.eks_node_group[each.key].id
     version = aws_launch_template.eks_node_group[each.key].latest_version

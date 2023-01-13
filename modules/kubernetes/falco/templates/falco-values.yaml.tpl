@@ -5,7 +5,7 @@ driver:
 falco:
   grpc:
     enabled: true
-  grpcOutput:
+  grpc_output:
     enabled: true
 
   # This should be further explored in the future but seems

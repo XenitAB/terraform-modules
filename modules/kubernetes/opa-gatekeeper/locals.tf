@@ -201,5 +201,15 @@ locals {
       }
       parameters = {}
     },
+    {
+      kind               = "K8sPodDisruptionBudget"
+      name               = "k8spoddisruptionbudget"
+      enforcement_action = ""
+      match = {
+        kinds      = []
+        namespaces = []
+      }
+      parameters = {}
+    },
   ]
 }

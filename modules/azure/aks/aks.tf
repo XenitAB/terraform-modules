@@ -60,6 +60,11 @@ resource "azurerm_kubernetes_cluster" "this" {
     }
   }
 
+  storage_profile {
+    file_driver_enabled         = false
+    snapshot_controller_enabled = false
+  }
+
   default_node_pool {
     name           = "default"
     vnet_subnet_id = data.azurerm_subnet.this.id

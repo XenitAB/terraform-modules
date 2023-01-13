@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#909](https://github.com/XenitAB/terraform-modules/pull/909) Update Azure provider.
+- [#910](https://github.com/XenitAB/terraform-modules/pull/910) Disable AKS file driver and snapshot controller.
 
 ### Fix
 

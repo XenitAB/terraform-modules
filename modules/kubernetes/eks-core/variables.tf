@@ -338,16 +338,19 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
-    datadog_site = string
-    api_key      = string
-    app_key      = string
-    namespaces   = list(string)
+    datadog_site         = string
+    api_key              = string
+    app_key              = string
+    namespaces           = list(string)
+    apm_ignore_resources = list(string)
+
   })
   default = {
-    datadog_site = ""
-    api_key      = ""
-    app_key      = ""
-    namespaces   = [""]
+    datadog_site         = ""
+    api_key              = ""
+    app_key              = ""
+    namespaces           = [""]
+    apm_ignore_resources = []
   }
 }
 

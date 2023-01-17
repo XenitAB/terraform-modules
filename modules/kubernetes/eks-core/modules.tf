@@ -468,12 +468,13 @@ module "datadog" {
 
   source = "../../kubernetes/datadog"
 
-  location          = data.aws_region.current.name
-  environment       = var.environment
-  datadog_site      = var.datadog_config.datadog_site
-  api_key           = var.datadog_config.api_key
-  app_key           = var.datadog_config.app_key
-  namespace_include = var.datadog_config.namespaces
+  location             = data.aws_region.current.name
+  environment          = var.environment
+  datadog_site         = var.datadog_config.datadog_site
+  api_key              = var.datadog_config.api_key
+  app_key              = var.datadog_config.app_key
+  namespace_include    = var.datadog_config.namespaces
+  apm_ignore_resources = var.datadog_config.apm_ignore_resources
 }
 
 # vpa

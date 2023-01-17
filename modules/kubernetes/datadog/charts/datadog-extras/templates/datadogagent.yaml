@@ -30,6 +30,8 @@ spec:
         value: {{ .Values.containerInclude }}
       - name: DD_CONTAINER_EXCLUDE
         value: "kube_namespace:.*"
+      - name: DD_APM_IGNORE_RESOURCES
+        value: {{ .Values.apmIgnoreResources }} 
     config:
       tolerations:
         - operator: Exists

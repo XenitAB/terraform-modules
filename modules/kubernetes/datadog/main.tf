@@ -26,7 +26,7 @@ terraform {
 
 locals {
   container_filter_include = join(" ", formatlist("kube_namespace:%s", var.namespace_include))
-  apm_ignore_resources     = join(",", formatlist("\"%s\"", var.apm_ignore_resources))
+  apm_ignore_resources     = join(",", formatlist("%s", var.apm_ignore_resources))
   values = templatefile("${path.module}/templates/values.yaml.tpl", {
     datadog_site             = var.datadog_site
     location                 = var.location

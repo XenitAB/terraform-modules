@@ -123,7 +123,7 @@ resource "helm_release" "gatekeeper" {
   chart       = "gatekeeper"
   name        = "gatekeeper"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "3.9.0"
+  version     = "3.11.0"
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/gatekeeper-values.yaml.tpl", {

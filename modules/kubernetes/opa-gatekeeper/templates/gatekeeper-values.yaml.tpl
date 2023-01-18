@@ -27,6 +27,7 @@ psp:
 upgradeCRDs:
   enabled: false
 mutatingWebhookReinvocationPolicy: IfNeeded
+validatingWebhookFailurePolicy: Fail
 
 mutatingWebhookCustomRules:
   - apiGroups:

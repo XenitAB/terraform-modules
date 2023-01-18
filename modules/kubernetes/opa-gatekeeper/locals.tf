@@ -206,7 +206,7 @@ locals {
       name               = "k8spoddisruptionbudget"
       enforcement_action = ""
       match = {
-        kinds      = []
+      kinds        = ["Deployment", "StatefulSet", "PodDisruptionBudget"]
         namespaces = []
       }
       parameters = {}

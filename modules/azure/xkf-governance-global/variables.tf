@@ -38,9 +38,29 @@ variable "group_name_prefix" {
   type        = string
 }
 
-variable "azure_ad_group_prefix" {
-  description = "Prefix for Azure AD Groups"
-  type        = string
-  default     = "az"
+variable "azuread_groups" {
+  description = "Azure AD groups from global"
+  type = object({
+    rg_owner = map(object({
+      id = string
+    }))
+    rg_contributor = map(object({
+      id = string
+    }))
+    rg_reader = map(object({
+      id = string
+    }))
+    sub_owner = object({
+      id = string
+    })
+    sub_contributor = object({
+      id = string
+    })
+    sub_reader = object({
+      id = string
+    })
+    service_endpoint_join = object({
+      id = string
+    })
+  })
 }
-

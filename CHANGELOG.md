@@ -19,6 +19,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#897](https://github.com/XenitAB/terraform-modules/pull/897) Add Datadog APM ignore resources
 
+### Changed
+
+- [#920](https://github.com/XenitAB/terraform-modules/pull/920) Increase default AKS audit retention to 365 days.
+
 ## 2023.01.2
 
 ### Changed

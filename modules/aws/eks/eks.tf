@@ -156,7 +156,7 @@ resource "helm_release" "cilium" {
   namespace   = "kube-system"
   repository  = "https://helm.cilium.io/"
   chart       = "cilium"
-  version     = "1.12.2"
+  version     = "1.12.6"
   timeout     = 600
   max_history = 3
   values = [

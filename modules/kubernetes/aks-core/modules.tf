@@ -30,7 +30,7 @@ module "opa_gatekeeper_crd" {
 
   chart_repository = "https://open-policy-agent.github.io/gatekeeper/charts"
   chart_name       = "gatekeeper"
-  chart_version    = "3.7.1"
+  chart_version    = "3.11.0"
 }
 
 module "opa_gatekeeper" {

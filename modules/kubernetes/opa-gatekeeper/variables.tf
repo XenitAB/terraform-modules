@@ -36,6 +36,14 @@ variable "additional_assigns" {
   default = []
 }
 
+variable "additional_modify_sets" {
+  description = "Additional modify sets that should be added"
+  type = list(object({
+    name = string
+  }))
+  default = []
+}
+
 variable "excluded_namespaces" {
   description = "Namespaces to opt out of constraints and assigns"
   type        = list(string)

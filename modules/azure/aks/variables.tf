@@ -40,6 +40,9 @@ variable "aks_config" {
     version = string
     # Enables paid SKU for AKS and makes the default node pool HA
     production_grade = bool
+    # Will replace the default cluster auto scaler expander with a priority expander, 
+    # see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md#configuration
+    priority_expander_config = optional(map(list(string)))
     node_pools = list(object({
       name           = string
       version        = string

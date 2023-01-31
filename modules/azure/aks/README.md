@@ -16,6 +16,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.28.1 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.38.0 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.4.3 |
 
 ## Providers
@@ -24,6 +25,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.28.1 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.38.0 |
+| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
 
 ## Modules
 
@@ -47,6 +49,7 @@ No modules.
 | [azurerm_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/role_assignment) | resource |
+| [kubectl_manifest.priority_expander](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/client_config) | data source |
 | [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/resource_group) | data source |
@@ -61,7 +64,7 @@ No modules.
 | <a name="input_aad_groups"></a> [aad\_groups](#input\_aad\_groups) | Configuration for Azure AD Groups (AAD Groups) | <pre>object({<br>    view = map(any)<br>    edit = map(any)<br>    cluster_admin = object({<br>      id   = string<br>      name = string<br>    })<br>    cluster_view = object({<br>      id   = string<br>      name = string<br>    })<br>    aks_managed_identity = object({<br>      id   = string<br>      name = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_aks_audit_log_retention"></a> [aks\_audit\_log\_retention](#input\_aks\_audit\_log\_retention) | The aks audit log retention in days, 0 = infinite | `number` | `365` | no |
 | <a name="input_aks_authorized_ips"></a> [aks\_authorized\_ips](#input\_aks\_authorized\_ips) | Authorized IPs to access AKS API | `list(string)` | n/a | yes |
-| <a name="input_aks_config"></a> [aks\_config](#input\_aks\_config) | The Azure Kubernetes Service (AKS) configuration | <pre>object({<br>    version = string<br>    # Enables paid SKU for AKS and makes the default node pool HA<br>    production_grade = bool<br>    node_pools = list(object({<br>      name           = string<br>      version        = string<br>      vm_size        = string<br>      min_count      = number<br>      max_count      = number<br>      spot_enabled   = bool<br>      spot_max_price = number<br>      node_taints    = list(string)<br>      node_labels    = map(string)<br>    }))<br>  })</pre> | n/a | yes |
+| <a name="input_aks_config"></a> [aks\_config](#input\_aks\_config) | The Azure Kubernetes Service (AKS) configuration | <pre>object({<br>    version = string<br>    # Enables paid SKU for AKS and makes the default node pool HA<br>    production_grade = bool<br>    # Will replace the default cluster auto scaler expander with a priority expander, <br>    # see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md#configuration<br>    priority_expander_config = optional(map(list(string)))<br>    node_pools = list(object({<br>      name           = string<br>      version        = string<br>      vm_size        = string<br>      min_count      = number<br>      max_count      = number<br>      spot_enabled   = bool<br>      spot_max_price = number<br>      node_taints    = list(string)<br>      node_labels    = map(string)<br>    }))<br>  })</pre> | n/a | yes |
 | <a name="input_aks_default_node_pool_vm_size"></a> [aks\_default\_node\_pool\_vm\_size](#input\_aks\_default\_node\_pool\_vm\_size) | The VM size of the AKS clusters default node pool. Do not override unless explicitly required. | `string` | `"Standard_D2ds_v5"` | no |
 | <a name="input_aks_managed_identity_group_id"></a> [aks\_managed\_identity\_group\_id](#input\_aks\_managed\_identity\_group\_id) | The group id of aks managed identity | `string` | n/a | yes |
 | <a name="input_aks_name_suffix"></a> [aks\_name\_suffix](#input\_aks\_name\_suffix) | The suffix for the Azure Kubernetes Service (AKS) clusters | `number` | n/a | yes |

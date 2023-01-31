@@ -166,6 +166,9 @@ variable "opa_gatekeeper_config" {
     additional_assigns = list(object({
       name = string
     }))
+    additional_modify_sets = list(object({
+      name = string
+    }))
   })
   default = {
     additional_excluded_namespaces = []
@@ -173,6 +176,7 @@ variable "opa_gatekeeper_config" {
     additional_constraints         = []
     enable_default_assigns         = true
     additional_assigns             = []
+    additional_modify_sets         = []
   }
 }
 

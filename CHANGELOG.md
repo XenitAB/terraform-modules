@@ -21,6 +21,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#897](https://github.com/XenitAB/terraform-modules/pull/897) Add Datadog APM ignore resources
 - [#921](https://github.com/XenitAB/terraform-modules/pull/921) Add Azure Alerts if no data gets sent to log storage account.
+- [#922](https://github.com/XenitAB/terraform-modules/pull/922) Enable use of spot instances in AKS
+
+### Changed
+
+- [#920](https://github.com/XenitAB/terraform-modules/pull/920) Increase default AKS audit retention to 365 days.
+>>>>>>> f91050c9 (Enable use of spot instances in AKS)
 
 ## 2023.01.2
 

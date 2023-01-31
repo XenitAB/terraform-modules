@@ -116,6 +116,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_additional_assigns"></a> [additional\_assigns](#input\_additional\_assigns) | Additional assigns that should be added | <pre>list(object({<br>    name = string<br>  }))</pre> | `[]` | no |
 | <a name="input_additional_constraints"></a> [additional\_constraints](#input\_additional\_constraints) | Additional constraints that should be added | <pre>list(object({<br>    kind               = string<br>    name               = string<br>    enforcement_action = string<br>    match = object({<br>      kinds = list(object({<br>        apiGroups = list(string)<br>        kinds     = list(string)<br>      }))<br>      namespaces = list(string)<br>    })<br>    parameters = any<br>  }))</pre> | `[]` | no |
+| <a name="input_additional_modify_sets"></a> [additional\_modify\_sets](#input\_additional\_modify\_sets) | Additional modify sets that should be added | <pre>list(object({<br>    name = string<br>  }))</pre> | `[]` | no |
 | <a name="input_cloud_provider"></a> [cloud\_provider](#input\_cloud\_provider) | Cloud provider to use. | `string` | `"azure"` | no |
 | <a name="input_enable_default_assigns"></a> [enable\_default\_assigns](#input\_enable\_default\_assigns) | If enabled default assigns will be added | `bool` | `true` | no |
 | <a name="input_enable_default_constraints"></a> [enable\_default\_constraints](#input\_enable\_default\_constraints) | If enabled default constraints will be added | `bool` | `true` | no |

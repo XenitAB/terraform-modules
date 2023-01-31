@@ -97,3 +97,14 @@ variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string
 }
+
+variable "notification_email" {
+  description = "Email address to send alert notifications"
+  type        = string
+}
+
+variable "alerts_enabled" {
+  description = "Should alert rules be created by default"
+  type        = bool
+  default     = false
+}

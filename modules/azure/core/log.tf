@@ -15,19 +15,29 @@ resource "azurerm_storage_account" "log" {
 }
 
 resource "azurerm_monitor_action_group" "this" {
-  name                = "xenit-devops"
+  for_each = {
+    for s in ["alerts"] :
+    s => s
+    if var.alerts_enabled
+  }
+  name                = "xenit-devops-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
   resource_group_name = data.azurerm_resource_group.log.name
   short_name          = "xenit-devops"
 
   email_receiver {
     name                    = "xenit-devops"
-    email_address           = "edvin.norling@xenit.se"
+    email_address           = var.notification_email
     use_common_alert_schema = true
   }
 }
 
 resource "azurerm_monitor_metric_alert" "log" {
-  name                = "audit log storage account missing"
+  for_each = {
+    for s in ["alerts"] :
+    s => s
+    if var.alerts_enabled
+  }
+  name                = "audit log${var.environment}${var.location_short}${var.name}${var.unique_suffix} storage account missing data"
   resource_group_name = data.azurerm_resource_group.log.name
   scopes              = [azurerm_storage_account.log.id]
   description         = "No data being written to the storage account, check the AKS audit logs"
@@ -42,7 +52,7 @@ resource "azurerm_monitor_metric_alert" "log" {
   }
 
   action {
-    action_group_id = azurerm_monitor_action_group.this.id
+    action_group_id = azurerm_monitor_action_group["alerts"].this.id
   }
   severity = 1
 }

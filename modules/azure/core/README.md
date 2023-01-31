@@ -49,6 +49,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_alerts_enabled"></a> [alerts\_enabled](#input\_alerts\_enabled) | Should alert rules be created by default | `bool` | `false` | no |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
 | <a name="input_azure_role_definition_prefix"></a> [azure\_role\_definition\_prefix](#input\_azure\_role\_definition\_prefix) | Prefix for Azure Role Definition names | `string` | `"role"` | no |
 | <a name="input_enable_storage_account"></a> [enable\_storage\_account](#input\_enable\_storage\_account) | Should a storage account be created in the core resource group? (used for diagnostics) | `bool` | `false` | no |
@@ -56,6 +57,7 @@ No modules.
 | <a name="input_group_name_separator"></a> [group\_name\_separator](#input\_group\_name\_separator) | Separator for group names | `string` | `"-"` | no |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The commonName to use for the deploy | `string` | n/a | yes |
+| <a name="input_notification_email"></a> [notification\_email](#input\_notification\_email) | Email address to send alert notifications | `string` | n/a | yes |
 | <a name="input_peering_config"></a> [peering\_config](#input\_peering\_config) | Network peering configuration | <pre>list(object({<br>    name                         = string<br>    remote_virtual_network_id    = string<br>    allow_forwarded_traffic      = bool<br>    use_remote_gateways          = bool<br>    allow_virtual_network_access = bool<br>  }))</pre> | `[]` | no |
 | <a name="input_route_config"></a> [route\_config](#input\_route\_config) | Route configuration. Not applied to AKS subnets | <pre>list(object({<br>    subnet_name = string # Short name for the subnet<br>    routes = list(object({<br>      name                   = string # Name of the route<br>      address_prefix         = string # Example: 192.168.0.0/24<br>      next_hop_type          = string # VirtualNetworkGateway, VnetLocal, Internet, VirtualAppliance and None<br>      next_hop_in_ip_address = string # Only set if next_hop_type is VirtualAppliance<br>    }))<br><br>  }))</pre> | `[]` | no |
 | <a name="input_subnet_private_endpoints"></a> [subnet\_private\_endpoints](#input\_subnet\_private\_endpoints) | Enable private enpoint for specific subnet names | `map(bool)` | `{}` | no |

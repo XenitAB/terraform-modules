@@ -25,6 +25,8 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [azurerm_monitor_action_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/monitor_action_group) | resource |
+| [azurerm_monitor_metric_alert.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/monitor_metric_alert) | resource |
 | [azurerm_network_security_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/network_security_group) | resource |
 | [azurerm_role_assignment.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_definition.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/role_definition) | resource |

@@ -20,8 +20,9 @@ resource "azurerm_monitor_action_group" "this" {
   short_name          = "xenit-devops"
 
   email_receiver {
-    name          = "xenit-devops"
-    email_address = "edvin.norling@xenit.se"
+    name                    = "xenit-devops"
+    email_address           = "edvin.norling@xenit.se"
+    use_common_alert_schema = true
   }
 }
 
@@ -30,6 +31,7 @@ resource "azurerm_monitor_metric_alert" "log" {
   resource_group_name = data.azurerm_resource_group.log.name
   scopes              = [azurerm_storage_account.log.id]
   description         = "No data being written to the storage account, check the AKS audit logs"
+  frequency           = "PT5M"
 
   dynamic_criteria {
     metric_namespace  = "Microsoft.Storage/storageAccounts"

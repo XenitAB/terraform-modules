@@ -52,7 +52,7 @@ resource "azurerm_monitor_metric_alert" "log" {
   }
 
   action {
-    action_group_id = azurerm_monitor_action_group["alerts"].this.id
+    action_group_id = azurerm_monitor_action_group.this["alerts"].id
   }
   severity = 1
 }

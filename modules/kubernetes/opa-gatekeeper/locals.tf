@@ -125,6 +125,7 @@ locals {
       parameters = {
         allowedCapabilities      = [""]
         requiredDropCapabilities = ["NET_RAW", "CAP_SYS_ADMIN"]
+        exemptImages             = ["ghcr.io/grafana/xk6-disruptor-agent:*"]
       }
     },
     {

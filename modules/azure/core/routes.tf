@@ -4,9 +4,10 @@ resource "azurerm_route_table" "this" {
     route.subnet_name => route
   }
 
-  name                = "rt-${var.environment}-${var.location_short}-${var.name}-${each.value.subnet_name}"
-  location            = data.azurerm_resource_group.this.location
-  resource_group_name = data.azurerm_resource_group.this.name
+  name                          = "rt-${var.environment}-${var.location_short}-${var.name}-${each.value.subnet_name}"
+  location                      = data.azurerm_resource_group.this.location
+  resource_group_name           = data.azurerm_resource_group.this.name
+  disable_bgp_route_propagation = each.value.disable_bgp_route_propagation
 }
 
 resource "azurerm_route" "this" {

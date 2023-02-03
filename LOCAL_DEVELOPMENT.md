@@ -62,5 +62,5 @@ sudo pacman -S parallel
 Ubuntu:
 
 ```shell
-sudo apt install parallel`
+sudo apt install parallel
 ````

@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#917](https://github.com/XenitAB/terraform-modules/pull/917) Remove datasource for azuread_groups in xkf_governance_global.
 - [#920](https://github.com/XenitAB/terraform-modules/pull/920) Increase default AKS audit retention to 365 days.
+- [#926](https://github.com/XenitAB/terraform-modules/pull/926) Make disable_bgp_route_propagation configurable.
 
 ### Fix
 

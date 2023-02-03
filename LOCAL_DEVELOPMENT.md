@@ -22,7 +22,7 @@ tfenv use ${TF_VERSION}
 ### tflint
 
 ```shell
-TFLINT_VERSION=v0.39.2
+TFLINT_VERSION=v0.42.1
 cd /tmp
 wget https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VERSION}/tflint_linux_amd64.zip
 unzip tflint_linux_amd64.zip
@@ -53,6 +53,14 @@ mv terraform-docs /usr/bin/terraform-docs
 
 Use package manager of choice for your distribution.
 
+Arch:
+
 ```shell
 sudo pacman -S parallel
 ```
+
+Ubuntu:
+
+```shell
+sudo apt install parallel`
+````

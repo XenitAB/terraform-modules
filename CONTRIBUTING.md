@@ -40,7 +40,7 @@ needs to be created for the module. In the 'validation' directory create a new d
 Inside there you should create a `m̀ain.tf` file which imports the module with a local path and passes dummy values for all of the
 required variables, so that it is possible to run `terraform validate`.
 
-## Your first Pull Request
+## Your First Pull Request
 
 These are the steps someone without contributor access needs to take to create a pull request:
 

@@ -77,39 +77,14 @@ variable "namespaces" {
     object({
       name   = string
       labels = map(string)
-      flux = object({
-        enabled             = bool
-        create_crds         = bool
-        include_tenant_name = bool
-        azure_devops = object({
-          org  = string
-          proj = string
-          repo = string
-        })
-        github = object({
-          repo = string
-        })
-      })
+      fluxcd = optional(object({
+        provider    = string
+        project     = optional(string)
+        repository  = string
+        create_crds = optional(bool, false)
+      }))
     })
   )
-  default = [{
-    name   = ""
-    labels = {}
-    flux = {
-      enabled             = true
-      create_crds         = false
-      include_tenant_name = false
-      azure_devops = {
-        org  = ""
-        proj = ""
-        repo = ""
-      }
-      github = {
-        repo = ""
-      }
-    }
-    }
-  ]
 }
 
 variable "kubernetes_network_policy_default_deny" {
@@ -140,27 +115,24 @@ variable "kubernetes_default_limit_range" {
   }
 }
 
-variable "fluxcd_v2_enabled" {
-  description = "Should fluxcd-v2 be enabled"
+variable "fluxcd_enabled" {
+  description = "Should FluxCD be enabled"
   type        = bool
   default     = true
 }
 
-variable "fluxcd_v2_config" {
-  description = "Configuration for fluxcd-v2"
+variable "fluxcd_config" {
+  description = "Configuration for FluxCD"
   type = object({
-    type = string
-    github = object({
-      org             = string
-      app_id          = number
+    organization = string
+    github = optional(object({
+      application_id  = number
       installation_id = number
       private_key     = string
-    })
-    azure_devops = object({
-      pat  = string
-      org  = string
-      proj = string
-    })
+    }))
+    azure_devops = optional(object({
+      pat = string
+    }))
   })
 }
 

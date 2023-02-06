@@ -61,55 +61,22 @@ module "gatekeeper" {
   exclude_namespaces = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
 }
 
-# FluxCD v2
-module "fluxcd_v2_azure_devops" {
+module "fluxcd" {
   for_each = {
-    for s in ["fluxcd-v2"] :
+    for s in ["fluxcd"] :
     s => s
-    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "azure-devops"
+    if var.fluxcd_enabled
   }
 
-  source = "../../kubernetes/fluxcd-v2-azdo"
+  source = "../../kubernetes/fluxcd"
 
-  environment       = var.environment
-  cluster_id        = local.cluster_id
-  azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
-  azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
-  azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
-  namespaces = [for ns in var.namespaces : {
+  environment = var.environment
+  cluster_id  = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
+  providers   = var.fluxcd_config.providers
+  bootstrap   = var.fluxcd_config.bootstrap
+  tenants = [for ns in var.namespaces : {
     name = ns.name
-    flux = {
-      enabled             = ns.flux.enabled
-      create_crds         = ns.flux.create_crds
-      include_tenant_name = ns.flux.include_tenant_name
-      org                 = ns.flux.azure_devops.org
-      proj                = ns.flux.azure_devops.proj
-      repo                = ns.flux.azure_devops.repo
-    }
-  }]
-}
-
-module "fluxcd_v2_github" {
-  for_each = {
-    for s in ["fluxcd-v2"] :
-    s => s
-    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "github"
-  }
-
-  source = "../../kubernetes/fluxcd-v2-github"
-
-  environment            = var.environment
-  cluster_id             = local.cluster_id
-  github_org             = var.fluxcd_v2_config.github.org
-  github_app_id          = var.fluxcd_v2_config.github.app_id
-  github_installation_id = var.fluxcd_v2_config.github.installation_id
-  github_private_key     = var.fluxcd_v2_config.github.private_key
-  namespaces = [for ns in var.namespaces : {
-    name = ns.name
-    flux = {
-      enabled = ns.flux.enabled
-      repo    = ns.flux.github.repo
-    }
+    flux = ns.flux
   }]
 }
 

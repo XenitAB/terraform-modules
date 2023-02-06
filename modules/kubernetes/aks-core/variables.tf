@@ -503,7 +503,7 @@ variable "node_local_dns_enabled" {
 variable "node_ttl_enabled" {
   description = "Should Node TTL be enabled"
   type        = bool
-  default     = false
+  default     = true
 }
 
 

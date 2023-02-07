@@ -40,7 +40,9 @@ locals {
         kinds      = []
         namespaces = []
       }
-      parameters = {}
+      parameters = {
+        exemptImages = ["ghcr.io/grafana/xk6-disruptor-agent:*"]
+      }
     },
     {
       kind               = "K8sPSPHostNamespace"
@@ -125,6 +127,7 @@ locals {
       parameters = {
         allowedCapabilities      = [""]
         requiredDropCapabilities = ["NET_RAW", "CAP_SYS_ADMIN"]
+        exemptImages             = ["ghcr.io/grafana/xk6-disruptor-agent:*"]
       }
     },
     {

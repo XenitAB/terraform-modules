@@ -39,6 +39,12 @@ variable "aks_name_suffix" {
   type        = number
 }
 
+variable "priority_expander_config" {
+  description = "Cluster auto scaler priority expander configuration."
+  type        = map(list(string))
+  default     = null
+}
+
 variable "aad_groups" {
   description = "Configuration for aad groups"
   type = object({

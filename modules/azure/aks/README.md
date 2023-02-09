@@ -16,7 +16,6 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.28.1 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.38.0 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.4.3 |
 
 ## Providers
@@ -25,7 +24,6 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.28.1 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.38.0 |
-| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
 
 ## Modules
 
@@ -49,7 +47,6 @@ No modules.
 | [azurerm_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/role_assignment) | resource |
-| [kubectl_manifest.priority_expander](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/client_config) | data source |
 | [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/resource_group) | data source |
@@ -85,3 +82,4 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Kube config for the created AKS cluster |
+| <a name="output_priority_expander_config"></a> [priority\_expander\_config](#output\_priority\_expander\_config) | Cluster auto scaler priority expander configuration. |

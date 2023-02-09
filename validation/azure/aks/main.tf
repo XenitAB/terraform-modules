@@ -28,8 +28,9 @@ module "aks" {
   }
 
   aks_config = {
-    version          = "1.24.3"
-    production_grade = false
+    version                  = "1.24.3"
+    production_grade         = false
+    priority_expander_config = { "10" : [".*standard.*"], "20" : [".*spot.*"] }
     default_node_pool = {
       node_labels = {
         "test" = "test"

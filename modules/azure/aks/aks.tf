@@ -15,9 +15,6 @@ data "azurerm_storage_account" "log" {
 
 locals {
   auto_scaler_expander = var.aks_config.priority_expander_config == null ? "least-waste" : "priority"
-
-  # Produces a map(string), e.g. {"10" : "[.*standard.*]", "20" : "[.*spot.*]"}
-  priority_expander_config = var.aks_config.priority_expander_config == null ? {} : { for k, v in var.aks_config.priority_expander_config : k => format("%s%s%s", "[", join(",", v), "]") }
 }
 
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
@@ -89,29 +86,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 }
 
-provider "kubectl" {
-  host                   = azurerm_kubernetes_cluster.this.kube_config[0].host
-  client_certificate     = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].client_certificate)
-  client_key             = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].client_key)
-  cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].cluster_ca_certificate)
-  load_config_file       = false
-}
-
-resource "kubectl_manifest" "priority_expander" {
-  for_each = {
-    for s in ["priority_expander"] :
-    s => s
-    if var.aks_config.priority_expander_config != null
-  }
-  depends_on = [azurerm_kubernetes_cluster.this]
-  apply_only = true
-  yaml_body = templatefile("${path.module}/templates/priority-expander.yaml.tpl", {
-    priority_expander_config = local.priority_expander_config
-  })
-}
-
 resource "azurerm_kubernetes_cluster_node_pool" "this" {
-  depends_on = [kubectl_manifest.priority_expander]
   for_each = {
     for nodePool in var.aks_config.node_pools :
     nodePool.name => nodePool

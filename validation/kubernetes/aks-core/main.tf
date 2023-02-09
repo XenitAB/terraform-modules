@@ -47,6 +47,8 @@ module "aks_core" {
     }
   }
 
+  priority_expander_config = { "10" : [".*standard.*"], "20" : [".*spot.*"] }
+
   aad_groups = {
     view = {
       test = {

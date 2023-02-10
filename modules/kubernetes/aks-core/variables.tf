@@ -39,6 +39,12 @@ variable "aks_name_suffix" {
   type        = number
 }
 
+variable "priority_expander_config" {
+  description = "Cluster auto scaler priority expander configuration."
+  type        = map(list(string))
+  default     = null
+}
+
 variable "aad_groups" {
   description = "Configuration for aad groups"
   type = object({
@@ -166,6 +172,9 @@ variable "opa_gatekeeper_config" {
     additional_assigns = list(object({
       name = string
     }))
+    additional_modify_sets = list(object({
+      name = string
+    }))
   })
   default = {
     additional_excluded_namespaces = []
@@ -173,6 +182,7 @@ variable "opa_gatekeeper_config" {
     additional_constraints         = []
     enable_default_assigns         = true
     additional_assigns             = []
+    additional_modify_sets         = []
   }
 }
 

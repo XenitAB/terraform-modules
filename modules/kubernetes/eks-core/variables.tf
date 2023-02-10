@@ -395,5 +395,5 @@ variable "node_local_dns_dns_ip" {
 variable "node_ttl_enabled" {
   description = "Should Node TTL be enabled"
   type        = bool
-  default     = false
+  default     = true
 }

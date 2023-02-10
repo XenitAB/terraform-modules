@@ -1,6 +1,8 @@
 # Core
 
 This module is used to create core resources like virtual network for the subscription.
+This module assumes that you have a RG called `rg-<env>-<location_short>-log`.
+Easiest is to define this RG in the governance module.
 
 ## Requirements
 

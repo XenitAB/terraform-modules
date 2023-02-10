@@ -8,8 +8,3 @@ output "kube_config" {
     cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].cluster_ca_certificate)
   }
 }
-
-output "priority_expander_config" {
-  description = "Cluster auto scaler priority expander configuration."
-  value       = var.aks_config.priority_expander_config
-}

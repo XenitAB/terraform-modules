@@ -82,4 +82,3 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Kube config for the created AKS cluster |
-| <a name="output_priority_expander_config"></a> [priority\_expander\_config](#output\_priority\_expander\_config) | Cluster auto scaler priority expander configuration. |

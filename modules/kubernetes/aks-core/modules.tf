@@ -80,7 +80,6 @@ module "opa_gatekeeper" {
 
 # FluxCD v2
 module "fluxcd_v2_azure_devops" {
-
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s
@@ -107,7 +106,6 @@ module "fluxcd_v2_azure_devops" {
 }
 
 module "fluxcd_v2_github" {
-
   for_each = {
     for s in ["fluxcd-v2"] :
     s => s

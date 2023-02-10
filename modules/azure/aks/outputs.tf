@@ -11,5 +11,5 @@ output "kube_config" {
 
 output "priority_expander_config" {
   description = "Cluster auto scaler priority expander configuration."
-  value = var.aks_config.priority_expander_config
+  value       = var.aks_config.priority_expander_config
 }

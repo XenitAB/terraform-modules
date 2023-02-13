@@ -49,3 +49,4 @@ enabledMonitors:
   grafanaAgent: ${grafana_agent_enabled}
   nodeLocalDNS: ${node_local_dns_enabled}
   promtail: ${promtail_enabled}
+  nodeTtl: ${node_ttl_enabled}

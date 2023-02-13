@@ -445,6 +445,23 @@ spec:
       app.kubernetes.io/instance: promtail
       app.kubernetes.io/name: promtail
 {{- end }}
+{{- if .Values.enabledMonitors.nodeTtl }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    xkf.xenit.io/monitoring: platform
+  name: node-ttl
+  namespace: node-ttl
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: node-ttl
+      app.kubernetes.io/instance: node-ttl
+  endpoints:
+    - port: metrics
+{{- end }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor

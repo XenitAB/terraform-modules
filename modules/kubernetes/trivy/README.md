@@ -1,14 +1,14 @@
-# Starboard
+# Trivy
 
-Adds [`Starboard`](https://github.com/aquasecurity/starboard) and
+Adds [`Trivy-operator`](https://github.com/aquasecurity/trivy-operator) and
 [`Trivy`](https://github.com/aquasecurity/trivy) to a Kubernetes clusters.
-The modules consists of two components, trivy and starboard where
+The modules consists of two components, trivy and trivy-operator where
 Trivy is used as a server to store aqua security image vulnerability database.
-Staboard is used to trigger image and config scans on newly created replicasets and
+Trivy-operator is used to trigger image and config scans on newly created replicasets and
 generates a CR with a report that both admins and developers can use to improve there setup.
 
 [`starboard-exporter`](https://github.com/giantswarm/starboard-exporter) is used to gather
-trivy metrics from starboard CRD:s.
+trivy metrics from trivy-operator CRD:s.
 
 ## Requirements
 
@@ -33,11 +33,11 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [helm_release.starboard](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
 | [helm_release.starboard_exporter](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
 | [helm_release.trivy](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
+| [helm_release.trivy-operator](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
 | [helm_release.trivy_extras](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
-| [kubernetes_namespace.starboard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/namespace) | resource |
+| [kubernetes_namespace.trivy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/namespace) | resource |
 
 ## Inputs
 

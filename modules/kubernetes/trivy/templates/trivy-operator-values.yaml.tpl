@@ -10,18 +10,21 @@ trivy:
   mode: ClientServer
   severity: MEDIUM,HIGH,CRITICAL
   ignoreUnfixed: true
-  serverURL: "http://trivy.starboard-operator.svc.cluster.local:4954"
-  imageRef: docker.io/aquasec/trivy:0.24.3
+  serverURL: "http://trivy.trivy.svc.cluster.local:4954"
+  serverServiceName: trivy
 
 operator:
   # configAuditScannerEnabled the flag to enable configuration audit scanner
   configAuditScannerEnabled: false
-  # kubernetesBenchmarkEnabled the flag to enable CIS Kubernetes Benchmark scanner
-  kubernetesBenchmarkEnabled: false
   # vulnerabilityScannerScanOnlyCurrentRevisions the flag to only create vulnerability scans on the current revision of a deployment.
   vulnerabilityScannerScanOnlyCurrentRevisions: true
-  # vulnerabilityScannerReportTTL the flag to set how long a vulnerability report should exist. "" means that the vulnerabilityScannerReportTTL feature is disabled
-  vulnerabilityScannerReportTTL: "25h"
+  # rbacAssessmentScannerEnabled the flag to enable rbac assessment scanner
+  rbacAssessmentScannerEnabled: false
+  # infraAssessmentScannerEnabled the flag to enable infra assessment scanner
+  infraAssessmentScannerEnabled: false
+  builtInTrivyServer: true
+  # scannerReportTTL the flag to set how long a report should exist. "" means that the ScannerReportTTL feature is disabled
+  ScannerReportTTL: "25h"
 
 %{~ if provider == "aws" ~}
 serviceAccount:
@@ -30,7 +33,7 @@ serviceAccount:
 %{~ endif ~}
 
 %{~ if provider == "azure" ~}
-starboard:
+trivyOperator:
   # scanJobPodTemplateLabels comma-separated representation of the labels which the user wants the scanner pods to be
   # labeled with. Example: `foo=bar,env=stage` will labeled the scanner pods with the labels `foo: bar` and `env: stage`
   scanJobPodTemplateLabels: "aadpodidbinding=trivy"

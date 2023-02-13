@@ -34,6 +34,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`control-plane-logs`](control-plane-logs/README.md)
 - [`helm-crd`](helm-crd/README.md)
 - [`helm-crd-oci`](helm-crd-oci/README.md)
+- [`spegel`](spegel/README.md)
 
 ## Style Guide
 

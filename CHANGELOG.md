@@ -9,8 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - [#934](https://github.com/XenitAB/terraform-modules/pull/934) Add certificate permissions for resource group AAD group.
-
 - [#906](https://github.com/XenitAB/terraform-modules/pull/906) Add support for kubernetes 1.25 in Azure.
+- [#936](https://github.com/XenitAB/terraform-modules/pull/936) Add Spegel to AKS and EKS.
 
 ### Changed
 

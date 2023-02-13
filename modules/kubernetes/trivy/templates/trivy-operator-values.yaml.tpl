@@ -11,7 +11,6 @@ trivy:
   severity: MEDIUM,HIGH,CRITICAL
   ignoreUnfixed: true
   serverURL: "http://trivy.trivy.svc.cluster.local:4954"
-  serverServiceName: trivy
 
 operator:
   # configAuditScannerEnabled the flag to enable configuration audit scanner
@@ -22,7 +21,6 @@ operator:
   rbacAssessmentScannerEnabled: false
   # infraAssessmentScannerEnabled the flag to enable infra assessment scanner
   infraAssessmentScannerEnabled: false
-  builtInTrivyServer: true
   # scannerReportTTL the flag to set how long a report should exist. "" means that the ScannerReportTTL feature is disabled
   ScannerReportTTL: "25h"
 

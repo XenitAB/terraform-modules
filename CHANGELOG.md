@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#906](https://github.com/XenitAB/terraform-modules/pull/906) Add support for kubernetes 1.25 in Azure.
+
 ### Changed
 
 - [#928](https://github.com/XenitAB/terraform-modules/pull/928) Enable Node TTL by default.

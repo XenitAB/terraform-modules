@@ -39,6 +39,12 @@ variable "aks_name_suffix" {
   type        = number
 }
 
+variable "priority_expander_config" {
+  description = "Cluster auto scaler priority expander configuration."
+  type        = map(list(string))
+  default     = null
+}
+
 variable "aad_groups" {
   description = "Configuration for aad groups"
   type = object({
@@ -166,6 +172,9 @@ variable "opa_gatekeeper_config" {
     additional_assigns = list(object({
       name = string
     }))
+    additional_modify_sets = list(object({
+      name = string
+    }))
   })
   default = {
     additional_excluded_namespaces = []
@@ -173,6 +182,7 @@ variable "opa_gatekeeper_config" {
     additional_constraints         = []
     enable_default_assigns         = true
     additional_assigns             = []
+    additional_modify_sets         = []
   }
 }
 
@@ -267,16 +277,18 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
-    datadog_site = string
-    api_key      = string
-    app_key      = string
-    namespaces   = list(string)
+    datadog_site         = string
+    api_key              = string
+    app_key              = string
+    namespaces           = list(string)
+    apm_ignore_resources = list(string)
   })
   default = {
-    datadog_site = ""
-    api_key      = ""
-    app_key      = ""
-    namespaces   = [""]
+    datadog_site         = ""
+    api_key              = ""
+    app_key              = ""
+    namespaces           = [""]
+    apm_ignore_resources = []
   }
 }
 
@@ -491,7 +503,7 @@ variable "node_local_dns_enabled" {
 variable "node_ttl_enabled" {
   description = "Should Node TTL be enabled"
   type        = bool
-  default     = false
+  default     = true
 }
 
 

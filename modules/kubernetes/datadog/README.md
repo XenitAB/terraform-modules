@@ -39,6 +39,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_api_key"></a> [api\_key](#input\_api\_key) | API key to upload data to Datadog | `string` | n/a | yes |
+| <a name="input_apm_ignore_resources"></a> [apm\_ignore\_resources](#input\_apm\_ignore\_resources) | The resources that shall be excluded from APM | `list(string)` | `[]` | no |
 | <a name="input_app_key"></a> [app\_key](#input\_app\_key) | APP key to configure data like alarms in Datadog | `string` | n/a | yes |
 | <a name="input_datadog_site"></a> [datadog\_site](#input\_datadog\_site) | Site to connect Datadog agent | `string` | `"datadoghq.eu"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Cluster environment | `string` | n/a | yes |

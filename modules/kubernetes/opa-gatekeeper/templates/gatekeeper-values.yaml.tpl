@@ -1,6 +1,11 @@
 postInstall:
   labelNamespace:
     enabled: false
+  tolerations:
+    - key: "kubernetes.azure.com/scalesetpriority"
+      operator: "Equal"
+      value: "spot"
+      effect: "NoSchedule"
 controllerManager:
   %{~ if provider == "aws" ~}
   hostNetwork: true
@@ -9,6 +14,11 @@ controllerManager:
   healthPort: 8012
   %{~ endif ~}
   priorityClassName: platform-high
+  tolerations:
+    - key: "kubernetes.azure.com/scalesetpriority"
+      operator: "Equal"
+      value: "spot"
+      effect: "NoSchedule"
 audit:
   priorityClassName: platform-high
   resources:
@@ -17,6 +27,11 @@ audit:
     requests:
       cpu: 100m
       memory: 256Mi
+  tolerations:
+    - key: "kubernetes.azure.com/scalesetpriority"
+      operator: "Equal"
+      value: "spot"
+      effect: "NoSchedule"
   %{~ if provider == "aws" ~}
   hostNetwork: true
   metricsPort: 8013
@@ -40,3 +55,4 @@ mutatingWebhookCustomRules:
     - '*'
     - pods/ephemeralcontainers
     scope: '*'
+

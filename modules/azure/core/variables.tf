@@ -45,7 +45,8 @@ variable "subnet_private_endpoints" {
 variable "route_config" {
   description = "Route configuration. Not applied to AKS subnets"
   type = list(object({
-    subnet_name = string # Short name for the subnet
+    subnet_name                   = string                # Short name for the subnet
+    disable_bgp_route_propagation = optional(bool, false) # Controls propagation of routes learned by BGP on that route table 
     routes = list(object({
       name                   = string # Name of the route
       address_prefix         = string # Example: 192.168.0.0/24
@@ -96,4 +97,15 @@ variable "enable_storage_account" {
 variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string
+}
+
+variable "notification_email" {
+  description = "Email address to send alert notifications"
+  type        = string
+}
+
+variable "alerts_enabled" {
+  description = "Should alert rules be created by default"
+  type        = bool
+  default     = false
 }

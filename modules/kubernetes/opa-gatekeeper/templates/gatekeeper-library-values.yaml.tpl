@@ -31,6 +31,11 @@ assigns:
   - name: "${item.name}"
   %{~ endfor ~}
 
+modifySets:
+  %{~ for item in modify_sets ~}
+  - name: "${item.name}"
+  %{~ endfor ~}
+
 exclude:
   %{~ for item in excluded_namespaces ~}
   - excludedNamespaces:

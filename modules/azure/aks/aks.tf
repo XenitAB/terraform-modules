@@ -13,6 +13,10 @@ data "azurerm_storage_account" "log" {
   resource_group_name = data.azurerm_resource_group.log.name
 }
 
+locals {
+  auto_scaler_expander = var.aks_config.priority_expander_config == null ? "least-waste" : "priority"
+}
+
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
@@ -30,7 +34,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     skip_nodes_with_local_storage = false
     # Selects the node pool which would result in the least amount of waste.
     # TODO: When supported we should make use of multiple expanders #499
-    expander = "least-waste"
+    expander = local.auto_scaler_expander
   }
 
   network_profile {
@@ -58,6 +62,11 @@ resource "azurerm_kubernetes_cluster" "this" {
     ssh_key {
       key_data = var.ssh_public_key
     }
+  }
+
+  storage_profile {
+    file_driver_enabled         = false
+    snapshot_controller_enabled = false
   }
 
   default_node_pool {
@@ -106,8 +115,21 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
     pod_max_pid = 1000
   }
 
-  upgrade_settings {
-    max_surge = "33%"
+  dynamic "upgrade_settings" {
+    # Max surge cannot be set for pool with spot instances
+    for_each = each.value.spot_enabled ? [] : [""]
+    content {
+      max_surge = "33%"
+    }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      # Node taints will make the node pool to be re-created, hence ignore
+      node_taints,
+      # Node labels will make the node pool to be updated, hence ignore
+      node_labels,
+    ]
   }
 }
 

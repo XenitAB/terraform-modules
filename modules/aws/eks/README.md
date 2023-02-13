@@ -34,6 +34,8 @@
 
 | Name | Type |
 |------|------|
+| [aws_autoscaling_group_tag.label](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/autoscaling_group_tag) | resource |
+| [aws_autoscaling_group_tag.taint](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/autoscaling_group_tag) | resource |
 | [aws_eks_addon.core_dns](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/eks_addon) | resource |
 | [aws_eks_addon.ebs_csi_driver](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/eks_addon) | resource |
 | [aws_eks_addon.kube_proxy](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/resources/eks_addon) | resource |

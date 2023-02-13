@@ -13,3 +13,46 @@ resource "azurerm_storage_account" "log" {
   # is_hsn_enabled makes it possible to use power BI on the storage account
   is_hns_enabled = true
 }
+
+resource "azurerm_monitor_action_group" "this" {
+  for_each = {
+    for s in ["alerts"] :
+    s => s
+    if var.alerts_enabled
+  }
+  name                = "xenit-devops-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
+  resource_group_name = data.azurerm_resource_group.log.name
+  short_name          = "xenit-devops"
+
+  email_receiver {
+    name                    = "xenit-devops"
+    email_address           = var.notification_email
+    use_common_alert_schema = true
+  }
+}
+
+resource "azurerm_monitor_metric_alert" "log" {
+  for_each = {
+    for s in ["alerts"] :
+    s => s
+    if var.alerts_enabled
+  }
+  name                = "audit log${var.environment}${var.location_short}${var.name}${var.unique_suffix} storage account missing data"
+  resource_group_name = data.azurerm_resource_group.log.name
+  scopes              = [azurerm_storage_account.log.id]
+  description         = "No data being written to the storage account, check the AKS audit logs"
+  frequency           = "PT5M"
+
+  dynamic_criteria {
+    metric_namespace  = "Microsoft.Storage/storageAccounts"
+    metric_name       = "Ingress"
+    aggregation       = "Total"
+    operator          = "LessThan"
+    alert_sensitivity = "Low"
+  }
+
+  action {
+    action_group_id = azurerm_monitor_action_group.this["alerts"].id
+  }
+  severity = 1
+}

@@ -72,6 +72,7 @@ module "opa_gatekeeper" {
       },
     ]
   )
+  additional_modify_sets = var.opa_gatekeeper_config.additional_modify_sets
   enable_default_assigns = var.opa_gatekeeper_config.enable_default_assigns
   excluded_namespaces    = concat(var.opa_gatekeeper_config.additional_excluded_namespaces, local.excluded_namespaces)
   cloud_provider         = "azure"
@@ -366,12 +367,13 @@ module "datadog" {
 
   source = "../../kubernetes/datadog"
 
-  location          = var.location_short
-  environment       = var.environment
-  datadog_site      = var.datadog_config.datadog_site
-  api_key           = var.datadog_config.api_key
-  app_key           = var.datadog_config.app_key
-  namespace_include = var.datadog_config.namespaces
+  location             = var.location_short
+  environment          = var.environment
+  datadog_site         = var.datadog_config.datadog_site
+  api_key              = var.datadog_config.api_key
+  app_key              = var.datadog_config.app_key
+  namespace_include    = var.datadog_config.namespaces
+  apm_ignore_resources = var.datadog_config.apm_ignore_resources
 }
 
 # grafana-agent
@@ -644,4 +646,6 @@ module "node_ttl" {
   }
 
   source = "../../kubernetes/node-ttl"
+
+  status_config_map_namespace = "kube-system"
 }

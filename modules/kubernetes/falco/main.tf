@@ -36,7 +36,7 @@ resource "helm_release" "falco" {
   chart       = "falco"
   name        = "falco"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "2.0.16"
+  version     = "2.3.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/falco-values.yaml.tpl", {
     provider = var.cloud_provider
@@ -48,7 +48,7 @@ resource "helm_release" "falco_exporter" {
   chart       = "falco-exporter"
   name        = "falco-exporter"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "0.8.2"
+  version     = "0.9.1"
   max_history = 3
   values      = [templatefile("${path.module}/templates/falco-exporter-values.yaml.tpl", {})]
 }

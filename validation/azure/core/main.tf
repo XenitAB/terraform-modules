@@ -66,4 +66,5 @@ module "core" {
       ]
     },
   ]
+  notification_email = "foo@example.com"
 }

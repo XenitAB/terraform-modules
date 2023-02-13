@@ -4,7 +4,7 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.28.1 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.28.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.38.0 |
 
 ## Providers
 
@@ -28,15 +28,12 @@ No modules.
 | [azuread_group_member.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azuread_group_member.resource_group_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
 | [azuread_group_member.resource_group_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/group_member) | resource |
-| [azuread_group.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
-| [azuread_group.resource_group_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
-| [azuread_group.resource_group_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
+| <a name="input_azuread_groups"></a> [azuread\_groups](#input\_azuread\_groups) | Azure AD groups from global | <pre>object({<br>    rg_owner = map(object({<br>      id = string<br>    }))<br>    rg_contributor = map(object({<br>      id = string<br>    }))<br>    rg_reader = map(object({<br>      id = string<br>    }))<br>    sub_owner = object({<br>      id = string<br>    })<br>    sub_contributor = object({<br>      id = string<br>    })<br>    sub_reader = object({<br>      id = string<br>    })<br>    service_endpoint_join = object({<br>      id = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_cloud_provider"></a> [cloud\_provider](#input\_cloud\_provider) | Current provider | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environemnt | `string` | n/a | yes |
 | <a name="input_group_name_prefix"></a> [group\_name\_prefix](#input\_group\_name\_prefix) | Prefix for Azure AD groups | `string` | n/a | yes |

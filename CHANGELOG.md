@@ -6,6 +6,43 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#928](https://github.com/XenitAB/terraform-modules/pull/928) Enable Node TTL by default.
+
+## 2023.02.1
+
+### Changed
+
+- [#917](https://github.com/XenitAB/terraform-modules/pull/917) Remove datasource for azuread_groups in xkf_governance_global.
+- [#920](https://github.com/XenitAB/terraform-modules/pull/920) Increase default AKS audit retention to 365 days.
+- [#926](https://github.com/XenitAB/terraform-modules/pull/926) Make disable_bgp_route_propagation configurable.
+- [#916](https://github.com/XenitAB/terraform-modules/pull/916) Update Node TTL to v0.0.5.
+
+### Fix
+
+- [#856](https://github.com/XenitAB/terraform-modules/pull/856) Update falco to v0.33.0 and falco-exporter to v0.8.0.
+- [#918](https://github.com/XenitAB/terraform-modules/pull/918) Update workflows with new action versions
+
+### Added
+
+- [#897](https://github.com/XenitAB/terraform-modules/pull/897) Add Datadog APM ignore resources
+- [#921](https://github.com/XenitAB/terraform-modules/pull/921) Add Azure Alerts if no data gets sent to log storage account.
+- [#922](https://github.com/XenitAB/terraform-modules/pull/922) Enable use of spot instances in AKS
+
+## 2023.01.2
+
+### Changed
+
+- [#909](https://github.com/XenitAB/terraform-modules/pull/909) Update Azure provider.
+- [#910](https://github.com/XenitAB/terraform-modules/pull/910) Disable AKS file driver and snapshot controller.
+
+### Fix
+
+- [#911](https://github.com/XenitAB/terraform-modules/pull/911) Fix Node TTL status ConfigMap namespace for AKS.
+
+## 2023.01.1
+
 ### Added
 
 - [#894](https://github.com/XenitAB/terraform-modules/pull/894) Add x509-certificate-exporter helm chart.
@@ -17,6 +54,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#900](https://github.com/XenitAB/terraform-modules/pull/900) Trigger upgrade pipeline in xkf-templates at release
 - [#902](https://github.com/XenitAB/terraform-modules/pull/902) Update cluster-autoscaler to 1.24.
 - [#903](https://github.com/XenitAB/terraform-modules/pull/903) Update Node TTL to v0.0.4.
+- [#905](https://github.com/XenitAB/terraform-modules/pull/905) Update Prometheus to v2.41.0.
+
+### Fix
+
+- [#907](https://github.com/XenitAB/terraform-modules/pull/907) Add node labels and taints as tags to ASG.
 
 ## 2022.12.3
 

@@ -103,6 +103,7 @@ locals {
   values = templatefile("${path.module}/templates/gatekeeper-library-values.yaml.tpl", {
     constraints         = concat((var.enable_default_constraints ? local.default_constraints : []), var.additional_constraints),
     assigns             = concat((var.enable_default_assigns ? local.default_assigns : []), var.additional_assigns),
+    modify_sets         = var.additional_modify_sets
     excluded_namespaces = var.excluded_namespaces
   })
 }
@@ -138,7 +139,7 @@ resource "helm_release" "gatekeeper_templates" {
   chart       = "gatekeeper-library-templates"
   name        = "gatekeeper-library-templates"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v0.20.1"
+  version     = "v0.23.1"
   max_history = 3
   values      = [local.values]
 }
@@ -150,7 +151,7 @@ resource "helm_release" "gatekeeper_constraints" {
   chart       = "gatekeeper-library-constraints"
   name        = "gatekeeper-library-constraints"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v0.20.1"
+  version     = "v0.23.1"
   max_history = 3
   values      = [local.values]
 }

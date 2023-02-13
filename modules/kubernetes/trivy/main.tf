@@ -37,7 +37,7 @@ resource "kubernetes_namespace" "trivy" {
   }
 }
 
-resource "helm_release" "trivy-operator" {
+resource "helm_release" "trivy_operator" {
   repository  = "https://aquasecurity.github.io/helm-charts/"
   chart       = "trivy-operator"
   name        = "trivy-operator"

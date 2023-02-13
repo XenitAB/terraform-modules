@@ -46,13 +46,13 @@ resource "helm_release" "trivy-operator" {
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/trivy-operator-values.yaml.tpl", {
-    provider           = var.cloud_provider
-    trivy_role_arn = var.trivy_role_arn
+    provider                = var.cloud_provider
+    trivy_operator_role_arn = var.trivy_operator_role_arn
   })]
 }
 
 resource "helm_release" "starboard_exporter" {
-  depends_on  = [helm_release.starboard]
+  depends_on  = [helm_release.trivy]
   repository  = "https://giantswarm.github.io/giantswarm-catalog/"
   chart       = "starboard-exporter"
   name        = "starboard-exporter"

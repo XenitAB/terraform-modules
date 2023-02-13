@@ -26,7 +26,7 @@ operator:
 %{~ if provider == "aws" ~}
 serviceAccount:
   annotations:
-    eks.amazonaws.com/role-arn: ${starboard_role_arn}
+    eks.amazonaws.com/role-arn: ${trivy_operator_role_arn}
 %{~ endif ~}
 
 %{~ if provider == "azure" ~}

@@ -64,7 +64,7 @@ enabledMonitors:
   csiSecretsStorProviderAzure: false
   csiSecretsStorProviderAws: false
   azadKubeProxy: false
-  starboard: false
+  trivy: false
   grafanaAgent: false
   nodeLocalDNS: false
   promtail: false

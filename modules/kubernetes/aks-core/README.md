@@ -75,8 +75,8 @@ This module is used to create AKS clusters.
 | [kubernetes_cluster_role.get_vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.list_namespaces](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.starboard_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.top](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.trivy_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role_binding.cluster_admin](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_cluster_role_binding.cluster_view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_cluster_role_binding.edit_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role_binding) | resource |
@@ -90,8 +90,8 @@ This module is used to create AKS clusters.
 | [kubernetes_role_binding.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.starboard_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.top](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.trivy_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
 | [kubernetes_storage_class.zrs_premium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/storage_class) | resource |

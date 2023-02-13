@@ -354,17 +354,17 @@ variable "datadog_config" {
   }
 }
 
-variable "starboard_enabled" {
-  description = "Should Starboard be enabled"
+variable "trivy_enabled" {
+  description = "Should trivy be enabled"
   type        = bool
   default     = false
 }
 
-variable "starboard_config" {
-  description = "Configuration for starboard & trivy"
+variable "trivy_config" {
+  description = "Configuration for trivy-operator & trivy"
   type = object({
-    starboard_role_arn = string
-    trivy_role_arn     = string
+    trivy_operator_role_arn = string
+    trivy_role_arn          = string
   })
 }
 

@@ -84,11 +84,11 @@ module "eks_core" {
     extra_headers             = {}
   }
 
-  starboard_enabled = true
+  trivy_enabled = true
 
-  starboard_config = {
-    starboard_role_arn = "arn1234"
-    trivy_role_arn     = "arn1234"
+  trivy_config = {
+    trivy_operator_role_arn = "arn1234"
+    trivy_role_arn          = "arn1234"
   }
 
   prometheus_enabled = true

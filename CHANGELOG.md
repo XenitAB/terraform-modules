@@ -15,9 +15,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#936](https://github.com/XenitAB/terraform-modules/pull/936) Add Spegel to AKS and EKS.
 
 ### Changed
-- [#929](https://github.com/XenitAB/terraform-modules/pull/928) Make allow_gateway_transit configurable.
 
 - [#928](https://github.com/XenitAB/terraform-modules/pull/928) Enable Node TTL by default.
+- [#929](https://github.com/XenitAB/terraform-modules/pull/928) Make allow_gateway_transit configurable.
 - [#935](https://github.com/XenitAB/terraform-modules/pull/935) Update Node TTL to v0.0.6 and enable monitoring.
 - [#933](https://github.com/XenitAB/terraform-modules/pull/933) Change from starboard to trivy-operator.
 

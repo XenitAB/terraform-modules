@@ -62,15 +62,15 @@ resource "kubernetes_cluster_role" "top" {
   }
 }
 
-resource "kubernetes_cluster_role" "starboard_reports" {
+resource "kubernetes_cluster_role" "trivy_reports" {
   for_each = {
-    for s in ["starboard"] :
+    for s in ["trivy"] :
     s => s
-    if var.starboard_enabled
+    if var.trivy_enabled
   }
 
   metadata {
-    name = "starboard-reports"
+    name = "trivy-reports"
     labels = {
       "xkf.xenit.io/kind" = "platform"
     }

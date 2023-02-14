@@ -45,7 +45,7 @@ enabledMonitors:
   csiSecretsStorProviderAzure: ${csi_secrets_store_provider_azure_enabled}
   csiSecretsStorProviderAws: ${csi_secrets_store_provider_aws_enabled}
   azadKubeProxy: ${azad_kube_proxy_enabled}
-  starboard: ${starboard_enabled}
+  trivy: ${trivy_enabled}
   grafanaAgent: ${grafana_agent_enabled}
   nodeLocalDNS: ${node_local_dns_enabled}
   promtail: ${promtail_enabled}

@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#928](https://github.com/XenitAB/terraform-modules/pull/928) Enable Node TTL by default.
 - [#935](https://github.com/XenitAB/terraform-modules/pull/935) Update Node TTL to v0.0.6 and enable monitoring.
+- [#933](https://github.com/XenitAB/terraform-modules/pull/933) Change from starboard to trivy-operator.
 
 ## 2023.02.1
 

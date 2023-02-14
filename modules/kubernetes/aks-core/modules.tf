@@ -15,7 +15,7 @@ locals {
     "linkerd",
     "linkerd-cni",
     "reloader",
-    "starboard-operator",
+    "trivy",
     "tigera-operator",
     "velero",
     "grafana-agent",
@@ -522,7 +522,7 @@ module "prometheus" {
   csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
   aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
   azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
-  starboard_enabled                        = var.starboard_enabled
+  trivy_enabled                            = var.trivy_enabled
   vpa_enabled                              = var.vpa_enabled
   node_local_dns_enabled                   = var.node_local_dns_enabled
   grafana_agent_enabled                    = var.grafana_agent_enabled
@@ -577,30 +577,30 @@ module "promtail" {
   }
 }
 
-# starboard
-module "starboard_crd" {
+# trivy
+module "trivy_crd" {
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://aquasecurity.github.io/helm-charts/"
-  chart_name       = "starboard-operator"
-  chart_version    = "0.9.1"
+  chart_name       = "trivy-operator"
+  chart_version    = "0.11.0"
 }
 
-module "starboard" {
-  depends_on = [module.opa_gatekeeper, module.starboard_crd]
+module "trivy" {
+  depends_on = [module.opa_gatekeeper, module.trivy_crd]
 
   for_each = {
-    for s in ["starboard"] :
+    for s in ["trivy"] :
     s => s
-    if var.starboard_enabled
+    if var.trivy_enabled
   }
 
-  source = "../../kubernetes/starboard"
+  source = "../../kubernetes/trivy"
 
   cloud_provider                  = "azure"
-  client_id                       = var.starboard_config.client_id
-  resource_id                     = var.starboard_config.resource_id
-  volume_claim_storage_class_name = var.starboard_volume_claim_storage_class_name
+  client_id                       = var.trivy_config.client_id
+  resource_id                     = var.trivy_config.resource_id
+  volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
 }
 
 # vpa

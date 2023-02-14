@@ -68,7 +68,7 @@ customRules:
         (container.image.repository = "k8s.gcr.io/autoscaling/vpa-recommender") or
         (container.image.repository = "docker.io/bitnami/external-dns") or
         (container.image.repository = "docker.io/giantswarm/starboard-exporter") or
-        (container.image.repository = "docker.io/aquasec/starboard-operator") or
+        (container.image.repository = "docker.io/aquasec/trivy-operator") or
         (container.image.repository = "k8s.gcr.io/autoscaling/cluster-autoscaler")
 
   # Applications which spawn a docker or kubectl client

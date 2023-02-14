@@ -1,15 +1,15 @@
 /**
-  * # Starboard
+  * # Trivy
   *
-  * Adds [`Starboard`](https://github.com/aquasecurity/starboard) and
+  * Adds [`Trivy-operator`](https://github.com/aquasecurity/trivy-operator) and
   * [`Trivy`](https://github.com/aquasecurity/trivy) to a Kubernetes clusters.
-  * The modules consists of two components, trivy and starboard where
+  * The modules consists of two components, trivy and trivy-operator where
   * Trivy is used as a server to store aqua security image vulnerability database.
-  * Staboard is used to trigger image and config scans on newly created replicasets and
+  * Trivy-operator is used to trigger image and config scans on newly created replicasets and
   * generates a CR with a report that both admins and developers can use to improve there setup.
   *
   * [`starboard-exporter`](https://github.com/giantswarm/starboard-exporter) is used to gather
-  * trivy metrics from starboard CRD:s.
+  * trivy metrics from trivy-operator CRD:s.
   */
 
 terraform {
@@ -27,37 +27,37 @@ terraform {
   }
 }
 
-resource "kubernetes_namespace" "starboard" {
+resource "kubernetes_namespace" "trivy" {
   metadata {
     labels = {
-      name                = "starboard-operator"
+      name                = "trivy"
       "xkf.xenit.io/kind" = "platform"
     }
-    name = "starboard-operator"
+    name = "trivy"
   }
 }
 
-resource "helm_release" "starboard" {
+resource "helm_release" "trivy_operator" {
   repository  = "https://aquasecurity.github.io/helm-charts/"
-  chart       = "starboard-operator"
-  name        = "starboard-operator"
-  namespace   = kubernetes_namespace.starboard.metadata[0].name
-  version     = "0.9.1"
+  chart       = "trivy-operator"
+  name        = "trivy-operator"
+  namespace   = kubernetes_namespace.trivy.metadata[0].name
+  version     = "0.11.1-rc"
   max_history = 3
   skip_crds   = true
-  values = [templatefile("${path.module}/templates/starboard-values.yaml.tpl", {
-    provider           = var.cloud_provider
-    starboard_role_arn = var.starboard_role_arn
+  values = [templatefile("${path.module}/templates/trivy-operator-values.yaml.tpl", {
+    provider                = var.cloud_provider
+    trivy_operator_role_arn = var.trivy_operator_role_arn
   })]
 }
 
 resource "helm_release" "starboard_exporter" {
-  depends_on  = [helm_release.starboard]
+  depends_on  = [helm_release.trivy]
   repository  = "https://giantswarm.github.io/giantswarm-catalog/"
   chart       = "starboard-exporter"
   name        = "starboard-exporter"
-  version     = "0.1.4"
-  namespace   = kubernetes_namespace.starboard.metadata[0].name
+  version     = "0.7.1"
+  namespace   = kubernetes_namespace.trivy.metadata[0].name
   max_history = 3
   values      = [file("${path.module}/templates/starboard-exporter-values.yaml")]
 }
@@ -66,8 +66,8 @@ resource "helm_release" "trivy" {
   repository  = "https://aquasecurity.github.io/helm-charts/"
   chart       = "trivy"
   name        = "trivy"
-  namespace   = kubernetes_namespace.starboard.metadata[0].name
-  version     = "0.4.12"
+  namespace   = kubernetes_namespace.trivy.metadata[0].name
+  version     = "0.5.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/trivy-values.yaml.tpl", {
     provider                        = var.cloud_provider
@@ -85,7 +85,7 @@ resource "helm_release" "trivy_extras" {
 
   chart       = "${path.module}/charts/trivy-extras"
   name        = "trivy-extras"
-  namespace   = kubernetes_namespace.starboard.metadata[0].name
+  namespace   = kubernetes_namespace.trivy.metadata[0].name
   max_history = 3
 
   set {

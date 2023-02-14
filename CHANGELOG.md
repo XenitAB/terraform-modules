@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2023.02.2
+
 ### Added
 
 - [#934](https://github.com/XenitAB/terraform-modules/pull/934) Add certificate permissions for resource group AAD group.

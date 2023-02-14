@@ -105,6 +105,7 @@ resource "helm_release" "prometheus_extras" {
     grafana_agent_enabled                    = var.grafana_agent_enabled
     node_local_dns_enabled                   = var.node_local_dns_enabled
     promtail_enabled                         = var.promtail_enabled
+    node_ttl_enabled                         = var.node_ttl_enabled
   })]
 }
 

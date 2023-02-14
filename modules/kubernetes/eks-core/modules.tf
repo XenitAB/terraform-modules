@@ -381,6 +381,7 @@ module "prometheus" {
   vpa_enabled                            = var.vpa_enabled
   node_local_dns_enabled                 = var.node_local_dns_enabled
   promtail_enabled                       = var.promtail_enabled
+  node_ttl_enabled                       = var.node_ttl_enabled
 }
 
 # trivy

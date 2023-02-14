@@ -362,7 +362,7 @@ spec:
     - path: /metrics
       port: metrics
 {{- end }}
-{{- if .Values.enabledMonitors.starboard }}
+{{- if .Values.enabledMonitors.trivy }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -370,7 +370,7 @@ metadata:
   labels:
     xkf.xenit.io/monitoring: platform
   name: starboard-exporter
-  namespace: starboard-operator
+  namespace: trivy
 spec:
   endpoints:
   - interval: 1m
@@ -378,7 +378,7 @@ spec:
     port: metrics
   namespaceSelector:
     matchNames:
-    - starboard-operator
+    - trivy
   selector:
     matchLabels:
       app.kubernetes.io/instance: starboard-exporter

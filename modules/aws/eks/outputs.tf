@@ -57,10 +57,10 @@ output "promtail_config" {
   }
 }
 
-output "starboard_config" {
-  description = "Configuration for Starboard"
+output "trivy_config" {
+  description = "Configuration for Trivy"
   value = {
-    starboard_role_arn = module.starboard_ecr["starboard"].role_arn
-    trivy_role_arn     = module.trivy_ecr["trivy"].role_arn
+    trivy_operator_role_arn = module.trivy_operator_ecr["trivy"].role_arn
+    trivy_role_arn          = module.trivy_ecr["trivy"].role_arn
   }
 }

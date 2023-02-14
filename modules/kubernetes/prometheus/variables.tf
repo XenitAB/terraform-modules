@@ -145,8 +145,8 @@ variable "grafana_agent_enabled" {
   default     = false
 }
 
-variable "starboard_enabled" {
-  description = "Should starboard be enabled"
+variable "trivy_enabled" {
+  description = "Should trivy be enabled"
   type        = bool
   default     = false
 }

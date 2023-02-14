@@ -4,8 +4,8 @@ provider "kubernetes" {}
 
 provider "helm" {}
 
-module "starboard" {
-  source = "../../../modules/kubernetes/starboard"
+module "trivy" {
+  source = "../../../modules/kubernetes/trivy"
 
   providers = {
     kubernetes = kubernetes

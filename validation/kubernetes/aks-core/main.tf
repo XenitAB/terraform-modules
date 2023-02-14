@@ -80,8 +80,8 @@ module "aks_core" {
     resource_id = "bar"
   }
 
-  starboard_enabled = true
-  starboard_config = {
+  trivy_enabled = true
+  trivy_config = {
     client_id   = "foo"
     resource_id = "bar"
   }

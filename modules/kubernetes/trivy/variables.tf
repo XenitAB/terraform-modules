@@ -1,10 +1,10 @@
 variable "cloud_provider" {
-  description = "Cloud provider used for starboard"
+  description = "Cloud provider used for trivy"
   type        = string
 }
 
-variable "starboard_role_arn" {
-  description = "starboard role arn used to download ECR images, this only applies to AWS"
+variable "trivy_operator_role_arn" {
+  description = "trivy-operaetor role arn used to download ECR images, this only applies to AWS"
   type        = string
   default     = ""
 }

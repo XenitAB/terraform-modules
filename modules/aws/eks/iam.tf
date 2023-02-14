@@ -227,7 +227,7 @@ module "trivy_operator_ecr" {
   source = "../irsa"
 
   for_each = {
-    for s in ["trivy_operator"] :
+    for s in ["trivy"] :
     s => s
     if var.trivy_enabled
   }

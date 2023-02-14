@@ -229,7 +229,7 @@ module "starboard_ecr" {
   for_each = {
     for s in ["starboard"] :
     s => s
-    if var.starboard_enabled
+    if var.trivy_enabled
   }
 
   name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}-starboard-ecr"
@@ -251,7 +251,7 @@ module "trivy_ecr" {
   for_each = {
     for s in ["trivy"] :
     s => s
-    if var.starboard_enabled
+    if var.trivy_enabled
   }
 
   name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}-trivy-ecr"

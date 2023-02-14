@@ -98,7 +98,7 @@ variable "enabled_cluster_log_types" {
   default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 }
 
-variable "starboard_enabled" {
+variable "trivy_enabled" {
   description = "Should starboard be enaled"
   type        = bool
   default     = false

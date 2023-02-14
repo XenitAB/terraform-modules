@@ -1,7 +1,7 @@
 /**
-  * # Node TTL
+  * # Spegel
   *
-  * This module is used to add [`node-ttl`](https://github.com/XenitAB/node-ttl) to Kubernetes clusters.
+  * This module is used to add [spegel](https://github.com/XenitAB/spegel) to Kubernetes clusters.
   */
 
 terraform {
@@ -21,21 +21,18 @@ terraform {
 
 resource "kubernetes_namespace" "this" {
   metadata {
-    name = "node-ttl"
+    name = "sepgel"
     labels = {
-      name                = "node-ttl"
+      name                = "spegel"
       "xkf.xenit.io/kind" = "platform"
     }
   }
 }
 
 resource "helm_release" "this" {
-  chart       = "oci://ghcr.io/xenitab/helm-charts/node-ttl"
-  name        = "node-ttl"
+  chart       = "oci://ghcr.io/xenitab/helm-charts/spegel"
+  name        = "spegel"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v0.0.6"
+  version     = "v0.0.3"
   max_history = 3
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    status_config_map_namespace = var.status_config_map_namespace
-  })]
 }

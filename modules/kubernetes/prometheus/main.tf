@@ -101,10 +101,11 @@ resource "helm_release" "prometheus_extras" {
     csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
     csi_secrets_store_provider_aws_enabled   = var.csi_secrets_store_provider_aws_enabled
     azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
-    starboard_enabled                        = var.starboard_enabled
+    trivy_enabled                            = var.trivy_enabled
     grafana_agent_enabled                    = var.grafana_agent_enabled
     node_local_dns_enabled                   = var.node_local_dns_enabled
     promtail_enabled                         = var.promtail_enabled
+    node_ttl_enabled                         = var.node_ttl_enabled
   })]
 }
 

@@ -453,21 +453,21 @@ variable "linkerd_enabled" {
   default     = false
 }
 
-variable "starboard_enabled" {
-  description = "Should Starboard be enabled"
+variable "trivy_enabled" {
+  description = "Should trivy be enabled"
   type        = bool
   default     = true
 }
 
 
-variable "starboard_volume_claim_storage_class_name" {
-  description = "Configuration for starboard volume claim storage class name"
+variable "trivy_volume_claim_storage_class_name" {
+  description = "Configuration for trivy volume claim storage class name"
   type        = string
   default     = "managed-csi-zrs"
 }
 
-variable "starboard_config" {
-  description = "Configuration for starboard"
+variable "trivy_config" {
+  description = "Configuration for trivy"
   type = object({
     client_id   = string
     resource_id = string
@@ -506,6 +506,11 @@ variable "node_ttl_enabled" {
   default     = true
 }
 
+variable "spegel_enabled" {
+  description = "Should Spegel be enabled"
+  type        = bool
+  default     = true
+}
 
 variable "control_plane_logs_enabled" {
   description = "Should Control plan be enabled"

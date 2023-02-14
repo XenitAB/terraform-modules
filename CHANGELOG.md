@@ -9,13 +9,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - [#934](https://github.com/XenitAB/terraform-modules/pull/934) Add certificate permissions for resource group AAD group.
-
 - [#906](https://github.com/XenitAB/terraform-modules/pull/906) Add support for kubernetes 1.25 in Azure.
+- [#936](https://github.com/XenitAB/terraform-modules/pull/936) Add Spegel to AKS and EKS.
 
 ### Changed
 - [#929](https://github.com/XenitAB/terraform-modules/pull/928) Make allow_gateway_transit configurable.
 
 - [#928](https://github.com/XenitAB/terraform-modules/pull/928) Enable Node TTL by default.
+- [#935](https://github.com/XenitAB/terraform-modules/pull/935) Update Node TTL to v0.0.6 and enable monitoring.
+- [#933](https://github.com/XenitAB/terraform-modules/pull/933) Change from starboard to trivy-operator.
 
 ## 2023.02.1
 

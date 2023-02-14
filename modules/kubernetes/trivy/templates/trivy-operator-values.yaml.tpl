@@ -1,4 +1,4 @@
-# targetNamespace defines where you want starboard-operator to operate. By
+# targetNamespace defines where you want trivy-operator to operate. By
 # default it will only operate in the namespace its installed in, but you can
 # specify another namespace, or a comma separated list of namespaces, or set it
 # to a blank string to let it operate in all namespaces.

@@ -21,6 +21,7 @@ locals {
     "grafana-agent",
     "promtail",
     "prometheus",
+    "spegel",
   ]
 }
 
@@ -649,4 +650,16 @@ module "node_ttl" {
   source = "../../kubernetes/node-ttl"
 
   status_config_map_namespace = "kube-system"
+}
+
+module "spegel" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["spegel"] :
+    s => s
+    if var.spegel_enabled
+  }
+
+  source = "../../kubernetes/spegel"
 }

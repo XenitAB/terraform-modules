@@ -51,6 +51,7 @@ This module is used to configure EKS clusters.
 | <a name="module_prometheus_crd"></a> [prometheus\_crd](#module\_prometheus\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_promtail"></a> [promtail](#module\_promtail) | ../../kubernetes/promtail | n/a |
 | <a name="module_reloader"></a> [reloader](#module\_reloader) | ../../kubernetes/reloader | n/a |
+| <a name="module_spegel"></a> [spegel](#module\_spegel) | ../../kubernetes/spegel | n/a |
 | <a name="module_trivy"></a> [trivy](#module\_trivy) | ../../kubernetes/trivy | n/a |
 | <a name="module_trivy_crd"></a> [trivy\_crd](#module\_trivy\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../../kubernetes/velero | n/a |
@@ -131,6 +132,7 @@ This module is used to configure EKS clusters.
 | <a name="input_promtail_config"></a> [promtail\_config](#input\_promtail\_config) | Configuration for promtail | <pre>object({<br>    role_arn            = string<br>    loki_address        = string<br>    excluded_namespaces = list(string)<br>  })</pre> | <pre>{<br>  "excluded_namespaces": [],<br>  "loki_address": "",<br>  "role_arn": ""<br>}</pre> | no |
 | <a name="input_promtail_enabled"></a> [promtail\_enabled](#input\_promtail\_enabled) | Should promtail be enabled | `bool` | `false` | no |
 | <a name="input_reloader_enabled"></a> [reloader\_enabled](#input\_reloader\_enabled) | Should Reloader be enabled | `bool` | `true` | no |
+| <a name="input_spegel_enabled"></a> [spegel\_enabled](#input\_spegel\_enabled) | Should Spegel be enabled | `bool` | `true` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
 | <a name="input_trivy_config"></a> [trivy\_config](#input\_trivy\_config) | Configuration for trivy-operator & trivy | <pre>object({<br>    trivy_operator_role_arn = string<br>    trivy_role_arn          = string<br>  })</pre> | n/a | yes |
 | <a name="input_trivy_enabled"></a> [trivy\_enabled](#input\_trivy\_enabled) | Should trivy be enabled | `bool` | `false` | no |

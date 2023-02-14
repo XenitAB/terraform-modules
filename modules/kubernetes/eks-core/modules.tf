@@ -13,7 +13,8 @@ locals {
     "prometheus",
     "reloader",
     "velero",
-    "promtail"
+    "promtail",
+    "spegel"
   ]
   dns_zone = {
     for dns in data.aws_route53_zone.this :
@@ -524,4 +525,16 @@ module "node_ttl" {
   source = "../../kubernetes/node-ttl"
 
   status_config_map_namespace = "cluster-autoscaler"
+}
+
+module "spegel" {
+  depends_on = [module.opa_gatekeeper]
+
+  for_each = {
+    for s in ["spegel"] :
+    s => s
+    if var.spegel_enabled
+  }
+
+  source = "../../kubernetes/spegel"
 }

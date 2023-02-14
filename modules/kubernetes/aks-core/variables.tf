@@ -506,6 +506,11 @@ variable "node_ttl_enabled" {
   default     = true
 }
 
+variable "spegel_enabled" {
+  description = "Should Spegel be enabled"
+  type        = bool
+  default     = true
+}
 
 variable "control_plane_logs_enabled" {
   description = "Should Control plan be enabled"

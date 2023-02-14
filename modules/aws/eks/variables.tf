@@ -99,8 +99,7 @@ variable "enabled_cluster_log_types" {
 }
 
 variable "trivy_enabled" {
-  description = "Should starboard be enaled"
+  description = "Should trivy be enaled"
   type        = bool
-  default     = false
+  default     = true
 }
-

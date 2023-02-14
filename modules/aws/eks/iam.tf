@@ -210,7 +210,7 @@ module "promtail" {
   policy_json_create         = true
 }
 
-data "aws_iam_policy_document" "starboard_ecr_read_only" {
+data "aws_iam_policy_document" "trivy_ecr_read_only" {
   statement {
     effect = "Allow"
     actions = [
@@ -223,11 +223,11 @@ data "aws_iam_policy_document" "starboard_ecr_read_only" {
   }
 }
 
-module "starboard_ecr" {
+module "trivy_operator_ecr" {
   source = "../irsa"
 
   for_each = {
-    for s in ["starboard"] :
+    for s in ["trivy_operator"] :
     s => s
     if var.trivy_enabled
   }
@@ -239,9 +239,9 @@ module "starboard_ecr" {
       arn = aws_iam_openid_connect_provider.this.arn
     }
   ]
-  kubernetes_namespace       = "starboard-operator"
-  kubernetes_service_account = "starboard-operator"
-  policy_json                = data.aws_iam_policy_document.starboard_ecr_read_only.json
+  kubernetes_namespace       = "trivy"
+  kubernetes_service_account = "trivy-operator"
+  policy_json                = data.aws_iam_policy_document.trivy_ecr_read_only.json
   policy_json_create         = true
 }
 
@@ -261,9 +261,9 @@ module "trivy_ecr" {
       arn = aws_iam_openid_connect_provider.this.arn
     }
   ]
-  kubernetes_namespace       = "starboard-operator"
+  kubernetes_namespace       = "trivy"
   kubernetes_service_account = "trivy"
-  policy_json                = data.aws_iam_policy_document.starboard_ecr_read_only.json
+  policy_json                = data.aws_iam_policy_document.trivy_ecr_read_only.json
   policy_json_create         = true
 }
 

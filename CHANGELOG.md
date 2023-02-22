@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+- [#943] (https://github.com/XenitAB/terraform-modules/pull/943) Core/azurerm_subnet: Make "private_endpoint_network_policies_enabled" configurable
+
 ## 2023.02.3
 
 ### Changed

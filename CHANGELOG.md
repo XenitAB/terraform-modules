@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- [#944](https://github.com/XenitAB/terraform-modules/pull/944) Upgrade grafana-agent to 0.6.0.
+- [#944](https://github.com/XenitAB/terraform-modules/pull/944) Upgrade grafana-agent to 0.2.12.
 
 ## 2023.02.3
 

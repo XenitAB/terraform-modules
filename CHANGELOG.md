@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#944](https://github.com/XenitAB/terraform-modules/pull/944) Upgrade grafana-agent to 0.6.0.
+
 ## 2023.02.3
 
 ### Changed

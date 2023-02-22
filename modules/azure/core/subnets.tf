@@ -12,6 +12,7 @@ resource "azurerm_subnet" "this" {
   service_endpoints                              = each.value.subnet_service_endpoints
   enforce_private_link_endpoint_network_policies = local.subnet_private_endpoints[each.value.subnet_short_name]
   enforce_private_link_service_network_policies  = local.subnet_private_endpoints[each.value.subnet_short_name]
+  private_endpoint_network_policies_enabled      = each.value.subnet_private_endpoint_network_policies_enabled
 }
 
 resource "azurerm_subnet" "aks" {

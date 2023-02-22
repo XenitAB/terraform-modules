@@ -383,7 +383,7 @@ module "grafana_agent_crd" {
 
   chart_repository = "https://grafana.github.io/helm-charts"
   chart_name       = "grafana-agent-operator"
-  chart_version    = "0.1.5"
+  chart_version    = "0.6.0"
 }
 
 module "grafana_agent" {

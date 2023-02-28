@@ -31,12 +31,13 @@ metadata:
   namespace: ${name}
 spec:
   gitImplementation: libgit2
-  interval: 1m
+  interval: 3m
   url: ${repo}
   secretRef:
     name: flux
   ref:
     branch: ${branch}
+  timeout: 120s
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization

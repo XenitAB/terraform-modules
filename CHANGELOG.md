@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#945](https://github.com/XenitAB/terraform-modules/pull/945) Increase flux gitrepository fetch to 3m and 120s timeout.
+
 ## 2023.02.3
 
 ### Changed

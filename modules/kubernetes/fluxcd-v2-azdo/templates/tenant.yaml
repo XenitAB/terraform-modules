@@ -37,6 +37,7 @@ spec:
     name: flux
   ref:
     branch: ${branch}
+  timeout: 120s
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization

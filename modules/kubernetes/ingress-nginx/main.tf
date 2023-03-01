@@ -43,23 +43,23 @@ resource "helm_release" "ingress_nginx" {
   version     = "4.4.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    http_snippet           = var.http_snippet
     provider               = var.cloud_provider
     ingress_class          = "nginx"
+    default_ingress_class  = true
     internal_load_balancer = false
-    public_private_enabled = var.public_private_enabled
+    external_dns_hostname  = var.external_dns_hostname
     default_certificate = {
       enabled         = var.default_certificate.enabled
       dns_zone        = var.default_certificate.dns_zone
       namespaced_name = "ingress-nginx/ingress-nginx"
     }
-    extra_config              = var.extra_config
-    extra_headers             = var.extra_headers
+    public_private_enabled    = var.public_private_enabled
+    allow_snippet_annotations = var.customization.allow_snippet_annotations
+    http_snippet              = var.customization.http_snippet
+    extra_config              = var.customization.extra_config
+    extra_headers             = var.customization.extra_headers
     linkerd_enabled           = var.linkerd_enabled
     datadog_enabled           = var.datadog_enabled
-    allow_snippet_annotations = var.allow_snippet_annotations
-    external_dns_hostname     = var.external_dns_hostname
-    default_ingress_class     = true
   })]
 }
 
@@ -77,23 +77,23 @@ resource "helm_release" "ingress_nginx_public" {
   version     = "4.4.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    http_snippet           = var.http_snippet
     provider               = var.cloud_provider
     ingress_class          = "nginx-public"
+    default_ingress_class  = true
     internal_load_balancer = false
-    public_private_enabled = var.public_private_enabled
+    external_dns_hostname  = var.external_dns_hostname
     default_certificate = {
       enabled         = var.default_certificate.enabled
       dns_zone        = var.default_certificate.dns_zone
       namespaced_name = "ingress-nginx/ingress-nginx"
     }
-    extra_config              = var.extra_config
-    extra_headers             = var.extra_headers
+    public_private_enabled    = var.public_private_enabled
+    allow_snippet_annotations = var.customization_public.allow_snippet_annotations == null ? var.customization.allow_snippet_annotations : var.customization_public.allow_snippet_annotations
+    http_snippet              = var.customization_public.http_snippet == null ? var.customization.http_snippet : var.customization_public.http_snippet
+    extra_config              = merge(var.customization.extra_config, var.customization_public.extra_config)
+    extra_headers             = merge(var.customization.extra_headers, var.customization_public.extra_config)
     linkerd_enabled           = var.linkerd_enabled
     datadog_enabled           = var.datadog_enabled
-    allow_snippet_annotations = var.allow_snippet_annotations
-    external_dns_hostname     = var.external_dns_hostname
-    default_ingress_class     = true
   })]
 }
 
@@ -111,23 +111,23 @@ resource "helm_release" "ingress_nginx_private" {
   version     = "4.4.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    http_snippet           = var.http_snippet
     provider               = var.cloud_provider
     ingress_class          = "nginx-private"
+    default_ingress_class  = false
     internal_load_balancer = true
-    public_private_enabled = var.public_private_enabled
+    external_dns_hostname  = var.external_dns_hostname
     default_certificate = {
       enabled         = var.default_certificate.enabled
       dns_zone        = var.default_certificate.dns_zone
       namespaced_name = "ingress-nginx/ingress-nginx"
     }
-    extra_config              = var.extra_config
-    extra_headers             = var.extra_headers
+    public_private_enabled    = var.public_private_enabled
+    allow_snippet_annotations = var.customization_private.allow_snippet_annotations == null ? var.customization.allow_snippet_annotations : var.customization_private.allow_snippet_annotations
+    http_snippet              = var.customization_private.http_snippet == null ? var.customization.http_snippet : var.customization_private.http_snippet
+    extra_config              = merge(var.customization.extra_config, var.customization_private.extra_config)
+    extra_headers             = merge(var.customization.extra_headers, var.customization_private.extra_config)
     linkerd_enabled           = var.linkerd_enabled
     datadog_enabled           = var.datadog_enabled
-    allow_snippet_annotations = var.allow_snippet_annotations
-    external_dns_hostname     = var.external_dns_hostname
-    default_ingress_class     = false
   })]
 }
 

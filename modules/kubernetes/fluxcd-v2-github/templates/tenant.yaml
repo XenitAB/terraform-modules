@@ -31,7 +31,7 @@ metadata:
   namespace: ${name}
 spec:
   gitImplementation: libgit2
-  interval: 3m
+  interval: 1m
   url: ${repo}
   secretRef:
     name: flux

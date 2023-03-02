@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#943](https://github.com/XenitAB/terraform-modules/pull/943) Make private endpoint network policies configurable.
+
 ### Changed
 
 - [#945](https://github.com/XenitAB/terraform-modules/pull/945) Increase flux gitrepository timeout to 120s.

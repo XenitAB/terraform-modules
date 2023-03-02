@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
 - [#943] (https://github.com/XenitAB/terraform-modules/pull/943) Core/azurerm_subnet: Make "private_endpoint_network_policies_enabled" configurable
+- [#945](https://github.com/XenitAB/terraform-modules/pull/945) Increase flux gitrepository timeout to 120s.
 
 ## 2023.02.3
 

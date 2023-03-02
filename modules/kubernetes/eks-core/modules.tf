@@ -161,19 +161,17 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider            = "aws"
-  http_snippet              = var.ingress_config.http_snippet
-  linkerd_enabled           = var.linkerd_enabled
-  datadog_enabled           = var.datadog_enabled
-  public_private_enabled    = var.ingress_config.public_private_enabled
-  allow_snippet_annotations = var.ingress_config.allow_snippet_annotations
-  extra_config              = var.ingress_config.extra_config
-  extra_headers             = var.ingress_config.extra_headers
-
+  cloud_provider = "aws"
   default_certificate = {
     enabled  = true
     dns_zone = var.cert_manager_config.dns_zone[0]
   }
+  public_private_enabled = var.ingress_nginx_config.public_private_enabled
+  customization          = var.ingress_nginx_config.customization
+  customization_public   = var.ingress_nginx_config.customization_public
+  customization_private  = var.ingress_nginx_config.customization_private
+  linkerd_enabled        = var.linkerd_enabled
+  datadog_enabled        = var.datadog_enabled
 }
 
 module "ingress_healthz" {
@@ -190,7 +188,7 @@ module "ingress_healthz" {
   environment            = var.environment
   dns_zone               = var.cert_manager_config.dns_zone[0]
   linkerd_enabled        = var.linkerd_enabled
-  public_private_enabled = var.ingress_config.public_private_enabled
+  public_private_enabled = var.ingress_nginx_config.public_private_enabled
 }
 
 module "external_dns" {

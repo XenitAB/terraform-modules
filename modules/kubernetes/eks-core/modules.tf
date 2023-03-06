@@ -381,6 +381,7 @@ module "prometheus" {
   node_local_dns_enabled                 = var.node_local_dns_enabled
   promtail_enabled                       = var.promtail_enabled
   node_ttl_enabled                       = var.node_ttl_enabled
+  spegel_enabled                         = var.spegel_enabled
 }
 
 # trivy

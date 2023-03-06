@@ -527,6 +527,7 @@ module "prometheus" {
   grafana_agent_enabled                    = var.grafana_agent_enabled
   promtail_enabled                         = var.promtail_enabled
   node_ttl_enabled                         = var.node_ttl_enabled
+  spegel_enabled                           = var.spegel_enabled
 }
 
 module "control_plane_logs" {

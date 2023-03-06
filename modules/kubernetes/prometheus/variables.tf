@@ -174,3 +174,9 @@ variable "node_ttl_enabled" {
   type        = bool
   default     = false
 }
+
+variable "spegel_enabled" {
+  description = "Should Spegel be enabled"
+  type        = bool
+  default     = false
+}

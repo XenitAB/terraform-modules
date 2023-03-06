@@ -169,22 +169,29 @@ variable "ingress_nginx_enabled" {
   default     = true
 }
 
-variable "ingress_config" {
+variable "ingress_nginx_config" {
   description = "Ingress configuration"
   type = object({
-    http_snippet              = string
-    public_private_enabled    = bool
-    allow_snippet_annotations = bool
-    extra_config              = map(string)
-    extra_headers             = map(string)
+    public_private_enabled = bool
+    customization = optional(object({
+      allow_snippet_annotations = bool
+      http_snippet              = string
+      extra_config              = map(string)
+      extra_headers             = map(string)
+    }))
+    customization_public = optional(object({
+      allow_snippet_annotations = optional(bool)
+      http_snippet              = optional(string)
+      extra_config              = optional(map(string))
+      extra_headers             = optional(map(string))
+    }))
+    customization_private = optional(object({
+      allow_snippet_annotations = optional(bool)
+      http_snippet              = optional(string)
+      extra_config              = optional(map(string))
+      extra_headers             = optional(map(string))
+    }))
   })
-  default = {
-    http_snippet              = ""
-    public_private_enabled    = false
-    allow_snippet_annotations = false
-    extra_config              = {}
-    extra_headers             = {}
-  }
 }
 
 variable "ingress_healthz_enabled" {

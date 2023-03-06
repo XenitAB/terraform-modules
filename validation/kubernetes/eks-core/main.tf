@@ -76,12 +76,8 @@ module "eks_core" {
     }
   }
 
-  ingress_config = {
-    http_snippet              = ""
-    public_private_enabled    = false
-    allow_snippet_annotations = false
-    extra_config              = {}
-    extra_headers             = {}
+  ingress_nginx_config = {
+    public_private_enabled = false
   }
 
   trivy_enabled = true

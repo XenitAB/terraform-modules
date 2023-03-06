@@ -212,20 +212,18 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider            = "azure"
-  http_snippet              = var.ingress_config.http_snippet
-  linkerd_enabled           = var.linkerd_enabled
-  datadog_enabled           = var.datadog_enabled
-  public_private_enabled    = var.ingress_config.public_private_enabled
-  allow_snippet_annotations = var.ingress_config.allow_snippet_annotations
-  extra_config              = var.ingress_config.extra_config
-  extra_headers             = var.ingress_config.extra_headers
-  external_dns_hostname     = var.external_dns_hostname
-
+  cloud_provider        = "azure"
+  external_dns_hostname = var.external_dns_hostname
   default_certificate = {
     enabled  = true
     dns_zone = var.cert_manager_config.dns_zone[0]
   }
+  public_private_enabled = var.ingress_nginx_config.public_private_enabled
+  customization          = var.ingress_nginx_config.customization
+  customization_public   = var.ingress_nginx_config.customization_public
+  customization_private  = var.ingress_nginx_config.customization_private
+  linkerd_enabled        = var.linkerd_enabled
+  datadog_enabled        = var.datadog_enabled
 }
 
 # ingress-healthz
@@ -244,7 +242,7 @@ module "ingress_healthz" {
   dns_zone               = var.cert_manager_config.dns_zone[0]
   location_short         = var.location_short
   linkerd_enabled        = var.linkerd_enabled
-  public_private_enabled = var.ingress_config.public_private_enabled
+  public_private_enabled = var.ingress_nginx_config.public_private_enabled
 }
 
 # External DNS
@@ -529,6 +527,7 @@ module "prometheus" {
   grafana_agent_enabled                    = var.grafana_agent_enabled
   promtail_enabled                         = var.promtail_enabled
   node_ttl_enabled                         = var.node_ttl_enabled
+  spegel_enabled                           = var.spegel_enabled
 }
 
 module "control_plane_logs" {

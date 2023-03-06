@@ -65,7 +65,7 @@ No modules.
 | <a name="input_subnet_private_endpoints"></a> [subnet\_private\_endpoints](#input\_subnet\_private\_endpoints) | Enable private enpoint for specific subnet names | `map(bool)` | `{}` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The subscription commonName to use for the deploy | `string` | n/a | yes |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | n/a | yes |
-| <a name="input_vnet_config"></a> [vnet\_config](#input\_vnet\_config) | Address spaces used by virtual network | <pre>object({<br>    address_space = list(string)<br>    dns_servers   = list(string)<br>    subnets = list(object({<br>      name              = string<br>      cidr              = string<br>      service_endpoints = list(string)<br>      aks_subnet        = bool<br>    }))<br>  })</pre> | n/a | yes |
+| <a name="input_vnet_config"></a> [vnet\_config](#input\_vnet\_config) | Address spaces used by virtual network | <pre>object({<br>    address_space = list(string)<br>    dns_servers   = list(string)<br>    subnets = list(object({<br>      name                                      = string<br>      cidr                                      = string<br>      service_endpoints                         = list(string)<br>      aks_subnet                                = bool<br>      private_endpoint_network_policies_enabled = optional(bool, true)<br>    }))<br>  })</pre> | n/a | yes |
 
 ## Outputs
 

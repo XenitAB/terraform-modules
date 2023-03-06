@@ -462,6 +462,23 @@ spec:
   endpoints:
     - port: metrics
 {{- end }}
+{{- if .Values.enabledMonitors.spegel }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    xkf.xenit.io/monitoring: platform
+  name: spegel
+  namespace: spegel
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: spegel
+      app.kubernetes.io/instance: spegel
+  endpoints:
+    - port: metrics
+{{- end }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor

@@ -52,7 +52,7 @@ resource "helm_release" "trivy_operator" {
 }
 
 resource "helm_release" "starboard_exporter" {
-  depends_on  = [helm_release.trivy]
+  depends_on  = [helm_release.trivy_operator]
   repository  = "https://giantswarm.github.io/giantswarm-catalog/"
   chart       = "starboard-exporter"
   name        = "starboard-exporter"

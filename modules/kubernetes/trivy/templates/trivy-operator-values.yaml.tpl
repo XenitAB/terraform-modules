@@ -10,7 +10,17 @@ trivy:
   mode: ClientServer
   severity: MEDIUM,HIGH,CRITICAL
   ignoreUnfixed: true
-  serverURL: "http://trivy.trivy.svc.cluster.local:4954"
+  %{~ if provider == "aws" ~}
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: ${trivy_role_arn}
+  %{~ endif ~}
+  %{~ if provider == "azure" ~}
+  labels:
+    aadpodidbinding: trivy
+  %{~ endif ~}
+  storageClass: ${volume_claim_storage_class_name}
+
 
 operator:
   # configAuditScannerEnabled the flag to enable configuration audit scanner
@@ -23,7 +33,7 @@ operator:
   infraAssessmentScannerEnabled: false
   # scannerReportTTL the flag to set how long a report should exist. "" means that the ScannerReportTTL feature is disabled
   ScannerReportTTL: "25h"
-
+  builtInTrivyServer: true
 %{~ if provider == "aws" ~}
 serviceAccount:
   annotations:

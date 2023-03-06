@@ -19,7 +19,7 @@ trivy:
   labels:
     aadpodidbinding: trivy
   %{~ endif ~}
-  storageClass: ${volume_claim_storage_class_name}
+  storageClassName: ${volume_claim_storage_class_name}
 
 
 operator:

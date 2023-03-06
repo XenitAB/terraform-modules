@@ -43,12 +43,13 @@ resource "azurerm_monitor_metric_alert" "log" {
   description         = "No data being written to the storage account, check the AKS audit logs"
   frequency           = "PT5M"
 
-  dynamic_criteria {
-    metric_namespace  = "Microsoft.Storage/storageAccounts"
-    metric_name       = "Ingress"
-    aggregation       = "Total"
-    operator          = "LessThan"
-    alert_sensitivity = "Low"
+  criteria {
+    aggregation            = "Average"
+    metric_name            = "Ingress"
+    metric_namespace       = "Microsoft.Storage/storageAccounts"
+    operator               = "LessThan"
+    skip_metric_validation = false
+    threshold              = 51200
   }
 
   action {

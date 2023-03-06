@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#945](https://github.com/XenitAB/terraform-modules/pull/945) Increase flux gitrepository timeout to 120s.
 - [#947](https://github.com/XenitAB/terraform-modules/pull/947) Bump git-auth-proxy to v0.8.2.
 - [#946](https://github.com/XenitAB/terraform-modules/pull/946) [Breaking] Enable configuration for private and public ingress controllers.
+- [#949](https://github.com/XenitAB/terraform-modules/pull/949) Update audit log alert criteria.
 
 ## 2023.02.3
 

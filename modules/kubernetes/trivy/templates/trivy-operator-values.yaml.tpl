@@ -42,6 +42,7 @@ serviceAccount:
 %{~ endif ~}
 
 %{~ if provider == "azure" ~}
+
 trivyOperator:
   # scanJobPodTemplateLabels comma-separated representation of the labels which the user wants the scanner pods to be
   # labeled with. Example: `foo=bar,env=stage` will labeled the scanner pods with the labels `foo: bar` and `env: stage`

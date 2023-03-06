@@ -34,13 +34,13 @@ operator:
   # scannerReportTTL the flag to set how long a report should exist. "" means that the ScannerReportTTL feature is disabled
   ScannerReportTTL: "25h"
   builtInTrivyServer: true
-%{~ if provider == "aws" ~}
-serviceAccount:
-  annotations:
-    eks.amazonaws.com/role-arn: ${trivy_operator_role_arn}
-%{~ endif ~}
+  %{~ if provider == "aws" ~}
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: ${trivy_operator_role_arn}
+  %{~ endif ~}
 
-%{~ if provider == "azure" ~}
+  %{~ if provider == "azure" ~}
 trivyOperator:
   # scanJobPodTemplateLabels comma-separated representation of the labels which the user wants the scanner pods to be
   # labeled with. Example: `foo=bar,env=stage` will labeled the scanner pods with the labels `foo: bar` and `env: stage`

@@ -41,7 +41,8 @@ resource "azurerm_monitor_metric_alert" "log" {
   resource_group_name = data.azurerm_resource_group.log.name
   scopes              = [azurerm_storage_account.log.id]
   description         = "No data being written to the storage account, check the AKS audit logs"
-  frequency           = "PT5M"
+  frequency           = "PT15M"
+  window_size         = "PT1H"
 
   criteria {
     aggregation            = "Average"
@@ -55,5 +56,5 @@ resource "azurerm_monitor_metric_alert" "log" {
   action {
     action_group_id = azurerm_monitor_action_group.this["alerts"].id
   }
-  severity = 1
+  severity = 2
 }

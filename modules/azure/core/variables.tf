@@ -24,22 +24,14 @@ variable "vnet_config" {
     address_space = list(string)
     dns_servers   = list(string)
     subnets = list(object({
-      name              = string
-      cidr              = string
-      service_endpoints = list(string)
-      aks_subnet        = bool
+      name                                          = string
+      cidr                                          = string
+      service_endpoints                             = list(string)
+      aks_subnet                                    = bool
+      private_link_service_network_policies_enabled = optional(bool, true)
+      private_endpoint_network_policies_enabled     = optional(bool, true)
     }))
   })
-}
-
-# The following would enable private endpoint on only the "servers" subnet:
-# subnet_private_endpoints = {
-#   servers = true
-# }
-variable "subnet_private_endpoints" {
-  description = "Enable private enpoint for specific subnet names"
-  type        = map(bool)
-  default     = {}
 }
 
 variable "route_config" {

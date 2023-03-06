@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#945](https://github.com/XenitAB/terraform-modules/pull/945) Increase flux gitrepository timeout to 120s.
+- [#953](https://github.com/XenitAB/terraform-modules/pull/953) Switch to new trivy-operator and trivy-server.
 
 ## 2023.02.3
 

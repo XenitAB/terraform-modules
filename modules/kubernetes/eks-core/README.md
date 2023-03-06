@@ -134,7 +134,7 @@ This module is used to configure EKS clusters.
 | <a name="input_reloader_enabled"></a> [reloader\_enabled](#input\_reloader\_enabled) | Should Reloader be enabled | `bool` | `true` | no |
 | <a name="input_spegel_enabled"></a> [spegel\_enabled](#input\_spegel\_enabled) | Should Spegel be enabled | `bool` | `true` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
-| <a name="input_trivy_config"></a> [trivy\_config](#input\_trivy\_config) | Configuration for trivy-operator & trivy | <pre>object({<br>    trivy_operator_role_arn = string<br>    trivy_role_arn          = string<br>  })</pre> | n/a | yes |
+| <a name="input_trivy_config"></a> [trivy\_config](#input\_trivy\_config) | Configuration for trivy-operator & trivy | <pre>object({<br>    trivy_operator_role_arn = string<br>  })</pre> | n/a | yes |
 | <a name="input_trivy_enabled"></a> [trivy\_enabled](#input\_trivy\_enabled) | Should trivy be enabled | `bool` | `false` | no |
 | <a name="input_velero_config"></a> [velero\_config](#input\_velero\_config) | Velero configuration | <pre>object({<br>    role_arn     = string<br>    s3_bucket_id = string<br>  })</pre> | n/a | yes |
 | <a name="input_velero_enabled"></a> [velero\_enabled](#input\_velero\_enabled) | Should Velero be enabled | `bool` | `false` | no |

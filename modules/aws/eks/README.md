@@ -26,7 +26,6 @@
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../irsa | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../irsa | n/a |
 | <a name="module_promtail"></a> [promtail](#module\_promtail) | ../irsa | n/a |
-| <a name="module_trivy_ecr"></a> [trivy\_ecr](#module\_trivy\_ecr) | ../irsa | n/a |
 | <a name="module_trivy_operator_ecr"></a> [trivy\_operator\_ecr](#module\_trivy\_operator\_ecr) | ../irsa | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../irsa | n/a |
 

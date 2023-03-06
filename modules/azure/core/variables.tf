@@ -24,10 +24,10 @@ variable "vnet_config" {
     address_space = list(string)
     dns_servers   = list(string)
     subnets = list(object({
-      name                                      = string
-      cidr                                      = string
-      service_endpoints                         = list(string)
-      aks_subnet                                = bool
+      name              = string
+      cidr              = string
+      service_endpoints = list(string)
+      aks_subnet        = bool
     }))
   })
 }

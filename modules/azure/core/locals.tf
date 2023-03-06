@@ -7,7 +7,6 @@ locals {
       subnet_cidr                                      = subnet.cidr
       subnet_service_endpoints                         = subnet.service_endpoints
       subnet_aks_subnet                                = subnet.aks_subnet
-      subnet_private_endpoint_network_policies_enabled = subnet.private_endpoint_network_policies_enabled
     }
   ]
 

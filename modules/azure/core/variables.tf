@@ -28,7 +28,6 @@ variable "vnet_config" {
       cidr                                      = string
       service_endpoints                         = list(string)
       aks_subnet                                = bool
-      private_endpoint_network_policies_enabled = optional(bool, true)
     }))
   })
 }
@@ -47,7 +46,7 @@ variable "route_config" {
   description = "Route configuration. Not applied to AKS subnets"
   type = list(object({
     subnet_name                   = string                # Short name for the subnet
-    disable_bgp_route_propagation = optional(bool, false) # Controls propagation of routes learned by BGP on that route table 
+    disable_bgp_route_propagation = optional(bool, false) # Controls propagation of routes learned by BGP on that route table
     routes = list(object({
       name                   = string # Name of the route
       address_prefix         = string # Example: 192.168.0.0/24
@@ -67,7 +66,7 @@ variable "peering_config" {
     allow_forwarded_traffic      = bool
     use_remote_gateways          = bool
     allow_virtual_network_access = bool
-    allow_gateway_transit        = optional(bool, false) # Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. 
+    allow_gateway_transit        = optional(bool, false) # Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network.
   }))
   default = []
 }

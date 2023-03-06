@@ -84,7 +84,6 @@ module "eks_core" {
 
   trivy_config = {
     trivy_operator_role_arn = "arn1234"
-    trivy_role_arn          = "arn1234"
   }
 
   prometheus_enabled = true

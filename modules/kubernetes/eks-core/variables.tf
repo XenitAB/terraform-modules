@@ -371,7 +371,6 @@ variable "trivy_config" {
   description = "Configuration for trivy-operator & trivy"
   type = object({
     trivy_operator_role_arn = string
-    trivy_role_arn          = string
   })
 }
 

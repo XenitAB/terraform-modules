@@ -406,7 +406,6 @@ module "trivy" {
 
   cloud_provider                  = "aws"
   trivy_operator_role_arn         = var.trivy_config.trivy_operator_role_arn
-  trivy_role_arn                  = var.trivy_config.trivy_role_arn
   volume_claim_storage_class_name = "gp2"
 }
 

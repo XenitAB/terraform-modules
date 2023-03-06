@@ -46,8 +46,9 @@ resource "helm_release" "trivy_operator" {
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/trivy-operator-values.yaml.tpl", {
-    provider                = var.cloud_provider
-    trivy_operator_role_arn = var.trivy_operator_role_arn
+    provider                        = var.cloud_provider
+    trivy_operator_role_arn         = var.trivy_operator_role_arn
+    volume_claim_storage_class_name = var.volume_claim_storage_class_name
   })]
 }
 

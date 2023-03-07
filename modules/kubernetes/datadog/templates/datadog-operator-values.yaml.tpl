@@ -3,10 +3,6 @@ apiKey: ${api_key}
 image:
   tag: 1.0.0-rc.8
 installCRDs: false
-datadog-crds:
-  migration:
-    datadogAgents:
-      version: "v2alpha1"
 datadogMonitor:
   enabled: true
 resources:

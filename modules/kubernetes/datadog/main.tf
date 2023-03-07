@@ -55,7 +55,7 @@ resource "helm_release" "datadog_operator" {
   chart       = "datadog-operator"
   name        = "datadog-operator"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "1.0.0-rc.8"
+  version     = local.values_datadog_operator.image.tag
   max_history = 3
   values      = [local.values_datadog_operator]
 }

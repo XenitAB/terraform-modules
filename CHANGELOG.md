@@ -19,6 +19,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#949](https://github.com/XenitAB/terraform-modules/pull/949) Update audit log alert criteria.
 - [#954](https://github.com/XenitAB/terraform-modules/pull/954) Make audit log alert have bigger window_size and frequency.
 
+### Fixed
+
+- [#952](https://github.com/XenitAB/terraform-modules/pull/952) Fix issues created by #943 and change core to use new private_endpoint_network_policies_enabled in core subnet config.
+
 ## 2023.02.3
 
 ### Changed

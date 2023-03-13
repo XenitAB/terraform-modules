@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#957](https://github.com/XenitAB/terraform-modules/pull/957) Update Spegel to v0.0.5 and set resources.
+
 ## 2023.03.1
 
 ### Added

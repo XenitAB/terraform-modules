@@ -1,5 +1,14 @@
+resource "azurecaf_name" "azuread_group_service_endpoint_join" {
+  name          = "serviceEndpointJoin"
+  resource_type = "general"
+  separator     = var.group_name_separator
+  prefixes      = local.resource_names.azuread_group_sub.prefixes
+  suffixes      = local.resource_names.azuread_group_sub.suffixes
+  use_slug      = false
+}
+
 resource "azuread_group" "service_endpoint_join" {
-  display_name            = "${var.azure_ad_group_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}serviceEndpointJoin"
+  display_name            = azurecaf_name.azuread_group_service_endpoint_join.result
   prevent_duplicate_names = true
   security_enabled        = true
 }

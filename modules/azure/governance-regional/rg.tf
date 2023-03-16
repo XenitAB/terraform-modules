@@ -1,16 +1,28 @@
+resource "azurecaf_name" "azurerm_resource_group_rg" {
+  for_each = {
+    for rg in var.resource_group_configs :
+    rg.common_name => rg
+  }
+
+  name          = each.value.common_name
+  resource_type = "azurerm_resource_group"
+  prefixes      = local.resource_names.azurerm_resource_group.prefixes
+  suffixes      = local.resource_names.azurerm_resource_group.suffixes
+  use_slug      = false
+}
+
 resource "azurerm_resource_group" "rg" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
   }
 
-  name     = "rg-${var.environment}-${var.location_short}-${each.value.common_name}"
+  name     = azurecaf_name.azurerm_resource_group_rg[each.key].result
   location = var.location
   tags = merge(
     {
       "Environment"   = var.environment,
       "LocationShort" = var.location_short
-
     },
     each.value.tags
   )

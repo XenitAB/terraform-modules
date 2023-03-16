@@ -24,6 +24,10 @@ terraform {
       version = "0.2.5"
       source  = "xenitab/pal"
     }
+    azurecaf = {
+      source  = "aztfmod/azurecaf"
+      version = "2.0.0-preview3"
+    }
   }
 }
 

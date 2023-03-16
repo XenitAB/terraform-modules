@@ -1,5 +1,14 @@
+resource "azurecaf_name" "azuread_application_sub_reader_sp" {
+  name          = "reader"
+  resource_type = "general"
+  separator     = var.group_name_separator
+  prefixes      = local.resource_names.azuread_application_sub.prefixes
+  suffixes      = local.resource_names.azuread_application_sub.suffixes
+  use_slug      = false
+}
+
 resource "azuread_application" "sub_reader_sp" {
-  display_name = "${var.service_principal_name_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}reader"
+  display_name = azurecaf_name.azuread_application_sub_reader_sp.result
 }
 
 resource "azuread_service_principal" "sub_reader_sp" {

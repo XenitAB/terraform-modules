@@ -69,3 +69,34 @@ variable "resource_group_configs" {
     })
   )
 }
+
+variable "resource_name_overrides" {
+  description = "A way to override the resource names"
+  type = object({
+    azuread_group_rg = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azuread_group_sub = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azuread_group_all_subs = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azuread_group_acr = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azuread_application_rg = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azuread_application_sub = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+  })
+  default = null
+}

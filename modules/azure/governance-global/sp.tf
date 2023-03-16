@@ -39,6 +39,21 @@ resource "pal_management_partner" "owner_spn" {
   overwrite     = true
 }
 
+resource "azurecaf_name" "azuread_application_aad_app" {
+  for_each = {
+    for rg in var.resource_group_configs :
+    rg.common_name => rg
+    if rg.delegate_service_principal == true
+  }
+
+  name          = each.key
+  resource_type = "general"
+  separator     = var.group_name_separator
+  prefixes      = local.resource_names.azuread_application_rg.prefixes
+  suffixes      = concat(local.resource_names.azuread_application_rg.suffixes, ["contributor"])
+  use_slug      = false
+}
+
 resource "azuread_application" "aad_app" {
   for_each = {
     for rg in var.resource_group_configs :
@@ -46,7 +61,7 @@ resource "azuread_application" "aad_app" {
     if rg.delegate_service_principal == true
   }
 
-  display_name = "${var.service_principal_name_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.value.common_name}${var.group_name_separator}contributor"
+  display_name = azurecaf_name.azuread_application_aad_app[each.key].result
 }
 
 resource "azuread_service_principal" "aad_sp" {

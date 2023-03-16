@@ -1,3 +1,17 @@
+resource "azurecaf_name" "azurerm_key_vault_delegate_kv" {
+  for_each = {
+    for rg in var.resource_group_configs :
+    rg.common_name => rg
+    if rg.delegate_key_vault == true
+  }
+
+  name          = each.value.common_name
+  resource_type = "azurerm_key_vault"
+  prefixes      = local.resource_names.azurerm_key_vault.prefixes
+  suffixes      = local.resource_names.azurerm_key_vault.suffixes
+  use_slug      = false
+}
+
 #tfsec:ignore:AZU020 tfsec:ignore:AZU021
 resource "azurerm_key_vault" "delegate_kv" {
   for_each = {
@@ -6,7 +20,7 @@ resource "azurerm_key_vault" "delegate_kv" {
     if rg.delegate_key_vault == true
   }
 
-  name = each.value.disable_unique_suffix ? "kv-${var.environment}-${var.location_short}-${each.value.common_name}" : join("-", compact(["kv-${var.environment}-${var.location_short}-${each.value.common_name}", var.unique_suffix]))
+  name = azurecaf_name.azurerm_key_vault_delegate_kv[each.key].result
 
   location                 = azurerm_resource_group.rg[each.key].location
   resource_group_name      = azurerm_resource_group.rg[each.key].name

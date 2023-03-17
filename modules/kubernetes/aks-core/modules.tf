@@ -352,7 +352,7 @@ module "datadog_crd" {
 
   chart_repository = "https://helm.datadoghq.com"
   chart_name       = "datadog-operator"
-  chart_version    = "0.8.4"
+  chart_version    = "0.9.2"
 }
 
 module "datadog" {

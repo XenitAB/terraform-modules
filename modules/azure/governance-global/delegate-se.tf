@@ -2,8 +2,8 @@ data "azurecaf_name" "azuread_group_service_endpoint_join" {
   name          = "serviceEndpointJoin"
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = module.naming.names.azuread_group_sub.prefixes
-  suffixes      = module.naming.names.azuread_group_sub.suffixes
+  prefixes      = module.names.this.azuread_group_sub.prefixes
+  suffixes      = module.names.this.azuread_group_sub.suffixes
   use_slug      = false
 }
 

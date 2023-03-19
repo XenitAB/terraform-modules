@@ -8,8 +8,8 @@ data "azurecaf_name" "azuread_application_delegate_kv_aad" {
   name          = each.key
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = module.naming.names.azuread_application_rg.prefixes
-  suffixes      = concat(module.naming.names.azuread_application_rg.suffixes, ["kvreader"])
+  prefixes      = module.names.this.azuread_application_rg.prefixes
+  suffixes      = concat(module.names.this.azuread_application_rg.suffixes, ["kvreader"])
   use_slug      = false
 }
 

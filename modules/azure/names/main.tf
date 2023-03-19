@@ -1,3 +1,65 @@
+/**
+  * # Azure naming conventions
+  *
+  * This module is created to be used together with the [`aztfmod/azurecaf`](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs) provider.
+  * 
+  * Load the module:
+  *
+  * ```terraform
+  * module "names" {
+  *   source = "../names"
+  * 
+  *   resource_name_overrides = var.resource_name_overrides
+  *   environment             = var.environment
+  *   location_short          = var.location_short
+  *   unique_suffix           = var.unique_suffix
+  * }
+  * ```
+  *
+  * Then it can be used like this:
+  *
+  * ```terraform
+  * data "azurecaf_name" "azurerm_resource_group_rg" {
+  *   for_each = {
+  *     for rg in var.resource_group_configs :
+  *     rg.common_name => rg
+  *   }
+  * 
+  *   name          = each.value.common_name
+  *   resource_type = "azurerm_resource_group"
+  *   prefixes      = module.names.this.azurerm_resource_group.prefixes
+  *   suffixes      = module.names.this.azurerm_resource_group.suffixes
+  *   use_slug      = false
+  * }
+  * ```
+  * 
+  * Then you use it with a resource:
+  *
+  * ```terraform
+  * resource "azurerm_resource_group" "rg" {
+  *   for_each = {
+  *     for rg in var.resource_group_configs :
+  *     rg.common_name => rg
+  *   }
+  * 
+  *   name     = data.azurecaf_name.azurerm_resource_group_rg[each.key].result
+  *   location = var.location
+  *   tags = merge(
+  *     {
+  *       "Environment"   = var.environment,
+  *       "LocationShort" = var.location_short
+  *     },
+  *     each.value.tags
+  *   )
+  * }
+  * ```
+  *
+  */
+
+terraform {
+  required_version = ">= 1.3.0"
+}
+
 locals {
   resource_names = {
     azuread_group_rg = {

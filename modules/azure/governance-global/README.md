@@ -24,7 +24,9 @@ This module is used for governance on a global level and not using any specific 
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_names"></a> [names](#module\_names) | ../names | n/a |
 
 ## Resources
 
@@ -103,7 +105,7 @@ No modules.
 | <a name="input_owner_service_principal_name"></a> [owner\_service\_principal\_name](#input\_owner\_service\_principal\_name) | The name of the service principal that will be used to run terraform and is owner of the subsciptions | `string` | n/a | yes |
 | <a name="input_partner_id"></a> [partner\_id](#input\_partner\_id) | Azure partner id to link service principal with | `string` | `""` | no |
 | <a name="input_resource_group_configs"></a> [resource\_group\_configs](#input\_resource\_group\_configs) | Resource group configuration | <pre>list(<br>    object({<br>      common_name                = string<br>      delegate_aks               = bool # Delegate aks permissions<br>      delegate_key_vault         = bool # Delegate KeyVault creation<br>      delegate_service_endpoint  = bool # Delegate Service Endpoint permissions<br>      delegate_service_principal = bool # Delegate Service Principal<br>      disable_unique_suffix      = bool # Disable unique_suffix on resource names<br>      tags                       = map(string)<br>    })<br>  )</pre> | n/a | yes |
-| <a name="input_resource_name_overrides"></a> [resource\_name\_overrides](#input\_resource\_name\_overrides) | A way to override the resource names | <pre>object({<br>    azuread_group_rg = optional(object({<br>      prefixes = optional(list(string))<br>      suffixes = optional(list(string))<br>    }))<br>    azuread_group_sub = optional(object({<br>      prefixes = optional(list(string))<br>      suffixes = optional(list(string))<br>    }))<br>    azuread_group_all_subs = optional(object({<br>      prefixes = optional(list(string))<br>      suffixes = optional(list(string))<br>    }))<br>    azuread_group_acr = optional(object({<br>      prefixes = optional(list(string))<br>      suffixes = optional(list(string))<br>    }))<br>    azuread_application_rg = optional(object({<br>      prefixes = optional(list(string))<br>      suffixes = optional(list(string))<br>    }))<br>    azuread_application_sub = optional(object({<br>      prefixes = optional(list(string))<br>      suffixes = optional(list(string))<br>    }))<br>  })</pre> | `null` | no |
+| <a name="input_resource_name_overrides"></a> [resource\_name\_overrides](#input\_resource\_name\_overrides) | A way to override the resource names | `any` | `null` | no |
 | <a name="input_service_principal_name_prefix"></a> [service\_principal\_name\_prefix](#input\_service\_principal\_name\_prefix) | Prefix for service principals | `string` | `"sp"` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
 

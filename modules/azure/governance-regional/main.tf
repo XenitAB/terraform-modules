@@ -34,8 +34,8 @@ terraform {
 data "azurerm_subscription" "current" {}
 data "azurerm_client_config" "current" {}
 
-module "naming" {
-  source = "../naming"
+module "names" {
+  source = "../names"
 
   resource_name_overrides = var.resource_name_overrides
   environment             = var.environment

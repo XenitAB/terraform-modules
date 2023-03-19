@@ -9,8 +9,8 @@ data "azurecaf_name" "azuread_group_all_owner" {
   name          = "all"
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = module.naming.names.azuread_group_all_subs.prefixes
-  suffixes      = concat(module.naming.names.azuread_group_all_subs.suffixes, ["owner"])
+  prefixes      = module.names.this.azuread_group_all_subs.prefixes
+  suffixes      = concat(module.names.this.azuread_group_all_subs.suffixes, ["owner"])
   use_slug      = false
 }
 
@@ -46,8 +46,8 @@ data "azurecaf_name" "azuread_group_all_contributor" {
   name          = "all"
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = module.naming.names.azuread_group_all_subs.prefixes
-  suffixes      = concat(module.naming.names.azuread_group_all_subs.suffixes, ["contributor"])
+  prefixes      = module.names.this.azuread_group_all_subs.prefixes
+  suffixes      = concat(module.names.this.azuread_group_all_subs.suffixes, ["contributor"])
   use_slug      = false
 }
 
@@ -83,8 +83,8 @@ data "azurecaf_name" "azuread_group_all_reader" {
   name          = "all"
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = module.naming.names.azuread_group_all_subs.prefixes
-  suffixes      = concat(module.naming.names.azuread_group_all_subs.suffixes, ["reader"])
+  prefixes      = module.names.this.azuread_group_all_subs.prefixes
+  suffixes      = concat(module.names.this.azuread_group_all_subs.suffixes, ["reader"])
   use_slug      = false
 }
 

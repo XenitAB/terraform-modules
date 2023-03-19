@@ -33,8 +33,8 @@ terraform {
 
 data "azurerm_subscription" "current" {}
 
-module "naming" {
-  source = "../naming"
+module "names" {
+  source = "../names"
 
   resource_name_overrides       = var.resource_name_overrides
   azure_ad_group_prefix         = var.azure_ad_group_prefix

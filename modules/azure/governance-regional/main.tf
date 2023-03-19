@@ -37,10 +37,8 @@ data "azurerm_client_config" "current" {}
 module "naming" {
   source = "../naming"
 
-  resource_name_overrides       = var.resource_name_overrides
-  service_principal_name_prefix = var.service_principal_name_prefix
-  environment                   = var.environment
-  subscription_name             = var.subscription_name
-  location_short                = var.location_short
-  unique_suffix                 = var.unique_suffix
+  resource_name_overrides = var.resource_name_overrides
+  environment             = var.environment
+  location_short          = var.location_short
+  unique_suffix           = var.unique_suffix
 }

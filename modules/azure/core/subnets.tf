@@ -1,17 +1,3 @@
-data "azurecaf_name" "azurerm_subnet_this" {
-  for_each = {
-    for subnet in local.subnets :
-    subnet.subnet_full_name => subnet
-    if subnet.subnet_aks_subnet == false
-  }
-
-  name          = each.value.subnet_full_name
-  resource_type = "azurerm_subnet"
-  prefixes      = concat(module.names.this.azurerm_subnet.prefixes, [var.name])
-  suffixes      = module.names.this.azurerm_subnet.suffixes
-  use_slug      = false
-}
-
 # NOTE: Using the subnet_full_name here makes it weird referencing it from things like a route table.
 #       Not sure what to do about it, but worth noting down for future reference.
 resource "azurerm_subnet" "this" {

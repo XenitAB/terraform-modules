@@ -42,6 +42,4 @@ module "naming" {
   service_principal_name_prefix = var.service_principal_name_prefix
   environment                   = var.environment
   subscription_name             = var.subscription_name
-  location_short                = var.location_short
-  unique_suffix                 = var.unique_suffix
 }

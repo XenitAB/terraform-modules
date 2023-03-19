@@ -38,8 +38,6 @@ module "naming" {
   source = "../naming"
 
   resource_name_overrides       = var.resource_name_overrides
-  azure_ad_group_prefix         = var.azure_ad_group_prefix
-  aks_group_name_prefix         = var.aks_group_name_prefix
   service_principal_name_prefix = var.service_principal_name_prefix
   environment                   = var.environment
   subscription_name             = var.subscription_name

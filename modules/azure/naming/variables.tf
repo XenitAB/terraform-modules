@@ -58,20 +58,23 @@ variable "service_principal_name_prefix" {
 variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string
+  default     = null
 }
 
 variable "subscription_name" {
   description = "The commonName for the subscription"
   type        = string
+  default     = null
 }
 
 variable "location_short" {
   description = "The location shortname for the subscription"
   type        = string
+  default     = null
 }
 
 variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string
-  default     = ""
+  default     = null
 }

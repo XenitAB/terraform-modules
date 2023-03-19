@@ -1,5 +1,5 @@
 # Example: az-sub-<subName>-all-owner
-resource "azurecaf_name" "azuread_group_all_owner" {
+data "azurecaf_name" "azuread_group_all_owner" {
   for_each = {
     for s in ["delegate_sub_groups"] :
     s => s
@@ -21,7 +21,7 @@ data "azuread_group" "all_owner" {
     if var.delegate_sub_groups
   }
 
-  display_name = azurecaf_name.azuread_group_all_owner["delegate_sub_groups"].result
+  display_name = data.azurecaf_name.azuread_group_all_owner["delegate_sub_groups"].result
 }
 
 resource "azuread_group_member" "sub_all_owner" {
@@ -36,7 +36,7 @@ resource "azuread_group_member" "sub_all_owner" {
 }
 
 # Example: az-sub-<subName>-all-contributor
-resource "azurecaf_name" "azuread_group_all_contributor" {
+data "azurecaf_name" "azuread_group_all_contributor" {
   for_each = {
     for s in ["delegate_sub_groups"] :
     s => s
@@ -58,7 +58,7 @@ data "azuread_group" "all_contributor" {
     if var.delegate_sub_groups
   }
 
-  display_name = azurecaf_name.azuread_group_all_contributor["delegate_sub_groups"].result
+  display_name = data.azurecaf_name.azuread_group_all_contributor["delegate_sub_groups"].result
 }
 
 resource "azuread_group_member" "sub_all_contributor" {
@@ -73,7 +73,7 @@ resource "azuread_group_member" "sub_all_contributor" {
 }
 
 # Example: az-sub-<subName>-all-reader
-resource "azurecaf_name" "azuread_group_all_reader" {
+data "azurecaf_name" "azuread_group_all_reader" {
   for_each = {
     for s in ["delegate_sub_groups"] :
     s => s
@@ -95,7 +95,7 @@ data "azuread_group" "all_reader" {
     if var.delegate_sub_groups
   }
 
-  display_name = azurecaf_name.azuread_group_all_reader["delegate_sub_groups"].result
+  display_name = data.azurecaf_name.azuread_group_all_reader["delegate_sub_groups"].result
 }
 
 resource "azuread_group_member" "sub_all_reader" {

@@ -1,4 +1,4 @@
-resource "azurecaf_name" "azuread_group_service_endpoint_join" {
+data "azurecaf_name" "azuread_group_service_endpoint_join" {
   name          = "serviceEndpointJoin"
   resource_type = "general"
   separator     = var.group_name_separator
@@ -8,7 +8,7 @@ resource "azurecaf_name" "azuread_group_service_endpoint_join" {
 }
 
 resource "azuread_group" "service_endpoint_join" {
-  display_name            = azurecaf_name.azuread_group_service_endpoint_join.result
+  display_name            = data.azurecaf_name.azuread_group_service_endpoint_join.result
   prevent_duplicate_names = true
   security_enabled        = true
 }

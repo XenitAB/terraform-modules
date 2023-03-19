@@ -1,7 +1,7 @@
 # More info about Azure Container Registry Roles can be found here: https://docs.microsoft.com/en-us/azure/container-registry/container-registry-roles
 
 # ACR Push Azure AD group will grant push and pull permissions to the Container Registry
-resource "azurecaf_name" "azuread_group_acr_push" {
+data "azurecaf_name" "azuread_group_acr_push" {
   for_each = {
     for s in ["delegate_acr"] :
     s => s
@@ -23,13 +23,13 @@ resource "azuread_group" "acr_push" {
     if var.delegate_acr
   }
 
-  display_name            = azurecaf_name.azuread_group_acr_push["delegate_acr"].result
+  display_name            = data.azurecaf_name.azuread_group_acr_push["delegate_acr"].result
   prevent_duplicate_names = true
   security_enabled        = true
 }
 
 # ACR Pull Azure AD group will grant pull permissions to the Container Registry
-resource "azurecaf_name" "azuread_group_acr_pull" {
+data "azurecaf_name" "azuread_group_acr_pull" {
   for_each = {
     for s in ["delegate_acr"] :
     s => s
@@ -51,13 +51,13 @@ resource "azuread_group" "acr_pull" {
     if var.delegate_acr
   }
 
-  display_name            = azurecaf_name.azuread_group_acr_pull["delegate_acr"].result
+  display_name            = data.azurecaf_name.azuread_group_acr_pull["delegate_acr"].result
   prevent_duplicate_names = true
   security_enabled        = true
 }
 
 # ACR Reader Azure AD group will grant ARM (to view Container Registry in Azure Portal) and pull permissions to the Container Registry
-resource "azurecaf_name" "azuread_group_acr_reader" {
+data "azurecaf_name" "azuread_group_acr_reader" {
   for_each = {
     for s in ["delegate_acr"] :
     s => s
@@ -79,7 +79,7 @@ resource "azuread_group" "acr_reader" {
     if var.delegate_acr
   }
 
-  display_name            = azurecaf_name.azuread_group_acr_reader["delegate_acr"].result
+  display_name            = data.azurecaf_name.azuread_group_acr_reader["delegate_acr"].result
   prevent_duplicate_names = true
   security_enabled        = true
 }

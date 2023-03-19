@@ -1,4 +1,4 @@
-resource "azurecaf_name" "azurerm_resource_group_rg" {
+data "azurecaf_name" "azurerm_resource_group_rg" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
@@ -17,7 +17,7 @@ resource "azurerm_resource_group" "rg" {
     rg.common_name => rg
   }
 
-  name     = azurecaf_name.azurerm_resource_group_rg[each.key].result
+  name     = data.azurecaf_name.azurerm_resource_group_rg[each.key].result
   location = var.location
   tags = merge(
     {

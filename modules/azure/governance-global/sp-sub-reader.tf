@@ -1,4 +1,4 @@
-resource "azurecaf_name" "azuread_application_sub_reader_sp" {
+data "azurecaf_name" "azuread_application_sub_reader_sp" {
   name          = "reader"
   resource_type = "general"
   separator     = var.group_name_separator
@@ -8,7 +8,7 @@ resource "azurecaf_name" "azuread_application_sub_reader_sp" {
 }
 
 resource "azuread_application" "sub_reader_sp" {
-  display_name = azurecaf_name.azuread_application_sub_reader_sp.result
+  display_name = data.azurecaf_name.azuread_application_sub_reader_sp.result
 }
 
 resource "azuread_service_principal" "sub_reader_sp" {

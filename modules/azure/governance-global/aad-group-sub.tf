@@ -1,5 +1,5 @@
 # AAD Group for Subscription Owners
-resource "azurecaf_name" "azuread_group_sub_owner" {
+data "azurecaf_name" "azuread_group_sub_owner" {
   name          = "owner"
   resource_type = "general"
   separator     = var.group_name_separator
@@ -9,7 +9,7 @@ resource "azurecaf_name" "azuread_group_sub_owner" {
 }
 
 resource "azuread_group" "sub_owner" {
-  display_name            = azurecaf_name.azuread_group_sub_owner.result
+  display_name            = data.azurecaf_name.azuread_group_sub_owner.result
   prevent_duplicate_names = true
   security_enabled        = true
 }
@@ -21,7 +21,7 @@ resource "azurerm_role_assignment" "sub_owner" {
 }
 
 # AAD Group for Subscription Contributors
-resource "azurecaf_name" "azuread_group_sub_contributor" {
+data "azurecaf_name" "azuread_group_sub_contributor" {
   name          = "contributor"
   resource_type = "general"
   separator     = var.group_name_separator
@@ -31,7 +31,7 @@ resource "azurecaf_name" "azuread_group_sub_contributor" {
 }
 
 resource "azuread_group" "sub_contributor" {
-  display_name            = azurecaf_name.azuread_group_sub_contributor.result
+  display_name            = data.azurecaf_name.azuread_group_sub_contributor.result
   prevent_duplicate_names = true
   security_enabled        = true
 }
@@ -43,7 +43,7 @@ resource "azurerm_role_assignment" "sub_contributor" {
 }
 
 # AAD Group for Subscription Readers
-resource "azurecaf_name" "azuread_group_sub_reader" {
+data "azurecaf_name" "azuread_group_sub_reader" {
   name          = "reader"
   resource_type = "general"
   separator     = var.group_name_separator
@@ -53,7 +53,7 @@ resource "azurecaf_name" "azuread_group_sub_reader" {
 }
 
 resource "azuread_group" "sub_reader" {
-  display_name            = azurecaf_name.azuread_group_sub_reader.result
+  display_name            = data.azurecaf_name.azuread_group_sub_reader.result
   prevent_duplicate_names = true
   security_enabled        = true
 }

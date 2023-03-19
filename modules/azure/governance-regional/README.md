@@ -31,8 +31,6 @@ No modules.
 |------|------|
 | [azuread_application_password.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/application_password) | resource |
 | [azuread_application_password.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/resources/application_password) | resource |
-| [azurecaf_name.azurerm_key_vault_delegate_kv](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/resources/name) | resource |
-| [azurecaf_name.azurerm_resource_group_rg](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/resources/name) | resource |
 | [azurerm_key_vault.delegate_kv](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/key_vault) | resource |
 | [azurerm_key_vault_access_policy.ap_kvreader_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.ap_owner_spn](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/key_vault_access_policy) | resource |
@@ -50,6 +48,8 @@ No modules.
 | [azurerm_role_assignment.rg_owner](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.rg_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/role_assignment) | resource |
 | [azuread_service_principal.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/service_principal) | data source |
+| [azurecaf_name.azurerm_key_vault_delegate_kv](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |
+| [azurecaf_name.azurerm_resource_group_rg](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/client_config) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/subscription) | data source |
 

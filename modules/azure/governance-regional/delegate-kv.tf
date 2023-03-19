@@ -1,4 +1,4 @@
-resource "azurecaf_name" "azurerm_key_vault_delegate_kv" {
+data "azurecaf_name" "azurerm_key_vault_delegate_kv" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
@@ -20,7 +20,7 @@ resource "azurerm_key_vault" "delegate_kv" {
     if rg.delegate_key_vault == true
   }
 
-  name = azurecaf_name.azurerm_key_vault_delegate_kv[each.key].result
+  name = data.azurecaf_name.azurerm_key_vault_delegate_kv[each.key].result
 
   location                 = azurerm_resource_group.rg[each.key].location
   resource_group_name      = azurerm_resource_group.rg[each.key].name

@@ -1,4 +1,4 @@
-resource "azurecaf_name" "azuread_application_delegate_kv_aad" {
+data "azurecaf_name" "azuread_application_delegate_kv_aad" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
@@ -20,7 +20,7 @@ resource "azuread_application" "delegate_kv_aad" {
     if rg.delegate_key_vault == true
   }
 
-  display_name = azurecaf_name.azuread_application_delegate_kv_aad[each.key].result
+  display_name = data.azurecaf_name.azuread_application_delegate_kv_aad[each.key].result
 }
 
 resource "azuread_service_principal" "delegate_kv_aad" {

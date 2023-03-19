@@ -39,7 +39,7 @@ resource "pal_management_partner" "owner_spn" {
   overwrite     = true
 }
 
-resource "azurecaf_name" "azuread_application_aad_app" {
+data "azurecaf_name" "azuread_application_aad_app" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
@@ -61,7 +61,7 @@ resource "azuread_application" "aad_app" {
     if rg.delegate_service_principal == true
   }
 
-  display_name = azurecaf_name.azuread_application_aad_app[each.key].result
+  display_name = data.azurecaf_name.azuread_application_aad_app[each.key].result
 }
 
 resource "azuread_service_principal" "aad_sp" {

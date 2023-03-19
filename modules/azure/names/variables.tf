@@ -33,6 +33,42 @@ variable "resource_name_overrides" {
       prefixes = optional(list(string))
       suffixes = optional(list(string))
     }))
+    azurerm_role_definition = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azurerm_storage_account_log = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azurerm_monitor_action_group = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azurerm_virtual_network = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azurerm_network_security_group = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azurerm_route_table = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azurerm_subnet = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azurerm_virtual_network_peering = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
+    azurerm_storage_account = optional(object({
+      prefixes = optional(list(string))
+      suffixes = optional(list(string))
+    }))
   })
   default = null
 }
@@ -53,6 +89,12 @@ variable "service_principal_name_prefix" {
   description = "Prefix for service principals"
   type        = string
   default     = "sp"
+}
+
+variable "azure_role_definition_prefix" {
+  description = "Prefix for Azure Role Definition names"
+  type        = string
+  default     = "role"
 }
 
 variable "environment" {

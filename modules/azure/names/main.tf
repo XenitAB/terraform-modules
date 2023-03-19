@@ -94,5 +94,37 @@ locals {
       prefixes = try(var.resource_name_overrides.azurerm_key_vault.prefixes, null) != null ? var.resource_name_overrides.azurerm_key_vault.prefixes : ["kv", var.environment, var.location_short]
       suffixes = try(var.resource_name_overrides.azurerm_key_vault.suffixes, null) != null ? var.resource_name_overrides.azurerm_key_vault.suffixes : [var.unique_suffix]
     }
+    azurerm_role_definition = {
+      prefixes = try(var.resource_name_overrides.azurerm_role_definition.prefixes, null) != null ? var.resource_name_overrides.azurerm_role_definition.prefixes : [var.azure_role_definition_prefix, var.environment, var.location_short]
+      suffixes = try(var.resource_name_overrides.azurerm_role_definition.suffixes, null) != null ? var.resource_name_overrides.azurerm_role_definition.suffixes : [var.unique_suffix]
+    }
+    azurerm_storage_account_log = {
+      prefixes = try(var.resource_name_overrides.azurerm_storage_account_log.prefixes, null) != null ? var.resource_name_overrides.azurerm_storage_account_log.prefixes : ["log", var.environment, var.location_short]
+      suffixes = try(var.resource_name_overrides.azurerm_storage_account_log.suffixes, null) != null ? var.resource_name_overrides.azurerm_storage_account_log.suffixes : [var.unique_suffix]
+    }
+    azurerm_virtual_network = {
+      prefixes = try(var.resource_name_overrides.azurerm_virtual_network.prefixes, null) != null ? var.resource_name_overrides.azurerm_virtual_network.prefixes : ["vnet", var.environment, var.location_short]
+      suffixes = try(var.resource_name_overrides.azurerm_virtual_network.suffixes, null) != null ? var.resource_name_overrides.azurerm_virtual_network.suffixes : []
+    }
+    azurerm_network_security_group = {
+      prefixes = try(var.resource_name_overrides.azurerm_network_security_group.prefixes, null) != null ? var.resource_name_overrides.azurerm_network_security_group.prefixes : ["nsg", var.environment, var.location_short]
+      suffixes = try(var.resource_name_overrides.azurerm_network_security_group.suffixes, null) != null ? var.resource_name_overrides.azurerm_network_security_group.suffixes : []
+    }
+    azurerm_route_table = {
+      prefixes = try(var.resource_name_overrides.azurerm_route_table.prefixes, null) != null ? var.resource_name_overrides.azurerm_route_table.prefixes : ["rt", var.environment, var.location_short]
+      suffixes = try(var.resource_name_overrides.azurerm_route_table.suffixes, null) != null ? var.resource_name_overrides.azurerm_route_table.suffixes : []
+    }
+    azurerm_subnet = {
+      prefixes = try(var.resource_name_overrides.azurerm_subnet.prefixes, null) != null ? var.resource_name_overrides.azurerm_subnet.prefixes : ["sn", var.environment, var.location_short]
+      suffixes = try(var.resource_name_overrides.azurerm_subnet.suffixes, null) != null ? var.resource_name_overrides.azurerm_subnet.suffixes : []
+    }
+    azurerm_virtual_network_peering = {
+      prefixes = try(var.resource_name_overrides.azurerm_virtual_network_peering.prefixes, null) != null ? var.resource_name_overrides.azurerm_virtual_network_peering.prefixes : ["peering", var.environment, var.location_short]
+      suffixes = try(var.resource_name_overrides.azurerm_virtual_network_peering.suffixes, null) != null ? var.resource_name_overrides.azurerm_virtual_network_peering.suffixes : []
+    }
+    azurerm_storage_account = {
+      prefixes = try(var.resource_name_overrides.azurerm_storage_account.prefixes, null) != null ? var.resource_name_overrides.azurerm_storage_account.prefixes : ["sa", var.environment, var.location_short]
+      suffixes = try(var.resource_name_overrides.azurerm_storage_account.suffixes, null) != null ? var.resource_name_overrides.azurerm_storage_account.suffixes : [var.unique_suffix]
+    }
   }
 }

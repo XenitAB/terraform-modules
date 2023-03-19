@@ -100,3 +100,15 @@ variable "alerts_enabled" {
   type        = bool
   default     = false
 }
+
+variable "log_common_name" {
+  description = "The common name for the logs"
+  type        = string
+  default     = "log"
+}
+
+variable "resource_name_overrides" {
+  description = "A way to override the resource names"
+  type        = any
+  default     = null
+}

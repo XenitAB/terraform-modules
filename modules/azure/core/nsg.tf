@@ -1,3 +1,17 @@
+data "azurecaf_name" "azurerm_network_security_group_this" {
+  for_each = {
+    for subnet in local.subnets :
+    subnet.subnet_full_name => subnet
+    if subnet.subnet_aks_subnet == false
+  }
+
+  name          = each.value.subnet_short_name
+  resource_type = "azurerm_network_security_group"
+  prefixes      = concat(module.names.this.azurerm_network_security_group.prefixes, [var.name])
+  suffixes      = module.names.this.azurerm_network_security_group.suffixes
+  use_slug      = false
+}
+
 resource "azurerm_network_security_group" "this" {
   for_each = {
     for subnet in local.subnets :
@@ -5,7 +19,7 @@ resource "azurerm_network_security_group" "this" {
     if subnet.subnet_aks_subnet == false
   }
 
-  name                = "nsg-${var.environment}-${var.location_short}-${var.name}-${each.value.subnet_short_name}"
+  name                = data.azurecaf_name.azurerm_network_security_group_this[each.key].result
   location            = data.azurerm_resource_group.this.location
   resource_group_name = data.azurerm_resource_group.this.name
 }

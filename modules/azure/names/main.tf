@@ -60,6 +60,7 @@ terraform {
   required_version = ">= 1.3.0"
 }
 
+# NOTE: locals are used as an intermediate stage to be able to use variables, since it's not possible to use variables in variables. 
 locals {
   resource_names = {
     azuread_group_rg = {

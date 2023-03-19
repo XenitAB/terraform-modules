@@ -11,8 +11,8 @@ data "azurecaf_name" "azuread_group_acr_push" {
   name          = "acrpush"
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = local.resource_names.azuread_group_acr.prefixes
-  suffixes      = local.resource_names.azuread_group_acr.suffixes
+  prefixes      = module.naming.names.azuread_group_acr.prefixes
+  suffixes      = module.naming.names.azuread_group_acr.suffixes
   use_slug      = false
 }
 
@@ -39,8 +39,8 @@ data "azurecaf_name" "azuread_group_acr_pull" {
   name          = "acrpull"
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = local.resource_names.azuread_group_acr.prefixes
-  suffixes      = local.resource_names.azuread_group_acr.suffixes
+  prefixes      = module.naming.names.azuread_group_acr.prefixes
+  suffixes      = module.naming.names.azuread_group_acr.suffixes
   use_slug      = false
 }
 
@@ -67,8 +67,8 @@ data "azurecaf_name" "azuread_group_acr_reader" {
   name          = "acrreader"
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = local.resource_names.azuread_group_acr.prefixes
-  suffixes      = local.resource_names.azuread_group_acr.suffixes
+  prefixes      = module.naming.names.azuread_group_acr.prefixes
+  suffixes      = module.naming.names.azuread_group_acr.suffixes
   use_slug      = false
 }
 

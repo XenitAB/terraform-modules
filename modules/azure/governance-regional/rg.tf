@@ -6,8 +6,8 @@ data "azurecaf_name" "azurerm_resource_group_rg" {
 
   name          = each.value.common_name
   resource_type = "azurerm_resource_group"
-  prefixes      = local.resource_names.azurerm_resource_group.prefixes
-  suffixes      = local.resource_names.azurerm_resource_group.suffixes
+  prefixes      = module.naming.names.azurerm_resource_group.prefixes
+  suffixes      = module.naming.names.azurerm_resource_group.suffixes
   use_slug      = false
 }
 

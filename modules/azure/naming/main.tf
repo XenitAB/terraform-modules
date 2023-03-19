@@ -24,5 +24,13 @@ locals {
       prefixes = try(var.resource_name_overrides.azuread_application_sub.prefixes, null) != null ? var.resource_name_overrides.azuread_application_sub.prefixes : [var.service_principal_name_prefix, "sub", var.subscription_name, var.environment]
       suffixes = try(var.resource_name_overrides.azuread_application_sub.suffixes, null) != null ? var.resource_name_overrides.azuread_application_sub.suffixes : []
     }
+    azurerm_resource_group = {
+      prefixes = try(var.resource_name_overrides.azurerm_resource_group.prefixes, null) != null ? var.resource_name_overrides.azurerm_resource_group.prefixes : ["rg", var.environment, var.location_short]
+      suffixes = try(var.resource_name_overrides.azurerm_resource_group.suffixes, null) != null ? var.resource_name_overrides.azurerm_resource_group.suffixes : []
+    }
+    azurerm_key_vault = {
+      prefixes = try(var.resource_name_overrides.azurerm_key_vault.prefixes, null) != null ? var.resource_name_overrides.azurerm_key_vault.prefixes : ["kv", var.environment, var.location_short]
+      suffixes = try(var.resource_name_overrides.azurerm_key_vault.suffixes, null) != null ? var.resource_name_overrides.azurerm_key_vault.suffixes : [var.unique_suffix]
+    }
   }
 }

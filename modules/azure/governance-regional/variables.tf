@@ -104,15 +104,6 @@ variable "aad_sp_passwords" {
 
 variable "resource_name_overrides" {
   description = "A way to override the resource names"
-  type = object({
-    azurerm_resource_group = optional(object({
-      prefixes = optional(list(string))
-      suffixes = optional(list(string))
-    }))
-    azurerm_key_vault = optional(object({
-      prefixes = optional(list(string))
-      suffixes = optional(list(string))
-    }))
-  })
-  default = null
+  type        = any
+  default     = null
 }

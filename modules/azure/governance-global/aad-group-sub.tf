@@ -3,8 +3,8 @@ data "azurecaf_name" "azuread_group_sub_owner" {
   name          = "owner"
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = local.resource_names.azuread_group_sub.prefixes
-  suffixes      = local.resource_names.azuread_group_sub.suffixes
+  prefixes      = module.naming.names.azuread_group_sub.prefixes
+  suffixes      = module.naming.names.azuread_group_sub.suffixes
   use_slug      = false
 }
 
@@ -25,8 +25,8 @@ data "azurecaf_name" "azuread_group_sub_contributor" {
   name          = "contributor"
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = local.resource_names.azuread_group_sub.prefixes
-  suffixes      = local.resource_names.azuread_group_sub.suffixes
+  prefixes      = module.naming.names.azuread_group_sub.prefixes
+  suffixes      = module.naming.names.azuread_group_sub.suffixes
   use_slug      = false
 }
 
@@ -47,8 +47,8 @@ data "azurecaf_name" "azuread_group_sub_reader" {
   name          = "reader"
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = local.resource_names.azuread_group_sub.prefixes
-  suffixes      = local.resource_names.azuread_group_sub.suffixes
+  prefixes      = module.naming.names.azuread_group_sub.prefixes
+  suffixes      = module.naming.names.azuread_group_sub.suffixes
   use_slug      = false
 }
 

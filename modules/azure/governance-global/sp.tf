@@ -49,8 +49,8 @@ data "azurecaf_name" "azuread_application_aad_app" {
   name          = each.key
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = local.resource_names.azuread_application_rg.prefixes
-  suffixes      = concat(local.resource_names.azuread_application_rg.suffixes, ["contributor"])
+  prefixes      = module.naming.names.azuread_application_rg.prefixes
+  suffixes      = concat(module.naming.names.azuread_application_rg.suffixes, ["contributor"])
   use_slug      = false
 }
 

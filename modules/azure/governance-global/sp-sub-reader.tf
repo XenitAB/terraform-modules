@@ -2,8 +2,8 @@ data "azurecaf_name" "azuread_application_sub_reader_sp" {
   name          = "reader"
   resource_type = "general"
   separator     = var.group_name_separator
-  prefixes      = local.resource_names.azuread_application_sub.prefixes
-  suffixes      = local.resource_names.azuread_application_sub.suffixes
+  prefixes      = module.naming.names.azuread_application_sub.prefixes
+  suffixes      = module.naming.names.azuread_application_sub.suffixes
   use_slug      = false
 }
 

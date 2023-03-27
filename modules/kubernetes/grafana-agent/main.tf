@@ -148,7 +148,7 @@ resource "helm_release" "kube_state_metrics" {
   chart       = "kube-state-metrics"
   name        = "kube-state-metrics"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "4.5.0"
+  version     = "5.1.0"
   max_history = 3
   values      = [local.kube_state_metrics_values]
 }

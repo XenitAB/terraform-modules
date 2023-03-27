@@ -132,7 +132,8 @@ spec:
           operator: "Exists"
       containers:
         - name: node-cache
-          image: k8s.gcr.io/dns/k8s-dns-node-cache:1.22.11
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             requests:
               cpu: 25m

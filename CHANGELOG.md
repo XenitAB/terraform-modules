@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#959](https://github.com/XenitAB/terraform-modules/pull/959) Update node-local-dns to 1.22.20 and move to using registry.k8s.io.
 - [#962](https://github.com/XenitAB/terraform-modules/pull/962) Update Cluster Autoscaler Helm chart to move to using registry.k8s.io.
 - [#960](https://github.com/XenitAB/terraform-modules/pull/960) Update Goldilocks and VPA and move to using registry.k8s.io.
+- [#961](https://github.com/XenitAB/terraform-modules/pull/961) Update CSI secret store and move to using registry.k8s.io.
 
 ## 2023.03.1
 

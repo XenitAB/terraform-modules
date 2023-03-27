@@ -1,3 +1,8 @@
+image:
+  repository: registry.k8s.io/dns/k8s-dns-node-cache
+  pullPolicy: IfNotPresent
+  tag: 1.22.20
+
 # The IP of the core-dns server
 # export kubedns=$(kubectl get svc kube-dns -n kube-system -o jsonpath={.spec.clusterIP})
 dnsServer: 10.0.0.10

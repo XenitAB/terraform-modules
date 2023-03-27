@@ -434,7 +434,7 @@ module "csi_secrets_store_provider_aws_crd" {
 
   chart_repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
   chart_name       = "secrets-store-csi-driver"
-  chart_version    = "1.1.2"
+  chart_version    = "1.3.2"
 }
 
 module "csi_secrets_store_provider_aws" {
@@ -476,15 +476,6 @@ module "datadog" {
   app_key              = var.datadog_config.app_key
   namespace_include    = var.datadog_config.namespaces
   apm_ignore_resources = var.datadog_config.apm_ignore_resources
-}
-
-# vpa
-module "vpa_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://charts.fairwinds.com/stable"
-  chart_name       = "goldilocks"
-  chart_version    = "5.1.0"
 }
 
 module "vpa" {

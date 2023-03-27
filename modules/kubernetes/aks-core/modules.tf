@@ -331,7 +331,7 @@ module "csi_secrets_store_provider_azure_crd" {
 
   chart_repository = "https://azure.github.io/secrets-store-csi-driver-provider-azure/charts"
   chart_name       = "csi-secrets-store-provider-azure"
-  chart_version    = "1.0.1"
+  chart_version    = "1.4.0"
 }
 
 module "csi_secrets_store_provider_azure" {
@@ -601,15 +601,6 @@ module "trivy" {
   client_id                       = var.trivy_config.client_id
   resource_id                     = var.trivy_config.resource_id
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
-}
-
-# vpa
-module "vpa_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://charts.fairwinds.com/stable"
-  chart_name       = "vpa"
-  chart_version    = "0.5.0"
 }
 
 module "vpa" {

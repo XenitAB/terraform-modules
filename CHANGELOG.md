@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#957](https://github.com/XenitAB/terraform-modules/pull/957) Update Spegel to v0.0.5 and set resources.
 - [#959](https://github.com/XenitAB/terraform-modules/pull/959) Update node-local-dns to 1.22.20 and move to using registry.k8s.io.
 - [#962](https://github.com/XenitAB/terraform-modules/pull/962) Update Cluster Autoscaler Helm chart to move to using registry.k8s.io.
+- [#960](https://github.com/XenitAB/terraform-modules/pull/960) Update Goldilocks and VPA and move to using registry.k8s.io.
 
 ## 2023.03.1
 

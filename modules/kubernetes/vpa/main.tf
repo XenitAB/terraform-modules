@@ -38,7 +38,7 @@ resource "helm_release" "vpa" {
   chart       = "vpa"
   name        = "vpa"
   namespace   = kubernetes_namespace.vpa.metadata[0].name
-  version     = "0.5.0"
+  version     = "1.6.1"
   max_history = 3
   skip_crds   = true
   values      = [templatefile("${path.module}/templates/vpa-values.yaml.tpl", {})]
@@ -49,7 +49,7 @@ resource "helm_release" "goldilocks" {
   chart       = "goldilocks"
   name        = "goldilocks"
   namespace   = kubernetes_namespace.vpa.metadata[0].name
-  version     = "5.1.0"
+  version     = "6.5.1"
   max_history = 3
   values      = [templatefile("${path.module}/templates/goldilocks-values.yaml.tpl", {})]
 }

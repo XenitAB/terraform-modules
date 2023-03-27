@@ -17,3 +17,9 @@ updater:
 
 admissionController:
   enabled: false
+
+recommender:
+  image:
+    repository: registry.k8s.io/autoscaling/vpa-recommender
+    pullPolicy: IfNotPresent
+    tag: "0.12.0"

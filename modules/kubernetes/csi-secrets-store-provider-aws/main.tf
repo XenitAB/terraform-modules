@@ -33,7 +33,7 @@ resource "helm_release" "csi_secrets_store_driver" {
   repository  = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
   chart       = "secrets-store-csi-driver"
   name        = "secrets-store-csi-driver"
-  version     = "1.1.2"
+  version     = "1.3.2"
   namespace   = kubernetes_namespace.this.metadata[0].name
   max_history = 3
   skip_crds   = true
@@ -64,6 +64,8 @@ resource "helm_release" "csi_secrets_store_driver" {
   }
 }
 
+# TODO: Switch to using new Helm Chart.
+# https://github.com/aws/secrets-store-csi-driver-provider-aws/tree/main/charts/secrets-store-csi-driver-provider-aws
 resource "helm_release" "csi_secrets_store_provider_aws" {
   depends_on = [helm_release.csi_secrets_store_driver]
 

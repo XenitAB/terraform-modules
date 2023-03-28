@@ -136,7 +136,7 @@ module "aad_pod_identity_crd" {
 
   chart_repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
   chart_name       = "aad-pod-identity"
-  chart_version    = "4.1.10"
+  chart_version    = "4.1.16"
 }
 
 module "aad_pod_identity" {

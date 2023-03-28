@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#960](https://github.com/XenitAB/terraform-modules/pull/960) Update Goldilocks and VPA and move to using registry.k8s.io.
 - [#961](https://github.com/XenitAB/terraform-modules/pull/961) Update CSI secret store and move to using registry.k8s.io.
 - [#963](https://github.com/XenitAB/terraform-modules/pull/963) Update Kube State Metrics and move to using registry.k8s.io.
+- [#965](https://github.com/XenitAB/terraform-modules/pull/965) Update AAD Pod Identity to chart version 4.1.16 with app version 1.8.15.
 
 ### Fixed
 

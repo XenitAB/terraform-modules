@@ -95,6 +95,11 @@ locals {
       prefixes = try(var.resource_name_overrides.azurerm_key_vault.prefixes, null) != null ? var.resource_name_overrides.azurerm_key_vault.prefixes : ["kv", var.environment, var.location_short]
       suffixes = try(var.resource_name_overrides.azurerm_key_vault.suffixes, null) != null ? var.resource_name_overrides.azurerm_key_vault.suffixes : [var.unique_suffix]
     }
+    azurerm_monitor_action_group = {
+      prefixes = try(var.resource_name_overrides.azurerm_monitor_action_group.prefixes, null) != null ? var.resource_name_overrides.azurerm_monitor_action_group.prefixes : []
+      # TODO This naming is not optimal, but will be addressed in separate PR as that will be a breaking change.
+      suffixes = try(var.resource_name_overrides.azurerm_monitor_action_group.suffixes, null) != null ? var.resource_name_overrides.azurerm_monitor_action_group.suffixes : [var.environment, var.location_short, "core", var.unique_suffix]
+    }
     azurerm_role_definition = {
       prefixes = try(var.resource_name_overrides.azurerm_role_definition.prefixes, null) != null ? var.resource_name_overrides.azurerm_role_definition.prefixes : [var.azure_role_definition_prefix, var.environment, var.location_short]
       suffixes = try(var.resource_name_overrides.azurerm_role_definition.suffixes, null) != null ? var.resource_name_overrides.azurerm_role_definition.suffixes : [var.unique_suffix]

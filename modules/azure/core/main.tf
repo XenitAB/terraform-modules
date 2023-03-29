@@ -18,5 +18,21 @@ terraform {
       version = "2.28.1"
       source  = "hashicorp/azuread"
     }
+    azurecaf = {
+      source  = "aztfmod/azurecaf"
+      version = "2.0.0-preview3"
+    }
   }
+}
+
+module "names" {
+  source = "../names"
+
+  resource_name_overrides      = var.resource_name_overrides
+  subscription_name            = var.subscription_name
+  environment                  = var.environment
+  location_short               = var.location_short
+  unique_suffix                = var.unique_suffix
+  azure_ad_group_prefix        = var.azure_ad_group_prefix
+  azure_role_definition_prefix = var.azure_role_definition_prefix
 }

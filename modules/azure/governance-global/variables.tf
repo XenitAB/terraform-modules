@@ -69,3 +69,9 @@ variable "resource_group_configs" {
     })
   )
 }
+
+variable "resource_name_overrides" {
+  description = "A way to override the resource names"
+  type        = any
+  default     = null
+}

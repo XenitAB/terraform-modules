@@ -101,3 +101,9 @@ variable "aad_sp_passwords" {
   description = "Application password per resource group."
   type        = map(string)
 }
+
+variable "resource_name_overrides" {
+  description = "A way to override the resource names"
+  type        = any
+  default     = null
+}

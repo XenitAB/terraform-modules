@@ -24,8 +24,21 @@ terraform {
       version = "0.2.5"
       source  = "xenitab/pal"
     }
+    azurecaf = {
+      source  = "aztfmod/azurecaf"
+      version = "2.0.0-preview3"
+    }
   }
 }
 
 data "azurerm_subscription" "current" {}
 data "azurerm_client_config" "current" {}
+
+module "names" {
+  source = "../names"
+
+  resource_name_overrides = var.resource_name_overrides
+  environment             = var.environment
+  location_short          = var.location_short
+  unique_suffix           = var.unique_suffix
+}

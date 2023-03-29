@@ -1,3 +1,5 @@
+# NOTE: Using the subnet_full_name here makes it weird referencing it from things like a route table.
+#       Not sure what to do about it, but worth noting down for future reference.
 resource "azurerm_subnet" "this" {
   for_each = {
     for subnet in local.subnets :

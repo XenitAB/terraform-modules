@@ -1,10 +1,22 @@
+data "azurecaf_name" "azurerm_route_table_this" {
+  for_each = {
+    for route in var.route_config :
+    route.subnet_name => route
+  }
+  name          = each.value.subnet_name
+  resource_type = "azurerm_route_table"
+  prefixes      = concat(module.names.this.azurerm_route_table.prefixes, [var.name])
+  suffixes      = module.names.this.azurerm_route_table.suffixes
+  use_slug      = false
+}
+
 resource "azurerm_route_table" "this" {
   for_each = {
     for route in var.route_config :
     route.subnet_name => route
   }
 
-  name                          = "rt-${var.environment}-${var.location_short}-${var.name}-${each.value.subnet_name}"
+  name                          = data.azurecaf_name.azurerm_route_table_this[each.key].result
   location                      = data.azurerm_resource_group.this.location
   resource_group_name           = data.azurerm_resource_group.this.name
   disable_bgp_route_propagation = each.value.disable_bgp_route_propagation
@@ -48,6 +60,6 @@ resource "azurerm_subnet_route_table_association" "this" {
     route.subnet_name => route
   }
 
-  subnet_id      = azurerm_subnet.this["sn-${var.environment}-${var.location_short}-${var.name}-${each.value.subnet_name}"].id
+  subnet_id      = azurerm_subnet.this[data.azurecaf_name.local_subnets_subnet_full_name[each.value.subnet_name].result].id # NOTE: Yeah, I know.
   route_table_id = azurerm_route_table.this[each.value.subnet_name].id
 }

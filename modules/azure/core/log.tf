@@ -1,17 +1,50 @@
+data "azurecaf_name" "azurerm_resource_group_log" {
+  name          = var.log_common_name
+  resource_type = "azurerm_resource_group"
+  prefixes      = module.names.this.azurerm_resource_group.prefixes
+  suffixes      = module.names.this.azurerm_resource_group.suffixes
+  use_slug      = false
+}
+
 data "azurerm_resource_group" "log" {
-  name = "rg-${var.environment}-${var.location_short}-log"
+  name = data.azurecaf_name.azurerm_resource_group_log.result
+}
+
+# NOTE: Using `log` as the prefix for a storage account isn't what we normally do, 
+#       but keeping it for backward compatibility.
+#       This will by default generate: logdevwecore1234 
+#                                      log{env}{location_short}{name}{unique_suffix}
+data "azurecaf_name" "azurerm_storage_account_log" {
+  name          = var.name
+  resource_type = "azurerm_storage_account"
+  prefixes      = module.names.this.azurerm_storage_account_log.prefixes
+  suffixes      = module.names.this.azurerm_storage_account_log.suffixes
+  use_slug      = false
 }
 
 #tfsec:ignore:azure-storage-queue-services-logging-enabled
 resource "azurerm_storage_account" "log" {
-  name                     = "log${var.environment}${var.location_short}${var.name}${var.unique_suffix}"
+  name                     = data.azurecaf_name.azurerm_storage_account_log.result
   resource_group_name      = data.azurerm_resource_group.log.name
   location                 = data.azurerm_resource_group.log.location
   account_tier             = "Standard"
   account_replication_type = "GRS"
   min_tls_version          = "TLS1_2"
-  # is_hsn_enabled makes it possible to use power BI on the storage account
-  is_hns_enabled = true
+  is_hns_enabled           = true # Makes it possible to use power BI on the storage account
+}
+
+data "azurecaf_name" "azurerm_monitor_action_group_this" {
+  for_each = {
+    for s in ["alerts"] :
+    s => s
+    if var.alerts_enabled
+  }
+
+  name          = "xenit-devops"
+  resource_type = "general"
+  prefixes      = module.names.this.azurerm_monitor_action_group.prefixes
+  suffixes      = module.names.this.azurerm_monitor_action_group.suffixes
+  use_slug      = false
 }
 
 resource "azurerm_monitor_action_group" "this" {
@@ -20,7 +53,8 @@ resource "azurerm_monitor_action_group" "this" {
     s => s
     if var.alerts_enabled
   }
-  name                = "xenit-devops-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
+
+  name                = data.azurecaf_name.azurerm_monitor_action_group_this["alerts"].result
   resource_group_name = data.azurerm_resource_group.log.name
   short_name          = "xenit-devops"
 

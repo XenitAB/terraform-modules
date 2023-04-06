@@ -40,6 +40,10 @@ terraform {
       source  = "hashicorp/helm"
       version = "2.6.0"
     }
+    git = {
+      source  = "xenitab/git"
+      version = ">=0.0.1"
+    }
   }
 }
 

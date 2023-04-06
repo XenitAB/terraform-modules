@@ -19,10 +19,10 @@ terraform {
     }
   }
 }
-   
+
 resource "git_repository_file" "kustomization" {
- path = "clsuters/we-dev-aks1/datadog.yaml"
- content = <<EOF
+  path    = var.path_kustomization # "clusters/we-dev-aks1/datadog.yaml"
+  content = <<EOF
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
@@ -33,19 +33,23 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./platform/we-dev-aks1/datadog
+  path: "./${var.path_platform}"
   prune: true
   validation: client
  EOF
 }
-   
-resource "git_repository_file" "this" {
- path = "platform/we-dev-aks1/datadog/datadog.yaml"
- content = <<EOF
+
+resource "git_repository_file" "platform" {
+  path    = var.path_platform # "platform/we-dev-aks1/datadog.yaml"
+  content = <<EOF
 apiVersion: v1
 kind: Namespace
 metadata:
  name: datadog
+ labels = {
+   name                = "datadog"
+   "xkf.xenit.io/kind" = "platform"
+  }
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
@@ -88,8 +92,8 @@ metadata:
   name: datadog
   namespace: datadog
 spec:
-  clusterName: {{ .Values.clusterName }}
-  site: {{ .Values.site }}
+  clusterName: ${var.location}-${var.environment}
+  site: ${var.datadog_site}
   credentials:
     apiSecret:
       secretName: datadog-operator-apikey
@@ -111,16 +115,16 @@ spec:
       - name: DD_CONTAINER_EXCLUDE_LOGS
         value: "name:datadog-agent"
       - name: DD_CONTAINER_INCLUDE
-        value: {{ .Values.containerInclude }}
+        value: "kube_namespace: ${var.namespace_include}"
       - name: DD_CONTAINER_EXCLUDE
         value: "kube_namespace:.*"
       - name: DD_APM_IGNORE_RESOURCES
-        value: {{ .Values.apmIgnoreResources }} 
+        value: ${var.apm_ignore_resources} 
     config:
       tolerations:
         - operator: Exists
       tags:
-        - env:{{ .Values.environment }}
+        - env: ${var.environment}
       kubelet:
         tlsVerify: false
       criSocket:
@@ -157,6 +161,8 @@ spec:
       logsConfigContainerCollectAll: true
  EOF
 }
+
+/*
 
 locals {
   container_filter_include = join(" ", formatlist("kube_namespace:%s", var.namespace_include))
@@ -203,3 +209,4 @@ resource "helm_release" "datadog_extras" {
   max_history = 3
   values      = [local.values]
 }
+*/

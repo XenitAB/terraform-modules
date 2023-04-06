@@ -347,16 +347,8 @@ module "csi_secrets_store_provider_azure" {
 }
 
 # datadog
-module "datadog_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://helm.datadoghq.com"
-  chart_name       = "datadog-operator"
-  chart_version    = "0.8.0"
-}
-
 module "datadog" {
-  depends_on = [module.opa_gatekeeper, module.datadog_crd]
+  depends_on = [module.opa_gatekeeper]
 
   for_each = {
     for s in ["datadog"] :
@@ -368,6 +360,8 @@ module "datadog" {
 
   location             = var.location_short
   environment          = var.environment
+  path_kustomization   = var.datadog_config.path_kustomization
+  path_platform        = var.datadog_config.path_platform
   datadog_site         = var.datadog_config.datadog_site
   api_key              = var.datadog_config.api_key
   app_key              = var.datadog_config.app_key

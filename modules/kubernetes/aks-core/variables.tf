@@ -289,6 +289,8 @@ variable "datadog_config" {
     app_key              = string
     namespaces           = list(string)
     apm_ignore_resources = list(string)
+    path_kustomization   = string
+    path_platform        = string
   })
   default = {
     datadog_site         = ""

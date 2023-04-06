@@ -360,8 +360,6 @@ module "datadog" {
 
   location             = var.location_short
   environment          = var.environment
-  path_kustomization   = var.datadog_config.path_kustomization
-  path_platform        = var.datadog_config.path_platform
   datadog_site         = var.datadog_config.datadog_site
   api_key              = var.datadog_config.api_key
   app_key              = var.datadog_config.app_key

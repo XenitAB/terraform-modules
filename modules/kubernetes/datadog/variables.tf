@@ -1,12 +1,3 @@
-variable "path_kustomization" {
-  description = "Path to datadog kustomization"
-  type        = string
-}
-
-variable "path_platform" {
-  description = "Path to datadog platform flux"
-  type        = string
-}
 variable "datadog_site" {
   description = "Site to connect Datadog agent"
   type        = string

@@ -289,8 +289,6 @@ variable "datadog_config" {
     app_key              = string
     namespaces           = string
     apm_ignore_resources = string
-    path_kustomization   = string
-    path_platform        = string
   })
   default = {
     datadog_site         = ""
@@ -298,8 +296,6 @@ variable "datadog_config" {
     app_key              = ""
     namespaces           = ""
     apm_ignore_resources = ""
-    path_kustomization   = ""
-    path_platform        = ""
   }
 }
 

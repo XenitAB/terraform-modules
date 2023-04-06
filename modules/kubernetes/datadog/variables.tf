@@ -35,11 +35,12 @@ variable "app_key" {
 
 variable "namespace_include" {
   description = "The namespace that should be checked by Datadog, example: kube_namespace:NAMESPACE kube_namespace:NAMESPACE2"
-  type        = list(string)
+  type        = string
 }
 
 variable "apm_ignore_resources" {
   description = "The resources that shall be excluded from APM"
-  type        = list(string)
-  default     = []
+  type        = string
 }
+
+#The namespace_include and apm_ignore_resources cant be lists for this to work, temp-testing with just string

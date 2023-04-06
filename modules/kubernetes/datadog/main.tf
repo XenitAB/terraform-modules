@@ -46,10 +46,9 @@ apiVersion: v1
 kind: Namespace
 metadata:
  name: datadog
- labels = {
-   name                = "datadog"
-   "xkf.xenit.io/kind" = "platform"
-  }
+ labels:
+   name              = "datadog"
+   xkf.xenit.io/kind = "platform"
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
@@ -68,22 +67,22 @@ metadata:
 spec:
   chart:
     spec:
-      crds: CreateReplace
       chart: datadog-operator
       sourceRef:
         kind: HelmRepository
         name: datadog
       version: 0.8.0
-    values:
-      appKey: ${var.app_key}
-      apiKey: ${var.api_key}
-      installCRDs: false
-      datadogMonitor:
-        enabled: true
-      resources:
-        requests:
-          cpu: 15m
-          memory: 50Mi
+  values:
+    crds: CreateReplace
+    appKey: ${var.app_key}
+    apiKey: ${var.api_key}
+    installCRDs: false
+    datadogMonitor:
+      enabled: true
+    resources:
+      requests:
+        cpu: 15m
+        memory: 50Mi
   interval: 1m0s
 ---
 apiVersion: datadoghq.com/v1alpha1
@@ -124,7 +123,7 @@ spec:
       tolerations:
         - operator: Exists
       tags:
-        - env: ${var.environment}
+        - "env: ${var.environment}"
       kubelet:
         tlsVerify: false
       criSocket:

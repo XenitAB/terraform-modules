@@ -360,6 +360,7 @@ module "datadog" {
 
   location             = var.location_short
   environment          = var.environment
+  cluster_id           = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
   datadog_site         = var.datadog_config.datadog_site
   api_key              = var.datadog_config.api_key
   app_key              = var.datadog_config.app_key

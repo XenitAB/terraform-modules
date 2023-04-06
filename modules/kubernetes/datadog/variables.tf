@@ -24,6 +24,11 @@ variable "app_key" {
   type        = string
 }
 
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}
+
 variable "namespace_include" {
   description = "The namespace that should be checked by Datadog, example: kube_namespace:NAMESPACE kube_namespace:NAMESPACE2"
   type        = string

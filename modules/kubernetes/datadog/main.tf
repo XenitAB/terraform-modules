@@ -21,7 +21,7 @@ terraform {
 }
 
 resource "git_repository_file" "kustomization" {
-  path    = "clusters/${var.location}-${var.environment}-${local.aks_name_suffix}/datadog.yaml" # "clusters/we-dev-aks1/datadog.yaml"
+  path    = "clusters/${var.cluster_id}/datadog.yaml" # "clusters/we-dev-aks1/datadog.yaml"
   content = <<EOF
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
@@ -33,14 +33,14 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: "./platform/${var.location}-${var.environment}-${local.aks_name_suffix}/datadog/"
+  path: "./platform/${var.cluster_id}/datadog/"
   prune: true
   validation: client
  EOF
 }
 
 resource "git_repository_file" "platform" {
-  path    = "platform/${var.location}-${var.environment}-${local.aks_name_suffix}/datadog/datadog.yaml" # "platform/we-dev-aks1/datadog.yaml"
+  path    = "platform/${var.cluster_id}/datadog/datadog.yaml" # "platform/we-dev-aks1/datadog.yaml"
   content = <<EOF
 apiVersion: v1
 kind: Namespace

@@ -13,7 +13,7 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
+    git = {
       source  = "xenitab/git"
       version = "0.0.1"
     }

@@ -37,6 +37,7 @@ variable "namespace_include" {
 variable "apm_ignore_resources" {
   description = "The resources that shall be excluded from APM"
   type        = string
+  default     = ""
 }
 
 #The namespace_include and apm_ignore_resources cant be lists for this to work, temp-testing with just string

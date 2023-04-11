@@ -31,13 +31,11 @@ variable "cluster_id" {
 
 variable "namespace_include" {
   description = "The namespace that should be checked by Datadog, example: kube_namespace:NAMESPACE kube_namespace:NAMESPACE2"
-  type        = string
+  type        = list(string)
 }
 
 variable "apm_ignore_resources" {
   description = "The resources that shall be excluded from APM"
-  type        = string
-  default     = ""
+  type        = list(string)
+  default     = [""]
 }
-
-#The namespace_include and apm_ignore_resources cant be lists for this to work, temp-testing with just string

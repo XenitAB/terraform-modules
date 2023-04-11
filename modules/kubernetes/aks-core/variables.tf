@@ -287,15 +287,15 @@ variable "datadog_config" {
     datadog_site         = string
     api_key              = string
     app_key              = string
-    namespaces           = string
-    apm_ignore_resources = string
+    namespaces           = list(string)
+    apm_ignore_resources = list(string)
   })
   default = {
     datadog_site         = ""
     api_key              = ""
     app_key              = ""
-    namespaces           = ""
-    apm_ignore_resources = ""
+    namespaces           = [""]
+    apm_ignore_resources = [""]
   }
 }
 

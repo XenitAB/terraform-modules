@@ -27,22 +27,22 @@ locals {
 
 resource "git_repository_file" "kustomization" {
   path = "clusters/${var.cluster_id}/datadog.yaml" # "clusters/we-dev-aks1/datadog.yaml"
-  content = [templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
     cluster_id = var.cluster_id
-  })]
+  })
 }
 
 resource "git_repository_file" "platform" {
   path = "platform/${var.cluster_id}/datadog/datadog.yaml" # "platform/we-dev-aks1/datadog.yaml"
-  content = [templatefile("${path.module}/templates/platform.yaml.tpl", {
-    app_key                  = var.app_key,
-    api_key                  = var.api_key,
-    location                 = var.location,
-    environment              = var.environment,
-    datadog_site             = var.datadog_site,
-    container_filter_include = local.container_filter_include,
-    apm_ignore_resources     = local.apm_ignore_resources,
-  })]
+  content = templatefile("${path.module}/templates/platform.yaml.tpl", {
+    app_key              = var.app_key,
+    api_key              = var.api_key,
+    location             = var.location,
+    environment          = var.environment,
+    datadog_site         = var.datadog_site,
+    namespace_include    = local.container_filter_include,
+    apm_ignore_resources = local.apm_ignore_resources,
+  })
 }
 
 /*

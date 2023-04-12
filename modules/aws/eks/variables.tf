@@ -103,3 +103,9 @@ variable "trivy_enabled" {
   type        = bool
   default     = true
 }
+
+variable "ebs_volume_size" {
+  description = "Size in GB of the EBS volume"
+  type        = number
+  default     = 20
+}

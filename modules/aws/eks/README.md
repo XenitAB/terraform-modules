@@ -66,6 +66,7 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_aws_kms_key_arn"></a> [aws\_kms\_key\_arn](#input\_aws\_kms\_key\_arn) | eks secrets customer master key | `string` | n/a | yes |
 | <a name="input_cluster_role_arn"></a> [cluster\_role\_arn](#input\_cluster\_role\_arn) | IAM role to attach to EKS cluster | `string` | n/a | yes |
+| <a name="input_ebs_volume_size"></a> [ebs\_volume\_size](#input\_ebs\_volume\_size) | Size in GB of the EBS volume | `number` | `20` | no |
 | <a name="input_eks_authorized_ips"></a> [eks\_authorized\_ips](#input\_eks\_authorized\_ips) | Authorized IPs to access EKS API | `list(string)` | n/a | yes |
 | <a name="input_eks_config"></a> [eks\_config](#input\_eks\_config) | The EKS Config | <pre>object({<br>    version    = string<br>    cidr_block = string<br>    node_pools = list(object({<br>      name           = string<br>      version        = string<br>      instance_types = list(string)<br>      min_size       = number<br>      max_size       = number<br>      node_labels    = map(string)<br>      node_taints = list(object({<br>        key    = string<br>        value  = string<br>        effect = string<br>      }))<br>    }))<br>  })</pre> | n/a | yes |
 | <a name="input_eks_name_suffix"></a> [eks\_name\_suffix](#input\_eks\_name\_suffix) | The suffix for the eks clusters | `number` | `1` | no |

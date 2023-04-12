@@ -23,6 +23,7 @@ locals {
     "prometheus",
     "spegel",
   ]
+  cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
 }
 
 # OPA Gatekeeper
@@ -90,7 +91,7 @@ module "fluxcd_v2_azure_devops" {
   source = "../../kubernetes/fluxcd-v2-azdo"
 
   environment       = var.environment
-  cluster_id        = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
+  cluster_id        = local.cluster_id
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
   azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
@@ -116,7 +117,7 @@ module "fluxcd_v2_github" {
   source = "../../kubernetes/fluxcd-v2-github"
 
   environment            = var.environment
-  cluster_id             = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
+  cluster_id             = local.cluster_id
   github_org             = var.fluxcd_v2_config.github.org
   github_app_id          = var.fluxcd_v2_config.github.app_id
   github_installation_id = var.fluxcd_v2_config.github.installation_id
@@ -360,7 +361,7 @@ module "datadog" {
 
   location             = var.location_short
   environment          = var.environment
-  cluster_id           = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
+  cluster_id           = local.cluster_id
   datadog_site         = var.datadog_config.datadog_site
   api_key              = var.datadog_config.api_key
   app_key              = var.datadog_config.app_key

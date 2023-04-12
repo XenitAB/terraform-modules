@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
+- [#968](https://github.com/XenitAB/terraform-modules/pull/968) Move Datadog to install with Flux.
 - [#971](https://github.com/XenitAB/terraform-modules/pull/971) Add variable for EBS volume size.
 - [#958](https://github.com/XenitAB/terraform-modules/pull/958) Make azure/governance and azure/core use the [aztfmod/azurecaf](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs) provider for names.
 

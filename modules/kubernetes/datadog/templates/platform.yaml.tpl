@@ -30,10 +30,9 @@ spec:
         name: datadog
       version: 0.8.0
   values:
-    crds: CreateReplace
     appKey: ${app_key}
     apiKey: ${api_key}
-    installCRDs: false
+    installCRDs: true
     datadogMonitor:
       enabled: true
     resources:

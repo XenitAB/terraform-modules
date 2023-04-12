@@ -214,7 +214,7 @@ resource "aws_launch_template" "eks_node_group" {
   block_device_mappings {
     device_name = "/dev/xvda"
     ebs {
-      volume_size = 20
+      volume_size = var.ebs_volume_size
     }
   }
   user_data = base64encode(templatefile("${path.module}/templates/userdata.sh.tpl", {

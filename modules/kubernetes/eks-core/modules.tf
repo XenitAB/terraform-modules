@@ -20,6 +20,7 @@ locals {
     for dns in data.aws_route53_zone.this :
     dns.name => dns.zone_id
   }
+  cluster_id = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
 }
 
 data "aws_route53_zone" "this" {
@@ -83,7 +84,7 @@ module "fluxcd_v2_azure_devops" {
   source = "../../kubernetes/fluxcd-v2-azdo"
 
   environment       = var.environment
-  cluster_id        = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
+  cluster_id        = local.cluster_id
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
   azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
@@ -109,7 +110,7 @@ module "fluxcd_v2_github" {
   source = "../../kubernetes/fluxcd-v2-github"
 
   environment            = var.environment
-  cluster_id             = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
+  cluster_id             = local.cluster_id
   github_org             = var.fluxcd_v2_config.github.org
   github_app_id          = var.fluxcd_v2_config.github.app_id
   github_installation_id = var.fluxcd_v2_config.github.installation_id
@@ -450,16 +451,8 @@ module "csi_secrets_store_provider_aws" {
 }
 
 # datadog
-module "datadog_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://helm.datadoghq.com"
-  chart_name       = "datadog-operator"
-  chart_version    = "0.8.0"
-}
-
 module "datadog" {
-  depends_on = [module.opa_gatekeeper, module.datadog_crd]
+  depends_on = [module.opa_gatekeeper]
 
   for_each = {
     for s in ["datadog"] :
@@ -476,6 +469,7 @@ module "datadog" {
   app_key              = var.datadog_config.app_key
   namespace_include    = var.datadog_config.namespaces
   apm_ignore_resources = var.datadog_config.apm_ignore_resources
+  cluster_id           = local.cluster_id
 }
 
 module "vpa_crd" {

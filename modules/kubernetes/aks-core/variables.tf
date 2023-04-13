@@ -295,7 +295,7 @@ variable "datadog_config" {
     api_key              = ""
     app_key              = ""
     namespaces           = [""]
-    apm_ignore_resources = []
+    apm_ignore_resources = [""]
   }
 }
 

@@ -1,11 +1,54 @@
+
+apiVersion: v1
+kind: Namespace
+metadata:
+ name: datadog
+ labels:
+   name              = "datadog"
+   xkf.xenit.io/kind = "platform"
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: datadog
+  namespace: datadog
+spec:
+  interval: 1m0s
+  url: "https://helm.datadoghq.com"
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: datadog-operator
+  namespace: datadog
+spec:
+  chart:
+    spec:
+      chart: datadog-operator
+      sourceRef:
+        kind: HelmRepository
+        name: datadog
+      version: 0.8.0
+  values:
+    appKey: ${app_key}
+    apiKey: ${api_key}
+    installCRDs: true
+    datadogMonitor:
+      enabled: true
+    resources:
+      requests:
+        cpu: 15m
+        memory: 50Mi
+  interval: 1m0s
+---
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
   namespace: datadog
 spec:
-  clusterName: {{ .Values.clusterName }}
-  site: {{ .Values.site }}
+  clusterName: ${location}-${environment}
+  site: ${datadog_site}
   credentials:
     apiSecret:
       secretName: datadog-operator-apikey
@@ -27,16 +70,16 @@ spec:
       - name: DD_CONTAINER_EXCLUDE_LOGS
         value: "name:datadog-agent"
       - name: DD_CONTAINER_INCLUDE
-        value: {{ .Values.containerInclude }}
+        value: "kube_namespace: ${namespace_include}"
       - name: DD_CONTAINER_EXCLUDE
         value: "kube_namespace:.*"
       - name: DD_APM_IGNORE_RESOURCES
-        value: {{ .Values.apmIgnoreResources }} 
+        value: ${apm_ignore_resources} 
     config:
       tolerations:
         - operator: Exists
       tags:
-        - env:{{ .Values.environment }}
+        - "env: ${environment}"
       kubelet:
         tlsVerify: false
       criSocket:

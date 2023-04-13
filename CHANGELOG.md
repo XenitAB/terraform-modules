@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
+- [#972](https://github.com/XenitAB/terraform-modules/pull/968) Update Datadog to install with flux.
 - [#970](https://github.com/XenitAB/terraform-modules/pull/970) Update Azurerm provider to 3.51.0.
 
 ### Added

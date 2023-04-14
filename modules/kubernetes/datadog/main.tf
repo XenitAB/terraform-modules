@@ -32,9 +32,17 @@ resource "git_repository_file" "kustomization" {
   })
 }
 
-resource "git_repository_file" "platform" {
+resource "git_repository_file" "datadog-operator" {
+  path = "platform/${var.cluster_id}/datadog-operator/datadog-operator.yaml" # "platform/we-dev-aks1/datadog-operator.yaml"
+  content = templatefile("${path.module}/templates/datadog-operator.yaml.tpl", {
+    app_key = var.app_key,
+    api_key = var.api_key,
+  })
+}
+
+resource "git_repository_file" "datadog" {
   path = "platform/${var.cluster_id}/datadog/datadog.yaml" # "platform/we-dev-aks1/datadog.yaml"
-  content = templatefile("${path.module}/templates/platform.yaml.tpl", {
+  content = templatefile("${path.module}/templates/datadog.yaml.tpl", {
     app_key              = var.app_key,
     api_key              = var.api_key,
     location             = var.location,

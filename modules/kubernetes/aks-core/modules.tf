@@ -363,8 +363,6 @@ module "datadog" {
   environment          = var.environment
   cluster_id           = local.cluster_id
   datadog_site         = var.datadog_config.datadog_site
-  api_key              = var.datadog_config.api_key
-  app_key              = var.datadog_config.app_key
   namespace_include    = var.datadog_config.namespaces
   apm_ignore_resources = var.datadog_config.apm_ignore_resources
   tenant_id            = data.azurerm_client_config.current.tenant_id

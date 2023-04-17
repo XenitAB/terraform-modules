@@ -8,11 +8,11 @@ spec:
   site: ${datadog_site}
   credentials:
     apiSecret:
-      secretName: datadog-operator-apikey
-      keyName: api-key
+      secretName: api_key
+      keyName: api_key
     appSecret:
-      secretName: datadog-operator-appkey
-      keyName: app-key
+      secretName: app_key
+      keyName: app_key
   agent:
     priorityClassName: platform-high
     image:
@@ -44,6 +44,8 @@ spec:
       volumeMounts:
         - name: containerdsocket
           mountPath: /var/run/containerd/containerd.sock
+        - name: datadog-secrets
+          mountPath: "/mnt/secrets-store"
       volumes:
         - hostPath:
             path: /var/run/containerd/containerd.sock
@@ -51,6 +53,12 @@ spec:
         - hostPath:
             path: /var/run
           name: var-run
+        - name: secret-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: datadog-secrets
       resources:
         requests:
           cpu: 60m

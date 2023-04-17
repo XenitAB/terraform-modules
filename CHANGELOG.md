@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#970](https://github.com/XenitAB/terraform-modules/pull/970) Update Azurerm provider to 3.51.0.
+- [#974](https://github.com/XenitAB/terraform-modules/pull/974) Update Spegel to v0.0.6.
 
 ### Added
 

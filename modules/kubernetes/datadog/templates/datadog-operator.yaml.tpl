@@ -45,6 +45,7 @@ apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentity
 metadata:
   name: datadog
+  namespace: datadog
 spec:
   type: 0
   resourceID: ${resource_id}
@@ -54,6 +55,7 @@ apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentityBinding
 metadata:
   name: datadog
+  namespace: datadog
 spec:
   azureIdentity: datadog
   selector: datadog
@@ -68,6 +70,7 @@ spec:
   parameters:
     usePodIdentity: "true"
     keyvaultName: "kv-sand-we-core-7844"
+    tenantId: ${tenant_id}
     objects: |
       array:
         - |

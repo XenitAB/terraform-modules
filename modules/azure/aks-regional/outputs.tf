@@ -108,3 +108,11 @@ output "log_eventhub_authorization_rule_id" {
   description = "The authoritzation rule id for event hub"
   value       = azurerm_eventhub_namespace_authorization_rule.aks.id
 }
+
+output "datadog_identity" {
+  description = "MSI authentication identity for External DNS"
+  value = {
+    client_id   = azurerm_user_assigned_identity.datadog.client_id
+    resource_id = azurerm_user_assigned_identity.datadog.id
+  }
+}

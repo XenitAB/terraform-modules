@@ -367,6 +367,8 @@ module "datadog" {
   app_key              = var.datadog_config.app_key
   namespace_include    = var.datadog_config.namespaces
   apm_ignore_resources = var.datadog_config.apm_ignore_resources
+  client_id            = var.external_dns_config.client_id
+  resource_id          = var.external_dns_config.resource_id
 }
 
 # grafana-agent

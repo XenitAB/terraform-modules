@@ -41,6 +41,23 @@ spec:
         memory: 50Mi
   interval: 1m0s
 ---
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentity
+metadata:
+  name: datadog
+spec:
+  type: 0
+  resourceID: ${resource_id}
+  clientID: ${client_id}
+---
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentityBinding
+metadata:
+  name: datadog
+spec:
+  azureIdentity: datadog
+  selector: datadog
+---
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
@@ -52,10 +69,13 @@ spec:
     usePodIdentity: "true"
     keyvaultName: "kv-sand-we-core-7844"
     objects: |
-      - objectName: "datadog-api-key"
-        objectType: "secret"
-      - objectName: "datadog-app-key"
-        objectType: "secret"
+      array:
+        - |
+          objectName: datadog-api-key
+          objectType: secret
+        - |
+          objectName: datadog-app-key
+          objectType: secret
   secretObjects:
     - secretName: app_key
       type: Opaque

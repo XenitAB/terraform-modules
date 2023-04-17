@@ -35,8 +35,10 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "datadog-operator" {
   path = "platform/${var.cluster_id}/datadog-operator/datadog-operator.yaml" # "platform/we-dev-aks1/datadog-operator.yaml"
   content = templatefile("${path.module}/templates/datadog-operator.yaml.tpl", {
-    app_key = var.app_key,
-    api_key = var.api_key,
+    app_key     = var.app_key,
+    api_key     = var.api_key,
+    client_id   = var.client_id
+    resource_id = var.resource_id
   })
 }
 

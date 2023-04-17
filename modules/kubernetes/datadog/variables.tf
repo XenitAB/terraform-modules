@@ -38,3 +38,13 @@ variable "apm_ignore_resources" {
   description = "The resources that shall be excluded from APM"
   type        = list(string)
 }
+
+variable "client_id" {
+  description = "Unique identifier"
+  type        = string
+}
+
+variable "resource_id" {
+  description = "Unique identifier"
+  type        = string
+}

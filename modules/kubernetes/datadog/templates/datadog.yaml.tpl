@@ -6,13 +6,6 @@ metadata:
 spec:
   clusterName: ${location}-${environment}
   site: ${datadog_site}
-  credentials:
-    apiSecret:
-      secretName: api_key
-      keyName: api_key
-    appSecret:
-      secretName: app_key
-      keyName: app_key
   agent:
     priorityClassName: platform-high
     image:
@@ -24,6 +17,16 @@ spec:
       enabled: true
       hostPort: 8126
     env:
+      - name: DD_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: datadog-api-key
+            key: api-key
+      - name: DD_APP_KEY
+        valueFrom:
+          secretKeyRef:
+            name: datadog-app-key
+            key: app-key
       - name: DD_CONTAINER_EXCLUDE_LOGS
         value: "name:datadog-agent"
       - name: DD_CONTAINER_INCLUDE

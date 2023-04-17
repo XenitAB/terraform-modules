@@ -48,3 +48,8 @@ variable "resource_id" {
   description = "Unique identifier"
   type        = string
 }
+
+variable "tenant_id" {
+  description = "Tenant id for the deployment"
+  type        = string
+}

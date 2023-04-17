@@ -80,12 +80,12 @@ spec:
           objectName: datadog-app-key
           objectType: secret
   secretObjects:
-    - secretName: app_key
+    - secretName: datadog-app-key
       type: Opaque
       data:
         - objectName: datadog-app-key
           key: app-key
-    - secretName: api-key
+    - secretName: datadog-api-key
       type: Opaque
       data:
         - objectName: datadog-api-key

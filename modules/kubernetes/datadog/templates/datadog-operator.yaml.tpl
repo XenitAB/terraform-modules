@@ -30,8 +30,8 @@ spec:
         name: datadog
       version: 0.8.0
   values:
-    appKey: ${app_key}
-    apiKey: ${api_key}
+    apiKeyExistingSecret: datadog-api-key
+    appKeyExistingSecret: datadog-app-key
     installCRDs: true
     datadogMonitor:
       enabled: true
@@ -40,3 +40,30 @@ spec:
         cpu: 15m
         memory: 50Mi
   interval: 1m0s
+---
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: datadog-secrets
+  namespace: datadog
+spec:
+  provider: azure
+  parameters:
+    usePodIdentity: "true"
+    keyvaultName: "kv-sand-we-core-7844"
+    objects: |
+      - objectName: "datadog-api-key"
+        objectType: "secret"
+      - objectName: "datadog-app-key"
+        objectType: "secret"
+  secretObjects:
+    - secretName: app_key
+      type: Opaque
+      data:
+        - objectName: datadog-app-key
+          key: app-key
+    - secretName: api-key
+      type: Opaque
+      data:
+        - objectName: datadog-api-key
+          key: api-key

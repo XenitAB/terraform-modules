@@ -37,7 +37,7 @@ resource "git_repository_file" "datadog-operator" {
   content = templatefile("${path.module}/templates/datadog-operator.yaml.tpl", {
     app_key     = var.app_key,
     api_key     = var.api_key,
-    tenant_id   = data.azurerm_client_config.current.tenant_id,
+    tenant_id   = var.tenant_id,
     client_id   = var.client_id,
     resource_id = var.resource_id,
   })

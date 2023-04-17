@@ -367,6 +367,7 @@ module "datadog" {
   app_key              = var.datadog_config.app_key
   namespace_include    = var.datadog_config.namespaces
   apm_ignore_resources = var.datadog_config.apm_ignore_resources
+  tenant_id            = data.azurerm_client_config.current.tenant_id
   client_id            = var.datadog_identity.client_id
   resource_id          = var.datadog_identity.resource_id
 

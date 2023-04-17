@@ -548,3 +548,10 @@ variable "control_plane_logs_config" {
     eventhub_name     = ""
   }
 }
+variable "datadog_identity" {
+  description = "UAI identity for datadog"
+  type = object({
+    client_id   = string
+    resource_id = string
+  })
+}

@@ -106,6 +106,7 @@ spec:
     metadata:
       labels:
         app: datadog-secret-mount
+        aadpodidbinding: datadog
     spec:
       containers:
         - name: busybox

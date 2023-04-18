@@ -369,9 +369,10 @@ module "datadog" {
   azure_config = {
     azure_key_vault_name = var.datadog_config.azure_key_vault_name
     identity = {
-      client_id            = var.datadog_config.identity.client_id
-      resource_id          = var.datadog_config.identity.resource_id
-      tenant_id            = data.azurerm_client_config.current.tenant_id
+      client_id   = var.datadog_config.identity.client_id
+      resource_id = var.datadog_config.identity.resource_id
+      tenant_id   = data.azurerm_client_config.current.tenant_id
+    }
   }
 }
 

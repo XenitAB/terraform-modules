@@ -2,7 +2,7 @@ apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  namespace: datadog'
+  namespace: datadog
   labels:
     aadpodidbinding: datadog
 spec:

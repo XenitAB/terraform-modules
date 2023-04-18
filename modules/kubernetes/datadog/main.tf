@@ -25,30 +25,44 @@ locals {
   apm_ignore_resources     = join(",", formatlist("%s", var.apm_ignore_resources))
 }
 
+cloud_provider = "aws" ? var.operator_path : "/templates/datadog-operator-eks.yaml.tpl"
+
 resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/datadog.yaml" # "clusters/we-dev-aks1/datadog.yaml"
+  path = "clusters/${var.cluster_id}/datadog.yaml"
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
     cluster_id = var.cluster_id
   })
 }
-
-resource "git_repository_file" "datadog-operator" {
-  path = "platform/${var.cluster_id}/datadog-operator/datadog-operator.yaml" # "platform/we-dev-aks1/datadog-operator.yaml"
-  content = templatefile("${path.module}/templates/datadog-operator.yaml.tpl", {
-    key_vault_name = var.azure_config.azure_key_vault_name
-    tenant_id      = var.azure_config.identity.tenant_id
-    resource_id    = var.azure_config.identity.resource_id
-    client_id      = var.azure_config.identity.client_id
-  })
-}
+# resource "git_repository_file" "datadog_operator" {
+#   path = "platform/${var.cluster_id}/datadog-operator/datadog-operator.yaml"
+#   content = templatefile("${path.module}/templates/datadog-operator.yaml.tpl", {
+#     key_vault_name = var.azure_config.azure_key_vault_name
+#     tenant_id      = var.azure_config.identity.tenant_id
+#     resource_id    = var.azure_config.identity.resource_id
+#     client_id      = var.azure_config.identity.client_id
+#   })
+# }
 
 resource "git_repository_file" "datadog" {
-  path = "platform/${var.cluster_id}/datadog/datadog.yaml" # "platform/we-dev-aks1/datadog.yaml"
+  path = "platform/${var.cluster_id}/datadog/datadog.yaml"
   content = templatefile("${path.module}/templates/datadog.yaml.tpl", {
     location             = var.location,
     environment          = var.environment,
     datadog_site         = var.datadog_site,
     namespace_include    = local.container_filter_include,
     apm_ignore_resources = local.apm_ignore_resources,
+  })
+}
+
+
+resource "git_repository_file" "datadog_operator" {
+  path = "platform/${var.cluster_id}/datadog-operator/datadog-operator.yaml"
+  content = templatefile("${path.module}${var.operator_path}", {
+    key_vault_name = var.azure_config.azure_key_vault_name
+    tenant_id      = var.azure_config.identity.tenant_id
+    resource_id    = var.azure_config.identity.resource_id
+    client_id      = var.azure_config.identity.client_id
+    role_arn       = var.aws_config.role_arn
+
   })
 }

@@ -47,20 +47,3 @@ variable "azure_config" {
     }
   }
 }
-
-variable "aws_config" {
-  description = "AWS specific config"
-  type = object({
-    role_arn = string
-  })
-  default = {
-    role_arn = ""
-  }
-}
-
-
-variable "operator_path" {
-  description = "value"
-  type        = string
-  default     = "/templates/datadog-operator.yaml.tpl"
-}

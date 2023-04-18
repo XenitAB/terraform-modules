@@ -95,6 +95,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: datadog-secret-mount
+  namespace: datadog
 spec:
   selector:
     matchLabels:

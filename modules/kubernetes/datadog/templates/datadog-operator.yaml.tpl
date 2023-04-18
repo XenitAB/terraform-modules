@@ -74,21 +74,21 @@ spec:
     objects: |
       array:
         - |
-          objectName: datadog-operator-apikey
+          objectName: datadog-api-key
           objectType: secret
         - |
-          objectName: datadog-operator-appkey
+          objectName: datadog-app-key
           objectType: secret
   secretObjects:
     - secretName: datadog-operator-appkey
       type: Opaque
       data:
-        - objectName: datadog-operator-appkey
+        - objectName: datadog-app-key
           key: app-key
     - secretName: datadog-operator-apikey
       type: Opaque
       data:
-        - objectName: datadog-operator-apikey
+        - objectName: datadog-api-key
           key: api-key
 ---
 apiVersion: apps/v1

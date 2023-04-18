@@ -48,8 +48,8 @@ metadata:
   namespace: datadog
 spec:
   type: 0
-  resourceID: ${resource_id}
-  clientID: ${client_id}
+  resourceID: ${azure_config.resource_id}
+  clientID: ${azure_config.client_id}
 ---
 apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentityBinding
@@ -69,8 +69,8 @@ spec:
   provider: azure
   parameters:
     usePodIdentity: "true"
-    keyvaultName: ${key_vault_name}
-    tenantId: ${tenant_id}
+    keyvaultName: ${azure_config.key_vault_name}
+    tenantId: ${azure_config.tenant_id}
     objects: |
       array:
         - |

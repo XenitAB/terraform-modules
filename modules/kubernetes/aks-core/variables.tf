@@ -284,11 +284,25 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
+
+    azure_key_vault_name = string
+    identity = object({
+      client_id   = string
+      resource_id = string
+      tenant_id   = string
+    })
+
     datadog_site         = string
     namespaces           = list(string)
     apm_ignore_resources = list(string)
   })
   default = {
+    azure_key_vault_name = ""
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
     datadog_site         = ""
     namespaces           = [""]
     apm_ignore_resources = [""]

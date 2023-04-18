@@ -58,6 +58,11 @@ variable "aws_config" {
   }
 }
 
+variable "cloud_provider" {
+  description = "cloud provider"
+  type        = string
+  default     = "azure"
+}
 
 variable "operator_path" {
   description = "value"

@@ -291,7 +291,7 @@ variable "datadog_config" {
       resource_id = string
       tenant_id   = string
     })
-
+    cloud_provider       = string
     datadog_site         = string
     namespaces           = list(string)
     apm_ignore_resources = list(string)
@@ -303,6 +303,7 @@ variable "datadog_config" {
       resource_id = ""
       tenant_id   = ""
     }
+    cloud_provider       = "azure"
     datadog_site         = ""
     namespaces           = [""]
     apm_ignore_resources = [""]

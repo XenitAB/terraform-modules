@@ -468,7 +468,6 @@ module "datadog" {
   datadog_site         = var.datadog_config.datadog_site
   namespace_include    = var.datadog_config.namespaces
   apm_ignore_resources = var.datadog_config.apm_ignore_resources
-  cloud_provider       = var.datadog_config.cloud_provider
   cluster_id           = local.cluster_id
 }
 

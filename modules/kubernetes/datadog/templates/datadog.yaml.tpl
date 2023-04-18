@@ -4,8 +4,8 @@ metadata:
   name: datadog
   namespace: datadog
 spec:
-  clusterName: we-sand
-  site: datadoghq.eu
+  clusterName: ${location}-${environment}
+  site: ${datadog_site}
   credentials:
     apiSecret:
       secretName: datadog-operator-apikey
@@ -27,16 +27,16 @@ spec:
       - name: DD_CONTAINER_EXCLUDE_LOGS
         value: "name:datadog-agent"
       - name: DD_CONTAINER_INCLUDE
-        value: "kube_namespace: kube_namespace:monitor"
+        value: "kube_namespace: ${namespace_include}"
       - name: DD_CONTAINER_EXCLUDE
         value: "kube_namespace:.*"
       - name: DD_APM_IGNORE_RESOURCES
-        value: '' 
+        value: ${apm_ignore_resources} 
     config:
       tolerations:
         - operator: Exists
       tags:
-        - "env: sand"
+        - "env: ${environment}"
       kubelet:
         tlsVerify: false
       criSocket:

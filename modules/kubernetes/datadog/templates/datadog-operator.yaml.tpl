@@ -96,6 +96,8 @@ kind: Deployment
 metadata:
   name: datadog-secret-mount
   namespace: datadog
+  labels:
+    aadpodidbinding: datadog
 spec:
   selector:
     matchLabels:

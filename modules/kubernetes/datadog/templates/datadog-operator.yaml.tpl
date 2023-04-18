@@ -69,7 +69,7 @@ spec:
   provider: azure
   parameters:
     usePodIdentity: "true"
-    keyvaultName: "kv-sand-we-core-7844"
+    keyvaultName: ${key_vault_name}
     tenantId: ${tenant_id}
     objects: |
       array:
@@ -90,3 +90,45 @@ spec:
       data:
         - objectName: datadog-api-key
           key: api-key
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datadog-secret-mount
+spec:
+  selector:
+    matchLabels:
+      app: datadog-secret-mount
+  template:
+    metadata:
+      labels:
+        app: datadog-secret-mount
+    spec:
+      containers:
+        - name: busybox
+          image: busybox:latest
+          command: ["/bin/sh", "-c", "--"]
+          args: ["while true; do sleep 30; done;"]
+          tty: true
+          volumeMounts:
+            - name: secret-store
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          env:
+            - name: DATADOG-API-KEY
+              valueFrom:
+                secretKeyRef:
+                  name: datadog-api-key
+                  key: api-key
+            - name: DATADOG-APP-KEY
+              valueFrom:
+                secretKeyRef:
+                  name: datadog-app-key
+                  key: app-key
+      volumes:
+        - name: secret-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: datadog-secrets

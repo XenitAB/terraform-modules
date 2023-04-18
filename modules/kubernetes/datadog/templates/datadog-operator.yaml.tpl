@@ -30,8 +30,8 @@ spec:
         name: datadog
       version: 0.8.0
   values:
-    apiKeyExistingSecret: datadog-api-key
-    appKeyExistingSecret: datadog-app-key
+    apiKeyExistingSecret: datadog-operator-apikey
+    appKeyExistingSecret: datadog-operator-appkey
     installCRDs: true
     datadogMonitor:
       enabled: true
@@ -74,21 +74,21 @@ spec:
     objects: |
       array:
         - |
-          objectName: datadog-api-key
+          objectName: datadog-operator-apikey
           objectType: secret
         - |
-          objectName: datadog-app-key
+          objectName: datadog-operator-appkey
           objectType: secret
   secretObjects:
-    - secretName: datadog-app-key
+    - secretName: datadog-operator-appkey
       type: Opaque
       data:
-        - objectName: datadog-app-key
+        - objectName: datadog-operator-appkey
           key: app-key
-    - secretName: datadog-api-key
+    - secretName: datadog-operator-apikey
       type: Opaque
       data:
-        - objectName: datadog-api-key
+        - objectName: datadog-operator-apikey
           key: api-key
 ---
 apiVersion: apps/v1
@@ -119,15 +119,15 @@ spec:
               mountPath: "/mnt/secrets-store"
               readOnly: true
           env:
-            - name: DATADOG-API-KEY
+            - name: datadog-operator-apikey
               valueFrom:
                 secretKeyRef:
-                  name: datadog-api-key
+                  name: datadog-operator-apikey
                   key: api-key
-            - name: DATADOG-APP-KEY
+            - name: datadog-operator-appkey
               valueFrom:
                 secretKeyRef:
-                  name: datadog-app-key
+                  name: datadog-operator-appkey
                   key: app-key
       volumes:
         - name: secret-store

@@ -3,17 +3,15 @@ kind: DatadogAgent
 metadata:
   name: datadog
   namespace: datadog
-  labels:
-    aadpodidbinding: datadog
 spec:
-  clusterName: ${location}-${environment}
-  site: ${datadog_site}
+  clusterName: we-sand
+  site: datadoghq.eu
   credentials:
     apiSecret:
-      secretName: datadog-api-key
+      secretName: datadog-operator-apikey
       keyName: api-key
     appSecret:
-      secretName: datadog-app-key
+      secretName: datadog-operator-appkey
       keyName: app-key
   agent:
     priorityClassName: platform-high
@@ -29,16 +27,16 @@ spec:
       - name: DD_CONTAINER_EXCLUDE_LOGS
         value: "name:datadog-agent"
       - name: DD_CONTAINER_INCLUDE
-        value: "kube_namespace: ${namespace_include}"
+        value: "kube_namespace: kube_namespace:monitor"
       - name: DD_CONTAINER_EXCLUDE
         value: "kube_namespace:.*"
       - name: DD_APM_IGNORE_RESOURCES
-        value: ${apm_ignore_resources} 
+        value: '' 
     config:
       tolerations:
         - operator: Exists
       tags:
-        - "env: ${environment}"
+        - "env: sand"
       kubelet:
         tlsVerify: false
       criSocket:
@@ -46,8 +44,6 @@ spec:
       volumeMounts:
         - name: containerdsocket
           mountPath: /var/run/containerd/containerd.sock
-        - name: datadog-secrets
-          mountPath: "/mnt/secrets-store"
       volumes:
         - hostPath:
             path: /var/run/containerd/containerd.sock
@@ -55,12 +51,6 @@ spec:
         - hostPath:
             path: /var/run
           name: var-run
-        - name: secret-store
-          csi:
-            driver: secrets-store.csi.k8s.io
-            readOnly: true
-            volumeAttributes:
-              secretProviderClass: datadog-secrets
       resources:
         requests:
           cpu: 60m

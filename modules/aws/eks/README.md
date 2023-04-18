@@ -22,6 +22,7 @@
 |------|--------|---------|
 | <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../irsa | n/a |
 | <a name="module_cluster_autoscaler"></a> [cluster\_autoscaler](#module\_cluster\_autoscaler) | ../irsa | n/a |
+| <a name="module_datadog"></a> [datadog](#module\_datadog) | ../irsa | n/a |
 | <a name="module_eks_ebs_csi_driver"></a> [eks\_ebs\_csi\_driver](#module\_eks\_ebs\_csi\_driver) | ../irsa | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../irsa | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../irsa | n/a |
@@ -51,6 +52,7 @@
 | [aws_eks_cluster_auth.this](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/eks_cluster_auth) | data source |
 | [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.cluster_autoscaler](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.datadog](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.external_dns](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.trivy_ecr_read_only](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.velero](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/iam_policy_document) | data source |
@@ -84,6 +86,7 @@
 |------|-------------|
 | <a name="output_cert_manager_config"></a> [cert\_manager\_config](#output\_cert\_manager\_config) | Configuration for Cert Manager |
 | <a name="output_cluster_autoscaler_config"></a> [cluster\_autoscaler\_config](#output\_cluster\_autoscaler\_config) | Configuration for Cluster Autoscaler |
+| <a name="output_datadog_config"></a> [datadog\_config](#output\_datadog\_config) | Configuration for Prometheus |
 | <a name="output_external_dns_config"></a> [external\_dns\_config](#output\_external\_dns\_config) | Configuration for External DNS |
 | <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Kube config for the created EKS cluster |
 | <a name="output_prometheus_config"></a> [prometheus\_config](#output\_prometheus\_config) | Configuration for Prometheus |

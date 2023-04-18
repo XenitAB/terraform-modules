@@ -365,7 +365,6 @@ module "datadog" {
   datadog_site         = var.datadog_config.datadog_site
   namespace_include    = var.datadog_config.namespaces
   apm_ignore_resources = var.datadog_config.apm_ignore_resources
-  cloud_provider       = var.datadog_config.cloud_provider
 
   azure_config = {
     azure_key_vault_name = var.datadog_config.azure_key_vault_name

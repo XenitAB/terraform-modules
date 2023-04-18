@@ -346,14 +346,12 @@ variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
 
-    cloud_provider       = string
     datadog_site         = string
     namespaces           = list(string)
     apm_ignore_resources = list(string)
     role_arn             = string
   })
   default = {
-    cloud_provider       = "aws"
     datadog_site         = ""
     namespaces           = [""]
     apm_ignore_resources = [""]

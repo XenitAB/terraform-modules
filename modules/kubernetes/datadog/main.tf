@@ -35,7 +35,10 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "datadog-operator" {
   path = "platform/${var.cluster_id}/datadog-operator/datadog-operator.yaml" # "platform/we-dev-aks1/datadog-operator.yaml"
   content = templatefile("${path.module}/templates/datadog-operator.yaml.tpl", {
-    azure_config = var.azure_config
+    key_vault_name = var.azure_config.azure_key_vault_name
+    tenant_id      = var.azure_config.identity.tenant_id
+    resource_id    = var.azure_config.identity.resource_id
+    client_id      = var.azure_config.identity.client_id
   })
 }
 

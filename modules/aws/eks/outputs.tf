@@ -66,7 +66,7 @@ output "trivy_config" {
 }
 
 output "datadog_config" {
-  description = "Configuration for Prometheus"
+  description = "Configuration for Datadog"
   value = {
     role_arn = module.datadog.role_arn
   }

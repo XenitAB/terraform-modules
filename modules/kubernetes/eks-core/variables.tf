@@ -357,6 +357,13 @@ variable "datadog_config" {
   }
 }
 
+variable "datadog_iam" {
+  description = "Datadog IAM config"
+  type = object({
+    role_arn = string
+  })
+}
+
 variable "trivy_enabled" {
   description = "Should trivy be enabled"
   type        = bool

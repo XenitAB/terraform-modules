@@ -464,6 +464,10 @@ module "datadog" {
 
   cloud_provider = "aws"
 
+  aws_config = {
+    role_arn = var.datadog_iam.role_arn
+  }
+
   location             = data.aws_region.current.name
   environment          = var.environment
   datadog_site         = var.datadog_config.datadog_site

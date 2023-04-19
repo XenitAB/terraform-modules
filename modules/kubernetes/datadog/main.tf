@@ -39,6 +39,8 @@ resource "git_repository_file" "datadog-operator" {
     tenant_id      = var.azure_config.identity.tenant_id
     resource_id    = var.azure_config.identity.resource_id
     client_id      = var.azure_config.identity.client_id
+    cloud_provider = var.cloud_provider
+    role_arn       = var.aws_config.role_arn
   })
 }
 

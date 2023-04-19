@@ -109,10 +109,3 @@ variable "ebs_volume_size" {
   type        = number
   default     = 20
 }
-
-variable "datadog_enabled" {
-  description = "Should Datadog be enabled"
-  type        = bool
-  default     = true
-}
-

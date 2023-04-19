@@ -33,10 +33,10 @@ resource "git_repository_file" "kustomization" {
 }
 
 resource "git_repository_file" "datadog-operator" {
-  path    = "platform/${var.cluster_id}/datadog-operator/datadog-operator.yaml"
-  content = "${path.module}/templates/datadog-operator.yaml"
+  path = "platform/${var.cluster_id}/datadog-operator/datadog-operator.yaml"
+  content = templatefile("${path.module}/templates/datadog-operator.yaml", {
+  })
 }
-
 resource "git_repository_file" "datadog" {
   path = "platform/${var.cluster_id}/datadog/datadog.yaml"
   content = templatefile("${path.module}/templates/datadog.yaml.tpl", {

@@ -359,6 +359,8 @@ module "datadog" {
 
   source = "../../kubernetes/datadog"
 
+  cloud_provider = "azure"
+
   location             = var.location_short
   environment          = var.environment
   cluster_id           = local.cluster_id

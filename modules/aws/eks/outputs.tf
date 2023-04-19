@@ -64,12 +64,7 @@ output "trivy_config" {
     trivy_role_arn          = module.trivy_ecr["trivy"].role_arn
   }
 }
-
-<<<<<<< HEAD
-output "datadog_config" {
-=======
 output "datadog_iam" {
->>>>>>> 99dca23e (Update IAM for datadog)
   description = "Configuration for Datadog"
   value = {
     role_arn = module.datadog.role_arn

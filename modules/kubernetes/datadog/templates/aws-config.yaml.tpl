@@ -34,7 +34,7 @@ metadata:
   name: datadog
   namespace: datadog
   annotations:
-    ${role_arn}
+    eks.amazonaws.com/role-arn: ${role_arn}
 ---
 apiVersion: apps/v1
 kind: Deployment

@@ -31,7 +31,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: datadog-sa
+  name: datadog
   namespace: datadog
   annotations:
     ${role_arn}
@@ -50,7 +50,7 @@ spec:
       labels:
         app: datadog-secret-mount
     spec:
-      serviceAccountName: datadog-secret-sa
+      serviceAccountName: datadog
       containers:
         - name: busybox
           image: busybox:latest

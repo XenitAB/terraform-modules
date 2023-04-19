@@ -283,7 +283,7 @@ module "eks_ebs_csi_driver" {
   policy_json_create         = false
 }
 
-data "aws_iam_policy_document" "datadog" {
+data "aws_iam_policy_document" "datadog_secrets" {
   statement {
     effect = "Allow"
     actions = [
@@ -297,18 +297,12 @@ data "aws_iam_policy_document" "datadog" {
       "ssm:GetParameter",
       "ssm:GetParameters",
     ]
-    resources = ["arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:datadog-*"]
+    resources = ["arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/datadog-*"]
   }
 }
 
 module "datadog" {
   source = "../irsa"
-
-  for_each = {
-    for s in ["datadog"] :
-    s => s
-    if var.datadog_enabled
-  }
 
   name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}-datadog"
   oidc_providers = [
@@ -318,7 +312,7 @@ module "datadog" {
     }
   ]
   kubernetes_namespace       = "datadog"
-  kubernetes_service_account = "datadog-sa"
-  policy_json                = data.aws_iam_policy_document.datadog.json
+  kubernetes_service_account = "datadog"
+  policy_json                = data.aws_iam_policy_document.datadog_secrets.json
   policy_json_create         = true
 }

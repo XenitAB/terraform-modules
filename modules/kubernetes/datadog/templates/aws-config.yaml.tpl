@@ -7,15 +7,10 @@ spec:
   provider: aws
   parameters:
     objects: |
-      array:
-        - |
-          objectName: "application/datadog-secrets/datadog-api-key"
-          objectType: "ssmparameter"
-          objectAlias: "datadog-api-key"
-        - |
-          objectName: "application/datadog-secrets/datadog-app-key"
-          objectType: "ssmparameter"
-          objectAlias: "datadog-app-key"
+      - objectName: "datadog-api-key"
+        objectType: "ssmparameter"
+      - objectName: "datadog-app-key"
+        objectType: "ssmparameter"
   secretObjects:
     - secretName: datadog-operator-appkey
       type: Opaque

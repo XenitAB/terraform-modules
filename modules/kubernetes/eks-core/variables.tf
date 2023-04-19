@@ -345,23 +345,18 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
+    role_arn             = string
     datadog_site         = string
     namespaces           = list(string)
     apm_ignore_resources = list(string)
 
   })
   default = {
+    role_arn             = ""
     datadog_site         = ""
     namespaces           = [""]
     apm_ignore_resources = []
   }
-}
-
-variable "datadog_iam" {
-  description = "Datadog IAM config"
-  type = object({
-    role_arn = string
-  })
 }
 
 variable "trivy_enabled" {

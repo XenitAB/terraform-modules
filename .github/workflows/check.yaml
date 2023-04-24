@@ -7,7 +7,7 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v3
       - name: Setup TFLint
-        uses: terraform-linters/setup-tflint@v2
+        uses: terraform-linters/setup-tflint@v3
         with:
           tflint_version: v0.42.1
       - name: Run lint

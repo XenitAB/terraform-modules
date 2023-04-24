@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dangoslen/changelog-enforcer@v2
+      - uses: dangoslen/changelog-enforcer@v3
         with:
           skipLabels: "ignore-changelog"

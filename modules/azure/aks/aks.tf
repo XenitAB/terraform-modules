@@ -25,7 +25,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   resource_group_name             = data.azurerm_resource_group.this.name
   dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   kubernetes_version              = var.aks_config.version
-  sku_tier                        = var.aks_config.production_grade ? "Paid" : "Free"
+  sku_tier                        = var.aks_config.production_grade ? "Standard" : "Free"
   api_server_authorized_ip_ranges = var.aks_authorized_ips
   run_command_enabled             = false
 

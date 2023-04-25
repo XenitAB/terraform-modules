@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2023.04.2
+
 ### Fixed
 
 - [#980](https://github.com/XenitAB/terraform-modules/pull/980) Re-enable option to disable unique suffixes for resource group key vaults.

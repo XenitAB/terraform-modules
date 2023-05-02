@@ -28,7 +28,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: datadog
-      version: 0.8.0
+      version: 0.9.2
   values:
     apiKeyExistingSecret: datadog-operator-apikey
     appKeyExistingSecret: datadog-operator-appkey

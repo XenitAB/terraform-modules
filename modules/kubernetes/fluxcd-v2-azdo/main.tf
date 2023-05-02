@@ -25,7 +25,7 @@ terraform {
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.17.0"
+      version = "0.25.3"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
@@ -99,10 +99,9 @@ data "flux_install" "this" {
 }
 
 data "flux_sync" "this" {
-  url                = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
-  branch             = var.branch
-  target_path        = "clusters/${var.cluster_id}"
-  git_implementation = "libgit2"
+  url         = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
+  branch      = var.branch
+  target_path = "clusters/${var.cluster_id}"
 }
 
 data "kubectl_file_documents" "install" {

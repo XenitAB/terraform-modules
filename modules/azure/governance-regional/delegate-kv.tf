@@ -8,7 +8,7 @@ data "azurecaf_name" "azurerm_key_vault_delegate_kv" {
   name          = each.value.common_name
   resource_type = "azurerm_key_vault"
   prefixes      = module.names.this.azurerm_key_vault.prefixes
-  suffixes      = module.names.this.azurerm_key_vault.suffixes
+  suffixes      = each.value.disable_unique_suffix ? null : module.names.this.azurerm_key_vault.suffixes
   use_slug      = false
 }
 

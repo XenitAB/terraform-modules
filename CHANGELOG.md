@@ -6,9 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-## Changed
+### Changed
 
 - [#972](https://github.com/XenitAB/terraform-modules/pull/968) Update Datadog to install with flux.
+- [#983](https://github.com/XenitAB/terraform-modules/pull/983) Update Flux to 0.25.3.
+
+## 2023.04.2
+
+### Fixed
+
+- [#980](https://github.com/XenitAB/terraform-modules/pull/980) Re-enable option to disable unique suffixes for resource group key vaults.
 
 ## 2023.04.1
 

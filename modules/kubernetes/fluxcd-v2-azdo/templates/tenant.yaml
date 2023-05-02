@@ -30,7 +30,6 @@ metadata:
   name: ${name}
   namespace: ${name}
 spec:
-  gitImplementation: libgit2
   interval: 1m
   url: ${repo}
   secretRef:

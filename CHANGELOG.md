@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#983](https://github.com/XenitAB/terraform-modules/pull/983) Update Flux to 0.25.3.
+
 ## 2023.04.2
 
 ### Fixed

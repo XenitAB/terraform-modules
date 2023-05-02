@@ -21,7 +21,9 @@ terraform {
 }
 
 locals {
-  apm_ignore_resources = join(",", formatlist("%s", var.apm_ignore_resources))
+  apm_ignore_resources     = join(",", formatlist("%s", var.apm_ignore_resources))
+  container_filter_include = join(" ", formatlist("%s", var.namespace_include))
+
 }
 
 resource "git_repository_file" "kustomization" {

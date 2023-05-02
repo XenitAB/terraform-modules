@@ -21,8 +21,7 @@ terraform {
 }
 
 locals {
-  container_filter_include = join(" ", formatlist("kube_namespace:%s", var.namespace_include))
-  apm_ignore_resources     = join(",", formatlist("%s", var.apm_ignore_resources))
+  apm_ignore_resources = join(",", formatlist("%s", var.apm_ignore_resources))
 }
 
 resource "git_repository_file" "kustomization" {
@@ -43,7 +42,7 @@ resource "git_repository_file" "datadog" {
     location             = var.location,
     environment          = var.environment,
     datadog_site         = var.datadog_site,
-    namespace_include    = local.container_filter_include,
+    namespace_include    = var.namespace_include,
     apm_ignore_resources = local.apm_ignore_resources,
   })
 }

@@ -1,3 +1,4 @@
+#Currently not used, keeping in case of rollback.
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:

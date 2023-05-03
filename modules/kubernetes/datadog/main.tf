@@ -35,11 +35,11 @@ resource "git_repository_file" "kustomization" {
 
 resource "git_repository_file" "datadog_operator" {
   path = "platform/${var.cluster_id}/datadog-operator/datadog-operator.yaml"
-  content = templatefile("${path.module}/templates/datadog-operator2.yaml", {
+  content = templatefile("${path.module}/templates/datadog-operator.yaml", {
   })
 }
 resource "git_repository_file" "datadog" {
-  path = "platform/${var.cluster_id}/datadog/datadog.yaml"
+  path = "platform/${var.cluster_id}/datadog/datadog-agent.yaml"
   content = templatefile("${path.module}/templates/datadog-agent.yaml.tpl", {
     location             = var.location,
     environment          = var.environment,

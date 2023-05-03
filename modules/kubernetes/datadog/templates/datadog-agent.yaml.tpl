@@ -33,7 +33,7 @@ spec:
         - name: DD_CONTAINER_EXCLUDE
           value: "kube_namespace:.*"
         - name: DD_APM_IGNORE_RESOURCES
-          value: ${apm_ignore_resources} 
+          value: ${apm_ignore_resources}
     clusterAgent:
       replicas: 2
       priorityClassName: platform-low
@@ -52,3 +52,8 @@ spec:
       enabled: true
     logCollection:
       containerCollectAll: true
+    apm:
+      enabled: true
+      hostPortConfig:
+        enabled: true
+        hostPort: 8126

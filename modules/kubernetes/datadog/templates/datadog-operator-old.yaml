@@ -1,4 +1,4 @@
-
+#Currently not used, keeping in case of rollback.
 apiVersion: v1
 kind: Namespace
 metadata:

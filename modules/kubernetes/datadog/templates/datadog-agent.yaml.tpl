@@ -21,12 +21,10 @@ spec:
   override:
     nodeAgent:
       priorityClassName: platform-high
-      image:
-        name: "gcr.io/datadoghq/agent:latest"
       tolerations:
         - operator: Exists
-      tags:
-        - "env: ${environment}"
+      image:
+        name: "gcr.io/datadoghq/agent:latest"
       env:
         - name: DD_CONTAINER_EXCLUDE_LOGS
           value: "name:datadog-agent"
@@ -36,16 +34,6 @@ spec:
           value: "kube_namespace:.*"
         - name: DD_APM_IGNORE_RESOURCES
           value: ${apm_ignore_resources} 
-      containers:
-        criSocket:
-          criSocketPath: /var/run/containerd/containerd.sock
-        volumeMounts:
-          - name: containerdsocket
-            mountPath: /var/run/containerd/containerd.sock
-      volumes:
-        - hostPath:
-            path: /var/run/containerd/containerd.sock
-            name: containerdsocket
     clusterAgent:
       replicas: 2
       priorityClassName: platform-low
@@ -53,26 +41,14 @@ spec:
         name: "gcr.io/datadoghq/cluster-agent:latest"
       tolerations:
         - operator: Exists
-      tags:
-        - "env: ${environment}"
       containers:
-        criSocket:
-          criSocketPath: /var/run/containerd/containerd.sock
-        volumeMounts:
-          - name: containerdsocket
-            mountPath: /var/run/containerd/containerd.sock
         config:
           resources:
             requests:
               cpu: 60m
               memory: 200Mi
-      volumes:
-        - hostPath:
-            path: /var/run/containerd/containerd.sock
-            name: containerdsocket
   features:
     kubeStateMetricsCore:
       enabled: true
     logCollection:
-      enabled: true
-      logsConfigContainerCollectAll: true
+      containerCollectAll: true

@@ -6,10 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2023.04.3
+
+### Added
+
+- [#985](https://github.com/XenitAB/terraform-modules/pull/985) Manage Flux notification provider.
+
 ### Changed
 
 - [#972](https://github.com/XenitAB/terraform-modules/pull/968) Update Datadog to install with flux.
 - [#983](https://github.com/XenitAB/terraform-modules/pull/983) Update Flux to 0.25.3.
+- [#984](https://github.com/XenitAB/terraform-modules/pull/984) Update Spegel to v0.0.7.
+- [#986](https://github.com/XenitAB/terraform-modules/pull/986) Update Flux CRD versions.
 
 ## 2023.04.2
 

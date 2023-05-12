@@ -55,5 +55,5 @@ spec:
     apm:
       enabled: true
       hostPortConfig:
-        enabled: true
+        enabled: true 
         hostPort: 8126

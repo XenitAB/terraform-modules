@@ -4,8 +4,8 @@ metadata:
   name: datadog
   namespace: datadog
 spec:
-  clusterName: {{ .Values.clusterName }}
-  site: {{ .Values.site }}
+  clusterName: ${location}-${environment}
+  site: ${datadog_site}
   credentials:
     apiSecret:
       secretName: datadog-operator-apikey
@@ -27,16 +27,16 @@ spec:
       - name: DD_CONTAINER_EXCLUDE_LOGS
         value: "name:datadog-agent"
       - name: DD_CONTAINER_INCLUDE
-        value: {{ .Values.containerInclude }}
+        value: "kube_namespace: ${namespace_include}"
       - name: DD_CONTAINER_EXCLUDE
         value: "kube_namespace:.*"
       - name: DD_APM_IGNORE_RESOURCES
-        value: {{ .Values.apmIgnoreResources }} 
+        value: ${apm_ignore_resources} 
     config:
       tolerations:
         - operator: Exists
       tags:
-        - env:{{ .Values.environment }}
+        - "env: ${environment}"
       kubelet:
         tlsVerify: false
       criSocket:

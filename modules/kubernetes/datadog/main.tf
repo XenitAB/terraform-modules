@@ -23,7 +23,6 @@ terraform {
 locals {
   apm_ignore_resources     = join(",", formatlist("%s", var.apm_ignore_resources))
   container_filter_include = join(",", formatlist("%s", var.namespace_include))
-
 }
 
 resource "git_repository_file" "kustomization" {
@@ -38,6 +37,7 @@ resource "git_repository_file" "datadog_operator" {
   content = templatefile("${path.module}/templates/datadog-operator.yaml", {
   })
 }
+
 resource "git_repository_file" "datadog" {
   path = "platform/${var.cluster_id}/datadog/datadog-agent.yaml"
   content = templatefile("${path.module}/templates/datadog-agent.yaml.tpl", {

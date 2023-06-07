@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-## Changed
+## 2023.06.1
+
+### Changed
 
 - [#972](https://github.com/XenitAB/terraform-modules/pull/968) Update Datadog to install with flux.
 

@@ -7,5 +7,5 @@ data "azurerm_virtual_network" "vnet" {
 resource "azurerm_role_assignment" "vnet" {
   scope                = data.azurerm_virtual_network.vnet.id
   role_definition_name = "Contributor"
-  principal_id         = var.vnet_role_assignment
+  principal_id         = var.aks_managed_identity
 }

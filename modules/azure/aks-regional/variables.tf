@@ -106,3 +106,8 @@ variable "acr_name_override" {
   type        = string
   default     = ""
 }
+
+variable "vnet_role_assignment" {
+  description = "principal_id of the aks enterprise application"
+  type        = string
+}

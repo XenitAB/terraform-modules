@@ -81,5 +81,4 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_aks_principal_id"></a> [aks\_principal\_id](#output\_aks\_principal\_id) | ID of the enterprise application created fpr the AKS cluster |
 | <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Kube config for the created AKS cluster |

@@ -93,7 +93,6 @@ This module is used to create resources that are used by AKS clusters.
 | <a name="input_public_ip_prefix_name_override"></a> [public\_ip\_prefix\_name\_override](#input\_public\_ip\_prefix\_name\_override) | Override the default public ip prefix name - the last digit | `string` | `""` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
-| <a name="input_vnet_role_assignment"></a> [vnet\_role\_assignment](#input\_vnet\_role\_assignment) | principal\_id of the aks enterprise application | `string` | n/a | yes |
 
 ## Outputs
 

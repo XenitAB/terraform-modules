@@ -8,7 +8,3 @@ output "kube_config" {
     cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.this.kube_admin_config[0].cluster_ca_certificate)
   }
 }
-output "aks_principal_id" {
-  description = "ID of the enterprise application created fpr the AKS cluster"
-  value       = azurerm_kubernetes_cluster.this.identity[0].principal_id
-}

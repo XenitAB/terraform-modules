@@ -20,6 +20,7 @@ module "aks_regional" {
   subscription_name     = "xks"
   core_name             = "core"
   unique_suffix         = "1234"
+  vnet_role_assignment  = "123"
   namespaces = [
     {
       name                    = "team1"

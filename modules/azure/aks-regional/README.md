@@ -50,6 +50,7 @@ This module is used to create resources that are used by AKS clusters.
 | [azurerm_role_assignment.trivy_managed](https://registry.terraform.io/providers/hashicorp/azurerm/3.51.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.velero_msi](https://registry.terraform.io/providers/hashicorp/azurerm/3.51.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.velero_rg_read](https://registry.terraform.io/providers/hashicorp/azurerm/3.51.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.vnet](https://registry.terraform.io/providers/hashicorp/azurerm/3.51.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.51.0/docs/resources/role_assignment) | resource |
 | [azurerm_storage_account.velero](https://registry.terraform.io/providers/hashicorp/azurerm/3.51.0/docs/resources/storage_account) | resource |
 | [azurerm_storage_container.velero](https://registry.terraform.io/providers/hashicorp/azurerm/3.51.0/docs/resources/storage_container) | resource |
@@ -69,6 +70,7 @@ This module is used to create resources that are used by AKS clusters.
 | [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/3.51.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.51.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.51.0/docs/data-sources/resource_group) | data source |
+| [azurerm_virtual_network.vnet](https://registry.terraform.io/providers/hashicorp/azurerm/3.51.0/docs/data-sources/virtual_network) | data source |
 
 ## Inputs
 
@@ -91,6 +93,7 @@ This module is used to create resources that are used by AKS clusters.
 | <a name="input_public_ip_prefix_name_override"></a> [public\_ip\_prefix\_name\_override](#input\_public\_ip\_prefix\_name\_override) | Override the default public ip prefix name - the last digit | `string` | `""` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
+| <a name="input_vnet_role_assignment"></a> [vnet\_role\_assignment](#input\_vnet\_role\_assignment) | principal\_id of the aks enterprise application | `string` | n/a | yes |
 
 ## Outputs
 

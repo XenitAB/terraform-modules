@@ -9,7 +9,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Added
 
 - [#991](https://github.com/XenitAB/terraform-modules/pull/991) Add vnet role assignment.
+
+## Changed
+
 - [#988](https://github.com/XenitAB/terraform-modules/pull/988) Update Azurerm provider version and enable AKS workload identities.
+- [#982](https://github.com/XenitAB/terraform-modules/pull/972) Update datadog-operator to 1.0.2 and agent to v2alpha1.
 
 ## 2023.06.1
 
@@ -25,9 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- [#972](https://github.com/XenitAB/terraform-modules/pull/968) Update Datadog to install with flux.
 - [#983](https://github.com/XenitAB/terraform-modules/pull/983) Update Flux to 0.25.3.
-- [#982](https://github.com/XenitAB/terraform-modules/pull/972) Update datadog-operator to 1.0.2 and agent to v2alpha1.
 - [#984](https://github.com/XenitAB/terraform-modules/pull/984) Update Spegel to v0.0.7.
 - [#986](https://github.com/XenitAB/terraform-modules/pull/986) Update Flux CRD versions.
 

@@ -29,6 +29,9 @@ resource "azurerm_kubernetes_cluster" "this" {
   api_server_authorized_ip_ranges = var.aks_authorized_ips
   run_command_enabled             = false
 
+  oidc_issuer_enabled       = true
+  workload_identity_enabled = true
+
   auto_scaler_profile {
     # Pods should not depend on local storage like EmptyDir or HostPath
     skip_nodes_with_local_storage = false

@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## Added
+
+- [#991](https://github.com/XenitAB/terraform-modules/pull/991) Add vnet role assignment.
+- [#988](https://github.com/XenitAB/terraform-modules/pull/988) Update Azurerm provider version and enable AKS workload identities.
+
 ## 2023.06.1
 
 ### Changed

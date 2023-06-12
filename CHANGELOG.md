@@ -6,11 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-## Added
+## 2023.06.2
+
+### Added
 
 - [#991](https://github.com/XenitAB/terraform-modules/pull/991) Add vnet role assignment.
 
-## Changed
+### Changed
 
 - [#988](https://github.com/XenitAB/terraform-modules/pull/988) Update Azurerm provider version and enable AKS workload identities.
 - [#982](https://github.com/XenitAB/terraform-modules/pull/972) Update datadog-operator to 1.0.2 and agent to v2alpha1.

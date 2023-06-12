@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#991](https://github.com/XenitAB/terraform-modules/pull/991) Add vnet role assignment.
 - [#988](https://github.com/XenitAB/terraform-modules/pull/988) Update Azurerm provider version and enable AKS workload identities.
+- [#992](https://github.com/XenitAB/terraform-modules/pull/992) Add AKS cluster principal_id to aksmsi group.
 
 ## 2023.06.1
 

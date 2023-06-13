@@ -24,12 +24,12 @@ spec:
       tolerations:
         - operator: Exists
       image:
-        name: "gcr.io/datadoghq/agent:latest"
+        name: "gcr.io/datadoghq/agent:7.45.0"
       env:
         - name: DD_CONTAINER_EXCLUDE_LOGS
           value: "name:datadog-agent"
         - name: DD_CONTAINER_INCLUDE
-          value: "kube_namespace:${namespace_include}"
+          value: ${namespace_include}
         - name: DD_CONTAINER_EXCLUDE
           value: "kube_namespace:.*"
         - name: DD_APM_IGNORE_RESOURCES
@@ -38,7 +38,7 @@ spec:
       replicas: 2
       priorityClassName: platform-low
       image:
-        name: "gcr.io/datadoghq/cluster-agent:latest"
+        name: "gcr.io/datadoghq/cluster-agent:7.45.0"
       tolerations:
         - operator: Exists
       containers:
@@ -51,9 +51,12 @@ spec:
     kubeStateMetricsCore:
       enabled: true
     logCollection:
+      enabled: true
       containerCollectAll: true
     apm:
       enabled: true
       hostPortConfig:
         enabled: true 
         hostPort: 8126
+    admissionController:
+      enabled: false

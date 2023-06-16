@@ -37,6 +37,7 @@ resource "git_repository_file" "datadog_operator" {
   content = templatefile("${path.module}/templates/datadog-operator.yaml", {
   })
 }
+
 resource "git_repository_file" "datadog" {
   path = "platform/${var.cluster_id}/datadog/datadog-agent.yaml"
   content = templatefile("${path.module}/templates/datadog-agent.yaml.tpl", {

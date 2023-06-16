@@ -6,11 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-## Added
+### Fixed
+
+- [#995](https://github.com/XenitAB/terraform-modules/pull/995) Fix Kubernetes version validation.
+
+### Changed
+
+- [#996](https://github.com/XenitAB/terraform-modules/pull/996) Rename Datadog agent.
+- [#992](https://github.com/XenitAB/terraform-modules/pull/992) Add AKS cluster principal_id to aksmsi group.
+
+## 2023.06.3
+
+### Changed
+
+- [#994](https://github.com/XenitAB/terraform-modules/pull/994) Update Datadog agent config.
+
+## 2023.06.2
+
+### Added
 
 - [#991](https://github.com/XenitAB/terraform-modules/pull/991) Add vnet role assignment.
+
+### Changed
+
 - [#988](https://github.com/XenitAB/terraform-modules/pull/988) Update Azurerm provider version and enable AKS workload identities.
-- [#992](https://github.com/XenitAB/terraform-modules/pull/992) Add AKS cluster principal_id to aksmsi group.
+- [#982](https://github.com/XenitAB/terraform-modules/pull/972) Update datadog-operator to 1.0.2 and agent to v2alpha1.
 
 ## 2023.06.1
 

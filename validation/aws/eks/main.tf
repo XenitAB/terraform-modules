@@ -23,12 +23,12 @@ module "eks" {
 
   eks_authorized_ips = ["0.0.0.0/0"]
   eks_config = {
-    version    = "1.23"
+    version    = "1.25"
     cidr_block = "10.0.16.0/20"
     node_pools = [
       {
         name           = "standard"
-        version        = "1.23.5-20220309"
+        version        = "1.25.5-20220309"
         min_size       = 1
         max_size       = 3
         instance_types = ["t3.large"]
@@ -37,7 +37,7 @@ module "eks" {
       },
       {
         name           = "batch"
-        version        = "1.23.5-20220309"
+        version        = "1.25.5-20220309"
         min_size       = 1
         max_size       = 3
         instance_types = ["t3.large"]

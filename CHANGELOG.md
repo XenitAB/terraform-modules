@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
+- [#989](https://github.com/XenitAB/terraform-modules/pull/989) Update Azad-Kube-Proxy to v0.0.47.
 - [#996](https://github.com/XenitAB/terraform-modules/pull/996) Rename Datadog agent.
 
 ## 2023.06.3
@@ -48,7 +49,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#983](https://github.com/XenitAB/terraform-modules/pull/983) Update Flux to 0.25.3.
 - [#984](https://github.com/XenitAB/terraform-modules/pull/984) Update Spegel to v0.0.7.
 - [#986](https://github.com/XenitAB/terraform-modules/pull/986) Update Flux CRD versions.
-- [#989](https://github.com/XenitAB/terraform-modules/pull/989) Update Azad-Kube-Proxy to v0.0.47.
 
 ## 2023.04.2
 

@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#989](https://github.com/XenitAB/terraform-modules/pull/989) Update Azad-Kube-Proxy to v0.0.47.
 - [#996](https://github.com/XenitAB/terraform-modules/pull/996) Rename Datadog agent.
+- [#992](https://github.com/XenitAB/terraform-modules/pull/992) Add AKS cluster principal_id to aksmsi group.
 
 ## 2023.06.3
 

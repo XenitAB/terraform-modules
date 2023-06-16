@@ -30,3 +30,8 @@ resource "azuread_group_member" "aks_managed_identity" {
   group_object_id  = var.aad_groups.aks_managed_identity.id
   member_object_id = azurerm_kubernetes_cluster.this.kubelet_identity[0].object_id
 }
+
+resource "azuread_group_member" "aks_cluster_identity" {
+  group_object_id  = var.aad_groups.aks_managed_identity.id
+  member_object_id = azurerm_kubernetes_cluster.this.identity[0].principal_id
+}

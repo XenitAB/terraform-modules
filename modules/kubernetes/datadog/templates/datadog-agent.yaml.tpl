@@ -2,7 +2,7 @@
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
-  name: datadog-v2
+  name: datadog
   namespace: datadog
 spec:
   global:

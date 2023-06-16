@@ -10,7 +10,11 @@ spec:
     name: flux-system
   path: "./platform/${cluster_id}/datadog-operator/"
   prune: true
-  validation: client
+  healthChecks:
+  - apiVersion: apps/v1
+    kind: Deployment
+    namespace: datadog
+    name: datadog-operator
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
@@ -26,4 +30,12 @@ spec:
     name: flux-system
   path: "./platform/${cluster_id}/datadog/"
   prune: true
-  validation: client
+  healthChecks:
+  - apiVersion: apps/v1
+    kind: Deployment
+    namespace: datadog
+    name: datadog-cluster-agent
+  - apiVersion: apps/v1
+    kind: DaemonSet
+    namespace: datadog
+    name: datadog-agent

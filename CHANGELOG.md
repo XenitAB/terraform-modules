@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#995](https://github.com/XenitAB/terraform-modules/pull/995) Fix Kubernetes version validation.
 
+### Changed
+
+- [#996](https://github.com/XenitAB/terraform-modules/pull/996) Rename Datadog agent.
+
 ## 2023.06.3
 
 ### Changed

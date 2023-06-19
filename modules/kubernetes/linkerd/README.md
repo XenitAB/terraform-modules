@@ -44,7 +44,7 @@ Look at the [nginx](https://linkerd.io/2.10/tasks/using-ingress/#nginx) example 
 
 ### Linkerd CNI
 
-The [Linkerd CNI](https://linkerd.io/2.10/features/cni/) is required to if the linkerd-proxy sidecar isn't allowed to be root, which happens if using OPA-Gatekeeper.
+The [Linkerd CNI](https://linkerd.io/2.10/features/cni/) is required to if the linkerd-proxy sidecar isn't allowed to be root, which happens if using Gatekeeper.
 
 ## Requirements
 

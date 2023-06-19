@@ -4,6 +4,8 @@ metadata:
   name: datadog-operator
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: gatekeeper-config
   interval: 5m
   sourceRef:
     kind: GitRepository
@@ -23,6 +25,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: gatekeeper-config
     - name: datadog-operator
   interval: 5m
   sourceRef:

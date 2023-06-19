@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#996](https://github.com/XenitAB/terraform-modules/pull/996) Rename Datadog agent.
 - [#992](https://github.com/XenitAB/terraform-modules/pull/992) Add AKS cluster principal_id to aksmsi group.
 - [#997](https://github.com/XenitAB/terraform-modules/pull/997) Add health checks to Datadog.
+- [#998](https://github.com/XenitAB/terraform-modules/pull/998) Update GitHub Terraform provider to 5.28.0.
 
 ## 2023.06.3
 

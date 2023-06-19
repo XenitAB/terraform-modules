@@ -9,7 +9,7 @@ This module is used to configure EKS clusters.
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.31.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.25.3 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 4.21.0 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | 5.28.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.6.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.13.1 |

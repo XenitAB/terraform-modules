@@ -21,6 +21,7 @@ locals {
     "grafana-agent",
     "promtail",
     "prometheus",
+    "node-ttl",
     "spegel",
   ]
   cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
@@ -640,8 +641,6 @@ module "node_local_dns" {
 }
 
 module "node_ttl" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["node-ttl"] :
     s => s
@@ -650,6 +649,7 @@ module "node_ttl" {
 
   source = "../../kubernetes/node-ttl"
 
+  cluster_id                  = local.cluster_id
   status_config_map_namespace = "kube-system"
 }
 

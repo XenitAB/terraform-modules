@@ -663,4 +663,6 @@ module "spegel" {
   }
 
   source = "../../kubernetes/spegel"
+
+  cluster_id = local.cluster_id
 }

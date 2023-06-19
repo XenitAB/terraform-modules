@@ -10,7 +10,7 @@ This module is used to create AKS clusters.
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.28.1 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.57.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.25.3 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 4.21.0 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | 5.28.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.6.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.13.1 |

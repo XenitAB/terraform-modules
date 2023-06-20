@@ -62,7 +62,6 @@ This module is used to create AKS clusters.
 | <a name="module_trivy_crd"></a> [trivy\_crd](#module\_trivy\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../../kubernetes/velero | n/a |
 | <a name="module_vpa"></a> [vpa](#module\_vpa) | ../../kubernetes/vpa | n/a |
-| <a name="module_vpa_crd"></a> [vpa\_crd](#module\_vpa\_crd) | ../../kubernetes/helm-crd | n/a |
 
 ## Resources
 

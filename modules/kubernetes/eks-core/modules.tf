@@ -14,6 +14,7 @@ locals {
     "reloader",
     "velero",
     "promtail",
+    "node-ttl",
     "spegel"
   ]
   dns_zone = {
@@ -510,8 +511,6 @@ module "node_local_dns" {
 }
 
 module "node_ttl" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["node-ttl"] :
     s => s
@@ -520,6 +519,7 @@ module "node_ttl" {
 
   source = "../../kubernetes/node-ttl"
 
+  cluster_id                  = local.cluster_id
   status_config_map_namespace = "cluster-autoscaler"
 }
 

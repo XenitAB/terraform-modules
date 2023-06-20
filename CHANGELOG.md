@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#1001](https://github.com/XenitAB/terraform-modules/pull/1001) Migrate node-ttl to install with Flux.
+- [#1002](https://github.com/XenitAB/terraform-modules/pull/1002) Migrate spegel to install with Flux.
 
 ## 2023.06.4
 

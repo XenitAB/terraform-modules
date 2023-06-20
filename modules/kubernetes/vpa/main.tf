@@ -12,44 +12,21 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.13.1"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.6.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-resource "kubernetes_namespace" "vpa" {
-  metadata {
-    labels = {
-      name                = "vpa"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "vpa"
-  }
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/vpa.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id
+  })
 }
 
-resource "helm_release" "vpa" {
-  repository  = "https://charts.fairwinds.com/stable"
-  chart       = "vpa"
-  name        = "vpa"
-  namespace   = kubernetes_namespace.vpa.metadata[0].name
-  version     = "1.6.1"
-  max_history = 3
-  skip_crds   = true
-  values      = [templatefile("${path.module}/templates/vpa-values.yaml.tpl", {})]
-}
-
-resource "helm_release" "goldilocks" {
-  repository  = "https://charts.fairwinds.com/stable"
-  chart       = "goldilocks"
-  name        = "goldilocks"
-  namespace   = kubernetes_namespace.vpa.metadata[0].name
-  version     = "6.5.1"
-  max_history = 3
-  values      = [templatefile("${path.module}/templates/goldilocks-values.yaml.tpl", {})]
+resource "git_repository_file" "vpa" {
+  path    = "platform/${var.cluster_id}/vpa/vpa.yaml"
+  content = templatefile("${path.module}/templates/vpa.yaml.tpl", {})
 }

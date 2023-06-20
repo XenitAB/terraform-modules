@@ -23,6 +23,7 @@ locals {
     "prometheus",
     "node-ttl",
     "spegel",
+    "vpa",
   ]
   cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
 }
@@ -607,17 +608,7 @@ module "trivy" {
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
 }
 
-module "vpa_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://charts.fairwinds.com/stable"
-  chart_name       = "vpa"
-  chart_version    = "1.6.1"
-}
-
 module "vpa" {
-  depends_on = [module.opa_gatekeeper, module.vpa_crd]
-
   for_each = {
     for s in ["vpa"] :
     s => s
@@ -625,6 +616,8 @@ module "vpa" {
   }
 
   source = "../../kubernetes/vpa"
+
+  cluster_id = local.cluster_id
 }
 
 module "node_local_dns" {

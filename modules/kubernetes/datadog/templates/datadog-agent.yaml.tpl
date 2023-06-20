@@ -59,3 +59,8 @@ spec:
         hostPort: 8126
     admissionController:
       enabled: false
+    otlp:
+      receiver:
+        protocols:
+          http:
+            enabled: true

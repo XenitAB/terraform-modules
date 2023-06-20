@@ -1,4 +1,3 @@
-
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:

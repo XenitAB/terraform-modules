@@ -65,7 +65,3 @@ spec:
         protocols:
           http:
             enabled: true
-      metrics:
-        enabled: true
-      traces:
-        enabled: true

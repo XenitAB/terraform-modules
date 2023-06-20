@@ -7,13 +7,13 @@ This module is used to add [`node-ttl`](https://github.com/XenitAB/node-ttl) to 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.2 |
+| <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_git"></a> [git](#provider\_git) | 0.0.2 |
+| <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
 
 ## Modules
 
@@ -23,8 +23,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [git_repository_file.kustomization](https://registry.terraform.io/providers/xenitab/git/0.0.2/docs/resources/repository_file) | resource |
-| [git_repository_file.node_ttl](https://registry.terraform.io/providers/xenitab/git/0.0.2/docs/resources/repository_file) | resource |
+| [git_repository_file.kustomization](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.node_ttl](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 
 ## Inputs
 

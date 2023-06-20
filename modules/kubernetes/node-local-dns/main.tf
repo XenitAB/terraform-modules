@@ -8,25 +8,24 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.13.1"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.6.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-resource "helm_release" "this" {
-  chart       = "${path.module}/charts/node-local-dns"
-  name        = "node-local-dns"
-  namespace   = "kube-system"
-  max_history = 3
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/node-local-dns.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id
+  })
+}
 
-  set {
-    name  = "dnsServer"
-    value = var.dns_ip
-  }
+resource "git_repository_file" "node_local_dns" {
+  path = "platform/${var.cluster_id}/node-local-dns/node-local-dns.yaml"
+  content = templatefile("${path.module}/templates/node-local-dns.yaml.tpl", {
+    local_dns = "169.254.20.10"
+    dns_ip    = var.dns_ip
+  })
 }

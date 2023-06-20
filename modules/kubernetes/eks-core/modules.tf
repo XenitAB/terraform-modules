@@ -507,7 +507,9 @@ module "node_local_dns" {
   }
 
   source = "../../kubernetes/node-local-dns"
-  dns_ip = var.node_local_dns_dns_ip
+
+  cluster_id = local.cluster_id
+  dns_ip     = "172.20.0.10"
 }
 
 module "node_ttl" {

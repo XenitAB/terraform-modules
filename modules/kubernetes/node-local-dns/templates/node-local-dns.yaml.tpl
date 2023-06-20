@@ -13,6 +13,9 @@
 # limitations under the License.
 #
 
+# Manifest originates from:
+# https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/dns/nodelocaldns/nodelocaldns.yaml
+
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -55,19 +58,19 @@ data:
         }
         reload
         loop
-        bind {{ .Values.localdns }} {{ .Values.dnsServer }}
+        bind ${local_dns} ${dns_ip}
         forward . __PILLAR__CLUSTER__DNS__ {
                 force_tcp
         }
         prometheus :9253
-        health {{ .Values.localdns }}:8080
+        health ${local_dns}:8080
         }
     in-addr.arpa:53 {
         errors
         cache 30
         reload
         loop
-        bind {{ .Values.localdns }} {{ .Values.dnsServer }}
+        bind ${local_dns} ${dns_ip}
         forward . __PILLAR__CLUSTER__DNS__ {
                 force_tcp
         }
@@ -78,7 +81,7 @@ data:
         cache 30
         reload
         loop
-        bind {{ .Values.localdns }} {{ .Values.dnsServer }}
+        bind ${local_dns} ${dns_ip}
         forward . __PILLAR__CLUSTER__DNS__ {
                 force_tcp
         }
@@ -92,7 +95,7 @@ data:
         }
         reload
         loop
-        bind {{ .Values.localdns }} {{ .Values.dnsServer }}
+        bind ${local_dns} ${dns_ip}
         forward . __PILLAR__UPSTREAM__SERVERS__
         prometheus :9253
         }
@@ -132,8 +135,8 @@ spec:
           operator: "Exists"
       containers:
         - name: node-cache
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "registry.k8s.io/dns/k8s-dns-node-cache:1.22.20"
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: 25m
@@ -141,7 +144,7 @@ spec:
           args:
             [
               "-localip",
-              "{{ .Values.localdns }},{{ .Values.dnsServer }}",
+              "${local_dns},${dns_ip}",
               "-conf",
               "/etc/Corefile",
               "-upstreamsvc",
@@ -161,7 +164,7 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              host: {{ .Values.localdns }}
+              host: ${local_dns}
               path: /health
               port: 8080
             initialDelaySeconds: 60

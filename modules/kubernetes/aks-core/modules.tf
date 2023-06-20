@@ -627,10 +627,7 @@ module "vpa" {
   source = "../../kubernetes/vpa"
 }
 
-# node-local-dns
 module "node_local_dns" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["node-local-dns"] :
     s => s
@@ -638,6 +635,9 @@ module "node_local_dns" {
   }
 
   source = "../../kubernetes/node-local-dns"
+
+  cluster_id = local.cluster_id
+  dns_ip     = "10.0.0.10"
 }
 
 module "node_ttl" {

@@ -14,7 +14,7 @@ metadata:
 spec:
   type: "oci"
   interval: 1m0s
-  url: "oci://ghcr.io/xenitab/helm-charts/node-ttl"
+  url: "oci://ghcr.io/xenitab/helm-charts"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease

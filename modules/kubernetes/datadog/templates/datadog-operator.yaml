@@ -1,11 +1,10 @@
-
 apiVersion: v1
 kind: Namespace
 metadata:
  name: datadog
  labels:
-   name              = "datadog"
-   xkf.xenit.io/kind = "platform"
+   name: "datadog"
+   xkf.xenit.io/kind: "platform"
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

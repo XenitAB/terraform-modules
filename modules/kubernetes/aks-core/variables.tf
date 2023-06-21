@@ -153,36 +153,19 @@ variable "aad_pod_identity_config" {
   }))
 }
 
-variable "opa_gatekeeper_enabled" {
+variable "gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
   type        = bool
   default     = true
 }
 
-variable "opa_gatekeeper_config" {
+variable "gatekeeper_config" {
   description = "Configuration for OPA Gatekeeper"
   type = object({
-    additional_excluded_namespaces = list(string)
-    enable_default_constraints     = bool
-    additional_constraints = list(object({
-      excluded_namespaces = list(string)
-      processes           = list(string)
-    }))
-    enable_default_assigns = bool
-    additional_assigns = list(object({
-      name = string
-    }))
-    additional_modify_sets = list(object({
-      name = string
-    }))
+    exclude_namespaces = list(string)
   })
   default = {
-    additional_excluded_namespaces = []
-    enable_default_constraints     = true
-    additional_constraints         = []
-    enable_default_assigns         = true
-    additional_assigns             = []
-    additional_modify_sets         = []
+    exclude_namespaces = []
   }
 }
 

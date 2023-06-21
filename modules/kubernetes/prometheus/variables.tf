@@ -97,7 +97,7 @@ variable "falco_enabled" {
   default     = false
 }
 
-variable "opa_gatekeeper_enabled" {
+variable "gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
   type        = bool
   default     = false

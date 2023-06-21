@@ -1,6 +1,5 @@
 locals {
-  excluded_namespaces = [
-    "kube-system",
+  exclude_namespaces = [
     "aad-pod-identity",
     "azdo-proxy",
     "calico-system",
@@ -10,7 +9,6 @@ locals {
     "external-dns",
     "falco",
     "flux-system",
-    "gatekeeper-system",
     "ingress-nginx",
     "linkerd",
     "linkerd-cni",
@@ -28,58 +26,18 @@ locals {
   cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
 }
 
-# OPA Gatekeeper
-module "opa_gatekeeper_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://open-policy-agent.github.io/gatekeeper/charts"
-  chart_name       = "gatekeeper"
-  chart_version    = "3.7.1"
-}
-
-module "opa_gatekeeper" {
-  depends_on = [module.opa_gatekeeper_crd]
-
+module "gatekeeper" {
   for_each = {
-    for s in ["opa-gatekeeper"] :
+    for s in ["gatekeeper"] :
     s => s
-    if var.opa_gatekeeper_enabled
+    if var.gatekeeper_enabled
   }
 
-  source = "../../kubernetes/opa-gatekeeper"
+  source = "../../kubernetes/gatekeeper"
 
-  enable_default_constraints = var.opa_gatekeeper_config.enable_default_constraints
-  additional_constraints = concat(
-    var.opa_gatekeeper_config.additional_constraints,
-    [
-      {
-        kind               = "AzureIdentityFormat"
-        name               = "azure-identity-format"
-        enforcement_action = ""
-        match = {
-          kinds      = []
-          namespaces = []
-        }
-        parameters = {}
-      },
-      {
-        kind               = "K8sPodPriorityClass"
-        name               = "pod-priority-class"
-        enforcement_action = ""
-        match = {
-          kinds      = []
-          namespaces = []
-        }
-        parameters = {
-          permittedClassNames = ["platform-high", "platform-medium", "platform-low", "tenant-high", "tenant-medium", "tenant-low"]
-        }
-      },
-    ]
-  )
-  additional_modify_sets = var.opa_gatekeeper_config.additional_modify_sets
-  enable_default_assigns = var.opa_gatekeeper_config.enable_default_assigns
-  excluded_namespaces    = concat(var.opa_gatekeeper_config.additional_excluded_namespaces, local.excluded_namespaces)
-  cloud_provider         = "azure"
+  cluster_id         = local.cluster_id
+  cloud_provider     = "azure"
+  exclude_namespaces = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
 }
 
 # FluxCD v2
@@ -143,7 +101,7 @@ module "aad_pod_identity_crd" {
 }
 
 module "aad_pod_identity" {
-  depends_on = [module.opa_gatekeeper, module.aad_pod_identity_crd]
+  depends_on = [module.aad_pod_identity_crd]
 
   for_each = {
     for s in ["aad-pod-identity"] :
@@ -161,7 +119,7 @@ module "aad_pod_identity" {
 
 # AZ Metrics
 module "azure_metrics" {
-  depends_on = [module.opa_gatekeeper, module.aad_pod_identity_crd]
+  depends_on = [module.aad_pod_identity_crd]
 
   for_each = {
     for s in ["azure-metrics"] :
@@ -192,7 +150,7 @@ module "linkerd_crd" {
 }
 
 module "linkerd" {
-  depends_on = [module.opa_gatekeeper, module.cert_manager_crd, module.linkerd_crd]
+  depends_on = [module.cert_manager_crd, module.linkerd_crd]
 
   for_each = {
     for s in ["linkerd"] :
@@ -205,7 +163,7 @@ module "linkerd" {
 
 # ingress-nginx
 module "ingress_nginx" {
-  depends_on = [module.opa_gatekeeper, module.linkerd]
+  depends_on = [module.linkerd]
 
   for_each = {
     for s in ["ingress-nginx"] :
@@ -231,7 +189,7 @@ module "ingress_nginx" {
 
 # ingress-healthz
 module "ingress_healthz" {
-  depends_on = [module.opa_gatekeeper, module.linkerd]
+  depends_on = [module.linkerd]
 
   for_each = {
     for s in ["ingress-healthz"] :
@@ -250,7 +208,7 @@ module "ingress_healthz" {
 
 # External DNS
 module "external_dns" {
-  depends_on = [module.opa_gatekeeper, module.aad_pod_identity_crd]
+  depends_on = [module.aad_pod_identity_crd]
 
   for_each = {
     for s in ["external-dns"] :
@@ -284,7 +242,7 @@ module "cert_manager_crd" {
 }
 
 module "cert_manager" {
-  depends_on = [module.opa_gatekeeper, module.cert_manager_crd]
+  depends_on = [module.cert_manager_crd]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -307,8 +265,6 @@ module "cert_manager" {
 
 # Velero
 module "velero" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["velero"] :
     s => s
@@ -338,7 +294,7 @@ module "csi_secrets_store_provider_azure_crd" {
 }
 
 module "csi_secrets_store_provider_azure" {
-  depends_on = [module.opa_gatekeeper, module.csi_secrets_store_provider_azure_crd]
+  depends_on = [module.csi_secrets_store_provider_azure_crd]
 
   for_each = {
     for s in ["csi-secrets-store-provider-azure"] :
@@ -351,8 +307,6 @@ module "csi_secrets_store_provider_azure" {
 
 # datadog
 module "datadog" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["datadog"] :
     s => s
@@ -390,7 +344,7 @@ module "grafana_agent_crd" {
 }
 
 module "grafana_agent" {
-  depends_on = [module.opa_gatekeeper, module.grafana_agent_crd]
+  depends_on = [module.grafana_agent_crd]
 
   for_each = {
     for s in ["grafana-agent"] :
@@ -425,8 +379,6 @@ module "grafana_agent" {
 
 # falco
 module "falco" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["falco"] :
     s => s
@@ -440,8 +392,6 @@ module "falco" {
 
 # Reloader
 module "reloader" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["reloader"] :
     s => s
@@ -484,7 +434,7 @@ module "prometheus_crd" {
 }
 
 module "prometheus" {
-  depends_on = [module.opa_gatekeeper, module.prometheus_crd]
+  depends_on = [module.prometheus_crd]
 
   for_each = {
     for s in ["prometheus"] :
@@ -520,7 +470,7 @@ module "prometheus" {
   namespace_selector = var.prometheus_config.namespace_selector
 
   falco_enabled                            = var.falco_enabled
-  opa_gatekeeper_enabled                   = var.opa_gatekeeper_enabled
+  gatekeeper_enabled                       = var.gatekeeper_enabled
   linkerd_enabled                          = var.linkerd_enabled
   flux_enabled                             = var.fluxcd_v2_enabled
   csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
@@ -536,8 +486,6 @@ module "prometheus" {
 }
 
 module "control_plane_logs" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["control_plane_logs"] :
     s => s
@@ -560,8 +508,6 @@ module "control_plane_logs" {
 }
 
 module "promtail" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["promtail"] :
     s => s
@@ -592,7 +538,7 @@ module "trivy_crd" {
 }
 
 module "trivy" {
-  depends_on = [module.opa_gatekeeper, module.trivy_crd]
+  depends_on = [module.trivy_crd]
 
   for_each = {
     for s in ["trivy"] :
@@ -647,8 +593,6 @@ module "node_ttl" {
 }
 
 module "spegel" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["spegel"] :
     s => s

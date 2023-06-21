@@ -1,20 +1,6 @@
 locals {
   exclude_namespaces = [
-    "calico-system",
-    "cert-manager",
-    "csi-secrets-store-provider-aws",
-    "datadog",
-    "external-dns",
-    "falco",
-    "flux-system",
-    "ingress-nginx",
-    "prometheus",
-    "reloader",
     "velero",
-    "promtail",
-    "node-ttl",
-    "spegel",
-    "vpa",
   ]
   dns_zone = {
     for dns in data.aws_route53_zone.this :

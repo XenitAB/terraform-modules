@@ -1,27 +1,9 @@
 locals {
   exclude_namespaces = [
-    "aad-pod-identity",
-    "azdo-proxy",
-    "calico-system",
-    "cert-manager",
-    "csi-secrets-store-provider-azure",
-    "datadog",
-    "external-dns",
-    "falco",
-    "flux-system",
-    "ingress-nginx",
     "linkerd",
     "linkerd-cni",
-    "reloader",
-    "trivy",
-    "tigera-operator",
     "velero",
     "grafana-agent",
-    "promtail",
-    "prometheus",
-    "node-ttl",
-    "spegel",
-    "vpa",
   ]
   cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
 }

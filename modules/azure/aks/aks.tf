@@ -87,6 +87,14 @@ resource "azurerm_kubernetes_cluster" "this" {
     node_count                   = var.aks_config.production_grade ? 2 : 1
     only_critical_addons_enabled = true
   }
+
+  ingress_application_gateway {
+    gateway_id   = var.ingress_application_gateway_config.gateway_id
+    gateway_name = var.ingress_application_gateway_config.gateway_name
+    subnet_cidr  = var.ingress_application_gateway_config.subnet_cidr
+    subnet_id    = var.ingress_application_gateway_config.subnet_id
+
+  }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "this" {

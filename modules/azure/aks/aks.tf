@@ -89,10 +89,10 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   ingress_application_gateway {
-    gateway_id   = var.ingress_application_gateway_config.gateway_id
-    gateway_name = var.ingress_application_gateway_config.gateway_name
-    subnet_cidr  = var.ingress_application_gateway_config.subnet_cidr
-    subnet_id    = var.ingress_application_gateway_config.subnet_id
+    gateway_id   = azurerm_application_gateway.this.id
+    gateway_name = azurerm_application_gateway.this.name
+    subnet_cidr  = data.azurerm_subnet.this.address_prefix
+    subnet_id    = data.azurerm_subnet.this.id
 
   }
 }

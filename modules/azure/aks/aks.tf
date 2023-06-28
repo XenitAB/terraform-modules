@@ -95,14 +95,10 @@ resource "azurerm_kubernetes_cluster" "this" {
       if var.appgw_enabled
     }
     content {
-      gateway_id   = azurerm_application_gateway.this["agw"].id
-      gateway_name = azurerm_application_gateway.this["agw"].name
-      subnet_cidr  = data.azurerm_subnet.agw.address_prefix
-      subnet_id    = data.azurerm_subnet.agw.id
+      gateway_id = azurerm_application_gateway.this["agw"].id
     }
   }
 }
-
 resource "azurerm_kubernetes_cluster_node_pool" "this" {
   for_each = {
     for nodePool in var.aks_config.node_pools :

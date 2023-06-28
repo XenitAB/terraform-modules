@@ -88,17 +88,18 @@ resource "azurerm_kubernetes_cluster" "this" {
     only_critical_addons_enabled = true
   }
 
-  ingress_application_gateway {
+  dynamic "ingress_application_gateway" {
     for_each = {
       for s in ["agw"] :
       s => s
       if var.appgw_enabled
     }
-    gateway_id   = azurerm_application_gateway.this.id
-    gateway_name = azurerm_application_gateway.this.name
-    subnet_cidr  = data.azurerm_subnet.this.address_prefix
-    subnet_id    = data.azurerm_subnet.this.id
-
+    content {
+      gateway_id   = azurerm_application_gateway.this["agw"].id
+      gateway_name = azurerm_application_gateway.this["agw"].name
+      subnet_cidr  = data.azurerm_subnet.agw.address_prefix
+      subnet_id    = data.azurerm_subnet.agw.id
+    }
   }
 }
 

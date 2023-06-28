@@ -1,34 +1,52 @@
 locals {
-  backend_address_pool_name      = "${azurerm_kubernetes_cluster.this.name}-beap"
-  frontend_port_name             = "${azurerm_kubernetes_cluster.this.name}-feport"
-  frontend_ip_configuration_name = "${azurerm_kubernetes_cluster.this.name}-feip"
-  http_setting_name              = "${azurerm_kubernetes_cluster.this.name}-be-htst"
-  listener_name                  = "${azurerm_kubernetes_cluster.this.name}-httplstn"
-  request_routing_rule_name      = "${azurerm_kubernetes_cluster.this.name}-rqrt"
-  redirect_configuration_name    = "${azurerm_kubernetes_cluster.this.name}-rdrcfg"
+  backend_address_pool_name      = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-beap"
+  frontend_port_name             = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-feport"
+  frontend_ip_configuration_name = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-feip"
+  http_setting_name              = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-be-htst"
+  listener_name                  = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-httplstn"
+  request_routing_rule_name      = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-rqrt"
+  redirect_configuration_name    = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-rdrcfg"
+}
+
+data "azurerm_subnet" "agw" {
+  name                 = "sn-${var.environment}-${var.location_short}-${var.core_name}-agw"
+  virtual_network_name = "vnet-${var.environment}-${var.location_short}-${var.core_name}"
+  resource_group_name  = "rg-${var.environment}-${var.location_short}-${var.core_name}"
 }
 
 resource "azurerm_public_ip" "agw" {
-  name                = "agw-pip-${azurerm_kubernetes_cluster.this.name}"
+  for_each = {
+    for s in ["agw"] :
+    s => s
+    if var.appgw_enabled
+  }
+
+  name                = "agw-pip-aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   location            = data.azurerm_resource_group.this.location
   resource_group_name = data.azurerm_resource_group.this.name
+  sku                 = "Standard"
   allocation_method   = "Static"
 }
 
 resource "azurerm_application_gateway" "this" {
-  name                = "agw-${azurerm_kubernetes_cluster.this.name}"
+  for_each = {
+    for s in ["agw"] :
+    s => s
+    if var.appgw_enabled
+  }
+  name                = "agw-aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   location            = data.azurerm_resource_group.this.location
   resource_group_name = data.azurerm_resource_group.this.name
 
   sku {
-    name     = "Standard_Small"
-    tier     = "Standard"
+    name     = "WAF_v2"
+    tier     = "WAF_v2"
     capacity = 2
   }
 
   gateway_ip_configuration {
-    name      = "${azurerm_kubernetes_cluster.this.name}-ip-config"
-    subnet_id = data.azurerm_subnet.this.id
+    name      = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-ip-config"
+    subnet_id = data.azurerm_subnet.agw.id
 
   }
 
@@ -39,7 +57,7 @@ resource "azurerm_application_gateway" "this" {
 
   frontend_ip_configuration {
     name                 = local.frontend_ip_configuration_name
-    public_ip_address_id = azurerm_public_ip.agw.id
+    public_ip_address_id = azurerm_public_ip.agw[each.key].id
   }
 
   backend_address_pool {
@@ -65,8 +83,14 @@ resource "azurerm_application_gateway" "this" {
   request_routing_rule {
     name                       = local.request_routing_rule_name
     rule_type                  = "Basic"
+    priority                   = 1
     http_listener_name         = local.listener_name
     backend_address_pool_name  = local.backend_address_pool_name
     backend_http_settings_name = local.http_setting_name
+  }
+  waf_configuration {
+    enabled          = true
+    firewall_mode    = "Detection"
+    rule_set_version = "3.2"
   }
 }

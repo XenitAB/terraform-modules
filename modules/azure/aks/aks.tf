@@ -89,6 +89,11 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   ingress_application_gateway {
+    for_each = {
+      for s in ["agw"] :
+      s => s
+      if var.appgw_enabled
+    }
     gateway_id   = azurerm_application_gateway.this.id
     gateway_name = azurerm_application_gateway.this.name
     subnet_cidr  = data.azurerm_subnet.this.address_prefix

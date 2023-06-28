@@ -180,3 +180,9 @@ variable "log_eventhub_authorization_rule_id" {
   description = "The authoritzation rule id for event hub"
   type        = string
 }
+
+variable "appgw_enabled" {
+  description = "Should Application Gateway ingress controller be enabled?"
+  type        = bool
+  default     = false
+}

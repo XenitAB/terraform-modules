@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1005](https://github.com/XenitAB/terraform-modules/pull/1005) Migrate node-local-dns to install with Flux.
 - [#1007](https://github.com/XenitAB/terraform-modules/pull/1007) Migrate vpa to install with Flux.
 - [#1003](https://github.com/XenitAB/terraform-modules/pull/1003) Migrate gatekeeper to install with Flux.
+- [#1003](https://github.com/XenitAB/terraform-modules/pull/1012) Make Availability Zones configurable for AKS.
 
 ## 2023.06.4
 

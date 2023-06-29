@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2023.06.5
+
 ### Added
 
 - [#1000](https://github.com/XenitAB/terraform-modules/pull/1000) Add OTLP support in datadog-agent.

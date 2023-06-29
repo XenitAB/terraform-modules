@@ -75,7 +75,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   default_node_pool {
     name           = "default"
     vnet_subnet_id = data.azurerm_subnet.this.id
-    zones          = ["1", "2", "3"]
+    zones          = var.aks_default_node_pool_zones
 
     orchestrator_version = var.aks_config.version
     # This is a bug in tflint
@@ -98,7 +98,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   name                  = each.value.name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
   vnet_subnet_id        = data.azurerm_subnet.this.id
-  zones                 = ["1", "2", "3"]
+  zones                 = each.value.zones
 
   enable_auto_scaling  = true
   os_disk_type         = "Ephemeral"

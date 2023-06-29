@@ -94,3 +94,14 @@ resource "azurerm_application_gateway" "this" {
     rule_set_version = "3.2"
   }
 }
+resource "azurerm_role_assignment" "aks_contributor_agw" {
+  for_each = {
+    for s in ["agw"] :
+    s => s
+    if var.appgw_enabled
+  }
+  scope                            = azurerm_application_gateway.this["agw"].id
+  role_definition_name             = "Contributor"
+  principal_id                     = azurerm_kubernetes_cluster.this.ingress_application_gateway[0].ingress_application_gateway_identity[0].object_id
+  skip_service_principal_aad_check = true
+}

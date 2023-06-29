@@ -34,6 +34,12 @@ variable "aks_default_node_pool_vm_size" {
   default     = "Standard_D2ds_v5"
 }
 
+variable "aks_default_node_pool_zones" {
+  description = "The default node pool zones."
+  type        = list(string)
+  default     = ["1", "2", "3"]
+}
+
 variable "aks_config" {
   description = "The Azure Kubernetes Service (AKS) configuration"
   type = object({
@@ -47,6 +53,7 @@ variable "aks_config" {
       name           = string
       version        = string
       vm_size        = string
+      zones          = optional(list(string), ["1", "2", "3"])
       min_count      = number
       max_count      = number
       spot_enabled   = bool

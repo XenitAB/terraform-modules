@@ -173,6 +173,7 @@ module "external_dns" {
 
   source = "../../kubernetes/external-dns"
 
+  cluster_id   = local.cluster_id
   dns_provider = "aws"
   txt_owner_id = "${var.environment}-${var.name}${var.eks_name_suffix}"
   aws_config = {

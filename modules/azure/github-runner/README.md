@@ -58,6 +58,7 @@ No modules.
 | <a name="input_source_image_id"></a> [source\_image\_id](#input\_source\_image\_id) | The Azure Pipelines agent image id | `string` | n/a | yes |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
 | <a name="input_vmss_admin_username"></a> [vmss\_admin\_username](#input\_vmss\_admin\_username) | The admin username | `string` | `"ghradmin"` | no |
+| <a name="input_vmss_diff_disk_placement"></a> [vmss\_diff\_disk\_placement](#input\_vmss\_diff\_disk\_placement) | Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created. | `string` | `"CacheDisk"` | no |
 | <a name="input_vmss_disk_size_gb"></a> [vmss\_disk\_size\_gb](#input\_vmss\_disk\_size\_gb) | The disk size (in GB) for the VMSS instances | `number` | `128` | no |
 | <a name="input_vmss_instances"></a> [vmss\_instances](#input\_vmss\_instances) | The number of instances | `number` | `1` | no |
 | <a name="input_vmss_sku"></a> [vmss\_sku](#input\_vmss\_sku) | The sku for VMSS instances | `string` | `"Standard_F4s_v2"` | no |

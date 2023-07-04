@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+
+- [#1016](https://github.com/XenitAB/terraform-modules/pull/1016) Add variable for VMSS diff disk placement for GitHub Runners.
+
 ## 2023.06.5
 
 ### Added

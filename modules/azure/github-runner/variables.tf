@@ -66,6 +66,17 @@ variable "vmss_disk_size_gb" {
   default     = 128
 }
 
+variable "vmss_diff_disk_placement" {
+  description = "Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created."
+  type        = string
+  default     = "CacheDisk"
+
+  validation {
+    condition     = var.vmss_diff_disk_placement == "CacheDisk" || var.vmss_diff_disk_placement == "ResourceDisk"
+    error_message = "Diff disk placement must be either 'CacheDisk' or 'ResourceDisk'."
+  }
+}
+
 variable "vmss_subnet_config" {
   description = "The subnet configuration for the VMSS instances"
   type = object({

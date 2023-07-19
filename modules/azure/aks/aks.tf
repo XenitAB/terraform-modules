@@ -68,7 +68,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   storage_profile {
-    file_driver_enabled         = false
+    file_driver_enabled         = true
     snapshot_controller_enabled = false
   }
 

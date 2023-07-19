@@ -92,6 +92,8 @@ This module is used to create AKS clusters.
 | [kubernetes_role_binding.trivy_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
+| [kubernetes_storage_class.azurefile_zrs_premium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/storage_class) | resource |
+| [kubernetes_storage_class.azurefile_zrs_standard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.zrs_premium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.zrs_standard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/storage_class) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.57.0/docs/data-sources/client_config) | data source |

@@ -8,7 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
+- [#1016](https://github.com/XenitAB/terraform-modules/pull/1016) Add variable for VMSS diff disk placement for GitHub Runners.
+
+## 2023.06.5
+
+### Added
+
 - [#1000](https://github.com/XenitAB/terraform-modules/pull/1000) Add OTLP support in datadog-agent.
+- [#1010](https://github.com/XenitAB/terraform-modules/pull/1010) Add azureFile CSI storage classes.
 
 ### Changed
 
@@ -19,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1005](https://github.com/XenitAB/terraform-modules/pull/1005) Migrate node-local-dns to install with Flux.
 - [#1007](https://github.com/XenitAB/terraform-modules/pull/1007) Migrate vpa to install with Flux.
 - [#1003](https://github.com/XenitAB/terraform-modules/pull/1003) Migrate gatekeeper to install with Flux.
+- [#1003](https://github.com/XenitAB/terraform-modules/pull/1012) Make Availability Zones configurable for AKS.
 
 ## 2023.06.4
 

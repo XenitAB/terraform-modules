@@ -1,6 +1,7 @@
 secretsExporter:
   includeNamespaces:
     - ${prometheus_namespace}
+  priorityClassName: platform-medium
 
 prometheusRules:
   # We don't manage prometheus rules per cluster.

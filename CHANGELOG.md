@@ -12,13 +12,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#1017](https://github.com/XenitAB/terraform-modules/pull/1017) Add support for kubernetes 1.26.
 - [#1016](https://github.com/XenitAB/terraform-modules/pull/1016) Add variable for VMSS diff disk placement for GitHub Runners.
+- [#1010](https://github.com/XenitAB/terraform-modules/pull/1010) Add azureFile CSI storage classes.
 
 ## 2023.06.5
 
 ### Added
 
 - [#1000](https://github.com/XenitAB/terraform-modules/pull/1000) Add OTLP support in datadog-agent.
-- [#1010](https://github.com/XenitAB/terraform-modules/pull/1010) Add azureFile CSI storage classes.
 
 ### Changed
 

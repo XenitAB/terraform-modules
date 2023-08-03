@@ -22,11 +22,12 @@ resource "azurerm_key_vault" "delegate_kv" {
 
   name = data.azurecaf_name.azurerm_key_vault_delegate_kv[each.key].result
 
-  location                 = azurerm_resource_group.rg[each.key].location
-  resource_group_name      = azurerm_resource_group.rg[each.key].name
-  tenant_id                = data.azurerm_client_config.current.tenant_id
-  sku_name                 = "standard"
-  purge_protection_enabled = each.value.key_vault_purge_protection_enabled
+  location                    = azurerm_resource_group.rg[each.key].location
+  resource_group_name         = azurerm_resource_group.rg[each.key].name
+  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  sku_name                    = "standard"
+  purge_protection_enabled    = each.value.key_vault_purge_protection_enabled
+  enabled_for_disk_encryption = each.value.enabled_for_disk_encryption
 }
 
 resource "azurerm_key_vault_access_policy" "ap_owner_spn" {

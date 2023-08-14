@@ -35,7 +35,6 @@ variable "resource_group_configs" {
       lock_resource_group                = bool # Adds management_lock (CanNotDelete) to the resource group
       disable_unique_suffix              = bool # Disable unique_suffix on resource names
       key_vault_purge_protection_enabled = optional(bool, false)
-      enabled_for_disk_encryption        = optional(bool, false)
       tags                               = map(string)
     })
   )

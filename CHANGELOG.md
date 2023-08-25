@@ -6,21 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2023.08.1
+
 ### Added
 
 - [#1017](https://github.com/XenitAB/terraform-modules/pull/1017) Add support for kubernetes 1.26.
 - [#1016](https://github.com/XenitAB/terraform-modules/pull/1016) Add variable for VMSS diff disk placement for GitHub Runners.
+- [#1010](https://github.com/XenitAB/terraform-modules/pull/1010) Add azureFile CSI storage classes.
+
+### Changed
+
+- [#1009](https://github.com/XenitAB/terraform-modules/pull/1009) Set allow_nested_items_to_be_public in SAs false.
 
 ## 2023.06.5
 
 ### Added
 
 - [#1000](https://github.com/XenitAB/terraform-modules/pull/1000) Add OTLP support in datadog-agent.
-- [#1010](https://github.com/XenitAB/terraform-modules/pull/1010) Add azureFile CSI storage classes.
 
 ### Changed
 
-- [#1009](https://github.com/XenitAB/terraform-modules/pull/1009) Set allow_nested_items_to_be_public in SAs false.
 - [#1001](https://github.com/XenitAB/terraform-modules/pull/1001) Migrate node-ttl to install with Flux.
 - [#1002](https://github.com/XenitAB/terraform-modules/pull/1002) Migrate spegel to install with Flux.
 - [#1006](https://github.com/XenitAB/terraform-modules/pull/1006) Update Git provider.

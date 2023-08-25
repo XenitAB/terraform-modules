@@ -19,12 +19,11 @@ resource "azurerm_storage_account" "this" {
     if var.enable_storage_account
   }
 
-  name                            = data.azurecaf_name.azurerm_storage_account_this["storage_account"].result
-  resource_group_name             = data.azurerm_resource_group.this.name
-  location                        = data.azurerm_resource_group.this.location
-  account_tier                    = "Standard"
-  account_replication_type        = "GRS"
-  account_kind                    = "StorageV2"
-  min_tls_version                 = "TLS1_2"
-  allow_nested_items_to_be_public = false
+  name                     = data.azurecaf_name.azurerm_storage_account_this["storage_account"].result
+  resource_group_name      = data.azurerm_resource_group.this.name
+  location                 = data.azurerm_resource_group.this.location
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
+  account_kind             = "StorageV2"
+  min_tls_version          = "TLS1_2"
 }

@@ -3,14 +3,14 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.28.1 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.57.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.41.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.71.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.28.1 |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.41.0 |
 
 ## Modules
 
@@ -20,11 +20,11 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azuread_group.aks_managed_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
-| [azuread_group.cluster_admin](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
-| [azuread_group.cluster_view](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
-| [azuread_group.edit](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
-| [azuread_group.view](https://registry.terraform.io/providers/hashicorp/azuread/2.28.1/docs/data-sources/group) | data source |
+| [azuread_group.aks_managed_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/group) | data source |
+| [azuread_group.cluster_admin](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/group) | data source |
+| [azuread_group.cluster_view](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/group) | data source |
+| [azuread_group.edit](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/group) | data source |
+| [azuread_group.view](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/group) | data source |
 
 ## Inputs
 

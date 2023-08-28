@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Changed
+
+- [#1024](https://github.com/XenitAB/terraform-modules/pull/1024) Update provider versions.
+
 ## 2023.08.1
 
 ### Added

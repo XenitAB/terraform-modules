@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - [#1024](https://github.com/XenitAB/terraform-modules/pull/1024) Update provider versions.
 
+### Added
+
+- [#1023](https://github.com/XenitAB/terraform-modules/pull/1023) Set OS upgrade explicitly to Unmanaged.
+
 ## 2023.08.1
 
 ### Added

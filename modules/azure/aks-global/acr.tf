@@ -1,10 +1,35 @@
-# Create Azure Container Registry
 resource "azurerm_container_registry" "acr" {
   name                = var.acr_name_override == "" ? "acr${var.environment}${var.location_short}${var.name}${var.unique_suffix}" : var.acr_name_override
   resource_group_name = resource.azurerm_resource_group.this.name
   location            = resource.azurerm_resource_group.this.location
   sku                 = "Standard"
   admin_enabled       = false
+}
+
+resource "azurerm_container_registry_task" "acr_purge_task" {
+  name                  = "acr-purge-ask"
+  container_registry_id = azurerm_container_registry.acr.id
+
+  platform {
+    os           = "Linux"
+    architecture = "amd64"
+  }
+
+  encoded_step {
+    task_content = <<EOF
+version: v1.1.0
+steps: 
+  - cmd: acr purge --filter '.*:.*' --ago 365d --keep 5
+    disableWorkingDirectoryOverride: true
+    timeout: 3600
+EOF
+  }
+
+  timer_trigger {
+    name     = "every-monday"
+    schedule = "0 12 * * 1"
+    enabled  = true
+  }
 }
 
 # Add AcrPull permission for the AKS Service Principal (Client)

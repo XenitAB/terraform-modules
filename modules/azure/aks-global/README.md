@@ -22,6 +22,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/container_registry) | resource |
+| [azurerm_container_registry_task.acr_purge_task](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/container_registry_task) | resource |
 | [azurerm_dns_zone.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/dns_zone) | resource |
 | [azurerm_management_lock.rg](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/management_lock) | resource |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/resource_group) | resource |

@@ -56,3 +56,9 @@ data "azurerm_resource_group" "global" {
 locals {
   aks_name_suffix = var.aks_name_suffix != null ? var.aks_name_suffix : ""
 }
+
+data "azurerm_container_registry" "acr" {
+  name                = var.acr_name_override == "" ? "acr${var.environment}${var.location_short}${var.name}${var.unique_suffix}" : var.acr_name_override
+  resource_group_name = data.azurerm_resource_group.global.name
+}
+

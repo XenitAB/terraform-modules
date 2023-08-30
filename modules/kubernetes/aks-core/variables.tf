@@ -39,6 +39,12 @@ variable "aks_name_suffix" {
   type        = number
 }
 
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
+  type        = string
+  default     = ""
+}
+
 variable "priority_expander_config" {
   description = "Cluster auto scaler priority expander configuration."
   type        = map(list(string))
@@ -540,4 +546,10 @@ variable "control_plane_logs_config" {
     eventhub_hostname = ""
     eventhub_name     = ""
   }
+}
+
+variable "acr_name_override" {
+  description = "Override default name of ACR"
+  type        = string
+  default     = ""
 }

@@ -28,7 +28,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: spegel
-      version: v0.0.7
+      version: v0.0.12
   interval: 1m0s
   values:
     resources:
@@ -37,3 +37,17 @@ spec:
         memory: 40Mi
       limits:
         memory: 140Mi
+    spegel:
+      registries:
+        - https://docker.io
+        - https://ghcr.io
+        - https://quay.io
+        - https://mcr.microsoft.com
+        - https://public.ecr.aws
+        - https://gcr.io
+        - https://registry.k8s.io
+        - https://k8s.gcr.io
+        - https://lscr.io
+        %{~ if private_registry != "" ~}
+        - ${ private_registry }
+        %{~ endif ~}

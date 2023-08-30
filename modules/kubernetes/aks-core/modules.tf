@@ -601,5 +601,6 @@ module "spegel" {
 
   source = "../../kubernetes/spegel"
 
-  cluster_id = local.cluster_id
+  cluster_id       = local.cluster_id
+  private_registry = "https://${data.azurerm_container_registry.acr.login_server}"
 }

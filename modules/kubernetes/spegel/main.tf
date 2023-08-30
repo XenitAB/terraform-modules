@@ -25,6 +25,6 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "spegel" {
   path = "platform/${var.cluster_id}/spegel/spegel.yaml"
   content = templatefile("${path.module}/templates/spegel.yaml.tpl", {
-    cluster_id = var.cluster_id
+    private_registry = var.private_registry
   })
 }

@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#1025](https://github.com/XenitAB/terraform-modules/pull/1025) Enable Spegel mirroring for private ACR registry.
+- [#1028](https://github.com/XenitAB/terraform-modules/pull/1028) Change to use api_server_access_profile for AKS.
 
 ### Added
 

@@ -6,8 +6,10 @@ metadata:
 spec:
   match:
   - excludedNamespaces:
-    - kube-system
     - gatekeeper-system
+    - kube-system
+    - calico-system
+    - tigera-operator
     processes:
     - '*'
   - excludedNamespaces:
@@ -43,6 +45,8 @@ metadata:
 spec:
   enforcementAction: deny
   match:
+    excludedNamespaces:
+      - spegel
     kinds:
     - apiGroups:
       - ""
@@ -69,11 +73,128 @@ metadata:
 spec:
   enforcementAction: deny
   match:
+    excludedNamespaces:
+      - datadog
+      - falco
+      - spegel
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - prometheus
+      - datadog
+      - ingress-nginx
+      - cert-manager
+      - aad-pod-identity
+      - external-dns
+      - flux-system
+      - vpa
+      - reloader
     kinds:
     - apiGroups:
       - ""
       kinds:
       - Pod
+---
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: init-container-read-only-root-fs
+spec:
+  match:
+    excludedNamespaces:
+      - datadog
+      - falco
+      - spegel
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - prometheus
+      - datadog
+      - ingress-nginx
+      - cert-manager
+      - aad-pod-identity
+      - external-dns
+      - flux-system
+      - vpa
+      - reloader
+    scope: Namespaced
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Pod"]
+  applyTo:
+    - groups: [""]
+      versions: ["v1"]
+      kinds: ["Pod"]
+  location: "spec.initContainers[name:*].securityContext.readOnlyRootFilesystem"
+  parameters:
+    assign:
+      value: true
+---
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: container-read-only-root-fs
+spec:
+  match:
+    excludedNamespaces:
+      - datadog
+      - falco
+      - spegel
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - prometheus
+      - datadog
+      - ingress-nginx
+      - cert-manager
+      - aad-pod-identity
+      - external-dns
+      - flux-system
+      - vpa
+      - reloader
+    scope: Namespaced
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Pod"]
+  applyTo:
+    - groups: [""]
+      versions: ["v1"]
+      kinds: ["Pod"]
+  location: "spec.containers[name:*].securityContext.readOnlyRootFilesystem"
+  parameters:
+    assign:
+      value: true
+---
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: ephemeral-container-read-only-root-fs
+spec:
+  match:
+    excludedNamespaces:
+      - datadog
+      - falco
+      - spegel
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - prometheus
+      - datadog
+      - ingress-nginx
+      - cert-manager
+      - aad-pod-identity
+      - external-dns
+      - flux-system
+      - vpa
+      - reloader
+    scope: Namespaced
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Pod"]
+  applyTo:
+    - groups: [""]
+      versions: ["v1"]
+      kinds: ["Pod"]
+  location: "spec.ephemeralContainers[name:*].securityContext.readOnlyRootFilesystem"
+  parameters:
+    assign:
+      value: true
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPSPFlexVolumes
@@ -95,6 +216,9 @@ metadata:
 spec:
   enforcementAction: deny
   match:
+    namespaceSelector:
+      matchLabels:
+        xkf.xenit.io/kind: tenant
     excludedNamespaces:
     - flux-system
     kinds:
@@ -114,6 +238,8 @@ metadata:
 spec:
   enforcementAction: deny
   match:
+    excludedNamespaces:
+      - spegel
     kinds:
     - apiGroups:
       - ""
@@ -161,11 +287,132 @@ metadata:
 spec:
   enforcementAction: deny
   match:
+    excludedNamespaces:
+      - spegel
+      - prometheus
+      - datadog
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - falco
+      - ingress-nginx
+      - aad-pod-identity
+      - external-dns
+      - aad-pod-identity
+      - cert-manager
+      - trivy
+      - flux-system
+      - reloader
+      - vpa
     kinds:
     - apiGroups:
       - ""
       kinds:
       - Pod
+---
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: init-container-disallow-privilege-escalation
+spec:
+  match:
+    excludedNamespaces:
+      - spegel
+      - prometheus
+      - datadog
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - falco
+      - ingress-nginx
+      - aad-pod-identity
+      - external-dns
+      - aad-pod-identity
+      - cert-manager
+      - trivy
+      - flux-system
+      - reloader
+      - vpa
+    scope: Namespaced
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Pod"]
+  applyTo:
+    - versions: ["v1"]
+      groups: [""]
+      kinds: ["Pod"]
+  location: "spec.initContainers[name:*].securityContext.allowPrivilegeEscalation"
+  parameters:
+    assign:
+      value: false
+---
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: ephemeral-container-disallow-privilege-escalation
+spec:
+  match:
+    excludedNamespaces:
+      - spegel
+      - prometheus
+      - datadog
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - falco
+      - ingress-nginx
+      - aad-pod-identity
+      - external-dns
+      - aad-pod-identity
+      - cert-manager
+      - trivy
+      - flux-system
+      - reloader
+      - vpa
+    scope: Namespaced
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Pod"]
+  applyTo:
+    - versions: ["v1"]
+      groups: [""]
+      kinds: ["Pod"]
+  location: "spec.ephemeralContainers[name:*].securityContext.allowPrivilegeEscalation"
+  parameters:
+    assign:
+      value: false
+---
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: container-disallow-privilege-escalation
+spec:
+  match:
+    excludedNamespaces:
+      - spegel
+      - prometheus
+      - datadog
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - falco
+      - ingress-nginx
+      - aad-pod-identity
+      - external-dns
+      - aad-pod-identity
+      - cert-manager
+      - trivy
+      - flux-system
+      - reloader
+      - vpa
+    scope: Namespaced
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Pod"]
+  applyTo:
+    - versions: ["v1"]
+      groups: [""]
+      kinds: ["Pod"]
+  location: "spec.containers[name:*].securityContext.allowPrivilegeEscalation"
+  parameters:
+    assign:
+      value: false
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPSPHostNamespace
@@ -174,6 +421,8 @@ metadata:
 spec:
   enforcementAction: deny
   match:
+    excludedNamespaces:
+      - prometheus
     kinds:
     - apiGroups:
       - ""
@@ -200,6 +449,11 @@ metadata:
 spec:
   enforcementAction: deny
   match:
+    excludedNamespaces:
+      - prometheus
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - aad-pod-identity
     kinds:
     - apiGroups:
       - ""
@@ -245,6 +499,15 @@ metadata:
 spec:
   enforcementAction: deny
   match:
+    excludedNamespaces:
+      - falco
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - promtail
+      - prometheus
+      - spegel
+      - datadog
+      - aad-pod-identity
     kinds:
     - apiGroups:
       - ""
@@ -267,6 +530,10 @@ metadata:
 spec:
   enforcementAction: deny
   match:
+    excludedNamespaces:
+      - falco
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
     kinds:
     - apiGroups:
       - ""
@@ -280,6 +547,21 @@ metadata:
 spec:
   enforcementAction: deny
   match:
+    excludedNamespaces:
+      - spegel
+      - prometheus
+      - falco
+      - datadog
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - aad-pod-identity
+      - trivy
+      - cert-manager
+      - ingress-nginx
+      - flux-system
+      - external-dns
+      - reloader
+      - vpa
     kinds:
     - apiGroups:
       - ""
@@ -291,6 +573,114 @@ spec:
     requiredDropCapabilities:
     - NET_RAW
     - CAP_SYS_ADMIN
+---
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: init-container-drop-capabilities
+spec:
+  match:
+    excludedNamespaces:
+      - spegel
+      - prometheus
+      - falco
+      - datadog
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - aad-pod-identity
+      - trivy
+      - cert-manager
+      - ingress-nginx
+      - flux-system
+      - external-dns
+      - reloader
+      - vpa
+    scope: Namespaced
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Pod"]
+  applyTo:
+    - groups: [""]
+      versions: ["v1"]
+      kinds: ["Pod"]
+  location: "spec.initContainers[name:*].securityContext.capabilities.drop"
+  parameters:
+    assign:
+      value:
+        - NET_RAW
+        - CAP_SYS_ADMIN
+---
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: ephemeral-container-drop-capabilities
+spec:
+  match:
+    excludedNamespaces:
+      - spegel
+      - prometheus
+      - falco
+      - datadog
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - aad-pod-identity
+      - trivy
+      - cert-manager
+      - ingress-nginx
+      - flux-system
+      - external-dns
+      - reloader
+      - vpa
+    scope: Namespaced
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Pod"]
+  applyTo:
+    - groups: [""]
+      versions: ["v1"]
+      kinds: ["Pod"]
+  location: "spec.ephemeralContainers[name:*].securityContext.capabilities.drop"
+  parameters:
+    assign:
+      value:
+        - NET_RAW
+        - CAP_SYS_ADMIN
+---
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: container-drop-capabilities
+spec:
+  match:
+    excludedNamespaces:
+      - spegel
+      - prometheus
+      - falco
+      - datadog
+      - csi-secrets-store-provider-azure
+      - csi-secrets-store-provider-aws
+      - aad-pod-identity
+      - trivy
+      - cert-manager
+      - ingress-nginx
+      - flux-system
+      - external-dns
+      - reloader
+      - vpa
+    scope: Namespaced
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["Pod"]
+  applyTo:
+    - groups: [""]
+      versions: ["v1"]
+      kinds: ["Pod"]
+  location: "spec.containers[name:*].securityContext.capabilities.drop"
+  parameters:
+    assign:
+      value:
+        - NET_RAW
+        - CAP_SYS_ADMIN
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredProbes
@@ -315,186 +705,12 @@ spec:
 apiVersion: mutations.gatekeeper.sh/v1beta1
 kind: Assign
 metadata:
-  name: container-disallow-privilege-escalation
-spec:
-  match:
-    scope: Namespaced
-    kinds:
-      - apiGroups: ["*"]
-        kinds: ["Pod"]
-  applyTo:
-    - versions: ["v1"]
-      groups: [""]
-      kinds: ["Pod"]
-  location: "spec.containers[name:*].securityContext.allowPrivilegeEscalation"
-  parameters:
-    assign:
-      value: false
----
-apiVersion: mutations.gatekeeper.sh/v1beta1
-kind: Assign
-metadata:
-  name: container-drop-capabilities
-spec:
-  match:
-    scope: Namespaced
-    kinds:
-      - apiGroups: ["*"]
-        kinds: ["Pod"]
-  applyTo:
-    - groups: [""]
-      versions: ["v1"]
-      kinds: ["Pod"]
-  location: "spec.containers[name:*].securityContext.capabilities.drop"
-  parameters:
-    assign:
-      value:
-        - NET_RAW
-        - CAP_SYS_ADMIN
----
-apiVersion: mutations.gatekeeper.sh/v1beta1
-kind: Assign
-metadata:
-  name: container-read-only-root-fs
-spec:
-  match:
-    scope: Namespaced
-    kinds:
-      - apiGroups: ["*"]
-        kinds: ["Pod"]
-  applyTo:
-    - groups: [""]
-      versions: ["v1"]
-      kinds: ["Pod"]
-  location: "spec.containers[name:*].securityContext.readOnlyRootFilesystem"
-  parameters:
-    assign:
-      value: true
----
-apiVersion: mutations.gatekeeper.sh/v1beta1
-kind: Assign
-metadata:
-  name: ephemeral-container-disallow-privilege-escalation
-spec:
-  match:
-    scope: Namespaced
-    kinds:
-      - apiGroups: ["*"]
-        kinds: ["Pod"]
-  applyTo:
-    - versions: ["v1"]
-      groups: [""]
-      kinds: ["Pod"]
-  location: "spec.ephemeralContainers[name:*].securityContext.allowPrivilegeEscalation"
-  parameters:
-    assign:
-      value: false
----
-apiVersion: mutations.gatekeeper.sh/v1beta1
-kind: Assign
-metadata:
-  name: ephemeral-container-drop-capabilities
-spec:
-  match:
-    scope: Namespaced
-    kinds:
-      - apiGroups: ["*"]
-        kinds: ["Pod"]
-  applyTo:
-    - groups: [""]
-      versions: ["v1"]
-      kinds: ["Pod"]
-  location: "spec.ephemeralContainers[name:*].securityContext.capabilities.drop"
-  parameters:
-    assign:
-      value:
-        - NET_RAW
-        - CAP_SYS_ADMIN
----
-apiVersion: mutations.gatekeeper.sh/v1beta1
-kind: Assign
-metadata:
-  name: ephemeral-container-read-only-root-fs
-spec:
-  match:
-    scope: Namespaced
-    kinds:
-      - apiGroups: ["*"]
-        kinds: ["Pod"]
-  applyTo:
-    - groups: [""]
-      versions: ["v1"]
-      kinds: ["Pod"]
-  location: "spec.ephemeralContainers[name:*].securityContext.readOnlyRootFilesystem"
-  parameters:
-    assign:
-      value: true
----
-apiVersion: mutations.gatekeeper.sh/v1beta1
-kind: Assign
-metadata:
-  name: init-container-disallow-privilege-escalation
-spec:
-  match:
-    scope: Namespaced
-    kinds:
-      - apiGroups: ["*"]
-        kinds: ["Pod"]
-  applyTo:
-    - versions: ["v1"]
-      groups: [""]
-      kinds: ["Pod"]
-  location: "spec.initContainers[name:*].securityContext.allowPrivilegeEscalation"
-  parameters:
-    assign:
-      value: false
----
-apiVersion: mutations.gatekeeper.sh/v1beta1
-kind: Assign
-metadata:
-  name: init-container-drop-capabilities
-spec:
-  match:
-    scope: Namespaced
-    kinds:
-      - apiGroups: ["*"]
-        kinds: ["Pod"]
-  applyTo:
-    - groups: [""]
-      versions: ["v1"]
-      kinds: ["Pod"]
-  location: "spec.initContainers[name:*].securityContext.capabilities.drop"
-  parameters:
-    assign:
-      value:
-        - NET_RAW
-        - CAP_SYS_ADMIN
----
-apiVersion: mutations.gatekeeper.sh/v1beta1
-kind: Assign
-metadata:
-  name: init-container-read-only-root-fs
-spec:
-  match:
-    scope: Namespaced
-    kinds:
-      - apiGroups: ["*"]
-        kinds: ["Pod"]
-  applyTo:
-    - groups: [""]
-      versions: ["v1"]
-      kinds: ["Pod"]
-  location: "spec.initContainers[name:*].securityContext.readOnlyRootFilesystem"
-  parameters:
-    assign:
-      value: true
----
-apiVersion: mutations.gatekeeper.sh/v1beta1
-kind: Assign
-metadata:
   name: pod-default-seccomp
 spec:
   match:
+    namespaceSelector:
+      matchLabels:
+        xkf.xenit.io/kind: tenant
     scope: Namespaced
     kinds:
       - apiGroups: ["*"]
@@ -517,6 +733,9 @@ metadata:
   name: pod-serviceaccount-token-false
 spec:
   match:
+    namespaceSelector:
+      matchLabels:
+        xkf.xenit.io/kind: tenant
     scope: Namespaced
     kinds:
       - apiGroups: ["*"]

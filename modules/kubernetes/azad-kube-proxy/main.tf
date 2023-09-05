@@ -53,8 +53,18 @@ resource "git_repository_file" "node_ttl" {
     fqdn                  = var.fqdn,
     allowed_ips_csv       = join(",", var.allowed_ips),
     azure_ad_group_prefix = var.azure_ad_group_prefix
-    client_id             = var.azure_ad_app.client_id
-    client_secret         = var.azure_ad_app.client_secret
-    tenant_id             = var.azure_ad_app.tenant_id
   })
+}
+
+resource "kubernetes_secret" "this" {
+  metadata {
+    name      = "azad-kube-proxy"
+    namespace = kubernetes_namespace.this.metadata[0].name
+  }
+
+  data = {
+    client_id     = var.azure_ad_app.client_id
+    client_secret = var.azure_ad_app.client_secret
+    tenant_id     = var.azure_ad_app.tenant_id
+  }
 }

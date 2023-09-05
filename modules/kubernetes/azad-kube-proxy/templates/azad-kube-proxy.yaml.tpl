@@ -16,16 +16,6 @@ spec:
   interval: 1m0s
   url: "oci://ghcr.io/xenitab/helm-charts"
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: azad-kube-proxy
-type: Opaque
-data:
-  TENANT_ID: ${tenant_id}
-  CLIENT_SECRET: ${client_secret}
-  CLIENT_ID: ${client_id}
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:

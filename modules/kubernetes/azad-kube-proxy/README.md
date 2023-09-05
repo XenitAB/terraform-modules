@@ -31,8 +31,7 @@ module "aks\_core" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
+| <a name="provider_git"></a> [git](#provider\_git) | n/a |
 
 ## Modules
 
@@ -42,9 +41,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [helm_release.azad_kube_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
-| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
-| [kubernetes_secret.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/secret) | resource |
+| [git_repository_file.kustomization](https://registry.terraform.io/providers/hashicorp/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.node_ttl](https://registry.terraform.io/providers/hashicorp/git/latest/docs/resources/repository_file) | resource |
 
 ## Inputs
 

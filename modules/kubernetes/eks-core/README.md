@@ -7,7 +7,7 @@ This module is used to configure EKS clusters.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.31.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.15.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.25.3 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 5.34.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
@@ -19,7 +19,7 @@ This module is used to configure EKS clusters.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.31.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.15.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
 
@@ -84,8 +84,8 @@ This module is used to configure EKS clusters.
 | [kubernetes_role_binding.trivy_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
-| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/region) | data source |
-| [aws_route53_zone.this](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/route53_zone) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/5.15.0/docs/data-sources/region) | data source |
+| [aws_route53_zone.this](https://registry.terraform.io/providers/hashicorp/aws/5.15.0/docs/data-sources/route53_zone) | data source |
 
 ## Inputs
 

@@ -204,6 +204,7 @@ module "ingress_healthz" {
   location_short         = var.location_short
   linkerd_enabled        = var.linkerd_enabled
   public_private_enabled = var.ingress_nginx_config.public_private_enabled
+  cluster_id             = local.cluster_id
 }
 
 # External DNS

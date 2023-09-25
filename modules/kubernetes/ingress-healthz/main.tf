@@ -10,13 +10,9 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
@@ -25,28 +21,20 @@ locals {
   ingress_class_name = var.public_private_enabled == true ? "nginx-public" : "nginx"
 }
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = "ingress-healthz"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "ingress-healthz"
-  }
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/ingress-healthz.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id
+  })
 }
 
-resource "helm_release" "ingress_healthz" {
-  repository  = "https://charts.bitnami.com/bitnami"
-  chart       = "nginx"
-  name        = "ingress-healthz"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "12.0.3"
-  max_history = 3
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
+resource "git_repository_file" "ingress_healthz" {
+  path = "platform/${var.cluster_id}/ingress-healthz/ingress-healthz.yaml"
+  content = templatefile("${path.module}/templates/ingress-healthz.yaml.tpl", {
     environment        = var.environment
     dns_zone           = var.dns_zone
     location_short     = var.location_short
     linkerd_enabled    = var.linkerd_enabled
     ingress_class_name = local.ingress_class_name
-  })]
+  })
 }

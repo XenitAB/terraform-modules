@@ -28,74 +28,72 @@ spec:
         kind: HelmRepository
         name: ingress-healthz
       version: 12.0.3
-  interval: 1m0s
   values:
     replicaCount: 2
-    priorityClassName: "platform-low"
+    priorityClassName: platform-low
     resources:
-    requests:
+      requests:
         cpu: 50m
         memory: 64Mi
-    limits:
+      limits:
         memory: 128Mi
     containerSecurityContext:
-    enabled: true
-    runAsUser: 1001
-    runAsNonRoot: true
-    allowPrivilegeEscalation: false
-    readOnlyRootFilesystem: true
-    capabilities:
-        drop:
-        - NET_RAW
-    # Work around until PR gets merged
-    # https://github.com/bitnami/charts/pull/6101
-    sysctls: null
+      enabled: true
+      runAsUser: 1001
+      runAsNonRoot: true
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+          drop:
+          - NET_RAW
+      sysctls: "null"
     service:
-    type: ClusterIP
+      type: ClusterIP
     ingress:
-    enabled: true
-    ingressClassName: ${ingress_class_name}
-    %{ if location_short == "" }
-    hostname: ingress-healthz.${dns_zone}
-    %{ else }
-    hostname: ingress-healthz-${location_short}.${dns_zone}
-    %{ endif }
-    annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-        %{ if linkerd_enabled }
-        nginx.ingress.kubernetes.io/configuration-snippet: |
-        proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-        grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-        %{ endif }
-    extraTls:
-        - hosts:
-        %{ if location_short == "" }
-            - ingress-healthz.${dns_zone}
-        %{ else }
-            - ingress-healthz-${location_short}.${dns_zone}
-        %{ endif }
-        secretName: ingress-healthz-cert
-    %{ if linkerd_enabled }
-    podAnnotations:
-    linkerd.io/inject: enabled
-    %{ endif }
+      enabled: true
+      ingressClassName: ${ingress_class_name}
+      %{ if location_short == "" }
+      hostname: ingress-healthz.${dns_zone}
+      %{ else }
+      hostname: ingress-healthz-${location_short}.${dns_zone}
+      %{ endif }
+      annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          %{ if linkerd_enabled }
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+          proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+          grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+          %{ endif }
+      extraTls:
+          hosts:
+      %{ if location_short == "" }
+          - ingress-healthz.${dns_zone}
+      %{ else }
+          - ingress-healthz-${location_short}.${dns_zone}
+      %{ endif }
+          secretName: ingress-healthz-cert
+      %{ if linkerd_enabled }
+      podAnnotations:
+      linkerd.io/inject: enabled
+      %{ endif }
     pdb:
-    create: true
-    minAvailable: 1
+      create: true
+      minAvailable: 1
     serverBlock: |-
-    server {
-        listen 0.0.0.0:8080;
-        root /app;
-        location / {
-        ssi on;
-        ssi_types *;
-        add_header Content-Type application/json;
-        return 200 '{"status": "pass", "environment": "${environment}", "date": "<!--# config timefmt="%c" --><!--#echo var="date_local"-->"}';
-        }
-    }
+      server {
+          listen 0.0.0.0:8080;
+          root /app;
+          location / {
+          ssi on;
+          ssi_types *;
+          add_header Content-Type application/json;
+          return 200 '{"status": "pass", "environment": "sand", "date": "<!--# config timefmt="%c" --><!--#echo var="date_local"-->"}';
+          }
+      }
     extraVolumes:
-    - emptyDir: {}
-        name: temp
+      - name: temp
+        emptyDir: {}
     extraVolumeMounts:
-    - mountPath: /opt/bitnami/nginx/tmp/
-        name: temp
+      - name: temp
+        mountPath: /opt/bitnami/nginx/tmp/
+  interval: 1m0s

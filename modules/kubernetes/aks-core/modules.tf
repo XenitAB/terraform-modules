@@ -10,6 +10,7 @@ locals {
     "falco",
     "flux-system",
     "ingress-nginx",
+    "ingress-healthz",
     "linkerd",
     "linkerd-cni",
     "reloader",

@@ -36,6 +36,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#1009](https://github.com/XenitAB/terraform-modules/pull/1009) Set allow_nested_items_to_be_public in SAs false.
+- [#1020](https://github.com/XenitAB/terraform-modules/pull/1020) Enabled Azure Disk Encryption ability for Key Vaults.
 
 ## 2023.06.5
 

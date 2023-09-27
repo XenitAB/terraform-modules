@@ -64,14 +64,15 @@ spec:
           proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
           grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
           %{ endif }
-      extraTls:
-          hosts:
-      %{ if location_short == "" }
-          - ingress-healthz.${dns_zone}
-      %{ else }
-          - ingress-healthz-${location_short}.${dns_zone}
-      %{ endif }
-          secretName: ingress-healthz-cert
+      tls: true
+      extraHosts:
+          - hosts:
+        %{ if location_short == "" }
+            - ingress-healthz.${dns_zone}
+        %{ else }
+            - ingress-healthz-${location_short}.${dns_zone}
+        %{ endif }
+            secretName: ingress-healthz-cert
       %{ if linkerd_enabled }
       podAnnotations:
       linkerd.io/inject: enabled

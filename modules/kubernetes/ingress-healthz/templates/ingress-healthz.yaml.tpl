@@ -23,7 +23,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: ingress-healthz
+      chart: nginx
       sourceRef:
         kind: HelmRepository
         name: ingress-healthz

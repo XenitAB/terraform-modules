@@ -14,4 +14,4 @@ spec:
   - apiVersion: apps/v1
     kind: Deployment
     namespace: ingress-healthz
-    name: ingress-healthz
+    name: ingress-healthz-nginx

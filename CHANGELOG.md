@@ -11,6 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1025](https://github.com/XenitAB/terraform-modules/pull/1025) Enable Spegel mirroring for private ACR registry.
 - [#1033](https://github.com/XenitAB/terraform-modules/pull/1033) Migrate ingress-healthz to install with flux.
 - [#1035](https://github.com/XenitAB/terraform-modules/pull/1035) Fix ingress-healthz kustomization health check.
+- [#1036](https://github.com/XenitAB/terraform-modules/pull/1036) Migrate Falco to install with flux.
+
 ### Added
 
 - [#1027](https://github.com/XenitAB/terraform-modules/pull/1027) Add purge task to remove old images from ACR.

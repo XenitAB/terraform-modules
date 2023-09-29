@@ -1,8 +1,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: falco_exporter
-  namespace: falco_exporter
+  name: falco-exporter
+  namespace: falco
 spec:
   type: "oci"
   interval: 1m0s
@@ -11,15 +11,15 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: falco_exporter
+  name: falco-exporter
   namespace: falco
 spec:
   chart:
     spec:
-      chart: falco_exporter
+      chart: falco-exporter
       sourceRef:
         kind: HelmRepository
-        name: falco_exporter
+        name: falco-exporter
       version: v0.9.1
   interval: 1m0s
   values:

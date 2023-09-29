@@ -390,6 +390,7 @@ module "falco" {
   source = "../../kubernetes/falco"
 
   cloud_provider = "azure"
+  cluster_id     = var.cluster.id
 }
 
 # Reloader

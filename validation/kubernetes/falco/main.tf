@@ -13,4 +13,5 @@ module "falco" {
   }
 
   cloud_provider = "bar"
+  cluster_id     = "foo"
 }

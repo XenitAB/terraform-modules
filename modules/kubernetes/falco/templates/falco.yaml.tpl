@@ -12,7 +12,6 @@ metadata:
   name: falco
   namespace: falco
 spec:
-  type: "oci"
   interval: 1m0s
   url: "https://falcosecurity.github.io/charts"
 ---

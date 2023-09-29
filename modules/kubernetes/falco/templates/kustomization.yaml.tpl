@@ -9,7 +9,7 @@ spec:
     kind: GitRepository
     name: flux-system
   path: "./platform/${cluster_id}/falco/"
-  prune: true§
+  prune: true
   healthChecks:
   - apiVersion: apps/v1
     kind: DaemonSet

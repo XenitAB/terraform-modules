@@ -32,7 +32,7 @@ resource "git_repository_file" "falco" {
 }
 
 resource "git_repository_file" "falco_exporter" {
-  path = "platform/${var.cluster_id}/falco/falco_exporter.yaml"
+  path = "platform/${var.cluster_id}/falco/falco-exporter.yaml"
   content = templatefile("${path.module}/templates/falco-exporter.yaml.tpl", {
   })
 }

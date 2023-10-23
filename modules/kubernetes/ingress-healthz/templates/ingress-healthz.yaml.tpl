@@ -88,7 +88,7 @@ spec:
           ssi on;
           ssi_types *;
           add_header Content-Type application/json;
-          return 200 '{"status": "pass", "environment": "sand", "date": "<!--# config timefmt="%c" --><!--#echo var="date_local"-->"}';
+          return 200 '{"status": "pass", "environment": "${environment}", "date": "<!--# config timefmt="%c" --><!--#echo var="date_local"-->"}';
           }
       }
     extraVolumes:

@@ -8,6 +8,7 @@ locals {
     "falco",
     "flux-system",
     "ingress-nginx",
+    "ingress-healthz",
     "prometheus",
     "reloader",
     "velero",

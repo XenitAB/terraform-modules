@@ -58,12 +58,12 @@ spec:
       hostname: ingress-healthz-${location_short}.${dns_zone}
       %{ endif }
       annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
-          %{ if linkerd_enabled }
-          nginx.ingress.kubernetes.io/configuration-snippet: |
+        %{ if linkerd_enabled }
+        nginx.ingress.kubernetes.io/configuration-snippet: |
           proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
           grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-          %{ endif }
+        %{ endif }
+        cert-manager.io/cluster-issuer: letsencrypt
       tls: true
       extraHosts:
           - hosts:

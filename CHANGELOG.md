@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1041](https://github.com/XenitAB/terraform-modules/pull/1041) Fix ingress-healthz YAML for linkerd.
 - [#1040](https://github.com/XenitAB/terraform-modules/pull/1040) Exclude ingress-healthz namespace from gatekeeper.
 
 ## 2023.10.2

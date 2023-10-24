@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## Changed
+
+- [#1040](https://github.com/XenitAB/terraform-modules/pull/1040) Exclude ingress-healthz namespace from gatekeeper.
+
 ## 2023.10.2
 
 ### Changed

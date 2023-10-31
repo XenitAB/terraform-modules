@@ -23,6 +23,8 @@ operator:
   infraAssessmentScannerEnabled: false
   # scannerReportTTL the flag to set how long a report should exist. "" means that the ScannerReportTTL feature is disabled
   ScannerReportTTL: "25h"
+  # -- the flag to enable sbom generation
+  sbomGenerationEnabled: false
 
 %{~ if provider == "aws" ~}
 serviceAccount:

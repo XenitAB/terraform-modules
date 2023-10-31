@@ -42,7 +42,7 @@ resource "helm_release" "trivy_operator" {
   chart       = "trivy-operator"
   name        = "trivy-operator"
   namespace   = kubernetes_namespace.trivy.metadata[0].name
-  version     = "0.16.4"
+  version     = "0.18.4"
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/trivy-operator-values.yaml.tpl", {
@@ -67,7 +67,7 @@ resource "helm_release" "trivy" {
   chart       = "trivy"
   name        = "trivy"
   namespace   = kubernetes_namespace.trivy.metadata[0].name
-  version     = "0.46.1"
+  version     = "0.7.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/trivy-values.yaml.tpl", {
     provider                        = var.cloud_provider

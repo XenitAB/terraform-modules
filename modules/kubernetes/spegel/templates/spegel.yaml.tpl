@@ -28,7 +28,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: spegel
-      version: v0.0.12
+      version: v0.0.14
   interval: 1m0s
   values:
     resources:
@@ -38,6 +38,7 @@ spec:
       limits:
         memory: 140Mi
     spegel:
+      mirrorResolveTimeout: "1s"
       registries:
         - https://docker.io
         - https://ghcr.io

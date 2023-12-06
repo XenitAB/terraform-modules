@@ -6,11 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## Changed
+
+- [#1041](https://github.com/XenitAB/terraform-modules/pull/1041) Fix ingress-healthz YAML for linkerd.
+- [#1040](https://github.com/XenitAB/terraform-modules/pull/1040) Exclude ingress-healthz namespace from gatekeeper.
+- [#1044](https://github.com/XenitAB/terraform-modules/pull/1044) Update Spegel to v0.0.14.
+- [#1028](https://github.com/XenitAB/terraform-modules/pull/1028) Use api_server_access_profile for AKS.
+
+## 2023.10.2
+
 ### Changed
 
 - [#1025](https://github.com/XenitAB/terraform-modules/pull/1025) Enable Spegel mirroring for private ACR registry.
-- [#1028](https://github.com/XenitAB/terraform-modules/pull/1028) Use api_server_access_profile for AKS.
+- [#1038](https://github.com/XenitAB/terraform-modules/pull/1038) Fix enviroment in ingress-healthz return.
 
+## 2023.10.1
+
+### Changed
+
+- [#1025](https://github.com/XenitAB/terraform-modules/pull/1025) Enable Spegel mirroring for private ACR registry.
+- [#1033](https://github.com/XenitAB/terraform-modules/pull/1033) Migrate ingress-healthz to install with flux.
+- [#1035](https://github.com/XenitAB/terraform-modules/pull/1035) Fix ingress-healthz kustomization health check.
 ### Added
 
 - [#1027](https://github.com/XenitAB/terraform-modules/pull/1027) Add purge task to remove old images from ACR.

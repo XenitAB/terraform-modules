@@ -65,6 +65,7 @@ resource "azurerm_role_assignment" "sub_reader" {
 }
 
 data "azuread_application" "sp_all_owner" {
+  count        = var.service_principal_all_owner_name != "" ? 1 : 0
   display_name = var.service_principal_all_owner_name
 }
 

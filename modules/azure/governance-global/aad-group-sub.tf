@@ -70,6 +70,7 @@ data "azuread_application" "sp_all_owner" {
 }
 
 resource "azuread_group_member" "sp_all_owner" {
+  count            = var.service_principal_all_owner_name != "" ? 1 : 0
   group_object_id  = azuread_group.sub_owner.id
   member_object_id = data.azuread_application.sp_all_owner[count.index].id
 }

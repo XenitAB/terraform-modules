@@ -28,7 +28,7 @@ module "aks" {
   }
 
   aks_config = {
-    version                  = "1.25.6"
+    version                  = "1.27.7"
     production_grade         = false
     priority_expander_config = { "10" : [".*standard.*"], "20" : [".*spot.*"] }
     default_node_pool = {
@@ -39,7 +39,7 @@ module "aks" {
     node_pools = [
       {
         name      = "pool1"
-        version   = "1.25.6"
+        version   = "1.27.7"
         vm_size   = "Standard_B2s"
         min_count = 1
         max_count = 1

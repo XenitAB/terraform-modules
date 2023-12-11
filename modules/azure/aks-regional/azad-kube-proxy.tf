@@ -10,3 +10,9 @@ module "azad_kube_proxy" {
   display_name = local.azad_kube_proxy_name
   cluster_name = local.azad_kube_proxy_name
 }
+
+resource "azurerm_key_vault_secret" "azad_kube_proxy" {
+  name         = "azad-kube-proxy-${var.environment}-${var.location_short}-${var.name}"
+  key_vault_id = module.azad_kube_proxy.data.client_secret
+  value        = azuread_application_password.this.value
+}

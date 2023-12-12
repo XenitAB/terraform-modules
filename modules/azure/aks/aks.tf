@@ -155,7 +155,7 @@ resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
 
 resource "azurerm_storage_management_policy" "log_storage_account_audit_policy" {
   storage_account_id = data.azurerm_storage_account.log.id
-  
+
   rule {
     name    = "logs_kube_audit_admin"
     enabled = true
@@ -176,7 +176,7 @@ resource "azurerm_monitor_diagnostic_setting" "log_eventhub_audit" {
   target_resource_id             = azurerm_kubernetes_cluster.this.id
   eventhub_name                  = var.log_eventhub_name
   eventhub_authorization_rule_id = var.log_eventhub_authorization_rule_id
-  
+
   enabled_log {
     category = "cluster-autoscaler"
   }

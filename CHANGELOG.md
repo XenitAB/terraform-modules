@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1040](https://github.com/XenitAB/terraform-modules/pull/1040) Exclude ingress-healthz namespace from gatekeeper.
 - [#1044](https://github.com/XenitAB/terraform-modules/pull/1044) Update Spegel to v0.0.14.
 - [#1028](https://github.com/XenitAB/terraform-modules/pull/1028) Use api_server_access_profile for AKS.
+- [#1046](https://github.com/XenitAB/terraform-modules/pull/1044) Add validation for k8s 1.27 and 1.28.
 
 ## 2023.10.2
 

@@ -20,14 +20,17 @@ locals {
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
-  name                            = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
-  location                        = data.azurerm_resource_group.this.location
-  resource_group_name             = data.azurerm_resource_group.this.name
-  dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
-  kubernetes_version              = var.aks_config.version
-  sku_tier                        = var.aks_config.production_grade ? "Standard" : "Free"
-  api_server_authorized_ip_ranges = var.aks_authorized_ips
-  run_command_enabled             = false
+  name                = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
+  dns_prefix          = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  kubernetes_version  = var.aks_config.version
+  sku_tier            = var.aks_config.production_grade ? "Standard" : "Free"
+  run_command_enabled = false
+
+  api_server_access_profile {
+    authorized_ip_ranges = var.aks_authorized_ips
+  }
 
   oidc_issuer_enabled       = true
   workload_identity_enabled = true

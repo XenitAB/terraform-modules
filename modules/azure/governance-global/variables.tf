@@ -79,5 +79,4 @@ variable "resource_name_overrides" {
 variable "service_principal_all_owner_name" {
   description = "Name of the manually created SP-sub-all-owner"
   type        = string
-  default     = ""
 }

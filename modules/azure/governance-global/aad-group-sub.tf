@@ -70,5 +70,5 @@ data "azuread_application" "sp_all_owner" {
 
 resource "azuread_group_member" "sp_all_owner" {
   group_object_id  = azuread_group.sub_owner.id
-  member_object_id = data.azuread_application.sp_all_owner[count.index].id
+  member_object_id = data.azuread_application.sp_all_owner.id
 }

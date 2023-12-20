@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1051](https://github.com/XenitAB/terraform-modules/pull/1051) Fixed typo in the contribution guide
 - [#1050](https://github.com/XenitAB/terraform-modules/pull/1050) Migrate diagnostic settings.
 - [#1049](https://github.com/XenitAB/terraform-modules/pull/1049) Add azad kube proxy password to core key vault.
 - [#1041](https://github.com/XenitAB/terraform-modules/pull/1041) Fix ingress-healthz YAML for linkerd.

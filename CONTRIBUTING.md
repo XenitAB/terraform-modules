@@ -37,7 +37,7 @@ gmake
 Creating a new module is simple but has some non-obvious requirements for all of the checks to pass. First create a new module
 directory in the 'modules' directory and in a fitting category directory. After the module is created a validation configuration
 needs to be created for the module. In the 'validation' directory create a new directory with the same name and path as the module.
-Inside there you should create a `m̀ain.tf` file which imports the module with a local path and passes dummy values for all of the
+Inside there you should create a `main.tf` file which imports the module with a local path and passes dummy values for all of the
 required variables, so that it is possible to run `terraform validate`.
 
 ## Your First Pull Request

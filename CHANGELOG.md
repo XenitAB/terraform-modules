@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+<<<<<<< HEAD
 - [#1062](https://github.com/XenitAB/terraform-modules/pull/1062) Migrate cert-manager to install with flux.
 - [#1063](https://github.com/XenitAB/terraform-modules/pull/1063) Make inlude_tenant_name optional.
 - [#1059](https://github.com/XenitAB/terraform-modules/pull/1059) Move promtail to install with flux.
@@ -17,6 +18,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1030](https://github.com/XenitAB/terraform-modules/pull/1030) Move azad-kube-proxy to install with flux.
 - [#1014](https://github.com/XenitAB/terraform-modules/pull/1014) Migrate external-dns to install with Flux.
 - [#1054](https://github.com/XenitAB/terraform-modules/pull/1050) Fix object constructor map keys must be unique error.
+=======
+- [#1052](https://github.com/XenitAB/terraform-modules/pull/1052) Update ingress-healthz to 15.5.2.
+>>>>>>> 6eea7eb7 (Changelog)
 - [#1050](https://github.com/XenitAB/terraform-modules/pull/1050) Migrate diagnostic settings.
 - [#1049](https://github.com/XenitAB/terraform-modules/pull/1049) Add azad kube proxy password to core key vault.
 - [#1041](https://github.com/XenitAB/terraform-modules/pull/1041) Fix ingress-healthz YAML for linkerd.

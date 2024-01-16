@@ -27,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: ingress-healthz
-      version: 12.0.3
+      version: 15.5.2
   values:
     replicaCount: 2
     priorityClassName: platform-low

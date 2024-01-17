@@ -23,21 +23,21 @@ resource "azuread_application_password" "owner_spn" {
   }
 }
 
-resource "pal_management_partner" "owner_spn" {
-  depends_on = [azuread_application_password.owner_spn]
-
-  for_each = {
-    for s in ["pal"] :
-    s => s
-    if var.partner_id != ""
-  }
-
-  tenant_id     = data.azurerm_subscription.current.tenant_id
-  client_id     = data.azuread_service_principal.owner_spn.application_id
-  client_secret = azuread_application_password.owner_spn["pal"].value
-  partner_id    = var.partner_id
-  overwrite     = true
-}
+#resource "pal_management_partner" "owner_spn" {
+#  depends_on = [azuread_application_password.owner_spn]
+#
+#  for_each = {
+#    for s in ["pal"] :
+#    s => s
+#    if var.partner_id != ""
+#  }
+#
+#  tenant_id     = data.azurerm_subscription.current.tenant_id
+#  client_id     = data.azuread_service_principal.owner_spn.application_id
+#  client_secret = azuread_application_password.owner_spn["pal"].value
+#  partner_id    = var.partner_id
+#  overwrite     = true
+#}
 
 data "azurecaf_name" "azuread_application_aad_app" {
   for_each = {
@@ -92,18 +92,18 @@ resource "azuread_application_password" "aad_sp" {
 }
 
 
-resource "pal_management_partner" "aad_sp" {
-  depends_on = [azuread_application_password.aad_sp]
-
-  for_each = {
-    for rg in var.resource_group_configs :
-    rg.common_name => rg
-    if rg.delegate_service_principal == true && var.partner_id != ""
-  }
-
-  tenant_id     = data.azurerm_subscription.current.tenant_id
-  client_id     = azuread_application.aad_app[each.key].application_id
-  client_secret = azuread_application_password.aad_sp[each.key].value
-  partner_id    = var.partner_id
-  overwrite     = true
-}
+#resource "pal_management_partner" "aad_sp" {
+#  depends_on = [azuread_application_password.aad_sp]
+#
+#  for_each = {
+#    for rg in var.resource_group_configs :
+#    rg.common_name => rg
+#    if rg.delegate_service_principal == true && var.partner_id != ""
+#  }
+#
+#  tenant_id     = data.azurerm_subscription.current.tenant_id
+#  client_id     = azuread_application.aad_app[each.key].application_id
+#  client_secret = azuread_application_password.aad_sp[each.key].value
+#  partner_id    = var.partner_id
+#  overwrite     = true
+#}

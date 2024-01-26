@@ -48,6 +48,7 @@ No modules.
 | [azurerm_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
+| [azurerm_storage_management_policy.log_storage_account_audit_policy](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/storage_management_policy) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/client_config) | data source |
 | [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/resource_group) | data source |

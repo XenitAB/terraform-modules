@@ -37,6 +37,7 @@ This module is used to create resources that are used by AKS clusters.
 | [azurerm_eventhub_namespace_authorization_rule.listen](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/eventhub_namespace_authorization_rule) | resource |
 | [azurerm_key_vault_access_policy.datadog](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_secret.azad_kube_proxy](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.eventhub_connection_string](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_public_ip_prefix.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/public_ip_prefix) | resource |

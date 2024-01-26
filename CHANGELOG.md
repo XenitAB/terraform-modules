@@ -8,9 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1050](https://github.com/XenitAB/terraform-modules/pull/1050) Migrate diagnostic settings.
+- [#1049](https://github.com/XenitAB/terraform-modules/pull/1049) Add azad kube proxy password to core key vault.
 - [#1041](https://github.com/XenitAB/terraform-modules/pull/1041) Fix ingress-healthz YAML for linkerd.
 - [#1040](https://github.com/XenitAB/terraform-modules/pull/1040) Exclude ingress-healthz namespace from gatekeeper.
 - [#1044](https://github.com/XenitAB/terraform-modules/pull/1044) Update Spegel to v0.0.14.
+- [#1028](https://github.com/XenitAB/terraform-modules/pull/1028) Use api_server_access_profile for AKS.
+- [#1046](https://github.com/XenitAB/terraform-modules/pull/1044) Add validation for k8s 1.27 and 1.28.
 
 ## 2023.10.2
 

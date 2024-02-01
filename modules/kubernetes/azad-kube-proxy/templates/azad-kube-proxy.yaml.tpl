@@ -20,6 +20,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: azad-kube-proxy
+  namespace: azad-kube-proxy
 type: Opaque
 data:
   TENANT_ID: ${tenant_id}

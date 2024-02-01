@@ -53,8 +53,8 @@ resource "git_repository_file" "node_ttl" {
     fqdn                  = var.fqdn,
     allowed_ips_csv       = join(",", var.allowed_ips),
     azure_ad_group_prefix = var.azure_ad_group_prefix
-    client_id             = var.azure_ad_app.client_id
-    client_secret         = var.azure_ad_app.client_secret
-    tenant_id             = var.azure_ad_app.tenant_id
+    client_id             = base64encode(var.azure_ad_app.client_id)
+    client_secret         = base64encode(var.azure_ad_app.client_secret)
+    tenant_id             = base64encode(var.azure_ad_app.tenant_id)
   })
 }

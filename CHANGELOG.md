@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1030](https://github.com/XenitAB/terraform-modules/pull/1030) Move azad-kube-proxy to install with flux.
 - [#1054](https://github.com/XenitAB/terraform-modules/pull/1050) Fix object constructor map keys must be unique error
 - [#1050](https://github.com/XenitAB/terraform-modules/pull/1050) Migrate diagnostic settings.
 - [#1049](https://github.com/XenitAB/terraform-modules/pull/1049) Add azad kube proxy password to core key vault.

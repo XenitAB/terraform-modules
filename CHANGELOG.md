@@ -6,10 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## Changed
+
+- [#1054](https://github.com/XenitAB/terraform-modules/pull/1050) Fix object constructor map keys must be unique error
+- [#1050](https://github.com/XenitAB/terraform-modules/pull/1050) Migrate diagnostic settings.
+- [#1049](https://github.com/XenitAB/terraform-modules/pull/1049) Add azad kube proxy password to core key vault.
+- [#1041](https://github.com/XenitAB/terraform-modules/pull/1041) Fix ingress-healthz YAML for linkerd.
+- [#1040](https://github.com/XenitAB/terraform-modules/pull/1040) Exclude ingress-healthz namespace from gatekeeper.
+- [#1044](https://github.com/XenitAB/terraform-modules/pull/1044) Update Spegel to v0.0.14.
+- [#1028](https://github.com/XenitAB/terraform-modules/pull/1028) Use api_server_access_profile for AKS.
+- [#1046](https://github.com/XenitAB/terraform-modules/pull/1044) Add validation for k8s 1.27 and 1.28.
+- [#1047](https://github.com/XenitAB/terraform-modules/pull/1047) Add Owner-SP to sub-owner group.
+
+## 2023.10.2
+
+### Changed
+
+- [#1038](https://github.com/XenitAB/terraform-modules/pull/1038) Fix enviroment in ingress-healthz return.
+
+## 2023.10.1
+
 ### Changed
 
 - [#1025](https://github.com/XenitAB/terraform-modules/pull/1025) Enable Spegel mirroring for private ACR registry.
-
+- [#1033](https://github.com/XenitAB/terraform-modules/pull/1033) Migrate ingress-healthz to install with flux.
+- [#1035](https://github.com/XenitAB/terraform-modules/pull/1035) Fix ingress-healthz kustomization health check.
 ### Added
 
 - [#1027](https://github.com/XenitAB/terraform-modules/pull/1027) Add purge task to remove old images from ACR.
@@ -35,6 +56,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - [#1009](https://github.com/XenitAB/terraform-modules/pull/1009) Set allow_nested_items_to_be_public in SAs false.
+- [#1020](https://github.com/XenitAB/terraform-modules/pull/1020) Enabled Azure Disk Encryption ability for Key Vaults.
 
 ## 2023.06.5
 

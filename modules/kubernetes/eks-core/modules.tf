@@ -8,6 +8,7 @@ locals {
     "falco",
     "flux-system",
     "ingress-nginx",
+    "ingress-healthz",
     "prometheus",
     "reloader",
     "velero",
@@ -160,6 +161,7 @@ module "ingress_healthz" {
   dns_zone               = var.cert_manager_config.dns_zone[0]
   linkerd_enabled        = var.linkerd_enabled
   public_private_enabled = var.ingress_nginx_config.public_private_enabled
+  cluster_id             = local.cluster_id
 }
 
 module "external_dns" {

@@ -7,7 +7,7 @@ This module is used to create AKS clusters.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.41.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.47.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.71.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.25.3 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 5.34.0 |

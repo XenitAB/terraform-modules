@@ -51,3 +51,8 @@ variable "branch" {
   type        = string
   default     = "main"
 }
+
+variable "delegate_access_ns" {
+  description = "test"
+  type        = string
+}

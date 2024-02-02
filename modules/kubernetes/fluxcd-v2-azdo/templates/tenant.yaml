@@ -23,6 +23,11 @@ subjects:
 - kind: ServiceAccount
   name: flux
   namespace: ${name}
+%{ if delegate_access_ns != "" }
+- kind: ServiceAccount
+  name: flux
+  namespace: ${delegate_access_ns}
+%{ endif }
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository

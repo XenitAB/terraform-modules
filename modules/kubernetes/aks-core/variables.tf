@@ -51,6 +51,12 @@ variable "priority_expander_config" {
   default     = null
 }
 
+variable "delegate_access_ns" {
+  description = "test"
+  type        = string
+  default     = ""
+}
+
 variable "aad_groups" {
   description = "Configuration for aad groups"
   type = object({

@@ -51,11 +51,12 @@ module "fluxcd_v2_azure_devops" {
 
   source = "../../kubernetes/fluxcd-v2-azdo"
 
-  environment       = var.environment
-  cluster_id        = local.cluster_id
-  azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
-  azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
-  azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
+  environment        = var.environment
+  delegate_access_ns = var.delegate_access_ns
+  cluster_id         = local.cluster_id
+  azure_devops_pat   = var.fluxcd_v2_config.azure_devops.pat
+  azure_devops_org   = var.fluxcd_v2_config.azure_devops.org
+  azure_devops_proj  = var.fluxcd_v2_config.azure_devops.proj
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {

@@ -94,7 +94,7 @@ variable "namespaces" {
   )
   default = [{
     name   = ""
-    labels = ""
+    labels = {}
     flux = {
       enabled              = true
       create_crds          = false

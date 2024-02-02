@@ -24,6 +24,12 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "tenant_path_override" {
+  description = "path to tenant config in gitops"
+  type        = string
+  default     = ""
+}
+
 variable "namespaces" {
   description = "The namespaces to configure flux with"
   type = list(

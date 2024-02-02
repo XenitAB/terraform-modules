@@ -92,7 +92,7 @@ variable "namespaces" {
       })
     })
   )
-  default = {
+  default = [{
     name   = ""
     labels = ""
     flux = {
@@ -108,7 +108,8 @@ variable "namespaces" {
         repo = ""
       }
     }
-  }
+    }
+  ]
 }
 
 variable "kubernetes_network_policy_default_deny" {

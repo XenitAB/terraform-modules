@@ -215,7 +215,7 @@ resource "azuredevops_git_repository_file" "tenant" {
     branch             = var.branch,
     name               = each.key,
     environment        = var.environment,
-    delegate_access_ns = var.delegate_access_ns
+    delegate_access_ns = each.value.flux.delegate_access_ns == "" ? var.environment : each.value.flux.delegate_access_ns,
     create_crds        = each.value.flux.create_crds
   })
   overwrite_on_create = true

@@ -30,14 +30,26 @@ variable "namespaces" {
     object({
       name = string
       flux = object({
-        enabled     = bool
-        create_crds = bool
-        org         = string
-        proj        = string
-        repo        = string
+        enabled            = bool
+        create_crds        = bool
+        delegate_access_ns = string
+        org                = string
+        proj               = string
+        repo               = string
       })
     })
   )
+  default = [{
+    name = ""
+    flux = {
+      enabled            = false,
+      create_crds        = false,
+      delegate_access_ns = "",
+      org                = "",
+      proj               = "",
+      repo               = "",
+    }
+  }]
 }
 
 variable "cluster_repo" {
@@ -50,9 +62,4 @@ variable "branch" {
   description = "Branch to point source controller towards"
   type        = string
   default     = "main"
-}
-
-variable "delegate_access_ns" {
-  description = "test"
-  type        = string
 }

@@ -104,9 +104,9 @@ variable "namespaces" {
         proj = ""
         repo = ""
       }
-      github = object({
+      github = {
         repo = ""
-      })
+      }
     }
   }
 }

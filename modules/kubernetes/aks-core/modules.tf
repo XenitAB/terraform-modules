@@ -51,6 +51,7 @@ module "fluxcd_v2_azure_devops" {
 
   source = "../../kubernetes/fluxcd-v2-azdo"
 
+  environment       = var.environment
   cluster_id        = local.cluster_id
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org

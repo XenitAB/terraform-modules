@@ -149,7 +149,6 @@ variable "fluxcd_v2_config" {
   description = "Configuration for fluxcd-v2"
   type = object({
     type = string
-
     github = object({
       org             = string
       app_id          = number

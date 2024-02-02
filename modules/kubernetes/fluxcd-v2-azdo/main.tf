@@ -214,8 +214,7 @@ resource "azuredevops_git_repository_file" "tenant" {
     repo        = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${each.value.flux.proj}/_git/${each.value.flux.repo}"
     branch      = var.branch,
     name        = each.key,
-    tenant_path = var.tenant_path_override == "" ? var.environment : var.tenant_path_override
-    environment = var.environment,
+    tenant_path = each.value.flux.tenant_path_override == "" ? var.environment : var.tenant_path_override,
     create_crds = each.value.flux.create_crds
   })
   overwrite_on_create = true

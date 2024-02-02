@@ -78,8 +78,9 @@ variable "namespaces" {
       name   = string
       labels = map(string)
       flux = object({
-        enabled     = bool
-        create_crds = bool
+        enabled              = bool
+        create_crds          = bool
+        tenant_path_override = string
         azure_devops = object({
           org  = string
           proj = string
@@ -91,6 +92,23 @@ variable "namespaces" {
       })
     })
   )
+  default = {
+    name   = ""
+    labels = ""
+    flux = {
+      enabled              = true
+      create_crds          = false
+      tenant_path_override = ""
+      azure_devops = {
+        org  = ""
+        proj = ""
+        repo = ""
+      }
+      github = object({
+        repo = ""
+      })
+    }
+  }
 }
 
 variable "kubernetes_network_policy_default_deny" {
@@ -131,6 +149,7 @@ variable "fluxcd_v2_config" {
   description = "Configuration for fluxcd-v2"
   type = object({
     type = string
+
     github = object({
       org             = string
       app_id          = number

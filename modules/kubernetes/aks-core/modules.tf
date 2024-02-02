@@ -51,7 +51,6 @@ module "fluxcd_v2_azure_devops" {
 
   source = "../../kubernetes/fluxcd-v2-azdo"
 
-  environment       = var.environment
   cluster_id        = local.cluster_id
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
@@ -59,11 +58,12 @@ module "fluxcd_v2_azure_devops" {
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {
-      enabled     = ns.flux.enabled
-      create_crds = ns.flux.create_crds
-      org         = ns.flux.azure_devops.org
-      proj        = ns.flux.azure_devops.proj
-      repo        = ns.flux.azure_devops.repo
+      enabled              = ns.flux.enabled
+      create_crds          = ns.flux.create_crds
+      tenant_path_override = ns.flux.tenant_path_override
+      org                  = ns.flux.azure_devops.org
+      proj                 = ns.flux.azure_devops.proj
+      repo                 = ns.flux.azure_devops.repo
     }
   }]
 }

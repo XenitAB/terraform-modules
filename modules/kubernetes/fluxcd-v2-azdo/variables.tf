@@ -39,6 +39,18 @@ variable "namespaces" {
       })
     })
   )
+  default = [{
+    name = ""
+    flux = {
+      enabled             = true
+      create_crds         = false
+      include_tenant_name = false
+      org                 = ""
+      proj                = ""
+      repo                = ""
+    }
+    }
+  ]
 }
 
 variable "cluster_repo" {

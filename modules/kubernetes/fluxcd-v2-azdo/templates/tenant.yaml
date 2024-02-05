@@ -37,7 +37,6 @@ spec:
   ref:
     branch: ${branch}
   timeout: 120s
-%{ if include_tenant_name == false }
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
@@ -47,30 +46,17 @@ metadata:
 spec:
   serviceAccountName: flux
   interval: 5m
-  path: ./tenant/${environment}
-  sourceRef:
-    kind: GitRepository
-    name: ${name}
-  prune: true
-  validation: client
-%{ endif }
 %{ if include_tenant_name == true }
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: ${name}
-  namespace: ${name}
-spec:
-  serviceAccountName: flux
-  interval: 5m
   path: ./tenant/${environment}/${name}
+%{ endif }
+%{ if include_tenant_name == false }
+  path: ./tenant/${environment}
+%{ endif }
   sourceRef:
     kind: GitRepository
     name: ${name}
   prune: true
   validation: client
-%{ endif }
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Provider

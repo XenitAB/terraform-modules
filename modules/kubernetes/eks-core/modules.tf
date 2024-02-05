@@ -240,6 +240,7 @@ module "falco" {
   source = "../../kubernetes/falco"
 
   cloud_provider = "aws"
+  cluster_id     = local.cluster_id
 }
 
 module "reloader" {

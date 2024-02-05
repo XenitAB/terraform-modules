@@ -59,12 +59,12 @@ module "fluxcd_v2_azure_devops" {
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {
-      enabled              = ns.flux.enabled
-      create_crds          = ns.flux.create_crds
-      tenant_path_override = ns.flux.tenant_path_override
-      org                  = ns.flux.azure_devops.org
-      proj                 = ns.flux.azure_devops.proj
-      repo                 = ns.flux.azure_devops.repo
+      enabled             = ns.flux.enabled
+      create_crds         = ns.flux.create_crds
+      include_tenant_name = ns.flux.include_tenant_name
+      org                 = ns.flux.azure_devops.org
+      proj                = ns.flux.azure_devops.proj
+      repo                = ns.flux.azure_devops.repo
     }
   }]
 }

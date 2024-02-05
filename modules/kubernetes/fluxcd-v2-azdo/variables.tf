@@ -30,12 +30,12 @@ variable "namespaces" {
     object({
       name = string
       flux = object({
-        enabled              = bool
-        create_crds          = bool
-        tenant_path_override = string
-        org                  = string
-        proj                 = string
-        repo                 = string
+        enabled             = bool
+        create_crds         = bool
+        include_tenant_name = bool
+        org                 = string
+        proj                = string
+        repo                = string
       })
     })
   )

@@ -78,9 +78,9 @@ variable "namespaces" {
       name   = string
       labels = map(string)
       flux = object({
-        enabled              = bool
-        create_crds          = bool
-        tenant_path_override = string
+        enabled             = bool
+        create_crds         = bool
+        include_tenant_name = string
         azure_devops = object({
           org  = string
           proj = string
@@ -96,9 +96,9 @@ variable "namespaces" {
     name   = ""
     labels = {}
     flux = {
-      enabled              = true
-      create_crds          = false
-      tenant_path_override = ""
+      enabled             = true
+      create_crds         = false
+      include_tenant_name = false
       azure_devops = {
         org  = ""
         proj = ""

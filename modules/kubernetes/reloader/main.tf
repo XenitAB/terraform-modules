@@ -17,14 +17,14 @@ terraform {
 }
 
 resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/spegel.yaml"
+  path = "clusters/${var.cluster_id}/reloader.yaml"
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
     cluster_id = var.cluster_id
   })
 }
 
-resource "git_repository_file" "spegel" {
-  path = "platform/${var.cluster_id}/spegel/spegel.yaml"
-  content = templatefile("${path.module}/templates/spegel.yaml.tpl", {
+resource "git_repository_file" "reloader" {
+  path = "platform/${var.cluster_id}/reloader/reloader.yaml"
+  content = templatefile("${path.module}/templates/reloader.yaml.tpl", {
   })
 }

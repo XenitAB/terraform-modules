@@ -30,7 +30,6 @@ spec:
       version: v0.0.102
   interval: 1m0s
   values:
-  reloader:
     deployment:
       priorityClassName: platform-low
       resources:

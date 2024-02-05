@@ -14,4 +14,4 @@ spec:
   - apiVersion: apps/v1
     kind: deployment
     namespace: reloader
-    name: reloader
+    name: reloader-reloader

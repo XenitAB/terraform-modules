@@ -61,7 +61,6 @@ output "trivy_config" {
   description = "Configuration for Trivy"
   value = {
     trivy_operator_role_arn = module.trivy_operator_ecr["trivy"].role_arn
-    trivy_role_arn          = module.trivy_ecr["trivy"].role_arn
   }
 }
 output "datadog_config" {

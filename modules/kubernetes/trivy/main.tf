@@ -42,17 +42,18 @@ resource "helm_release" "trivy_operator" {
   chart       = "trivy-operator"
   name        = "trivy-operator"
   namespace   = kubernetes_namespace.trivy.metadata[0].name
-  version     = "0.11.1-rc"
+  version     = "0.12.0"
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/trivy-operator-values.yaml.tpl", {
-    provider                = var.cloud_provider
-    trivy_operator_role_arn = var.trivy_operator_role_arn
+    provider                        = var.cloud_provider
+    trivy_operator_role_arn         = var.trivy_operator_role_arn
+    volume_claim_storage_class_name = var.volume_claim_storage_class_name
   })]
 }
 
 resource "helm_release" "starboard_exporter" {
-  depends_on  = [helm_release.trivy]
+  depends_on  = [helm_release.trivy_operator]
   repository  = "https://giantswarm.github.io/giantswarm-catalog/"
   chart       = "starboard-exporter"
   name        = "starboard-exporter"
@@ -60,20 +61,6 @@ resource "helm_release" "starboard_exporter" {
   namespace   = kubernetes_namespace.trivy.metadata[0].name
   max_history = 3
   values      = [file("${path.module}/templates/starboard-exporter-values.yaml")]
-}
-
-resource "helm_release" "trivy" {
-  repository  = "https://aquasecurity.github.io/helm-charts/"
-  chart       = "trivy"
-  name        = "trivy"
-  namespace   = kubernetes_namespace.trivy.metadata[0].name
-  version     = "0.5.0"
-  max_history = 3
-  values = [templatefile("${path.module}/templates/trivy-values.yaml.tpl", {
-    provider                        = var.cloud_provider
-    trivy_role_arn                  = var.trivy_role_arn
-    volume_claim_storage_class_name = var.volume_claim_storage_class_name
-  })]
 }
 
 resource "helm_release" "trivy_extras" {

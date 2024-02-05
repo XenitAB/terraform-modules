@@ -176,6 +176,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#946](https://github.com/XenitAB/terraform-modules/pull/946) [Breaking] Enable configuration for private and public ingress controllers.
 - [#949](https://github.com/XenitAB/terraform-modules/pull/949) Update audit log alert criteria.
 - [#954](https://github.com/XenitAB/terraform-modules/pull/954) Make audit log alert have bigger window_size and frequency.
+- [#953](https://github.com/XenitAB/terraform-modules/pull/953) Switch to new trivy-operator and trivy-server.
 
 ### Fixed
 

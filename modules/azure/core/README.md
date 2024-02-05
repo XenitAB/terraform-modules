@@ -9,7 +9,7 @@ Easiest is to define this RG in the governance module.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.41.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.47.0 |
 | <a name="requirement_azurecaf"></a> [azurecaf](#requirement\_azurecaf) | 2.0.0-preview3 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.71.0 |
 
@@ -17,7 +17,7 @@ Easiest is to define this RG in the governance module.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.41.0 |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.47.0 |
 | <a name="provider_azurecaf"></a> [azurecaf](#provider\_azurecaf) | 2.0.0-preview3 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.71.0 |
 
@@ -47,7 +47,7 @@ Easiest is to define this RG in the governance module.
 | [azurerm_subnet_route_table_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/subnet_route_table_association) | resource |
 | [azurerm_virtual_network.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/virtual_network) | resource |
 | [azurerm_virtual_network_peering.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/virtual_network_peering) | resource |
-| [azuread_group.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/group) | data source |
+| [azuread_group.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/data-sources/group) | data source |
 | [azurecaf_name.azuread_group_service_endpoint_join](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |
 | [azurecaf_name.azurerm_monitor_action_group_this](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |
 | [azurecaf_name.azurerm_network_security_group_this](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |

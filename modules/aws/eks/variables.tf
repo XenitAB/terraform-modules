@@ -56,9 +56,9 @@ variable "eks_config" {
 
   validation {
     condition = alltrue([
-      for np in concat(var.eks_config.node_pools, [{ version : var.eks_config.version }]) : can(regex("^1.(25|26)", np.version))
+      for np in concat(var.eks_config.node_pools, [{ version : var.eks_config.version }]) : can(regex("^1.(26|27|28)", np.version))
     ])
-    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.25, 1.26."
+    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.26, 1.27, 1.28."
   }
 
   validation {

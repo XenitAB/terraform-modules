@@ -210,8 +210,6 @@ module "ingress_healthz" {
 
 # External DNS
 module "external_dns" {
-  depends_on = [module.aad_pod_identity_crd]
-
   for_each = {
     for s in ["external-dns"] :
     s => s
@@ -220,6 +218,7 @@ module "external_dns" {
 
   source = "../../kubernetes/external-dns"
 
+  cluster_id   = local.cluster_id
   dns_provider = "azure"
   txt_owner_id = "${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   azure_config = {

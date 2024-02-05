@@ -1,17 +1,9 @@
 terraform {}
 
-provider "kubernetes" {}
-
-provider "helm" {}
-
 module "external_dns" {
   source = "../../../modules/kubernetes/external-dns"
 
-  providers = {
-    kubernetes = kubernetes
-    helm       = helm
-  }
-
+  cluster_id   = "foo"
   dns_provider = "azure"
   txt_owner_id = "dev-aks1"
   azure_config = {

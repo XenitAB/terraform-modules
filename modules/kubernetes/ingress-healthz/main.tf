@@ -24,7 +24,8 @@ locals {
 resource "git_repository_file" "kustomization" {
   path = "clusters/${var.cluster_id}/ingress-healthz.yaml"
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
+    cluster_id  = var.cluster_id
+    environment = var.environment
   })
 }
 

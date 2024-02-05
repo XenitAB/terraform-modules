@@ -8,9 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1057](https://github.com/XenitAB/terraform-modules/pull/1057) Migrate reloader to install with flux.
 - [#1030](https://github.com/XenitAB/terraform-modules/pull/1030) Move azad-kube-proxy to install with flux.
 - [#1014](https://github.com/XenitAB/terraform-modules/pull/1014) Migrate external-dns to install with Flux.
-- [#1054](https://github.com/XenitAB/terraform-modules/pull/1050) Fix object constructor map keys must be unique error
+- [#1054](https://github.com/XenitAB/terraform-modules/pull/1050) Fix object constructor map keys must be unique error.
 - [#1050](https://github.com/XenitAB/terraform-modules/pull/1050) Migrate diagnostic settings.
 - [#1049](https://github.com/XenitAB/terraform-modules/pull/1049) Add azad kube proxy password to core key vault.
 - [#1041](https://github.com/XenitAB/terraform-modules/pull/1041) Fix ingress-healthz YAML for linkerd.

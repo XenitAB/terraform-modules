@@ -1,3 +1,8 @@
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}
+
 variable "dns_provider" {
   description = "DNS provider to use."
   type        = string

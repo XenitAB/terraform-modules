@@ -24,3 +24,8 @@ variable "azure_ad_group_prefix" {
   type        = string
   default     = ""
 }
+
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}

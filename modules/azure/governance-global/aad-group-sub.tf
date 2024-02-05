@@ -1,6 +1,15 @@
 # AAD Group for Subscription Owners
+data "azurecaf_name" "azuread_group_sub_owner" {
+  name          = "owner"
+  resource_type = "general"
+  separator     = var.group_name_separator
+  prefixes      = module.names.this.azuread_group_sub.prefixes
+  suffixes      = module.names.this.azuread_group_sub.suffixes
+  use_slug      = false
+}
+
 resource "azuread_group" "sub_owner" {
-  display_name            = "${var.azure_ad_group_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}owner"
+  display_name            = data.azurecaf_name.azuread_group_sub_owner.result
   prevent_duplicate_names = true
   security_enabled        = true
 }
@@ -12,8 +21,17 @@ resource "azurerm_role_assignment" "sub_owner" {
 }
 
 # AAD Group for Subscription Contributors
+data "azurecaf_name" "azuread_group_sub_contributor" {
+  name          = "contributor"
+  resource_type = "general"
+  separator     = var.group_name_separator
+  prefixes      = module.names.this.azuread_group_sub.prefixes
+  suffixes      = module.names.this.azuread_group_sub.suffixes
+  use_slug      = false
+}
+
 resource "azuread_group" "sub_contributor" {
-  display_name            = "${var.azure_ad_group_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}contributor"
+  display_name            = data.azurecaf_name.azuread_group_sub_contributor.result
   prevent_duplicate_names = true
   security_enabled        = true
 }
@@ -25,8 +43,17 @@ resource "azurerm_role_assignment" "sub_contributor" {
 }
 
 # AAD Group for Subscription Readers
+data "azurecaf_name" "azuread_group_sub_reader" {
+  name          = "reader"
+  resource_type = "general"
+  separator     = var.group_name_separator
+  prefixes      = module.names.this.azuread_group_sub.prefixes
+  suffixes      = module.names.this.azuread_group_sub.suffixes
+  use_slug      = false
+}
+
 resource "azuread_group" "sub_reader" {
-  display_name            = "${var.azure_ad_group_prefix}${var.group_name_separator}sub${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}reader"
+  display_name            = data.azurecaf_name.azuread_group_sub_reader.result
   prevent_duplicate_names = true
   security_enabled        = true
 }
@@ -35,4 +62,13 @@ resource "azurerm_role_assignment" "sub_reader" {
   scope                = data.azurerm_subscription.current.id
   role_definition_name = "Reader"
   principal_id         = azuread_group.sub_reader.id
+}
+
+data "azuread_service_principal" "sp_all_owner" {
+  display_name = var.service_principal_all_owner_name
+}
+
+resource "azuread_group_member" "sp_all_owner" {
+  group_object_id  = azuread_group.sub_owner.id
+  member_object_id = data.azuread_service_principal.sp_all_owner.object_id
 }

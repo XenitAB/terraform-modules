@@ -9,23 +9,36 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "3.38.0"
+      version = "3.71.0"
       source  = "hashicorp/azurerm"
     }
     azuread = {
-      version = "2.28.1"
+      version = "2.47.0"
       source  = "hashicorp/azuread"
     }
     random = {
-      version = "3.4.3"
+      version = "3.5.1"
       source  = "hashicorp/random"
     }
     pal = {
       version = "0.2.5"
       source  = "xenitab/pal"
     }
+    azurecaf = {
+      source  = "aztfmod/azurecaf"
+      version = "2.0.0-preview3"
+    }
   }
 }
 
 data "azurerm_subscription" "current" {}
 data "azurerm_client_config" "current" {}
+
+module "names" {
+  source = "../names"
+
+  resource_name_overrides = var.resource_name_overrides
+  environment             = var.environment
+  location_short          = var.location_short
+  unique_suffix           = var.unique_suffix
+}

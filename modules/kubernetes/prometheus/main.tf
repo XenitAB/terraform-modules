@@ -11,11 +11,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.13.1"
+      version = "2.23.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.6.0"
+      version = "2.11.0"
     }
   }
 }
@@ -94,7 +94,7 @@ resource "helm_release" "prometheus_extras" {
     namespace_selector = "[${join(", ", var.namespace_selector)}]",
 
     falco_enabled                            = var.falco_enabled
-    opa_gatekeeper_enabled                   = var.opa_gatekeeper_enabled
+    gatekeeper_enabled                       = var.gatekeeper_enabled
     linkerd_enabled                          = var.linkerd_enabled
     flux_enabled                             = var.flux_enabled
     aad_pod_identity_enabled                 = var.aad_pod_identity_enabled

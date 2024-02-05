@@ -1,5 +1,5 @@
 locals {
-  excluded_namespaces = [
+  exclude_namespaces = [
     "calico-system",
     "cert-manager",
     "csi-secrets-store-provider-aws",
@@ -7,19 +7,21 @@ locals {
     "external-dns",
     "falco",
     "flux-system",
-    "gatekeeper-system",
     "ingress-nginx",
-    "kube-system",
+    "ingress-healthz",
     "prometheus",
     "reloader",
     "velero",
     "promtail",
-    "spegel"
+    "node-ttl",
+    "spegel",
+    "vpa",
   ]
   dns_zone = {
     for dns in data.aws_route53_zone.this :
     dns.name => dns.zone_id
   }
+  cluster_id = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
 }
 
 data "aws_route53_zone" "this" {
@@ -30,46 +32,18 @@ data "aws_route53_zone" "this" {
   name = each.key
 }
 
-module "opa_gatekeeper_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://open-policy-agent.github.io/gatekeeper/charts"
-  chart_name       = "gatekeeper"
-  chart_version    = "3.7.1"
-}
-
-module "opa_gatekeeper" {
-  depends_on = [module.opa_gatekeeper_crd]
-
+module "gatekeeper" {
   for_each = {
-    for s in ["opa-gatekeeper"] :
+    for s in ["gatekeeper"] :
     s => s
-    if var.opa_gatekeeper_enabled
+    if var.gatekeeper_enabled
   }
 
-  source = "../../kubernetes/opa-gatekeeper"
+  source = "../../kubernetes/gatekeeper"
 
-  enable_default_constraints = var.opa_gatekeeper_config.enable_default_constraints
-  additional_constraints = concat(
-    var.opa_gatekeeper_config.additional_constraints,
-    [
-      {
-        kind               = "K8sPodPriorityClass"
-        name               = "pod-priority-class"
-        enforcement_action = ""
-        match = {
-          kinds      = []
-          namespaces = []
-        }
-        parameters = {
-          permittedClassNames = ["platform-high", "platform-medium", "platform-low", "tenant-high", "tenant-medium", "tenant-low"]
-        }
-      },
-    ]
-  )
-  enable_default_assigns = var.opa_gatekeeper_config.enable_default_assigns
-  excluded_namespaces    = concat(var.opa_gatekeeper_config.additional_excluded_namespaces, local.excluded_namespaces)
-  cloud_provider         = "aws"
+  cluster_id         = local.cluster_id
+  cloud_provider     = "aws"
+  exclude_namespaces = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
 }
 
 # FluxCD v2
@@ -83,7 +57,7 @@ module "fluxcd_v2_azure_devops" {
   source = "../../kubernetes/fluxcd-v2-azdo"
 
   environment       = var.environment
-  cluster_id        = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
+  cluster_id        = local.cluster_id
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
   azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
@@ -109,7 +83,7 @@ module "fluxcd_v2_github" {
   source = "../../kubernetes/fluxcd-v2-github"
 
   environment            = var.environment
-  cluster_id             = "${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}"
+  cluster_id             = local.cluster_id
   github_org             = var.fluxcd_v2_config.github.org
   github_app_id          = var.fluxcd_v2_config.github.app_id
   github_installation_id = var.fluxcd_v2_config.github.installation_id
@@ -139,7 +113,7 @@ module "linkerd_crd" {
 }
 
 module "linkerd" {
-  depends_on = [module.opa_gatekeeper, module.cert_manager, module.linkerd_crd]
+  depends_on = [module.cert_manager, module.linkerd_crd]
 
   for_each = {
     for s in ["linkerd"] :
@@ -151,8 +125,6 @@ module "linkerd" {
 }
 
 module "ingress_nginx" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["ingress-nginx"] :
     s => s
@@ -175,7 +147,7 @@ module "ingress_nginx" {
 }
 
 module "ingress_healthz" {
-  depends_on = [module.opa_gatekeeper, module.ingress_nginx]
+  depends_on = [module.ingress_nginx]
 
   for_each = {
     for s in ["ingress-healthz"] :
@@ -189,11 +161,10 @@ module "ingress_healthz" {
   dns_zone               = var.cert_manager_config.dns_zone[0]
   linkerd_enabled        = var.linkerd_enabled
   public_private_enabled = var.ingress_nginx_config.public_private_enabled
+  cluster_id             = local.cluster_id
 }
 
 module "external_dns" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["external-dns"] :
     s => s
@@ -202,6 +173,7 @@ module "external_dns" {
 
   source = "../../kubernetes/external-dns"
 
+  cluster_id   = local.cluster_id
   dns_provider = "aws"
   txt_owner_id = "${var.environment}-${var.name}${var.eks_name_suffix}"
   aws_config = {
@@ -222,7 +194,7 @@ module "cert_manager_crd" {
 }
 
 module "cert_manager" {
-  depends_on = [module.opa_gatekeeper, module.cert_manager_crd]
+  depends_on = [module.cert_manager_crd]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -242,8 +214,6 @@ module "cert_manager" {
 }
 
 module "velero" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["velero"] :
     s => s
@@ -261,8 +231,6 @@ module "velero" {
 }
 
 module "falco" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["falco"] :
     s => s
@@ -275,8 +243,6 @@ module "falco" {
 }
 
 module "reloader" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["reloader"] :
     s => s
@@ -310,8 +276,6 @@ module "azad_kube_proxy" {
 
 # Promtail
 module "promtail" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["promtail"] :
     s => s
@@ -341,7 +305,7 @@ module "prometheus_crd" {
 }
 
 module "prometheus" {
-  depends_on = [module.opa_gatekeeper, module.prometheus_crd]
+  depends_on = [module.prometheus_crd]
 
   for_each = {
     for s in ["prometheus"] :
@@ -371,7 +335,7 @@ module "prometheus" {
   namespace_selector = var.prometheus_config.namespace_selector
 
   falco_enabled                          = var.falco_enabled
-  opa_gatekeeper_enabled                 = var.opa_gatekeeper_enabled
+  gatekeeper_enabled                     = var.gatekeeper_enabled
   linkerd_enabled                        = var.linkerd_enabled
   flux_enabled                           = var.fluxcd_v2_enabled
   csi_secrets_store_provider_aws_enabled = var.csi_secrets_store_provider_aws_enabled
@@ -394,7 +358,7 @@ module "trivy_crd" {
 }
 
 module "trivy" {
-  depends_on = [module.opa_gatekeeper, module.trivy_crd]
+  depends_on = [module.trivy_crd]
 
   for_each = {
     for s in ["trivy"] :
@@ -410,8 +374,6 @@ module "trivy" {
 }
 
 module "cluster_autoscaler" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["cluster-autoscaler"] :
     s => s
@@ -433,11 +395,11 @@ module "csi_secrets_store_provider_aws_crd" {
 
   chart_repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
   chart_name       = "secrets-store-csi-driver"
-  chart_version    = "1.1.2"
+  chart_version    = "1.3.2"
 }
 
 module "csi_secrets_store_provider_aws" {
-  depends_on = [module.csi_secrets_store_provider_aws_crd, module.opa_gatekeeper]
+  depends_on = [module.csi_secrets_store_provider_aws_crd]
 
   for_each = {
     for s in ["csi-secrets-store-provider-aws"] :
@@ -449,17 +411,7 @@ module "csi_secrets_store_provider_aws" {
 }
 
 # datadog
-module "datadog_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://helm.datadoghq.com"
-  chart_name       = "datadog-operator"
-  chart_version    = "0.8.0"
-}
-
 module "datadog" {
-  depends_on = [module.opa_gatekeeper, module.datadog_crd]
-
   for_each = {
     for s in ["datadog"] :
     s => s
@@ -468,27 +420,21 @@ module "datadog" {
 
   source = "../../kubernetes/datadog"
 
+  cloud_provider = "aws"
+
+  aws_config = {
+    role_arn = var.datadog_config.role_arn
+  }
+
   location             = data.aws_region.current.name
   environment          = var.environment
   datadog_site         = var.datadog_config.datadog_site
-  api_key              = var.datadog_config.api_key
-  app_key              = var.datadog_config.app_key
   namespace_include    = var.datadog_config.namespaces
   apm_ignore_resources = var.datadog_config.apm_ignore_resources
-}
-
-# vpa
-module "vpa_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://charts.fairwinds.com/stable"
-  chart_name       = "goldilocks"
-  chart_version    = "5.1.0"
+  cluster_id           = local.cluster_id
 }
 
 module "vpa" {
-  depends_on = [module.opa_gatekeeper, module.vpa_crd]
-
   for_each = {
     for s in ["vpa"] :
     s => s
@@ -496,10 +442,12 @@ module "vpa" {
   }
 
   source = "../../kubernetes/vpa"
+
+  cluster_id = local.cluster_id
 }
 
 module "node_local_dns" {
-  depends_on = [module.opa_gatekeeper, module.prometheus]
+  depends_on = [module.prometheus]
 
   for_each = {
     for s in ["node-local-dns"] :
@@ -508,12 +456,12 @@ module "node_local_dns" {
   }
 
   source = "../../kubernetes/node-local-dns"
-  dns_ip = var.node_local_dns_dns_ip
+
+  cluster_id = local.cluster_id
+  dns_ip     = "172.20.0.10"
 }
 
 module "node_ttl" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["node-ttl"] :
     s => s
@@ -522,12 +470,11 @@ module "node_ttl" {
 
   source = "../../kubernetes/node-ttl"
 
+  cluster_id                  = local.cluster_id
   status_config_map_namespace = "cluster-autoscaler"
 }
 
 module "spegel" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["spegel"] :
     s => s
@@ -535,4 +482,6 @@ module "spegel" {
   }
 
   source = "../../kubernetes/spegel"
+
+  cluster_id = local.cluster_id
 }

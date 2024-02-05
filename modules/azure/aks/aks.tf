@@ -20,14 +20,22 @@ locals {
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
-  name                            = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
-  location                        = data.azurerm_resource_group.this.location
-  resource_group_name             = data.azurerm_resource_group.this.name
-  dns_prefix                      = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
-  kubernetes_version              = var.aks_config.version
-  sku_tier                        = var.aks_config.production_grade ? "Paid" : "Free"
-  api_server_authorized_ip_ranges = var.aks_authorized_ips
-  run_command_enabled             = false
+  name                = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
+  dns_prefix          = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  kubernetes_version  = var.aks_config.version
+  sku_tier            = var.aks_config.production_grade ? "Standard" : "Free"
+  run_command_enabled = false
+
+  api_server_access_profile {
+    authorized_ip_ranges = var.aks_authorized_ips
+  }
+
+  oidc_issuer_enabled       = true
+  workload_identity_enabled = true
+
+  node_os_channel_upgrade = "Unmanaged"
 
   auto_scaler_profile {
     # Pods should not depend on local storage like EmptyDir or HostPath
@@ -65,14 +73,14 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   storage_profile {
-    file_driver_enabled         = false
+    file_driver_enabled         = true
     snapshot_controller_enabled = false
   }
 
   default_node_pool {
     name           = "default"
     vnet_subnet_id = data.azurerm_subnet.this.id
-    zones          = ["1", "2", "3"]
+    zones          = var.aks_default_node_pool_zones
 
     orchestrator_version = var.aks_config.version
     # This is a bug in tflint
@@ -95,7 +103,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   name                  = each.value.name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
   vnet_subnet_id        = data.azurerm_subnet.this.id
-  zones                 = ["1", "2", "3"]
+  zones                 = each.value.zones
 
   enable_auto_scaling  = true
   os_disk_type         = "Ephemeral"
@@ -138,122 +146,30 @@ resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
   target_resource_id = azurerm_kubernetes_cluster.this.id
   storage_account_id = data.azurerm_storage_account.log.id
 
-  log {
-    category = "kube-scheduler"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "kube-controller-manager"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "cloud-controller-manager"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "csi-azurefile-controller"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "csi-snapshot-controller"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "csi-azuredisk-controller"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "guard"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "cluster-autoscaler"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "kube-audit"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
+  enabled_log {
     category = "kube-audit-admin"
-    enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = var.aks_audit_log_retention
-    }
-  }
-
-  log {
-    category = "kube-apiserver"
-    enabled  = false
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
   }
 
   metric {
     category = "AllMetrics"
     enabled  = false
+  }
+}
 
-    retention_policy {
-      days    = 0
-      enabled = false
+resource "azurerm_storage_management_policy" "log_storage_account_audit_policy" {
+  storage_account_id = data.azurerm_storage_account.log.id
+
+  rule {
+    name    = "logs_kube_audit_admin"
+    enabled = true
+    filters {
+      prefix_match = ["insights-logs-kube-audit-admin"]
+      blob_types   = ["appendBlob"]
+    }
+    actions {
+      base_blob {
+        delete_after_days_since_modification_greater_than = var.aks_audit_log_retention
+      }
     }
   }
 }
@@ -264,123 +180,13 @@ resource "azurerm_monitor_diagnostic_setting" "log_eventhub_audit" {
   eventhub_name                  = var.log_eventhub_name
   eventhub_authorization_rule_id = var.log_eventhub_authorization_rule_id
 
-  log {
-    category = "kube-scheduler"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "kube-controller-manager"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "cloud-controller-manager"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "csi-azurefile-controller"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "csi-snapshot-controller"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "csi-azuredisk-controller"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "guard"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
+  enabled_log {
     category = "cluster-autoscaler"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "kube-audit"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "kube-audit-admin"
-    enabled  = false
-
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
-  }
-
-  log {
-    category = "kube-apiserver"
-    enabled  = false
-    retention_policy {
-      enabled = false
-      days    = 0
-    }
   }
 
   metric {
     category = "AllMetrics"
     enabled  = false
-
-    retention_policy {
-      days    = 0
-      enabled = false
-    }
   }
 }
 

@@ -39,6 +39,12 @@ variable "aks_name_suffix" {
   type        = number
 }
 
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
+  type        = string
+  default     = ""
+}
+
 variable "priority_expander_config" {
   description = "Cluster auto scaler priority expander configuration."
   type        = map(list(string))
@@ -153,36 +159,19 @@ variable "aad_pod_identity_config" {
   }))
 }
 
-variable "opa_gatekeeper_enabled" {
+variable "gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
   type        = bool
   default     = true
 }
 
-variable "opa_gatekeeper_config" {
+variable "gatekeeper_config" {
   description = "Configuration for OPA Gatekeeper"
   type = object({
-    additional_excluded_namespaces = list(string)
-    enable_default_constraints     = bool
-    additional_constraints = list(object({
-      excluded_namespaces = list(string)
-      processes           = list(string)
-    }))
-    enable_default_assigns = bool
-    additional_assigns = list(object({
-      name = string
-    }))
-    additional_modify_sets = list(object({
-      name = string
-    }))
+    exclude_namespaces = list(string)
   })
   default = {
-    additional_excluded_namespaces = []
-    enable_default_constraints     = true
-    additional_constraints         = []
-    enable_default_assigns         = true
-    additional_assigns             = []
-    additional_modify_sets         = []
+    exclude_namespaces = []
   }
 }
 
@@ -284,18 +273,28 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
+
+    azure_key_vault_name = string
+    identity = object({
+      client_id   = string
+      resource_id = string
+      tenant_id   = string
+    })
+
     datadog_site         = string
-    api_key              = string
-    app_key              = string
     namespaces           = list(string)
     apm_ignore_resources = list(string)
   })
   default = {
+    azure_key_vault_name = ""
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
     datadog_site         = ""
-    api_key              = ""
-    app_key              = ""
     namespaces           = [""]
-    apm_ignore_resources = []
+    apm_ignore_resources = [""]
   }
 }
 
@@ -547,4 +546,10 @@ variable "control_plane_logs_config" {
     eventhub_hostname = ""
     eventhub_name     = ""
   }
+}
+
+variable "acr_name_override" {
+  description = "Override default name of ACR"
+  type        = string
+  default     = ""
 }

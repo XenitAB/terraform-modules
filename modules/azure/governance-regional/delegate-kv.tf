@@ -1,3 +1,17 @@
+data "azurecaf_name" "azurerm_key_vault_delegate_kv" {
+  for_each = {
+    for rg in var.resource_group_configs :
+    rg.common_name => rg
+    if rg.delegate_key_vault == true
+  }
+
+  name          = each.value.common_name
+  resource_type = "azurerm_key_vault"
+  prefixes      = module.names.this.azurerm_key_vault.prefixes
+  suffixes      = each.value.disable_unique_suffix ? null : module.names.this.azurerm_key_vault.suffixes
+  use_slug      = false
+}
+
 #tfsec:ignore:AZU020 tfsec:ignore:AZU021
 resource "azurerm_key_vault" "delegate_kv" {
   for_each = {
@@ -6,13 +20,14 @@ resource "azurerm_key_vault" "delegate_kv" {
     if rg.delegate_key_vault == true
   }
 
-  name = each.value.disable_unique_suffix ? "kv-${var.environment}-${var.location_short}-${each.value.common_name}" : join("-", compact(["kv-${var.environment}-${var.location_short}-${each.value.common_name}", var.unique_suffix]))
+  name = data.azurecaf_name.azurerm_key_vault_delegate_kv[each.key].result
 
-  location                 = azurerm_resource_group.rg[each.key].location
-  resource_group_name      = azurerm_resource_group.rg[each.key].name
-  tenant_id                = data.azurerm_client_config.current.tenant_id
-  sku_name                 = "standard"
-  purge_protection_enabled = each.value.key_vault_purge_protection_enabled
+  location                    = azurerm_resource_group.rg[each.key].location
+  resource_group_name         = azurerm_resource_group.rg[each.key].name
+  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  sku_name                    = "standard"
+  purge_protection_enabled    = each.value.key_vault_purge_protection_enabled
+  enabled_for_disk_encryption = true
 }
 
 resource "azurerm_key_vault_access_policy" "ap_owner_spn" {

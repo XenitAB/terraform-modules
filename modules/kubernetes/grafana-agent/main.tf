@@ -59,11 +59,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.13.1"
+      version = "2.23.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.6.0"
+      version = "2.11.0"
     }
   }
 }
@@ -148,7 +148,7 @@ resource "helm_release" "kube_state_metrics" {
   chart       = "kube-state-metrics"
   name        = "kube-state-metrics"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "4.5.0"
+  version     = "5.1.0"
   max_history = 3
   values      = [local.kube_state_metrics_values]
 }

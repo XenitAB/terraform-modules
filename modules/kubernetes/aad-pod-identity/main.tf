@@ -10,11 +10,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.13.1"
+      version = "2.23.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.6.0"
+      version = "2.11.0"
     }
   }
 }
@@ -34,7 +34,7 @@ resource "helm_release" "aad_pod_identity" {
   repository  = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
   chart       = "aad-pod-identity"
   name        = "aad-pod-identity"
-  version     = "4.1.10"
+  version     = "4.1.16"
   namespace   = kubernetes_namespace.this.metadata[0].name
   max_history = 3
   skip_crds   = true

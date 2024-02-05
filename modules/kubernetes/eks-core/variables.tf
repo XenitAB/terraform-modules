@@ -119,32 +119,19 @@ variable "fluxcd_v2_config" {
   })
 }
 
-variable "opa_gatekeeper_enabled" {
+variable "gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
   type        = bool
   default     = true
 }
 
-variable "opa_gatekeeper_config" {
+variable "gatekeeper_config" {
   description = "Configuration for OPA Gatekeeper"
   type = object({
-    additional_excluded_namespaces = list(string)
-    enable_default_constraints     = bool
-    additional_constraints = list(object({
-      excluded_namespaces = list(string)
-      processes           = list(string)
-    }))
-    enable_default_assigns = bool
-    additional_assigns = list(object({
-      name = string
-    }))
+    exclude_namespaces = list(string)
   })
   default = {
-    additional_excluded_namespaces = []
-    enable_default_constraints     = true
-    additional_constraints         = []
-    enable_default_assigns         = true
-    additional_assigns             = []
+    exclude_namespaces = []
   }
 }
 
@@ -345,17 +332,15 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
+    role_arn             = string
     datadog_site         = string
-    api_key              = string
-    app_key              = string
     namespaces           = list(string)
     apm_ignore_resources = list(string)
 
   })
   default = {
+    role_arn             = ""
     datadog_site         = ""
-    api_key              = ""
-    app_key              = ""
     namespaces           = [""]
     apm_ignore_resources = []
   }
@@ -390,12 +375,6 @@ variable "node_local_dns_enabled" {
   description = "Should node local dns be enabled"
   type        = bool
   default     = true
-}
-
-variable "node_local_dns_dns_ip" {
-  description = "Should node local dns be enabled"
-  type        = string
-  default     = "172.20.0.10"
 }
 
 variable "node_ttl_enabled" {

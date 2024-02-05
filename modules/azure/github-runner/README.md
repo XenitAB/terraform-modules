@@ -13,15 +13,15 @@ Setup an image using Packer according [github-runner](https://github.com/XenitAB
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.38.0 |
-| <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.3 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.71.0 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.38.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.3 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.71.0 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
 
 ## Modules
 
@@ -31,15 +31,15 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_key_vault_access_policy.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/key_vault_access_policy) | resource |
-| [azurerm_key_vault_secret.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/key_vault_secret) | resource |
-| [azurerm_linux_virtual_machine_scale_set.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/resources/linux_virtual_machine_scale_set) | resource |
-| [tls_private_key.this](https://registry.terraform.io/providers/hashicorp/tls/4.0.3/docs/resources/private_key) | resource |
-| [azurerm_key_vault.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/key_vault) | data source |
-| [azurerm_key_vault_secret.github_secrets](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/key_vault_secret) | data source |
-| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/resource_group) | data source |
-| [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/subnet) | data source |
-| [azurerm_subscription.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.38.0/docs/data-sources/subscription) | data source |
+| [azurerm_key_vault_access_policy.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_secret.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/key_vault_secret) | resource |
+| [azurerm_linux_virtual_machine_scale_set.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/linux_virtual_machine_scale_set) | resource |
+| [tls_private_key.this](https://registry.terraform.io/providers/hashicorp/tls/4.0.4/docs/resources/private_key) | resource |
+| [azurerm_key_vault.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/key_vault) | data source |
+| [azurerm_key_vault_secret.github_secrets](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/resource_group) | data source |
+| [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/subnet) | data source |
+| [azurerm_subscription.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/subscription) | data source |
 
 ## Inputs
 
@@ -58,6 +58,7 @@ No modules.
 | <a name="input_source_image_id"></a> [source\_image\_id](#input\_source\_image\_id) | The Azure Pipelines agent image id | `string` | n/a | yes |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
 | <a name="input_vmss_admin_username"></a> [vmss\_admin\_username](#input\_vmss\_admin\_username) | The admin username | `string` | `"ghradmin"` | no |
+| <a name="input_vmss_diff_disk_placement"></a> [vmss\_diff\_disk\_placement](#input\_vmss\_diff\_disk\_placement) | Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created. | `string` | `"CacheDisk"` | no |
 | <a name="input_vmss_disk_size_gb"></a> [vmss\_disk\_size\_gb](#input\_vmss\_disk\_size\_gb) | The disk size (in GB) for the VMSS instances | `number` | `128` | no |
 | <a name="input_vmss_instances"></a> [vmss\_instances](#input\_vmss\_instances) | The number of instances | `number` | `1` | no |
 | <a name="input_vmss_sku"></a> [vmss\_sku](#input\_vmss\_sku) | The sku for VMSS instances | `string` | `"Standard_F4s_v2"` | no |

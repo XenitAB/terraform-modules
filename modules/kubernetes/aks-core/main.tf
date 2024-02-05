@@ -9,28 +9,28 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "3.38.0"
+      version = "3.71.0"
       source  = "hashicorp/azurerm"
     }
     azuread = {
-      version = "2.28.1"
+      version = "2.47.0"
       source  = "hashicorp/azuread"
     }
     random = {
       source  = "hashicorp/random"
-      version = "3.4.3"
+      version = "3.5.1"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.13.1"
+      version = "2.23.0"
     }
     github = {
       source  = "integrations/github"
-      version = "4.21.0"
+      version = "5.34.0"
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.17.0"
+      version = "0.25.3"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
@@ -38,7 +38,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.6.0"
+      version = "2.11.0"
     }
   }
 }
@@ -56,3 +56,9 @@ data "azurerm_resource_group" "global" {
 locals {
   aks_name_suffix = var.aks_name_suffix != null ? var.aks_name_suffix : ""
 }
+
+data "azurerm_container_registry" "acr" {
+  name                = var.acr_name_override == "" ? "acr${var.environment}${var.location_short}${var.name}${var.unique_suffix}" : var.acr_name_override
+  resource_group_name = data.azurerm_resource_group.global.name
+}
+

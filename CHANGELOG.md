@@ -6,6 +6,161 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## Changed
+
+- [#1014](https://github.com/XenitAB/terraform-modules/pull/1014) Migrate external-dns to install with Flux.
+- [#1054](https://github.com/XenitAB/terraform-modules/pull/1050) Fix object constructor map keys must be unique error
+- [#1050](https://github.com/XenitAB/terraform-modules/pull/1050) Migrate diagnostic settings.
+- [#1049](https://github.com/XenitAB/terraform-modules/pull/1049) Add azad kube proxy password to core key vault.
+- [#1041](https://github.com/XenitAB/terraform-modules/pull/1041) Fix ingress-healthz YAML for linkerd.
+- [#1040](https://github.com/XenitAB/terraform-modules/pull/1040) Exclude ingress-healthz namespace from gatekeeper.
+- [#1044](https://github.com/XenitAB/terraform-modules/pull/1044) Update Spegel to v0.0.14.
+- [#1028](https://github.com/XenitAB/terraform-modules/pull/1028) Use api_server_access_profile for AKS.
+- [#1046](https://github.com/XenitAB/terraform-modules/pull/1044) Add validation for k8s 1.27 and 1.28.
+- [#1047](https://github.com/XenitAB/terraform-modules/pull/1047) Add Owner-SP to sub-owner group.
+
+## 2023.10.2
+
+### Changed
+
+- [#1038](https://github.com/XenitAB/terraform-modules/pull/1038) Fix enviroment in ingress-healthz return.
+
+## 2023.10.1
+
+### Changed
+
+- [#1025](https://github.com/XenitAB/terraform-modules/pull/1025) Enable Spegel mirroring for private ACR registry.
+- [#1033](https://github.com/XenitAB/terraform-modules/pull/1033) Migrate ingress-healthz to install with flux.
+- [#1035](https://github.com/XenitAB/terraform-modules/pull/1035) Fix ingress-healthz kustomization health check.
+### Added
+
+- [#1027](https://github.com/XenitAB/terraform-modules/pull/1027) Add purge task to remove old images from ACR.
+
+## 2023.08.2
+
+### Changed
+
+- [#1024](https://github.com/XenitAB/terraform-modules/pull/1024) Update provider versions.
+
+### Added
+
+- [#1023](https://github.com/XenitAB/terraform-modules/pull/1023) Set OS upgrade explicitly to Unmanaged.
+
+## 2023.08.1
+
+### Added
+
+- [#1017](https://github.com/XenitAB/terraform-modules/pull/1017) Add support for kubernetes 1.26.
+- [#1016](https://github.com/XenitAB/terraform-modules/pull/1016) Add variable for VMSS diff disk placement for GitHub Runners.
+- [#1010](https://github.com/XenitAB/terraform-modules/pull/1010) Add azureFile CSI storage classes.
+
+### Changed
+
+- [#1009](https://github.com/XenitAB/terraform-modules/pull/1009) Set allow_nested_items_to_be_public in SAs false.
+- [#1020](https://github.com/XenitAB/terraform-modules/pull/1020) Enabled Azure Disk Encryption ability for Key Vaults.
+
+## 2023.06.5
+
+### Added
+
+- [#1000](https://github.com/XenitAB/terraform-modules/pull/1000) Add OTLP support in datadog-agent.
+
+### Changed
+
+- [#1001](https://github.com/XenitAB/terraform-modules/pull/1001) Migrate node-ttl to install with Flux.
+- [#1002](https://github.com/XenitAB/terraform-modules/pull/1002) Migrate spegel to install with Flux.
+- [#1006](https://github.com/XenitAB/terraform-modules/pull/1006) Update Git provider.
+- [#1005](https://github.com/XenitAB/terraform-modules/pull/1005) Migrate node-local-dns to install with Flux.
+- [#1007](https://github.com/XenitAB/terraform-modules/pull/1007) Migrate vpa to install with Flux.
+- [#1003](https://github.com/XenitAB/terraform-modules/pull/1003) Migrate gatekeeper to install with Flux.
+- [#1003](https://github.com/XenitAB/terraform-modules/pull/1012) Make Availability Zones configurable for AKS.
+
+## 2023.06.4
+
+### Fixed
+
+- [#995](https://github.com/XenitAB/terraform-modules/pull/995) Fix Kubernetes version validation.
+
+### Changed
+
+- [#989](https://github.com/XenitAB/terraform-modules/pull/989) Update Azad-Kube-Proxy to v0.0.47.
+- [#996](https://github.com/XenitAB/terraform-modules/pull/996) Rename Datadog agent.
+- [#992](https://github.com/XenitAB/terraform-modules/pull/992) Add AKS cluster principal_id to aksmsi group.
+- [#997](https://github.com/XenitAB/terraform-modules/pull/997) Add health checks to Datadog.
+- [#998](https://github.com/XenitAB/terraform-modules/pull/998) Update GitHub Terraform provider to 5.28.0.
+
+## 2023.06.3
+
+### Changed
+
+- [#994](https://github.com/XenitAB/terraform-modules/pull/994) Update Datadog agent config.
+
+## 2023.06.2
+
+### Added
+
+- [#991](https://github.com/XenitAB/terraform-modules/pull/991) Add vnet role assignment.
+
+### Changed
+
+- [#988](https://github.com/XenitAB/terraform-modules/pull/988) Update Azurerm provider version and enable AKS workload identities.
+- [#982](https://github.com/XenitAB/terraform-modules/pull/972) Update datadog-operator to 1.0.2 and agent to v2alpha1.
+
+## 2023.06.1
+
+### Changed
+
+- [#972](https://github.com/XenitAB/terraform-modules/pull/968) Update Datadog to install with flux.
+
+## 2023.04.3
+
+### Added
+
+- [#985](https://github.com/XenitAB/terraform-modules/pull/985) Manage Flux notification provider.
+
+### Changed
+
+- [#983](https://github.com/XenitAB/terraform-modules/pull/983) Update Flux to 0.25.3.
+- [#984](https://github.com/XenitAB/terraform-modules/pull/984) Update Spegel to v0.0.7.
+- [#986](https://github.com/XenitAB/terraform-modules/pull/986) Update Flux CRD versions.
+
+## 2023.04.2
+
+### Fixed
+
+- [#980](https://github.com/XenitAB/terraform-modules/pull/980) Re-enable option to disable unique suffixes for resource group key vaults.
+
+## 2023.04.1
+
+### Changed
+
+- [#973](https://github.com/XenitAB/terraform-modules/pull/973) Switch to Standard sku_tier due to deprecations in the AzureAPI.
+- [#970](https://github.com/XenitAB/terraform-modules/pull/970) Update Azurerm provider to 3.51.0.
+- [#974](https://github.com/XenitAB/terraform-modules/pull/974) Update Spegel to v0.0.6.
+
+### Added
+
+- [#971](https://github.com/XenitAB/terraform-modules/pull/971) Add variable for EBS volume size.
+- [#958](https://github.com/XenitAB/terraform-modules/pull/958) Make azure/governance and azure/core use the [aztfmod/azurecaf](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs) provider for names.
+
+## 2023.03.2
+
+### Changed
+
+- [#957](https://github.com/XenitAB/terraform-modules/pull/957) Update Spegel to v0.0.5 and set resources.
+- [#959](https://github.com/XenitAB/terraform-modules/pull/959) Update node-local-dns to 1.22.20 and move to using registry.k8s.io.
+- [#962](https://github.com/XenitAB/terraform-modules/pull/962) Update Cluster Autoscaler Helm chart to move to using registry.k8s.io.
+- [#960](https://github.com/XenitAB/terraform-modules/pull/960) Update Goldilocks and VPA and move to using registry.k8s.io.
+- [#961](https://github.com/XenitAB/terraform-modules/pull/961) Update CSI secret store and move to using registry.k8s.io.
+- [#963](https://github.com/XenitAB/terraform-modules/pull/963) Update Kube State Metrics and move to using registry.k8s.io.
+- [#965](https://github.com/XenitAB/terraform-modules/pull/965) Update AAD Pod Identity to chart version 4.1.16 with app version 1.8.15.
+
+### Fixed
+
+- [#964](https://github.com/XenitAB/terraform-modules/pull/964) Fix CRD versions.
+
+## 2023.03.1
+
 ### Added
 
 - [#943](https://github.com/XenitAB/terraform-modules/pull/943) Make private endpoint network policies configurable.
@@ -19,6 +174,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#949](https://github.com/XenitAB/terraform-modules/pull/949) Update audit log alert criteria.
 - [#954](https://github.com/XenitAB/terraform-modules/pull/954) Make audit log alert have bigger window_size and frequency.
 - [#953](https://github.com/XenitAB/terraform-modules/pull/953) Switch to new trivy-operator and trivy-server.
+
+### Fixed
+
+- [#952](https://github.com/XenitAB/terraform-modules/pull/952) Fix issues created by #943 and change core to use new private_endpoint_network_policies_enabled in core subnet config.
 
 ## 2023.02.3
 

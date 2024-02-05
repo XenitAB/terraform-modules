@@ -1,6 +1,5 @@
 locals {
-  excluded_namespaces = [
-    "kube-system",
+  exclude_namespaces = [
     "aad-pod-identity",
     "azdo-proxy",
     "calico-system",
@@ -10,8 +9,8 @@ locals {
     "external-dns",
     "falco",
     "flux-system",
-    "gatekeeper-system",
     "ingress-nginx",
+    "ingress-healthz",
     "linkerd",
     "linkerd-cni",
     "reloader",
@@ -21,62 +20,25 @@ locals {
     "grafana-agent",
     "promtail",
     "prometheus",
+    "node-ttl",
     "spegel",
+    "vpa",
   ]
+  cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
 }
 
-# OPA Gatekeeper
-module "opa_gatekeeper_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://open-policy-agent.github.io/gatekeeper/charts"
-  chart_name       = "gatekeeper"
-  chart_version    = "3.7.1"
-}
-
-module "opa_gatekeeper" {
-  depends_on = [module.opa_gatekeeper_crd]
-
+module "gatekeeper" {
   for_each = {
-    for s in ["opa-gatekeeper"] :
+    for s in ["gatekeeper"] :
     s => s
-    if var.opa_gatekeeper_enabled
+    if var.gatekeeper_enabled
   }
 
-  source = "../../kubernetes/opa-gatekeeper"
+  source = "../../kubernetes/gatekeeper"
 
-  enable_default_constraints = var.opa_gatekeeper_config.enable_default_constraints
-  additional_constraints = concat(
-    var.opa_gatekeeper_config.additional_constraints,
-    [
-      {
-        kind               = "AzureIdentityFormat"
-        name               = "azure-identity-format"
-        enforcement_action = ""
-        match = {
-          kinds      = []
-          namespaces = []
-        }
-        parameters = {}
-      },
-      {
-        kind               = "K8sPodPriorityClass"
-        name               = "pod-priority-class"
-        enforcement_action = ""
-        match = {
-          kinds      = []
-          namespaces = []
-        }
-        parameters = {
-          permittedClassNames = ["platform-high", "platform-medium", "platform-low", "tenant-high", "tenant-medium", "tenant-low"]
-        }
-      },
-    ]
-  )
-  additional_modify_sets = var.opa_gatekeeper_config.additional_modify_sets
-  enable_default_assigns = var.opa_gatekeeper_config.enable_default_assigns
-  excluded_namespaces    = concat(var.opa_gatekeeper_config.additional_excluded_namespaces, local.excluded_namespaces)
-  cloud_provider         = "azure"
+  cluster_id         = local.cluster_id
+  cloud_provider     = "azure"
+  exclude_namespaces = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
 }
 
 # FluxCD v2
@@ -90,7 +52,7 @@ module "fluxcd_v2_azure_devops" {
   source = "../../kubernetes/fluxcd-v2-azdo"
 
   environment       = var.environment
-  cluster_id        = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
+  cluster_id        = local.cluster_id
   azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
   azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
   azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
@@ -116,7 +78,7 @@ module "fluxcd_v2_github" {
   source = "../../kubernetes/fluxcd-v2-github"
 
   environment            = var.environment
-  cluster_id             = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
+  cluster_id             = local.cluster_id
   github_org             = var.fluxcd_v2_config.github.org
   github_app_id          = var.fluxcd_v2_config.github.app_id
   github_installation_id = var.fluxcd_v2_config.github.installation_id
@@ -136,11 +98,11 @@ module "aad_pod_identity_crd" {
 
   chart_repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
   chart_name       = "aad-pod-identity"
-  chart_version    = "4.1.10"
+  chart_version    = "4.1.16"
 }
 
 module "aad_pod_identity" {
-  depends_on = [module.opa_gatekeeper, module.aad_pod_identity_crd]
+  depends_on = [module.aad_pod_identity_crd]
 
   for_each = {
     for s in ["aad-pod-identity"] :
@@ -158,7 +120,7 @@ module "aad_pod_identity" {
 
 # AZ Metrics
 module "azure_metrics" {
-  depends_on = [module.opa_gatekeeper, module.aad_pod_identity_crd]
+  depends_on = [module.aad_pod_identity_crd]
 
   for_each = {
     for s in ["azure-metrics"] :
@@ -189,7 +151,7 @@ module "linkerd_crd" {
 }
 
 module "linkerd" {
-  depends_on = [module.opa_gatekeeper, module.cert_manager_crd, module.linkerd_crd]
+  depends_on = [module.cert_manager_crd, module.linkerd_crd]
 
   for_each = {
     for s in ["linkerd"] :
@@ -202,7 +164,7 @@ module "linkerd" {
 
 # ingress-nginx
 module "ingress_nginx" {
-  depends_on = [module.opa_gatekeeper, module.linkerd]
+  depends_on = [module.linkerd]
 
   for_each = {
     for s in ["ingress-nginx"] :
@@ -228,7 +190,7 @@ module "ingress_nginx" {
 
 # ingress-healthz
 module "ingress_healthz" {
-  depends_on = [module.opa_gatekeeper, module.linkerd]
+  depends_on = [module.linkerd]
 
   for_each = {
     for s in ["ingress-healthz"] :
@@ -243,12 +205,11 @@ module "ingress_healthz" {
   location_short         = var.location_short
   linkerd_enabled        = var.linkerd_enabled
   public_private_enabled = var.ingress_nginx_config.public_private_enabled
+  cluster_id             = local.cluster_id
 }
 
 # External DNS
 module "external_dns" {
-  depends_on = [module.opa_gatekeeper, module.aad_pod_identity_crd]
-
   for_each = {
     for s in ["external-dns"] :
     s => s
@@ -257,6 +218,7 @@ module "external_dns" {
 
   source = "../../kubernetes/external-dns"
 
+  cluster_id   = local.cluster_id
   dns_provider = "azure"
   txt_owner_id = "${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   azure_config = {
@@ -281,7 +243,7 @@ module "cert_manager_crd" {
 }
 
 module "cert_manager" {
-  depends_on = [module.opa_gatekeeper, module.cert_manager_crd]
+  depends_on = [module.cert_manager_crd]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -304,8 +266,6 @@ module "cert_manager" {
 
 # Velero
 module "velero" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["velero"] :
     s => s
@@ -331,11 +291,11 @@ module "csi_secrets_store_provider_azure_crd" {
 
   chart_repository = "https://azure.github.io/secrets-store-csi-driver-provider-azure/charts"
   chart_name       = "csi-secrets-store-provider-azure"
-  chart_version    = "1.0.1"
+  chart_version    = "1.4.0"
 }
 
 module "csi_secrets_store_provider_azure" {
-  depends_on = [module.opa_gatekeeper, module.csi_secrets_store_provider_azure_crd]
+  depends_on = [module.csi_secrets_store_provider_azure_crd]
 
   for_each = {
     for s in ["csi-secrets-store-provider-azure"] :
@@ -347,17 +307,7 @@ module "csi_secrets_store_provider_azure" {
 }
 
 # datadog
-module "datadog_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://helm.datadoghq.com"
-  chart_name       = "datadog-operator"
-  chart_version    = "0.8.0"
-}
-
 module "datadog" {
-  depends_on = [module.opa_gatekeeper, module.datadog_crd]
-
   for_each = {
     for s in ["datadog"] :
     s => s
@@ -366,13 +316,23 @@ module "datadog" {
 
   source = "../../kubernetes/datadog"
 
+  cloud_provider = "azure"
+
   location             = var.location_short
   environment          = var.environment
+  cluster_id           = local.cluster_id
   datadog_site         = var.datadog_config.datadog_site
-  api_key              = var.datadog_config.api_key
-  app_key              = var.datadog_config.app_key
   namespace_include    = var.datadog_config.namespaces
   apm_ignore_resources = var.datadog_config.apm_ignore_resources
+
+  azure_config = {
+    azure_key_vault_name = var.datadog_config.azure_key_vault_name
+    identity = {
+      client_id   = var.datadog_config.identity.client_id
+      resource_id = var.datadog_config.identity.resource_id
+      tenant_id   = data.azurerm_client_config.current.tenant_id
+    }
+  }
 }
 
 # grafana-agent
@@ -385,7 +345,7 @@ module "grafana_agent_crd" {
 }
 
 module "grafana_agent" {
-  depends_on = [module.opa_gatekeeper, module.grafana_agent_crd]
+  depends_on = [module.grafana_agent_crd]
 
   for_each = {
     for s in ["grafana-agent"] :
@@ -420,8 +380,6 @@ module "grafana_agent" {
 
 # falco
 module "falco" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["falco"] :
     s => s
@@ -435,8 +393,6 @@ module "falco" {
 
 # Reloader
 module "reloader" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["reloader"] :
     s => s
@@ -479,7 +435,7 @@ module "prometheus_crd" {
 }
 
 module "prometheus" {
-  depends_on = [module.opa_gatekeeper, module.prometheus_crd]
+  depends_on = [module.prometheus_crd]
 
   for_each = {
     for s in ["prometheus"] :
@@ -515,7 +471,7 @@ module "prometheus" {
   namespace_selector = var.prometheus_config.namespace_selector
 
   falco_enabled                            = var.falco_enabled
-  opa_gatekeeper_enabled                   = var.opa_gatekeeper_enabled
+  gatekeeper_enabled                       = var.gatekeeper_enabled
   linkerd_enabled                          = var.linkerd_enabled
   flux_enabled                             = var.fluxcd_v2_enabled
   csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
@@ -531,8 +487,6 @@ module "prometheus" {
 }
 
 module "control_plane_logs" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["control_plane_logs"] :
     s => s
@@ -555,8 +509,6 @@ module "control_plane_logs" {
 }
 
 module "promtail" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["promtail"] :
     s => s
@@ -587,7 +539,7 @@ module "trivy_crd" {
 }
 
 module "trivy" {
-  depends_on = [module.opa_gatekeeper, module.trivy_crd]
+  depends_on = [module.trivy_crd]
 
   for_each = {
     for s in ["trivy"] :
@@ -603,18 +555,7 @@ module "trivy" {
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
 }
 
-# vpa
-module "vpa_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://charts.fairwinds.com/stable"
-  chart_name       = "vpa"
-  chart_version    = "0.5.0"
-}
-
 module "vpa" {
-  depends_on = [module.opa_gatekeeper, module.vpa_crd]
-
   for_each = {
     for s in ["vpa"] :
     s => s
@@ -622,12 +563,11 @@ module "vpa" {
   }
 
   source = "../../kubernetes/vpa"
+
+  cluster_id = local.cluster_id
 }
 
-# node-local-dns
 module "node_local_dns" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["node-local-dns"] :
     s => s
@@ -635,11 +575,12 @@ module "node_local_dns" {
   }
 
   source = "../../kubernetes/node-local-dns"
+
+  cluster_id = local.cluster_id
+  dns_ip     = "10.0.0.10"
 }
 
 module "node_ttl" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["node-ttl"] :
     s => s
@@ -648,12 +589,11 @@ module "node_ttl" {
 
   source = "../../kubernetes/node-ttl"
 
+  cluster_id                  = local.cluster_id
   status_config_map_namespace = "kube-system"
 }
 
 module "spegel" {
-  depends_on = [module.opa_gatekeeper]
-
   for_each = {
     for s in ["spegel"] :
     s => s
@@ -661,4 +601,7 @@ module "spegel" {
   }
 
   source = "../../kubernetes/spegel"
+
+  cluster_id       = local.cluster_id
+  private_registry = "https://${data.azurerm_container_registry.acr.login_server}"
 }

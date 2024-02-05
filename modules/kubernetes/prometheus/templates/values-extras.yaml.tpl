@@ -38,7 +38,7 @@ prometheus:
 
 enabledMonitors:
   falco: ${falco_enabled}
-  opaGatekeeper: ${opa_gatekeeper_enabled}
+  opaGatekeeper: ${gatekeeper_enabled}
   linkerd: ${linkerd_enabled}
   flux: ${flux_enabled}
   aadPodIdentity: ${aad_pod_identity_enabled}

@@ -14,19 +14,19 @@ terraform {
     }
     random = {
       source  = "hashicorp/random"
-      version = "3.4.3"
+      version = "3.5.1"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.13.1"
+      version = "2.23.0"
     }
     github = {
       source  = "integrations/github"
-      version = "4.21.0"
+      version = "5.34.0"
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.17.0"
+      version = "0.25.3"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
@@ -34,7 +34,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.6.0"
+      version = "2.11.0"
     }
   }
 }

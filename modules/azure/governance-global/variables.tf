@@ -69,3 +69,14 @@ variable "resource_group_configs" {
     })
   )
 }
+
+variable "resource_name_overrides" {
+  description = "A way to override the resource names"
+  type        = any
+  default     = null
+}
+
+variable "service_principal_all_owner_name" {
+  description = "Name of the manually created SP-sub-all-owner"
+  type        = string
+}

@@ -45,7 +45,7 @@
   *
   * ### Linkerd CNI
   *
-  * The [Linkerd CNI](https://linkerd.io/2.10/features/cni/) is required to if the linkerd-proxy sidecar isn't allowed to be root, which happens if using OPA-Gatekeeper.
+  * The [Linkerd CNI](https://linkerd.io/2.10/features/cni/) is required to if the linkerd-proxy sidecar isn't allowed to be root, which happens if using Gatekeeper.
   *
   */
 
@@ -55,15 +55,15 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.13.1"
+      version = "2.23.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.6.0"
+      version = "2.11.0"
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "4.0.3"
+      version = "4.0.4"
     }
   }
 }

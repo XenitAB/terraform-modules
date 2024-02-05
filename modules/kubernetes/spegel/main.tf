@@ -8,31 +8,23 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.13.1"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.6.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    name = "spegel"
-    labels = {
-      name                = "spegel"
-      "xkf.xenit.io/kind" = "platform"
-    }
-  }
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/spegel.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id
+  })
 }
 
-resource "helm_release" "this" {
-  chart       = "oci://ghcr.io/xenitab/helm-charts/spegel"
-  name        = "spegel"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v0.0.4"
-  max_history = 3
+resource "git_repository_file" "spegel" {
+  path = "platform/${var.cluster_id}/spegel/spegel.yaml"
+  content = templatefile("${path.module}/templates/spegel.yaml.tpl", {
+    private_registry = var.private_registry
+  })
 }

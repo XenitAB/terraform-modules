@@ -1,3 +1,5 @@
+# NOTE: Using the subnet_full_name here makes it weird referencing it from things like a route table.
+#       Not sure what to do about it, but worth noting down for future reference.
 resource "azurerm_subnet" "this" {
   for_each = {
     for subnet in local.subnets :
@@ -5,14 +7,13 @@ resource "azurerm_subnet" "this" {
     if subnet.subnet_aks_subnet == false
   }
 
-  name                                           = each.value.subnet_full_name
-  resource_group_name                            = data.azurerm_resource_group.this.name
-  virtual_network_name                           = azurerm_virtual_network.this.name
-  address_prefixes                               = [each.value.subnet_cidr]
-  service_endpoints                              = each.value.subnet_service_endpoints
-  enforce_private_link_endpoint_network_policies = local.subnet_private_endpoints[each.value.subnet_short_name]
-  enforce_private_link_service_network_policies  = local.subnet_private_endpoints[each.value.subnet_short_name]
-  private_endpoint_network_policies_enabled      = each.value.subnet_private_endpoint_network_policies_enabled
+  name                                          = each.value.subnet_full_name
+  resource_group_name                           = data.azurerm_resource_group.this.name
+  virtual_network_name                          = azurerm_virtual_network.this.name
+  address_prefixes                              = [each.value.subnet_cidr]
+  service_endpoints                             = each.value.subnet_service_endpoints
+  private_link_service_network_policies_enabled = true
+  private_endpoint_network_policies_enabled     = true
 }
 
 resource "azurerm_subnet" "aks" {
@@ -22,11 +23,11 @@ resource "azurerm_subnet" "aks" {
     if subnet.subnet_aks_subnet == true
   }
 
-  name                                           = each.value.subnet_full_name
-  resource_group_name                            = data.azurerm_resource_group.this.name
-  virtual_network_name                           = azurerm_virtual_network.this.name
-  address_prefixes                               = [each.value.subnet_cidr]
-  service_endpoints                              = each.value.subnet_service_endpoints
-  enforce_private_link_endpoint_network_policies = local.subnet_private_endpoints[each.value.subnet_short_name]
-  enforce_private_link_service_network_policies  = local.subnet_private_endpoints[each.value.subnet_short_name]
+  name                                          = each.value.subnet_full_name
+  resource_group_name                           = data.azurerm_resource_group.this.name
+  virtual_network_name                          = azurerm_virtual_network.this.name
+  address_prefixes                              = [each.value.subnet_cidr]
+  service_endpoints                             = each.value.subnet_service_endpoints
+  private_link_service_network_policies_enabled = true
+  private_endpoint_network_policies_enabled     = true
 }

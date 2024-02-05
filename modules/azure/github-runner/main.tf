@@ -15,12 +15,12 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "3.38.0"
+      version = "3.71.0"
       source  = "hashicorp/azurerm"
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "4.0.3"
+      version = "4.0.4"
     }
   }
 }
@@ -90,7 +90,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "this" {
     storage_account_type = "Standard_LRS"
     disk_size_gb         = var.vmss_disk_size_gb
     diff_disk_settings {
-      option = "Local"
+      option    = "Local"
+      placement = var.vmss_diff_disk_placement
     }
   }
 

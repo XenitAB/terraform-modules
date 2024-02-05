@@ -21,11 +21,11 @@ terraform {
   required_providers {
     helm = {
       source  = "hashicorp/helm"
-      version = "2.6.0"
+      version = "2.11.0"
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.17.0"
+      version = "0.25.3"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
@@ -33,7 +33,7 @@ terraform {
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.13.1"
+      version = "2.23.0"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
@@ -99,10 +99,9 @@ data "flux_install" "this" {
 }
 
 data "flux_sync" "this" {
-  url                = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
-  branch             = var.branch
-  target_path        = "clusters/${var.cluster_id}"
-  git_implementation = "libgit2"
+  url         = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${var.azure_devops_proj}/_git/${var.cluster_repo}"
+  branch      = var.branch
+  target_path = "clusters/${var.cluster_id}"
 }
 
 data "kubectl_file_documents" "install" {

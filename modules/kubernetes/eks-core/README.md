@@ -8,20 +8,20 @@ This module is used to configure EKS clusters.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.31.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.17.0 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 4.21.0 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.6.0 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.25.3 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | 5.34.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.13.1 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | 3.4.3 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.23.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | 3.5.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.31.0 |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.6.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.13.1 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
 
 ## Modules
 
@@ -34,19 +34,17 @@ This module is used to configure EKS clusters.
 | <a name="module_csi_secrets_store_provider_aws"></a> [csi\_secrets\_store\_provider\_aws](#module\_csi\_secrets\_store\_provider\_aws) | ../../kubernetes/csi-secrets-store-provider-aws | n/a |
 | <a name="module_csi_secrets_store_provider_aws_crd"></a> [csi\_secrets\_store\_provider\_aws\_crd](#module\_csi\_secrets\_store\_provider\_aws\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_datadog"></a> [datadog](#module\_datadog) | ../../kubernetes/datadog | n/a |
-| <a name="module_datadog_crd"></a> [datadog\_crd](#module\_datadog\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../../kubernetes/external-dns | n/a |
 | <a name="module_falco"></a> [falco](#module\_falco) | ../../kubernetes/falco | n/a |
 | <a name="module_fluxcd_v2_azure_devops"></a> [fluxcd\_v2\_azure\_devops](#module\_fluxcd\_v2\_azure\_devops) | ../../kubernetes/fluxcd-v2-azdo | n/a |
 | <a name="module_fluxcd_v2_github"></a> [fluxcd\_v2\_github](#module\_fluxcd\_v2\_github) | ../../kubernetes/fluxcd-v2-github | n/a |
+| <a name="module_gatekeeper"></a> [gatekeeper](#module\_gatekeeper) | ../../kubernetes/gatekeeper | n/a |
 | <a name="module_ingress_healthz"></a> [ingress\_healthz](#module\_ingress\_healthz) | ../../kubernetes/ingress-healthz | n/a |
 | <a name="module_ingress_nginx"></a> [ingress\_nginx](#module\_ingress\_nginx) | ../../kubernetes/ingress-nginx | n/a |
 | <a name="module_linkerd"></a> [linkerd](#module\_linkerd) | ../../kubernetes/linkerd | n/a |
 | <a name="module_linkerd_crd"></a> [linkerd\_crd](#module\_linkerd\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_node_local_dns"></a> [node\_local\_dns](#module\_node\_local\_dns) | ../../kubernetes/node-local-dns | n/a |
 | <a name="module_node_ttl"></a> [node\_ttl](#module\_node\_ttl) | ../../kubernetes/node-ttl | n/a |
-| <a name="module_opa_gatekeeper"></a> [opa\_gatekeeper](#module\_opa\_gatekeeper) | ../../kubernetes/opa-gatekeeper | n/a |
-| <a name="module_opa_gatekeeper_crd"></a> [opa\_gatekeeper\_crd](#module\_opa\_gatekeeper\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../../kubernetes/prometheus | n/a |
 | <a name="module_prometheus_crd"></a> [prometheus\_crd](#module\_prometheus\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_promtail"></a> [promtail](#module\_promtail) | ../../kubernetes/promtail | n/a |
@@ -56,37 +54,36 @@ This module is used to configure EKS clusters.
 | <a name="module_trivy_crd"></a> [trivy\_crd](#module\_trivy\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../../kubernetes/velero | n/a |
 | <a name="module_vpa"></a> [vpa](#module\_vpa) | ../../kubernetes/vpa | n/a |
-| <a name="module_vpa_crd"></a> [vpa\_crd](#module\_vpa\_crd) | ../../kubernetes/helm-crd | n/a |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [helm_release.aks_core_extras](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
-| [kubernetes_cluster_role.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.get_nodes](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.get_vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.list_namespaces](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.top](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role.trivy_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role) | resource |
-| [kubernetes_cluster_role_binding.cluster_admin](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_cluster_role_binding.cluster_view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_cluster_role_binding.edit_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_cluster_role_binding.get_nodes](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_cluster_role_binding.view_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_limit_range.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/limit_range) | resource |
-| [kubernetes_namespace.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/namespace) | resource |
-| [kubernetes_network_policy.allow_egress_ingress_datadog](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/network_policy) | resource |
-| [kubernetes_network_policy.allow_egress_ingress_grafana_agent](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/network_policy) | resource |
-| [kubernetes_network_policy.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/network_policy) | resource |
-| [kubernetes_role_binding.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.top](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.trivy_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/role_binding) | resource |
+| [helm_release.aks_core_extras](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
+| [kubernetes_cluster_role.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.get_nodes](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.get_vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.list_namespaces](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.top](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role.trivy_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role_binding.cluster_admin](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_cluster_role_binding.cluster_view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_cluster_role_binding.edit_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_cluster_role_binding.get_nodes](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_cluster_role_binding.view_list_ns](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_limit_range.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/limit_range) | resource |
+| [kubernetes_namespace.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
+| [kubernetes_network_policy.allow_egress_ingress_datadog](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/network_policy) | resource |
+| [kubernetes_network_policy.allow_egress_ingress_grafana_agent](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/network_policy) | resource |
+| [kubernetes_network_policy.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/network_policy) | resource |
+| [kubernetes_role_binding.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.helm_release](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.top](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.trivy_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/region) | data source |
 | [aws_route53_zone.this](https://registry.terraform.io/providers/hashicorp/aws/4.31.0/docs/data-sources/route53_zone) | data source |
 
@@ -102,7 +99,7 @@ This module is used to configure EKS clusters.
 | <a name="input_cluster_autoscaler_config"></a> [cluster\_autoscaler\_config](#input\_cluster\_autoscaler\_config) | Cluster Autoscaler configuration | <pre>object({<br>    role_arn = string<br>  })</pre> | n/a | yes |
 | <a name="input_cluster_autoscaler_enabled"></a> [cluster\_autoscaler\_enabled](#input\_cluster\_autoscaler\_enabled) | Should Cluster Autoscaler be enabled | `bool` | `true` | no |
 | <a name="input_csi_secrets_store_provider_aws_enabled"></a> [csi\_secrets\_store\_provider\_aws\_enabled](#input\_csi\_secrets\_store\_provider\_aws\_enabled) | Should csi-secrets-store-provider-aws be enabled | `bool` | `true` | no |
-| <a name="input_datadog_config"></a> [datadog\_config](#input\_datadog\_config) | Datadog configuration | <pre>object({<br>    datadog_site         = string<br>    api_key              = string<br>    app_key              = string<br>    namespaces           = list(string)<br>    apm_ignore_resources = list(string)<br><br>  })</pre> | <pre>{<br>  "api_key": "",<br>  "apm_ignore_resources": [],<br>  "app_key": "",<br>  "datadog_site": "",<br>  "namespaces": [<br>    ""<br>  ]<br>}</pre> | no |
+| <a name="input_datadog_config"></a> [datadog\_config](#input\_datadog\_config) | Datadog configuration | <pre>object({<br>    role_arn             = string<br>    datadog_site         = string<br>    namespaces           = list(string)<br>    apm_ignore_resources = list(string)<br><br>  })</pre> | <pre>{<br>  "apm_ignore_resources": [],<br>  "datadog_site": "",<br>  "namespaces": [<br>    ""<br>  ],<br>  "role_arn": ""<br>}</pre> | no |
 | <a name="input_datadog_enabled"></a> [datadog\_enabled](#input\_datadog\_enabled) | Should Datadog be enabled | `bool` | `false` | no |
 | <a name="input_eks_name_suffix"></a> [eks\_name\_suffix](#input\_eks\_name\_suffix) | The suffix for the eks clusters | `number` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
@@ -111,6 +108,8 @@ This module is used to configure EKS clusters.
 | <a name="input_falco_enabled"></a> [falco\_enabled](#input\_falco\_enabled) | Should Falco be enabled | `bool` | `false` | no |
 | <a name="input_fluxcd_v2_config"></a> [fluxcd\_v2\_config](#input\_fluxcd\_v2\_config) | Configuration for fluxcd-v2 | <pre>object({<br>    type = string<br>    github = object({<br>      org             = string<br>      app_id          = number<br>      installation_id = number<br>      private_key     = string<br>    })<br>    azure_devops = object({<br>      pat  = string<br>      org  = string<br>      proj = string<br>    })<br>  })</pre> | n/a | yes |
 | <a name="input_fluxcd_v2_enabled"></a> [fluxcd\_v2\_enabled](#input\_fluxcd\_v2\_enabled) | Should fluxcd-v2 be enabled | `bool` | `true` | no |
+| <a name="input_gatekeeper_config"></a> [gatekeeper\_config](#input\_gatekeeper\_config) | Configuration for OPA Gatekeeper | <pre>object({<br>    exclude_namespaces = list(string)<br>  })</pre> | <pre>{<br>  "exclude_namespaces": []<br>}</pre> | no |
+| <a name="input_gatekeeper_enabled"></a> [gatekeeper\_enabled](#input\_gatekeeper\_enabled) | Should OPA Gatekeeper be enabled | `bool` | `true` | no |
 | <a name="input_grafana_agent_enabled"></a> [grafana\_agent\_enabled](#input\_grafana\_agent\_enabled) | Should Grafana-Agent be enabled | `bool` | `false` | no |
 | <a name="input_group_name_prefix"></a> [group\_name\_prefix](#input\_group\_name\_prefix) | Prefix for Azure AD groups | `string` | n/a | yes |
 | <a name="input_group_name_separator"></a> [group\_name\_separator](#input\_group\_name\_separator) | Separator for group names | `string` | `"-"` | no |
@@ -122,11 +121,8 @@ This module is used to configure EKS clusters.
 | <a name="input_linkerd_enabled"></a> [linkerd\_enabled](#input\_linkerd\_enabled) | Should linkerd be enabled | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name to use for the deploy | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name   = string<br>      labels = map(string)<br>      flux = object({<br>        enabled     = bool<br>        create_crds = bool<br>        azure_devops = object({<br>          org  = string<br>          proj = string<br>          repo = string<br>        })<br>        github = object({<br>          repo = string<br>        })<br>      })<br>    })<br>  )</pre> | n/a | yes |
-| <a name="input_node_local_dns_dns_ip"></a> [node\_local\_dns\_dns\_ip](#input\_node\_local\_dns\_dns\_ip) | Should node local dns be enabled | `string` | `"172.20.0.10"` | no |
 | <a name="input_node_local_dns_enabled"></a> [node\_local\_dns\_enabled](#input\_node\_local\_dns\_enabled) | Should node local dns be enabled | `bool` | `true` | no |
 | <a name="input_node_ttl_enabled"></a> [node\_ttl\_enabled](#input\_node\_ttl\_enabled) | Should Node TTL be enabled | `bool` | `true` | no |
-| <a name="input_opa_gatekeeper_config"></a> [opa\_gatekeeper\_config](#input\_opa\_gatekeeper\_config) | Configuration for OPA Gatekeeper | <pre>object({<br>    additional_excluded_namespaces = list(string)<br>    enable_default_constraints     = bool<br>    additional_constraints = list(object({<br>      excluded_namespaces = list(string)<br>      processes           = list(string)<br>    }))<br>    enable_default_assigns = bool<br>    additional_assigns = list(object({<br>      name = string<br>    }))<br>  })</pre> | <pre>{<br>  "additional_assigns": [],<br>  "additional_constraints": [],<br>  "additional_excluded_namespaces": [],<br>  "enable_default_assigns": true,<br>  "enable_default_constraints": true<br>}</pre> | no |
-| <a name="input_opa_gatekeeper_enabled"></a> [opa\_gatekeeper\_enabled](#input\_opa\_gatekeeper\_enabled) | Should OPA Gatekeeper be enabled | `bool` | `true` | no |
 | <a name="input_prometheus_config"></a> [prometheus\_config](#input\_prometheus\_config) | Configuration for prometheus | <pre>object({<br>    role_arn = string<br><br>    tenant_id = string<br><br>    remote_write_authenticated = bool<br>    remote_write_url           = string<br><br>    volume_claim_size = string<br><br>    resource_selector  = list(string)<br>    namespace_selector = list(string)<br>  })</pre> | n/a | yes |
 | <a name="input_prometheus_enabled"></a> [prometheus\_enabled](#input\_prometheus\_enabled) | Should prometheus be enabled | `bool` | `true` | no |
 | <a name="input_promtail_config"></a> [promtail\_config](#input\_promtail\_config) | Configuration for promtail | <pre>object({<br>    role_arn            = string<br>    loki_address        = string<br>    excluded_namespaces = list(string)<br>  })</pre> | <pre>{<br>  "excluded_namespaces": [],<br>  "loki_address": "",<br>  "role_arn": ""<br>}</pre> | no |

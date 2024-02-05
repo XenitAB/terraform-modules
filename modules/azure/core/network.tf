@@ -1,5 +1,13 @@
+data "azurecaf_name" "azurerm_virtual_network_this" {
+  name          = var.name
+  resource_type = "azurerm_virtual_network"
+  prefixes      = module.names.this.azurerm_virtual_network.prefixes
+  suffixes      = module.names.this.azurerm_virtual_network.suffixes
+  use_slug      = false
+}
+
 resource "azurerm_virtual_network" "this" {
-  name                = "vnet-${var.environment}-${var.location_short}-${var.name}"
+  name                = data.azurecaf_name.azurerm_virtual_network_this.result
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
   address_space       = var.vnet_config.address_space
@@ -12,7 +20,7 @@ resource "azurerm_virtual_network_peering" "this" {
     peering_config.name => peering_config
   }
 
-  name                         = "peering-${each.value.name}"
+  name                         = each.value.full_name
   resource_group_name          = data.azurerm_resource_group.this.name
   virtual_network_name         = azurerm_virtual_network.this.name
   remote_virtual_network_id    = each.value.peering_config.remote_virtual_network_id

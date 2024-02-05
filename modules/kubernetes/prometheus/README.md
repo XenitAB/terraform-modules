@@ -8,15 +8,15 @@ If you are running on AWS we also install [Metrics server](https://aws.amazon.co
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.6.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.13.1 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.23.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.6.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.13.1 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
 
 ## Modules
 
@@ -26,11 +26,11 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [helm_release.metrics_server](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
-| [helm_release.prometheus](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
-| [helm_release.prometheus_extras](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
-| [helm_release.x509_certificate_exporter](https://registry.terraform.io/providers/hashicorp/helm/2.6.0/docs/resources/release) | resource |
-| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.13.1/docs/resources/namespace) | resource |
+| [helm_release.metrics_server](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
+| [helm_release.prometheus](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
+| [helm_release.prometheus_extras](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
+| [helm_release.x509_certificate_exporter](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
+| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
 
 ## Inputs
 
@@ -47,12 +47,12 @@ No modules.
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment in which the prometheus instance is deployed | `string` | n/a | yes |
 | <a name="input_falco_enabled"></a> [falco\_enabled](#input\_falco\_enabled) | Should Falco be enabled | `bool` | `false` | no |
 | <a name="input_flux_enabled"></a> [flux\_enabled](#input\_flux\_enabled) | Should flux-system be enabled | `bool` | `false` | no |
+| <a name="input_gatekeeper_enabled"></a> [gatekeeper\_enabled](#input\_gatekeeper\_enabled) | Should OPA Gatekeeper be enabled | `bool` | `false` | no |
 | <a name="input_grafana_agent_enabled"></a> [grafana\_agent\_enabled](#input\_grafana\_agent\_enabled) | Should grafana-agent be enabled | `bool` | `false` | no |
 | <a name="input_linkerd_enabled"></a> [linkerd\_enabled](#input\_linkerd\_enabled) | Should linkerd be enabled | `bool` | `false` | no |
 | <a name="input_namespace_selector"></a> [namespace\_selector](#input\_namespace\_selector) | Kind labels to look for in namespaces | `list(string)` | <pre>[<br>  "platform"<br>]</pre> | no |
 | <a name="input_node_local_dns_enabled"></a> [node\_local\_dns\_enabled](#input\_node\_local\_dns\_enabled) | Should node local DNS be enabled | `bool` | `false` | no |
 | <a name="input_node_ttl_enabled"></a> [node\_ttl\_enabled](#input\_node\_ttl\_enabled) | Should Node TTL be enabled | `bool` | `false` | no |
-| <a name="input_opa_gatekeeper_enabled"></a> [opa\_gatekeeper\_enabled](#input\_opa\_gatekeeper\_enabled) | Should OPA Gatekeeper be enabled | `bool` | `false` | no |
 | <a name="input_promtail_enabled"></a> [promtail\_enabled](#input\_promtail\_enabled) | Should promtail be enabled | `bool` | `false` | no |
 | <a name="input_region"></a> [region](#input\_region) | The region in which the prometheus instance is deployed | `string` | n/a | yes |
 | <a name="input_remote_write_authenticated"></a> [remote\_write\_authenticated](#input\_remote\_write\_authenticated) | Adds TLS authentication to remote write configuration if true | `bool` | `true` | no |

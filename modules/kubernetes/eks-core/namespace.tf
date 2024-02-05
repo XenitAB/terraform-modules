@@ -77,11 +77,13 @@ resource "kubernetes_network_policy" "tenant" {
           }
         }
       }
+      # TODO: Use output from node-local-dns module
       to {
         ip_block {
-          cidr = "${var.node_local_dns_dns_ip}/32"
+          cidr = "172.20.0.10/32"
         }
       }
+      # TODO: Use output from node-local-dns module
       to {
         ip_block {
           cidr = "169.254.20.10/32"

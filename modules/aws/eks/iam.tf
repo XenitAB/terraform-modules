@@ -260,3 +260,37 @@ module "eks_ebs_csi_driver" {
   policy_permissions_arn     = ["arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"]
   policy_json_create         = false
 }
+
+data "aws_iam_policy_document" "datadog_secrets" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "ssm:DescribeParameters",
+    ]
+    resources = ["*"]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ssm:GetParameter",
+      "ssm:GetParameters",
+    ]
+    resources = ["arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/datadog-*"]
+  }
+}
+
+module "datadog" {
+  source = "../irsa"
+
+  name = "${var.name_prefix}-${data.aws_region.current.name}-${var.environment}-${var.name}${var.eks_name_suffix}-datadog"
+  oidc_providers = [
+    {
+      url = aws_iam_openid_connect_provider.this.url
+      arn = aws_iam_openid_connect_provider.this.arn
+    }
+  ]
+  kubernetes_namespace       = "datadog"
+  kubernetes_service_account = "datadog"
+  policy_json                = data.aws_iam_policy_document.datadog_secrets.json
+  policy_json_create         = true
+}

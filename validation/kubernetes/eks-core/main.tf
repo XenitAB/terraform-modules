@@ -86,6 +86,13 @@ module "eks_core" {
     trivy_operator_role_arn = "arn1234"
   }
 
+  datadog_config = {
+    datadog_site         = "foobar.eu"
+    namespaces           = (["test", "bar"])
+    apm_ignore_resources = ["''"]
+    role_arn             = "arn1234"
+  }
+
   prometheus_enabled = true
   prometheus_config = {
     role_arn = "foo"

@@ -1,3 +1,8 @@
+variable "cloud_provider" {
+  description = "Name of cloud provider"
+  type        = string
+}
+
 variable "datadog_site" {
   description = "Site to connect Datadog agent"
   type        = string
@@ -14,13 +19,8 @@ variable "location" {
   type        = string
 }
 
-variable "api_key" {
-  description = "API key to upload data to Datadog"
-  type        = string
-}
-
-variable "app_key" {
-  description = "APP key to configure data like alarms in Datadog"
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
   type        = string
 }
 
@@ -32,5 +32,34 @@ variable "namespace_include" {
 variable "apm_ignore_resources" {
   description = "The resources that shall be excluded from APM"
   type        = list(string)
-  default     = []
+}
+
+variable "azure_config" {
+  description = "Azure specific configuration"
+  type = object({
+    azure_key_vault_name = string
+    identity = object({
+      client_id   = string
+      resource_id = string
+      tenant_id   = string
+    })
+  })
+  default = {
+    azure_key_vault_name = ""
+    identity = {
+      client_id   = ""
+      resource_id = ""
+      tenant_id   = ""
+    }
+  }
+}
+
+variable "aws_config" {
+  description = "AWS specific configuration"
+  type = object({
+    role_arn = string
+  })
+  default = {
+    role_arn = ""
+  }
 }

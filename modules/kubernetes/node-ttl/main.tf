@@ -8,34 +8,23 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.13.1"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.6.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    name = "node-ttl"
-    labels = {
-      name                = "node-ttl"
-      "xkf.xenit.io/kind" = "platform"
-    }
-  }
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/node-ttl.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id
+  })
 }
 
-resource "helm_release" "this" {
-  chart       = "oci://ghcr.io/xenitab/helm-charts/node-ttl"
-  name        = "node-ttl"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v0.0.6"
-  max_history = 3
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
+resource "git_repository_file" "node_ttl" {
+  path = "platform/${var.cluster_id}/node-ttl/node-ttl.yaml"
+  content = templatefile("${path.module}/templates/node-ttl.yaml.tpl", {
     status_config_map_namespace = var.status_config_map_namespace
-  })]
+  })
 }

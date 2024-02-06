@@ -249,8 +249,8 @@ module "reloader" {
     s => s
     if var.reloader_enabled
   }
-
-  source = "../../kubernetes/reloader"
+  cluster_id = local.cluster_id
+  source     = "../../kubernetes/reloader"
 }
 
 module "azad_kube_proxy" {

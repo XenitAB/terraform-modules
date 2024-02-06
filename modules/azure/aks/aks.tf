@@ -218,8 +218,8 @@ resource "azurerm_role_assignment" "aks_managed_identity_noderg_virtual_machine_
   principal_id         = var.aad_groups.aks_managed_identity.id
 }
 
-# resource "azurerm_kubernetes_cluster_extension" "kv" {
-#   name           = "azure-keyvault-secrets-provider"
-#   cluster_id     = azurerm_kubernetes_cluster.this.id
-#   extension_type = "azure-keyvault-secrets-provider"
-# }
+resource "azurerm_kubernetes_cluster_extension" "kv" {
+  name           = "azure-keyvault-secrets-provider"
+  cluster_id     = azurerm_kubernetes_cluster.this.id
+  extension_type = "azure-keyvault-secrets-provider"
+}

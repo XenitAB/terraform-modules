@@ -211,8 +211,6 @@ module "ingress_healthz" {
 
 # External DNS
 module "external_dns" {
-  depends_on = [module.aad_pod_identity_crd]
-
   for_each = {
     for s in ["external-dns"] :
     s => s
@@ -221,6 +219,7 @@ module "external_dns" {
 
   source = "../../kubernetes/external-dns"
 
+  cluster_id   = local.cluster_id
   dns_provider = "azure"
   txt_owner_id = "${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   azure_config = {
@@ -391,6 +390,7 @@ module "falco" {
   source = "../../kubernetes/falco"
 
   cloud_provider = "azure"
+  cluster_id     = local.cluster_id
 }
 
 # Reloader
@@ -406,16 +406,14 @@ module "reloader" {
 
 # azad-kube-proxy
 module "azad_kube_proxy" {
-  depends_on = [module.ingress_nginx]
-
   for_each = {
     for s in ["azad-kube-proxy"] :
     s => s
     if var.azad_kube_proxy_enabled
   }
 
-  source = "../../kubernetes/azad-kube-proxy"
-
+  source                = "../../kubernetes/azad-kube-proxy"
+  cluster_id            = local.cluster_id
   fqdn                  = var.azad_kube_proxy_config.fqdn
   azure_ad_group_prefix = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
   allowed_ips           = var.azad_kube_proxy_config.allowed_ips

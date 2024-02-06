@@ -40,25 +40,6 @@ kind: ServiceMonitor
 metadata:
   labels:
     xkf.xenit.io/monitoring: platform
-  name: external-dns
-  namespace: external-dns
-spec:
-  endpoints:
-  - path: /metrics
-    port: http
-  namespaceSelector:
-    matchNames:
-    - external-dns
-  selector:
-    matchLabels:
-      app.kubernetes.io/instance: external-dns
-      app.kubernetes.io/name: external-dns
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  labels:
-    xkf.xenit.io/monitoring: platform
   name: ingress-nginx-controller
   namespace: ingress-nginx
 spec:

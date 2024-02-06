@@ -173,6 +173,7 @@ module "external_dns" {
 
   source = "../../kubernetes/external-dns"
 
+  cluster_id   = local.cluster_id
   dns_provider = "aws"
   txt_owner_id = "${var.environment}-${var.name}${var.eks_name_suffix}"
   aws_config = {
@@ -239,6 +240,7 @@ module "falco" {
   source = "../../kubernetes/falco"
 
   cloud_provider = "aws"
+  cluster_id     = local.cluster_id
 }
 
 module "reloader" {
@@ -252,16 +254,14 @@ module "reloader" {
 }
 
 module "azad_kube_proxy" {
-  depends_on = [module.ingress_nginx]
-
   for_each = {
     for s in ["azad-kube-proxy"] :
     s => s
     if var.azad_kube_proxy_enabled
   }
 
-  source = "../../kubernetes/azad-kube-proxy"
-
+  source                = "../../kubernetes/azad-kube-proxy"
+  cluster_id            = local.cluster_id
   fqdn                  = var.azad_kube_proxy_config.fqdn
   azure_ad_group_prefix = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
   allowed_ips           = var.azad_kube_proxy_config.allowed_ips

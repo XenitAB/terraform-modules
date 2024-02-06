@@ -10,6 +10,7 @@ spec:
     name: flux-system
   path: "./platform/${cluster_id}/reloader/"
   prune: true
+  wait: true
   healthChecks:
   - apiVersion: apps/v1
     kind: deployment

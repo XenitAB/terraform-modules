@@ -3,6 +3,11 @@ variable "cloud_provider" {
   type        = string
 }
 
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}
+
 variable "cluster_name" {
   description = "Name of the K8S cluster"
   type        = string

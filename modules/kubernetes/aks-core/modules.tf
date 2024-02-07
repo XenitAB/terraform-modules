@@ -518,7 +518,6 @@ module "promtail" {
   }
 
   source              = "../../kubernetes/promtail"
-  cloud_provider      = "azure"
   cluster_name        = "${var.name}${local.aks_name_suffix}"
   environment         = var.environment
   region              = var.location_short

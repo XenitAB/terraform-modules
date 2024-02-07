@@ -104,6 +104,7 @@ apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
   name: promtail
+  namespace: promtail
 spec:
   provider: "azure"
   parameters:
@@ -128,6 +129,7 @@ apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentity
 metadata:
   name: promtail
+  namespace: promtail
 spec:
   type: 0
   resourceID: "${azure_config.identity.resource_id}"
@@ -137,6 +139,7 @@ apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentityBinding
 metadata:
   name: promtail
+  namespace: promtail
 spec:
   azureIdentity: promtail
   selector: promtail
@@ -145,7 +148,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: promtail-metrics
-  namespace: "${namespace}"
+  namespace: promtail
   labels:
     app.kubernetes.io/instance: promtail
     app.kubernetes.io/name: promtail

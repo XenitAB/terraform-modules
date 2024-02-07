@@ -1,3 +1,8 @@
+variable "cloud_provider" {
+  description = "Cloud provider used for load balancer"
+  type        = string
+}
+
 variable "default_certificate" {
   description = "If enalbed and configured nginx will be configured with a default certificate."
   type = object({
@@ -70,9 +75,4 @@ variable "datadog_enabled" {
   description = "Should datadog be enabled"
   type        = bool
   default     = false
-}
-
-variable "cluster_id" {
-  description = "Unique identifier of the cluster across regions and instances."
-  type        = string
 }

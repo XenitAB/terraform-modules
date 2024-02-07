@@ -12,6 +12,7 @@ spec:
     name: flux-system
   path: "./platform/${cluster_id}/datadog-operator/"
   prune: true
+  wait: true
   healthChecks:
   - apiVersion: apps/v1
     kind: Deployment

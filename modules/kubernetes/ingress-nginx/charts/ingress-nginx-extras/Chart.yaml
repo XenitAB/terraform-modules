@@ -1,6 +1,0 @@
-apiVersion: v2
-name: ingress-nginx-extras
-description: Creates extra resources for ingress-nginx
-type: application
-version: 0.1.1
-appVersion: "1.16.0"

@@ -62,7 +62,7 @@ spec:
         %{~ if internal_load_balancer || external_dns_hostname != "" ~}
         annotations:
           %{~ if internal_load_balancer ~}
-          service.beta.kubernetes.io/${provider}-load-balancer-internal: "true"
+          service.beta.kubernetes.io/azure-load-balancer-internal: "true"
           %{~ endif ~}
           %{~ if external_dns_hostname != "" ~}
           external-dns.alpha.kubernetes.io/hostname: ${external_dns_hostname}

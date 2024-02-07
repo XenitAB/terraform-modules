@@ -154,4 +154,4 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt
-{{- end }}
+%{~ endif ~}

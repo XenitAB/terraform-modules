@@ -1,8 +1,3 @@
-variable "cloud_provider" {
-  description = "Name of cloud provider"
-  type        = string
-}
-
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
@@ -23,20 +18,10 @@ variable "region" {
   type        = string
 }
 
-
 variable "excluded_namespaces" {
   description = "Namespaces to not ship logs from"
   type        = list(string)
   default     = []
-}
-variable "aws_config" {
-  description = "AWS specific configuration"
-  type = object({
-    role_arn = string
-  })
-  default = {
-    role_arn = ""
-  }
 }
 variable "azure_config" {
   description = "Azure specific configuration"

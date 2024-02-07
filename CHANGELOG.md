@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1058](https://github.com/XenitAB/terraform-modules/pull/1058) Use secrets-provider AKS-addon instead of seperate helmchart.
 - [#1057](https://github.com/XenitAB/terraform-modules/pull/1057) Migrate reloader to install with flux.
 - [#1036](https://github.com/XenitAB/terraform-modules/pull/1036) Migrate Falco to install with flux.
 - [#1030](https://github.com/XenitAB/terraform-modules/pull/1030) Move azad-kube-proxy to install with flux.

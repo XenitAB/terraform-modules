@@ -33,24 +33,19 @@ spec:
     controller:
       image:
         chroot: true
-
       replicaCount: 3
       minAvailable: 2
-
       resources:
         requests:
           cpu: 100m
           memory: 110Mi
-
-      priorityClassName: platform-high
-
       ingressClassResource:
         name: ${ingress_class}
         default: ${default_ingress_class}
         controllerValue: "k8s.io/ingress-${ingress_class}"
+      priorityClassName: platform-high
 
-      # Should eventually be removed as ingress class annotations are deprecated
-      ingressClass: ${ingress_class}
+      ingressClass: ${ingress_class} # Should eventually be removed as ingress class annotations are deprecated
 
       %{~ if public_private_enabled ~}
       electionID: ingress-controller-leader-${ingress_class}
@@ -112,7 +107,6 @@ spec:
         config.linkerd.io/skip-inbound-ports: "80,443,8443"
         %{~ endif ~}
       %{~ endif ~}
-
       %{~ if datadog_enabled ~}
       extraEnvs:
       - name: HOST_IP
@@ -140,8 +134,8 @@ spec:
                         - ingress-${ingress_class}
                 topologyKey: topology.kubernetes.io/zone
               weight: 100
----
 %{~ if default_certificate.enabled ~}
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -155,3 +149,4 @@ spec:
     kind: ClusterIssuer
     name: letsencrypt
 %{~ endif ~}
+---

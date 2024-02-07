@@ -258,12 +258,6 @@ variable "velero_config" {
   })
 }
 
-variable "csi_secrets_store_provider_azure_enabled" {
-  description = "Should csi-secrets-store-provider-azure be enabled"
-  type        = bool
-  default     = true
-}
-
 variable "datadog_enabled" {
   description = "Should Datadog be enabled"
   type        = bool

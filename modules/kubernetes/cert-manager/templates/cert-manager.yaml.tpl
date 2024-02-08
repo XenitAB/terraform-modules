@@ -55,6 +55,7 @@ apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentity
 metadata:
   name: cert-manager
+  namespace: cert-manager
 spec:
   type: 0
   resourceID: ${azure_config.resource_id}
@@ -64,6 +65,7 @@ apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentityBinding
 metadata:
   name: cert-manager
+  namespace: cert-manager
 spec:
   azureIdentity: cert-manager
   selector: cert-manager
@@ -72,6 +74,7 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt
+  namespace: cert-manager
 spec:
   acme:
     email: ${notification_email}

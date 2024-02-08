@@ -7,11 +7,7 @@ provider "helm" {}
 module "aad_pod_identity" {
   source = "../../../modules/kubernetes/aad-pod-identity"
 
-  providers = {
-    kubernetes = kubernetes
-    helm       = helm
-  }
-
+  cluster_id = "foobar"
   aad_pod_identity = {
     "test" = {
       id        = "id"

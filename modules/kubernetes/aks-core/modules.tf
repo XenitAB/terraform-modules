@@ -95,8 +95,6 @@ module "fluxcd_v2_github" {
 
 # AAD-Pod-Identity
 module "aad_pod_identity" {
-  depends_on = [module.aad_pod_identity_crd]
-
   for_each = {
     for s in ["aad-pod-identity"] :
     s => s
@@ -113,8 +111,6 @@ module "aad_pod_identity" {
 
 # AZ Metrics
 module "azure_metrics" {
-  depends_on = [module.aad_pod_identity_crd]
-
   for_each = {
     for s in ["azure-metrics"] :
     s => s

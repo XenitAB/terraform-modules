@@ -81,11 +81,11 @@ spec:
     solvers:
     - selector:
         dnsZones: 
-          - ${azure_config.hosted_zone_names}
+          - ${dns_zones}
       dns01:
           azureDNS:
             environment: AzurePublicCloud
             subscriptionID: ${azure_config.subscription_id}
             resourceGroupName: ${azure_config.resource_group_name}
-            hostedZoneName: ${azure_config.hosted_zone_names}
+            hostedZoneName: ${dns_zones}
 

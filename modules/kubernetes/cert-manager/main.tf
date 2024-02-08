@@ -15,6 +15,10 @@ terraform {
   }
 }
 
+locals {
+  azure_hosted_zone_names = "[${join(",", var.azure_config.hosted_zone_names)}]"
+}
+
 resource "git_repository_file" "kustomization" {
   path = "clusters/${var.cluster_id}/cert-manager.yaml"
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
@@ -28,6 +32,6 @@ resource "git_repository_file" "cert_manager" {
     notification_email = var.notification_email,
     acme_server        = var.acme_server,
     azure_config       = var.azure_config,
-
+    dns_zones          = local.azure_hosted_zone_names
   })
 }

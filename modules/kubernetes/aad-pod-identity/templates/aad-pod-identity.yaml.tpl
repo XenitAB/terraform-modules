@@ -46,7 +46,7 @@ spec:
 
     azureIdentities:
     %{ for namespace in namespaces ~}
-    "${namespace.name}":
+  "${namespace.name}":
         namespace: "${namespace.name}"
         type: "0"
         resourceID: "${aad_pod_identity[namespace.name].id}"

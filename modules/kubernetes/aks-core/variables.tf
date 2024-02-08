@@ -78,8 +78,9 @@ variable "namespaces" {
       name   = string
       labels = map(string)
       flux = object({
-        enabled     = bool
-        create_crds = bool
+        enabled             = bool
+        create_crds         = bool
+        include_tenant_name = string
         azure_devops = object({
           org  = string
           proj = string
@@ -91,6 +92,24 @@ variable "namespaces" {
       })
     })
   )
+  default = [{
+    name   = ""
+    labels = {}
+    flux = {
+      enabled             = true
+      create_crds         = false
+      include_tenant_name = false
+      azure_devops = {
+        org  = ""
+        proj = ""
+        repo = ""
+      }
+      github = {
+        repo = ""
+      }
+    }
+    }
+  ]
 }
 
 variable "kubernetes_network_policy_default_deny" {

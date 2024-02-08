@@ -94,14 +94,6 @@ module "fluxcd_v2_github" {
 }
 
 # AAD-Pod-Identity
-module "aad_pod_identity_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
-  chart_name       = "aad-pod-identity"
-  chart_version    = "4.1.16"
-}
-
 module "aad_pod_identity" {
   depends_on = [module.aad_pod_identity_crd]
 
@@ -111,8 +103,8 @@ module "aad_pod_identity" {
     if var.aad_pod_identity_enabled
   }
 
-  source = "../../kubernetes/aad-pod-identity"
-
+  source           = "../../kubernetes/aad-pod-identity"
+  cluster_id       = local.cluster_id
   aad_pod_identity = var.aad_pod_identity_config
   namespaces = [for ns in var.namespaces : {
     name = ns.name

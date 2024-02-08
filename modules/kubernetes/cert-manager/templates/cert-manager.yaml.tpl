@@ -53,9 +53,11 @@ spec:
           cpu: 25m
           memory: 250Mi
 ---
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt
+  namespace: cert-manager
 spec:
   acme:
     email: ${notification_email}

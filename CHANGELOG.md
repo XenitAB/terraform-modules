@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1061](https://github.com/XenitAB/terraform-modules/pull/1061) Migrate aad-pod-identity to install with flux.
 - [#1055](https://github.com/XenitAB/terraform-modules/pull/1055) Add functionality for multiple flux-tenants in one environment.
 - [#1057](https://github.com/XenitAB/terraform-modules/pull/1057) Migrate reloader to install with flux.
 - [#1036](https://github.com/XenitAB/terraform-modules/pull/1036) Migrate Falco to install with flux.

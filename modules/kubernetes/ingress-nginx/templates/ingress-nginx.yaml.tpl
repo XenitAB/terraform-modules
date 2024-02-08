@@ -61,7 +61,7 @@ spec:
           external-dns.alpha.kubernetes.io/hostname: ${external_dns_hostname}
           %{~ endif ~}
         %{~ endif ~}
-
+      allowSnippetAnnotations: ${allow_snippet_annotations}
       config:
         %{~ for key, value in extra_config ~}
         ${key}: "${value}"
@@ -75,7 +75,6 @@ spec:
         http-snippet: |
           ${http_snippet}
         %{~ endif ~}
-        allow-snippet-annotations: ${allow_snippet_annotations}
         %{~ if allow_snippet_annotations ~}
         annotation-value-word-blocklist: load_module,lua_package,_by_lua,location,root,proxy_pass,serviceaccount,{,},',\
         %{~ endif ~}

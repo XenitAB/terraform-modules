@@ -65,7 +65,7 @@ spec:
     solvers:
     - selector:
         dnsZones: 
-          - ${azure_config.hosted_zone_names}
+          - ${dns_zones}
       dns01:
           azureDNS:
             environment: AzurePublicCloud

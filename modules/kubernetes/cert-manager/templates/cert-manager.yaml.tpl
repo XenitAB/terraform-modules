@@ -79,14 +79,14 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-cluster-issuer-account-key
     solvers:
-    {{- range $zone := $azure_config.hosted_zone_names }}
+    %{~ for zone in azure_config.hosted_zone_names ~}
     - selector:
-        dnsZones:
-          - {{ . | quote }}
+        dnsZones: 
+          - ${zone}
       dns01:
           azureDNS:
             environment: AzurePublicCloud
             subscriptionID: ${azure_config.subscription_id}
             resourceGroupName: ${azure_config.resource_group_name}
-            hostedZoneName: {{ . | quote }}
-    {{- end }}
+            hostedZoneName: ${zone}
+    %{ endfor }

@@ -43,17 +43,15 @@ spec:
         name: ${ingress_class}
         default: ${default_ingress_class}
         controllerValue: "k8s.io/ingress-${ingress_class}"
-      priorityClassName: platform-high
-
-      ingressClass: ${ingress_class} # Should eventually be removed as ingress class annotations are deprecated
-
+      priorityClassName: "platform-high"
+      ingressClass: ${ingress_class}
       %{~ if public_private_enabled ~}
       electionID: ingress-controller-leader-${ingress_class}
       ingressClassByName: true
       %{~ endif ~}
 
       service:
-        externalTrafficPolicy: Local
+        externalTrafficPolicy: "Local"
         %{~ if internal_load_balancer || external_dns_hostname != "" ~}
         annotations:
           %{~ if internal_load_balancer ~}
@@ -134,12 +132,14 @@ spec:
                         - ingress-${ingress_class}
                 topologyKey: topology.kubernetes.io/zone
               weight: 100
+
 %{~ if default_certificate.enabled ~}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: ingress-nginx
+  namespace: ingress-nginx
 spec:
   secretName: ingress-nginx
   revisionHistoryLimit: 3
@@ -149,4 +149,3 @@ spec:
     kind: ClusterIssuer
     name: letsencrypt
 %{~ endif ~}
----

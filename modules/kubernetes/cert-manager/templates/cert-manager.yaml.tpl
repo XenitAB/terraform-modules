@@ -92,4 +92,4 @@ spec:
       - selector:
           dnsZones: 
             - ${zone}%
-{endfor}
+%{endfor}

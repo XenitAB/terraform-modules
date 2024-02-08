@@ -133,7 +133,6 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider = "aws"
   default_certificate = {
     enabled  = true
     dns_zone = var.cert_manager_config.dns_zone[0]
@@ -144,6 +143,7 @@ module "ingress_nginx" {
   customization_private  = var.ingress_nginx_config.customization_private
   linkerd_enabled        = var.linkerd_enabled
   datadog_enabled        = var.datadog_enabled
+  cluster_id             = local.cluster_id
 }
 
 module "ingress_healthz" {

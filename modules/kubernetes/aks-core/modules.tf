@@ -519,13 +519,12 @@ module "promtail" {
   }
 
   source              = "../../kubernetes/promtail"
-  cloud_provider      = "azure"
   cluster_name        = "${var.name}${local.aks_name_suffix}"
   environment         = var.environment
   region              = var.location_short
   excluded_namespaces = var.promtail_config.excluded_namespaces
-
-  loki_address = var.promtail_config.loki_address
+  cluster_id          = local.cluster_id
+  loki_address        = var.promtail_config.loki_address
   azure_config = {
     azure_key_vault_name = var.promtail_config.azure_key_vault_name
     identity             = var.promtail_config.identity

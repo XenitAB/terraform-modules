@@ -27,14 +27,16 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: cert-manager
-      version: v1.7.1
+      version: v1.14.4
   interval: 1m0s
   values:
     global:
       priorityClassName: "platform-medium"
-
     podLabels:
-      aadpodidbinding: cert-manager
+      azure.workload.identity/use: "true"
+    serviceAccount:
+      labels:
+        azure.workload.identity/use: "true"
     webhook:
       resources:
         requests:
@@ -51,30 +53,9 @@ spec:
           cpu: 25m
           memory: 250Mi
 ---
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentity
-metadata:
-  name: cert-manager
-  namespace: cert-manager
-spec:
-  type: 0
-  resourceID: ${azure_config.resource_id}
-  clientID: ${azure_config.client_id }
----
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentityBinding
-metadata:
-  name: cert-manager
-  namespace: cert-manager
-spec:
-  azureIdentity: cert-manager
-  selector: cert-manager
----
-apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt
-  namespace: cert-manager
 spec:
   acme:
     email: ${notification_email}
@@ -89,6 +70,8 @@ spec:
             subscriptionID: ${azure_config.subscription_id}
             resourceGroupName: ${azure_config.resource_group_name}
             hostedZoneName: ${zone}
+            managedIdentity:
+              clientID: ${$azure_config.client_id}
       - selector:
           dnsZones: 
             - ${zone}

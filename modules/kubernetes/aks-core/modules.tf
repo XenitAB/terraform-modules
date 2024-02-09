@@ -152,7 +152,7 @@ module "linkerd_crd" {
 }
 
 module "linkerd" {
-  depends_on = [module.cert_manager_crd, module.linkerd_crd]
+  depends_on = [module.linkerd_crd]
 
   for_each = {
     for s in ["linkerd"] :
@@ -232,20 +232,7 @@ module "external_dns" {
 }
 
 # Cert Manager
-module "cert_manager_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://charts.jetstack.io"
-  chart_name       = "cert-manager"
-  chart_version    = "v1.7.1"
-  values = {
-    "installCRDs" = "true"
-  }
-}
-
 module "cert_manager" {
-  depends_on = [module.cert_manager_crd]
-
   for_each = {
     for s in ["cert-manager"] :
     s => s
@@ -254,8 +241,8 @@ module "cert_manager" {
 
   source = "../../kubernetes/cert-manager"
 
+  cluster_id         = local.cluster_id
   notification_email = var.cert_manager_config.notification_email
-  cloud_provider     = "azure"
   azure_config = {
     hosted_zone_names   = var.cert_manager_config.dns_zone
     resource_group_name = data.azurerm_resource_group.global.name

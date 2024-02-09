@@ -194,7 +194,6 @@ module "cert_manager_crd" {
 }
 
 module "cert_manager" {
-  depends_on = [module.cert_manager_crd]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -202,14 +201,8 @@ module "cert_manager" {
     if var.cert_manager_enabled
   }
 
-  source = "../../kubernetes/cert-manager"
-
-  cloud_provider = "aws"
-  aws_config = {
-    region         = data.aws_region.current.name
-    hosted_zone_id = local.dns_zone
-    role_arn       = var.cert_manager_config.role_arn
-  }
+  source             = "../../kubernetes/cert-manager"
+  cluster_id         = local.cluster_id
   notification_email = var.cert_manager_config.notification_email
 }
 

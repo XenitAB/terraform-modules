@@ -32,7 +32,7 @@ variable "namespaces" {
       flux = object({
         enabled             = bool
         create_crds         = bool
-        include_tenant_name = bool
+        include_tenant_name = optional(bool, false)
         org                 = string
         proj                = string
         repo                = string
@@ -42,12 +42,11 @@ variable "namespaces" {
   default = [{
     name = ""
     flux = {
-      enabled             = true
-      create_crds         = false
-      include_tenant_name = false
-      org                 = ""
-      proj                = ""
-      repo                = ""
+      enabled     = true
+      create_crds = false
+      org         = ""
+      proj        = ""
+      repo        = ""
     }
     }
   ]

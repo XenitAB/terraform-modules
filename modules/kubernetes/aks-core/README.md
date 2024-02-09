@@ -34,7 +34,6 @@ This module is used to create AKS clusters.
 | <a name="module_azad_kube_proxy"></a> [azad\_kube\_proxy](#module\_azad\_kube\_proxy) | ../../kubernetes/azad-kube-proxy | n/a |
 | <a name="module_azure_metrics"></a> [azure\_metrics](#module\_azure\_metrics) | ../../kubernetes/azure-metrics | n/a |
 | <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../../kubernetes/cert-manager | n/a |
-| <a name="module_cert_manager_crd"></a> [cert\_manager\_crd](#module\_cert\_manager\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_control_plane_logs"></a> [control\_plane\_logs](#module\_control\_plane\_logs) | ../../kubernetes/control-plane-logs | n/a |
 | <a name="module_csi_secrets_store_provider_azure"></a> [csi\_secrets\_store\_provider\_azure](#module\_csi\_secrets\_store\_provider\_azure) | ../../kubernetes/csi-secrets-store-provider-azure | n/a |
 | <a name="module_csi_secrets_store_provider_azure_crd"></a> [csi\_secrets\_store\_provider\_azure\_crd](#module\_csi\_secrets\_store\_provider\_azure\_crd) | ../../kubernetes/helm-crd | n/a |

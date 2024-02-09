@@ -80,7 +80,7 @@ variable "namespaces" {
       flux = object({
         enabled             = bool
         create_crds         = bool
-        include_tenant_name = string
+        include_tenant_name = optional(bool, false)
         azure_devops = object({
           org  = string
           proj = string
@@ -96,9 +96,8 @@ variable "namespaces" {
     name   = ""
     labels = {}
     flux = {
-      enabled             = true
-      create_crds         = false
-      include_tenant_name = false
+      enabled     = true
+      create_crds = false
       azure_devops = {
         org  = ""
         proj = ""

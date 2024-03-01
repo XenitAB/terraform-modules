@@ -31,7 +31,7 @@ spec:
   interval: 1m0s
   values:
     client:
-      %{ if telepresence_config.allow_conflicting_subnets != [] ~}
+      %{ if length(telepresence_config.allow_conflicting_subnets) > 0 ~}
       allowConflictingSubnets: 
       %{ for subnet in telepresence_config.allow_conflicting_subnets ~}
       - ${subnet}
@@ -40,14 +40,14 @@ spec:
       connectionTTL: 12h
     clientRbac:
       create: ${ telepresence_config.client_rbac.create }
-      %{ if telepresence_config.client_rbac.subjects ~}
+      %{ if length(telepresence_config.client_rbac.subjects) > 0 ~}
       subjects:
       %{ for subject in telepresence_config.client_rbac.namespaces ~}
       - ${subject}
       %{ endfor }
       %{ endif }
       namespaced: ${ telepresence_config.client_rbac.namespaced }
-       %{ if telepresence_config.client_rbac.namespaces ~}
+       %{ if length(telepresence_config.client_rbac.namespaces) > 0 ~}
       namespaces:
       - ambassador
       %{ for ns in telepresence_config.client_rbac.namespaces ~}
@@ -57,7 +57,7 @@ spec:
     managerRbac:
       create: ${ telepresence_config.manager_rbac.create }
       namespaced: ${ telepresence_config.manager_rbac.namespaced }
-       %{ if telepresence_config.manager_rbac.namespaces ~}
+       %{ if length(telepresence_config.manager_rbac.namespaces) > 0 ~}
       namespaces:
       - ambassador
       %{ for ns in telepresence_config.manager_rbac.namespaces ~}

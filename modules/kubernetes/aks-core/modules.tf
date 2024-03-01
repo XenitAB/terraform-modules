@@ -36,10 +36,11 @@ module "gatekeeper" {
 
   source = "../../kubernetes/gatekeeper"
 
-  cluster_id         = local.cluster_id
-  cloud_provider     = "azure"
-  exclude_namespaces = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
-  mirrord_enabled    = var.mirrord_enabled
+  cluster_id           = local.cluster_id
+  cloud_provider       = "azure"
+  exclude_namespaces   = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
+  mirrord_enabled      = var.mirrord_enabled
+  telepresence_enabled = var.telepresence_enabled
 }
 
 # FluxCD v2

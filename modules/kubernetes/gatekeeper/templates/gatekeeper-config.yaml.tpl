@@ -305,7 +305,7 @@ spec:
     requiredDropCapabilities:
     - NET_RAW
     - CAP_SYS_ADMIN
-    %{ if mirrord_enabled || telepresence_enabled true }
+    %{ if mirrord_enabled || telepresence_enabled }
     exemptImages:
     %{ if mirrord_enabled }
     - "ghcr.io/metalbear-co/mirrord:*"

@@ -287,7 +287,16 @@ variable "telepresence_config" {
         namespaces = optional(list(string), [])
       })
     })
-    default = {}
+    default = {
+      client_rbac: {
+        create:     false
+        namespaced: false
+      }
+      manager_rbac: {
+        create:     true
+        namespaced: true
+      }
+    }
 }
 
 variable "velero_enabled" {

@@ -31,7 +31,7 @@ spec:
   interval: 1m0s
   values:
     client:
-      %{ if not (eq telepresence_config.allow_conflicting_subnets []) ~}
+      %{ if telepresence_config.allow_conflicting_subnets != [] ~}
       allowConflictingSubnets: 
       %{ for subnet in telepresence_config.allow_conflicting_subnets ~}
       - ${subnet}

@@ -74,7 +74,7 @@ spec:
       - ""
       kinds:
       - Pod
-  %{ if mirrord_enabled ~}
+  %{ if mirrord_enabled }
   parameters:
     exemptImages:
     - "ghcr.io/metalbear-co/mirrord:*"
@@ -184,7 +184,7 @@ spec:
       - ""
       kinds:
       - Pod
-  %{ if mirrord_enabled ~}
+  %{ if mirrord_enabled }
   parameters:
     exemptImages:
     - "ghcr.io/metalbear-co/mirrord:*"
@@ -269,7 +269,7 @@ spec:
     - secret
     - projected
     - csi
-    %{ if mirrord_enabled ~}
+    %{ if mirrord_enabled }
     exemptImages:
     - "ghcr.io/metalbear-co/mirrord:*"
     %{ endif }
@@ -305,12 +305,12 @@ spec:
     requiredDropCapabilities:
     - NET_RAW
     - CAP_SYS_ADMIN
-    %{ if mirrord_enabled or telepresence_enabled ~}
+    %{ if or mirrord_enabled telepresence_enabled }
     exemptImages:
-    %{ if mirrord_enabled ~}
+    %{ if mirrord_enabled }
     - "ghcr.io/metalbear-co/mirrord:*"
     %{ endif }
-    %{ if telepresence_enabled ~}
+    %{ if telepresence_enabled }
     - "docker.io/datawire/tel2:*"
     %{ endif }
     %{ endif }

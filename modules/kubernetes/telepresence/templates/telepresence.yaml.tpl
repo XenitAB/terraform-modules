@@ -39,14 +39,14 @@ spec:
       %{ endif }
       connectionTTL: 12h
     clientRbac:
-      create: %{ telepresence_config.client_rbac.create }
+      create: ${ telepresence_config.client_rbac.create }
       %{ if telepresence_config.client_rbac.subjects ~}
       subjects:
       %{ for subject in telepresence_config.client_rbac.namespaces ~}
       - ${subject}
       %{ endfor }
       %{ endif }
-      namespaced: %{ telepresence_config.client_rbac.namespaced }
+      namespaced: ${ telepresence_config.client_rbac.namespaced }
        %{ if telepresence_config.client_rbac.namespaces ~}
       namespaces:
       - ambassador
@@ -55,8 +55,8 @@ spec:
       %{ endfor }
       %{ endif }
     managerRbac:
-      create: %{ telepresence_config.manager_rbac.create }
-      namespaced: %{ telepresence_config.manager_rbac.namespaced }
+      create: ${ telepresence_config.manager_rbac.create }
+      namespaced: ${ telepresence_config.manager_rbac.namespaced }
        %{ if telepresence_config.manager_rbac.namespaces ~}
       namespaces:
       - ambassador

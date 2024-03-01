@@ -26,5 +26,6 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "telepresence" {
   path = "platform/${var.cluster_id}/telepresence/telepresence.yaml"
   content = templatefile("${path.module}/templates/telepresence.yaml.tpl", {
+    telepresence_config = var.telepresence_config
   })
 }

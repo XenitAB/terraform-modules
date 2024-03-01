@@ -113,6 +113,7 @@ resource "kubernetes_network_policy" "allow_egress_traffic_manager" {
   }
 
   spec {
+    pod_selector {}
     policy_types = ["Egress"]
 
     egress {

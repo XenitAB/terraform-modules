@@ -287,7 +287,7 @@ variable "telepresence_config" {
         namespaces = optional(list(string), [])
       })
     })
-    default = object({})
+    default = {}
 }
 
 variable "velero_enabled" {

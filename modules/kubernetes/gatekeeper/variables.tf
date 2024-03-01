@@ -14,13 +14,13 @@ variable "exclude_namespaces" {
   type        = list(string)
 }
 
-variable "mirrord enabled" {
+variable "mirrord_enabled" {
   description = "If Gatekeeper validations should make an exemption for mirrord agent."
   type        = bool
   default     = false
 }
 
-variable "telepresence enabled" {
+variable "telepresence_enabled" {
   description = "If Gatekeeper validations should make an exemption for telepresence agent."
   type        = bool
   default     = false

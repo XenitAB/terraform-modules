@@ -41,7 +41,7 @@ resource "azurerm_policy_definition" "azure_remove_node_spot_taints" {
         "details": {
           "mutationInfo": {
             "sourceType": "Base64Encoded",
-            "content": ${local.azure_remove_node_spot_taints}
+            "content": "${local.azure_remove_node_spot_taints}"
           }
         }
       }

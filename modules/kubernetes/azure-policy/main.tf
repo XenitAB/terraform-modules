@@ -1270,10 +1270,19 @@ resource "azurerm_policy_set_definition" "xks" {
   }
 
   # All the mutations
-  for_each = { for mutation in var.azure_policy_config.mutations : mutation.name => mutation }
   policy_definition_reference {
+    for_each = { for mutation in var.azure_policy_config.mutations : mutation.name => mutation }
     policy_definition_id = azurerm_policy_definition.mutations["${each.key}"].id
   }
+}
+
+data "azurerm_resource_group" "this" {
+  name = "rg-${var.environment}-${var.location_short}-${var.name}"
+}
+
+data "azurerm_kubernetes_cluster" "this" {
+  resource_group_name = data.azurerm_resource_group.this.name
+  name                = "aks-${var.environment}-${var.location_short}-${var.aks_name}"
 }
 
 resource "azurerm_resource_policy_assignment" "this" {

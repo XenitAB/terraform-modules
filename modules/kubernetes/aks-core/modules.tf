@@ -40,6 +40,7 @@ module "azure_policy" {
   environment         = var.environment
   location_short      = var.location_short
   aks_name            = var.name
+  aks_name_suffix     = var.aks_name_suffix
 }
 
 module "gatekeeper" {

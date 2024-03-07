@@ -190,7 +190,7 @@ variable "azure_policy_config" {
     mutations           = list(object({
       name              = string
       display_name      = bool
-      mutation_template = string
+      template          = string
     }))
   })
   default = {

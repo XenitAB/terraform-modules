@@ -27,6 +27,17 @@ locals {
   cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
 }
 
+module "azure-policy" {
+  for_each = {
+    for s in ["gatekeeper"] :
+    s => s
+    if var.azure_policy_enabled
+  }
+
+  source = "../../kubernetes/azure-policy"
+  azure_policy_config = var.azure_policy_config
+}
+
 module "gatekeeper" {
   for_each = {
     for s in ["gatekeeper"] :

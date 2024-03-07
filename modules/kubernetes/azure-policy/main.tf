@@ -1290,7 +1290,7 @@ data "azurerm_kubernetes_cluster" "this" {
 
 resource "azurerm_resource_policy_assignment" "this" {
   name                 = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-assignment"
-  resource_id          = azurerm_kubernetes_cluster.this.id
+  resource_id          = data.azurerm_kubernetes_cluster.this.id
   policy_definition_id = azurerm_policy_set_definition.xks.id
 }
 

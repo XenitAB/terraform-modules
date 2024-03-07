@@ -35,7 +35,11 @@ module "azure_policy" {
   }
 
   source = "../../kubernetes/azure-policy"
+
   azure_policy_config = var.azure_policy_config
+  environment         = var.environment
+  location_short      = var.location_short
+  aks_name            = var.name
 }
 
 module "gatekeeper" {

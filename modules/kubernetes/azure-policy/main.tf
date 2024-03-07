@@ -41,7 +41,7 @@ resource "azurerm_policy_definition" "azure_remove_node_spot_taints" {
         "details": {
           "mutationInfo": {
             "sourceType": "Base64Encoded",
-            "content": base64encode(templatefile("${path.module}/templates/azure-remove-node-spot-taints.yaml.tpl", {}))
+            "content": ${base64encode(templatefile("${path.module}/templates/azure-remove-node-spot-taints.yaml.tpl", {}))}
           }
         }
       }

@@ -637,7 +637,7 @@ resource "azurerm_policy_definition" "mutations" {
         "details": {
           "mutationInfo": {
             "sourceType": "Base64Encoded",
-            "content": "${filebase64("templates/${each.value.template}")}" 
+            "content": "${filebase64("${path.module}/templates/${each.value.template}")}" 
           }
         }
       }
@@ -1285,7 +1285,7 @@ data "azurerm_resource_group" "this" {
 
 data "azurerm_kubernetes_cluster" "this" {
   resource_group_name = data.azurerm_resource_group.this.name
-  name                = "aks-${var.environment}-${var.location_short}-${var.aks_name}"
+  name                = "aks-${var.environment}-${var.location_short}-${var.aks_name}${var.aks_name_suffix}"
 }
 
 resource "azurerm_resource_policy_assignment" "this" {

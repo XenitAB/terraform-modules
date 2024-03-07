@@ -41,7 +41,7 @@ resource "azurerm_policy_definition" "azure_remove_node_spot_taints" {
         "details": {
           "mutationInfo": {
             "sourceType": "Base64Encoded",
-            "content": filebase64("templates/azure-remove-node-spot-taints.yaml.tpl")          }
+            "content": "YXBpVmVyc2lvbjogbXV0YXRpb25zLmdhdGVrZWVwZXIuc2gvdjFiZXRhMQpraW5kOiBNb2RpZnlTZXQKbWV0YWRhdGE6CiAgbmFtZTogcmVtb3ZlLWF6dXJlLW5vZGUtc3BvdC10YWludHMKc3BlYzoKICBsb2NhdGlvbjogInNwZWMudGFpbnRzIgogIGFwcGx5VG86CiAgICAtIGdyb3VwczogWyIiXQogICAgICBraW5kczogWyJOb2RlIl0KICAgICAgdmVyc2lvbnM6IFsidjEiXQogIHBhcmFtZXRlcnM6CiAgICBvcGVyYXRpb246IHBydW5lCiAgICB2YWx1ZXM6CiAgICAgIGZyb21MaXN0OgogICAgICAgIC0gZWZmZWN0OiBOb1NjaGVkdWxlCiAgICAgICAgICBrZXk6IGt1YmVybmV0ZXMuYXp1cmUuY29tL3NjYWxlc2V0cHJpb3JpdHkKICAgICAgICAgIHZhbHVlOiBzcG90"          }
         }
       }
     }

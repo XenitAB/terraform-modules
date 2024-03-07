@@ -74,7 +74,7 @@ resource "azurerm_policy_definition" "k8s_block_node_port" {
         "details": {
           "templateInfo": {
             "sourceType": "Base64Encoded",
-            "content": filebase64("templates/k8s-block-node-port.yaml.tpl") 
+            "content": "${local.k8s_block_node_port}"
           },
           "apiGroups": [
             ""
@@ -151,7 +151,7 @@ resource "azurerm_policy_definition" "k8s_secrets_store_csi_unique_volume" {
         "details": {
           "templateInfo": {
             "sourceType": "Base64Encoded",
-            "content": filebase64("templates/k8s-secrets-store-csi-unique-volume.yaml.tpl") 
+            "content": "${local.k8s_secrets_store_csi_unique_volume}" 
           },
           "apiGroups": [
             ""
@@ -228,7 +228,7 @@ resource "azurerm_policy_definition" "flux_require_service_account" {
         "details": {
           "templateInfo": {
             "sourceType": "Base64Encoded",
-            "content": filebase64("templates/flux-require-service-account.yaml.tpl") 
+            "content":  "${local.flux_require_service_account}" 
           },
           "apiGroups": [
             "helm.toolkit.fluxcd.io",
@@ -307,7 +307,7 @@ resource "azurerm_policy_definition" "k8s_pod_priority_class" {
         "details": {
           "templateInfo": {
             "sourceType": "Base64Encoded",
-            "content": filebase64("templates/k8s-pod-priority-class.yaml.tpl") 
+            "content": "${local.k8s_pod_priority_class}"
           },
           "apiGroups": [
             ""
@@ -394,7 +394,7 @@ resource "azurerm_policy_definition" "k8s_require_ingress_class" {
         "details": {
           "templateInfo": {
             "sourceType": "Base64Encoded",
-            "content": filebase64("templates/k8s-require-ingress-class.yaml.tpl") 
+            "content": "${local.k8s_require_ingress_class}"
           },
           "apiGroups": [
             "networking.k8s.io"
@@ -480,7 +480,7 @@ resource "azurerm_policy_definition" "flux_disable_cross_namespace_source" {
         "details": {
           "templateInfo": {
             "sourceType": "Base64Encoded",
-            "content": filebase64("templates/flux-disable-cross-namespace-source.yaml.tpl") 
+            "content": "${local.flux_disable_cross_namespace_source}"
           },
           "apiGroups": [
             "helm.toolkit.fluxcd.io",
@@ -559,7 +559,7 @@ resource "azurerm_policy_definition" "azure_identity_format" {
         "details": {
           "templateInfo": {
             "sourceType": "Base64Encoded",
-            "content": filebase64("templates/flux-disable-cross-namespace-source.yaml.tpl") 
+            "content": "${local.azure_identity_format}" 
           },
           "apiGroups": [
             "aadpodidentity.k8s.io"
@@ -637,7 +637,7 @@ resource "azurerm_policy_definition" "mutations" {
         "details": {
           "mutationInfo": {
             "sourceType": "Base64Encoded",
-            "content": filebase64("templates/${each.value.template}") 
+            "content": "${filebase64("templates/${each.value.template}")}" 
           }
         }
       }

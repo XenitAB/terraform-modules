@@ -17,6 +17,8 @@ terraform {
 }
 
 resource "azurerm_policy_definition" "azure_remove_node_spot_taints" {
+  name         = "AzureRemoveNodeSpotTaints"
+  display_name = "Remove azure spot node taints"
   policy_type  = "Custom"
   mode         = "Microsoft.Kubernetes.Data"
 
@@ -47,6 +49,8 @@ resource "azurerm_policy_definition" "azure_remove_node_spot_taints" {
 }
 
 resource "azurerm_policy_definition" "k8s_block_node_port" {
+  name         = "K8sBlockNodePort"
+  display_name = "Block node port services"
   policy_type  = "Custom"
   mode         = "Microsoft.Kubernetes.Data"
 
@@ -122,6 +126,8 @@ resource "azurerm_policy_definition" "k8s_block_node_port" {
 }
 
 resource "azurerm_policy_definition" "k8s_secrets_store_csi_unique_volume" {
+  name         = "K8sSecretsStoreCsiUniqueVolumes"
+  display_name = "Secrets store should use unique csi volumes"
   policy_type  = "Custom"
   mode         = "Microsoft.Kubernetes.Data"
 
@@ -197,6 +203,8 @@ resource "azurerm_policy_definition" "k8s_secrets_store_csi_unique_volume" {
 }
 
 resource "azurerm_policy_definition" "flux_require_service_account" {
+  name         = "FluxRequireServiceAccount"
+  display_name = "Flux requires service account"
   policy_type  = "Custom"
   mode         = "Microsoft.Kubernetes.Data"
 
@@ -274,6 +282,8 @@ resource "azurerm_policy_definition" "flux_require_service_account" {
 }
 
 resource "azurerm_policy_definition" "k8s_pod_priority_class" {
+  name         = "K8sPodPriorityClass"
+  display_name = "K8s pods should use allowed priority classes"
   policy_type  = "Custom"
   mode         = "Microsoft.Kubernetes.Data"
 
@@ -359,6 +369,8 @@ resource "azurerm_policy_definition" "k8s_pod_priority_class" {
 }
 
 resource "azurerm_policy_definition" "k8s_require_ingress_class" {
+  name         = "K8sRequireIngressClass"
+  display_name = "K8s ingresses should specify ingress class"
   policy_type  = "Custom"
   mode         = "Microsoft.Kubernetes.Data"
 
@@ -443,6 +455,8 @@ resource "azurerm_policy_definition" "k8s_require_ingress_class" {
 }
 
 resource "azurerm_policy_definition" "flux_disable_cross_namespace_source" {
+  name         = "FluxDisableCrossNamespaceSource"
+  display_name = "Flux should disable cross namespace source"
   policy_type  = "Custom"
   mode         = "Microsoft.Kubernetes.Data"
 
@@ -520,6 +534,8 @@ resource "azurerm_policy_definition" "flux_disable_cross_namespace_source" {
 }
 
 resource "azurerm_policy_definition" "azure_identity_format" {
+  name         = "AzureIdentityFormat"
+  display_name = "Azure identity format"
   policy_type  = "Custom"
   mode         = "Microsoft.Kubernetes.Data"
 

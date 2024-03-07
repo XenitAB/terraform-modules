@@ -10,7 +10,7 @@ variable "azure_policy_config" {
     exclude_namespaces  = list(string)
     mutations           = list(object({
       name              = string
-      display_name      = bool
+      display_name      = string
       template          = string
     }))
   })

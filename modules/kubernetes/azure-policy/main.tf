@@ -1274,7 +1274,7 @@ resource "azurerm_policy_set_definition" "xks" {
     for_each = { for mutation in var.azure_policy_config.mutations : mutation.name => mutation }
     
     content {
-      policy_definition_id = azurerm_policy_definition.mutations["${each.key}"].id
+      policy_definition_id = azurerm_policy_definition.mutations[policy_definition_reference.key].id
     }
   }
 }

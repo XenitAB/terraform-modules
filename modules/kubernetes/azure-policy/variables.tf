@@ -3,6 +3,11 @@ variable "aks_name" {
   type        = string
 }
 
+variable "aks_name_suffix" {
+  description = "The suffix for the aks clusters"
+  type        = number
+}
+
 variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string

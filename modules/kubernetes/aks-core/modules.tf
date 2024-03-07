@@ -27,7 +27,7 @@ locals {
   cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
 }
 
-module "azure-policy" {
+module "azure_policy" {
   for_each = {
     for s in ["gatekeeper"] :
     s => s

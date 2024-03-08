@@ -1008,7 +1008,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('excludedNamespaces')]"
       },
       "requiredProbes": {
-        "value": "[parameters('enforceProbes')]"
+        "value": "[parameters('requiredProbes')]"
       }
     }
     VALUE

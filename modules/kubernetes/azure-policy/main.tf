@@ -817,7 +817,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),['flux-system'])]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('flux-system'))]"
       },
       "labelSelector": {
         "matchLabels": {

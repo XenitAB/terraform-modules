@@ -314,7 +314,9 @@ resource "azurerm_policy_definition" "k8s_pod_priority_class" {
           ],
           "namespaces": "[parameters('namespaces')]",
           "excludedNamespaces": "[parameters('excludedNamespaces')]",
-          "permittedClassNames": "[parameters('permittedClassNames')]"
+          "values": {
+            "permittedClassNames": "[parameters('permittedClassNames')]"
+          }
         }
       }
     }
@@ -398,7 +400,9 @@ resource "azurerm_policy_definition" "k8s_require_ingress_class" {
           ],
           "namespaces": "[parameters('namespaces')]",
           "excludedNamespaces": "[parameters('excludedNamespaces')]",
-          "permittedClassNames": "[parameters('permittedClassNames')]"
+          "values": {
+            "permittedClassNames": "[parameters('permittedClassNames')]"
+          }
         }
       }
     }
@@ -740,6 +744,7 @@ resource "azurerm_policy_set_definition" "xks" {
         ]"
       }
     }
+    VALUE
   }
 
   policy_definition_reference {
@@ -763,6 +768,7 @@ resource "azurerm_policy_set_definition" "xks" {
         ]"
       }
     }
+    VALUE
   }
 
   policy_definition_reference {
@@ -791,6 +797,7 @@ resource "azurerm_policy_set_definition" "xks" {
           "xkf.xenit.io/kind": "tenant"
       }
     }
+    VALUE
   }
 
   policy_definition_reference {
@@ -825,6 +832,7 @@ resource "azurerm_policy_set_definition" "xks" {
         ]"
       }
     }
+    VALUE
   }
 
   policy_definition_reference {
@@ -855,6 +863,7 @@ resource "azurerm_policy_set_definition" "xks" {
         ]
       }
     }
+    VALUE
   }
 
   policy_definition_reference {
@@ -879,6 +888,7 @@ resource "azurerm_policy_set_definition" "xks" {
         ]"
       }
     }
+    VALUE
   }
 
   policy_definition_reference {
@@ -902,6 +912,7 @@ resource "azurerm_policy_set_definition" "xks" {
         ]"
       }
     }
+    VALUE
   }
 
   # Built-in definitions

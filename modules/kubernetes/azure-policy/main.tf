@@ -83,8 +83,7 @@ resource "azurerm_policy_definition" "k8s_block_node_port" {
             "Service"
           ],
           "namespaces": "[parameters('namespaces')]",
-          "excludedNamespaces": "[parameters('excludedNamespaces')]",
-          "labelSelector": "[parameters('labelSelector')]"
+          "excludedNamespaces": "[parameters('excludedNamespaces')]"
         }
       }
     }
@@ -160,8 +159,7 @@ resource "azurerm_policy_definition" "k8s_secrets_store_csi_unique_volume" {
             "Pod"
           ],
           "namespaces": "[parameters('namespaces')]",
-          "excludedNamespaces": "[parameters('excludedNamespaces')]",
-          "labelSelector": "[parameters('labelSelector')]"
+          "excludedNamespaces": "[parameters('excludedNamespaces')]"
         }
       }
     }
@@ -239,8 +237,7 @@ resource "azurerm_policy_definition" "flux_require_service_account" {
             "Kustomization"
           ],
           "namespaces": "[parameters('namespaces')]",
-          "excludedNamespaces": "[parameters('excludedNamespaces')]",
-          "labelSelector": "[parameters('labelSelector')]"
+          "excludedNamespaces": "[parameters('excludedNamespaces')]"
         }
       }
     }
@@ -317,10 +314,7 @@ resource "azurerm_policy_definition" "k8s_pod_priority_class" {
           ],
           "namespaces": "[parameters('namespaces')]",
           "excludedNamespaces": "[parameters('excludedNamespaces')]",
-          "labelSelector": "[parameters('labelSelector')]",
-          "values": {
-            "permittedClassNames": "[parameters('permittedClassNames')]"
-          }
+          "permittedClassNames": "[parameters('permittedClassNames')]"
         }
       }
     }
@@ -404,10 +398,7 @@ resource "azurerm_policy_definition" "k8s_require_ingress_class" {
           ],
           "namespaces": "[parameters('namespaces')]",
           "excludedNamespaces": "[parameters('excludedNamespaces')]",
-          "labelSelector": "[parameters('labelSelector')]",
-          "values": {
-            "permittedClassNames": "[parameters('permittedClassNames')]"
-          }
+          "permittedClassNames": "[parameters('permittedClassNames')]"
         }
       }
     }
@@ -491,8 +482,7 @@ resource "azurerm_policy_definition" "flux_disable_cross_namespace_source" {
             "Kustomization"
           ],
           "namespaces": "[parameters('namespaces')]",
-          "excludedNamespaces": "[parameters('excludedNamespaces')]",
-          "labelSelector": "[parameters('labelSelector')]"
+          "excludedNamespaces": "[parameters('excludedNamespaces')]"
         }
       }
     }
@@ -568,8 +558,7 @@ resource "azurerm_policy_definition" "azure_identity_format" {
             "AzureIdentity"
           ],
           "namespaces": "[parameters('namespaces')]",
-          "excludedNamespaces": "[parameters('excludedNamespaces')]",
-          "labelSelector": "[parameters('labelSelector')]"
+          "excludedNamespaces": "[parameters('excludedNamespaces')]"
         }
       }
     }
@@ -637,7 +626,7 @@ resource "azurerm_policy_definition" "mutations" {
         "details": {
           "mutationInfo": {
             "sourceType": "Base64Encoded",
-            "content": "${filebase64("${path.module}/templates/${each.value.template}")}" 
+            "content": "${filebase64(templatefile("${path.module}/templates/${each.value.template}"), { exclude_namespaces = var.azure_policy_config.exclude_namespaces })}" 
           }
         }
       }

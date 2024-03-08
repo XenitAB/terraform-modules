@@ -274,6 +274,65 @@ resource "azurerm_policy_definition" "flux_require_service_account" {
           "description": "List of Kubernetes namespaces to only include in policy evaluation. An empty list means the policy is applied to all resources in all namespaces."
         },
         "defaultValue": []
+      },
+      "labelSelector": {
+        "type": "object",
+        "metadata": {
+          "displayName": "Kubernetes label selector",
+          "description": "Label query to select Kubernetes resources for policy evaluation. An empty label selector matches all Kubernetes resources."
+        },
+        "defaultValue": {},
+        "schema": {
+          "description": "A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all resources.",
+          "type": "object",
+          "properties": {
+            "matchLabels": {
+              "description": "matchLabels is a map of {key,value} pairs.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "minProperties": 1
+            },
+            "matchExpressions": {
+              "description": "matchExpressions is a list of values, a key, and an operator.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "description": "key is the label key that the selector applies to.",
+                    "type": "string"
+                  },
+                  "operator": {
+                    "description": "operator represents a key's relationship to a set of values.",
+                    "type": "string",
+                    "enum": [
+                      "In",
+                      "NotIn",
+                      "Exists",
+                      "DoesNotExist"
+                    ]
+                  },
+                  "values": {
+                    "description": "values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "key",
+                  "operator"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        }
       }
     }
     PARAMETERS
@@ -761,11 +820,9 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),['flux-system'])]"
       },
       "labelSelector": {
-        "matchLabels": [
-          {
-            "xkf.xenit.io/kind": "tenant"
-          }
-        ]
+        "matchLabels": {
+          {"xkf.xenit.io/kind": "tenant"}
+        }
       }
     }
     VALUE
@@ -779,7 +836,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),['spegel'])]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('spegel'))]"
       },
       "permittedClassNames": {
         "value": "['platform-low','platform-medium','platform-high','tenant-low','tenant-medium','tenant-high']"
@@ -813,7 +870,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),['flux-system'])]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('flux-system'))]"
       }
     }
     VALUE
@@ -844,10 +901,10 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),['ambassador'])]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('ambassador'))]"
       },
       "excludedImages": {
-        "value": "[concat(parameters('excludedImages'),['ghcr.io/metalbear-co/mirrord:*'])]"
+        "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*'))]"
       }
     }
     VALUE
@@ -862,7 +919,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),['ambassador'])]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('ambassador'))]"
       }
     }
     VALUE
@@ -877,7 +934,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),['aad-pod-identity','ambassador','cert-manager','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','trivy','vpa'])]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('aad-pod-identity','ambassador','cert-manager','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','trivy','vpa'))]"
       },
        "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -898,7 +955,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('excludedNamespaces')]"
       },
       "excludedImages": {
-        "value": "[concat(parameters('excludedImages'),['ghcr.io/metalbear-co/mirrord:*'])]"
+        "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*'))]"
       }
     }
     VALUE
@@ -931,7 +988,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),['aad-pod-identity','csi-secrets-store-provider-azure'])]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('aad-pod-identity','csi-secrets-store-provider-azure'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -949,13 +1006,13 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),['aad-pod-identity','csi-secrets-store-provider-azure','datadog','falco','prometheus','promtail','spegel'])]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('aad-pod-identity','csi-secrets-store-provider-azure','datadog','falco','prometheus','promtail','spegel'))]"
       },
       "allowedVolumeTypes": {
-        "value": "[concat(parameters('volumes'),['configMap','downwardAPI','emptyDir','persistentVolumeClaim','secret','projected','csi'])]"
+        "value": "[concat(parameters('volumes'),createArray('configMap','downwardAPI','emptyDir','persistentVolumeClaim','secret','projected','csi'))]"
       },
       "excludedImages": {
-        "value": "[concat(parameters('excludedImages'),['ghcr.io/metalbear-co/mirrord:*'])]"
+        "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*'))]"
       }
     }
     VALUE
@@ -970,7 +1027,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),['csi-secrets-store-provider-azure','falco'])]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('csi-secrets-store-provider-azure','falco'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -994,10 +1051,10 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('requiredDropCapabilities')]"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),['aad-pod-identity','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','promtail','reloader','spegel','trivy','vpa'])]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('aad-pod-identity','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','promtail','reloader','spegel','trivy','vpa'))]"
       },
       "excludedImages": {
-        "value": "[concat(parameters('excludedImages'),['docker.io/datawire/tel2:*','ghcr.io/metalbear-co/mirrord:*'])]"
+        "value": "[concat(parameters('excludedImages'),createArray('docker.io/datawire/tel2:*','ghcr.io/metalbear-co/mirrord:*'))]"
       }
     }
     VALUE

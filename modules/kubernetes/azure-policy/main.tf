@@ -744,17 +744,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(
-            parameters('excludedNamespaces'),
-            [
-              'calico-system',
-              'gatekeeper-system',
-              'kube-system',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[parameters('excludedNamespaces')]"
       }
     }
     VALUE
@@ -768,18 +758,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(
-            parameters('excludedNamespaces'),
-            [
-              'calico-system',
-              'flux-system',
-              'gatekeeper-system',
-              'kube-system',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedNamespaces'),['flux-system'])]"
       },
       "labelSelector": {
         "matchLabels":
@@ -797,18 +776,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(
-            parameters('excludedNamespaces'),
-            [
-              'calico-system',
-              'gatekeeper-system',
-              'kube-system',
-              'spegel',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedNamespaces'),['spegel'])]"
       },
       "permittedClassNames": {
         "value": "[
@@ -832,17 +800,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(
-            parameters('excludedNamespaces'),
-            [
-              'calico-system',
-              'gatekeeper-system',
-              'kube-system',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[parameters('excludedNamespaces')]"
       },
       "permittedClassNames": {
         "value": [
@@ -863,18 +821,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(
-            parameters('excludedNamespaces'),
-            [
-              'calico-system',
-              'flux-system',
-              'gatekeeper-system',
-              'kube-system',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedNamespaces'),['flux-system'])]"
       }
     }
     VALUE
@@ -888,17 +835,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(
-            parameters('excludedNamespaces'),
-            [
-              'calico-system',
-              'gatekeeper-system',
-              'kube-system',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[parameters('excludedNamespaces')]"
       }
     }
     VALUE
@@ -915,18 +852,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(
-            parameters('excludedNamespaces'),
-            [
-              'ambassador',
-              'calico-system',
-              'gatekeeper-system',
-              'kube-system',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedNamespaces'),['ambassador'])]"
       },
       "excludedImages": {
         "value": "[
@@ -951,18 +877,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(
-            parameters('excludedNamespaces'),
-            [
-              'ambassador',
-              'calico-system',
-              'gatekeeper-system',
-              'kube-system',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedNamespaces'),['ambassador'])]"
       }
     }
     VALUE
@@ -977,31 +892,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(
-            parameters('excludedNamespaces'),
-            [
-              'aad-pod-identity',
-              'ambassador',
-              'calico-system',
-              'cert-manager',
-              'csi-secrets-store-provider-azure',
-              'datadog',
-              'external-dns',
-              'falco',
-              'flux-system',
-              'gatekeeper-system',
-              'ingress-nginx',
-              'kube-system',
-              'prometheus',
-              'reloader',
-              'spegel',
-              'tigera-operator',
-              'trivy',
-              'vpa'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedNamespaces'),['aad-pod-identity','ambassador','cert-manager','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','trivy','vpa'])]"
       },
        "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -1019,16 +910,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(parameters('excludedNamespaces'),
-            [
-              'calico-system',
-              'gatekeeper-system',
-              'kube-system',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[parameters('excludedNamespaces')]"
       },
       "excludedImages": {
         "value": "[
@@ -1052,16 +934,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(parameters('excludedNamespaces'),
-            [
-              'calico-system',
-              'gatekeeper-system',
-              'kube-system',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[parameters('excludedNamespaces')]"
       },
       "allowedExternalIPs": {
         "value": "[parameters('allowedExternalIPs')]"
@@ -1079,19 +952,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(parameters('excludedNamespaces'),
-            [
-              'aad-pod-identity',
-              'calico-system',
-              'csi-secrets-store-provider-azure',
-              'gatekeeper-system',
-              'kube-system',
-              'prometheus',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedNamespaces'),['aad-pod-identity','csi-secrets-store-provider-azure'])]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -1109,23 +970,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(parameters('excludedNamespaces'),
-            [
-              'aad-pod-identity',
-              'calico-system',
-              'csi-secrets-store-provider-azure',
-              'datadog',
-              'falco',
-              'gatekeeper-system',
-              'kube-system',
-              'prometheus',
-              'promtail',
-              'spegel',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedNamespaces'),['aad-pod-identity','csi-secrets-store-provider-azure','datadog','falco','prometheus','promtail','spegel'])]"
       },
       "allowedVolumeTypes": {
         "value": "[
@@ -1165,18 +1010,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(parameters('excludedNamespaces'),
-            [
-              'calico-system',
-              'csi-secrets-store-provider-azure',
-              'falco',
-              'gatekeeper-system',
-              'kube-system',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedNamespaces'),['csi-secrets-store-provider-azure','falco'])]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -1200,30 +1034,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "[parameters('requiredDropCapabilities')]"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(parameters('excludedNamespaces'),
-            [
-              'aad-pod-identity',
-              'calico-system',
-              'csi-secrets-store-provider-azure',
-              'cert-manager',
-              'datadog',
-              'external-dns',
-              'falco',
-              'flux-system',
-              'gatekeeper-system',
-              'ingress-nginx',
-              'kube-system',
-              'prometheus',
-              'promtail',
-              'reloader',
-              'spegel',
-              'tigera-operator',
-              'trivy',
-              'vpa'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedNamespaces'),['aad-pod-identity','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','promtail','reloader','spegel','trivy','vpa'])]"
       },
       "excludedImages": {
         "value": "[

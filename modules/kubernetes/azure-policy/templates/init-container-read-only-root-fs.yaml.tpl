@@ -21,7 +21,7 @@ spec:
       - reloader
       - spegel
       - vpa
-      %{ for ns in azure_policy_config.exclude_namespaces }
+      %{ for ns in exclude_namespaces }
       - ${ns}
       %{ endfor }
     scope: Namespaced

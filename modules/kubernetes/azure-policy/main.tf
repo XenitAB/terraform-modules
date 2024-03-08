@@ -626,7 +626,7 @@ resource "azurerm_policy_definition" "mutations" {
         "details": {
           "mutationInfo": {
             "sourceType": "Base64Encoded",
-            "content": "${filebase64(templatefile("${path.module}/templates/${each.value.template}", { exclude_namespaces = var.azure_policy_config.exclude_namespaces }))}" 
+            "content": "${base64encode(templatefile("${path.module}/templates/${each.value.template}", { exclude_namespaces = var.azure_policy_config.exclude_namespaces }))}" 
           }
         }
       }

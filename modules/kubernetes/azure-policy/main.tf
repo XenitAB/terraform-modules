@@ -775,8 +775,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),createArray('spegel'))]"
       },
       "permittedClassNames": {
-        "value": "createArray('platform-low','platform-medium','platform-high','tenant-low','tenant-medium','tenant-high']
-        )"
+        "value": "[createArray('platform-low','platform-medium','platform-high','tenant-low','tenant-medium','tenant-high')]"
       }
     }
     VALUE
@@ -793,7 +792,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('excludedNamespaces')]"
       },
       "permittedClassNames": {
-        "value": "createArray('nginx','nginx-private','nginx-public')"
+        "value": "[createArray('nginx','nginx-private','nginx-public')]"
       }
     }
     VALUE

@@ -761,8 +761,9 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),['flux-system'])]"
       },
       "labelSelector": {
-        "matchLabels":
+        "matchLabels": [
           "xkf.xenit.io/kind": "tenant"
+        ]
       }
     }
     VALUE
@@ -779,14 +780,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),['spegel'])]"
       },
       "permittedClassNames": {
-        "value": "[
-          'platform-low',
-          'platform-medium',
-          'platform-high',
-          'tenant-low',
-          'tenant-medium',
-          'tenant-high'
-        ]"
+        "value": "['platform-low','platform-medium','platform-high','tenant-low','tenant-medium','tenant-high']"
       }
     }
     VALUE
@@ -803,11 +797,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('excludedNamespaces')]"
       },
       "permittedClassNames": {
-        "value": [
-          'nginx',
-          'nginx-private',
-          'nginx-public'
-        ]
+        "value": ['nginx','nginx-private','nginx-public']
       }
     }
     VALUE
@@ -855,14 +845,8 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),['ambassador'])]"
       },
       "excludedImages": {
-        "value": "[
-          concat(
-            parameters('excludedImages'),
-            [
-              'ghcr.io/metalbear-co/mirrord:*'
-            ]
-          )
-        ]"
+        "value": "[concat(
+            parameters('excludedImages'),['ghcr.io/metalbear-co/mirrord:*'])]"
       }
     }
     VALUE
@@ -913,13 +897,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('excludedNamespaces')]"
       },
       "excludedImages": {
-        "value": "[
-          concat(parameters('excludedImages'),
-            [
-              'ghcr.io/metalbear-co/mirrord:*'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedImages'),['ghcr.io/metalbear-co/mirrord:*'])]"
       }
     }
     VALUE
@@ -973,29 +951,10 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),['aad-pod-identity','csi-secrets-store-provider-azure','datadog','falco','prometheus','promtail','spegel'])]"
       },
       "allowedVolumeTypes": {
-        "value": "[
-          concat(parameters('volumes'),
-            [
-              'configMap',
-              'downwardAPI',
-              'emptyDir',
-              'persistentVolumeClaim',
-              'secret',
-              'projected',
-              'csi'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('volumes'),['configMap','downwardAPI','emptyDir','persistentVolumeClaim','secret','projected','csi'])]"
       },
       "excludedImages": {
-        "value": "[
-          concat(
-            parameters('excludedImages'),
-            [
-              'ghcr.io/metalbear-co/mirrord:*'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedImages'),['ghcr.io/metalbear-co/mirrord:*'])]"
       }
     }
     VALUE
@@ -1037,15 +996,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),['aad-pod-identity','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','promtail','reloader','spegel','trivy','vpa'])]"
       },
       "excludedImages": {
-        "value": "[
-          concat(
-            parameters('excludedImages'),
-            [
-              'docker.io/datawire/tel2:*',
-              'ghcr.io/metalbear-co/mirrord:*'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedImages'),['docker.io/datawire/tel2:*','ghcr.io/metalbear-co/mirrord:*'])]"
       }
     }
     VALUE

@@ -730,18 +730,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[
-          concat(
-            parameters('excludedNamespaces'),
-            [
-              'calico-system',
-              'gatekeeper-system',
-              'kube-system',
-              'spegel',
-              'tigera-operator'
-            ]
-          )
-        ]"
+        "value": "[concat(parameters('excludedNamespaces'),['spegel'])]"
       }
     }
     VALUE

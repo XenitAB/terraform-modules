@@ -818,11 +818,6 @@ resource "azurerm_policy_set_definition" "xks" {
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray('flux-system'))]"
-      },
-      "labelSelector": {
-        "matchLabels": {
-          {"xkf.xenit.io/kind": "tenant"}
-        }
       }
     }
     VALUE

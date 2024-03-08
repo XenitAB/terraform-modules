@@ -762,7 +762,9 @@ resource "azurerm_policy_set_definition" "xks" {
       },
       "labelSelector": {
         "matchLabels": [
-          "xkf.xenit.io/kind": "tenant"
+          {
+            "xkf.xenit.io/kind": "tenant"
+          }
         ]
       }
     }
@@ -797,7 +799,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('excludedNamespaces')]"
       },
       "permittedClassNames": {
-        "value": ['nginx','nginx-private','nginx-public']
+        "value": "['nginx','nginx-private','nginx-public']"
       }
     }
     VALUE
@@ -845,8 +847,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),['ambassador'])]"
       },
       "excludedImages": {
-        "value": "[concat(
-            parameters('excludedImages'),['ghcr.io/metalbear-co/mirrord:*'])]"
+        "value": "[concat(parameters('excludedImages'),['ghcr.io/metalbear-co/mirrord:*'])]"
       }
     }
     VALUE
@@ -987,10 +988,10 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "allowedCapabilities": {
-        "[parameters('allowedCapabilities')]"
+        "value": "[parameters('allowedCapabilities')]"
       },
       "requiredDropCapabilities": {
-        "[parameters('requiredDropCapabilities')]"
+        "value": "[parameters('requiredDropCapabilities')]"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),['aad-pod-identity','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','promtail','reloader','spegel','trivy','vpa'])]"
@@ -1014,7 +1015,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('excludedNamespaces')]"
       },
       "requiredProbes": {
-        "[parameters('enforceProbes')]"
+        "value": "[parameters('enforceProbes')]"
       }
     }
     VALUE

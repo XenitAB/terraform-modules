@@ -945,7 +945,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),createArray('aad-pod-identity','csi-secrets-store-provider-azure','datadog','falco','prometheus','promtail','spegel'))]"
       },
       "allowedVolumeTypes": {
-        "value": "[concat(parameters('volumes'),createArray('configMap','downwardAPI','emptyDir','persistentVolumeClaim','secret','projected','csi'))]"
+        "value": "[concat(parameters('allowedVolumeTypes'),createArray('configMap','downwardAPI','emptyDir','persistentVolumeClaim','secret','projected','csi'))]"
       },
       "excludedImages": {
         "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*'))]"

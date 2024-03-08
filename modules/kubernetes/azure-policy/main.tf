@@ -730,7 +730,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "concat(parameters('excludedNamespaces'),['spegel'])"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('spegel'))]"
       }
     }
     VALUE

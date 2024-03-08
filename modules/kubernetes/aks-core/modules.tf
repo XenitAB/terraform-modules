@@ -29,7 +29,7 @@ locals {
 
 module "azure_policy" {
   for_each = {
-    for s in ["gatekeeper"] :
+    for s in ["azure_policy"] :
     s => s
     if var.azure_policy_enabled
   }

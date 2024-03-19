@@ -159,7 +159,7 @@ resource "azurerm_policy_definition" "k8s_secrets_store_csi_unique_volume" {
             "Pod"
           ],
           "namespaces": "[parameters('namespaces')]",
-          "excludedNamespaces": "[parameters('excludedNamespaces')]"
+          "excludedNamespaces": "[concat(createArray(${local.system_namespaces}),parameters('excludedNamespaces'))]"
         }
       }
     }
@@ -315,7 +315,7 @@ resource "azurerm_policy_definition" "k8s_pod_priority_class" {
           "namespaces": "[parameters('namespaces')]",
           "excludedNamespaces": "[parameters('excludedNamespaces')]",
           "values": {
-            "permittedClassNames": "[parameters('permittedClassNames')]"
+            "permittedClassNames": "[concat(createArray(${local.system_namespaces}),parameters('permittedClassNames'))]"
           }
         }
       }
@@ -399,7 +399,7 @@ resource "azurerm_policy_definition" "k8s_require_ingress_class" {
             "Ingress"
           ],
           "namespaces": "[parameters('namespaces')]",
-          "excludedNamespaces": "[parameters('excludedNamespaces')]",
+          "excludedNamespaces": "[concat(createArray(${local.system_namespaces}),parameters('excludedNamespaces'))]",
           "values": {
             "permittedClassNames": "[parameters('permittedClassNames')]"
           }
@@ -837,7 +837,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray('ambassador'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('ambassador'))]"
       },
       "excludedImages": {
         "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*'))]"
@@ -855,7 +855,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray('ambassador'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('ambassador'))]"
       }
     }
     VALUE
@@ -870,7 +870,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray('aad-pod-identity','ambassador','cert-manager','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','trivy','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','cert-manager','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','trivy','vpa'))]"
       },
        "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -888,7 +888,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[parameters('excludedNamespaces')]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}))]"
       },
       "excludedImages": {
         "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*'))]"
@@ -906,7 +906,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[parameters('excludedNamespaces')]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}))]"
       },
       "allowedExternalIPs": {
         "value": "[parameters('allowedExternalIPs')]"
@@ -924,7 +924,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray('aad-pod-identity','csi-secrets-store-provider-azure'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -942,7 +942,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray('aad-pod-identity','csi-secrets-store-provider-azure','datadog','falco','prometheus','promtail','spegel'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','datadog','falco','prometheus','promtail','spegel'))]"
       },
       "allowedVolumeTypes": {
         "value": "[concat(parameters('allowedVolumeTypes'),createArray('configMap','downwardAPI','emptyDir','persistentVolumeClaim','secret','projected','csi'))]"
@@ -963,7 +963,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray('csi-secrets-store-provider-azure','falco'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('csi-secrets-store-provider-azure','falco'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -987,7 +987,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('requiredDropCapabilities')]"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray('aad-pod-identity','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','promtail','reloader','spegel','trivy','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','promtail','reloader','spegel','trivy','vpa'))]"
       },
       "excludedImages": {
         "value": "[concat(parameters('excludedImages'),createArray('docker.io/datawire/tel2:*','ghcr.io/metalbear-co/mirrord:*'))]"
@@ -1005,7 +1005,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Audit"
       },
       "excludedNamespaces": {
-        "value": "[parameters('excludedNamespaces')]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}))]"
       },
       "requiredProbes": {
         "value": "[parameters('requiredProbes')]"

@@ -1,5 +1,5 @@
 locals {
-    system_namespaces = ["calico-system", "gatekeeper-system", "kube-system", "tigera-operator"]
+    system_namespaces = "'calico-system', 'gatekeeper-system', 'kube-system', 'tigera-operator'"
     azure_identity_format = base64encode(
         templatefile("${path.module}/templates/azure-identity-format.yaml.tpl", {
         })

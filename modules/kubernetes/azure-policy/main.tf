@@ -83,7 +83,7 @@ resource "azurerm_policy_definition" "k8s_block_node_port" {
             "Service"
           ],
           "namespaces": "[parameters('namespaces')]",
-          "excludedNamespaces": "[concat(${local.system_namespaces},parameters('excludedNamespaces'))]"
+          "excludedNamespaces": "[concat(createArray(${local.system_namespaces}),parameters('excludedNamespaces'))]"
         }
       }
     }

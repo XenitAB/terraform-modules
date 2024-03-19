@@ -83,7 +83,7 @@ resource "azurerm_policy_definition" "k8s_block_node_port" {
             "Service"
           ],
           "namespaces": "[parameters('namespaces')]",
-          "excludedNamespaces": "[parameters('excludedNamespaces')]"
+          "excludedNamespaces": "[concat(${local.system_namespaces},parameters('excludedNamespaces'))]"
         }
       }
     }
@@ -682,7 +682,7 @@ resource "azurerm_policy_set_definition" "xks" {
           "displayName": "Namespace exclusions",
           "description": "List of Kubernetes namespaces to exclude from policy evaluation."
         },
-        "defaultValue": [createArray('acstor','calico-system','gatekeeper-system','kube-system','tigera-operator')]
+        "defaultValue": []
       },
       "excludedImages": {
         "type": "Array",

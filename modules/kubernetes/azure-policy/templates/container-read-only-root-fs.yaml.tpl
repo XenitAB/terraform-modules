@@ -12,7 +12,6 @@ spec:
       - aad-pod-identity
       - cert-manager
       - csi-secrets-store-provider-azure
-      - cert-manager
       - datadog
       - external-dns
       - falco

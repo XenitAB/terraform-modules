@@ -772,7 +772,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray('spegel'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('spegel'))]"
       },
       "permittedClassNames": {
         "value": "[createArray('platform-low','platform-medium','platform-high','tenant-low','tenant-medium','tenant-high')]"
@@ -837,7 +837,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('ambassador'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','cert-manager','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','spegel'))]"
       },
       "excludedImages": {
         "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*'))]"
@@ -870,7 +870,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','cert-manager','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','trivy','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azad-kube-proxy','cert-manager','control-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','node-ttl','prometheus','reloader','spegel','trivy','vpa'))]"
       },
        "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -888,7 +888,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('prometheus'))]"
       },
       "excludedImages": {
         "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*'))]"
@@ -924,7 +924,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','spegel'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -987,7 +987,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('requiredDropCapabilities')]"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','promtail','reloader','spegel','trivy','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','trivy','vpa'))]"
       },
       "excludedImages": {
         "value": "[concat(parameters('excludedImages'),createArray('docker.io/datawire/tel2:*','ghcr.io/metalbear-co/mirrord:*'))]"

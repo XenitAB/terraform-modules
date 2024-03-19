@@ -28,7 +28,7 @@ locals {
         })
     )
     azure_identity_format = base64encode(
-        templatefile("${path.module}/templates/flux-disable-cross-namespace-source.yaml.tpl", {
+        templatefile("${path.module}/templates/azure-identity-format.yaml.tpl", {
         })
     )
 }

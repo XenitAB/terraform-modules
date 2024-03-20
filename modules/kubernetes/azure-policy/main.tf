@@ -758,7 +758,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "namespaces": {
-        "value": "[${jsonencode(var.tenant_namespaces)}]"
+        "value": "${jsonencode(var.tenant_namespaces)}"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray('flux-system'))]"
@@ -840,7 +840,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','cert-manager','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','spegel'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azure-metrics','cert-manager','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','vpa'))]"
       },
       "excludedImages": {
         "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*','docker.io/datawire/tel2:*'))]"
@@ -1008,7 +1008,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Audit"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-podidentity','cert-manager','controle-plane-logs','trivy'))]"
       },
       "requiredProbes": {
         "value": "[parameters('requiredProbes')]"

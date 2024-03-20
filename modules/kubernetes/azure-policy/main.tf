@@ -757,6 +757,9 @@ resource "azurerm_policy_set_definition" "xks" {
       "effect": {
         "value": "deny"
       },
+      "namespaces": {
+        "value": "[${jsonencode(var.tenant_namespaces)}]"
+      },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray('flux-system'))]"
       }
@@ -840,7 +843,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','cert-manager','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','spegel'))]"
       },
       "excludedImages": {
-        "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*'))]"
+        "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*','docker.io/datawire/tel2:*'))]"
       }
     }
     VALUE
@@ -870,7 +873,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azad-kube-proxy','cert-manager','control-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','node-ttl','prometheus','reloader','spegel','trivy','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azad-kube-proxy','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','node-ttl','prometheus','reloader','spegel','trivy','vpa'))]"
       },
        "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -987,7 +990,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('requiredDropCapabilities')]"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','trivy','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','azure-metrics','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','ingress-healthz','prometheus','reloader','spegel','trivy','vpa'))]"
       },
       "excludedImages": {
         "value": "[concat(parameters('excludedImages'),createArray('docker.io/datawire/tel2:*','ghcr.io/metalbear-co/mirrord:*'))]"

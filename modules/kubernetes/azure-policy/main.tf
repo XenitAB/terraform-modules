@@ -758,7 +758,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "namespaces": {
-        "value": "${jsonencode(var.tenant_namespaces)}"
+        "value": ${jsonencode(var.tenant_namespaces)}
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray('flux-system'))]"

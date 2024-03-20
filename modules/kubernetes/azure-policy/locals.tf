@@ -1,5 +1,10 @@
 locals {
     system_namespaces = "'calico-system', 'gatekeeper-system', 'kube-system', 'tigera-operator'"
+    tenant_namespaces = [
+        for namespace in var.tenant_namespaces : {
+            namespace.name if namespace.flux.enabled
+        }
+    ]
     azure_identity_format = base64encode(
         templatefile("${path.module}/templates/azure-identity-format.yaml.tpl", {
         })

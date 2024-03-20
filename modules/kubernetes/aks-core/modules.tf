@@ -36,11 +36,15 @@ module "azure_policy" {
 
   source = "../../kubernetes/azure-policy"
 
+  aks_name            = var.name
+  aks_name_suffix     = var.aks_name_suffix
   azure_policy_config = var.azure_policy_config
   environment         = var.environment
   location_short      = var.location_short
-  aks_name            = var.name
-  aks_name_suffix     = var.aks_name_suffix
+  tenant_namespaces   = [
+    for namespace in var.namespaces : 
+      namespace.name if namespace.flux.enabled
+  ]
 }
 
 module "gatekeeper" {

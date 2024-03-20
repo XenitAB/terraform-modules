@@ -654,3 +654,15 @@ variable "acr_name_override" {
   type        = string
   default     = ""
 }
+
+variable "additional_storage_classes" {
+  description = "List of additional storage classes to create"
+  type        = list(object({
+    name           = string
+    provisioner    = string
+    reclaim_policy = string
+    binding_mode   = string
+    sku_name       = string
+  }))
+  default     = []
+}

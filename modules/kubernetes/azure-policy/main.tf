@@ -761,7 +761,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": ${jsonencode(var.tenant_namespaces)}
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray('flux-system'))]"
+        "value": "[parameters('excludedNamespaces')]"
       }
     }
     VALUE
@@ -1008,7 +1008,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Audit"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-podidentity','cert-manager','controle-plane-logs','trivy','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','cert-manager','controle-plane-logs','trivy','vpa'))]"
       },
       "requiredProbes": {
         "value": "[parameters('requiredProbes')]"

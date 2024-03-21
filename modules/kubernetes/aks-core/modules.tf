@@ -31,7 +31,7 @@ module "azure_policy" {
   for_each = {
     for s in ["azure_policy"] :
     s => s
-    if var.azure_policy_enabled
+    if var.azure_policy_enabled && !var.gatekeeper_enabled
   }
 
   source = "../../kubernetes/azure-policy"
@@ -45,20 +45,13 @@ module "azure_policy" {
     for namespace in var.namespaces : 
       namespace.name if namespace.flux.enabled
   ]
-
-  lifecycle {
-    precondition {
-      condition     = var.gatekeeper_enabled = false
-      error_message = "Gatekeeper and Azure Policy can not both be enabled."
-    }
-  }
 }
 
 module "gatekeeper" {
   for_each = {
     for s in ["gatekeeper"] :
     s => s
-    if var.gatekeeper_enabled
+    if var.gatekeeper_enabled && var.azure_policy_enabled
   }
 
   source = "../../kubernetes/gatekeeper"
@@ -66,13 +59,6 @@ module "gatekeeper" {
   cluster_id         = local.cluster_id
   cloud_provider     = "azure"
   exclude_namespaces = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
-
-  lifecycle {
-    precondition {
-      condition     = var.azure_policy_enabled = false
-      error_message = "Gatekeeper and Azure Policy can not both be enabled."
-    }
-  }
 }
 
 # FluxCD v2

@@ -114,6 +114,12 @@ variable "aks_config" {
   }
 }
 
+variable "azure_policy_enabled" {
+  description = "If the Azure Policy for Kubernetes add-on should be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "ssh_public_key" {
   description = "SSH public key to add to servers"
   type        = string

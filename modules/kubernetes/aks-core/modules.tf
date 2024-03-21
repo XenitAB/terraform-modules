@@ -45,6 +45,13 @@ module "azure_policy" {
     for namespace in var.namespaces : 
       namespace.name if namespace.flux.enabled
   ]
+
+  lifecycle {
+    precondition {
+      condition     = var.gatekeeper_enabled = false
+      error_message = "Gatekeeper and Azure Policy can not both be enabled."
+    }
+  }
 }
 
 module "gatekeeper" {
@@ -59,6 +66,13 @@ module "gatekeeper" {
   cluster_id         = local.cluster_id
   cloud_provider     = "azure"
   exclude_namespaces = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
+
+  lifecycle {
+    precondition {
+      condition     = var.azure_policy_enabled = false
+      error_message = "Gatekeeper and Azure Policy can not both be enabled."
+    }
+  }
 }
 
 # FluxCD v2

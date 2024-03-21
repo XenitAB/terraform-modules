@@ -32,6 +32,10 @@ resource "azurerm_kubernetes_cluster" "this" {
     authorized_ip_ranges = var.aks_authorized_ips
   }
 
+  azure_policy {
+    enabled = var.azure_policy_enabled
+  }
+
   oidc_issuer_enabled       = true
   workload_identity_enabled = true
 

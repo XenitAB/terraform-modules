@@ -54,7 +54,7 @@ resource "kubernetes_storage_class" "azurefile_zrs_premium" {
   parameters = {
     skuName = "Premium_ZRS"
   }
-  
+
   volume_binding_mode = "WaitForFirstConsumer"
 }
 

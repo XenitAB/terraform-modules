@@ -92,6 +92,7 @@ This module is used to create AKS clusters.
 | [kubernetes_role_binding.trivy_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
+| [kubernetes_storage_class.additional](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.azurefile_zrs_premium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.azurefile_zrs_standard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.zrs_premium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
@@ -109,7 +110,7 @@ This module is used to create AKS clusters.
 | <a name="input_aad_pod_identity_config"></a> [aad\_pod\_identity\_config](#input\_aad\_pod\_identity\_config) | Configuration for aad pod identity | <pre>map(object({<br>    id        = string<br>    client_id = string<br>  }))</pre> | n/a | yes |
 | <a name="input_aad_pod_identity_enabled"></a> [aad\_pod\_identity\_enabled](#input\_aad\_pod\_identity\_enabled) | Should aad-pod-identity be enabled | `bool` | `true` | no |
 | <a name="input_acr_name_override"></a> [acr\_name\_override](#input\_acr\_name\_override) | Override default name of ACR | `string` | `""` | no |
-| <a name="input_additional_storage_classes"></a> [additional\_storage\_classes](#input\_additional\_storage_classes) | Additional k8s storage classes to create | <pre>list(object({<br>  name           = string<br>  provisioner    = string<br>  reclaim_policy = string<br>  binding_mode   = string<br>  sku_name       = string <br>}))</pre> | n/a | yes |
+| <a name="input_additional_storage_classes"></a> [additional\_storage\_classes](#input\_additional\_storage\_classes) | List of additional storage classes to create | <pre>list(object({<br>    name           = string<br>    provisioner    = string<br>    reclaim_policy = string<br>    binding_mode   = string<br>    sku_name       = string<br>  }))</pre> | `[]` | no |
 | <a name="input_aks_name_suffix"></a> [aks\_name\_suffix](#input\_aks\_name\_suffix) | The suffix for the aks clusters | `number` | n/a | yes |
 | <a name="input_azad_kube_proxy_config"></a> [azad\_kube\_proxy\_config](#input\_azad\_kube\_proxy\_config) | The azad-kube-proxy configuration | <pre>object({<br>    fqdn        = string<br>    allowed_ips = list(string)<br>    azure_ad_app = object({<br>      client_id     = string<br>      client_secret = string<br>      tenant_id     = string<br>    })<br>  })</pre> | <pre>{<br>  "allowed_ips": [],<br>  "azure_ad_app": {<br>    "client_id": "",<br>    "client_secret": "",<br>    "tenant_id": ""<br>  },<br>  "fqdn": ""<br>}</pre> | no |
 | <a name="input_azad_kube_proxy_enabled"></a> [azad\_kube\_proxy\_enabled](#input\_azad\_kube\_proxy\_enabled) | Should azad-kube-proxy be enabled | `bool` | `false` | no |

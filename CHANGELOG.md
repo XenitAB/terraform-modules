@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1064](https://github.com/XenitAB/terraform-modules/pull/1064) Add support for creating additional k8s storage classes.
 - [#1063](https://github.com/XenitAB/terraform-modules/pull/1063) Make inlude_tenant_name optional.
 - [#1059](https://github.com/XenitAB/terraform-modules/pull/1059) Move promtail to install with flux.
 - [#1055](https://github.com/XenitAB/terraform-modules/pull/1055) Add functionality for multiple flux-tenants in one environment.

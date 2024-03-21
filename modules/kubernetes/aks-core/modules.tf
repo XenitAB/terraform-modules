@@ -1,6 +1,7 @@
 locals {
   exclude_namespaces = [
     "aad-pod-identity",
+    "azad-kube-proxy",
     "azdo-proxy",
     "calico-system",
     "cert-manager",

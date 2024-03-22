@@ -1,19 +1,7 @@
-resource "azurerm_security_center_subscription_pricing" "kubernetes" {
-  count         = (var.defender_enabled && var.defender_config.kubernetes_sensor_enabled) ? 1 : 0
-  tier          = "Standard"
-  resource_type = "KubernetesService"
-}
-
 resource "azurerm_security_center_subscription_pricing" "containers" {
   count         = (var.defender_enabled && var.defender_config.vulnerability_assessments_enabled) ? 1 : 0
   tier          = "Standard"
   resource_type = "Containers"
-}
-
-resource "azurerm_security_center_subscription_pricing" "container_registry" {
-  count         = (var.defender_enabled && var.defender_config.vulnerability_assessments_enabled) ? 1 : 0
-  tier          = "Standard"
-  resource_type = "ContainerRegistry"
 }
 
 resource "azurerm_security_center_subscription_pricing" "cspm" {

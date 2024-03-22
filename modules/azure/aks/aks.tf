@@ -77,8 +77,14 @@ resource "azurerm_kubernetes_cluster" "this" {
     snapshot_controller_enabled = false
   }
 
+  # Remove
   key_vault_secrets_provider {
     secret_rotation_enabled = true
+  }
+  azure_policy_enabled = var.azure_policy_enabled
+  ######################
+  microsoft_defender {
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.xks_op.id
   }
 
   default_node_pool {

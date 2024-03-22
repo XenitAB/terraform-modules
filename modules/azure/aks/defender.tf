@@ -53,7 +53,7 @@ resource "azurerm_resource_policy_assignment" "kubernetes_sensor" {
   parameters =  <<PARAMETERS
     {
       "effect": {
-        "value": ${jsonencode((var.defender_enabled && var.defender_config.kubernetes_sensor_enabled) ? 'DeployIfNotExists' : 'Disabled')}
+        "value": ${jsonencode((var.defender_enabled && var.defender_config.kubernetes_sensor_enabled) ? "DeployIfNotExists" : "Disabled")}
       },
       "logAnalyticsWorkspaceResourceId": {
         "value": "${azurerm_log_analytics_workspace.xks_op.id}"
@@ -73,7 +73,7 @@ resource "azurerm_resource_policy_assignment" "vulnerability_assessments" {
   parameters =  <<PARAMETERS
     {
       "effect": {
-        "value": ${jsonencode((var.defender_enabled && var.defender_config.vulnerability_assessments_enabled) ? 'DeployIfNotExists' : 'Disabled')}
+        "value": ${jsonencode((var.defender_enabled && var.defender_config.vulnerability_assessments_enabled) ? "DeployIfNotExists" : "Disabled")}
       }
       "isAgentlessDiscoveryForKubernetesEnabled": {
         "value": "${var.defender_enabled && var.defender_config.vulnerability_assessments_enabled ? true : false}"
@@ -93,7 +93,7 @@ resource "azurerm_resource_policy_assignment" "agentless_discovery" {
   parameters =  <<PARAMETERS
     {
       "effect": {
-        "value": ${jsonencode((var.defender_enabled && var.defender_config.kubernetes_discovery_enabled) ? 'DeployIfNotExists' : 'Disabled')}
+        "value": ${jsonencode((var.defender_enabled && var.defender_config.kubernetes_discovery_enabled) ? "DeployIfNotExists" : "Disabled")}
       }
       "isContainerRegistriesVulnerabilityAssessmentsEnabled": {
         "value": "${var.defender_enabled && var.defender_config.kubernetes_discovery_enabled ? true : false}"

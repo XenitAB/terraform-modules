@@ -2,6 +2,10 @@ resource "azurerm_security_center_subscription_pricing" "containers" {
   count         = (var.defender_enabled && var.defender_config.vulnerability_assessments_enabled) ? 1 : 0
   tier          = "Standard"
   resource_type = "Containers"
+
+  lifecycle {
+    ignore_changes = [additional_extension_properties]
+  }
 }
 
 resource "azurerm_security_center_subscription_pricing" "cspm" {
@@ -11,6 +15,10 @@ resource "azurerm_security_center_subscription_pricing" "cspm" {
 
   extension {
     name = "AgentlessDiscoveryForKubernetes"
+  }
+
+  lifecycle {
+    ignore_changes = [additional_extension_properties]
   }
 }
 
@@ -30,30 +38,30 @@ resource "azurerm_log_analytics_workspace" "xks_op" {
   #}
 }
 
-#resource "azurerm_resource_policy_assignment" "kubernetes_sensor" {
-#  name                 = "DefenderContainersKubernetesSensor"
-#  description          = "Configures AKS cluster to enable Defender profile"
-#  display_name         = "Defender for Containers Kubernetes sensor"
-#  location             = "West Europe"
-#  resource_id          = azurerm_kubernetes_cluster.this.id
-#  policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/64def556-fbad-4622-930e-72d1d5589bf5"
+resource "azurerm_resource_policy_assignment" "kubernetes_sensor" {
+  name                 = "DefenderContainersKubernetesSensor"
+  description          = "Configures AKS cluster to enable Defender profile"
+  display_name         = "Defender for Containers Kubernetes sensor"
+  location             = "West Europe"
+  resource_id          = azurerm_kubernetes_cluster.this.id
+  policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/64def556-fbad-4622-930e-72d1d5589bf5"
   
   
-#  parameters =  <<PARAMETERS
-#    {
-#      "effect": {
-#        "value": ${jsonencode((var.defender_enabled && var.defender_config.kubernetes_sensor_enabled) ? local.policy_effect_deploy : local.policy_effect_disable)}
-#      },
-#      "logAnalyticsWorkspaceResourceId": {
-#        "value": "${azurerm_log_analytics_workspace.xks_op.id}"
-#      }
-#    } 
-#    PARAMETERS
+  parameters =  <<PARAMETERS
+    {
+      "effect": {
+        "value": ${jsonencode((var.defender_enabled && var.defender_config.kubernetes_sensor_enabled) ? local.policy_effect_deploy : local.policy_effect_disable)}
+      },
+      "logAnalyticsWorkspaceResourceId": {
+        "value": "${azurerm_log_analytics_workspace.xks_op.id}"
+      }
+    } 
+    PARAMETERS
 
-#  identity {
-#    type = "SystemAssigned"
-#  }
-#}
+  identity {
+    type = "SystemAssigned"
+  }
+}
 
 resource "azurerm_resource_policy_assignment" "vulnerability_assessments" {
   name                 = "DefenderContainersVulnerabilityAssessment"

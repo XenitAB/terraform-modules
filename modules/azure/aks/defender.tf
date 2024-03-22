@@ -48,6 +48,10 @@ resource "azurerm_resource_policy_assignment" "kubernetes_sensor" {
       }
     } 
     PARAMETERS
+
+  identity {
+    type = "SystemAssigned"
+  }
 }
 
 resource "azurerm_resource_policy_assignment" "vulnerability_assessments" {
@@ -63,11 +67,15 @@ resource "azurerm_resource_policy_assignment" "vulnerability_assessments" {
       "effect": {
         "value": ${jsonencode((var.defender_enabled && var.defender_config.vulnerability_assessments_enabled) ? local.policy_effect_deploy : local.policy_effect_disable)}
       },
-      "isAgentlessDiscoveryForKubernetesEnabled": {
+      "isContainerRegistriesVulnerabilityAssessmentsEnabled": {
         "value": ${jsonencode(var.defender_enabled && var.defender_config.vulnerability_assessments_enabled ? true : false)}
       }
     } 
     PARAMETERS
+
+  identity {
+    type = "SystemAssigned"
+  }
 }
 
 resource "azurerm_resource_policy_assignment" "agentless_discovery" {
@@ -77,15 +85,18 @@ resource "azurerm_resource_policy_assignment" "agentless_discovery" {
   resource_id          = azurerm_kubernetes_cluster.this.id
   policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/72f8cee7-2937-403d-84a1-a4e3e57f3c21"
   
-  
   parameters =  <<PARAMETERS
     {
       "effect": {
         "value": ${jsonencode((var.defender_enabled && var.defender_config.kubernetes_discovery_enabled) ? local.policy_effect_deploy : local.policy_effect_disable)}
       },
-      "isContainerRegistriesVulnerabilityAssessmentsEnabled": {
+      "isAgentlessDiscoveryForKubernetesEnabled": {
         "value": ${jsonencode(var.defender_enabled && var.defender_config.kubernetes_discovery_enabled ? true : false)}
       }
     } 
     PARAMETERS
+
+  identity {
+    type = "SystemAssigned"
+  }
 }

@@ -207,5 +207,7 @@ variable "defender_config" {
     kubernetes_sensor_enabled         = optional(bool, true)
     vulnerability_assessments_enabled = optional(bool, true)
   })
-  default = {}
+  default = {
+    log_analytics_workspace = {}
+  }
 }

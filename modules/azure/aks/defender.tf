@@ -37,8 +37,6 @@ resource "azurerm_log_analytics_workspace" "xks_op_standard" {
   internet_ingestion_enabled = false
   internet_query_enabled     = false
 
-  reservation_capacity_in_gb_per_day  
-  
   identity {
     type = SystemAssigned 
   }

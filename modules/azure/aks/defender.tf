@@ -2,10 +2,6 @@ resource "azurerm_security_center_subscription_pricing" "containers" {
   count         = (var.defender_enabled && var.defender_config.vulnerability_assessments_enabled) ? 1 : 0
   tier          = "Standard"
   resource_type = "Containers"
-
-  lifecycle {
-    ignore_changes = [additional_extension_properties]
-  }
 }
 
 resource "azurerm_security_center_subscription_pricing" "cspm" {
@@ -14,11 +10,8 @@ resource "azurerm_security_center_subscription_pricing" "cspm" {
   resource_type = "CloudPosture"
 
   extension {
-    name = "AgentlessDiscoveryForKubernetes"
-  }
-
-  lifecycle {
-    ignore_changes = [additional_extension_properties]
+    name                            = "AgentlessDiscoveryForKubernetes"
+    additional_extension_properties = {}
   }
 }
 

@@ -76,7 +76,7 @@ resource "azurerm_resource_policy_assignment" "vulnerability_assessments" {
         "value": ${jsonencode((var.defender_enabled && var.defender_config.vulnerability_assessments_enabled) ? local.policy_effect_deploy : local.policy_effect_disable)}
       }
       "isAgentlessDiscoveryForKubernetesEnabled": {
-        "value": "${var.defender_enabled && var.defender_config.vulnerability_assessments_enabled ? true : false}"
+        "value": ${jsonencode(var.defender_enabled && var.defender_config.vulnerability_assessments_enabled ? true : false)}
       }
     } 
     PARAMETERS
@@ -96,7 +96,7 @@ resource "azurerm_resource_policy_assignment" "agentless_discovery" {
         "value": ${jsonencode((var.defender_enabled && var.defender_config.kubernetes_discovery_enabled) ? local.policy_effect_deploy : local.policy_effect_disable)}
       }
       "isContainerRegistriesVulnerabilityAssessmentsEnabled": {
-        "value": "${var.defender_enabled && var.defender_config.kubernetes_discovery_enabled ? true : false}"
+        "value": ${jsonencode(var.defender_enabled && var.defender_config.kubernetes_discovery_enabled ? true : false)}
       }
     } 
     PARAMETERS

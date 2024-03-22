@@ -34,6 +34,7 @@ resource "azurerm_resource_policy_assignment" "kubernetes_sensor" {
   name                 = "DefenderContainersKubernetesSensor"
   description          = "Configures AKS cluster to enable Defender profile"
   display_name         = "Defender for Containers Kubernetes sensor"
+  location             = "West Europe"
   resource_id          = azurerm_kubernetes_cluster.this.id
   policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/64def556-fbad-4622-930e-72d1d5589bf5"
   
@@ -58,6 +59,7 @@ resource "azurerm_resource_policy_assignment" "vulnerability_assessments" {
   name                 = "DefenderContainersVulnerabilityAssessment"
   description          = "Provides vulnerability management for images stored in ACR and running images in AKS clusters"
   display_name         = "Defender for Containers vulnerability mangement"
+  location             = "West Europe"
   resource_id          = azurerm_kubernetes_cluster.this.id
   policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/efd4031d-b232-4595-babf-ae817348e91b"
   
@@ -82,6 +84,7 @@ resource "azurerm_resource_policy_assignment" "agentless_discovery" {
   name                 = "DefenderKubernetesAgentlessDiscovery"
   description          = "Provides agentless Kubernetes discovery for AKS clusters"
   display_name         = "Defender Kubernetes agentless discovery"
+  location             = "West Europe"
   resource_id          = azurerm_kubernetes_cluster.this.id
   policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/72f8cee7-2937-403d-84a1-a4e3e57f3c21"
   

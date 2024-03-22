@@ -37,9 +37,9 @@ resource "azurerm_log_analytics_workspace" "xks_op_standard" {
   internet_ingestion_enabled = false
   internet_query_enabled     = false
 
-  identity {
-    type = SystemAssigned 
-  }
+  #identity {
+  #  type = SystemAssigned 
+  #}
 }
 
 resource "azurerm_log_analytics_workspace" "xks_op_reserved" {
@@ -53,7 +53,7 @@ resource "azurerm_log_analytics_workspace" "xks_op_reserved" {
   internet_ingestion_enabled = false
   internet_query_enabled     = false
 
-  reservation_capacity_in_gb_per_day = var.reservation_capacity
+  reservation_capacity_in_gb_per_day = var.defender_config.log_analytics_workspace.reservation_gb
   
   identity {
     type = SystemAssigned 

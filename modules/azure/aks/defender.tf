@@ -55,9 +55,9 @@ resource "azurerm_log_analytics_workspace" "xks_op_reserved" {
 
   reservation_capacity_in_gb_per_day = var.defender_config.log_analytics_workspace.reservation_gb
   
-  identity {
-    type = SystemAssigned 
-  }
+  #identity {
+  #  type = SystemAssigned 
+  #}
 }
 
 resource "azurerm_resource_policy_assignment" "kubernetes_sensor" {
@@ -78,10 +78,6 @@ resource "azurerm_resource_policy_assignment" "kubernetes_sensor" {
       }
     } 
     PARAMETERS
-    
-  identity {
-    type = "SystemAssigned"
-  }
 }
 
 resource "azurerm_resource_policy_assignment" "vulnerability_assessments" {
@@ -102,10 +98,6 @@ resource "azurerm_resource_policy_assignment" "vulnerability_assessments" {
       }
     } 
     PARAMETERS
-    
-  identity {
-    type = "SystemAssigned"
-  }
 }
 
 resource "azurerm_resource_policy_assignment" "agentless_discovery" {
@@ -126,8 +118,4 @@ resource "azurerm_resource_policy_assignment" "agentless_discovery" {
       }
     } 
     PARAMETERS
-    
-  identity {
-    type = "SystemAssigned"
-  }
 }

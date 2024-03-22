@@ -26,35 +26,17 @@ resource "azurerm_security_center_subscription_pricing" "cspm" {
   }
 }
 
-resource "azurerm_log_analytics_workspace" "xks_op_standard" {
-  count                      = (var.defender_enabled && var.defender_config.log_analytics_workspace.sku_name != "PerGB2018") ? 1 : 0
-  name                       = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-op"
-  location                   = data.azurerm_resource_group.this.location
-  resource_group_name        = data.azurerm_resource_group.this.name
-  sku                        = var.defender_config.log_analytics_workspace.sku_name
-  retention_in_days          = var.defender_config.log_analytics_workspace.retention_days
-  daily_quota_gb             = var.defender_config.log_analytics_workspace.daily_quota_gb
-  internet_ingestion_enabled = false
-  internet_query_enabled     = false
-
-  #identity {
-  #  type = SystemAssigned 
-  #}
-}
-
-resource "azurerm_log_analytics_workspace" "xks_op_reserved" {
-  count                      = (var.defender_enabled && var.defender_config.log_analytics_workspace.sku_name == "CapacityReservation") ? 1 : 0
-  name                       = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-op"
-  location                   = data.azurerm_resource_group.this.location
-  resource_group_name        = data.azurerm_resource_group.this.name
-  sku                        = var.defender_config.log_analytics_workspace.sku_name
-  retention_in_days          = var.defender_config.log_analytics_workspace.retention_days
-  daily_quota_gb             = var.defender_config.log_analytics_workspace.daily_quota_gb
-  internet_ingestion_enabled = false
-  internet_query_enabled     = false
-
-  reservation_capacity_in_gb_per_day = var.defender_config.log_analytics_workspace.reservation_gb
-  
+resource "azurerm_log_analytics_workspace" "xks_op" {
+  name                               = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-op"
+  location                           = data.azurerm_resource_group.this.location
+  resource_group_name                = data.azurerm_resource_group.this.name
+  sku                                = var.defender_config.log_analytics_workspace.sku_name
+  retention_in_days                  = var.defender_config.log_analytics_workspace.retention_days
+  daily_quota_gb                     = var.defender_config.log_analytics_workspace.daily_quota_gb
+  internet_ingestion_enabled         = false
+  internet_query_enabled             = false
+  reservation_capacity_in_gb_per_day = var.defender_config.log_analytics_workspace.sku_name == "CapacityReservation" ? var.defender_config.log_analytics_workspace.reservation_gb : null
+                                       
   #identity {
   #  type = SystemAssigned 
   #}
@@ -71,10 +53,10 @@ resource "azurerm_resource_policy_assignment" "kubernetes_sensor" {
   parameters =  <<PARAMETERS
     {
       "effect": {
-        "value": ${(var.defender_enabled && var.defender_config.kubernetes_sensor_enabled) ? "DeployIfNotExists" : "Disabled"}
+        "value": ${jsonencode((var.defender_enabled && var.defender_config.kubernetes_sensor_enabled) ? 'DeployIfNotExists' : 'Disabled')}
       },
       "logAnalyticsWorkspaceResourceId": {
-        "value": "${var.defender_config.log_analytics_workspace.sku_name == "CapacityReservation" ? azurerm_log_analytics_workspace.xks_op_standard[0].id : azurerm_log_analytics_workspace.xks_op_reserved[0].id}"
+        "value": "${azurerm_log_analytics_workspace.xks_op.id}"
       }
     } 
     PARAMETERS
@@ -91,7 +73,7 @@ resource "azurerm_resource_policy_assignment" "vulnerability_assessments" {
   parameters =  <<PARAMETERS
     {
       "effect": {
-        "value": ${(var.defender_enabled && var.defender_config.vulnerability_assessments_enabled) ? "DeployIfNotExists" : "Disabled"}
+        "value": ${jsonencode((var.defender_enabled && var.defender_config.vulnerability_assessments_enabled) ? 'DeployIfNotExists' : 'Disabled')}
       }
       "isAgentlessDiscoveryForKubernetesEnabled": {
         "value": "${var.defender_enabled && var.defender_config.vulnerability_assessments_enabled ? true : false}"
@@ -111,7 +93,7 @@ resource "azurerm_resource_policy_assignment" "agentless_discovery" {
   parameters =  <<PARAMETERS
     {
       "effect": {
-        "value": ${(var.defender_enabled && var.defender_config.kubernetes_discovery_enabled) ? "DeployIfNotExists" : "Disabled"}
+        "value": ${jsonencode((var.defender_enabled && var.defender_config.kubernetes_discovery_enabled) ? 'DeployIfNotExists' : 'Disabled')}
       }
       "isContainerRegistriesVulnerabilityAssessmentsEnabled": {
         "value": "${var.defender_enabled && var.defender_config.kubernetes_discovery_enabled ? true : false}"

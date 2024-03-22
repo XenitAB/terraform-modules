@@ -76,7 +76,8 @@ resource "azurerm_resource_policy_assignment" "kubernetes_sensor" {
       "logAnalyticsWorkspaceResourceId": {
         "value": "${var.defender_config.log_analytics_workspace.sku_name == "CapacityReservation" ? azurerm_log_analytics_workspace.xks_op_standard.id : azurerm_log_analytics_workspace.xks_op_reserved.id}"
       }
-    } PARAMETERS
+    } 
+    PARAMETERS
     
   identity {
     type = "SystemAssigned"
@@ -99,7 +100,8 @@ resource "azurerm_resource_policy_assignment" "vulnerability_assessments" {
       "isAgentlessDiscoveryForKubernetesEnabled": {
         "value": "${var.defender_enabled && var.defender_config.vulnerability_assessments_enabled ? true : false}"
       }
-    } PARAMETERS
+    } 
+    PARAMETERS
     
   identity {
     type = "SystemAssigned"
@@ -122,7 +124,8 @@ resource "azurerm_resource_policy_assignment" "agentless_discovery" {
       "isContainerRegistriesVulnerabilityAssessmentsEnabled": {
         "value": "${var.defender_enabled && var.defender_config.kubernetes_discovery_enabled ? true : false}"
       }
-    } PARAMETERS
+    } 
+    PARAMETERS
     
   identity {
     type = "SystemAssigned"

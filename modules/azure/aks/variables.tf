@@ -229,12 +229,12 @@ variable "defender_enabled" {
 variable "defender_config" {
   description = "Defender for Containers configuration"
   type        = object({
-    log_analytics_workspace = object({
+    log_analytics_workspace = optional(object({
       sku_name       = optional(string, "PerGB2018")
       daily_quota_gb = optional(number, -1)
       reservation_gb = optional(number, 0)
       retention_days = optional(number, 30)
-    })
+    }), {})
     kubernetes_discovery_enabled      = optional(bool, false)
     kubernetes_sensor_enabled         = optional(bool, true)
     vulnerability_assessments_enabled = optional(bool, true)

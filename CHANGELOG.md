@@ -12,7 +12,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
-<<<<<<< HEAD
 - [#1062](https://github.com/XenitAB/terraform-modules/pull/1062) Migrate cert-manager to install with flux.
 - [#1052](https://github.com/XenitAB/terraform-modules/pull/1052) Update ingress-healthz to 15.5.2.
 - [#1086](https://github.com/XenitAB/terraform-modules/pull/1086) Migrate control-plane-logs to install with flux and bump helm chart version.
@@ -31,8 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1070](https://github.com/XenitAB/terraform-modules/pull/1070) Support Azure Policy add-on
 - [#1058](https://github.com/XenitAB/terraform-modules/pull/1058) Use secrets-provider AKS-addon instead of seperate helmchart.
 - [#1065](https://github.com/XenitAB/terraform-modules/pull/1065) Exclude azad-kube-proxy from gatekeeper.
-=======
->>>>>>> 108ad3c8 (feat: Add support for adding additional storage classes)
+- [#1065](https://github.com/XenitAB/terraform-modules/pull/1065) Exclude azad-kube-proxy from gatekeeper.
 - [#1064](https://github.com/XenitAB/terraform-modules/pull/1064) Add support for creating additional k8s storage classes.
 - [#1063](https://github.com/XenitAB/terraform-modules/pull/1063) Make inlude_tenant_name optional.
 - [#1059](https://github.com/XenitAB/terraform-modules/pull/1059) Move promtail to install with flux.

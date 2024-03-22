@@ -74,7 +74,7 @@ resource "azurerm_resource_policy_assignment" "kubernetes_sensor" {
         "value": ${(var.defender_enabled && var.defender_config.kubernetes_sensor_enabled) ? "DeployIfNotExists" : "Disabled"}
       },
       "logAnalyticsWorkspaceResourceId": {
-        "value": "${var.defender_config.log_analytics_workspace.sku_name == "CapacityReservation" ? azurerm_log_analytics_workspace.xks_op_standard[count.index].id : azurerm_log_analytics_workspace.xks_op_reserved[count.index].id}"
+        "value": "${var.defender_config.log_analytics_workspace.sku_name == "CapacityReservation" ? azurerm_log_analytics_workspace.xks_op_standard[0].id : azurerm_log_analytics_workspace.xks_op_reserved[0].id}"
       }
     } 
     PARAMETERS

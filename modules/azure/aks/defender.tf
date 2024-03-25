@@ -1,13 +1,16 @@
+resource "azurerm_security_center_auto_provisioning" "this" {
+    auto_provision = "Off"
+}
+
 resource "azurerm_security_center_subscription_pricing" "containers" {
   count         = (var.defender_enabled && var.defender_config.vulnerability_assessments_enabled) ? 1 : 0
   tier          = "Standard"
   resource_type = "Containers"
-}
 
-resource "azurerm_security_center_subscription_pricing" "cspm" {
-  count         = (var.defender_enabled && var.defender_config.kubernetes_discovery_enabled) ? 1 : 0
-  tier          = "Standard"
-  resource_type = "CloudPosture"
+  extension {
+    name                            = "ContainerRegistriesVulnerabilityAssessments"
+    additional_extension_properties = {}
+  }
 
   extension {
     name                            = "AgentlessDiscoveryForKubernetes"
@@ -22,13 +25,18 @@ resource "azurerm_log_analytics_workspace" "xks_op" {
   sku                                = var.defender_config.log_analytics_workspace.sku_name
   retention_in_days                  = var.defender_config.log_analytics_workspace.retention_days
   daily_quota_gb                     = var.defender_config.log_analytics_workspace.daily_quota_gb
-  internet_ingestion_enabled         = false
+  internet_ingestion_enabled         = true
   internet_query_enabled             = true
   reservation_capacity_in_gb_per_day = var.defender_config.log_analytics_workspace.sku_name == "CapacityReservation" ? var.defender_config.log_analytics_workspace.reservation_gb : null
                                        
   #identity {
   #  type = SystemAssigned 
   #}
+}
+
+resource "azurerm_security_center_workspace" "example" {
+  scope        = "/subscriptions/00000000-0000-0000-0000-000000000000"
+  workspace_id = azurerm_log_analytics_workspace.xks_op.id
 }
 
 resource "azurerm_resource_policy_assignment" "kubernetes_sensor" {

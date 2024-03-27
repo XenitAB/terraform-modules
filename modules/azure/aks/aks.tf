@@ -86,9 +86,14 @@ resource "azurerm_kubernetes_cluster" "this" {
   azure_policy_enabled = true
   ######################
 
-  #microsoft_defender {
-  #  log_analytics_workspace_id = azurerm_log_analytics_workspace.xks_op.id
-  #}
+  dynamic microsoft_defender {
+    for_each = {
+      for s in ["defender"] :
+      s => s
+      if var.defender_enabled
+    }
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.xks_op.id
+  }
 
   default_node_pool {
     name           = "default"

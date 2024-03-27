@@ -30,11 +30,6 @@ resource "azurerm_log_analytics_workspace" "xks_op" {
   reservation_capacity_in_gb_per_day = var.defender_config.log_analytics_workspace.sku_name == "CapacityReservation" ? var.defender_config.log_analytics_workspace.reservation_gb : null
 }
 
-resource "azurerm_security_center_workspace" "this" {
-  scope        = data.azurerm_resource_group.this.id
-  workspace_id = azurerm_log_analytics_workspace.xks_op.id
-}
-
 resource "azurerm_resource_policy_assignment" "kubernetes_sensor" {
   name                 = "DefenderContainersKubernetesSensor"
   description          = "Configures AKS cluster to enable Defender profile"

@@ -85,11 +85,8 @@ resource "azurerm_kubernetes_cluster" "this" {
   ######################
 
   dynamic microsoft_defender {
-    for_each = {
-      for s in ["defender"] :
-      s => s
-      if var.defender_enabled
-    }
+    for_each = var.defender_enabled ? [] : [""]
+    
     content {
       log_analytics_workspace_id = azurerm_log_analytics_workspace.xks_op.id
     }
@@ -159,7 +156,38 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   }
 }
 
+resource "azurerm_log_analytics_workspace" "xks_audit" {
+  count                              = var.audit_config.destination_type == "AnalyticsWorkspace" ? 1 : 0
+  name                               = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-audit"
+  location                           = data.azurerm_resource_group.this.location
+  resource_group_name                = data.azurerm_resource_group.this.name
+  sku                                = var.audit_config.analytics_workspace.sku_name
+  retention_in_days                  = var.audit_config.analytics_workspace.retention_days
+  daily_quota_gb                     = var.audit_config.analytics_workspace.daily_quota_gb
+  internet_ingestion_enabled         = true
+  internet_query_enabled             = true
+  reservation_capacity_in_gb_per_day = var.audit_config.analytics_workspace.sku_name == "CapacityReservation" ? var.defender_config.log_analytics_workspace.reservation_gb : null
+}
+
+resource "azurerm_monitor_diagnostic_setting" "log_analytics_workspace_audit" {
+  count                          = var.audit_config.destination_type == "AnalyticsWorkspace" ? 1 : 0
+  name                           = "log-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  target_resource_id             = azurerm_kubernetes_cluster.this.id
+  log_analytics_workspace_id     = azurerm_log_analytics_workspace.xks_audit.id
+  log_analytics_destination_type = "Dedicated"
+
+  enabled_log {
+    category = "kube-audit-admin"
+  }
+
+  metric {
+    category = "AllMetrics"
+    enabled  = false
+  }
+}
+
 resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
+  count              = var.audit_config.destination_type == "StorageAccount" ? 1 : 0
   name               = "log-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   target_resource_id = azurerm_kubernetes_cluster.this.id
   storage_account_id = data.azurerm_storage_account.log.id

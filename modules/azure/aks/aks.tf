@@ -86,7 +86,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   azure_policy_enabled = true
   ######################
 
-  dynamic microsoft_defender {
+  dynamic "microsoft_defender" {
     for each = var.defender_enabled ? [1] : []
     log_analytics_workspace_id = azurerm_log_analytics_workspace.xks_op.id
   }

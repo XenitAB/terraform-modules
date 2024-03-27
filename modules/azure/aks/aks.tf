@@ -83,9 +83,11 @@ resource "azurerm_kubernetes_cluster" "this" {
   key_vault_secrets_provider {
     secret_rotation_enabled = true
   }
-  azure_policy_enabled = false
+  azure_policy_enabled = true
   ######################
-  microsoft_defender {
+
+  dynamic microsoft_defender {
+    for each = var.defender_enabled ? [1] : []
     log_analytics_workspace_id = azurerm_log_analytics_workspace.xks_op.id
   }
 

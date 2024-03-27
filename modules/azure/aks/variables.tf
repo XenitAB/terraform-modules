@@ -208,7 +208,7 @@ variable "audit_config" {
   default = {}
 
   validation {
-    condition =
+    condition     = contains(["AnalyticsWorkspace", "StorageAccount"], var.audit_config.destination_type)
     error_message = "Invalid destination_type: ${var.audit_config.destination_type}. Allowed vallues: ['AnalyticsWorkspace', 'StorageAccount']"
   }
 }

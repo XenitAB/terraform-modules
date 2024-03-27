@@ -226,10 +226,29 @@ variable "defender_enabled" {
   default     = false
 }
 
+variable "audit_config" {
+  description = "Kubernetes audit log config"
+  type        = object({
+    destination_type = optional(string, "StorageAccount")
+    analytics_workspace = optional(object({
+      sku_name       = optional(string, "PerGB2018")
+      daily_quota_gb = optional(number, -1)
+      reservation_gb = optional(number, 0)
+      retention_days = optional(number, 30)
+    }), {})
+  })
+  default = {}
+
+  validation {
+    condition =
+    error_message = "Invalid destination_type: ${var.audit_config.destination_type}. Allowed vallues: ['AnalyticsWorkspace', 'StorageAccount']"
+  }
+}
+
 variable "defender_config" {
   description = "Defender for Containers configuration"
   type        = object({
-    log_analytics_workspace = optional(object({
+    analytics_workspace = optional(object({
       sku_name       = optional(string, "PerGB2018")
       daily_quota_gb = optional(number, -1)
       reservation_gb = optional(number, 0)
@@ -239,7 +258,5 @@ variable "defender_config" {
     kubernetes_sensor_enabled         = optional(bool, true)
     vulnerability_assessments_enabled = optional(bool, true)
   })
-  default = {
-    log_analytics_workspace = {}
-  }
+  default = {}
 }

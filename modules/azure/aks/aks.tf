@@ -157,7 +157,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
 }
 
 resource "azurerm_log_analytics_workspace" "xks_audit" {
-  count                              = var.audit_config.destination_type == "AnalyticsWorkspace" ? 1 : 0
   name                               = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-audit"
   location                           = data.azurerm_resource_group.this.location
   resource_group_name                = data.azurerm_resource_group.this.name

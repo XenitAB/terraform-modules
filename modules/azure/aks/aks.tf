@@ -90,7 +90,9 @@ resource "azurerm_kubernetes_cluster" "this" {
       s => s
       if var.defender_enabled
     }
-    log_analytics_workspace_id = azurerm_log_analytics_workspace.xks_op.id
+    content {
+      log_analytics_workspace_id = azurerm_log_analytics_workspace.xks_op.id
+    }
   }
 
   default_node_pool {

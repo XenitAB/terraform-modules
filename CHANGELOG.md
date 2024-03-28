@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## Added
+
+- [#1066](https://github.com/XenitAB/terraform-modules/pull/1066) Enable workload identity service account in tenant namespaces.
+
 ## Changed
 
 - [#1065](https://github.com/XenitAB/terraform-modules/pull/1065) Exclude azad-kube-proxy from gatekeeper.

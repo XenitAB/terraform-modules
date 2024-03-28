@@ -10,11 +10,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+      version = "2.27.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.11.0"
+      version = "2.12.1"
     }
   }
 }
@@ -39,7 +39,7 @@ resource "helm_release" "cert_manager" {
   chart       = "cert-manager"
   name        = "cert-manager"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v1.7.1"
+  version     = "v1.14.4"
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {

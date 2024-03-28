@@ -21,11 +21,11 @@ terraform {
   required_providers {
     helm = {
       source  = "hashicorp/helm"
-      version = "2.11.0"
+      version = "2.12.1"
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.25.3"
+      version = "1.2.3"
     }
     azuredevops = {
       source  = "xenitab/azuredevops"
@@ -33,7 +33,7 @@ terraform {
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+      version = "2.27.0"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"

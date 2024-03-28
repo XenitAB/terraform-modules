@@ -11,11 +11,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+      version = "2.27.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.11.0"
+      version = "2.12.1"
     }
   }
 }
@@ -36,7 +36,7 @@ resource "helm_release" "prometheus" {
   chart       = "kube-prometheus-stack"
   name        = "prometheus"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "42.1.1"
+  version     = "57.2.0"
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
@@ -61,7 +61,7 @@ resource "helm_release" "metrics_server" {
   chart       = "metrics-server"
   name        = "metrics-server"
   namespace   = "kube-system"
-  version     = "6.2.4"
+  version     = "7.0.1"
   max_history = 3
   values      = [templatefile("${path.module}/templates/values-metrics-server.yaml.tpl", {})]
 }
@@ -116,7 +116,7 @@ resource "helm_release" "x509_certificate_exporter" {
   chart       = "x509-certificate-exporter"
   name        = "x509-certificate-exporter"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "3.6.0"
+  version     = "3.12.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values-x509.yaml.tpl", {
     prometheus_namespace = kubernetes_namespace.this.metadata[0].name,

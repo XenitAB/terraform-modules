@@ -10,11 +10,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+      version = "2.27.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.11.0"
+      version = "2.12.1"
     }
   }
 }
@@ -34,7 +34,7 @@ resource "helm_release" "velero" {
   chart       = "velero"
   name        = "velero"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "2.23.6"
+  version     = "6.0.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
     cloud_provider = var.cloud_provider,

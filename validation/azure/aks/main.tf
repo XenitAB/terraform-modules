@@ -18,6 +18,7 @@ module "aks" {
   environment                   = "dev"
   location_short                = "we"
   name                          = "xks"
+  subscription_name             = "sub"
   core_name                     = "core"
   unique_suffix                 = 1337
   aks_name_suffix               = "1"

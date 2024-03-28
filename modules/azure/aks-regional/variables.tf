@@ -33,11 +33,6 @@ variable "namespaces" {
   )
 }
 
-variable "dns_zone" {
-  description = "List of DNS Zone to create"
-  type        = list(string)
-}
-
 variable "aks_authorized_ips" {
   description = "Authorized IPs to access AKS API"
   type        = list(string)

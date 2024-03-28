@@ -21,22 +21,9 @@ output "aks_public_ip_prefix_ids" {
   value       = local.aks_public_ip_prefix_ids
 }
 
-output "dns_zone" {
-  description = "DNS Zone to be used with external-dns"
-  value       = var.dns_zone
-}
-
 output "ssh_public_key" {
   description = "SSH public key to add to servers"
   value       = tls_private_key.ssh_key.public_key_openssh
-}
-
-output "external_dns_identity" {
-  description = "MSI authentication identity for External DNS"
-  value = {
-    client_id   = azurerm_user_assigned_identity.external_dns.client_id
-    resource_id = azurerm_user_assigned_identity.external_dns.id
-  }
 }
 
 output "velero" {

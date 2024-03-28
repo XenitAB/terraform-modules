@@ -187,3 +187,9 @@ variable "log_eventhub_authorization_rule_id" {
   description = "The authoritzation rule id for event hub"
   type        = string
 }
+
+variable "dns_zones" {
+  description = "List of DNS Zone to create"
+  type        = list(string)
+}
+

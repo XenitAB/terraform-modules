@@ -31,7 +31,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aws_config"></a> [aws\_config](#input\_aws\_config) | AWS specific configuration | <pre>object({<br>    role_arn = string,<br>    region   = string<br>  })</pre> | <pre>{<br>  "region": "",<br>  "role_arn": ""<br>}</pre> | no |
-| <a name="input_azure_config"></a> [azure\_config](#input\_azure\_config) | AWS specific configuration | <pre>object({<br>    subscription_id = string,<br>    tenant_id       = string,<br>    resource_group  = string,<br>    client_id       = string,<br>    resource_id     = string<br>  })</pre> | <pre>{<br>  "client_id": "",<br>  "resource_group": "",<br>  "resource_id": "",<br>  "subscription_id": "",<br>  "tenant_id": ""<br>}</pre> | no |
+| <a name="input_azure_config"></a> [azure\_config](#input\_azure\_config) | AWS specific configuration | <pre>object({<br>    subscription_id = string,<br>    tenant_id       = string,<br>    resource_group  = string,<br>    client_id       = string,<br>  })</pre> | <pre>{<br>  "client_id": "",<br>  "resource_group": "",<br>  "subscription_id": "",<br>  "tenant_id": ""<br>}</pre> | no |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_dns_provider"></a> [dns\_provider](#input\_dns\_provider) | DNS provider to use. | `string` | n/a | yes |
 | <a name="input_sources"></a> [sources](#input\_sources) | k8s resource types to observe | `list(string)` | <pre>[<br>  "ingress",<br>  "service"<br>]</pre> | no |

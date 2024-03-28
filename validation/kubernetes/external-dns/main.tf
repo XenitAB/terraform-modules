@@ -11,6 +11,5 @@ module "external_dns" {
     subscription_id = "id"
     resource_group  = "name"
     client_id       = "id"
-    resource_id     = "id"
   }
 }

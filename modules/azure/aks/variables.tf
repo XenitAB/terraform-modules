@@ -18,6 +18,11 @@ variable "unique_suffix" {
   type        = string
 }
 
+variable "subscription_name" {
+  description = "The commonName for the subscription"
+  type        = string
+}
+
 variable "core_name" {
   description = "The commonName for the core infrastructure"
   type        = string

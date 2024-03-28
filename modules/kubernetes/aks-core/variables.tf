@@ -75,8 +75,9 @@ variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes."
   type = list(
     object({
-      name   = string
-      labels = map(string)
+      name                        = string
+      labels                      = map(string)
+      workload_identity_client_id = string
       flux = object({
         enabled             = bool
         create_crds         = bool
@@ -93,8 +94,9 @@ variable "namespaces" {
     })
   )
   default = [{
-    name   = ""
-    labels = {}
+    name                        = ""
+    labels                      = {}
+    workload_identity_client_id = ""
     flux = {
       enabled     = true
       create_crds = false

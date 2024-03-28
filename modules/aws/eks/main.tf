@@ -3,18 +3,18 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "4.31.0"
+      version = "5.42.0"
       # Need both providers, one is default and the other is
       # to create the eks cluster and get auth token
       configuration_aliases = [aws.eks_admin]
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "4.0.4"
+      version = "4.0.5"
     }
     null = {
       source  = "hashicorp/null"
-      version = "3.2.1"
+      version = "3.2.2"
     }
   }
 }

@@ -18,11 +18,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+      version = "2.27.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.11.0"
+      version = "2.12.1"
     }
   }
 }
@@ -42,7 +42,7 @@ resource "helm_release" "trivy_operator" {
   chart       = "trivy-operator"
   name        = "trivy-operator"
   namespace   = kubernetes_namespace.trivy.metadata[0].name
-  version     = "0.11.1-rc"
+  version     = "0.21.1"
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/trivy-operator-values.yaml.tpl", {
@@ -56,7 +56,7 @@ resource "helm_release" "starboard_exporter" {
   repository  = "https://giantswarm.github.io/giantswarm-catalog/"
   chart       = "starboard-exporter"
   name        = "starboard-exporter"
-  version     = "0.7.1"
+  version     = "0.7.8"
   namespace   = kubernetes_namespace.trivy.metadata[0].name
   max_history = 3
   values      = [file("${path.module}/templates/starboard-exporter-values.yaml")]
@@ -67,7 +67,7 @@ resource "helm_release" "trivy" {
   chart       = "trivy"
   name        = "trivy"
   namespace   = kubernetes_namespace.trivy.metadata[0].name
-  version     = "0.5.0"
+  version     = "0.7.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/trivy-values.yaml.tpl", {
     provider                        = var.cloud_provider

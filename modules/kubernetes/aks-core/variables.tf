@@ -78,8 +78,9 @@ variable "namespaces" {
       name   = string
       labels = map(string)
       flux = object({
-        enabled     = bool
-        create_crds = bool
+        enabled             = bool
+        create_crds         = bool
+        include_tenant_name = optional(bool, false)
         azure_devops = object({
           org  = string
           proj = string
@@ -91,6 +92,23 @@ variable "namespaces" {
       })
     })
   )
+  default = [{
+    name   = ""
+    labels = {}
+    flux = {
+      enabled     = true
+      create_crds = false
+      azure_devops = {
+        org  = ""
+        proj = ""
+        repo = ""
+      }
+      github = {
+        repo = ""
+      }
+    }
+    }
+  ]
 }
 
 variable "kubernetes_network_policy_default_deny" {
@@ -546,4 +564,16 @@ variable "acr_name_override" {
   description = "Override default name of ACR"
   type        = string
   default     = ""
+}
+
+variable "additional_storage_classes" {
+  description = "List of additional storage classes to create"
+  type = list(object({
+    name           = string
+    provisioner    = string
+    reclaim_policy = string
+    binding_mode   = string
+    sku_name       = string
+  }))
+  default = []
 }

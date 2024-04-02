@@ -9,6 +9,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Changed
 
 - [#1058](https://github.com/XenitAB/terraform-modules/pull/1058) Use secrets-provider AKS-addon instead of seperate helmchart.
+- [#1065](https://github.com/XenitAB/terraform-modules/pull/1065) Exclude azad-kube-proxy from gatekeeper.
+- [#1064](https://github.com/XenitAB/terraform-modules/pull/1064) Add support for creating additional k8s storage classes.
+- [#1063](https://github.com/XenitAB/terraform-modules/pull/1063) Make inlude_tenant_name optional.
+- [#1059](https://github.com/XenitAB/terraform-modules/pull/1059) Move promtail to install with flux.
+- [#1055](https://github.com/XenitAB/terraform-modules/pull/1055) Add functionality for multiple flux-tenants in one environment.
 - [#1057](https://github.com/XenitAB/terraform-modules/pull/1057) Migrate reloader to install with flux.
 - [#1036](https://github.com/XenitAB/terraform-modules/pull/1036) Migrate Falco to install with flux.
 - [#1030](https://github.com/XenitAB/terraform-modules/pull/1030) Move azad-kube-proxy to install with flux.

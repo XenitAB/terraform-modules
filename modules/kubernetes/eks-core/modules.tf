@@ -282,15 +282,11 @@ module "promtail" {
 
   source              = "../../kubernetes/promtail"
   loki_address        = var.promtail_config.loki_address
-  cloud_provider      = "aws"
   cluster_name        = "${var.name}${var.eks_name_suffix}"
   environment         = var.environment
   region              = data.aws_region.current.name
   excluded_namespaces = var.promtail_config.excluded_namespaces
-
-  aws_config = {
-    role_arn = var.promtail_config.role_arn
-  }
+  cluster_id          = local.cluster_id
 }
 
 # Prometheus

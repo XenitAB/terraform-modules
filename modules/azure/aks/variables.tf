@@ -195,14 +195,14 @@ variable "defender_enabled" {
 }
 
 variable "audit_config" {
-  description = "Kubernetes audit log config"
+  description = "Kubernetes audit log configuration"
   type        = object({
     destination_type = optional(string, "StorageAccount")
     analytics_workspace = optional(object({
       sku_name       = optional(string, "PerGB2018")
       daily_quota_gb = optional(number, -1)
       reservation_gb = optional(number, 0)
-      retention_days = optional(number, 30)
+      retention_days = optional(number, 7)
     }), {})
   })
   default = {}
@@ -214,7 +214,7 @@ variable "audit_config" {
 }
 
 variable "defender_config" {
-  description = "Defender for Containers configuration"
+  description = "The Microsoft Defender for containers configuration"
   type        = object({
     analytics_workspace = optional(object({
       sku_name       = optional(string, "PerGB2018")

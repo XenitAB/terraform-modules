@@ -40,10 +40,14 @@ No modules.
 | [azurerm_federated_identity_credential.tenant](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/federated_identity_credential) | resource |
 | [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/kubernetes_cluster) | resource |
 | [azurerm_kubernetes_cluster_node_pool.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/kubernetes_cluster_node_pool) | resource |
+| [azurerm_log_analytics_workspace.xks_op](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/log_analytics_workspace) | resource |
 | [azurerm_monitor_diagnostic_setting.log_eventhub_audit](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_monitor_diagnostic_setting.log_storage_account_audit](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
+| [azurerm_resource_policy_assignment.kubernetes_sensor](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/resource_policy_assignment) | resource |
+| [azurerm_resource_policy_assignment.vulnerability_assessments](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/resource_policy_assignment) | resource |
+| [azurerm_resource_policy_assignment.agentless_discovery](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/resource_policy_assignment) | resource |
 | [azurerm_role_assignment.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.azure_metrics_aks_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.azure_metrics_lb_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
@@ -52,6 +56,8 @@ No modules.
 | [azurerm_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
+| [azurerm_security_center_auto_provisioning.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/security_center_auto_provisioning) | resource |
+| [azurerm_security_center_subscription_pricing.containers](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/security_center_subscription_pricing) | resource |
 | [azurerm_storage_management_policy.log_storage_account_audit_policy](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/storage_management_policy) | resource |
 | [azurerm_user_assigned_identity.cert_manager](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.tenant](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/user_assigned_identity) | resource |
@@ -75,6 +81,7 @@ No modules.
 | <a name="input_aks_config"></a> [aks\_config](#input\_aks\_config) | The Azure Kubernetes Service (AKS) configuration | <pre>object({<br>    version = string<br>    # Enables paid SKU for AKS and makes the default node pool HA<br>    production_grade = bool<br>    # Will replace the default cluster auto scaler expander with a priority expander, <br>    # see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md#configuration<br>    priority_expander_config = optional(map(list(string)))<br>    node_pools = list(object({<br>      name           = string<br>      version        = string<br>      vm_size        = string<br>      zones          = optional(list(string), ["1", "2", "3"])<br>      min_count      = number<br>      max_count      = number<br>      spot_enabled   = bool<br>      spot_max_price = number<br>      node_taints    = list(string)<br>      node_labels    = map(string)<br>    }))<br>  })</pre> | n/a | yes |
 | <a name="input_aks_default_node_pool_vm_size"></a> [aks\_default\_node\_pool\_vm\_size](#input\_aks\_default\_node\_pool\_vm\_size) | The VM size of the AKS clusters default node pool. Do not override unless explicitly required. | `string` | `"Standard_D2ds_v5"` | no |
 | <a name="input_aks_default_node_pool_zones"></a> [aks\_default\_node\_pool\_zones](#input\_aks\_default\_node\_pool\_zones) | The default node pool zones. | `list(string)` | <pre>[<br>  "1",<br>  "2",<br>  "3"<br>]</pre> | no |
+| <a name="input_audit_config"></a> [audit\_config](#input\_audit\_config) | Kubernetes audit log configuration | <pre>object({<br/>  destination_type    = optional(string, "StorageAccount")<br/>  analytics_workspace = optional(object({<br/>    sku_name        = optional(string, 'PerGB2018')<br/>     daily_quota_gb = optional(number, -1)<br/>     reservation_gb = optional(number, 0)<br/>     retention_days = optional(number, 30)<br/>  }), {})<br/>})</pre> | {} | yes |
 | <a name="input_aks_managed_identity_group_id"></a> [aks\_managed\_identity\_group\_id](#input\_aks\_managed\_identity\_group\_id) | The group id of aks managed identity | `string` | n/a | yes |
 | <a name="input_aks_name_suffix"></a> [aks\_name\_suffix](#input\_aks\_name\_suffix) | The suffix for the Azure Kubernetes Service (AKS) clusters | `number` | n/a | yes |
 | <a name="input_aks_public_ip_prefix_id"></a> [aks\_public\_ip\_prefix\_id](#input\_aks\_public\_ip\_prefix\_id) | Public IP ID AKS egresses from | `string` | n/a | yes |
@@ -83,6 +90,9 @@ No modules.
 | <a name="input_azure_policy_enabled"></a> [azure\_policy\_enabled](#input\_azure\_policy\_enabled) | If the Azure Policy for Kubernetes add-on should be enabled | `bool` | `false` | no |
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The commonName for the core infrastructure | `string` | n/a | yes |
 | <a name="input_dns_zones"></a> [dns\_zones](#input\_dns\_zones) | List of DNS Zones | `list(string)` | n/a | yes |
+| <a name="input_defender_config"></a> [defender\_config](#input\_defender\_config) | The Microsoft Defender for containers configuration | <pre>object({<br/>  analytics_workspace = optional(object({<br/>    sku_name       = optional(string, 'PerGB2018')<br/>    daily_quota_gb = optional(number, -1)<br/>    reservation_gb = optional(number, 0)<br/>    retention_days = optional(number, 30)<br/>  }), {})<br/>  kubernetes_discovery_enabled      = optional(bool, false)<br/>  kubernetes_sensor_enabled         = optional(bool, true)<br/>  vulnerability_assessments_enabled = optional(bool, true)<br/>})</pre> | {} | yes |
+| <a name="input_defender_enabled"></a> [defender\_enabled](#input\_defender\_enabled) | If Microsoft Defender for containers should be enabled | `bool` | false | no |
+| <a name="input_defender_config"></a> [defender\_config](#input\_defender\_config) | The Microsoft Defender for containers configuration | `bool` | false | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_global_location_short"></a> [global\_location\_short](#input\_global\_location\_short) | The Azure region short name where the global resources resides. | `string` | n/a | yes |
 | <a name="input_group_name_separator"></a> [group\_name\_separator](#input\_group\_name\_separator) | Separator for group names | `string` | `"-"` | no |

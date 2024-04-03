@@ -3,7 +3,10 @@ global:
 
 %{ if provider == "azure" }
 podLabels:
-  aadpodidbinding: cert-manager
+  azure.workload.identity/use: "true"
+serviceAccount:
+  labels:
+    azure.workload.identity/use: "true"
 webhook:
   resources:
     requests:

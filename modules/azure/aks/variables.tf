@@ -204,3 +204,13 @@ variable "log_eventhub_authorization_rule_id" {
   description = "The authoritzation rule id for event hub"
   type        = string
 }
+
+variable "dns_zones" {
+  description = "List of DNS Zones"
+  type        = list(string)
+}
+
+variable "global_location_short" {
+  description = "The Azure region short name where the global resources resides."
+  type        = string
+}

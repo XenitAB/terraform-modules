@@ -90,6 +90,7 @@ This module is used to create AKS clusters.
 | [kubernetes_role_binding.trivy_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
+| [kubernetes_service_account_v1.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/service_account_v1) | resource |
 | [kubernetes_storage_class.additional](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.azurefile_zrs_premium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.azurefile_zrs_standard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
@@ -99,6 +100,7 @@ This module is used to create AKS clusters.
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/container_registry) | data source |
 | [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/resource_group) | data source |
+| [azurerm_user_assigned_identity.tenant](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/user_assigned_identity) | data source |
 
 ## Inputs
 

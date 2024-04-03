@@ -18,6 +18,23 @@ variable "unique_suffix" {
   type        = string
 }
 
+variable "group_name_separator" {
+  description = "Separator for group names"
+  type        = string
+  default     = "-"
+}
+
+variable "azure_ad_group_prefix" {
+  description = "Prefix for Azure AD Groups"
+  type        = string
+  default     = "az"
+}
+
+variable "subscription_name" {
+  description = "The commonName for the subscription"
+  type        = string
+}
+
 variable "core_name" {
   description = "The commonName for the core infrastructure"
   type        = string

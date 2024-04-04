@@ -79,13 +79,6 @@ resource "azurerm_kubernetes_cluster" "this" {
     snapshot_controller_enabled = false
   }
 
-  # Remove
-  key_vault_secrets_provider {
-    secret_rotation_enabled = true
-  }
-  azure_policy_enabled = true
-  ######################
-
   dynamic microsoft_defender {
     for_each = var.defender_enabled ? [] : [""]
     
@@ -204,6 +197,7 @@ resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
 }
 
 resource "azurerm_storage_management_policy" "log_storage_account_audit_policy" {
+  count              = var.audit_config.destination_type == "StorageAccount" ? 1 : 0
   storage_account_id = data.azurerm_storage_account.log.id
 
   rule {

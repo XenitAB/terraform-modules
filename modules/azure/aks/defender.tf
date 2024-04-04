@@ -3,7 +3,7 @@ resource "azurerm_security_center_auto_provisioning" "this" {
 }
 
 resource "azurerm_security_center_subscription_pricing" "containers" {
-  count         = (var.defender_enabled && var.defender_config.vulnerability_assessments_enabled) ? 1 : 0
+  count         =  var.defender_enabled ? 1 : 0
   tier          = "Standard"
   resource_type = "Containers"
 

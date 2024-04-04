@@ -51,7 +51,7 @@ module "gatekeeper" {
   for_each = {
     for s in ["gatekeeper"] :
     s => s
-    if var.gatekeeper_enabled && var.azure_policy_enabled
+    if var.gatekeeper_enabled && !var.azure_policy_enabled
   }
 
   source = "../../kubernetes/gatekeeper"

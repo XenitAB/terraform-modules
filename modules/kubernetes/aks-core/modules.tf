@@ -260,8 +260,7 @@ module "cert_manager" {
     hosted_zone_names   = var.cert_manager_config.dns_zone
     resource_group_name = data.azurerm_resource_group.global.name
     subscription_id     = data.azurerm_client_config.current.subscription_id
-    client_id           = var.external_dns_config.client_id
-    resource_id         = var.external_dns_config.resource_id
+    client_id           = data.azurerm_user_assigned_identity.cert_manager.client_id
   }
 }
 

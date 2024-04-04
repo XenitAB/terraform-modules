@@ -57,6 +57,37 @@ data "azurerm_dns_zone" "this" {
   resource_group_name = data.azurerm_resource_group.global.name
 }
 
+resource "azurerm_user_assigned_identity" "external_dns" {
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
+  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-external-dns"
+}
+
+resource "azurerm_role_assignment" "external_dns_contributor" {
+  for_each = {
+    for dns in var.dns_zones :
+    dns => dns
+  }
+  scope                = data.azurerm_dns_zone.this[each.key].id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_user_assigned_identity.external_dns.principal_id
+}
+
+resource "azurerm_role_assignment" "external_dns_reader" {
+  scope                = data.azurerm_resource_group.global.id
+  role_definition_name = "Reader"
+  principal_id         = azurerm_user_assigned_identity.external_dns.principal_id
+}
+
+resource "azurerm_federated_identity_credential" "external_dns" {
+  name                = azurerm_user_assigned_identity.external_dns.name
+  resource_group_name = azurerm_user_assigned_identity.external_dns.resource_group_name
+  parent_id           = azurerm_user_assigned_identity.external_dns.id
+  audience            = ["api://AzureADTokenExchange"]
+  issuer              = azurerm_kubernetes_cluster.this.oidc_issuer_url
+  subject             = "system:serviceaccount:external-dns:external-dns"
+}
+
 resource "azurerm_user_assigned_identity" "cert_manager" {
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location

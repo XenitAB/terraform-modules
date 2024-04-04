@@ -26,14 +26,12 @@ variable "azure_config" {
     tenant_id       = string,
     resource_group  = string,
     client_id       = string,
-    resource_id     = string
   })
   default = {
     subscription_id = "",
     tenant_id       = "",
     resource_group  = "",
     client_id       = "",
-    resource_id     = ""
   }
 }
 

@@ -3,7 +3,12 @@ resource "azurerm_security_center_auto_provisioning" "this" {
 }
 
 resource "azurerm_security_center_subscription_pricing" "containers" {
-  count         = var.defender_enabled ? 1 : 0
+  for_each = {
+    for s in ["defender"] :
+    s => s
+    if var.defender_enabled
+  }
+
   tier          = "Standard"
   resource_type = "Containers"
 

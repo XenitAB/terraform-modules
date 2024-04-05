@@ -79,9 +79,9 @@ resource "azurerm_kubernetes_cluster" "this" {
     snapshot_controller_enabled = false
   }
 
-  dynamic microsoft_defender {
+  dynamic "microsoft_defender" {
     for_each = var.defender_enabled ? [] : [""]
-    
+
     content {
       log_analytics_workspace_id = azurerm_log_analytics_workspace.xks_op.id
     }

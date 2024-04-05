@@ -523,7 +523,7 @@ module "trivy" {
   for_each = {
     for s in ["trivy"] :
     s => s
-    if var.trivy_enabled
+    if var.trivy_enabled && !var.defender_enabled
   }
 
   source = "../../kubernetes/trivy"

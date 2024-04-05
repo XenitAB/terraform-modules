@@ -577,3 +577,9 @@ variable "additional_storage_classes" {
   }))
   default = []
 }
+
+variable "defender_enabled" {
+  description = "If Defender for Containers should be enabled"
+  type        = bool
+  default     = false
+}

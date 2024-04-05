@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1071](https://github.com/XenitAB/terraform-modules/pull/1064) Add support for Microsoft Defender for Containers and sending k8s audit logs to analytics workspace.
 - [#1058](https://github.com/XenitAB/terraform-modules/pull/1058) Use secrets-provider AKS-addon instead of seperate helmchart.
 - [#1065](https://github.com/XenitAB/terraform-modules/pull/1065) Exclude azad-kube-proxy from gatekeeper.
 - [#1064](https://github.com/XenitAB/terraform-modules/pull/1064) Add support for creating additional k8s storage classes.

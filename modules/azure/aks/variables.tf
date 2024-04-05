@@ -205,6 +205,47 @@ variable "log_eventhub_authorization_rule_id" {
   type        = string
 }
 
+variable "defender_enabled" {
+  description = "If Defender for Containers should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "audit_config" {
+  description = "Kubernetes audit log configuration"
+  type = object({
+    destination_type = optional(string, "StorageAccount")
+    analytics_workspace = optional(object({
+      sku_name       = optional(string, "PerGB2018")
+      daily_quota_gb = optional(number, -1)
+      reservation_gb = optional(number, 0)
+      retention_days = optional(number, 7)
+    }), {})
+  })
+  default = {}
+
+  validation {
+    condition     = contains(["AnalyticsWorkspace", "StorageAccount"], var.audit_config.destination_type)
+    error_message = "Invalid destination_type: ${var.audit_config.destination_type}. Allowed vallues: ['AnalyticsWorkspace', 'StorageAccount']"
+  }
+}
+
+variable "defender_config" {
+  description = "The Microsoft Defender for containers configuration"
+  type = object({
+    analytics_workspace = optional(object({
+      sku_name       = optional(string, "PerGB2018")
+      daily_quota_gb = optional(number, -1)
+      reservation_gb = optional(number, 0)
+      retention_days = optional(number, 30)
+    }), {})
+    kubernetes_discovery_enabled      = optional(bool, false)
+    kubernetes_sensor_enabled         = optional(bool, true)
+    vulnerability_assessments_enabled = optional(bool, true)
+  })
+  default = {}
+}
+
 variable "dns_zones" {
   description = "List of DNS Zones"
   type        = list(string)

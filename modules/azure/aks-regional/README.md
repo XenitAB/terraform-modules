@@ -43,9 +43,6 @@ This module is used to create resources that are used by AKS clusters.
 | [azurerm_public_ip_prefix.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/public_ip_prefix) | resource |
 | [azurerm_role_assignment.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.datadog](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.external_dns_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.external_dns_msi](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.external_dns_rg_read](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.external_storage_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.trivy_acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.trivy_managed](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
@@ -58,7 +55,6 @@ This module is used to create resources that are used by AKS clusters.
 | [azurerm_user_assigned_identity.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.datadog](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/user_assigned_identity) | resource |
-| [azurerm_user_assigned_identity.external_dns](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.trivy](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.velero](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/user_assigned_identity) | resource |
@@ -66,7 +62,6 @@ This module is used to create resources that are used by AKS clusters.
 | [azuread_group.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/data-sources/group) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/client_config) | data source |
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/container_registry) | data source |
-| [azurerm_dns_zone.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/dns_zone) | data source |
 | [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/key_vault) | data source |
 | [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/resource_group) | data source |
@@ -107,7 +102,6 @@ This module is used to create resources that are used by AKS clusters.
 | <a name="output_azure_metrics_identity"></a> [azure\_metrics\_identity](#output\_azure\_metrics\_identity) | MSI authentication identity for Azure Metrics |
 | <a name="output_datadog"></a> [datadog](#output\_datadog) | MSI authentication identity for Datadog |
 | <a name="output_dns_zone"></a> [dns\_zone](#output\_dns\_zone) | DNS Zone to be used with external-dns |
-| <a name="output_external_dns_identity"></a> [external\_dns\_identity](#output\_external\_dns\_identity) | MSI authentication identity for External DNS |
 | <a name="output_log_eventhub_authorization_rule_id"></a> [log\_eventhub\_authorization\_rule\_id](#output\_log\_eventhub\_authorization\_rule\_id) | The authoritzation rule id for event hub |
 | <a name="output_log_eventhub_hostname"></a> [log\_eventhub\_hostname](#output\_log\_eventhub\_hostname) | The eventhub hostname for k8s logs |
 | <a name="output_log_eventhub_name"></a> [log\_eventhub\_name](#output\_log\_eventhub\_name) | The eventhub name for k8s logs |

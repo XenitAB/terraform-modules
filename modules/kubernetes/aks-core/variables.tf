@@ -333,14 +333,6 @@ variable "external_dns_enabled" {
   default     = true
 }
 
-variable "external_dns_config" {
-  description = "External DNS configuration"
-  type = object({
-    client_id   = string
-    resource_id = string
-  })
-}
-
 variable "velero_enabled" {
   description = "Should Velero be enabled"
   type        = bool

@@ -31,14 +31,6 @@ output "ssh_public_key" {
   value       = tls_private_key.ssh_key.public_key_openssh
 }
 
-output "external_dns_identity" {
-  description = "MSI authentication identity for External DNS"
-  value = {
-    client_id   = azurerm_user_assigned_identity.external_dns.client_id
-    resource_id = azurerm_user_assigned_identity.external_dns.id
-  }
-}
-
 output "velero" {
   description = "Velero configuration"
   value = {

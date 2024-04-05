@@ -7,18 +7,14 @@ provider "azurerm" {
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
 
-  name                  = "baz"
-  aks_name_suffix       = 1
-  location_short        = "foo"
-  global_location_short = "sc"
-  environment           = "bar"
-  subscription_name     = "baz"
-  group_name_prefix     = "aks"
-  namespaces            = []
-  external_dns_config = {
-    client_id   = "foo"
-    resource_id = "bar"
-  }
+  name                    = "baz"
+  aks_name_suffix         = 1
+  location_short          = "foo"
+  global_location_short   = "sc"
+  environment             = "bar"
+  subscription_name       = "baz"
+  group_name_prefix       = "aks"
+  namespaces              = []
   aad_pod_identity_config = {}
   velero_config = {
     azure_storage_account_name      = "foo"

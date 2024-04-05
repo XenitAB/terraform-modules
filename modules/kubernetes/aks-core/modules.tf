@@ -27,11 +27,31 @@ locals {
   cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
 }
 
+module "azure_policy" {
+  for_each = {
+    for s in ["azure_policy"] :
+    s => s
+    if var.azure_policy_enabled && !var.gatekeeper_enabled
+  }
+
+  source = "../../kubernetes/azure-policy"
+
+  aks_name            = var.name
+  aks_name_suffix     = var.aks_name_suffix
+  azure_policy_config = var.azure_policy_config
+  environment         = var.environment
+  location_short      = var.location_short
+  tenant_namespaces = [
+    for namespace in var.namespaces :
+    namespace.name if namespace.flux.enabled
+  ]
+}
+
 module "gatekeeper" {
   for_each = {
     for s in ["gatekeeper"] :
     s => s
-    if var.gatekeeper_enabled
+    if var.gatekeeper_enabled && !var.azure_policy_enabled
   }
 
   source = "../../kubernetes/gatekeeper"

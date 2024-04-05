@@ -185,16 +185,16 @@ variable "azure_policy_enabled" {
 
 variable "azure_policy_config" {
   description = "A list of Azure policy mutations to create and include in the XKS policy set definition"
-  type        = object({
-    exclude_namespaces  = list(string)
-    mutations           = list(object({
-      name              = string
-      display_name      = string
-      template          = string
+  type = object({
+    exclude_namespaces = list(string)
+    mutations = list(object({
+      name         = string
+      display_name = string
+      template     = string
     }))
   })
   default = {
-    exclude_namespaces  = [
+    exclude_namespaces = [
       "linkerd",
       "linkerd-cni",
       "velero",

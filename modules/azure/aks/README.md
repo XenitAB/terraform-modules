@@ -22,7 +22,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.47.0 |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.41.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.71.0 |
 
 ## Modules
@@ -80,7 +80,7 @@ No modules.
 | <a name="input_aks_public_ip_prefix_id"></a> [aks\_public\_ip\_prefix\_id](#input\_aks\_public\_ip\_prefix\_id) | Public IP ID AKS egresses from | `string` | n/a | yes |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
 | <a name="input_azure_metrics_identity"></a> [azure\_metrics\_identity](#input\_azure\_metrics\_identity) | MSI authentication identity for Azure Metrics | <pre>object({<br>    id           = string<br>    principal_id = string<br>  })</pre> | n/a | yes |
-| <a name="input_azure_policy_enabled"></a> [azure\_policy\_enabled](#input\_azure\_policy\_enabled) | If Azure Policy Add-On should be enabled | `bool` | `false` | no |
+| <a name="input_azure_policy_enabled"></a> [azure\_policy\_enabled](#input\_azure\_policy\_enabled) | If the Azure Policy for Kubernetes add-on should be enabled | `bool` | `false` | no |
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The commonName for the core infrastructure | `string` | n/a | yes |
 | <a name="input_dns_zones"></a> [dns\_zones](#input\_dns\_zones) | List of DNS Zones | `list(string)` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |

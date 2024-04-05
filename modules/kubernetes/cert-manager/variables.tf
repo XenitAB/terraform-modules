@@ -21,14 +21,12 @@ variable "azure_config" {
     hosted_zone_names   = list(string),
     resource_group_name = string,
     client_id           = string,
-    resource_id         = string,
   })
   default = {
     subscription_id     = "",
     hosted_zone_names   = [],
     resource_group_name = "",
     client_id           = "",
-    resource_id         = "",
   }
 }
 

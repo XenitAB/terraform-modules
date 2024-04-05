@@ -36,6 +36,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`helm-crd-oci`](helm-crd-oci/README.md)
 - [`spegel`](spegel/README.md)
 - [`telepresence`](telepresence/README.md)
+- [`azure-policy`](azure-policy/README.md)
 
 ## Style Guide
 

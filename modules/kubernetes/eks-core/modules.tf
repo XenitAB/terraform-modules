@@ -2,7 +2,6 @@ locals {
   exclude_namespaces = [
     "calico-system",
     "cert-manager",
-    "csi-secrets-store-provider-aws",
     "datadog",
     "external-dns",
     "falco",
@@ -329,18 +328,17 @@ module "prometheus" {
   resource_selector  = var.prometheus_config.resource_selector
   namespace_selector = var.prometheus_config.namespace_selector
 
-  falco_enabled                          = var.falco_enabled
-  gatekeeper_enabled                     = var.gatekeeper_enabled
-  linkerd_enabled                        = var.linkerd_enabled
-  flux_enabled                           = var.fluxcd_v2_enabled
-  csi_secrets_store_provider_aws_enabled = var.csi_secrets_store_provider_aws_enabled
-  azad_kube_proxy_enabled                = var.azad_kube_proxy_enabled
-  trivy_enabled                          = var.trivy_enabled
-  vpa_enabled                            = var.vpa_enabled
-  node_local_dns_enabled                 = var.node_local_dns_enabled
-  promtail_enabled                       = var.promtail_enabled
-  node_ttl_enabled                       = var.node_ttl_enabled
-  spegel_enabled                         = var.spegel_enabled
+  falco_enabled           = var.falco_enabled
+  gatekeeper_enabled      = var.gatekeeper_enabled
+  linkerd_enabled         = var.linkerd_enabled
+  flux_enabled            = var.fluxcd_v2_enabled
+  azad_kube_proxy_enabled = var.azad_kube_proxy_enabled
+  trivy_enabled           = var.trivy_enabled
+  vpa_enabled             = var.vpa_enabled
+  node_local_dns_enabled  = var.node_local_dns_enabled
+  promtail_enabled        = var.promtail_enabled
+  node_ttl_enabled        = var.node_ttl_enabled
+  spegel_enabled          = var.spegel_enabled
 }
 
 # trivy
@@ -384,26 +382,6 @@ module "cluster_autoscaler" {
     region   = data.aws_region.current.name
     role_arn = var.cluster_autoscaler_config.role_arn
   }
-}
-
-module "csi_secrets_store_provider_aws_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
-  chart_name       = "secrets-store-csi-driver"
-  chart_version    = "1.3.2"
-}
-
-module "csi_secrets_store_provider_aws" {
-  depends_on = [module.csi_secrets_store_provider_aws_crd]
-
-  for_each = {
-    for s in ["csi-secrets-store-provider-aws"] :
-    s => s
-    if var.csi_secrets_store_provider_aws_enabled
-  }
-
-  source = "../../kubernetes/csi-secrets-store-provider-aws"
 }
 
 # datadog

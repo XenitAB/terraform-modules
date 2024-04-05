@@ -18,6 +18,23 @@ variable "unique_suffix" {
   type        = string
 }
 
+variable "group_name_separator" {
+  description = "Separator for group names"
+  type        = string
+  default     = "-"
+}
+
+variable "azure_ad_group_prefix" {
+  description = "Prefix for Azure AD Groups"
+  type        = string
+  default     = "az"
+}
+
+variable "subscription_name" {
+  description = "The commonName for the subscription"
+  type        = string
+}
+
 variable "core_name" {
   description = "The commonName for the core infrastructure"
   type        = string
@@ -191,5 +208,15 @@ variable "log_eventhub_name" {
 
 variable "log_eventhub_authorization_rule_id" {
   description = "The authoritzation rule id for event hub"
+  type        = string
+}
+
+variable "dns_zones" {
+  description = "List of DNS Zones"
+  type        = list(string)
+}
+
+variable "global_location_short" {
+  description = "The Azure region short name where the global resources resides."
   type        = string
 }

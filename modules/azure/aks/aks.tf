@@ -85,6 +85,10 @@ resource "azurerm_kubernetes_cluster" "this" {
     }
   }
 
+  key_vault_secrets_provider {
+    secret_rotation_enabled = true
+  }
+
   default_node_pool {
     name           = "default"
     vnet_subnet_id = data.azurerm_subnet.this.id

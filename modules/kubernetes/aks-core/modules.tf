@@ -1,10 +1,10 @@
 locals {
   exclude_namespaces = [
     "aad-pod-identity",
+    "azad-kube-proxy",
     "azdo-proxy",
     "calico-system",
     "cert-manager",
-    "csi-secrets-store-provider-azure",
     "datadog",
     "external-dns",
     "falco",
@@ -260,8 +260,7 @@ module "cert_manager" {
     hosted_zone_names   = var.cert_manager_config.dns_zone
     resource_group_name = data.azurerm_resource_group.global.name
     subscription_id     = data.azurerm_client_config.current.subscription_id
-    client_id           = var.external_dns_config.client_id
-    resource_id         = var.external_dns_config.resource_id
+    client_id           = data.azurerm_user_assigned_identity.cert_manager.client_id
   }
 }
 
@@ -284,27 +283,6 @@ module "velero" {
     client_id                 = var.velero_config.identity.client_id
     resource_id               = var.velero_config.identity.resource_id
   }
-}
-
-# csi-secrets-store-provider-azure
-module "csi_secrets_store_provider_azure_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://azure.github.io/secrets-store-csi-driver-provider-azure/charts"
-  chart_name       = "csi-secrets-store-provider-azure"
-  chart_version    = "1.4.0"
-}
-
-module "csi_secrets_store_provider_azure" {
-  depends_on = [module.csi_secrets_store_provider_azure_crd]
-
-  for_each = {
-    for s in ["csi-secrets-store-provider-azure"] :
-    s => s
-    if var.csi_secrets_store_provider_azure_enabled
-  }
-
-  source = "../../kubernetes/csi-secrets-store-provider-azure"
 }
 
 # datadog
@@ -473,20 +451,19 @@ module "prometheus" {
   resource_selector  = var.prometheus_config.resource_selector
   namespace_selector = var.prometheus_config.namespace_selector
 
-  falco_enabled                            = var.falco_enabled
-  gatekeeper_enabled                       = var.gatekeeper_enabled
-  linkerd_enabled                          = var.linkerd_enabled
-  flux_enabled                             = var.fluxcd_v2_enabled
-  csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
-  aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
-  azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
-  trivy_enabled                            = var.trivy_enabled
-  vpa_enabled                              = var.vpa_enabled
-  node_local_dns_enabled                   = var.node_local_dns_enabled
-  grafana_agent_enabled                    = var.grafana_agent_enabled
-  promtail_enabled                         = var.promtail_enabled
-  node_ttl_enabled                         = var.node_ttl_enabled
-  spegel_enabled                           = var.spegel_enabled
+  falco_enabled            = var.falco_enabled
+  gatekeeper_enabled       = var.gatekeeper_enabled
+  linkerd_enabled          = var.linkerd_enabled
+  flux_enabled             = var.fluxcd_v2_enabled
+  aad_pod_identity_enabled = var.aad_pod_identity_enabled
+  azad_kube_proxy_enabled  = var.azad_kube_proxy_enabled
+  trivy_enabled            = var.trivy_enabled
+  vpa_enabled              = var.vpa_enabled
+  node_local_dns_enabled   = var.node_local_dns_enabled
+  grafana_agent_enabled    = var.grafana_agent_enabled
+  promtail_enabled         = var.promtail_enabled
+  node_ttl_enabled         = var.node_ttl_enabled
+  spegel_enabled           = var.spegel_enabled
 }
 
 module "control_plane_logs" {

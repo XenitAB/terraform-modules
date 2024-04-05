@@ -10,7 +10,6 @@ azureConfig:
   clientID: "${azureConfig.client_id}"
   subscriptionID: "${azureConfig.subscription_id}"
   hostedZoneNames: ${azureHostedZoneNames}
-  resourceID: "${azureConfig.resource_id}"
 
 awsConfig:
   region: "${awsConfig.region}"

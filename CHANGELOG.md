@@ -6,9 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## Added
+
+- [#1066](https://github.com/XenitAB/terraform-modules/pull/1066) Enable workload identity service account in tenant namespaces.
+
 ## Changed
 
 - [#1071](https://github.com/XenitAB/terraform-modules/pull/1064) Add support for Microsoft Defender for Containers and sending k8s audit logs to analytics workspace.
+- [#1058](https://github.com/XenitAB/terraform-modules/pull/1058) Use secrets-provider AKS-addon instead of seperate helmchart.
+- [#1065](https://github.com/XenitAB/terraform-modules/pull/1065) Exclude azad-kube-proxy from gatekeeper.
 - [#1064](https://github.com/XenitAB/terraform-modules/pull/1064) Add support for creating additional k8s storage classes.
 - [#1063](https://github.com/XenitAB/terraform-modules/pull/1063) Make inlude_tenant_name optional.
 - [#1059](https://github.com/XenitAB/terraform-modules/pull/1059) Move promtail to install with flux.
@@ -26,6 +32,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1028](https://github.com/XenitAB/terraform-modules/pull/1028) Use api_server_access_profile for AKS.
 - [#1046](https://github.com/XenitAB/terraform-modules/pull/1044) Add validation for k8s 1.27 and 1.28.
 - [#1047](https://github.com/XenitAB/terraform-modules/pull/1047) Add Owner-SP to sub-owner group.
+- [#1067](https://github.com/XenitAB/terraform-modules/pull/1067) Update cert-manager to use workload identities for authentication.
 
 ## 2023.10.2
 

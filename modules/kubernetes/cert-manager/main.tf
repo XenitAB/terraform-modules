@@ -39,7 +39,7 @@ resource "helm_release" "cert_manager" {
   chart       = "cert-manager"
   name        = "cert-manager"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v1.7.1"
+  version     = "v1.14.4"
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {

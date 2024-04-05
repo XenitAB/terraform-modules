@@ -14,7 +14,7 @@ metadata:
 spec:
   type: "oci"
   interval: 1m0s
-  url: "oci://ghcr.io/xenitab/helm-charts"
+  url: "oci://ghcr.io/spegel-org/helm-charts"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -28,7 +28,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: spegel
-      version: v0.0.14
+      version: v0.0.20
   interval: 1m0s
   values:
     resources:
@@ -40,6 +40,7 @@ spec:
     spegel:
       mirrorResolveTimeout: "1s"
       registries:
+        - https://cgr.dev
         - https://docker.io
         - https://ghcr.io
         - https://quay.io

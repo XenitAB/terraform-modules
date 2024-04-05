@@ -28,7 +28,7 @@ resource "azurerm_policy_definition" "azure_remove_node_spot_taints" {
     }
     METADATA
 
-  policy_rule  = <<POLICY_RULE
+  policy_rule = <<POLICY_RULE
     {
       "if": {
         "field": "type",
@@ -61,7 +61,7 @@ resource "azurerm_policy_definition" "k8s_block_node_port" {
     }
     METADATA
 
-  policy_rule  = <<POLICY_RULE
+  policy_rule = <<POLICY_RULE
     {
       "if": {
         "field": "type",
@@ -137,7 +137,7 @@ resource "azurerm_policy_definition" "k8s_secrets_store_csi_unique_volume" {
     }
     METADATA
 
-  policy_rule  = <<POLICY_RULE
+  policy_rule = <<POLICY_RULE
     {
       "if": {
         "field": "type",
@@ -213,7 +213,7 @@ resource "azurerm_policy_definition" "flux_require_service_account" {
     }
     METADATA
 
-  policy_rule  = <<POLICY_RULE
+  policy_rule = <<POLICY_RULE
     {
       "if": {
         "field": "type",
@@ -291,7 +291,7 @@ resource "azurerm_policy_definition" "k8s_pod_priority_class" {
     }
     METADATA
 
-  policy_rule  = <<POLICY_RULE
+  policy_rule = <<POLICY_RULE
     {
       "if": {
         "field": "type",
@@ -377,7 +377,7 @@ resource "azurerm_policy_definition" "k8s_require_ingress_class" {
     }
     METADATA
 
-  policy_rule  = <<POLICY_RULE
+  policy_rule = <<POLICY_RULE
     {
       "if": {
         "field": "type",
@@ -462,7 +462,7 @@ resource "azurerm_policy_definition" "flux_disable_cross_namespace_source" {
     }
     METADATA
 
-  policy_rule  = <<POLICY_RULE
+  policy_rule = <<POLICY_RULE
     {
       "if": {
         "field": "type",
@@ -540,7 +540,7 @@ resource "azurerm_policy_definition" "azure_identity_format" {
     }
     METADATA
 
-  policy_rule  = <<POLICY_RULE
+  policy_rule = <<POLICY_RULE
     {
       "if": {
         "field": "type",
@@ -605,8 +605,8 @@ resource "azurerm_policy_definition" "azure_identity_format" {
 }
 
 resource "azurerm_policy_definition" "mutations" {
-  policy_type  = "Custom"
-  mode         = "Microsoft.Kubernetes.Data"
+  policy_type = "Custom"
+  mode        = "Microsoft.Kubernetes.Data"
 
   metadata = <<METADATA
     {
@@ -614,9 +614,9 @@ resource "azurerm_policy_definition" "mutations" {
     }
     METADATA
 
-  for_each = { for mutation in var.azure_policy_config.mutations : mutation.name => mutation }
-  name         = "${each.key}"
-  display_name = "${each.value.display_name}"
+  for_each     = { for mutation in var.azure_policy_config.mutations : mutation.name => mutation }
+  name         = each.key
+  display_name = each.value.display_name
   policy_rule  = <<POLICY_RULE
   {
     "if": {
@@ -644,12 +644,12 @@ resource "azurerm_policy_set_definition" "xks" {
   description  = "This policy set defines a baseline standard for XKS tenant clusters"
   display_name = "Xenit Kubernetes Service baseline standards for XKS tenant clusters"
 
-  metadata   = <<METADATA
+  metadata = <<METADATA
     {
       "category": "Kubernetes"
     }
     METADATA
-    
+
   parameters = <<PARAMETERS
     {
       "allowedCapabilities": {
@@ -848,7 +848,7 @@ resource "azurerm_policy_set_definition" "xks" {
     }
     VALUE
   }
-  
+
   # Flex volumes constraint
   policy_definition_reference {
     policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/f4a8fce0-2dd5-4c21-9a36-8f0ec809d663"
@@ -863,7 +863,7 @@ resource "azurerm_policy_set_definition" "xks" {
     }
     VALUE
   }
-  
+
   # Container privilege escalation constraint
   policy_definition_reference {
     policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/1c6e92c9-99f0-4e55-9cf2-0c234dc48f99"
@@ -881,7 +881,7 @@ resource "azurerm_policy_set_definition" "xks" {
     }
     VALUE
   }
-  
+
   # Host process ID or host IPC namespace sharing constraint
   policy_definition_reference {
     policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/47a1ee2f-2a2a-4576-bf2a-e0e36709c2b8"
@@ -899,7 +899,7 @@ resource "azurerm_policy_set_definition" "xks" {
     }
     VALUE
   }
-  
+
   # External IPs constraint
   policy_definition_reference {
     policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/d46c275d-1680-448d-b2ec-e495a3b6cc89"
@@ -917,7 +917,7 @@ resource "azurerm_policy_set_definition" "xks" {
     }
     VALUE
   }
-  
+
   # Host network constraint
   policy_definition_reference {
     policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/82985f06-dc18-4a48-bc1c-b9f4f0098cfe"
@@ -935,7 +935,7 @@ resource "azurerm_policy_set_definition" "xks" {
     }
     VALUE
   }
-  
+
   # Volume types constraint
   policy_definition_reference {
     policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/16697877-1118-4fb1-9b65-9898ec2509ec"
@@ -956,7 +956,7 @@ resource "azurerm_policy_set_definition" "xks" {
     }
     VALUE
   }
-  
+
   # Privileged container constraint
   policy_definition_reference {
     policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/95edb821-ddaf-4404-9732-666045e056b4"
@@ -974,7 +974,7 @@ resource "azurerm_policy_set_definition" "xks" {
     }
     VALUE
   }
-  
+
   # Container capabilities constraint
   policy_definition_reference {
     policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/c26596ff-4d70-4e6a-9a30-c2506bd2f80c"
@@ -998,7 +998,7 @@ resource "azurerm_policy_set_definition" "xks" {
     }
     VALUE
   }
-  
+
   # Required probes constraint
   policy_definition_reference {
     policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/b1a9997f-2883-4f12-bdff-2280f99b5915"
@@ -1018,9 +1018,9 @@ resource "azurerm_policy_set_definition" "xks" {
   }
 
   # All the mutations
-  dynamic policy_definition_reference {
+  dynamic "policy_definition_reference" {
     for_each = { for mutation in var.azure_policy_config.mutations : mutation.name => mutation }
-    
+
     content {
       policy_definition_id = azurerm_policy_definition.mutations[policy_definition_reference.key].id
     }

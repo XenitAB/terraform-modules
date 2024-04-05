@@ -8,24 +8,18 @@ variable "aks_name_suffix" {
   type        = number
 }
 
-variable "azure_policy_enabled" {
-  description = "If the Azure Policy for Kubernetes add-on should be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "azure_policy_config" {
   description = "A list of Azure policy mutations to create and include in the XKS policy set definition"
-  type        = object({
-    exclude_namespaces  = list(string)
-    mutations           = list(object({
-      name              = string
-      display_name      = string
-      template          = string
+  type = object({
+    exclude_namespaces = list(string)
+    mutations = list(object({
+      name         = string
+      display_name = string
+      template     = string
     }))
   })
   default = {
-    exclude_namespaces  = [
+    exclude_namespaces = [
       "linkerd",
       "linkerd-cni",
       "velero",

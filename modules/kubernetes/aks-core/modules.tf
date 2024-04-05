@@ -41,9 +41,9 @@ module "azure_policy" {
   azure_policy_config = var.azure_policy_config
   environment         = var.environment
   location_short      = var.location_short
-  tenant_namespaces   = [
-    for namespace in var.namespaces : 
-      namespace.name if namespace.flux.enabled
+  tenant_namespaces = [
+    for namespace in var.namespaces :
+    namespace.name if namespace.flux.enabled
   ]
 }
 

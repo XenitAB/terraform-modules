@@ -843,7 +843,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azure-metrics','cert-manager','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','vpa'))]"
       },
       "excludedImages": {
-        "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*','docker.io/datawire/tel2:*'))]"
+        "value": "[parameters('excludedImages')]"
       }
     }
     VALUE
@@ -894,7 +894,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('prometheus'))]"
       },
       "excludedImages": {
-        "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*'))]"
+        "value": "[parameters('excludedImages')]"
       }
     }
     VALUE
@@ -951,7 +951,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('allowedVolumeTypes'),createArray('configMap','downwardAPI','emptyDir','persistentVolumeClaim','secret','projected','csi'))]"
       },
       "excludedImages": {
-        "value": "[concat(parameters('excludedImages'),createArray('ghcr.io/metalbear-co/mirrord:*'))]"
+        "value": "[parameters('excludedImages')]"
       }
     }
     VALUE
@@ -993,7 +993,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','azure-metrics','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','ingress-healthz','prometheus','reloader','spegel','trivy','vpa'))]"
       },
       "excludedImages": {
-        "value": "[concat(parameters('excludedImages'),createArray('docker.io/datawire/tel2:*','ghcr.io/metalbear-co/mirrord:*'))]"
+        "value": "[parameters('excludedImages')]"
       }
     }
     VALUE

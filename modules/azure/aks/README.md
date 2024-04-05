@@ -22,7 +22,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.47.0 |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.41.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.71.0 |
 
 ## Modules

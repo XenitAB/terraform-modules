@@ -80,7 +80,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   dynamic "microsoft_defender" {
-    for_each = var.defender_enabled ? [] : [""]
+    for_each = var.defender_enabled ? [""] : []
 
     content {
       log_analytics_workspace_id = azurerm_log_analytics_workspace.xks_op.id

@@ -93,7 +93,6 @@ spec:
             (container.image.repository = "quay.io/prometheus-operator/prometheus-operator") or
             (container.image.repository = "k8s.gcr.io/ingress-nginx/controller") or
             (container.image.repository = "gcr.io/datadoghq/cluster-agent") or
-            (container.image.repository = "public.ecr.aws/aws-secrets-manager/secrets-store-csi-driver-provider-aws") or
             (container.image.repository = "k8s.gcr.io/sig-storage/csi-node-driver-registrar") or
             (container.image.repository = "openpolicyagent/gatekeeper") or
             (container.image.repository = "quay.io/fairwinds/goldilocks") or
@@ -140,7 +139,6 @@ spec:
             (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/azuredisk-csi") or
             (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/azurefile-csi") or
             (container.image.repository = "mcr.microsoft.com/oss/kubernetes/kube-proxy") or
-            (container.image.repository = "602401143452.dkr.ecr.eu-west-1.amazonaws.com/eks/kube-proxy") or
             (container.image.repository = "k8s.gcr.io/sig-storage/csi-node-driver-registrar") or
             (container.image.repository = "k8s.gcr.io/dns/k8s-dns-node-cache") or
             (container.image.repository = "docker.io/falcosecurity/falco")

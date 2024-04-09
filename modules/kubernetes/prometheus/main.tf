@@ -2,7 +2,6 @@
   * # Prometheus
   *
   * Adds [Prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) to a Kubernetes cluster.
-  * If you are running on AWS we also install [Metrics server](https://aws.amazon.com/premiumsupport/knowledge-center/eks-metrics-server/)
   */
 
 terraform {
@@ -49,23 +48,6 @@ resource "helm_release" "prometheus" {
   force_update = true
 }
 
-# EKS will not install metrics server out of the box so it has to be added.
-resource "helm_release" "metrics_server" {
-  for_each = {
-    for s in ["metrics-server"] :
-    s => s
-    if var.cloud_provider == "aws"
-  }
-
-  repository  = "https://charts.bitnami.com/bitnami"
-  chart       = "metrics-server"
-  name        = "metrics-server"
-  namespace   = "kube-system"
-  version     = "6.2.4"
-  max_history = 3
-  values      = [templatefile("${path.module}/templates/values-metrics-server.yaml.tpl", {})]
-}
-
 # Prometheus declaration and monitors for all of the platform applications.
 resource "helm_release" "prometheus_extras" {
   depends_on = [helm_release.prometheus]
@@ -75,9 +57,7 @@ resource "helm_release" "prometheus_extras" {
   namespace   = kubernetes_namespace.this.metadata[0].name
   max_history = 3
   values = [templatefile("${path.module}/templates/values-extras.yaml.tpl", {
-    cloud_provider = var.cloud_provider
-    azure_config   = var.azure_config
-    aws_config     = var.aws_config
+    azure_config = var.azure_config
 
     cluster_name = var.cluster_name
     environment  = var.environment
@@ -99,7 +79,6 @@ resource "helm_release" "prometheus_extras" {
     flux_enabled                             = var.flux_enabled
     aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
     csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
-    csi_secrets_store_provider_aws_enabled   = var.csi_secrets_store_provider_aws_enabled
     azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
     trivy_enabled                            = var.trivy_enabled
     grafana_agent_enabled                    = var.grafana_agent_enabled

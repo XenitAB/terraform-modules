@@ -53,7 +53,6 @@ resource "git_repository_file" "azure_config" {
   for_each = {
     for s in ["azure-config"] :
     s => s
-    if var.cloud_provider == "azure"
   }
 
   path = "platform/${var.cluster_id}/datadog-operator/azure-config.yaml"
@@ -62,18 +61,5 @@ resource "git_repository_file" "azure_config" {
     tenant_id      = var.azure_config.identity.tenant_id
     resource_id    = var.azure_config.identity.resource_id
     client_id      = var.azure_config.identity.client_id
-  })
-}
-
-resource "git_repository_file" "aws_config" {
-  for_each = {
-    for s in ["aws-config"] :
-    s => s
-    if var.cloud_provider == "aws"
-  }
-
-  path = "platform/${var.cluster_id}/datadog-operator/aws-config.yaml"
-  content = templatefile("${path.module}/templates/aws-config.yaml.tpl", {
-    role_arn = var.aws_config.role_arn
   })
 }

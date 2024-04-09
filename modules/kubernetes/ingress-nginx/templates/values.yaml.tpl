@@ -25,23 +25,12 @@ controller:
   ingressClassByName: true
   %{~ endif ~}
 
-  %{~ if provider == "aws" ~}
-  # Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
-  # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
-  # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
-  dnsPolicy: ClusterFirstWithHostNet
-  hostNetwork: true
-  %{~ endif ~}
-
   service:
     externalTrafficPolicy: Local
-    %{~ if provider == "aws" || internal_load_balancer || external_dns_hostname != "" ~}
+    %{~ if internal_load_balancer || external_dns_hostname != "" ~}
     annotations:
       %{~ if internal_load_balancer ~}
-      service.beta.kubernetes.io/${provider}-load-balancer-internal: "true"
-      %{~ endif ~}
-      %{~ if provider == "aws" ~}
-      service.beta.kubernetes.io/aws-load-balancer-type: nlb
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
       %{~ endif ~}
       %{~ if external_dns_hostname != "" ~}
       external-dns.alpha.kubernetes.io/hostname: ${external_dns_hostname}
@@ -106,39 +95,6 @@ controller:
     service:
       labels:
         function: metrics
-  %{~ if provider == "aws" && internal_load_balancer ~}
-    port: 10354
-
-  containerPort:
-    http: 1080
-    https: 1443
-
-  admissionWebhooks:
-    port: 2443
-
-  extraArgs:
-    # Port to use for the healthz endpoint. (default 10254)
-    healthz-port: 10354
-    http-port: 1080
-    https-port: 1443
-    # Port to use for exposing the default server (catch-all). (default 8181)
-    default-server-port: 8282
-    # Port to use for expose the ingress controller Go profiler when it is enabled. (default 10245)
-    profiler-port: 10345
-    # Port to use for the lua HTTP endpoint configuration. (default 10246)
-    status-port: 10346
-    # Port to use for the lua TCP/UDP endpoint configuration. (default 10247)
-    stream-port: 10347
-    # Port to use for the internal syslog server when chroot is enabled. (default 127.0.0.1:11514)
-    internal-logger-address: 127.0.0.1:11515
-
-  livenessProbe:
-    httpGet:
-      port: 10354
-  readinessProbe:
-    httpGet:
-      port: 10354
-  %{~ endif ~}
 
   affinity:
     podAntiAffinity:

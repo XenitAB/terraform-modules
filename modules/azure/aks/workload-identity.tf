@@ -112,3 +112,30 @@ resource "azurerm_federated_identity_credential" "cert_manager" {
   issuer              = azurerm_kubernetes_cluster.this.oidc_issuer_url
   subject             = "system:serviceaccount:cert-manager:cert-manager"
 }
+
+data "azurerm_key_vault" "core" {
+  name                = join("-", compact(["kv-${var.environment}-${var.location_short}-${var.core_name}", var.unique_suffix]))
+  resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"
+}
+
+resource "azurerm_user_assigned_identity" "datadog" {
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
+  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-datadog"
+}
+
+resource "azurerm_key_vault_access_policy" "datadog" {
+  key_vault_id       = data.azurerm_key_vault.core.id
+  tenant_id          = data.azurerm_client_config.current.tenant_id
+  object_id          = azurerm_user_assigned_identity.datadog.principal_id
+  secret_permissions = ["Get"]
+}
+
+resource "azurerm_federated_identity_credential" "datadog" {
+  name                = azurerm_user_assigned_identity.datadog.name
+  resource_group_name = azurerm_user_assigned_identity.datadog.resource_group_name
+  parent_id           = azurerm_user_assigned_identity.datadog.id
+  audience            = ["api://AzureADTokenExchange"]
+  issuer              = azurerm_kubernetes_cluster.this.oidc_issuer_url
+  subject             = "system:serviceaccount:datadog:datadog-secret-mount"
+}

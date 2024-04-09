@@ -30,7 +30,7 @@ spec:
       version: 7.1.0
   interval: 1m0s
   values:
-    provider: "${provider}"
+    provider: "azure"
     sources:
       %{~ for item in sources ~}
       - "${item}"
@@ -39,7 +39,6 @@ spec:
     securityContext:
       allowPrivilegeEscalation: false
       readOnlyRootFilesystem: true
-    %{ if provider == "azure" }
     serviceAccount:
       annotations:
         azure.workload.identity/client-id: ${azure_config.client_id}
@@ -50,14 +49,6 @@ spec:
       tenantId: "${azure_config.tenant_id}"
       subscriptionId: "${azure_config.subscription_id}"
       resourceGroup: "${azure_config.resource_group}"
-    %{ endif }
-    %{ if provider == "aws" }
-    aws:
-      region: "${aws_config.region}"
-    serviceAccount:
-      annotations:
-        eks.amazonaws.com/role-arn: "${aws_config.role_arn}"
-    %{ endif }
     policy: sync # will also delete the record
     registry: "txt"
     txtOwnerId: "${txt_owner_id}"

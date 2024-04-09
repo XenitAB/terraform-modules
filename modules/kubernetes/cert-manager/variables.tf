@@ -24,8 +24,11 @@ variable "azure_config" {
     client_id           = "",
   }
 }
+<<<<<<< HEAD
 
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
 }
+=======
+>>>>>>> 18fa30ff (Remove support for AWS cloud provider)

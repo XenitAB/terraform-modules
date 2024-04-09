@@ -11,6 +11,4 @@ module "ingress_nginx" {
     kubernetes = kubernetes
     helm       = helm
   }
-
-  cloud_provider = "bar"
 }

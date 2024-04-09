@@ -31,8 +31,12 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_acme_server"></a> [acme\_server](#input\_acme\_server) | ACME server to add to the created ClusterIssuer | `string` | `"https://acme-v02.api.letsencrypt.org/directory"` | no |
+<<<<<<< HEAD
 | <a name="input_azure_config"></a> [azure\_config](#input\_azure\_config) | Azure specific configuration | <pre>object({<br>    subscription_id     = string,<br>    hosted_zone_names   = list(string),<br>    resource_group_name = string,<br>    client_id           = string,<br>    resource_id         = string,<br>  })</pre> | <pre>{<br>  "client_id": "",<br>  "hosted_zone_names": [],<br>  "resource_group_name": "",<br>  "resource_id": "",<br>  "subscription_id": ""<br>}</pre> | no |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
+=======
+| <a name="input_azure_config"></a> [azure\_config](#input\_azure\_config) | Azure specific configuration | <pre>object({<br>    subscription_id     = string,<br>    hosted_zone_names   = list(string),<br>    resource_group_name = string,<br>    client_id           = string,<br>  })</pre> | <pre>{<br>  "client_id": "",<br>  "hosted_zone_names": [],<br>  "resource_group_name": "",<br>  "subscription_id": ""<br>}</pre> | no |
+>>>>>>> 18fa30ff (Remove support for AWS cloud provider)
 | <a name="input_notification_email"></a> [notification\_email](#input\_notification\_email) | Email address to send certificate expiration notifications | `string` | n/a | yes |
 
 ## Outputs

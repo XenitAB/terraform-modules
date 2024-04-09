@@ -1,12 +1,3 @@
-variable "cloud_provider" {
-  description = "Current provider"
-  type        = string
-  validation {
-    condition     = can(regex("azure|aws", var.cloud_provider))
-    error_message = "Cloud provider is not valid."
-  }
-}
-
 variable "environment" {
   description = "The environemnt"
   type        = string

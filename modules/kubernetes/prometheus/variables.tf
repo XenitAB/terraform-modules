@@ -1,8 +1,3 @@
-variable "cloud_provider" {
-  description = "Name of cloud provider"
-  type        = string
-}
-
 variable "azure_config" {
   description = "Azure specific configuration"
   type = object({
@@ -20,16 +15,6 @@ variable "azure_config" {
       resource_id = ""
       tenant_id   = ""
     }
-  }
-}
-
-variable "aws_config" {
-  description = "AWS specific configuration"
-  type = object({
-    role_arn = string
-  })
-  default = {
-    role_arn = ""
   }
 }
 
@@ -117,12 +102,6 @@ variable "flux_enabled" {
 
 variable "csi_secrets_store_provider_azure_enabled" {
   description = "Should csi-secrets-store-provider-azure be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "csi_secrets_store_provider_aws_enabled" {
-  description = "Should csi-secrets-store-provider-aws be enabled"
   type        = bool
   default     = false
 }

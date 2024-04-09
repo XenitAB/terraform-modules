@@ -45,7 +45,6 @@ spec:
         - https://ghcr.io
         - https://quay.io
         - https://mcr.microsoft.com
-        - https://public.ecr.aws
         - https://gcr.io
         - https://registry.k8s.io
         - https://k8s.gcr.io

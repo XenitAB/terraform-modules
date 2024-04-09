@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+
+- [#1074](https://github.com/XenitAB/terraform-modules/pull/1074) Fix reversed logic for enabling Defender
 - [#1073](https://github.com/XenitAB/terraform-modules/pull/1072) Remove support for AWS
 - [#1071](https://github.com/XenitAB/terraform-modules/pull/1064) Add support for Microsoft Defender for Containers and sending k8s audit logs to analytics workspace
 - [#1070](https://github.com/XenitAB/terraform-modules/pull/1070) Support Azure Policy add-on

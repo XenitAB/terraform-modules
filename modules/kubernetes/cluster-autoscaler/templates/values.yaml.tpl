@@ -1,4 +1,4 @@
-cloudProvider: ${provider}
+cloudProvider: "azure"
 
 image:
   tag: v1.24.0
@@ -24,15 +24,6 @@ securityContext:
   runAsNonRoot: true
   runAsUser: 1001
   runAsGroup: 1001
-
-%{ if provider == "aws" }
-awsRegion: ${aws_config.region}
-rbac:
-  serviceAccount:
-    name: "cluster-autoscaler"
-    annotations:
-      eks.amazonaws.com/role-arn: ${aws_config.role_arn}
-%{ endif }
 
 extraArgs:
   skip-nodes-with-local-storage: false

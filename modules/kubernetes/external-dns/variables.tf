@@ -20,7 +20,7 @@ variable "txt_owner_id" {
 }
 
 variable "azure_config" {
-  description = "AWS specific configuration"
+  description = "Azure specific configuration"
   type = object({
     subscription_id = string,
     tenant_id       = string,
@@ -32,17 +32,5 @@ variable "azure_config" {
     tenant_id       = "",
     resource_group  = "",
     client_id       = "",
-  }
-}
-
-variable "aws_config" {
-  description = "AWS specific configuration"
-  type = object({
-    role_arn = string,
-    region   = string
-  })
-  default = {
-    role_arn = "",
-    region   = ""
   }
 }

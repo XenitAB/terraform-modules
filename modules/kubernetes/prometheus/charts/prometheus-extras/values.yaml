@@ -1,4 +1,4 @@
-cloudProvider: ""
+cloudProvider: "azure"
 secretName: "xenit-proxy-certificate"
 
 azureConfig:
@@ -7,11 +7,6 @@ azureConfig:
   tenantID: ""
   keyVaultName: ""
   keyVaultSecretName: "xenit-proxy-certificate"
-
-awsConfig:
-  roleARN: ""
-  keyParameterName: "xenit-proxy-certificate-key"
-  crtParameterName: "xenit-proxy-certificate-crt"
 
 replicaCount: 2
 
@@ -62,7 +57,6 @@ enabledMonitors:
   flux: false
   aadPodIdentity: false
   csiSecretsStorProviderAzure: false
-  csiSecretsStorProviderAws: false
   azadKubeProxy: false
   trivy: false
   grafanaAgent: false

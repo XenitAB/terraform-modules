@@ -57,7 +57,6 @@ module "gatekeeper" {
   source = "../../kubernetes/gatekeeper"
 
   cluster_id         = local.cluster_id
-  cloud_provider     = "azure"
   exclude_namespaces = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
 }
 
@@ -195,7 +194,6 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider        = "azure"
   external_dns_hostname = var.external_dns_hostname
   default_certificate = {
     enabled  = true
@@ -274,7 +272,6 @@ module "cert_manager" {
   source = "../../kubernetes/cert-manager"
 
   notification_email = var.cert_manager_config.notification_email
-  cloud_provider     = "azure"
   azure_config = {
     hosted_zone_names   = var.cert_manager_config.dns_zone
     resource_group_name = data.azurerm_resource_group.global.name
@@ -293,7 +290,6 @@ module "velero" {
 
   source = "../../kubernetes/velero"
 
-  cloud_provider = "azure"
   azure_config = {
     subscription_id           = data.azurerm_client_config.current.subscription_id
     resource_group            = data.azurerm_resource_group.this.name
@@ -313,8 +309,6 @@ module "datadog" {
   }
 
   source = "../../kubernetes/datadog"
-
-  cloud_provider = "azure"
 
   location             = var.location_short
   environment          = var.environment
@@ -386,8 +380,7 @@ module "falco" {
 
   source = "../../kubernetes/falco"
 
-  cloud_provider = "azure"
-  cluster_id     = local.cluster_id
+  cluster_id = local.cluster_id
 }
 
 # Reloader
@@ -445,7 +438,6 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
-  cloud_provider = "azure"
   azure_config = {
     azure_key_vault_name = var.prometheus_config.azure_key_vault_name
     identity = {
@@ -494,7 +486,6 @@ module "control_plane_logs" {
 
   source = "../../kubernetes/control-plane-logs"
 
-  cloud_provider = "azure"
   azure_config = {
     azure_key_vault_name = var.control_plane_logs_config.azure_key_vault_name
     identity = {
@@ -547,7 +538,6 @@ module "trivy" {
 
   source = "../../kubernetes/trivy"
 
-  cloud_provider                  = "azure"
   client_id                       = var.trivy_config.client_id
   resource_id                     = var.trivy_config.resource_id
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name

@@ -5,7 +5,6 @@ provider "azuread" {}
 module "xkf_global" {
   source = "../../../modules/azure/xkf-governance-global"
 
-  cloud_provider    = "azure"
   environment       = "dev"
   subscription_name = "xks"
 

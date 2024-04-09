@@ -1,8 +1,3 @@
-variable "cloud_provider" {
-  description = "Name of cloud provider"
-  type        = string
-}
-
 variable "datadog_site" {
   description = "Site to connect Datadog agent"
   type        = string
@@ -51,15 +46,5 @@ variable "azure_config" {
       resource_id = ""
       tenant_id   = ""
     }
-  }
-}
-
-variable "aws_config" {
-  description = "AWS specific configuration"
-  type = object({
-    role_arn = string
-  })
-  default = {
-    role_arn = ""
   }
 }

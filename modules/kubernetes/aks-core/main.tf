@@ -79,3 +79,8 @@ data "azurerm_user_assigned_identity" "cert_manager" {
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
+data "azurerm_user_assigned_identity" "datadog" {
+  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-datadog"
+  resource_group_name = data.azurerm_resource_group.this.name
+}
+

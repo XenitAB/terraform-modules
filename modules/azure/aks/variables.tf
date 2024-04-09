@@ -234,7 +234,7 @@ variable "audit_config" {
       sku_name       = optional(string, "PerGB2018")
       daily_quota_gb = optional(number, -1)
       reservation_gb = optional(number, 0)
-      retention_days = optional(number, 7)
+      retention_days = optional(number, 30)
     }), {})
   })
   default = {}

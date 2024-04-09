@@ -12,7 +12,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
-<<<<<<< HEAD
 - [#1062](https://github.com/XenitAB/terraform-modules/pull/1062) Migrate cert-manager to install with flux.
 - [#1052](https://github.com/XenitAB/terraform-modules/pull/1052) Update ingress-healthz to 15.5.2.
 - [#1086](https://github.com/XenitAB/terraform-modules/pull/1086) Migrate control-plane-logs to install with flux and bump helm chart version.
@@ -26,9 +25,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1080](https://github.com/XenitAB/terraform-modules/pull/1080) Handle deprecated attributes introduced in the azuread provider v 2.44
 - [#1077](https://github.com/XenitAB/terraform-modules/pull/1077) Fix retention days for analytics workspace
 - [#1074](https://github.com/XenitAB/terraform-modules/pull/1074) Fix reversed logic for enabling Defender
-=======
->>>>>>> 18fa30ff (Remove support for AWS cloud provider)
 - [#1073](https://github.com/XenitAB/terraform-modules/pull/1072) Remove support for AWS
+- [#1074](https://github.com/XenitAB/terraform-modules/pull/1074) Fix reversed logic for enabling Defender
 - [#1071](https://github.com/XenitAB/terraform-modules/pull/1064) Add support for Microsoft Defender for Containers and sending k8s audit logs to analytics workspace
 - [#1070](https://github.com/XenitAB/terraform-modules/pull/1070) Support Azure Policy add-on
 - [#1058](https://github.com/XenitAB/terraform-modules/pull/1058) Use secrets-provider AKS-addon instead of seperate helmchart.

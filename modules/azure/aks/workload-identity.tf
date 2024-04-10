@@ -13,7 +13,6 @@ data "azuread_group" "tenant_resource_group_contributor" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
-    if ns.delegate_resource_group == true
   }
 
   display_name = "${var.azure_ad_group_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.key}${var.group_name_separator}contributor"
@@ -23,7 +22,6 @@ resource "azuread_group_member" "tenant" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
-    if ns.delegate_resource_group == true
   }
 
   group_object_id  = data.azuread_group.tenant_resource_group_contributor[each.key].id

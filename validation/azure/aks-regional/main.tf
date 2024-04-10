@@ -22,8 +22,7 @@ module "aks_regional" {
   unique_suffix         = "1234"
   namespaces = [
     {
-      name                    = "team1"
-      delegate_resource_group = true
+      name = "team1"
       labels = {
         "test" = "test"
       }

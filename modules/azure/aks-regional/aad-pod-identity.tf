@@ -23,7 +23,6 @@ data "azuread_group" "resource_group_contributor" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
-    if ns.delegate_resource_group == true
   }
   display_name = "${var.azure_ad_group_prefix}${var.group_name_separator}rg${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}${each.key}${var.group_name_separator}contributor"
 }
@@ -32,7 +31,6 @@ resource "azuread_group_member" "aad_pod_identity" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
-    if ns.delegate_resource_group == true
   }
   group_object_id  = data.azuread_group.resource_group_contributor[each.key].id
   member_object_id = azurerm_user_assigned_identity.aad_pod_identity[each.key].principal_id

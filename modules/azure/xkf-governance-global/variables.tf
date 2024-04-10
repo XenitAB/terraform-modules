@@ -12,8 +12,7 @@ variable "namespaces" {
   description = "The Kubernetes namespaces to create Azure AD groups for"
   type = list(
     object({
-      name                    = string
-      delegate_resource_group = bool
+      name = string
     })
   )
 }

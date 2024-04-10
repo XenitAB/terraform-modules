@@ -41,6 +41,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1072](https://github.com/XenitAB/terraform-modules/pull/1072) Update Spegel to v0.0.20 and move to using chart from spegel-org.
 - [#1069](https://github.com/XenitAB/terraform-modules/pull/1069) Update external-dns to use workload identities for authentication.
 - [#1076](https://github.com/XenitAB/terraform-modules/pull/1076) Update Datadog to use workload identities.
+- [#1078](https://github.com/XenitAB/terraform-modules/pull/1078) Remove delegate resource group from namespaces.
 
 ## Fixed
 

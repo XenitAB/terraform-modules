@@ -10,8 +10,7 @@ module "xks_global" {
 
   namespaces = [
     {
-      name                    = "team1"
-      delegate_resource_group = true
+      name = "team1"
       labels = {
         "test" = "test"
       }

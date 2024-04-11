@@ -61,10 +61,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1075](https://github.com/XenitAB/terraform-modules/pull/1075) Fix name collision in identities when AKS does not have unique suffix.
 - [#1079](https://github.com/XenitAB/terraform-modules/pull/1079) Fix Client ID set to tenant service account.
 
-## Fixed
-
-- [#1075](https://github.com/XenitAB/terraform-modules/pull/1075) Fix name collision in identities when AKS does not have unique suffix.
-
 ## 2023.10.2
 
 ### Changed

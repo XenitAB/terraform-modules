@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1080](https://github.com/XenitAB/terraform-modules/pull/1080) Handle deprecated attributes introduced in the azuread provider v 2.44
 - [#1077](https://github.com/XenitAB/terraform-modules/pull/1077) Fix retention days for analytics workspace
 - [#1074](https://github.com/XenitAB/terraform-modules/pull/1074) Fix reversed logic for enabling Defender
 - [#1073](https://github.com/XenitAB/terraform-modules/pull/1072) Remove support for AWS

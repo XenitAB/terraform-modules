@@ -13,8 +13,8 @@ resource "azuread_application_password" "owner_spn" {
     if var.partner_id != ""
   }
 
-  application_object_id = data.azuread_application.owner_spn.object_id
-  end_date              = timeadd(timestamp(), "87600h") # 10 years
+  application_id = data.azuread_application.owner_spn.id
+  end_date       = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {
     ignore_changes = [
@@ -33,7 +33,7 @@ resource "pal_management_partner" "owner_spn" {
   }
 
   tenant_id     = data.azurerm_subscription.current.tenant_id
-  client_id     = data.azuread_service_principal.owner_spn.application_id
+  client_id     = data.azuread_service_principal.owner_spn.client_id
   client_secret = azuread_application_password.owner_spn["pal"].value
   partner_id    = var.partner_id
   overwrite     = true
@@ -71,7 +71,7 @@ resource "azuread_service_principal" "aad_sp" {
     if rg.delegate_service_principal == true
   }
 
-  application_id = azuread_application.aad_app[each.key].application_id
+  client_id = azuread_application.aad_app[each.key].client_id
 }
 
 resource "azuread_application_password" "aad_sp" {
@@ -81,8 +81,8 @@ resource "azuread_application_password" "aad_sp" {
     if rg.delegate_service_principal == true
   }
 
-  application_object_id = azuread_application.aad_app[each.key].object_id
-  end_date              = timeadd(timestamp(), "87600h") # 10 years
+  application_id = azuread_application.aad_app[each.key].id
+  end_date       = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {
     ignore_changes = [
@@ -102,7 +102,7 @@ resource "pal_management_partner" "aad_sp" {
   }
 
   tenant_id     = data.azurerm_subscription.current.tenant_id
-  client_id     = azuread_application.aad_app[each.key].application_id
+  client_id     = azuread_application.aad_app[each.key].client_id
   client_secret = azuread_application_password.aad_sp[each.key].value
   partner_id    = var.partner_id
   overwrite     = true

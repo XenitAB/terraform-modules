@@ -13,8 +13,8 @@ resource "azuread_application_password" "owner_spn" {
     if var.partner_id != ""
   }
 
-  application_object_id = data.azuread_application.owner_spn.object_id
-  end_date              = timeadd(timestamp(), "87600h") # 10 years
+  application_id = data.azuread_application.owner_spn.object_id
+  end_date       = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {
     ignore_changes = [
@@ -81,8 +81,8 @@ resource "azuread_application_password" "aad_sp" {
     if rg.delegate_service_principal == true
   }
 
-  application_object_id = azuread_application.aad_app[each.key].object_id
-  end_date              = timeadd(timestamp(), "87600h") # 10 years
+  application_id = azuread_application.aad_app[each.key].object_id
+  end_date       = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {
     ignore_changes = [

@@ -1,5 +1,5 @@
 resource "azuread_application_password" "sub_reader_sp" {
-  application_object_id = var.azuread_apps.sub_reader.application_object_id
+  application_id = var.azuread_apps.sub_reader.application_object_id
   end_date              = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {

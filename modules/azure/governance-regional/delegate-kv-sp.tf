@@ -5,8 +5,8 @@ resource "azuread_application_password" "delegate_kv_aad" {
     if rg.delegate_key_vault == true
   }
 
-  application_object_id = var.azuread_apps.delegate_kv[each.key].application_object_id
-  end_date              = timeadd(timestamp(), "87600h") # 10 years
+  application_id = var.azuread_apps.delegate_kv[each.key].application_object_id
+  end_date       = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {
     ignore_changes = [

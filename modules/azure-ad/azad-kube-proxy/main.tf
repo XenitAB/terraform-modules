@@ -74,7 +74,7 @@ resource "azuread_application_pre_authorized" "azure_cli" {
 }
 
 resource "azuread_application_password" "this" {
-  application_id = azuread_application.this.object_id
+  application_id = azuread_application.this.id
 }
 
 resource "azuread_service_principal" "this" {

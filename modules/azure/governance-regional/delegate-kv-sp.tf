@@ -27,7 +27,7 @@ resource "azurerm_key_vault_secret" "delegate_kv_aad" {
   value = jsonencode({
     tenantId       = data.azurerm_subscription.current.tenant_id
     subscriptionId = data.azurerm_subscription.current.subscription_id
-    clientId       = var.azuread_apps.delegate_kv[each.key].application_id
+    clientId       = var.azuread_apps.delegate_kv[each.key].client_id
     clientSecret   = azuread_application_password.delegate_kv_aad[each.value.common_name].value
     keyVaultName   = azurerm_key_vault.delegate_kv[each.key].name
   })

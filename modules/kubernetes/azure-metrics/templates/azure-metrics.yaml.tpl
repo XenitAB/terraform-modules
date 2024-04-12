@@ -166,7 +166,7 @@ spec:
     matchLabels:
       app.kubernetes.io/name: azure-metrics
       app.kubernetes.io/instance: azure-metrics-exporter
-%{ ~ endif ~}
+%{~ endif ~}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor

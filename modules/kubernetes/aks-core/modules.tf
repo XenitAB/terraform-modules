@@ -31,7 +31,7 @@ module "azure_policy" {
   for_each = {
     for s in ["azure_policy"] :
     s => s
-    if var.azure_policy_enabled && !var.gatekeeper_enabled
+    if var.azure_policy_enabled && ! var.gatekeeper_enabled
   }
 
   source = "../../kubernetes/azure-policy"
@@ -51,7 +51,7 @@ module "gatekeeper" {
   for_each = {
     for s in ["gatekeeper"] :
     s => s
-    if var.gatekeeper_enabled && !var.azure_policy_enabled
+    if var.gatekeeper_enabled && ! var.azure_policy_enabled
   }
 
   source = "../../kubernetes/gatekeeper"
@@ -153,6 +153,7 @@ module "azure_metrics" {
   client_id       = var.azure_metrics_config.client_id
   resource_id     = var.azure_metrics_config.resource_id
   subscription_id = data.azurerm_client_config.current.subscription_id
+  cluster_id      = local.cluster_id
 }
 
 # linkerd
@@ -532,7 +533,7 @@ module "trivy" {
   for_each = {
     for s in ["trivy"] :
     s => s
-    if var.trivy_enabled && !var.defender_enabled
+    if var.trivy_enabled && ! var.defender_enabled
   }
 
   source = "../../kubernetes/trivy"

@@ -74,6 +74,7 @@ module "aks_core" {
   azure_metrics_config = {
     client_id   = "foo"
     resource_id = "bar"
+    cluster_id  = "foo"
   }
 
   trivy_enabled = true

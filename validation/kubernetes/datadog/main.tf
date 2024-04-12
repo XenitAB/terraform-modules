@@ -13,7 +13,6 @@ module "datadog" {
   }
 
   location             = "foo"
-  cloud_provider       = "fubb"
   environment          = "bar"
   namespace_include    = ["ns1", "ns2"]
   cluster_id           = "foobar"

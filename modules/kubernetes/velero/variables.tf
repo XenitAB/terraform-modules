@@ -1,11 +1,5 @@
-variable "cloud_provider" {
-  description = "Cloud provider to use."
-  type        = string
-  default     = "azure"
-}
-
 variable "azure_config" {
-  description = "AWS specific configuration"
+  description = "Azure specific configuration"
   type = object({
     subscription_id           = string,
     resource_group            = string,
@@ -22,19 +16,5 @@ variable "azure_config" {
     resource_id               = ""
     storage_account_name      = ""
     storage_account_container = ""
-  }
-}
-
-variable "aws_config" {
-  description = "AWS specific configuration"
-  type = object({
-    role_arn     = string,
-    region       = string,
-    s3_bucket_id = string
-  })
-  default = {
-    role_arn     = ""
-    region       = ""
-    s3_bucket_id = ""
   }
 }

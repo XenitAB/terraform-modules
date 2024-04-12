@@ -1,4 +1,4 @@
-cloudProvider: "${cloud_provider}"
+cloudProvider: "azure"
 
 azureConfig:
   resourceID: "${azure_config.identity.resource_id}"

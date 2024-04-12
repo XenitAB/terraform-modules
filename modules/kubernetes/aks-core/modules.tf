@@ -27,17 +27,36 @@ locals {
   cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
 }
 
+module "azure_policy" {
+  for_each = {
+    for s in ["azure_policy"] :
+    s => s
+    if var.azure_policy_enabled && !var.gatekeeper_enabled
+  }
+
+  source = "../../kubernetes/azure-policy"
+
+  aks_name            = var.name
+  aks_name_suffix     = var.aks_name_suffix
+  azure_policy_config = var.azure_policy_config
+  environment         = var.environment
+  location_short      = var.location_short
+  tenant_namespaces = [
+    for namespace in var.namespaces :
+    namespace.name if namespace.flux.enabled
+  ]
+}
+
 module "gatekeeper" {
   for_each = {
     for s in ["gatekeeper"] :
     s => s
-    if var.gatekeeper_enabled
+    if var.gatekeeper_enabled && !var.azure_policy_enabled
   }
 
   source = "../../kubernetes/gatekeeper"
 
   cluster_id         = local.cluster_id
-  cloud_provider     = "azure"
   exclude_namespaces = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
 }
 
@@ -175,7 +194,6 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider        = "azure"
   external_dns_hostname = var.external_dns_hostname
   default_certificate = {
     enabled  = true
@@ -226,8 +244,7 @@ module "external_dns" {
     tenant_id       = data.azurerm_client_config.current.tenant_id
     subscription_id = data.azurerm_client_config.current.subscription_id
     resource_group  = data.azurerm_resource_group.global.name
-    client_id       = var.external_dns_config.client_id
-    resource_id     = var.external_dns_config.resource_id
+    client_id       = data.azurerm_user_assigned_identity.external_dns.client_id
   }
 }
 
@@ -255,13 +272,11 @@ module "cert_manager" {
   source = "../../kubernetes/cert-manager"
 
   notification_email = var.cert_manager_config.notification_email
-  cloud_provider     = "azure"
   azure_config = {
     hosted_zone_names   = var.cert_manager_config.dns_zone
     resource_group_name = data.azurerm_resource_group.global.name
     subscription_id     = data.azurerm_client_config.current.subscription_id
-    client_id           = var.external_dns_config.client_id
-    resource_id         = var.external_dns_config.resource_id
+    client_id           = data.azurerm_user_assigned_identity.cert_manager.client_id
   }
 }
 
@@ -275,7 +290,6 @@ module "velero" {
 
   source = "../../kubernetes/velero"
 
-  cloud_provider = "azure"
   azure_config = {
     subscription_id           = data.azurerm_client_config.current.subscription_id
     resource_group            = data.azurerm_resource_group.this.name
@@ -296,8 +310,6 @@ module "datadog" {
 
   source = "../../kubernetes/datadog"
 
-  cloud_provider = "azure"
-
   location             = var.location_short
   environment          = var.environment
   cluster_id           = local.cluster_id
@@ -308,9 +320,8 @@ module "datadog" {
   azure_config = {
     azure_key_vault_name = var.datadog_config.azure_key_vault_name
     identity = {
-      client_id   = var.datadog_config.identity.client_id
-      resource_id = var.datadog_config.identity.resource_id
-      tenant_id   = data.azurerm_client_config.current.tenant_id
+      client_id = data.azurerm_user_assigned_identity.datadog.client_id
+      tenant_id = data.azurerm_user_assigned_identity.datadog.tenant_id
     }
   }
 }
@@ -368,8 +379,7 @@ module "falco" {
 
   source = "../../kubernetes/falco"
 
-  cloud_provider = "azure"
-  cluster_id     = local.cluster_id
+  cluster_id = local.cluster_id
 }
 
 # Reloader
@@ -427,7 +437,6 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
-  cloud_provider = "azure"
   azure_config = {
     azure_key_vault_name = var.prometheus_config.azure_key_vault_name
     identity = {
@@ -476,7 +485,6 @@ module "control_plane_logs" {
 
   source = "../../kubernetes/control-plane-logs"
 
-  cloud_provider = "azure"
   azure_config = {
     azure_key_vault_name = var.control_plane_logs_config.azure_key_vault_name
     identity = {
@@ -524,12 +532,11 @@ module "trivy" {
   for_each = {
     for s in ["trivy"] :
     s => s
-    if var.trivy_enabled
+    if var.trivy_enabled && !var.defender_enabled
   }
 
   source = "../../kubernetes/trivy"
 
-  cloud_provider                  = "azure"
   client_id                       = var.trivy_config.client_id
   resource_id                     = var.trivy_config.resource_id
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name

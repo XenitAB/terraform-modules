@@ -28,7 +28,6 @@ resource "git_repository_file" "external_dns" {
     provider     = var.dns_provider,
     sources      = var.sources,
     azure_config = var.azure_config,
-    aws_config   = var.aws_config,
     txt_owner_id = var.txt_owner_id,
   })
 }

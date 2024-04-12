@@ -43,7 +43,6 @@ resource "helm_release" "ingress_nginx" {
   version     = "4.4.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider               = var.cloud_provider
     ingress_class          = "nginx"
     default_ingress_class  = true
     internal_load_balancer = false
@@ -77,7 +76,6 @@ resource "helm_release" "ingress_nginx_public" {
   version     = "4.4.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider               = var.cloud_provider
     ingress_class          = "nginx-public"
     default_ingress_class  = true
     internal_load_balancer = false
@@ -111,7 +109,6 @@ resource "helm_release" "ingress_nginx_private" {
   version     = "4.4.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider               = var.cloud_provider
     ingress_class          = "nginx-private"
     default_ingress_class  = false
     internal_load_balancer = true

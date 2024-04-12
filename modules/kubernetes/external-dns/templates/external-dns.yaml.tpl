@@ -27,10 +27,10 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: external-dns
-      version: 6.12.2
+      version: 7.1.0
   interval: 1m0s
   values:
-    provider: "${provider}"
+    provider: "azure"
     sources:
       %{~ for item in sources ~}
       - "${item}"
@@ -39,22 +39,16 @@ spec:
     securityContext:
       allowPrivilegeEscalation: false
       readOnlyRootFilesystem: true
-    %{ if provider == "azure" }
+    serviceAccount:
+      annotations:
+        azure.workload.identity/client-id: ${azure_config.client_id}
+    podLabels: 
+      azure.workload.identity/use: "true"
     azure:
+      useWorkloadIdentityExtension: true
       tenantId: "${azure_config.tenant_id}"
       subscriptionId: "${azure_config.subscription_id}"
       resourceGroup: "${azure_config.resource_group}"
-      useManagedIdentityExtension: true
-    podLabels:
-      aadpodidbinding: external-dns
-    %{ endif }
-    %{ if provider == "aws" }
-    aws:
-      region: "${aws_config.region}"
-    serviceAccount:
-      annotations:
-        eks.amazonaws.com/role-arn: "${aws_config.role_arn}"
-    %{ endif }
     policy: sync # will also delete the record
     registry: "txt"
     txtOwnerId: "${txt_owner_id}"
@@ -82,24 +76,3 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: external-dns
       app.kubernetes.io/name: external-dns
-%{ if provider == "azure" }
----
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentity
-metadata:
-  name: external-dns
-  namespace: external-dns
-spec:
-  type: 0
-  resourceID: ${azure_config.resource_id}
-  clientID: ${azure_config.client_id}
----
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentityBinding
-metadata:
-  name: external-dns
-  namespace: external-dns
-spec:
-  azureIdentity: external-dns
-  selector: external-dns
-%{ endif }

@@ -13,7 +13,7 @@ resource "azuread_application_password" "owner_spn" {
     if var.partner_id != ""
   }
 
-  application_id = data.azuread_application.owner_spn.application_id
+  application_id = data.azuread_application.owner_spn.id
   end_date       = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {
@@ -81,7 +81,7 @@ resource "azuread_application_password" "aad_sp" {
     if rg.delegate_service_principal == true
   }
 
-  application_id = azuread_application.aad_app[each.key].application_id
+  application_id = azuread_application.aad_app[each.key].id
   end_date       = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {

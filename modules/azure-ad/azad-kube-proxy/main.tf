@@ -26,8 +26,8 @@ data "azuread_application_published_app_ids" "well_known" {}
 resource "random_uuid" "oauth2_permission_scope_user_impersonation" {}
 
 resource "azuread_service_principal" "ms_graph" {
-  client_id = data.azuread_application_published_app_ids.well_known.result.MicrosoftGraph
-  use_existing   = true
+  client_id    = data.azuread_application_published_app_ids.well_known.result.MicrosoftGraph
+  use_existing = true
 }
 
 resource "azuread_application" "this" {
@@ -68,9 +68,9 @@ resource "azuread_application" "this" {
 }
 
 resource "azuread_application_pre_authorized" "azure_cli" {
-  application_id        = azuread_application.this.id
-  authorized_client_id  = data.azuread_application_published_app_ids.well_known.result.MicrosoftAzureCli
-  permission_ids        = [random_uuid.oauth2_permission_scope_user_impersonation.result]
+  application_id       = azuread_application.this.id
+  authorized_client_id = data.azuread_application_published_app_ids.well_known.result.MicrosoftAzureCli
+  permission_ids       = [random_uuid.oauth2_permission_scope_user_impersonation.result]
 }
 
 resource "azuread_application_password" "this" {

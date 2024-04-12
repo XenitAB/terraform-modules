@@ -75,10 +75,10 @@ spec:
       enabled: true
 
     podmonitor:
-      loadBalancer: true
-      kubernetes: true
+      loadBalancer: ${podmonitor_loadbalancer}
+      kubernetes: ${podmonitor_kubernetes}
 
-    subscription: ""
+    subscription: ${subscription_id}
 ---
 apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentity
@@ -97,14 +97,15 @@ spec:
   azureIdentity: azure-metrics
   selector: azure-metrics
 ---
-{{- if .Values.podmonitor.loadBalancer }}
+%{~ if podmonitor_loadbalancer ~}
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   labels:
-    {{- include "azure-metrics-exporter.labels" . | nindent 4 }}
+      app.kubernetes.io/name: azure-metrics
+      app.kubernetes.io/instance: azure-metrics
     xkf.xenit.io/monitoring: platform
-  name: {{ include "azure-metrics-exporter.fullname" . }}-loadbalancers
+  name: azure-metrics-exporter-loadbalancers
 spec:
   podMetricsEndpoints:
   - interval: 60s
@@ -113,7 +114,7 @@ spec:
     params:
       name: ["azure-metric"]
       subscription:
-        - {{ .Values.subscription }}
+        - ${subscription_id}
       template:
         - '{name}_{metric}_{aggregation}_{unit}'
       resourceType:
@@ -127,17 +128,19 @@ spec:
         - UsedSnatPorts
   selector:
     matchLabels:
-      {{- include "azure-metrics-exporter.selectorLabels" . | nindent 6 }}
-{{- end }}
+      app.kubernetes.io/name: azure-metrics
+      app.kubernetes.io/instance: azure-metrics-exporter
+%{~ endif ~}
 ---
-{{- if .Values.podmonitor.kubernetes }}
+%{~ if podmonitor_kubernetes ~}
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   labels:
-    {{- include "azure-metrics-exporter.labels" . | nindent 4 }}
+      app.kubernetes.io/name: azure-metrics
+      app.kubernetes.io/instance: azure-metrics
     xkf.xenit.io/monitoring: platform
-  name: {{ include "azure-metrics-exporter.fullname" . }}-kubernetes
+  name: azure-metrics-exporter-kubernetes
 spec:
   podMetricsEndpoints:
   - interval: 60s
@@ -146,7 +149,7 @@ spec:
     params:
       name: ["azure-metric"]
       subscription:
-        - {{ .Values.subscription }}
+        - ${subscription_id}
       template:
         - '{metric}'
       resourceType:
@@ -161,16 +164,18 @@ spec:
         - cluster_autoscaler_unschedulable_pods_count
   selector:
     matchLabels:
-      {{- include "azure-metrics-exporter.selectorLabels" . | nindent 6 }}
-{{- end }}
+      app.kubernetes.io/name: azure-metrics
+      app.kubernetes.io/instance: azure-metrics-exporter
+%{ ~ endif ~}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   labels:
-    {{- include "azure-metrics-exporter.labels" . | nindent 4 }}
+      app.kubernetes.io/name: azure-metrics
+      app.kubernetes.io/instance: azure-metrics
     xkf.xenit.io/monitoring: platform
-  name: {{ include "azure-metrics-exporter.fullname" . }}
+  name: azure-metrics-exporter
 spec:
   podMetricsEndpoints:
   - interval: 60s
@@ -178,4 +183,5 @@ spec:
     path: /metrics
   selector:
     matchLabels:
-      {{- include "azure-metrics-exporter.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/name: azure-metrics
+      app.kubernetes.io/instance: azure-metrics-exporter

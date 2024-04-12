@@ -18,3 +18,14 @@ variable "subscription_id" {
   type        = string
 }
 
+variable "podmonitor_loadbalancer" {
+  type        = bool
+  description = "Enable podmonitor for loadbalancers?"
+  default     = true
+}
+
+variable "podmonitor_kubernetes" {
+  type        = bool
+  description = "Enable podmonitor for kubernetes?"
+  default     = true
+}

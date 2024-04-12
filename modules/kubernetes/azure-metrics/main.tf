@@ -26,8 +26,10 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "azure_metrics" {
   path = "platform/${var.cluster_id}/azure-metrics/azure-metrics.yaml"
   content = templatefile("${path.module}/templates/azure-metrics.yaml.tpl", {
-    resource_id     = var.resource_id
-    client_id       = var.client_id
-    subscription_id = var.subscription_id
+    resource_id             = var.resource_id
+    client_id               = var.client_id
+    subscription_id         = var.subscription_id
+    podmonitor_kubernetes   = var.podmonitor_kubernetes
+    podmonitor_loadbalancer = var.podmonitor_loadbalancer
   })
 }

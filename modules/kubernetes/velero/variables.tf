@@ -18,3 +18,8 @@ variable "azure_config" {
     storage_account_container = ""
   }
 }
+
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}

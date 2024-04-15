@@ -7,11 +7,8 @@ provider "helm" {}
 module "velero" {
   source = "../../../modules/kubernetes/velero"
 
-  providers = {
-    kubernetes = kubernetes
-    helm       = helm
-  }
-
+  cluster_id = "we-dev-aks1"
+  
   azure_config = {
     subscription_id           = "id"
     resource_group            = "name"

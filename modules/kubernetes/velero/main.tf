@@ -8,54 +8,25 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = "velero"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "velero"
-  }
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/velero.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id
+  })
 }
 
-resource "helm_release" "velero" {
-  repository  = "https://vmware-tanzu.github.io/helm-charts"
-  chart       = "velero"
-  name        = "velero"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "2.23.6"
-  max_history = 3
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    azure_config = var.azure_config,
-  })]
-}
-
-resource "helm_release" "velero_extras" {
-  depends_on = [helm_release.velero]
-
-  chart       = "${path.module}/charts/velero-extras"
-  name        = "velero-extras"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  max_history = 3
-
-  set {
-    name  = "resourceID"
-    value = var.azure_config.resource_id
-  }
-
-  set {
-    name  = "clientID"
-    value = var.azure_config.client_id
-  }
+resource "git_repository_file" "velero" {
+  path = "platform/${var.cluster_id}/velero/velero.yaml"
+  content = templatefile("${path.module}/templates/velero.yaml.tpl", {
+    azure_config     = var.azure_config,
+    client_id        = var.azure_config.client_id,
+    resource_id      = var.azure_config.resource_id,
+  })
 }

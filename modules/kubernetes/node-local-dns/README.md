@@ -32,6 +32,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_dns_ip"></a> [dns\_ip](#input\_dns\_ip) | Central DNS IP | `string` | n/a | yes |
+| <a name="input_use_coredns"></a> [use\_coredns](#input\_use\_coredns) | Should coredns be used as the last route instead of upstream dns? | `bool` | `false` | no |
 
 ## Outputs
 

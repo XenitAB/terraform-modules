@@ -563,8 +563,8 @@ module "node_local_dns" {
 
   source = "../../kubernetes/node-local-dns"
 
-  cluster_id = local.cluster_id
-  dns_ip     = "10.0.0.10"
+  cluster_id  = local.cluster_id
+  dns_ip      = "10.0.0.10"
   use_coredns = var.use_coredns
 }
 

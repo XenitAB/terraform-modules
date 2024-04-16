@@ -280,7 +280,7 @@ module "velero" {
   source = "../../kubernetes/velero"
 
   cluster_id = local.cluster_id
-  
+
   azure_config = {
     subscription_id           = data.azurerm_client_config.current.subscription_id
     resource_group            = data.azurerm_resource_group.this.name

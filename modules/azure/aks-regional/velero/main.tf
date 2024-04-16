@@ -1,3 +1,18 @@
+terraform {
+  required_version = ">= 1.3.0"
+
+  required_providers {
+    azurerm = {
+      version = "3.99.0"
+      source  = "hashicorp/azurerm"
+    }
+  }
+}
+
+data "azurerm_resource_group" "this" {
+  name = "rg-${var.environment}-${var.location_short}-${var.name}"
+}
+
 #tfsec:ignore:azure-storage-queue-services-logging-enabled
 resource "azurerm_storage_account" "velero" {
   name                            = "strg${var.environment}${var.location_short}${var.name}velero${var.unique_suffix}"

@@ -538,7 +538,9 @@ module "trivy" {
   source = "../../kubernetes/trivy"
 
   client_id                       = var.trivy_config.client_id
+  cluster_id                      = local.cluster_id
   resource_id                     = var.trivy_config.resource_id
+  starboard_exporter_enabled      = var.starboard_exporter_enabled
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
 }
 

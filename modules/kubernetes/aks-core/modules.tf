@@ -565,6 +565,7 @@ module "node_local_dns" {
 
   cluster_id = local.cluster_id
   dns_ip     = "10.0.0.10"
+  use_coredns = var.use_coredns
 }
 
 module "node_ttl" {

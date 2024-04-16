@@ -96,7 +96,11 @@ data:
         reload
         loop
         bind ${local_dns} ${dns_ip}
+        %{~ if use_coredns ~}
+        forward . __PILLAR__CLUSTER__DNS__
+        %{~ else ~}
         forward . __PILLAR__UPSTREAM__SERVERS__
+        %{~ endif ~}
         prometheus :9253
         }
 ---

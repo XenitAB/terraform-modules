@@ -26,7 +26,13 @@ resource "git_repository_file" "velero" {
   path = "platform/${var.cluster_id}/velero/velero.yaml"
   content = templatefile("${path.module}/templates/velero.yaml.tpl", {
     azure_config = var.azure_config,
-    client_id    = var.azure_config.client_id,
-    resource_id  = var.azure_config.resource_id,
+  })
+}
+
+resource "git_repository_file" "velero_extras" {
+  path = "platform/${var.cluster_id}/velero/velero-extras.yaml"
+  content = templatefile("${path.module}/templates/velero-extras.yaml.tpl", {
+    client_id   = var.azure_config.client_id,
+    resource_id = var.azure_config.resource_id,
   })
 }

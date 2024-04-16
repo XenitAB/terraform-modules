@@ -541,6 +541,11 @@ variable "trivy_enabled" {
   default     = true
 }
 
+variable "starboard_exporter_enabled" {
+  description = "If the starboard-exporter Helm chart should be deployed"
+  type        = bool
+  default     = true
+}
 
 variable "trivy_volume_claim_storage_class_name" {
   description = "Configuration for trivy volume claim storage class name"

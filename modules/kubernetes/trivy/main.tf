@@ -46,8 +46,6 @@ resource "helm_release" "trivy_operator" {
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/trivy-operator-values.yaml.tpl", {
-    provider                = var.cloud_provider
-    trivy_operator_role_arn = var.trivy_operator_role_arn
   })]
 }
 
@@ -70,8 +68,6 @@ resource "helm_release" "trivy" {
   version     = "0.5.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/trivy-values.yaml.tpl", {
-    provider                        = var.cloud_provider
-    trivy_role_arn                  = var.trivy_role_arn
     volume_claim_storage_class_name = var.volume_claim_storage_class_name
   })]
 }
@@ -80,7 +76,6 @@ resource "helm_release" "trivy_extras" {
   for_each = {
     for s in ["trivy_extras"] :
     s => s
-    if var.cloud_provider == "azure"
   }
 
   chart       = "${path.module}/charts/trivy-extras"

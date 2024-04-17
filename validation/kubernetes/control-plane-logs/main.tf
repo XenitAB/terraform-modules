@@ -11,6 +11,4 @@ module "control-plane-logs" {
     kubernetes = kubernetes
     helm       = helm
   }
-
-  cloud_provider = "azure"
 }

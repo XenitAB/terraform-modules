@@ -49,7 +49,3 @@ metadata:
   name: {{ .Values.serviceAccount.name }}
   labels:
     {{- include "prometheus-extras.labels" . | nindent 4 }}
-  {{- if eq .Values.cloudProvider "aws" }}
-  annotations:
-    "eks.amazonaws.com/role-arn": {{ .Values.awsConfig.roleARN }}
-  {{- end }}

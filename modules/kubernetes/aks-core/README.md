@@ -8,7 +8,7 @@ This module is used to create AKS clusters.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.47.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.71.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.99.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.25.3 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 5.34.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
@@ -20,7 +20,7 @@ This module is used to create AKS clusters.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.71.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.99.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
@@ -32,11 +32,10 @@ This module is used to create AKS clusters.
 | <a name="module_aad_pod_identity"></a> [aad\_pod\_identity](#module\_aad\_pod\_identity) | ../../kubernetes/aad-pod-identity | n/a |
 | <a name="module_azad_kube_proxy"></a> [azad\_kube\_proxy](#module\_azad\_kube\_proxy) | ../../kubernetes/azad-kube-proxy | n/a |
 | <a name="module_azure_metrics"></a> [azure\_metrics](#module\_azure\_metrics) | ../../kubernetes/azure-metrics | n/a |
+| <a name="module_azure_policy"></a> [azure\_policy](#module\_azure\_policy) | ../../kubernetes/azure-policy | n/a |
 | <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../../kubernetes/cert-manager | n/a |
 | <a name="module_cert_manager_crd"></a> [cert\_manager\_crd](#module\_cert\_manager\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_control_plane_logs"></a> [control\_plane\_logs](#module\_control\_plane\_logs) | ../../kubernetes/control-plane-logs | n/a |
-| <a name="module_csi_secrets_store_provider_azure"></a> [csi\_secrets\_store\_provider\_azure](#module\_csi\_secrets\_store\_provider\_azure) | ../../kubernetes/csi-secrets-store-provider-azure | n/a |
-| <a name="module_csi_secrets_store_provider_azure_crd"></a> [csi\_secrets\_store\_provider\_azure\_crd](#module\_csi\_secrets\_store\_provider\_azure\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_datadog"></a> [datadog](#module\_datadog) | ../../kubernetes/datadog | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../../kubernetes/external-dns | n/a |
 | <a name="module_falco"></a> [falco](#module\_falco) | ../../kubernetes/falco | n/a |
@@ -91,14 +90,20 @@ This module is used to create AKS clusters.
 | [kubernetes_role_binding.trivy_reports](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.view](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
+| [kubernetes_service_account_v1.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/service_account_v1) | resource |
+| [kubernetes_storage_class.additional](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.azurefile_zrs_premium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.azurefile_zrs_standard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.zrs_premium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.zrs_standard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
-| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/client_config) | data source |
-| [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/container_registry) | data source |
-| [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/resource_group) | data source |
-| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/resource_group) | data source |
+| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/client_config) | data source |
+| [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/container_registry) | data source |
+| [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/resource_group) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/resource_group) | data source |
+| [azurerm_user_assigned_identity.cert_manager](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/user_assigned_identity) | data source |
+| [azurerm_user_assigned_identity.datadog](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/user_assigned_identity) | data source |
+| [azurerm_user_assigned_identity.external_dns](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/user_assigned_identity) | data source |
+| [azurerm_user_assigned_identity.tenant](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/user_assigned_identity) | data source |
 
 ## Inputs
 
@@ -108,20 +113,23 @@ This module is used to create AKS clusters.
 | <a name="input_aad_pod_identity_config"></a> [aad\_pod\_identity\_config](#input\_aad\_pod\_identity\_config) | Configuration for aad pod identity | <pre>map(object({<br>    id        = string<br>    client_id = string<br>  }))</pre> | n/a | yes |
 | <a name="input_aad_pod_identity_enabled"></a> [aad\_pod\_identity\_enabled](#input\_aad\_pod\_identity\_enabled) | Should aad-pod-identity be enabled | `bool` | `true` | no |
 | <a name="input_acr_name_override"></a> [acr\_name\_override](#input\_acr\_name\_override) | Override default name of ACR | `string` | `""` | no |
+| <a name="input_additional_storage_classes"></a> [additional\_storage\_classes](#input\_additional\_storage\_classes) | List of additional storage classes to create | <pre>list(object({<br>    name           = string<br>    provisioner    = string<br>    reclaim_policy = string<br>    binding_mode   = string<br>    sku_name       = string<br>  }))</pre> | `[]` | no |
 | <a name="input_aks_name_suffix"></a> [aks\_name\_suffix](#input\_aks\_name\_suffix) | The suffix for the aks clusters | `number` | n/a | yes |
 | <a name="input_azad_kube_proxy_config"></a> [azad\_kube\_proxy\_config](#input\_azad\_kube\_proxy\_config) | The azad-kube-proxy configuration | <pre>object({<br>    fqdn        = string<br>    allowed_ips = list(string)<br>    azure_ad_app = object({<br>      client_id     = string<br>      client_secret = string<br>      tenant_id     = string<br>    })<br>  })</pre> | <pre>{<br>  "allowed_ips": [],<br>  "azure_ad_app": {<br>    "client_id": "",<br>    "client_secret": "",<br>    "tenant_id": ""<br>  },<br>  "fqdn": ""<br>}</pre> | no |
 | <a name="input_azad_kube_proxy_enabled"></a> [azad\_kube\_proxy\_enabled](#input\_azad\_kube\_proxy\_enabled) | Should azad-kube-proxy be enabled | `bool` | `false` | no |
 | <a name="input_azure_metrics_config"></a> [azure\_metrics\_config](#input\_azure\_metrics\_config) | AZ Metrics configuration | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |
 | <a name="input_azure_metrics_enabled"></a> [azure\_metrics\_enabled](#input\_azure\_metrics\_enabled) | Should AZ Metrics be enabled | `bool` | `true` | no |
+| <a name="input_azure_policy_config"></a> [azure\_policy\_config](#input\_azure\_policy\_config) | A list of Azure policy mutations to create and include in the XKS policy set definition | <pre>object({<br>    exclude_namespaces = list(string)<br>    mutations = list(object({<br>      name         = string<br>      display_name = string<br>      template     = string<br>    }))<br>  })</pre> | <pre>{<br>  "exclude_namespaces": [<br>    "linkerd",<br>    "linkerd-cni",<br>    "velero",<br>    "grafana-agent"<br>  ],<br>  "mutations": [<br>    {<br>      "display_name": "Containers should not use privilege escalation",<br>      "name": "ContainerNoPrivilegeEscalation",<br>      "template": "container-disallow-privilege-escalation.yaml.tpl"<br>    },<br>    {<br>      "display_name": "Containers should drop disallowed capabilities",<br>      "name": "ContainerDropCapabilities",<br>      "template": "container-drop-capabilities.yaml.tpl"<br>    },<br>    {<br>      "display_name": "Containers should use a read-only root filesystem",<br>      "name": "ContainerReadOnlyRootFs",<br>      "template": "container-read-only-root-fs.yaml.tpl"<br>    },<br>    {<br>      "display_name": "Ephemeral containers should not use privilege escalation",<br>      "name": "EphemeralContainerNoPrivilegeEscalation",<br>      "template": "ephemeral-container-disallow-privilege-escalation.yaml.tpl"<br>    },<br>    {<br>      "display_name": "Ephemeral containers should drop disallowed capabilities",<br>      "name": "EphemeralContainerDropCapabilities",<br>      "template": "ephemeral-container-drop-capabilities.yaml.tpl"<br>    },<br>    {<br>      "display_name": "Ephemeral containers should use a read-only root filesystem",<br>      "name": "EphemeralContainerReadOnlyRootFs",<br>      "template": "ephemeral-container-read-only-root-fs.yaml.tpl"<br>    },<br>    {<br>      "display_name": "Init containers should not use privilege escalation",<br>      "name": "InitContainerNoPrivilegeEscalation",<br>      "template": "init-container-disallow-privilege-escalation.yaml.tpl"<br>    },<br>    {<br>      "display_name": "Init containers should drop disallowed capabilities",<br>      "name": "InitContainerDropCapabilities",<br>      "template": "init-container-drop-capabilities.yaml.tpl"<br>    },<br>    {<br>      "display_name": "Init containers should use a read-only root filesystem",<br>      "name": "InitContainerReadOnlyRootFs",<br>      "template": "init-container-read-only-root-fs.yaml.tpl"<br>    },<br>    {<br>      "display_name": "Pods should use an allowed seccomp profile",<br>      "name": "PodDefaultSecComp",<br>      "template": "k8s-pod-default-seccomp.yaml.tpl"<br>    },<br>    {<br>      "display_name": "Pods should not automount service account tokens",<br>      "name": "PodServiceAccountTokenNoAutoMount",<br>      "template": "k8s-pod-serviceaccount-token-false.yaml.tpl"<br>    }<br>  ]<br>}</pre> | no |
+| <a name="input_azure_policy_enabled"></a> [azure\_policy\_enabled](#input\_azure\_policy\_enabled) | If the Azure Policy for Kubernetes add-on should be enabled | `bool` | `false` | no |
 | <a name="input_cert_manager_config"></a> [cert\_manager\_config](#input\_cert\_manager\_config) | Cert Manager configuration, the first item in the list is the main domain | <pre>object({<br>    notification_email = string<br>    dns_zone           = list(string)<br>  })</pre> | n/a | yes |
 | <a name="input_cert_manager_enabled"></a> [cert\_manager\_enabled](#input\_cert\_manager\_enabled) | Should Cert Manager be enabled | `bool` | `true` | no |
 | <a name="input_control_plane_logs_config"></a> [control\_plane\_logs\_config](#input\_control\_plane\_logs\_config) | Configuration for control plane log | <pre>object({<br>    azure_key_vault_name = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>      tenant_id   = string<br>    })<br>    eventhub_hostname = string<br>    eventhub_name     = string<br>  })</pre> | <pre>{<br>  "azure_key_vault_name": "",<br>  "eventhub_hostname": "",<br>  "eventhub_name": "",<br>  "identity": {<br>    "client_id": "",<br>    "resource_id": "",<br>    "tenant_id": ""<br>  }<br>}</pre> | no |
 | <a name="input_control_plane_logs_enabled"></a> [control\_plane\_logs\_enabled](#input\_control\_plane\_logs\_enabled) | Should Control plan be enabled | `bool` | `false` | no |
-| <a name="input_csi_secrets_store_provider_azure_enabled"></a> [csi\_secrets\_store\_provider\_azure\_enabled](#input\_csi\_secrets\_store\_provider\_azure\_enabled) | Should csi-secrets-store-provider-azure be enabled | `bool` | `true` | no |
-| <a name="input_datadog_config"></a> [datadog\_config](#input\_datadog\_config) | Datadog configuration | <pre>object({<br><br>    azure_key_vault_name = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>      tenant_id   = string<br>    })<br><br>    datadog_site         = string<br>    namespaces           = list(string)<br>    apm_ignore_resources = list(string)<br>  })</pre> | <pre>{<br>  "apm_ignore_resources": [<br>    ""<br>  ],<br>  "azure_key_vault_name": "",<br>  "datadog_site": "",<br>  "identity": {<br>    "client_id": "",<br>    "resource_id": "",<br>    "tenant_id": ""<br>  },<br>  "namespaces": [<br>    ""<br>  ]<br>}</pre> | no |
+| <a name="input_coredns_upstream"></a> [coredns\_upstream](#input\_coredns\_upstream) | Should coredns be used as the last route instead of upstream dns? | `bool` | `false` | no |
+| <a name="input_datadog_config"></a> [datadog\_config](#input\_datadog\_config) | Datadog configuration | <pre>object({<br><br>    azure_key_vault_name = string<br>    datadog_site         = string<br>    namespaces           = list(string)<br>    apm_ignore_resources = list(string)<br>  })</pre> | <pre>{<br>  "apm_ignore_resources": [<br>    ""<br>  ],<br>  "azure_key_vault_name": "",<br>  "datadog_site": "",<br>  "namespaces": [<br>    ""<br>  ]<br>}</pre> | no |
 | <a name="input_datadog_enabled"></a> [datadog\_enabled](#input\_datadog\_enabled) | Should Datadog be enabled | `bool` | `false` | no |
+| <a name="input_defender_enabled"></a> [defender\_enabled](#input\_defender\_enabled) | If Defender for Containers should be enabled | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
-| <a name="input_external_dns_config"></a> [external\_dns\_config](#input\_external\_dns\_config) | External DNS configuration | <pre>object({<br>    client_id   = string<br>    resource_id = string<br>  })</pre> | n/a | yes |
 | <a name="input_external_dns_enabled"></a> [external\_dns\_enabled](#input\_external\_dns\_enabled) | Should External DNS be enabled | `bool` | `true` | no |
 | <a name="input_external_dns_hostname"></a> [external\_dns\_hostname](#input\_external\_dns\_hostname) | hostname for ingress-nginx to use for external-dns | `string` | `""` | no |
 | <a name="input_falco_enabled"></a> [falco\_enabled](#input\_falco\_enabled) | Should Falco be enabled | `bool` | `true` | no |
@@ -142,7 +150,7 @@ This module is used to create AKS clusters.
 | <a name="input_linkerd_enabled"></a> [linkerd\_enabled](#input\_linkerd\_enabled) | Should linkerd be enabled | `bool` | `false` | no |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name. | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The commonName to use for the deploy | `string` | n/a | yes |
-| <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name   = string<br>      labels = map(string)<br>      flux = object({<br>        enabled             = bool<br>        create_crds         = bool<br>        include_tenant_name = string<br>        azure_devops = object({<br>          org  = string<br>          proj = string<br>          repo = string<br>        })<br>        github = object({<br>          repo = string<br>        })<br>      })<br>    })<br>  )</pre> | <pre>[<br>  {<br>    "flux": {<br>      "azure_devops": {<br>        "org": "",<br>        "proj": "",<br>        "repo": ""<br>      },<br>      "create_crds": false,<br>      "enabled": true,<br>      "github": {<br>        "repo": ""<br>      },<br>      "include_tenant_name": false<br>    },<br>    "labels": {},<br>    "name": ""<br>  }<br>]</pre> | no |
+| <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name   = string<br>      labels = map(string)<br>      flux = object({<br>        enabled             = bool<br>        create_crds         = bool<br>        include_tenant_name = optional(bool, false)<br>        azure_devops = object({<br>          org  = string<br>          proj = string<br>          repo = string<br>        })<br>        github = object({<br>          repo = string<br>        })<br>      })<br>    })<br>  )</pre> | <pre>[<br>  {<br>    "flux": {<br>      "azure_devops": {<br>        "org": "",<br>        "proj": "",<br>        "repo": ""<br>      },<br>      "create_crds": false,<br>      "enabled": true,<br>      "github": {<br>        "repo": ""<br>      }<br>    },<br>    "labels": {},<br>    "name": ""<br>  }<br>]</pre> | no |
 | <a name="input_node_local_dns_enabled"></a> [node\_local\_dns\_enabled](#input\_node\_local\_dns\_enabled) | Should VPA be enabled | `bool` | `true` | no |
 | <a name="input_node_ttl_enabled"></a> [node\_ttl\_enabled](#input\_node\_ttl\_enabled) | Should Node TTL be enabled | `bool` | `true` | no |
 | <a name="input_priority_expander_config"></a> [priority\_expander\_config](#input\_priority\_expander\_config) | Cluster auto scaler priority expander configuration. | `map(list(string))` | `null` | no |

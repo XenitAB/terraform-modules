@@ -12,8 +12,3 @@ azureConfig:
   hostedZoneNames: []
   resourceID: ""
 
-awsConfig:
-  region: ""
-  zones:
-    - hostedZoneID: ""
-      name: ""

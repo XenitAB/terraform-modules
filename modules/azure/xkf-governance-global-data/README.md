@@ -4,7 +4,7 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.47.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.71.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.99.0 |
 
 ## Providers
 
@@ -30,11 +30,10 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cloud_provider"></a> [cloud\_provider](#input\_cloud\_provider) | Current provider | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environemnt | `string` | n/a | yes |
 | <a name="input_group_name_prefix"></a> [group\_name\_prefix](#input\_group\_name\_prefix) | Prefix for Azure AD groups | `string` | n/a | yes |
 | <a name="input_group_name_separator"></a> [group\_name\_separator](#input\_group\_name\_separator) | Separator for group names | `string` | `"-"` | no |
-| <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The Kubernetes namespaces to create Azure AD groups for | <pre>list(<br>    object({<br>      name                    = string<br>      delegate_resource_group = bool<br>    })<br>  )</pre> | n/a | yes |
+| <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The Kubernetes namespaces to create Azure AD groups for | <pre>list(<br>    object({<br>      name = string<br>    })<br>  )</pre> | n/a | yes |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
 
 ## Outputs

@@ -1,8 +1,3 @@
-variable "cloud_provider" {
-  description = "Name of cloud provider"
-  type        = string
-}
-
 variable "azure_config" {
   description = "Azure specific configuration"
   type = object({

@@ -1,4 +1,3 @@
-%{ if cloud_provider == "azure" }
 configuration:
   provider: "azure"
   logLevel: "warning"
@@ -30,35 +29,5 @@ initContainers:
 
 podLabels:
   aadpodidbinding: velero
-%{ endif }
-
-%{ if cloud_provider == "aws" }
-configuration:
-  provider: "aws"
-  logLevel: "warning"
-  logFormat: "json"
-  backupStorageLocation:
-    name: "default"
-    bucket: "${aws_config.s3_bucket_id}"
-    config:
-      region: "${aws_config.region}"
-
-snapshotsEnable: false
-
-securityContext:
-  fsGroup: 1337
-
-serviceAccount:
-  server:
-    annotations:
-      eks.amazonaws.com/role-arn: ${aws_config.role_arn}
-
-initContainers:
-  - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.1.0
-    volumeMounts:
-      - mountPath: "/target"
-        name: "plugins"
-%{ endif }
 
 priorityClassName: "platform-low"

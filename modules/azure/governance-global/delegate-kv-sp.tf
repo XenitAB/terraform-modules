@@ -30,5 +30,5 @@ resource "azuread_service_principal" "delegate_kv_aad" {
     if rg.delegate_key_vault == true
   }
 
-  application_id = azuread_application.delegate_kv_aad[each.key].application_id
+  client_id = azuread_application.delegate_kv_aad[each.key].client_id
 }

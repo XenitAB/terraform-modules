@@ -3,6 +3,7 @@ apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentity
 metadata:
   name: trivy
+  namespace: trivy
 spec:
   type: 0
   resourceID: ${resource_id}
@@ -12,6 +13,7 @@ apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentityBinding
 metadata:
   name: trivy
+  namespace: trivy
 spec:
   azureIdentity: trivy
   selector: trivy

@@ -34,7 +34,7 @@ spec:
       mode: ClientServer
       severity: MEDIUM,HIGH,CRITICAL
       ignoreUnfixed: true
-      serverURL: "http://trivy.trivy.svc.cluster.local:4954"
+      serverUrl: "http://trivy.trivy.svc.cluster.local:4954"
 
     operator:
       # configAuditScannerEnabled the flag to enable configuration audit scanner

@@ -1,7 +1,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: trivy
+  name: starboard-exporter
   namespace: trivy
 spec:
   interval: 1m0s

@@ -22,5 +22,9 @@ spec:
       version: v0.7.8
   interval: 1m0s
   values:
+    global:
+      podSecurityStandards:
+        # Don't create a psp
+        enforced: true
     networkpolicy:
       enabled: false

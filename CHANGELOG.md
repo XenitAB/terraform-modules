@@ -6,9 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## Added
+
+- [#1066](https://github.com/XenitAB/terraform-modules/pull/1066) Enable workload identity service account in tenant namespaces.
+
 ## Changed
 
 - [#1051](https://github.com/XenitAB/terraform-modules/pull/1051) Fixed typo in the contribution guide
+- [#1084](https://github.com/XenitAB/terraform-modules/pull/1084) Make it possible to use CoreDNS as the last route in node-local-dns.
+- [#1081](https://github.com/XenitAB/terraform-modules/pull/1081) Bump azurerm provider to v 3.99.0
+- [#1080](https://github.com/XenitAB/terraform-modules/pull/1080) Handle deprecated attributes introduced in the azuread provider v 2.44
+- [#1077](https://github.com/XenitAB/terraform-modules/pull/1077) Fix retention days for analytics workspace
+- [#1074](https://github.com/XenitAB/terraform-modules/pull/1074) Fix reversed logic for enabling Defender
+- [#1073](https://github.com/XenitAB/terraform-modules/pull/1072) Remove support for AWS
+- [#1071](https://github.com/XenitAB/terraform-modules/pull/1064) Add support for Microsoft Defender for Containers and sending k8s audit logs to analytics workspace
+- [#1070](https://github.com/XenitAB/terraform-modules/pull/1070) Support Azure Policy add-on
+- [#1058](https://github.com/XenitAB/terraform-modules/pull/1058) Use secrets-provider AKS-addon instead of seperate helmchart.
+- [#1065](https://github.com/XenitAB/terraform-modules/pull/1065) Exclude azad-kube-proxy from gatekeeper.
+- [#1064](https://github.com/XenitAB/terraform-modules/pull/1064) Add support for creating additional k8s storage classes.
+- [#1063](https://github.com/XenitAB/terraform-modules/pull/1063) Make inlude_tenant_name optional.
+- [#1059](https://github.com/XenitAB/terraform-modules/pull/1059) Move promtail to install with flux.
+- [#1058](https://github.com/XenitAB/terraform-modules/pull/1058) Use secrets-provider AKS-addon instead of seperate helmchart.
+- [#1055](https://github.com/XenitAB/terraform-modules/pull/1055) Add functionality for multiple flux-tenants in one environment.
+- [#1057](https://github.com/XenitAB/terraform-modules/pull/1057) Migrate reloader to install with flux.
+- [#1036](https://github.com/XenitAB/terraform-modules/pull/1036) Migrate Falco to install with flux.
+- [#1030](https://github.com/XenitAB/terraform-modules/pull/1030) Move azad-kube-proxy to install with flux.
+- [#1014](https://github.com/XenitAB/terraform-modules/pull/1014) Migrate external-dns to install with Flux.
+- [#1054](https://github.com/XenitAB/terraform-modules/pull/1050) Fix object constructor map keys must be unique error.
 - [#1050](https://github.com/XenitAB/terraform-modules/pull/1050) Migrate diagnostic settings.
 - [#1049](https://github.com/XenitAB/terraform-modules/pull/1049) Add azad kube proxy password to core key vault.
 - [#1041](https://github.com/XenitAB/terraform-modules/pull/1041) Fix ingress-healthz YAML for linkerd.
@@ -16,6 +40,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1044](https://github.com/XenitAB/terraform-modules/pull/1044) Update Spegel to v0.0.14.
 - [#1028](https://github.com/XenitAB/terraform-modules/pull/1028) Use api_server_access_profile for AKS.
 - [#1046](https://github.com/XenitAB/terraform-modules/pull/1044) Add validation for k8s 1.27 and 1.28.
+- [#1047](https://github.com/XenitAB/terraform-modules/pull/1047) Add Owner-SP to sub-owner group.
+- [#1067](https://github.com/XenitAB/terraform-modules/pull/1067) Update cert-manager to use workload identities for authentication.
+- [#1072](https://github.com/XenitAB/terraform-modules/pull/1072) Update Spegel to v0.0.20 and move to using chart from spegel-org.
+- [#1069](https://github.com/XenitAB/terraform-modules/pull/1069) Update external-dns to use workload identities for authentication.
+- [#1076](https://github.com/XenitAB/terraform-modules/pull/1076) Update Datadog to use workload identities.
+- [#1078](https://github.com/XenitAB/terraform-modules/pull/1078) Remove delegate resource group from namespaces.
+
+## Fixed
+
+- [#1075](https://github.com/XenitAB/terraform-modules/pull/1075) Fix name collision in identities when AKS does not have unique suffix.
+- [#1079](https://github.com/XenitAB/terraform-modules/pull/1079) Fix Client ID set to tenant service account.
 
 ## 2023.10.2
 
@@ -30,6 +65,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1025](https://github.com/XenitAB/terraform-modules/pull/1025) Enable Spegel mirroring for private ACR registry.
 - [#1033](https://github.com/XenitAB/terraform-modules/pull/1033) Migrate ingress-healthz to install with flux.
 - [#1035](https://github.com/XenitAB/terraform-modules/pull/1035) Fix ingress-healthz kustomization health check.
+
 ### Added
 
 - [#1027](https://github.com/XenitAB/terraform-modules/pull/1027) Add purge task to remove old images from ACR.

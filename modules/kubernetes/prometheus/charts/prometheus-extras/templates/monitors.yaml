@@ -40,25 +40,6 @@ kind: ServiceMonitor
 metadata:
   labels:
     xkf.xenit.io/monitoring: platform
-  name: external-dns
-  namespace: external-dns
-spec:
-  endpoints:
-  - path: /metrics
-    port: http
-  namespaceSelector:
-    matchNames:
-    - external-dns
-  selector:
-    matchLabels:
-      app.kubernetes.io/instance: external-dns
-      app.kubernetes.io/name: external-dns
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  labels:
-    xkf.xenit.io/monitoring: platform
   name: ingress-nginx-controller
   namespace: ingress-nginx
 spec:
@@ -123,24 +104,6 @@ spec:
     matchLabels:
       app.kubernetes.io/name: secrets-store-csi-driver
       app.kubernetes.io/instance: csi-secrets-store-provider-azure
-  podMetricsEndpoints:
-    - path: /metrics
-      port: "8081"
-{{- end }}
-{{- if .Values.enabledMonitors.csiSecretsStorProviderAws }}
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: secrets-store-csi-driver
-  namespace: csi-secrets-store-provider-aws
-  labels:
-    xkf.xenit.io/monitoring: platform
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: secrets-store-csi-driver
-      app.kubernetes.io/instance: secrets-store-csi-driver
   podMetricsEndpoints:
     - path: /metrics
       port: "8081"
@@ -340,24 +303,6 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: csi-secrets-store-provider-azure
       app.kubernetes.io/name: csi-secrets-store-provider-azure
-  podMetricsEndpoints:
-    - path: /metrics
-      port: metrics
-{{- end }}
-{{- if .Values.enabledMonitors.csiSecretsStorProviderAws }}
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: csi-secrets-store-driver-aws
-  namespace: csi-secrets-store-provider-aws
-  labels:
-    xkf.xenit.io/monitoring: platform
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/instance: csi-secrets-store-provider-aws
-      app.kubernetes.io/name: csi-secrets-store-provider-aws
   podMetricsEndpoints:
     - path: /metrics
       port: metrics

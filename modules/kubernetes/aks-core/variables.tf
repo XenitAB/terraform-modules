@@ -78,8 +78,9 @@ variable "namespaces" {
       name   = string
       labels = map(string)
       flux = object({
-        enabled     = bool
-        create_crds = bool
+        enabled             = bool
+        create_crds         = bool
+        include_tenant_name = optional(bool, false)
         azure_devops = object({
           org  = string
           proj = string
@@ -91,6 +92,23 @@ variable "namespaces" {
       })
     })
   )
+  default = [{
+    name   = ""
+    labels = {}
+    flux = {
+      enabled     = true
+      create_crds = false
+      azure_devops = {
+        org  = ""
+        proj = ""
+        repo = ""
+      }
+      github = {
+        repo = ""
+      }
+    }
+    }
+  ]
 }
 
 variable "kubernetes_network_policy_default_deny" {
@@ -157,6 +175,89 @@ variable "aad_pod_identity_config" {
     id        = string
     client_id = string
   }))
+}
+
+variable "azure_policy_enabled" {
+  description = "If the Azure Policy for Kubernetes add-on should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "azure_policy_config" {
+  description = "A list of Azure policy mutations to create and include in the XKS policy set definition"
+  type = object({
+    exclude_namespaces = list(string)
+    mutations = list(object({
+      name         = string
+      display_name = string
+      template     = string
+    }))
+  })
+  default = {
+    exclude_namespaces = [
+      "linkerd",
+      "linkerd-cni",
+      "velero",
+      "grafana-agent",
+    ]
+    mutations = [
+      {
+        name         = "ContainerNoPrivilegeEscalation"
+        display_name = "Containers should not use privilege escalation"
+        template     = "container-disallow-privilege-escalation.yaml.tpl"
+      },
+      {
+        name         = "ContainerDropCapabilities"
+        display_name = "Containers should drop disallowed capabilities"
+        template     = "container-drop-capabilities.yaml.tpl"
+      },
+      {
+        name         = "ContainerReadOnlyRootFs"
+        display_name = "Containers should use a read-only root filesystem"
+        template     = "container-read-only-root-fs.yaml.tpl"
+      },
+      {
+        name         = "EphemeralContainerNoPrivilegeEscalation"
+        display_name = "Ephemeral containers should not use privilege escalation"
+        template     = "ephemeral-container-disallow-privilege-escalation.yaml.tpl"
+      },
+      {
+        name         = "EphemeralContainerDropCapabilities"
+        display_name = "Ephemeral containers should drop disallowed capabilities"
+        template     = "ephemeral-container-drop-capabilities.yaml.tpl"
+      },
+      {
+        name         = "EphemeralContainerReadOnlyRootFs"
+        display_name = "Ephemeral containers should use a read-only root filesystem"
+        template     = "ephemeral-container-read-only-root-fs.yaml.tpl"
+      },
+      {
+        name         = "InitContainerNoPrivilegeEscalation"
+        display_name = "Init containers should not use privilege escalation"
+        template     = "init-container-disallow-privilege-escalation.yaml.tpl"
+      },
+      {
+        name         = "InitContainerDropCapabilities"
+        display_name = "Init containers should drop disallowed capabilities"
+        template     = "init-container-drop-capabilities.yaml.tpl"
+      },
+      {
+        name         = "InitContainerReadOnlyRootFs"
+        display_name = "Init containers should use a read-only root filesystem"
+        template     = "init-container-read-only-root-fs.yaml.tpl"
+      },
+      {
+        name         = "PodDefaultSecComp"
+        display_name = "Pods should use an allowed seccomp profile"
+        template     = "k8s-pod-default-seccomp.yaml.tpl"
+      },
+      {
+        name         = "PodServiceAccountTokenNoAutoMount"
+        display_name = "Pods should not automount service account tokens"
+        template     = "k8s-pod-serviceaccount-token-false.yaml.tpl"
+      },
+    ]
+  }
 }
 
 variable "gatekeeper_enabled" {
@@ -232,14 +333,6 @@ variable "external_dns_enabled" {
   default     = true
 }
 
-variable "external_dns_config" {
-  description = "External DNS configuration"
-  type = object({
-    client_id   = string
-    resource_id = string
-  })
-}
-
 variable "velero_enabled" {
   description = "Should Velero be enabled"
   type        = bool
@@ -258,12 +351,6 @@ variable "velero_config" {
   })
 }
 
-variable "csi_secrets_store_provider_azure_enabled" {
-  description = "Should csi-secrets-store-provider-azure be enabled"
-  type        = bool
-  default     = true
-}
-
 variable "datadog_enabled" {
   description = "Should Datadog be enabled"
   type        = bool
@@ -275,23 +362,12 @@ variable "datadog_config" {
   type = object({
 
     azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-
     datadog_site         = string
     namespaces           = list(string)
     apm_ignore_resources = list(string)
   })
   default = {
     azure_key_vault_name = ""
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
     datadog_site         = ""
     namespaces           = [""]
     apm_ignore_resources = [""]
@@ -552,4 +628,28 @@ variable "acr_name_override" {
   description = "Override default name of ACR"
   type        = string
   default     = ""
+}
+
+variable "additional_storage_classes" {
+  description = "List of additional storage classes to create"
+  type = list(object({
+    name           = string
+    provisioner    = string
+    reclaim_policy = string
+    binding_mode   = string
+    sku_name       = string
+  }))
+  default = []
+}
+
+variable "defender_enabled" {
+  description = "If Defender for Containers should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "coredns_upstream" {
+  type        = bool
+  description = "Should coredns be used as the last route instead of upstream dns?"
+  default     = false
 }

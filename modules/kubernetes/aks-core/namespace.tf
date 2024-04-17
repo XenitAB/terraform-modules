@@ -13,6 +13,18 @@ resource "kubernetes_namespace" "tenant" {
   }
 }
 
+resource "kubernetes_service_account_v1" "tenant" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+
+  metadata {
+    name      = each.key
+    namespace = each.key
+    annotations = {
+      "azure.workload.identity/client-id" = data.azurerm_user_assigned_identity.tenant[each.key].client_id
+    }
+  }
+}
+
 resource "kubernetes_limit_range" "tenant" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 

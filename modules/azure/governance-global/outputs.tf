@@ -42,7 +42,7 @@ output "azuread_apps" {
       key => {
         display_name                = value.display_name
         application_object_id       = value.id
-        application_id              = value.application_id
+        client_id                   = value.client_id
         service_principal_object_id = azuread_service_principal.delegate_kv_aad[key].id
       }
     }
@@ -51,14 +51,14 @@ output "azuread_apps" {
       key => {
         display_name                = value.display_name
         application_object_id       = value.id
-        application_id              = value.application_id
+        client_id                   = value.client_id
         service_principal_object_id = azuread_service_principal.aad_sp[key].id
       }
     }
     sub_reader = {
       display_name                = azuread_application.sub_reader_sp.display_name
       application_object_id       = azuread_application.sub_reader_sp.id
-      application_id              = azuread_application.sub_reader_sp.application_id
+      client_id                   = azuread_application.sub_reader_sp.client_id
       service_principal_object_id = azuread_service_principal.sub_reader_sp.id
     }
   }

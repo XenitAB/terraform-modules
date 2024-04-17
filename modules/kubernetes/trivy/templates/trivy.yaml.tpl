@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
- name: spegel
+ name: trivy
  labels:
    name              = "trivy"
    xkf.xenit.io/kind = "platform"

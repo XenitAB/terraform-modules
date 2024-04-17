@@ -26,5 +26,9 @@ spec:
       podSecurityStandards:
         # Don't create a psp
         enforced: true
+    monitoring:
+      grafanaDashboard:
+        # Don't create Grafana dashboard ConfigMap
+        enabled: false
     networkpolicy:
       enabled: false

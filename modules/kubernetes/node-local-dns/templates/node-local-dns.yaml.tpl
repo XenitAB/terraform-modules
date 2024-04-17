@@ -96,7 +96,7 @@ data:
         reload
         loop
         bind ${local_dns} ${dns_ip}
-        %{~ if use_coredns ~}
+        %{~ if coredns_upstream ~}
         forward . __PILLAR__CLUSTER__DNS__
         %{~ else ~}
         forward . __PILLAR__UPSTREAM__SERVERS__

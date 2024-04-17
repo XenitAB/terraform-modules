@@ -43,7 +43,7 @@ resource "git_repository_file" "trivy" {
   })
 }
 
-resource "git_repository_file" "trivy_extrax" {
+resource "git_repository_file" "trivy_extras" {
   path = "platform/${var.cluster_id}/trivy/trivy-extras.yaml"
   content = templatefile("${path.module}/templates/trivy-extras.yaml.tpl", {
     client_id   = var.client_id,

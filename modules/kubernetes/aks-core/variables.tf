@@ -647,3 +647,9 @@ variable "defender_enabled" {
   type        = bool
   default     = false
 }
+
+variable "coredns_upstream" {
+  type        = bool
+  description = "Should coredns be used as the last route instead of upstream dns?"
+  default     = false
+}

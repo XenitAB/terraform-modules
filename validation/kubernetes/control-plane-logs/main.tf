@@ -7,8 +7,5 @@ provider "helm" {}
 module "control-plane-logs" {
   source = "../../../modules/kubernetes/control-plane-logs"
 
-  providers = {
-    kubernetes = kubernetes
-    helm       = helm
-  }
+  cluster_id = "id"
 }

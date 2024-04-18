@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Changed
 
 - [#1083](https://github.com/XenitAB/terraform-modules/pull/1083) Migrate velero to install with Flux
+- [#1085](https://github.com/XenitAB/terraform-modules/pull/1085) Migrate trivy to install with flux
 - [#1051](https://github.com/XenitAB/terraform-modules/pull/1051) Fixed typo in the contribution guide
 - [#1084](https://github.com/XenitAB/terraform-modules/pull/1084) Make it possible to use CoreDNS as the last route in node-local-dns.
 - [#1081](https://github.com/XenitAB/terraform-modules/pull/1081) Bump azurerm provider to v 3.99.0

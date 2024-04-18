@@ -47,10 +47,12 @@ metadata:
   namespace: controle-plane-logs
   labels:
     app.kubernetes.io/instance: vector
-    app.kubernetes.io/managed-by: Flux
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: vector
     app.kubernetes.io/version: 0.37.1-distroless-libc
     helm.sh/chart: vector-0.32.1
+    meta.helm.sh/release-name: vector
+    meta.helm.sh/release-namespace: controle-plane-logs
 data:
   hostname: ${eventhub_hostname }
   topic: ${eventhub_name }

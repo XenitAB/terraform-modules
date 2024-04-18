@@ -495,6 +495,7 @@ module "control_plane_logs" {
     eventhub_hostname = var.control_plane_logs_config.eventhub_hostname
     eventhub_name     = var.control_plane_logs_config.eventhub_name
   }
+  cluster_id = local.cluster_id
 }
 
 module "promtail" {

@@ -77,3 +77,6 @@ spec:
       capabilities:
         drop:
           - ALL
+    serviceAccount:
+      create: true
+      name: vector

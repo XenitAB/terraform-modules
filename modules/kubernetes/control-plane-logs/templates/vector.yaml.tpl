@@ -81,6 +81,9 @@ spec:
       capabilities:
         drop:
           - ALL
+    service:
+      enabled: false
     serviceAccount:
       create: true
       name: vector
+      automountToken: false

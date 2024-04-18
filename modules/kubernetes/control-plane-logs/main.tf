@@ -20,20 +20,20 @@ terraform {
 }
 
 resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/vector.yaml"
+  path = "clusters/${var.cluster_id}/control-plane-logs.yaml"
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
     cluster_id = var.cluster_id
   })
 }
 
 resource "git_repository_file" "vector" {
-  path = "platform/${var.cluster_id}/vector/vector.yaml"
+  path = "platform/${var.cluster_id}/control-plane-logs/vector.yaml"
   content = templatefile("${path.module}/templates/vector.yaml.tpl", {
   })
 }
 
 resource "git_repository_file" "vector_extras" {
-  path = "platform/${var.cluster_id}/vector/vector-extras.yaml"
+  path = "platform/${var.cluster_id}/control-plane-logs/vector-extras.yaml"
   content = templatefile("${path.module}/templates/vector-extras.yaml.tpl", {
     azure_key_vault_name = var.azure_config.azure_key_vault_name,
     client_id            = var.azure_config.identity.client_id,

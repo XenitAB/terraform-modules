@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: control-plane-logs
+  name: controle-plane-logs
   namespace: flux-system
 spec:
   interval: 5m
@@ -13,5 +13,5 @@ spec:
   healthChecks:
   - apiVersion: apps/v1
     kind: Deployment
-    namespace: control-plane-logs
+    namespace: controle-plane-logs
     name: vector

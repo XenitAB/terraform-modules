@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
- name: control-plane-logs
+ name: controle-plane-logs
  labels:
    name              = "vector"
    xkf.xenit.io/kind = "platform"
@@ -10,7 +10,7 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: vector
-  namespace: control-plane-logs
+  namespace: controle-plane-logs
 spec:
   interval: 1m0s
   url: "https://helm.vector.dev"
@@ -19,7 +19,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: vector
-  namespace: control-plane-logs
+  namespace: controle-plane-logs
 spec:
   chart:
     spec:

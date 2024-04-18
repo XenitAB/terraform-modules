@@ -37,6 +37,9 @@ spec:
       aadpodidbinding: vector
     args:
       - "--config-dir=/config"
+    existingConfigMaps:
+      - vector
+    dataDir: 
     env:
       - name: HOST
         valueFrom:

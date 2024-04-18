@@ -5,6 +5,7 @@ locals {
     "azdo-proxy",
     "calico-system",
     "cert-manager",
+    "controle-plane-logs",
     "datadog",
     "external-dns",
     "falco",

@@ -46,7 +46,11 @@ metadata:
   name: "vector"
   namespace: controle-plane-logs
   labels:
-    {{- include "vector.labels" . | nindent 4 }}
+    app.kubernetes.io/instance: vector
+    app.kubernetes.io/managed-by: Flux
+    app.kubernetes.io/name: vector
+    app.kubernetes.io/version: 0.37.1-distroless-libc
+    helm.sh/chart: vector-0.32.1
 data:
   hostname: ${eventhub_hostname }
   topic: ${eventhub_name }

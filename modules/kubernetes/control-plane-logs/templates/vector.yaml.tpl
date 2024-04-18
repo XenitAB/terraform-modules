@@ -39,7 +39,7 @@ spec:
       - "--config-dir=/config"
     existingConfigMaps:
       - vector
-    dataDir: 
+    dataDir: "/vector-data-dir"
     env:
       - name: HOST
         valueFrom:

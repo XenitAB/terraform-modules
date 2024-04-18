@@ -91,8 +91,9 @@ data:
       '''
 
     [sinks.console]
-    type = "console"
-    inputs = [ "post_unset" ]
-    target = "stdout"
-      [sinks.console.encoding]
+      type = "console"
+      inputs = [ "post_unset" ]
+      target = "stdout"
+      
+    [sinks.console.encoding]
       codec = "json"

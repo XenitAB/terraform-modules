@@ -40,6 +40,7 @@ spec:
     existingConfigMaps:
       - vector
     dataDir: "/vector-data-dir"
+    containerPorts: []
     env:
       - name: HOST
         valueFrom:

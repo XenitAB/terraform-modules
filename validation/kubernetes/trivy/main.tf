@@ -1,14 +1,10 @@
 terraform {}
 
-provider "kubernetes" {}
-
-provider "helm" {}
-
 module "trivy" {
   source = "../../../modules/kubernetes/trivy"
 
-  providers = {
-    kubernetes = kubernetes
-    helm       = helm
-  }
+  client_id                       = "id"
+  cluster_id                      = "id"
+  resource_id                     = "id"
+  volume_claim_storage_class_name = "name"
 }

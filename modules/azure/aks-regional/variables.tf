@@ -105,3 +105,9 @@ variable "acr_name_override" {
   type        = string
   default     = ""
 }
+
+variable "velero_enabled" {
+  description = "Should Velero be enabled"
+  type        = bool
+  default     = false
+}

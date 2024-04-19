@@ -541,7 +541,6 @@ variable "trivy_enabled" {
   default     = true
 }
 
-
 variable "trivy_volume_claim_storage_class_name" {
   description = "Configuration for trivy volume claim storage class name"
   type        = string
@@ -551,8 +550,9 @@ variable "trivy_volume_claim_storage_class_name" {
 variable "trivy_config" {
   description = "Configuration for trivy"
   type = object({
-    client_id   = string
-    resource_id = string
+    client_id                  = string
+    resource_id                = string
+    starboard_exporter_enabled = optional(bool, true)
   })
 }
 
@@ -645,5 +645,11 @@ variable "additional_storage_classes" {
 variable "defender_enabled" {
   description = "If Defender for Containers should be enabled"
   type        = bool
+  default     = false
+}
+
+variable "coredns_upstream" {
+  type        = bool
+  description = "Should coredns be used as the last route instead of upstream dns?"
   default     = false
 }

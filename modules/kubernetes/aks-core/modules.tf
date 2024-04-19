@@ -5,6 +5,7 @@ locals {
     "azdo-proxy",
     "calico-system",
     "cert-manager",
+    "controle-plane-logs",
     "datadog",
     "external-dns",
     "falco",
@@ -113,25 +114,15 @@ module "fluxcd_v2_github" {
 }
 
 # AAD-Pod-Identity
-module "aad_pod_identity_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
-  chart_name       = "aad-pod-identity"
-  chart_version    = "4.1.16"
-}
-
 module "aad_pod_identity" {
-  depends_on = [module.aad_pod_identity_crd]
-
   for_each = {
     for s in ["aad-pod-identity"] :
     s => s
     if var.aad_pod_identity_enabled
   }
 
-  source = "../../kubernetes/aad-pod-identity"
-
+  source           = "../../kubernetes/aad-pod-identity"
+  cluster_id       = local.cluster_id
   aad_pod_identity = var.aad_pod_identity_config
   namespaces = [for ns in var.namespaces : {
     name = ns.name
@@ -140,8 +131,6 @@ module "aad_pod_identity" {
 
 # AZ Metrics
 module "azure_metrics" {
-  depends_on = [module.aad_pod_identity_crd]
-
   for_each = {
     for s in ["azure-metrics"] :
     s => s
@@ -206,6 +195,7 @@ module "ingress_nginx" {
   customization_private  = var.ingress_nginx_config.customization_private
   linkerd_enabled        = var.linkerd_enabled
   datadog_enabled        = var.datadog_enabled
+  cluster_id             = local.cluster_id
 }
 
 # ingress-healthz
@@ -290,6 +280,8 @@ module "velero" {
   }
 
   source = "../../kubernetes/velero"
+
+  cluster_id = local.cluster_id
 
   azure_config = {
     subscription_id           = data.azurerm_client_config.current.subscription_id
@@ -496,6 +488,7 @@ module "control_plane_logs" {
     eventhub_hostname = var.control_plane_logs_config.eventhub_hostname
     eventhub_name     = var.control_plane_logs_config.eventhub_name
   }
+  cluster_id = local.cluster_id
 }
 
 module "promtail" {
@@ -539,7 +532,9 @@ module "trivy" {
   source = "../../kubernetes/trivy"
 
   client_id                       = var.trivy_config.client_id
+  cluster_id                      = local.cluster_id
   resource_id                     = var.trivy_config.resource_id
+  starboard_exporter_enabled      = var.trivy_config.starboard_exporter_enabled
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
 }
 
@@ -564,8 +559,9 @@ module "node_local_dns" {
 
   source = "../../kubernetes/node-local-dns"
 
-  cluster_id = local.cluster_id
-  dns_ip     = "10.0.0.10"
+  cluster_id       = local.cluster_id
+  dns_ip           = "10.0.0.10"
+  coredns_upstream = var.coredns_upstream
 }
 
 module "node_ttl" {

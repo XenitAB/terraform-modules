@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1052](https://github.com/XenitAB/terraform-modules/pull/1052) Update ingress-healthz to 15.5.2.
 - [#1086](https://github.com/XenitAB/terraform-modules/pull/1086) Migrate control-plane-logs to install with flux and bump helm chart version.
 - [#1083](https://github.com/XenitAB/terraform-modules/pull/1083) Migrate velero to install with Flux
 - [#1060](https://github.com/XenitAB/terraform-modules/pull/1060) Migrate ingress-nginx to install with flux.

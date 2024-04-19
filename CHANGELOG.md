@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1061](https://github.com/XenitAB/terraform-modules/pull/1061) Migrate aad-pod-identity to install with flux.
 - [#1085](https://github.com/XenitAB/terraform-modules/pull/1085) Migrate trivy to install with flux
 - [#1051](https://github.com/XenitAB/terraform-modules/pull/1051) Fixed typo in the contribution guide
 - [#1084](https://github.com/XenitAB/terraform-modules/pull/1084) Make it possible to use CoreDNS as the last route in node-local-dns.

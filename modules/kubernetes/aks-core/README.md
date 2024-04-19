@@ -30,7 +30,6 @@ This module is used to create AKS clusters.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_aad_pod_identity"></a> [aad\_pod\_identity](#module\_aad\_pod\_identity) | ../../kubernetes/aad-pod-identity | n/a |
-| <a name="module_aad_pod_identity_crd"></a> [aad\_pod\_identity\_crd](#module\_aad\_pod\_identity\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_azad_kube_proxy"></a> [azad\_kube\_proxy](#module\_azad\_kube\_proxy) | ../../kubernetes/azad-kube-proxy | n/a |
 | <a name="module_azure_metrics"></a> [azure\_metrics](#module\_azure\_metrics) | ../../kubernetes/azure-metrics | n/a |
 | <a name="module_azure_policy"></a> [azure\_policy](#module\_azure\_policy) | ../../kubernetes/azure-policy | n/a |

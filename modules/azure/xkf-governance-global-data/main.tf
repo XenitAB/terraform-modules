@@ -6,7 +6,7 @@ terraform {
       source  = "hashicorp/azuread"
     }
     azurerm = {
-      version = "3.71.0"
+      version = "3.99.0"
       source  = "hashicorp/azurerm"
     }
   }
@@ -34,7 +34,6 @@ data "azuread_group" "aks_managed_identity" {
   for_each = {
     for s in ["aks"] :
     s => s
-    if var.cloud_provider == "azure"
   }
 
   display_name = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}aksmsi"

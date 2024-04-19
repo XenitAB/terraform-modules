@@ -27,8 +27,7 @@ variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes"
   type = list(
     object({
-      name                    = string
-      delegate_resource_group = bool
+      name = string
     })
   )
 }
@@ -105,4 +104,10 @@ variable "acr_name_override" {
   description = "Override default name of ACR"
   type        = string
   default     = ""
+}
+
+variable "velero_enabled" {
+  description = "Should Velero be enabled"
+  type        = bool
+  default     = false
 }

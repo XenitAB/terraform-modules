@@ -1,32 +1,16 @@
 global:
   priorityClassName: "platform-medium"
 
-%{ if provider == "azure" }
 podLabels:
-  aadpodidbinding: cert-manager
-webhook:
-  resources:
-    requests:
-      cpu: 30m
-      memory: 100Mi
-%{ endif }
-%{ if provider == "aws" }
+  azure.workload.identity/use: "true"
 serviceAccount:
-  annotations:
-    eks.amazonaws.com/role-arn: "${aws_config.role_arn}"
-securityContext:
-  fsGroup: 1001
-# This has to be enabled because when using Calico
-# EKS will not be able to reach the webhook service.
-# https://cert-manager.io/docs/concepts/webhook/#webhook-connection-problems-on-aws-eks
+  labels:
+    azure.workload.identity/use: "true"
 webhook:
-  securePort: 10260
-  hostNetwork: true
   resources:
     requests:
       cpu: 30m
       memory: 100Mi
-%{ endif }
 
 requests:
   cpu: 15m

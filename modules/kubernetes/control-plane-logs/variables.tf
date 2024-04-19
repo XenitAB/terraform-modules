@@ -1,8 +1,3 @@
-variable "cloud_provider" {
-  description = "Name of cloud provider"
-  type        = string
-}
-
 variable "azure_config" {
   description = "Azure specific configuration"
   type = object({
@@ -25,4 +20,9 @@ variable "azure_config" {
     eventhub_hostname = ""
     eventhub_name     = ""
   }
+}
+
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
 }

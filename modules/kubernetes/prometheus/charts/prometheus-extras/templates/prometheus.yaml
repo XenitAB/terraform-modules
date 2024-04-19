@@ -7,11 +7,9 @@ metadata:
 spec:
   version: v2.41.0
   scrapeInterval: "1m"
-  {{- if eq .Values.cloudProvider "azure" }}
   podMetadata:
     labels:
       aadpodidbinding: prometheus
-  {{- end }}
   containers:
     - name: prometheus
       args:

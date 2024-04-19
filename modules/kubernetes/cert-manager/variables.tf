@@ -9,11 +9,6 @@ variable "acme_server" {
   default     = "https://acme-v02.api.letsencrypt.org/directory"
 }
 
-variable "cloud_provider" {
-  description = "Cloud provider to use."
-  type        = string
-}
-
 variable "azure_config" {
   description = "Azure specific configuration"
   type = object({
@@ -21,27 +16,11 @@ variable "azure_config" {
     hosted_zone_names   = list(string),
     resource_group_name = string,
     client_id           = string,
-    resource_id         = string,
   })
   default = {
     subscription_id     = "",
     hosted_zone_names   = [],
     resource_group_name = "",
     client_id           = "",
-    resource_id         = "",
-  }
-}
-
-variable "aws_config" {
-  description = "AWS specific configuration"
-  type = object({
-    region         = string,
-    hosted_zone_id = map(string)
-    role_arn       = string,
-  })
-  default = {
-    region         = "",
-    hosted_zone_id = {},
-    role_arn       = "",
   }
 }

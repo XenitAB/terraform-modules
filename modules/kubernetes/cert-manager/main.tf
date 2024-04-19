@@ -39,12 +39,10 @@ resource "helm_release" "cert_manager" {
   chart       = "cert-manager"
   name        = "cert-manager"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v1.7.1"
+  version     = "v1.14.4"
   max_history = 3
   skip_crds   = true
   values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider   = var.cloud_provider,
-    aws_config = var.aws_config,
   })]
 }
 
@@ -58,9 +56,7 @@ resource "helm_release" "cert_manager_extras" {
   values = [templatefile("${path.module}/templates/cert-manager-extras-values.yaml.tpl", {
     notificationEmail    = var.notification_email,
     acmeServer           = var.acme_server,
-    cloudProvider        = var.cloud_provider,
     azureConfig          = var.azure_config,
-    azureHostedZoneNames = local.azure_hosted_zone_names
-    awsConfig            = var.aws_config,
+    azureHostedZoneNames = local.azure_hosted_zone_names,
   })]
 }

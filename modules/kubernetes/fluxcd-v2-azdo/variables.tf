@@ -30,14 +30,26 @@ variable "namespaces" {
     object({
       name = string
       flux = object({
-        enabled     = bool
-        create_crds = bool
-        org         = string
-        proj        = string
-        repo        = string
+        enabled             = bool
+        create_crds         = bool
+        include_tenant_name = optional(bool, false)
+        org                 = string
+        proj                = string
+        repo                = string
       })
     })
   )
+  default = [{
+    name = ""
+    flux = {
+      enabled     = true
+      create_crds = false
+      org         = ""
+      proj        = ""
+      repo        = ""
+    }
+    }
+  ]
 }
 
 variable "cluster_repo" {

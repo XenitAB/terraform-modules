@@ -193,6 +193,7 @@ module "ingress_nginx" {
   customization_private  = var.ingress_nginx_config.customization_private
   linkerd_enabled        = var.linkerd_enabled
   datadog_enabled        = var.datadog_enabled
+  cluster_id             = local.cluster_id
 }
 
 # ingress-healthz

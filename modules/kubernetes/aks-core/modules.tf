@@ -539,7 +539,9 @@ module "trivy" {
   source = "../../kubernetes/trivy"
 
   client_id                       = var.trivy_config.client_id
+  cluster_id                      = local.cluster_id
   resource_id                     = var.trivy_config.resource_id
+  starboard_exporter_enabled      = var.trivy_config.starboard_exporter_enabled
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
 }
 
@@ -564,8 +566,9 @@ module "node_local_dns" {
 
   source = "../../kubernetes/node-local-dns"
 
-  cluster_id = local.cluster_id
-  dns_ip     = "10.0.0.10"
+  cluster_id       = local.cluster_id
+  dns_ip           = "10.0.0.10"
+  coredns_upstream = var.coredns_upstream
 }
 
 module "node_ttl" {

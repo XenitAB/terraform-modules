@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1083](https://github.com/XenitAB/terraform-modules/pull/1083) Migrate velero to install with Flux
 - [#1060](https://github.com/XenitAB/terraform-modules/pull/1060) Migrate ingress-nginx to install with flux.
 - [#1061](https://github.com/XenitAB/terraform-modules/pull/1061) Migrate aad-pod-identity to install with flux.
 - [#1085](https://github.com/XenitAB/terraform-modules/pull/1085) Migrate trivy to install with flux

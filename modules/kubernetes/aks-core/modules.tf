@@ -113,25 +113,15 @@ module "fluxcd_v2_github" {
 }
 
 # AAD-Pod-Identity
-module "aad_pod_identity_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
-  chart_name       = "aad-pod-identity"
-  chart_version    = "4.1.16"
-}
-
 module "aad_pod_identity" {
-  depends_on = [module.aad_pod_identity_crd]
-
   for_each = {
     for s in ["aad-pod-identity"] :
     s => s
     if var.aad_pod_identity_enabled
   }
 
-  source = "../../kubernetes/aad-pod-identity"
-
+  source           = "../../kubernetes/aad-pod-identity"
+  cluster_id       = local.cluster_id
   aad_pod_identity = var.aad_pod_identity_config
   namespaces = [for ns in var.namespaces : {
     name = ns.name
@@ -140,8 +130,6 @@ module "aad_pod_identity" {
 
 # AZ Metrics
 module "azure_metrics" {
-  depends_on = [module.aad_pod_identity_crd]
-
   for_each = {
     for s in ["azure-metrics"] :
     s => s
@@ -205,6 +193,7 @@ module "ingress_nginx" {
   customization_private  = var.ingress_nginx_config.customization_private
   linkerd_enabled        = var.linkerd_enabled
   datadog_enabled        = var.datadog_enabled
+  cluster_id             = local.cluster_id
 }
 
 # ingress-healthz

@@ -23,7 +23,7 @@ resource "git_repository_file" "kustomization" {
 }
 
 resource "git_repository_file" "namespace" {
-  path = "platform/${var.cluster_id}/namespace.yaml"
+  path = "platform/${var.cluster_id}/ingress-nginx/namespace.yaml"
   content = templatefile("${path.module}/templates/namespace.yaml.tpl", {
   })
 }

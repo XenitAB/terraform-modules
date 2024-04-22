@@ -22,6 +22,12 @@ resource "git_repository_file" "kustomization" {
   })
 }
 
+resource "git_repository_file" "namespace" {
+  path = "clusters/${var.cluster_id}/namespace.yaml"
+  content = templatefile("${path.module}/templates/namespace.yaml.tpl", {
+  })
+}
+
 resource "git_repository_file" "ingress_nginx" {
   for_each = {
     for s in ["ingress-nginx"] :

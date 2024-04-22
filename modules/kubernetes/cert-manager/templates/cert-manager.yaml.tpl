@@ -74,7 +74,7 @@ spec:
             hostedZoneName: ${zone}
             managedIdentity:
               clientID: ${azure_config.client_id}
-      - selector:
+        selector:
           dnsZones: 
             - ${zone}
 %{ endfor }

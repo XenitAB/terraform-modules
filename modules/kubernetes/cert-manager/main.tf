@@ -16,7 +16,6 @@ terraform {
 }
 
 locals {
-  namespace               = "cert-manager"
   azure_hosted_zone_names = "[${join(",", var.azure_config.hosted_zone_names)}]"
 }
 

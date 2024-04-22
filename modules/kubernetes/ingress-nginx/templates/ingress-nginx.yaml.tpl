@@ -19,7 +19,7 @@ spec:
       chart: ingress-nginx
       sourceRef:
         kind: HelmRepository
-        name: ingress-nginx
+        name: ${ingress_nginx_name}
       version: 4.10.0
   interval: 1m0s
   values:

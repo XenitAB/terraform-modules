@@ -65,7 +65,7 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-cluster-issuer-account-key
     solvers:
-%{ for zone in dns_zones ~}
+%{ for zone in azure_config.hosted_zone_name ~}
       - dns01:
           azureDNS:
             environment: AzurePublicCloud
@@ -73,7 +73,7 @@ spec:
             resourceGroupName: ${azure_config.resource_group_name}
             hostedZoneName: ${zone}
             managedIdentity:
-              clientID: ${$azure_config.client_id}
+              clientID: ${azure_config.client_id}
       - selector:
           dnsZones: 
             - ${zone}

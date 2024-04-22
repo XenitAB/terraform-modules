@@ -8,13 +8,9 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
@@ -22,16 +18,6 @@ terraform {
 locals {
   namespace               = "cert-manager"
   azure_hosted_zone_names = "[${join(",", var.azure_config.hosted_zone_names)}]"
-}
-
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = local.namespace
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = local.namespace
-  }
 }
 
 resource "git_repository_file" "kustomization" {

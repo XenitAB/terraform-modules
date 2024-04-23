@@ -12,6 +12,6 @@ spec:
   prune: true
   healthChecks:
   - apiVersion: apps/v1
-    kind: DaemonSet
+    kind: Deployment
     namespace: azure-metrics
     name: azure-metrics

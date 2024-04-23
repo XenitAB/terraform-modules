@@ -70,9 +70,8 @@ spec:
 
     affinity: {}
 
-    aadpodidbinding:
-      name: azure-metrics
-      enabled: true
+    podLabels:
+      aadpodidbinding: azure-metrics
 
     podmonitor:
       loadBalancer: ${podmonitor_loadbalancer}
@@ -96,8 +95,9 @@ metadata:
 spec:
   azureIdentity: azure-metrics
   selector: azure-metrics
----
+
 %{~ if podmonitor_loadbalancer ~}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:

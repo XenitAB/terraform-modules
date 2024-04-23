@@ -262,6 +262,7 @@ module "cert_manager" {
   source = "../../kubernetes/cert-manager"
 
   notification_email = var.cert_manager_config.notification_email
+  cluster_id         = local.cluster_id
   azure_config = {
     hosted_zone_names   = var.cert_manager_config.dns_zone
     resource_group_name = data.azurerm_resource_group.global.name

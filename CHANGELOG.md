@@ -11,7 +11,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1066](https://github.com/XenitAB/terraform-modules/pull/1066) Enable workload identity service account in tenant namespaces.
 
 ## Changed
+
 - [#1088](https://github.com/XenitAB/terraform-modules/pull/1088) Fix ingress-nginx multiple files collision when using public_private_enabled.
+- [#1087](https://github.com/XenitAB/terraform-modules/pull/1087) Migrate cert-manager to install with flux
 - [#1052](https://github.com/XenitAB/terraform-modules/pull/1052) Update ingress-healthz to 15.5.2.
 - [#1086](https://github.com/XenitAB/terraform-modules/pull/1086) Migrate control-plane-logs to install with flux and bump helm chart version.
 - [#1083](https://github.com/XenitAB/terraform-modules/pull/1083) Migrate velero to install with Flux

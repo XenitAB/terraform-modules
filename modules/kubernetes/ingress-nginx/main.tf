@@ -22,6 +22,12 @@ resource "git_repository_file" "kustomization" {
   })
 }
 
+resource "git_repository_file" "namespace" {
+  path = "platform/${var.cluster_id}/ingress-nginx/namespace.yaml"
+  content = templatefile("${path.module}/templates/namespace.yaml.tpl", {
+  })
+}
+
 resource "git_repository_file" "ingress_nginx" {
   for_each = {
     for s in ["ingress-nginx"] :
@@ -32,6 +38,7 @@ resource "git_repository_file" "ingress_nginx" {
   path = "platform/${var.cluster_id}/ingress-nginx/ingress-nginx.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx.yaml.tpl", {
     ingress_class          = "nginx"
+    ingress_nginx_name     = "ingress-nginx"
     default_ingress_class  = true
     internal_load_balancer = false
     external_dns_hostname  = var.external_dns_hostname
@@ -60,6 +67,7 @@ resource "git_repository_file" "ingress_nginx_public" {
   path = "platform/${var.cluster_id}/ingress-nginx/ingress-nginx-public.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx.yaml.tpl", {
     ingress_class          = "nginx-public"
+    ingress_nginx_name     = "ingress-nginx-public"
     default_ingress_class  = true
     internal_load_balancer = false
     external_dns_hostname  = var.external_dns_hostname
@@ -89,6 +97,7 @@ resource "git_repository_file" "ingress_nginx_private" {
   path = "platform/${var.cluster_id}/ingress-nginx/ingress-nginx-private.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx.yaml.tpl", {
     ingress_class          = "nginx-private"
+    ingress_nginx_name     = "ingress-nginx-private"
     default_ingress_class  = false
     internal_load_balancer = true
     external_dns_hostname  = var.external_dns_hostname

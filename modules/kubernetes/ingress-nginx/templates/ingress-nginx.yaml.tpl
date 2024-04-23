@@ -1,15 +1,8 @@
-apiVersion: v1
-kind: Namespace
-metadata:
- name: ingress-nginx
- labels:
-   name              = "ingress-nginx"
-   xkf.xenit.io/kind = "platform"
----
+
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: ingress-nginx
+  name: ${ingress_nginx_name}
   namespace: ingress-nginx
 spec:
   interval: 1m0s
@@ -18,7 +11,7 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: ingress-nginx
+  name: ${ingress_nginx_name}
   namespace: ingress-nginx
 spec:
   chart:
@@ -26,7 +19,7 @@ spec:
       chart: ingress-nginx
       sourceRef:
         kind: HelmRepository
-        name: ingress-nginx
+        name: ${ingress_nginx_name}
       version: 4.10.0
   interval: 1m0s
   values:
@@ -137,10 +130,10 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: ingress-nginx
+  name: ${ingress_nginx_name}
   namespace: ingress-nginx
 spec:
-  secretName: ingress-nginx
+  secretName: ${ingress_nginx_name}
   revisionHistoryLimit: 3
   dnsNames:
     - '*.${default_certificate.dns_zone}'

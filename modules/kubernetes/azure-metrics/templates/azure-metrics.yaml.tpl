@@ -83,6 +83,7 @@ apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentity
 metadata:
   name: azure-metrics
+  namespace: azure-metrics
 spec:
   type: 0
   resourceID: ${resource_id}
@@ -92,6 +93,7 @@ apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentityBinding
 metadata:
   name: azure-metrics
+  namespace: azure-metrics
 spec:
   azureIdentity: azure-metrics
   selector: azure-metrics

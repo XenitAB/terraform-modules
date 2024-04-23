@@ -133,8 +133,9 @@ spec:
       app.kubernetes.io/name: azure-metrics
       app.kubernetes.io/instance: azure-metrics-exporter
 %{~ endif ~}
----
+
 %{~ if podmonitor_kubernetes ~}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:

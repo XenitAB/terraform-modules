@@ -71,7 +71,7 @@ module "aks_core" {
       name = "name"
     }
   }
-  
+
   trivy_enabled = true
   trivy_config = {
     client_id   = "foo"

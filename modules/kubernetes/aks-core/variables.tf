@@ -569,15 +569,6 @@ variable "vpa_enabled" {
   default     = true
 }
 
-# Obsolete. To be removed.
-variable "azure_metrics_config" {
-  description = "AZ Metrics configuration"
-  type = object({
-    client_id   = string
-    resource_id = string
-  })
-}
-
 variable "node_local_dns_enabled" {
   description = "Should VPA be enabled"
   type        = bool

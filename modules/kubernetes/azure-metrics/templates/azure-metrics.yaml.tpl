@@ -30,54 +30,22 @@ spec:
       version: v1.2.1
   interval: 1m0s
   values:
+    fullnameOverride: "ezure-metrics-exporter"
     image:
-      repository: webdevops/azure-metrics-exporter
-      pullPolicy: IfNotPresent
-      # Overrides the image tag whose default is the chart appVersion.
-      tag: "22.3.0"
-
-    imagePullSecrets: []
-    nameOverride: ""
-    fullnameOverride: ""
-
-    podAnnotations: {}
-
-    podSecurityContext:
-      {}
-      # fsGroup: 2000
-
-    securityContext:
-      {}
-      # capabilities:
-      #   drop:
-      #   - ALL
-      # readOnlyRootFilesystem: true
-      # runAsNonRoot: true
-      # runAsUser: 1000
-
-    service:
-      type: ClusterIP
-      port: 80
-
+      tag: "24.2.0"
     resources:
       requests:
         cpu: 15m
         memory: 25Mi
-
-    nodeSelector: {}
-
-    tolerations: []
-
-    affinity: {}
-
     podLabels:
-      aadpodidbinding: azure-metrics
-
-    podmonitor:
-      loadBalancer: ${podmonitor_loadbalancer}
-      kubernetes: ${podmonitor_kubernetes}
-
-    subscription: ${subscription_id}
+      azure.workload.identity/use: "true"
+    serviceAccount:
+      # name must correlate with azurerm_federated_identity_credential.azure_metrics.subject
+      name: azure-metrics-exporter
+      labels:
+        azure.workload.identity/use: "true"
+    netpol:
+      enabled: false
 ---
 apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentity

@@ -14,4 +14,8 @@ spec:
   - apiVersion: apps/v1
     kind: DaemonSet
     namespace: aad-pod-identity
-    name: aad-pod-identity
+    name: aad-pod-identity-nmi
+  - apiVersion: apps/v1
+    kind: Deployment
+    namespace: aad-pod-identity
+    name: aad-pod-identity-mic

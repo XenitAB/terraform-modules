@@ -25,7 +25,7 @@ spec:
     cluster_name: ${cluster_name}
     environment: ${environment}
     region: ${region}
-    %{ if tenant_id }
+    %{ if tenant_id != "" }
     tenant_id: ${tenant_id}
     %{ endif }
   replicas: 2

@@ -569,6 +569,7 @@ variable "vpa_enabled" {
   default     = true
 }
 
+# Obsolete. To be removed.
 variable "azure_metrics_config" {
   description = "AZ Metrics configuration"
   type = object({

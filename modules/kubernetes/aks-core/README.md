@@ -100,6 +100,7 @@ This module is used to create AKS clusters.
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/container_registry) | data source |
 | [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/resource_group) | data source |
+| [azurerm_user_assigned_identity.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/user_assigned_identity) | data source |
 | [azurerm_user_assigned_identity.cert_manager](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/user_assigned_identity) | data source |
 | [azurerm_user_assigned_identity.datadog](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/user_assigned_identity) | data source |
 | [azurerm_user_assigned_identity.external_dns](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/user_assigned_identity) | data source |

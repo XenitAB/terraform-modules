@@ -36,6 +36,7 @@ No modules.
 | [azuread_group_member.aks_cluster_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/resources/group_member) | resource |
 | [azuread_group_member.aks_managed_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/resources/group_member) | resource |
 | [azuread_group_member.tenant](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/resources/group_member) | resource |
+| [azurerm_federated_identity_credential.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/federated_identity_credential) | resource |
 | [azurerm_federated_identity_credential.cert_manager](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/federated_identity_credential) | resource |
 | [azurerm_federated_identity_credential.datadog](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/federated_identity_credential) | resource |
 | [azurerm_federated_identity_credential.external_dns](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/federated_identity_credential) | resource |
@@ -55,6 +56,7 @@ No modules.
 | [azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.azure_metrics_aks_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.azure_metrics_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.azure_metrics_lb_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.cert_manager_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.cluster_admin](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
@@ -66,6 +68,7 @@ No modules.
 | [azurerm_security_center_auto_provisioning.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/security_center_auto_provisioning) | resource |
 | [azurerm_security_center_subscription_pricing.containers](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/security_center_subscription_pricing) | resource |
 | [azurerm_storage_management_policy.log_storage_account_audit_policy](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/storage_management_policy) | resource |
+| [azurerm_user_assigned_identity.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.cert_manager](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.datadog](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.external_dns](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/user_assigned_identity) | resource |

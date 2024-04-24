@@ -47,25 +47,6 @@ spec:
     netpol:
       enabled: false
 ---
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentity
-metadata:
-  name: azure-metrics
-  namespace: azure-metrics
-spec:
-  type: 0
-  resourceID: ${resource_id}
-  clientID: ${client_id}
----
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentityBinding
-metadata:
-  name: azure-metrics
-  namespace: azure-metrics
-spec:
-  azureIdentity: azure-metrics
-  selector: azure-metrics
----
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
@@ -74,6 +55,7 @@ metadata:
     app.kubernetes.io/instance: azure-metrics
     xkf.xenit.io/monitoring: platform
   name: azure-metrics-exporter
+  namespace: azure-metrics
 spec:
   podMetricsEndpoints:
   - interval: 60s
@@ -93,6 +75,7 @@ metadata:
     app.kubernetes.io/instance: azure-metrics
     xkf.xenit.io/monitoring: platform
   name: azure-metrics-exporter-loadbalancers
+  namespace: azure-metrics
 spec:
   podMetricsEndpoints:
   - interval: 60s
@@ -128,6 +111,7 @@ metadata:
     app.kubernetes.io/instance: azure-metrics
     xkf.xenit.io/monitoring: platform
   name: azure-metrics-exporter-kubernetes
+  namespace: azure-metrics
 spec:
   podMetricsEndpoints:
   - interval: 60s

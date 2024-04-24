@@ -35,7 +35,6 @@ No modules.
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_podmonitor_kubernetes"></a> [podmonitor\_kubernetes](#input\_podmonitor\_kubernetes) | Enable podmonitor for kubernetes? | `bool` | `true` | no |
 | <a name="input_podmonitor_loadbalancer"></a> [podmonitor\_loadbalancer](#input\_podmonitor\_loadbalancer) | Enable podmonitor for loadbalancers? | `bool` | `true` | no |
-| <a name="input_resource_id"></a> [resource\_id](#input\_resource\_id) | The resource\_id for aadpodidentity to the resource | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The subscription id where your kubernetes cluster is deployed | `string` | n/a | yes |
 
 ## Outputs

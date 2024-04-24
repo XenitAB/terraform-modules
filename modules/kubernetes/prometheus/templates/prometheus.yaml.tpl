@@ -2,6 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
   name: xks
+  namespace: prometheus
 spec:
   version: v2.41.0
   scrapeInterval: "1m"

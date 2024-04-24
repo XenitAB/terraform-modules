@@ -127,10 +127,6 @@ spec:
       rbac:
         pspEnabled: false
 
-    # We don't monitor the clusters locally
-    defaultRules:
-      create: false
-
     prometheusOperator:
       priorityClassName: "platform-low"
 

@@ -4,6 +4,7 @@ metadata:
   labels:
     xkf.xenit.io/monitoring: platform
   name: prometheus
+  namespace: prometheus
 spec:
   podMetricsEndpoints:
     - port: web

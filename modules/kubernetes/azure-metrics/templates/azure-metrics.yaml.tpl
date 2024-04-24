@@ -97,7 +97,24 @@ metadata:
 spec:
   azureIdentity: azure-metrics
   selector: azure-metrics
-
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+      app.kubernetes.io/name: azure-metrics
+      app.kubernetes.io/instance: azure-metrics
+    xkf.xenit.io/monitoring: platform
+  name: azure-metrics-exporter
+spec:
+  podMetricsEndpoints:
+  - interval: 60s
+    port: http
+    path: /metrics
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: azure-metrics
+      app.kubernetes.io/instance: azure-metrics-exporter
 %{ if podmonitor_loadbalancer }
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -133,7 +150,6 @@ spec:
       app.kubernetes.io/name: azure-metrics
       app.kubernetes.io/instance: azure-metrics-exporter
 %{ endif }
-
 %{ if podmonitor_kubernetes }
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -170,21 +186,3 @@ spec:
       app.kubernetes.io/name: azure-metrics
       app.kubernetes.io/instance: azure-metrics-exporter
 %{ endif }
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  labels:
-      app.kubernetes.io/name: azure-metrics
-      app.kubernetes.io/instance: azure-metrics
-    xkf.xenit.io/monitoring: platform
-  name: azure-metrics-exporter
-spec:
-  podMetricsEndpoints:
-  - interval: 60s
-    port: http
-    path: /metrics
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: azure-metrics
-      app.kubernetes.io/instance: azure-metrics-exporter

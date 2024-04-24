@@ -97,15 +97,3 @@ resource "git_repository_file" "x509_certificate_exporter" {
   content = templatefile("${path.module}/templates/x509-certificate-exporter.yaml.tpl", {
   })
 }
-
-resource "helm_release" "x509_certificate_exporter" {
-  repository  = "https://charts.enix.io"
-  chart       = "x509-certificate-exporter"
-  name        = "x509-certificate-exporter"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "3.6.0"
-  max_history = 3
-  values = [templatefile("${path.module}/templates/values-x509.yaml.tpl", {
-    prometheus_namespace = kubernetes_namespace.this.metadata[0].name,
-  })]
-}

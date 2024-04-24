@@ -98,7 +98,7 @@ spec:
   azureIdentity: azure-metrics
   selector: azure-metrics
 
-%{~ if podmonitor_loadbalancer ~}
+%{ if podmonitor_loadbalancer }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
@@ -132,9 +132,9 @@ spec:
     matchLabels:
       app.kubernetes.io/name: azure-metrics
       app.kubernetes.io/instance: azure-metrics-exporter
-%{~ endif ~}
+%{ endif }
 
-%{~ if podmonitor_kubernetes ~}
+%{ if podmonitor_kubernetes }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
@@ -169,7 +169,7 @@ spec:
     matchLabels:
       app.kubernetes.io/name: azure-metrics
       app.kubernetes.io/instance: azure-metrics-exporter
-%{~ endif ~}
+%{ endif }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor

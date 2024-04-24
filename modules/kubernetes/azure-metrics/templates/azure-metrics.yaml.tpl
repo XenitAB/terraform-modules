@@ -70,8 +70,8 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   labels:
-      app.kubernetes.io/name: azure-metrics
-      app.kubernetes.io/instance: azure-metrics
+    app.kubernetes.io/name: azure-metrics
+    app.kubernetes.io/instance: azure-metrics
     xkf.xenit.io/monitoring: platform
   name: azure-metrics-exporter
 spec:
@@ -89,8 +89,8 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   labels:
-      app.kubernetes.io/name: azure-metrics
-      app.kubernetes.io/instance: azure-metrics
+    app.kubernetes.io/name: azure-metrics
+    app.kubernetes.io/instance: azure-metrics
     xkf.xenit.io/monitoring: platform
   name: azure-metrics-exporter-loadbalancers
 spec:

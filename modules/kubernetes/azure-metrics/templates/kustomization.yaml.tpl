@@ -14,4 +14,4 @@ spec:
   - apiVersion: apps/v1
     kind: Deployment
     namespace: azure-metrics
-    name: azure-metrics-azure-metric
+    name: azure-metrics-exporter

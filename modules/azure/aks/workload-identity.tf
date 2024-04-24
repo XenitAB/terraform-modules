@@ -138,7 +138,7 @@ resource "azurerm_federated_identity_credential" "azure_metrics" {
   parent_id           = azurerm_user_assigned_identity.azure_metrics.id
   audience            = ["api://AzureADTokenExchange"]
   issuer              = azurerm_kubernetes_cluster.this.oidc_issuer_url
-  subject             = "system:serviceaccount:cert-manager:azure-metrics-exporter"
+  subject             = "system:serviceaccount:azure-metrics:azure-metrics-exporter"
 }
 
 data "azurerm_key_vault" "core" {

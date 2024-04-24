@@ -22,6 +22,7 @@ module "grafana_agent" {
     traces_password  = "bar"
   }
 
+  cluster_id        = "id"
   cluster_name      = "aks1"
   environment       = "dev"
   vpa_enabled       = false

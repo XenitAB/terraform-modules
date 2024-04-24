@@ -361,6 +361,7 @@ module "grafana_agent" {
     traces_password  = var.grafana_agent_config.credentials.traces_password
   }
 
+  cluster_id              = local.cluster_id
   cluster_name            = "${var.name}${local.aks_name_suffix}"
   environment             = var.environment
   vpa_enabled             = var.vpa_enabled

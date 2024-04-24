@@ -42,8 +42,8 @@ spec:
     serviceAccount:
       # name must correlate with azurerm_federated_identity_credential.azure_metrics.subject
       name: azure-metrics-exporter
-      labels:
-        azure.workload.identity/use: "true"
+      annotations:
+        azure.workload.identity/client-id: ${client_id}
     netpol:
       enabled: false
 ---

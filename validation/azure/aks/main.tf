@@ -18,6 +18,7 @@ module "aks" {
   environment                   = "dev"
   location_short                = "we"
   name                          = "xks"
+  subscription_name             = "sub"
   core_name                     = "core"
   unique_suffix                 = 1337
   aks_name_suffix               = "1"
@@ -28,7 +29,7 @@ module "aks" {
   }
 
   aks_config = {
-    version                  = "1.25.6"
+    version                  = "1.27.7"
     production_grade         = false
     priority_expander_config = { "10" : [".*standard.*"], "20" : [".*spot.*"] }
     default_node_pool = {
@@ -39,7 +40,7 @@ module "aks" {
     node_pools = [
       {
         name      = "pool1"
-        version   = "1.25.6"
+        version   = "1.27.7"
         vm_size   = "Standard_B2s"
         min_count = 1
         max_count = 1
@@ -56,8 +57,7 @@ module "aks" {
   }
   namespaces = [
     {
-      name                    = "team1"
-      delegate_resource_group = true
+      name = "team1"
       labels = {
         "test" = "test"
       }
@@ -100,4 +100,7 @@ module "aks" {
 
   log_eventhub_name                  = "eventhub1"
   log_eventhub_authorization_rule_id = "12345"
+
+  global_location_short = "we"
+  dns_zones             = ["example.com"]
 }

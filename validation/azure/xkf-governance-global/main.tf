@@ -5,14 +5,12 @@ provider "azuread" {}
 module "xkf_global" {
   source = "../../../modules/azure/xkf-governance-global"
 
-  cloud_provider    = "azure"
   environment       = "dev"
   subscription_name = "xks"
 
   namespaces = [
     {
-      name                    = "team1"
-      delegate_resource_group = true
+      name = "team1"
       labels = {
         "test" = "test"
       }

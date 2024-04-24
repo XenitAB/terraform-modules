@@ -18,6 +18,23 @@ variable "unique_suffix" {
   type        = string
 }
 
+variable "group_name_separator" {
+  description = "Separator for group names"
+  type        = string
+  default     = "-"
+}
+
+variable "azure_ad_group_prefix" {
+  description = "Prefix for Azure AD Groups"
+  type        = string
+  default     = "az"
+}
+
+variable "subscription_name" {
+  description = "The commonName for the subscription"
+  type        = string
+}
+
 variable "core_name" {
   description = "The commonName for the core infrastructure"
   type        = string
@@ -65,9 +82,9 @@ variable "aks_config" {
 
   validation {
     condition = alltrue([
-      for np in concat(var.aks_config.node_pools, [{ version : var.aks_config.version }]) : can(regex("^1.(25|26)", np.version))
+      for np in concat(var.aks_config.node_pools, [{ version : var.aks_config.version }]) : can(regex("^1.(26|27|28)", np.version))
     ])
-    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.25, 1.26."
+    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.26, 1.27, 1.28."
   }
 
   validation {
@@ -114,6 +131,12 @@ variable "aks_config" {
   }
 }
 
+variable "azure_policy_enabled" {
+  description = "If the Azure Policy for Kubernetes add-on should be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "ssh_public_key" {
   description = "SSH public key to add to servers"
   type        = string
@@ -153,8 +176,7 @@ variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes"
   type = list(
     object({
-      name                    = string
-      delegate_resource_group = bool
+      name = string
     })
   )
 }
@@ -185,5 +207,56 @@ variable "log_eventhub_name" {
 
 variable "log_eventhub_authorization_rule_id" {
   description = "The authoritzation rule id for event hub"
+  type        = string
+}
+
+variable "defender_enabled" {
+  description = "If Defender for Containers should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "audit_config" {
+  description = "Kubernetes audit log configuration"
+  type = object({
+    destination_type = optional(string, "StorageAccount")
+    analytics_workspace = optional(object({
+      sku_name       = optional(string, "PerGB2018")
+      daily_quota_gb = optional(number, -1)
+      reservation_gb = optional(number, 0)
+      retention_days = optional(number, 30)
+    }), {})
+  })
+  default = {}
+
+  validation {
+    condition     = contains(["AnalyticsWorkspace", "StorageAccount"], var.audit_config.destination_type)
+    error_message = "Invalid destination_type: ${var.audit_config.destination_type}. Allowed vallues: ['AnalyticsWorkspace', 'StorageAccount']"
+  }
+}
+
+variable "defender_config" {
+  description = "The Microsoft Defender for containers configuration"
+  type = object({
+    analytics_workspace = optional(object({
+      sku_name       = optional(string, "PerGB2018")
+      daily_quota_gb = optional(number, -1)
+      reservation_gb = optional(number, 0)
+      retention_days = optional(number, 30)
+    }), {})
+    kubernetes_discovery_enabled      = optional(bool, false)
+    kubernetes_sensor_enabled         = optional(bool, true)
+    vulnerability_assessments_enabled = optional(bool, true)
+  })
+  default = {}
+}
+
+variable "dns_zones" {
+  description = "List of DNS Zones"
+  type        = list(string)
+}
+
+variable "global_location_short" {
+  description = "The Azure region short name where the global resources resides."
   type        = string
 }

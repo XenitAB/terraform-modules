@@ -10,45 +10,28 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = "falco"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "falco"
-  }
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/falco.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id
+  })
 }
 
-resource "helm_release" "falco" {
-  repository  = "https://falcosecurity.github.io/charts"
-  chart       = "falco"
-  name        = "falco"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "2.3.0"
-  max_history = 3
-  values = [templatefile("${path.module}/templates/falco-values.yaml.tpl", {
-    provider = var.cloud_provider
-  })]
+resource "git_repository_file" "falco" {
+  path = "platform/${var.cluster_id}/falco/falco.yaml"
+  content = templatefile("${path.module}/templates/falco.yaml.tpl", {
+  })
 }
 
-resource "helm_release" "falco_exporter" {
-  repository  = "https://falcosecurity.github.io/charts"
-  chart       = "falco-exporter"
-  name        = "falco-exporter"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "0.9.1"
-  max_history = 3
-  values      = [templatefile("${path.module}/templates/falco-exporter-values.yaml.tpl", {})]
+resource "git_repository_file" "falco_exporter" {
+  path = "platform/${var.cluster_id}/falco/falco-exporter.yaml"
+  content = templatefile("${path.module}/templates/falco-exporter.yaml.tpl", {
+  })
 }

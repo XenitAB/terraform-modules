@@ -46,7 +46,11 @@ metadata:
 spec:
   serviceAccountName: flux
   interval: 5m
+%{ if include_tenant_name == true }
+  path: ./tenant/${name}/${environment}
+%{ else }
   path: ./tenant/${environment}
+%{ endif }
   sourceRef:
     kind: GitRepository
     name: ${name}

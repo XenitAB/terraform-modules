@@ -9,11 +9,11 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "3.71.0"
+      version = "3.99.0"
       source  = "hashicorp/azurerm"
     }
     azuread = {
-      version = "2.41.0"
+      version = "2.47.0"
       source  = "hashicorp/azuread"
     }
     random = {
@@ -60,5 +60,27 @@ locals {
 data "azurerm_container_registry" "acr" {
   name                = var.acr_name_override == "" ? "acr${var.environment}${var.location_short}${var.name}${var.unique_suffix}" : var.acr_name_override
   resource_group_name = data.azurerm_resource_group.global.name
+}
+
+data "azurerm_user_assigned_identity" "tenant" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+
+  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-${each.key}-wi"
+  resource_group_name = data.azurerm_resource_group.this.name
+}
+
+data "azurerm_user_assigned_identity" "external_dns" {
+  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-external-dns"
+  resource_group_name = data.azurerm_resource_group.this.name
+}
+
+data "azurerm_user_assigned_identity" "cert_manager" {
+  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-cert-manager"
+  resource_group_name = data.azurerm_resource_group.this.name
+}
+
+data "azurerm_user_assigned_identity" "datadog" {
+  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-datadog"
+  resource_group_name = data.azurerm_resource_group.this.name
 }
 

@@ -31,26 +31,6 @@ output "ssh_public_key" {
   value       = tls_private_key.ssh_key.public_key_openssh
 }
 
-output "external_dns_identity" {
-  description = "MSI authentication identity for External DNS"
-  value = {
-    client_id   = azurerm_user_assigned_identity.external_dns.client_id
-    resource_id = azurerm_user_assigned_identity.external_dns.id
-  }
-}
-
-output "velero" {
-  description = "Velero configuration"
-  value = {
-    azure_storage_account_name      = azurerm_storage_account.velero.name
-    azure_storage_account_container = azurerm_storage_container.velero.name
-    identity = {
-      client_id   = azurerm_user_assigned_identity.velero.client_id
-      resource_id = azurerm_user_assigned_identity.velero.id
-    }
-  }
-}
-
 output "xenit" {
   description = "Configuration used by monitoring solution to get authentication credentials"
   value = {
@@ -107,16 +87,4 @@ output "log_eventhub_hostname" {
 output "log_eventhub_authorization_rule_id" {
   description = "The authoritzation rule id for event hub"
   value       = azurerm_eventhub_namespace_authorization_rule.aks.id
-}
-
-output "datadog" {
-  description = "MSI authentication identity for Datadog"
-  value = {
-    azure_key_vault_name = data.azurerm_key_vault.core.name
-    identity = {
-      client_id   = azurerm_user_assigned_identity.datadog.client_id
-      resource_id = azurerm_user_assigned_identity.datadog.id
-      tenant_id   = data.azurerm_client_config.current.tenant_id
-    }
-  }
 }

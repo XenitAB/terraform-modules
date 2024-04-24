@@ -1,15 +1,17 @@
 locals {
   exclude_namespaces = [
     "aad-pod-identity",
+    "azad-kube-proxy",
     "azdo-proxy",
     "calico-system",
     "cert-manager",
-    "csi-secrets-store-provider-azure",
+    "controle-plane-logs",
     "datadog",
     "external-dns",
     "falco",
     "flux-system",
     "ingress-nginx",
+    "ingress-healthz",
     "linkerd",
     "linkerd-cni",
     "reloader",
@@ -26,17 +28,36 @@ locals {
   cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
 }
 
+module "azure_policy" {
+  for_each = {
+    for s in ["azure_policy"] :
+    s => s
+    if var.azure_policy_enabled && !var.gatekeeper_enabled
+  }
+
+  source = "../../kubernetes/azure-policy"
+
+  aks_name            = var.name
+  aks_name_suffix     = var.aks_name_suffix
+  azure_policy_config = var.azure_policy_config
+  environment         = var.environment
+  location_short      = var.location_short
+  tenant_namespaces = [
+    for namespace in var.namespaces :
+    namespace.name if namespace.flux.enabled
+  ]
+}
+
 module "gatekeeper" {
   for_each = {
     for s in ["gatekeeper"] :
     s => s
-    if var.gatekeeper_enabled
+    if var.gatekeeper_enabled && !var.azure_policy_enabled
   }
 
   source = "../../kubernetes/gatekeeper"
 
   cluster_id         = local.cluster_id
-  cloud_provider     = "azure"
   exclude_namespaces = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
 }
 
@@ -58,11 +79,12 @@ module "fluxcd_v2_azure_devops" {
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {
-      enabled     = ns.flux.enabled
-      create_crds = ns.flux.create_crds
-      org         = ns.flux.azure_devops.org
-      proj        = ns.flux.azure_devops.proj
-      repo        = ns.flux.azure_devops.repo
+      enabled             = ns.flux.enabled
+      create_crds         = ns.flux.create_crds
+      include_tenant_name = ns.flux.include_tenant_name
+      org                 = ns.flux.azure_devops.org
+      proj                = ns.flux.azure_devops.proj
+      repo                = ns.flux.azure_devops.repo
     }
   }]
 }
@@ -92,25 +114,15 @@ module "fluxcd_v2_github" {
 }
 
 # AAD-Pod-Identity
-module "aad_pod_identity_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
-  chart_name       = "aad-pod-identity"
-  chart_version    = "4.1.16"
-}
-
 module "aad_pod_identity" {
-  depends_on = [module.aad_pod_identity_crd]
-
   for_each = {
     for s in ["aad-pod-identity"] :
     s => s
     if var.aad_pod_identity_enabled
   }
 
-  source = "../../kubernetes/aad-pod-identity"
-
+  source           = "../../kubernetes/aad-pod-identity"
+  cluster_id       = local.cluster_id
   aad_pod_identity = var.aad_pod_identity_config
   namespaces = [for ns in var.namespaces : {
     name = ns.name
@@ -119,8 +131,6 @@ module "aad_pod_identity" {
 
 # AZ Metrics
 module "azure_metrics" {
-  depends_on = [module.aad_pod_identity_crd]
-
   for_each = {
     for s in ["azure-metrics"] :
     s => s
@@ -173,7 +183,6 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  cloud_provider        = "azure"
   external_dns_hostname = var.external_dns_hostname
   default_certificate = {
     enabled  = true
@@ -185,6 +194,7 @@ module "ingress_nginx" {
   customization_private  = var.ingress_nginx_config.customization_private
   linkerd_enabled        = var.linkerd_enabled
   datadog_enabled        = var.datadog_enabled
+  cluster_id             = local.cluster_id
 }
 
 # ingress-healthz
@@ -204,12 +214,11 @@ module "ingress_healthz" {
   location_short         = var.location_short
   linkerd_enabled        = var.linkerd_enabled
   public_private_enabled = var.ingress_nginx_config.public_private_enabled
+  cluster_id             = local.cluster_id
 }
 
 # External DNS
 module "external_dns" {
-  depends_on = [module.aad_pod_identity_crd]
-
   for_each = {
     for s in ["external-dns"] :
     s => s
@@ -218,14 +227,14 @@ module "external_dns" {
 
   source = "../../kubernetes/external-dns"
 
+  cluster_id   = local.cluster_id
   dns_provider = "azure"
   txt_owner_id = "${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   azure_config = {
     tenant_id       = data.azurerm_client_config.current.tenant_id
     subscription_id = data.azurerm_client_config.current.subscription_id
     resource_group  = data.azurerm_resource_group.global.name
-    client_id       = var.external_dns_config.client_id
-    resource_id     = var.external_dns_config.resource_id
+    client_id       = data.azurerm_user_assigned_identity.external_dns.client_id
   }
 }
 
@@ -253,13 +262,12 @@ module "cert_manager" {
   source = "../../kubernetes/cert-manager"
 
   notification_email = var.cert_manager_config.notification_email
-  cloud_provider     = "azure"
+  cluster_id         = local.cluster_id
   azure_config = {
     hosted_zone_names   = var.cert_manager_config.dns_zone
     resource_group_name = data.azurerm_resource_group.global.name
     subscription_id     = data.azurerm_client_config.current.subscription_id
-    client_id           = var.external_dns_config.client_id
-    resource_id         = var.external_dns_config.resource_id
+    client_id           = data.azurerm_user_assigned_identity.cert_manager.client_id
   }
 }
 
@@ -273,7 +281,8 @@ module "velero" {
 
   source = "../../kubernetes/velero"
 
-  cloud_provider = "azure"
+  cluster_id = local.cluster_id
+
   azure_config = {
     subscription_id           = data.azurerm_client_config.current.subscription_id
     resource_group            = data.azurerm_resource_group.this.name
@@ -282,27 +291,6 @@ module "velero" {
     client_id                 = var.velero_config.identity.client_id
     resource_id               = var.velero_config.identity.resource_id
   }
-}
-
-# csi-secrets-store-provider-azure
-module "csi_secrets_store_provider_azure_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://azure.github.io/secrets-store-csi-driver-provider-azure/charts"
-  chart_name       = "csi-secrets-store-provider-azure"
-  chart_version    = "1.4.0"
-}
-
-module "csi_secrets_store_provider_azure" {
-  depends_on = [module.csi_secrets_store_provider_azure_crd]
-
-  for_each = {
-    for s in ["csi-secrets-store-provider-azure"] :
-    s => s
-    if var.csi_secrets_store_provider_azure_enabled
-  }
-
-  source = "../../kubernetes/csi-secrets-store-provider-azure"
 }
 
 # datadog
@@ -315,8 +303,6 @@ module "datadog" {
 
   source = "../../kubernetes/datadog"
 
-  cloud_provider = "azure"
-
   location             = var.location_short
   environment          = var.environment
   cluster_id           = local.cluster_id
@@ -327,9 +313,8 @@ module "datadog" {
   azure_config = {
     azure_key_vault_name = var.datadog_config.azure_key_vault_name
     identity = {
-      client_id   = var.datadog_config.identity.client_id
-      resource_id = var.datadog_config.identity.resource_id
-      tenant_id   = data.azurerm_client_config.current.tenant_id
+      client_id = data.azurerm_user_assigned_identity.datadog.client_id
+      tenant_id = data.azurerm_user_assigned_identity.datadog.tenant_id
     }
   }
 }
@@ -387,7 +372,7 @@ module "falco" {
 
   source = "../../kubernetes/falco"
 
-  cloud_provider = "azure"
+  cluster_id = local.cluster_id
 }
 
 # Reloader
@@ -398,21 +383,22 @@ module "reloader" {
     if var.reloader_enabled
   }
 
-  source = "../../kubernetes/reloader"
+  source     = "../../kubernetes/reloader"
+  cluster_id = local.cluster_id
+
 }
+
 
 # azad-kube-proxy
 module "azad_kube_proxy" {
-  depends_on = [module.ingress_nginx]
-
   for_each = {
     for s in ["azad-kube-proxy"] :
     s => s
     if var.azad_kube_proxy_enabled
   }
 
-  source = "../../kubernetes/azad-kube-proxy"
-
+  source                = "../../kubernetes/azad-kube-proxy"
+  cluster_id            = local.cluster_id
   fqdn                  = var.azad_kube_proxy_config.fqdn
   azure_ad_group_prefix = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
   allowed_ips           = var.azad_kube_proxy_config.allowed_ips
@@ -444,7 +430,6 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
-  cloud_provider = "azure"
   azure_config = {
     azure_key_vault_name = var.prometheus_config.azure_key_vault_name
     identity = {
@@ -469,20 +454,19 @@ module "prometheus" {
   resource_selector  = var.prometheus_config.resource_selector
   namespace_selector = var.prometheus_config.namespace_selector
 
-  falco_enabled                            = var.falco_enabled
-  gatekeeper_enabled                       = var.gatekeeper_enabled
-  linkerd_enabled                          = var.linkerd_enabled
-  flux_enabled                             = var.fluxcd_v2_enabled
-  csi_secrets_store_provider_azure_enabled = var.csi_secrets_store_provider_azure_enabled
-  aad_pod_identity_enabled                 = var.aad_pod_identity_enabled
-  azad_kube_proxy_enabled                  = var.azad_kube_proxy_enabled
-  trivy_enabled                            = var.trivy_enabled
-  vpa_enabled                              = var.vpa_enabled
-  node_local_dns_enabled                   = var.node_local_dns_enabled
-  grafana_agent_enabled                    = var.grafana_agent_enabled
-  promtail_enabled                         = var.promtail_enabled
-  node_ttl_enabled                         = var.node_ttl_enabled
-  spegel_enabled                           = var.spegel_enabled
+  falco_enabled            = var.falco_enabled
+  gatekeeper_enabled       = var.gatekeeper_enabled
+  linkerd_enabled          = var.linkerd_enabled
+  flux_enabled             = var.fluxcd_v2_enabled
+  aad_pod_identity_enabled = var.aad_pod_identity_enabled
+  azad_kube_proxy_enabled  = var.azad_kube_proxy_enabled
+  trivy_enabled            = var.trivy_enabled
+  vpa_enabled              = var.vpa_enabled
+  node_local_dns_enabled   = var.node_local_dns_enabled
+  grafana_agent_enabled    = var.grafana_agent_enabled
+  promtail_enabled         = var.promtail_enabled
+  node_ttl_enabled         = var.node_ttl_enabled
+  spegel_enabled           = var.spegel_enabled
 }
 
 module "control_plane_logs" {
@@ -494,7 +478,6 @@ module "control_plane_logs" {
 
   source = "../../kubernetes/control-plane-logs"
 
-  cloud_provider = "azure"
   azure_config = {
     azure_key_vault_name = var.control_plane_logs_config.azure_key_vault_name
     identity = {
@@ -505,6 +488,7 @@ module "control_plane_logs" {
     eventhub_hostname = var.control_plane_logs_config.eventhub_hostname
     eventhub_name     = var.control_plane_logs_config.eventhub_name
   }
+  cluster_id = local.cluster_id
 }
 
 module "promtail" {
@@ -515,13 +499,12 @@ module "promtail" {
   }
 
   source              = "../../kubernetes/promtail"
-  cloud_provider      = "azure"
   cluster_name        = "${var.name}${local.aks_name_suffix}"
   environment         = var.environment
   region              = var.location_short
   excluded_namespaces = var.promtail_config.excluded_namespaces
-
-  loki_address = var.promtail_config.loki_address
+  cluster_id          = local.cluster_id
+  loki_address        = var.promtail_config.loki_address
   azure_config = {
     azure_key_vault_name = var.promtail_config.azure_key_vault_name
     identity             = var.promtail_config.identity
@@ -543,14 +526,15 @@ module "trivy" {
   for_each = {
     for s in ["trivy"] :
     s => s
-    if var.trivy_enabled
+    if var.trivy_enabled && !var.defender_enabled
   }
 
   source = "../../kubernetes/trivy"
 
-  cloud_provider                  = "azure"
   client_id                       = var.trivy_config.client_id
+  cluster_id                      = local.cluster_id
   resource_id                     = var.trivy_config.resource_id
+  starboard_exporter_enabled      = var.trivy_config.starboard_exporter_enabled
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
 }
 
@@ -575,8 +559,9 @@ module "node_local_dns" {
 
   source = "../../kubernetes/node-local-dns"
 
-  cluster_id = local.cluster_id
-  dns_ip     = "10.0.0.10"
+  cluster_id       = local.cluster_id
+  dns_ip           = "10.0.0.10"
+  coredns_upstream = var.coredns_upstream
 }
 
 module "node_ttl" {

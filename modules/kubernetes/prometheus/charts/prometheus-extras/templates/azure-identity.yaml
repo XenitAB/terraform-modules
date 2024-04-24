@@ -1,4 +1,3 @@
-{{- if eq .Values.cloudProvider "azure" }}
 apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentity
 metadata:
@@ -17,4 +16,3 @@ metadata:
 spec:
   azureIdentity: prometheus
   selector: prometheus
-{{- end }}

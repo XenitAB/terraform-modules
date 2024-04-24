@@ -30,7 +30,7 @@ spec:
       version: v1.2.1
   interval: 1m0s
   values:
-    fullnameOverride: "ezure-metrics-exporter"
+    fullnameOverride: "azure-metrics-exporter"
     image:
       tag: "24.2.0"
     resources:

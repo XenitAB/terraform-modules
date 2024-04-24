@@ -3,6 +3,7 @@ locals {
     "aad-pod-identity",
     "azad-kube-proxy",
     "azdo-proxy",
+    "azure-metrics",
     "calico-system",
     "cert-manager",
     "controle-plane-logs",

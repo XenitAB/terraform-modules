@@ -18,21 +18,21 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.25.3 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | 5.34.0 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
+| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 1.2.3 |
+| <a name="requirement_github"></a> [github](#requirement\_github) | 6.2.1 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.13.1 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.23.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.29.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_flux"></a> [flux](#provider\_flux) | 0.25.3 |
-| <a name="provider_github"></a> [github](#provider\_github) | 5.34.0 |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
+| <a name="provider_flux"></a> [flux](#provider\_flux) | 1.2.3 |
+| <a name="provider_github"></a> [github](#provider\_github) | 6.2.1 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.13.1 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.29.0 |
 
 ## Modules
 
@@ -42,18 +42,18 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [github_repository_file.cluster_tenants](https://registry.terraform.io/providers/integrations/github/5.34.0/docs/resources/repository_file) | resource |
-| [github_repository_file.install](https://registry.terraform.io/providers/integrations/github/5.34.0/docs/resources/repository_file) | resource |
-| [github_repository_file.kustomize](https://registry.terraform.io/providers/integrations/github/5.34.0/docs/resources/repository_file) | resource |
-| [github_repository_file.sync](https://registry.terraform.io/providers/integrations/github/5.34.0/docs/resources/repository_file) | resource |
-| [github_repository_file.tenant](https://registry.terraform.io/providers/integrations/github/5.34.0/docs/resources/repository_file) | resource |
-| [helm_release.git_auth_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
+| [github_repository_file.cluster_tenants](https://registry.terraform.io/providers/integrations/github/6.2.1/docs/resources/repository_file) | resource |
+| [github_repository_file.install](https://registry.terraform.io/providers/integrations/github/6.2.1/docs/resources/repository_file) | resource |
+| [github_repository_file.kustomize](https://registry.terraform.io/providers/integrations/github/6.2.1/docs/resources/repository_file) | resource |
+| [github_repository_file.sync](https://registry.terraform.io/providers/integrations/github/6.2.1/docs/resources/repository_file) | resource |
+| [github_repository_file.tenant](https://registry.terraform.io/providers/integrations/github/6.2.1/docs/resources/repository_file) | resource |
+| [helm_release.git_auth_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.13.1/docs/resources/release) | resource |
 | [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
 | [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
-| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
-| [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/0.25.3/docs/data-sources/install) | data source |
-| [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/0.25.3/docs/data-sources/sync) | data source |
-| [github_repository.cluster](https://registry.terraform.io/providers/integrations/github/5.34.0/docs/data-sources/repository) | data source |
+| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.29.0/docs/resources/namespace) | resource |
+| [flux_install.this](https://registry.terraform.io/providers/fluxcd/flux/1.2.3/docs/data-sources/install) | data source |
+| [flux_sync.this](https://registry.terraform.io/providers/fluxcd/flux/1.2.3/docs/data-sources/sync) | data source |
+| [github_repository.cluster](https://registry.terraform.io/providers/integrations/github/6.2.1/docs/data-sources/repository) | data source |
 | [kubectl_file_documents.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/data-sources/file_documents) | data source |
 | [kubectl_file_documents.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/data-sources/file_documents) | data source |
 

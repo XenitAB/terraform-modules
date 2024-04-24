@@ -59,11 +59,11 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+      version = "2.29.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.11.0"
+      version = "2.13.1"
     }
   }
 }
@@ -126,7 +126,7 @@ resource "helm_release" "grafana_agent_operator" {
   chart       = "grafana-agent-operator"
   name        = "grafana-agent-operator"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "0.1.5"
+  version     = "0.3.21"
   max_history = 3
   skip_crds   = true
   values      = [local.operator_values]
@@ -148,7 +148,7 @@ resource "helm_release" "kube_state_metrics" {
   chart       = "kube-state-metrics"
   name        = "kube-state-metrics"
   namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "5.1.0"
+  version     = "5.19.0"
   max_history = 3
   values      = [local.kube_state_metrics_values]
 }

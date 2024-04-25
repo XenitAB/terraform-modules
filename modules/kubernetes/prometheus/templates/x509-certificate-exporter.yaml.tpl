@@ -5,7 +5,7 @@ metadata:
   namespace: prometheus
 spec:
   interval: 1m0s
-  url: "https://prometheus-community.github.io/helm-charts"
+  url: "https://charts.enix.io"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease

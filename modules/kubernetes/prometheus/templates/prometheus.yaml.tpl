@@ -95,7 +95,7 @@ spec:
         storageClassName: default
         resources:
           requests:
-            storage: 5Gi
+            storage: 10Gi
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:

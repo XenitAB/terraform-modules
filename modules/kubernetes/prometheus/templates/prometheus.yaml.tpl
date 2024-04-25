@@ -4,7 +4,7 @@ metadata:
   name: xks
   namespace: prometheus
 spec:
-  version: v2.41.0
+  version: v2.43.0
   scrapeInterval: "1m"
   podMetadata:
     labels:

@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1093](https://github.com/XenitAB/terraform-modules/pull/1093) Migrate Prometheus to install with flux.
 - [#1091](https://github.com/XenitAB/terraform-modules/pull/1091) fix(make): make lint work again
 - [#1090](https://github.com/XenitAB/terraform-modules/pull/1090) Fix aad-pod-identity kustomization healthcheck.
 - [#1089](https://github.com/XenitAB/terraform-modules/pull/1089) fix: make include_tenant_name work.

@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: prometheus
  labels:
-   name              = "prometheus"
-   xkf.xenit.io/kind = "platform"
+   name: prometheus
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

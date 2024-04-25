@@ -36,36 +36,38 @@ spec:
     matchExpressions:
       - key: xkf.xenit.io/monitoring
         operator: In
-        values: [platform]
+        values: ${resource_selector}
   serviceMonitorNamespaceSelector:
     matchExpressions:
       - key: xkf.xenit.io/kind
         operator: In
-        values: [platform]
+        values: ${namespace_selector}
   probeSelector:
     matchExpressions:
       - key: xkf.xenit.io/monitoring
         operator: In
-        values: [platform]
+        values: ${resource_selector}
   probeNamespaceSelector:
     matchExpressions:
       - key: xkf.xenit.io/kind
         operator: In
-        values: [platform]
+        values: ${resource_selector}
   podMonitorSelector:
     matchExpressions:
       - key: xkf.xenit.io/monitoring
         operator: In
-        values: [platform]
+        values: ${namespace_selector}
   podMonitorNamespaceSelector:
     matchExpressions:
       - key: xkf.xenit.io/kind
         operator: In
-        values: [platform]
+        values: ${namespace_selector}
   remoteWrite:
     - name: thanos
       url: ${remote_write_url}
-      headers: {}
+      headers: 
+        THANOS-TENANT: ${tenant_id}
+
 
       # Setting according to others observation
       # https://github.com/prometheus/prometheus/pull/9634

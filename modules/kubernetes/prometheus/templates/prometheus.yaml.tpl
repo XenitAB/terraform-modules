@@ -64,7 +64,7 @@ spec:
         values: [platform]
   remoteWrite:
     - name: thanos
-      url: ""
+      url: ${remote_write_url}
       headers: {}
 
       # Setting according to others observation

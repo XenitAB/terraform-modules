@@ -66,7 +66,6 @@ spec:
     - name: thanos
       url: ""
       headers: {}
-      authenticated: true
 
       # Setting according to others observation
       # https://github.com/prometheus/prometheus/pull/9634
@@ -77,10 +76,11 @@ spec:
         maxBackoff: 5s
         maxSamplesPerSend: 500
         maxShards: 50
+%{ if remote_write_authenticated }
       tlsConfig:
         certFile: /mnt/tls/tls.crt
         keyFile: /mnt/tls/tls.key
-
+%{ endif }
   resources:
     requests:
       memory: "2Gi"
@@ -119,6 +119,7 @@ spec:
     fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 1000
+%{ if remote_write_authenticated }
   volumeMounts:
     - mountPath: /mnt/secrets-store
       name: secrets-store
@@ -135,3 +136,4 @@ spec:
     - name: tls
       secret:
         secretName: xenit-proxy-certificate
+%{ endif }

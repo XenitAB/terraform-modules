@@ -51,7 +51,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   labels:
-    app.kubernetes.io/name: azure-metrics
+    app.kubernetes.io/name: azure-metrics-exporter
     app.kubernetes.io/instance: azure-metrics
     xkf.xenit.io/monitoring: platform
   name: azure-metrics-exporter
@@ -59,19 +59,19 @@ metadata:
 spec:
   podMetricsEndpoints:
   - interval: 60s
-    port: http
+    port: http-metrics
     path: /metrics
   selector:
     matchLabels:
-      app.kubernetes.io/name: azure-metrics
-      app.kubernetes.io/instance: azure-metrics-exporter
+      app.kubernetes.io/name: azure-metrics-exporter
+      app.kubernetes.io/instance: azure-metrics
 %{ if podmonitor_loadbalancer }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   labels:
-    app.kubernetes.io/name: azure-metrics
+    app.kubernetes.io/name: azure-metrics-exporter
     app.kubernetes.io/instance: azure-metrics
     xkf.xenit.io/monitoring: platform
   name: azure-metrics-exporter-loadbalancers
@@ -79,7 +79,7 @@ metadata:
 spec:
   podMetricsEndpoints:
   - interval: 60s
-    port: http
+    port: http-metrics
     path: /probe/metrics/list
     params:
       name: ["azure-metric"]
@@ -98,8 +98,8 @@ spec:
         - UsedSnatPorts
   selector:
     matchLabels:
-      app.kubernetes.io/name: azure-metrics
-      app.kubernetes.io/instance: azure-metrics-exporter
+      app.kubernetes.io/name: azure-metrics-exporter
+      app.kubernetes.io/instance: azure-metrics
 %{ endif }
 %{ if podmonitor_kubernetes }
 ---
@@ -107,7 +107,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   labels:
-    app.kubernetes.io/name: azure-metrics
+    app.kubernetes.io/name: azure-metrics-exporter
     app.kubernetes.io/instance: azure-metrics
     xkf.xenit.io/monitoring: platform
   name: azure-metrics-exporter-kubernetes
@@ -115,7 +115,7 @@ metadata:
 spec:
   podMetricsEndpoints:
   - interval: 60s
-    port: http
+    port: http-metrics
     path: /probe/metrics/list
     params:
       name: ["azure-metric"]
@@ -135,6 +135,6 @@ spec:
         - cluster_autoscaler_unschedulable_pods_count
   selector:
     matchLabels:
-      app.kubernetes.io/name: azure-metrics
-      app.kubernetes.io/instance: azure-metrics-exporter
+      app.kubernetes.io/name: azure-metrics-exporter
+      app.kubernetes.io/instance: azure-metrics
 %{ endif }

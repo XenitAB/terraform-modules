@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1096](https://github.com/XenitAB/terraform-modules/pull/1084) feat: migrate grafana-agent to install with flux
 - [#1084](https://github.com/XenitAB/terraform-modules/pull/1084) Make it possible to use CoreDNS as the last route in node-local-dns.
 - [#1081](https://github.com/XenitAB/terraform-modules/pull/1081) Bump azurerm provider to v 3.99.0
 - [#1080](https://github.com/XenitAB/terraform-modules/pull/1080) Handle deprecated attributes introduced in the azuread provider v 2.44

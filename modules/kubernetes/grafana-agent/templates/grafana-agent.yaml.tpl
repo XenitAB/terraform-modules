@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: grafana-agent
  labels:
-   name              = "grafana-agent"
-   xkf.xenit.io/kind = "platform"
+   name: grafana-agent
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

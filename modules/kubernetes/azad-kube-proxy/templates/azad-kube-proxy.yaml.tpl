@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: azad-kube-proxy
  labels:
-   name              = "azad-kube-proxy"
-   xkf.xenit.io/kind = "platform"
+   name: azad-kube-proxy
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

@@ -143,7 +143,6 @@ module "azure_metrics" {
   client_id       = data.azurerm_user_assigned_identity.azure_metrics.client_id
   subscription_id = data.azurerm_client_config.current.subscription_id
   cluster_id      = local.cluster_id
-  azure_metrics_config = var.azure_metrics_config
 }
 
 # linkerd

@@ -53,7 +53,7 @@ spec:
           cpu: 25m
           memory: 250Mi
     dns01RecursiveNameserversOnly: true
-    dns01RecursiveNameservers: "8.8.8.8:53\,1.1.1.1:53"
+    dns01RecursiveNameservers: "8.8.8.8:53,1.1.1.1:53"
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer

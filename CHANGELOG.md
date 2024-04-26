@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1097](https://github.com/XenitAB/terraform-modules/pull/1097) remove slash in certmanager nameserver config.
 - [#1096](https://github.com/XenitAB/terraform-modules/pull/1096) fix: add dns01 nameserver config to cert-manager.
 - [#1095](https://github.com/XenitAB/terraform-modules/pull/1095) fix: missing namespace labels
 - [#1082](https://github.com/XenitAB/terraform-modules/pull/1082) feat!: bump and migrate azure-metrics to workload identity and install with flux

@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1082](https://github.com/XenitAB/terraform-modules/pull/1082) feat!: bump and migrate azure-metrics to workload identity and install with flux
 - [#1091](https://github.com/XenitAB/terraform-modules/pull/1091) fix(make): make lint work again
 - [#1090](https://github.com/XenitAB/terraform-modules/pull/1090) Fix aad-pod-identity kustomization healthcheck.
 - [#1089](https://github.com/XenitAB/terraform-modules/pull/1089) fix: make include_tenant_name work.

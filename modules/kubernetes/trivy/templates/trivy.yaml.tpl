@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: trivy
  labels:
-   name              = "trivy"
-   xkf.xenit.io/kind = "platform"
+   name: trivy
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

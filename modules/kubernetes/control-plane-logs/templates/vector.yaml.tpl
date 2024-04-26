@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: controle-plane-logs
  labels:
-   name              = "vector"
-   xkf.xenit.io/kind = "platform"
+   name: controle-plane-logs
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

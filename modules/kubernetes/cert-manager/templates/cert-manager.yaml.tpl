@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: cert-manager
  labels:
-   name              = "cert-manager"
-   xkf.xenit.io/kind = "platform"
+   name: cert-manager
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

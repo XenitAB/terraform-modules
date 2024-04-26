@@ -1,18 +1,18 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  labels:
-    toolkit.fluxcd.io/tenant: ${name}
   name: flux
   namespace: ${name}
+  labels:
+    toolkit.fluxcd.io/tenant: ${name}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  labels:
-    toolkit.fluxcd.io/tenant: ${name}
   name: gotk-reconciler
   namespace: ${name}
+  labels:
+    toolkit.fluxcd.io/tenant: ${name}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -31,12 +31,11 @@ metadata:
   namespace: ${name}
 spec:
   interval: 1m
-  url: ${repo}
+  url: ${url}
   secretRef:
     name: flux
   ref:
-    branch: ${branch}
-  timeout: 120s
+    branch: main
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
@@ -46,7 +45,11 @@ metadata:
 spec:
   serviceAccountName: flux
   interval: 5m
+%{ if include_tenant_name == true }
+  path: ./tenant/${name}/${environment}
+%{ else }
   path: ./tenant/${environment}
+%{ endif }
   sourceRef:
     kind: GitRepository
     name: ${name}
@@ -59,8 +62,8 @@ metadata:
   name: ${name}
   namespace: ${name}
 spec:
-  type: github
-  address: ${repo}
+  type: azuredevops
+  address: ${url}
   secretRef:
     name: flux
 %{ if create_crds == true }

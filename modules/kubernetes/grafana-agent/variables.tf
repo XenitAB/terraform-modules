@@ -40,12 +40,6 @@ variable "environment" {
   type        = string
 }
 
-variable "vpa_enabled" {
-  description = "Should vpa be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "namespace_include" {
   description = "A list of the namespaces that kube-state-metrics and kubelet metrics"
   type        = list(string)

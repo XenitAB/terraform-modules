@@ -364,7 +364,6 @@ module "grafana_agent" {
   cluster_id              = local.cluster_id
   cluster_name            = "${var.name}${local.aks_name_suffix}"
   environment             = var.environment
-  vpa_enabled             = var.vpa_enabled
   namespace_include       = var.namespaces[*].name
   extra_namespaces        = var.grafana_agent_config.extra_namespaces
   include_kubelet_metrics = var.grafana_agent_config.include_kubelet_metrics

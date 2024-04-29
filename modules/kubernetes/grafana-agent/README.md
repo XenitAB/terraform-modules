@@ -30,6 +30,7 @@ No modules.
 | [git_repository_file.grafana_agent_extras](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [git_repository_file.kube_state_metrics](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [git_repository_file.kustomization](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
 | [kubernetes_secret.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/secret) | resource |
 
 ## Inputs
@@ -44,7 +45,6 @@ No modules.
 | <a name="input_include_kubelet_metrics"></a> [include\_kubelet\_metrics](#input\_include\_kubelet\_metrics) | If kubelet metrics shall be included for the namespaces in 'namespace\_include' | `bool` | `false` | no |
 | <a name="input_namespace_include"></a> [namespace\_include](#input\_namespace\_include) | A list of the namespaces that kube-state-metrics and kubelet metrics | `list(string)` | n/a | yes |
 | <a name="input_remote_write_urls"></a> [remote\_write\_urls](#input\_remote\_write\_urls) | the remote write urls | <pre>object({<br>    metrics = string<br>    logs    = string<br>    traces  = string<br>  })</pre> | <pre>{<br>  "logs": "",<br>  "metrics": "",<br>  "traces": ""<br>}</pre> | no |
-| <a name="input_vpa_enabled"></a> [vpa\_enabled](#input\_vpa\_enabled) | Should vpa be enabled | `bool` | `false` | no |
 
 ## Outputs
 

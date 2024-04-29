@@ -2,10 +2,9 @@ apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
   name: xks
-  labels:
-    {{- include "prometheus-extras.labels" . | nindent 4 }}
+  namespace: prometheus
 spec:
-  version: v2.41.0
+  version: v2.43.0
   scrapeInterval: "1m"
   podMetadata:
     labels:
@@ -24,46 +23,52 @@ spec:
   enableFeatures:
     - agent
   externalLabels:
-    cluster_name: {{ .Values.externalLabels.clusterName }}
-    environment: {{ .Values.externalLabels.environment }}
-    region: {{ .Values.externalLabels.region }}
-    {{- if .Values.externalLabels.tenantId }}
-    tenant_id: {{ .Values.externalLabels.tenantId }}
-    {{- end }}
-  replicas: {{ .Values.replicaCount }}
+    cluster_name: ${cluster_name}
+    environment: ${environment}
+    region: ${region}
+    %{ if tenant_id != "" }
+    tenant_id: ${tenant_id}
+    %{ endif }
+  replicas: 2
   priorityClassName: "platform-medium"
-  serviceAccountName: {{ .Values.serviceAccount.name }}
-  {{- with .Values.prometheus.resourceSelector }}
+  serviceAccountName: prometheus
   serviceMonitorSelector:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
-  {{- with .Values.prometheus.namespaceSelector }}
+    matchExpressions:
+      - key: xkf.xenit.io/monitoring
+        operator: In
+        values: ${resource_selector}
   serviceMonitorNamespaceSelector:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
-  {{- with .Values.prometheus.resourceSelector }}
+    matchExpressions:
+      - key: xkf.xenit.io/kind
+        operator: In
+        values: ${namespace_selector}
   probeSelector:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
-  {{- with .Values.prometheus.namespaceSelector }}
+    matchExpressions:
+      - key: xkf.xenit.io/monitoring
+        operator: In
+        values: ${resource_selector}
   probeNamespaceSelector:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
-  {{- with .Values.prometheus.resourceSelector }}
+    matchExpressions:
+      - key: xkf.xenit.io/kind
+        operator: In
+        values: ${resource_selector}
   podMonitorSelector:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
-  {{- with .Values.prometheus.namespaceSelector }}
+    matchExpressions:
+      - key: xkf.xenit.io/monitoring
+        operator: In
+        values: ${namespace_selector}
   podMonitorNamespaceSelector:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+    matchExpressions:
+      - key: xkf.xenit.io/kind
+        operator: In
+        values: ${namespace_selector}
   remoteWrite:
     - name: thanos
-      url: {{ .Values.remoteWrite.url }}
-      {{- with .Values.remoteWrite.headers }}
-      headers:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+      url: ${remote_write_url}
+      headers: 
+        THANOS-TENANT: ${tenant_id}
+
+
       # Setting according to others observation
       # https://github.com/prometheus/prometheus/pull/9634
       # Check docs for more information about settings
@@ -73,21 +78,24 @@ spec:
         maxBackoff: 5s
         maxSamplesPerSend: 500
         maxShards: 50
-      {{- if .Values.remoteWrite.authenticated }}
+%{ if remote_write_authenticated }
       tlsConfig:
         certFile: /mnt/tls/tls.crt
         keyFile: /mnt/tls/tls.key
-      {{- end }}
-
+%{ endif }
   resources:
-    {{- toYaml .Values.resources | nindent 4 }}
+    requests:
+      memory: "2Gi"
+      cpu: "20m"
+    limits:
+      memory: "6Gi"
   storage:
     volumeClaimTemplate:
       spec:
-        storageClassName: {{ .Values.volumeClaim.storageClassName }}
+        storageClassName: default
         resources:
           requests:
-            storage: {{ .Values.volumeClaim.size }}
+            storage: 10Gi
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
@@ -113,7 +121,7 @@ spec:
     fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 1000
-  {{- if .Values.remoteWrite.authenticated }}
+%{ if remote_write_authenticated }
   volumeMounts:
     - mountPath: /mnt/secrets-store
       name: secrets-store
@@ -129,5 +137,5 @@ spec:
           secretProviderClass: prometheus
     - name: tls
       secret:
-        secretName: {{ .Values.secretName }}
-  {{- end }}
+        secretName: xenit-proxy-certificate
+%{ endif }

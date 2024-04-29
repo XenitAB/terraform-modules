@@ -111,6 +111,36 @@ resource "azurerm_federated_identity_credential" "cert_manager" {
   subject             = "system:serviceaccount:cert-manager:cert-manager"
 }
 
+# azurerm_user_assigned_identity.azure_metrics is declared in aks-regional
+# we probably need to refactor the code a bit as part of the migration to
+# workload identity
+#
+# creating a separate identity here for now...
+resource "azurerm_user_assigned_identity" "azure_metrics" {
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
+  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-azure-metrics-wi"
+}
+
+resource "azurerm_role_assignment" "azure_metrics_contributor" {
+  for_each = {
+    for dns in var.dns_zones :
+    dns => dns
+  }
+  scope                = data.azurerm_dns_zone.this[each.key].id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_user_assigned_identity.azure_metrics.principal_id
+}
+
+resource "azurerm_federated_identity_credential" "azure_metrics" {
+  name                = azurerm_user_assigned_identity.azure_metrics.name
+  resource_group_name = azurerm_user_assigned_identity.azure_metrics.resource_group_name
+  parent_id           = azurerm_user_assigned_identity.azure_metrics.id
+  audience            = ["api://AzureADTokenExchange"]
+  issuer              = azurerm_kubernetes_cluster.this.oidc_issuer_url
+  subject             = "system:serviceaccount:azure-metrics:azure-metrics-exporter"
+}
+
 data "azurerm_key_vault" "core" {
   name                = join("-", compact(["kv-${var.environment}-${var.location_short}-${var.core_name}", var.unique_suffix]))
   resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"

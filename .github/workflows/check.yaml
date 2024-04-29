@@ -9,7 +9,7 @@ jobs:
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v3
         with:
-          tflint_version: v0.42.1
+          tflint_version: v0.50.3
       - name: Run lint
         run: |
           make lint

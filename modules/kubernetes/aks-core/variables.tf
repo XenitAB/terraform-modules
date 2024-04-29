@@ -80,7 +80,7 @@ variable "namespaces" {
       flux = object({
         enabled             = bool
         create_crds         = bool
-        include_tenant_name = optional(bool, false)
+        include_tenant_name = bool
         azure_devops = object({
           org  = string
           proj = string
@@ -96,8 +96,9 @@ variable "namespaces" {
     name   = ""
     labels = {}
     flux = {
-      enabled     = true
-      create_crds = false
+      enabled             = true
+      create_crds         = false
+      include_tenant_name = false
       azure_devops = {
         org  = ""
         proj = ""
@@ -541,7 +542,6 @@ variable "trivy_enabled" {
   default     = true
 }
 
-
 variable "trivy_volume_claim_storage_class_name" {
   description = "Configuration for trivy volume claim storage class name"
   type        = string
@@ -551,8 +551,9 @@ variable "trivy_volume_claim_storage_class_name" {
 variable "trivy_config" {
   description = "Configuration for trivy"
   type = object({
-    client_id   = string
-    resource_id = string
+    client_id                  = string
+    resource_id                = string
+    starboard_exporter_enabled = optional(bool, true)
   })
 }
 
@@ -566,14 +567,6 @@ variable "vpa_enabled" {
   description = "Should VPA be enabled"
   type        = bool
   default     = true
-}
-
-variable "azure_metrics_config" {
-  description = "AZ Metrics configuration"
-  type = object({
-    client_id   = string
-    resource_id = string
-  })
 }
 
 variable "node_local_dns_enabled" {

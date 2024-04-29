@@ -226,7 +226,7 @@ spec:
       k8s-app: kubelet
 %{ endif }
 ---
-piVersion: rbac.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: grafana-agent

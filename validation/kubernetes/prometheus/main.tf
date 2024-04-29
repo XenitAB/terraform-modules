@@ -1,17 +1,8 @@
 terraform {}
 
-provider "kubernetes" {}
-
-provider "helm" {}
-
 module "prometheus" {
   source = "../../../modules/kubernetes/prometheus"
-
-  providers = {
-    kubernetes = kubernetes
-    helm       = helm
-  }
-
+  
   cluster_id   = "foo"
   cluster_name = "aks1"
   dns_zones    = ["a.com"]

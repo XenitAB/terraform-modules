@@ -64,6 +64,11 @@ variable "region" {
   type        = string
 }
 
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}
+
 variable "remote_write_authenticated" {
   description = "Adds TLS authentication to remote write configuration if true"
   type        = bool
@@ -126,12 +131,6 @@ variable "linkerd_enabled" {
 
 variable "flux_enabled" {
   description = "Should flux-system be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "csi_secrets_store_provider_azure_enabled" {
-  description = "Should csi-secrets-store-provider-azure be enabled"
   type        = bool
   default     = false
 }

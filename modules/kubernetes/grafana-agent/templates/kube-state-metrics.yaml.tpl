@@ -57,10 +57,6 @@ spec:
       - storageclasses
       - validatingwebhookconfigurations
       - volumeattachments
-      # Specificly add verticalpodautoscalers to collectors
-      %{ if vpa_enabled }
-      - verticalpodautoscalers # not a default resource, see also: https://github.com/kubernetes/kube-state-metrics#enabling-verticalpodautoscalers
-      %{ endif }
     prometheus:
       monitor:
         enabled: true

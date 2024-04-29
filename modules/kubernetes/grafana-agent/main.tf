@@ -68,7 +68,6 @@ resource "git_repository_file" "grafana_agent_extras" {
 resource "git_repository_file" "kube_state_metrics" {
   path = "platform/${var.cluster_id}/grafana-agent/kube-state-metrics.yaml"
   content = templatefile("${path.module}/templates/kube-state-metrics.yaml.tpl", {
-    vpa_enabled    = var.vpa_enabled
     namespaces_csv = join(",", compact(concat(var.namespace_include, var.extra_namespaces)))
   })
 }

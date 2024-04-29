@@ -21,7 +21,19 @@ terraform {
   }
 }
 
+resource "kubernetes_namespace" "this" {
+  metadata {
+    labels = {
+      name                = "grafana-agent"
+      "xkf.xenit.io/kind" = "platform"
+    }
+    name = "grafana-agent"
+  }
+}
+
 resource "kubernetes_secret" "this" {
+  depends_on = [ kubernetes_namespace.this ]
+  
   metadata {
     name      = "grafana-agent-credentials"
     namespace = "grafana-agent"

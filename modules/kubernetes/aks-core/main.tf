@@ -69,6 +69,11 @@ data "azurerm_user_assigned_identity" "tenant" {
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
+data "azurerm_user_assigned_identity" "azure_metrics" {
+  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-azure-metrics-wi"
+  resource_group_name = data.azurerm_resource_group.this.name
+}
+
 data "azurerm_user_assigned_identity" "external_dns" {
   name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-external-dns"
   resource_group_name = data.azurerm_resource_group.this.name

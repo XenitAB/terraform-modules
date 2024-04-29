@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: velero
  labels:
-   name              = "velero"
-   xkf.xenit.io/kind = "platform"
+   name: velero
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

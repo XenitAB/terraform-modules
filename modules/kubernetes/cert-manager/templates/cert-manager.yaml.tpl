@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: cert-manager
  labels:
-   name              = "cert-manager"
-   xkf.xenit.io/kind = "platform"
+   name: cert-manager
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
@@ -52,6 +52,8 @@ spec:
         requests:
           cpu: 25m
           memory: 250Mi
+    dns01RecursiveNameserversOnly: true
+    dns01RecursiveNameservers: "8.8.8.8:53,1.1.1.1:53"
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer

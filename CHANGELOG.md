@@ -13,6 +13,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Changed
 
 - [#1093](https://github.com/XenitAB/terraform-modules/pull/1093) Migrate Prometheus to install with flux.
+- [#1097](https://github.com/XenitAB/terraform-modules/pull/1097) remove slash in certmanager nameserver config.
+- [#1096](https://github.com/XenitAB/terraform-modules/pull/1096) fix: add dns01 nameserver config to cert-manager.
+- [#1095](https://github.com/XenitAB/terraform-modules/pull/1095) fix: missing namespace labels
+- [#1082](https://github.com/XenitAB/terraform-modules/pull/1082) feat!: bump and migrate azure-metrics to workload identity and install with flux
 - [#1091](https://github.com/XenitAB/terraform-modules/pull/1091) fix(make): make lint work again
 - [#1090](https://github.com/XenitAB/terraform-modules/pull/1090) Fix aad-pod-identity kustomization healthcheck.
 - [#1089](https://github.com/XenitAB/terraform-modules/pull/1089) fix: make include_tenant_name work.

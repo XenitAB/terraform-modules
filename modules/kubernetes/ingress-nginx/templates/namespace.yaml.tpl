@@ -3,5 +3,5 @@ kind: Namespace
 metadata:
  name: ingress-nginx
  labels:
-   name              = "ingress-nginx"
-   xkf.xenit.io/kind = "platform"
+   name: ingress-nginx
+   xkf.xenit.io/kind: platform

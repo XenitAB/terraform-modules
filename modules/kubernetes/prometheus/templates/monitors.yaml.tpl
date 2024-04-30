@@ -2,9 +2,9 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   labels:
-    {{- include "prometheus-extras.labels" . | nindent 4 }}
     xkf.xenit.io/monitoring: platform
   name: prometheus
+  namespace: prometheus
 spec:
   podMetricsEndpoints:
     - port: web
@@ -54,7 +54,7 @@ spec:
       app.kubernetes.io/component: controller
       app.kubernetes.io/name: ingress-nginx
       function: metrics
-{{- if .Values.enabledMonitors.aadPodIdentity }}
+%{ if aad_pod_identity_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
@@ -89,26 +89,8 @@ spec:
   podMetricsEndpoints:
     - path: /metrics
       port: metrics
-{{- end }}
-{{- if .Values.enabledMonitors.csiSecretsStorProviderAzure }}
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: secrets-store-csi-driver
-  namespace: csi-secrets-store-provider-azure
-  labels:
-    xkf.xenit.io/monitoring: platform
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: secrets-store-csi-driver
-      app.kubernetes.io/instance: csi-secrets-store-provider-azure
-  podMetricsEndpoints:
-    - path: /metrics
-      port: "8081"
-{{- end }}
-{{- if .Values.enabledMonitors.flux }}
+%{ endif }
+%{ if flux_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
@@ -184,8 +166,8 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: git-auth-proxy
       app.kubernetes.io/name: git-auth-proxy
-{{- end }}
-{{- if .Values.enabledMonitors.falco }}
+%{ endif }
+%{ if falco_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -205,8 +187,8 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: falco-exporter
       app.kubernetes.io/name: falco-exporter
-{{- end }}
-{{- if .Values.enabledMonitors.opaGatekeeper }}
+%{ endif }
+%{ if gatekeeper_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
@@ -237,8 +219,8 @@ spec:
       control-plane: controller-manager
   podMetricsEndpoints:
     - port: metrics
-{{- end }}
-{{- if .Values.enabledMonitors.linkerd }}
+%{ endif }
+%{ if linkerd_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -270,8 +252,8 @@ spec:
   selector:
     matchLabels:
       component: prometheus
-{{- end }}
-{{- if .Values.enabledMonitors.azadKubeProxy }}
+%{ endif }
+%{ if azad_kube_proxy_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
@@ -288,26 +270,8 @@ spec:
   podMetricsEndpoints:
     - path: /metrics
       port: metrics
-{{- end }}
-{{- if .Values.enabledMonitors.csiSecretsStorProviderAzure }}
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: csi-secrets-store-driver-azure
-  namespace: csi-secrets-store-provider-azure
-  labels:
-    xkf.xenit.io/monitoring: platform
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/instance: csi-secrets-store-provider-azure
-      app.kubernetes.io/name: csi-secrets-store-provider-azure
-  podMetricsEndpoints:
-    - path: /metrics
-      port: metrics
-{{- end }}
-{{- if .Values.enabledMonitors.trivy }}
+%{ endif }
+%{ if trivy_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -328,8 +292,8 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: starboard-exporter
       app.kubernetes.io/name: starboard-exporter
-{{- end }}
-{{- if .Values.enabledMonitors.grafanaAgent }}
+%{ endif }
+%{ if grafana_agent_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
@@ -344,8 +308,8 @@ spec:
       app.kubernetes.io/name: grafana-agent
   podMetricsEndpoints:
     - port: http-metrics
-{{- end }}
-{{- if .Values.enabledMonitors.nodeLocalDNS }}
+%{ endif }
+%{ if node_local_dns_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -366,8 +330,8 @@ spec:
   selector:
     matchLabels:
       k8s-app: node-local-dns
-{{- end }}
-{{- if .Values.enabledMonitors.promtail }}
+%{ endif }
+%{ if promtail_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -389,8 +353,8 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: promtail
       app.kubernetes.io/name: promtail
-{{- end }}
-{{- if .Values.enabledMonitors.nodeTtl }}
+%{ endif }
+%{ if node_ttl_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -406,8 +370,8 @@ spec:
       app.kubernetes.io/instance: node-ttl
   endpoints:
     - port: metrics
-{{- end }}
-{{- if .Values.enabledMonitors.spegel }}
+%{ endif }
+%{ if spegel_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -423,7 +387,7 @@ spec:
       app.kubernetes.io/instance: spegel
   endpoints:
     - port: metrics
-{{- end }}
+%{ endif }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor

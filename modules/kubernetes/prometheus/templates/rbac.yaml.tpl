@@ -2,23 +2,21 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: prometheus-xks
-  labels:
-    {{- include "prometheus-extras.labels" . | nindent 4 }}
+  namespace: prometheus
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: prometheus-xks
 subjects:
   - kind: ServiceAccount
-    name: {{ .Values.serviceAccount.name }}
-    namespace: {{ .Release.Namespace }}
+    name: prometheus
+    namespace: prometheus
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: prometheus-xks
-  labels:
-    {{- include "prometheus-extras.labels" . | nindent 4 }}
+  namespace: prometheus
 rules:
 - apiGroups:
   - ""
@@ -46,6 +44,5 @@ rules:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ .Values.serviceAccount.name }}
-  labels:
-    {{- include "prometheus-extras.labels" . | nindent 4 }}
+  name: prometheus
+  namespace: prometheus

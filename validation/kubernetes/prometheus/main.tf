@@ -16,4 +16,5 @@ module "prometheus" {
   cluster_name     = "aks1"
   environment      = "dev"
   region           = "sc"
+  cluster_id       = "foo"
 }

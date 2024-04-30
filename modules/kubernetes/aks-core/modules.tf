@@ -444,7 +444,7 @@ module "prometheus" {
   environment  = var.environment
   tenant_id    = var.prometheus_config.tenant_id
   region       = var.location_short
-
+  cluster_id   = local.cluster_id
 
   remote_write_authenticated = var.prometheus_config.remote_write_authenticated
   remote_write_url           = var.prometheus_config.remote_write_url

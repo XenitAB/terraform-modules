@@ -172,7 +172,7 @@ resource "kubernetes_role_binding" "vpa" {
   }
 }
 
-resource "kubernetes_role_binding" "logs-ingress-nginx" {
+resource "kubernetes_role_binding" "logs_ingress_nginx" {
   for_each = { for ns in var.namespaces : ns.name => ns }
   metadata {
     name      = "${each.value.name}-logs-ingress-nginx"
@@ -194,7 +194,7 @@ resource "kubernetes_role_binding" "logs-ingress-nginx" {
   }
 }
 
-resource "kubernetes_role_binding" "logs-external-dns" {
+resource "kubernetes_role_binding" "logs_external_dns" {
   for_each = { for ns in var.namespaces : ns.name => ns }
   metadata {
     name      = "${each.value.name}-logs-external-dns"
@@ -215,7 +215,7 @@ resource "kubernetes_role_binding" "logs-external-dns" {
     name      = var.aad_groups.view[each.key].id
   }
 }
-resource "kubernetes_role_binding" "logs-cert-manager" {
+resource "kubernetes_role_binding" "logs_cert_manager" {
   for_each = { for ns in var.namespaces : ns.name => ns }
   metadata {
     name      = "${each.value.name}-logs-cert-manager"

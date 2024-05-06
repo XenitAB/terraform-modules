@@ -125,7 +125,7 @@ variable "aks_config" {
   # Spot max price is set when spot is enabled
   validation {
     condition = alltrue([
-      for np in var.aks_config.node_pools : (! np.spot_enabled && np.spot_max_price == null) || (np.spot_enabled && np.spot_max_price != null)
+      for np in var.aks_config.node_pools : (!np.spot_enabled && np.spot_max_price == null) || (np.spot_enabled && np.spot_max_price != null)
     ])
     error_message = "The spot_max_price cannot be null when spot_enabled is true."
   }

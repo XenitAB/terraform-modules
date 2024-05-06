@@ -33,7 +33,7 @@ module "azure_policy" {
   for_each = {
     for s in ["azure_policy"] :
     s => s
-    if var.azure_policy_enabled && ! var.gatekeeper_enabled
+    if var.azure_policy_enabled && !var.gatekeeper_enabled
   }
 
   source = "../../kubernetes/azure-policy"
@@ -53,7 +53,7 @@ module "gatekeeper" {
   for_each = {
     for s in ["gatekeeper"] :
     s => s
-    if var.gatekeeper_enabled && ! var.azure_policy_enabled
+    if var.gatekeeper_enabled && !var.azure_policy_enabled
   }
 
   source = "../../kubernetes/gatekeeper"
@@ -530,7 +530,7 @@ module "trivy" {
   for_each = {
     for s in ["trivy"] :
     s => s
-    if var.trivy_enabled && ! var.defender_enabled
+    if var.trivy_enabled && !var.defender_enabled
   }
 
   source = "../../kubernetes/trivy"

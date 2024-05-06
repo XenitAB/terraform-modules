@@ -646,3 +646,11 @@ variable "coredns_upstream" {
   description = "Should coredns be used as the last route instead of upstream dns?"
   default     = false
 }
+
+variable "use_private_ingress" {
+  description = "If true, private ingress will be used by azad-kube-proxy"
+  type        = bool
+  default     = false
+
+
+}

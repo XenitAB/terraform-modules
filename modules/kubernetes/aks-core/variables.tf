@@ -3,11 +3,6 @@ variable "location_short" {
   type        = string
 }
 
-variable "subscription_id" {
-  description = "The subscription id"
-  type        = string
-}
-
 variable "subscription_name" {
   description = "The commonName for the subscription"
   type        = string
@@ -39,10 +34,10 @@ variable "name" {
   type        = string
 }
 
-variable "aks_managed_identity" {
-  description = "AKS Azure AD managed identity"
-  type        = string
-}
+#variable "aks_managed_identity" {
+#  description = "AKS Azure AD managed identity"
+#  type        = string
+#}
 
 variable "aks_name_suffix" {
   description = "The suffix for the aks clusters"
@@ -485,22 +480,13 @@ variable "prometheus_volume_claim_storage_class_name" {
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
-    azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-
-    tenant_id = string
-
+    azure_key_vault_name       = string
+    tenant_id                  = string
     remote_write_authenticated = bool
     remote_write_url           = string
-
-    volume_claim_size = string
-
-    resource_selector  = list(string)
-    namespace_selector = list(string)
+    volume_claim_size          = string
+    resource_selector          = list(string)
+    namespace_selector         = list(string)
   })
 }
 
@@ -595,23 +581,13 @@ variable "control_plane_logs_config" {
   description = "Configuration for control plane log"
   type = object({
     azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-    eventhub_hostname = string
-    eventhub_name     = string
+    eventhub_hostname    = string
+    eventhub_name        = string
   })
   default = {
     azure_key_vault_name = ""
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
-    eventhub_hostname = ""
-    eventhub_name     = ""
+    eventhub_hostname    = ""
+    eventhub_name        = ""
   }
 }
 

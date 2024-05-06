@@ -1,5 +1,6 @@
 # Replace this with a datasource when availible in the AzureRM provider.
 locals {
+  aks_name_suffix = var.aks_name_suffix != null ? var.aks_name_suffix : ""
   vm_skus_disk_size_gb = {
     # AMD64
 

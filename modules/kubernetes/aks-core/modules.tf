@@ -78,11 +78,12 @@ module "azure_metrics" {
 
   source = "../../kubernetes/azure-metrics"
 
-  cluster_id          = local.cluster_id
-  location            = data.azurerm_resource_group.this.location
-  oidc_issuer_url     = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
-  resource_group_name = data.azurerm_resource_group.this.name
-  subscription_id     = data.azurerm_client_config.current.subscription_id
+  aks_managed_identity = data.azuread_group.aks_managed_identity.id
+  cluster_id           = local.cluster_id
+  location             = data.azurerm_resource_group.this.location
+  oidc_issuer_url      = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
+  resource_group_name  = data.azurerm_resource_group.this.name
+  subscription_id      = data.azurerm_client_config.current.subscription_id
 }
 
 module "azure_policy" {
@@ -122,7 +123,7 @@ module "cert_manager" {
   notification_email  = var.cert_manager_config.notification_email
   oidc_issuer_url     = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
-  subscription_id     = var.subscription_id
+  subscription_id     = data.azurerm_client_config.current.subscription_id
 }
 
 module "cert_manager_crd" {
@@ -199,7 +200,7 @@ module "external_dns" {
   location_short      = var.location_short
   oidc_issuer_url     = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
-  subscription_id     = var.subscription_id
+  subscription_id     = data.azurerm_client_config.current.subscription_id
   txt_owner_id        = "${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
 }
 
@@ -432,11 +433,6 @@ module "prometheus" {
   aks_name = var.name
   azure_config = {
     azure_key_vault_name = var.prometheus_config.azure_key_vault_name
-    identity = {
-      client_id   = var.prometheus_config.identity.client_id
-      resource_id = var.prometheus_config.identity.resource_id
-      tenant_id   = var.prometheus_config.identity.tenant_id
-    }
   }
 
   cluster_id                      = local.cluster_id
@@ -522,7 +518,7 @@ module "trivy" {
 
   source = "../../kubernetes/trivy"
 
-  aks_managed_identity            = var.aks_managed_identity
+  aks_managed_identity            = data.azuread_group.aks_managed_identity.id
   cluster_id                      = local.cluster_id
   environment                     = var.environment
   location                        = data.azurerm_resource_group.this.location
@@ -550,7 +546,7 @@ module "velero" {
 
   source = "../../kubernetes/velero"
 
-  aks_managed_identity = var.aks_managed_identity
+  aks_managed_identity = data.azuread_group.aks_managed_identity.id
   azure_config = {
     storage_account_name      = var.velero_config.azure_storage_account_name
     storage_account_container = var.velero_config.azure_storage_account_container
@@ -559,7 +555,7 @@ module "velero" {
   location            = data.azurerm_resource_group.this.location
   oidc_issuer_url     = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
-  subscription_id     = var.subscription_id
+  subscription_id     = data.azurerm_client_config.current.subscription_id
   unique_suffix       = var.unique_suffix
 }
 

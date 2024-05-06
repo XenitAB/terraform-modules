@@ -20,6 +20,7 @@ This module is used to create AKS clusters.
 
 | Name | Version |
 |------|---------|
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.47.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.99.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
@@ -96,6 +97,7 @@ This module is used to create AKS clusters.
 | [kubernetes_storage_class.azurefile_zrs_standard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.zrs_premium](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
 | [kubernetes_storage_class.zrs_standard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/storage_class) | resource |
+| [azuread_group.aks_managed_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/data-sources/group) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/client_config) | data source |
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/container_registry) | data source |
 | [azurerm_dns_zone.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/dns_zone) | data source |
@@ -114,7 +116,6 @@ This module is used to create AKS clusters.
 | <a name="input_aad_pod_identity_enabled"></a> [aad\_pod\_identity\_enabled](#input\_aad\_pod\_identity\_enabled) | Should aad-pod-identity be enabled | `bool` | `true` | no |
 | <a name="input_acr_name_override"></a> [acr\_name\_override](#input\_acr\_name\_override) | Override default name of ACR | `string` | `""` | no |
 | <a name="input_additional_storage_classes"></a> [additional\_storage\_classes](#input\_additional\_storage\_classes) | List of additional storage classes to create | <pre>list(object({<br>    name           = string<br>    provisioner    = string<br>    reclaim_policy = string<br>    binding_mode   = string<br>    sku_name       = string<br>  }))</pre> | `[]` | no |
-| <a name="input_aks_managed_identity"></a> [aks\_managed\_identity](#input\_aks\_managed\_identity) | AKS Azure AD managed identity | `string` | n/a | yes |
 | <a name="input_aks_name_suffix"></a> [aks\_name\_suffix](#input\_aks\_name\_suffix) | The suffix for the aks clusters | `number` | n/a | yes |
 | <a name="input_azad_kube_proxy_config"></a> [azad\_kube\_proxy\_config](#input\_azad\_kube\_proxy\_config) | The azad-kube-proxy configuration | <pre>object({<br>    fqdn        = string<br>    allowed_ips = list(string)<br>    azure_ad_app = object({<br>      client_id     = string<br>      client_secret = string<br>      tenant_id     = string<br>    })<br>  })</pre> | <pre>{<br>  "allowed_ips": [],<br>  "azure_ad_app": {<br>    "client_id": "",<br>    "client_secret": "",<br>    "tenant_id": ""<br>  },<br>  "fqdn": ""<br>}</pre> | no |
 | <a name="input_azad_kube_proxy_enabled"></a> [azad\_kube\_proxy\_enabled](#input\_azad\_kube\_proxy\_enabled) | Should azad-kube-proxy be enabled | `bool` | `false` | no |
@@ -123,7 +124,7 @@ This module is used to create AKS clusters.
 | <a name="input_azure_policy_enabled"></a> [azure\_policy\_enabled](#input\_azure\_policy\_enabled) | If the Azure Policy for Kubernetes add-on should be enabled | `bool` | `false` | no |
 | <a name="input_cert_manager_config"></a> [cert\_manager\_config](#input\_cert\_manager\_config) | Cert Manager configuration, the first item in the list is the main domain | <pre>object({<br>    notification_email = string<br>    dns_zone           = list(string)<br>  })</pre> | n/a | yes |
 | <a name="input_cert_manager_enabled"></a> [cert\_manager\_enabled](#input\_cert\_manager\_enabled) | Should Cert Manager be enabled | `bool` | `true` | no |
-| <a name="input_control_plane_logs_config"></a> [control\_plane\_logs\_config](#input\_control\_plane\_logs\_config) | Configuration for control plane log | <pre>object({<br>    azure_key_vault_name = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>      tenant_id   = string<br>    })<br>    eventhub_hostname = string<br>    eventhub_name     = string<br>  })</pre> | <pre>{<br>  "azure_key_vault_name": "",<br>  "eventhub_hostname": "",<br>  "eventhub_name": "",<br>  "identity": {<br>    "client_id": "",<br>    "resource_id": "",<br>    "tenant_id": ""<br>  }<br>}</pre> | no |
+| <a name="input_control_plane_logs_config"></a> [control\_plane\_logs\_config](#input\_control\_plane\_logs\_config) | Configuration for control plane log | <pre>object({<br>    azure_key_vault_name = string<br>    eventhub_hostname    = string<br>    eventhub_name        = string<br>  })</pre> | <pre>{<br>  "azure_key_vault_name": "",<br>  "eventhub_hostname": "",<br>  "eventhub_name": ""<br>}</pre> | no |
 | <a name="input_control_plane_logs_enabled"></a> [control\_plane\_logs\_enabled](#input\_control\_plane\_logs\_enabled) | Should Control plan be enabled | `bool` | `false` | no |
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The name for the core infrastructure | `string` | n/a | yes |
 | <a name="input_coredns_upstream"></a> [coredns\_upstream](#input\_coredns\_upstream) | Should coredns be used as the last route instead of upstream dns? | `bool` | `false` | no |
@@ -156,14 +157,13 @@ This module is used to create AKS clusters.
 | <a name="input_node_local_dns_enabled"></a> [node\_local\_dns\_enabled](#input\_node\_local\_dns\_enabled) | Should VPA be enabled | `bool` | `true` | no |
 | <a name="input_node_ttl_enabled"></a> [node\_ttl\_enabled](#input\_node\_ttl\_enabled) | Should Node TTL be enabled | `bool` | `true` | no |
 | <a name="input_priority_expander_config"></a> [priority\_expander\_config](#input\_priority\_expander\_config) | Cluster auto scaler priority expander configuration. | `map(list(string))` | `null` | no |
-| <a name="input_prometheus_config"></a> [prometheus\_config](#input\_prometheus\_config) | Configuration for prometheus | <pre>object({<br>    azure_key_vault_name = string<br>    identity = object({<br>      client_id   = string<br>      resource_id = string<br>      tenant_id   = string<br>    })<br><br>    tenant_id = string<br><br>    remote_write_authenticated = bool<br>    remote_write_url           = string<br><br>    volume_claim_size = string<br><br>    resource_selector  = list(string)<br>    namespace_selector = list(string)<br>  })</pre> | n/a | yes |
+| <a name="input_prometheus_config"></a> [prometheus\_config](#input\_prometheus\_config) | Configuration for prometheus | <pre>object({<br>    azure_key_vault_name       = string<br>    tenant_id                  = string<br>    remote_write_authenticated = bool<br>    remote_write_url           = string<br>    volume_claim_size          = string<br>    resource_selector          = list(string)<br>    namespace_selector         = list(string)<br>  })</pre> | n/a | yes |
 | <a name="input_prometheus_enabled"></a> [prometheus\_enabled](#input\_prometheus\_enabled) | Should prometheus be enabled | `bool` | `true` | no |
 | <a name="input_prometheus_volume_claim_storage_class_name"></a> [prometheus\_volume\_claim\_storage\_class\_name](#input\_prometheus\_volume\_claim\_storage\_class\_name) | Configuration for prometheus volume claim storage class name | `string` | `"managed-csi-zrs"` | no |
 | <a name="input_promtail_config"></a> [promtail\_config](#input\_promtail\_config) | Configuration for promtail | <pre>object({<br>    azure_key_vault_name = string<br>    loki_address         = string<br>    excluded_namespaces  = list(string)<br>  })</pre> | <pre>{<br>  "azure_key_vault_name": "",<br>  "excluded_namespaces": [],<br>  "loki_address": ""<br>}</pre> | no |
 | <a name="input_promtail_enabled"></a> [promtail\_enabled](#input\_promtail\_enabled) | Should promtail be enabled | `bool` | `false` | no |
 | <a name="input_reloader_enabled"></a> [reloader\_enabled](#input\_reloader\_enabled) | Should Reloader be enabled | `bool` | `true` | no |
 | <a name="input_spegel_enabled"></a> [spegel\_enabled](#input\_spegel\_enabled) | Should Spegel be enabled | `bool` | `true` | no |
-| <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The subscription id | `string` | n/a | yes |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
 | <a name="input_trivy_config"></a> [trivy\_config](#input\_trivy\_config) | Configuration for trivy | <pre>object({<br>    starboard_exporter_enabled = optional(bool, true)<br>  })</pre> | n/a | yes |
 | <a name="input_trivy_enabled"></a> [trivy\_enabled](#input\_trivy\_enabled) | Should trivy be enabled | `bool` | `true` | no |

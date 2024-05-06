@@ -27,6 +27,9 @@ No modules.
 | Name | Type |
 |------|------|
 | [azurerm_federated_identity_credential.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/federated_identity_credential) | resource |
+| [azurerm_role_assignment.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.azure_metrics_aks_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.azure_metrics_lb_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
 | [azurerm_user_assigned_identity.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/user_assigned_identity) | resource |
 | [git_repository_file.azure_metrics](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [git_repository_file.kustomization](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
@@ -35,6 +38,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_aks_managed_identity"></a> [aks\_managed\_identity](#input\_aks\_managed\_identity) | AKS Azure AD managed identity | `string` | n/a | yes |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | The Azure region name. | `string` | n/a | yes |
 | <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | Kubernetes OIDC issuer URL for workload identity. | `string` | n/a | yes |

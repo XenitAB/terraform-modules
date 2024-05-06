@@ -22,11 +22,6 @@ module "aks" {
   core_name                     = "core"
   unique_suffix                 = 1337
   aks_name_suffix               = "1"
-  aks_managed_identity_group_id = "1337"
-  azure_metrics_identity = {
-    id           = "id"
-    principal_id = "pid"
-  }
 
   aks_config = {
     version                  = "1.27.7"

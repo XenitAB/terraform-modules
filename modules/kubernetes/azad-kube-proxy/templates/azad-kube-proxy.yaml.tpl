@@ -72,7 +72,7 @@ spec:
     %{ if public_private_enabled == false }
       ingressClassName: "nginx"
     %{ endif }
-    %{ if public_private_enabled == true }
+    %{ if public_private_enabled == true && use_private_ingress == false }
       ingressClassName: "nginx-public"
     %{ endif }
     %{ if public_private_enabled == true && use_private_ingress == true }

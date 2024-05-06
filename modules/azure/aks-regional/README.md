@@ -49,7 +49,6 @@ This module is used to create resources that are used by AKS clusters.
 | [azuread_group.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/data-sources/group) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/client_config) | data source |
 | [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/key_vault) | data source |
-| [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/resource_group) | data source |
 | [azurerm_virtual_network.vnet](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/virtual_network) | data source |
@@ -58,7 +57,6 @@ This module is used to create resources that are used by AKS clusters.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_acr_name_override"></a> [acr\_name\_override](#input\_acr\_name\_override) | Override default name of ACR | `string` | `""` | no |
 | <a name="input_aks_authorized_ips"></a> [aks\_authorized\_ips](#input\_aks\_authorized\_ips) | Authorized IPs to access AKS API | `list(string)` | n/a | yes |
 | <a name="input_aks_managed_identity"></a> [aks\_managed\_identity](#input\_aks\_managed\_identity) | AKS Azure AD managed identity | `string` | n/a | yes |
 | <a name="input_azad_kube_proxy_config"></a> [azad\_kube\_proxy\_config](#input\_azad\_kube\_proxy\_config) | Azure AD Kubernetes Proxy configuration | <pre>object({<br>    cluster_name_prefix = string<br>    proxy_url_override  = string<br>  })</pre> | <pre>{<br>  "cluster_name_prefix": "aks",<br>  "proxy_url_override": ""<br>}</pre> | no |
@@ -66,7 +64,6 @@ This module is used to create resources that are used by AKS clusters.
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The name for the core infrastructure | `string` | n/a | yes |
 | <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | List of DNS Zone to create | `list(string)` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
-| <a name="input_global_location_short"></a> [global\_location\_short](#input\_global\_location\_short) | The Azure region short name where the global resources resides. | `string` | n/a | yes |
 | <a name="input_group_name_separator"></a> [group\_name\_separator](#input\_group\_name\_separator) | Separator for group names | `string` | `"-"` | no |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The name to use for the deploy | `string` | n/a | yes |
@@ -75,7 +72,6 @@ This module is used to create resources that are used by AKS clusters.
 | <a name="input_public_ip_prefix_name_override"></a> [public\_ip\_prefix\_name\_override](#input\_public\_ip\_prefix\_name\_override) | Override the default public ip prefix name - the last digit | `string` | `""` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
-| <a name="input_velero_enabled"></a> [velero\_enabled](#input\_velero\_enabled) | Should Velero be enabled | `bool` | `false` | no |
 
 ## Outputs
 

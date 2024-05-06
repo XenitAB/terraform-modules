@@ -6,14 +6,14 @@ metadata:
 spec:
   provider: "azure"
   parameters:
-    usePodIdentity: "true"
-    keyvaultName: ${azure_config.azure_key_vault_name}
+    clientID: ${client_id}
+    keyvaultName: ${azure_key_vault_name}
+    tenantId: ${tenant_id}
     objects:  |
       array:
         - |
           objectName: xenit-proxy-certificate
           objectType: secret
-    tenantId: ${azure_config.azure_key_vault_name}
   secretObjects:
     - secretName: xenit-proxy-certificate
       type: kubernetes.io/tls

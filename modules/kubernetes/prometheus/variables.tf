@@ -1,20 +1,25 @@
+variable "aks_name" {
+  description = "The AKS cluster short name, e.g. 'aks'."
+  type        = string
+}
+
 variable "azure_config" {
   description = "Azure specific configuration"
   type = object({
     azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
+    #identity = object({
+    #  client_id   = string
+    #  resource_id = string
+    #  tenant_id   = string
+    #})
   })
   default = {
     azure_key_vault_name = ""
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
+    #identity = {
+    #  client_id   = ""
+    #  resource_id = ""
+    #  tenant_id   = ""
+    #}
   }
 }
 
@@ -28,18 +33,8 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "dns_zones" {
-  description = "List of DNS Zones"
-  type        = list(string)
-}
-
 variable "environment" {
   description = "The environment in which the prometheus instance is deployed"
-  type        = string
-}
-
-variable "location" {
-  description = "The Azure region name."
   type        = string
 }
 
@@ -64,11 +59,6 @@ variable "region" {
   type        = string
 }
 
-variable "cluster_id" {
-  description = "Unique identifier of the cluster across regions and instances."
-  type        = string
-}
-
 variable "remote_write_authenticated" {
   description = "Adds TLS authentication to remote write configuration if true"
   type        = bool
@@ -89,12 +79,6 @@ variable "resource_selector" {
   description = "Monitoring type labels to look for in Prometheus resources"
   type        = list(string)
   default     = ["platform"]
-}
-
-variable "tenant_id" {
-  description = "The tenant id label to apply to all metrics in remote write"
-  type        = string
-  default     = ""
 }
 
 variable "volume_claim_storage_class_name" {

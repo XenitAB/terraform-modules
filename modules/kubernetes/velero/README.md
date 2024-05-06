@@ -35,6 +35,7 @@ No modules.
 | [git_repository_file.kustomization](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [git_repository_file.velero](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [git_repository_file.velero_extras](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/resource_group) | data source |
 
 ## Inputs
 

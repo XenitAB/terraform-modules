@@ -114,14 +114,14 @@ metadata:
 spec:
   provider: "azure"
   parameters:
-    usePodIdentity: "true"
-    keyvaultName: "${azure_config.azure_key_vault_name}"
+    clientID: ${client_id}
+    keyvaultName: ${azure_config.azure_key_vault_name}
+    tenantId: ${tenant_id}
     objects:  |
       array:
         - |
           objectName: "${azure_config.keyvault_secret_name}"
           objectType: secret
-    tenantId: "${tenant_id}"
   secretObjects:
     - secretName: "${k8s_secret_name}"
       type: kubernetes.io/tls

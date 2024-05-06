@@ -429,6 +429,7 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
+  aks_name = var.name
   azure_config = {
     azure_key_vault_name = var.prometheus_config.azure_key_vault_name
     identity = {
@@ -440,9 +441,7 @@ module "prometheus" {
 
   cluster_id                      = local.cluster_id
   cluster_name                    = "${var.name}${local.aks_name_suffix}"
-  dns_zones                       = var.dns_zones
   environment                     = var.environment
-  location                        = data.azurerm_resource_group.this.location
   location_short                  = var.location_short
   namespace_selector              = var.prometheus_config.namespace_selector
   oidc_issuer_url                 = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
@@ -451,7 +450,6 @@ module "prometheus" {
   remote_write_url                = var.prometheus_config.remote_write_url
   resource_group_name             = data.azurerm_resource_group.this.name
   resource_selector               = var.prometheus_config.resource_selector
-  tenant_id                       = var.prometheus_config.tenant_id
   volume_claim_storage_class_name = var.prometheus_volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 

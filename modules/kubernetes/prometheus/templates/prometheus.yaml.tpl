@@ -1,3 +1,11 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus
+  namespace: prometheus
+  annotations:
+    azure.workload.identity/client-id: ${client_id}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
@@ -8,7 +16,7 @@ spec:
   scrapeInterval: "1m"
   podMetadata:
     labels:
-      aadpodidbinding: prometheus
+      azure.workload.identity/use: "true"
   containers:
     - name: prometheus
       args:

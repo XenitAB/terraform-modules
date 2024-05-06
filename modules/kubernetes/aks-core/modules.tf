@@ -33,7 +33,7 @@ module "azure_policy" {
   for_each = {
     for s in ["azure_policy"] :
     s => s
-    if var.azure_policy_enabled && !var.gatekeeper_enabled
+    if var.azure_policy_enabled && ! var.gatekeeper_enabled
   }
 
   source = "../../kubernetes/azure-policy"
@@ -53,7 +53,7 @@ module "gatekeeper" {
   for_each = {
     for s in ["gatekeeper"] :
     s => s
-    if var.gatekeeper_enabled && !var.azure_policy_enabled
+    if var.gatekeeper_enabled && ! var.azure_policy_enabled
   }
 
   source = "../../kubernetes/gatekeeper"
@@ -398,11 +398,14 @@ module "azad_kube_proxy" {
     if var.azad_kube_proxy_enabled
   }
 
-  source                = "../../kubernetes/azad-kube-proxy"
-  cluster_id            = local.cluster_id
-  fqdn                  = var.azad_kube_proxy_config.fqdn
-  azure_ad_group_prefix = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
-  allowed_ips           = var.azad_kube_proxy_config.allowed_ips
+  source                 = "../../kubernetes/azad-kube-proxy"
+  cluster_id             = local.cluster_id
+  fqdn                   = var.azad_kube_proxy_config.fqdn
+  azure_ad_group_prefix  = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
+  allowed_ips            = var.azad_kube_proxy_config.allowed_ips
+  public_private_enabled = var.ingress_nginx_config.public_private_enabled
+  use_private_ingress    = var.use_private_ingress
+
 
   azure_ad_app = {
     client_id     = var.azad_kube_proxy_config.azure_ad_app.client_id
@@ -527,7 +530,7 @@ module "trivy" {
   for_each = {
     for s in ["trivy"] :
     s => s
-    if var.trivy_enabled && !var.defender_enabled
+    if var.trivy_enabled && ! var.defender_enabled
   }
 
   source = "../../kubernetes/trivy"

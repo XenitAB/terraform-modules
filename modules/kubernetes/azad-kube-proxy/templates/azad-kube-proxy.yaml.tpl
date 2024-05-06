@@ -69,6 +69,13 @@ spec:
 
     ingress:
       enabled: true
+    %{ if public_private_enabled == true && use_private_ingress == true }
+      ingressClassName: "nginx_private"
+    %{ elseif public_private_enabled == true }
+      ingressClassName: "nginx_public"
+    %{ else }
+      ingressClassName: "nginx"
+    %{ endif }
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt"
         nginx.ingress.kubernetes.io/whitelist-source-range: ${allowed_ips_csv}

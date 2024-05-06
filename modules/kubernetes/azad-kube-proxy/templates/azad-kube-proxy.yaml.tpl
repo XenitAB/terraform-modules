@@ -71,7 +71,7 @@ spec:
       enabled: true
     %{ if public_private_enabled == true && use_private_ingress == true }
       ingressClassName: "nginx_private"
-    %{ elseif public_private_enabled == true }
+    %{ else if public_private_enabled == true }
       ingressClassName: "nginx_public"
     %{ else }
       ingressClassName: "nginx"

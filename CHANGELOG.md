@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Added
 
 - [#1066](https://github.com/XenitAB/terraform-modules/pull/1066) Enable workload identity service account in tenant namespaces.
+- [#1101](https://github.com/XenitAB/terraform-modules/pull/1101) feat: Add possibility to use private ingress for azad-kube-proxy.
 
 ## Changed
 

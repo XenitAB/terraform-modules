@@ -69,12 +69,14 @@ spec:
 
     ingress:
       enabled: true
+    %{ if public_private_enabled == false }
+      ingressClassName: "nginx"
+    %{ endif }
+    %{ if public_private_enabled == true }
+      ingressClassName: "nginx_public"
+    %{ endif }
     %{ if public_private_enabled == true && use_private_ingress == true }
       ingressClassName: "nginx_private"
-    %{ else if public_private_enabled == true }
-      ingressClassName: "nginx_public"
-    %{ else }
-      ingressClassName: "nginx"
     %{ endif }
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt"

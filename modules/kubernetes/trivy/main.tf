@@ -16,6 +16,10 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
+    azurerm = {
+      version = "3.99.0"
+      source  = "hashicorp/azurerm"
+    }
     git = {
       source  = "xenitab/git"
       version = "0.0.3"
@@ -26,28 +30,22 @@ terraform {
 resource "git_repository_file" "kustomization" {
   path = "clusters/${var.cluster_id}/trivy.yaml"
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
+    cluster_id = var.cluster_id,
   })
 }
 
 resource "git_repository_file" "trivy_operator" {
   path = "platform/${var.cluster_id}/trivy/trivy-operator.yaml"
   content = templatefile("${path.module}/templates/trivy-operator.yaml.tpl", {
+    client_id = azurerm_user_assigned_identity.trivy.client_id,
   })
 }
 
 resource "git_repository_file" "trivy" {
   path = "platform/${var.cluster_id}/trivy/trivy.yaml"
   content = templatefile("${path.module}/templates/trivy.yaml.tpl", {
-    volume_claim_storage_class_name = var.volume_claim_storage_class_name
-  })
-}
-
-resource "git_repository_file" "trivy_extras" {
-  path = "platform/${var.cluster_id}/trivy/trivy-extras.yaml"
-  content = templatefile("${path.module}/templates/trivy-extras.yaml.tpl", {
-    client_id   = var.client_id,
-    resource_id = var.resource_id,
+    client_id                       = azurerm_user_assigned_identity.trivy.client_id,
+    volume_claim_storage_class_name = var.volume_claim_storage_class_name,
   })
 }
 

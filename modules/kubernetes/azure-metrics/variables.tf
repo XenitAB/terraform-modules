@@ -3,24 +3,34 @@ variable "cluster_id" {
   type        = string
 }
 
-variable "client_id" {
-  description = "The client_id for aadpodidentity with access to AZ specific metrics"
+variable "location" {
+  description = "The Azure region name."
+  type        = string
+}
+
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
+  type        = string
+}
+
+variable "podmonitor_loadbalancer" {
+  description = "Enable podmonitor for loadbalancers?"
+  type        = bool
+  default     = true
+}
+
+variable "podmonitor_kubernetes" {
+  description = "Enable podmonitor for kubernetes?"
+  type        = bool
+  default     = true
+}
+
+variable "resource_group_name" {
+  description = "The Azure resource group name"
   type        = string
 }
 
 variable "subscription_id" {
   description = "The subscription id where your kubernetes cluster is deployed"
   type        = string
-}
-
-variable "podmonitor_loadbalancer" {
-  type        = bool
-  description = "Enable podmonitor for loadbalancers?"
-  default     = true
-}
-
-variable "podmonitor_kubernetes" {
-  type        = bool
-  description = "Enable podmonitor for kubernetes?"
-  default     = true
 }

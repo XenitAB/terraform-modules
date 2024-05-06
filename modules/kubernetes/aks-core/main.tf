@@ -53,39 +53,34 @@ data "azurerm_resource_group" "global" {
   name = "rg-${var.environment}-${var.global_location_short}-global"
 }
 
-locals {
-  aks_name_suffix = var.aks_name_suffix != null ? var.aks_name_suffix : ""
-}
-
 data "azurerm_container_registry" "acr" {
   name                = var.acr_name_override == "" ? "acr${var.environment}${var.location_short}${var.name}${var.unique_suffix}" : var.acr_name_override
   resource_group_name = data.azurerm_resource_group.global.name
 }
 
+data "azurerm_key_vault" "core" {
+  name                = join("-", compact(["kv-${var.environment}-${var.location_short}-${var.core_name}", var.unique_suffix]))
+  resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"
+}
+
+data "azurerm_kubernetes_cluster" "this" {
+  resource_group_name = data.azurerm_resource_group.this.name
+  name                = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+}
+
 data "azurerm_user_assigned_identity" "tenant" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
-  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-${each.key}-wi"
+  name                = "uai-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}-${each.key}-wi"
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
-data "azurerm_user_assigned_identity" "azure_metrics" {
-  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-azure-metrics-wi"
-  resource_group_name = data.azurerm_resource_group.this.name
-}
-
-data "azurerm_user_assigned_identity" "external_dns" {
-  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-external-dns"
-  resource_group_name = data.azurerm_resource_group.this.name
-}
-
-data "azurerm_user_assigned_identity" "cert_manager" {
-  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-cert-manager"
-  resource_group_name = data.azurerm_resource_group.this.name
-}
-
-data "azurerm_user_assigned_identity" "datadog" {
-  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-datadog"
-  resource_group_name = data.azurerm_resource_group.this.name
+data "azurerm_dns_zone" "this" {
+  for_each = {
+    for dns in var.dns_zones :
+    dns => dns
+  }
+  name                = each.key
+  resource_group_name = data.azurerm_resource_group.global.name
 }
 

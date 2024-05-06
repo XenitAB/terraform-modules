@@ -42,6 +42,8 @@ kind: Deployment
 metadata:
   name: datadog-secret-mount
   namespace: datadog
+  labels:
+    azure.workload.identity/use: "true"
 spec:
   selector:
     matchLabels:

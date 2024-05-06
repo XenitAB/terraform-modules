@@ -51,9 +51,15 @@ spec:
     trivyOperator:
       # scanJobPodTemplateLabels comma-separated representation of the labels which the user wants the scanner pods to be
       # labeled with. Example: `foo=bar,env=stage` will labeled the scanner pods with the labels `foo: bar` and `env: stage`
-      scanJobPodTemplateLabels: "aadpodidbinding=trivy"
+      scanJobPodTemplateLabels: azure.workload.identity/use="true"
 
     resources:
       requests:
         cpu: 15m
         memory: 200Mi
+
+    serviceAccount:
+      create: true
+      name: trivy-operator
+      annotations:
+        azure.workload.identity/client-id: ${client_id}

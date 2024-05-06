@@ -18,9 +18,19 @@ variable "azure_config" {
   }
 }
 
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}
+
 variable "cluster_name" {
   description = "Name of the prometheus cluster"
   type        = string
+}
+
+variable "dns_zones" {
+  description = "List of DNS Zones"
+  type        = list(string)
 }
 
 variable "environment" {
@@ -28,15 +38,30 @@ variable "environment" {
   type        = string
 }
 
-variable "region" {
-  description = "The region in which the prometheus instance is deployed"
+variable "location" {
+  description = "The Azure region name."
   type        = string
 }
 
-variable "tenant_id" {
-  description = "The tenant id label to apply to all metrics in remote write"
+variable "location_short" {
+  description = "The Azure region short name."
   type        = string
-  default     = ""
+}
+
+variable "namespace_selector" {
+  description = "Kind labels to look for in namespaces"
+  type        = list(string)
+  default     = ["platform"]
+}
+
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
+  type        = string
+}
+
+variable "region" {
+  description = "The region in which the prometheus instance is deployed"
+  type        = string
 }
 
 variable "remote_write_authenticated" {
@@ -50,6 +75,23 @@ variable "remote_write_url" {
   type        = string
 }
 
+variable "resource_group_name" {
+  description = "The Azure resource group name"
+  type        = string
+}
+
+variable "resource_selector" {
+  description = "Monitoring type labels to look for in Prometheus resources"
+  type        = list(string)
+  default     = ["platform"]
+}
+
+variable "tenant_id" {
+  description = "The tenant id label to apply to all metrics in remote write"
+  type        = string
+  default     = ""
+}
+
 variable "volume_claim_storage_class_name" {
   description = "StorageClass name that your pvc will use"
   type        = string
@@ -60,18 +102,6 @@ variable "volume_claim_size" {
   description = "Size of prometheus disk"
   type        = string
   default     = "10Gi"
-}
-
-variable "resource_selector" {
-  description = "Monitoring type labels to look for in Prometheus resources"
-  type        = list(string)
-  default     = ["platform"]
-}
-
-variable "namespace_selector" {
-  description = "Kind labels to look for in namespaces"
-  type        = list(string)
-  default     = ["platform"]
 }
 
 # Opt in to additional monitors

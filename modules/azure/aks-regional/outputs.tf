@@ -43,14 +43,6 @@ output "xenit" {
   }
 }
 
-output "trivy_identity" {
-  description = "MSI authentication identity for Trivy image scaning"
-  value = {
-    client_id   = azurerm_user_assigned_identity.trivy.client_id
-    resource_id = azurerm_user_assigned_identity.trivy.id
-  }
-}
-
 output "aks_managed_identity_group_id" {
   description = "The group id of aks managed identity"
   value       = var.aks_managed_identity
@@ -63,16 +55,6 @@ output "azad_kube_proxy" {
   }
   sensitive = true
 }
-
-output "azure_metrics_identity" {
-  description = "MSI authentication identity for Azure Metrics"
-  value = {
-    client_id    = azurerm_user_assigned_identity.azure_metrics.client_id
-    resource_id  = azurerm_user_assigned_identity.azure_metrics.id
-    principal_id = azurerm_user_assigned_identity.azure_metrics.principal_id
-  }
-}
-
 
 output "log_eventhub_name" {
   description = "The eventhub name for k8s logs"

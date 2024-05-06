@@ -8,10 +8,14 @@ module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
 
   name                    = "baz"
+  aks_managed_identity    = "id"
   aks_name_suffix         = 1
+  core_name               = "core"
+  dns_zones               = ["a.com"]
   location_short          = "foo"
   global_location_short   = "sc"
   environment             = "bar"
+  subscription_id         = "id"
   subscription_name       = "baz"
   group_name_prefix       = "aks"
   namespaces              = []

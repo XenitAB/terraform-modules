@@ -250,13 +250,3 @@ variable "defender_config" {
   })
   default = {}
 }
-
-variable "dns_zones" {
-  description = "List of DNS Zones"
-  type        = list(string)
-}
-
-variable "global_location_short" {
-  description = "The Azure region short name where the global resources resides."
-  type        = string
-}

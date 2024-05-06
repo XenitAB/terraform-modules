@@ -25,7 +25,6 @@ This module is used to create resources that are used by AKS clusters.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_azad_kube_proxy"></a> [azad\_kube\_proxy](#module\_azad\_kube\_proxy) | ../../azure-ad/azad-kube-proxy | n/a |
-| <a name="module_velero"></a> [velero](#module\_velero) | ./velero/ | n/a |
 
 ## Resources
 
@@ -42,18 +41,13 @@ This module is used to create resources that are used by AKS clusters.
 | [azurerm_key_vault_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_public_ip_prefix.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/public_ip_prefix) | resource |
 | [azurerm_role_assignment.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.trivy_acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.trivy_managed](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.vnet](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
 | [azurerm_user_assigned_identity.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/user_assigned_identity) | resource |
-| [azurerm_user_assigned_identity.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/user_assigned_identity) | resource |
-| [azurerm_user_assigned_identity.trivy](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/user_assigned_identity) | resource |
 | [tls_private_key.ssh_key](https://registry.terraform.io/providers/hashicorp/tls/4.0.4/docs/resources/private_key) | resource |
 | [azuread_group.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/data-sources/group) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/client_config) | data source |
-| [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/container_registry) | data source |
 | [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/key_vault) | data source |
 | [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/resource_group) | data source |
@@ -92,12 +86,10 @@ This module is used to create resources that are used by AKS clusters.
 | <a name="output_aks_managed_identity_group_id"></a> [aks\_managed\_identity\_group\_id](#output\_aks\_managed\_identity\_group\_id) | The group id of aks managed identity |
 | <a name="output_aks_public_ip_prefix_ids"></a> [aks\_public\_ip\_prefix\_ids](#output\_aks\_public\_ip\_prefix\_ids) | Azure Kubernetes Service IP Prefixes |
 | <a name="output_azad_kube_proxy"></a> [azad\_kube\_proxy](#output\_azad\_kube\_proxy) | The Azure AD Application config for azad-kube-proxy |
-| <a name="output_azure_metrics_identity"></a> [azure\_metrics\_identity](#output\_azure\_metrics\_identity) | MSI authentication identity for Azure Metrics |
 | <a name="output_dns_zone"></a> [dns\_zone](#output\_dns\_zone) | DNS Zone to be used with external-dns |
 | <a name="output_log_eventhub_authorization_rule_id"></a> [log\_eventhub\_authorization\_rule\_id](#output\_log\_eventhub\_authorization\_rule\_id) | The authoritzation rule id for event hub |
 | <a name="output_log_eventhub_hostname"></a> [log\_eventhub\_hostname](#output\_log\_eventhub\_hostname) | The eventhub hostname for k8s logs |
 | <a name="output_log_eventhub_name"></a> [log\_eventhub\_name](#output\_log\_eventhub\_name) | The eventhub name for k8s logs |
 | <a name="output_namespaces"></a> [namespaces](#output\_namespaces) | Kubernetes namespaces |
 | <a name="output_ssh_public_key"></a> [ssh\_public\_key](#output\_ssh\_public\_key) | SSH public key to add to servers |
-| <a name="output_trivy_identity"></a> [trivy\_identity](#output\_trivy\_identity) | MSI authentication identity for Trivy image scaning |
 | <a name="output_xenit"></a> [xenit](#output\_xenit) | Configuration used by monitoring solution to get authentication credentials |

@@ -35,18 +35,16 @@ spec:
     podLabels:
       azure.workload.identity/use: "true"
     serviceAccount:
-      labels:
-        azure.workload.identity/use: "true"
+      annotations:
+        azure.workload.identity/client-id: ${client_id}
     webhook:
       resources:
         requests:
           cpu: 30m
           memory: 100Mi
-
     requests:
       cpu: 15m
       memory: 150Mi
-
     cainjector:
       resources:
         requests:
@@ -67,15 +65,15 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-cluster-issuer-account-key
     solvers:
-%{ for zone in azure_config.hosted_zone_names ~}
+%{ for zone in dns_zones ~}
       - dns01:
           azureDNS:
             environment: AzurePublicCloud
-            subscriptionID: ${azure_config.subscription_id}
-            resourceGroupName: ${azure_config.resource_group_name}
+            subscriptionID: ${subscription_id}
+            resourceGroupName: ${resource_group_name}
             hostedZoneName: ${zone}
             managedIdentity:
-              clientID: ${azure_config.client_id}
+              clientID: ${client_id}
         selector:
           dnsZones: 
             - ${zone}

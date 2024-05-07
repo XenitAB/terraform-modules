@@ -78,8 +78,12 @@ module "azure_metrics" {
   source = "../../kubernetes/azure-metrics"
 
   aks_managed_identity = data.azuread_group.aks_managed_identity.id
+  aks_name             = var.name
+  aks_name_suffix      = var.aks_name_suffix
   cluster_id           = local.cluster_id
+  environment          = var.environment
   location             = data.azurerm_resource_group.this.location
+  location_short       = var.location_short
   oidc_issuer_url      = var.oidc_issuer_url
   resource_group_name  = data.azurerm_resource_group.this.name
   subscription_id      = data.azurerm_client_config.current.subscription_id

@@ -3,13 +3,33 @@ variable "aks_managed_identity" {
   type        = string
 }
 
+variable "aks_name" {
+  description = "The commonName to use for the deploy"
+  type        = string
+}
+
+variable "aks_name_suffix" {
+  description = "The suffix for the aks clusters"
+  type        = number
+}
+
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
 variable "location" {
   description = "The Azure region name."
+  type        = string
+}
+
+variable "location_short" {
+  description = "The Azure region short name."
   type        = string
 }
 

@@ -67,11 +67,6 @@ data "azurerm_key_vault" "core" {
   resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"
 }
 
-data "azurerm_kubernetes_cluster" "this" {
-  resource_group_name = data.azurerm_resource_group.this.name
-  name                = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
-}
-
 data "azurerm_user_assigned_identity" "tenant" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 

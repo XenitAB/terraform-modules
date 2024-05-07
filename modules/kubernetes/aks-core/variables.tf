@@ -34,11 +34,6 @@ variable "name" {
   type        = string
 }
 
-#variable "aks_managed_identity" {
-#  description = "AKS Azure AD managed identity"
-#  type        = string
-#}
-
 variable "aks_name_suffix" {
   description = "The suffix for the aks clusters"
   type        = number
@@ -624,4 +619,9 @@ variable "coredns_upstream" {
 variable "dns_zones" {
   description = "List of DNS Zones"
   type        = list(string)
+}
+
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
+  type        = string
 }

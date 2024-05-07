@@ -11,6 +11,7 @@ module "aks_core" {
   aks_name_suffix         = 1
   core_name               = "core"
   dns_zones               = ["a.com"]
+  oidc_issuer_url         = "url"
   location_short          = "foo"
   global_location_short   = "sc"
   environment             = "bar"

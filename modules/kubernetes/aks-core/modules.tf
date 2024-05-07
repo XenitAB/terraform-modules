@@ -81,7 +81,7 @@ module "azure_metrics" {
   aks_managed_identity = data.azuread_group.aks_managed_identity.id
   cluster_id           = local.cluster_id
   location             = data.azurerm_resource_group.this.location
-  oidc_issuer_url      = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
+  oidc_issuer_url      = var.oidc_issuer_url
   resource_group_name  = data.azurerm_resource_group.this.name
   subscription_id      = data.azurerm_client_config.current.subscription_id
 }
@@ -121,7 +121,7 @@ module "cert_manager" {
   dns_zones           = local.dns_zones
   location            = data.azurerm_resource_group.this.location
   notification_email  = var.cert_manager_config.notification_email
-  oidc_issuer_url     = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
+  oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
   subscription_id     = data.azurerm_client_config.current.subscription_id
 }
@@ -155,7 +155,7 @@ module "control_plane_logs" {
   cluster_id          = local.cluster_id
   environment         = var.environment
   location_short      = var.location_short
-  oidc_issuer_url     = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
+  oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
@@ -179,7 +179,7 @@ module "datadog" {
   location            = data.azurerm_resource_group.this.location
   location_short      = var.location_short
   namespace_include   = var.datadog_config.namespaces
-  oidc_issuer_url     = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
+  oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
@@ -198,7 +198,7 @@ module "external_dns" {
   environment         = var.environment
   location            = data.azurerm_resource_group.this.location
   location_short      = var.location_short
-  oidc_issuer_url     = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
+  oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
   subscription_id     = data.azurerm_client_config.current.subscription_id
   txt_owner_id        = "${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
@@ -440,7 +440,7 @@ module "prometheus" {
   environment                     = var.environment
   location_short                  = var.location_short
   namespace_selector              = var.prometheus_config.namespace_selector
-  oidc_issuer_url                 = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
+  oidc_issuer_url                 = var.oidc_issuer_url
   region                          = var.location_short
   remote_write_authenticated      = var.prometheus_config.remote_write_authenticated
   remote_write_url                = var.prometheus_config.remote_write_url
@@ -491,7 +491,7 @@ module "promtail" {
   excluded_namespaces = var.promtail_config.excluded_namespaces
   location_short      = var.location_short
   loki_address        = var.promtail_config.loki_address
-  oidc_issuer_url     = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
+  oidc_issuer_url     = var.oidc_issuer_url
   region              = var.location_short
   resource_group_name = data.azurerm_resource_group.this.name
 }
@@ -523,7 +523,7 @@ module "trivy" {
   environment                     = var.environment
   location                        = data.azurerm_resource_group.this.location
   location_short                  = var.location_short
-  oidc_issuer_url                 = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
+  oidc_issuer_url                 = var.oidc_issuer_url
   resource_group_name             = data.azurerm_resource_group.this.name
   starboard_exporter_enabled      = var.trivy_config.starboard_exporter_enabled
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
@@ -553,7 +553,7 @@ module "velero" {
   }
   cluster_id          = local.cluster_id
   location            = data.azurerm_resource_group.this.location
-  oidc_issuer_url     = data.azurerm_kubernetes_cluster.this.oidc_issuer_url
+  oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
   subscription_id     = data.azurerm_client_config.current.subscription_id
   unique_suffix       = var.unique_suffix

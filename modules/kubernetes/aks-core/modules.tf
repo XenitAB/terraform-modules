@@ -26,7 +26,6 @@ locals {
     "spegel",
     "vpa",
   ]
-  aks_name_suffix = var.aks_name_suffix != null ? var.aks_name_suffix : ""
   cluster_id      = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
   dns_zones = {
     for zone in data.azurerm_dns_zone.this :

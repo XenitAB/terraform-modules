@@ -30,7 +30,7 @@ resource "azurerm_role_assignment" "azure_metrics_aks_reader" {
 }
 
 resource "azurerm_role_assignment" "azure_metrics_lb_reader" {
-  scope                = "/subscriptions/${var.subscription_id}/resourceGroups/mc_${var.resource_group_name}_aks-${var.environment}-${var.location_short}-${var.aks_name}${local.aks_name_suffix}_${data.azurerm_resource_group.this.location}/providers/Microsoft.Network/loadBalancers/kubernetes"
+  scope                = "/subscriptions/${var.subscription_id}/resourceGroups/mc_${var.resource_group_name}_aks-${var.environment}-${var.location_short}-${var.aks_name}${local.aks_name_suffix}_${var.location}/providers/Microsoft.Network/loadBalancers/kubernetes"
   role_definition_name = "Monitoring Reader"
   principal_id         = azurerm_user_assigned_identity.azure_metrics.principal_id
 }

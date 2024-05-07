@@ -9,6 +9,11 @@ variable "aks_managed_identity" {
   type        = string
 }
 
+variable "aks_name" {
+  description = "The commonName to use for the deploy"
+  type        = string
+}
+
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
@@ -43,6 +48,12 @@ variable "starboard_exporter_enabled" {
   description = "If the starboard-exporter Helm chart should be deployed"
   type        = bool
   default     = true
+}
+
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
+  type        = string
+  default     = ""
 }
 
 variable "volume_claim_storage_class_name" {

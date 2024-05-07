@@ -1,0 +1,23 @@
+2024-05-07T15:41:11.934+0200 [INFO]  Terraform version: 1.8.2
+2024-05-07T15:41:11.934+0200 [DEBUG] using github.com/hashicorp/go-tfe v1.51.0
+2024-05-07T15:41:11.934+0200 [DEBUG] using github.com/hashicorp/hcl/v2 v2.20.0
+2024-05-07T15:41:11.934+0200 [DEBUG] using github.com/hashicorp/terraform-svchost v0.1.1
+2024-05-07T15:41:11.934+0200 [DEBUG] using github.com/zclconf/go-cty v1.14.3
+2024-05-07T15:41:11.934+0200 [INFO]  Go runtime version: go1.22.1
+2024-05-07T15:41:11.934+0200 [INFO]  CLI args: []string{"terraform", "validate"}
+2024-05-07T15:41:11.934+0200 [DEBUG] Attempting to open CLI config file: /home/lars/.terraformrc
+2024-05-07T15:41:11.934+0200 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+2024-05-07T15:41:11.934+0200 [DEBUG] ignoring non-existing provider search directory terraform.d/plugins
+2024-05-07T15:41:11.934+0200 [DEBUG] ignoring non-existing provider search directory /home/lars/.terraform.d/plugins
+2024-05-07T15:41:11.934+0200 [DEBUG] ignoring non-existing provider search directory /home/lars/.local/share/terraform/plugins
+2024-05-07T15:41:11.934+0200 [DEBUG] ignoring non-existing provider search directory /usr/share/ubuntu/terraform/plugins
+2024-05-07T15:41:11.934+0200 [DEBUG] ignoring non-existing provider search directory /home/lars/.local/share/flatpak/exports/share/terraform/plugins
+2024-05-07T15:41:11.934+0200 [DEBUG] ignoring non-existing provider search directory /var/lib/flatpak/exports/share/terraform/plugins
+2024-05-07T15:41:11.934+0200 [DEBUG] ignoring non-existing provider search directory /usr/local/share/terraform/plugins
+2024-05-07T15:41:11.934+0200 [DEBUG] ignoring non-existing provider search directory /usr/share/terraform/plugins
+2024-05-07T15:41:11.934+0200 [DEBUG] ignoring non-existing provider search directory /var/lib/snapd/desktop/terraform/plugins
+2024-05-07T15:41:11.935+0200 [INFO]  CLI command args: []string{"validate"}
+2024-05-07T15:41:11.935+0200 [DEBUG] checking for provisioner in "."
+2024-05-07T15:41:11.937+0200 [DEBUG] checking for provisioner in "/usr/bin"
+2024-05-07T15:41:11.937+0200 [DEBUG] Building and walking validate graph
+2024-05-07T15:41:11.937+0200 [DEBUG] Starting graph walk: walkValidate

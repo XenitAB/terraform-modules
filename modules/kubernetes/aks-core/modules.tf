@@ -26,7 +26,7 @@ locals {
     "spegel",
     "vpa",
   ]
-  cluster_id      = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
+  cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
   dns_zones = {
     for zone in data.azurerm_dns_zone.this :
     zone.name => zone.id
@@ -518,6 +518,7 @@ module "trivy" {
   source = "../../kubernetes/trivy"
 
   aks_managed_identity            = data.azuread_group.aks_managed_identity.id
+  aks_name                        = var.name
   cluster_id                      = local.cluster_id
   environment                     = var.environment
   location                        = data.azurerm_resource_group.this.location
@@ -525,6 +526,7 @@ module "trivy" {
   oidc_issuer_url                 = var.oidc_issuer_url
   resource_group_name             = data.azurerm_resource_group.this.name
   starboard_exporter_enabled      = var.trivy_config.starboard_exporter_enabled
+  unique_suffix                   = var.unique_suffix
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
 }
 

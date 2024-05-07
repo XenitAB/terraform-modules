@@ -24,7 +24,7 @@ data "azurerm_resource_group" "global" {
 }
 
 data "azurerm_container_registry" "acr" {
-  name                = var.acr_name_override == "" ? "acr${var.cluster_id}" : var.acr_name_override
+  name                = var.acr_name_override == "" ? "acr${var.environment}${var.location_short}${var.aks_name}${var.unique_suffix}" : var.acr_name_override
   resource_group_name = data.azurerm_resource_group.global.name
 }
 

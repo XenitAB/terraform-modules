@@ -15,13 +15,13 @@ module "aks" {
     azurerm = azurerm
   }
 
-  environment                   = "dev"
-  location_short                = "we"
-  name                          = "xks"
-  subscription_name             = "sub"
-  core_name                     = "core"
-  unique_suffix                 = 1337
-  aks_name_suffix               = "1"
+  environment       = "dev"
+  location_short    = "we"
+  name              = "xks"
+  subscription_name = "sub"
+  core_name         = "core"
+  unique_suffix     = 1337
+  aks_name_suffix   = "1"
 
   aks_config = {
     version                  = "1.27.7"

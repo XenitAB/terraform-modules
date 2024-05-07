@@ -13,7 +13,7 @@ resource "azurerm_role_assignment" "external_dns_contributor" {
     for dns in var.dns_zones :
     dns => dns
   }
-  scope                = var.dns_zones[each.key]
+  scope                = each.key
   role_definition_name = "Contributor"
   principal_id         = azurerm_user_assigned_identity.external_dns.principal_id
 }

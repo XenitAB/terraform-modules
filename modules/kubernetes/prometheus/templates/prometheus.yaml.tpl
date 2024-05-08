@@ -1,11 +1,3 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: prometheus
-  namespace: prometheus
-  annotations:
-    azure.workload.identity/client-id: ${client_id}
----
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:

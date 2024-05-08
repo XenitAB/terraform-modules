@@ -15,4 +15,4 @@ spec:
   - apiVersion: apps/v1
     kind: Deployment
     namespace: ingress-nginx
-    name: ingress-nginx
+    name: ingress-nginx-controller

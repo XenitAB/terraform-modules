@@ -195,16 +195,17 @@ module "external_dns" {
 
   source = "../../kubernetes/external-dns"
 
-  cluster_id          = local.cluster_id
-  dns_provider        = "azure"
-  dns_zones           = local.dns_zones
-  environment         = var.environment
-  location            = data.azurerm_resource_group.this.location
-  location_short      = var.location_short
-  oidc_issuer_url     = var.oidc_issuer_url
-  resource_group_name = data.azurerm_resource_group.this.name
-  subscription_id     = data.azurerm_client_config.current.subscription_id
-  txt_owner_id        = "${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  cluster_id                 = local.cluster_id
+  dns_provider               = "azure"
+  dns_zones                  = local.dns_zones
+  environment                = var.environment
+  global_resource_group_name = data.azurerm_resource_group.global.name
+  location                   = data.azurerm_resource_group.this.location
+  location_short             = var.location_short
+  oidc_issuer_url            = var.oidc_issuer_url
+  resource_group_name        = data.azurerm_resource_group.this.name
+  subscription_id            = data.azurerm_client_config.current.subscription_id
+  txt_owner_id               = "${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
 }
 
 module "falco" {

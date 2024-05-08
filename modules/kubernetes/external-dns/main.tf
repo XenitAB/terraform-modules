@@ -31,7 +31,7 @@ resource "git_repository_file" "external_dns" {
   content = templatefile("${path.module}/templates/external-dns.yaml.tpl", {
     client_id           = azurerm_user_assigned_identity.external_dns.client_id,
     provider            = var.dns_provider,
-    resource_group_name = var.resource_group_name,
+    resource_group_name = var.global_resource_group_name,
     sources             = var.sources,
     subscription_id     = var.subscription_id,
     tenant_id           = azurerm_user_assigned_identity.external_dns.tenant_id,

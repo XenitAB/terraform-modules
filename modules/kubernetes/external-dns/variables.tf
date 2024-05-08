@@ -18,6 +18,11 @@ variable "environment" {
   type        = string
 }
 
+variable "global_resource_group_name" {
+  description = "The Azure global resource group name"
+  type        = string
+}
+
 variable "location" {
   description = "The Azure region name."
   type        = string

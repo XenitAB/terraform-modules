@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1102](https://github.com/XenitAB/terraform-modules/pull/1102) fix: deployment name in ingress-nginx healthcheck.
 - [#1098](https://github.com/XenitAB/terraform-modules/pull/1098) feat: migrate grafana-agent to install with flux
 - [#1093](https://github.com/XenitAB/terraform-modules/pull/1093) Migrate Prometheus to install with flux.
 - [#1097](https://github.com/XenitAB/terraform-modules/pull/1097) remove slash in certmanager nameserver config.

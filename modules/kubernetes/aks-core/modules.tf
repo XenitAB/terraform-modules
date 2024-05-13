@@ -60,6 +60,8 @@ module "azad_kube_proxy" {
   fqdn                  = var.azad_kube_proxy_config.fqdn
   azure_ad_group_prefix = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
   allowed_ips           = var.azad_kube_proxy_config.allowed_ips
+  public_private_enabled = var.ingress_nginx_config.public_private_enabled
+  use_private_ingress    = var.use_private_ingress
 
   azure_ad_app = {
     client_id     = var.azad_kube_proxy_config.azure_ad_app.client_id

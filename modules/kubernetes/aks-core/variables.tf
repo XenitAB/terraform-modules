@@ -625,3 +625,9 @@ variable "oidc_issuer_url" {
   description = "Kubernetes OIDC issuer URL for workload identity."
   type        = string
 }
+
+variable "use_private_ingress" {
+  description = "If true, private ingress will be used by azad-kube-proxy"
+  type        = bool
+  default     = false
+}

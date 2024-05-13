@@ -49,6 +49,11 @@ variable "region" {
   type        = string
 }
 
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}
+
 variable "remote_write_authenticated" {
   description = "Adds TLS authentication to remote write configuration if true"
   type        = bool

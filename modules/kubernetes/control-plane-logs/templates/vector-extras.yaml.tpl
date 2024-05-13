@@ -14,7 +14,6 @@ spec:
         - |
           objectName: "eventhub-connectionstring"
           objectType: secret
-    tenantId: "${tenant_id}"
   secretObjects:
     - secretName: "msg-queue"
       type: Opaque

@@ -37,7 +37,6 @@ resource "git_repository_file" "prometheus_operator" {
 resource "git_repository_file" "prometheus" {
   path = "platform/${var.cluster_id}/prometheus/prometheus.yaml"
   content = templatefile("${path.module}/templates/prometheus.yaml.tpl", {
-    client_id                       = data.azurerm_user_assigned_identity.xenit.client_id,
     cluster_name                    = var.cluster_name,
     environment                     = var.environment,
     region                          = var.region,
@@ -54,6 +53,7 @@ resource "git_repository_file" "prometheus" {
 resource "git_repository_file" "rbac" {
   path = "platform/${var.cluster_id}/prometheus/rbac.yaml"
   content = templatefile("${path.module}/templates/rbac.yaml.tpl", {
+    client_id = data.azurerm_user_assigned_identity.xenit.client_id,
   })
 }
 

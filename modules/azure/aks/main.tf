@@ -31,13 +31,6 @@ terraform {
   }
 }
 
-data "azurerm_client_config" "current" {}
-
 data "azurerm_resource_group" "this" {
   name = "rg-${var.environment}-${var.location_short}-${var.name}"
 }
-
-locals {
-  aks_name_suffix = var.aks_name_suffix != null ? var.aks_name_suffix : ""
-}
-

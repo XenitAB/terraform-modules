@@ -1,19 +1,15 @@
+variable "aks_managed_identity" {
+  description = "AKS Azure AD managed identity"
+  type        = string
+}
+
 variable "azure_config" {
   description = "Azure specific configuration"
   type = object({
-    subscription_id           = string,
-    resource_group            = string,
-    client_id                 = string,
-    resource_id               = string,
     storage_account_name      = string,
     storage_account_container = string
   })
   default = {
-    subscription_id           = ""
-    tenant_id                 = ""
-    resource_group            = ""
-    client_id                 = ""
-    resource_id               = ""
     storage_account_name      = ""
     storage_account_container = ""
   }
@@ -22,4 +18,30 @@ variable "azure_config" {
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
+}
+
+variable "location" {
+  description = "The Azure region name."
+  type        = string
+}
+
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
+  type        = string
+}
+
+variable "resource_group_name" {
+  description = "The Azure resource group name"
+  type        = string
+}
+
+variable "subscription_id" {
+  description = "The Azure subscription id"
+  type        = string
+}
+
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
+  type        = string
+  default     = ""
 }

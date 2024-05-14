@@ -8,7 +8,7 @@ spec:
   scrapeInterval: "1m"
   podMetadata:
     labels:
-      aadpodidbinding: prometheus
+      azure.workload.identity/use: "true"
   containers:
     - name: prometheus
       args:

@@ -1,22 +1,3 @@
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentity
-metadata:
-  name: vector
-  namespace: controle-plane-logs
-spec:
-  type: 0
-  resourceID: ${resource_id}
-  clientID: ${client_id}
----
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentityBinding
-metadata:
-  name: vector
-  namespace: controle-plane-logs
-spec:
-  azureIdentity: vector
-  selector: vector
----
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
@@ -25,14 +6,14 @@ metadata:
 spec:
   provider: "azure"
   parameters:
-    usePodIdentity: "true"
-    keyvaultName: "${azure_key_vault_name}"
+    clientID: ${client_id}
+    keyvaultName: ${azure_key_vault_name}
+    tenantId: ${tenant_id}
     objects:  |
       array:
         - |
           objectName: "eventhub-connectionstring"
           objectType: secret
-    tenantId: "${tenant_id}"
   secretObjects:
     - secretName: "msg-queue"
       type: Opaque

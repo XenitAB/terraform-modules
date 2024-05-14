@@ -46,3 +46,5 @@ kind: ServiceAccount
 metadata:
   name: prometheus
   namespace: prometheus
+  annotations:
+    azure.workload.identity/client-id: ${client_id}

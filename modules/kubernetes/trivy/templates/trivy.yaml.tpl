@@ -32,6 +32,9 @@ spec:
   values:
     trivy:
       labels:
-        aadpodidbinding: trivy
+        azure.workload.identity/use: "true"
+      serviceAccount:
+        annotations:
+          azure.workload.identity/client-id: ${client_id}
     persistence:
       storageClass: ${volume_claim_storage_class_name}

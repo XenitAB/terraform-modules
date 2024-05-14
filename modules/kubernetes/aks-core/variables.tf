@@ -291,6 +291,11 @@ variable "cert_manager_config" {
   })
 }
 
+variable "core_name" {
+  description = "The name for the core infrastructure"
+  type        = string
+}
+
 variable "ingress_nginx_enabled" {
   description = "Should Ingress NGINX be enabled"
   type        = bool
@@ -345,10 +350,6 @@ variable "velero_config" {
   type = object({
     azure_storage_account_name      = string
     azure_storage_account_container = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-    })
   })
 }
 
@@ -361,7 +362,6 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
-
     azure_key_vault_name = string
     datadog_site         = string
     namespaces           = list(string)
@@ -475,22 +475,13 @@ variable "prometheus_volume_claim_storage_class_name" {
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
-    azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-
-    tenant_id = string
-
+    azure_key_vault_name       = string
+    tenant_id                  = string
     remote_write_authenticated = bool
     remote_write_url           = string
-
-    volume_claim_size = string
-
-    resource_selector  = list(string)
-    namespace_selector = list(string)
+    volume_claim_size          = string
+    resource_selector          = list(string)
+    namespace_selector         = list(string)
   })
 }
 
@@ -504,23 +495,13 @@ variable "promtail_config" {
   description = "Configuration for promtail"
   type = object({
     azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-    loki_address        = string
-    excluded_namespaces = list(string)
+    loki_address         = string
+    excluded_namespaces  = list(string)
   })
   default = {
     azure_key_vault_name = ""
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
-    loki_address        = ""
-    excluded_namespaces = []
+    loki_address         = ""
+    excluded_namespaces  = []
   }
 }
 
@@ -551,8 +532,6 @@ variable "trivy_volume_claim_storage_class_name" {
 variable "trivy_config" {
   description = "Configuration for trivy"
   type = object({
-    client_id                  = string
-    resource_id                = string
     starboard_exporter_enabled = optional(bool, true)
   })
 }
@@ -597,23 +576,13 @@ variable "control_plane_logs_config" {
   description = "Configuration for control plane log"
   type = object({
     azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-    eventhub_hostname = string
-    eventhub_name     = string
+    eventhub_hostname    = string
+    eventhub_name        = string
   })
   default = {
     azure_key_vault_name = ""
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
-    eventhub_hostname = ""
-    eventhub_name     = ""
+    eventhub_hostname    = ""
+    eventhub_name        = ""
   }
 }
 
@@ -645,6 +614,16 @@ variable "coredns_upstream" {
   type        = bool
   description = "Should coredns be used as the last route instead of upstream dns?"
   default     = false
+}
+
+variable "dns_zones" {
+  description = "List of DNS Zones"
+  type        = list(string)
+}
+
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
+  type        = string
 }
 
 variable "use_private_ingress" {

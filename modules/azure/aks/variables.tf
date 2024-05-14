@@ -181,19 +181,6 @@ variable "namespaces" {
   )
 }
 
-variable "aks_managed_identity_group_id" {
-  description = "The group id of aks managed identity"
-  type        = string
-}
-
-variable "azure_metrics_identity" {
-  description = "MSI authentication identity for Azure Metrics"
-  type = object({
-    id           = string
-    principal_id = string
-  })
-}
-
 variable "aks_audit_log_retention" {
   description = "The aks audit log retention in days, 0 = infinite"
   type        = number
@@ -249,14 +236,4 @@ variable "defender_config" {
     vulnerability_assessments_enabled = optional(bool, true)
   })
   default = {}
-}
-
-variable "dns_zones" {
-  description = "List of DNS Zones"
-  type        = list(string)
-}
-
-variable "global_location_short" {
-  description = "The Azure region short name where the global resources resides."
-  type        = string
 }

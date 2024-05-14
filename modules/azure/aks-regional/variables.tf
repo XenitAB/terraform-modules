@@ -94,20 +94,3 @@ variable "aks_managed_identity" {
   description = "AKS Azure AD managed identity"
   type        = string
 }
-
-variable "global_location_short" {
-  description = "The Azure region short name where the global resources resides."
-  type        = string
-}
-
-variable "acr_name_override" {
-  description = "Override default name of ACR"
-  type        = string
-  default     = ""
-}
-
-variable "velero_enabled" {
-  description = "Should Velero be enabled"
-  type        = bool
-  default     = false
-}

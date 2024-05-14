@@ -34,7 +34,7 @@ spec:
     podAnnotations:
       secret.reloader.stakater.com/reload: "vector"
     podLabels:
-      aadpodidbinding: vector
+      azure.workload.identity/use: "true"
     args:
       - "--config-dir=/config"
     existingConfigMaps:
@@ -87,3 +87,5 @@ spec:
       create: true
       name: vector
       automountToken: false
+      annotations:
+        azure.workload.identity/client-id: ${client_id}

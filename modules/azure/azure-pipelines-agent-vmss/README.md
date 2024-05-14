@@ -11,15 +11,15 @@ Follow this guide to setup the agent pool (manually): https://docs.microsoft.com
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.99.0 |
-| <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.4 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.103.1 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.5 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.99.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.103.1 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.5 |
 
 ## Modules
 
@@ -29,11 +29,11 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_key_vault_secret.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/key_vault_secret) | resource |
-| [azurerm_linux_virtual_machine_scale_set.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/linux_virtual_machine_scale_set) | resource |
-| [tls_private_key.this](https://registry.terraform.io/providers/hashicorp/tls/4.0.4/docs/resources/private_key) | resource |
-| [azurerm_key_vault.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/key_vault) | data source |
-| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/resource_group) | data source |
+| [azurerm_key_vault_secret.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.103.1/docs/resources/key_vault_secret) | resource |
+| [azurerm_linux_virtual_machine_scale_set.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.103.1/docs/resources/linux_virtual_machine_scale_set) | resource |
+| [tls_private_key.this](https://registry.terraform.io/providers/hashicorp/tls/4.0.5/docs/resources/private_key) | resource |
+| [azurerm_key_vault.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.103.1/docs/data-sources/key_vault) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.103.1/docs/data-sources/resource_group) | data source |
 
 ## Inputs
 

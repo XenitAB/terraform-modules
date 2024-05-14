@@ -122,13 +122,14 @@ module "cert_manager" {
 
   source = "../../kubernetes/cert-manager"
 
-  cluster_id          = local.cluster_id
-  dns_zones           = local.dns_zones
-  location            = data.azurerm_resource_group.this.location
-  notification_email  = var.cert_manager_config.notification_email
-  oidc_issuer_url     = var.oidc_issuer_url
-  resource_group_name = data.azurerm_resource_group.this.name
-  subscription_id     = data.azurerm_client_config.current.subscription_id
+  cluster_id                 = local.cluster_id
+  dns_zones                  = local.dns_zones
+  global_resource_group_name = data.azurerm_resource_group.global.name
+  location                   = data.azurerm_resource_group.this.location
+  notification_email         = var.cert_manager_config.notification_email
+  oidc_issuer_url            = var.oidc_issuer_url
+  resource_group_name        = data.azurerm_resource_group.this.name
+  subscription_id            = data.azurerm_client_config.current.subscription_id
 }
 
 module "cert_manager_crd" {

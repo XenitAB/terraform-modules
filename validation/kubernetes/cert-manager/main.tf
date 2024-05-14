@@ -11,9 +11,10 @@ module "cert_manager" {
   dns_zones = {
     "a.com" = "id"
   }
-  location            = "location"
-  notification_email  = "example@example.com"
-  oidc_issuer_url     = "url"
-  resource_group_name = "rg-name"
-  subscription_id     = "id"
+  global_resource_group_name = "global"
+  location                   = "location"
+  notification_email         = "example@example.com"
+  oidc_issuer_url            = "url"
+  resource_group_name        = "rg-name"
+  subscription_id            = "id"
 }

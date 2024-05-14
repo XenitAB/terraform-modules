@@ -14,6 +14,11 @@ variable "dns_zones" {
   type        = map(string)
 }
 
+variable "global_resource_group_name" {
+  description = "The Azure global resource group name"
+  type        = string
+}
+
 variable "location" {
   description = "The Azure region name."
   type        = string

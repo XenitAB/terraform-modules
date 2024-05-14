@@ -37,7 +37,7 @@ resource "git_repository_file" "cert_manager" {
     client_id           = azurerm_user_assigned_identity.cert_manager.client_id,
     dns_zones           = var.dns_zones,
     notification_email  = var.notification_email,
-    resource_group_name = var.resource_group_name,
+    resource_group_name = var.global_resource_group_name,
     subscription_id     = var.subscription_id,
   })
 }

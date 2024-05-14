@@ -207,7 +207,7 @@ module "external_dns" {
   oidc_issuer_url            = var.oidc_issuer_url
   resource_group_name        = data.azurerm_resource_group.this.name
   subscription_id            = data.azurerm_client_config.current.subscription_id
-  txt_owner_id               = "${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  txt_owner_id               = "${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
 }
 
 module "falco" {

@@ -55,11 +55,11 @@ module "azad_kube_proxy" {
     if var.azad_kube_proxy_enabled
   }
 
-  source                = "../../kubernetes/azad-kube-proxy"
-  cluster_id            = local.cluster_id
-  fqdn                  = var.azad_kube_proxy_config.fqdn
-  azure_ad_group_prefix = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
-  allowed_ips           = var.azad_kube_proxy_config.allowed_ips
+  source                 = "../../kubernetes/azad-kube-proxy"
+  cluster_id             = local.cluster_id
+  fqdn                   = var.azad_kube_proxy_config.fqdn
+  azure_ad_group_prefix  = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
+  allowed_ips            = var.azad_kube_proxy_config.allowed_ips
   public_private_enabled = var.ingress_nginx_config.public_private_enabled
   use_private_ingress    = var.use_private_ingress
 
@@ -524,7 +524,7 @@ module "trivy" {
 
   source = "../../kubernetes/trivy"
 
-  acr_name_override               = var.acr_name_override 
+  acr_name_override               = var.acr_name_override
   aks_managed_identity            = data.azuread_group.aks_managed_identity.id
   aks_name                        = var.name
   cluster_id                      = local.cluster_id

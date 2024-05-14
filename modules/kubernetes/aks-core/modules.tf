@@ -524,6 +524,7 @@ module "trivy" {
 
   source = "../../kubernetes/trivy"
 
+  acr_name_override               = var.acr_name_override 
   aks_managed_identity            = data.azuread_group.aks_managed_identity.id
   aks_name                        = var.name
   cluster_id                      = local.cluster_id

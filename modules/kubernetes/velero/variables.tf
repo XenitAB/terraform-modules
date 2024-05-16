@@ -45,3 +45,8 @@ variable "unique_suffix" {
   type        = string
   default     = ""
 }
+
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}

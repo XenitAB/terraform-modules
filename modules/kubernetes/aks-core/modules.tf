@@ -567,6 +567,7 @@ module "velero" {
   resource_group_name = data.azurerm_resource_group.this.name
   subscription_id     = data.azurerm_client_config.current.subscription_id
   unique_suffix       = var.unique_suffix
+  environment         = var.environment
 }
 
 module "vpa" {

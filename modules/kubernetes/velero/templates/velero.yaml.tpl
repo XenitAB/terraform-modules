@@ -36,24 +36,32 @@ spec:
       logFormat: "json"
       backupStorageLocation:
         name: "default"
+        %{ if azure_config.storage_account_container != "" }
         bucket: "${azure_config.storage_account_container}"
+        %{ endif }
+        %{ else }
+        bucket: "strg${environment}velero${unique_suffix}"
+        %{ endif }
         config:
           resourceGroup: "${resource_group_name}"
-          storageAccount: "${azure_config.storage_account_name}"
+          %{ if azure_config.storage_account_name != "" }
+          storageAccount: "${azure_config.storage_account_name"
+          %{ endif }
+          %{ else }
+          storageAccount: "strg${environment}velero${unique_suffix}"
+          %{ endif }
     snapshotsEnable: false
-    # Yes this is needed even if it duplicates data
-    # https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure#option-2-use-aad-pod-identity
     credentials:
     secretContents:
         cloud: |
-        AZURE_SUBSCRIPTION_ID=${subscription_id}
-        AZURE_RESOURCE_GROUP=${resource_group_name}
-        AZURE_CLOUD_NAME=AzurePublicCloud
+          AZURE_SUBSCRIPTION_ID=${subscription_id}
+          AZURE_RESOURCE_GROUP=${resource_group_name}
+          AZURE_CLOUD_NAME=AzurePublicCloud
     initContainers:
-    - name: "velero-plugin-for-microsoft-azure"
+      - name: "velero-plugin-for-microsoft-azure"
         image: "velero/velero-plugin-for-microsoft-azure:v1.1.1"
         volumeMounts:
-        - mountPath: "/target"
+          - mountPath: "/target"
             name: "plugins"
     podLabels:
       azure.workload.identity/use: "true"

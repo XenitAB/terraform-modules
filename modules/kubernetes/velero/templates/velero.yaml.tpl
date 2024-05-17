@@ -38,7 +38,6 @@ spec:
         name: "default"
         %{ if azure_config.storage_account_container != "" }
         bucket: "${azure_config.storage_account_container}"
-        %{ endif }
         %{ else }
         bucket: "strg${environment}velero${unique_suffix}"
         %{ endif }
@@ -46,7 +45,6 @@ spec:
           resourceGroup: "${resource_group_name}"
           %{ if azure_config.storage_account_name != "" }
           storageAccount: "${azure_config.storage_account_name}"
-          %{ endif }
           %{ else }
           storageAccount: "strg${environment}velero${unique_suffix}"
           %{ endif }

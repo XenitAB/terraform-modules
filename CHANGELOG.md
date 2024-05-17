@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1105](https://github.com/XenitAB/terraform-modules/pull/1105) Fix: Velero storage account name format
 - [#1101](https://github.com/XenitAB/terraform-modules/pull/1101) feat: migrate remaining platform components to workload identity
 - [#1098](https://github.com/XenitAB/terraform-modules/pull/1084) feat: migrate grafana-agent to install with flux
 - [#1102](https://github.com/XenitAB/terraform-modules/pull/1102) fix: deployment name in ingress-nginx healthcheck.

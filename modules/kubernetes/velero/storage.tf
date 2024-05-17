@@ -1,6 +1,6 @@
 #tfsec:ignore:azure-storage-queue-services-logging-enabled
 resource "azurerm_storage_account" "velero" {
-  name                            = "strg${var.cluster_id}velero${var.unique_suffix}"
+  name                            = var.azure_config.storage_account_name == "" ? "strg${var.environment}velero${var.unique_suffix}" : var.azure_config.storage_account_name
   resource_group_name             = var.resource_group_name
   location                        = var.location
   account_tier                    = "Standard"
@@ -12,6 +12,6 @@ resource "azurerm_storage_account" "velero" {
 
 resource "azurerm_storage_container" "velero" {
   storage_account_name  = azurerm_storage_account.velero.name
-  name                  = "backup"
+  name                  = var.azure_config.storage_account_container == "" ? "backup" : var.azure_config.storage_account_container
   container_access_type = "private"
 }

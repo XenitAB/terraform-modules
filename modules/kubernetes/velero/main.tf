@@ -31,8 +31,10 @@ resource "git_repository_file" "velero" {
   content = templatefile("${path.module}/templates/velero.yaml.tpl", {
     azure_config        = var.azure_config,
     client_id           = azurerm_user_assigned_identity.velero.client_id,
+    environment         = var.environment,
     resource_group_name = var.resource_group_name,
     subscription_id     = var.subscription_id,
+    unique_suffix       = var.unique_suffix,
   })
 }
 

@@ -13,6 +13,7 @@ module "velero" {
     storage_account_container = "name"
   }
   cluster_id          = "we-dev-aks1"
+  environment         = "dev"
   location            = "we"
   oidc_issuer_url     = "url"
   resource_group_name = "rg-name"

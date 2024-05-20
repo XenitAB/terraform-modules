@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 2024.05.1
+
 ## Added
 
 - [#1100](https://github.com/XenitAB/terraform-modules/pull/1100) feat: Add RBAC to allow customers more insight.

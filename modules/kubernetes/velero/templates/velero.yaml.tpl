@@ -39,7 +39,7 @@ spec:
         %{ if azure_config.storage_account_container != "" }
         bucket: "${azure_config.storage_account_container}"
         %{ else }
-        bucket: "strg${environment}velero${unique_suffix}"
+        bucket: "backup"
         %{ endif }
         config:
           resourceGroup: "${resource_group_name}"
@@ -50,11 +50,11 @@ spec:
           %{ endif }
     snapshotsEnable: false
     credentials:
-    secretContents:
-        cloud: |
-          AZURE_SUBSCRIPTION_ID=${subscription_id}
-          AZURE_RESOURCE_GROUP=${resource_group_name}
-          AZURE_CLOUD_NAME=AzurePublicCloud
+      secretContents:
+          cloud: |
+            AZURE_SUBSCRIPTION_ID=${subscription_id}
+            AZURE_RESOURCE_GROUP=${resource_group_name}
+            AZURE_CLOUD_NAME=AzurePublicCloud
     initContainers:
       - name: "velero-plugin-for-microsoft-azure"
         image: "velero/velero-plugin-for-microsoft-azure:v1.1.1"

@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Changed
 
+- [#1110](https://github.com/XenitAB/terraform-modules/pull/1110) Fix: add a private ingress class instead of replacing the public.
 - [#1108](https://github.com/XenitAB/terraform-modules/pull/1108) chore: bump azuread provider to v2.50.0
 
 ## 2024.05.1

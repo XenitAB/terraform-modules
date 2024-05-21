@@ -60,7 +60,7 @@ module "azad_kube_proxy" {
   fqdn                   = var.azad_kube_proxy_config.fqdn
   azure_ad_group_prefix  = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
   allowed_ips            = var.azad_kube_proxy_config.allowed_ips
-  public_private_enabled = var.ingress_nginx_config.public_private_enabled
+  private_ingress_enabled = var.ingress_nginx_config.private_ingress_enabled
   use_private_ingress    = var.use_private_ingress
 
   azure_ad_app = {
@@ -345,7 +345,7 @@ module "ingress_healthz" {
   dns_zone               = var.cert_manager_config.dns_zone[0]
   location_short         = var.location_short
   linkerd_enabled        = var.linkerd_enabled
-  public_private_enabled = var.ingress_nginx_config.public_private_enabled
+  private_ingress_enabled = var.ingress_nginx_config.private_ingress_enabled
   cluster_id             = local.cluster_id
 }
 
@@ -365,7 +365,7 @@ module "ingress_nginx" {
     enabled  = true
     dns_zone = var.cert_manager_config.dns_zone[0]
   }
-  public_private_enabled = var.ingress_nginx_config.public_private_enabled
+  private_ingress_enabled = var.ingress_nginx_config.private_ingress_enabled
   customization          = var.ingress_nginx_config.customization
   customization_public   = var.ingress_nginx_config.customization_public
   customization_private  = var.ingress_nginx_config.customization_private

@@ -30,7 +30,7 @@ variable "cluster_id" {
   type        = string
 }
 
-variable "public_private_enabled" {
+variable "private_ingress_enabled" {
   description = "If true will create a public and private ingress controller. Otherwise only a public ingress controller will be created."
   type        = bool
   default     = false

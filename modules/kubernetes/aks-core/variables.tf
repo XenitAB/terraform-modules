@@ -307,7 +307,7 @@ variable "ingress_nginx_enabled" {
 variable "ingress_nginx_config" {
   description = "Ingress configuration"
   type = object({
-    public_private_enabled = bool
+    private_ingress_enabled = bool
     customization = optional(object({
       allow_snippet_annotations = bool
       http_snippet              = string

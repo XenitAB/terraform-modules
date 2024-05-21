@@ -18,7 +18,7 @@ terraform {
 }
 
 locals {
-  ingress_class_name = var.public_private_enabled == true ? "nginx-public" : "nginx"
+  ingress_class_name = var.private_ingress_enabled == true ? "nginx-public" : "nginx"
 }
 
 resource "git_repository_file" "kustomization" {

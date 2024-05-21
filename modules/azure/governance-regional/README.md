@@ -7,7 +7,7 @@ This module is used for governance on a regional level and not using any specifi
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.47.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
 | <a name="requirement_azurecaf"></a> [azurecaf](#requirement\_azurecaf) | 2.0.0-preview3 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.99.0 |
 | <a name="requirement_pal"></a> [pal](#requirement\_pal) | 0.2.5 |
@@ -17,7 +17,7 @@ This module is used for governance on a regional level and not using any specifi
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.47.0 |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
 | <a name="provider_azurecaf"></a> [azurecaf](#provider\_azurecaf) | 2.0.0-preview3 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.99.0 |
 
@@ -31,8 +31,8 @@ This module is used for governance on a regional level and not using any specifi
 
 | Name | Type |
 |------|------|
-| [azuread_application_password.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/resources/application_password) | resource |
-| [azuread_application_password.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/resources/application_password) | resource |
+| [azuread_application_password.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application_password) | resource |
+| [azuread_application_password.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application_password) | resource |
 | [azurerm_key_vault.delegate_kv](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/key_vault) | resource |
 | [azurerm_key_vault_access_policy.ap_kvreader_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.ap_owner_spn](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/key_vault_access_policy) | resource |
@@ -49,7 +49,7 @@ This module is used for governance on a regional level and not using any specifi
 | [azurerm_role_assignment.rg_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.rg_owner](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.rg_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/resources/role_assignment) | resource |
-| [azuread_service_principal.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/data-sources/service_principal) | data source |
+| [azuread_service_principal.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/service_principal) | data source |
 | [azurecaf_name.azurerm_key_vault_delegate_kv](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |
 | [azurecaf_name.azurerm_resource_group_rg](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.99.0/docs/data-sources/client_config) | data source |

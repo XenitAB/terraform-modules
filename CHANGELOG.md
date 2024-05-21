@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## Changed
+
+- [#1108](https://github.com/XenitAB/terraform-modules/pull/1108) chore: bump azuread provider to v2.50.0
+
 ## 2024.05.1
 
 ## Added

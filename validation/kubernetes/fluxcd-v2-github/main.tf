@@ -9,5 +9,6 @@ module "fluxcd_v2" {
   github_private_key     = "foo" #tfsec:ignore:general-secrets-no-plaintext-exposure
   environment            = "dev"
   cluster_id             = "foobar"
+  cluster_repo           = "repo"
   namespaces             = []
 }

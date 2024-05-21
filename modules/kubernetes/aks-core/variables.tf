@@ -155,11 +155,13 @@ variable "fluxcd_v2_config" {
       app_id          = number
       installation_id = number
       private_key     = string
+      repo            = optional(string, "fleet-infra")
     })
     azure_devops = object({
       pat  = string
       org  = string
       proj = string
+      repo = optional(string, "fleet-infra")
     })
   })
 }

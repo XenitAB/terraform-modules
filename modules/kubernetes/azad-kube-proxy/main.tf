@@ -50,13 +50,13 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "azad_kube_proxy" {
   path = "platform/${var.cluster_id}/azad-kube-proxy/azad-kube-proxy.yaml"
   content = templatefile("${path.module}/templates/azad-kube-proxy.yaml.tpl", {
-    fqdn                   = var.fqdn,
+    fqdn                    = var.fqdn,
     private_ingress_enabled = var.private_ingress_enabled
-    use_private_ingress    = var.use_private_ingress
-    allowed_ips_csv        = join(",", var.allowed_ips),
-    azure_ad_group_prefix  = var.azure_ad_group_prefix
-    client_id              = base64encode(var.azure_ad_app.client_id)
-    client_secret          = base64encode(var.azure_ad_app.client_secret)
-    tenant_id              = base64encode(var.azure_ad_app.tenant_id)
+    use_private_ingress     = var.use_private_ingress
+    allowed_ips_csv         = join(",", var.allowed_ips),
+    azure_ad_group_prefix   = var.azure_ad_group_prefix
+    client_id               = base64encode(var.azure_ad_app.client_id)
+    client_secret           = base64encode(var.azure_ad_app.client_secret)
+    tenant_id               = base64encode(var.azure_ad_app.tenant_id)
   })
 }

@@ -41,7 +41,7 @@ resource "git_repository_file" "ingress_nginx" {
       dns_zone        = var.default_certificate.dns_zone
       namespaced_name = "ingress-nginx/ingress-nginx"
     }
-    private_ingress_enabled    = var.private_ingress_enabled
+    private_ingress_enabled   = var.private_ingress_enabled
     allow_snippet_annotations = var.customization.allow_snippet_annotations
     http_snippet              = var.customization.http_snippet
     extra_config              = var.customization.extra_config
@@ -70,7 +70,7 @@ resource "git_repository_file" "ingress_nginx_private" {
       dns_zone        = var.default_certificate.dns_zone
       namespaced_name = "ingress-nginx/ingress-nginx"
     }
-    private_ingress_enabled    = var.private_ingress_enabled
+    private_ingress_enabled   = var.private_ingress_enabled
     allow_snippet_annotations = var.customization_private.allow_snippet_annotations == null ? var.customization.allow_snippet_annotations : var.customization_private.allow_snippet_annotations
     http_snippet              = var.customization_private.http_snippet == null ? var.customization.http_snippet : var.customization_private.http_snippet
     extra_config              = merge(var.customization.extra_config, var.customization_private.extra_config)

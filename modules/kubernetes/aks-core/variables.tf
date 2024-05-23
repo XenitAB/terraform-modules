@@ -314,12 +314,6 @@ variable "ingress_nginx_config" {
       extra_config              = map(string)
       extra_headers             = map(string)
     }))
-    customization_public = optional(object({
-      allow_snippet_annotations = optional(bool)
-      http_snippet              = optional(string)
-      extra_config              = optional(map(string))
-      extra_headers             = optional(map(string))
-    }))
     customization_private = optional(object({
       allow_snippet_annotations = optional(bool)
       http_snippet              = optional(string)

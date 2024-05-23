@@ -38,17 +38,6 @@ variable "customization" {
   }
 }
 
-variable "customization_public" {
-  description = "Public specific customization, will override the global customization."
-  type = object({
-    allow_snippet_annotations = optional(bool)
-    http_snippet              = optional(string)
-    extra_config              = optional(map(string))
-    extra_headers             = optional(map(string))
-  })
-  default = {}
-}
-
 variable "customization_private" {
   description = "Private specific customization, will override the global customization."
   type = object({

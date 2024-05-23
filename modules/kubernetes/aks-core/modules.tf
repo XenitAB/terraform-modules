@@ -366,7 +366,6 @@ module "ingress_nginx" {
   }
   private_ingress_enabled = var.ingress_nginx_config.private_ingress_enabled
   customization           = var.ingress_nginx_config.customization
-  customization_public    = var.ingress_nginx_config.customization_public
   customization_private   = var.ingress_nginx_config.customization_private
   linkerd_enabled         = var.linkerd_enabled
   datadog_enabled         = var.datadog_enabled

@@ -75,7 +75,7 @@ module "aks_core" {
   trivy_enabled = true
   trivy_config  = {}
   ingress_nginx_config = {
-    public_private_enabled = false
+    private_ingress_enabled = false
   }
   prometheus_enabled = true
   prometheus_config = {

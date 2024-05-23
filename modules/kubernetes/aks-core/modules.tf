@@ -55,13 +55,13 @@ module "azad_kube_proxy" {
     if var.azad_kube_proxy_enabled
   }
 
-  source                 = "../../kubernetes/azad-kube-proxy"
-  cluster_id             = local.cluster_id
-  fqdn                   = var.azad_kube_proxy_config.fqdn
-  azure_ad_group_prefix  = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
-  allowed_ips            = var.azad_kube_proxy_config.allowed_ips
-  public_private_enabled = var.ingress_nginx_config.public_private_enabled
-  use_private_ingress    = var.use_private_ingress
+  source                  = "../../kubernetes/azad-kube-proxy"
+  cluster_id              = local.cluster_id
+  fqdn                    = var.azad_kube_proxy_config.fqdn
+  azure_ad_group_prefix   = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
+  allowed_ips             = var.azad_kube_proxy_config.allowed_ips
+  private_ingress_enabled = var.ingress_nginx_config.private_ingress_enabled
+  use_private_ingress     = var.use_private_ingress
 
   azure_ad_app = {
     client_id     = var.azad_kube_proxy_config.azure_ad_app.client_id
@@ -341,12 +341,11 @@ module "ingress_healthz" {
 
   source = "../../kubernetes/ingress-healthz"
 
-  environment            = var.environment
-  dns_zone               = var.cert_manager_config.dns_zone[0]
-  location_short         = var.location_short
-  linkerd_enabled        = var.linkerd_enabled
-  public_private_enabled = var.ingress_nginx_config.public_private_enabled
-  cluster_id             = local.cluster_id
+  environment     = var.environment
+  dns_zone        = var.cert_manager_config.dns_zone[0]
+  location_short  = var.location_short
+  linkerd_enabled = var.linkerd_enabled
+  cluster_id      = local.cluster_id
 }
 
 module "ingress_nginx" {
@@ -365,13 +364,12 @@ module "ingress_nginx" {
     enabled  = true
     dns_zone = var.cert_manager_config.dns_zone[0]
   }
-  public_private_enabled = var.ingress_nginx_config.public_private_enabled
-  customization          = var.ingress_nginx_config.customization
-  customization_public   = var.ingress_nginx_config.customization_public
-  customization_private  = var.ingress_nginx_config.customization_private
-  linkerd_enabled        = var.linkerd_enabled
-  datadog_enabled        = var.datadog_enabled
-  cluster_id             = local.cluster_id
+  private_ingress_enabled = var.ingress_nginx_config.private_ingress_enabled
+  customization           = var.ingress_nginx_config.customization
+  customization_private   = var.ingress_nginx_config.customization_private
+  linkerd_enabled         = var.linkerd_enabled
+  datadog_enabled         = var.datadog_enabled
+  cluster_id              = local.cluster_id
 }
 
 module "linkerd" {

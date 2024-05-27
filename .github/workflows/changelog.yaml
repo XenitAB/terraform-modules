@@ -3,7 +3,6 @@ on:
   pull_request:
     types: 
       - opened
-      - edited
     branches:
       - 'main'
 jobs:
@@ -27,8 +26,6 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           OUTPUT: CHANGELOG.md
       - name: Commit
-        env:
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'

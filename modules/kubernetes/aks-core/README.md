@@ -56,6 +56,7 @@ This module is used to create AKS clusters.
 | <a name="module_promtail"></a> [promtail](#module\_promtail) | ../../kubernetes/promtail | n/a |
 | <a name="module_reloader"></a> [reloader](#module\_reloader) | ../../kubernetes/reloader | n/a |
 | <a name="module_spegel"></a> [spegel](#module\_spegel) | ../../kubernetes/spegel | n/a |
+| <a name="module_telepresence"></a> [telepresence](#module\_telepresence) | ../../kubernetes/telepresence | n/a |
 | <a name="module_trivy"></a> [trivy](#module\_trivy) | ../../kubernetes/trivy | n/a |
 | <a name="module_trivy_crd"></a> [trivy\_crd](#module\_trivy\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_velero"></a> [velero](#module\_velero) | ../../kubernetes/velero | n/a |
@@ -86,6 +87,7 @@ This module is used to create AKS clusters.
 | [kubernetes_namespace.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
 | [kubernetes_network_policy.allow_egress_ingress_datadog](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/network_policy) | resource |
 | [kubernetes_network_policy.allow_egress_ingress_grafana_agent](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/network_policy) | resource |
+| [kubernetes_network_policy.allow_egress_traffic_manager](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/network_policy) | resource |
 | [kubernetes_network_policy.tenant](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/network_policy) | resource |
 | [kubernetes_role_binding.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/role_binding) | resource |
@@ -157,6 +159,7 @@ This module is used to create AKS clusters.
 | <a name="input_kubernetes_network_policy_default_deny"></a> [kubernetes\_network\_policy\_default\_deny](#input\_kubernetes\_network\_policy\_default\_deny) | If network policies should by default deny cross namespace traffic | `bool` | `true` | no |
 | <a name="input_linkerd_enabled"></a> [linkerd\_enabled](#input\_linkerd\_enabled) | Should linkerd be enabled | `bool` | `false` | no |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name. | `string` | n/a | yes |
+| <a name="input_mirrord_enabled"></a> [mirrord\_enabled](#input\_mirrord\_enabled) | Should mirrord be enabled | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | The commonName to use for the deploy | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes. | <pre>list(<br>    object({<br>      name   = string<br>      labels = map(string)<br>      flux = object({<br>        enabled             = bool<br>        create_crds         = bool<br>        include_tenant_name = bool<br>        azure_devops = object({<br>          org  = string<br>          proj = string<br>          repo = string<br>        })<br>        github = object({<br>          repo = string<br>        })<br>      })<br>    })<br>  )</pre> | <pre>[<br>  {<br>    "flux": {<br>      "azure_devops": {<br>        "org": "",<br>        "proj": "",<br>        "repo": ""<br>      },<br>      "create_crds": false,<br>      "enabled": true,<br>      "github": {<br>        "repo": ""<br>      },<br>      "include_tenant_name": false<br>    },<br>    "labels": {},<br>    "name": ""<br>  }<br>]</pre> | no |
 | <a name="input_node_local_dns_enabled"></a> [node\_local\_dns\_enabled](#input\_node\_local\_dns\_enabled) | Should VPA be enabled | `bool` | `true` | no |
@@ -171,6 +174,8 @@ This module is used to create AKS clusters.
 | <a name="input_reloader_enabled"></a> [reloader\_enabled](#input\_reloader\_enabled) | Should Reloader be enabled | `bool` | `true` | no |
 | <a name="input_spegel_enabled"></a> [spegel\_enabled](#input\_spegel\_enabled) | Should Spegel be enabled | `bool` | `true` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
+| <a name="input_telepresence_config"></a> [telepresence\_config](#input\_telepresence\_config) | Config to use when deploying traffic manager to the cluster | <pre>object({<br>    allow_conflicting_subnets = optional(list(string), [])<br>    client_rbac = object({<br>      create     = bool<br>      namespaced = bool<br>      namespaces = optional(list(string), ["ambassador"])<br>      subjects   = optional(list(string), [])<br>    })<br>    manager_rbac = object({<br>      create     = bool<br>      namespaced = bool<br>      namespaces = optional(list(string), [])<br>    })<br>  })</pre> | <pre>{<br>  "client_rbac": {<br>    "create": false,<br>    "namespaced": false<br>  },<br>  "manager_rbac": {<br>    "create": true,<br>    "namespaced": true<br>  }<br>}</pre> | no |
+| <a name="input_telepresence_enabled"></a> [telepresence\_enabled](#input\_telepresence\_enabled) | Should Telepresence be enabled | `bool` | `false` | no |
 | <a name="input_trivy_config"></a> [trivy\_config](#input\_trivy\_config) | Configuration for trivy | <pre>object({<br>    starboard_exporter_enabled = optional(bool, true)<br>  })</pre> | n/a | yes |
 | <a name="input_trivy_enabled"></a> [trivy\_enabled](#input\_trivy\_enabled) | Should trivy be enabled | `bool` | `true` | no |
 | <a name="input_trivy_volume_claim_storage_class_name"></a> [trivy\_volume\_claim\_storage\_class\_name](#input\_trivy\_volume\_claim\_storage\_class\_name) | Configuration for trivy volume claim storage class name | `string` | `"managed-csi-zrs"` | no |

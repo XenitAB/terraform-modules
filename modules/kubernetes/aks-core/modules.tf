@@ -284,8 +284,10 @@ module "gatekeeper" {
 
   source = "../../kubernetes/gatekeeper"
 
-  cluster_id         = local.cluster_id
-  exclude_namespaces = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
+  cluster_id           = local.cluster_id
+  exclude_namespaces   = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
+  mirrord_enabled      = var.mirrord_enabled
+  telepresence_enabled = var.telepresence_enabled
 }
 
 module "grafana_agent" {
@@ -592,4 +594,17 @@ module "spegel" {
 
   cluster_id       = local.cluster_id
   private_registry = "https://${data.azurerm_container_registry.acr.login_server}"
+}
+
+module "telepresence" {
+  for_each = {
+    for s in ["telepresence"] :
+    s => s
+    if var.telepresence_enabled
+  }
+
+  source = "../../kubernetes/telepresence"
+
+  cluster_id          = local.cluster_id
+  telepresence_config = var.telepresence_config
 }

@@ -34,6 +34,8 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_exclude_namespaces"></a> [exclude\_namespaces](#input\_exclude\_namespaces) | Namespaces to exclude from admission and mutation. | `list(string)` | n/a | yes |
+| <a name="input_mirrord_enabled"></a> [mirrord\_enabled](#input\_mirrord\_enabled) | If Gatekeeper validations should make an exemption for mirrord agent. | `bool` | `false` | no |
+| <a name="input_telepresence_enabled"></a> [telepresence\_enabled](#input\_telepresence\_enabled) | If Gatekeeper validations should make an exemption for telepresence agent. | `bool` | `false` | no |
 
 ## Outputs
 

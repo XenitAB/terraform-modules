@@ -335,6 +335,47 @@ variable "external_dns_enabled" {
   default     = true
 }
 
+variable "mirrord_enabled" {
+  description = "Should mirrord be enabled"
+  type        = bool
+  default     = false
+}
+
+
+variable "telepresence_enabled" {
+  description = "Should Telepresence be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "telepresence_config" {
+  description = "Config to use when deploying traffic manager to the cluster"
+  type = object({
+    allow_conflicting_subnets = optional(list(string), [])
+    client_rbac = object({
+      create     = bool
+      namespaced = bool
+      namespaces = optional(list(string), ["ambassador"])
+      subjects   = optional(list(string), [])
+    })
+    manager_rbac = object({
+      create     = bool
+      namespaced = bool
+      namespaces = optional(list(string), [])
+    })
+  })
+  default = {
+    client_rbac : {
+      create : false
+      namespaced : false
+    }
+    manager_rbac : {
+      create : true
+      namespaced : true
+    }
+  }
+}
+
 variable "velero_enabled" {
   description = "Should Velero be enabled"
   type        = bool

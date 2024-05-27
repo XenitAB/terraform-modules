@@ -1,12 +1,38 @@
 name: changelog
 on:
-  pull_request:
-    types: [opened, synchronize, reopened, ready_for_review, labeled, unlabeled]
+  pull_request_review:
+    types: 
+      - submitted
+    branches:
+      - 'main'
 jobs:
   changelog:
+    name: Generate CHANGELOG
+    if: github.event.review.state == 'APPROVED'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: dangoslen/changelog-enforcer@v3
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          skipLabels: "ignore-changelog"
+          ref:  ${{ github.head_ref || github.ref_name }} 
+          fetch-depth: 0
+      - name: Generate
+        uses: orhun/git-cliff-action@v3
+        id: git-cliff
+        with:
+          config: xenit-changelog.toml
+          args: --verbose 2023.10.2..
+        env:
+          GITHUB_REPO: ${{ github.repository }}
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          OUTPUT: CHANGELOG.md
+      - name: Commit
+        env:
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          set +e
+          git add CHANGELOG.md
+          git commit -m "Update changelog"
+          git push

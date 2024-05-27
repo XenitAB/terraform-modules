@@ -26,7 +26,6 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "gatekeeper" {
   path = "platform/${var.cluster_id}/gatekeeper/gatekeeper.yaml"
   content = templatefile("${path.module}/templates/gatekeeper.yaml.tpl", {
-    provider = var.cloud_provider
   })
 }
 

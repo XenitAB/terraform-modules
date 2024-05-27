@@ -8,10 +8,51 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Added
 
-- [#1066](https://github.com/XenitAB/terraform-modules/pull/1066) Enable workload identity service account in tenant namespaces.
+- [#1109](https://github.com/XenitAB/terraform-modules/pull/1109) feat: add feature to override flux repository name
 
 ## Changed
 
+- [#1110](https://github.com/XenitAB/terraform-modules/pull/1110) Fix: add a private ingress class instead of replacing the existing.
+- [#1108](https://github.com/XenitAB/terraform-modules/pull/1108) chore: bump azuread provider to v2.50.0
+
+## 2024.05.1
+
+## Added
+
+- [#1100](https://github.com/XenitAB/terraform-modules/pull/1100) feat: Add RBAC to allow customers more insight.
+- [#1066](https://github.com/XenitAB/terraform-modules/pull/1066) Enable workload identity service account in tenant namespaces.
+- [#1101](https://github.com/XenitAB/terraform-modules/pull/1101) feat: Add possibility to use private ingress for azad-kube-proxy.
+
+## Changed
+
+- [#1106](https://github.com/XenitAB/terraform-modules/pull/1106) Fix: Velero bucket name and yaml formatting
+- [#1105](https://github.com/XenitAB/terraform-modules/pull/1105) Fix: Velero storage account name format
+- [#1101](https://github.com/XenitAB/terraform-modules/pull/1101) feat: migrate remaining platform components to workload identity
+- [#1098](https://github.com/XenitAB/terraform-modules/pull/1084) feat: migrate grafana-agent to install with flux
+- [#1102](https://github.com/XenitAB/terraform-modules/pull/1102) fix: deployment name in ingress-nginx healthcheck.
+- [#1093](https://github.com/XenitAB/terraform-modules/pull/1093) Migrate Prometheus to install with flux.
+- [#1097](https://github.com/XenitAB/terraform-modules/pull/1097) remove slash in certmanager nameserver config.
+- [#1096](https://github.com/XenitAB/terraform-modules/pull/1096) fix: add dns01 nameserver config to cert-manager.
+- [#1095](https://github.com/XenitAB/terraform-modules/pull/1095) fix: missing namespace labels
+- [#1082](https://github.com/XenitAB/terraform-modules/pull/1082) feat!: bump and migrate azure-metrics to workload identity and install with flux
+- [#1091](https://github.com/XenitAB/terraform-modules/pull/1091) fix(make): make lint work again
+- [#1090](https://github.com/XenitAB/terraform-modules/pull/1090) Fix aad-pod-identity kustomization healthcheck.
+- [#1089](https://github.com/XenitAB/terraform-modules/pull/1089) fix: make include_tenant_name work.
+- [#1088](https://github.com/XenitAB/terraform-modules/pull/1088) Fix ingress-nginx multiple files collision when using public_private_enabled.
+- [#1087](https://github.com/XenitAB/terraform-modules/pull/1087) Migrate cert-manager to install with flux
+- [#1052](https://github.com/XenitAB/terraform-modules/pull/1052) Update ingress-healthz to 15.5.2.
+- [#1086](https://github.com/XenitAB/terraform-modules/pull/1086) Migrate control-plane-logs to install with flux and bump helm chart version.
+- [#1083](https://github.com/XenitAB/terraform-modules/pull/1083) Migrate velero to install with Flux
+- [#1060](https://github.com/XenitAB/terraform-modules/pull/1060) Migrate ingress-nginx to install with flux.
+- [#1061](https://github.com/XenitAB/terraform-modules/pull/1061) Migrate aad-pod-identity to install with flux.
+- [#1085](https://github.com/XenitAB/terraform-modules/pull/1085) Migrate trivy to install with flux
+- [#1051](https://github.com/XenitAB/terraform-modules/pull/1051) Fixed typo in the contribution guide
+- [#1084](https://github.com/XenitAB/terraform-modules/pull/1084) Make it possible to use CoreDNS as the last route in node-local-dns.
+- [#1081](https://github.com/XenitAB/terraform-modules/pull/1081) Bump azurerm provider to v 3.99.0
+- [#1080](https://github.com/XenitAB/terraform-modules/pull/1080) Handle deprecated attributes introduced in the azuread provider v 2.44
+- [#1077](https://github.com/XenitAB/terraform-modules/pull/1077) Fix retention days for analytics workspace
+- [#1074](https://github.com/XenitAB/terraform-modules/pull/1074) Fix reversed logic for enabling Defender
+- [#1073](https://github.com/XenitAB/terraform-modules/pull/1072) Remove support for AWS
 - [#1071](https://github.com/XenitAB/terraform-modules/pull/1064) Add support for Microsoft Defender for Containers and sending k8s audit logs to analytics workspace
 - [#1070](https://github.com/XenitAB/terraform-modules/pull/1070) Support Azure Policy add-on
 - [#1068](https://github.com/XenitAB/terraform-modules/pull/1068) Support remote debugging with Telepresence and Mirrord.
@@ -37,6 +78,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [#1047](https://github.com/XenitAB/terraform-modules/pull/1047) Add Owner-SP to sub-owner group.
 - [#1067](https://github.com/XenitAB/terraform-modules/pull/1067) Update cert-manager to use workload identities for authentication.
 - [#1072](https://github.com/XenitAB/terraform-modules/pull/1072) Update Spegel to v0.0.20 and move to using chart from spegel-org.
+- [#1069](https://github.com/XenitAB/terraform-modules/pull/1069) Update external-dns to use workload identities for authentication.
+- [#1076](https://github.com/XenitAB/terraform-modules/pull/1076) Update Datadog to use workload identities.
+- [#1078](https://github.com/XenitAB/terraform-modules/pull/1078) Remove delegate resource group from namespaces.
+
+## Fixed
+
+- [#1075](https://github.com/XenitAB/terraform-modules/pull/1075) Fix name collision in identities when AKS does not have unique suffix.
+- [#1079](https://github.com/XenitAB/terraform-modules/pull/1079) Fix Client ID set to tenant service account.
 
 ## 2023.10.2
 

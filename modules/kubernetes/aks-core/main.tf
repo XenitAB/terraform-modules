@@ -9,11 +9,11 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "3.71.0"
+      version = "3.99.0"
       source  = "hashicorp/azurerm"
     }
     azuread = {
-      version = "2.47.0"
+      version = "2.50.0"
       source  = "hashicorp/azuread"
     }
     random = {
@@ -53,6 +53,10 @@ data "azurerm_resource_group" "global" {
   name = "rg-${var.environment}-${var.global_location_short}-global"
 }
 
+data "azuread_group" "aks_managed_identity" {
+  display_name = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}aksmsi"
+}
+
 locals {
   aks_name_suffix = var.aks_name_suffix != null ? var.aks_name_suffix : ""
 }
@@ -62,14 +66,24 @@ data "azurerm_container_registry" "acr" {
   resource_group_name = data.azurerm_resource_group.global.name
 }
 
+data "azurerm_key_vault" "core" {
+  name                = join("-", compact(["kv-${var.environment}-${var.location_short}-${var.core_name}", var.unique_suffix]))
+  resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"
+}
+
 data "azurerm_user_assigned_identity" "tenant" {
   for_each = { for ns in var.namespaces : ns.name => ns }
 
-  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-${each.key}"
+  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-${each.key}-wi"
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
-data "azurerm_user_assigned_identity" "cert_manager" {
-  name                = "uai-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}-cert-manager"
-  resource_group_name = data.azurerm_resource_group.this.name
+data "azurerm_dns_zone" "this" {
+  for_each = {
+    for dns in var.dns_zones :
+    dns => dns
+  }
+  name                = each.key
+  resource_group_name = data.azurerm_resource_group.global.name
 }
+

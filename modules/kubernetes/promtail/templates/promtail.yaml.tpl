@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: promtail
  labels:
-   name              = "promtail"
-   xkf.xenit.io/kind = "platform"
+   name: promtail
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
@@ -80,7 +80,7 @@ spec:
         memory: 100Mi
 
     podLabels:
-      aadpodidbinding: promtail
+      azure.workload.identity/use: "true"
 
     extraVolumes:
       - name: secrets-store
@@ -99,6 +99,12 @@ spec:
       - name: tls
         mountPath: "/mnt/tls"
         readOnly: true
+
+    serviceAccount:
+      create: true
+      name: promtail
+      annotations:
+        azure.workload.identity/client-id: ${client_id}
 ---
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
@@ -108,14 +114,14 @@ metadata:
 spec:
   provider: "azure"
   parameters:
-    usePodIdentity: "true"
-    keyvaultName: "${azure_config.azure_key_vault_name}"
+    clientID: ${client_id}
+    keyvaultName: ${azure_config.azure_key_vault_name}
+    tenantId: ${tenant_id}
     objects:  |
       array:
         - |
           objectName: "${azure_config.keyvault_secret_name}"
           objectType: secret
-    tenantId: "${azure_config.identity.tenant_id}"
   secretObjects:
     - secretName: "${k8s_secret_name}"
       type: kubernetes.io/tls
@@ -124,25 +130,6 @@ spec:
           key: tls.key
         - objectName: "${azure_config.keyvault_secret_name}"
           key: tls.crt
----
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentity
-metadata:
-  name: promtail
-  namespace: promtail
-spec:
-  type: 0
-  resourceID: "${azure_config.identity.resource_id}"
-  clientID: "${azure_config.identity.client_id}"
----
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentityBinding
-metadata:
-  name: promtail
-  namespace: promtail
-spec:
-  azureIdentity: promtail
-  selector: promtail
 ---
 apiVersion: v1
 kind: Service

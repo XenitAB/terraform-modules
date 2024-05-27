@@ -3,12 +3,6 @@ variable "cluster_id" {
   type        = string
 }
 
-variable "cloud_provider" {
-  description = "Cloud provider to use."
-  type        = string
-  default     = "azure"
-}
-
 variable "exclude_namespaces" {
   description = "Namespaces to exclude from admission and mutation."
   type        = list(string)

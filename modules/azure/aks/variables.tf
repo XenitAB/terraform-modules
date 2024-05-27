@@ -176,23 +176,9 @@ variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes"
   type = list(
     object({
-      name                    = string
-      delegate_resource_group = bool
+      name = string
     })
   )
-}
-
-variable "aks_managed_identity_group_id" {
-  description = "The group id of aks managed identity"
-  type        = string
-}
-
-variable "azure_metrics_identity" {
-  description = "MSI authentication identity for Azure Metrics"
-  type = object({
-    id           = string
-    principal_id = string
-  })
 }
 
 variable "aks_audit_log_retention" {
@@ -225,7 +211,7 @@ variable "audit_config" {
       sku_name       = optional(string, "PerGB2018")
       daily_quota_gb = optional(number, -1)
       reservation_gb = optional(number, 0)
-      retention_days = optional(number, 7)
+      retention_days = optional(number, 30)
     }), {})
   })
   default = {}
@@ -250,14 +236,4 @@ variable "defender_config" {
     vulnerability_assessments_enabled = optional(bool, true)
   })
   default = {}
-}
-
-variable "dns_zones" {
-  description = "List of DNS Zones"
-  type        = list(string)
-}
-
-variable "global_location_short" {
-  description = "The Azure region short name where the global resources resides."
-  type        = string
 }

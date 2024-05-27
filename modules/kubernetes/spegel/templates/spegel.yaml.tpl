@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: spegel
  labels:
-   name              = "spegel"
-   xkf.xenit.io/kind = "platform"
+   name: spegel
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
@@ -45,7 +45,6 @@ spec:
         - https://ghcr.io
         - https://quay.io
         - https://mcr.microsoft.com
-        - https://public.ecr.aws
         - https://gcr.io
         - https://registry.k8s.io
         - https://k8s.gcr.io

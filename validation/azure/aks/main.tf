@@ -15,18 +15,13 @@ module "aks" {
     azurerm = azurerm
   }
 
-  environment                   = "dev"
-  location_short                = "we"
-  name                          = "xks"
-  subscription_name             = "sub"
-  core_name                     = "core"
-  unique_suffix                 = 1337
-  aks_name_suffix               = "1"
-  aks_managed_identity_group_id = "1337"
-  azure_metrics_identity = {
-    id           = "id"
-    principal_id = "pid"
-  }
+  environment       = "dev"
+  location_short    = "we"
+  name              = "xks"
+  subscription_name = "sub"
+  core_name         = "core"
+  unique_suffix     = 1337
+  aks_name_suffix   = "1"
 
   aks_config = {
     version                  = "1.27.7"
@@ -57,8 +52,7 @@ module "aks" {
   }
   namespaces = [
     {
-      name                    = "team1"
-      delegate_resource_group = true
+      name = "team1"
       labels = {
         "test" = "test"
       }
@@ -101,7 +95,4 @@ module "aks" {
 
   log_eventhub_name                  = "eventhub1"
   log_eventhub_authorization_rule_id = "12345"
-
-  global_location_short = "we"
-  dns_zones             = ["example.com"]
 }

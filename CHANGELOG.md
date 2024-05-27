@@ -18,7 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Ci: automate CHANGELOG with git-cliff by @landerss1 in [#1112](https://github.com/XenitAB/terraform-modules/pulls/1112)
 - Chore: bump azuread provider to v2.50.0 by @landerss1 in [#1108](https://github.com/XenitAB/terraform-modules/pulls/1108)
+
+
+
+### 📚 Documentation
+
+
 
 ## [2024.05.1](https://github.com/XenitAB/terraform-modules/releases/tag/2024.05.1)
 

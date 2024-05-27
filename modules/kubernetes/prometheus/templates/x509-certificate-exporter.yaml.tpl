@@ -19,13 +19,13 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: x509-certificate-exporter
-      version: 3.6.0
+      version: 3.8.0
   interval: 1m0s
   values:
     secretsExporter:
       includeNamespaces:
         - prometheus
-
+    priorityClassName: platform-medium
     prometheusRules:
       # We don't manage prometheus rules per cluster.
       create: false

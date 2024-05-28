@@ -1,10 +1,10 @@
 name: changelog
 on:
-  pull_request:
-    types: 
-      - opened
+  push:
     branches:
       - 'main'
+    paths-ignore:
+      - CHANGELOG.md
 jobs:
   changelog:
     name: Generate CHANGELOG
@@ -13,7 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref:  ${{ github.head_ref || github.ref_name }} 
           fetch-depth: 0
       - name: Generate
         uses: orhun/git-cliff-action@v3
@@ -25,11 +24,16 @@ jobs:
           GITHUB_REPO: ${{ github.repository }}
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           OUTPUT: CHANGELOG.md
-      - name: Commit
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-          set +e
-          git add CHANGELOG.md
-          git commit -m "Update changelog"
-          git push
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token:  "${{ secrets.GITHUB_TOKEN }}"
+          committer: GitHub <noreply@github.com>
+          commit-message: "Update CHANGELOG"
+          title: "doc: update CHANGELOG"
+          delete-branch: true
+          branch: update/CHANGELOG
+          labels: |
+            documentation
+          add-paths: |
+            CHANGELOG.md

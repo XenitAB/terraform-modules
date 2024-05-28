@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 📚 Documentation
+- Doc: update CHANGELOG by @landerss1 in [#1116](https://github.com/XenitAB/terraform-modules/pulls/1116)
 
 
 

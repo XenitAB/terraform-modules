@@ -4,7 +4,7 @@ on:
     branches:
       - 'main'
     paths-ignore:
-      - CHANGELOG.md
+      - 'CHANGELOG.md'
 jobs:
   conventional-commit:
     runs-on: ubuntu-latest

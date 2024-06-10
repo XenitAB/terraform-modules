@@ -131,6 +131,12 @@ variable "aks_config" {
   }
 }
 
+variable "aks_cost_analysis_enabled" {
+  description = "If AKS cost analysis should be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "azure_policy_enabled" {
   description = "If the Azure Policy for Kubernetes add-on should be enabled"
   type        = bool

@@ -3,8 +3,6 @@ on:
   pull_request:
     branches:
       - 'main'
-    paths-ignore:
-      - 'CHANGELOG.md'
 jobs:
   conventional-commit:
     runs-on: ubuntu-latest

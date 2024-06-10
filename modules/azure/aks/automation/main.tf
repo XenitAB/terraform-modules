@@ -73,7 +73,7 @@ resource "azurerm_automation_schedule" "aks" {
   week_days               = length(each.value.week_days) != 0 ? each.value.week_days : null
 
   lifecycle {
-    ignore_changes = [ 
+    ignore_changes = [
       start_time,
     ]
   }

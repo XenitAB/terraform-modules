@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: add support for starting/stopping a cluster using Azure automation by @landerss1 in [#1120](https://github.com/XenitAB/terraform-modules/pulls/1120)
 - Feat: upgrade and add x509 priorityClassName by @landerss1 in [#1113](https://github.com/XenitAB/terraform-modules/pulls/1113)
 - Feat: add remote debug support by @landerss1 in [#1068](https://github.com/XenitAB/terraform-modules/pulls/1068)
 - Feat: add feature to override name of flux repo by @landerss1 in [#1109](https://github.com/XenitAB/terraform-modules/pulls/1109)
@@ -27,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 📚 Documentation
+- Doc: update CHANGELOG by @landerss1 in [#1123](https://github.com/XenitAB/terraform-modules/pulls/1123)
 - Doc: update CHANGELOG by @landerss1 in [#1119](https://github.com/XenitAB/terraform-modules/pulls/1119)
 - Doc: update CHANGELOG by @landerss1 in [#1116](https://github.com/XenitAB/terraform-modules/pulls/1116)
 

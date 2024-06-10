@@ -91,7 +91,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove slash in certmanager nameserver config by @CalleB3 in [#1097](https://github.com/XenitAB/terraform-modules/pulls/1097)
 - Update ingress-healthz to 15.5.2 by @landerss1 in [#1052](https://github.com/XenitAB/terraform-modules/pulls/1052)
 - Make it possible to use CoreDNS as the last route in node-local-dns by @CalleB3 in [#1084](https://github.com/XenitAB/terraform-modules/pulls/1084)
-- Bump azurerm provider to v 3.99.0 by @landerss1 in [#1081](https://github.com/XenitAB/terraform-modules/pulls/1081)
+- Bump azurerm provider to v 3.107.0 by @landerss1 in [#1081](https://github.com/XenitAB/terraform-modules/pulls/1081)
 - Azuread deprecations introduced in provider v 2.44 by @landerss1 in [#1080](https://github.com/XenitAB/terraform-modules/pulls/1080)
 - Remove delegate resource group from namespaces by @phillebaba in [#1078](https://github.com/XenitAB/terraform-modules/pulls/1078)
 - Minimum retention days for analytics workspace by @landerss1 in [#1077](https://github.com/XenitAB/terraform-modules/pulls/1077)

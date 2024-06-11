@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: add support for starting/stopping a cluster using Azure automation by @landerss1 in [#1120](https://github.com/XenitAB/terraform-modules/pulls/1120)
 - Feat: upgrade and add x509 priorityClassName by @landerss1 in [#1113](https://github.com/XenitAB/terraform-modules/pulls/1113)
 - Feat: add remote debug support by @landerss1 in [#1068](https://github.com/XenitAB/terraform-modules/pulls/1068)
 - Feat: add feature to override name of flux repo by @landerss1 in [#1109](https://github.com/XenitAB/terraform-modules/pulls/1109)
@@ -20,12 +21,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: bump azurerm provider to v3.107.0 by @landerss1 in [#1122](https://github.com/XenitAB/terraform-modules/pulls/1122)
 - Ci: automate CHANGELOG with git-cliff by @landerss1 in [#1112](https://github.com/XenitAB/terraform-modules/pulls/1112)
 - Chore: bump azuread provider to v2.50.0 by @landerss1 in [#1108](https://github.com/XenitAB/terraform-modules/pulls/1108)
 
 
 
 ### 📚 Documentation
+- Doc: update CHANGELOG by @landerss1 in [#1123](https://github.com/XenitAB/terraform-modules/pulls/1123)
+- Doc: update CHANGELOG by @landerss1 in [#1119](https://github.com/XenitAB/terraform-modules/pulls/1119)
 - Doc: update CHANGELOG by @landerss1 in [#1116](https://github.com/XenitAB/terraform-modules/pulls/1116)
 
 
@@ -91,7 +95,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove slash in certmanager nameserver config by @CalleB3 in [#1097](https://github.com/XenitAB/terraform-modules/pulls/1097)
 - Update ingress-healthz to 15.5.2 by @landerss1 in [#1052](https://github.com/XenitAB/terraform-modules/pulls/1052)
 - Make it possible to use CoreDNS as the last route in node-local-dns by @CalleB3 in [#1084](https://github.com/XenitAB/terraform-modules/pulls/1084)
-- Bump azurerm provider to v 3.107.0 by @landerss1 in [#1081](https://github.com/XenitAB/terraform-modules/pulls/1081)
+- Bump azurerm provider to v 3.99.0 by @landerss1 in [#1081](https://github.com/XenitAB/terraform-modules/pulls/1081)
 - Azuread deprecations introduced in provider v 2.44 by @landerss1 in [#1080](https://github.com/XenitAB/terraform-modules/pulls/1080)
 - Remove delegate resource group from namespaces by @phillebaba in [#1078](https://github.com/XenitAB/terraform-modules/pulls/1078)
 - Minimum retention days for analytics workspace by @landerss1 in [#1077](https://github.com/XenitAB/terraform-modules/pulls/1077)

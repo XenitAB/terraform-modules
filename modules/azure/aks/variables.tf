@@ -1,3 +1,58 @@
+variable "aks_automation_enabled" {
+  description = "Should AKS automation be enabled"
+  type        = bool
+  default     = false
+}
+
+# Monthly occurence currently not supported
+variable "aks_automation_config" {
+  description = "AKS automation configuration"
+  type = object({
+    public_network_access_enabled = optional(bool, false),
+    runbook_schedules = optional(list(object({
+      name        = string,
+      frequency   = string,
+      interval    = optional(number, null),
+      start_time  = string, # ISO 8601 format
+      timezone    = optional(string, "Europe/Stockholm")
+      expiry_time = optional(string, ""),
+      description = string,
+      week_days   = optional(list(string), []),
+      operation   = string,
+      node_pools  = optional(list(string), []),
+    })), [])
+  })
+  default = {}
+
+  validation {
+    condition = length([
+      for schedule in var.aks_automation_config.runbook_schedules : true
+      if contains(["OneTime", "Day", "Hour", "Week"], schedule.frequency)
+    ]) == length(var.aks_automation_config.runbook_schedules)
+    error_message = "The frequency of the schedule must be either 'OneTime', 'Day', 'Hour', 'Week'."
+  }
+
+  #validation {
+  #  condition = (var.aks_automation_config.frequency != "Week" && length(var.aks_automation_config.week_days) == 0) || (var.aks_automation_config.frequency == "Week" && contains(
+  #    ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], var.aks_automation_config.week_days
+  #  ))
+  #  error_message = "The frequency of the schedule must be either 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' or 'Sunday'."
+  #}
+
+  #validation {
+  #  condition = contains(
+  #    ["start", "stop"], var.aks_automation_config.operation
+  #  )
+  #  error_message = "The operation of the schedule must be either 'start' or 'stop'."
+  #}
+}
+
+variable "aks_joblogs_retention_days" {
+  description = "How many days to keep logs from automation jobs"
+  type        = number
+  default     = 7
+}
+
 variable "location_short" {
   description = "The Azure region short name"
   type        = string

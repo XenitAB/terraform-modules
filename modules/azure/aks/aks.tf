@@ -217,6 +217,44 @@ resource "azurerm_storage_management_policy" "log_storage_account_audit_policy" 
       }
     }
   }
+
+  dynamic "rule" {
+    for_each = var.aks_automation_enabled ? [""] : []
+
+    content {
+      name    = "logs_joblogs"
+      enabled = true
+
+      filters {
+        prefix_match = ["insights-logs-joblogs"]
+        blob_types   = ["appendBlob"]
+      }
+      actions {
+        base_blob {
+          delete_after_days_since_modification_greater_than = var.aks_joblogs_retention_days
+        }
+      }
+    }
+  }
+
+  dynamic "rule" {
+    for_each = var.aks_automation_enabled ? [""] : []
+
+    content {
+      name    = "logs_jobstreams"
+      enabled = true
+
+      filters {
+        prefix_match = ["insights-logs-jobstreams"]
+        blob_types   = ["appendBlob"]
+      }
+      actions {
+        base_blob {
+          delete_after_days_since_modification_greater_than = var.aks_joblogs_retention_days
+        }
+      }
+    }
+  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "log_eventhub_audit" {

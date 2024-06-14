@@ -3,6 +3,11 @@ on:
   pull_request:
     branches:
       - 'main'
+    types:
+      - labeled
+      - opened
+      - reopened
+      - synchronize
 jobs:
   conventional-commit:
     runs-on: ubuntu-latest

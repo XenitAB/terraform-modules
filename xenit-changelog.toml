@@ -63,7 +63,7 @@ commit_parsers = [
     { message = "^(?i)prepare", skip = true },
     { message = "(?i)prepare for|release", skip = true },
     { message = "^(?i)release", skip = true },
-    { message = "^(?i)update changelog", skip = true },
+    { message = "(?i)update changelog", skip = true },
     { message = "^(?i).breaking.", group = "<!-- 0 -->⛓️‍💥 Breaking Changes" },
     { message = "^(?i)feat!", group = "<!-- 0 -->⛓️‍💥 Breaking Changes" },
     { message = "^(?i)fix!", group = "<!-- 0 -->⛓️‍💥 Breaking Changes" },

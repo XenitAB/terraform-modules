@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Ci: run check when PR is labeled by @landerss1 in [#1131](https://github.com/XenitAB/terraform-modules/pulls/1131)
+- Ci: don't include update of CHANGELOG in the CHANGELOG by @landerss1 in [#1129](https://github.com/XenitAB/terraform-modules/pulls/1129)
 - Chore: bump ytanikin/PRConventionalCommits from 1.1.0 to 1.2.0 by @landerss1 in [#1115](https://github.com/XenitAB/terraform-modules/pulls/1115)
 - Chore: bump azurerm provider to v3.107.0 by @landerss1 in [#1122](https://github.com/XenitAB/terraform-modules/pulls/1122)
 - Ci: automate CHANGELOG with git-cliff by @landerss1 in [#1112](https://github.com/XenitAB/terraform-modules/pulls/1112)
@@ -32,10 +34,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 📚 Documentation
-- Doc: update CHANGELOG by @landerss1 in [#1124](https://github.com/XenitAB/terraform-modules/pulls/1124)
-- Doc: update CHANGELOG by @landerss1 in [#1123](https://github.com/XenitAB/terraform-modules/pulls/1123)
-- Doc: update CHANGELOG by @landerss1 in [#1119](https://github.com/XenitAB/terraform-modules/pulls/1119)
-- Doc: update CHANGELOG by @landerss1 in [#1116](https://github.com/XenitAB/terraform-modules/pulls/1116)
 
 
 
@@ -90,7 +88,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Migrate aad-pod-identity to install with flux by @CalleB3 in [#1061](https://github.com/XenitAB/terraform-modules/pulls/1061)
 - Migrate trivy to install with flux by @landerss1 in [#1085](https://github.com/XenitAB/terraform-modules/pulls/1085)
 - Migrate reloader to install with flux by @CalleB3 in [#1057](https://github.com/XenitAB/terraform-modules/pulls/1057)
-- Migrate falco to install with flux by @CalleB3 in [#1036](https://github.com/XenitAB/terraform-modules/pulls/1036)
 - Migrate external-dns to install with Flux by @phillebaba in [#1014](https://github.com/XenitAB/terraform-modules/pulls/1014)
 - Migrate diagnostic settings by @landerss1 in [#1050](https://github.com/XenitAB/terraform-modules/pulls/1050)
 
@@ -114,7 +111,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Make inlude_tenant_name optional by @CalleB3 in [#1063](https://github.com/XenitAB/terraform-modules/pulls/1063)
 - Move promtail to install with flux by @CalleB3 in [#1059](https://github.com/XenitAB/terraform-modules/pulls/1059)
 - Move azad-kube-proxy to install with flux by @CalleB3 in [#1030](https://github.com/XenitAB/terraform-modules/pulls/1030)
-- Use api_server_access_profile for AKS by @CalleB3 in [#1028](https://github.com/XenitAB/terraform-modules/pulls/1028)
 - Update Spegel to v0.0.14 by @phillebaba in [#1044](https://github.com/XenitAB/terraform-modules/pulls/1044)
 - Exclude ingress-healthz namespace from gatekeeper by @CalleB3 in [#1040](https://github.com/XenitAB/terraform-modules/pulls/1040)
 

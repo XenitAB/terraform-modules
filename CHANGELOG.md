@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: bump peter-evans/create-pull-request to v6 by @landerss1 in [#1132](https://github.com/XenitAB/terraform-modules/pulls/1132)
 - Ci: run check when PR is labeled by @landerss1 in [#1131](https://github.com/XenitAB/terraform-modules/pulls/1131)
 - Ci: don't include update of CHANGELOG in the CHANGELOG by @landerss1 in [#1129](https://github.com/XenitAB/terraform-modules/pulls/1129)
 - Chore: bump ytanikin/PRConventionalCommits from 1.1.0 to 1.2.0 by @landerss1 in [#1115](https://github.com/XenitAB/terraform-modules/pulls/1115)

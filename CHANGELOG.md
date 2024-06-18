@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: make upgrade_settings configurable by @landerss1 in [#1136](https://github.com/XenitAB/terraform-modules/pulls/1136)
 - Feat: add support for AKS cost analysis by @landerss1 in [#1126](https://github.com/XenitAB/terraform-modules/pulls/1126)
 - Feat: add support for starting/stopping a cluster using Azure automation by @landerss1 in [#1120](https://github.com/XenitAB/terraform-modules/pulls/1120)
 - Feat: upgrade and add x509 priorityClassName by @landerss1 in [#1113](https://github.com/XenitAB/terraform-modules/pulls/1113)

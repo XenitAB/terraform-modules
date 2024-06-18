@@ -106,6 +106,12 @@ resource "azurerm_kubernetes_cluster" "this" {
     enable_auto_scaling          = false
     node_count                   = var.aks_config.production_grade ? 2 : 1
     only_critical_addons_enabled = true
+
+    upgrade_settings {
+      drain_timeout_in_minutes      = var.aks_config.upgrade_settings.drain_timeout_in_minutes
+      node_soak_duration_in_minutes = var.aks_config.upgrade_settings.node_soak_duration_in_minutes
+      max_surge                     = var.aks_config.upgrade_settings.max_surge
+    }
   }
 }
 
@@ -141,8 +147,11 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   dynamic "upgrade_settings" {
     # Max surge cannot be set for pool with spot instances
     for_each = each.value.spot_enabled ? [] : [""]
+
     content {
-      max_surge = "33%"
+      drain_timeout_in_minutes      = each.value.upgrade_settings.drain_timeout_in_minutes
+      node_soak_duration_in_minutes = each.value.upgrade_settings.node_soak_duration_in_minutes
+      max_surge                     = each.value.upgrade_settings.max_surge
     }
   }
 

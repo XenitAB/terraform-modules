@@ -132,7 +132,25 @@ variable "aks_config" {
       spot_max_price = number
       node_taints    = list(string)
       node_labels    = map(string)
+      upgrade_settings = optional(object({
+        drain_timeout_in_minutes      = optional(number, 30)
+        node_soak_duration_in_minutes = optional(number, 0)
+        max_surge                     = optional(number, 33)
+        }), {
+        drain_timeout_in_minutes      = 30
+        node_soak_duration_in_minutes = 0
+        max_surge                     = 33
+      })
     }))
+    upgrade_settings = optional(object({
+      drain_timeout_in_minutes      = optional(number, 30)
+      node_soak_duration_in_minutes = optional(number, 0)
+      max_surge                     = optional(number, 33)
+      }), {
+      drain_timeout_in_minutes      = 30
+      node_soak_duration_in_minutes = 0
+      max_surge                     = 33
+    })
   })
 
   validation {

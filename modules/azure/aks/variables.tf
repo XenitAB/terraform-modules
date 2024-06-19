@@ -263,7 +263,7 @@ variable "namespaces" {
 variable "aks_audit_log_retention" {
   description = "The aks audit log retention in days, 0 = infinite"
   type        = number
-  default     = 365
+  default     = 30
 }
 
 variable "log_eventhub_name" {

@@ -92,9 +92,12 @@ resource "azurerm_automation_job_schedule" "aks" {
 
   # The azure job schedule rest api only supports type map[string]string for field parameters
   parameters = {
-    resourcegroupname = data.azurerm_resource_group.this.name
-    aksclustername    = var.aks_name
-    operation         = each.value.operation
+    resourcegroupname      = data.azurerm_resource_group.this.name
+    aksclustername         = var.aks_name
+    operation              = each.value.operation
+    alertsenabled          = var.alerts_enabled
+    alertresourcegroupname = var.alerts_resource_group_name
+    alertname              = var.alert_name
   }
 }
 

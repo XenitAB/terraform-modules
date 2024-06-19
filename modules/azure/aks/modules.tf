@@ -11,6 +11,9 @@ module "automation" {
   aks_name                   = azurerm_kubernetes_cluster.this.name
   aks_automation_config      = var.aks_automation_config
   aks_joblogs_retention_days = var.aks_joblogs_retention_days
+  alerts_enabled             = var.alerts_enabled
+  alerts_resource_group_name = data.azurerm_resource_group.log.name
+  alert_name                 = "audit log${var.environment}${var.location_short}${var.name}${var.unique_suffix} storage account missing data"
   location_short             = var.location_short
   resource_group_name        = data.azurerm_resource_group.this.name
   environment                = var.environment

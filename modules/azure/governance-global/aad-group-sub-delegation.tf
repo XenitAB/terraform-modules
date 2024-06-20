@@ -125,5 +125,5 @@ resource "azuread_group_member" "sp_all_owner" {
     if var.delegate_sub_groups
   }
   group_object_id  = azuread_group.sub_owner.id
-  member_object_id = data.azuread_service_principal.sp_all_owner.object_id
+  member_object_id = data.azuread_service_principal.sp_all_owner["delegate_sub_groups"].object_id
 }

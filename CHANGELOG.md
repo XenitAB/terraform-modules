@@ -24,6 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+### 🚜 Refactor
+- Refactor: update of the default log retention time for azure to 30 days by @yabracadabra in [#1140](https://github.com/XenitAB/terraform-modules/pulls/1140)
+
+
+
 ### ⚙️ Miscellaneous
 - Chore: update spegel to 0.0.23 by @yabracadabra in [#1134](https://github.com/XenitAB/terraform-modules/pulls/1134)
 - Chore: bump peter-evans/create-pull-request to v6 by @landerss1 in [#1132](https://github.com/XenitAB/terraform-modules/pulls/1132)

@@ -30,5 +30,5 @@ data "azurerm_user_assigned_identity" "tenant" {
   }
 
   name                = "uai-${var.environment}-${var.location_short}-${var.aks_name}${local.aks_name_suffix}-${each.key}-wi"
-  resource_group_name = "rg-${var.environment}-${var.location_short}-${each.key}"
+  resource_group_name = var.resource_group_name
 }

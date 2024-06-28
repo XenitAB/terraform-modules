@@ -30,14 +30,15 @@ spec:
       version: v2.7.0
   interval: 1m0s
   values:
-    multitenant.enable: true
+    multitenant:
+      enable: true
     azureOperatorMode: webhooks
     useWorkloadIdentityAuth: true
     azureClientID: "${client_id}"
     azureSyncPeriod: "${sync_period}"
     crdPattern: "${crd_pattern}"
     metrics:
-        enable: ${enable_metrics}
+      enable: ${enable_metrics}
 
     
     

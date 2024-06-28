@@ -22,4 +22,4 @@ spec:
     azureSyncPeriod: "${sync_period}"
     crdPattern: "${crd_pattern}"
     metrics:
-        enable: ${enable_metrics
+        enable: ${enable_metrics}

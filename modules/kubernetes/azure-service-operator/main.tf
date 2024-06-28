@@ -36,7 +36,7 @@ resource "git_repository_file" "azure_service_operator_tenant" {
   for_each = { for ns in var.azure_service_operator_config.tenant_namespaces : ns.name => ns }
 
   path = "platform/${var.cluster_id}/azure-service-operator/azure-service-operator-${each.key}.yaml"
-  content = templatefile("${path.module}/templates/azure-service-operator-${each.key}.yaml.tpl", {
+  content = templatefile("${path.module}/templates/azure-service-operator-tenant.yaml.tpl", {
     client_id         = data.azurerm_user_assigned_identity.tenant[each.key].client_id,
     crd_pattern       = each.value.crd_pattern,
     enable_metrics    = each.value.enable_metrics,

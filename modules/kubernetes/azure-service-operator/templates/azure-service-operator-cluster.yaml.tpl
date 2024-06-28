@@ -12,7 +12,6 @@ metadata:
   name: aso2
   namespace: azureserviceoperator-system
 spec:
-  type: "oci"
   interval: 1m0s
   url: "https://raw.githubusercontent.com/Azure/azure-service-operator/main/v2/charts"
 ---

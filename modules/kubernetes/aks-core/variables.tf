@@ -667,6 +667,40 @@ variable "use_private_ingress" {
   description = "If true, private ingress will be used by azad-kube-proxy"
   type        = bool
   default     = false
+}
 
+variable "azure_service_operator_enabled" {
+  description = "If Azure Service Operator should be enabled"
+  type        = bool
+  default     = false
+}
 
+variable "azure_service_operator_config" {
+  description = "Azure Service Operator configuration"
+  type = object({
+    cluster_config = optional(object({
+      sync_period    = optional(string, "1m")
+      enable_metrics = optional(bool, false)
+      crd_pattern    = optional(string, "") # never set this to '*', limit this to the resources that are actually needed
+    }), {})
+    tenant_namespaces = optional(list(object({
+      name           = string
+      sync_period    = optional(string, "1m")
+      enable_metrics = optional(bool, false)
+      crd_pattern    = optional(string, "") # never set this to '*', limit this to the resources that are actually needed
+    })), [])
+  })
+  default = {}
+
+  validation {
+    condition     = var.azure_service_operator_config.cluster_config.crd_pattern != "*"
+    error_message = "Installing all CRD:s in the cluster is not supported, please limit to the ones needed"
+  }
+
+  validation {
+    condition = alltrue([
+      for ns in var.azure_service_operator_config.tenant_namespaces : ns.crd_pattern != "*"
+    ])
+    error_message = "Installing all CRD:s in a tenant namespace is not supported, please limit to the ones needed"
+  }
 }

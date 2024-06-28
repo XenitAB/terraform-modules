@@ -111,6 +111,26 @@ module "azure_policy" {
   ]
 }
 
+module "azure_service_operator" {
+  for_each = {
+    for s in ["azure_service_operator"] :
+    s => s
+    if var.azure_service_operator_enabled
+  }
+
+  source = "../../kubernetes/azure-service-operator"
+
+  aks_name                      = var.name
+  aks_name_suffix               = local.aks_name_suffix
+  azure_service_operator_config = var.azure_service_operator_config
+  cluster_id                    = local.cluster_id
+  environment                   = var.environment
+  location                      = data.azurerm_resource_group.this.location
+  location_short                = var.location_short
+  oidc_issuer_url               = var.oidc_issuer_url
+  resource_group_name           = data.azurerm_resource_group.this.name
+}
+
 module "cert_manager" {
   depends_on = [module.cert_manager_crd]
 

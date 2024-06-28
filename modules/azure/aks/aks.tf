@@ -49,9 +49,11 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   network_profile {
-    network_plugin    = "kubenet"
-    network_policy    = "calico"
-    load_balancer_sku = "standard"
+    network_plugin      = "azure"
+    network_plugin_mode = "overlay"
+    network_policy      = "cilium"
+    network_data_plane  = "cilium"
+    load_balancer_sku   = "standard"
     load_balancer_profile {
       outbound_ip_prefix_ids = [
         var.aks_public_ip_prefix_id

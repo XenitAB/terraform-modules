@@ -17,6 +17,18 @@ locals {
   auto_scaler_expander = var.aks_config.priority_expander_config == null ? "least-waste" : "priority"
 }
 
+resource "azurerm_user_assigned_identity" "aks" {
+  name                = "uai-aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
+}
+
+resource "azurerm_role_assignment" "example" {
+  scope                = data.azurerm_resource_group.this.id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_user_assigned_identity.aks.principal_id
+}
+
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
@@ -62,7 +74,8 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   identity {
-    type = "SystemAssigned"
+    type = "UserAssigned"
+    identity_ids = azurerm_user_assigned_identity.aks.principal_id
   }
 
   azure_active_directory_role_based_access_control {

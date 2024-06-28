@@ -41,6 +41,6 @@ resource "git_repository_file" "azure_service_operator_tenant" {
     crd_pattern       = each.value.crd_pattern,
     enable_metrics    = each.value.enable_metrics,
     sync_period       = each.value.sync_period,
-    tenantnamespace   = each.value.name,
+    tenant_namespace  = each.value.name,
   })
 }

@@ -9,7 +9,7 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "3.107.0"
+      version = "3.110.0"
       source  = "hashicorp/azurerm"
     }
     git = {
@@ -72,6 +72,7 @@ resource "git_repository_file" "monitors" {
     promtail_enabled         = var.promtail_enabled,
     node_ttl_enabled         = var.node_ttl_enabled,
     spegel_enabled           = var.spegel_enabled,
+    cilium_enabled           = var.cilium_enabled,
   })
 }
 

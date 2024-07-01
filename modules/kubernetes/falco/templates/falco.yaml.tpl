@@ -134,7 +134,9 @@ spec:
       rules_launch_privileged_container.yaml: |-
         - macro: Launch Privileged Container
           condition: >
+%{ if cilium_enabled == false }
             (container.image.repository = "mcr.microsoft.com/oss/calico/node") or
+%{ endif }
             (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/secrets-store/driver") or
             (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/azuredisk-csi") or
             (container.image.repository = "mcr.microsoft.com/oss/kubernetes-csi/azurefile-csi") or

@@ -32,3 +32,19 @@ data "azurerm_user_assigned_identity" "tenant" {
   name                = "uai-${var.environment}-${var.location_short}-${var.aks_name}${local.aks_name_suffix}-${each.key}-wi"
   resource_group_name = var.resource_group_name
 }
+
+# Need to create a special federated identity record since we can't specify an existing service account, or the name of the
+# account for the azure service operator
+resource "azurerm_federated_identity_credential" "tenant" {
+  for_each = {
+    for ns in var.azure_service_operator_config.tenant_namespaces :
+    ns.name => ns
+  }
+
+  name                = data.azurerm_user_assigned_identity.tenant[each.key].name
+  resource_group_name = data.azurerm_user_assigned_identity.tenant[each.key].resource_group_name
+  parent_id           = data.azurerm_user_assigned_identity.tenant[each.key].id
+  audience            = ["api://AzureADTokenExchange"]
+  issuer              = var.oidc_issuer_url
+  subject             = "system:serviceaccount:${each.key}:azureserviceoperator-default"
+}

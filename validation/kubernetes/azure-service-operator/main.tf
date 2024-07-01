@@ -17,4 +17,5 @@ module "azure_service_operator" {
   oidc_issuer_url               = "url"
   resource_group_name           = ""
   subscription_id               = "id"
+  tenant_id                     = "id"
 }

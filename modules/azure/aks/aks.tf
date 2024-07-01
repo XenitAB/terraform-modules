@@ -73,10 +73,10 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   network_profile {
-    network_plugin      = var.cilium_enabled == true ? "azure" : "kubenet"
-    network_plugin_mode = var.cilium_enabled == true ? "overlay" : null
-    network_policy      = var.cilium_enabled == true ? "cilium" : "calico"
-    network_data_plane  = var.cilium_enabled == true ? "cilium" : "azure"
+    network_plugin      = var.cilium_enabled ? "azure" : "kubenet"
+    network_plugin_mode = var.cilium_enabled ? "overlay" : null
+    network_policy      = var.cilium_enabled ? "cilium" : "calico"
+    network_data_plane  = var.cilium_enabled ? "cilium" : "azure"
     load_balancer_sku   = "standard"
     load_balancer_profile {
       outbound_ip_prefix_ids = [
@@ -86,8 +86,8 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   identity {
-    type         = var.cilium_enabled == true ? "UserAssigned" : "SystemAssigned"
-    identity_ids = var.cilium_enabled == true ? azurerm_user_assigned_identity.aks["cilium"].principal_id : null
+    type         = var.cilium_enabled ? "UserAssigned" : "SystemAssigned"
+    identity_ids = var.cilium_enabled ? each.value.azurerm_user_assigned_identity.aks.principal_id : null
   }
 
   azure_active_directory_role_based_access_control {

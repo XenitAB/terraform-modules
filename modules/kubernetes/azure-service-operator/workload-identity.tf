@@ -41,7 +41,7 @@ resource "azurerm_federated_identity_credential" "tenant" {
     ns.name => ns
   }
 
-  name                = data.azurerm_user_assigned_identity.tenant[each.key].name
+  name                = "uai-${var.environment}-${var.location_short}-${var.aks_name}${local.aks_name_suffix}-${each.key}-aso-wi"
   resource_group_name = data.azurerm_user_assigned_identity.tenant[each.key].resource_group_name
   parent_id           = data.azurerm_user_assigned_identity.tenant[each.key].id
   audience            = ["api://AzureADTokenExchange"]

@@ -87,7 +87,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 
   identity {
     type         = var.cilium_enabled ? "UserAssigned" : "SystemAssigned"
-    identity_ids = var.cilium_enabled ? each.value.azurerm_user_assigned_identity.aks.principal_id : null
+    identity_ids = var.cilium_enabled ? azurerm_user_assigned_identity.aks.principal_id : null
   }
 
   azure_active_directory_role_based_access_control {

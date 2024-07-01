@@ -38,7 +38,7 @@ resource "azurerm_role_assignment" "aks" {
 
   scope                = data.azurerm_resource_group.this.id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_user_assigned_identity.aks[0].principal_id
+  principal_id         = azurerm_user_assigned_identity.aks[each.key].principal_id
 }
 
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
@@ -87,7 +87,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 
   identity {
     type         = var.cilium_enabled == true ? "UserAssigned" : "SystemAssigned"
-    identity_ids = var.cilium_enabled == true ? azurerm_user_assigned_identity.aks[0].principal_id : null
+    identity_ids = var.cilium_enabled == true ? azurerm_user_assigned_identity.aks[each.key].principal_id : null
   }
 
   azure_active_directory_role_based_access_control {

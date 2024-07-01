@@ -72,6 +72,7 @@ resource "git_repository_file" "monitors" {
     promtail_enabled         = var.promtail_enabled,
     node_ttl_enabled         = var.node_ttl_enabled,
     spegel_enabled           = var.spegel_enabled,
+    cilium_enabled           = var.cilium_enabled,
   })
 }
 

@@ -18,12 +18,24 @@ locals {
 }
 
 resource "azurerm_user_assigned_identity" "aks" {
+  for_each = {
+    for c in ["cilium"] :
+    c => c
+    if var.cilium_enabled
+  }
+
   name                = "uai-aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
 }
 
-resource "azurerm_role_assignment" "example" {
+resource "azurerm_role_assignment" "aks" {
+  for_each = {
+    for c in ["cilium"] :
+    c => c
+    if var.cilium_enabled
+  }
+
   scope                = data.azurerm_resource_group.this.id
   role_definition_name = "Contributor"
   principal_id         = azurerm_user_assigned_identity.aks.principal_id
@@ -61,10 +73,10 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   network_profile {
-    network_plugin      = "azure"
-    network_plugin_mode = "overlay"
-    network_policy      = "cilium"
-    network_data_plane  = "cilium"
+    network_plugin      = var.cilium_enabled == true ? "azure" : "kubenet"
+    network_plugin_mode = var.cilium_enabled == true ? "overlay" : null
+    network_policy      = var.cilium_enabled == true ? "cilium" : "calico"
+    network_data_plane  = var.cilium_enabled == true ? "cilium" : "azure"
     load_balancer_sku   = "standard"
     load_balancer_profile {
       outbound_ip_prefix_ids = [
@@ -74,8 +86,8 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   identity {
-    type         = "UserAssigned"
-    identity_ids = azurerm_user_assigned_identity.aks.principal_id
+    type         = var.cilium_enabled == true ? "UserAssigned" : "SystemAssigned"
+    identity_ids = var.cilium_enabled == true ? azurerm_user_assigned_identity.aks.principal_id : null
   }
 
   azure_active_directory_role_based_access_control {

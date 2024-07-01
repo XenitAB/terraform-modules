@@ -667,6 +667,10 @@ variable "use_private_ingress" {
   description = "If true, private ingress will be used by azad-kube-proxy"
   type        = bool
   default     = false
+}
 
-
+variable "cilium_enabled" {
+  description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
+  type        = bool
+  default     = true
 }

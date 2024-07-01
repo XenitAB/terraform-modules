@@ -27,6 +27,7 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "falco" {
   path = "platform/${var.cluster_id}/falco/falco.yaml"
   content = templatefile("${path.module}/templates/falco.yaml.tpl", {
+    cilium_enabled = var.cilium_enabled
   })
 }
 

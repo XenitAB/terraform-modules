@@ -18,6 +18,8 @@ spec:
       enable: true
     azureOperatorMode: watchers
     useWorkloadIdentityAuth: true
+    azureTenantID: ${tenant_id}
+    azureSubscriptionID: ${subscription_id}
     azureClientID: "${client_id}"
     azureTargetNamespaces:
       - ${tenant_namespace}

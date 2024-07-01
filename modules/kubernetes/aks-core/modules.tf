@@ -129,6 +129,7 @@ module "azure_service_operator" {
   location_short                = var.location_short
   oidc_issuer_url               = var.oidc_issuer_url
   resource_group_name           = data.azurerm_resource_group.this.name
+  subscription_id               = data.azurerm_client_config.current.subscription_id
 }
 
 module "cert_manager" {

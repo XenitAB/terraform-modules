@@ -16,4 +16,5 @@ module "azure_service_operator" {
   location_short                = "we"
   oidc_issuer_url               = "url"
   resource_group_name           = ""
+  subscription_id               = "id"
 }

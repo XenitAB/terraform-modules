@@ -33,6 +33,8 @@ spec:
     multitenant:
       enable: true
     azureOperatorMode: webhooks
+    azureTenantID: ${tenant_id}
+    azureSubscriptionID: ${subscription_id}
     useWorkloadIdentityAuth: true
     azureClientID: "${client_id}"
     azureSyncPeriod: "${sync_period}"

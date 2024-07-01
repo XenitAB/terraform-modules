@@ -220,7 +220,7 @@ module "falco" {
 
   source = "../../kubernetes/falco"
 
-  cluster_id = local.cluster_id
+  cluster_id     = local.cluster_id
   cilium_enabled = var.cilium_enabled
 }
 

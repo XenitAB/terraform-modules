@@ -49,12 +49,12 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | [azurerm_resource_policy_assignment.agentless_discovery](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/resource_policy_assignment) | resource |
 | [azurerm_resource_policy_assignment.kubernetes_sensor](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/resource_policy_assignment) | resource |
 | [azurerm_resource_policy_assignment.vulnerability_assessments](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/resource_policy_assignment) | resource |
+| [azurerm_role_assignment.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.cluster_admin](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.example](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/role_assignment) | resource |
 | [azurerm_security_center_auto_provisioning.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/security_center_auto_provisioning) | resource |
 | [azurerm_security_center_subscription_pricing.containers](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/security_center_subscription_pricing) | resource |
@@ -87,6 +87,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | <a name="input_audit_config"></a> [audit\_config](#input\_audit\_config) | Kubernetes audit log configuration | <pre>object({<br>    destination_type = optional(string, "StorageAccount")<br>    analytics_workspace = optional(object({<br>      sku_name       = optional(string, "PerGB2018")<br>      daily_quota_gb = optional(number, -1)<br>      reservation_gb = optional(number, 0)<br>      retention_days = optional(number, 30)<br>    }), {})<br>  })</pre> | `{}` | no |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
 | <a name="input_azure_policy_enabled"></a> [azure\_policy\_enabled](#input\_azure\_policy\_enabled) | If the Azure Policy for Kubernetes add-on should be enabled | `bool` | `false` | no |
+| <a name="input_cilium_enabled"></a> [cilium\_enabled](#input\_cilium\_enabled) | If enabled, will use Azure CNI with Cilium instead of kubenet | `bool` | `true` | no |
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The commonName for the core infrastructure | `string` | n/a | yes |
 | <a name="input_defender_config"></a> [defender\_config](#input\_defender\_config) | The Microsoft Defender for containers configuration | <pre>object({<br>    analytics_workspace = optional(object({<br>      sku_name       = optional(string, "PerGB2018")<br>      daily_quota_gb = optional(number, -1)<br>      reservation_gb = optional(number, 0)<br>      retention_days = optional(number, 30)<br>    }), {})<br>    kubernetes_discovery_enabled      = optional(bool, false)<br>    kubernetes_sensor_enabled         = optional(bool, true)<br>    vulnerability_assessments_enabled = optional(bool, true)<br>  })</pre> | `{}` | no |
 | <a name="input_defender_enabled"></a> [defender\_enabled](#input\_defender\_enabled) | If Defender for Containers should be enabled | `bool` | `false` | no |

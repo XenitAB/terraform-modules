@@ -4,6 +4,7 @@ locals {
     "azad-kube-proxy",
     "azdo-proxy",
     "azure-metrics",
+    "azureserviceoperator-system",
     "calico-system",
     "cert-manager",
     "controle-plane-logs",

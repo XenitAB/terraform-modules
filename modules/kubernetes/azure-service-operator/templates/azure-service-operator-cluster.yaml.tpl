@@ -27,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: aso2
-      version: v2.8.0
+      version: v2.7.0
   interval: 1m0s
   values:
     multitenant:
@@ -41,6 +41,8 @@ spec:
     crdPattern: "${crd_pattern}"
     metrics:
       enable: ${enable_metrics}
+    networkPolicies:
+      enable: false
 
     
     

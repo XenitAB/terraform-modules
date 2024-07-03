@@ -11,8 +11,9 @@ spec:
         kind: HelmRepository
         name: aso2
         namespace: azureserviceoperator-system
-      version: v2.8.0
+      version: v2.7.0
   interval: 1m0s
+  serviceAccountName: ${tenant_namespace}
   values:
     multitenant:
       enable: true

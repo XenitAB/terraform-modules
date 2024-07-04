@@ -1297,8 +1297,7 @@ spec:
           properties:
             tlsOptional:
               type: boolean
-              description: "When set to `true` the TLS {} is optional, defaults
-              to false."
+              description: "When set to `true` the TLS {} is optional, defaults to false."
   targets:
     - target: admission.k8s.gatekeeper.sh
       rego: |
@@ -2638,38 +2637,39 @@ spec:
               description: |-
                 Any container that uses an image that matches an entry in this list will be excluded from enforcement. Prefix-matching can be signified with `*`. For example: `my-image-*`.
                 It is recommended that users use the fully-qualified Docker image name (e.g. start with a domain name) in order to avoid unexpectedly exempting images from an untrusted repository.
+              type: array
               items:
                 type: string
   targets:
     - target: admission.k8s.gatekeeper.sh
       libs:
         - |
-        package lib.exempt_container
+          package lib.exempt_container
 
-        is_exempt(container) {
+          is_exempt(container) {
             exempt_images := object.get(object.get(input, "parameters", {}), "exemptImages", [])
             img := container.image
             exemption := exempt_images[_]
             _matches_exemption(img, exemption)
-        }
+          }
 
-        _matches_exemption(img, exemption) {
+          _matches_exemption(img, exemption) {
             not endswith(exemption, "*")
             exemption == img
-        }
+          }
 
-        _matches_exemption(img, exemption) {
+          _matches_exemption(img, exemption) {
             endswith(exemption, "*")
             prefix := trim_suffix(exemption, "*")
             startswith(img, prefix)
-        }
+          }
       rego: |
         package k8spsphostnamespace
 
         import data.lib.exempt_container.is_exempt
 
         violation[{"msg": msg, "details": {}}] {
-            c := input_containers[_]
+            c := input.parameters.exemptImages[_]
             not is_exempt(c)
             input_share_hostnamespace(input.review.object)
             msg := sprintf("Sharing the host namespace is not allowed: %v", [input.review.object.metadata.name])
@@ -3631,6 +3631,7 @@ spec:
               description: |-
                 Any container that uses an image that matches an entry in this list will be excluded from enforcement. Prefix-matching can be signified with `*`. For example: `my-image-*`.
                 It is recommended that users use the fully-qualified Docker image name (e.g. start with a domain name) in order to avoid unexpectedly exempting images from an untrusted repository.
+              type: array
               items:
                 type: string
   targets:
@@ -3662,7 +3663,7 @@ spec:
         import data.lib.exempt_container.is_exempt
 
         violation[{"msg": msg, "details": {}}] {
-            c := input_containers[_]
+            c := input.parameters.exemptImages[_]
             not is_exempt(c)
             volume_fields := {x | input.review.object.spec.volumes[_][x]; x != "name"}
             field := volume_fields[_]

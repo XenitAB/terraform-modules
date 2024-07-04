@@ -13,7 +13,7 @@ spec:
         namespace: azureserviceoperator-system
       version: v2.7.0
   interval: 1m0s
-  serviceAccountName: ${tenant_namespace}
+  serviceAccountName: flux
   values:
     multitenant:
       enable: true

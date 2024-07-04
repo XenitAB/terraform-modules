@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: aks automation module dependent on aks cluster by @landerss1 in [#1146](https://github.com/XenitAB/terraform-modules/pulls/1146)
+- Fix: rego errors in gatekeeper templates by @landerss1 in [#1144](https://github.com/XenitAB/terraform-modules/pulls/1144)
 - Fix: allow vector to use writable root file system by @landerss1 in [#1128](https://github.com/XenitAB/terraform-modules/pulls/1128)
 - Fix: allow prometheus-node-exporter to use host network/port by @landerss1 in [#1127](https://github.com/XenitAB/terraform-modules/pulls/1127)
 - Fix: add a private ingressclass instead of replacing the existing by @landerss1 in [#1110](https://github.com/XenitAB/terraform-modules/pulls/1110)

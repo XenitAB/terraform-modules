@@ -36,6 +36,7 @@ This module is used to create AKS clusters.
 | <a name="module_azure_policy"></a> [azure\_policy](#module\_azure\_policy) | ../../kubernetes/azure-policy | n/a |
 | <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../../kubernetes/cert-manager | n/a |
 | <a name="module_cert_manager_crd"></a> [cert\_manager\_crd](#module\_cert\_manager\_crd) | ../../kubernetes/helm-crd | n/a |
+| <a name="module_cilium"></a> [cilium](#module\_cilium) | ../../kubernetes/cilium | n/a |
 | <a name="module_control_plane_logs"></a> [control\_plane\_logs](#module\_control\_plane\_logs) | ../../kubernetes/control-plane-logs | n/a |
 | <a name="module_datadog"></a> [datadog](#module\_datadog) | ../../kubernetes/datadog | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../../kubernetes/external-dns | n/a |
@@ -155,6 +156,8 @@ This module is used to create AKS clusters.
 | <a name="input_ingress_healthz_enabled"></a> [ingress\_healthz\_enabled](#input\_ingress\_healthz\_enabled) | Should ingress-healthz be enabled | `bool` | `true` | no |
 | <a name="input_ingress_nginx_config"></a> [ingress\_nginx\_config](#input\_ingress\_nginx\_config) | Ingress configuration | <pre>object({<br>    private_ingress_enabled = bool<br>    customization = optional(object({<br>      allow_snippet_annotations = bool<br>      http_snippet              = string<br>      extra_config              = map(string)<br>      extra_headers             = map(string)<br>    }))<br>    customization_private = optional(object({<br>      allow_snippet_annotations = optional(bool)<br>      http_snippet              = optional(string)<br>      extra_config              = optional(map(string))<br>      extra_headers             = optional(map(string))<br>    }))<br>  })</pre> | n/a | yes |
 | <a name="input_ingress_nginx_enabled"></a> [ingress\_nginx\_enabled](#input\_ingress\_nginx\_enabled) | Should Ingress NGINX be enabled | `bool` | `true` | no |
+| <a name="input_k8s_service_host"></a> [k8s\_service\_host](#input\_k8s\_service\_host) | n/a | `string` | n/a | yes |
+| <a name="input_k8s_service_port"></a> [k8s\_service\_port](#input\_k8s\_service\_port) | n/a | `number` | `443` | no |
 | <a name="input_kubernetes_default_limit_range"></a> [kubernetes\_default\_limit\_range](#input\_kubernetes\_default\_limit\_range) | Default limit range for tenant namespaces | <pre>object({<br>    default_request = object({<br>      cpu    = string<br>      memory = string<br>    })<br>    default = object({<br>      memory = string<br>    })<br>  })</pre> | <pre>{<br>  "default": {<br>    "memory": "256Mi"<br>  },<br>  "default_request": {<br>    "cpu": "50m",<br>    "memory": "32Mi"<br>  }<br>}</pre> | no |
 | <a name="input_kubernetes_network_policy_default_deny"></a> [kubernetes\_network\_policy\_default\_deny](#input\_kubernetes\_network\_policy\_default\_deny) | If network policies should by default deny cross namespace traffic | `bool` | `true` | no |
 | <a name="input_linkerd_enabled"></a> [linkerd\_enabled](#input\_linkerd\_enabled) | Should linkerd be enabled | `bool` | `false` | no |

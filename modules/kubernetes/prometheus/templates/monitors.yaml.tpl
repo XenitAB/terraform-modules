@@ -54,6 +54,86 @@ spec:
       app.kubernetes.io/component: controller
       app.kubernetes.io/name: ingress-nginx
       function: metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: cilium-agent
+  namespace: prometheus
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      k8s-app: cilium
+  podMetricsEndpoints:
+    - path: /metrics
+      port: prometheus
+  podTargetLabels:
+  - k8s-app
+  namespaceSelector:
+    matchNames:
+      - kube-system
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: cilium-operator
+  namespace: prometheus
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      name: cilium-operator
+  podMetricsEndpoints:
+    - path: /metrics
+      port: prometheus
+  podTargetLabels:
+  - io.cilium/app
+  namespaceSelector:
+    matchNames:
+      - kube-system
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: hubble-relay
+  namespace: prometheus
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      k8s-app: hubble-relay
+  podMetricsEndpoints:
+    - path: /metrics
+      port: prometheus
+  podTargetLabels:
+  - k8s-app
+  namespaceSelector:
+    matchNames:
+      - kube-system
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: hubble
+  namespace: prometheus
+  labels:
+    xkf.xenit.io/monitoring: platform
+spec:
+  selector:
+    matchLabels:
+      k8s-app: cilium
+  podMetricsEndpoints:
+    - path: /metrics
+      port: hubble-metrics
+  podTargetLabels:
+  - k8s-app
+  namespaceSelector:
+    matchNames:
+      - kube-system
 %{ if aad_pod_identity_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1

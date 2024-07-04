@@ -6,6 +6,7 @@ locals {
     "azure-metrics",
     "calico-system",
     "cert-manager",
+    "cilium-test",
     "controle-plane-logs",
     "datadog",
     "external-dns",
@@ -141,6 +142,13 @@ module "cert_manager_crd" {
   values = {
     "installCRDs" = "true"
   }
+}
+
+module "cilium" {
+  source           = "../../kubernetes/cilium"
+  cluster_id       = local.cluster_id
+  k8s_service_host = var.k8s_service_host
+  k8s_service_port = var.k8s_service_port
 }
 
 module "control_plane_logs" {

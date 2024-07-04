@@ -667,6 +667,13 @@ variable "use_private_ingress" {
   description = "If true, private ingress will be used by azad-kube-proxy"
   type        = bool
   default     = false
+}
 
+variable "k8s_service_host" {
+  type = string
+}
 
+variable "k8s_service_port" {
+  type    = number
+  default = 443
 }

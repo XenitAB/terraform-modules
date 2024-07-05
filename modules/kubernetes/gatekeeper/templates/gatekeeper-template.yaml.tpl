@@ -43,13 +43,74 @@ spec:
     spec:
       names:
         kind: FluxRequireServiceAccount
+      validation:
+        # Schema for the `parameters` field
+        openAPIV3Schema:
+          type: object
+          properties:
+            exemptImages:
+              description: >-
+                Any container that uses an image that matches an entry in this list will be excluded
+                from enforcement. Prefix-matching can be signified with `*`. For example: `my-image-*`.
+
+                It is recommended that users use the fully-qualified Docker image name (e.g. start with a domain name)
+                in order to avoid unexpectedly exempting images from an untrusted repository.
+              type: array
+              items:
+                type: string
   targets:
-  - rego: "package fluxrequireserviceaccount\n\nviolation[{\"msg\": msg}] {\n\tcheck_kind(input.review.kind.kind)\n\tcheck_service_account(input.review.object.spec)\n\tmsg
-      := sprintf(`'%v' has to specify a serviceAccountName`, [input.review.kind.kind])\n}\n\ncheck_kind(kind)
-      {\n\tkind == \"HelmRelease\"\n}\n\ncheck_kind(kind) {\n\tkind == \"Kustomization\"\n}\n\ncheck_service_account(spec)
-      {\n\tspec.serviceAccountName == \"\"\n}\n\ncheck_service_account(spec) {\n\tnot
-      spec.serviceAccountName\n}"
-    target: admission.k8s.gatekeeper.sh
+    - rego: >-
+        package fluxrequireserviceaccount
+
+        import data.lib.exempt_container.is_exempt
+
+        violation[{"msg": msg}] {
+          c := input.parameters.exemptImages[_]
+          not is_exempt(c)
+        	check_kind(input.review.kind.kind)
+        	check_service_account(input.review.object.spec)
+        	msg := sprintf(`'%v' has to specify a serviceAccountName`, [input.review.kind.kind])
+        }
+
+        check_kind(kind) {
+        	kind == "HelmRelease"
+        }
+
+        check_kind(kind) {
+        	kind == "Kustomization"
+        }
+
+        check_service_account(spec) {
+        	spec.serviceAccountName == ""
+        }
+
+        check_service_account(spec) {
+        	not spec.serviceAccountName
+        }
+
+      libs:
+        - |
+          package lib.exempt_container
+
+          is_exempt(container) {
+              exempt_images := object.get(object.get(input, "parameters", {}), "exemptImages", [])
+              img := container.image
+              exemption := exempt_images[_]
+              _matches_exemption(img, exemption)
+          }
+
+          _matches_exemption(img, exemption) {
+              not endswith(exemption, "*")
+              exemption == img
+          }
+
+          _matches_exemption(img, exemption) {
+              endswith(exemption, "*")
+              prefix := trim_suffix(exemption, "*")
+              startswith(img, prefix)
+          }
+
+      target: admission.k8s.gatekeeper.sh
 ---
 apiVersion: templates.gatekeeper.sh/v1
 kind: ConstraintTemplate
@@ -2736,6 +2797,8 @@ spec:
         import data.lib.exempt_container.is_exempt
 
         violation[{"msg": msg, "details": {}}] {
+            c := input.review.object.spec.containers[_]
+            not is_exempt(c)
             input_share_hostnetwork(input.review.object)
             msg := sprintf("The specified hostNetwork and hostPort are not allowed, pod: %v. Allowed values: %v", [input.review.object.metadata.name, input.parameters])
         }
@@ -2835,7 +2898,7 @@ spec:
         import data.lib.exempt_container.is_exempt
 
         violation[{"msg": msg, "details": {}}] {
-            c := input_containers[_]
+            c := input.review.object.spec.containers[_]
             not is_exempt(c)
             c.securityContext.privileged
             msg := sprintf("Privileged container is not allowed: %v, securityContext: %v", [c.name, c.securityContext])
@@ -2929,7 +2992,7 @@ spec:
         import data.lib.exempt_container.is_exempt
 
         violation[{"msg": msg, "details": {}}] {
-            c := input_containers[_]
+            c := input.review.object.spec.containers[_]
             not is_exempt(c)
             allowedProcMount := get_allowed_proc_mount(input)
             not input_proc_mount_type_allowed(allowedProcMount, c)
@@ -3132,7 +3195,7 @@ spec:
         import data.lib.exempt_container.is_exempt
 
         violation[{"msg": msg, "details": {}}] {
-            c := input_containers[_]
+            c := input.review.object.spec.containers[_]
             not is_exempt(c)
             input_read_only_root_fs(c)
             msg := sprintf("only read-only root filesystem container is allowed: %v", [c.name])
@@ -3663,7 +3726,7 @@ spec:
         import data.lib.exempt_container.is_exempt
 
         violation[{"msg": msg, "details": {}}] {
-            c := input.parameters.exemptImages[_]
+            c := input.review.object.spec.containers[_]
             not is_exempt(c)
             volume_fields := {x | input.review.object.spec.volumes[_][x]; x != "name"}
             field := volume_fields[_]

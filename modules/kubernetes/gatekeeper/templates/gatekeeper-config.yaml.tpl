@@ -111,6 +111,11 @@ spec:
       - kustomize.toolkit.fluxcd.io
       kinds:
       - Kustomization
+  %{ if azure_service_operator_enabled }
+  parameters:
+    exemptImages:
+    - "mcr.microsoft.com/k8s/azureserviceoperator:*"
+  %{ endif }
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPodPriorityClass

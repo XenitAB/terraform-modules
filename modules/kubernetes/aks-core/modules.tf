@@ -307,10 +307,11 @@ module "gatekeeper" {
 
   source = "../../kubernetes/gatekeeper"
 
-  cluster_id           = local.cluster_id
-  exclude_namespaces   = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
-  mirrord_enabled      = var.mirrord_enabled
-  telepresence_enabled = var.telepresence_enabled
+  cluster_id                     = local.cluster_id
+  azure_service_operator_enabled = var.azure_service_operator_enabled
+  exclude_namespaces             = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
+  mirrord_enabled                = var.mirrord_enabled
+  telepresence_enabled           = var.telepresence_enabled
 }
 
 module "grafana_agent" {

@@ -13,6 +13,7 @@ spec:
         namespace: azureserviceoperator-system
       version: v2.7.0
   interval: 1m0s
+  serviceAccountName: flux
   values:
     multitenant:
       enable: true
@@ -24,6 +25,7 @@ spec:
     azureTargetNamespaces:
       - ${tenant_namespace}
     azureSyncPeriod: "${sync_period}"
-    crdPattern: "${crd_pattern}"
+    installCRDs: false
+    #crdPattern: "${crd_pattern}"
     metrics:
       enable: ${enable_metrics}

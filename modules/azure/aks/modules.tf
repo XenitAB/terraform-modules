@@ -5,7 +5,7 @@ module "automation" {
     if var.aks_automation_enabled
   }
 
-  depends_on = [ azurerm_kubernetes_cluster.this ]
+  depends_on = [azurerm_kubernetes_cluster.this]
 
   source = "./automation"
 

@@ -49,7 +49,7 @@ resource "azurerm_automation_runbook" "aks" {
   description             = "This runbook is used to start or stop a XKS cluster"
   runbook_type            = "PowerShell"
 
-  content = templatefile("${path.module}/scripts/aks-start-stop-scale.ps1.tpl", {
+  content = templatefile("${path.module}/scripts/aks-start-stop.ps1.tpl", {
     principal_id    = azurerm_user_assigned_identity.aks_automation.principal_id
     subscription_id = data.azurerm_subscription.current.subscription_id
   })

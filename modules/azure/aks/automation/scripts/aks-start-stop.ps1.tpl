@@ -15,6 +15,15 @@
     
     .PARAMETER Operation
         Currently supported operations are 'start-cluster' and 'stop-cluster'
+
+	.PARAMETER AlertsEnabled
+		Flag indicating if metric alerts are enabled on audit logs
+
+	.PARAMETER AlertResourceGroupName
+		The resource group name where the metric alert is enabled
+
+	.PARAMETER AlertName
+		Name of an alert to disable/enable
     
     .INPUTS
         None.
@@ -30,7 +39,13 @@ Param(
 	[String] $AksClusterName,
     	[parameter(Mandatory=$true)]
 		[ValidateSet('start-cluster','stop-cluster')]
-    [String]$Operation
+    [String]$Operation,
+		[parameter(Mandatory=$true)]
+	[bool] $AlertsEnabled,
+		[parameter(Mandatory=$false)]
+	[String] $AlertResourceGroupName,
+		[parameter(Mandatory=$false)]
+	[String] $AlertName
 )
 	
 try
@@ -58,12 +73,26 @@ try {
 			Write-Output "Starting Cluster $AksClusterName in resource group $ResourceGroupName"
 			Start-AzAksCluster -ResourceGroupName $ResourceGroupName -Name $AksClusterName
 			Write-Output "Cluster started"
+
+			if ($AlertsEnabled)
+			{
+				Write-Output "Enabling alert rule '$AlertName'"
+				Get-AzMetricAlertRuleV2 -ResourceGroupName $AlertResourceGroupName -Name $AlertName | Add-AzMetricAlertRuleV2 -DisableRule:$false
+				Write-Output "Alert rule '$AlertName' enabled"
+			}
 		}
 		'stop-cluster'
 		{
 			Write-Output "Stopping Cluster $AksClusterName in resource group $ResourceGroupName"
 			Stop-AzAksCluster -ResourceGroupName $ResourceGroupName -Name $AksClusterName
 			Write-Output "Cluster stopped"
+
+			if ($AlertsEnabled)
+			{
+				Write-Output "Disabling alert rule '$AlertName'"
+				Get-AzMetricAlertRuleV2 -ResourceGroupName $AlertResourceGroupName -Name $AlertName | Add-AzMetricAlertRuleV2 -DisableRule:$true
+				Write-Output "Alert rule '$AlertName' disabled"
+			}
 		}
 	}
 }

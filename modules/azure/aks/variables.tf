@@ -210,6 +210,12 @@ variable "aks_cost_analysis_enabled" {
   default     = false
 }
 
+variable "alerts_enabled" {
+  description = "If metric alerts on audit logs are enabled"
+  type        = bool
+  default     = false
+}
+
 variable "azure_policy_enabled" {
   description = "If the Azure Policy for Kubernetes add-on should be enabled"
   type        = bool

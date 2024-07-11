@@ -40,16 +40,16 @@ resource "azurerm_automation_account" "aks" {
 }
 
 resource "azurerm_automation_runbook" "aks" {
-  name                    = "AKS-StartStopScale"
+  name                    = "AKS-StartStop"
   location                = data.azurerm_resource_group.this.location
   resource_group_name     = data.azurerm_resource_group.this.name
   automation_account_name = azurerm_automation_account.aks.name
   log_verbose             = "false"
   log_progress            = "true"
   description             = "This runbook is used to start or stop a XKS cluster"
-  runbook_type            = "PowerShell"
+  runbook_type            = "PowerShell72"
 
-  content = templatefile("${path.module}/scripts/aks-start-stop-scale.ps1.tpl", {
+  content = templatefile("${path.module}/scripts/aks-start-stop.ps1.tpl", {
     principal_id    = azurerm_user_assigned_identity.aks_automation.principal_id
     subscription_id = data.azurerm_subscription.current.subscription_id
   })
@@ -92,9 +92,12 @@ resource "azurerm_automation_job_schedule" "aks" {
 
   # The azure job schedule rest api only supports type map[string]string for field parameters
   parameters = {
-    resourcegroupname = data.azurerm_resource_group.this.name
-    aksclustername    = var.aks_name
-    operation         = each.value.operation
+    resourcegroupname      = data.azurerm_resource_group.this.name
+    aksclustername         = var.aks_name
+    operation              = each.value.operation
+    alertsenabled          = var.alerts_enabled
+    alertresourcegroupname = var.alerts_resource_group_name
+    alertname              = var.alert_name
   }
 }
 

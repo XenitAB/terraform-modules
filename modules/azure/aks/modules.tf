@@ -5,6 +5,8 @@ module "automation" {
     if var.aks_automation_enabled
   }
 
+  depends_on = [ azurerm_kubernetes_cluster.this ]
+
   source = "./automation"
 
   aks_managed_identity       = var.aad_groups.aks_managed_identity.id

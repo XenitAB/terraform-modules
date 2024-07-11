@@ -1,11 +1,11 @@
 module "automation" {
+  depends_on = [azurerm_kubernetes_cluster.this]
+  
   for_each = {
     for s in ["automation"] :
     s => s
     if var.aks_automation_enabled
   }
-
-  depends_on = [azurerm_kubernetes_cluster.this]
 
   source = "./automation"
 

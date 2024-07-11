@@ -1,6 +1,6 @@
 module "automation" {
   depends_on = [azurerm_kubernetes_cluster.this]
-  
+
   for_each = {
     for s in ["automation"] :
     s => s

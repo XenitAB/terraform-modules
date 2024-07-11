@@ -40,7 +40,7 @@ resource "azurerm_automation_account" "aks" {
 }
 
 resource "azurerm_automation_runbook" "aks" {
-  name                    = "AKS-StartStopScale"
+  name                    = "AKS-StartStop"
   location                = data.azurerm_resource_group.this.location
   resource_group_name     = data.azurerm_resource_group.this.name
   automation_account_name = azurerm_automation_account.aks.name

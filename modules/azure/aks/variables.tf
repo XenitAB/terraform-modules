@@ -212,7 +212,7 @@ variable "aks_cost_analysis_enabled" {
 
 variable "alerts_enabled" {
   description = "If metric alerts on audit logs are enabled"
-  type        = string
+  type        = boolean
   default     = false
 }
 

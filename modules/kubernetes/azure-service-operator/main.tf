@@ -5,9 +5,13 @@
   */
 
 terraform {
-  required_version = ">= 1.6.0"
+  required_version = ">= 1.3.0"
 
   required_providers {
+    azurerm = {
+      version = "3.107.0"
+      source  = "hashicorp/azurerm"
+    }
     git = {
       source  = "xenitab/git"
       version = "0.0.3"

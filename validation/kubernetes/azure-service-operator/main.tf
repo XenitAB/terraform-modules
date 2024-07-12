@@ -17,12 +17,11 @@ module "azure_service_operator" {
       { name = "mimforum" }
     ]
   }
-  cluster_id          = "id"
-  environment         = "env"
-  location            = "location"
-  location_short      = "we"
-  oidc_issuer_url     = "url"
-  resource_group_name = ""
-  subscription_id     = "id"
-  tenant_id           = "id"
+  cluster_id      = "id"
+  environment     = "env"
+  location        = "location"
+  location_short  = "we"
+  oidc_issuer_url = "url"
+  subscription_id = "id"
+  tenant_id       = "id"
 }

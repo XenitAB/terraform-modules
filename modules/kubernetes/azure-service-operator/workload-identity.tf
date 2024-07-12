@@ -1,7 +1,3 @@
-data "azurerm_resource_group" "this" {
-  name = "rg-${var.environment}-${var.location_short}-${var.aks_name}"
-}
-
 data "azurerm_resource_group" "tenant" {
   for_each = {
     for ns in var.azure_service_operator_config.tenant_namespaces :

@@ -32,6 +32,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_azure_service_operator_enabled"></a> [azure\_service\_operator\_enabled](#input\_azure\_service\_operator\_enabled) | If Azure Service Operator should be enabled | `bool` | `false` | no |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_exclude_namespaces"></a> [exclude\_namespaces](#input\_exclude\_namespaces) | Namespaces to exclude from admission and mutation. | `list(string)` | n/a | yes |
 | <a name="input_mirrord_enabled"></a> [mirrord\_enabled](#input\_mirrord\_enabled) | If Gatekeeper validations should make an exemption for mirrord agent. | `bool` | `false` | no |

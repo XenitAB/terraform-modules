@@ -53,11 +53,6 @@ variable "oidc_issuer_url" {
   type        = string
 }
 
-variable "resource_group_name" {
-  description = "The Azure resource group name"
-  type        = string
-}
-
 variable "subscription_id" {
   description = "The Azure subscription id"
   type        = string

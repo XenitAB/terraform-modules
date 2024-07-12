@@ -25,9 +25,9 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "azure_service_operator_cluster" {
   path = "platform/${var.cluster_id}/azure-service-operator/azure-service-operator-cluster.yaml"
   content = templatefile("${path.module}/templates/azure-service-operator-cluster.yaml.tpl", {
-    tenant_id       = var.tenant_id,
-    subscription_id = var.subscription_id,
-    client_id       = azurerm_user_assigned_identity.azure_service_operator.client_id,
+    #tenant_id       = var.tenant_id,
+    #subscription_id = var.subscription_id,
+    #client_id       = azurerm_user_assigned_identity.azure_service_operator.client_id,
     crd_pattern     = var.azure_service_operator_config.cluster_config.crd_pattern,
     enable_metrics  = var.azure_service_operator_config.cluster_config.enable_metrics,
     sync_period     = var.azure_service_operator_config.cluster_config.sync_period,

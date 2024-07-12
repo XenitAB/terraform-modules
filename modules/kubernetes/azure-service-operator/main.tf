@@ -41,7 +41,7 @@ resource "git_repository_file" "azure_service_operator_tenant" {
   content = templatefile("${path.module}/templates/azure-service-operator-tenant.yaml.tpl", {
     tenant_id        = var.tenant_id,
     subscription_id  = var.subscription_id,
-    client_id        = data.azurerm_user_assigned_identity.tenant[each.key].client_id,
+    client_id        = azurerm_user_assigned_identity.tenant[each.key].client_id,
     tenant_namespace = each.value.name,
   })
 }

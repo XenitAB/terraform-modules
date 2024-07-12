@@ -683,7 +683,9 @@ variable "azure_service_operator_config" {
       enable_metrics = optional(bool, false)
       crd_pattern    = optional(string, "") # never set this to '*', limit this to the resources that are actually needed
     }), {})
-    tenant_namespaces = optional(list(string), [])
+    tenant_namespaces = optional(list(object({
+      name = string
+    })), [])
   })
   default = {}
 

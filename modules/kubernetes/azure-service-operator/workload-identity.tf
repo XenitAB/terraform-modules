@@ -2,6 +2,15 @@ data "azurerm_resource_group" "this" {
   name = "rg-${var.environment}-${var.location_short}-${var.aks_name}"
 }
 
+data "azurerm_resource_group" "tenant" {
+  for_each = {
+    for ns in var.azure_service_operator_config.tenant_namespaces :
+    ns.name => ns
+  }
+
+  name = "rg-${var.environment}-${var.location_short}-${each.key}"
+}
+
 resource "azurerm_user_assigned_identity" "azure_service_operator" {
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -42,7 +51,7 @@ resource "azurerm_role_assignment" "tenant_contributor" {
     ns.name => ns
   }
 
-  scope                = azurerm_user_assigned_identity.tenant[each.key].resource_group_name
+  scope                = data.azurerm_resource_group.tenant[each.key].id
   role_definition_name = "Contributor"
   principal_id         = azurerm_user_assigned_identity.tenant[each.key].principal_id
 }

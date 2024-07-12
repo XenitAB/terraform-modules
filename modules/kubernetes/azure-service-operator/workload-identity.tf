@@ -22,3 +22,13 @@ resource "azurerm_federated_identity_credential" "azure_service_operator" {
   issuer              = var.oidc_issuer_url
   subject             = "system:serviceaccount:azureserviceoperator-system:azureserviceoperator-default"
 }
+
+data "azurerm_user_assigned_identity" "tenant" {
+  for_each = {
+    for ns in var.azure_service_operator_config.tenant_namespaces :
+    ns.name => ns
+  }
+
+  name                = "uai-${var.environment}-${var.location_short}-${var.aks_name}${local.aks_name_suffix}-${each.key}-wi"
+  resource_group_name = "rg-${var.environment}-${var.location_short}-${each.key}"
+}

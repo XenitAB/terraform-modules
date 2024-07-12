@@ -30,10 +30,6 @@ spec:
       version: v2.7.0
   interval: 1m0s
   values:
-    #azureTenantID: {tenant_id}
-    #azureSubscriptionID: {subscription_id}
-    #useWorkloadIdentityAuth: true
-    #azureClientID: {client_id}
     azureSyncPeriod: "${sync_period}"
     crdPattern: "${crd_pattern}"
     metrics:

@@ -46,5 +46,5 @@ resource "azurerm_federated_identity_credential" "tenant" {
   parent_id           = data.azurerm_user_assigned_identity.tenant[each.key].id
   audience            = ["api://AzureADTokenExchange"]
   issuer              = var.oidc_issuer_url
-  subject             = "system:serviceaccount:${each.key}:azureserviceoperator-default"
+  subject             = "system:serviceaccount:${each.key}:${each.key}"
 }

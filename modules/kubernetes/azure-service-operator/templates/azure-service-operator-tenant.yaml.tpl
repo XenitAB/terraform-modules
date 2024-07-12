@@ -1,31 +1,9 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
+apiVersion: v1
+kind: Secret
 metadata:
-  name: azure-service-operator
+  name: aso-credential
   namespace: ${tenant_namespace}
-spec:
-  chart:
-    spec:
-      chart: azure-service-operator
-      sourceRef:
-        kind: HelmRepository
-        name: aso2
-        namespace: azureserviceoperator-system
-      version: v2.7.0
-  interval: 1m0s
-  serviceAccountName: flux
-  values:
-    multitenant:
-      enable: true
-    azureOperatorMode: watchers
-    useWorkloadIdentityAuth: true
-    azureTenantID: ${tenant_id}
-    azureSubscriptionID: ${subscription_id}
-    azureClientID: "${client_id}"
-    azureTargetNamespaces:
-      - ${tenant_namespace}
-    azureSyncPeriod: "${sync_period}"
-    installCRDs: false
-    #crdPattern: "${crd_pattern}"
-    metrics:
-      enable: ${enable_metrics}
+stringData:
+  AZURE_SUBSCRIPTION_ID: ${subscription_id}
+  AZURE_TENANT_ID: ${tenant_id}
+  AZURE_CLIENT_ID: ${client_id}

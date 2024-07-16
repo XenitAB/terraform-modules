@@ -63,12 +63,3 @@ resource "azurerm_role_assignment" "sub_reader" {
   role_definition_name = "Reader"
   principal_id         = azuread_group.sub_reader.id
 }
-
-data "azuread_service_principal" "sp_all_owner" {
-  display_name = var.service_principal_all_owner_name
-}
-
-resource "azuread_group_member" "sp_all_owner" {
-  group_object_id  = azuread_group.sub_owner.id
-  member_object_id = data.azuread_service_principal.sp_all_owner.object_id
-}

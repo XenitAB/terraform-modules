@@ -355,6 +355,21 @@ module "grafana_agent_crd" {
   chart_version    = "0.1.5"
 }
 
+module "grafana_alloy" {
+
+  for_each = {
+    for s in ["grafana-alloy"] :
+    s => s
+    if var.grafana_alloy_enabled
+  }
+
+  source = "../../kubernetes/grafana-alloy"
+
+  chart_repository = "https://grafana.github.io/helm-charts"
+  chart_name       = "alloy"
+  chart_version    = "0.5.1"
+}
+
 module "ingress_healthz" {
   depends_on = [module.linkerd]
 

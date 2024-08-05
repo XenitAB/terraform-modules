@@ -1,4 +1,4 @@
-variable "alloy-configmap-config" {
+variable "alloy_configmap_config" {
   description = "Content for the configmap in order to configure the alloy service."
   type        = string
   default     = ""

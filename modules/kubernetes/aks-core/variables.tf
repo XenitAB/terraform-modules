@@ -457,6 +457,18 @@ variable "grafana_agent_config" {
   }
 }
 
+variable "grafana_alloy_enabled" {
+  description = "Should Grafana-Alloy be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "alloy_configmap_config" {
+  description = "The config that should be passed to the configmap created by the grafana-alloy helm chart upon deployment"
+  type        = string
+  default     = ""
+}
+
 variable "falco_enabled" {
   description = "Should Falco be enabled"
   type        = bool

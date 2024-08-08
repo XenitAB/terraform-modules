@@ -366,8 +366,6 @@ module "grafana_alloy" {
   source = "../../kubernetes/grafana-alloy"
 
   chart_repository = "https://grafana.github.io/helm-charts"
-  chart_name       = "alloy"
-  chart_version    = "0.5.1"
 }
 
 module "ingress_healthz" {
@@ -378,7 +376,18 @@ module "ingress_healthz" {
     s => s
     if var.ingress_healthz_enabled
   }
-
+ 
+  azure_config = {
+    azure_key_vault_name = var.grafana_alloy.azure_key_vault_name
+  }
+  cluster_id          = local.cluster_id
+  environment         = var.environment
+  key_vault_id        = data.azurerm_key_vault.core.id
+  location            = data.azurerm_resource_group.this.location
+  location_short      = var.location_short
+  oidc_issuer_url     = var.oidc_issuer_url
+  resource_group_name = data.azurerm_resource_group.this.name
+}
   source = "../../kubernetes/ingress-healthz"
 
   environment     = var.environment

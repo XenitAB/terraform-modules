@@ -355,6 +355,30 @@ module "grafana_agent_crd" {
   chart_version    = "0.1.5"
 }
 
+module "grafana_alloy" {
+
+  for_each = {
+    for s in ["grafana-alloy"] :
+    s => s
+    if var.grafana_alloy_enabled
+  }
+
+  source = "../../kubernetes/grafana-alloy"
+
+  chart_repository = "https://grafana.github.io/helm-charts"
+  aks_name = var.name
+  azure_config = {
+    azure_key_vault_name = var.promtail_config.azure_key_vault_name
+  }
+  cluster_id          = local.cluster_id
+  cluster_name        = "${var.name}${local.aks_name_suffix}"
+  environment         = var.environment
+  location_short      = var.location_short
+  oidc_issuer_url     = var.oidc_issuer_url
+  region              = var.location_short
+  resource_group_name = data.azurerm_resource_group.this.name
+}
+
 module "ingress_healthz" {
   depends_on = [module.linkerd]
 
@@ -363,7 +387,6 @@ module "ingress_healthz" {
     s => s
     if var.ingress_healthz_enabled
   }
-
   source = "../../kubernetes/ingress-healthz"
 
   environment     = var.environment

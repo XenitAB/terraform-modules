@@ -1,7 +1,12 @@
-variable "alloy_configmap_config" {
-  description = "Content for the configmap in order to configure the alloy service."
+
+variable "grafana_otelcol_exporter_endpoint" {
+  description = "Endpoint for the otel exporter that is deployed within the grafana-alloy deployment."
   type        = string
-  default     = ""
+}
+
+variable "grafana_otelcol_auth_basic_username" {
+  description = "Username for the grafana-alloy otel authentication, the password is set via an env variable."
+  type        = string
 }
 
 variable "azure_config" {

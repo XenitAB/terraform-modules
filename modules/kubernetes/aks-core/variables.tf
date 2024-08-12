@@ -463,10 +463,11 @@ variable "grafana_alloy_enabled" {
   default     = false
 }
 
-variable "alloy_configmap_config" {
-  description = "The config that should be passed to the configmap created by the grafana-alloy helm chart upon deployment"
-  type        = string
-  default     = ""
+variable "grafana_alloy_config" {
+  description = "Grafana Alloy config"
+  type = object({
+    azure_key_vault_name       = string
+  })
 }
 
 variable "falco_enabled" {

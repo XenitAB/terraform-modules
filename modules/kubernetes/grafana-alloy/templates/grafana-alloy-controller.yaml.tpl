@@ -34,7 +34,7 @@ spec:
         - name: GRAFANA_CLOUD_API_KEY
           valueFrom:
             secretKeyRef:
-              name: grafana-cloud-api-key
+              name: "${azure_config.keyvault_secret_name}"
               key: GRAFANA_CLOUD_API_KEY
       extraPorts:
         - name: otpl-http-trace
@@ -52,10 +52,9 @@ spec:
         runAsUser: 473
         runAsGroup: 473
       configMap:
-        content: |-
-          %{~ if alloy-configmap-config != "" ~}
-            ${ alloy-configmap-config }
-          %{~ endif ~}
+        create: false
+        name: grafana-alloy-config
+        key: config
     controller:
       type: 'deployment'
       volumes:
@@ -68,28 +67,70 @@ spec:
               secretProviderClass: grafana-alloy-secret
   interval: 1m0s
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-alloy-config
+data:
+  config: |-
+    logging {
+      level = "info"
+      format = "logfmt"
+    }
+
+    otelcol.receiver.otlp "otlp_receiver" {
+      grpc {
+        endpoint = "0.0.0.0:4317"
+      }
+      http {
+        endpoint = "0.0.0.0:4318"
+      }
+
+      output {
+        traces = [otelcol.processor.batch.grafanacloud.input]
+      }
+    }
+
+    otelcol.processor.batch "grafanacloud" {
+      output {
+        traces = [otelcol.exporter.otlp.grafanacloud.input]
+      }
+    }
+
+    otelcol.exporter.otlp "grafanacloud" {
+      client {
+        endpoint = $(grafana_otelcol_exporter_endpoint)  #"tempo-prod-18-prod-eu-north-0.grafana.net:443"
+        auth = otelcol.auth.basic.grafanacloud.handler
+      }
+    }
+
+    otelcol.auth.basic "grafanacloud" {
+      username = $(grafana_otelcol_auth_basic_username)  #"925062"
+    }
+---
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
   name: grafana-alloy-secrets
   namespace: grafana-alloy
 spec:
-  provider: azure
+  provider: "azure"
   parameters:
     clientID: ${client_id}
-    keyvaultName: ${key_vault_name}
+    keyvaultName: ${azure_config.azure_key_vault_name}
     tenantId: ${tenant_id}
-    objects: |
+    objects:  |
       array:
         - |
-          objectName: grafana-cloud-api-key
+          objectName: "${azure_config.keyvault_secret_name}"
           objectType: secret
   secretObjects:
-    - secretName: grafana-cloud-api-key
-      type: Opaque
+    - secretName: "${k8s_secret_name}"
+      type: kubernetes.io/tls
       data:
-        - objectName: grafana-cloud-api-key
+        - objectName: "${azure_config.keyvault_secret_name}"
           key: GRAFANA_CLOUD_API_KEY
+
 ---
 apiVersion: v1
 kind: ServiceAccount

@@ -368,15 +368,15 @@ module "grafana_alloy" {
   chart_repository = "https://grafana.github.io/helm-charts"
   aks_name = var.name
   azure_config = {
-    azure_key_vault_name = var.promtail_config.azure_key_vault_name
+    azure_key_vault_name = var.datadog_config.azure_key_vault_name
   }
   cluster_id          = local.cluster_id
-  cluster_name        = "${var.name}${local.aks_name_suffix}"
   environment         = var.environment
+  location            = data.azurerm_resource_group.this.location
   location_short      = var.location_short
   oidc_issuer_url     = var.oidc_issuer_url
-  region              = var.location_short
   resource_group_name = data.azurerm_resource_group.this.name
+
 }
 
 module "ingress_healthz" {

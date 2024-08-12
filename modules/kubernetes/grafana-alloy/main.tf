@@ -20,13 +20,6 @@ terraform {
   }
 }
 
-locals {
-  azure_config = {
-    azure_key_vault_name = var.azure_config.azure_key_vault_name
-    }
-}
-
-
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
@@ -47,11 +40,19 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "grafana_alloy" {
   path = "platform/${var.cluster_id}/grafana-alloy/grafana-alloy-controller.yaml"
   content = templatefile("${path.module}/templates/grafana-alloy-controller.yaml.tpl", {
-    region              = var.region,
-    environment         = var.environment,
-    cluster_name        = var.cluster_name,
-    azure_config        = local.azure_config,
-    client_id           = data.azurerm_user_assigned_identity.xenit.client_id,
-    tenant_id           = data.azurerm_user_assigned_identity.xenit.tenant_id,
+  })
+}
+
+resource "git_repository_file" "azure_config" {
+  for_each = {
+    for s in ["azure-config"] :
+    s => s
+  }
+
+  path = "platform/${var.cluster_id}/grafana-alloy/azure-config.yaml"
+  content = templatefile("${path.module}/templates/azure-config.yaml.tpl", {
+    key_vault_name = var.azure_config.azure_key_vault_name,
+    tenant_id      = azurerm_user_assigned_identity.grafana_alloy.tenant_id,
+    client_id      = azurerm_user_assigned_identity.grafana_alloy.client_id,
   })
 }

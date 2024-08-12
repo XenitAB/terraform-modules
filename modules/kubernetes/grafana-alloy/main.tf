@@ -51,8 +51,10 @@ resource "git_repository_file" "azure_config" {
 
   path = "platform/${var.cluster_id}/grafana-alloy/azure-config.yaml"
   content = templatefile("${path.module}/templates/azure-config.yaml.tpl", {
-    key_vault_name = var.azure_config.azure_key_vault_name,
-    tenant_id      = azurerm_user_assigned_identity.grafana_alloy.tenant_id,
-    client_id      = azurerm_user_assigned_identity.grafana_alloy.client_id,
+    key_vault_name                      = var.azure_config.azure_key_vault_name,
+    tenant_id                           = azurerm_user_assigned_identity.grafana_alloy.tenant_id,
+    client_id                           = azurerm_user_assigned_identity.grafana_alloy.client_id,
+    grafana_otelcol_auth_basic_username = var.grafana_otelcol_auth_basic_username
+    grafana_otelcol_exporter_endpoint   = var.grafana_otelcol_auth_basic_username
   })
 }

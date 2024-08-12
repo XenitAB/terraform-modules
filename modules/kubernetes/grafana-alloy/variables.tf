@@ -29,11 +29,6 @@ variable "environment" {
   type        = string
 }
 
-variable "key_vault_id" {
-  description = "Core key vault id"
-  type        = string
-}
-
 variable "location" {
   description = "The Azure region name."
   type        = string

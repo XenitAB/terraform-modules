@@ -365,7 +365,6 @@ module "grafana_alloy" {
 
   source = "../../kubernetes/grafana-alloy"
 
-  chart_repository = "https://grafana.github.io/helm-charts"
   azure_config = {
     azure_key_vault_name = var.datadog_config.azure_key_vault_name
   }

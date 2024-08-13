@@ -17,6 +17,7 @@ variable "azure_config" {
   })
   default = {
     azure_key_vault_name = ""
+    keyvault_secret_name = ""
   }
 }
 

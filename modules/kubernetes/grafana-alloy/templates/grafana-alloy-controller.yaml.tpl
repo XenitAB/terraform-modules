@@ -125,7 +125,7 @@ spec:
           objectName: "${azure_config.keyvault_secret_name}"
           objectType: secret
   secretObjects:
-    - secretName: "${keyvault_secret_name}"
+    - secretName: "${azure_config.keyvault_secret_name}"
       type: kubernetes.io/tls
       data:
         - objectName: "${azure_config.keyvault_secret_name}"

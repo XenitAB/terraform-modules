@@ -13,6 +13,7 @@ variable "azure_config" {
   description = "Azure specific configuration"
   type = object({
     azure_key_vault_name = string
+    keyvault_secret_name - string
   })
   default = {
     azure_key_vault_name = ""

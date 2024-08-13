@@ -368,10 +368,8 @@ module "grafana_alloy" {
   azure_config = {
     azure_key_vault_name = var.datadog_config.azure_key_vault_name
   }
-  grafana-alloy-config = {
-    grafana_otelcol_auth_basic_username = var.grafana_alloy_config.grafana_otelcol_auth_basic_username
-    grafana_otelcol_exporter_endpoint   = var.grafana_alloy_config.grafana_otelcol_exporter_endpoint
-  }
+  grafana_otelcol_auth_basic_username = var.grafana_alloy_config.grafana_otelcol_auth_basic_username
+  grafana_otelcol_exporter_endpoint   = var.grafana_alloy_config.grafana_otelcol_exporter_endpoint
   cluster_id                          = local.cluster_id
   environment                         = var.environment
   location                            = data.azurerm_resource_group.this.location

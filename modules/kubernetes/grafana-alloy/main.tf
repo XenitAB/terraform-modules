@@ -40,8 +40,8 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "grafana_alloy" {
   path = "platform/${var.cluster_id}/grafana-alloy/grafana-alloy-controller.yaml"
   content = templatefile("${path.module}/templates/grafana-alloy-controller.yaml.tpl", {
-    azure_config        = var.azure_config,
-    client_id           = data.azurerm_user_assigned_identity.xenit.client_id,
-    tenant_id           = data.azurerm_user_assigned_identity.xenit.tenant_id,
+    azure_config = var.azure_config,
+    client_id    = data.azurerm_user_assigned_identity.xenit.client_id,
+    tenant_id    = data.azurerm_user_assigned_identity.xenit.tenant_id,
   })
 }

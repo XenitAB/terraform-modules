@@ -99,13 +99,13 @@ data:
 
     otelcol.exporter.otlp "grafanacloud" {
       client {
-        endpoint = $(grafana_otelcol_exporter_endpoint)  #"tempo-prod-18-prod-eu-north-0.grafana.net:443"
+        endpoint = $(grafana_otelcol_exporter_endpoint)
         auth = otelcol.auth.basic.grafanacloud.handler
       }
     }
 
     otelcol.auth.basic "grafanacloud" {
-      username = $(grafana_otelcol_auth_basic_username)  #"925062"
+      username = $(grafana_otelcol_auth_basic_username)
     }
 ---
 apiVersion: secrets-store.csi.x-k8s.io/v1
@@ -125,7 +125,7 @@ spec:
           objectName: "${azure_config.keyvault_secret_name}"
           objectType: secret
   secretObjects:
-    - secretName: "${k8s_secret_name}"
+    - secretName: "${keyvault_secret_name}"
       type: kubernetes.io/tls
       data:
         - objectName: "${azure_config.keyvault_secret_name}"

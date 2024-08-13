@@ -369,6 +369,7 @@ module "grafana_alloy" {
     azure_key_vault_name = var.grafana_alloy_config.azure_key_vault_name
     keyvault_secret_name = var.grafana_alloy_config.keyvault_secret_name
   }
+  aks_name                            = var.name
   grafana_otelcol_auth_basic_username = var.grafana_alloy_config.grafana_otelcol_auth_basic_username
   grafana_otelcol_exporter_endpoint   = var.grafana_alloy_config.grafana_otelcol_exporter_endpoint
   cluster_id                          = local.cluster_id

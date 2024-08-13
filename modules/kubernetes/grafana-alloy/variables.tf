@@ -21,6 +21,11 @@ variable "azure_config" {
   }
 }
 
+variable "aks_name" {
+  description = "The AKS cluster short name, e.g. 'aks'."
+  type        = string
+}
+
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string

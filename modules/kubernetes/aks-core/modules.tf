@@ -366,8 +366,8 @@ module "grafana_alloy" {
   source = "../../kubernetes/grafana-alloy"
 
   azure_config = {
-    azure_key_vault_name = var.grafana_alloy_config.azure_key_vault_name
-    keyvault_secret_name = var.grafana_alloy_config.keyvault_secret_name
+    azure_key_vault_name                = var.grafana_alloy_config.azure_key_vault_name
+    keyvault_secret_name                = var.grafana_alloy_config.keyvault_secret_name
   }
   aks_name                              = var.name
   grafana_alloy_config = {

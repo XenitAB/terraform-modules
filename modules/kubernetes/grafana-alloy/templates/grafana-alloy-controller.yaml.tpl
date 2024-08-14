@@ -28,11 +28,11 @@ spec:
         kind: HelmRepository
         name: grafana-alloy
       version: 0.5.1
-  serviceAccountName: "grafana-alloy"
   values:
     serviceAccount:
-      create: false
-      name: grafana-alloy
+      create: true
+      annotations:
+        azure.workload.identity/client-id: ${client_id}
     alloy:
       extraEnv:
         - name: GRAFANA_CLOUD_API_KEY
@@ -137,57 +137,3 @@ spec:
       data:
         - objectName: "${azure_config.keyvault_secret_name}"
           key: GRAFANA_CLOUD_API_KEY
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  namespace: grafana-alloy
-  name: grafana-alloy-role
-rules:
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "list", "watch"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: grafana-alloy-rolebinding
-  namespace: grafana-alloy
-subjects:
-- kind: ServiceAccount
-  name: grafana-alloy
-  namespace: grafana-alloy
-roleRef:
-  kind: Role
-  name: grafana-alloy-role
-  apiGroup: rbac.authorization.k8s.io
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: specific-crd-manager
-rules:
-- apiGroups: ["apiextensions.k8s.io"]
-  resources: ["customresourcedefinitions","clusterroles", "clusterrolebindings"]
-  verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: specific-crd-manager-binding
-subjects:
-- kind: ServiceAccount
-  name: grafana-alloy
-  namespace: grafana-alloy
-roleRef:
-  kind: ClusterRole
-  name: specific-crd-manager
-  apiGroup: rbac.authorization.k8s.io
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: grafana-alloy
-  namespace: grafana-alloy
-  annotations:
-    azure.workload.identity/client-id: ${client_id}

@@ -28,6 +28,7 @@ spec:
         kind: HelmRepository
         name: grafana
       version: 0.5.1
+  serviceAccountName: grafana-alloy-secret-mount
   values:
     alloy:
       extraEnv:

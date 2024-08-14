@@ -26,7 +26,7 @@ spec:
       chart: alloy
       sourceRef:
         kind: HelmRepository
-        name: grafana
+        name: grafana-alloy
       version: 0.5.1
   serviceAccountName: grafana-alloy-secret-mount
   values:

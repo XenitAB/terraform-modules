@@ -162,3 +162,26 @@ roleRef:
   kind: Role
   name: grafana-alloy-role
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: specific-crd-manager
+rules:
+- apiGroups: ["apiextensions.k8s.io"]
+  resources: ["customresourcedefinitions"]
+  resourceNames: ["podlogs.monitoring.grafana.com"]
+  verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
+  ---
+  apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: specific-crd-manager-binding
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: grafana-alloy
+roleRef:
+  kind: ClusterRole
+  name: specific-crd-manager
+  apiGroup: rbac.authorization.k8s.io

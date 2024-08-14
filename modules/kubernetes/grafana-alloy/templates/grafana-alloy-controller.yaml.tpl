@@ -101,11 +101,11 @@ data:
 
     otelcol.processor.batch "grafanacloud" {
       output {
-        traces = [otelcol.exporter.otlp.grafanacloud.input]
+        traces = [otelcol.exporter.otlphttp.grafanacloud.input]
       }
     }
 
-    otelcol.exporter.otlp "grafanacloud" {
+    otelcol.exporter.otlphttp "grafanacloud" {
       client {
         endpoint = "${grafana_alloy_config.grafana_otelcol_exporter_endpoint}"
         auth = otelcol.auth.basic.grafanacloud.handler

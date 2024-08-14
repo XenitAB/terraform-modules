@@ -71,6 +71,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: grafana-alloy-config
+  namespace = grafana-alloy
 data:
   config: |-
     logging {

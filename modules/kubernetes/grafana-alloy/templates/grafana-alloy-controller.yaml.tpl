@@ -134,7 +134,7 @@ spec:
           objectType: secret
   secretObjects:
     - secretName: "${azure_config.keyvault_secret_name}"
-      type: kubernetes.io/tls
+      type: secret
       data:
         - objectName: "${azure_config.keyvault_secret_name}"
           key: GRAFANA_CLOUD_API_KEY

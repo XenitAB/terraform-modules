@@ -138,3 +138,27 @@ spec:
       data:
         - objectName: "${azure_config.keyvault_secret_name}"
           key: GRAFANA_CLOUD_API_KEY
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: grafana-alloy
+  name: default
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: grafana-alloy-rolebinding
+  namespace: grafana-alloy
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: grafana-alloy
+roleRef:
+  kind: Role
+  name: grafana-alloy-role
+  apiGroup: rbac.authorization.k8s.io

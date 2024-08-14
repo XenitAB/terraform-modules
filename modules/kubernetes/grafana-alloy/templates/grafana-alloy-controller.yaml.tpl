@@ -107,13 +107,13 @@ data:
 
     otelcol.exporter.otlp "grafanacloud" {
       client {
-        endpoint = $(grafana_otelcol_exporter_endpoint)
+        endpoint = "$(grafana_otelcol_exporter_endpoint)"
         auth = otelcol.auth.basic.grafanacloud.handler
       }
     }
 
     otelcol.auth.basic "grafanacloud" {
-      username = $(grafana_otelcol_auth_basic_username)
+      username = "$(grafana_otelcol_auth_basic_username)"
     }
 ---
 apiVersion: secrets-store.csi.x-k8s.io/v1
@@ -134,7 +134,7 @@ spec:
           objectType: secret
   secretObjects:
     - secretName: "${azure_config.keyvault_secret_name}"
-      type: secret
+      type: Opaque
       data:
         - objectName: "${azure_config.keyvault_secret_name}"
           key: GRAFANA_CLOUD_API_KEY

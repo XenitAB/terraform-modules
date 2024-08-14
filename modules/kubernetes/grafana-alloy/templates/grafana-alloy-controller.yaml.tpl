@@ -28,12 +28,11 @@ spec:
         kind: HelmRepository
         name: grafana-alloy
       version: 0.5.1
-  serviceAccountName: "default"
+  serviceAccountName: "grafana-alloy"
   values:
     serviceAccount:
-      create: true
-      annotations:
-        azure.workload.identity/client-id: ${client_id}
+      create: false
+      name: grafana-alloy
     alloy:
       extraEnv:
         - name: GRAFANA_CLOUD_API_KEY
@@ -156,7 +155,7 @@ metadata:
   namespace: grafana-alloy
 subjects:
 - kind: ServiceAccount
-  name: default
+  name: grafana-alloy
   namespace: grafana-alloy
 roleRef:
   kind: Role
@@ -178,9 +177,17 @@ metadata:
   name: specific-crd-manager-binding
 subjects:
 - kind: ServiceAccount
-  name: default
+  name: grafana-alloy
   namespace: grafana-alloy
 roleRef:
   kind: ClusterRole
   name: specific-crd-manager
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: grafana-alloy
+  namespace: grafana-alloy
+  annotations:
+    azure.workload.identity/client-id: ${client_id}

@@ -168,7 +168,7 @@ metadata:
   name: specific-crd-manager
 rules:
 - apiGroups: ["apiextensions.k8s.io"]
-  resources: ["customresourcedefinitions"]
+  resources: ["customresourcedefinitions","clusterroles", "clusterrolebindings"]
   verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1

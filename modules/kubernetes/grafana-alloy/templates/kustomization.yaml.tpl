@@ -12,4 +12,3 @@ spec:
     name: flux-system
   path: "./platform/${cluster_id}/grafana-alloy/"
   prune: true
-  healthChecks: #to be defined

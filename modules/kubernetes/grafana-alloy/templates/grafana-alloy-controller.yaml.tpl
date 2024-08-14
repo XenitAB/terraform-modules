@@ -71,7 +71,7 @@ spec:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: grafana-alloy-secret
+              secretProviderClass: grafana-alloy-secrets
   interval: 1m0s
 ---
 apiVersion: v1

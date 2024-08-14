@@ -28,8 +28,12 @@ spec:
         kind: HelmRepository
         name: grafana-alloy
       version: 0.5.1
-  serviceAccountName: grafana-alloy-secret-mount
+  serviceAccountName: "default"
   values:
+    serviceAccount:
+      create: true
+      annotations:
+        azure.workload.identity/client-id: ${client_id}
     alloy:
       extraEnv:
         - name: GRAFANA_CLOUD_API_KEY
@@ -57,6 +61,8 @@ spec:
         name: grafana-alloy-config
         key: config
     controller:
+      podLabels:
+        azure.workload.identity/use: "true"
       type: 'deployment'
       volumes:
         extra:
@@ -132,12 +138,3 @@ spec:
       data:
         - objectName: "${azure_config.keyvault_secret_name}"
           key: GRAFANA_CLOUD_API_KEY
-
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: grafana-alloy-secret-mount
-  namespace: grafana-alloy
-  annotations:
-    azure.workload.identity/client-id: ${client_id}

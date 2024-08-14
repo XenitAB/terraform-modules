@@ -107,13 +107,13 @@ data:
 
     otelcol.exporter.otlp "grafanacloud" {
       client {
-        endpoint = "${grafana_otelcol_exporter_endpoint}"
+        endpoint = "${grafana_alloy_config.grafana_otelcol_exporter_endpoint}"
         auth = otelcol.auth.basic.grafanacloud.handler
       }
     }
 
     otelcol.auth.basic "grafanacloud" {
-      username = "${grafana_otelcol_auth_basic_username}"
+      username = "${grafana_alloy_config.grafana_otelcol_auth_basic_username}"
       password = env("GRAFANA_CLOUD_API_KEY")
     }
 ---

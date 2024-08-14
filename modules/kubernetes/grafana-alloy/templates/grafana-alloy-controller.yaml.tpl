@@ -170,7 +170,6 @@ metadata:
 rules:
 - apiGroups: ["apiextensions.k8s.io"]
   resources: ["customresourcedefinitions"]
-  resourceNames: ["podlogs.monitoring.grafana.com"]
   verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1

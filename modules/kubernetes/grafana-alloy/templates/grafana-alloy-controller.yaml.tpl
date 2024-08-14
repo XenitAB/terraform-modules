@@ -65,6 +65,7 @@ spec:
       type: 'deployment'
       volumes:
         extra:
+        - name: temp-storage
         - name: secret-store
           csi:
             driver: secrets-store.csi.k8s.io

@@ -172,8 +172,8 @@ rules:
   resources: ["customresourcedefinitions"]
   resourceNames: ["podlogs.monitoring.grafana.com"]
   verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
-  ---
-  apiVersion: rbac.authorization.k8s.io/v1
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: specific-crd-manager-binding

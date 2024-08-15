@@ -101,7 +101,6 @@ resource "azurerm_kubernetes_cluster" "this" {
     # This is a bug in tflint
     # tflint-ignore: azurerm_kubernetes_cluster_default_node_pool_invalid_vm_size
     vm_size                      = var.aks_default_node_pool_vm_size
-    kubelet_disk_type            = "Temporary"
     os_disk_type                 = "Ephemeral"
     os_disk_size_gb              = local.vm_skus_disk_size_gb[var.aks_default_node_pool_vm_size]
     enable_auto_scaling          = false
@@ -128,7 +127,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   zones                 = each.value.zones
 
   enable_auto_scaling  = true
-  kubelet_disk_type    = "Temporary"
+  kubelet_disk_type    = each.value.kubelet_disk_type
   os_disk_type         = "Ephemeral"
   os_disk_size_gb      = local.vm_skus_disk_size_gb[each.value.vm_size]
   orchestrator_version = each.value.version

@@ -127,6 +127,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   zones                 = each.value.zones
 
   enable_auto_scaling  = true
+  kubelet_disk_type    = each.value.kubelet_disk_type
   os_disk_type         = "Ephemeral"
   os_disk_size_gb      = local.vm_skus_disk_size_gb[each.value.vm_size]
   orchestrator_version = each.value.version

@@ -377,7 +377,6 @@ module "grafana_alloy" {
   cluster_id                            = local.cluster_id
   environment                           = var.environment
   location_short                        = data.azurerm_resource_group.this.location
-  location_short                        = var.location_short
   oidc_issuer_url                       = var.oidc_issuer_url
   resource_group_name                   = data.azurerm_resource_group.this.name
 }

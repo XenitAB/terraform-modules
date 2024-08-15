@@ -17,6 +17,10 @@ terraform {
       source  = "xenitab/git"
       version = "0.0.3"
     }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.23.0"
+    }
   }
 }
 

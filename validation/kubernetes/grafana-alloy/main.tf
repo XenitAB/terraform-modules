@@ -4,16 +4,16 @@ provider "kubernetes" {}
 
 provider "helm" {}
 
-module "grafana_agent" {
+module "grafana_alloy" {
   source = "../../../modules/kubernetes/grafana-alloy"
 
-  cluster_id                            = "foo"
-  cluster_name                          = "aks1"
-  oidc_issuer_url                       = "url"
-  resource_group_name                   = "rg-name"
-  environment                           = "dev"
-  namespace_include                     = ["foobar"]
-  grafana_alloy_config                  = {
+  cluster_id          = "foo"
+  oidc_issuer_url     = "url"
+  resource_group_name = "rg-name"
+  environment         = "dev"
+  aks_name            = "fooburrito"
+  location_short      = "foob"
+  grafana_alloy_config = {
     grafana_otelcol_auth_basic_username = "foo"
     grafana_otelcol_exporter_endpoint   = "bar"
     azure_key_vault_name                = "foobar"

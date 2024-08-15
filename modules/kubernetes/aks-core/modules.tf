@@ -366,19 +366,19 @@ module "grafana_alloy" {
   source = "../../kubernetes/grafana-alloy"
 
   azure_config = {
-    azure_key_vault_name                = var.grafana_alloy_config.azure_key_vault_name
-    keyvault_secret_name                = var.grafana_alloy_config.keyvault_secret_name
+    azure_key_vault_name = var.grafana_alloy_config.azure_key_vault_name
+    keyvault_secret_name = var.grafana_alloy_config.keyvault_secret_name
   }
   grafana_alloy_config = {
     grafana_otelcol_auth_basic_username = var.grafana_alloy_config.grafana_otelcol_auth_basic_username
     grafana_otelcol_exporter_endpoint   = var.grafana_alloy_config.grafana_otelcol_exporter_endpoint
   }
-  aks_name                              = var.name
-  cluster_id                            = local.cluster_id
-  environment                           = var.environment
-  location_short                        = data.azurerm_resource_group.this.location
-  oidc_issuer_url                       = var.oidc_issuer_url
-  resource_group_name                   = data.azurerm_resource_group.this.name
+  aks_name            = var.name
+  cluster_id          = local.cluster_id
+  environment         = var.environment
+  location_short      = data.azurerm_resource_group.this.location
+  oidc_issuer_url     = var.oidc_issuer_url
+  resource_group_name = data.azurerm_resource_group.this.name
 }
 
 module "ingress_healthz" {

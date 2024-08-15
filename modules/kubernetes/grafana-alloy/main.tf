@@ -2,7 +2,6 @@
   * # Grafana Alloy
   *
   * Adds [Grafana Alloy](https://github.com/grafana/alloy/tree/main/operations/helm) to a Kubernetes cluster.
-  * Finish this at some point
   */
 
 terraform {

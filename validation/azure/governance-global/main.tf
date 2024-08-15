@@ -17,9 +17,10 @@ provider "pal" {}
 module "governance-global" {
   source = "../../../modules/azure/governance-global"
 
-  environment                  = "dev"
-  subscription_name            = "xks"
-  owner_service_principal_name = "test"
+  environment                      = "dev"
+  subscription_name                = "xks"
+  owner_service_principal_name     = "test"
+  service_principal_all_owner_name = "test"
   resource_group_configs = [
     {
       common_name                = "core",

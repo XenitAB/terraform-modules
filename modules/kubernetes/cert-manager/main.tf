@@ -8,59 +8,36 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+    azurerm = {
+      version = "3.107.0"
+      source  = "hashicorp/azurerm"
     }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-locals {
-  namespace               = "cert-manager"
-  azure_hosted_zone_names = "[${join(",", var.azure_config.hosted_zone_names)}]"
+#locals {
+#  azure_hosted_zone_names = "[${join(",", var.dns_zones)}]"
+#}
+
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/cert-manager.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id,
+  })
 }
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = local.namespace
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = local.namespace
-  }
-}
-
-resource "helm_release" "cert_manager" {
-  repository  = "https://charts.jetstack.io"
-  chart       = "cert-manager"
-  name        = "cert-manager"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v1.7.1"
-  max_history = 3
-  skip_crds   = true
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider   = var.cloud_provider,
-    aws_config = var.aws_config,
-  })]
-}
-
-resource "helm_release" "cert_manager_extras" {
-  depends_on = [helm_release.cert_manager]
-
-  chart       = "${path.module}/charts/cert-manager-extras"
-  name        = "cert-manager-extras"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  max_history = 3
-  values = [templatefile("${path.module}/templates/cert-manager-extras-values.yaml.tpl", {
-    notificationEmail    = var.notification_email,
-    acmeServer           = var.acme_server,
-    cloudProvider        = var.cloud_provider,
-    azureConfig          = var.azure_config,
-    azureHostedZoneNames = local.azure_hosted_zone_names
-    awsConfig            = var.aws_config,
-  })]
+resource "git_repository_file" "cert_manager" {
+  path = "platform/${var.cluster_id}/cert-manager/cert-manager.yaml"
+  content = templatefile("${path.module}/templates/cert-manager.yaml.tpl", {
+    acme_server         = var.acme_server,
+    client_id           = azurerm_user_assigned_identity.cert_manager.client_id,
+    dns_zones           = var.dns_zones,
+    notification_email  = var.notification_email,
+    resource_group_name = var.global_resource_group_name,
+    subscription_id     = var.subscription_id,
+  })
 }

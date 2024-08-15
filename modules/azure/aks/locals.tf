@@ -1,5 +1,6 @@
 # Replace this with a datasource when availible in the AzureRM provider.
 locals {
+  aks_name_suffix = var.aks_name_suffix != null ? var.aks_name_suffix : ""
   vm_skus_disk_size_gb = {
     # AMD64
 
@@ -76,4 +77,6 @@ locals {
     "Standard_E20pds_v5" = 750
     "Standard_E32pds_v5" = 1200
   }
+  policy_effect_deploy  = "DeployIfNotExists"
+  policy_effect_disable = "Disabled"
 }

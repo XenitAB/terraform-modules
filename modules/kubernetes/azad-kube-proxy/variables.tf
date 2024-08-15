@@ -24,3 +24,20 @@ variable "azure_ad_group_prefix" {
   type        = string
   default     = ""
 }
+
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}
+
+variable "private_ingress_enabled" {
+  description = "If true will create a public and private ingress controller. Otherwise only a public ingress controller will be created."
+  type        = bool
+  default     = false
+}
+
+variable "use_private_ingress" {
+  description = "If true, private ingress will be used by azad-kube-proxy"
+  type        = bool
+  default     = false
+}

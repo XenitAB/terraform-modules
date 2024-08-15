@@ -15,15 +15,15 @@ trivy metrics from trivy-operator CRD:s.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.23.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.107.0 |
+| <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.107.0 |
+| <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
 
 ## Modules
 
@@ -33,21 +33,32 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [helm_release.starboard_exporter](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
-| [helm_release.trivy](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
-| [helm_release.trivy_extras](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
-| [helm_release.trivy_operator](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
-| [kubernetes_namespace.trivy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
+| [azurerm_federated_identity_credential.trivy](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/federated_identity_credential) | resource |
+| [azurerm_role_assignment.trivy_acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.trivy_managed](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/role_assignment) | resource |
+| [azurerm_user_assigned_identity.trivy](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/user_assigned_identity) | resource |
+| [git_repository_file.kustomization](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.starboard_eporter](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.trivy](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.trivy_operator](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/data-sources/container_registry) | data source |
+| [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/data-sources/resource_group) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_client_id"></a> [client\_id](#input\_client\_id) | Azure specific, the client\_id for aadpodidentity with access to ACR | `string` | `""` | no |
-| <a name="input_cloud_provider"></a> [cloud\_provider](#input\_cloud\_provider) | Cloud provider used for trivy | `string` | n/a | yes |
-| <a name="input_resource_id"></a> [resource\_id](#input\_resource\_id) | Azure specific, the resource\_id for aadpodidentity to the resource | `string` | `""` | no |
-| <a name="input_trivy_operator_role_arn"></a> [trivy\_operator\_role\_arn](#input\_trivy\_operator\_role\_arn) | trivy-operaetor role arn used to download ECR images, this only applies to AWS | `string` | `""` | no |
-| <a name="input_trivy_role_arn"></a> [trivy\_role\_arn](#input\_trivy\_role\_arn) | trivy role arn used to download ECR images, this only applies to AWS | `string` | `""` | no |
+| <a name="input_acr_name_override"></a> [acr\_name\_override](#input\_acr\_name\_override) | Override default name of ACR | `string` | `""` | no |
+| <a name="input_aks_managed_identity"></a> [aks\_managed\_identity](#input\_aks\_managed\_identity) | AKS Azure AD managed identity | `string` | n/a | yes |
+| <a name="input_aks_name"></a> [aks\_name](#input\_aks\_name) | The commonName to use for the deploy | `string` | n/a | yes |
+| <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | The Azure region name. | `string` | n/a | yes |
+| <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name. | `string` | n/a | yes |
+| <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | Kubernetes OIDC issuer URL for workload identity. | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The Azure resource group name | `string` | n/a | yes |
+| <a name="input_starboard_exporter_enabled"></a> [starboard\_exporter\_enabled](#input\_starboard\_exporter\_enabled) | If the starboard-exporter Helm chart should be deployed | `bool` | `true` | no |
+| <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
 | <a name="input_volume_claim_storage_class_name"></a> [volume\_claim\_storage\_class\_name](#input\_volume\_claim\_storage\_class\_name) | StorageClass name that your pvc will use | `string` | `"default"` | no |
 
 ## Outputs

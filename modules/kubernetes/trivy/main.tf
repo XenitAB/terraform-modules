@@ -16,85 +16,47 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+    azurerm = {
+      version = "3.107.0"
+      source  = "hashicorp/azurerm"
     }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-resource "kubernetes_namespace" "trivy" {
-  metadata {
-    labels = {
-      name                = "trivy"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "trivy"
-  }
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/trivy.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id,
+  })
 }
 
-resource "helm_release" "trivy_operator" {
-  repository  = "https://aquasecurity.github.io/helm-charts/"
-  chart       = "trivy-operator"
-  name        = "trivy-operator"
-  namespace   = kubernetes_namespace.trivy.metadata[0].name
-  version     = "0.11.1-rc"
-  max_history = 3
-  skip_crds   = true
-  values = [templatefile("${path.module}/templates/trivy-operator-values.yaml.tpl", {
-    provider                = var.cloud_provider
-    trivy_operator_role_arn = var.trivy_operator_role_arn
-  })]
+resource "git_repository_file" "trivy_operator" {
+  path = "platform/${var.cluster_id}/trivy/trivy-operator.yaml"
+  content = templatefile("${path.module}/templates/trivy-operator.yaml.tpl", {
+    client_id = azurerm_user_assigned_identity.trivy.client_id,
+  })
 }
 
-resource "helm_release" "starboard_exporter" {
-  depends_on  = [helm_release.trivy]
-  repository  = "https://giantswarm.github.io/giantswarm-catalog/"
-  chart       = "starboard-exporter"
-  name        = "starboard-exporter"
-  version     = "0.7.1"
-  namespace   = kubernetes_namespace.trivy.metadata[0].name
-  max_history = 3
-  values      = [file("${path.module}/templates/starboard-exporter-values.yaml")]
+resource "git_repository_file" "trivy" {
+  path = "platform/${var.cluster_id}/trivy/trivy.yaml"
+  content = templatefile("${path.module}/templates/trivy.yaml.tpl", {
+    client_id                       = azurerm_user_assigned_identity.trivy.client_id,
+    volume_claim_storage_class_name = var.volume_claim_storage_class_name,
+  })
 }
 
-resource "helm_release" "trivy" {
-  repository  = "https://aquasecurity.github.io/helm-charts/"
-  chart       = "trivy"
-  name        = "trivy"
-  namespace   = kubernetes_namespace.trivy.metadata[0].name
-  version     = "0.5.0"
-  max_history = 3
-  values = [templatefile("${path.module}/templates/trivy-values.yaml.tpl", {
-    provider                        = var.cloud_provider
-    trivy_role_arn                  = var.trivy_role_arn
-    volume_claim_storage_class_name = var.volume_claim_storage_class_name
-  })]
-}
-
-resource "helm_release" "trivy_extras" {
+resource "git_repository_file" "starboard_eporter" {
   for_each = {
-    for s in ["trivy_extras"] :
+    for s in ["starboard_eporter"] :
     s => s
-    if var.cloud_provider == "azure"
+    if var.starboard_exporter_enabled
   }
 
-  chart       = "${path.module}/charts/trivy-extras"
-  name        = "trivy-extras"
-  namespace   = kubernetes_namespace.trivy.metadata[0].name
-  max_history = 3
-
-  set {
-    name  = "resourceID"
-    value = var.resource_id
-  }
-
-  set {
-    name  = "clientID"
-    value = var.client_id
-  }
+  path = "platform/${var.cluster_id}/trivy/starboard-eporter.yaml"
+  content = templatefile("${path.module}/templates/starboard-exporter.yaml.tpl", {
+  })
 }

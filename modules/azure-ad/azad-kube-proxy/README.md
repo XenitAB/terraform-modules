@@ -7,14 +7,14 @@ This module is used to configure the Azure AD Application used by [`azad-kube-pr
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.41.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.5.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.41.0 |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.5.1 |
 
 ## Modules
@@ -25,15 +25,15 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azuread_app_role_assignment.ms_graph_directory_read_all](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/app_role_assignment) | resource |
-| [azuread_application.this](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/application) | resource |
-| [azuread_application_password.this](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/application_password) | resource |
-| [azuread_application_pre_authorized.azure_cli](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/application_pre_authorized) | resource |
-| [azuread_service_principal.ms_graph](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/service_principal) | resource |
-| [azuread_service_principal.this](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/service_principal) | resource |
+| [azuread_app_role_assignment.ms_graph_directory_read_all](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/app_role_assignment) | resource |
+| [azuread_application.this](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application) | resource |
+| [azuread_application_password.this](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application_password) | resource |
+| [azuread_application_pre_authorized.azure_cli](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application_pre_authorized) | resource |
+| [azuread_service_principal.ms_graph](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/service_principal) | resource |
+| [azuread_service_principal.this](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/service_principal) | resource |
 | [random_uuid.oauth2_permission_scope_user_impersonation](https://registry.terraform.io/providers/hashicorp/random/3.5.1/docs/resources/uuid) | resource |
-| [azuread_application_published_app_ids.well_known](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/application_published_app_ids) | data source |
-| [azuread_client_config.current](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/client_config) | data source |
+| [azuread_application_published_app_ids.well_known](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/application_published_app_ids) | data source |
+| [azuread_client_config.current](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/client_config) | data source |
 
 ## Inputs
 

@@ -1,5 +1,20 @@
-variable "cloud_provider" {
-  description = "Name of cloud provider"
+variable "azure_config" {
+  description = "Azure specific configuration"
+  type = object({
+    azure_key_vault_name = string
+  })
+  default = {
+    azure_key_vault_name = ""
+  }
+}
+
+variable "aks_name" {
+  description = "The AKS cluster short name, e.g. 'aks'."
+  type        = string
+}
+
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
   type        = string
 }
 
@@ -9,7 +24,28 @@ variable "cluster_name" {
 }
 
 variable "environment" {
-  description = "The environment in which the promtail instance is deployed"
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
+variable "excluded_namespaces" {
+  description = "Namespaces to not ship logs from"
+  type        = list(string)
+  default     = []
+}
+
+variable "location_short" {
+  description = "The Azure region short name."
+  type        = string
+}
+
+variable "loki_address" {
+  description = "The address of the Loki instance to send logs to"
+  type        = string
+}
+
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
   type        = string
 }
 
@@ -18,42 +54,7 @@ variable "region" {
   type        = string
 }
 
-
-variable "excluded_namespaces" {
-  description = "Namespaces to not ship logs from"
-  type        = list(string)
-  default     = []
-}
-variable "aws_config" {
-  description = "AWS specific configuration"
-  type = object({
-    role_arn = string
-  })
-  default = {
-    role_arn = ""
-  }
-}
-variable "azure_config" {
-  description = "Azure specific configuration"
-  type = object({
-    azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-  })
-  default = {
-    azure_key_vault_name = ""
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
-  }
-}
-
-variable "loki_address" {
-  description = "The address of the Loki instance to send logs to"
+variable "resource_group_name" {
+  description = "The Azure resource group name"
   type        = string
 }

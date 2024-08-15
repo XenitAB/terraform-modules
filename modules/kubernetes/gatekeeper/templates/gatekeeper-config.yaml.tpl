@@ -74,6 +74,11 @@ spec:
       - ""
       kinds:
       - Pod
+  %{ if mirrord_enabled }
+  parameters:
+    exemptImages:
+    - "ghcr.io/metalbear-co/mirrord:*"
+  %{ endif }
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPSPFlexVolumes
@@ -179,6 +184,11 @@ spec:
       - ""
       kinds:
       - Pod
+  %{ if mirrord_enabled }
+  parameters:
+    exemptImages:
+    - "ghcr.io/metalbear-co/mirrord:*"
+  %{ endif }
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sExternalIPs
@@ -259,6 +269,10 @@ spec:
     - secret
     - projected
     - csi
+    %{ if mirrord_enabled }
+    exemptImages:
+    - "ghcr.io/metalbear-co/mirrord:*"
+    %{ endif }
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPSPPrivilegedContainer
@@ -291,6 +305,15 @@ spec:
     requiredDropCapabilities:
     - NET_RAW
     - CAP_SYS_ADMIN
+    %{ if mirrord_enabled || telepresence_enabled }
+    exemptImages:
+    %{ if mirrord_enabled }
+    - "ghcr.io/metalbear-co/mirrord:*"
+    %{ endif }
+    %{ if telepresence_enabled }
+    - "docker.io/datawire/tel2:*"
+    %{ endif }
+    %{ endif }
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredProbes
@@ -330,6 +353,9 @@ spec:
   parameters:
     assign:
       value: false
+    pathTests:
+    - subPath: "spec.containers[name:*].securityContext.allowPrivilegeEscalation"
+      condition: MustNotExist
 ---
 apiVersion: mutations.gatekeeper.sh/v1beta1
 kind: Assign
@@ -351,6 +377,9 @@ spec:
       value:
         - NET_RAW
         - CAP_SYS_ADMIN
+    pathTests:
+    - subPath: "spec.containers[name:*].securityContext.capabilities"
+      condition: MustNotExist
 ---
 apiVersion: mutations.gatekeeper.sh/v1beta1
 kind: Assign
@@ -370,6 +399,9 @@ spec:
   parameters:
     assign:
       value: true
+    pathTests:
+    - subPath: "spec.containers[name:*].securityContext.readOnlyRootFilesystem"
+      condition: MustNotExist
 ---
 apiVersion: mutations.gatekeeper.sh/v1beta1
 kind: Assign
@@ -389,6 +421,9 @@ spec:
   parameters:
     assign:
       value: false
+    pathTests:
+    - subPath: "spec.ephemeralContainers[name:*].securityContext.allowPrivilegeEscalation"
+      condition: MustNotExist
 ---
 apiVersion: mutations.gatekeeper.sh/v1beta1
 kind: Assign
@@ -410,6 +445,9 @@ spec:
       value:
         - NET_RAW
         - CAP_SYS_ADMIN
+    pathTests:
+    - subPath: "spec.ephemeralContainers[name:*].securityContext.capabilities"
+      condition: MustNotExist
 ---
 apiVersion: mutations.gatekeeper.sh/v1beta1
 kind: Assign
@@ -429,6 +467,9 @@ spec:
   parameters:
     assign:
       value: true
+    pathTests:
+    - subPath: "spec.ephemeralContainers[name:*].securityContext.readOnlyRootFilesystem"
+      condition: MustNotExist
 ---
 apiVersion: mutations.gatekeeper.sh/v1beta1
 kind: Assign
@@ -448,6 +489,9 @@ spec:
   parameters:
     assign:
       value: false
+    pathTests:
+    - subPath: "spec.initContainers[name:*].securityContext.allowPrivilegeEscalation"
+      condition: MustNotExist
 ---
 apiVersion: mutations.gatekeeper.sh/v1beta1
 kind: Assign
@@ -469,6 +513,9 @@ spec:
       value:
         - NET_RAW
         - CAP_SYS_ADMIN
+    pathTests:
+    - subPath: "spec.initContainers[name:*].securityContext.capabilities"
+      condition: MustNotExist
 ---
 apiVersion: mutations.gatekeeper.sh/v1beta1
 kind: Assign
@@ -488,6 +535,9 @@ spec:
   parameters:
     assign:
       value: true
+    pathTests:
+    - subPath: "spec.initContainers[name:*].securityContext.readOnlyRootFilesystem"
+      condition: MustNotExist
 ---
 apiVersion: mutations.gatekeeper.sh/v1beta1
 kind: Assign

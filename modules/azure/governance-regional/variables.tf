@@ -79,19 +79,19 @@ variable "azuread_apps" {
     delegate_kv = map(object({
       display_name                = string
       application_object_id       = string
-      application_id              = string
+      client_id                   = string
       service_principal_object_id = string
     }))
     rg_contributor = map(object({
       display_name                = string
       application_object_id       = string
-      application_id              = string
+      client_id                   = string
       service_principal_object_id = string
     }))
     sub_reader = object({
       display_name                = string
       application_object_id       = string
-      application_id              = string
+      client_id                   = string
       service_principal_object_id = string
     })
   })

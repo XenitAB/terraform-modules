@@ -69,7 +69,7 @@ No modules.
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_cluster_repo"></a> [cluster\_repo](#input\_cluster\_repo) | Name of cluster repository | `string` | `"fleet-infra"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name of the cluster | `string` | n/a | yes |
-| <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled     = bool<br>        create_crds = bool<br>        org         = string<br>        proj        = string<br>        repo        = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
+| <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled             = bool<br>        create_crds         = bool<br>        include_tenant_name = bool<br>        org                 = string<br>        proj                = string<br>        repo                = string<br>      })<br>    })<br>  )</pre> | <pre>[<br>  {<br>    "flux": {<br>      "create_crds": false,<br>      "enabled": true,<br>      "include_tenant_name": false,<br>      "org": "",<br>      "proj": "",<br>      "repo": ""<br>    },<br>    "name": ""<br>  }<br>]</pre> | no |
 
 ## Outputs
 

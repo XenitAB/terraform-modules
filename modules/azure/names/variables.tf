@@ -45,10 +45,6 @@ variable "resource_name_overrides" {
       prefixes = optional(list(string))
       suffixes = optional(list(string))
     }))
-    azurerm_monitor_action_group = optional(object({
-      prefixes = optional(list(string))
-      suffixes = optional(list(string))
-    }))
     azurerm_virtual_network = optional(object({
       prefixes = optional(list(string))
       suffixes = optional(list(string))

@@ -9,45 +9,22 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = "reloader"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "reloader"
-  }
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/reloader.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id
+  })
 }
 
-resource "helm_release" "reloader" {
-  repository  = "https://stakater.github.io/stakater-charts"
-  chart       = "reloader"
-  name        = "reloader"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "v0.0.102"
-  max_history = 3
-
-  set {
-    name  = "reloader.deployment.priorityClassName"
-    value = "platform-low"
-  }
-  set {
-    name  = "reloader.deployment.resources.requests.cpu"
-    value = "15m"
-  }
-  set {
-    name  = "reloader.deployment.resources.requests.memory"
-    value = "50Mi"
-  }
+resource "git_repository_file" "reloader" {
+  path = "platform/${var.cluster_id}/reloader/reloader.yaml"
+  content = templatefile("${path.module}/templates/reloader.yaml.tpl", {
+  })
 }

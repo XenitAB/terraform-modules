@@ -1,12 +1,3 @@
-variable "cloud_provider" {
-  description = "Current provider"
-  type        = string
-  validation {
-    condition     = can(regex("azure|aws", var.cloud_provider))
-    error_message = "Cloud provider is not valid."
-  }
-}
-
 variable "environment" {
   description = "The environemnt"
   type        = string
@@ -21,8 +12,7 @@ variable "namespaces" {
   description = "The Kubernetes namespaces to create Azure AD groups for"
   type = list(
     object({
-      name                    = string
-      delegate_resource_group = bool
+      name = string
     })
   )
 }

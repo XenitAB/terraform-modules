@@ -8,13 +8,13 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+    azurerm = {
+      version = "3.107.0"
+      source  = "hashicorp/azurerm"
     }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
@@ -22,47 +22,32 @@ terraform {
 locals {
   namespace       = "promtail"
   k8s_secret_name = "xenit-proxy-certificate" #tfsec:ignore:general-secrets-no-plaintext-exposure
-  aws_config = {
-    key_parameter_name = "xenit-proxy-certificate-key"
-    crt_parameter_name = "xenit-proxy-certificate-crt"
-    role_arn           = var.aws_config.role_arn
-  }
   azure_config = {
     azure_key_vault_name = var.azure_config.azure_key_vault_name
-    identity             = var.azure_config.identity
     keyvault_secret_name = "xenit-proxy-certificate"
   }
 
 }
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = local.namespace
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = local.namespace
-  }
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/promtail.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id,
+  })
 }
 
-resource "helm_release" "promtail" {
-  repository  = "https://grafana.github.io/helm-charts"
-  chart       = "promtail"
-  name        = "promtail"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "6.6.2"
-  max_history = 3
-
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider            = var.cloud_provider
-    region              = var.region
-    environment         = var.environment
-    cluster_name        = var.cluster_name
-    namespace           = local.namespace
-    excluded_namespaces = var.excluded_namespaces
-    k8s_secret_name     = local.k8s_secret_name
-    loki_address        = var.loki_address
-    azure_config        = local.azure_config
-    aws_config          = local.aws_config
-  })]
+resource "git_repository_file" "promtail" {
+  path = "platform/${var.cluster_id}/promtail/promtail.yaml"
+  content = templatefile("${path.module}/templates/promtail.yaml.tpl", {
+    region              = var.region,
+    environment         = var.environment,
+    cluster_name        = var.cluster_name,
+    namespace           = local.namespace,
+    excluded_namespaces = var.excluded_namespaces,
+    k8s_secret_name     = local.k8s_secret_name,
+    loki_address        = var.loki_address,
+    azure_config        = local.azure_config,
+    client_id           = data.azurerm_user_assigned_identity.xenit.client_id,
+    tenant_id           = data.azurerm_user_assigned_identity.xenit.tenant_id,
+  })
 }

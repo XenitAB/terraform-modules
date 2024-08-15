@@ -12,7 +12,7 @@ resource "azuread_application" "sub_reader_sp" {
 }
 
 resource "azuread_service_principal" "sub_reader_sp" {
-  application_id = azuread_application.sub_reader_sp.application_id
+  client_id = azuread_application.sub_reader_sp.client_id
 }
 
 resource "azurerm_role_assignment" "sub_reader_sp" {

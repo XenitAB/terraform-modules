@@ -8,58 +8,33 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+    azurerm = {
+      version = "3.107.0"
+      source  = "hashicorp/azurerm"
     }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = "external-dns"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "external-dns"
-  }
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/external-dns.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id,
+  })
 }
 
-resource "helm_release" "external_dns" {
-  repository  = "https://charts.bitnami.com/bitnami"
-  chart       = "external-dns"
-  name        = "external-dns"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "6.12.2"
-  max_history = 3
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    provider     = var.dns_provider,
-    sources      = var.sources,
-    azure_config = var.azure_config,
-    aws_config   = var.aws_config,
-    txt_owner_id = var.txt_owner_id,
-  })]
-}
-
-resource "helm_release" "external_dns_extras" {
-  depends_on = [helm_release.external_dns]
-
-  chart       = "${path.module}/charts/external-dns-extras"
-  name        = "external-dns-extras"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  max_history = 3
-
-  set {
-    name  = "resourceID"
-    value = var.azure_config.resource_id
-  }
-
-  set {
-    name  = "clientID"
-    value = var.azure_config.client_id
-  }
+resource "git_repository_file" "external_dns" {
+  path = "platform/${var.cluster_id}/external-dns/external-dns.yaml"
+  content = templatefile("${path.module}/templates/external-dns.yaml.tpl", {
+    client_id           = azurerm_user_assigned_identity.external_dns.client_id,
+    provider            = var.dns_provider,
+    resource_group_name = var.global_resource_group_name,
+    sources             = var.sources,
+    subscription_id     = var.subscription_id,
+    tenant_id           = azurerm_user_assigned_identity.external_dns.tenant_id,
+    txt_owner_id        = var.txt_owner_id,
+  })
 }

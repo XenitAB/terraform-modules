@@ -8,9 +8,9 @@ This directory contains all the Kubernetes Terraform modules.
 - [`eks-core`](eks-core/README.md)
 - [`aad-pod-identity`](aad-pod-identity/README.md)
 - [`azure-metrics`](azure-metrics/README.md)
+- [`azure-service-operator`](azure-service-operator/README.md)
 - [`cert-manager`](cert-manager/README.md)
 - [`csi-secrets-store-provider-azure`](csi-secrets-store-provider-azure/README.md)
-- [`csi-secrets-store-provider-aws`](csi-secrets-store-provider-aws/README.md)
 - [`external-dns`](external-dns/README.md)
 - [`fluxcd-v2-azdo`](fluxcd-v2-azdo/README.md)
 - [`fluxcd-v2-github`](fluxcd-v2-github/README.md)
@@ -35,6 +35,8 @@ This directory contains all the Kubernetes Terraform modules.
 - [`helm-crd`](helm-crd/README.md)
 - [`helm-crd-oci`](helm-crd-oci/README.md)
 - [`spegel`](spegel/README.md)
+- [`telepresence`](telepresence/README.md)
+- [`azure-policy`](azure-policy/README.md)
 
 ## Style Guide
 

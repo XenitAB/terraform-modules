@@ -12,34 +12,38 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+    azurerm = {
+      version = "3.107.0"
+      source  = "hashicorp/azurerm"
     }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
-    }
-  }
-}
-
-resource "kubernetes_namespace" "this" {
-  metadata {
-    name = "controle-plane-logs"
-    labels = {
-      name                = "controle-plane-logs"
-      "xkf.xenit.io/kind" = "platform"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-resource "helm_release" "vector" {
-  chart       = "${path.module}/charts/vector"
-  name        = "vector"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  max_history = 3
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
-    cloud_provider = var.cloud_provider
-    azure_config   = var.azure_config
-  })]
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/control-plane-logs.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id,
+  })
+}
+
+resource "git_repository_file" "vector" {
+  path = "platform/${var.cluster_id}/control-plane-logs/vector.yaml"
+  content = templatefile("${path.module}/templates/vector.yaml.tpl", {
+    client_id = data.azurerm_user_assigned_identity.xenit.client_id,
+  })
+}
+
+resource "git_repository_file" "vector_extras" {
+  path = "platform/${var.cluster_id}/control-plane-logs/vector-extras.yaml"
+  content = templatefile("${path.module}/templates/vector-extras.yaml.tpl", {
+    azure_key_vault_name = var.azure_config.azure_key_vault_name,
+    client_id            = data.azurerm_user_assigned_identity.xenit.client_id,
+    eventhub_hostname    = var.azure_config.eventhub_hostname,
+    eventhub_name        = var.azure_config.eventhub_name,
+    tenant_id            = data.azurerm_user_assigned_identity.xenit.tenant_id,
+  })
 }

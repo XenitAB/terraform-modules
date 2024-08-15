@@ -171,3 +171,68 @@ resource "kubernetes_role_binding" "vpa" {
     name      = var.aad_groups.edit[each.key].id
   }
 }
+
+resource "kubernetes_role_binding" "logs_ingress_nginx" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+  metadata {
+    name      = "${each.value.name}-logs-ingress-nginx"
+    namespace = "ingress-nginx"
+    labels = {
+      "aad-group-name"    = var.aad_groups.edit[each.key].name
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = kubernetes_cluster_role.logs_ingress_nginx.metadata[0].name
+  }
+  subject {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "Group"
+    name      = var.aad_groups.view[each.key].id
+  }
+}
+
+resource "kubernetes_role_binding" "logs_external_dns" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+  metadata {
+    name      = "${each.value.name}-logs-external-dns"
+    namespace = "external-dns"
+    labels = {
+      "aad-group-name"    = var.aad_groups.edit[each.key].name
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = kubernetes_cluster_role.logs_external_dns.metadata[0].name
+  }
+  subject {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "Group"
+    name      = var.aad_groups.view[each.key].id
+  }
+}
+resource "kubernetes_role_binding" "logs_cert_manager" {
+  for_each = { for ns in var.namespaces : ns.name => ns }
+  metadata {
+    name      = "${each.value.name}-logs-cert-manager"
+    namespace = "cert-manager"
+    labels = {
+      "aad-group-name"    = var.aad_groups.edit[each.key].name
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = kubernetes_cluster_role.logs_cert_manager.metadata[0].name
+  }
+  subject {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "Group"
+    name      = var.aad_groups.view[each.key].id
+  }
+}

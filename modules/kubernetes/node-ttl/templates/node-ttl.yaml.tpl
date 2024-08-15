@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: node-ttl
  labels:
-   name              = "node-ttl"
-   xkf.xenit.io/kind = "platform"
+   name: node-ttl
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

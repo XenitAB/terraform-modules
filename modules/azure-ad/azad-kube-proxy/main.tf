@@ -9,7 +9,7 @@ terraform {
 
   required_providers {
     azuread = {
-      version = "2.41.0"
+      version = "2.50.0"
       source  = "hashicorp/azuread"
     }
     random = {
@@ -26,8 +26,8 @@ data "azuread_application_published_app_ids" "well_known" {}
 resource "random_uuid" "oauth2_permission_scope_user_impersonation" {}
 
 resource "azuread_service_principal" "ms_graph" {
-  application_id = data.azuread_application_published_app_ids.well_known.result.MicrosoftGraph
-  use_existing   = true
+  client_id    = data.azuread_application_published_app_ids.well_known.result.MicrosoftGraph
+  use_existing = true
 }
 
 resource "azuread_application" "this" {
@@ -68,17 +68,17 @@ resource "azuread_application" "this" {
 }
 
 resource "azuread_application_pre_authorized" "azure_cli" {
-  application_object_id = azuread_application.this.object_id
-  authorized_app_id     = data.azuread_application_published_app_ids.well_known.result.MicrosoftAzureCli
-  permission_ids        = [random_uuid.oauth2_permission_scope_user_impersonation.result]
+  application_id       = azuread_application.this.id
+  authorized_client_id = data.azuread_application_published_app_ids.well_known.result.MicrosoftAzureCli
+  permission_ids       = [random_uuid.oauth2_permission_scope_user_impersonation.result]
 }
 
 resource "azuread_application_password" "this" {
-  application_object_id = azuread_application.this.object_id
+  application_id = azuread_application.this.id
 }
 
 resource "azuread_service_principal" "this" {
-  application_id = azuread_application.this.application_id
+  client_id = azuread_application.this.client_id
 }
 
 resource "azuread_app_role_assignment" "ms_graph_directory_read_all" {

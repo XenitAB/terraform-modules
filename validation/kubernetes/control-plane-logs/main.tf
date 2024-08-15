@@ -7,10 +7,10 @@ provider "helm" {}
 module "control-plane-logs" {
   source = "../../../modules/kubernetes/control-plane-logs"
 
-  providers = {
-    kubernetes = kubernetes
-    helm       = helm
-  }
-
-  cloud_provider = "azure"
+  aks_name            = "aks"
+  cluster_id          = "foo"
+  environment         = "dev"
+  location_short      = "we"
+  oidc_issuer_url     = "url"
+  resource_group_name = "rg-name"
 }

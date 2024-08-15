@@ -1,24 +1,19 @@
 terraform {}
 
-provider "kubernetes" {}
-
-provider "helm" {}
-
 module "external_dns" {
   source = "../../../modules/kubernetes/external-dns"
 
-  providers = {
-    kubernetes = kubernetes
-    helm       = helm
-  }
-
+  cluster_id   = "foo"
   dns_provider = "azure"
-  txt_owner_id = "dev-aks1"
-  azure_config = {
-    tenant_id       = "id"
-    subscription_id = "id"
-    resource_group  = "name"
-    client_id       = "id"
-    resource_id     = "id"
+  dns_zones = {
+    "a.com" = "id"
   }
+  environment                = "dev"
+  global_resource_group_name = "global"
+  location                   = "location"
+  location_short             = "we"
+  oidc_issuer_url            = "url"
+  resource_group_name        = "rg-name"
+  subscription_id            = "id"
+  txt_owner_id               = "dev-aks1"
 }

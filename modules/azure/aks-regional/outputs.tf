@@ -31,26 +31,6 @@ output "ssh_public_key" {
   value       = tls_private_key.ssh_key.public_key_openssh
 }
 
-output "external_dns_identity" {
-  description = "MSI authentication identity for External DNS"
-  value = {
-    client_id   = azurerm_user_assigned_identity.external_dns.client_id
-    resource_id = azurerm_user_assigned_identity.external_dns.id
-  }
-}
-
-output "velero" {
-  description = "Velero configuration"
-  value = {
-    azure_storage_account_name      = azurerm_storage_account.velero.name
-    azure_storage_account_container = azurerm_storage_container.velero.name
-    identity = {
-      client_id   = azurerm_user_assigned_identity.velero.client_id
-      resource_id = azurerm_user_assigned_identity.velero.id
-    }
-  }
-}
-
 output "xenit" {
   description = "Configuration used by monitoring solution to get authentication credentials"
   value = {
@@ -60,14 +40,6 @@ output "xenit" {
       resource_id = azurerm_user_assigned_identity.xenit.id
       tenant_id   = data.azurerm_client_config.current.tenant_id
     }
-  }
-}
-
-output "trivy_identity" {
-  description = "MSI authentication identity for Trivy image scaning"
-  value = {
-    client_id   = azurerm_user_assigned_identity.trivy.client_id
-    resource_id = azurerm_user_assigned_identity.trivy.id
   }
 }
 
@@ -84,16 +56,6 @@ output "azad_kube_proxy" {
   sensitive = true
 }
 
-output "azure_metrics_identity" {
-  description = "MSI authentication identity for Azure Metrics"
-  value = {
-    client_id    = azurerm_user_assigned_identity.azure_metrics.client_id
-    resource_id  = azurerm_user_assigned_identity.azure_metrics.id
-    principal_id = azurerm_user_assigned_identity.azure_metrics.principal_id
-  }
-}
-
-
 output "log_eventhub_name" {
   description = "The eventhub name for k8s logs"
   value       = azurerm_eventhub.this.name
@@ -107,16 +69,4 @@ output "log_eventhub_hostname" {
 output "log_eventhub_authorization_rule_id" {
   description = "The authoritzation rule id for event hub"
   value       = azurerm_eventhub_namespace_authorization_rule.aks.id
-}
-
-output "datadog" {
-  description = "MSI authentication identity for Datadog"
-  value = {
-    azure_key_vault_name = data.azurerm_key_vault.core.name
-    identity = {
-      client_id   = azurerm_user_assigned_identity.datadog.client_id
-      resource_id = azurerm_user_assigned_identity.datadog.id
-      tenant_id   = data.azurerm_client_config.current.tenant_id
-    }
-  }
 }

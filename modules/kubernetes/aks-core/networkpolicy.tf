@@ -95,3 +95,45 @@ resource "kubernetes_network_policy" "allow_egress_ingress_grafana_agent" {
     }
   }
 }
+
+resource "kubernetes_network_policy" "allow_egress_traffic_manager" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if var.telepresence_enabled && var.kubernetes_network_policy_default_deny
+  }
+
+  metadata {
+    name      = "allow-egress-traffic-manager"
+    namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
+
+    labels = {
+      "xkf.xenit.io/kind" = "tenant"
+    }
+  }
+
+  spec {
+    pod_selector {}
+    policy_types = ["Egress"]
+
+    egress {
+      to {
+        pod_selector {
+          match_labels = {
+            "app" = "traffic-manager"
+          }
+        }
+        namespace_selector {
+          match_labels = {
+            "kubernetes.io/metadata.name" = "ambassador"
+          }
+        }
+      }
+
+      ports {
+        port     = "8081"
+        protocol = "TCP"
+      }
+    }
+  }
+}

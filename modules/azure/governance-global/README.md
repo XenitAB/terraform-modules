@@ -7,9 +7,9 @@ This module is used for governance on a global level and not using any specific 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.41.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
 | <a name="requirement_azurecaf"></a> [azurecaf](#requirement\_azurecaf) | 2.0.0-preview3 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.71.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.107.0 |
 | <a name="requirement_pal"></a> [pal](#requirement\_pal) | 0.2.5 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.5.1 |
 
@@ -17,9 +17,9 @@ This module is used for governance on a global level and not using any specific 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.41.0 |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
 | <a name="provider_azurecaf"></a> [azurecaf](#provider\_azurecaf) | 2.0.0-preview3 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.71.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.107.0 |
 | <a name="provider_pal"></a> [pal](#provider\_pal) | 0.2.5 |
 
 ## Modules
@@ -32,48 +32,50 @@ This module is used for governance on a global level and not using any specific 
 
 | Name | Type |
 |------|------|
-| [azuread_application.aad_app](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/application) | resource |
-| [azuread_application.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/application) | resource |
-| [azuread_application.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/application) | resource |
-| [azuread_application_password.aad_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/application_password) | resource |
-| [azuread_application_password.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/application_password) | resource |
-| [azuread_group.acr_pull](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group) | resource |
-| [azuread_group.acr_push](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group) | resource |
-| [azuread_group.acr_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group) | resource |
-| [azuread_group.rg_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group) | resource |
-| [azuread_group.rg_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group) | resource |
-| [azuread_group.rg_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group) | resource |
-| [azuread_group.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group) | resource |
-| [azuread_group.sub_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group) | resource |
-| [azuread_group.sub_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group) | resource |
-| [azuread_group.sub_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group) | resource |
-| [azuread_group_member.acr_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_group_member.acr_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_group_member.acr_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_group_member.acr_reader_rg_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_group_member.acr_reader_rg_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_group_member.acr_reader_rg_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_group_member.acr_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_group_member.service_endpoint_join_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_group_member.service_endpoint_join_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_group_member.service_endpoint_join_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_group_member.sub_all_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_group_member.sub_all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_group_member.sub_all_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/group_member) | resource |
-| [azuread_service_principal.aad_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/service_principal) | resource |
-| [azuread_service_principal.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/service_principal) | resource |
-| [azuread_service_principal.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/resources/service_principal) | resource |
-| [azurerm_role_assignment.sub_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.sub_owner](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.sub_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
+| [azuread_application.aad_app](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application) | resource |
+| [azuread_application.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application) | resource |
+| [azuread_application.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application) | resource |
+| [azuread_application_password.aad_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application_password) | resource |
+| [azuread_application_password.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application_password) | resource |
+| [azuread_group.acr_pull](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group.acr_push](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group.acr_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group.rg_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group.rg_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group.rg_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group.service_endpoint_join](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group.sub_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group.sub_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group.sub_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group_member.acr_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.acr_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.acr_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.acr_reader_rg_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.acr_reader_rg_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.acr_reader_rg_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.acr_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.service_endpoint_join_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.service_endpoint_join_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.service_endpoint_join_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.sp_all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.sub_all_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.sub_all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_group_member.sub_all_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
+| [azuread_service_principal.aad_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/service_principal) | resource |
+| [azuread_service_principal.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/service_principal) | resource |
+| [azuread_service_principal.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/service_principal) | resource |
+| [azurerm_role_assignment.sub_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.sub_owner](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.sub_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/role_assignment) | resource |
 | [pal_management_partner.aad_sp](https://registry.terraform.io/providers/xenitab/pal/0.2.5/docs/resources/management_partner) | resource |
 | [pal_management_partner.owner_spn](https://registry.terraform.io/providers/xenitab/pal/0.2.5/docs/resources/management_partner) | resource |
-| [azuread_application.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/application) | data source |
-| [azuread_group.all_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/group) | data source |
-| [azuread_group.all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/group) | data source |
-| [azuread_group.all_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/group) | data source |
-| [azuread_service_principal.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.41.0/docs/data-sources/service_principal) | data source |
+| [azuread_application.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/application) | data source |
+| [azuread_group.all_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/group) | data source |
+| [azuread_group.all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/group) | data source |
+| [azuread_group.all_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/group) | data source |
+| [azuread_service_principal.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/service_principal) | data source |
+| [azuread_service_principal.sp_all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/service_principal) | data source |
 | [azurecaf_name.azuread_application_aad_app](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |
 | [azurecaf_name.azuread_application_delegate_kv_aad](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |
 | [azurecaf_name.azuread_application_sub_reader_sp](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |
@@ -90,7 +92,7 @@ This module is used for governance on a global level and not using any specific 
 | [azurecaf_name.azuread_group_sub_contributor](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |
 | [azurecaf_name.azuread_group_sub_owner](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |
 | [azurecaf_name.azuread_group_sub_reader](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |
-| [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/subscription) | data source |
+| [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/data-sources/subscription) | data source |
 
 ## Inputs
 
@@ -106,6 +108,7 @@ This module is used for governance on a global level and not using any specific 
 | <a name="input_partner_id"></a> [partner\_id](#input\_partner\_id) | Azure partner id to link service principal with | `string` | `""` | no |
 | <a name="input_resource_group_configs"></a> [resource\_group\_configs](#input\_resource\_group\_configs) | Resource group configuration | <pre>list(<br>    object({<br>      common_name                = string<br>      delegate_aks               = bool # Delegate aks permissions<br>      delegate_key_vault         = bool # Delegate KeyVault creation<br>      delegate_service_endpoint  = bool # Delegate Service Endpoint permissions<br>      delegate_service_principal = bool # Delegate Service Principal<br>      disable_unique_suffix      = bool # Disable unique_suffix on resource names<br>      tags                       = map(string)<br>    })<br>  )</pre> | n/a | yes |
 | <a name="input_resource_name_overrides"></a> [resource\_name\_overrides](#input\_resource\_name\_overrides) | A way to override the resource names | `any` | `null` | no |
+| <a name="input_service_principal_all_owner_name"></a> [service\_principal\_all\_owner\_name](#input\_service\_principal\_all\_owner\_name) | Name of the manually created SP-sub-all-owner | `string` | n/a | yes |
 | <a name="input_service_principal_name_prefix"></a> [service\_principal\_name\_prefix](#input\_service\_principal\_name\_prefix) | Prefix for service principals | `string` | `"sp"` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
 

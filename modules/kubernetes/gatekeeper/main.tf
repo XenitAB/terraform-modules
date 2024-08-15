@@ -26,7 +26,6 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "gatekeeper" {
   path = "platform/${var.cluster_id}/gatekeeper/gatekeeper.yaml"
   content = templatefile("${path.module}/templates/gatekeeper.yaml.tpl", {
-    provider = var.cloud_provider
   })
 }
 
@@ -38,6 +37,9 @@ resource "git_repository_file" "gatekeeper_template" {
 resource "git_repository_file" "gatekeeper_config" {
   path = "platform/${var.cluster_id}/gatekeeper-config/gatekeeper-config.yaml"
   content = templatefile("${path.module}/templates/gatekeeper-config.yaml.tpl", {
-    exclude_namespaces = var.exclude_namespaces
+    exclude_namespaces             = var.exclude_namespaces
+    azure_service_operator_enabled = var.azure_service_operator_enabled
+    mirrord_enabled                = var.mirrord_enabled
+    telepresence_enabled           = var.telepresence_enabled
   })
 }

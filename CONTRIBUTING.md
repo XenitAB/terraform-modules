@@ -37,7 +37,7 @@ gmake
 Creating a new module is simple but has some non-obvious requirements for all of the checks to pass. First create a new module
 directory in the 'modules' directory and in a fitting category directory. After the module is created a validation configuration
 needs to be created for the module. In the 'validation' directory create a new directory with the same name and path as the module.
-Inside there you should create a `m̀ain.tf` file which imports the module with a local path and passes dummy values for all of the
+Inside there you should create a `main.tf` file which imports the module with a local path and passes dummy values for all of the
 required variables, so that it is possible to run `terraform validate`.
 
 ## Your First Pull Request
@@ -56,12 +56,10 @@ These are the steps someone without contributor access needs to take to create a
 1. Push the changes using `git push --set-upstream origin <branch-name>`
 1. Go to your GitHub repository and pres "Compare & pull request"
 1. Choose the correct base repository (should be XenitAB/terraform-modules main branch)
-1. Write a respectable subject and body for the PR, make sure to reference your issue using "Fixes #<issue number>"
-1. Make sure the subject starts with <module base>/<module>, example: `azure/core: <subject>`
+1. Make sure your commits and PR title conforms to [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), where `type` should be one of `feat`,`fix`,`docs`,`test`,`ci`,`refactor`,`perf`,`chore`, or `revert`. Using a `scope` is optional. If used, it can be the module, using the following format: `module group/module`. Example: `fix(azure/core): <subject>`
 1. Make sure you allow edits by maintainers
 1. Then press Create pull request
 1. INFO: A maintainer will be required to approve the checks to run before you will receive feedback from them
-1. When the PR is created, you will receive a PR number. It is required to update the [CHANGELOG.md](CHANGELOG.md) with this PR before all checks will pass
 1. When all checks are passing and you have received an approval and a maintainer have merged the changes, press "Delete branch" in the PR
 1. Locally, in the terminal, check out main using `git checkout main`
 1. Remove the local branch using `git branch -D <branch-name>`

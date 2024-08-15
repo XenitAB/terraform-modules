@@ -7,12 +7,8 @@ provider "helm" {}
 module "grafana_agent" {
   source = "../../../modules/kubernetes/grafana-agent"
 
-  remote_write_urls = {
-    metrics = "foo"
-    logs    = "bar"
-    traces  = "baz"
-  }
-
+  cluster_id   = "foo"
+  cluster_name = "aks1"
   credentials = {
     metrics_username = "foo"
     metrics_password = "bar"
@@ -21,9 +17,11 @@ module "grafana_agent" {
     traces_username  = "foo"
     traces_password  = "bar"
   }
-
-  cluster_name      = "aks1"
   environment       = "dev"
-  vpa_enabled       = false
   namespace_include = ["foobar"]
+  remote_write_urls = {
+    metrics = "foo"
+    logs    = "bar"
+    traces  = "baz"
+  }
 }

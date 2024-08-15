@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: ingress-healthz
  labels:
-   name              = "ingress-healthz"
-   xkf.xenit.io/kind = "platform"
+   name: ingress-healthz
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
@@ -27,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: ingress-healthz
-      version: 12.0.3
+      version: 15.5.2
   values:
     replicaCount: 2
     priorityClassName: platform-low

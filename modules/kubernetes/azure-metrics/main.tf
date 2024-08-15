@@ -9,54 +9,30 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+    azurerm = {
+      version = "3.107.0"
+      source  = "hashicorp/azurerm"
     }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = "azure-metrics"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "azure-metrics"
-  }
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/azure-metrics.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id,
+  })
 }
 
-resource "helm_release" "azure_metrics_extras" {
-  chart       = "${path.module}/charts/azure-metrics-extras"
-  name        = "azure-metrics-extras"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  max_history = 3
-
-  set {
-    name  = "resourceID"
-    value = var.resource_id
-  }
-
-  set {
-    name  = "clientID"
-    value = var.client_id
-  }
-}
-
-resource "helm_release" "azure_metrics" {
-  depends_on = [helm_release.azure_metrics_extras]
-
-  chart       = "${path.module}/charts/azure-metrics-exporter"
-  name        = "azure-metrics"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  max_history = 3
-
-  set {
-    name  = "subscription"
-    value = var.subscription_id
-  }
+resource "git_repository_file" "azure_metrics" {
+  path = "platform/${var.cluster_id}/azure-metrics/azure-metrics.yaml"
+  content = templatefile("${path.module}/templates/azure-metrics.yaml.tpl", {
+    client_id               = azurerm_user_assigned_identity.azure_metrics.client_id,
+    subscription_id         = var.subscription_id,
+    podmonitor_kubernetes   = var.podmonitor_kubernetes,
+    podmonitor_loadbalancer = var.podmonitor_loadbalancer,
+  })
 }

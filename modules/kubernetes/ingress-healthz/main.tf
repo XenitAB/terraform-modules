@@ -17,10 +17,6 @@ terraform {
   }
 }
 
-locals {
-  ingress_class_name = var.public_private_enabled == true ? "nginx-public" : "nginx"
-}
-
 resource "git_repository_file" "kustomization" {
   path = "clusters/${var.cluster_id}/ingress-healthz.yaml"
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
@@ -36,6 +32,6 @@ resource "git_repository_file" "ingress_healthz" {
     dns_zone           = var.dns_zone
     location_short     = var.location_short
     linkerd_enabled    = var.linkerd_enabled
-    ingress_class_name = local.ingress_class_name
+    ingress_class_name = "nginx"
   })
 }

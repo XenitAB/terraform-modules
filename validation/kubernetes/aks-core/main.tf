@@ -7,18 +7,17 @@ provider "azurerm" {
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
 
-  name                  = "baz"
-  aks_name_suffix       = 1
-  location_short        = "foo"
-  global_location_short = "sc"
-  environment           = "bar"
-  subscription_name     = "baz"
-  group_name_prefix     = "aks"
-  namespaces            = []
-  external_dns_config = {
-    client_id   = "foo"
-    resource_id = "bar"
-  }
+  name                    = "baz"
+  aks_name_suffix         = 1
+  core_name               = "core"
+  dns_zones               = ["a.com"]
+  oidc_issuer_url         = "url"
+  location_short          = "foo"
+  global_location_short   = "sc"
+  environment             = "bar"
+  subscription_name       = "baz"
+  group_name_prefix       = "aks"
+  namespaces              = []
   aad_pod_identity_config = {}
   velero_config = {
     azure_storage_account_name      = "foo"
@@ -46,9 +45,7 @@ module "aks_core" {
       proj = ""
     }
   }
-
   priority_expander_config = { "10" : [".*standard.*"], "20" : [".*spot.*"] }
-
   aad_groups = {
     view = {
       test = {
@@ -75,40 +72,21 @@ module "aks_core" {
       name = "name"
     }
   }
-  azure_metrics_config = {
-    client_id   = "foo"
-    resource_id = "bar"
-  }
-
   trivy_enabled = true
-  trivy_config = {
-    client_id   = "foo"
-    resource_id = "bar"
-  }
-
+  trivy_config  = {}
   ingress_nginx_config = {
-    public_private_enabled = false
+    private_ingress_enabled = false
   }
-
   prometheus_enabled = true
   prometheus_config = {
-    azure_key_vault_name = "foobar"
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
-
-    tenant_id = ""
-
-    remote_write_authenticated = true
-    remote_write_url           = "https://my-receiver.com"
-
+    azure_key_vault_name            = "foobar"
+    tenant_id                       = ""
+    remote_write_authenticated      = true
+    remote_write_url                = "https://my-receiver.com"
     volume_claim_storage_class_name = "default"
     volume_claim_size               = "5Gi"
-
-    resource_selector  = ["platform"]
-    namespace_selector = ["platform"]
+    resource_selector               = ["platform"]
+    namespace_selector              = ["platform"]
   }
   external_dns_hostname = "foobar.com"
 }

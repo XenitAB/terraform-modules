@@ -119,7 +119,7 @@ module "governance-regional" {
       test = {
         display_name                = "test"
         application_object_id       = "00000000-0000-0000-0000-000000000000"
-        application_id              = "00000000-0000-0000-0000-000000000000"
+        client_id                   = "00000000-0000-0000-0000-000000000000"
         service_principal_object_id = "00000000-0000-0000-0000-000000000000"
       }
     }
@@ -127,14 +127,14 @@ module "governance-regional" {
       test = {
         display_name                = "test"
         application_object_id       = "00000000-0000-0000-0000-000000000000"
-        application_id              = "00000000-0000-0000-0000-000000000000"
+        client_id                   = "00000000-0000-0000-0000-000000000000"
         service_principal_object_id = "00000000-0000-0000-0000-000000000000"
       }
     }
     sub_reader = {
       display_name                = "test"
       application_object_id       = "00000000-0000-0000-0000-000000000000"
-      application_id              = "00000000-0000-0000-0000-000000000000"
+      client_id                   = "00000000-0000-0000-0000-000000000000"
       service_principal_object_id = "00000000-0000-0000-0000-000000000000"
     }
   }

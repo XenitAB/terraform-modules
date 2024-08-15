@@ -40,12 +40,6 @@ variable "environment" {
   type        = string
 }
 
-variable "vpa_enabled" {
-  description = "Should vpa be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "namespace_include" {
   description = "A list of the namespaces that kube-state-metrics and kubelet metrics"
   type        = list(string)
@@ -60,4 +54,9 @@ variable "include_kubelet_metrics" {
   description = "If kubelet metrics shall be included for the namespaces in 'namespace_include'"
   type        = bool
   default     = false
+}
+
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
 }

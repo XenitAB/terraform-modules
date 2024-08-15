@@ -27,11 +27,11 @@ lint:
 	echo lint: Start
 	MODULE_GROUPS=$$(find modules -mindepth 1 -maxdepth 1 -type d)
 	for MODULE_GROUP in $${MODULE_GROUPS}; do
-		tflint --init -c $${MODULE_GROUP}/.tflint.hcl
+		tflint --init -c .tflint.hcl --chdir $${MODULE_GROUP}
 		MODULES=$$(find $${MODULE_GROUP} -mindepth 1 -maxdepth 1 -type d)
 		for MODULE in $$MODULES; do
 			echo lint: $${MODULE}
-			tflint -c $${MODULE_GROUP}/.tflint.hcl $${MODULE}
+			tflint -c ../.tflint.hcl --chdir $${MODULE}
 		done
 	done
 	echo lint: Success

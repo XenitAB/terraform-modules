@@ -9,11 +9,11 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "3.71.0"
+      version = "3.107.0"
       source  = "hashicorp/azurerm"
     }
     azuread = {
-      version = "2.41.0"
+      version = "2.50.0"
       source  = "hashicorp/azuread"
     }
     random = {
@@ -27,12 +27,8 @@ terraform {
   }
 }
 
+data "azurerm_client_config" "current" {}
+
 data "azurerm_resource_group" "this" {
   name = "rg-${var.environment}-${var.location_short}-${var.name}"
 }
-
-data "azurerm_resource_group" "global" {
-  name = "rg-${var.environment}-${var.global_location_short}-global"
-}
-
-data "azurerm_client_config" "current" {}

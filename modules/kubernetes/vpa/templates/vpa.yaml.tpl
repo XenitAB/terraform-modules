@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: vpa
  labels:
-   name              = "vpa"
-   xkf.xenit.io/kind = "platform"
+   name: vpa
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

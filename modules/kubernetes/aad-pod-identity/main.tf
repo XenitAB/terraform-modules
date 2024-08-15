@@ -8,38 +8,24 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
   }
 }
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = "aad-pod-identity"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "aad-pod-identity"
-  }
+resource "git_repository_file" "kustomization" {
+  path = "clusters/${var.cluster_id}/aad-pod-identity.yaml"
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id
+  })
 }
 
-#tf-latest-version:ignore
-resource "helm_release" "aad_pod_identity" {
-  repository  = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
-  chart       = "aad-pod-identity"
-  name        = "aad-pod-identity"
-  version     = "4.1.16"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  max_history = 3
-  skip_crds   = true
-  values = [templatefile("${path.module}/templates/values.yaml.tpl", {
+resource "git_repository_file" "aad_pod_identity" {
+  path = "platform/${var.cluster_id}/aad-pod-identity/aad-pod-identity.yaml"
+  content = templatefile("${path.module}/templates/aad-pod-identity.yaml.tpl", {
     namespaces       = var.namespaces,
     aad_pod_identity = var.aad_pod_identity
-  })]
+  })
 }

@@ -78,8 +78,9 @@ variable "namespaces" {
       name   = string
       labels = map(string)
       flux = object({
-        enabled     = bool
-        create_crds = bool
+        enabled             = bool
+        create_crds         = bool
+        include_tenant_name = bool
         azure_devops = object({
           org  = string
           proj = string
@@ -91,6 +92,24 @@ variable "namespaces" {
       })
     })
   )
+  default = [{
+    name   = ""
+    labels = {}
+    flux = {
+      enabled             = true
+      create_crds         = false
+      include_tenant_name = false
+      azure_devops = {
+        org  = ""
+        proj = ""
+        repo = ""
+      }
+      github = {
+        repo = ""
+      }
+    }
+    }
+  ]
 }
 
 variable "kubernetes_network_policy_default_deny" {
@@ -136,11 +155,13 @@ variable "fluxcd_v2_config" {
       app_id          = number
       installation_id = number
       private_key     = string
+      repo            = optional(string, "fleet-infra")
     })
     azure_devops = object({
       pat  = string
       org  = string
       proj = string
+      repo = optional(string, "fleet-infra")
     })
   })
 }
@@ -157,6 +178,89 @@ variable "aad_pod_identity_config" {
     id        = string
     client_id = string
   }))
+}
+
+variable "azure_policy_enabled" {
+  description = "If the Azure Policy for Kubernetes add-on should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "azure_policy_config" {
+  description = "A list of Azure policy mutations to create and include in the XKS policy set definition"
+  type = object({
+    exclude_namespaces = list(string)
+    mutations = list(object({
+      name         = string
+      display_name = string
+      template     = string
+    }))
+  })
+  default = {
+    exclude_namespaces = [
+      "linkerd",
+      "linkerd-cni",
+      "velero",
+      "grafana-agent",
+    ]
+    mutations = [
+      {
+        name         = "ContainerNoPrivilegeEscalation"
+        display_name = "Containers should not use privilege escalation"
+        template     = "container-disallow-privilege-escalation.yaml.tpl"
+      },
+      {
+        name         = "ContainerDropCapabilities"
+        display_name = "Containers should drop disallowed capabilities"
+        template     = "container-drop-capabilities.yaml.tpl"
+      },
+      {
+        name         = "ContainerReadOnlyRootFs"
+        display_name = "Containers should use a read-only root filesystem"
+        template     = "container-read-only-root-fs.yaml.tpl"
+      },
+      {
+        name         = "EphemeralContainerNoPrivilegeEscalation"
+        display_name = "Ephemeral containers should not use privilege escalation"
+        template     = "ephemeral-container-disallow-privilege-escalation.yaml.tpl"
+      },
+      {
+        name         = "EphemeralContainerDropCapabilities"
+        display_name = "Ephemeral containers should drop disallowed capabilities"
+        template     = "ephemeral-container-drop-capabilities.yaml.tpl"
+      },
+      {
+        name         = "EphemeralContainerReadOnlyRootFs"
+        display_name = "Ephemeral containers should use a read-only root filesystem"
+        template     = "ephemeral-container-read-only-root-fs.yaml.tpl"
+      },
+      {
+        name         = "InitContainerNoPrivilegeEscalation"
+        display_name = "Init containers should not use privilege escalation"
+        template     = "init-container-disallow-privilege-escalation.yaml.tpl"
+      },
+      {
+        name         = "InitContainerDropCapabilities"
+        display_name = "Init containers should drop disallowed capabilities"
+        template     = "init-container-drop-capabilities.yaml.tpl"
+      },
+      {
+        name         = "InitContainerReadOnlyRootFs"
+        display_name = "Init containers should use a read-only root filesystem"
+        template     = "init-container-read-only-root-fs.yaml.tpl"
+      },
+      {
+        name         = "PodDefaultSecComp"
+        display_name = "Pods should use an allowed seccomp profile"
+        template     = "k8s-pod-default-seccomp.yaml.tpl"
+      },
+      {
+        name         = "PodServiceAccountTokenNoAutoMount"
+        display_name = "Pods should not automount service account tokens"
+        template     = "k8s-pod-serviceaccount-token-false.yaml.tpl"
+      },
+    ]
+  }
 }
 
 variable "gatekeeper_enabled" {
@@ -189,6 +293,11 @@ variable "cert_manager_config" {
   })
 }
 
+variable "core_name" {
+  description = "The name for the core infrastructure"
+  type        = string
+}
+
 variable "ingress_nginx_enabled" {
   description = "Should Ingress NGINX be enabled"
   type        = bool
@@ -198,18 +307,12 @@ variable "ingress_nginx_enabled" {
 variable "ingress_nginx_config" {
   description = "Ingress configuration"
   type = object({
-    public_private_enabled = bool
+    private_ingress_enabled = bool
     customization = optional(object({
       allow_snippet_annotations = bool
       http_snippet              = string
       extra_config              = map(string)
       extra_headers             = map(string)
-    }))
-    customization_public = optional(object({
-      allow_snippet_annotations = optional(bool)
-      http_snippet              = optional(string)
-      extra_config              = optional(map(string))
-      extra_headers             = optional(map(string))
     }))
     customization_private = optional(object({
       allow_snippet_annotations = optional(bool)
@@ -232,12 +335,45 @@ variable "external_dns_enabled" {
   default     = true
 }
 
-variable "external_dns_config" {
-  description = "External DNS configuration"
+variable "mirrord_enabled" {
+  description = "Should mirrord be enabled"
+  type        = bool
+  default     = false
+}
+
+
+variable "telepresence_enabled" {
+  description = "Should Telepresence be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "telepresence_config" {
+  description = "Config to use when deploying traffic manager to the cluster"
   type = object({
-    client_id   = string
-    resource_id = string
+    allow_conflicting_subnets = optional(list(string), [])
+    client_rbac = object({
+      create     = bool
+      namespaced = bool
+      namespaces = optional(list(string), ["ambassador"])
+      subjects   = optional(list(string), [])
+    })
+    manager_rbac = object({
+      create     = bool
+      namespaced = bool
+      namespaces = optional(list(string), [])
+    })
   })
+  default = {
+    client_rbac : {
+      create : false
+      namespaced : false
+    }
+    manager_rbac : {
+      create : true
+      namespaced : true
+    }
+  }
 }
 
 variable "velero_enabled" {
@@ -251,17 +387,7 @@ variable "velero_config" {
   type = object({
     azure_storage_account_name      = string
     azure_storage_account_container = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-    })
   })
-}
-
-variable "csi_secrets_store_provider_azure_enabled" {
-  description = "Should csi-secrets-store-provider-azure be enabled"
-  type        = bool
-  default     = true
 }
 
 variable "datadog_enabled" {
@@ -273,25 +399,13 @@ variable "datadog_enabled" {
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
-
     azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-
     datadog_site         = string
     namespaces           = list(string)
     apm_ignore_resources = list(string)
   })
   default = {
     azure_key_vault_name = ""
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
     datadog_site         = ""
     namespaces           = [""]
     apm_ignore_resources = [""]
@@ -398,22 +512,13 @@ variable "prometheus_volume_claim_storage_class_name" {
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
-    azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-
-    tenant_id = string
-
+    azure_key_vault_name       = string
+    tenant_id                  = string
     remote_write_authenticated = bool
     remote_write_url           = string
-
-    volume_claim_size = string
-
-    resource_selector  = list(string)
-    namespace_selector = list(string)
+    volume_claim_size          = string
+    resource_selector          = list(string)
+    namespace_selector         = list(string)
   })
 }
 
@@ -427,23 +532,13 @@ variable "promtail_config" {
   description = "Configuration for promtail"
   type = object({
     azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-    loki_address        = string
-    excluded_namespaces = list(string)
+    loki_address         = string
+    excluded_namespaces  = list(string)
   })
   default = {
     azure_key_vault_name = ""
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
-    loki_address        = ""
-    excluded_namespaces = []
+    loki_address         = ""
+    excluded_namespaces  = []
   }
 }
 
@@ -465,7 +560,6 @@ variable "trivy_enabled" {
   default     = true
 }
 
-
 variable "trivy_volume_claim_storage_class_name" {
   description = "Configuration for trivy volume claim storage class name"
   type        = string
@@ -475,8 +569,7 @@ variable "trivy_volume_claim_storage_class_name" {
 variable "trivy_config" {
   description = "Configuration for trivy"
   type = object({
-    client_id   = string
-    resource_id = string
+    starboard_exporter_enabled = optional(bool, true)
   })
 }
 
@@ -490,14 +583,6 @@ variable "vpa_enabled" {
   description = "Should VPA be enabled"
   type        = bool
   default     = true
-}
-
-variable "azure_metrics_config" {
-  description = "AZ Metrics configuration"
-  type = object({
-    client_id   = string
-    resource_id = string
-  })
 }
 
 variable "node_local_dns_enabled" {
@@ -528,23 +613,13 @@ variable "control_plane_logs_config" {
   description = "Configuration for control plane log"
   type = object({
     azure_key_vault_name = string
-    identity = object({
-      client_id   = string
-      resource_id = string
-      tenant_id   = string
-    })
-    eventhub_hostname = string
-    eventhub_name     = string
+    eventhub_hostname    = string
+    eventhub_name        = string
   })
   default = {
     azure_key_vault_name = ""
-    identity = {
-      client_id   = ""
-      resource_id = ""
-      tenant_id   = ""
-    }
-    eventhub_hostname = ""
-    eventhub_name     = ""
+    eventhub_hostname    = ""
+    eventhub_name        = ""
   }
 }
 
@@ -552,4 +627,70 @@ variable "acr_name_override" {
   description = "Override default name of ACR"
   type        = string
   default     = ""
+}
+
+variable "additional_storage_classes" {
+  description = "List of additional storage classes to create"
+  type = list(object({
+    name           = string
+    provisioner    = string
+    reclaim_policy = string
+    binding_mode   = string
+    sku_name       = string
+  }))
+  default = []
+}
+
+variable "defender_enabled" {
+  description = "If Defender for Containers should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "coredns_upstream" {
+  type        = bool
+  description = "Should coredns be used as the last route instead of upstream dns?"
+  default     = false
+}
+
+variable "dns_zones" {
+  description = "List of DNS Zones"
+  type        = list(string)
+}
+
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
+  type        = string
+}
+
+variable "use_private_ingress" {
+  description = "If true, private ingress will be used by azad-kube-proxy"
+  type        = bool
+  default     = false
+}
+
+variable "azure_service_operator_enabled" {
+  description = "If Azure Service Operator should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "azure_service_operator_config" {
+  description = "Azure Service Operator configuration"
+  type = object({
+    cluster_config = optional(object({
+      sync_period    = optional(string, "1m")
+      enable_metrics = optional(bool, false)
+      crd_pattern    = optional(string, "") # never set this to '*', limit this to the resources that are actually needed
+    }), {})
+    tenant_namespaces = optional(list(object({
+      name = string
+    })), [])
+  })
+  default = {}
+
+  validation {
+    condition     = var.azure_service_operator_config.cluster_config.crd_pattern != "*"
+    error_message = "Installing all CRD:s in the cluster is not supported, please limit to the ones needed"
+  }
 }

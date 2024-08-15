@@ -1,22 +1,3 @@
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentity
-metadata:
-  name: datadog
-  namespace: datadog
-spec:
-  type: 0
-  resourceID: ${resource_id}
-  clientID: ${client_id}
----
-apiVersion: aadpodidentity.k8s.io/v1
-kind: AzureIdentityBinding
-metadata:
-  name: datadog
-  namespace: datadog
-spec:
-  azureIdentity: datadog
-  selector: datadog
----
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
@@ -25,7 +6,7 @@ metadata:
 spec:
   provider: azure
   parameters:
-    usePodIdentity: "true"
+    clientID: ${client_id}
     keyvaultName: ${key_vault_name}
     tenantId: ${tenant_id}
     objects: |
@@ -48,13 +29,21 @@ spec:
         - objectName: datadog-api-key
           key: api-key
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: datadog-secret-mount
+  namespace: datadog
+  annotations:
+    azure.workload.identity/client-id: ${client_id}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: datadog-secret-mount
   namespace: datadog
   labels:
-    aadpodidbinding: datadog
+    azure.workload.identity/use: "true"
 spec:
   selector:
     matchLabels:
@@ -63,8 +52,8 @@ spec:
     metadata:
       labels:
         app: datadog-secret-mount
-        aadpodidbinding: datadog
     spec:
+      serviceAccountName: datadog-secret-mount
       containers:
         - name: busybox
           image: busybox:latest

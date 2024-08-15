@@ -73,4 +73,6 @@ This module is used for governance on a regional level and not using any specifi
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_key_vault_name"></a> [key\_vault\_name](#output\_key\_vault\_name) | Output each keyvault name |

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: add support for Temporary kubelet disk type by @landerss1 in [#1153](https://github.com/XenitAB/terraform-modules/pulls/1153)
 - Feat: add support for Azure service operator by @landerss1 in [#1149](https://github.com/XenitAB/terraform-modules/pulls/1149)
 - Feat: disable or enable metrics alert when cluster is stopped or started by @landerss1 in [#1147](https://github.com/XenitAB/terraform-modules/pulls/1147)
 - Feat: make upgrade_settings configurable by @landerss1 in [#1136](https://github.com/XenitAB/terraform-modules/pulls/1136)
@@ -34,6 +35,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Feat(azure/governance-regional): add output of key vault names by @landerss1 in [#1045](https://github.com/XenitAB/terraform-modules/pulls/1045)
+- Chore: upgrade hashicorp/setup-terraform from 2 to 3 by @landerss1 in [#1042](https://github.com/XenitAB/terraform-modules/pulls/1042)
+- Chore: upgrade terraform-linters/setup-tflint from 3 to 4 by @landerss1 in [#1034](https://github.com/XenitAB/terraform-modules/pulls/1034)
 - Chore: update spegel to 0.0.23 by @yabracadabra in [#1134](https://github.com/XenitAB/terraform-modules/pulls/1134)
 - Chore: bump peter-evans/create-pull-request to v6 by @landerss1 in [#1132](https://github.com/XenitAB/terraform-modules/pulls/1132)
 - Ci: run check when PR is labeled by @landerss1 in [#1131](https://github.com/XenitAB/terraform-modules/pulls/1131)

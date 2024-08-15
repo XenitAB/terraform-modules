@@ -46,6 +46,7 @@ This module is used to create AKS clusters.
 | <a name="module_gatekeeper"></a> [gatekeeper](#module\_gatekeeper) | ../../kubernetes/gatekeeper | n/a |
 | <a name="module_grafana_agent"></a> [grafana\_agent](#module\_grafana\_agent) | ../../kubernetes/grafana-agent | n/a |
 | <a name="module_grafana_agent_crd"></a> [grafana\_agent\_crd](#module\_grafana\_agent\_crd) | ../../kubernetes/helm-crd | n/a |
+| <a name="module_grafana_alloy"></a> [grafana\_alloy](#module\_grafana\_alloy) | ../../kubernetes/grafana-alloy | n/a |
 | <a name="module_ingress_healthz"></a> [ingress\_healthz](#module\_ingress\_healthz) | ../../kubernetes/ingress-healthz | n/a |
 | <a name="module_ingress_nginx"></a> [ingress\_nginx](#module\_ingress\_nginx) | ../../kubernetes/ingress-nginx | n/a |
 | <a name="module_linkerd"></a> [linkerd](#module\_linkerd) | ../../kubernetes/linkerd | n/a |
@@ -153,6 +154,8 @@ This module is used to create AKS clusters.
 | <a name="input_global_location_short"></a> [global\_location\_short](#input\_global\_location\_short) | The Azure region short name where the global resources resides. | `string` | n/a | yes |
 | <a name="input_grafana_agent_config"></a> [grafana\_agent\_config](#input\_grafana\_agent\_config) | The Grafan-Agent configuration | <pre>object({<br>    remote_write_urls = object({<br>      metrics = string<br>      logs    = string<br>      traces  = string<br>    })<br>    credentials = object({<br>      metrics_username = string<br>      metrics_password = string<br>      logs_username    = string<br>      logs_password    = string<br>      traces_username  = string<br>      traces_password  = string<br>    })<br>    extra_namespaces        = list(string)<br>    include_kubelet_metrics = bool<br>  })</pre> | <pre>{<br>  "credentials": {<br>    "logs_password": "",<br>    "logs_username": "",<br>    "metrics_password": "",<br>    "metrics_username": "",<br>    "traces_password": "",<br>    "traces_username": ""<br>  },<br>  "extra_namespaces": [<br>    "ingress-nginx"<br>  ],<br>  "include_kubelet_metrics": false,<br>  "remote_write_urls": {<br>    "logs": "",<br>    "metrics": "",<br>    "traces": ""<br>  }<br>}</pre> | no |
 | <a name="input_grafana_agent_enabled"></a> [grafana\_agent\_enabled](#input\_grafana\_agent\_enabled) | Should Grafana-Agent be enabled | `bool` | `false` | no |
+| <a name="input_grafana_alloy_config"></a> [grafana\_alloy\_config](#input\_grafana\_alloy\_config) | Grafana Alloy config | <pre>object({<br>    azure_key_vault_name                = string<br>    keyvault_secret_name                = string<br>    grafana_otelcol_auth_basic_username = string<br>    grafana_otelcol_exporter_endpoint   = string<br>  })</pre> | n/a | yes |
+| <a name="input_grafana_alloy_enabled"></a> [grafana\_alloy\_enabled](#input\_grafana\_alloy\_enabled) | Should Grafana-Alloy be enabled | `bool` | `false` | no |
 | <a name="input_group_name_prefix"></a> [group\_name\_prefix](#input\_group\_name\_prefix) | Prefix for Azure AD groups | `string` | n/a | yes |
 | <a name="input_group_name_separator"></a> [group\_name\_separator](#input\_group\_name\_separator) | Separator for group names | `string` | `"-"` | no |
 | <a name="input_ingress_healthz_enabled"></a> [ingress\_healthz\_enabled](#input\_ingress\_healthz\_enabled) | Should ingress-healthz be enabled | `bool` | `true` | no |

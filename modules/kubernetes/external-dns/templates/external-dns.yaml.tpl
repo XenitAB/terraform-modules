@@ -41,14 +41,14 @@ spec:
       readOnlyRootFilesystem: true
     serviceAccount:
       annotations:
-        azure.workload.identity/client-id: ${azure_config.client_id}
+        azure.workload.identity/client-id: ${client_id}
     podLabels: 
       azure.workload.identity/use: "true"
     azure:
       useWorkloadIdentityExtension: true
-      tenantId: "${azure_config.tenant_id}"
-      subscriptionId: "${azure_config.subscription_id}"
-      resourceGroup: "${azure_config.resource_group}"
+      tenantId: "${tenant_id}"
+      subscriptionId: "${subscription_id}"
+      resourceGroup: "${resource_group_name}"
     policy: sync # will also delete the record
     registry: "txt"
     txtOwnerId: "${txt_owner_id}"

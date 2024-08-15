@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: velero
  labels:
-   name              = "velero"
-   xkf.xenit.io/kind = "platform"
+   name: velero
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
@@ -36,30 +36,37 @@ spec:
       logFormat: "json"
       backupStorageLocation:
         name: "default"
+        %{ if azure_config.storage_account_container != "" }
         bucket: "${azure_config.storage_account_container}"
+        %{ else }
+        bucket: "backup"
+        %{ endif }
         config:
-          resourceGroup: "${azure_config.resource_group}"
+          resourceGroup: "${resource_group_name}"
+          %{ if azure_config.storage_account_name != "" }
           storageAccount: "${azure_config.storage_account_name}"
-
+          %{ else }
+          storageAccount: "strg${environment}velero${unique_suffix}"
+          %{ endif }
     snapshotsEnable: false
-
-    # Yes this is needed even if it duplicates data
-    # https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure#option-2-use-aad-pod-identity
     credentials:
-    secretContents:
-        cloud: |
-        AZURE_SUBSCRIPTION_ID=${azure_config.subscription_id}
-        AZURE_RESOURCE_GROUP=${azure_config.resource_group}
-        AZURE_CLOUD_NAME=AzurePublicCloud
-
+      secretContents:
+          cloud: |
+            AZURE_SUBSCRIPTION_ID=${subscription_id}
+            AZURE_RESOURCE_GROUP=${resource_group_name}
+            AZURE_CLOUD_NAME=AzurePublicCloud
     initContainers:
-    - name: "velero-plugin-for-microsoft-azure"
+      - name: "velero-plugin-for-microsoft-azure"
         image: "velero/velero-plugin-for-microsoft-azure:v1.1.1"
         volumeMounts:
-        - mountPath: "/target"
+          - mountPath: "/target"
             name: "plugins"
-
     podLabels:
-    aadpodidbinding: velero
-
+      azure.workload.identity/use: "true"
     priorityClassName: "platform-low"
+    serviceAccount:
+      server:
+        create: true
+        name: velero
+        annotations:
+          azure.workload.identity/client-id: ${client_id}

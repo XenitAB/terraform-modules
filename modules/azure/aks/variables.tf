@@ -1,3 +1,58 @@
+variable "aks_automation_enabled" {
+  description = "Should AKS automation be enabled"
+  type        = bool
+  default     = false
+}
+
+# Monthly occurence currently not supported
+variable "aks_automation_config" {
+  description = "AKS automation configuration"
+  type = object({
+    public_network_access_enabled = optional(bool, false),
+    runbook_schedules = optional(list(object({
+      name        = string,
+      frequency   = string,
+      interval    = optional(number, null),
+      start_time  = string, # ISO 8601 format
+      timezone    = optional(string, "Europe/Stockholm")
+      expiry_time = optional(string, ""),
+      description = string,
+      week_days   = optional(list(string), []),
+      operation   = string,
+      node_pools  = optional(list(string), []),
+    })), [])
+  })
+  default = {}
+
+  validation {
+    condition = length([
+      for schedule in var.aks_automation_config.runbook_schedules : true
+      if contains(["OneTime", "Day", "Hour", "Week"], schedule.frequency)
+    ]) == length(var.aks_automation_config.runbook_schedules)
+    error_message = "The frequency of the schedule must be either 'OneTime', 'Day', 'Hour', 'Week'."
+  }
+
+  #validation {
+  #  condition = (var.aks_automation_config.frequency != "Week" && length(var.aks_automation_config.week_days) == 0) || (var.aks_automation_config.frequency == "Week" && contains(
+  #    ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], var.aks_automation_config.week_days
+  #  ))
+  #  error_message = "The frequency of the schedule must be either 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' or 'Sunday'."
+  #}
+
+  #validation {
+  #  condition = contains(
+  #    ["start", "stop"], var.aks_automation_config.operation
+  #  )
+  #  error_message = "The operation of the schedule must be either 'start' or 'stop'."
+  #}
+}
+
+variable "aks_joblogs_retention_days" {
+  description = "How many days to keep logs from automation jobs"
+  type        = number
+  default     = 7
+}
+
 variable "location_short" {
   description = "The Azure region short name"
   type        = string
@@ -77,14 +132,32 @@ variable "aks_config" {
       spot_max_price = number
       node_taints    = list(string)
       node_labels    = map(string)
+      upgrade_settings = optional(object({
+        drain_timeout_in_minutes      = optional(number, 30)
+        node_soak_duration_in_minutes = optional(number, 0)
+        max_surge                     = optional(number, 33)
+        }), {
+        drain_timeout_in_minutes      = 30
+        node_soak_duration_in_minutes = 0
+        max_surge                     = 33
+      })
     }))
+    upgrade_settings = optional(object({
+      drain_timeout_in_minutes      = optional(number, 30)
+      node_soak_duration_in_minutes = optional(number, 0)
+      max_surge                     = optional(number, 33)
+      }), {
+      drain_timeout_in_minutes      = 30
+      node_soak_duration_in_minutes = 0
+      max_surge                     = 33
+    })
   })
 
   validation {
     condition = alltrue([
-      for np in concat(var.aks_config.node_pools, [{ version : var.aks_config.version }]) : can(regex("^1.(26|27|28)", np.version))
+      for np in concat(var.aks_config.node_pools, [{ version : var.aks_config.version }]) : can(regex("^1.(28|29|30|31)", np.version))
     ])
-    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.26, 1.27, 1.28."
+    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.28, 1.29, 1.30 or 1.31."
   }
 
   validation {
@@ -129,6 +202,18 @@ variable "aks_config" {
     ])
     error_message = "The spot_max_price cannot be null when spot_enabled is true."
   }
+}
+
+variable "aks_cost_analysis_enabled" {
+  description = "If AKS cost analysis should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "alerts_enabled" {
+  description = "If metric alerts on audit logs are enabled"
+  type        = bool
+  default     = false
 }
 
 variable "azure_policy_enabled" {
@@ -181,23 +266,10 @@ variable "namespaces" {
   )
 }
 
-variable "aks_managed_identity_group_id" {
-  description = "The group id of aks managed identity"
-  type        = string
-}
-
-variable "azure_metrics_identity" {
-  description = "MSI authentication identity for Azure Metrics"
-  type = object({
-    id           = string
-    principal_id = string
-  })
-}
-
 variable "aks_audit_log_retention" {
   description = "The aks audit log retention in days, 0 = infinite"
   type        = number
-  default     = 365
+  default     = 30
 }
 
 variable "log_eventhub_name" {
@@ -249,14 +321,4 @@ variable "defender_config" {
     vulnerability_assessments_enabled = optional(bool, true)
   })
   default = {}
-}
-
-variable "dns_zones" {
-  description = "List of DNS Zones"
-  type        = list(string)
-}
-
-variable "global_location_short" {
-  description = "The Azure region short name where the global resources resides."
-  type        = string
 }

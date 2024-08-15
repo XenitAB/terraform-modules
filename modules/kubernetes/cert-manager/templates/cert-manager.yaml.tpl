@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: cert-manager
  labels:
-   name              = "cert-manager"
-   xkf.xenit.io/kind = "platform"
+   name: cert-manager
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
@@ -35,23 +35,23 @@ spec:
     podLabels:
       azure.workload.identity/use: "true"
     serviceAccount:
-      labels:
-        azure.workload.identity/use: "true"
+      annotations:
+        azure.workload.identity/client-id: ${client_id}
     webhook:
       resources:
         requests:
           cpu: 30m
           memory: 100Mi
-
     requests:
       cpu: 15m
       memory: 150Mi
-
     cainjector:
       resources:
         requests:
           cpu: 25m
           memory: 250Mi
+    dns01RecursiveNameserversOnly: true
+    dns01RecursiveNameservers: "8.8.8.8:53,1.1.1.1:53"
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -65,15 +65,15 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-cluster-issuer-account-key
     solvers:
-%{ for zone in azure_config.hosted_zone_names ~}
+%{ for zone, id in dns_zones ~}
       - dns01:
           azureDNS:
             environment: AzurePublicCloud
-            subscriptionID: ${azure_config.subscription_id}
-            resourceGroupName: ${azure_config.resource_group_name}
+            subscriptionID: ${subscription_id}
+            resourceGroupName: ${resource_group_name}
             hostedZoneName: ${zone}
             managedIdentity:
-              clientID: ${azure_config.client_id}
+              clientID: ${client_id}
         selector:
           dnsZones: 
             - ${zone}

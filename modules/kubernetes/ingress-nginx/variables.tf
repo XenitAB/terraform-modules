@@ -16,8 +16,8 @@ variable "external_dns_hostname" {
   default     = ""
 }
 
-variable "public_private_enabled" {
-  description = "If true will create a public and private ingress controller. Otherwise only a public ingress controller will be created."
+variable "private_ingress_enabled" {
+  description = "If true will create a private ingress controller. Otherwise only a public ingress controller will be created."
   type        = bool
   default     = false
 }
@@ -36,17 +36,6 @@ variable "customization" {
     extra_config              = {}
     extra_headers             = {}
   }
-}
-
-variable "customization_public" {
-  description = "Public specific customization, will override the global customization."
-  type = object({
-    allow_snippet_annotations = optional(bool)
-    http_snippet              = optional(string)
-    extra_config              = optional(map(string))
-    extra_headers             = optional(map(string))
-  })
-  default = {}
 }
 
 variable "customization_private" {

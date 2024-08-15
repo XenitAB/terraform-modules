@@ -38,7 +38,7 @@ spec:
         controllerValue: "k8s.io/ingress-${ingress_class}"
       priorityClassName: "platform-high"
       ingressClass: ${ingress_class}
-      %{~ if public_private_enabled ~}
+      %{~ if private_ingress_enabled ~}
       electionID: ingress-controller-leader-${ingress_class}
       ingressClassByName: true
       %{~ endif ~}

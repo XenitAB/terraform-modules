@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: reloader
  labels:
-   name              = "reloader"
-   xkf.xenit.io/kind = "platform"
+   name: reloader
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

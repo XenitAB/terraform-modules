@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: spegel
  labels:
-   name              = "spegel"
-   xkf.xenit.io/kind = "platform"
+   name: spegel
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
@@ -28,7 +28,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: spegel
-      version: v0.0.20
+      version: v0.0.23
   interval: 1m0s
   values:
     resources:

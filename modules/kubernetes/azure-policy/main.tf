@@ -10,7 +10,7 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "3.99.0"
+      version = "3.107.0"
       source  = "hashicorp/azurerm"
     }
   }
@@ -761,7 +761,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": ${jsonencode(var.tenant_namespaces)}
       },
       "excludedNamespaces": {
-        "value": "[parameters('excludedNamespaces')]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('azureserviceoperator-system'))]"
       }
     }
     VALUE
@@ -840,7 +840,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azure-metrics','cert-manager','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azure-metrics','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','vpa'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -927,7 +927,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','spegel'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','prometheus','spegel'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"

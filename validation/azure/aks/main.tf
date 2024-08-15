@@ -15,21 +15,16 @@ module "aks" {
     azurerm = azurerm
   }
 
-  environment                   = "dev"
-  location_short                = "we"
-  name                          = "xks"
-  subscription_name             = "sub"
-  core_name                     = "core"
-  unique_suffix                 = 1337
-  aks_name_suffix               = "1"
-  aks_managed_identity_group_id = "1337"
-  azure_metrics_identity = {
-    id           = "id"
-    principal_id = "pid"
-  }
+  environment       = "dev"
+  location_short    = "we"
+  name              = "xks"
+  subscription_name = "sub"
+  core_name         = "core"
+  unique_suffix     = 1337
+  aks_name_suffix   = "1"
 
   aks_config = {
-    version                  = "1.27.7"
+    version                  = "1.28.9"
     production_grade         = false
     priority_expander_config = { "10" : [".*standard.*"], "20" : [".*spot.*"] }
     default_node_pool = {
@@ -40,7 +35,7 @@ module "aks" {
     node_pools = [
       {
         name      = "pool1"
-        version   = "1.27.7"
+        version   = "1.28.9"
         vm_size   = "Standard_B2s"
         min_count = 1
         max_count = 1
@@ -100,7 +95,4 @@ module "aks" {
 
   log_eventhub_name                  = "eventhub1"
   log_eventhub_authorization_rule_id = "12345"
-
-  global_location_short = "we"
-  dns_zones             = ["example.com"]
 }

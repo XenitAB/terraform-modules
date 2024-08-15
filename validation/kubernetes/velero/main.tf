@@ -4,27 +4,19 @@ provider "kubernetes" {}
 
 provider "helm" {}
 
-module "azure_velero" {
-  source = "../../../modules/azure/aks-regional/velero"
-
-  aks_managed_identity = "uai"
-  location_short       = "short"
-  name                 = "name"
-  environment          = "env"
-  unique_suffix        = "suffix"
-}
-
 module "velero" {
   source = "../../../modules/kubernetes/velero"
 
-  cluster_id = "we-dev-aks1"
-
+  aks_managed_identity = "id"
   azure_config = {
-    subscription_id           = "id"
-    resource_group            = "name"
     storage_account_name      = "name"
     storage_account_container = "name"
-    client_id                 = "id"
-    resource_id               = "id"
   }
+  cluster_id          = "we-dev-aks1"
+  environment         = "dev"
+  location            = "we"
+  oidc_issuer_url     = "url"
+  resource_group_name = "rg-name"
+  subscription_id     = "id"
+  unique_suffix       = "1234"
 }

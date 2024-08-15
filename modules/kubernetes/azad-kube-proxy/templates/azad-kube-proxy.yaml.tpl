@@ -3,8 +3,8 @@ kind: Namespace
 metadata:
  name: azad-kube-proxy
  labels:
-   name              = "azad-kube-proxy"
-   xkf.xenit.io/kind = "platform"
+   name: azad-kube-proxy
+   xkf.xenit.io/kind: platform
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
@@ -69,6 +69,12 @@ spec:
 
     ingress:
       enabled: true
+    %{ if private_ingress_enabled == true && use_private_ingress == false }
+      ingressClassName: "nginx"
+    %{ endif }
+    %{ if private_ingress_enabled == true && use_private_ingress == true }
+      ingressClassName: "nginx-private"
+    %{ endif }
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt"
         nginx.ingress.kubernetes.io/whitelist-source-range: ${allowed_ips_csv}

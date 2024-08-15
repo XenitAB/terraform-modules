@@ -12,6 +12,7 @@ module "grafana_alloy" {
   resource_group_name = "rg-name"
   environment         = "dev"
   aks_name            = "fooburrito"
+  aks_core            = "smoething"
   location_short      = "foob"
   grafana_alloy_config = {
     grafana_otelcol_auth_basic_username = "foo"

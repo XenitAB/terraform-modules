@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: make service_principal_all_owner_name optional by @landerss1 in [#1139](https://github.com/XenitAB/terraform-modules/pulls/1139)
 - Feat: add support for Temporary kubelet disk type by @landerss1 in [#1153](https://github.com/XenitAB/terraform-modules/pulls/1153)
 - Feat: add support for Azure service operator by @landerss1 in [#1149](https://github.com/XenitAB/terraform-modules/pulls/1149)
 - Feat: disable or enable metrics alert when cluster is stopped or started by @landerss1 in [#1147](https://github.com/XenitAB/terraform-modules/pulls/1147)

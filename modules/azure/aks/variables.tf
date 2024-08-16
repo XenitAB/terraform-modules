@@ -122,16 +122,17 @@ variable "aks_config" {
     # see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md#configuration
     priority_expander_config = optional(map(list(string)))
     node_pools = list(object({
-      name           = string
-      version        = string
-      vm_size        = string
-      zones          = optional(list(string), ["1", "2", "3"])
-      min_count      = number
-      max_count      = number
-      spot_enabled   = bool
-      spot_max_price = number
-      node_taints    = list(string)
-      node_labels    = map(string)
+      name              = string
+      version           = string
+      vm_size           = string
+      kubelet_disk_type = optional(string, "Temporary")
+      zones             = optional(list(string), ["1", "2", "3"])
+      min_count         = number
+      max_count         = number
+      spot_enabled      = bool
+      spot_max_price    = number
+      node_taints       = list(string)
+      node_labels       = map(string)
       upgrade_settings = optional(object({
         drain_timeout_in_minutes      = optional(number, 30)
         node_soak_duration_in_minutes = optional(number, 0)
@@ -206,6 +207,12 @@ variable "aks_config" {
 
 variable "aks_cost_analysis_enabled" {
   description = "If AKS cost analysis should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "alerts_enabled" {
+  description = "If metric alerts on audit logs are enabled"
   type        = bool
   default     = false
 }

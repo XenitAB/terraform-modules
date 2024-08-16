@@ -761,7 +761,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": ${jsonencode(var.tenant_namespaces)}
       },
       "excludedNamespaces": {
-        "value": "[parameters('excludedNamespaces')]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray('azureserviceoperator-system'))]"
       }
     }
     VALUE

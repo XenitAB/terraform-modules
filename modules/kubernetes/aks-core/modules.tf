@@ -4,6 +4,7 @@ locals {
     "azad-kube-proxy",
     "azdo-proxy",
     "azure-metrics",
+    "azureserviceoperator-system",
     "calico-system",
     "cert-manager",
     "controle-plane-logs",
@@ -109,6 +110,27 @@ module "azure_policy" {
     for namespace in var.namespaces :
     namespace.name if namespace.flux.enabled
   ]
+}
+
+module "azure_service_operator" {
+  for_each = {
+    for s in ["azure_service_operator"] :
+    s => s
+    if var.azure_service_operator_enabled
+  }
+
+  source = "../../kubernetes/azure-service-operator"
+
+  aks_name                      = var.name
+  aks_name_suffix               = local.aks_name_suffix
+  azure_service_operator_config = var.azure_service_operator_config
+  cluster_id                    = local.cluster_id
+  environment                   = var.environment
+  location                      = data.azurerm_resource_group.this.location
+  location_short                = var.location_short
+  oidc_issuer_url               = var.oidc_issuer_url
+  subscription_id               = data.azurerm_client_config.current.subscription_id
+  tenant_id                     = data.azurerm_client_config.current.tenant_id
 }
 
 module "cert_manager" {
@@ -284,10 +306,11 @@ module "gatekeeper" {
 
   source = "../../kubernetes/gatekeeper"
 
-  cluster_id           = local.cluster_id
-  exclude_namespaces   = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
-  mirrord_enabled      = var.mirrord_enabled
-  telepresence_enabled = var.telepresence_enabled
+  cluster_id                     = local.cluster_id
+  azure_service_operator_enabled = var.azure_service_operator_enabled
+  exclude_namespaces             = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
+  mirrord_enabled                = var.mirrord_enabled
+  telepresence_enabled           = var.telepresence_enabled
 }
 
 module "grafana_agent" {

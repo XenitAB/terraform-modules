@@ -1,3 +1,9 @@
+variable "azure_service_operator_enabled" {
+  description = "If Azure Service Operator should be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string

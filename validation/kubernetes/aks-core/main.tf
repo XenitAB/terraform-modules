@@ -7,6 +7,12 @@ provider "azurerm" {
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
 
+  grafana_alloy_config = {
+    grafana_otelcol_auth_basic_username = ""
+    grafana_otelcol_exporter_endpoint   = ""
+    azure_key_vault_name                = ""
+    keyvault_secret_name                = ""
+  }
   name                    = "baz"
   aks_name_suffix         = 1
   core_name               = "core"

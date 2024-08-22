@@ -547,9 +547,10 @@ variable "promtail_enabled" {
 variable "promtail_config" {
   description = "Configuration for promtail"
   type = object({
-    azure_key_vault_name = string
-    loki_address         = string
-    excluded_namespaces  = list(string)
+    azure_key_vault_name  = string
+    grafana_cloud_address = string
+    loki_address          = string
+    excluded_namespaces   = list(string)
   })
   default = {
     azure_key_vault_name = ""

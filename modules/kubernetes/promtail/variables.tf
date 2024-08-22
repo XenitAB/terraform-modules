@@ -33,7 +33,10 @@ variable "excluded_namespaces" {
   type        = list(string)
   default     = []
 }
-
+variable "grafana_cloud_address" {
+  description = "The address of the grafana cloud instance to send logs to"
+  type        = string
+}
 variable "location_short" {
   description = "The Azure region short name."
   type        = string

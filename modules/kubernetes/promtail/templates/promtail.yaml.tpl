@@ -35,7 +35,7 @@ spec:
         - url: "${loki_address}"
           tls_config:
             cert_file: /mnt/tls/tls.crt
-            key_file: /mnt/tls/tls.key
+        -   url: "${grafana_cloud_address}"
       snippets:
         pipelineStages:
           - cri: {}

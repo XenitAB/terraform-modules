@@ -541,15 +541,16 @@ module "promtail" {
   azure_config = {
     azure_key_vault_name = var.promtail_config.azure_key_vault_name
   }
-  cluster_id          = local.cluster_id
-  cluster_name        = "${var.name}${local.aks_name_suffix}"
-  environment         = var.environment
-  excluded_namespaces = var.promtail_config.excluded_namespaces
-  location_short      = var.location_short
-  loki_address        = var.promtail_config.loki_address
-  oidc_issuer_url     = var.oidc_issuer_url
-  region              = var.location_short
-  resource_group_name = data.azurerm_resource_group.this.name
+  cluster_id            = local.cluster_id
+  cluster_name          = "${var.name}${local.aks_name_suffix}"
+  environment           = var.environment
+  grafana_cloud_address = var.promtail_config.grafana_cloud_address
+  excluded_namespaces   = var.promtail_config.excluded_namespaces
+  location_short        = var.location_short
+  loki_address          = var.promtail_config.loki_address
+  oidc_issuer_url       = var.oidc_issuer_url
+  region                = var.location_short
+  resource_group_name   = data.azurerm_resource_group.this.name
 }
 
 module "reloader" {

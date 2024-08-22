@@ -553,9 +553,10 @@ variable "promtail_config" {
     excluded_namespaces   = list(string)
   })
   default = {
-    azure_key_vault_name = ""
-    loki_address         = ""
-    excluded_namespaces  = []
+    azure_key_vault_name  = ""
+    grafana_cloud_address = ""
+    loki_address          = ""
+    excluded_namespaces   = []
   }
 }
 

@@ -4,7 +4,7 @@ provider "kubernetes" {}
 
 provider "helm" {}
 
-module "grafana_alloy" {
+module "grafana-k8s-monitoring" {
   source = "../../../modules/kubernetes/grafana-k8s-monitoring"
 
   grafana_k8s_monitor_config = {

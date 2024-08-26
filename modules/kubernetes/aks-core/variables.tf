@@ -474,7 +474,7 @@ variable "grafana_alloy_config" {
 }
 
 variable "grafana_k8s_monitoring_enabled" {
-  description = "Should Grafana-Alloy be enabled"
+  description = "Should Grafana-k8s-chart be enabled/deployed"
   type        = bool
   default     = false
 }

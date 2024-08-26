@@ -1,6 +1,6 @@
 # grafana-k8s-monitoring
 
-Adds [grafana-k8s-monitoring](https://github.com/grafana/alloy/tree/main/operations/helm) to a Kubernetes cluster.
+Adds [grafana-k8s-monitoring](https://github.com/grafana/k8s-monitoring-helm/tree/main/charts/k8s-monitoring) to a Kubernetes cluster.
 
 ## Requirements
 

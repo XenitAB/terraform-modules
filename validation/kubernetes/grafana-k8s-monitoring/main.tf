@@ -5,8 +5,8 @@ provider "kubernetes" {}
 provider "helm" {}
 
 module "grafana-k8s-monitoring" {
-  source = "../../../modules/kubernetes/grafana-k8s-monitoring"
-
+  source     = "../../../modules/kubernetes/grafana-k8s-monitoring"
+  cluster_id = "yabadabadoo"
   grafana_k8s_monitor_config = {
     grafana_cloud_api_key             = "foo"
     grafana_cloud_prometheus_username = "bar"

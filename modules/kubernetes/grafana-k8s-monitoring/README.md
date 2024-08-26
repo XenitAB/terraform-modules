@@ -34,6 +34,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_grafana_k8s_monitor_config"></a> [grafana\_k8s\_monitor\_config](#input\_grafana\_k8s\_monitor\_config) | Configuration for the username and password | <pre>object({<br>    grafana_cloud_api_key             = string<br>    grafana_cloud_prometheus_username = string<br>    grafana_cloud_prometheus_host     = string<br>    grafana_cloud_loki_host           = string<br>    grafana_cloud_loki_username       = string<br>    grafana_cloud_tempo_host          = string<br>    grafana_cloud_tempo_username      = string<br>    cluster_name                      = string<br>  })</pre> | <pre>{<br>  "cluster_name": "",<br>  "grafana_cloud_api_key": "",<br>  "grafana_cloud_loki_host": "",<br>  "grafana_cloud_loki_username": "",<br>  "grafana_cloud_prometheus_host": "",<br>  "grafana_cloud_prometheus_username": "",<br>  "grafana_cloud_tempo_host": "",<br>  "grafana_cloud_tempo_username": ""<br>}</pre> | no |
 
 ## Outputs

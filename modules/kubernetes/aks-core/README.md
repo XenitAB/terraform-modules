@@ -47,7 +47,7 @@ This module is used to create AKS clusters.
 | <a name="module_grafana_agent"></a> [grafana\_agent](#module\_grafana\_agent) | ../../kubernetes/grafana-agent | n/a |
 | <a name="module_grafana_agent_crd"></a> [grafana\_agent\_crd](#module\_grafana\_agent\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_grafana_alloy"></a> [grafana\_alloy](#module\_grafana\_alloy) | ../../kubernetes/grafana-alloy | n/a |
-| <a name="module_grafana_k8s_monitoring"></a> [grafana\_k8s\_monitoring](#module\_grafana\_k8s\_monitoring) | ../../kubernetes/grafana_k8s_monitoring | n/a |
+| <a name="module_grafana_k8s_monitoring"></a> [grafana\_k8s\_monitoring](#module\_grafana\_k8s\_monitoring) | ../../kubernetes/grafana-k8s-monitoring | n/a |
 | <a name="module_ingress_healthz"></a> [ingress\_healthz](#module\_ingress\_healthz) | ../../kubernetes/ingress-healthz | n/a |
 | <a name="module_ingress_nginx"></a> [ingress\_nginx](#module\_ingress\_nginx) | ../../kubernetes/ingress-nginx | n/a |
 | <a name="module_linkerd"></a> [linkerd](#module\_linkerd) | ../../kubernetes/linkerd | n/a |

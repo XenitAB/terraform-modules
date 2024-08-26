@@ -29,6 +29,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`vpa`](vpa/README.md)
 - [`grafana-agent`](grafana-agent/README.md)
 - [`grafana-alloy`](grafana-alloy/README.md)
+- [`grafana-k8s-monitoring`](grafana-k8s-monitoring/README.md)
 - [`node-local-dns`](node-local-dns/README.md)
 - [`node-ttl`](node-ttl/README.md)
 - [`promtail`](promtail/README.md)

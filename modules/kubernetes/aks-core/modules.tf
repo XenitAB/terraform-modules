@@ -380,7 +380,27 @@ module "grafana_alloy" {
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
 }
+module "grafana_k8s_monitoring" {
 
+  for_each = {
+    for s in ["grafana_k8s_monitoring"] :
+    s => s
+    if var.grafana_k8s_monitoring_enabled
+  }
+
+  source = "../../kubernetes/grafana_k8s_monitoring"
+
+  grafana_k8s_monitor_config = {
+    grafana_cloud_api_key             = var.grafana_k8s_monitor_config.grafana_cloud_api_key
+    grafana_cloud_prometheus_username = var.grafana_k8s_monitor_config.grafana_cloud_prometheus_username
+    grafana_cloud_prometheus_host     = var.grafana_k8s_monitor_config.grafana_cloud_prometheus_host
+    grafana_cloud_loki_host           = var.grafana_k8s_monitor_config.grafana_cloud_loki_host
+    grafana_cloud_loki_username       = var.grafana_k8s_monitor_config.grafana_cloud_loki_username
+    grafana_cloud_tempo_host          = var.grafana_k8s_monitor_config.grafana_cloud_tempo_host
+    grafana_cloud_tempo_username      = var.grafana_k8s_monitor_config.grafana_cloud_tempo_username
+    cluster_name                      = var.grafana_k8s_monitor_config.cluster_name
+  }
+}
 module "ingress_healthz" {
   depends_on = [module.linkerd]
 

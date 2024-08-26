@@ -473,6 +473,27 @@ variable "grafana_alloy_config" {
   })
 }
 
+variable "grafana_k8s_monitoring_enabled" {
+  description = "Should Grafana-Alloy be enabled"
+  type        = bool
+  default     = false
+}
+
+
+variable "grafana_k8s_monitor_config" {
+  description = "Grafana k8s monitor chart config"
+  type = object({
+    grafana_cloud_api_key             = string
+    grafana_cloud_prometheus_username = string
+    grafana_cloud_prometheus_host     = string
+    grafana_cloud_loki_host           = string
+    grafana_cloud_loki_username       = string
+    grafana_cloud_tempo_host          = string
+    grafana_cloud_tempo_username      = string
+    cluster_name                      = string
+  })
+}
+
 variable "falco_enabled" {
   description = "Should Falco be enabled"
   type        = bool

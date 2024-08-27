@@ -390,17 +390,16 @@ module "grafana_k8s_monitoring" {
 
   source = "../../kubernetes/grafana-k8s-monitoring"
 
-  cluster_id = local.cluster_id
+  cluster_id            = local.cluster_id
+  cluster_name          = var.grafana_k8s_monitor_config.cluster_name
+  grafana_cloud_api_key = var.grafana_k8s_monitor_config.grafana_cloud_api_key
   grafana_k8s_monitor_config = {
-    grafana_cloud_api_key             = var.grafana_k8s_monitor_config.grafana_cloud_api_key
     grafana_cloud_prometheus_username = var.grafana_k8s_monitor_config.grafana_cloud_prometheus_username
     grafana_cloud_prometheus_host     = var.grafana_k8s_monitor_config.grafana_cloud_prometheus_host
     grafana_cloud_loki_host           = var.grafana_k8s_monitor_config.grafana_cloud_loki_host
     grafana_cloud_loki_username       = var.grafana_k8s_monitor_config.grafana_cloud_loki_username
     grafana_cloud_tempo_host          = var.grafana_k8s_monitor_config.grafana_cloud_tempo_host
     grafana_cloud_tempo_username      = var.grafana_k8s_monitor_config.grafana_cloud_tempo_username
-    cluster_name                      = var.grafana_k8s_monitor_config.cluster_name
-
   }
 }
 module "ingress_healthz" {

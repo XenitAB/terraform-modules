@@ -45,5 +45,7 @@ resource "git_repository_file" "grafana_k8s_monitoring" {
   path = "platform/${var.cluster_id}/grafana-k8s-monitoring/grafana-k8s-monitoring.yaml"
   content = templatefile("${path.module}/templates/grafana-k8s-monitoring.yaml.tpl", {
     grafana_k8s_monitor_config = var.grafana_k8s_monitor_config
+    cluster_name               = var.cluster_name
+    grafana_cloud_api_key      = var.grafana_cloud_api_key
   })
 }

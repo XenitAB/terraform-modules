@@ -13,33 +13,33 @@ metadata:
   name: grafana-k8s-monitoring
   namespace: grafana-k8s-monitoring
 spec:
-  interval: 5m0s
+  interval: 1m0s
   chart:
     spec:
       chart: k8s-monitoring
       sourceRef:
         kind: HelmRepository
-        name: k8s-monitoring
+        name: grafana-k8s-monitoring
       version: 1.4.8
   values:
     cluster:
-      name: "${grafana_k8s_monitor_config.cluster_name}"
+      name: "${cluster_name}"
     externalServices:
       prometheus:
         host: "${grafana_k8s_monitor_config.grafana_cloud_prometheus_host}"
         basicAuth:
           username: "${grafana_k8s_monitor_config.grafana_cloud_prometheus_username}"
-          password: "${grafana_k8s_monitor_config.grafana_cloud_api_key}"
+          password: "${grafana_cloud_api_key}"
       loki:
         host: "${grafana_k8s_monitor_config.grafana_cloud_loki_host}"
         basicAuth:
           username: "${grafana_k8s_monitor_config.grafana_cloud_loki_username}"
-          password: "${grafana_k8s_monitor_config.grafana_cloud_api_key}"
+          password: "${grafana_cloud_api_key}"
       tempo:
         host: "${grafana_k8s_monitor_config.grafana_cloud_tempo_host}"
         basicAuth:
           username: "${grafana_k8s_monitor_config.grafana_cloud_tempo_username}"
-          password: "${grafana_k8s_monitor_config.grafana_cloud_api_key}"
+          password: "${grafana_cloud_api_key}"
     metrics:
       enabled: true
       alloy:
@@ -73,7 +73,7 @@ spec:
       enabled: true
       opencost:
         exporter:
-          defaultClusterId: "${grafana_k8s_monitor_config.cluster_name}"
+          defaultClusterId: "${cluster_name}"
         prometheus:
           external:
             url: "${grafana_k8s_monitor_config.grafana_cloud_prometheus_host}"

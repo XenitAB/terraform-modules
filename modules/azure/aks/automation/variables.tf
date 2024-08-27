@@ -5,7 +5,7 @@ variable "aks_managed_identity" {
 
 variable "automation_group_id" {
   description = "id of the group being assigned access to Automation Account"
-  type = string
+  type = list(string)
 }
 
 variable "aks_name" {

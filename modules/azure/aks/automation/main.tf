@@ -22,6 +22,12 @@ resource "azurerm_role_assignment" "aks_automation" {
   principal_id         = azurerm_user_assigned_identity.aks_automation.principal_id
 }
 
+resource "azurerm_role_assignment" "aks_automation" {
+  scope                = azurerm_automation_account.aks
+  role_definition_name = "Automation Operator"
+  principal_id         = var.automation_group_id
+}
+
 resource "azurerm_automation_account" "aks" {
   name                          = "auto-${var.aks_name}"
   location                      = data.azurerm_resource_group.this.location

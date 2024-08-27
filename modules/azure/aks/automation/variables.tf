@@ -3,6 +3,11 @@ variable "aks_managed_identity" {
   type        = string
 }
 
+variable "automation_group_id" {
+  description = "id of the group being assigned access to Automation Account"
+  type = string
+}
+
 variable "aks_name" {
   description = "The name of the AKS cluster"
   type        = string

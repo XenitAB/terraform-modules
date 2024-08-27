@@ -10,6 +10,7 @@ module "automation" {
   source = "./automation"
 
   aks_managed_identity       = var.aad_groups.aks_managed_identity.id
+  automation_group_id        = var.aad_groups.edit[each.key].id
   aks_name                   = azurerm_kubernetes_cluster.this.name
   aks_automation_config      = var.aks_automation_config
   aks_joblogs_retention_days = var.aks_joblogs_retention_days

@@ -28,7 +28,7 @@ resource "azurerm_role_assignment" "aks_automation" {
 }
 
 resource "azurerm_role_assignment" "automation_access" {
-  scope                = azurerm_automation_account.aks
+  scope                = azurerm_automation_account.aks.id
   role_definition_name = "Automation Operator"
   principal_id         = azuread_group.automation_access.id
 }

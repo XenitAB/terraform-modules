@@ -23,6 +23,8 @@ resource "azurerm_role_assignment" "aks_automation" {
 }
 
 resource "azurerm_role_assignment" "automation_access" {
+  for_each = { for id in var.automation_group_id  }
+
   scope                = azurerm_automation_account.aks
   role_definition_name = "Automation Operator"
   principal_id         = var.automation_group_id[each.key]

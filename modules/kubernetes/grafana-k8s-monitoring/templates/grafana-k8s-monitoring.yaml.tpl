@@ -22,23 +22,23 @@ spec:
       version: 1.4.8
   values:
     cluster:
-      name: ${grafana_k8s_monitor_config.cluster_name}
+      name: "${grafana_k8s_monitor_config.cluster_name}"
     externalServices:
       prometheus:
-        host: ${grafana_k8s_monitor_config.grafana_cloud_prometheus_host}
+        host: "${grafana_k8s_monitor_config.grafana_cloud_prometheus_host}"
         basicAuth:
-          username: ${grafana_k8s_monitor_config.grafana_cloud_prometheus_username}
-          password: ${grafana_k8s_monitor_config.grafana_cloud_api_key}
+          username: "${grafana_k8s_monitor_config.grafana_cloud_prometheus_username}"
+          password: "${grafana_k8s_monitor_config.grafana_cloud_api_key}"
       loki:
-        host: ${grafana_k8s_monitor_config.grafana_cloud_loki_host}
+        host: "${grafana_k8s_monitor_config.grafana_cloud_loki_host}"
         basicAuth:
-          username: ${grafana_k8s_monitor_config.grafana_cloud_loki_username}
-          password: ${grafana_k8s_monitor_config.grafana_cloud_api_key}
+          username: "${grafana_k8s_monitor_config.grafana_cloud_loki_username}"
+          password: "${grafana_k8s_monitor_config.grafana_cloud_api_key}"
       tempo:
-        host:${grafana_k8s_monitor_config.grafana_cloud_tempo_host}
+        host: "${grafana_k8s_monitor_config.grafana_cloud_tempo_host}"
         basicAuth:
-          username: ${grafana_k8s_monitor_config.grafana_cloud_tempo_username}
-          password: ${grafana_k8s_monitor_config.grafana_cloud_api_key}
+          username: "${grafana_k8s_monitor_config.grafana_cloud_tempo_username}"
+          password: "${grafana_k8s_monitor_config.grafana_cloud_api_key}"
     metrics:
       enabled: true
       alloy:
@@ -72,10 +72,10 @@ spec:
       enabled: true
       opencost:
         exporter:
-          defaultClusterId: ${grafana_k8s_monitor_config.cluster_name}
+          defaultClusterId: "${grafana_k8s_monitor_config.cluster_name}"
         prometheus:
           external:
-            url: ${grafana_k8s_monitor_config.grafana_cloud_prometheus_host}
+            url: "${grafana_k8s_monitor_config.grafana_cloud_prometheus_host}"
     kube-state-metrics:
       enabled: true
     prometheus-node-exporter:

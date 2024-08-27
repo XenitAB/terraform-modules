@@ -10,6 +10,11 @@ data "azurerm_kubernetes_cluster" "xks" {
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
+resource "azuread_group" "automation_access" {
+  display_name     = "az-auto-${var.aks_name}-operator"
+  security_enabled = true
+}
+
 resource "azurerm_user_assigned_identity" "aks_automation" {
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
@@ -23,11 +28,9 @@ resource "azurerm_role_assignment" "aks_automation" {
 }
 
 resource "azurerm_role_assignment" "automation_access" {
-  for_each = { for id in var.automation_group_id : id => id }
-
   scope                = azurerm_automation_account.aks
   role_definition_name = "Automation Operator"
-  principal_id         = var.automation_group_id[each.value]
+  principal_id         = azuread_group.automation_access.id
 }
 
 resource "azurerm_automation_account" "aks" {

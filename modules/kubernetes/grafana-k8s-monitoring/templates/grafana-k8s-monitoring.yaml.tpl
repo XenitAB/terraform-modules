@@ -13,6 +13,7 @@ metadata:
   name: grafana-k8s-monitoring
   namespace: grafana-k8s-monitoring
 spec:
+  interval: 5m0s
   chart:
     spec:
       chart: k8s-monitoring

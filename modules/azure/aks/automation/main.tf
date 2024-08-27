@@ -23,7 +23,7 @@ resource "azurerm_role_assignment" "aks_automation" {
 }
 
 resource "azurerm_role_assignment" "automation_access" {
-  for_each = { for id in var.automation_group_id  }
+  for_each = { for id in var.automation_group_id : id => id }
 
   scope                = azurerm_automation_account.aks
   role_definition_name = "Automation Operator"

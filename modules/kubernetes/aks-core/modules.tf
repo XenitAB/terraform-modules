@@ -390,7 +390,7 @@ module "grafana_k8s_monitoring" {
 
   source = "../../kubernetes/grafana-k8s-monitoring"
   azure_config = {
-    azure_key_vault_name = var.datadog_config.azure_key_vault_name
+    azure_key_vault_name = var.grafana_k8s_monitor_config.azure_key_vault_name
   }
   key_vault_id        = data.azurerm_key_vault.core.id
   location            = data.azurerm_resource_group.this.location
@@ -399,6 +399,7 @@ module "grafana_k8s_monitoring" {
   cluster_id          = local.cluster_id
   cluster_name        = var.grafana_k8s_monitor_config.cluster_name
   grafana_k8s_monitor_config = {
+    azure_key_vault_name              = var.grafana_k8s_monitor_config.azure_key_vault_name
     grafana_cloud_prometheus_username = var.grafana_k8s_monitor_config.grafana_cloud_prometheus_username
     grafana_cloud_prometheus_host     = var.grafana_k8s_monitor_config.grafana_cloud_prometheus_host
     grafana_cloud_loki_host           = var.grafana_k8s_monitor_config.grafana_cloud_loki_host

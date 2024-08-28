@@ -27,19 +27,22 @@ spec:
     externalServices:
       prometheus:
         host: "${grafana_k8s_monitor_config.grafana_cloud_prometheus_host}"
-        basicAuth:
-          username: "${grafana_k8s_monitor_config.grafana_cloud_prometheus_username}"
-          password: "${grafana_cloud_api_key}"
+        secret:
+          create: false
+          name: prometheus-grafana-cloud
+          namespace: grafana-k8s-monitor
       loki:
         host: "${grafana_k8s_monitor_config.grafana_cloud_loki_host}"
-        basicAuth:
-          username: "${grafana_k8s_monitor_config.grafana_cloud_loki_username}"
-          password: "${grafana_cloud_api_key}"
+        secret:
+          create: false
+          name: loki-grafana-cloud
+          namespace: grafana-k8s-monitoring
       tempo:
         host: "${grafana_k8s_monitor_config.grafana_cloud_tempo_host}"
-        basicAuth:
-          username: "${grafana_k8s_monitor_config.grafana_cloud_tempo_username}"
-          password: "${grafana_cloud_api_key}"
+        secret:
+          create: false
+          name: tempo-grafana-cloud
+          namespace: grafana-k8s-monitoring
     metrics:
       enabled: true
       alloy:
@@ -51,7 +54,6 @@ spec:
         enabled: true
       node-exporter:
         enabled: true
-
     logs:
       enabled: true
       pod_logs:

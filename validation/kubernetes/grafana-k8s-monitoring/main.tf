@@ -13,12 +13,9 @@ module "grafana-k8s-monitoring" {
   location            = "narnia"
   oidc_issuer_url     = "gimme safe auth"
   grafana_k8s_monitor_config = {
-    grafana_cloud_prometheus_username = "bar"
     grafana_cloud_prometheus_host     = "barfoo"
     grafana_cloud_loki_host           = "foobar"
-    grafana_cloud_loki_username       = "foo123"
     grafana_cloud_tempo_host          = "bar123"
-    grafana_cloud_tempo_username      = "barfoo123"
 
   }
 }

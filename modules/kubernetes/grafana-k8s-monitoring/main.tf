@@ -48,17 +48,3 @@ resource "git_repository_file" "grafana_k8s_monitoring" {
     cluster_name               = var.cluster_name
   })
 }
-
-resource "git_repository_file" "azure_config" {
-  for_each = {
-    for s in ["azure-config"] :
-    s => s
-  }
-
-  path = "platform/${var.cluster_id}/grafana-k8s-monitoring/azure-config.yaml"
-  content = templatefile("${path.module}/templates/azure-config.yaml.tpl", {
-    key_vault_name = var.azure_config.azure_key_vault_name,
-    tenant_id      = azurerm_user_assigned_identity.grafana_k8s_monitor.tenant_id,
-    client_id      = azurerm_user_assigned_identity.grafana_k8s_monitor.client_id,
-  })
-}

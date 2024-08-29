@@ -2,7 +2,7 @@ apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
   name: grafana-k8s-monitor-secrets
-  namespace: grafana-k8s-monitor
+  namespace: grafana-k8s-monitoring
 spec:
   provider: azure
   parameters:
@@ -56,7 +56,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: grafana-k8s-monitor-secret-mount
-  namespace: grafana-k8s-monitor
+  namespace: grafana-k8s-monitoring
   annotations:
     azure.workload.identity/client-id: ${client_id}
 ---
@@ -64,7 +64,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: grafana-k8s-monitor-secret-mount
-  namespace: grafana-k8s-monitor
+  namespace: grafana-k8s-monitoring
   labels:
     azure.workload.identity/use: "true"
 spec:

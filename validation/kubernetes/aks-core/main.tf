@@ -8,14 +8,11 @@ module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
 
   grafana_k8s_monitor_config = {
-    grafana_cloud_api_key             = "asd"
-    grafana_cloud_prometheus_username = "dsa"
-    grafana_cloud_prometheus_host     = "sda"
-    grafana_cloud_loki_host           = "asdw"
-    grafana_cloud_loki_username       = "asdas"
-    grafana_cloud_tempo_host          = "asdas"
-    grafana_cloud_tempo_username      = "asdas"
-    cluster_name                      = "asdas"
+    grafana_cloud_prometheus_host = "sda"
+    grafana_cloud_loki_host       = "asdw"
+    grafana_cloud_tempo_host      = "asdas"
+    cluster_name                  = "asdas"
+    azure_key_vault_name          = "yaba"
   }
   grafana_alloy_config = {
     grafana_otelcol_auth_basic_username = ""

@@ -76,8 +76,6 @@ spec:
                 volumeAttributes:
                   secretProviderClass: grafana-k8s-monitor-secrets
 
-    prometheus-operator-crds:
-      enabled: false
     cluster:
       name: "${cluster_name}"
     externalServices:
@@ -138,7 +136,7 @@ spec:
     prometheus-node-exporter:
       enabled: true
     prometheus-operator-crds:
-      enabled: true
+      enabled: false
     kepler:
       enabled: true
     alloy-events: {}

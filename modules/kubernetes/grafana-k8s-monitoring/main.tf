@@ -48,6 +48,6 @@ resource "git_repository_file" "grafana_k8s_monitoring" {
     cluster_name               = var.cluster_name
     tenant_id                  = azurerm_user_assigned_identity.grafana_k8s_monitor.tenant_id,
     client_id                  = azurerm_user_assigned_identity.grafana_k8s_monitor.client_id,
-    key_vault_name             = var.azure_config.azure_key_vault_name,
+    key_vault_name             = var.grafana_k8s_monitor_config.azure_key_vault_name,
   })
 }

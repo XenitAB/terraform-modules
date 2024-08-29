@@ -14,15 +14,6 @@ variable "grafana_k8s_monitor_config" {
     azure_key_vault_name          = ""
   }
 }
-variable "azure_config" {
-  description = "Azure specific configuration"
-  type = object({
-
-  })
-  default = {
-    azure_key_vault_name = ""
-  }
-}
 variable "cluster_name" {
   description = "Unique identifier of the cluster across instances."
   type        = string

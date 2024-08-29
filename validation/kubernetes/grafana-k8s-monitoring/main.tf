@@ -16,6 +16,6 @@ module "grafana-k8s-monitoring" {
     grafana_cloud_prometheus_host = "barfoo"
     grafana_cloud_loki_host       = "foobar"
     grafana_cloud_tempo_host      = "bar123"
-
+    azure_key_vault_name          = "boobooyaba"
   }
 }

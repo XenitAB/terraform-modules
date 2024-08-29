@@ -74,7 +74,7 @@ spec:
         exporter:
           defaultClusterId: "${cluster_name}"
         prometheus:
-          existingSecretName: "opesncost-prometheus-grafana-cloud"
+          existingSecretName: "prometheus-grafana-cloud"
     kube-state-metrics:
       enabled: true
     prometheus-node-exporter:

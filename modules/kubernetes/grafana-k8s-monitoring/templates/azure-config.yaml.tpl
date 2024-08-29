@@ -45,7 +45,7 @@ spec:
         - objectName: prometheus-grafana-cloud-host
           key: host
         - objectName: prometheus-grafana-cloud-user
-          key: user
+          key: username
         - objectName: prometheus-grafana-cloud-password
           key: password
     - secretName: loki-grafana-cloud
@@ -54,7 +54,7 @@ spec:
         - objectName: loki-grafana-cloud-host
           key: host
         - objectName: loki-grafana-cloud-user
-          key: user
+          key: username
         - objectName: loki-grafana-cloud-password
           key: password
     - secretName: tempo-grafana-cloud
@@ -63,16 +63,10 @@ spec:
         - objectName: tempo-grafana-cloud-host
           key: host
         - objectName: tempo-grafana-cloud-user
-          key: user
+          key: username
         - objectName: tempo-grafana-cloud-password
           key: password
-    - secretName: opesncost-prometheus-grafana-cloud
-      type: Opaque
-      data:
-        - objectName: prometheus-grafana-cloud-user
-          key: username
-        - objectName: prometheus-grafana-cloud-password
-          key: password
+
 
 ---
 apiVersion: v1

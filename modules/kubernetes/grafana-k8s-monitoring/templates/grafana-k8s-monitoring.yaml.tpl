@@ -30,7 +30,7 @@ spec:
         secret:
           create: false
           name: prometheus-grafana-cloud
-          namespace: grafana-k8s-monitor
+          namespace: grafana-k8s-monitoring
       loki:
         host: "${grafana_k8s_monitor_config.grafana_cloud_loki_host}"
         secret:
@@ -77,6 +77,7 @@ spec:
         exporter:
           defaultClusterId: "${cluster_name}"
         prometheus:
+        existingSecretName: prometheus-grafana-cloud
           external:
             url: "${grafana_k8s_monitor_config.grafana_cloud_prometheus_host}"
     kube-state-metrics:

@@ -55,7 +55,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: grafana_k8s_monitor
+  name: grafana-k8s-monitor-secret-mount
   namespace: grafana-k8s-monitoring
   annotations:
     azure.workload.identity/client-id: ${client_id}
@@ -76,7 +76,7 @@ spec:
       labels:
         app: grafana-k8s-monitor-secret-mount
     spec:
-      serviceAccountName: grafana_k8s_monitor
+      serviceAccountName: grafana-k8s-monitor-secret-mount
       containers:
         - name: busybox
           image: busybox:latest

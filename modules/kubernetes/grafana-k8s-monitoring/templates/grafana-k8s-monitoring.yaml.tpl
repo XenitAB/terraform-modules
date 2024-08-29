@@ -26,19 +26,16 @@ spec:
       name: "${cluster_name}"
     externalServices:
       prometheus:
-        host: "${grafana_k8s_monitor_config.grafana_cloud_prometheus_host}"
         secret:
           create: false
           name: prometheus-grafana-cloud
           namespace: grafana-k8s-monitoring
       loki:
-        host: "${grafana_k8s_monitor_config.grafana_cloud_loki_host}"
         secret:
           create: false
           name: loki-grafana-cloud
           namespace: grafana-k8s-monitoring
       tempo:
-        host: "${grafana_k8s_monitor_config.grafana_cloud_tempo_host}"
         secret:
           create: false
           name: tempo-grafana-cloud
@@ -77,9 +74,7 @@ spec:
         exporter:
           defaultClusterId: "${cluster_name}"
         prometheus:
-        existingSecretName: prometheus-grafana-cloud
-          external:
-            url: "${grafana_k8s_monitor_config.grafana_cloud_prometheus_host}"
+          existingSecretName: "opesncost-prometheus-grafana-cloud"
     kube-state-metrics:
       enabled: true
     prometheus-node-exporter:

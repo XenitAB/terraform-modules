@@ -38,9 +38,10 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_azure_config"></a> [azure\_config](#input\_azure\_config) | Azure specific configuration | <pre>object({<br><br>  })</pre> | <pre>{<br>  "azure_key_vault_name": ""<br>}</pre> | no |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Unique identifier of the cluster across instances. | `string` | n/a | yes |
-| <a name="input_grafana_k8s_monitor_config"></a> [grafana\_k8s\_monitor\_config](#input\_grafana\_k8s\_monitor\_config) | Configuration for the username and password | <pre>object({<br>    grafana_cloud_prometheus_host = string<br>    grafana_cloud_loki_host       = string<br>    grafana_cloud_tempo_host      = string<br>  })</pre> | <pre>{<br>  "grafana_cloud_loki_host": "",<br>  "grafana_cloud_prometheus_host": "",<br>  "grafana_cloud_tempo_host": ""<br>}</pre> | no |
+| <a name="input_grafana_k8s_monitor_config"></a> [grafana\_k8s\_monitor\_config](#input\_grafana\_k8s\_monitor\_config) | Configuration for the username and password | <pre>object({<br>    grafana_cloud_prometheus_host = string<br>    grafana_cloud_loki_host       = string<br>    grafana_cloud_tempo_host      = string<br>    azure_key_vault_name          = string<br>  })</pre> | <pre>{<br>  "azure_key_vault_name": "",<br>  "grafana_cloud_loki_host": "",<br>  "grafana_cloud_prometheus_host": "",<br>  "grafana_cloud_tempo_host": ""<br>}</pre> | no |
 | <a name="input_key_vault_id"></a> [key\_vault\_id](#input\_key\_vault\_id) | Core key vault id | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | The Azure region name. | `string` | n/a | yes |
 | <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | Kubernetes OIDC issuer URL for workload identity. | `string` | n/a | yes |

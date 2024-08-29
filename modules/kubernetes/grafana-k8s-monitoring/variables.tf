@@ -5,11 +5,22 @@ variable "grafana_k8s_monitor_config" {
     grafana_cloud_prometheus_host = string
     grafana_cloud_loki_host       = string
     grafana_cloud_tempo_host      = string
+    azure_key_vault_name          = string
   })
   default = {
     grafana_cloud_prometheus_host = ""
     grafana_cloud_loki_host       = ""
     grafana_cloud_tempo_host      = ""
+    azure_key_vault_name          = ""
+  }
+}
+variable "azure_config" {
+  description = "Azure specific configuration"
+  type = object({
+
+  })
+  default = {
+    azure_key_vault_name = ""
   }
 }
 variable "cluster_name" {

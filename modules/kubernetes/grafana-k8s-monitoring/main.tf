@@ -46,7 +46,8 @@ resource "git_repository_file" "grafana_k8s_monitoring" {
   content = templatefile("${path.module}/templates/grafana-k8s-monitoring.yaml.tpl", {
     grafana_k8s_monitor_config = var.grafana_k8s_monitor_config
     cluster_name               = var.cluster_name
-    client_id                  = data.azurerm_user_assigned_identity.grafana_k8s_monitor.client_id,
-    tenant_id                  = data.azurerm_user_assigned_identity.grafana_k8s_monitor.tenant_id,
+    tenant_id                  = azurerm_user_assigned_identity.grafana_k8s_monitor.tenant_id,
+    client_id                  = azurerm_user_assigned_identity.grafana_k8s_monitor.client_id,
+    key_vault_name             = var.azure_config.azure_key_vault_name,
   })
 }

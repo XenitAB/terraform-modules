@@ -389,9 +389,9 @@ module "grafana_k8s_monitoring" {
   }
 
   source = "../../kubernetes/grafana-k8s-monitoring"
- # azure_config = {
- #   azure_key_vault_name = var.grafana_k8s_monitor_config.azure_key_vault_name
- # }
+  # azure_config = {
+  #   azure_key_vault_name = var.grafana_k8s_monitor_config.azure_key_vault_name
+  # }
   key_vault_id        = data.azurerm_key_vault.core.id
   location            = data.azurerm_resource_group.this.location
   oidc_issuer_url     = var.oidc_issuer_url

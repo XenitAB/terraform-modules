@@ -131,7 +131,7 @@ resource "azurerm_monitor_action_group" "xks" {
   resource_group_name = data.azurerm_resource_group.this.name
   short_name          = "aks-action-1"
 
-  dynamic email_receiver {
+  dynamic "email_receiver" {
     for_each = var.aks_automation_config.alerts_config.email_to != "" ? [""] : []
 
     content {

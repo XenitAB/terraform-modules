@@ -170,7 +170,7 @@ resource "azurerm_monitor_metric_alert" "xks" {
     threshold        = 0
 
     dimension {
-      name     = "Runbook Name"
+      name     = "Runbook"
       operator = "Include"
       values   = [azurerm_automation_runbook.aks.name]
     }

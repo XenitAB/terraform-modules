@@ -473,6 +473,24 @@ variable "grafana_alloy_config" {
   })
 }
 
+variable "grafana_k8s_monitoring_enabled" {
+  description = "Should Grafana-k8s-chart be enabled/deployed"
+  type        = bool
+  default     = false
+}
+
+
+variable "grafana_k8s_monitor_config" {
+  description = "Grafana k8s monitor chart config"
+  type = object({
+    azure_key_vault_name          = string
+    grafana_cloud_prometheus_host = string
+    grafana_cloud_loki_host       = string
+    grafana_cloud_tempo_host      = string
+    cluster_name                  = string
+  })
+}
+
 variable "falco_enabled" {
   description = "Should Falco be enabled"
   type        = bool

@@ -8,6 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: create entra group for access to automation account operators by @landerss1 in [#1162](https://github.com/XenitAB/terraform-modules/pulls/1162)
+
+
+
+### 🐛 Bug Fixes
+
+
+
+### ⚙️ Miscellaneous
+
+
+
+## [2024.08.1](https://github.com/XenitAB/terraform-modules/releases/tag/2024.08.1)
+
+### 🚀 New Features
 - Feat: prevent destruction of tenant namespaces by @landerss1 in [#1158](https://github.com/XenitAB/terraform-modules/pulls/1158)
 - Feat: adding grafana alloy module for k8s by @optocoupler in [#1156](https://github.com/XenitAB/terraform-modules/pulls/1156)
 - Feat: make service_principal_all_owner_name optional by @landerss1 in [#1139](https://github.com/XenitAB/terraform-modules/pulls/1139)

@@ -389,9 +389,7 @@ module "grafana_k8s_monitoring" {
   }
 
   source = "../../kubernetes/grafana-k8s-monitoring"
-  # azure_config = {
-  #   azure_key_vault_name = var.grafana_k8s_monitor_config.azure_key_vault_name
-  # }
+
   key_vault_id        = data.azurerm_key_vault.core.id
   location            = data.azurerm_resource_group.this.location
   oidc_issuer_url     = var.oidc_issuer_url
@@ -403,6 +401,9 @@ module "grafana_k8s_monitoring" {
     grafana_cloud_prometheus_host = var.grafana_k8s_monitor_config.grafana_cloud_prometheus_host
     grafana_cloud_loki_host       = var.grafana_k8s_monitor_config.grafana_cloud_loki_host
     grafana_cloud_tempo_host      = var.grafana_k8s_monitor_config.grafana_cloud_tempo_host
+    include_namespaces            = var.grafana_k8s_monitor_config.include_namespaces
+    include_namespaces_piped      = var.grafana_k8s_monitor_config.include_namespaces_piped
+    exclude_namespaces            = var.grafana_k8s_monitor_config.exclude_namespaces
   }
 }
 module "ingress_healthz" {

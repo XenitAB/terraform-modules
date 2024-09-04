@@ -96,6 +96,16 @@ spec:
           namespace: grafana-k8s-monitoring
     metrics:
       enabled: true
+      extraMetricRelabelingRules: |-
+        rule {
+            source_labels = ["namespace"]
+            regex = "^$|${include_namespaces_piped}"
+            action = "keep"
+        }
+      podMonitors:
+        namespaces: [${include_namespaces}]
+      serviceMonitors:
+        namespaces: [${include_namespaces}]
       alloy:
         metricsTuning:
           useIntegrationAllowList: true
@@ -109,6 +119,7 @@ spec:
       enabled: true
       pod_logs:
         enabled: true
+        excludeNamespaces: [${exclude_namespaces}]
       cluster_events:
         enabled: true
     traces:

@@ -488,6 +488,9 @@ variable "grafana_k8s_monitor_config" {
     grafana_cloud_loki_host       = string
     grafana_cloud_tempo_host      = string
     cluster_name                  = string
+    include_namespaces            = string
+    include_namespaces_piped      = string
+    exclude_namespaces            = string
   })
 }
 

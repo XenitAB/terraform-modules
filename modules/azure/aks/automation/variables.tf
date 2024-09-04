@@ -36,6 +36,11 @@ variable "location_short" {
   type        = string
 }
 
+variable "notification_email" {
+  description = "Where to send email alerts"
+  type        = string
+}
+
 variable "resource_group_name" {
   description = "The name of the resource group"
   type        = string
@@ -46,6 +51,13 @@ variable "aks_automation_config" {
   description = "AKS automation configuration"
   type = object({
     public_network_access_enabled = optional(bool, false),
+    alerts_config = optional(object({
+      enabled     = optional(bool, true),
+      frequency   = optional(string, ""),
+      window_size = optional(string, ""),
+      severity    = optional(number, 3),
+      email_to    = optional(string, ""),
+    }), {}),
     runbook_schedules = optional(list(object({
       name        = string,
       frequency   = string,

@@ -9,6 +9,13 @@ variable "aks_automation_config" {
   description = "AKS automation configuration"
   type = object({
     public_network_access_enabled = optional(bool, false),
+    alerts_config = optional(object({
+      enabled     = optional(bool, true),
+      frequency   = optional(string, ""),
+      window_size = optional(string, ""),
+      severity    = optional(number, 3),
+      email_to    = optional(string, ""),
+    }), {}),
     runbook_schedules = optional(list(object({
       name        = string,
       frequency   = string,
@@ -31,20 +38,12 @@ variable "aks_automation_config" {
     ]) == length(var.aks_automation_config.runbook_schedules)
     error_message = "The frequency of the schedule must be either 'OneTime', 'Day', 'Hour', 'Week'."
   }
+}
 
-  #validation {
-  #  condition = (var.aks_automation_config.frequency != "Week" && length(var.aks_automation_config.week_days) == 0) || (var.aks_automation_config.frequency == "Week" && contains(
-  #    ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], var.aks_automation_config.week_days
-  #  ))
-  #  error_message = "The frequency of the schedule must be either 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' or 'Sunday'."
-  #}
-
-  #validation {
-  #  condition = contains(
-  #    ["start", "stop"], var.aks_automation_config.operation
-  #  )
-  #  error_message = "The operation of the schedule must be either 'start' or 'stop'."
-  #}
+variable "notification_email" {
+  description = "Where to send email alerts"
+  type        = string
+  default     = "DG-Team-DevOps@xenit.se"
 }
 
 variable "aks_joblogs_retention_days" {

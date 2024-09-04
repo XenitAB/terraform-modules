@@ -119,3 +119,70 @@ resource "azurerm_monitor_diagnostic_setting" "automation_account" {
     enabled  = false
   }
 }
+
+resource "azurerm_monitor_action_group" "xks" {
+  for_each = {
+    for s in ["automation"] :
+    s => s
+    if var.aks_automation_config.alerts_config.enabled
+  }
+
+  name                = "${azurerm_automation_runbook.aks.name}-Failed-Action"
+  resource_group_name = data.azurerm_resource_group.this.name
+  short_name          = azurerm_automation_runbook.aks.name
+
+  dynamic email_receiver {
+    for_each = var.aks_automation_config.alerts_config.email_to != "" ? [""] : []
+    
+    content {
+      name          = "sendtoadmin"
+      email_address = var.aks_automation_config.alerts_config.email_to
+    }
+  }
+
+  # Always send to Xenit
+  email_receiver {
+    name          = "sendtoxenit"
+    email_address = var.notification_email
+  }
+}
+
+resource "azurerm_monitor_metric_alert" "xks" {
+  for_each = {
+    for s in ["automation"] :
+    s => s
+    if var.aks_automation_config.alerts_config.enabled
+  }
+
+  name                = "${azurerm_automation_runbook.aks.name}-alert"
+  resource_group_name = data.azurerm_resource_group.this.name
+  scopes              = [azurerm_automation_account.aks.id]
+  description         = "Action will be triggered when runbook job fails"
+  frequency           = var.aks_automation_config.alerts_config.frequency
+  window_size         = var.aks_automation_config.alerts_config.window_size
+  severity            = var.aks_automation_config.alerts_config.severity
+
+  criteria {
+    metric_namespace = "Microsoft.Automation/automationAccounts"
+    metric_name      = "Total Jobs"
+    aggregation      = "Total"
+    operator         = "GreaterThan"
+    threshold        = 0
+
+    dimension {
+      name     = "Runbook Name"
+      operator = "="
+      values   = [azurerm_automation_runbook.aks.name]
+    }
+
+    dimension {
+      name     = "Status"
+      operator = "="
+      values   = ["Failed"]
+    }
+  }
+
+  action {
+    action_group_id = azurerm_monitor_action_group.xks["automation"].id
+  }
+}

@@ -99,13 +99,13 @@ spec:
       extraMetricRelabelingRules: |-
         rule {
             source_labels = ["namespace"]
-            regex = "^$|${include_namespaces_piped}"
+            regex = "^$|${grafana_k8s_monitor_config.include_namespaces_piped}"
             action = "keep"
         }
       podMonitors:
-        namespaces: [${include_namespaces}]
+        namespaces: [${grafana_k8s_monitor_config.include_namespaces}]
       serviceMonitors:
-        namespaces: [${include_namespaces}]
+        namespaces: [${grafana_k8s_monitor_config.include_namespaces}]
       alloy:
         metricsTuning:
           useIntegrationAllowList: true
@@ -119,7 +119,7 @@ spec:
       enabled: true
       pod_logs:
         enabled: true
-        excludeNamespaces: [${exclude_namespaces}]
+        excludeNamespaces: [${grafana_k8s_monitor_config.exclude_namespaces}]
       cluster_events:
         enabled: true
     traces:

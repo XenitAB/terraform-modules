@@ -129,11 +129,11 @@ resource "azurerm_monitor_action_group" "xks" {
 
   name                = "${azurerm_automation_runbook.aks.name}-Failed-Action"
   resource_group_name = data.azurerm_resource_group.this.name
-  short_name          = azurerm_automation_runbook.aks.name
+  short_name          = "aks-action-1"
 
   dynamic email_receiver {
     for_each = var.aks_automation_config.alerts_config.email_to != "" ? [""] : []
-    
+
     content {
       name          = "sendtoadmin"
       email_address = var.aks_automation_config.alerts_config.email_to

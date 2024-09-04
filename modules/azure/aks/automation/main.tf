@@ -164,7 +164,7 @@ resource "azurerm_monitor_metric_alert" "xks" {
 
   criteria {
     metric_namespace = "Microsoft.Automation/automationAccounts"
-    metric_name      = "Total Jobs"
+    metric_name      = "TotalJob"
     aggregation      = "Total"
     operator         = "GreaterThan"
     threshold        = 0

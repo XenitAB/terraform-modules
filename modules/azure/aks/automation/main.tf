@@ -171,13 +171,13 @@ resource "azurerm_monitor_metric_alert" "xks" {
 
     dimension {
       name     = "Runbook Name"
-      operator = "="
+      operator = "Include"
       values   = [azurerm_automation_runbook.aks.name]
     }
 
     dimension {
       name     = "Status"
-      operator = "="
+      operator = "Include"
       values   = ["Failed"]
     }
   }

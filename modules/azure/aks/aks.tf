@@ -104,7 +104,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     os_disk_type                 = "Ephemeral"
     os_disk_size_gb              = local.vm_skus_disk_size_gb[var.aks_default_node_pool_vm_size]
     enable_auto_scaling          = false
-    node_count                   = var.aks_config.defaut_node_pool_size
+    node_count                   = var.aks_config.default_node_pool_size
     only_critical_addons_enabled = true
 
     upgrade_settings {

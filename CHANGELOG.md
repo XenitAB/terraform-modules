@@ -8,11 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: add initial support for automation alerts by @landerss1 in [#1167](https://github.com/XenitAB/terraform-modules/pulls/1167)
+- Feat: Adding Grafana Cloud k8s monitoring stack by @optocoupler in [#1161](https://github.com/XenitAB/terraform-modules/pulls/1161)
 - Feat: create entra group for access to automation account operators by @landerss1 in [#1162](https://github.com/XenitAB/terraform-modules/pulls/1162)
 
 
 
 ### 🐛 Bug Fixes
+
+
+
+### 🚜 Refactor
+- Refactor: explicitly set AKS SKU tier and node count by @landerss1 in [#1168](https://github.com/XenitAB/terraform-modules/pulls/1168)
 
 
 

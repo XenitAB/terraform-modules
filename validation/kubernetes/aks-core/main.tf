@@ -13,6 +13,9 @@ module "aks_core" {
     grafana_cloud_tempo_host      = "asdas"
     cluster_name                  = "asdas"
     azure_key_vault_name          = "yaba"
+    include_namespaces            = "one,two,three"
+    include_namespaces_piped      = "one|two|three"
+    exclude_namespaces            = "three,two,one"
   }
   grafana_alloy_config = {
     grafana_otelcol_auth_basic_username = ""

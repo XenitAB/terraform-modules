@@ -38,7 +38,7 @@ spec:
         autoscaling:
           enabled: true
           minReplicas: 2
-          maxReplicas: 10
+          maxReplicas: 20
           targetCPUUtilizationPercentage: 0
           targetMemoryUtilizationPercentage: 80
 
@@ -96,6 +96,16 @@ spec:
           namespace: grafana-k8s-monitoring
     metrics:
       enabled: true
+      extraMetricRelabelingRules: |-
+        rule {
+            source_labels = ["namespace"]
+            regex = "^$|${grafana_k8s_monitor_config.include_namespaces_piped}"
+            action = "keep"
+        }
+      podMonitors:
+        namespaces: [${grafana_k8s_monitor_config.include_namespaces}]
+      serviceMonitors:
+        namespaces: [${grafana_k8s_monitor_config.include_namespaces}]
       alloy:
         metricsTuning:
           useIntegrationAllowList: true
@@ -109,6 +119,7 @@ spec:
       enabled: true
       pod_logs:
         enabled: true
+        excludeNamespaces: [${grafana_k8s_monitor_config.exclude_namespaces}]
       cluster_events:
         enabled: true
     traces:

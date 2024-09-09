@@ -17,6 +17,7 @@ module "automation" {
   alerts_resource_group_name = data.azurerm_resource_group.log.name
   alert_name                 = "audit log${var.environment}${var.location_short}${var.name}${var.unique_suffix} storage account missing data"
   location_short             = var.location_short
+  notification_email         = var.notification_email
   resource_group_name        = data.azurerm_resource_group.this.name
   environment                = var.environment
   storage_account_id         = data.azurerm_storage_account.log.id

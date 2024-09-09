@@ -38,7 +38,7 @@ spec:
         autoscaling:
           enabled: true
           minReplicas: 2
-          maxReplicas: 10
+          maxReplicas: 20
           targetCPUUtilizationPercentage: 0
           targetMemoryUtilizationPercentage: 80
 

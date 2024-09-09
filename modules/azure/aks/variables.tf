@@ -114,9 +114,9 @@ variable "aks_default_node_pool_zones" {
 variable "aks_config" {
   description = "The Azure Kubernetes Service (AKS) configuration"
   type = object({
-    version               = string
-    sku_tier              = optional(string, "Free")
-    defaut_node_pool_size = optional(number, 1)
+    version                = string
+    sku_tier               = optional(string, "Free")
+    default_node_pool_size = optional(number, 1)
     # Will replace the default cluster auto scaler expander with a priority expander, 
     # see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md#configuration
     priority_expander_config = optional(map(list(string)))

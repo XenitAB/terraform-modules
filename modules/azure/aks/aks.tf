@@ -25,14 +25,14 @@ resource "azurerm_kubernetes_cluster" "this" {
   resource_group_name = data.azurerm_resource_group.this.name
   dns_prefix          = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   kubernetes_version  = var.aks_config.version
-  sku_tier            = var.aks_config.production_grade ? "Standard" : "Free"
+  sku_tier            = var.aks_config.sku_tier
   run_command_enabled = false
 
   api_server_access_profile {
     authorized_ip_ranges = var.aks_authorized_ips
   }
 
-  cost_analysis_enabled = var.aks_config.production_grade ? var.aks_cost_analysis_enabled : false
+  cost_analysis_enabled = var.aks_cost_analysis_enabled
   azure_policy_enabled  = var.azure_policy_enabled
 
   oidc_issuer_enabled       = true
@@ -104,7 +104,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     os_disk_type                 = "Ephemeral"
     os_disk_size_gb              = local.vm_skus_disk_size_gb[var.aks_default_node_pool_vm_size]
     enable_auto_scaling          = false
-    node_count                   = var.aks_config.production_grade ? 2 : 1
+    node_count                   = var.aks_config.defaut_node_pool_size
     only_critical_addons_enabled = true
 
     upgrade_settings {

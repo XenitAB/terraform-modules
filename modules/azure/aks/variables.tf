@@ -114,9 +114,9 @@ variable "aks_default_node_pool_zones" {
 variable "aks_config" {
   description = "The Azure Kubernetes Service (AKS) configuration"
   type = object({
-    version = string
-    # Enables paid SKU for AKS and makes the default node pool HA
-    production_grade = bool
+    version               = string
+    sku_tier              = optional(string, "Free")
+    defaut_node_pool_size = optional(number, 1)
     # Will replace the default cluster auto scaler expander with a priority expander, 
     # see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md#configuration
     priority_expander_config = optional(map(list(string)))
@@ -158,6 +158,11 @@ variable "aks_config" {
       for np in concat(var.aks_config.node_pools, [{ version : var.aks_config.version }]) : can(regex("^1.(28|29|30|31)", np.version))
     ])
     error_message = "The Kubernetes version has not been validated yet, supported versions are 1.28, 1.29, 1.30 or 1.31."
+  }
+
+  validation {
+    condition     = contains(["Free", "Standard", "Premium"], var.aks_config.sku_tier)
+    error_message = "Invalid pricing_tier: ${var.aks_config.sku_tier}. Allowed vallues: ['Free', 'Standard', 'Premium']"
   }
 
   validation {

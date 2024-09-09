@@ -484,13 +484,13 @@ variable "grafana_k8s_monitor_config" {
   description = "Grafana k8s monitor chart config"
   type = object({
     azure_key_vault_name          = string
-    grafana_cloud_prometheus_host = optional(string)
-    grafana_cloud_loki_host       = optional(string)
-    grafana_cloud_tempo_host      = optional(string)
+    grafana_cloud_prometheus_host = optional(string, "")
+    grafana_cloud_loki_host       = optional(string, "")
+    grafana_cloud_tempo_host      = optional(string, "")
     cluster_name                  = string
-    include_namespaces            = optional(string)
-    include_namespaces_piped      = optional(string)
-    exclude_namespaces            = optional(string)
+    include_namespaces            = optional(string, "")
+    include_namespaces_piped      = optional(string, "")
+    exclude_namespaces            = optional(string, "")
   })
 }
 

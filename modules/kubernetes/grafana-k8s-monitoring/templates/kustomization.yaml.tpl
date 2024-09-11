@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: gatekeeper-config
+    - name: flux-system
   interval: 5m
   sourceRef:
     kind: GitRepository

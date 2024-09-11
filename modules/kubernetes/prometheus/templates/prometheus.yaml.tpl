@@ -67,8 +67,8 @@ spec:
       url: ${remote_write_url}
       headers: 
         THANOS-TENANT: ${tenant_id}
-
-
+    - name: grafana-alloy
+      url: ${remote_write_url_alloy}
       # Setting according to others observation
       # https://github.com/prometheus/prometheus/pull/9634
       # Check docs for more information about settings

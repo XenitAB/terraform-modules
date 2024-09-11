@@ -43,6 +43,7 @@ resource "git_repository_file" "prometheus" {
     tenant_id                       = data.azurerm_user_assigned_identity.xenit.tenant_id,
     remote_write_authenticated      = var.remote_write_authenticated,
     remote_write_url                = var.remote_write_url,
+    remote_write_url_alloy          = var.remote_write_url_alloy,
     volume_claim_storage_class_name = var.volume_claim_storage_class_name,
     volume_claim_size               = var.volume_claim_size,
     resource_selector               = "[${join(", ", var.resource_selector)}]",

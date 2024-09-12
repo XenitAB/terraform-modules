@@ -28,7 +28,7 @@ terraform {
       version = "0.25.3"
     }
     azuredevops = {
-      source  = "mirosoft/azuredevops"
+      source  = "microsoft/azuredevops"
       version = ">=1.3.0"
     }
     kubernetes = {

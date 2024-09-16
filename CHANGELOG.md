@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: disabling opencost by @optocoupler in [#1174](https://github.com/XenitAB/terraform-modules/pulls/1174)
+- Feat: adding filtering for namespaces for grafana k8s chart by @optocoupler in [#1166](https://github.com/XenitAB/terraform-modules/pulls/1166)
 - Feat: add initial support for automation alerts by @landerss1 in [#1167](https://github.com/XenitAB/terraform-modules/pulls/1167)
 - Feat: Adding Grafana Cloud k8s monitoring stack by @optocoupler in [#1161](https://github.com/XenitAB/terraform-modules/pulls/1161)
 - Feat: create entra group for access to automation account operators by @landerss1 in [#1162](https://github.com/XenitAB/terraform-modules/pulls/1162)
@@ -15,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: in some clusters we dont use gatekeeper-config by @optocoupler in [#1175](https://github.com/XenitAB/terraform-modules/pulls/1175)
+- Fix: incorrect naming of input variable by @landerss1 in [#1170](https://github.com/XenitAB/terraform-modules/pulls/1170)
 
 
 
@@ -24,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: bump peter-evans/create-pull-request from 4 to 7 by @landerss1 in [#1172](https://github.com/XenitAB/terraform-modules/pulls/1172)
+- Chore: upgrade falco-exporter chart to 0.12.1 by @landerss1 in [#1173](https://github.com/XenitAB/terraform-modules/pulls/1173)
 
 
 

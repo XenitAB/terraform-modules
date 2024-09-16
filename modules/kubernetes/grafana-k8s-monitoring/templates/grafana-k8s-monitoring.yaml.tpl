@@ -134,7 +134,7 @@ spec:
       grafanaCloudMetrics:
         enabled: false
     opencost:
-      enabled: true
+      enabled: false
       opencost:
         exporter:
           defaultClusterId: "${cluster_name}"

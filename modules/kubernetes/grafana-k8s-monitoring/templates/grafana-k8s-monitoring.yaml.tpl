@@ -27,7 +27,7 @@ spec:
         resources:
           requests:
             cpu: "1m"
-            memory: "500Mi"
+            memory: "2G"
 
         storagePath: /var/lib/alloy
         mounts:
@@ -38,7 +38,7 @@ spec:
         autoscaling:
           enabled: true
           minReplicas: 2
-          maxReplicas: 20
+          maxReplicas: 10
           targetCPUUtilizationPercentage: 0
           targetMemoryUtilizationPercentage: 80
 

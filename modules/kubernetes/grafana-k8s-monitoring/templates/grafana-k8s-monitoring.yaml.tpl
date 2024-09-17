@@ -149,7 +149,7 @@ spec:
     prometheus-operator-crds:
       enabled: false
     kepler:
-      enabled: true
+      enabled: false
     alloy-events: {}
 ---
 apiVersion: secrets-store.csi.x-k8s.io/v1

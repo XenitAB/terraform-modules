@@ -31,6 +31,11 @@ variable "environment" {
   type        = string
 }
 
+variable "location" {
+  description = "The Azure region"
+  type        = string
+}
+
 variable "location_short" {
   description = "The Azure region short name"
   type        = string

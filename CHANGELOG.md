@@ -17,12 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: wrong location name forces replacement of automation resources by @landerss1 in [#1179](https://github.com/XenitAB/terraform-modules/pulls/1179)
 - Fix: in some clusters we dont use gatekeeper-config by @optocoupler in [#1175](https://github.com/XenitAB/terraform-modules/pulls/1175)
 - Fix: incorrect naming of input variable by @landerss1 in [#1170](https://github.com/XenitAB/terraform-modules/pulls/1170)
 
 
 
 ### 🚜 Refactor
+- Refactor: use Microsoft provider for Azure DevOps by @landerss1 in [#1177](https://github.com/XenitAB/terraform-modules/pulls/1177)
 - Refactor: explicitly set AKS SKU tier and node count by @landerss1 in [#1168](https://github.com/XenitAB/terraform-modules/pulls/1168)
 
 
@@ -30,6 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### ⚙️ Miscellaneous
 - Chore: bump peter-evans/create-pull-request from 4 to 7 by @landerss1 in [#1172](https://github.com/XenitAB/terraform-modules/pulls/1172)
 - Chore: upgrade falco-exporter chart to 0.12.1 by @landerss1 in [#1173](https://github.com/XenitAB/terraform-modules/pulls/1173)
+
+
+
+### 📚 Documentation
 
 
 

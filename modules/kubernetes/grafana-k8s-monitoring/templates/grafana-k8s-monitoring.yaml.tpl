@@ -27,7 +27,7 @@ spec:
         resources:
           requests:
             cpu: "1m"
-            memory: "500Mi"
+            memory: "2G"
 
         storagePath: /var/lib/alloy
         mounts:
@@ -38,7 +38,7 @@ spec:
         autoscaling:
           enabled: true
           minReplicas: 2
-          maxReplicas: 20
+          maxReplicas: 10
           targetCPUUtilizationPercentage: 0
           targetMemoryUtilizationPercentage: 80
 
@@ -149,7 +149,7 @@ spec:
     prometheus-operator-crds:
       enabled: false
     kepler:
-      enabled: true
+      enabled: false
     alloy-events: {}
 ---
 apiVersion: secrets-store.csi.x-k8s.io/v1

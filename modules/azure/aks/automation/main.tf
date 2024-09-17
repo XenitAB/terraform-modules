@@ -17,7 +17,7 @@ resource "azuread_group" "automation_access" {
 
 resource "azurerm_user_assigned_identity" "aks_automation" {
   resource_group_name = data.azurerm_resource_group.this.name
-  location            = data.azurerm_resource_group.this.location
+  location            = var.location
   name                = "uai-${var.aks_name}-auto"
 }
 
@@ -35,7 +35,7 @@ resource "azurerm_role_assignment" "automation_access" {
 
 resource "azurerm_automation_account" "aks" {
   name                          = "auto-${var.aks_name}"
-  location                      = data.azurerm_resource_group.this.location
+  location                      = var.location
   resource_group_name           = data.azurerm_resource_group.this.name
   public_network_access_enabled = var.aks_automation_config.public_network_access_enabled
   sku_name                      = "Basic"
@@ -52,7 +52,7 @@ resource "azurerm_automation_account" "aks" {
 
 resource "azurerm_automation_runbook" "aks" {
   name                    = "AKS-StartStop"
-  location                = data.azurerm_resource_group.this.location
+  location                = var.location
   resource_group_name     = data.azurerm_resource_group.this.name
   automation_account_name = azurerm_automation_account.aks.name
   log_verbose             = "false"

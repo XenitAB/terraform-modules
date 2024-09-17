@@ -52,6 +52,12 @@ variable "aks_joblogs_retention_days" {
   default     = 7
 }
 
+variable "location" {
+  description = "The Azure region"
+  type        = string
+  default     = "West Europe"
+}
+
 variable "location_short" {
   description = "The Azure region short name"
   type        = string

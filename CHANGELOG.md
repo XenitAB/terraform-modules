@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: fixing the memory consumption issues by @optocoupler in [#1180](https://github.com/XenitAB/terraform-modules/pulls/1180)
 - Feat: disabling opencost by @optocoupler in [#1174](https://github.com/XenitAB/terraform-modules/pulls/1174)
 - Feat: adding filtering for namespaces for grafana k8s chart by @optocoupler in [#1166](https://github.com/XenitAB/terraform-modules/pulls/1166)
 - Feat: add initial support for automation alerts by @landerss1 in [#1167](https://github.com/XenitAB/terraform-modules/pulls/1167)

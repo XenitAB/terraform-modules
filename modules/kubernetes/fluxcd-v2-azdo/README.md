@@ -28,7 +28,7 @@ the bootstrap configuration.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuredevops"></a> [azuredevops](#provider\_azuredevops) | 1.3.0 |
+| <a name="provider_azuredevops"></a> [azuredevops](#provider\_azuredevops) | >=1.3.0 |
 | <a name="provider_flux"></a> [flux](#provider\_flux) | 0.25.3 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |

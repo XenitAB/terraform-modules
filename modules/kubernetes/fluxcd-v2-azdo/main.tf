@@ -210,7 +210,7 @@ resource "azuredevops_git_repository_file" "tenant" {
   repository_id = data.azuredevops_git_repository.cluster.id
   branch        = "refs/heads/${var.branch}"
   file          = "tenants/${var.cluster_id}/${each.key}.yaml"
-  content = templatefile("${path.module}/templates/tenant.yaml", {
+  content = templatefile("${path.module}/templates/tenant.yaml.tpl", {
     repo                     = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${each.value.flux.proj}/_git/${each.value.flux.repo}"
     branch                   = var.branch,
     name                     = each.key,

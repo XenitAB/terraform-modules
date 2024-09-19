@@ -101,6 +101,7 @@ spec:
   enforcementAction: deny
   match:
     excludedNamespaces:
+    - ambassador
     - flux-system
     kinds:
     - apiGroups:

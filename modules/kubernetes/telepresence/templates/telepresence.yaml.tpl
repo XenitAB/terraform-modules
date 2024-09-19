@@ -29,6 +29,7 @@ spec:
         name: telepresence
       version: v2.18.1
   interval: 1m0s
+  serviceAccountName: default
   values:
     client:
       %{ if length(telepresence_config.allow_conflicting_subnets) > 0 }

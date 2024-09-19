@@ -254,13 +254,13 @@ module "fluxcd_v2_azure_devops" {
 
   source = "../../kubernetes/fluxcd-v2-azdo"
 
-  environment              = var.environment
-  cluster_id               = local.cluster_id
-  azure_devops_pat         = var.fluxcd_v2_config.azure_devops.pat
-  azure_devops_org         = var.fluxcd_v2_config.azure_devops.org
-  azure_devops_proj        = var.fluxcd_v2_config.azure_devops.proj
-  cluster_repo             = var.fluxcd_v2_config.azure_devops.repo
-  slack_flux_alert_webhook = var.slack_flux_alert_webhook
+  environment             = var.environment
+  cluster_id              = local.cluster_id
+  azure_devops_pat        = var.fluxcd_v2_config.azure_devops.pat
+  azure_devops_org        = var.fluxcd_v2_config.azure_devops.org
+  azure_devops_proj       = var.fluxcd_v2_config.azure_devops.proj
+  cluster_repo            = var.fluxcd_v2_config.azure_devops.repo
+  slack_flux_alert_config = var.slack_flux_alert_config
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {
@@ -283,13 +283,13 @@ module "fluxcd_v2_github" {
 
   source = "../../kubernetes/fluxcd-v2-github"
 
-  environment              = var.environment
-  cluster_id               = local.cluster_id
-  github_org               = var.fluxcd_v2_config.github.org
-  github_app_id            = var.fluxcd_v2_config.github.app_id
-  github_installation_id   = var.fluxcd_v2_config.github.installation_id
-  github_private_key       = var.fluxcd_v2_config.github.private_key
-  slack_flux_alert_webhook = var.slack_flux_alert_webhook
+  environment             = var.environment
+  cluster_id              = local.cluster_id
+  github_org              = var.fluxcd_v2_config.github.org
+  github_app_id           = var.fluxcd_v2_config.github.app_id
+  github_installation_id  = var.fluxcd_v2_config.github.installation_id
+  github_private_key      = var.fluxcd_v2_config.github.private_key
+  slack_flux_alert_config = var.slack_flux_alert_config
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {

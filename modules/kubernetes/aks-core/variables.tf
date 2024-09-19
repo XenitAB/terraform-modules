@@ -732,8 +732,15 @@ variable "azure_service_operator_config" {
   }
 }
 
-variable "slack_flux_alert_webhook" {
+variable "slack_flux_alert_config" {
   description = "A webhook address for sending alerts to slack"
-  type        = string
-  default     = "main"
+  type = object({
+    xenit_webhook  = string
+    tenant_webhook = string
+
+  })
+  default = {
+    xenit_webhook  = ""
+    tenant_webhook = ""
+  }
 }

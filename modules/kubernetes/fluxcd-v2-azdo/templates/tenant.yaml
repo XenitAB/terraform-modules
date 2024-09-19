@@ -94,7 +94,7 @@ roleRef:
 %{ endif }
 
 ---
-apiVersion: notification.toolkit.fluxcd.io/v1beta1
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Provider
 metadata:
   name: slack
@@ -105,7 +105,7 @@ spec:
   address: "${slack_flux_alert_webhook}"
 
 ---
-apiVersion: notification.toolkit.fluxcd.io/v1beta1
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
 metadata:
   name: flux-reconciliation

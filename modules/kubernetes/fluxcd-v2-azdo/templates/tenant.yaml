@@ -92,3 +92,35 @@ roleRef:
   kind: ClusterRole
   name: flux-tenant-${name}-crd-manage
 %{ endif }
+
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: slack
+  namespace: flux-system
+spec:
+  type: slack
+  channel: xks-alerts
+  address: "https://hooks.slack.com/services/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"
+
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  name: flux-reconciliation
+  namespace: flux-system
+  labels:
+    cluster: ${azure_devops_org}
+    environment: $(cluster_id)
+spec:
+  providerRef:
+    name: slack
+  eventSeverity: info
+  eventSources:
+    - kind: GitRepository
+      name: '*'
+    - kind: Kustomization
+      name: '*'
+    - kind: HelmRelease
+      name: '*'

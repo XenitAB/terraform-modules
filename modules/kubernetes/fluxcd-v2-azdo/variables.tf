@@ -64,3 +64,8 @@ variable "branch" {
   type        = string
   default     = "main"
 }
+variable "slack_flux_alert_webhook" {
+  description = "A webhook address for sending alerts to slack"
+  type        = string
+  default     = "main"
+}

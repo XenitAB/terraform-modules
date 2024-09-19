@@ -98,7 +98,7 @@ metadata:
 spec:
   type: slack
   channel: xks-alerts
-  address: "https://hooks.slack.com/services/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"
+  address: "$(slack_flux_alert_webhook)"
 
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta1

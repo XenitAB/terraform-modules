@@ -111,7 +111,7 @@ metadata:
   name: flux-reconciliation
   namespace: flux-system
   labels:
-    cluster: ${azure_devops_org}
+    cluster: $(azure_devops_org)
     environment: $(cluster_id)
 spec:
   providerRef:

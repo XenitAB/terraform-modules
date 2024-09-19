@@ -206,11 +206,14 @@ resource "github_repository_file" "tenant" {
   branch     = var.branch
   file       = "tenants/${var.cluster_id}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {
-    repo        = "${local.git_auth_proxy_url}/${var.github_org}/${each.value.flux.repo}.git"
-    branch      = var.branch,
-    name        = each.key,
-    environment = var.environment,
-    create_crds = false,
+    repo                     = "${local.git_auth_proxy_url}/${var.github_org}/${each.value.flux.repo}.git"
+    branch                   = var.branch,
+    name                     = each.key,
+    environment              = var.environment,
+    create_crds              = false,
+    slack_flux_alert_webhook = var.slack_flux_alert_webhook
+    github_org               = var.github_org
+    cluster_id               = var.cluster_id
   })
   overwrite_on_create = true
 

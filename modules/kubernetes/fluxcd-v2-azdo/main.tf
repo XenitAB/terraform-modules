@@ -211,12 +211,15 @@ resource "azuredevops_git_repository_file" "tenant" {
   branch        = "refs/heads/${var.branch}"
   file          = "tenants/${var.cluster_id}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {
-    repo                = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${each.value.flux.proj}/_git/${each.value.flux.repo}"
-    branch              = var.branch,
-    name                = each.key,
-    environment         = var.environment,
-    include_tenant_name = each.value.flux.include_tenant_name,
-    create_crds         = each.value.flux.create_crds
+    repo                     = "${local.git_auth_proxy_url}/${var.azure_devops_org}/${each.value.flux.proj}/_git/${each.value.flux.repo}"
+    branch                   = var.branch,
+    name                     = each.key,
+    environment              = var.environment,
+    include_tenant_name      = each.value.flux.include_tenant_name,
+    create_crds              = each.value.flux.create_crds
+    slack_flux_alert_webhook = var.slack_flux_alert_webhook
+    azure_devops_org         = var.azure_devops_org
+    cluster_id               = var.cluster_id
   })
   overwrite_on_create = true
 

@@ -28,7 +28,7 @@ the bootstrap configuration.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuredevops"></a> [azuredevops](#provider\_azuredevops) | >=1.3.0 |
+| <a name="provider_azuredevops"></a> [azuredevops](#provider\_azuredevops) | 1.3.0 |
 | <a name="provider_flux"></a> [flux](#provider\_flux) | 0.25.3 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
@@ -70,6 +70,7 @@ No modules.
 | <a name="input_cluster_repo"></a> [cluster\_repo](#input\_cluster\_repo) | Name of cluster repository | `string` | `"fleet-infra"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name of the cluster | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled             = bool<br>        create_crds         = bool<br>        include_tenant_name = bool<br>        org                 = string<br>        proj                = string<br>        repo                = string<br>      })<br>    })<br>  )</pre> | <pre>[<br>  {<br>    "flux": {<br>      "create_crds": false,<br>      "enabled": true,<br>      "include_tenant_name": false,<br>      "org": "",<br>      "proj": "",<br>      "repo": ""<br>    },<br>    "name": ""<br>  }<br>]</pre> | no |
+| <a name="input_slack_flux_alert_webhook"></a> [slack\_flux\_alert\_webhook](#input\_slack\_flux\_alert\_webhook) | A webhook address for sending alerts to slack | `string` | `"main"` | no |
 
 ## Outputs
 

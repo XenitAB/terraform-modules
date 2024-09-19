@@ -70,6 +70,7 @@ No modules.
 | <a name="input_github_org"></a> [github\_org](#input\_github\_org) | Org of GitHub repositories | `string` | n/a | yes |
 | <a name="input_github_private_key"></a> [github\_private\_key](#input\_github\_private\_key) | Private Key for GitHub Application used by Git Auth Proxy | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled = bool<br>        repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
+| <a name="input_slack_flux_alert_webhook"></a> [slack\_flux\_alert\_webhook](#input\_slack\_flux\_alert\_webhook) | A webhook address for sending alerts to slack | `string` | `"main"` | no |
 
 ## Outputs
 

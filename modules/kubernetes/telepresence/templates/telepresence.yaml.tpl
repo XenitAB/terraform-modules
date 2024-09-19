@@ -43,7 +43,9 @@ spec:
       %{ if length(telepresence_config.client_rbac.subjects) > 0 }
       subjects:
       %{ for subject in telepresence_config.client_rbac.subjects }
-      - ${subject}
+      - Kind: Group
+        name: ${subject}
+        apiGroup: rbac.authorization.k8s.io
       %{ endfor }
       %{ endif }
       namespaced: ${ telepresence_config.client_rbac.namespaced }

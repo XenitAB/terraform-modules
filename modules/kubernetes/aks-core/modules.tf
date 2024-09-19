@@ -260,7 +260,7 @@ module "fluxcd_v2_azure_devops" {
   azure_devops_org         = var.fluxcd_v2_config.azure_devops.org
   azure_devops_proj        = var.fluxcd_v2_config.azure_devops.proj
   cluster_repo             = var.fluxcd_v2_config.azure_devops.repo
-  slack_flux_alert_webhook = var.fluxcd_v2_config.slack_flux_alert_webhook
+  slack_flux_alert_webhook = var.slack_flux_alert_webhook
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {
@@ -289,7 +289,7 @@ module "fluxcd_v2_github" {
   github_app_id            = var.fluxcd_v2_config.github.app_id
   github_installation_id   = var.fluxcd_v2_config.github.installation_id
   github_private_key       = var.fluxcd_v2_config.github.private_key
-  slack_flux_alert_webhook = var.fluxcd_v2_config.slack_flux_alert_webhook
+  slack_flux_alert_webhook = var.slack_flux_alert_webhook
   namespaces = [for ns in var.namespaces : {
     name = ns.name
     flux = {

@@ -151,19 +151,17 @@ variable "fluxcd_v2_config" {
   type = object({
     type = string
     github = object({
-      org                      = string
-      app_id                   = number
-      installation_id          = number
-      private_key              = string
-      repo                     = optional(string, "fleet-infra")
-      slack_flux_alert_webhook = string
+      org             = string
+      app_id          = number
+      installation_id = number
+      private_key     = string
+      repo            = optional(string, "fleet-infra")
     })
     azure_devops = object({
-      pat                      = string
-      org                      = string
-      proj                     = string
-      repo                     = optional(string, "fleet-infra")
-      slack_flux_alert_webhook = string
+      pat  = string
+      org  = string
+      proj = string
+      repo = optional(string, "fleet-infra")
     })
   })
 }
@@ -732,4 +730,10 @@ variable "azure_service_operator_config" {
     condition     = var.azure_service_operator_config.cluster_config.crd_pattern != "*"
     error_message = "Installing all CRD:s in the cluster is not supported, please limit to the ones needed"
   }
+}
+
+variable "slack_flux_alert_webhook" {
+  description = "A webhook address for sending alerts to slack"
+  type        = string
+  default     = "main"
 }

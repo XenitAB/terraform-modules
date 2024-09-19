@@ -98,7 +98,7 @@ metadata:
 spec:
   type: slack
   channel: xks-alerts
-  address: "$(slack_flux_alert_webhook)"
+  address: "${slack_flux_alert_webhook}"
 
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta1
@@ -108,7 +108,7 @@ metadata:
   namespace: flux-system
   labels:
     cluster: ${github_org}
-    environment: $(cluster_id)
+    environment: ${cluster_id}
 spec:
   providerRef:
     name: slack

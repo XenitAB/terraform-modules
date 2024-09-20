@@ -20,6 +20,7 @@ the bootstrap configuration.
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuredevops"></a> [azuredevops](#requirement\_azuredevops) | >=1.3.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.25.3 |
+| <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.23.0 |
@@ -30,6 +31,7 @@ the bootstrap configuration.
 |------|---------|
 | <a name="provider_azuredevops"></a> [azuredevops](#provider\_azuredevops) | 1.3.0 |
 | <a name="provider_flux"></a> [flux](#provider\_flux) | 0.25.3 |
+| <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
@@ -47,6 +49,8 @@ No modules.
 | [azuredevops_git_repository_file.kustomize](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/git_repository_file) | resource |
 | [azuredevops_git_repository_file.sync](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/git_repository_file) | resource |
 | [azuredevops_git_repository_file.tenant](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/git_repository_file) | resource |
+| [git_repository_file.flux-alerts](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.kustomization](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [helm_release.git_auth_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
 | [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
 | [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |

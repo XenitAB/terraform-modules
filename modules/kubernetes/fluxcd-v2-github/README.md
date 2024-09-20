@@ -19,6 +19,7 @@ the bootstrap configuration.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.25.3 |
+| <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 5.34.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
@@ -29,6 +30,7 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | <a name="provider_flux"></a> [flux](#provider\_flux) | 0.25.3 |
+| <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
 | <a name="provider_github"></a> [github](#provider\_github) | 5.34.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
@@ -42,6 +44,8 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [git_repository_file.flux-alerts](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.kustomization](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [github_repository_file.cluster_tenants](https://registry.terraform.io/providers/integrations/github/5.34.0/docs/resources/repository_file) | resource |
 | [github_repository_file.install](https://registry.terraform.io/providers/integrations/github/5.34.0/docs/resources/repository_file) | resource |
 | [github_repository_file.kustomize](https://registry.terraform.io/providers/integrations/github/5.34.0/docs/resources/repository_file) | resource |

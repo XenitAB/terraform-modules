@@ -24,7 +24,7 @@ spec:
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Alert
 metadata:
-  name: flux-reconciliation
+  name: flux-reconciliation-customer
   namespace: flux-system
 spec:
   summary: "Customer: ${github_org} Env: ${cluster_id}. These are only Xenit related flux generated alerts"

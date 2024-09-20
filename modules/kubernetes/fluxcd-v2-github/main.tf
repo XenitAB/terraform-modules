@@ -227,16 +227,16 @@ resource "github_repository_file" "tenant" {
   }
 }
 resource "git_repository_file" "kustomization" {
-  path       = "clusters/${var.cluster_id}/flux-alerts.yaml"
+  path       = "clusters/${var.cluster_id}/flux_alerts.yaml"
   depends_on = [kubernetes_namespace.this]
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
     cluster_id = var.cluster_id,
   })
 }
 
-resource "git_repository_file" "flux-alerts" {
-  path = "platform/${var.cluster_id}/flux-alerts/flux-alerts.yaml"
-  content = templatefile("${path.module}/templates/flux-alerts.yaml.tpl", {
+resource "git_repository_file" "flux_alerts" {
+  path = "platform/${var.cluster_id}/flux-alerts/flux_alerts.yaml"
+  content = templatefile("${path.module}/templates/flux_alerts.yaml.tpl", {
     slack_flux_alert_config = {
       xenit_webhook  = var.slack_flux_alert_config.xenit_webhook
       tenant_webhook = var.slack_flux_alert_config.tenant_webhook

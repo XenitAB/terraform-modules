@@ -23,6 +23,10 @@ module "aks_core" {
     azure_key_vault_name                = ""
     keyvault_secret_name                = ""
   }
+  slack_flux_alert_config = {
+    xenit_webhook  = "barfoo"
+    tenant_webhook = "barbar"
+  }
   name                    = "baz"
   aks_name_suffix         = 1
   core_name               = "core"

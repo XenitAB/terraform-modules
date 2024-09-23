@@ -19,6 +19,7 @@ the bootstrap configuration.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.25.3 |
+| <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 5.34.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
@@ -29,6 +30,7 @@ the bootstrap configuration.
 | Name | Version |
 |------|---------|
 | <a name="provider_flux"></a> [flux](#provider\_flux) | 0.25.3 |
+| <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
 | <a name="provider_github"></a> [github](#provider\_github) | 5.34.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
@@ -42,6 +44,8 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [git_repository_file.flux_alerts](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.kustomization](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [github_repository_file.cluster_tenants](https://registry.terraform.io/providers/integrations/github/5.34.0/docs/resources/repository_file) | resource |
 | [github_repository_file.install](https://registry.terraform.io/providers/integrations/github/5.34.0/docs/resources/repository_file) | resource |
 | [github_repository_file.kustomize](https://registry.terraform.io/providers/integrations/github/5.34.0/docs/resources/repository_file) | resource |
@@ -70,6 +74,7 @@ No modules.
 | <a name="input_github_org"></a> [github\_org](#input\_github\_org) | Org of GitHub repositories | `string` | n/a | yes |
 | <a name="input_github_private_key"></a> [github\_private\_key](#input\_github\_private\_key) | Private Key for GitHub Application used by Git Auth Proxy | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled = bool<br>        repo    = string<br>      })<br>    })<br>  )</pre> | n/a | yes |
+| <a name="input_slack_flux_alert_config"></a> [slack\_flux\_alert\_config](#input\_slack\_flux\_alert\_config) | A webhook address for sending alerts to slack | <pre>object({<br>    xenit_webhook  = string<br>    tenant_webhook = string<br><br>  })</pre> | <pre>{<br>  "tenant_webhook": "",<br>  "xenit_webhook": ""<br>}</pre> | no |
 
 ## Outputs
 

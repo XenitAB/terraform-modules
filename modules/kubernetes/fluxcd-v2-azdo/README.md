@@ -20,6 +20,7 @@ the bootstrap configuration.
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuredevops"></a> [azuredevops](#requirement\_azuredevops) | >=1.3.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 0.25.3 |
+| <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.23.0 |
@@ -30,6 +31,7 @@ the bootstrap configuration.
 |------|---------|
 | <a name="provider_azuredevops"></a> [azuredevops](#provider\_azuredevops) | >=1.3.0 |
 | <a name="provider_flux"></a> [flux](#provider\_flux) | 0.25.3 |
+| <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
@@ -47,6 +49,8 @@ No modules.
 | [azuredevops_git_repository_file.kustomize](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/git_repository_file) | resource |
 | [azuredevops_git_repository_file.sync](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/git_repository_file) | resource |
 | [azuredevops_git_repository_file.tenant](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/git_repository_file) | resource |
+| [git_repository_file.flux_alerts](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.kustomization](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [helm_release.git_auth_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
 | [kubectl_manifest.install](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
 | [kubectl_manifest.sync](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
@@ -70,6 +74,7 @@ No modules.
 | <a name="input_cluster_repo"></a> [cluster\_repo](#input\_cluster\_repo) | Name of cluster repository | `string` | `"fleet-infra"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name of the cluster | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces to configure flux with | <pre>list(<br>    object({<br>      name = string<br>      flux = object({<br>        enabled             = bool<br>        create_crds         = bool<br>        include_tenant_name = bool<br>        org                 = string<br>        proj                = string<br>        repo                = string<br>      })<br>    })<br>  )</pre> | <pre>[<br>  {<br>    "flux": {<br>      "create_crds": false,<br>      "enabled": true,<br>      "include_tenant_name": false,<br>      "org": "",<br>      "proj": "",<br>      "repo": ""<br>    },<br>    "name": ""<br>  }<br>]</pre> | no |
+| <a name="input_slack_flux_alert_config"></a> [slack\_flux\_alert\_config](#input\_slack\_flux\_alert\_config) | A webhook address for sending alerts to slack | <pre>object({<br>    xenit_webhook  = string<br>    tenant_webhook = string<br><br>  })</pre> | <pre>{<br>  "tenant_webhook": "",<br>  "xenit_webhook": ""<br>}</pre> | no |
 
 ## Outputs
 

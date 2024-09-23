@@ -1,6 +1,7 @@
 locals {
   exclude_namespaces = [
     "aad-pod-identity",
+    "ambassador",
     "azad-kube-proxy",
     "azdo-proxy",
     "azure-metrics",

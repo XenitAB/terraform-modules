@@ -32,8 +32,9 @@ patchesStrategicMerge:
       spec:
         priorityClassName: platform-medium
         containers:
-          args: 
-            - '--rate-limit-interval=30m'
+          - name: manager
+            args:
+              - '--rate-limit-interval=30m'
 - |-
   apiVersion: apps/v1
   kind: Deployment

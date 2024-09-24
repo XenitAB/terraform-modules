@@ -11,4 +11,8 @@ module "fluxcd_v2" {
   cluster_id             = "foobar"
   cluster_repo           = "repo"
   namespaces             = []
+  slack_flux_alert_config = {
+    xenit_webhook  = "barfoo"
+    tenant_webhook = "barbar"
+  }
 }

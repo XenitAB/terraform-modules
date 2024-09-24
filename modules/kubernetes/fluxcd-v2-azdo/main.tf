@@ -39,6 +39,10 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = "1.14.0"
     }
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
+    }
   }
 }
 
@@ -217,6 +221,8 @@ resource "azuredevops_git_repository_file" "tenant" {
     environment         = var.environment,
     include_tenant_name = each.value.flux.include_tenant_name,
     create_crds         = each.value.flux.create_crds
+    azure_devops_org    = var.azure_devops_org
+    cluster_id          = var.cluster_id
   })
   overwrite_on_create = true
 
@@ -225,4 +231,24 @@ resource "azuredevops_git_repository_file" "tenant" {
       commit_message,
     ]
   }
+}
+
+resource "git_repository_file" "kustomization" {
+  path       = "clusters/${var.cluster_id}/flux-alerts.yaml"
+  depends_on = [kubernetes_namespace.this]
+  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
+    cluster_id = var.cluster_id,
+  })
+}
+
+resource "git_repository_file" "flux_alerts" {
+  path = "platform/${var.cluster_id}/flux-alerts/flux-alerts.yaml"
+  content = templatefile("${path.module}/templates/flux-alerts.yaml.tpl", {
+    slack_flux_alert_config = {
+      xenit_webhook  = var.slack_flux_alert_config.xenit_webhook
+      tenant_webhook = var.slack_flux_alert_config.tenant_webhook
+    }
+    azure_devops_org = var.azure_devops_org
+    cluster_id       = var.cluster_id
+  })
 }

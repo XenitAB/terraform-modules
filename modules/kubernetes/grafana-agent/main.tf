@@ -52,10 +52,10 @@ resource "kubernetes_secret" "this" {
 resource "git_repository_file" "kustomization" {
   path = "clusters/${var.cluster_id}/grafana-agent.yaml"
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-    remote_write_logs_url       = var.remote_write_urls.logs
-    remote_write_metrics_url    = var.remote_write_urls.metrics
-    remote_write_traces_url     = var.remote_write_urls.traces
+    cluster_id               = var.cluster_id
+    remote_write_logs_url    = var.remote_write_urls.logs
+    remote_write_metrics_url = var.remote_write_urls.metrics
+    remote_write_traces_url  = var.remote_write_urls.traces
   })
 }
 

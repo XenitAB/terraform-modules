@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: improved grafana agent configuration by @landerss1 in [#1192](https://github.com/XenitAB/terraform-modules/pulls/1192)
+- Feat: add gateway_transit option to peering_config by @landerss1 in [#1189](https://github.com/XenitAB/terraform-modules/pulls/1189)
+- Feat: changing the alerts interval evaluation time by @optocoupler in [#1184](https://github.com/XenitAB/terraform-modules/pulls/1184)
+- Feat: adding alerting for flux by @optocoupler in [#1182](https://github.com/XenitAB/terraform-modules/pulls/1182)
 - Feat: fixing the memory consumption issues by @optocoupler in [#1180](https://github.com/XenitAB/terraform-modules/pulls/1180)
 - Feat: disabling opencost by @optocoupler in [#1174](https://github.com/XenitAB/terraform-modules/pulls/1174)
 - Feat: adding filtering for namespaces for grafana k8s chart by @optocoupler in [#1166](https://github.com/XenitAB/terraform-modules/pulls/1166)
@@ -18,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: grafana alloy using wrong location short name by @landerss1 in [#1188](https://github.com/XenitAB/terraform-modules/pulls/1188)
+- Fix: telepresence deployment error by @landerss1 in [#1187](https://github.com/XenitAB/terraform-modules/pulls/1187)
+- Fix: Revert Exclude ambassador namespace" by @landerss1 in [#1186](https://github.com/XenitAB/terraform-modules/pulls/1186)
+- Fix: Exclude ambassador namespace by @CalleB3 in [#1185](https://github.com/XenitAB/terraform-modules/pulls/1185)
 - Fix: wrong location name forces replacement of automation resources by @landerss1 in [#1179](https://github.com/XenitAB/terraform-modules/pulls/1179)
 - Fix: in some clusters we dont use gatekeeper-config by @optocoupler in [#1175](https://github.com/XenitAB/terraform-modules/pulls/1175)
 - Fix: incorrect naming of input variable by @landerss1 in [#1170](https://github.com/XenitAB/terraform-modules/pulls/1170)
@@ -31,6 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: bump ytanikin/PRConventionalCommits from 1.2.0 to 1.3.0 by @landerss1 in [#1190](https://github.com/XenitAB/terraform-modules/pulls/1190)
+- Ci: bump terraform-docs version to v 0.19.0 by @landerss1 in [#1193](https://github.com/XenitAB/terraform-modules/pulls/1193)
 - Chore: bump peter-evans/create-pull-request from 4 to 7 by @landerss1 in [#1172](https://github.com/XenitAB/terraform-modules/pulls/1172)
 - Chore: upgrade falco-exporter chart to 0.12.1 by @landerss1 in [#1173](https://github.com/XenitAB/terraform-modules/pulls/1173)
 

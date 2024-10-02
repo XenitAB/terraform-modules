@@ -139,7 +139,7 @@ spec:
           operator: "Exists"
       containers:
         - name: node-cache
-          image: "registry.k8s.io/dns/k8s-dns-node-cache:1.23.1"
+          image: "registry.k8s.io/dns/k8s-dns-node-cache:1.22.20"
           imagePullPolicy: IfNotPresent
           resources:
             requests:

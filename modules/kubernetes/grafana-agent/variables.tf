@@ -43,11 +43,6 @@ variable "environment" {
 variable "namespace_include" {
   description = "A list of the namespaces that kube-state-metrics and kubelet metrics"
   type        = list(string)
-
-  validation {
-    condition     = length(var.namespace_include) > 0
-    error_message = "The namespace_include needs to at least contain one namespace in the list."
-  }
 }
 
 variable "include_kubelet_metrics" {

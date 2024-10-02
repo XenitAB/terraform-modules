@@ -29,6 +29,7 @@ spec:
   tolerations:
     - operator: "Exists"
 ---
+%{ if remote_write_logs_url != "" }
 apiVersion: monitoring.grafana.com/v1alpha1
 kind: LogsInstance
 metadata:
@@ -57,6 +58,8 @@ spec:
     matchLabels:
       xkf.xenit.io/monitoring: tenant
 ---
+%{ endif }
+%{ if remote_write_metrics_url != "" }
 apiVersion: monitoring.grafana.com/v1alpha1
 kind: MetricsInstance
 metadata:
@@ -96,6 +99,7 @@ spec:
     matchLabels:
       xkf.xenit.io/monitoring: tenant
 ---
+%{ endif }
 %{ if ingress_nginx_observability }
 apiVersion: monitoring.grafana.com/v1alpha1
 kind: PodLogs
@@ -298,6 +302,7 @@ data:
                 grpc:
                   endpoint: 0.0.0.0:55678
 ---
+%{ if remote_write_traces_url != "" }
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -402,6 +407,6 @@ spec:
       targetPort: jaeger
   selector:
     name: grafana-agent-traces
-
+%{ endif }
 
 

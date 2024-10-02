@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: Update Ingress-nginx, Cert-manager and external-dns by @CalleB3 in [#1191](https://github.com/XenitAB/terraform-modules/pulls/1191)
 - Chore: bump ytanikin/PRConventionalCommits from 1.2.0 to 1.3.0 by @landerss1 in [#1190](https://github.com/XenitAB/terraform-modules/pulls/1190)
 - Ci: bump terraform-docs version to v 0.19.0 by @landerss1 in [#1193](https://github.com/XenitAB/terraform-modules/pulls/1193)
 - Chore: bump peter-evans/create-pull-request from 4 to 7 by @landerss1 in [#1172](https://github.com/XenitAB/terraform-modules/pulls/1172)

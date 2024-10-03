@@ -73,41 +73,7 @@ metadata:
   namespace: grafana-alloy
 data:
   config: |-
-    logging {
-      level = "info"
-      format = "logfmt"
-    }
-
-    otelcol.receiver.otlp "otlp_receiver" {
-      grpc {
-        endpoint = "0.0.0.0:4317"
-      }
-      http {
-        endpoint = "0.0.0.0:4318"
-      }
-
-      output {
-        traces = [otelcol.processor.batch.grafanacloud.input]
-      }
-    }
-
-    otelcol.processor.batch "grafanacloud" {
-      output {
-        traces = [otelcol.exporter.otlphttp.grafanacloud.input]
-      }
-    }
-
-    otelcol.exporter.otlphttp "grafanacloud" {
-      client {
-        endpoint = "${grafana_alloy_config.grafana_otelcol_exporter_endpoint}"
-        auth = otelcol.auth.basic.grafanacloud.handler
-      }
-    }
-
-    otelcol.auth.basic "grafanacloud" {
-      username = "${grafana_alloy_config.grafana_otelcol_auth_basic_username}"
-      password = env("GRAFANA_CLOUD_API_KEY")
-    }
+    ${grafana_alloy_config}
 ---
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass

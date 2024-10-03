@@ -1,13 +1,6 @@
 variable "grafana_alloy_config" {
-  description = "Configuration for the username and password"
-  type = object({
-    grafana_otelcol_auth_basic_username = string
-    grafana_otelcol_exporter_endpoint   = string
-  })
-  default = {
-    grafana_otelcol_auth_basic_username = ""
-    grafana_otelcol_exporter_endpoint   = ""
-  }
+  description = "The configmap which will be created for grafana-alloy"
+  type        = string
 }
 
 variable "azure_config" {

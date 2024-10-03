@@ -1,6 +1,11 @@
 variable "grafana_alloy_config" {
-  description = "The configmap which will be created for grafana-alloy"
-  type        = string
+  description = "Configuration for the username and password"
+  type = object({
+    configmap = string
+  })
+  default = {
+    configmap = ""
+  }
 }
 
 variable "azure_config" {

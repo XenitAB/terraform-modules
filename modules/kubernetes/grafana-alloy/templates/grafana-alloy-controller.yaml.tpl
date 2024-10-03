@@ -73,7 +73,7 @@ metadata:
   namespace: grafana-alloy
 data:
   config: |-
-    ${grafana_alloy_config}
+    ${grafana_alloy_config.configmap}
 ---
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass

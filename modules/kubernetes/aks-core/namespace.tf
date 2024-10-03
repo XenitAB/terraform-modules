@@ -12,9 +12,9 @@ resource "kubernetes_namespace" "tenant" {
     name = each.value.name
   }
 
-  lifecycle {
-    prevent_destroy = true
-  }
+  #lifecycle {
+  #  prevent_destroy = true
+  #}
 }
 
 resource "kubernetes_service_account_v1" "tenant" {

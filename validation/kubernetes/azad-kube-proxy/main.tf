@@ -14,10 +14,13 @@ module "azad_kube_proxy" {
 
   fqdn       = "k8s.example.com"
   cluster_id = "test"
-
-  azure_ad_app = {
-    client_id     = "00000000-0000-0000-0000-000000000000"
-    client_secret = "00000000-0000-0000-0000-000000000000"
-    tenant_id     = "00000000-0000-0000-0000-000000000000"
-  }
+  environment = "test"
+  location = "test"
+  location_short = "we"
+  resource_group_name = "test"
+  dns_zones = ["test"]
+  name = "core"
+  key_vault_id = "foo"
+  key_vault_name = "foo"
+  oidc_issuer_url = "test.com"
 }

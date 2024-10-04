@@ -48,14 +48,6 @@ output "aks_managed_identity_group_id" {
   value       = var.aks_managed_identity
 }
 
-output "azad_kube_proxy" {
-  description = "The Azure AD Application config for azad-kube-proxy"
-  value = {
-    azure_ad_app = module.azad_kube_proxy.data
-  }
-  sensitive = true
-}
-
 output "log_eventhub_name" {
   description = "The eventhub name for k8s logs"
   value       = azurerm_eventhub.this.name

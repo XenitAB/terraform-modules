@@ -55,9 +55,9 @@ resource "git_repository_file" "azad_kube_proxy" {
     use_private_ingress     = var.use_private_ingress
     allowed_ips_csv         = join(",", var.allowed_ips),
     azure_ad_group_prefix   = var.azure_ad_group_prefix
-    client_id               = module.azad_kube_proxy.client_id
-    client_secret           = module.azad_kube_proxy.client_secret
-    tenant_id               = module.azad_kube_proxy.tenant_id
+    client_id               = module.azad_kube_proxy.data.client_id
+    client_secret           = module.azad_kube_proxy.data.client_secret
+    tenant_id               = module.azad_kube_proxy.data.tenant_id
   })
 }
 
@@ -79,6 +79,6 @@ module "azad_kube_proxy" {
 resource "azurerm_key_vault_secret" "azad_kube_proxy" {
   name         = "azad-kube-proxy-${var.environment}-${var.location_short}-${var.name}"
   key_vault_id = data.azurerm_key_vault.core.id
-  value        = module.azad_kube_proxy.data.client_secret
+  value        = module.data.azad_kube_proxy.data.client_secret
   content_type = "string"
 }

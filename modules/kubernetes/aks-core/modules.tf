@@ -57,18 +57,15 @@ module "azad_kube_proxy" {
   }
 
   source                  = "../../kubernetes/azad-kube-proxy"
+  environment             = var.environment
+  location_short          = var.location_short
+  name                    = var.name
   cluster_id              = local.cluster_id
   fqdn                    = var.azad_kube_proxy_config.fqdn
   azure_ad_group_prefix   = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
   allowed_ips             = var.azad_kube_proxy_config.allowed_ips
   private_ingress_enabled = var.ingress_nginx_config.private_ingress_enabled
   use_private_ingress     = var.use_private_ingress
-
-  azure_ad_app = {
-    client_id     = var.azad_kube_proxy_config.azure_ad_app.client_id
-    client_secret = var.azad_kube_proxy_config.azure_ad_app.client_secret
-    tenant_id     = var.azad_kube_proxy_config.azure_ad_app.tenant_id
-  }
 }
 
 module "azure_metrics" {

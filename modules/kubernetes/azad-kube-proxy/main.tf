@@ -51,13 +51,33 @@ resource "git_repository_file" "azad_kube_proxy" {
   path = "platform/${var.cluster_id}/azad-kube-proxy/azad-kube-proxy.yaml"
   content = templatefile("${path.module}/templates/azad-kube-proxy.yaml.tpl", {
     fqdn                    = var.fqdn,
-    private_ingress_enabled = var.private_ingress_enabled
-    use_private_ingress     = var.use_private_ingress
+    environment             = var.environment,
+    location_short          = var.location_short,
+    name                    = var.name,
+    private_ingress_enabled = var.private_ingress_enabled,
+    use_private_ingress     = var.use_private_ingress,
     allowed_ips_csv         = join(",", var.allowed_ips),
-    azure_ad_group_prefix   = var.azure_ad_group_prefix
-    client_id               = module.azad_kube_proxy.data.client_id
-    client_secret           = module.azad_kube_proxy.data.client_secret
-    tenant_id               = module.azad_kube_proxy.data.tenant_id
+    azure_ad_group_prefix   = var.azure_ad_group_prefix,
+    client_id               = module.azad_kube_proxy.data.client_id,
+    client_secret           = module.azad_kube_proxy.data.client_secret,
+    tenant_id               = module.azad_kube_proxy.data.tenant_id,
+  })
+}
+
+resource "git_repository_file" "azure_config" {
+  for_each = {
+    for s in ["azure-config"] :
+    s => s
+  }
+
+  path = "platform/${var.cluster_id}/azad-kube-proxy/azure-config.yaml"
+  content = templatefile("${path.module}/templates/azure-config.yaml.tpl", {
+    key_vault_name = var.key_vault_name,
+    environment    = var.environment,
+    location_short = var.location_short,
+    name           = var.name,
+    tenant_id      = azurerm_user_assigned_identity.azad_kube_proxy.tenant_id,
+    client_id      = azurerm_user_assigned_identity.azad_kube_proxy.client_id,
   })
 }
 

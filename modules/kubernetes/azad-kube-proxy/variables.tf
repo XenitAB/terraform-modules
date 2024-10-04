@@ -67,3 +67,23 @@ variable "dns_zones" {
   description = "List of DNS Zones"
   type        = list(string)
 }
+
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
+  type        = string
+}
+
+variable "resource_group_name" {
+  description = "The Azure resource group name"
+  type        = string
+}
+
+variable "location" {
+  description = "The Azure region name."
+  type        = string
+}
+
+variable "key_vault_name" {
+  description = "The keyvault name."
+  type        = string
+}

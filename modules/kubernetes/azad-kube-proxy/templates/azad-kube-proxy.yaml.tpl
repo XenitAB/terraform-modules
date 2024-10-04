@@ -36,21 +36,15 @@ spec:
       scheme: HTTP
 
     podEnv:
+      - name: TENANT_ID
+        value: ${tenant_id}
       - name: CLIENT_ID
-        valueFrom:
-          secretKeyRef:
-            name: azad-kube-proxy-${environment}-${location_short}-${name}
-            key: CLIENT_ID
+        value: ${client_id}
       - name: CLIENT_SECRET
         valueFrom:
           secretKeyRef:
             name: azad-kube-proxy-${environment}-${location_short}-${name}
             key: CLIENT_SECRET
-      - name: TENANT_ID
-        valueFrom:
-          secretKeyRef:
-            name: azad-kube-proxy-${environment}-${location_short}-${name}
-            key: TENANT_ID
       - name: TLS_ENABLED
         value: "false"
       - name: GROUP_IDENTIFIER

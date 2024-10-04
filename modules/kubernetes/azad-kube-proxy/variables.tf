@@ -58,3 +58,12 @@ variable "azad_kube_proxy_config" {
     proxy_url_override  = ""
   }
 }
+variable "key_vault_id" {
+  description = "core keyvault id"
+  type        = string
+}
+
+variable "dns_zones" {
+  description = "List of DNS Zones"
+  type        = list(string)
+}

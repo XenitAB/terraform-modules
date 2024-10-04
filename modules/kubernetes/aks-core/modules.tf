@@ -60,6 +60,8 @@ module "azad_kube_proxy" {
   environment             = var.environment
   location_short          = var.location_short
   name                    = var.name
+  key_vault_id            = data.azurerm_key_vault.core.id
+  dns_zones               = var.dns_zones
   cluster_id              = local.cluster_id
   fqdn                    = var.azad_kube_proxy_config.fqdn
   azure_ad_group_prefix   = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"

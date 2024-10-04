@@ -159,6 +159,12 @@ module "cert_manager" {
 }
 
 module "cert_manager_crd" {
+  for_each = {
+    for s in ["cert-manager"] :
+    s => s
+    if var.cert_manager_enabled
+  }
+
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://charts.jetstack.io"
@@ -354,6 +360,12 @@ module "grafana_agent" {
 }
 
 module "grafana_agent_crd" {
+  for_each = {
+    for s in ["grafana-agent"] :
+    s => s
+    if var.grafana_agent_enabled
+  }
+
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://grafana.github.io/helm-charts"
@@ -552,6 +564,12 @@ module "prometheus" {
 }
 
 module "prometheus_crd" {
+  for_each = {
+    for s in ["prometheus"] :
+    s => s
+    if var.prometheus_enabled
+  }
+
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://prometheus-community.github.io/helm-charts"
@@ -620,6 +638,11 @@ module "trivy" {
 }
 
 module "trivy_crd" {
+  for_each = {
+    for s in ["trivy"] :
+    s => s
+    if var.trivy_enabled && !var.defender_enabled
+  }
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://aquasecurity.github.io/helm-charts/"

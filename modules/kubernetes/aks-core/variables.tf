@@ -517,20 +517,10 @@ variable "azad_kube_proxy_config" {
   type = object({
     fqdn        = string
     allowed_ips = list(string)
-    azure_ad_app = object({
-      client_id     = string
-      client_secret = string
-      tenant_id     = string
-    })
   })
   default = {
     fqdn        = ""
     allowed_ips = []
-    azure_ad_app = {
-      client_id     = ""
-      client_secret = ""
-      tenant_id     = ""
-    }
   }
 }
 

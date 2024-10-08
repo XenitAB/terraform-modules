@@ -26,12 +26,6 @@ spec:
       annotations:
         azure.workload.identity/client-id: ${client_id}
     alloy:
-      extraEnv:
-        - name: GRAFANA_CLOUD_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: "${azure_config.keyvault_secret_name}"
-              key: GRAFANA_CLOUD_API_KEY
       extraPorts:
         - name: otpl-http-trace
           port: 4318
@@ -154,7 +148,7 @@ spec:
   provider: azure
   parameters:
     clientID: ${client_id}
-    keyvaultName: ${key_vault_name}
+    keyvaultName: ${azure_config.azure_key_vault_name}
     tenantId: ${tenant_id}
     objects: |
       array:

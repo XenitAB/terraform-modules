@@ -36,21 +36,15 @@ spec:
       scheme: HTTP
 
     podEnv:
+      - name: TENANT_ID
+        value: ${tenant_id}
       - name: CLIENT_ID
-        valueFrom:
-          secretKeyRef:
-            name: azad-kube-proxy
-            key: CLIENT_ID
+        value: ${client_id}
       - name: CLIENT_SECRET
         valueFrom:
           secretKeyRef:
-            name: azad-kube-proxy
+            name: azad-kube-proxy-${environment}-${location_short}-${name}
             key: CLIENT_SECRET
-      - name: TENANT_ID
-        valueFrom:
-          secretKeyRef:
-            name: azad-kube-proxy
-            key: TENANT_ID
       - name: TLS_ENABLED
         value: "false"
       - name: GROUP_IDENTIFIER
@@ -99,14 +93,3 @@ spec:
       requests:
         cpu: 10m
         memory: 32Mi
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: azad-kube-proxy
-  namespace: azad-kube-proxy
-type: Opaque
-data:
-  TENANT_ID: ${tenant_id}
-  CLIENT_SECRET: ${client_secret}
-  CLIENT_ID: ${client_id}

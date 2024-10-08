@@ -78,18 +78,6 @@ variable "azure_ad_group_prefix" {
   default     = "az"
 }
 
-variable "azad_kube_proxy_config" {
-  description = "Azure AD Kubernetes Proxy configuration"
-  type = object({
-    cluster_name_prefix = string
-    proxy_url_override  = string
-  })
-  default = {
-    cluster_name_prefix = "aks"
-    proxy_url_override  = ""
-  }
-}
-
 variable "aks_managed_identity" {
   description = "AKS Azure AD managed identity"
   type        = string

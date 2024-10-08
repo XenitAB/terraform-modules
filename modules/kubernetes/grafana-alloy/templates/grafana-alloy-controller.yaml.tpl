@@ -107,7 +107,7 @@ data:
 
     remote.kubernetes.secret "metrics_service" {
       name = "prometheus-grafana-cloud"
-      namespace = "grafana-k8s-monitoring"
+      namespace = "grafana-alloy"
     } 
 
     prometheus.remote_write "metrics_service" {
@@ -151,19 +151,29 @@ metadata:
   name: grafana-alloy-secrets
   namespace: grafana-alloy
 spec:
-  provider: "azure"
+  provider: azure
   parameters:
     clientID: ${client_id}
-    keyvaultName: ${azure_config.azure_key_vault_name}
+    keyvaultName: ${key_vault_name}
     tenantId: ${tenant_id}
-    objects:  |
+    objects: |
       array:
         - |
-          objectName: "${azure_config.keyvault_secret_name}"
+          objectName: prometheus-grafana-cloud-host
+          objectType: secret
+        - |
+          objectName: prometheus-grafana-cloud-user
+          objectType: secret
+        - |
+          objectName: prometheus-grafana-cloud-password
           objectType: secret
   secretObjects:
-    - secretName: "${azure_config.keyvault_secret_name}"
+    - secretName: prometheus-grafana-cloud
       type: Opaque
       data:
-        - objectName: "${azure_config.keyvault_secret_name}"
-          key: GRAFANA_CLOUD_API_KEY
+        - objectName: prometheus-grafana-cloud-host
+          key: host
+        - objectName: prometheus-grafana-cloud-user
+          key: username
+        - objectName: prometheus-grafana-cloud-password
+          key: password

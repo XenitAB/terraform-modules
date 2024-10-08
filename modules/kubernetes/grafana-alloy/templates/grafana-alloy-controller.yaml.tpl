@@ -19,7 +19,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana-alloy
-      version: 0.5.1
+      version: 0.9.1
   values:
     serviceAccount:
       create: true
@@ -73,7 +73,77 @@ metadata:
   namespace: grafana-alloy
 data:
   config: |-
-    ${grafana_alloy_config.configmap}
+
+    prometheus.scrape "flux_system_pods" {
+      job_name       = "integrations/kubernetes/flux-system"
+      scrape_interval = "60s"
+      forward_to     = [prometheus.relabel.metrics_service.receiver]
+
+      kubernetes_sd_config {
+        role = "pod"
+        namespaces = ["flux-system"]
+      }
+
+      clustering {
+        enabled = true
+      }
+    }
+
+    prometheus.relabel "metrics_service" {
+      max_cache_size = 100000
+      rule {
+        source_labels = ["cluster"]
+        regex = ""
+        replacement = "${grafana_alloy_config.cluster_name}"
+        target_label = "cluster"
+      }
+      rule {
+          source_labels = ["namespace"]
+          regex = "^$|flux-system"
+          action = "keep"
+      }
+      forward_to = [prometheus.remote_write.metrics_service.receiver]
+    }
+
+    remote.kubernetes.secret "metrics_service" {
+      name = "prometheus-grafana-cloud"
+      namespace = "grafana-k8s-monitoring"
+    } 
+
+    prometheus.remote_write "metrics_service" {
+      endpoint {
+        url = nonsensitive(remote.kubernetes.secret.metrics_service.data["host"]) + "/api/prom/push"
+        headers = { "X-Scope-OrgID" = nonsensitive(remote.kubernetes.secret.metrics_service.data["tenantId"]) }
+
+        basic_auth {
+          username = nonsensitive(remote.kubernetes.secret.metrics_service.data["username"])
+          password = remote.kubernetes.secret.metrics_service.data["password"]
+        }
+
+        send_native_histograms = false
+
+        queue_config {
+          capacity = 10000
+          min_shards = 1
+          max_shards = 50
+          max_samples_per_send = 2000
+          batch_send_deadline = "5s"
+          min_backoff = "30ms"
+          max_backoff = "5s"
+          retry_on_http_429 = true
+          sample_age_limit = "0s"
+        }
+      }
+
+      wal {
+        truncate_frequency = "2h"
+        min_keepalive_time = "5m"
+        max_keepalive_time = "8h"
+      }
+
+      external_labels = {
+      }
+    }
 ---
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass

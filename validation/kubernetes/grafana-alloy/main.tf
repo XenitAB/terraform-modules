@@ -14,8 +14,11 @@ module "grafana_alloy" {
   aks_name            = "fooburrito"
   location_short      = "foob"
   grafana_alloy_config = {
-    configmap            = "configbar"
-    azure_key_vault_name = "foobar"
-    keyvault_secret_name = "barfoo"
+    configmap                           = "configbar"
+    cluster_name                        = "awesome_cluster"
+    azure_key_vault_name                = "foobar"
+    keyvault_secret_name                = "barfoo"
+    grafana_otelcol_auth_basic_username = "some-integers"
+    grafana_otelcol_exporter_endpoint   = "some-url"
   }
 }

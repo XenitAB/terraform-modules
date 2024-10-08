@@ -18,9 +18,12 @@ module "aks_core" {
     exclude_namespaces            = "three,two,one"
   }
   grafana_alloy_config = {
-    configmap            = ""
-    azure_key_vault_name = ""
-    keyvault_secret_name = ""
+    configmap                           = ""
+    azure_key_vault_name                = ""
+    keyvault_secret_name                = ""
+    cluster_name                        = ""
+    grafana_otelcol_auth_basic_username = ""
+    grafana_otelcol_exporter_endpoint   = ""
   }
   slack_flux_alert_config = {
     xenit_webhook  = "barfoo"

@@ -1,10 +1,14 @@
 variable "grafana_alloy_config" {
   description = "Configuration for the username and password"
   type = object({
-    configmap = string
+    grafana_otelcol_auth_basic_username = string
+    grafana_otelcol_exporter_endpoint   = string
+    cluster_name                        = string
   })
   default = {
-    configmap = ""
+    grafana_otelcol_auth_basic_username = ""
+    grafana_otelcol_exporter_endpoint   = ""
+    cluster_name                        = ""
   }
 }
 

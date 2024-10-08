@@ -371,13 +371,17 @@ module "grafana_alloy" {
     azure_key_vault_name = var.grafana_alloy_config.azure_key_vault_name
     keyvault_secret_name = var.grafana_alloy_config.keyvault_secret_name
   }
-  grafana_alloy_config = var.grafana_alloy_config
-  aks_name             = var.name
-  cluster_id           = local.cluster_id
-  environment          = var.environment
-  location_short       = var.location_short
-  oidc_issuer_url      = var.oidc_issuer_url
-  resource_group_name  = data.azurerm_resource_group.this.name
+  grafana_alloy_config = {
+    grafana_otelcol_auth_basic_username = var.grafana_alloy_config.grafana_otelcol_auth_basic_username
+    grafana_otelcol_exporter_endpoint   = var.grafana_alloy_config.grafana_otelcol_exporter_endpoint
+    cluster_name                        = var.grafana_alloy_config.cluster_name
+  }
+  aks_name            = var.name
+  cluster_id          = local.cluster_id
+  environment         = var.environment
+  location_short      = var.location_short
+  oidc_issuer_url     = var.oidc_issuer_url
+  resource_group_name = data.azurerm_resource_group.this.name
 }
 module "grafana_k8s_monitoring" {
 

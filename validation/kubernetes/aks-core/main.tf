@@ -18,7 +18,6 @@ module "aks_core" {
     exclude_namespaces            = "three,two,one"
   }
   grafana_alloy_config = {
-    configmap                           = ""
     azure_key_vault_name                = ""
     keyvault_secret_name                = ""
     cluster_name                        = ""

@@ -67,17 +67,15 @@ metadata:
   namespace: grafana-alloy
 data:
   config: |-
+    discovery.kubernetes "pods" {
+      role = "pod"
+    }
 
     prometheus.scrape "flux_system_pods" {
-      job_name       = "integrations/kubernetes/flux-system"
+      job_name = "integrations/flux_system_pods"
+      targets = discovery.kubernetes.pods.targets
       scrape_interval = "60s"
       forward_to     = [prometheus.relabel.metrics_service.receiver]
-
-      kubernetes_sd_config {
-        role = "pod"
-        namespaces = ["flux-system"]
-      }
-
       clustering {
         enabled = true
       }
@@ -88,7 +86,7 @@ data:
       rule {
         source_labels = ["cluster"]
         regex = ""
-        replacement = "${grafana_alloy_config.cluster_name}"
+        replacement = ${grafana_alloy_config.cluster_name}
         target_label = "cluster"
       }
       rule {

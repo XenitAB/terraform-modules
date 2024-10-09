@@ -86,7 +86,7 @@ data:
       rule {
         source_labels = ["cluster"]
         regex = ""
-        replacement = ${grafana_alloy_config.cluster_name}
+        replacement = "${grafana_alloy_config.cluster_name}"
         target_label = "cluster"
       }
       rule {

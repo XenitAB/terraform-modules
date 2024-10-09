@@ -3,10 +3,12 @@ variable "grafana_alloy_config" {
   type = object({
     grafana_otelcol_auth_basic_username = string
     grafana_otelcol_exporter_endpoint   = string
+    cluster_name                        = string
   })
   default = {
     grafana_otelcol_auth_basic_username = ""
     grafana_otelcol_exporter_endpoint   = ""
+    cluster_name                        = ""
   }
 }
 

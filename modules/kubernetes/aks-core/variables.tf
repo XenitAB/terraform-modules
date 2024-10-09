@@ -468,6 +468,7 @@ variable "grafana_alloy_config" {
   type = object({
     azure_key_vault_name                = string
     keyvault_secret_name                = string
+    cluster_name                        = string
     grafana_otelcol_auth_basic_username = string
     grafana_otelcol_exporter_endpoint   = string
   })

@@ -390,6 +390,7 @@ module "grafana_alloy" {
   grafana_alloy_config = {
     grafana_otelcol_auth_basic_username = var.grafana_alloy_config.grafana_otelcol_auth_basic_username
     grafana_otelcol_exporter_endpoint   = var.grafana_alloy_config.grafana_otelcol_exporter_endpoint
+    cluster_name                        = var.grafana_alloy_config.cluster_name
   }
   aks_name            = var.name
   cluster_id          = local.cluster_id

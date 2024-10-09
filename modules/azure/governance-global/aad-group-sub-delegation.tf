@@ -56,7 +56,7 @@ resource "azuread_group_member" "sub_all_owner" {
   }
 
   group_object_id  = azuread_group.sub_owner.object_id
-  member_object_id = azuread_group.all_owner.object_id
+  member_object_id = azuread_group.all_owner["delegate_sub_groups"].object_id
 }
 
 # Example: az-sub-<subName>-all-contributor
@@ -83,7 +83,7 @@ resource "azuread_group_member" "sub_all_contributor" {
   }
 
   group_object_id  = azuread_group.sub_contributor.object_id
-  member_object_id = azuread_group.all_contributor.object_id
+  member_object_id = azuread_group.all_contributor["delegate_sub_groups"].object_id
 }
 
 # Example: az-sub-<subName>-all-reader
@@ -110,7 +110,7 @@ resource "azuread_group_member" "sub_all_reader" {
   }
 
   group_object_id  = azuread_group.sub_reader.object_id
-  member_object_id = azuread_group.all_reader.object_id
+  member_object_id = azuread_group.all_reader["delegate_sub_groups"].object_id
 }
 
 data "azuread_service_principal" "sp_all_owner" {

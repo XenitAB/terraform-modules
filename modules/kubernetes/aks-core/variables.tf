@@ -702,16 +702,3 @@ variable "azure_service_operator_config" {
     error_message = "Installing all CRD:s in the cluster is not supported, please limit to the ones needed"
   }
 }
-
-variable "slack_flux_alert_config" {
-  description = "A webhook address for sending alerts to slack"
-  type = object({
-    xenit_webhook  = string
-    tenant_webhook = string
-
-  })
-  default = {
-    xenit_webhook  = ""
-    tenant_webhook = ""
-  }
-}

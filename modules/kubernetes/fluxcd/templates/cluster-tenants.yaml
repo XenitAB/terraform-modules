@@ -1,4 +1,4 @@
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: tenants
@@ -10,4 +10,3 @@ spec:
     name: flux-system
   path: ./tenants/${cluster_id}
   prune: true
-  validation: client

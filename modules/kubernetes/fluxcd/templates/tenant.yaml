@@ -1,18 +1,18 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  labels:
-    toolkit.fluxcd.io/tenant: ${name}
   name: flux
   namespace: ${name}
+  labels:
+    toolkit.fluxcd.io/tenant: ${name}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  labels:
-    toolkit.fluxcd.io/tenant: ${name}
   name: gotk-reconciler
   namespace: ${name}
+  labels:
+    toolkit.fluxcd.io/tenant: ${name}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -24,21 +24,20 @@ subjects:
   name: flux
   namespace: ${name}
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
   name: ${name}
   namespace: ${name}
 spec:
   interval: 1m
-  url: ${repo}
+  url: ${url}
   secretRef:
     name: flux
   ref:
-    branch: ${branch}
-  timeout: 120s
+    branch: main
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: ${name}
@@ -46,25 +45,17 @@ metadata:
 spec:
   serviceAccountName: flux
   interval: 5m
+%{ if include_tenant_name == true }
+  path: ./tenant/${name}/${environment}
+%{ else }
   path: ./tenant/${environment}
+%{ endif }
   sourceRef:
     kind: GitRepository
     name: ${name}
   prune: true
-  validation: client
 ---
-apiVersion: notification.toolkit.fluxcd.io/v1beta2
-kind: Provider
-metadata:
-  name: ${name}
-  namespace: ${name}
-spec:
-  type: github
-  address: ${repo}
-  secretRef:
-    name: flux
 %{ if create_crds == true }
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:

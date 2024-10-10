@@ -1,7 +1,4 @@
-terraform {}
-
-provider "azurerm" {
-  features {}
+terraform {
 }
 
 module "aks_core" {
@@ -18,11 +15,11 @@ module "aks_core" {
     exclude_namespaces            = "three,two,one"
   }
   grafana_alloy_config = {
-    azure_key_vault_name                = ""
-    keyvault_secret_name                = ""
-    cluster_name                        = ""
-    grafana_otelcol_auth_basic_username = ""
-    grafana_otelcol_exporter_endpoint   = ""
+    cluster_name                        = "awesome_cluster"
+    azure_key_vault_name                = "foobar"
+    keyvault_secret_name                = "barfoo"
+    grafana_otelcol_auth_basic_username = "some-integers"
+    grafana_otelcol_exporter_endpoint   = "some-url"
   }
   slack_flux_alert_config = {
     xenit_webhook  = "barfoo"
@@ -52,18 +49,19 @@ module "aks_core" {
     notification_email = "foo"
     dns_zone           = ["bar", "faa"]
   }
-  fluxcd_v2_config = {
-    type = "github"
-    github = {
-      org             = ""
-      app_id          = 0
-      installation_id = 0
-      private_key     = ""
+  fluxcd_config = {
+    git_provider = {
+      organization        = "my-org"
+      type                = "azuredevops"
+      include_tenant_name = true
+      azure_devops = {
+        pat = "my-pat"
+      }
     }
-    azure_devops = {
-      pat  = ""
-      org  = ""
-      proj = ""
+    bootstrap = {
+      disable_secret_creation = true
+      project                 = "my-proj"
+      repository              = "my-repo"
     }
   }
   priority_expander_config = { "10" : [".*standard.*"], "20" : [".*spot.*"] }

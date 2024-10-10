@@ -72,7 +72,6 @@ module "azad_kube_proxy" {
   use_private_ingress     = var.use_private_ingress
   oidc_issuer_url         = var.oidc_issuer_url
   resource_group_name     = data.azurerm_resource_group.this.name
-
 }
 
 module "azure_metrics" {
@@ -255,57 +254,23 @@ module "falco" {
   cluster_id = local.cluster_id
 }
 
-module "fluxcd_v2_azure_devops" {
+module "fluxcd" {
   for_each = {
-    for s in ["fluxcd-v2"] :
+    for s in ["fluxcd"] :
     s => s
-    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "azure-devops"
+    if var.fluxcd_enabled
   }
 
-  source = "../../kubernetes/fluxcd-v2-azdo"
+  source = "../../kubernetes/fluxcd"
 
-  environment             = var.environment
-  cluster_id              = local.cluster_id
-  azure_devops_pat        = var.fluxcd_v2_config.azure_devops.pat
-  azure_devops_org        = var.fluxcd_v2_config.azure_devops.org
-  azure_devops_proj       = var.fluxcd_v2_config.azure_devops.proj
-  cluster_repo            = var.fluxcd_v2_config.azure_devops.repo
-  slack_flux_alert_config = var.slack_flux_alert_config
+  environment  = var.environment
+  cluster_id   = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
+  git_provider = var.fluxcd_config.git_provider
+  bootstrap    = var.fluxcd_config.bootstrap
   namespaces = [for ns in var.namespaces : {
-    name = ns.name
-    flux = {
-      enabled             = ns.flux.enabled
-      create_crds         = ns.flux.create_crds
-      include_tenant_name = ns.flux.include_tenant_name
-      org                 = ns.flux.azure_devops.org
-      proj                = ns.flux.azure_devops.proj
-      repo                = ns.flux.azure_devops.repo
-    }
-  }]
-}
-
-module "fluxcd_v2_github" {
-  for_each = {
-    for s in ["fluxcd-v2"] :
-    s => s
-    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "github"
-  }
-
-  source = "../../kubernetes/fluxcd-v2-github"
-
-  environment             = var.environment
-  cluster_id              = local.cluster_id
-  github_org              = var.fluxcd_v2_config.github.org
-  github_app_id           = var.fluxcd_v2_config.github.app_id
-  github_installation_id  = var.fluxcd_v2_config.github.installation_id
-  github_private_key      = var.fluxcd_v2_config.github.private_key
-  slack_flux_alert_config = var.slack_flux_alert_config
-  namespaces = [for ns in var.namespaces : {
-    name = ns.name
-    flux = {
-      enabled = ns.flux.enabled
-      repo    = ns.flux.github.repo
-    }
+    name   = ns.name
+    labels = ns.labels
+    fluxcd = ns.flux
   }]
 }
 
@@ -552,7 +517,7 @@ module "prometheus" {
   aad_pod_identity_enabled = var.aad_pod_identity_enabled
   azad_kube_proxy_enabled  = var.azad_kube_proxy_enabled
   falco_enabled            = var.falco_enabled
-  flux_enabled             = var.fluxcd_v2_enabled
+  flux_enabled             = var.fluxcd_enabled
   gatekeeper_enabled       = var.gatekeeper_enabled
   grafana_agent_enabled    = var.grafana_agent_enabled
   linkerd_enabled          = var.linkerd_enabled
@@ -644,6 +609,7 @@ module "trivy_crd" {
     s => s
     if var.trivy_enabled && !var.defender_enabled
   }
+
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://aquasecurity.github.io/helm-charts/"

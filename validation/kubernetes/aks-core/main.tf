@@ -21,10 +21,6 @@ module "aks_core" {
     grafana_otelcol_auth_basic_username = "some-integers"
     grafana_otelcol_exporter_endpoint   = "some-url"
   }
-  slack_flux_alert_config = {
-    xenit_webhook  = "barfoo"
-    tenant_webhook = "barbar"
-  }
   name                    = "baz"
   aks_name_suffix         = 1
   core_name               = "core"

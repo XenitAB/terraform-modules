@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat:  metrics for flux system by @optocoupler in [#1200](https://github.com/XenitAB/terraform-modules/pulls/1200)
 - Feat: Move azad-kube-proxy to aks-core and use SecretProviderClass by @CalleB3 in [#1196](https://github.com/XenitAB/terraform-modules/pulls/1196)
 - Feat: improved grafana agent configuration by @landerss1 in [#1192](https://github.com/XenitAB/terraform-modules/pulls/1192)
 - Feat: add gateway_transit option to peering_config by @landerss1 in [#1189](https://github.com/XenitAB/terraform-modules/pulls/1189)
@@ -23,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: some tenants don't have gatekeeper installed/enabled by @optocoupler in [#1202](https://github.com/XenitAB/terraform-modules/pulls/1202)
 - Fix: dont install unused CRDs by @CalleB3 in [#1197](https://github.com/XenitAB/terraform-modules/pulls/1197)
 - Fix: grafana alloy using wrong location short name by @landerss1 in [#1188](https://github.com/XenitAB/terraform-modules/pulls/1188)
 - Fix: telepresence deployment error by @landerss1 in [#1187](https://github.com/XenitAB/terraform-modules/pulls/1187)

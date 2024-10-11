@@ -79,7 +79,11 @@ resource "git_repository_file" "cluster_tenants" {
 }
 
 resource "git_repository_file" "tenant" {
-  for_each = { for ns in var.namespaces : ns.name => ns }
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.fluxcd != null
+  }
 
   override_on_create = true
   path               = "tenants/${var.cluster_id}/${each.key}.yaml"

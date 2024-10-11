@@ -110,7 +110,7 @@ module "azure_policy" {
   environment         = var.environment
   location_short      = var.location_short
   tenant_namespaces = [
-    for namespace in var.namespaces : namespace.name 
+    for namespace in var.namespaces : namespace.name
   ]
 }
 

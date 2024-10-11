@@ -49,7 +49,7 @@ resource "helm_release" "git_auth_proxy" {
   values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
     git_provider = var.git_provider
     bootstrap    = var.bootstrap
-    tenants      = var.namespaces
+    tenants      = [for tenant in var.namespaces : tenant if tenant.fluxcd != null]
   })]
 }
 

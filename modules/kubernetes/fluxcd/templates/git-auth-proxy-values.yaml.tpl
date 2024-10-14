@@ -29,14 +29,18 @@ config: |
         "repositories": [
           %{ for tenant in tenants ~}
           {
+            %{if git_provider.type == "azuredevops"}
             "project": "${tenant.fluxcd.project}",
+            %{endif}
             "name": "${tenant.fluxcd.repository}",
             "namespaces": ["${tenant.name}"],
             "secretNameOverride": "flux"
           },
           %{ endfor }
           {
+            %{if git_provider.type == "azuredevops"}
             "project": "${bootstrap.project}",
+             %{endif}
             "name": "${bootstrap.repository}",
             "namespaces": ["flux-system"],
             "secretNameOverride": "flux-system"

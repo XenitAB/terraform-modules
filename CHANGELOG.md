@@ -24,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: glux bootstrap not working for GitHub tenants by @landerss1 in [#1213](https://github.com/XenitAB/terraform-modules/pulls/1213)
+- Fix: git-auth-proxy config should not have project specified for GitH… by @landerss1 in [#1212](https://github.com/XenitAB/terraform-modules/pulls/1212)
+- Fix: wrong GitHub application id attribute provided in template by @landerss1 in [#1211](https://github.com/XenitAB/terraform-modules/pulls/1211)
+- Fix: flux project name is null for GitHub tenants by @landerss1 in [#1209](https://github.com/XenitAB/terraform-modules/pulls/1209)
 - Fix: don't create secret for git-auth-proxy if tenant is not using flux by @landerss1 in [#1208](https://github.com/XenitAB/terraform-modules/pulls/1208)
 - Fix: don't create flux tenant artifacts if flux isn't enabled by @landerss1 in [#1207](https://github.com/XenitAB/terraform-modules/pulls/1207)
 - Fix: create azure policy regardless of flux config by @landerss1 in [#1206](https://github.com/XenitAB/terraform-modules/pulls/1206)

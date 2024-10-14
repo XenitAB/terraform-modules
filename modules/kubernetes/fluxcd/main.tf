@@ -66,7 +66,7 @@ resource "flux_bootstrap_git" "this" {
   disable_secret_creation = var.bootstrap.disable_secret_creation
   components              = toset(["source-controller", "kustomize-controller", "helm-controller"])
   kustomization_override = templatefile("${path.module}/templates/kustomization-override.yaml.tpl", {
-    url = join("/", [local.git_auth_proxy_url, var.git_provider.organization, var.bootstrap.project, local.git_path_separator, var.bootstrap.repository])
+    url = join("/", compact([local.git_auth_proxy_url, var.git_provider.organization, var.bootstrap.project, local.git_path_separator, var.bootstrap.repository]))
   })
 }
 

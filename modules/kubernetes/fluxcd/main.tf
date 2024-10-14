@@ -48,6 +48,7 @@ resource "helm_release" "git_auth_proxy" {
   max_history = 3
   values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
     git_provider = var.git_provider
+    private_key  = var.git_provider.type == "github" ? base64encode(var.git_provider.github.private_key) : null
     bootstrap    = var.bootstrap
     tenants      = [for tenant in var.namespaces : tenant if tenant.fluxcd != null]
   })]

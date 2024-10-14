@@ -14,7 +14,7 @@ config: |
         "github": {
           "appID": ${git_provider.github.application_id},
           "installationID": ${git_provider.github.installation_id},
-          "privateKey": "${git_provider.github.private_key}"
+          "privateKey": "${private_key}"
         },
         "host": "github.com",
         %{endif}

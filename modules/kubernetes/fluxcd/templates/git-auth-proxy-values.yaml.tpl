@@ -12,7 +12,7 @@ config: |
         %{if git_provider.type == "github"}
         "provider": "github",
         "github": {
-          "appID": ${git_provider.github.app_id},
+          "appID": ${git_provider.github.application_id},
           "installationID": ${git_provider.github.installation_id},
           "privateKey": "${git_provider.github.private_key}"
         },

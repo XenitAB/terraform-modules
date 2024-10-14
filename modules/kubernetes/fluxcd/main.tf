@@ -93,12 +93,12 @@ resource "git_repository_file" "tenant" {
     name                = each.key,
     include_tenant_name = var.git_provider.include_tenant_name,
     provider_type       = var.git_provider.type
-    url = join("/", [
+    url = join("/", compact([
       local.git_auth_proxy_url,
       var.git_provider.organization,
       each.value.fluxcd.project,
       local.git_path_separator,
       each.value.fluxcd.repository
-    ])
+    ]))
   })
 }

@@ -69,6 +69,9 @@ data:
   config: |-
     discovery.kubernetes "pods" {
       role = "pod"
+      namespaces {
+        names = ["flux-system"]
+      }
     }
 
     prometheus.scrape "flux_system_pods" {

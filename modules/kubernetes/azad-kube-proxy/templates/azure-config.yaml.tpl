@@ -44,6 +44,8 @@ spec:
     metadata:
       labels:
         app: azad-kube-proxy-secret-mount
+      annotations:
+        secret.reloader.stakater.com/reload: "azad-kube-proxy-${environment}-${location_short}-${name}"
     spec:
       serviceAccountName: azad-kube-proxy
       containers:

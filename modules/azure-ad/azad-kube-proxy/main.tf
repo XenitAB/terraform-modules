@@ -75,6 +75,7 @@ resource "azuread_application_pre_authorized" "azure_cli" {
 
 resource "azuread_application_password" "this" {
   application_id = azuread_application.this.id
+  end_date = "2999-01-01T01:00:00Z"
 }
 
 resource "azuread_service_principal" "this" {

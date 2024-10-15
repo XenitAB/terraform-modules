@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: adding namespaced discovery by @optocoupler in [#1219](https://github.com/XenitAB/terraform-modules/pulls/1219)
+- Fix: add end_date to azad-proxy azuread_application_password by @CalleB3 in [#1216](https://github.com/XenitAB/terraform-modules/pulls/1216)
 - Fix: base64 encode private key for flux GitHub tenants by @landerss1 in [#1214](https://github.com/XenitAB/terraform-modules/pulls/1214)
 - Fix: glux bootstrap not working for GitHub tenants by @landerss1 in [#1213](https://github.com/XenitAB/terraform-modules/pulls/1213)
 - Fix: git-auth-proxy config should not have project specified for GitH… by @landerss1 in [#1212](https://github.com/XenitAB/terraform-modules/pulls/1212)

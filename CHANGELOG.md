@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: add flux notification provider by @CalleB3 in [#1222](https://github.com/XenitAB/terraform-modules/pulls/1222)
+- Fix: add flux notification-controller by @CalleB3 in [#1220](https://github.com/XenitAB/terraform-modules/pulls/1220)
 - Fix: adding namespaced discovery by @optocoupler in [#1219](https://github.com/XenitAB/terraform-modules/pulls/1219)
 - Fix: add end_date to azad-proxy azuread_application_password by @CalleB3 in [#1216](https://github.com/XenitAB/terraform-modules/pulls/1216)
 - Fix: base64 encode private key for flux GitHub tenants by @landerss1 in [#1214](https://github.com/XenitAB/terraform-modules/pulls/1214)

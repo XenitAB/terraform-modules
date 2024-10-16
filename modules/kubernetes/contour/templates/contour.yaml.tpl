@@ -1,4 +1,4 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: contour
@@ -7,11 +7,11 @@ spec:
   interval: 1m0s
   url: "bitnami https://charts.bitnami.com/bitnami"
 ---
-apiVersion: helm.toolkit.fluxcd.io/v1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: contour
-  namespace: ingress-nginx
+  namespace: projectcontour
 spec:
   chart:
     spec:

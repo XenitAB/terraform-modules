@@ -85,7 +85,7 @@ spec:
         - ${fqdn}
 
     podAnnotations:
-      secret.reloader.stakater.com/reload: "azad-kube-proxy"
+      secret.reloader.stakater.com/reload: "azad-kube-proxy-${environment}-${location_short}-${name}"
 
     resources:
       limits:

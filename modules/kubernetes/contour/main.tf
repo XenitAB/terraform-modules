@@ -15,6 +15,15 @@ terraform {
   }
 }
 
+resource "kubernetes_namespace" "contour" {
+  metadata {
+    name = "projectcontour"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+}
+
 resource "git_repository_file" "kustomization" {
   path = "clusters/${var.cluster_id}/contour.yaml"
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {

@@ -104,4 +104,5 @@ module "aks_core" {
     namespace_selector              = ["platform"]
   }
   external_dns_hostname = "foobar.com"
+  contour_enabled = true
 }

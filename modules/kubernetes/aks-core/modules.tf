@@ -195,6 +195,18 @@ module "control_plane_logs" {
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
+module "contour" {
+  for_each = {
+    for s in ["contour"] :
+    s => s
+    if var.contour_enabled
+  }
+
+  source = "../../kubernetes/contour"
+
+  cluster_id = local.cluster_id
+}
+
 module "datadog" {
   for_each = {
     for s in ["datadog"] :

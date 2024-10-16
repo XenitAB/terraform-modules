@@ -702,3 +702,9 @@ variable "azure_service_operator_config" {
     error_message = "Installing all CRD:s in the cluster is not supported, please limit to the ones needed"
   }
 }
+
+variable "contour_enabled" {
+  description = "If Contour should be enabled"
+  type        = bool
+  default     = false
+}

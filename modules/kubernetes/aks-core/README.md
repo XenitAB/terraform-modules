@@ -36,6 +36,7 @@ This module is used to create AKS clusters.
 | <a name="module_azure_service_operator"></a> [azure\_service\_operator](#module\_azure\_service\_operator) | ../../kubernetes/azure-service-operator | n/a |
 | <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ../../kubernetes/cert-manager | n/a |
 | <a name="module_cert_manager_crd"></a> [cert\_manager\_crd](#module\_cert\_manager\_crd) | ../../kubernetes/helm-crd | n/a |
+| <a name="module_contour"></a> [contour](#module\_contour) | ../../kubernetes/contour | n/a |
 | <a name="module_control_plane_logs"></a> [control\_plane\_logs](#module\_control\_plane\_logs) | ../../kubernetes/control-plane-logs | n/a |
 | <a name="module_datadog"></a> [datadog](#module\_datadog) | ../../kubernetes/datadog | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../../kubernetes/external-dns | n/a |
@@ -134,6 +135,7 @@ This module is used to create AKS clusters.
 | <a name="input_azure_service_operator_enabled"></a> [azure\_service\_operator\_enabled](#input\_azure\_service\_operator\_enabled) | If Azure Service Operator should be enabled | `bool` | `false` | no |
 | <a name="input_cert_manager_config"></a> [cert\_manager\_config](#input\_cert\_manager\_config) | Cert Manager configuration, the first item in the list is the main domain | <pre>object({<br/>    notification_email = string<br/>    dns_zone           = list(string)<br/>  })</pre> | n/a | yes |
 | <a name="input_cert_manager_enabled"></a> [cert\_manager\_enabled](#input\_cert\_manager\_enabled) | Should Cert Manager be enabled | `bool` | `true` | no |
+| <a name="input_contour_enabled"></a> [contour\_enabled](#input\_contour\_enabled) | If Contour should be enabled | `bool` | `false` | no |
 | <a name="input_control_plane_logs_config"></a> [control\_plane\_logs\_config](#input\_control\_plane\_logs\_config) | Configuration for control plane log | <pre>object({<br/>    azure_key_vault_name = string<br/>    eventhub_hostname    = string<br/>    eventhub_name        = string<br/>  })</pre> | <pre>{<br/>  "azure_key_vault_name": "",<br/>  "eventhub_hostname": "",<br/>  "eventhub_name": ""<br/>}</pre> | no |
 | <a name="input_control_plane_logs_enabled"></a> [control\_plane\_logs\_enabled](#input\_control\_plane\_logs\_enabled) | Should Control plan be enabled | `bool` | `false` | no |
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The name for the core infrastructure | `string` | n/a | yes |

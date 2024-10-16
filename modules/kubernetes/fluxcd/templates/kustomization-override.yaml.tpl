@@ -53,3 +53,21 @@ patches:
         template:
           spec:
             priorityClassName: platform-medium
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: notification-controller
+        namespace: flux-system
+      spec:
+        template:
+          spec:
+            priorityClassName: platform-medium
+            containers:
+              - name: manager
+                args:
+                  - '--rate-limit-interval=30m'
+                  - '--watch-all-namespaces=true'
+                  - '--log-level=info'
+                  - '--log-encoding=json'
+                  - '--enable-leader-election'

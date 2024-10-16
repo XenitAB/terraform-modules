@@ -5,7 +5,7 @@ metadata:
   namespace: projectcontour
 spec:
   interval: 1m0s
-  url: "bitnami https://charts.bitnami.com/bitnami"
+  url: "https://charts.bitnami.com/bitnami"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease

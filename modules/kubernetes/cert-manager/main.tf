@@ -39,5 +39,6 @@ resource "git_repository_file" "cert_manager" {
     notification_email  = var.notification_email,
     resource_group_name = var.global_resource_group_name,
     subscription_id     = var.subscription_id,
+    gateway_api_enabled = var.gateway_api_enabled,
   })
 }

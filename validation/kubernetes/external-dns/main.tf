@@ -16,4 +16,6 @@ module "external_dns" {
   resource_group_name        = "rg-name"
   subscription_id            = "id"
   txt_owner_id               = "dev-aks1"
+  sources                    = ["ingress", "service"]
+  extra_args                 = []
 }

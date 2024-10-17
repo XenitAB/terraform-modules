@@ -18,6 +18,11 @@ variable "environment" {
   type        = string
 }
 
+variable "extra_args" {
+  description = "Extra command line arguments that is not covered by the Helm chart values"
+  type        = list(string)
+}
+
 variable "global_resource_group_name" {
   description = "The Azure global resource group name"
   type        = string
@@ -46,7 +51,6 @@ variable "resource_group_name" {
 variable "sources" {
   description = "k8s resource types to observe"
   type        = list(string)
-  default     = ["ingress", "service"]
 }
 
 variable "subscription_id" {

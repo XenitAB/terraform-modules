@@ -32,6 +32,12 @@ spec:
   values:
     global:
       priorityClassName: "platform-medium"
+    %{~ if gateway_api_enabled ~}
+    config:
+      apiVersion: controller.config.cert-manager.io/v1alpha1
+      kind: ControllerConfiguration
+      enableGatewayAPI: true
+    %{~ endif ~}
     podLabels:
       azure.workload.identity/use: "true"
     serviceAccount:

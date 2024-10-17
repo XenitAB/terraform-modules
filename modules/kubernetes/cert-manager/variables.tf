@@ -14,6 +14,11 @@ variable "dns_zones" {
   type        = map(string)
 }
 
+variable "gateway_api_enabled" {
+  description = "If Gateway API should be enabled"
+  type        = bool
+}
+
 variable "global_resource_group_name" {
   description = "The Azure global resource group name"
   type        = string

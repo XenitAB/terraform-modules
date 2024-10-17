@@ -35,6 +35,12 @@ spec:
       %{~ for item in sources ~}
       - "${item}"
       %{~ endfor ~}
+    %{~ if length(extra_args) > 0 ~}
+    extraArgs:
+      %{~ for arg in extra_args ~}
+      - "${arg}"
+      %{~ endfor ~}
+    %{~ endif ~}
     logFormat: json
     securityContext:
       allowPrivilegeEscalation: false

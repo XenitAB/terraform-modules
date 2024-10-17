@@ -17,4 +17,5 @@ module "cert_manager" {
   oidc_issuer_url            = "url"
   resource_group_name        = "rg-name"
   subscription_id            = "id"
+  gateway_api_enabled        = true
 }

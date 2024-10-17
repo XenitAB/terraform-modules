@@ -1,7 +1,6 @@
 locals {
   exclude_namespaces = [
     "aad-pod-identity",
-    "azad-kube-proxy",
     "azdo-proxy",
     "azure-metrics",
     "azureserviceoperator-system",
@@ -47,31 +46,6 @@ module "aad_pod_identity" {
   namespaces = [for ns in var.namespaces : {
     name = ns.name
   }]
-}
-
-module "azad_kube_proxy" {
-  for_each = {
-    for s in ["azad-kube-proxy"] :
-    s => s
-    if var.azad_kube_proxy_enabled
-  }
-
-  source                  = "../../kubernetes/azad-kube-proxy"
-  environment             = var.environment
-  location_short          = var.location_short
-  location                = data.azurerm_resource_group.this.location
-  name                    = var.name
-  key_vault_id            = data.azurerm_key_vault.core.id
-  key_vault_name          = data.azurerm_key_vault.core.name
-  dns_zones               = var.dns_zones
-  cluster_id              = local.cluster_id
-  fqdn                    = var.azad_kube_proxy_config.fqdn
-  azure_ad_group_prefix   = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
-  allowed_ips             = var.azad_kube_proxy_config.allowed_ips
-  private_ingress_enabled = var.ingress_nginx_config.private_ingress_enabled
-  use_private_ingress     = var.use_private_ingress
-  oidc_issuer_url         = var.oidc_issuer_url
-  resource_group_name     = data.azurerm_resource_group.this.name
 }
 
 module "azure_metrics" {
@@ -514,7 +488,6 @@ module "prometheus" {
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
   aad_pod_identity_enabled = var.aad_pod_identity_enabled
-  azad_kube_proxy_enabled  = var.azad_kube_proxy_enabled
   falco_enabled            = var.falco_enabled
   flux_enabled             = var.fluxcd_enabled
   gatekeeper_enabled       = var.gatekeeper_enabled

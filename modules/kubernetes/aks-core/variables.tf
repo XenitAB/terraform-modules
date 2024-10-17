@@ -487,24 +487,6 @@ variable "reloader_enabled" {
   default     = true
 }
 
-variable "azad_kube_proxy_enabled" {
-  description = "Should azad-kube-proxy be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "azad_kube_proxy_config" {
-  description = "The azad-kube-proxy configuration"
-  type = object({
-    fqdn        = string
-    allowed_ips = list(string)
-  })
-  default = {
-    fqdn        = ""
-    allowed_ips = []
-  }
-}
-
 variable "prometheus_enabled" {
   description = "Should prometheus be enabled"
   type        = bool

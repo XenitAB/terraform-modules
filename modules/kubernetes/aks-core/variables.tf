@@ -284,6 +284,12 @@ variable "ingress_nginx_enabled" {
   default     = true
 }
 
+variable "nginx_gateway_enabled" {
+  description = "Should NGINX Gateway Fabric be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "ingress_nginx_config" {
   description = "Ingress configuration"
   type = object({

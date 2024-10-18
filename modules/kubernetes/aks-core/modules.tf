@@ -430,6 +430,20 @@ module "ingress_nginx" {
   cluster_id              = local.cluster_id
 }
 
+module "nginx_gateway_fabric" {
+  #depends_on = [module.gateway_api]
+
+  for_each = {
+    for s in ["nginx-gateway"] :
+    s => s
+    if var.nginx_gateway_enabled
+  }
+
+  source = "../../kubernetes/nginx-gateway-fabric"
+
+  cluster_id = local.cluster_id
+}
+
 module "linkerd" {
   depends_on = [module.cert_manager_crd, module.linkerd_crd]
 

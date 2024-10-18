@@ -5,6 +5,7 @@ metadata:
   namespace: nginx-gateway
 spec:
   interval: 1m0s
+  type: oci
   url: "oci://ghcr.io/nginxinc/charts"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1

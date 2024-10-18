@@ -65,6 +65,12 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-cluster-issuer-account-key
     solvers:
+      - http01:
+        gatewayHTTPRoute:
+          parentRefs: 
+          - name: nginx
+            namespace: default
+            kind: Gateway
 %{ for zone, id in dns_zones ~}
       - dns01:
           azureDNS:

@@ -15,7 +15,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: ngf
+      chart: nginx-gateway-fabric
       sourceRef:
         kind: HelmRepository
         name: nginx-gateway-fabric

@@ -5,7 +5,7 @@ metadata:
   namespace: nginx-gateway
 spec:
   interval: 1m0s
-  url: "oci://ghcr.io/nginxinc/charts/nginx-gateway-fabric"
+  url: "oci://ghcr.io/nginxinc/charts"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease

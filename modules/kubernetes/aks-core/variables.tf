@@ -653,12 +653,6 @@ variable "oidc_issuer_url" {
   type        = string
 }
 
-variable "use_private_ingress" {
-  description = "If true, private ingress will be used by azad-kube-proxy"
-  type        = bool
-  default     = false
-}
-
 variable "azure_service_operator_enabled" {
   description = "If Azure Service Operator should be enabled"
   type        = bool

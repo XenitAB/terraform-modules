@@ -4,6 +4,7 @@ locals {
     "azad-kube-proxy",
     "azdo-proxy",
     "azure-metrics",
+    "azureserviceoperator-system",
     "calico-system",
     "cert-manager",
     "controle-plane-logs",
@@ -56,18 +57,21 @@ module "azad_kube_proxy" {
   }
 
   source                  = "../../kubernetes/azad-kube-proxy"
+  environment             = var.environment
+  location_short          = var.location_short
+  location                = data.azurerm_resource_group.this.location
+  name                    = var.name
+  key_vault_id            = data.azurerm_key_vault.core.id
+  key_vault_name          = data.azurerm_key_vault.core.name
+  dns_zones               = var.dns_zones
   cluster_id              = local.cluster_id
   fqdn                    = var.azad_kube_proxy_config.fqdn
   azure_ad_group_prefix   = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}"
   allowed_ips             = var.azad_kube_proxy_config.allowed_ips
   private_ingress_enabled = var.ingress_nginx_config.private_ingress_enabled
   use_private_ingress     = var.use_private_ingress
-
-  azure_ad_app = {
-    client_id     = var.azad_kube_proxy_config.azure_ad_app.client_id
-    client_secret = var.azad_kube_proxy_config.azure_ad_app.client_secret
-    tenant_id     = var.azad_kube_proxy_config.azure_ad_app.tenant_id
-  }
+  oidc_issuer_url         = var.oidc_issuer_url
+  resource_group_name     = data.azurerm_resource_group.this.name
 }
 
 module "azure_metrics" {
@@ -106,9 +110,29 @@ module "azure_policy" {
   environment         = var.environment
   location_short      = var.location_short
   tenant_namespaces = [
-    for namespace in var.namespaces :
-    namespace.name if namespace.flux.enabled
+    for namespace in var.namespaces : namespace.name
   ]
+}
+
+module "azure_service_operator" {
+  for_each = {
+    for s in ["azure_service_operator"] :
+    s => s
+    if var.azure_service_operator_enabled
+  }
+
+  source = "../../kubernetes/azure-service-operator"
+
+  aks_name                      = var.name
+  aks_name_suffix               = local.aks_name_suffix
+  azure_service_operator_config = var.azure_service_operator_config
+  cluster_id                    = local.cluster_id
+  environment                   = var.environment
+  location                      = data.azurerm_resource_group.this.location
+  location_short                = var.location_short
+  oidc_issuer_url               = var.oidc_issuer_url
+  subscription_id               = data.azurerm_client_config.current.subscription_id
+  tenant_id                     = data.azurerm_client_config.current.tenant_id
 }
 
 module "cert_manager" {
@@ -133,6 +157,12 @@ module "cert_manager" {
 }
 
 module "cert_manager_crd" {
+  for_each = {
+    for s in ["cert-manager"] :
+    s => s
+    if var.cert_manager_enabled
+  }
+
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://charts.jetstack.io"
@@ -224,55 +254,23 @@ module "falco" {
   cilium_enabled = var.cilium_enabled
 }
 
-module "fluxcd_v2_azure_devops" {
+module "fluxcd" {
   for_each = {
-    for s in ["fluxcd-v2"] :
+    for s in ["fluxcd"] :
     s => s
-    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "azure-devops"
+    if var.fluxcd_enabled
   }
 
-  source = "../../kubernetes/fluxcd-v2-azdo"
+  source = "../../kubernetes/fluxcd"
 
-  environment       = var.environment
-  cluster_id        = local.cluster_id
-  azure_devops_pat  = var.fluxcd_v2_config.azure_devops.pat
-  azure_devops_org  = var.fluxcd_v2_config.azure_devops.org
-  azure_devops_proj = var.fluxcd_v2_config.azure_devops.proj
-  cluster_repo      = var.fluxcd_v2_config.azure_devops.repo
+  environment  = var.environment
+  cluster_id   = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
+  git_provider = var.fluxcd_config.git_provider
+  bootstrap    = var.fluxcd_config.bootstrap
   namespaces = [for ns in var.namespaces : {
-    name = ns.name
-    flux = {
-      enabled             = ns.flux.enabled
-      create_crds         = ns.flux.create_crds
-      include_tenant_name = ns.flux.include_tenant_name
-      org                 = ns.flux.azure_devops.org
-      proj                = ns.flux.azure_devops.proj
-      repo                = ns.flux.azure_devops.repo
-    }
-  }]
-}
-
-module "fluxcd_v2_github" {
-  for_each = {
-    for s in ["fluxcd-v2"] :
-    s => s
-    if var.fluxcd_v2_enabled && var.fluxcd_v2_config.type == "github"
-  }
-
-  source = "../../kubernetes/fluxcd-v2-github"
-
-  environment            = var.environment
-  cluster_id             = local.cluster_id
-  github_org             = var.fluxcd_v2_config.github.org
-  github_app_id          = var.fluxcd_v2_config.github.app_id
-  github_installation_id = var.fluxcd_v2_config.github.installation_id
-  github_private_key     = var.fluxcd_v2_config.github.private_key
-  namespaces = [for ns in var.namespaces : {
-    name = ns.name
-    flux = {
-      enabled = ns.flux.enabled
-      repo    = ns.flux.github.repo
-    }
+    name   = ns.name
+    labels = ns.labels
+    fluxcd = ns.flux
   }]
 }
 
@@ -285,10 +283,11 @@ module "gatekeeper" {
 
   source = "../../kubernetes/gatekeeper"
 
-  cluster_id           = local.cluster_id
-  exclude_namespaces   = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
-  mirrord_enabled      = var.mirrord_enabled
-  telepresence_enabled = var.telepresence_enabled
+  cluster_id                     = local.cluster_id
+  azure_service_operator_enabled = var.azure_service_operator_enabled
+  exclude_namespaces             = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
+  mirrord_enabled                = var.mirrord_enabled
+  telepresence_enabled           = var.telepresence_enabled
 }
 
 module "grafana_agent" {
@@ -320,12 +319,18 @@ module "grafana_agent" {
   cluster_id              = local.cluster_id
   cluster_name            = "${var.name}${local.aks_name_suffix}"
   environment             = var.environment
-  namespace_include       = var.namespaces[*].name
+  namespace_include       = length(var.namespaces) > 0 ? var.namespaces[*].name : []
   extra_namespaces        = var.grafana_agent_config.extra_namespaces
   include_kubelet_metrics = var.grafana_agent_config.include_kubelet_metrics
 }
 
 module "grafana_agent_crd" {
+  for_each = {
+    for s in ["grafana-agent"] :
+    s => s
+    if var.grafana_agent_enabled
+  }
+
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://grafana.github.io/helm-charts"
@@ -333,6 +338,58 @@ module "grafana_agent_crd" {
   chart_version    = "0.1.5"
 }
 
+module "grafana_alloy" {
+
+  for_each = {
+    for s in ["grafana-alloy"] :
+    s => s
+    if var.grafana_alloy_enabled
+  }
+
+  source = "../../kubernetes/grafana-alloy"
+
+  azure_config = {
+    azure_key_vault_name = var.grafana_alloy_config.azure_key_vault_name
+    keyvault_secret_name = var.grafana_alloy_config.keyvault_secret_name
+  }
+  grafana_alloy_config = {
+    grafana_otelcol_auth_basic_username = var.grafana_alloy_config.grafana_otelcol_auth_basic_username
+    grafana_otelcol_exporter_endpoint   = var.grafana_alloy_config.grafana_otelcol_exporter_endpoint
+    cluster_name                        = var.grafana_alloy_config.cluster_name
+  }
+  aks_name            = var.name
+  cluster_id          = local.cluster_id
+  environment         = var.environment
+  location_short      = var.location_short
+  oidc_issuer_url     = var.oidc_issuer_url
+  resource_group_name = data.azurerm_resource_group.this.name
+}
+module "grafana_k8s_monitoring" {
+
+  for_each = {
+    for s in ["grafana_k8s_monitoring"] :
+    s => s
+    if var.grafana_k8s_monitoring_enabled
+  }
+
+  source = "../../kubernetes/grafana-k8s-monitoring"
+
+  key_vault_id        = data.azurerm_key_vault.core.id
+  location            = data.azurerm_resource_group.this.location
+  oidc_issuer_url     = var.oidc_issuer_url
+  resource_group_name = data.azurerm_resource_group.this.name
+  cluster_id          = local.cluster_id
+  cluster_name        = var.grafana_k8s_monitor_config.cluster_name
+  grafana_k8s_monitor_config = {
+    azure_key_vault_name          = var.grafana_k8s_monitor_config.azure_key_vault_name
+    grafana_cloud_prometheus_host = var.grafana_k8s_monitor_config.grafana_cloud_prometheus_host
+    grafana_cloud_loki_host       = var.grafana_k8s_monitor_config.grafana_cloud_loki_host
+    grafana_cloud_tempo_host      = var.grafana_k8s_monitor_config.grafana_cloud_tempo_host
+    include_namespaces            = var.grafana_k8s_monitor_config.include_namespaces
+    include_namespaces_piped      = var.grafana_k8s_monitor_config.include_namespaces_piped
+    exclude_namespaces            = var.grafana_k8s_monitor_config.exclude_namespaces
+  }
+}
 module "ingress_healthz" {
   depends_on = [module.linkerd]
 
@@ -341,7 +398,6 @@ module "ingress_healthz" {
     s => s
     if var.ingress_healthz_enabled
   }
-
   source = "../../kubernetes/ingress-healthz"
 
   environment     = var.environment
@@ -463,7 +519,7 @@ module "prometheus" {
   azad_kube_proxy_enabled  = var.azad_kube_proxy_enabled
   cilium_enabled           = var.cilium_enabled
   falco_enabled            = var.falco_enabled
-  flux_enabled             = var.fluxcd_v2_enabled
+  flux_enabled             = var.fluxcd_enabled
   gatekeeper_enabled       = var.gatekeeper_enabled
   grafana_agent_enabled    = var.grafana_agent_enabled
   linkerd_enabled          = var.linkerd_enabled
@@ -476,6 +532,12 @@ module "prometheus" {
 }
 
 module "prometheus_crd" {
+  for_each = {
+    for s in ["prometheus"] :
+    s => s
+    if var.prometheus_enabled
+  }
+
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://prometheus-community.github.io/helm-charts"
@@ -544,6 +606,12 @@ module "trivy" {
 }
 
 module "trivy_crd" {
+  for_each = {
+    for s in ["trivy"] :
+    s => s
+    if var.trivy_enabled && !var.defender_enabled
+  }
+
   source = "../../kubernetes/helm-crd"
 
   chart_repository = "https://aquasecurity.github.io/helm-charts/"

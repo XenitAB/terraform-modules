@@ -8,6 +8,75 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat:  metrics for flux system by @optocoupler in [#1200](https://github.com/XenitAB/terraform-modules/pulls/1200)
+- Feat: Move azad-kube-proxy to aks-core and use SecretProviderClass by @CalleB3 in [#1196](https://github.com/XenitAB/terraform-modules/pulls/1196)
+- Feat: improved grafana agent configuration by @landerss1 in [#1192](https://github.com/XenitAB/terraform-modules/pulls/1192)
+- Feat: add gateway_transit option to peering_config by @landerss1 in [#1189](https://github.com/XenitAB/terraform-modules/pulls/1189)
+- Feat: changing the alerts interval evaluation time by @optocoupler in [#1184](https://github.com/XenitAB/terraform-modules/pulls/1184)
+- Feat: adding alerting for flux by @optocoupler in [#1182](https://github.com/XenitAB/terraform-modules/pulls/1182)
+- Feat: fixing the memory consumption issues by @optocoupler in [#1180](https://github.com/XenitAB/terraform-modules/pulls/1180)
+- Feat: disabling opencost by @optocoupler in [#1174](https://github.com/XenitAB/terraform-modules/pulls/1174)
+- Feat: adding filtering for namespaces for grafana k8s chart by @optocoupler in [#1166](https://github.com/XenitAB/terraform-modules/pulls/1166)
+- Feat: add initial support for automation alerts by @landerss1 in [#1167](https://github.com/XenitAB/terraform-modules/pulls/1167)
+- Feat: Adding Grafana Cloud k8s monitoring stack by @optocoupler in [#1161](https://github.com/XenitAB/terraform-modules/pulls/1161)
+- Feat: create entra group for access to automation account operators by @landerss1 in [#1162](https://github.com/XenitAB/terraform-modules/pulls/1162)
+
+
+
+### 🐛 Bug Fixes
+- Fix: add flux notification provider by @CalleB3 in [#1222](https://github.com/XenitAB/terraform-modules/pulls/1222)
+- Fix: add flux notification-controller by @CalleB3 in [#1220](https://github.com/XenitAB/terraform-modules/pulls/1220)
+- Fix: adding namespaced discovery by @optocoupler in [#1219](https://github.com/XenitAB/terraform-modules/pulls/1219)
+- Fix: add end_date to azad-proxy azuread_application_password by @CalleB3 in [#1216](https://github.com/XenitAB/terraform-modules/pulls/1216)
+- Fix: base64 encode private key for flux GitHub tenants by @landerss1 in [#1214](https://github.com/XenitAB/terraform-modules/pulls/1214)
+- Fix: glux bootstrap not working for GitHub tenants by @landerss1 in [#1213](https://github.com/XenitAB/terraform-modules/pulls/1213)
+- Fix: git-auth-proxy config should not have project specified for GitH… by @landerss1 in [#1212](https://github.com/XenitAB/terraform-modules/pulls/1212)
+- Fix: wrong GitHub application id attribute provided in template by @landerss1 in [#1211](https://github.com/XenitAB/terraform-modules/pulls/1211)
+- Fix: flux project name is null for GitHub tenants by @landerss1 in [#1209](https://github.com/XenitAB/terraform-modules/pulls/1209)
+- Fix: don't create secret for git-auth-proxy if tenant is not using flux by @landerss1 in [#1208](https://github.com/XenitAB/terraform-modules/pulls/1208)
+- Fix: don't create flux tenant artifacts if flux isn't enabled by @landerss1 in [#1207](https://github.com/XenitAB/terraform-modules/pulls/1207)
+- Fix: create azure policy regardless of flux config by @landerss1 in [#1206](https://github.com/XenitAB/terraform-modules/pulls/1206)
+- Fix: some tenants don't have gatekeeper installed/enabled by @optocoupler in [#1202](https://github.com/XenitAB/terraform-modules/pulls/1202)
+- Fix: dont install unused CRDs by @CalleB3 in [#1197](https://github.com/XenitAB/terraform-modules/pulls/1197)
+- Fix: grafana alloy using wrong location short name by @landerss1 in [#1188](https://github.com/XenitAB/terraform-modules/pulls/1188)
+- Fix: telepresence deployment error by @landerss1 in [#1187](https://github.com/XenitAB/terraform-modules/pulls/1187)
+- Fix: Revert Exclude ambassador namespace" by @landerss1 in [#1186](https://github.com/XenitAB/terraform-modules/pulls/1186)
+- Fix: Exclude ambassador namespace by @CalleB3 in [#1185](https://github.com/XenitAB/terraform-modules/pulls/1185)
+- Fix: wrong location name forces replacement of automation resources by @landerss1 in [#1179](https://github.com/XenitAB/terraform-modules/pulls/1179)
+- Fix: in some clusters we dont use gatekeeper-config by @optocoupler in [#1175](https://github.com/XenitAB/terraform-modules/pulls/1175)
+- Fix: incorrect naming of input variable by @landerss1 in [#1170](https://github.com/XenitAB/terraform-modules/pulls/1170)
+
+
+
+### 🚜 Refactor
+- Refactor: use Microsoft provider for Azure DevOps by @landerss1 in [#1177](https://github.com/XenitAB/terraform-modules/pulls/1177)
+- Refactor: explicitly set AKS SKU tier and node count by @landerss1 in [#1168](https://github.com/XenitAB/terraform-modules/pulls/1168)
+
+
+
+### ⚙️ Miscellaneous
+- Chore!: bump flux provider to v1.4.0 by @landerss1 in [#1203](https://github.com/XenitAB/terraform-modules/pulls/1203)
+- Chore: Update Ingress-nginx, Cert-manager and external-dns by @CalleB3 in [#1191](https://github.com/XenitAB/terraform-modules/pulls/1191)
+- Chore: bump ytanikin/PRConventionalCommits from 1.2.0 to 1.3.0 by @landerss1 in [#1190](https://github.com/XenitAB/terraform-modules/pulls/1190)
+- Ci: bump terraform-docs version to v 0.19.0 by @landerss1 in [#1193](https://github.com/XenitAB/terraform-modules/pulls/1193)
+- Chore: bump peter-evans/create-pull-request from 4 to 7 by @landerss1 in [#1172](https://github.com/XenitAB/terraform-modules/pulls/1172)
+- Chore: upgrade falco-exporter chart to 0.12.1 by @landerss1 in [#1173](https://github.com/XenitAB/terraform-modules/pulls/1173)
+
+
+
+### 📚 Documentation
+
+
+
+## [2024.08.1](https://github.com/XenitAB/terraform-modules/releases/tag/2024.08.1)
+
+### 🚀 New Features
+- Feat: prevent destruction of tenant namespaces by @landerss1 in [#1158](https://github.com/XenitAB/terraform-modules/pulls/1158)
+- Feat: adding grafana alloy module for k8s by @optocoupler in [#1156](https://github.com/XenitAB/terraform-modules/pulls/1156)
+- Feat: make service_principal_all_owner_name optional by @landerss1 in [#1139](https://github.com/XenitAB/terraform-modules/pulls/1139)
+- Feat: add support for Temporary kubelet disk type by @landerss1 in [#1153](https://github.com/XenitAB/terraform-modules/pulls/1153)
+- Feat: add support for Azure service operator by @landerss1 in [#1149](https://github.com/XenitAB/terraform-modules/pulls/1149)
+- Feat: disable or enable metrics alert when cluster is stopped or started by @landerss1 in [#1147](https://github.com/XenitAB/terraform-modules/pulls/1147)
 - Feat: make upgrade_settings configurable by @landerss1 in [#1136](https://github.com/XenitAB/terraform-modules/pulls/1136)
 - Feat: add support for AKS cost analysis by @landerss1 in [#1126](https://github.com/XenitAB/terraform-modules/pulls/1126)
 - Feat: add support for starting/stopping a cluster using Azure automation by @landerss1 in [#1120](https://github.com/XenitAB/terraform-modules/pulls/1120)
@@ -18,6 +87,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: aks automation module dependent on aks cluster by @landerss1 in [#1146](https://github.com/XenitAB/terraform-modules/pulls/1146)
+- Fix: rego errors in gatekeeper templates by @landerss1 in [#1144](https://github.com/XenitAB/terraform-modules/pulls/1144)
 - Fix: allow vector to use writable root file system by @landerss1 in [#1128](https://github.com/XenitAB/terraform-modules/pulls/1128)
 - Fix: allow prometheus-node-exporter to use host network/port by @landerss1 in [#1127](https://github.com/XenitAB/terraform-modules/pulls/1127)
 - Fix: add a private ingressclass instead of replacing the existing by @landerss1 in [#1110](https://github.com/XenitAB/terraform-modules/pulls/1110)
@@ -30,6 +101,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Feat(azure/governance-regional): add output of key vault names by @landerss1 in [#1045](https://github.com/XenitAB/terraform-modules/pulls/1045)
+- Chore: upgrade hashicorp/setup-terraform from 2 to 3 by @landerss1 in [#1042](https://github.com/XenitAB/terraform-modules/pulls/1042)
+- Chore: upgrade terraform-linters/setup-tflint from 3 to 4 by @landerss1 in [#1034](https://github.com/XenitAB/terraform-modules/pulls/1034)
 - Chore: update spegel to 0.0.23 by @yabracadabra in [#1134](https://github.com/XenitAB/terraform-modules/pulls/1134)
 - Chore: bump peter-evans/create-pull-request to v6 by @landerss1 in [#1132](https://github.com/XenitAB/terraform-modules/pulls/1132)
 - Ci: run check when PR is labeled by @landerss1 in [#1131](https://github.com/XenitAB/terraform-modules/pulls/1131)

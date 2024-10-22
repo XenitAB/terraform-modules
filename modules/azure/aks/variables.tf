@@ -9,6 +9,13 @@ variable "aks_automation_config" {
   description = "AKS automation configuration"
   type = object({
     public_network_access_enabled = optional(bool, false),
+    alerts_config = optional(object({
+      enabled     = optional(bool, true),
+      frequency   = optional(string, ""),
+      window_size = optional(string, ""),
+      severity    = optional(number, 3),
+      email_to    = optional(string, ""),
+    }), {}),
     runbook_schedules = optional(list(object({
       name        = string,
       frequency   = string,
@@ -31,26 +38,24 @@ variable "aks_automation_config" {
     ]) == length(var.aks_automation_config.runbook_schedules)
     error_message = "The frequency of the schedule must be either 'OneTime', 'Day', 'Hour', 'Week'."
   }
+}
 
-  #validation {
-  #  condition = (var.aks_automation_config.frequency != "Week" && length(var.aks_automation_config.week_days) == 0) || (var.aks_automation_config.frequency == "Week" && contains(
-  #    ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], var.aks_automation_config.week_days
-  #  ))
-  #  error_message = "The frequency of the schedule must be either 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' or 'Sunday'."
-  #}
-
-  #validation {
-  #  condition = contains(
-  #    ["start", "stop"], var.aks_automation_config.operation
-  #  )
-  #  error_message = "The operation of the schedule must be either 'start' or 'stop'."
-  #}
+variable "notification_email" {
+  description = "Where to send email alerts"
+  type        = string
+  default     = "DG-Team-DevOps@xenit.se"
 }
 
 variable "aks_joblogs_retention_days" {
   description = "How many days to keep logs from automation jobs"
   type        = number
   default     = 7
+}
+
+variable "location" {
+  description = "The Azure region"
+  type        = string
+  default     = "West Europe"
 }
 
 variable "location_short" {
@@ -115,23 +120,24 @@ variable "aks_default_node_pool_zones" {
 variable "aks_config" {
   description = "The Azure Kubernetes Service (AKS) configuration"
   type = object({
-    version = string
-    # Enables paid SKU for AKS and makes the default node pool HA
-    production_grade = bool
+    version                = string
+    sku_tier               = optional(string, "Free")
+    default_node_pool_size = optional(number, 1)
     # Will replace the default cluster auto scaler expander with a priority expander, 
     # see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md#configuration
     priority_expander_config = optional(map(list(string)))
     node_pools = list(object({
-      name           = string
-      version        = string
-      vm_size        = string
-      zones          = optional(list(string), ["1", "2", "3"])
-      min_count      = number
-      max_count      = number
-      spot_enabled   = bool
-      spot_max_price = number
-      node_taints    = list(string)
-      node_labels    = map(string)
+      name              = string
+      version           = string
+      vm_size           = string
+      kubelet_disk_type = optional(string, "Temporary")
+      zones             = optional(list(string), ["1", "2", "3"])
+      min_count         = number
+      max_count         = number
+      spot_enabled      = bool
+      spot_max_price    = number
+      node_taints       = list(string)
+      node_labels       = map(string)
       upgrade_settings = optional(object({
         drain_timeout_in_minutes      = optional(number, 30)
         node_soak_duration_in_minutes = optional(number, 0)
@@ -158,6 +164,11 @@ variable "aks_config" {
       for np in concat(var.aks_config.node_pools, [{ version : var.aks_config.version }]) : can(regex("^1.(28|29|30|31)", np.version))
     ])
     error_message = "The Kubernetes version has not been validated yet, supported versions are 1.28, 1.29, 1.30 or 1.31."
+  }
+
+  validation {
+    condition     = contains(["Free", "Standard", "Premium"], var.aks_config.sku_tier)
+    error_message = "Invalid pricing_tier: ${var.aks_config.sku_tier}. Allowed vallues: ['Free', 'Standard', 'Premium']"
   }
 
   validation {
@@ -206,6 +217,12 @@ variable "aks_config" {
 
 variable "aks_cost_analysis_enabled" {
   description = "If AKS cost analysis should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "alerts_enabled" {
+  description = "If metric alerts on audit logs are enabled"
   type        = bool
   default     = false
 }

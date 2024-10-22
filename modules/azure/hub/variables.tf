@@ -44,6 +44,7 @@ variable "peering_config" {
     allow_forwarded_traffic      = bool
     use_remote_gateways          = bool
     allow_virtual_network_access = bool
+    allow_gateway_transit        = optional(bool, false)
   }))
   default = []
 }

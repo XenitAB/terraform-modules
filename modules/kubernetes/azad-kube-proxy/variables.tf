@@ -1,11 +1,16 @@
-variable "azure_ad_app" {
-  description = "The Azure AD Application config for azad-kube-proxy"
-  type = object({
-    client_id     = string
-    client_secret = string
-    tenant_id     = string
-  })
-  sensitive = true
+variable "location_short" {
+  description = "The Azure region short name"
+  type        = string
+}
+
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
+variable "name" {
+  description = "The name to use for the deploy"
+  type        = string
 }
 
 variable "allowed_ips" {
@@ -40,4 +45,45 @@ variable "use_private_ingress" {
   description = "If true, private ingress will be used by azad-kube-proxy"
   type        = bool
   default     = false
+}
+
+variable "azad_kube_proxy_config" {
+  description = "Azure AD Kubernetes Proxy configuration"
+  type = object({
+    cluster_name_prefix = string
+    proxy_url_override  = string
+  })
+  default = {
+    cluster_name_prefix = "aks"
+    proxy_url_override  = ""
+  }
+}
+variable "key_vault_id" {
+  description = "core keyvault id"
+  type        = string
+}
+
+variable "dns_zones" {
+  description = "List of DNS Zones"
+  type        = list(string)
+}
+
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
+  type        = string
+}
+
+variable "resource_group_name" {
+  description = "The Azure resource group name"
+  type        = string
+}
+
+variable "location" {
+  description = "The Azure region name."
+  type        = string
+}
+
+variable "key_vault_name" {
+  description = "The keyvault name."
+  type        = string
 }

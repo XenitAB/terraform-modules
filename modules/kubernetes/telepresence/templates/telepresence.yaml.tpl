@@ -18,7 +18,7 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: telepresence
+  name: traffic-manager
   namespace: ambassador
 spec:
   chart:
@@ -43,7 +43,9 @@ spec:
       %{ if length(telepresence_config.client_rbac.subjects) > 0 }
       subjects:
       %{ for subject in telepresence_config.client_rbac.subjects }
-      - ${subject}
+      - kind: Group
+        name: ${subject}
+        apiGroup: rbac.authorization.k8s.io
       %{ endfor }
       %{ endif }
       namespaced: ${ telepresence_config.client_rbac.namespaced }

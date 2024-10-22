@@ -1,12 +1,26 @@
-terraform {}
-
-provider "azurerm" {
-  features {}
+terraform {
 }
 
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
 
+  grafana_k8s_monitor_config = {
+    grafana_cloud_prometheus_host = "sda"
+    grafana_cloud_loki_host       = "asdw"
+    grafana_cloud_tempo_host      = "asdas"
+    cluster_name                  = "asdas"
+    azure_key_vault_name          = "yaba"
+    include_namespaces            = "one,two,three"
+    include_namespaces_piped      = "one|two|three"
+    exclude_namespaces            = "three,two,one"
+  }
+  grafana_alloy_config = {
+    cluster_name                        = "awesome_cluster"
+    azure_key_vault_name                = "foobar"
+    keyvault_secret_name                = "barfoo"
+    grafana_otelcol_auth_basic_username = "some-integers"
+    grafana_otelcol_exporter_endpoint   = "some-url"
+  }
   name                    = "baz"
   aks_name_suffix         = 1
   core_name               = "core"
@@ -31,18 +45,19 @@ module "aks_core" {
     notification_email = "foo"
     dns_zone           = ["bar", "faa"]
   }
-  fluxcd_v2_config = {
-    type = "github"
-    github = {
-      org             = ""
-      app_id          = 0
-      installation_id = 0
-      private_key     = ""
+  fluxcd_config = {
+    git_provider = {
+      organization        = "my-org"
+      type                = "azuredevops"
+      include_tenant_name = true
+      azure_devops = {
+        pat = "my-pat"
+      }
     }
-    azure_devops = {
-      pat  = ""
-      org  = ""
-      proj = ""
+    bootstrap = {
+      disable_secret_creation = true
+      project                 = "my-proj"
+      repository              = "my-repo"
     }
   }
   priority_expander_config = { "10" : [".*standard.*"], "20" : [".*spot.*"] }

@@ -8,13 +8,41 @@ variable "aks_name" {
   type        = string
 }
 
+variable "alerts_enabled" {
+  description = "If metric alerts on audit logs are enabled"
+  type        = string
+  default     = false
+}
+
+variable "alert_name" {
+  description = "The name of an alert that should be disabled/enabled in automation runbook"
+  type        = string
+  default     = ""
+}
+
+variable "alerts_resource_group_name" {
+  description = "The name of a resource group where metric alerts are defined"
+  type        = string
+  default     = ""
+}
+
 variable "environment" {
   description = "The name of the environment"
   type        = string
 }
 
+variable "location" {
+  description = "The Azure region"
+  type        = string
+}
+
 variable "location_short" {
   description = "The Azure region short name"
+  type        = string
+}
+
+variable "notification_email" {
+  description = "Where to send email alerts"
   type        = string
 }
 
@@ -28,6 +56,13 @@ variable "aks_automation_config" {
   description = "AKS automation configuration"
   type = object({
     public_network_access_enabled = optional(bool, false),
+    alerts_config = optional(object({
+      enabled     = optional(bool, true),
+      frequency   = optional(string, ""),
+      window_size = optional(string, ""),
+      severity    = optional(number, 3),
+      email_to    = optional(string, ""),
+    }), {}),
     runbook_schedules = optional(list(object({
       name        = string,
       frequency   = string,

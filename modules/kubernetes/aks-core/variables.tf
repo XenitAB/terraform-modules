@@ -77,39 +77,15 @@ variable "namespaces" {
     object({
       name   = string
       labels = map(string)
-      flux = object({
-        enabled             = bool
-        create_crds         = bool
-        include_tenant_name = bool
-        azure_devops = object({
-          org  = string
-          proj = string
-          repo = string
-        })
-        github = object({
-          repo = string
-        })
-      })
+      flux = optional(object({
+        provider            = string
+        project             = optional(string)
+        repository          = string
+        include_tenant_name = optional(bool, false)
+        create_crds         = optional(bool, false)
+      }))
     })
   )
-  default = [{
-    name   = ""
-    labels = {}
-    flux = {
-      enabled             = true
-      create_crds         = false
-      include_tenant_name = false
-      azure_devops = {
-        org  = ""
-        proj = ""
-        repo = ""
-      }
-      github = {
-        repo = ""
-      }
-    }
-    }
-  ]
 }
 
 variable "kubernetes_network_policy_default_deny" {
@@ -140,28 +116,32 @@ variable "kubernetes_default_limit_range" {
   }
 }
 
-variable "fluxcd_v2_enabled" {
-  description = "Should fluxcd-v2 be enabled"
+variable "fluxcd_enabled" {
+  description = "Should fluxcd be enabled"
   type        = bool
   default     = true
 }
 
-variable "fluxcd_v2_config" {
-  description = "Configuration for fluxcd-v2"
+variable "fluxcd_config" {
+  description = "Configuration for FluxCD"
   type = object({
-    type = string
-    github = object({
-      org             = string
-      app_id          = number
-      installation_id = number
-      private_key     = string
-      repo            = optional(string, "fleet-infra")
+    git_provider = object({
+      organization        = string
+      type                = optional(string, "azuredevops")
+      include_tenant_name = optional(bool, false)
+      github = optional(object({
+        application_id  = number
+        installation_id = number
+        private_key     = string
+      }))
+      azure_devops = optional(object({
+        pat = string
+      }))
     })
-    azure_devops = object({
-      pat  = string
-      org  = string
-      proj = string
-      repo = optional(string, "fleet-infra")
+    bootstrap = object({
+      disable_secret_creation = optional(bool, true)
+      project                 = optional(string)
+      repository              = string
     })
   })
 }
@@ -457,6 +437,44 @@ variable "grafana_agent_config" {
   }
 }
 
+variable "grafana_alloy_enabled" {
+  description = "Should Grafana-Alloy be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "grafana_alloy_config" {
+  description = "Grafana Alloy config"
+  type = object({
+    azure_key_vault_name                = string
+    keyvault_secret_name                = string
+    cluster_name                        = string
+    grafana_otelcol_auth_basic_username = string
+    grafana_otelcol_exporter_endpoint   = string
+  })
+}
+
+variable "grafana_k8s_monitoring_enabled" {
+  description = "Should Grafana-k8s-chart be enabled/deployed"
+  type        = bool
+  default     = false
+}
+
+
+variable "grafana_k8s_monitor_config" {
+  description = "Grafana k8s monitor chart config"
+  type = object({
+    azure_key_vault_name          = string
+    grafana_cloud_prometheus_host = optional(string, "")
+    grafana_cloud_loki_host       = optional(string, "")
+    grafana_cloud_tempo_host      = optional(string, "")
+    cluster_name                  = string
+    include_namespaces            = optional(string, "")
+    include_namespaces_piped      = optional(string, "")
+    exclude_namespaces            = optional(string, "")
+  })
+}
+
 variable "falco_enabled" {
   description = "Should Falco be enabled"
   type        = bool
@@ -480,20 +498,10 @@ variable "azad_kube_proxy_config" {
   type = object({
     fqdn        = string
     allowed_ips = list(string)
-    azure_ad_app = object({
-      client_id     = string
-      client_secret = string
-      tenant_id     = string
-    })
   })
   default = {
     fqdn        = ""
     allowed_ips = []
-    azure_ad_app = {
-      client_id     = ""
-      client_secret = ""
-      tenant_id     = ""
-    }
   }
 }
 
@@ -673,4 +681,30 @@ variable "cilium_enabled" {
   description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
   type        = bool
   default     = true
+}
+
+variable "azure_service_operator_enabled" {
+  description = "If Azure Service Operator should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "azure_service_operator_config" {
+  description = "Azure Service Operator configuration"
+  type = object({
+    cluster_config = optional(object({
+      sync_period    = optional(string, "1m")
+      enable_metrics = optional(bool, false)
+      crd_pattern    = optional(string, "") # never set this to '*', limit this to the resources that are actually needed
+    }), {})
+    tenant_namespaces = optional(list(object({
+      name = string
+    })), [])
+  })
+  default = {}
+
+  validation {
+    condition     = var.azure_service_operator_config.cluster_config.crd_pattern != "*"
+    error_message = "Installing all CRD:s in the cluster is not supported, please limit to the ones needed"
+  }
 }

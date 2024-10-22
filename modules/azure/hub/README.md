@@ -54,9 +54,9 @@ No modules.
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The location shortname for the subscription | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The name to use for the deploy | `string` | n/a | yes |
 | <a name="input_nat_gateway_public_ip_prefix_length"></a> [nat\_gateway\_public\_ip\_prefix\_length](#input\_nat\_gateway\_public\_ip\_prefix\_length) | The Public IP Prefix length for NAT Gateway | `number` | `31` | no |
-| <a name="input_peering_config"></a> [peering\_config](#input\_peering\_config) | Peering configuration | <pre>list(object({<br>    name                         = string<br>    remote_virtual_network_id    = string<br>    allow_forwarded_traffic      = bool<br>    use_remote_gateways          = bool<br>    allow_virtual_network_access = bool<br>  }))</pre> | `[]` | no |
+| <a name="input_peering_config"></a> [peering\_config](#input\_peering\_config) | Peering configuration | <pre>list(object({<br/>    name                         = string<br/>    remote_virtual_network_id    = string<br/>    allow_forwarded_traffic      = bool<br/>    use_remote_gateways          = bool<br/>    allow_virtual_network_access = bool<br/>    allow_gateway_transit        = optional(bool, false)<br/>  }))</pre> | `[]` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The subscription CommonName to use for the deploy | `string` | n/a | yes |
-| <a name="input_vnet_config"></a> [vnet\_config](#input\_vnet\_config) | Address spaces used by virtual network. | <pre>object({<br>    address_space = list(string)<br>    subnets = list(object({<br>      name              = string<br>      cidr              = string<br>      service_endpoints = list(string)<br>    }))<br>  })</pre> | n/a | yes |
+| <a name="input_vnet_config"></a> [vnet\_config](#input\_vnet\_config) | Address spaces used by virtual network. | <pre>object({<br/>    address_space = list(string)<br/>    subnets = list(object({<br/>      name              = string<br/>      cidr              = string<br/>      service_endpoints = list(string)<br/>    }))<br/>  })</pre> | n/a | yes |
 
 ## Outputs
 

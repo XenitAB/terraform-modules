@@ -112,6 +112,8 @@ resource "azurerm_virtual_network_peering" "this" {
   allow_forwarded_traffic      = each.value.peering_config.allow_forwarded_traffic
   use_remote_gateways          = each.value.peering_config.use_remote_gateways
   allow_virtual_network_access = each.value.peering_config.allow_virtual_network_access
+  allow_gateway_transit        = each.value.peering_config.allow_gateway_transit
+
 }
 
 resource "azurerm_role_definition" "service_endpoint_join" {

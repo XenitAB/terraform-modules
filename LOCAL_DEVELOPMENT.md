@@ -42,7 +42,7 @@ mv tfsec-linux-amd64 /usr/bin/tfsec
 ### terraform-docs
 
 ```shell
-TERRAFORM_DOCS_VERSION=v0.16.0
+TERRAFORM_DOCS_VERSION=v0.19.0
 cd /tmp
 wget https://github.com/terraform-docs/terraform-docs/releases/download/${TERRAFORM_DOCS_VERSION}/terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz
 tar xzvf terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz terraform-docs

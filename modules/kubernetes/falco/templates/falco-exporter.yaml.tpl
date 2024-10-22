@@ -19,12 +19,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: falco-exporter
-      version: v0.9.1
+      version: v0.12.1
   interval: 1m0s
   values:
     priorityClassName: platform-high
-
-    tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/master
-      - operator: Exists

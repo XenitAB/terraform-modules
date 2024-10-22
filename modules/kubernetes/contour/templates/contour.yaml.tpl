@@ -23,6 +23,17 @@ spec:
   interval: 1m0s
   values:
     contour:
+      args:
+        - "gateway-provisioner"
+        - "--metrics-addr=127.0.0.1:8080"
+        - "--enable-leader-election"
+      extraEnvVars:
+        - name: CONTOUR_PROVISIONER_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+
       replicaCount: ${contour_config.replica_count}
       priorityClassName: "platform-high"
       resourcesPreset: ${contour_config.resource_preset}
@@ -31,28 +42,24 @@ spec:
         create: true
         minAvailable: "1"
       envoy:
-        kind: deployment
-        replicaCount: ${envoy_config.replica_count}
-        priorityClassName: "platform-high"
-        resourcesPreset: ${envoy_config.resource_preset}
-        %{~ if envoy_config.hpa_enabled ~}
-        autoscaling:
-          enabled: true
-          minReplicas: 1
-          maxReplicas: ${hpa_config.max_replicas}
-          %{~ if hpa_config.maz_cpu != null ~}
-          targetCPU: "${hpa_config.max_cpu}"
-          %{~ endif ~}
-          %{~ if hpa_config.target_memory != null ~}
-          targetMemory: "${hpa_config.target_memory}"
-          %{~ endif ~}
-          %{~ if hpa_config.behavior != null ~}
-          behavior:
-            ${hpa_config.behavior}
-          %{~ endif ~}
-        %{~ endif ~}
-        podAntiAffinityPreset: "hard"
-        logLevel: ${envoy_config.log_level}
-      ingress:
-        enabled: ${contour_config.ingress_enabled}
-        certManager: true
+        enabled: falsekind: GatewayClass
+---
+apiVersion: gateway.networking.k8s.io/v1
+metadata:
+  name: contour-with-envoy-deployment
+spec:
+  controllerName: projectcontour.io/gateway-controller
+  parametersRef:
+    kind: ContourDeployment
+    group: projectcontour.io
+    name: contour-with-envoy-deployment-params
+    namespace: projectcontour
+---
+kind: ContourDeployment
+apiVersion: projectcontour.io/v1alpha1
+metadata:
+  namespace: projectcontour
+  name: contour-with-envoy-deployment-params
+spec:
+  envoy:
+    workloadType: Deployment

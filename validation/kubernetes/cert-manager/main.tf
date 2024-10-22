@@ -18,4 +18,5 @@ module "cert_manager" {
   resource_group_name        = "rg-name"
   subscription_id            = "id"
   gateway_api_enabled        = true
+  gateway_api_config         = {}
 }

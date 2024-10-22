@@ -155,6 +155,7 @@ module "cert_manager" {
   resource_group_name        = data.azurerm_resource_group.this.name
   subscription_id            = data.azurerm_client_config.current.subscription_id
   gateway_api_enabled        = var.gateway_api_enabled
+  gateway_api_config         = var.gateway_api_config
 }
 
 module "cert_manager_crd" {
@@ -294,21 +295,33 @@ module "gatekeeper" {
   telepresence_enabled           = var.telepresence_enabled
 }
 
-module "gateway_api_crd" {
+#module "gateway_api_crd" {
+#  for_each = {
+#    for s in ["gateway-api"] :
+#    s => s
+#    if var.gateway_api_enabled
+#  }
+
+#  source = "../../kubernetes/helm-crd"
+
+#  chart_repository = "https://charts.portefaix.xyz/"
+#  chart_name       = "gateway-api-crds"
+#  chart_version    = "1.1.0"
+#  values = {
+#    "installCRDs" = "true"
+#  }
+#}
+
+module "gateway_api" {
   for_each = {
     for s in ["gateway-api"] :
     s => s
     if var.gateway_api_enabled
   }
 
-  source = "../../kubernetes/helm-crd"
+  source = "../../kubernetes/gateway-api"
 
-  chart_repository = "https://charts.portefaix.xyz/"
-  chart_name       = "gateway-api-crds"
-  chart_version    = "1.1.0"
-  values = {
-    "installCRDs" = "true"
-  }
+  cluster_id = local.cluster_id
 }
 
 module "grafana_agent" {

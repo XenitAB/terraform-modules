@@ -717,3 +717,12 @@ variable "gateway_api_enabled" {
   type        = bool
   default     = true
 }
+
+variable "gateway_api_config" {
+  description = "The Gateway API configuration"
+  type = object({
+    gateway_name      = optional(string, "")
+    gateway_namespace = optional(string, "")
+  })
+  default = {}
+}

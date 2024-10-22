@@ -34,5 +34,8 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "contour" {
   path = "platform/${var.cluster_id}/contour/contour.yaml"
   content = templatefile("${path.module}/templates/contour.yaml.tpl", {
+    contour_config = var.contour_config
+    envoy_config   = var.envoy_config
+    hpa_config     = var.envoy_config.hpa_config
   })
 }

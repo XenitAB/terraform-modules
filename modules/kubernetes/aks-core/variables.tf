@@ -709,6 +709,7 @@ variable "contour_enabled" {
   default     = false
 }
 
+/*
 variable "contour_config" {
   description = "Contour configuration"
   type = object({
@@ -735,3 +736,4 @@ variable "envoy_config" {
   })
   default = {}
 }
+*/

@@ -205,8 +205,9 @@ module "contour" {
   source = "../../kubernetes/contour"
 
   cluster_id     = local.cluster_id
-  contour_config = var.contour_config
+/*  contour_config = var.contour_config
   envoy_config   = var.envoy_config
+*/
 }
 
 module "datadog" {

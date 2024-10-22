@@ -44,6 +44,7 @@ spec:
       envoy:
         enabled: false
 ---
+kind: GatewayClass
 apiVersion: gateway.networking.k8s.io/v1
 metadata:
   namespace: contour

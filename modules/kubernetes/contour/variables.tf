@@ -3,7 +3,7 @@ variable "cluster_id" {
   type        = string
 }
 
-variable "contour_config" {
+/*variable "contour_config" {
   description = "Contour configuration"
   type = object({
     ingress_enabled = optional(bool, true)
@@ -27,3 +27,4 @@ variable "envoy_config" {
     }))
   })
 }
+*/

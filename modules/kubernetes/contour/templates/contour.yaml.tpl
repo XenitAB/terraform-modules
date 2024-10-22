@@ -42,10 +42,11 @@ spec:
         create: true
         minAvailable: "1"
       envoy:
-        enabled: falsekind: GatewayClass
+        enabled: false
 ---
 apiVersion: gateway.networking.k8s.io/v1
 metadata:
+  namespace: contour
   name: contour-with-envoy-deployment
 spec:
   controllerName: projectcontour.io/gateway-controller
@@ -53,12 +54,12 @@ spec:
     kind: ContourDeployment
     group: projectcontour.io
     name: contour-with-envoy-deployment-params
-    namespace: projectcontour
+    namespace: contour
 ---
 kind: ContourDeployment
 apiVersion: projectcontour.io/v1alpha1
 metadata:
-  namespace: projectcontour
+  namespace: contour
   name: contour-with-envoy-deployment-params
 spec:
   envoy:

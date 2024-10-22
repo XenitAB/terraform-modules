@@ -38,6 +38,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`spegel`](spegel/README.md)
 - [`telepresence`](telepresence/README.md)
 - [`azure-policy`](azure-policy/README.md)
+- [`contour`](contour/README.md)
 
 ## Style Guide
 

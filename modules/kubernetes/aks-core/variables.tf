@@ -702,3 +702,38 @@ variable "azure_service_operator_config" {
     error_message = "Installing all CRD:s in the cluster is not supported, please limit to the ones needed"
   }
 }
+
+variable "contour_enabled" {
+  description = "If Contour should be enabled"
+  type        = bool
+  default     = false
+}
+
+/*
+variable "contour_config" {
+  description = "Contour configuration"
+  type = object({
+    ingress_enabled = optional(bool, true)
+    replica_count   = optional(number, 2)
+    resource_preset = optional(string, "small")
+  })
+  default = {}
+}
+
+variable "envoy_config" {
+  description = "Contour configuration"
+  type = object({
+    log_level       = optional(string, "info")
+    replica_count   = optional(number, 2)
+    resource_preset = optional(string, "small")
+    hpa_enabled     = optional(bool, false)
+    hpa_config = optional(object({
+      max_replicas  = number
+      maz_cpu       = optional(string, null)
+      target_memory = optional(string, null)
+      behavior      = optional(string, null)
+    }))
+  })
+  default = {}
+}
+*/

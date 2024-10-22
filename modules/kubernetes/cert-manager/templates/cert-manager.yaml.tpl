@@ -71,15 +71,7 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-cluster-issuer-account-key
     solvers:
-      %{~ if gateway_api_enabled ~}
-      - http01:
-          gatewayHTTPRoute:
-            parentRefs: 
-            - name: ${gateway_solver_name}
-              namespace: ${gateway_solver_namespace}
-              kind: Gateway
-      %{~ endif ~}
-      %{ for zone, id in dns_zones ~}
+%{ for zone, id in dns_zones ~}
       - dns01:
           azureDNS:
             environment: AzurePublicCloud
@@ -91,4 +83,12 @@ spec:
         selector:
           dnsZones: 
             - ${zone}
-      %{ endfor }
+%{ endfor }
+       %{~ if gateway_api_enabled ~}
+      - http01:
+          gatewayHTTPRoute:
+            parentRefs: 
+            - name: ${gateway_solver_name}
+              namespace: ${gateway_solver_namespace}
+              kind: Gateway
+      %{~ endif ~}

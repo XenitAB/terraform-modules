@@ -21,3 +21,9 @@ resource "git_repository_file" "kustomization" {
     cluster_id = var.cluster_id
   })
 }
+
+resource "git_repository_file" "gateway-api" {
+  path = "platform/${var.cluster_id}/gateway-api/gateway-api.yaml"
+  content = templatefile("${path.module}/templates/gateway-api.yaml.tpl", {
+  })
+}

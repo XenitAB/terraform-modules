@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  resources:
-  - https://github.com/kubernetes-sigs/gateway-api/config/crd/experimental?timeout=120&ref=v1.2.0
+  sourceRef:
+    kind: GitRepository
+    name: gateway-api-crds
   path: "./platform/${cluster_id}/gateway-api/"

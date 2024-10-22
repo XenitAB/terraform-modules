@@ -136,7 +136,7 @@ module "azure_service_operator" {
 }
 
 module "cert_manager" {
-  depends_on = [module.gateway_api_crd, module.cert_manager_crd]
+  depends_on = [module.gateway_api, module.cert_manager_crd]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -222,7 +222,7 @@ module "datadog" {
 }
 
 module "external_dns" {
-  depends_on = [module.gateway_api_crd]
+  depends_on = [module.gateway_api]
 
   for_each = {
     for s in ["external-dns"] :

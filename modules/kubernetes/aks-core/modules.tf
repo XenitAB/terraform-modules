@@ -169,7 +169,7 @@ module "cert_manager_crd" {
 
   chart_repository = "https://charts.jetstack.io"
   chart_name       = "cert-manager"
-  chart_version    = "v1.7.1"
+  chart_version    = "v1.15.3"
   values = {
     "installCRDs" = "true"
   }

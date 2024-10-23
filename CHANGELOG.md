@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: add support for Nginx Gateway Fabric by @landerss1 in [#1228](https://github.com/XenitAB/terraform-modules/pulls/1228)
 - Feat: add support for Gateway API by @landerss1 in [#1226](https://github.com/XenitAB/terraform-modules/pulls/1226)
 - Feat:  metrics for flux system by @optocoupler in [#1200](https://github.com/XenitAB/terraform-modules/pulls/1200)
 - Feat: Move azad-kube-proxy to aks-core and use SecretProviderClass by @CalleB3 in [#1196](https://github.com/XenitAB/terraform-modules/pulls/1196)

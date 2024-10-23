@@ -686,6 +686,12 @@ variable "use_private_ingress" {
   default     = false
 }
 
+variable "cilium_enabled" {
+  description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
+  type        = bool
+  default     = false
+}
+
 variable "azure_service_operator_enabled" {
   description = "If Azure Service Operator should be enabled"
   type        = bool

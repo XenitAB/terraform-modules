@@ -20,6 +20,7 @@ data "helm_template" "this" {
   version      = var.chart_version
   include_crds = true
   api_versions = ["apiextensions.k8s.io/v1/CustomResourceDefinition"]
+  kube_version = "1.29.3"
 
   dynamic "set" {
     for_each = var.values

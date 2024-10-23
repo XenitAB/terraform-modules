@@ -51,6 +51,7 @@ This module is used to create AKS clusters.
 | <a name="module_ingress_nginx"></a> [ingress\_nginx](#module\_ingress\_nginx) | ../../kubernetes/ingress-nginx | n/a |
 | <a name="module_linkerd"></a> [linkerd](#module\_linkerd) | ../../kubernetes/linkerd | n/a |
 | <a name="module_linkerd_crd"></a> [linkerd\_crd](#module\_linkerd\_crd) | ../../kubernetes/helm-crd-oci | n/a |
+| <a name="module_nginx_gateway_fabric"></a> [nginx\_gateway\_fabric](#module\_nginx\_gateway\_fabric) | ../../kubernetes/nginx-gateway-fabric | n/a |
 | <a name="module_node_local_dns"></a> [node\_local\_dns](#module\_node\_local\_dns) | ../../kubernetes/node-local-dns | n/a |
 | <a name="module_node_ttl"></a> [node\_ttl](#module\_node\_ttl) | ../../kubernetes/node-ttl | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../../kubernetes/prometheus | n/a |
@@ -173,6 +174,8 @@ This module is used to create AKS clusters.
 | <a name="input_mirrord_enabled"></a> [mirrord\_enabled](#input\_mirrord\_enabled) | Should mirrord be enabled | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | The commonName to use for the deploy | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes. | <pre>list(<br/>    object({<br/>      name   = string<br/>      labels = map(string)<br/>      flux = optional(object({<br/>        provider            = string<br/>        project             = optional(string)<br/>        repository          = string<br/>        include_tenant_name = optional(bool, false)<br/>        create_crds         = optional(bool, false)<br/>      }))<br/>    })<br/>  )</pre> | n/a | yes |
+| <a name="input_nginx_gateway_config"></a> [nginx\_gateway\_config](#input\_nginx\_gateway\_config) | Gateway Fabric configuration | <pre>object({<br/>    logging_level     = optional(string, "info")<br/>    replica_count     = optional(number, 2)<br/>    telemetry_enabled = optional(bool, true)<br/>    telemetry_config = optional(object({<br/>      endpoint    = optional(string, "")<br/>      interval    = optional(string, "")<br/>      batch_size  = optional(number, 0)<br/>      batch_count = optional(number, 0)<br/>    }), {})<br/>  })</pre> | `{}` | no |
+| <a name="input_nginx_gateway_enabled"></a> [nginx\_gateway\_enabled](#input\_nginx\_gateway\_enabled) | Should NGINX Gateway Fabric be enabled | `bool` | `false` | no |
 | <a name="input_node_local_dns_enabled"></a> [node\_local\_dns\_enabled](#input\_node\_local\_dns\_enabled) | Should VPA be enabled | `bool` | `true` | no |
 | <a name="input_node_ttl_enabled"></a> [node\_ttl\_enabled](#input\_node\_ttl\_enabled) | Should Node TTL be enabled | `bool` | `true` | no |
 | <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | Kubernetes OIDC issuer URL for workload identity. | `string` | n/a | yes |

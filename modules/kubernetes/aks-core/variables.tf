@@ -733,3 +733,25 @@ variable "gateway_api_config" {
     error_message = "Invalid API channel: ${var.gateway_api_config.api_channel}. Allowed vallues: ['standard', 'experimental']"
   }
 }
+
+variable "nginx_gateway_enabled" {
+  description = "Should NGINX Gateway Fabric be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "nginx_gateway_config" {
+  description = "Gateway Fabric configuration"
+  type = object({
+    logging_level     = optional(string, "info")
+    replica_count     = optional(number, 2)
+    telemetry_enabled = optional(bool, true)
+    telemetry_config = optional(object({
+      endpoint    = optional(string, "")
+      interval    = optional(string, "")
+      batch_size  = optional(number, 0)
+      batch_count = optional(number, 0)
+    }), {})
+  })
+  default = {}
+}

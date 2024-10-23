@@ -315,6 +315,15 @@ variable "external_dns_enabled" {
   default     = true
 }
 
+variable "external_dns_config" {
+  description = "ExternalDNS config"
+  type = object({
+    extra_args = optional(list(string), [])
+    sources    = optional(list(string), ["ingress", "service"])
+  })
+  default = {}
+}
+
 variable "mirrord_enabled" {
   description = "Should mirrord be enabled"
   type        = bool
@@ -700,5 +709,27 @@ variable "azure_service_operator_config" {
   validation {
     condition     = var.azure_service_operator_config.cluster_config.crd_pattern != "*"
     error_message = "Installing all CRD:s in the cluster is not supported, please limit to the ones needed"
+  }
+}
+
+variable "gateway_api_enabled" {
+  description = "If Gateway API should be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "gateway_api_config" {
+  description = "The Gateway API configuration"
+  type = object({
+    api_version       = optional(string, "v1.2.0")
+    api_channel       = optional(string, "standard")
+    gateway_name      = optional(string, "")
+    gateway_namespace = optional(string, "")
+  })
+  default = {}
+
+  validation {
+    condition     = contains(["standard", "experimental"], var.gateway_api_config.api_channel)
+    error_message = "Invalid API channel: ${var.gateway_api_config.api_channel}. Allowed vallues: ['standard', 'experimental']"
   }
 }

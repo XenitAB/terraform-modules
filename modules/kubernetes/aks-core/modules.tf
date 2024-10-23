@@ -136,7 +136,7 @@ module "azure_service_operator" {
 }
 
 module "cert_manager" {
-  depends_on = [module.cert_manager_crd]
+  depends_on = [module.gateway_api, module.cert_manager_crd]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -154,6 +154,8 @@ module "cert_manager" {
   oidc_issuer_url            = var.oidc_issuer_url
   resource_group_name        = data.azurerm_resource_group.this.name
   subscription_id            = data.azurerm_client_config.current.subscription_id
+  gateway_api_enabled        = var.gateway_api_enabled
+  gateway_api_config         = var.gateway_api_config
 }
 
 module "cert_manager_crd" {
@@ -220,6 +222,8 @@ module "datadog" {
 }
 
 module "external_dns" {
+  depends_on = [module.gateway_api]
+
   for_each = {
     for s in ["external-dns"] :
     s => s
@@ -239,6 +243,8 @@ module "external_dns" {
   resource_group_name        = data.azurerm_resource_group.this.name
   subscription_id            = data.azurerm_client_config.current.subscription_id
   txt_owner_id               = "${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  sources                    = var.external_dns_config.sources
+  extra_args                 = var.external_dns_config.extra_args
 }
 
 module "falco" {
@@ -287,6 +293,19 @@ module "gatekeeper" {
   exclude_namespaces             = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
   mirrord_enabled                = var.mirrord_enabled
   telepresence_enabled           = var.telepresence_enabled
+}
+
+module "gateway_api" {
+  for_each = {
+    for s in ["gateway-api"] :
+    s => s
+    if var.gateway_api_enabled
+  }
+
+  source = "../../kubernetes/gateway-api"
+
+  cluster_id         = local.cluster_id
+  gateway_api_config = var.gateway_api_config
 }
 
 module "grafana_agent" {

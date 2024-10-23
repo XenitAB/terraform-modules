@@ -41,12 +41,13 @@ No modules.
 | <a name="input_dns_provider"></a> [dns\_provider](#input\_dns\_provider) | DNS provider to use. | `string` | n/a | yes |
 | <a name="input_dns_zones"></a> [dns\_zones](#input\_dns\_zones) | Map of DNS zones with id | `map(string)` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
+| <a name="input_extra_args"></a> [extra\_args](#input\_extra\_args) | Extra command line arguments that is not covered by the Helm chart values | `list(string)` | n/a | yes |
 | <a name="input_global_resource_group_name"></a> [global\_resource\_group\_name](#input\_global\_resource\_group\_name) | The Azure global resource group name | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | The Azure region name. | `string` | n/a | yes |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name. | `string` | n/a | yes |
 | <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | Kubernetes OIDC issuer URL for workload identity. | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The Azure resource group name | `string` | n/a | yes |
-| <a name="input_sources"></a> [sources](#input\_sources) | k8s resource types to observe | `list(string)` | <pre>[<br/>  "ingress",<br/>  "service"<br/>]</pre> | no |
+| <a name="input_sources"></a> [sources](#input\_sources) | k8s resource types to observe | `list(string)` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The Azure subscription id | `string` | n/a | yes |
 | <a name="input_txt_owner_id"></a> [txt\_owner\_id](#input\_txt\_owner\_id) | The txt-owner-id for external-dns | `string` | n/a | yes |
 

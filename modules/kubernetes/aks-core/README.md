@@ -42,6 +42,7 @@ This module is used to create AKS clusters.
 | <a name="module_falco"></a> [falco](#module\_falco) | ../../kubernetes/falco | n/a |
 | <a name="module_fluxcd"></a> [fluxcd](#module\_fluxcd) | ../../kubernetes/fluxcd | n/a |
 | <a name="module_gatekeeper"></a> [gatekeeper](#module\_gatekeeper) | ../../kubernetes/gatekeeper | n/a |
+| <a name="module_gateway_api"></a> [gateway\_api](#module\_gateway\_api) | ../../kubernetes/gateway-api | n/a |
 | <a name="module_grafana_agent"></a> [grafana\_agent](#module\_grafana\_agent) | ../../kubernetes/grafana-agent | n/a |
 | <a name="module_grafana_agent_crd"></a> [grafana\_agent\_crd](#module\_grafana\_agent\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_grafana_alloy"></a> [grafana\_alloy](#module\_grafana\_alloy) | ../../kubernetes/grafana-alloy | n/a |
@@ -143,6 +144,7 @@ This module is used to create AKS clusters.
 | <a name="input_defender_enabled"></a> [defender\_enabled](#input\_defender\_enabled) | If Defender for Containers should be enabled | `bool` | `false` | no |
 | <a name="input_dns_zones"></a> [dns\_zones](#input\_dns\_zones) | List of DNS Zones | `list(string)` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
+| <a name="input_external_dns_config"></a> [external\_dns\_config](#input\_external\_dns\_config) | ExternalDNS config | <pre>object({<br/>    extra_args = optional(list(string), [])<br/>    sources    = optional(list(string), ["ingress", "service"])<br/>  })</pre> | `{}` | no |
 | <a name="input_external_dns_enabled"></a> [external\_dns\_enabled](#input\_external\_dns\_enabled) | Should External DNS be enabled | `bool` | `true` | no |
 | <a name="input_external_dns_hostname"></a> [external\_dns\_hostname](#input\_external\_dns\_hostname) | hostname for ingress-nginx to use for external-dns | `string` | `""` | no |
 | <a name="input_falco_enabled"></a> [falco\_enabled](#input\_falco\_enabled) | Should Falco be enabled | `bool` | `true` | no |
@@ -150,6 +152,8 @@ This module is used to create AKS clusters.
 | <a name="input_fluxcd_enabled"></a> [fluxcd\_enabled](#input\_fluxcd\_enabled) | Should fluxcd be enabled | `bool` | `true` | no |
 | <a name="input_gatekeeper_config"></a> [gatekeeper\_config](#input\_gatekeeper\_config) | Configuration for OPA Gatekeeper | <pre>object({<br/>    exclude_namespaces = list(string)<br/>  })</pre> | <pre>{<br/>  "exclude_namespaces": []<br/>}</pre> | no |
 | <a name="input_gatekeeper_enabled"></a> [gatekeeper\_enabled](#input\_gatekeeper\_enabled) | Should OPA Gatekeeper be enabled | `bool` | `true` | no |
+| <a name="input_gateway_api_config"></a> [gateway\_api\_config](#input\_gateway\_api\_config) | The Gateway API configuration | <pre>object({<br/>    api_version       = optional(string, "v1.2.0")<br/>    api_channel       = optional(string, "standard")<br/>    gateway_name      = optional(string, "")<br/>    gateway_namespace = optional(string, "")<br/>  })</pre> | `{}` | no |
+| <a name="input_gateway_api_enabled"></a> [gateway\_api\_enabled](#input\_gateway\_api\_enabled) | If Gateway API should be enabled | `bool` | `true` | no |
 | <a name="input_global_location_short"></a> [global\_location\_short](#input\_global\_location\_short) | The Azure region short name where the global resources resides. | `string` | n/a | yes |
 | <a name="input_grafana_agent_config"></a> [grafana\_agent\_config](#input\_grafana\_agent\_config) | The Grafan-Agent configuration | <pre>object({<br/>    remote_write_urls = object({<br/>      metrics = string<br/>      logs    = string<br/>      traces  = string<br/>    })<br/>    credentials = object({<br/>      metrics_username = string<br/>      metrics_password = string<br/>      logs_username    = string<br/>      logs_password    = string<br/>      traces_username  = string<br/>      traces_password  = string<br/>    })<br/>    extra_namespaces        = list(string)<br/>    include_kubelet_metrics = bool<br/>  })</pre> | <pre>{<br/>  "credentials": {<br/>    "logs_password": "",<br/>    "logs_username": "",<br/>    "metrics_password": "",<br/>    "metrics_username": "",<br/>    "traces_password": "",<br/>    "traces_username": ""<br/>  },<br/>  "extra_namespaces": [<br/>    "ingress-nginx"<br/>  ],<br/>  "include_kubelet_metrics": false,<br/>  "remote_write_urls": {<br/>    "logs": "",<br/>    "metrics": "",<br/>    "traces": ""<br/>  }<br/>}</pre> | no |
 | <a name="input_grafana_agent_enabled"></a> [grafana\_agent\_enabled](#input\_grafana\_agent\_enabled) | Should Grafana-Agent be enabled | `bool` | `false` | no |

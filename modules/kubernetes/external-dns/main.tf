@@ -33,6 +33,7 @@ resource "git_repository_file" "external_dns" {
     provider            = var.dns_provider,
     resource_group_name = var.global_resource_group_name,
     sources             = var.sources,
+    extra_args          = var.extra_args,
     subscription_id     = var.subscription_id,
     tenant_id           = azurerm_user_assigned_identity.external_dns.tenant_id,
     txt_owner_id        = var.txt_owner_id,

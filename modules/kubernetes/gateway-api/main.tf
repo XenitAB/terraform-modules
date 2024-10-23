@@ -18,12 +18,8 @@ terraform {
 resource "git_repository_file" "kustomization" {
   path = "clusters/${var.cluster_id}/gateway-api.yaml"
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
-resource "git_repository_file" "gateway-api" {
-  path = "platform/${var.cluster_id}/gateway-api/gateway-api.yaml"
-  content = templatefile("${path.module}/templates/gateway-api.yaml.tpl", {
+    cluster_id  = var.cluster_id
+    api_version = var.gateway_api_config.api_version
+    api_channel = var.gateway_api_config.api_channel
   })
 }

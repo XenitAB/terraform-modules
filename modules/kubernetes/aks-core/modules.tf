@@ -295,23 +295,6 @@ module "gatekeeper" {
   telepresence_enabled           = var.telepresence_enabled
 }
 
-#module "gateway_api_crd" {
-#  for_each = {
-#    for s in ["gateway-api"] :
-#    s => s
-#    if var.gateway_api_enabled
-#  }
-
-#  source = "../../kubernetes/helm-crd"
-
-#  chart_repository = "https://charts.portefaix.xyz/"
-#  chart_name       = "gateway-api-crds"
-#  chart_version    = "1.1.0"
-#  values = {
-#    "installCRDs" = "true"
-#  }
-#}
-
 module "gateway_api" {
   for_each = {
     for s in ["gateway-api"] :
@@ -321,7 +304,8 @@ module "gateway_api" {
 
   source = "../../kubernetes/gateway-api"
 
-  cluster_id = local.cluster_id
+  cluster_id         = local.cluster_id
+  gateway_api_config = var.gateway_api_config
 }
 
 module "grafana_agent" {

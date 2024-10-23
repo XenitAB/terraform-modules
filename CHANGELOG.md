@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: add support for Gateway API by @landerss1 in [#1226](https://github.com/XenitAB/terraform-modules/pulls/1226)
 - Feat:  metrics for flux system by @optocoupler in [#1200](https://github.com/XenitAB/terraform-modules/pulls/1200)
 - Feat: Move azad-kube-proxy to aks-core and use SecretProviderClass by @CalleB3 in [#1196](https://github.com/XenitAB/terraform-modules/pulls/1196)
 - Feat: improved grafana agent configuration by @landerss1 in [#1192](https://github.com/XenitAB/terraform-modules/pulls/1192)
@@ -24,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: Add reloader annotation to azad-kube-proxy by @CalleB3 in [#1217](https://github.com/XenitAB/terraform-modules/pulls/1217)
 - Fix: add flux notification provider by @CalleB3 in [#1222](https://github.com/XenitAB/terraform-modules/pulls/1222)
 - Fix: add flux notification-controller by @CalleB3 in [#1220](https://github.com/XenitAB/terraform-modules/pulls/1220)
 - Fix: adding namespaced discovery by @optocoupler in [#1219](https://github.com/XenitAB/terraform-modules/pulls/1219)
@@ -55,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: update cert-manager CRDs to v1.15.3 by @landerss1 in [#1227](https://github.com/XenitAB/terraform-modules/pulls/1227)
 - Chore!: bump flux provider to v1.4.0 by @landerss1 in [#1203](https://github.com/XenitAB/terraform-modules/pulls/1203)
 - Chore: Update Ingress-nginx, Cert-manager and external-dns by @CalleB3 in [#1191](https://github.com/XenitAB/terraform-modules/pulls/1191)
 - Chore: bump ytanikin/PRConventionalCommits from 1.2.0 to 1.3.0 by @landerss1 in [#1190](https://github.com/XenitAB/terraform-modules/pulls/1190)

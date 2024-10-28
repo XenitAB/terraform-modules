@@ -61,11 +61,11 @@ resource "azurerm_subnet" "this" {
     subnet.subnet_full_name => subnet
   }
 
-  name                 = each.value.subnet_full_name
-  resource_group_name  = data.azurerm_resource_group.this.name
-  virtual_network_name = azurerm_virtual_network.this.name
-  address_prefixes     = [each.value.subnet_cidr]
-  service_endpoints    = each.value.subnet_service_endpoints
+  name                              = each.value.subnet_full_name
+  resource_group_name               = data.azurerm_resource_group.this.name
+  virtual_network_name              = azurerm_virtual_network.this.name
+  address_prefixes                  = [each.value.subnet_cidr]
+  service_endpoints                 = each.value.subnet_service_endpoints
   private_endpoint_network_policies = "Enabled"
 }
 

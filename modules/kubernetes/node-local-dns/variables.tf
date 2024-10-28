@@ -13,3 +13,8 @@ variable "coredns_upstream" {
   description = "Should coredns be used as the last route instead of upstream dns?"
   default     = false
 }
+variable "cilium_enabled" {
+  description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
+  type        = bool
+  default     = false
+}

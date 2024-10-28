@@ -33,5 +33,5 @@ resource "azuread_group_member" "aks_managed_identity" {
 
 resource "azuread_group_member" "aks_cluster_identity" {
   group_object_id  = var.aad_groups.aks_managed_identity.id
-  member_object_id = azurerm_kubernetes_cluster.this.identity[0].principal_id
+  member_object_id = var.cilium_enabled ? azurerm_user_assigned_identity.aks["cilium"].principal_id : azurerm_kubernetes_cluster.this.identity[0].principal_id
 }

@@ -58,19 +58,32 @@ data:
         }
         reload
         loop
+%{ if cilium_enabled }
+        bind 0.0.0.0
+%{ else }
         bind ${local_dns} ${dns_ip}
+%{ endif }
+
         forward . __PILLAR__CLUSTER__DNS__ {
                 force_tcp
         }
         prometheus :9253
+%{ if cilium_enabled }
+        health :8080
+%{ else }
         health ${local_dns}:8080
+%{ endif }
         }
     in-addr.arpa:53 {
         errors
         cache 30
         reload
         loop
+%{ if cilium_enabled }
+        bind 0.0.0.0
+%{ else }
         bind ${local_dns} ${dns_ip}
+%{ endif }
         forward . __PILLAR__CLUSTER__DNS__ {
                 force_tcp
         }
@@ -81,7 +94,11 @@ data:
         cache 30
         reload
         loop
+%{ if cilium_enabled }
+        bind 0.0.0.0
+%{ else }
         bind ${local_dns} ${dns_ip}
+%{ endif }
         forward . __PILLAR__CLUSTER__DNS__ {
                 force_tcp
         }
@@ -95,7 +112,11 @@ data:
         }
         reload
         loop
+%{ if cilium_enabled }
+        bind 0.0.0.0
+%{ else }
         bind ${local_dns} ${dns_ip}
+%{ endif }
         %{~ if coredns_upstream ~}
         forward . __PILLAR__CLUSTER__DNS__
         %{~ else ~}
@@ -123,12 +144,17 @@ spec:
       labels:
         k8s-app: node-local-dns
       annotations:
+%{ if cilium_enabled }
+        io.cilium.no-track-port: "53"
+%{ endif }
         prometheus.io/port: "9253"
         prometheus.io/scrape: "true"
     spec:
       priorityClassName: system-node-critical
       serviceAccountName: node-local-dns
+%{ if cilium_enabled == false }
       hostNetwork: true
+%{ endif }
       dnsPolicy: Default # Don't use cluster DNS.
       tolerations:
         - key: "CriticalAddonsOnly"
@@ -153,6 +179,11 @@ spec:
               "/etc/Corefile",
               "-upstreamsvc",
               "kube-dns-upstream",
+%{ if cilium_enabled }
+              "-skipteardown=true",
+              "-setupinterface=false",
+              "-setupiptables=false"
+%{ endif }
             ]
           securityContext:
             privileged: true
@@ -168,7 +199,10 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
+%{ if cilium_enabled == false }
               host: ${local_dns}
+%{ endif }
+
               path: /health
               port: 8080
             initialDelaySeconds: 60
@@ -217,3 +251,27 @@ spec:
       targetPort: 9253
   selector:
     k8s-app: node-local-dns
+%{ if cilium_enabled }
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumLocalRedirectPolicy
+metadata:
+  name: "nodelocaldns"
+  namespace: kube-system
+spec:
+  redirectFrontend:
+    serviceMatcher:
+      serviceName: kube-dns
+      namespace: kube-system
+  redirectBackend:
+    localEndpointSelector:
+      matchLabels:
+        k8s-app: node-local-dns
+    toPorts:
+      - port: "53"
+        name: dns
+        protocol: UDP
+      - port: "53"
+        name: dns-tcp
+        protocol: TCP
+%{ endif }

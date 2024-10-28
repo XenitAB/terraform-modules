@@ -28,5 +28,6 @@ resource "git_repository_file" "node_local_dns" {
     local_dns        = "169.254.20.10"
     dns_ip           = var.dns_ip
     coredns_upstream = var.coredns_upstream
+    cilium_enabled   = var.cilium_enabled
   })
 }

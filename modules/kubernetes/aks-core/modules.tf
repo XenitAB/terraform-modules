@@ -256,7 +256,8 @@ module "falco" {
 
   source = "../../kubernetes/falco"
 
-  cluster_id = local.cluster_id
+  cluster_id     = local.cluster_id
+  cilium_enabled = var.cilium_enabled
 }
 
 module "fluxcd" {
@@ -495,7 +496,7 @@ module "node_local_dns" {
   for_each = {
     for s in ["node-local-dns"] :
     s => s
-    if var.node_local_dns_enabled
+    if var.node_local_dns_enabled && !var.cilium_enabled
   }
 
   source = "../../kubernetes/node-local-dns"
@@ -503,6 +504,7 @@ module "node_local_dns" {
   cluster_id       = local.cluster_id
   dns_ip           = "10.0.0.10"
   coredns_upstream = var.coredns_upstream
+  cilium_enabled   = var.cilium_enabled
 }
 
 module "node_ttl" {
@@ -550,6 +552,7 @@ module "prometheus" {
 
   aad_pod_identity_enabled = var.aad_pod_identity_enabled
   azad_kube_proxy_enabled  = var.azad_kube_proxy_enabled
+  cilium_enabled           = var.cilium_enabled
   falco_enabled            = var.falco_enabled
   flux_enabled             = var.fluxcd_enabled
   gatekeeper_enabled       = var.gatekeeper_enabled

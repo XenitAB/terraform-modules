@@ -461,7 +461,7 @@ module "node_local_dns" {
   for_each = {
     for s in ["node-local-dns"] :
     s => s
-    if var.node_local_dns_enabled
+    if var.node_local_dns_enabled && !var.cilium_enabled
   }
 
   source = "../../kubernetes/node-local-dns"

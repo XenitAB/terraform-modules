@@ -169,6 +169,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
 
   kubelet_config {
     pod_max_pid = 1000
+    cpu_cfs_quota_enabled = false
   }
 
   dynamic "upgrade_settings" {

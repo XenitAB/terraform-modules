@@ -5,5 +5,5 @@ variable "cluster_id" {
 variable "cilium_enabled" {
   description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
   type        = bool
-  default     = true
+  default     = false
 }

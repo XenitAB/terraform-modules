@@ -91,7 +91,6 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   azure_active_directory_role_based_access_control {
-    managed                = true
     admin_group_object_ids = [var.aad_groups.cluster_admin.id]
   }
 
@@ -130,7 +129,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     vm_size                      = var.aks_default_node_pool_vm_size
     os_disk_type                 = "Ephemeral"
     os_disk_size_gb              = local.vm_skus_disk_size_gb[var.aks_default_node_pool_vm_size]
-    enable_auto_scaling          = false
+    auto_scaling_enabled         = false
     node_count                   = var.aks_config.default_node_pool_size
     only_critical_addons_enabled = true
 
@@ -153,7 +152,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   vnet_subnet_id        = data.azurerm_subnet.this.id
   zones                 = each.value.zones
 
-  enable_auto_scaling  = true
+  auto_scaling_enabled = true
   kubelet_disk_type    = each.value.kubelet_disk_type
   os_disk_type         = "Ephemeral"
   os_disk_size_gb      = local.vm_skus_disk_size_gb[each.value.vm_size]

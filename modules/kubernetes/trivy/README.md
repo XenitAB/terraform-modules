@@ -15,14 +15,14 @@ trivy metrics from trivy-operator CRD:s.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.110.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.7.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.110.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.7.0 |
 | <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
 
 ## Modules
@@ -33,16 +33,16 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_federated_identity_credential.trivy](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/federated_identity_credential) | resource |
-| [azurerm_role_assignment.trivy_acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.trivy_managed](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/role_assignment) | resource |
-| [azurerm_user_assigned_identity.trivy](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/resources/user_assigned_identity) | resource |
+| [azurerm_federated_identity_credential.trivy](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/federated_identity_credential) | resource |
+| [azurerm_role_assignment.trivy_acr](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.trivy_managed](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
+| [azurerm_user_assigned_identity.trivy](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/user_assigned_identity) | resource |
 | [git_repository_file.kustomization](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [git_repository_file.starboard_eporter](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [git_repository_file.trivy](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [git_repository_file.trivy_operator](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/data-sources/container_registry) | data source |
-| [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/3.110.0/docs/data-sources/resource_group) | data source |
+| [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/container_registry) | data source |
+| [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
 
 ## Inputs
 

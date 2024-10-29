@@ -13,7 +13,7 @@ resource "azurerm_subnet" "this" {
   address_prefixes                              = [each.value.subnet_cidr]
   service_endpoints                             = each.value.subnet_service_endpoints
   private_link_service_network_policies_enabled = true
-  private_endpoint_network_policies_enabled     = true
+  private_endpoint_network_policies             = "Enabled"
 }
 
 resource "azurerm_subnet" "aks" {
@@ -29,5 +29,5 @@ resource "azurerm_subnet" "aks" {
   address_prefixes                              = [each.value.subnet_cidr]
   service_endpoints                             = each.value.subnet_service_endpoints
   private_link_service_network_policies_enabled = true
-  private_endpoint_network_policies_enabled     = true
+  private_endpoint_network_policies             = "Enabled"
 }

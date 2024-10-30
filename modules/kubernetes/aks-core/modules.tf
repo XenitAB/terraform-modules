@@ -487,7 +487,7 @@ module "linkerd_crd" {
     if var.linkerd_enabled
   }
 
-  chart         = "https://helm.linkerd.io/stable"
+  chart_repository = "https://helm.linkerd.io/stable"
   chart_name    = "linkerd-crds"
   chart_version = "1.8.0"
 }

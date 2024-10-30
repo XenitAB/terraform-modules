@@ -220,7 +220,7 @@ resource "helm_release" "linkerd_extras" {
 
 #tf-latest-version:ignore
 resource "helm_release" "linkerd" {
-  depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
+  depends_on = [helm_release.linkerd_extras]
 
   repository  = "https://helm.linkerd.io/stable"
   chart       = "linkerd-control-plane"

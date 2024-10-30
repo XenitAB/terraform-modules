@@ -205,21 +205,6 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
   type = "kubernetes.io/tls"
 }
 
-# Install linkerd-cni helm chart
-#tf-latest-version:ignore
-resource "helm_release" "linkerd_cni" {
-  repository  = "https://helm.linkerd.io/stable"
-  chart       = "linkerd2-cni"
-  name        = "linkerd-cni"
-  namespace   = kubernetes_namespace.cni.metadata[0].name
-  version     = "30.12.2"
-  max_history = 3
-
-  values = [
-    templatefile("${path.module}/templates/values-cni.yaml.tpl", {}),
-  ]
-}
-
 # Install linkerd helm charts
 resource "helm_release" "linkerd_extras" {
   depends_on = [

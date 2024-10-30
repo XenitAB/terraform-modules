@@ -488,7 +488,7 @@ module "linkerd_crd" {
   }
 
   chart         = "https://helm.linkerd.io/stable"
-  chart_name    = "linkerd-crd"
+  chart_name    = "linkerd-crds"
   chart_version = "1.8.0"
 }
 

@@ -487,9 +487,9 @@ module "linkerd_crd" {
     if var.linkerd_enabled
   }
 
-  chart         = "oci://ghcr.io/xenitab/helm-charts/linkerd-crds"
+  chart         = "https://helm.linkerd.io/stable"
   chart_name    = "linkerd-crd"
-  chart_version = "2.12.2"
+  chart_version = "1.8.0"
 }
 
 module "node_local_dns" {

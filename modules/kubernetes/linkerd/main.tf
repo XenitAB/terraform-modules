@@ -212,7 +212,7 @@ resource "helm_release" "linkerd_cni" {
   chart       = "linkerd2-cni"
   name        = "linkerd-cni"
   namespace   = kubernetes_namespace.cni.metadata[0].name
-  version     = "30.3.4"
+  version     = "30.12.2"
   max_history = 3
 
   values = [

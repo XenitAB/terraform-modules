@@ -479,7 +479,7 @@ module "linkerd" {
 }
 
 module "linkerd_crd" {
-  source = "../../kubernetes/helm-crd-oci"
+  source = "../../kubernetes/helm-crd"
 
   for_each = {
     for s in ["linkerd"] :

@@ -488,8 +488,8 @@ module "linkerd_crd" {
   }
 
   chart_repository = "https://helm.linkerd.io/stable"
-  chart_name    = "linkerd-crds"
-  chart_version = "1.8.0"
+  chart_name       = "linkerd-crds"
+  chart_version    = "1.8.0"
 }
 
 module "node_local_dns" {

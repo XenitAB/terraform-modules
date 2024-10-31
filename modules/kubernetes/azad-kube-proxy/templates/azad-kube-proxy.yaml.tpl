@@ -27,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: azad-kube-proxy
-      version: v0.0.47
+      version: v0.0.48
   interval: 1m0s
   values:
     application:

@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: add support for karpenter autoscaling by @landerss1 in [#1235](https://github.com/XenitAB/terraform-modules/pulls/1235)
+- Feat: Upgrade Linkerd-CNI and CRDs by @CalleB3 in [#1231](https://github.com/XenitAB/terraform-modules/pulls/1231)
 - Feat: add option to use Azure CNI with Cilium by @CalleB3 in [#1142](https://github.com/XenitAB/terraform-modules/pulls/1142)
 - Feat: add support for Nginx Gateway Fabric by @landerss1 in [#1228](https://github.com/XenitAB/terraform-modules/pulls/1228)
 - Feat: add support for Gateway API by @landerss1 in [#1226](https://github.com/XenitAB/terraform-modules/pulls/1226)
@@ -59,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: Upgrade azad-kube-proxy to 0.0.48 by @CalleB3 in [#1234](https://github.com/XenitAB/terraform-modules/pulls/1234)
 - Chore: Upgrade Azurerm to 4.7.0 by @CalleB3 in [#1230](https://github.com/XenitAB/terraform-modules/pulls/1230)
 - Chore: update cert-manager CRDs to v1.15.3 by @landerss1 in [#1227](https://github.com/XenitAB/terraform-modules/pulls/1227)
 - Chore!: bump flux provider to v1.4.0 by @landerss1 in [#1203](https://github.com/XenitAB/terraform-modules/pulls/1203)

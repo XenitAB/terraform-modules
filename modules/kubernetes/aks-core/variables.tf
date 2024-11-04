@@ -833,3 +833,21 @@ variable "karpenter_config" {
     error_message = "The AKSNodeClass imageFamily must be either 'Ubuntu2204' or 'AzureLinux'."
   }
 }
+
+variable "envoy_gateway_enabled" {
+  description = "Should we deploy envoy-gateway"
+  type        = bool
+  default     = false
+}
+variable "envoy_gateway_config" {
+  description = "Envoy gateway configuration"
+  type = object({
+    logging_level             = optional(string, "info")
+    pod_labels                = optional(string, "")
+    replicas_count            = optional(number, 2)
+    resources_memory_limit    = optional(string, "")
+    resources_cpu_requests    = optional(string, "")
+    resources_memory_requests = optional(string, "")
+    service_annotations       = optional(string, "")
+  })
+}

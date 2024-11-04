@@ -15,6 +15,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`control-plane-logs`](control-plane-logs/README.md)
 - [`csi-secrets-store-provider-azure`](csi-secrets-store-provider-azure/README.md)
 - [`datadog`](datadog/README.md)
+- [`envoy-gateway`](envoy-gateway/README.md)
 - [`eks-core`](eks-core/README.md)
 - [`external-dns`](external-dns/README.md)
 - [`falco`](falco/README.md)

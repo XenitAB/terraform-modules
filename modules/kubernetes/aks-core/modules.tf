@@ -221,6 +221,21 @@ module "datadog" {
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
+module "envoy_gateway" {
+  depends_on = [module.gateway_api]
+
+  for_each = {
+    for s in ["envoy_gateway"] :
+    s => s
+    if var.envoy_gateway_enabled
+  }
+
+  source = "../../kubernetes/envoy-gateway"
+
+  cluster_id           = local.cluster_id
+  envoy_gateway_config = var.envoy_gateway_config
+}
+
 module "external_dns" {
   depends_on = [module.gateway_api]
 

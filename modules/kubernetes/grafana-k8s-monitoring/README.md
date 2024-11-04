@@ -15,7 +15,7 @@ Adds [grafana-k8s-monitoring](https://github.com/grafana/k8s-monitoring-helm/tre
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.7.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.107.0 |
 | <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
 

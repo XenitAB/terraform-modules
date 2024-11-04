@@ -21,7 +21,7 @@ terraform {
 
 resource "kubernetes_namespace" "envoy_gateway" {
   metadata {
-    name = "nginx-gateway"
+    name = "envoy-gateway"
     labels = {
       "xkf.xenit.io/kind" = "platform"
     }

@@ -35,7 +35,7 @@ spec:
       envoyGateway:
         resources:
           limits:
-            memory:${envoy_gateway_config.resources_memory_limit}
+            memory: ${envoy_gateway_config.resources_memory_limit}
           requests:
             cpu: ${envoy_gateway_config.resources_cpu_requests}
             memory: ${envoy_gateway_config.resources_memory_requests}

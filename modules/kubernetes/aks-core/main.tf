@@ -83,3 +83,15 @@ data "azurerm_dns_zone" "this" {
   resource_group_name = data.azurerm_resource_group.global.name
 }
 
+data "azurerm_kubernetes_cluster" "this" {
+  name                = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  resource_group_name = data.azurerm_resource_group.this.name
+}
+
+data "kubernetes_resources" "bootstrap_token" {
+  namespace      = "kube-system"
+  kind           = "Secret"
+  field_selector = "type=bootstrap.kubernetes.io/token"
+  api_version    = "v1"
+}
+

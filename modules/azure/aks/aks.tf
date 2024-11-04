@@ -352,5 +352,5 @@ resource "azurerm_subnet_network_security_group_association" "subnet_nsg_associa
   }
 
   subnet_id                 = each.value.vnet_subnet_id
-  network_security_group_id = data.azurerm_resources.nsg.id
+  network_security_group_id = data.azurerm_resources.nsg.resources[0].id
 }

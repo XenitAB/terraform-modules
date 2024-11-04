@@ -267,6 +267,8 @@ module "fluxcd" {
     if var.fluxcd_enabled
   }
 
+  depends_on = [module.karpenter]
+
   source = "../../kubernetes/fluxcd"
 
   environment  = var.environment
@@ -383,6 +385,7 @@ module "grafana_alloy" {
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
 }
+
 module "grafana_k8s_monitoring" {
 
   for_each = {
@@ -448,6 +451,37 @@ module "ingress_nginx" {
   linkerd_enabled         = var.linkerd_enabled
   datadog_enabled         = var.datadog_enabled
   cluster_id              = local.cluster_id
+}
+
+module "karpenter" {
+  for_each = {
+    for s in ["karpenter"] :
+    s => s
+    if var.karpenter_enabled
+  }
+
+  source = "../../kubernetes/karpenter"
+
+  aks_config = {
+    cluster_id       = local.cluster_id
+    cluster_name     = data.azurerm_kubernetes_cluster.this.name
+    cluster_endpoint = data.azurerm_kubernetes_cluster.this.kube_config[0].host
+    bootstrap_token = join(".", [
+      base64decode(data.kubernetes_resources.bootstrap_token.objects[0].data.token-id),
+      base64decode(data.kubernetes_resources.bootstrap_token.objects[0].data.token-secret)
+    ])
+    default_node_pool_size = data.azurerm_kubernetes_cluster.this.agent_pool_profile[0].count
+    node_identities        = data.azurerm_kubernetes_cluster.this.kubelet_identity[0].user_assigned_identity_id
+    node_resource_group    = data.azurerm_kubernetes_cluster.this.node_resource_group
+    oidc_issuer_url        = var.oidc_issuer_url
+    ssh_public_key         = data.azurerm_kubernetes_cluster.this.linux_profile[0].ssh_key[0].key_data
+    vnet_subnet_id         = data.azurerm_kubernetes_cluster.this.agent_pool_profile[0].vnet_subnet_id
+  }
+
+  karpenter_config    = var.karpenter_config
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
+  subscription_id     = data.azurerm_client_config.current.subscription_id
 }
 
 module "nginx_gateway_fabric" {

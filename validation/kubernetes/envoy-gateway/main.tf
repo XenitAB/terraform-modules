@@ -11,11 +11,9 @@ module "envoy-gateway" {
   envoy_gateway_config = {
     cluster_name              = "awesome_cluster"
     logging_level             = "debug"
-    pod_labels                = "foobar"
     replicas_count            = 42
     resources_memory_limit    = "30g"
     resources_cpu_requests    = "5000mi"
     resources_memory_requests = "50g"
-    service_annotations       = "barfoo"
   }
 }

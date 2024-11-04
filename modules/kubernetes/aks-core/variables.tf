@@ -843,11 +843,9 @@ variable "envoy_gateway_config" {
   description = "Envoy gateway configuration"
   type = object({
     logging_level             = optional(string, "info")
-    pod_labels                = optional(string, "")
     replicas_count            = optional(number, 2)
     resources_memory_limit    = optional(string, "")
     resources_cpu_requests    = optional(string, "")
     resources_memory_requests = optional(string, "")
-    service_annotations       = optional(string, "")
   })
 }

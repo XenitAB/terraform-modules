@@ -29,12 +29,9 @@ spec:
           level:
             default: ${envoy_gateway_config.logging_level}
     deployment:
-    %{~ if envoy_gateway_config.pod_labels ~}
       pod:
         labels: ${envoy_gateway_config.pod_labels}
-    %{~ endif ~}
       replicas: ${envoy_gateway_config.replicas_count}
-    %{~ if envoy_gateway_config.resources_memory_limit ~}
       envoyGateway:
         resources:
           limits:
@@ -42,8 +39,6 @@ spec:
           requests:
             cpu: ${envoy_gateway_config.resources_cpu_requests}
             memory: ${envoy_gateway_config.resources_memory_requests}
-    %{~ endif ~}
-    %{~ if envoy_gateway_config.service_annotations ~}
     service:
       annotations: ${envoy_gateway_config.service_annotations}
-    %{~ endif ~}
+

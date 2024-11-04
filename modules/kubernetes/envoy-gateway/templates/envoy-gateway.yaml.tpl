@@ -34,7 +34,7 @@ spec:
         labels: ${envoy_gateway_config.pod_labels}
     %{~ endif ~}
       replicas: ${envoy_gateway_config.replicas_count}
-    %{~ if envoy_gateway_config.resources_memory_limit and envoy_gateway_config.resources_cpu_requests and envoy_gateway_config.resources_memory_requests ~}
+    %{~ if envoy_gateway_config.resources_memory_limit ~}
       envoyGateway:
         resources:
           limits:

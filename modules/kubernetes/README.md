@@ -33,6 +33,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`nginx-gateway-fabric`](nginx-gateway-fabric/README.md)
 - [`node-local-dns`](node-local-dns/README.md)
 - [`node-ttl`](node-ttl/README.md)
+- [`popeye`](popeye/README.md)
 - [`prometheus`](prometheus/README.md)
 - [`promtail`](promtail/README.md)
 - [`reloader`](reloader/README.md)

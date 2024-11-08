@@ -500,6 +500,23 @@ module "nginx_gateway_fabric" {
   nginx_config   = var.ingress_nginx_config.customization
 }
 
+module "popeye" {
+  for_each = {
+    for s in ["popeye"] :
+    s => s
+    if var.popeye_enabled
+  }
+
+  source = "../../kubernetes/popeye"
+
+  aks_managed_identity_id = data.azurerm_user_assigned_identity.aks.principal_id
+  cluster_id              = local.cluster_id
+  location                = data.azurerm_key_vault.core.location
+  oidc_issuer_url         = var.oidc_issuer_url
+  popeye_config           = var.popeye_config
+  resource_group_name     = data.azurerm_resource_group.this.name
+}
+
 module "linkerd" {
   depends_on = [module.cert_manager_crd, module.linkerd_crd]
 

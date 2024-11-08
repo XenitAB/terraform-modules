@@ -1,3 +1,23 @@
+variable "aad_groups" {
+  description = "Configuration for Azure AD Groups (AAD Groups)"
+  type = object({
+    view = map(any)
+    edit = map(any)
+    cluster_admin = object({
+      id   = string
+      name = string
+    })
+    cluster_view = object({
+      id   = string
+      name = string
+    })
+    aks_managed_identity = object({
+      id   = string
+      name = string
+    })
+  })
+}
+
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
@@ -36,6 +56,23 @@ variable "location" {
 variable "location_short" {
   description = "The Azure region short name."
   type        = string
+}
+
+variable "namespaces" {
+  description = "The namespaces that should be created in Kubernetes."
+  type = list(
+    object({
+      name   = string
+      labels = map(string)
+      flux = optional(object({
+        provider            = string
+        project             = optional(string)
+        repository          = string
+        include_tenant_name = optional(bool, false)
+        create_crds         = optional(bool, false)
+      }))
+    })
+  )
 }
 
 variable "oidc_issuer_url" {

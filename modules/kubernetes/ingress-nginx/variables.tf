@@ -1,23 +1,30 @@
-variable "default_certificate" {
-  description = "If enalbed and configured nginx will be configured with a default certificate."
+variable "aad_groups" {
+  description = "Configuration for Azure AD Groups (AAD Groups)"
   type = object({
-    enabled  = bool,
-    dns_zone = string,
+    view = map(any)
+    edit = map(any)
+    cluster_admin = object({
+      id   = string
+      name = string
+    })
+    cluster_view = object({
+      id   = string
+      name = string
+    })
+    aks_managed_identity = object({
+      id   = string
+      name = string
+    })
   })
-  default = {
-    enabled  = false,
-    dns_zone = "",
-  }
 }
 
-variable "external_dns_hostname" {
-  description = "Hostname for external-dns to use"
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
   type        = string
-  default     = ""
 }
 
-variable "private_ingress_enabled" {
-  description = "If true will create a private ingress controller. Otherwise only a public ingress controller will be created."
+variable "datadog_enabled" {
+  description = "Should datadog be enabled"
   type        = bool
   default     = false
 }
@@ -49,19 +56,49 @@ variable "customization_private" {
   default = {}
 }
 
+variable "default_certificate" {
+  description = "If enalbed and configured nginx will be configured with a default certificate."
+  type = object({
+    enabled  = bool,
+    dns_zone = string,
+  })
+  default = {
+    enabled  = false,
+    dns_zone = "",
+  }
+}
+
+variable "external_dns_hostname" {
+  description = "Hostname for external-dns to use"
+  type        = string
+  default     = ""
+}
+
 variable "linkerd_enabled" {
   description = "Should linkerd be enabled"
   type        = bool
   default     = false
 }
 
-variable "datadog_enabled" {
-  description = "Should datadog be enabled"
-  type        = bool
-  default     = false
+variable "namespaces" {
+  description = "The namespaces that should be created in Kubernetes."
+  type = list(
+    object({
+      name   = string
+      labels = map(string)
+      flux = optional(object({
+        provider            = string
+        project             = optional(string)
+        repository          = string
+        include_tenant_name = optional(bool, false)
+        create_crds         = optional(bool, false)
+      }))
+    })
+  )
 }
 
-variable "cluster_id" {
-  description = "Unique identifier of the cluster across regions and instances."
-  type        = string
+variable "private_ingress_enabled" {
+  description = "If true will create a private ingress controller. Otherwise only a public ingress controller will be created."
+  type        = bool
+  default     = false
 }

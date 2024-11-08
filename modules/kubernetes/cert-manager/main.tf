@@ -16,14 +16,25 @@ terraform {
       source  = "xenitab/git"
       version = "0.0.3"
     }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.23.0"
+    }
   }
 }
 
-#locals {
-#  azure_hosted_zone_names = "[${join(",", var.dns_zones)}]"
-#}
+resource "kubernetes_namespace" "cert_manager" {
+  metadata {
+    name = "cert-manager"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+}
 
 resource "git_repository_file" "kustomization" {
+  depends_on = [kubernetes_namespace.cert_manager]
+
   path = "clusters/${var.cluster_id}/cert-manager.yaml"
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
     cluster_id = var.cluster_id,
@@ -31,6 +42,8 @@ resource "git_repository_file" "kustomization" {
 }
 
 resource "git_repository_file" "cert_manager" {
+  depends_on = [kubernetes_namespace.cert_manager]
+
   path = "platform/${var.cluster_id}/cert-manager/cert-manager.yaml"
   content = templatefile("${path.module}/templates/cert-manager.yaml.tpl", {
     acme_server              = var.acme_server,

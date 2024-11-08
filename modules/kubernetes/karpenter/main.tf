@@ -60,12 +60,11 @@ resource "helm_release" "karpenter" {
 }
 
 resource "kubectl_manifest" "node_classes" {
+  depends_on = [helm_release.karpenter]
   for_each = {
     for class in var.karpenter_config.node_classes :
     class.name => class
   }
-
-  depends_on = [helm_release.karpenter]
 
   server_side_apply = true
   apply_only        = true
@@ -75,12 +74,11 @@ resource "kubectl_manifest" "node_classes" {
 }
 
 resource "kubectl_manifest" "node_pools" {
+  depends_on = [kubectl_manifest.node_classes]
   for_each = {
     for pool in var.karpenter_config.node_pools :
     pool.name => pool
   }
-
-  depends_on = [kubectl_manifest.node_classes]
 
   server_side_apply = true
   apply_only        = true

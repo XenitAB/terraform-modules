@@ -55,6 +55,7 @@ This module is used to create AKS clusters.
 | <a name="module_nginx_gateway_fabric"></a> [nginx\_gateway\_fabric](#module\_nginx\_gateway\_fabric) | ../../kubernetes/nginx-gateway-fabric | n/a |
 | <a name="module_node_local_dns"></a> [node\_local\_dns](#module\_node\_local\_dns) | ../../kubernetes/node-local-dns | n/a |
 | <a name="module_node_ttl"></a> [node\_ttl](#module\_node\_ttl) | ../../kubernetes/node-ttl | n/a |
+| <a name="module_popeye"></a> [popeye](#module\_popeye) | ../../kubernetes/popeye | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../../kubernetes/prometheus | n/a |
 | <a name="module_prometheus_crd"></a> [prometheus\_crd](#module\_prometheus\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_promtail"></a> [promtail](#module\_promtail) | ../../kubernetes/promtail | n/a |
@@ -117,6 +118,7 @@ This module is used to create AKS clusters.
 | [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/kubernetes_cluster) | data source |
 | [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
+| [azurerm_user_assigned_identity.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/user_assigned_identity) | data source |
 | [azurerm_user_assigned_identity.tenant](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/user_assigned_identity) | data source |
 | [kubernetes_resources.bootstrap_token](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/data-sources/resources) | data source |
 
@@ -185,6 +187,8 @@ This module is used to create AKS clusters.
 | <a name="input_node_local_dns_enabled"></a> [node\_local\_dns\_enabled](#input\_node\_local\_dns\_enabled) | Should VPA be enabled | `bool` | `true` | no |
 | <a name="input_node_ttl_enabled"></a> [node\_ttl\_enabled](#input\_node\_ttl\_enabled) | Should Node TTL be enabled | `bool` | `true` | no |
 | <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | Kubernetes OIDC issuer URL for workload identity. | `string` | n/a | yes |
+| <a name="input_popeye_config"></a> [popeye\_config](#input\_popeye\_config) | The popeye configuration | <pre>object({<br/>    allowed_registries = optional(list(string), [])<br/>    cron_jobs = optional(list(object({<br/>      namespace     = optional(string, "default")<br/>      resources     = optional(string, "cj,cm,deploy,ds,gw,gwc,gwr,hpa,ing,job,np,pdb,po,pv,pvc,ro,rb,sa,sec,sts,svc")<br/>      output_format = optional(string, "html")<br/>      schedule      = optional(string, "0 0 * * 1")<br/>    })), [{}])<br/>    storage_account = optional(object({<br/>      resource_group_name = optional(string, "")<br/>      account_name        = optional(string, "")<br/>      file_share_size     = optional(string, "1Gi")<br/>    }), {})<br/>  })</pre> | `{}` | no |
+| <a name="input_popeye_enabled"></a> [popeye\_enabled](#input\_popeye\_enabled) | If the popeye module should be installed | `bool` | `false` | no |
 | <a name="input_priority_expander_config"></a> [priority\_expander\_config](#input\_priority\_expander\_config) | Cluster auto scaler priority expander configuration. | `map(list(string))` | `null` | no |
 | <a name="input_prometheus_config"></a> [prometheus\_config](#input\_prometheus\_config) | Configuration for prometheus | <pre>object({<br/>    azure_key_vault_name       = string<br/>    tenant_id                  = string<br/>    remote_write_authenticated = bool<br/>    remote_write_url           = string<br/>    volume_claim_size          = string<br/>    resource_selector          = list(string)<br/>    namespace_selector         = list(string)<br/>  })</pre> | n/a | yes |
 | <a name="input_prometheus_enabled"></a> [prometheus\_enabled](#input\_prometheus\_enabled) | Should prometheus be enabled | `bool` | `true` | no |

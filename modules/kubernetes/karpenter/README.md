@@ -10,6 +10,7 @@ This module is used to add self-hosted [`karpenter`](https://github.com/Azure/ka
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.7.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
+| <a name="requirement_time"></a> [time](#requirement\_time) | 0.12.1 |
 
 ## Providers
 
@@ -18,6 +19,7 @@ This module is used to add self-hosted [`karpenter`](https://github.com/Azure/ka
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.7.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
+| <a name="provider_time"></a> [time](#provider\_time) | 0.12.1 |
 
 ## Modules
 
@@ -34,6 +36,7 @@ No modules.
 | [kubectl_manifest.node_classes](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
 | [kubectl_manifest.node_pools](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
 | [kubectl_manifest.secret](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
+| [time_sleep.wait_for_karpenter](https://registry.terraform.io/providers/hashicorp/time/0.12.1/docs/resources/sleep) | resource |
 
 ## Inputs
 

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### ⛓️‍💥 Breaking Changes
+- Fix!: resolve dependency and timing issues when applying aks-core module in an empty cluster by @landerss1 in [#1240](https://github.com/XenitAB/terraform-modules/pulls/1240)
+
+
+
 ### 🚀 New Features
 - Feat: add support for popeye k8s linter by @landerss1 in [#1239](https://github.com/XenitAB/terraform-modules/pulls/1239)
 - Feat: add support for karpenter autoscaling by @landerss1 in [#1235](https://github.com/XenitAB/terraform-modules/pulls/1235)
@@ -30,6 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: use kubernets datasource to retrieve aks identity by @landerss1 in [#1243](https://github.com/XenitAB/terraform-modules/pulls/1243)
+- Fix: disable linkerd-cni by @CalleB3 in [#1233](https://github.com/XenitAB/terraform-modules/pulls/1233)
 - Fix: Add reloader annotation to azad-kube-proxy by @CalleB3 in [#1217](https://github.com/XenitAB/terraform-modules/pulls/1217)
 - Fix: add flux notification provider by @CalleB3 in [#1222](https://github.com/XenitAB/terraform-modules/pulls/1222)
 - Fix: add flux notification-controller by @CalleB3 in [#1220](https://github.com/XenitAB/terraform-modules/pulls/1220)

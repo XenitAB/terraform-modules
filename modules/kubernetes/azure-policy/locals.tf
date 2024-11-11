@@ -17,6 +17,10 @@ locals {
     templatefile("${path.module}/templates/flux-require-service-account.yaml.tpl", {
     })
   )
+  envoy_gateway_require_tls = base64encode(
+    templatefile("${path.module}/templates/envoy_gateway_require_tls.yaml.tpl", {
+    })
+  )
   k8s_block_node_port = base64encode(
     templatefile("${path.module}/templates/k8s-block-node-port.yaml.tpl", {
     })

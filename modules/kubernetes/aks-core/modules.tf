@@ -509,7 +509,7 @@ module "popeye" {
 
   source = "../../kubernetes/popeye"
 
-  aks_managed_identity_id = data.azurerm_user_assigned_identity.aks.principal_id
+  aks_managed_identity_id = var.cilium_enabled ? data.azurerm_kubernetes_cluster.this.identity[0].identity_ids[0] : data.azurerm_kubernetes_cluster.this.identity[0].principal_id
   cluster_id              = local.cluster_id
   location                = data.azurerm_key_vault.core.location
   oidc_issuer_url         = var.oidc_issuer_url

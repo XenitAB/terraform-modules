@@ -1,7 +1,7 @@
 # Specific for this module
 installNamespace: false
 namespace: "linkerd"
-cniEnabled: true
+cniEnabled: false
 identity:
   issuer:
     scheme: kubernetes.io/tls

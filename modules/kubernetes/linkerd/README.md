@@ -72,10 +72,8 @@ No modules.
 | Name | Type |
 |------|------|
 | [helm_release.linkerd](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
-| [helm_release.linkerd_cni](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
 | [helm_release.linkerd_extras](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
 | [helm_release.linkerd_viz](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
-| [kubernetes_namespace.cni](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
 | [kubernetes_namespace.viz](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
 | [kubernetes_secret.linkerd_trust_anchor](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/secret) | resource |

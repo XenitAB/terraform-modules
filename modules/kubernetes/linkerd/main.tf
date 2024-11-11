@@ -81,25 +81,6 @@ resource "kubernetes_namespace" "this" {
   }
 }
 
-# Information regarding cni namespace and the annotations and labels taken from: https://github.com/linkerd/linkerd2/blob/5f2d969cfac6ebc8893011eb120a32472a0648f3/charts/linkerd2-cni/templates/cni-plugin.yaml#L21-L29
-resource "kubernetes_namespace" "cni" {
-  metadata {
-    labels = {
-      name                                   = "linkerd-cni"
-      "xkf.xenit.io/kind"                    = "platform"
-      "config.linkerd.io/admission-webhooks" = "disabled"
-      "linkerd.io/cni-resource"              = "true"
-      "control-plane"                        = "true"
-    }
-
-    annotations = {
-      "linkerd.io/inject" = "disabled"
-    }
-
-    name = "linkerd-cni"
-  }
-}
-
 resource "kubernetes_namespace" "viz" {
   metadata {
     labels = {
@@ -205,21 +186,6 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
   type = "kubernetes.io/tls"
 }
 
-# Install linkerd-cni helm chart
-#tf-latest-version:ignore
-resource "helm_release" "linkerd_cni" {
-  repository  = "https://helm.linkerd.io/stable"
-  chart       = "linkerd2-cni"
-  name        = "linkerd-cni"
-  namespace   = kubernetes_namespace.cni.metadata[0].name
-  version     = "30.12.2"
-  max_history = 3
-
-  values = [
-    templatefile("${path.module}/templates/values-cni.yaml.tpl", {}),
-  ]
-}
-
 # Install linkerd helm charts
 resource "helm_release" "linkerd_extras" {
   depends_on = [
@@ -235,7 +201,7 @@ resource "helm_release" "linkerd_extras" {
 
 #tf-latest-version:ignore
 resource "helm_release" "linkerd" {
-  depends_on = [helm_release.linkerd_extras, helm_release.linkerd_cni]
+  depends_on = [helm_release.linkerd_extras]
 
   repository  = "https://helm.linkerd.io/stable"
   chart       = "linkerd-control-plane"

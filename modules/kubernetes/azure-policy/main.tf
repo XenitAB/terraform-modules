@@ -840,6 +840,22 @@ resource "azurerm_policy_set_definition" "xks" {
     }
     VALUE
   }
+  policy_definition_reference {
+    policy_definition_id = azurerm_policy_definition.envoy_gateway_require_tls.id
+    parameter_values     = <<VALUE
+    {
+      "effect": {
+        "value": "deny"
+      },
+      "namespaces": {
+        "value": ${jsonencode(var.tenant_namespaces)}
+      },
+      "excludedNamespaces": {
+        "value": "[concat(parameters('excludedNamespaces'))]"
+      }
+    }
+    VALUE
+  }
 
   policy_definition_reference {
     policy_definition_id = azurerm_policy_definition.k8s_pod_priority_class.id

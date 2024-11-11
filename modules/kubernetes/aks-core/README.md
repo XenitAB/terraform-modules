@@ -118,7 +118,6 @@ This module is used to create AKS clusters.
 | [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/kubernetes_cluster) | data source |
 | [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
-| [azurerm_user_assigned_identity.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/user_assigned_identity) | data source |
 | [azurerm_user_assigned_identity.tenant](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/user_assigned_identity) | data source |
 | [kubernetes_resources.bootstrap_token](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/data-sources/resources) | data source |
 

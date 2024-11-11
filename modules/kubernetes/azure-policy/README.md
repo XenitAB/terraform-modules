@@ -25,6 +25,7 @@ No modules.
 |------|------|
 | [azurerm_policy_definition.azure_identity_format](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
 | [azurerm_policy_definition.azure_remove_node_spot_taints](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
+| [azurerm_policy_definition.envoy_gateway_require_tls](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
 | [azurerm_policy_definition.flux_disable_cross_namespace_source](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
 | [azurerm_policy_definition.flux_require_service_account](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
 | [azurerm_policy_definition.k8s_block_node_port](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |

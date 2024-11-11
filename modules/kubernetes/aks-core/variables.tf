@@ -834,6 +834,7 @@ variable "karpenter_config" {
   }
 }
 
+
 variable "envoy_gateway_enabled" {
   description = "Should we deploy envoy-gateway"
   type        = bool
@@ -848,4 +849,29 @@ variable "envoy_gateway_config" {
     resources_cpu_requests    = optional(string, "")
     resources_memory_requests = optional(string, "")
   })
+}
+
+variable "popeye_enabled" {
+  description = "If the popeye module should be installed"
+  type        = bool
+  default     = false
+}
+
+variable "popeye_config" {
+  description = "The popeye configuration"
+  type = object({
+    allowed_registries = optional(list(string), [])
+    cron_jobs = optional(list(object({
+      namespace     = optional(string, "default")
+      resources     = optional(string, "cj,cm,deploy,ds,gw,gwc,gwr,hpa,ing,job,np,pdb,po,pv,pvc,ro,rb,sa,sec,sts,svc")
+      output_format = optional(string, "html")
+      schedule      = optional(string, "0 0 * * 1")
+    })), [{}])
+    storage_account = optional(object({
+      resource_group_name = optional(string, "")
+      account_name        = optional(string, "")
+      file_share_size     = optional(string, "1Gi")
+    }), {})
+  })
+  default = {}
 }

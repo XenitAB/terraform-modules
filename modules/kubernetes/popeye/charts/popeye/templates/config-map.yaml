@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: popeye
+  namespace: popeye
+  labels:
+    xkf.xenit.io/kind: "platform"
+data:
+  spinach: |-
+  {{ with .Values.config }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}

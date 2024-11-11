@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name:  popeye-reports-pvc
+  namespace: popeye
+  labels:
+    xkf.xenit.io/kind: "platform"
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: popeye-reports
+  resources:
+    requests:
+      storage:  {{ .Values.azure.pvc.size }}

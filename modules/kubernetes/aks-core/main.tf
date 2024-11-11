@@ -49,6 +49,11 @@ data "azurerm_resource_group" "global" {
   name = "rg-${var.environment}-${var.global_location_short}-global"
 }
 
+data "azurerm_user_assigned_identity" "aks" {
+  name                = "uai-aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  resource_group_name = data.azurerm_resource_group.this.name
+}
+
 data "azuread_group" "aks_managed_identity" {
   display_name = "${var.group_name_prefix}${var.group_name_separator}${var.subscription_name}${var.group_name_separator}${var.environment}${var.group_name_separator}aksmsi"
 }

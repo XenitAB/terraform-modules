@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: add support for popeye k8s linter by @landerss1 in [#1239](https://github.com/XenitAB/terraform-modules/pulls/1239)
 - Feat: add support for karpenter autoscaling by @landerss1 in [#1235](https://github.com/XenitAB/terraform-modules/pulls/1235)
 - Feat: Upgrade Linkerd-CNI and CRDs by @CalleB3 in [#1231](https://github.com/XenitAB/terraform-modules/pulls/1231)
 - Feat: add option to use Azure CNI with Cilium by @CalleB3 in [#1142](https://github.com/XenitAB/terraform-modules/pulls/1142)
@@ -55,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚜 Refactor
+- Refactor: associate AKS default NSG with vnet subnet  by @landerss1 in [#1237](https://github.com/XenitAB/terraform-modules/pulls/1237)
 - Refactor: use Microsoft provider for Azure DevOps by @landerss1 in [#1177](https://github.com/XenitAB/terraform-modules/pulls/1177)
 - Refactor: explicitly set AKS SKU tier and node count by @landerss1 in [#1168](https://github.com/XenitAB/terraform-modules/pulls/1168)
 

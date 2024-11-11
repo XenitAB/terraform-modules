@@ -1,0 +1,65 @@
+ {{ range .Values.cronJobs.namespaces }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: popeye-scan-{{ .name }}
+  namespace:  popeye
+  labels:
+    xkf.xenit.io/kind: "platform"
+    azure.workload.identity/use: 'true'
+spec:
+  schedule: {{ .schedule }}
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 300
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: popeye
+          restartPolicy: Never
+          containers:
+            - name: popeye
+              image: {{ $.Values.cronJobs.image }}
+              imagePullPolicy: IfNotPresent
+              command: ["/bin/popeye"]
+              args:
+                - -n
+                - {{ .name }}
+                - -s
+                - {{ .scan }}
+                - -f
+                - /etc/config/popeye/spinach.yml
+                - --save
+                - -o
+                - {{ .format }}
+                - '--force-exit-zero'
+              env:
+                - name: POPEYE_REPORT_DIR
+                  value: /reports
+              resources:
+                limits:
+                  cpu: {{ $.Values.cronJobs.resources.limits.cpu }}
+                  memory: {{ $.Values.cronJobs.resources.limits.memory }}
+              volumeMounts:
+                - name: spinach
+                  mountPath: /etc/config/popeye
+                - name: reports
+                  mountPath: /reports
+                - name: tmp
+                  mountPath: /tmp
+          volumes:
+            - name: spinach
+              configMap:
+                name: popeye
+                items:
+                  - key: spinach
+                    path: spinach.yml
+            - name: reports
+              azureFile:
+                secretName: popeye-secret
+                shareName: popeye-reports
+                readOnly: false
+            - name: tmp
+              emptyDir: {}
+---
+{{- end }}

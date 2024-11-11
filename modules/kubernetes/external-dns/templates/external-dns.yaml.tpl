@@ -1,10 +1,12 @@
 apiVersion: v1
 kind: Namespace
 metadata:
- name: external-dns
- labels:
-   name: "external-dns"
-   xkf.xenit.io/kind: "platform"
+  name: external-dns
+  labels:
+    name: "external-dns"
+    xkf.xenit.io/kind: "platform"
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: Disabled
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository

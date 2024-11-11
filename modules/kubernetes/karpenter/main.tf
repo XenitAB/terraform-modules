@@ -20,6 +20,10 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = "1.14.0"
     }
+    time = {
+      source  = "hashicorp/time"
+      version = "0.12.1"
+    }
   }
 }
 
@@ -59,13 +63,19 @@ resource "helm_release" "karpenter" {
   })]
 }
 
+# Wait a while to make sure karpenter webhooks get created
+resource "time_sleep" "wait_for_karpenter" {
+  depends_on = [helm_release.karpenter]
+
+  create_duration = "15s"
+}
+
 resource "kubectl_manifest" "node_classes" {
+  depends_on = [time_sleep.wait_for_karpenter]
   for_each = {
     for class in var.karpenter_config.node_classes :
     class.name => class
   }
-
-  depends_on = [helm_release.karpenter]
 
   server_side_apply = true
   apply_only        = true
@@ -75,12 +85,11 @@ resource "kubectl_manifest" "node_classes" {
 }
 
 resource "kubectl_manifest" "node_pools" {
+  depends_on = [kubectl_manifest.node_classes]
   for_each = {
     for pool in var.karpenter_config.node_pools :
     pool.name => pool
   }
-
-  depends_on = [kubectl_manifest.node_classes]
 
   server_side_apply = true
   apply_only        = true

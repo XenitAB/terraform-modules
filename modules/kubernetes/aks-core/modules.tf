@@ -146,10 +146,12 @@ module "cert_manager" {
 
   source = "../../kubernetes/cert-manager"
 
+  aad_groups                 = var.aad_groups
   cluster_id                 = local.cluster_id
   dns_zones                  = local.dns_zones
   global_resource_group_name = data.azurerm_resource_group.global.name
   location                   = data.azurerm_resource_group.this.location
+  namespaces                 = var.namespaces
   notification_email         = var.cert_manager_config.notification_email
   oidc_issuer_url            = var.oidc_issuer_url
   resource_group_name        = data.azurerm_resource_group.this.name
@@ -232,6 +234,7 @@ module "external_dns" {
 
   source = "../../kubernetes/external-dns"
 
+  aad_groups                 = var.aad_groups
   cluster_id                 = local.cluster_id
   dns_provider               = "azure"
   dns_zones                  = local.dns_zones
@@ -239,6 +242,7 @@ module "external_dns" {
   global_resource_group_name = data.azurerm_resource_group.global.name
   location                   = data.azurerm_resource_group.this.location
   location_short             = var.location_short
+  namespaces                 = var.namespaces
   oidc_issuer_url            = var.oidc_issuer_url
   resource_group_name        = data.azurerm_resource_group.this.name
   subscription_id            = data.azurerm_client_config.current.subscription_id
@@ -440,11 +444,13 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
+  aad_groups            = var.aad_groups
   external_dns_hostname = var.external_dns_hostname
   default_certificate = {
     enabled  = true
     dns_zone = var.cert_manager_config.dns_zone[0]
   }
+  namespaces              = var.namespaces
   private_ingress_enabled = var.ingress_nginx_config.private_ingress_enabled
   customization           = var.ingress_nginx_config.customization
   customization_private   = var.ingress_nginx_config.customization_private

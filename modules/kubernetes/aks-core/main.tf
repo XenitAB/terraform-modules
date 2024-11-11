@@ -89,7 +89,7 @@ data "azurerm_dns_zone" "this" {
 }
 
 data "azurerm_kubernetes_cluster" "this" {
-  name                = "aks-${var.environment}-${var.location_short}-${var.name}${var.aks_name_suffix}"
+  name                = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   resource_group_name = data.azurerm_resource_group.this.name
 }
 

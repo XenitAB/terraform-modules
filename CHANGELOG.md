@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: add required name label to ingress-nginx namespace by @landerss1 in [#1244](https://github.com/XenitAB/terraform-modules/pulls/1244)
 - Fix: use kubernets datasource to retrieve aks identity by @landerss1 in [#1243](https://github.com/XenitAB/terraform-modules/pulls/1243)
 - Fix: disable linkerd-cni by @CalleB3 in [#1233](https://github.com/XenitAB/terraform-modules/pulls/1233)
 - Fix: Add reloader annotation to azad-kube-proxy by @CalleB3 in [#1217](https://github.com/XenitAB/terraform-modules/pulls/1217)

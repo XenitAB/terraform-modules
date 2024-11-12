@@ -24,6 +24,7 @@ resource "kubernetes_namespace" "ingress_nginx" {
     name = "ingress-nginx"
     labels = {
       "xkf.xenit.io/kind" = "platform"
+      "name"              = "ingress-nginx"
     }
   }
 }

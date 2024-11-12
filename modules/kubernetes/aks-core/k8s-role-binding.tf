@@ -1,5 +1,6 @@
 resource "kubernetes_role_binding" "view" {
-  for_each = { for ns in var.namespaces : ns.name => ns }
+  depends_on = [kubernetes_namespace.tenant]
+  for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "${each.value.name}-view"
@@ -23,7 +24,8 @@ resource "kubernetes_role_binding" "view" {
 }
 
 resource "kubernetes_role_binding" "edit" {
-  for_each = { for ns in var.namespaces : ns.name => ns }
+  depends_on = [kubernetes_namespace.tenant]
+  for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "${each.value.name}-edit"
@@ -72,7 +74,8 @@ resource "kubernetes_role_binding" "helm_release" {
 }
 
 resource "kubernetes_role_binding" "custom_resource_edit" {
-  for_each = { for ns in var.namespaces : ns.name => ns }
+  depends_on = [kubernetes_namespace.tenant]
+  for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "custom-resource-edit"
@@ -96,7 +99,9 @@ resource "kubernetes_role_binding" "custom_resource_edit" {
 }
 
 resource "kubernetes_role_binding" "top" {
-  for_each = { for ns in var.namespaces : ns.name => ns }
+  depends_on = [kubernetes_namespace.tenant]
+  for_each   = { for ns in var.namespaces : ns.name => ns }
+
   metadata {
     name      = "${each.value.name}-top"
     namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
@@ -118,6 +123,8 @@ resource "kubernetes_role_binding" "top" {
 }
 
 resource "kubernetes_role_binding" "trivy_reports" {
+  depends_on = [kubernetes_namespace.tenant]
+
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
@@ -146,6 +153,8 @@ resource "kubernetes_role_binding" "trivy_reports" {
 }
 
 resource "kubernetes_role_binding" "vpa" {
+  depends_on = [kubernetes_namespace.tenant]
+
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
@@ -169,70 +178,5 @@ resource "kubernetes_role_binding" "vpa" {
     api_group = "rbac.authorization.k8s.io"
     kind      = "Group"
     name      = var.aad_groups.edit[each.key].id
-  }
-}
-
-resource "kubernetes_role_binding" "logs_ingress_nginx" {
-  for_each = { for ns in var.namespaces : ns.name => ns }
-  metadata {
-    name      = "${each.value.name}-logs-ingress-nginx"
-    namespace = "ingress-nginx"
-    labels = {
-      "aad-group-name"    = var.aad_groups.edit[each.key].name
-      "xkf.xenit.io/kind" = "platform"
-    }
-  }
-  role_ref {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.logs_ingress_nginx.metadata[0].name
-  }
-  subject {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "Group"
-    name      = var.aad_groups.view[each.key].id
-  }
-}
-
-resource "kubernetes_role_binding" "logs_external_dns" {
-  for_each = { for ns in var.namespaces : ns.name => ns }
-  metadata {
-    name      = "${each.value.name}-logs-external-dns"
-    namespace = "external-dns"
-    labels = {
-      "aad-group-name"    = var.aad_groups.edit[each.key].name
-      "xkf.xenit.io/kind" = "platform"
-    }
-  }
-  role_ref {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.logs_external_dns.metadata[0].name
-  }
-  subject {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "Group"
-    name      = var.aad_groups.view[each.key].id
-  }
-}
-resource "kubernetes_role_binding" "logs_cert_manager" {
-  for_each = { for ns in var.namespaces : ns.name => ns }
-  metadata {
-    name      = "${each.value.name}-logs-cert-manager"
-    namespace = "cert-manager"
-    labels = {
-      "aad-group-name"    = var.aad_groups.edit[each.key].name
-      "xkf.xenit.io/kind" = "platform"
-    }
-  }
-  role_ref {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.logs_cert_manager.metadata[0].name
-  }
-  subject {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "Group"
-    name      = var.aad_groups.view[each.key].id
   }
 }

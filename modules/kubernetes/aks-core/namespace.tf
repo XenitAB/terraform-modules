@@ -18,6 +18,8 @@ resource "kubernetes_namespace" "tenant" {
 }
 
 resource "kubernetes_service_account_v1" "tenant" {
+  depends_on = [kubernetes_namespace.tenant]
+
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
@@ -30,6 +32,8 @@ resource "kubernetes_service_account_v1" "tenant" {
 }
 
 resource "kubernetes_limit_range" "tenant" {
+  depends_on = [kubernetes_namespace.tenant]
+
   for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
@@ -53,6 +57,8 @@ resource "kubernetes_limit_range" "tenant" {
 
 # Denys all traffic but except to coredns and inside of namespace.
 resource "kubernetes_network_policy" "tenant" {
+  depends_on = [kubernetes_namespace.tenant]
+
   for_each = {
     for ns in var.namespaces :
     ns.name => ns

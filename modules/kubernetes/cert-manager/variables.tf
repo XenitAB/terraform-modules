@@ -1,3 +1,23 @@
+variable "aad_groups" {
+  description = "Configuration for Azure AD Groups (AAD Groups)"
+  type = object({
+    view = map(any)
+    edit = map(any)
+    cluster_admin = object({
+      id   = string
+      name = string
+    })
+    cluster_view = object({
+      id   = string
+      name = string
+    })
+    aks_managed_identity = object({
+      id   = string
+      name = string
+    })
+  })
+}
+
 variable "acme_server" {
   description = "ACME server to add to the created ClusterIssuer"
   type        = string
@@ -36,6 +56,23 @@ variable "global_resource_group_name" {
 variable "location" {
   description = "The Azure region name."
   type        = string
+}
+
+variable "namespaces" {
+  description = "The namespaces that should be created in Kubernetes."
+  type = list(
+    object({
+      name   = string
+      labels = map(string)
+      flux = optional(object({
+        provider            = string
+        project             = optional(string)
+        repository          = string
+        include_tenant_name = optional(bool, false)
+        create_crds         = optional(bool, false)
+      }))
+    })
+  )
 }
 
 variable "notification_email" {

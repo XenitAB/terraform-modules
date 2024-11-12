@@ -1,3 +1,4 @@
+%{~ if envoy_tls_policy_enabled ~}
 apiVersion: templates.gatekeeper.sh/v1
 kind: ConstraintTemplate
 metadata:
@@ -58,3 +59,4 @@ spec:
           - ECDHE-ECDSA-AES256-GCM-SHA384
           - ECDHE-RSA-AES256-GCM-SHA384
         minVersion: '1.2'
+%{~ endif ~}

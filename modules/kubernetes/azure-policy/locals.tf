@@ -19,6 +19,7 @@ locals {
   )
   envoy_gateway_require_tls = base64encode(
     templatefile("${path.module}/templates/envoy_gateway_require_tls.yaml.tpl", {
+      envoy_tls_policy_enabled = var.envoy_tls_policy_enabled
     })
   )
   k8s_block_node_port = base64encode(

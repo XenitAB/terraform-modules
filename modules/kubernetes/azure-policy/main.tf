@@ -843,7 +843,7 @@ resource "azurerm_policy_set_definition" "xks" {
     VALUE
   }
   policy_definition_reference {
-    policy_definition_id = azurerm_policy_definition.envoy_gateway_require_tls.id
+    policy_definition_id = azurerm_policy_definition.envoy_gateway_require_tls[0].id
     parameter_values     = <<VALUE
     {
       "effect": {

@@ -15,5 +15,6 @@ module "envoy-gateway" {
     resources_memory_limit    = "30g"
     resources_cpu_requests    = "5000mi"
     resources_memory_requests = "50g"
+    envoy_tls_policy_enabled  = true
   }
 }

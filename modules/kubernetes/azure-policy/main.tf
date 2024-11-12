@@ -278,7 +278,9 @@ resource "azurerm_policy_definition" "flux_require_service_account" {
     }
     PARAMETERS
 }
+
 resource "azurerm_policy_definition" "envoy_gateway_require_tls" {
+  count        = var.envoy_tls_policy_enabled ? 1 : 0
   name         = "EnvoyGatewayRequireTLS"
   display_name = "Envoy Gatway must have traffic policy"
   policy_type  = "Custom"

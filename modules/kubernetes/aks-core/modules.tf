@@ -104,11 +104,13 @@ module "azure_policy" {
 
   source = "../../kubernetes/azure-policy"
 
-  aks_name            = var.name
-  aks_name_suffix     = local.aks_name_suffix
-  azure_policy_config = var.azure_policy_config
-  environment         = var.environment
-  location_short      = var.location_short
+  aks_name                 = var.name
+  aks_name_suffix          = local.aks_name_suffix
+  azure_policy_config      = var.azure_policy_config
+  environment              = var.environment
+  location_short           = var.location_short
+  envoy_tls_policy_enabled = var.envoy_tls_policy_enabled
+
   tenant_namespaces = [
     for namespace in var.namespaces : namespace.name
   ]

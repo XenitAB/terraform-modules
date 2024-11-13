@@ -58,6 +58,12 @@ resource "kubernetes_namespace" "flux_system" {
   metadata {
     name = "flux-system"
   }
+
+  lifecycle {
+    ignore_changes = [
+      metadata
+    ]
+  }
 }
 
 resource "flux_bootstrap_git" "this" {

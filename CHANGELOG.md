@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: add support for specifying parameters for additional storage classes by @landerss1 in [#1248](https://github.com/XenitAB/terraform-modules/pulls/1248)
 - Feat: add support for popeye k8s linter by @landerss1 in [#1239](https://github.com/XenitAB/terraform-modules/pulls/1239)
 - Feat: add support for karpenter autoscaling by @landerss1 in [#1235](https://github.com/XenitAB/terraform-modules/pulls/1235)
 - Feat: Upgrade Linkerd-CNI and CRDs by @CalleB3 in [#1231](https://github.com/XenitAB/terraform-modules/pulls/1231)

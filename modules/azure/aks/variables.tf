@@ -339,3 +339,34 @@ variable "cilium_enabled" {
   type        = bool
   default     = false
 }
+variable "nsg_rules_enabled" {
+  type        = bool
+  description = "Is NSG being used? If so, apply rules"
+  default     = true
+}
+variable "nsg_rules" {
+  description = "Rules for trafic in the NSG associated to AKS"
+  type = object({
+    name                       = string
+    priority                   = number
+    direction                  = string
+    access                     = string
+    protocol                   = string
+    source_port_range          = string
+    destination_port_range     = string
+    source_address_prefix      = string
+    destination_address_prefix = string
+  })
+
+  default = {
+    name                       = null
+    priority                   = null
+    direction                  = null
+    access                     = null
+    protocol                   = null
+    source_port_range          = null
+    destination_port_range     = null
+    source_address_prefix      = null
+    destination_address_prefix = null
+  }
+}

@@ -339,14 +339,14 @@ variable "cilium_enabled" {
   type        = bool
   default     = false
 }
-variable "nsg_rules_enabled" {
-  type        = bool
+variable "nsg_rules_enabled"{
+  type = bool
   description = "Is NSG being used? If so, apply rules"
-  default     = true
+  default = true
 }
 variable "nsg_rules" {
   description = "Rules for trafic in the NSG associated to AKS"
-  type = object({
+  type = list(object({
     name                       = string
     priority                   = number
     direction                  = string
@@ -356,7 +356,7 @@ variable "nsg_rules" {
     destination_port_range     = string
     source_address_prefix      = string
     destination_address_prefix = string
-  })
+  }))
 
   default = {}
 }

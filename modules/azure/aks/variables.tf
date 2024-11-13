@@ -339,10 +339,10 @@ variable "cilium_enabled" {
   type        = bool
   default     = false
 }
-variable "nsg_rules_enabled"{
-  type = bool
+variable "nsg_rules_enabled" {
+  type        = bool
   description = "Is NSG being used? If so, apply rules"
-  default = true
+  default     = true
 }
 variable "nsg_rules" {
   description = "Rules for trafic in the NSG associated to AKS"

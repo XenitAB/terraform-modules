@@ -1,6 +1,6 @@
-# Nginx Gateway Fabric
+# Envoy Gateway
 
-This module is used to add [`nginx-gateway-fabric`](https://docs.nginx.com/nginx-gateway-fabric/) to Kubernetes clusters.
+This module is used to add [`envoy-gateway`](https://gateway.envoyproxy.io/docs/) to Kubernetes clusters.
 
 ## Requirements
 

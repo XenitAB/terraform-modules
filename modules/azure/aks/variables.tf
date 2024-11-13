@@ -358,15 +358,5 @@ variable "nsg_rules" {
     destination_address_prefix = string
   })
 
-  default = {
-    name                       = null
-    priority                   = null
-    direction                  = null
-    access                     = null
-    protocol                   = null
-    source_port_range          = null
-    destination_port_range     = null
-    source_address_prefix      = null
-    destination_address_prefix = null
-  }
+  default = {}
 }

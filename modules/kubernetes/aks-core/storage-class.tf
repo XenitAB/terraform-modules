@@ -68,9 +68,7 @@ resource "kubernetes_storage_class" "additional" {
   storage_provisioner = each.value.provisioner
   reclaim_policy      = each.value.reclaim_policy
 
-  parameters = {
-    skuName = each.value.sku_name
-  }
+  parameters = each.value.sku_name
 
   volume_binding_mode = each.value.binding_mode
 }

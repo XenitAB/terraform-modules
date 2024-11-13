@@ -652,7 +652,7 @@ variable "additional_storage_classes" {
     provisioner    = string
     reclaim_policy = string
     binding_mode   = string
-    sku_name       = string
+    parameters     = map(string)
   }))
   default = []
 }

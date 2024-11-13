@@ -27,7 +27,6 @@ variable "vnet_config" {
       name              = string
       cidr              = string
       service_endpoints = list(string)
-      aks_subnet        = bool
     }))
   })
 }

@@ -22,19 +22,16 @@ module "core" {
         name              = "servers"
         cidr              = "10.180.0.0/24"
         service_endpoints = []
-        aks_subnet        = false
       },
       {
         name              = "aks1"
         cidr              = "10.180.1.0/24"
         service_endpoints = []
-        aks_subnet        = true
       },
       {
         name              = "aks2"
         cidr              = "10.180.2.0/24"
         service_endpoints = []
-        aks_subnet        = true
       },
     ]
   }

@@ -1,7 +1,7 @@
 resource "azurerm_network_security_rule" "nsg" {
   for_each = {
     for rule in var.nsg_rules :
-    name => rule
+    rule.name => rule
     if var.nsg_rules_enabled
   }
 

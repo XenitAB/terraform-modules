@@ -23,8 +23,7 @@ resource "azuread_group" "all_owner" {
 
   display_name  = data.azurecaf_name.azuread_group_all_owner["delegate_sub_groups"].result
   mail_nickname = "az-sub-${var.subscription_name}-all-owner"
-  mail_enabled  = true
-  types         = ["DynamicMembership"]
+  mail_enabled  = false
 }
 
 resource "azuread_group_member" "sub_all_owner" {
@@ -63,8 +62,7 @@ resource "azuread_group" "all_contributor" {
 
   display_name  = data.azurecaf_name.azuread_group_all_contributor["delegate_sub_groups"].result
   mail_nickname = "az-sub-${var.subscription_name}-all-contributor"
-  mail_enabled  = true
-  types         = ["DynamicMembership"]
+  mail_enabled  = false
 }
 
 resource "azuread_group_member" "sub_all_contributor" {
@@ -103,8 +101,7 @@ resource "azuread_group" "all_reader" {
 
   display_name  = data.azurecaf_name.azuread_group_all_reader["delegate_sub_groups"].result
   mail_nickname = "az-sub-${var.subscription_name}-all-reader"
-  mail_enabled  = true
-  types         = ["DynamicMembership"]
+  mail_enabled  = false
 }
 
 resource "azuread_group_member" "sub_all_reader" {

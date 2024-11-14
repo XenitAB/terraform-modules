@@ -96,4 +96,30 @@ module "aks" {
 
   log_eventhub_name                  = "eventhub1"
   log_eventhub_authorization_rule_id = "12345"
+
+  add_default_security_lb_rule = true
+  additonal_security_rules = [
+    {
+      name                       = "test1"
+      priority                   = 100
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "80,443"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    },
+    {
+      name                       = "test2"
+      priority                   = 110
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "8080"
+      source_address_prefix      = "1.2.3.4"
+      destination_address_prefix = "4.3.2.1"
+    },
+  ]
 }

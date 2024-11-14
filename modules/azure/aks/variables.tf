@@ -339,3 +339,26 @@ variable "cilium_enabled" {
   type        = bool
   default     = false
 }
+
+variable "add_default_security_lb_rule" {
+  type        = bool
+  description = "Should default LB rule (allow internat to azure lb ips) be applied to NSG?"
+  default     = false
+}
+
+variable "additonal_security_rules" {
+  description = "Rules for trafic in the NSG associated to AKS"
+  type = list(object({
+    name                       = string
+    priority                   = number
+    direction                  = string
+    access                     = string
+    protocol                   = string
+    source_port_range          = string
+    destination_port_range     = string
+    source_address_prefix      = string
+    destination_address_prefix = string
+  }))
+
+  default = []
+}

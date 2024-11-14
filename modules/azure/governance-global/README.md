@@ -40,6 +40,9 @@ This module is used for governance on a global level and not using any specific 
 | [azuread_group.acr_pull](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
 | [azuread_group.acr_push](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
 | [azuread_group.acr_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group.all_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group.all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
+| [azuread_group.all_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
 | [azuread_group.rg_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
 | [azuread_group.rg_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
 | [azuread_group.rg_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group) | resource |
@@ -71,9 +74,6 @@ This module is used for governance on a global level and not using any specific 
 | [pal_management_partner.aad_sp](https://registry.terraform.io/providers/xenitab/pal/0.2.5/docs/resources/management_partner) | resource |
 | [pal_management_partner.owner_spn](https://registry.terraform.io/providers/xenitab/pal/0.2.5/docs/resources/management_partner) | resource |
 | [azuread_application.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/application) | data source |
-| [azuread_group.all_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/group) | data source |
-| [azuread_group.all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/group) | data source |
-| [azuread_group.all_reader](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/group) | data source |
 | [azuread_service_principal.owner_spn](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/service_principal) | data source |
 | [azuread_service_principal.sp_all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/service_principal) | data source |
 | [azurecaf_name.azuread_application_aad_app](https://registry.terraform.io/providers/aztfmod/azurecaf/2.0.0-preview3/docs/data-sources/name) | data source |

@@ -28,7 +28,7 @@ variable "vnet_config" {
       cidr              = string
       service_endpoints = list(string)
       create_nsg        = bool
-    }))
+  }))
     security_rules = optional(list(object({
       name                       = optional(string)
       priority                   = optional(number)
@@ -39,7 +39,7 @@ variable "vnet_config" {
       destination_port_range     = optional(string)
       source_address_prefix      = optional(string)
       destination_address_prefix = optional(string)
-    })))
+  })))
   })
 }
 

@@ -334,23 +334,3 @@ resource "azurerm_role_assignment" "aks_managed_identity_noderg_virtual_machine_
   role_definition_name = "Virtual Machine Contributor"
   principal_id         = var.aad_groups.aks_managed_identity.id
 }
-
-data "azurerm_kubernetes_cluster" "this" {
-  name                = azurerm_kubernetes_cluster.this.name
-  resource_group_name = azurerm_kubernetes_cluster.this.resource_group_name
-}
-
-data "azurerm_resources" "nsg" {
-  resource_group_name = data.azurerm_kubernetes_cluster.this.node_resource_group
-  type                = "Microsoft.Network/networkSecurityGroups"
-}
-
-resource "azurerm_subnet_network_security_group_association" "subnet_nsg_association" {
-  for_each = {
-    for pool_profile in data.azurerm_kubernetes_cluster.this.agent_pool_profile :
-    pool_profile.name => pool_profile
-  }
-
-  subnet_id                 = each.value.vnet_subnet_id
-  network_security_group_id = data.azurerm_resources.nsg.resources[0].id
-}

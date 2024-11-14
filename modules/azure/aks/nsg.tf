@@ -6,7 +6,7 @@ data "azurerm_resources" "this" {
 
 data "azurerm_public_ip" "this" {
   count               = var.add_default_security_lb_rule ? 1 : 0
-  name = data.azurerm_resources.this[count.index].resources[count.index].name
+  name                = data.azurerm_resources.this[count.index].resources[count.index].name
   resource_group_name = azurerm_kubernetes_cluster.this.node_resource_group
 }
 
@@ -20,7 +20,7 @@ resource "azurerm_network_security_rule" "allow_internet_azure_lb" {
   source_port_range           = "*"
   destination_port_range      = "80,443"
   source_address_prefix       = "Internet"
-  destination_address_prefix = data.azurerm_public_ip.this[0].ip_address
+  destination_address_prefix  = data.azurerm_public_ip.this[0].ip_address
   resource_group_name         = data.azurerm_resource_group.this.name
   network_security_group_name = "nsg-${var.environment}-${var.location_short}-${var.core_name}-${var.name}${var.aks_name_suffix}"
 }

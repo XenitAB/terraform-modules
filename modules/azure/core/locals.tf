@@ -53,4 +53,12 @@ locals {
       }
     ]
   ])
+  security_rules = flatten([
+    for subnet in var.vnet_config.subnets : [
+      for security_rule in subnet.security_rules : {
+        subnet_create_nsg        = subnet.create_nsg
+      }
+    ]
+  ])
+
 }

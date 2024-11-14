@@ -37,9 +37,9 @@ resource "azurerm_subnet_network_security_group_association" "this" {
 
 resource "azurerm_network_security_rule" "this" {
   for_each = {
-    for rule in var.vnet_config.security_rules :
-    rule.name => rule
-    if var.vnet_config.create_nsg == true
+    for security_rule in local.security_rules :
+    security_rule.security_rule => security_rule
+    if subnet.subnet_create_nsg == true  
   }
 
   name                        = each.value.name

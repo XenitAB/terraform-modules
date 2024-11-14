@@ -5,7 +5,7 @@ data "azurerm_resources" "this" {
 }
 
 data "azurerm_public_ip" "this" {
-  name = data.azurerm_resources.this[count.index].name
+  name = data.azurerm_resources.this.resource.name
   resource_group_name = azurerm_kubernetes_cluster.this.node_resource_group
 }
 

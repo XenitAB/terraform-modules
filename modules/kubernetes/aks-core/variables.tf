@@ -242,6 +242,11 @@ variable "azure_policy_config" {
     ]
   }
 }
+variable "envoy_tls_policy_enabled" {
+  description = "An option to remove the gatekeeper mutation for tls settings"
+  type        = bool
+  default     = false
+}
 
 variable "gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
@@ -832,6 +837,24 @@ variable "karpenter_config" {
     ])
     error_message = "The AKSNodeClass imageFamily must be either 'Ubuntu2204' or 'AzureLinux'."
   }
+}
+
+
+variable "envoy_gateway_enabled" {
+  description = "Should we deploy envoy-gateway"
+  type        = bool
+  default     = false
+}
+
+variable "envoy_gateway_config" {
+  description = "Envoy gateway configuration"
+  type = object({
+    logging_level             = optional(string, "info")
+    replicas_count            = optional(number, 2)
+    resources_memory_limit    = optional(string, "")
+    resources_cpu_requests    = optional(string, "")
+    resources_memory_requests = optional(string, "")
+  })
 }
 
 variable "popeye_enabled" {

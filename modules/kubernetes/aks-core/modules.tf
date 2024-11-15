@@ -104,11 +104,13 @@ module "azure_policy" {
 
   source = "../../kubernetes/azure-policy"
 
-  aks_name            = var.name
-  aks_name_suffix     = local.aks_name_suffix
-  azure_policy_config = var.azure_policy_config
-  environment         = var.environment
-  location_short      = var.location_short
+  aks_name                 = var.name
+  aks_name_suffix          = local.aks_name_suffix
+  azure_policy_config      = var.azure_policy_config
+  environment              = var.environment
+  location_short           = var.location_short
+  envoy_tls_policy_enabled = var.envoy_tls_policy_enabled
+
   tenant_namespaces = [
     for namespace in var.namespaces : namespace.name
   ]
@@ -221,6 +223,21 @@ module "datadog" {
   namespace_include   = var.datadog_config.namespaces
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
+}
+
+module "envoy_gateway" {
+  depends_on = [module.gateway_api]
+
+  for_each = {
+    for s in ["envoy_gateway"] :
+    s => s
+    if var.envoy_gateway_enabled
+  }
+
+  source = "../../kubernetes/envoy-gateway"
+
+  cluster_id           = local.cluster_id
+  envoy_gateway_config = var.envoy_gateway_config
 }
 
 module "external_dns" {

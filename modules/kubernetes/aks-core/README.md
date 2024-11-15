@@ -38,6 +38,7 @@ This module is used to create AKS clusters.
 | <a name="module_cert_manager_crd"></a> [cert\_manager\_crd](#module\_cert\_manager\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_control_plane_logs"></a> [control\_plane\_logs](#module\_control\_plane\_logs) | ../../kubernetes/control-plane-logs | n/a |
 | <a name="module_datadog"></a> [datadog](#module\_datadog) | ../../kubernetes/datadog | n/a |
+| <a name="module_envoy_gateway"></a> [envoy\_gateway](#module\_envoy\_gateway) | ../../kubernetes/envoy-gateway | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../../kubernetes/external-dns | n/a |
 | <a name="module_falco"></a> [falco](#module\_falco) | ../../kubernetes/falco | n/a |
 | <a name="module_fluxcd"></a> [fluxcd](#module\_fluxcd) | ../../kubernetes/fluxcd | n/a |
@@ -144,6 +145,9 @@ This module is used to create AKS clusters.
 | <a name="input_defender_enabled"></a> [defender\_enabled](#input\_defender\_enabled) | If Defender for Containers should be enabled | `bool` | `false` | no |
 | <a name="input_dns_zones"></a> [dns\_zones](#input\_dns\_zones) | List of DNS Zones | `list(string)` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
+| <a name="input_envoy_gateway_config"></a> [envoy\_gateway\_config](#input\_envoy\_gateway\_config) | Envoy gateway configuration | <pre>object({<br/>    logging_level             = optional(string, "info")<br/>    replicas_count            = optional(number, 2)<br/>    resources_memory_limit    = optional(string, "")<br/>    resources_cpu_requests    = optional(string, "")<br/>    resources_memory_requests = optional(string, "")<br/>  })</pre> | n/a | yes |
+| <a name="input_envoy_gateway_enabled"></a> [envoy\_gateway\_enabled](#input\_envoy\_gateway\_enabled) | Should we deploy envoy-gateway | `bool` | `false` | no |
+| <a name="input_envoy_tls_policy_enabled"></a> [envoy\_tls\_policy\_enabled](#input\_envoy\_tls\_policy\_enabled) | An option to remove the gatekeeper mutation for tls settings | `bool` | `false` | no |
 | <a name="input_external_dns_config"></a> [external\_dns\_config](#input\_external\_dns\_config) | ExternalDNS config | <pre>object({<br/>    extra_args = optional(list(string), [])<br/>    sources    = optional(list(string), ["ingress", "service"])<br/>  })</pre> | `{}` | no |
 | <a name="input_external_dns_enabled"></a> [external\_dns\_enabled](#input\_external\_dns\_enabled) | Should External DNS be enabled | `bool` | `true` | no |
 | <a name="input_external_dns_hostname"></a> [external\_dns\_hostname](#input\_external\_dns\_hostname) | hostname for ingress-nginx to use for external-dns | `string` | `""` | no |

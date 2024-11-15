@@ -1,5 +1,7 @@
 terraform {}
 
+provider "git" { }
+
 provider "kubernetes" {}
 
 provider "helm" {}

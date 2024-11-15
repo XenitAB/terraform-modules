@@ -354,6 +354,7 @@ resource "azurerm_policy_definition" "envoy_gateway_require_tls" {
     }
     PARAMETERS
 }
+
 resource "azurerm_policy_definition" "k8s_pod_priority_class" {
   name         = "K8sPodPriorityClass"
   display_name = "K8s pods should use allowed priority classes"

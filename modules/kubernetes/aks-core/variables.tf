@@ -845,6 +845,7 @@ variable "envoy_gateway_enabled" {
   type        = bool
   default     = false
 }
+
 variable "envoy_gateway_config" {
   description = "Envoy gateway configuration"
   type = object({

@@ -41,7 +41,7 @@ locals {
     templatefile("${path.module}/templates/k8s-require-ingress-class.yaml.tpl", {
     })
   )
-  
+
   k8s_secrets_store_csi_unique_volume = base64encode(
     templatefile("${path.module}/templates/k8s-secrets-store-csi-unique-volume.yaml.tpl", {
     })

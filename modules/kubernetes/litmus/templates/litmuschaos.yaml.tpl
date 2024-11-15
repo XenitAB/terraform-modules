@@ -22,12 +22,9 @@ spec:
       version: 3.12.0
   interval: 1m0s
   values:
-    portal:
-      server:
-        waitForMongodb:
-          securityContext:
-            runAsNonRoot: true
-            readOnlyRootFilesystem: true
-    mongodb:
-      auth:
-        existingSecret:
+    #portal:
+    #  server:
+    #    waitForMongodb:
+    #      securityContext:
+    #        runAsNonRoot: true
+    #        readOnlyRootFilesystem: true

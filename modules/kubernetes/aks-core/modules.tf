@@ -237,7 +237,7 @@ module "envoy_gateway" {
   source = "../../kubernetes/envoy-gateway"
 
   cluster_id           = local.cluster_id
-  envoy_gateway_config = var.envoy_gateway.config
+  envoy_gateway_config = var.envoy_gateway.envoy_gateway_config
 }
 
 module "external_dns" {

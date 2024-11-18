@@ -840,21 +840,28 @@ variable "karpenter_config" {
 }
 
 
-variable "envoy_gateway_enabled" {
+variable "envoy_gateway" {
   description = "Should we deploy envoy-gateway"
-  type        = bool
-  default     = false
-}
-
-variable "envoy_gateway_config" {
-  description = "Envoy gateway configuration"
   type = object({
-    logging_level             = optional(string, "info")
-    replicas_count            = optional(number, 2)
-    resources_memory_limit    = optional(string, "")
-    resources_cpu_requests    = optional(string, "")
-    resources_memory_requests = optional(string, "")
+    enabled = optional(bool, false)
+    config = optional(object({
+      logging_level             = optional(string, "info")
+      replicas_count            = optional(number, 2)
+      resources_memory_limit    = optional(string, "")
+      resources_cpu_requests    = optional(string, "")
+      resources_memory_requests = optional(string, "")
+    }))
+
   })
+  default = {
+    config = {
+      logging_level             = "info"
+      replica_count             = 2
+      resources_cpu_requests    = ""
+      resources_memory_limit    = ""
+      resources_memory_requests = ""
+    }
+  }
 }
 
 variable "popeye_enabled" {

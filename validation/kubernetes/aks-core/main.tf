@@ -3,7 +3,8 @@ terraform {
 
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
-  envoy_gateway_config = {
+  envoy_gateway = {
+    enabled                   = true
     logging_level             = "debug"
     replicas_count            = 42
     resources_memory_limit    = "30g"

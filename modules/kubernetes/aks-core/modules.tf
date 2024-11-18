@@ -231,13 +231,13 @@ module "envoy_gateway" {
   for_each = {
     for s in ["envoy_gateway"] :
     s => s
-    if var.envoy_gateway_enabled
+    if var.envoy_gateway.enabled
   }
 
   source = "../../kubernetes/envoy-gateway"
 
   cluster_id           = local.cluster_id
-  envoy_gateway_config = var.envoy_gateway_config
+  envoy_gateway_config = var.envoy_gateway.config
 }
 
 module "external_dns" {

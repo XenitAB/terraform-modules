@@ -850,13 +850,10 @@ variable "envoy_gateway" {
       resources_memory_limit    = optional(string, "")
       resources_cpu_requests    = optional(string, "")
       resources_memory_requests = optional(string, "")
-    }))
-
+    }), {})
   })
-  default = {
-    }
-  }
-
+  default = {}
+}
 
 variable "popeye_enabled" {
   description = "If the popeye module should be installed"

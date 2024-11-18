@@ -854,9 +854,10 @@ variable "envoy_gateway" {
 
   })
   default = {
-    config = {
+    enabled = false
+    envoy_gateway_config = {
       logging_level             = "info"
-      replica_count             = 2
+      replicas_count            = 2
       resources_cpu_requests    = ""
       resources_memory_limit    = ""
       resources_memory_requests = ""

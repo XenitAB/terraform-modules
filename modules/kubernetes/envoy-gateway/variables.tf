@@ -12,4 +12,5 @@ variable "envoy_gateway_config" {
     resources_cpu_requests    = optional(string, "")
     resources_memory_requests = optional(string, "")
   })
+  default = {}
 }

@@ -3,12 +3,16 @@ terraform {
 
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
-  envoy_gateway_config = {
-    logging_level             = "debug"
-    replicas_count            = 42
-    resources_memory_limit    = "30g"
-    resources_cpu_requests    = "5000mi"
-    resources_memory_requests = "50g"
+  envoy_gateway = {
+    enabled = true
+    envoy_gateway_config = {
+      logging_level             = "debug"
+      replicas_count            = 42
+      resources_memory_limit    = "30g"
+      resources_cpu_requests    = "5000mi"
+      resources_memory_requests = "50g"
+    }
+
   }
   grafana_k8s_monitor_config = {
     grafana_cloud_prometheus_host = "sda"

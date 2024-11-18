@@ -13,10 +13,5 @@ variable "envoy_gateway_config" {
     resources_memory_requests = optional(string, "")
   })
   default = {
-    logging_level             = "info"
-    replicas_count            = 2
-    resources_memory_limit    = ""
-    resources_cpu_requests    = ""
-    resources_memory_requests = ""
   }
 }

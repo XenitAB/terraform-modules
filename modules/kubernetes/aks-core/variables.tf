@@ -854,16 +854,9 @@ variable "envoy_gateway" {
 
   })
   default = {
-    enabled = false
-    envoy_gateway_config = {
-      logging_level             = "info"
-      replicas_count            = 2
-      resources_cpu_requests    = ""
-      resources_memory_limit    = ""
-      resources_memory_requests = ""
     }
   }
-}
+
 
 variable "popeye_enabled" {
   description = "If the popeye module should be installed"

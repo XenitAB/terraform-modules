@@ -56,9 +56,18 @@ locals {
   security_rules = flatten([
     for subnet in var.vnet_config.subnets : [
       for security_rule in subnet.security_rules : {
-        subnet_create_nsg = subnet.create_nsg
-        subnet_full_name  = data.azurecaf_name.local_subnets_subnet_full_name[subnet.name].result
-        rule_name         = security_rule.name
+        subnet_create_nsg               = subnet.create_nsg
+        subnet_full_name                = data.azurecaf_name.local_subnets_subnet_full_name[subnet.name].result
+        rule_name                       = security_rule.name
+        rule_priority                   = security_rule.priority
+        rule_direction                  = security_rule.direction
+        rule_access                     = security_rule.access
+        rule_protocol                   = security_rule.protocol
+        rule_source_port_range          = security_rule.source_port_range
+        rule_destination_port_range     = security_rule.destination_port_range
+        rule_source_address_prefix      = security_rule.source_address_prefix
+        rule_destination_address_prefix = security_rule.destination_address_prefix
+
       }
     ]
   ])

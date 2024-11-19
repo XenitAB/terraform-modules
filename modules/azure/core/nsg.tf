@@ -42,15 +42,15 @@ resource "azurerm_network_security_rule" "this" {
     if security_rule.subnet_create_nsg == true
   }
 
-  name                        = each.value.name
-  priority                    = each.value.priority
-  direction                   = each.value.direction
-  access                      = each.value.access
-  protocol                    = each.value.protocol
-  source_port_range           = each.value.source_port_range
-  destination_port_range      = each.value.destination_port_range
-  source_address_prefix       = each.value.source_address_prefix
-  destination_address_prefix  = each.value.destination_address_prefix
+  name                        = each.value.rule_name
+  priority                    = each.value.rule_priority
+  direction                   = each.value.rule_direction
+  access                      = each.value.rule_access
+  protocol                    = each.value.rule_protocol
+  source_port_range           = each.value.rule_source_port_range
+  destination_port_range      = each.value.rule_destination_port_range
+  source_address_prefix       = each.value.rule_source_address_prefix
+  destination_address_prefix  = each.value.rule_destination_address_prefix
   resource_group_name         = data.azurerm_resource_group.this.name
-  network_security_group_name = azurerm_network_security_group.this[data.azurecaf_name.azurerm_network_security_group_this[each.value.subnet_full_name].result].name
+  network_security_group_name = azurerm_network_security_group.this[data.azurecaf_name.azurerm_network_security_group_this[each.value.rule_subnet_full_name].result].name
 }

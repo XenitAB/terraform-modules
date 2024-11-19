@@ -57,7 +57,7 @@ locals {
     for subnet in var.vnet_config.subnets : [
       for security_rule in subnet.security_rules : {
         subnet_create_nsg               = subnet.create_nsg
-        nsg_full_name                   = data.azurecaf_name.azurerm_network_security_group_this[each.key].result
+        nsg_full_name                   = data.azurecaf_name.local_subnets_subnet_full_name[subnet.name].result
         rule_name                       = security_rule.name
         rule_priority                   = security_rule.priority
         rule_direction                  = security_rule.direction

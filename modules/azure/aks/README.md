@@ -46,6 +46,8 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | [azurerm_monitor_diagnostic_setting.log_analytics_workspace_audit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_monitor_diagnostic_setting.log_eventhub_audit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_monitor_diagnostic_setting.log_storage_account_audit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_network_security_rule.additonal_security_rules](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/network_security_rule) | resource |
+| [azurerm_network_security_rule.allow_internet_azure_lb](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/network_security_rule) | resource |
 | [azurerm_resource_policy_assignment.agentless_discovery](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/resource_policy_assignment) | resource |
 | [azurerm_resource_policy_assignment.kubernetes_sensor](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/resource_policy_assignment) | resource |
 | [azurerm_resource_policy_assignment.vulnerability_assessments](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/resource_policy_assignment) | resource |
@@ -59,15 +61,14 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | [azurerm_security_center_auto_provisioning.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/security_center_auto_provisioning) | resource |
 | [azurerm_security_center_subscription_pricing.containers](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/security_center_subscription_pricing) | resource |
 | [azurerm_storage_management_policy.log_storage_account_audit_policy](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/storage_management_policy) | resource |
-| [azurerm_subnet_network_security_group_association.subnet_nsg_association](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/subnet_network_security_group_association) | resource |
 | [azurerm_user_assigned_identity.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.tenant](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/user_assigned_identity) | resource |
 | [azuread_group.tenant_resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/group) | data source |
-| [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/kubernetes_cluster) | data source |
+| [azurerm_public_ip.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/public_ip) | data source |
 | [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
-| [azurerm_resources.nsg](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resources) | data source |
+| [azurerm_resources.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resources) | data source |
 | [azurerm_storage_account.log](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/storage_account) | data source |
 | [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/subnet) | data source |
 
@@ -76,6 +77,8 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aad_groups"></a> [aad\_groups](#input\_aad\_groups) | Configuration for Azure AD Groups (AAD Groups) | <pre>object({<br/>    view = map(any)<br/>    edit = map(any)<br/>    cluster_admin = object({<br/>      id   = string<br/>      name = string<br/>    })<br/>    cluster_view = object({<br/>      id   = string<br/>      name = string<br/>    })<br/>    aks_managed_identity = object({<br/>      id   = string<br/>      name = string<br/>    })<br/>  })</pre> | n/a | yes |
+| <a name="input_add_default_security_lb_rule"></a> [add\_default\_security\_lb\_rule](#input\_add\_default\_security\_lb\_rule) | Should default LB rule (allow internat to azure lb ips) be applied to NSG? | `bool` | `false` | no |
+| <a name="input_additonal_security_rules"></a> [additonal\_security\_rules](#input\_additonal\_security\_rules) | Rules for trafic in the NSG associated to AKS | <pre>list(object({<br/>    name                       = string<br/>    priority                   = number<br/>    direction                  = string<br/>    access                     = string<br/>    protocol                   = string<br/>    source_port_range          = string<br/>    destination_port_range     = string<br/>    source_address_prefix      = string<br/>    destination_address_prefix = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_aks_audit_log_retention"></a> [aks\_audit\_log\_retention](#input\_aks\_audit\_log\_retention) | The aks audit log retention in days, 0 = infinite | `number` | `30` | no |
 | <a name="input_aks_authorized_ips"></a> [aks\_authorized\_ips](#input\_aks\_authorized\_ips) | Authorized IPs to access AKS API | `list(string)` | n/a | yes |
 | <a name="input_aks_automation_config"></a> [aks\_automation\_config](#input\_aks\_automation\_config) | AKS automation configuration | <pre>object({<br/>    public_network_access_enabled = optional(bool, false),<br/>    alerts_config = optional(object({<br/>      enabled     = optional(bool, true),<br/>      frequency   = optional(string, ""),<br/>      window_size = optional(string, ""),<br/>      severity    = optional(number, 3),<br/>      email_to    = optional(string, ""),<br/>    }), {}),<br/>    runbook_schedules = optional(list(object({<br/>      name        = string,<br/>      frequency   = string,<br/>      interval    = optional(number, null),<br/>      start_time  = string, # ISO 8601 format<br/>      timezone    = optional(string, "Europe/Stockholm")<br/>      expiry_time = optional(string, ""),<br/>      description = string,<br/>      week_days   = optional(list(string), []),<br/>      operation   = string,<br/>      node_pools  = optional(list(string), []),<br/>    })), [])<br/>  })</pre> | `{}` | no |

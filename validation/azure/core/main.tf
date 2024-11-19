@@ -37,7 +37,7 @@ module "core" {
           protocol                   = "Tcp"
           source_port_range          = "*"
           destination_port_range     = "80,443"
-          source_address_prefix      = "*"
+          source_address_prefix      = "1.2.3.4"
           destination_address_prefix = "*"
           },
         ]

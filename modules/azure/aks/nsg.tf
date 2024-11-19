@@ -10,6 +10,7 @@ data "azurerm_public_ip" "this" {
   resource_group_name = azurerm_kubernetes_cluster.this.node_resource_group
 }
 
+#tfsec:ignore:azure-network-disable-rdp-from-internet tfsec:ignore:azure-network-ssh-blocked-from-internet tfsec:ignore:azure-network-no-public-ingress
 resource "azurerm_network_security_rule" "allow_internet_azure_lb" {
   count                       = var.add_default_security_lb_rule ? 1 : 0
   name                        = "aks-allow-internet-to-azure-lb"

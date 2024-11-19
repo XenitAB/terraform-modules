@@ -359,6 +359,5 @@ variable "additonal_security_rules" {
     source_address_prefix      = string
     destination_address_prefix = string
   }))
-
   default = []
 }

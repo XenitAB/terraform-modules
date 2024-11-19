@@ -52,5 +52,5 @@ resource "azurerm_network_security_rule" "this" {
   source_address_prefix       = each.value.rule_source_address_prefix
   destination_address_prefix  = each.value.rule_destination_address_prefix
   resource_group_name         = data.azurerm_resource_group.this.name
-  network_security_group_name = azurerm_network_security_group.this[data.azurecaf_name.azurerm_network_security_group_this[each.value.subnet_full_name].result].name
+  network_security_group_name = azurerm_network_security_group.this[each.key].name
 }

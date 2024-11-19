@@ -58,6 +58,7 @@ locals {
       for security_rule in subnet.security_rules : {
         subnet_create_nsg = subnet.create_nsg
         subnet_full_name  = data.azurecaf_name.local_subnets_subnet_full_name[subnet.name].result
+        rule_name         = security_rule.name
       }
     ]
   ])

@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: gateway_envoy seemless integration by @optocoupler in [#1254](https://github.com/XenitAB/terraform-modules/pulls/1254)
 - Fix: ignore metadata changes for flux namespace by @landerss1 in [#1246](https://github.com/XenitAB/terraform-modules/pulls/1246)
 - Fix: add required name label to ingress-nginx namespace by @landerss1 in [#1244](https://github.com/XenitAB/terraform-modules/pulls/1244)
 - Fix: use kubernets datasource to retrieve aks identity by @landerss1 in [#1243](https://github.com/XenitAB/terraform-modules/pulls/1243)

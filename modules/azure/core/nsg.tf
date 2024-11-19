@@ -39,7 +39,7 @@ resource "azurerm_network_security_rule" "this" {
   for_each = {
     for security_rule in local.security_rules :
     security_rule.security_rule => security_rule
-    if subnet.subnet_create_nsg == true  
+    if security_rule.subnet_create_nsg == true  
   }
 
   name                        = each.value.name
@@ -52,5 +52,5 @@ resource "azurerm_network_security_rule" "this" {
   source_address_prefix       = each.value.source_address_prefix
   destination_address_prefix  = each.value.destination_address_prefix
   resource_group_name         = data.azurerm_resource_group.this.name
-  network_security_group_name = azurerm_network_security_group.this[each.key].name
+  network_security_group_name = azurerm_network_security_group.this[data.azurecaf_name.azurerm_network_security_group_this[each.value.subnet_full_name].result].name
 }

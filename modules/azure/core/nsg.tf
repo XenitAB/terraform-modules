@@ -2,7 +2,6 @@ data "azurecaf_name" "azurerm_network_security_group_this" {
   for_each = {
     for subnet in local.subnets :
     subnet.subnet_full_name => subnet
-    if subnet.subnet_aks_subnet == false
   }
 
   name          = each.value.subnet_short_name
@@ -16,7 +15,6 @@ resource "azurerm_network_security_group" "this" {
   for_each = {
     for subnet in local.subnets :
     subnet.subnet_full_name => subnet
-    if subnet.subnet_aks_subnet == false
   }
 
   name                = data.azurecaf_name.azurerm_network_security_group_this[each.key].result
@@ -28,7 +26,6 @@ resource "azurerm_subnet_network_security_group_association" "this" {
   for_each = {
     for subnet in local.subnets :
     subnet.subnet_full_name => subnet
-    if subnet.subnet_aks_subnet == false
   }
 
   subnet_id                 = azurerm_subnet.this[each.key].id

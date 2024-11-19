@@ -41,7 +41,6 @@ Easiest is to define this RG in the governance module.
 | [azurerm_route_table.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/route_table) | resource |
 | [azurerm_storage_account.log](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/storage_account) | resource |
 | [azurerm_storage_account.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/storage_account) | resource |
-| [azurerm_subnet.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/subnet) | resource |
 | [azurerm_subnet_network_security_group_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/subnet_network_security_group_association) | resource |
 | [azurerm_subnet_route_table_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/subnet_route_table_association) | resource |
@@ -82,7 +81,7 @@ Easiest is to define this RG in the governance module.
 | <a name="input_route_config"></a> [route\_config](#input\_route\_config) | Route configuration. Not applied to AKS subnets | <pre>list(object({<br/>    subnet_name                   = string                # Short name for the subnet<br/>    disable_bgp_route_propagation = optional(bool, false) # Controls propagation of routes learned by BGP on that route table<br/>    routes = list(object({<br/>      name                   = string # Name of the route<br/>      address_prefix         = string # Example: 192.168.0.0/24<br/>      next_hop_type          = string # VirtualNetworkGateway, VnetLocal, Internet, VirtualAppliance and None<br/>      next_hop_in_ip_address = string # Only set if next_hop_type is VirtualAppliance<br/>    }))<br/><br/>  }))</pre> | `[]` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The subscription commonName to use for the deploy | `string` | n/a | yes |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | n/a | yes |
-| <a name="input_vnet_config"></a> [vnet\_config](#input\_vnet\_config) | Address spaces used by virtual network | <pre>object({<br/>    address_space = list(string)<br/>    dns_servers   = list(string)<br/>    subnets = list(object({<br/>      name              = string<br/>      cidr              = string<br/>      service_endpoints = list(string)<br/>      aks_subnet        = bool<br/>    }))<br/>  })</pre> | n/a | yes |
+| <a name="input_vnet_config"></a> [vnet\_config](#input\_vnet\_config) | Address spaces used by virtual network | <pre>object({<br/>    address_space = list(string)<br/>    dns_servers   = list(string)<br/>    subnets = list(object({<br/>      name              = string<br/>      cidr              = string<br/>      service_endpoints = list(string)<br/>    }))<br/>  })</pre> | n/a | yes |
 
 ## Outputs
 

@@ -46,6 +46,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | [azurerm_monitor_diagnostic_setting.log_analytics_workspace_audit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_monitor_diagnostic_setting.log_eventhub_audit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_monitor_diagnostic_setting.log_storage_account_audit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_network_security_rule.nsg](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/network_security_rule) | resource |
 | [azurerm_resource_policy_assignment.agentless_discovery](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/resource_policy_assignment) | resource |
 | [azurerm_resource_policy_assignment.kubernetes_sensor](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/resource_policy_assignment) | resource |
 | [azurerm_resource_policy_assignment.vulnerability_assessments](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/resource_policy_assignment) | resource |
@@ -59,15 +60,12 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | [azurerm_security_center_auto_provisioning.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/security_center_auto_provisioning) | resource |
 | [azurerm_security_center_subscription_pricing.containers](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/security_center_subscription_pricing) | resource |
 | [azurerm_storage_management_policy.log_storage_account_audit_policy](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/storage_management_policy) | resource |
-| [azurerm_subnet_network_security_group_association.subnet_nsg_association](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/subnet_network_security_group_association) | resource |
 | [azurerm_user_assigned_identity.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/user_assigned_identity) | resource |
 | [azurerm_user_assigned_identity.tenant](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/user_assigned_identity) | resource |
 | [azuread_group.tenant_resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/group) | data source |
-| [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/kubernetes_cluster) | data source |
 | [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
-| [azurerm_resources.nsg](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resources) | data source |
 | [azurerm_storage_account.log](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/storage_account) | data source |
 | [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/subnet) | data source |
 
@@ -104,6 +102,8 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | <a name="input_name"></a> [name](#input\_name) | The commonName to use for the deploy | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes | <pre>list(<br/>    object({<br/>      name = string<br/>    })<br/>  )</pre> | n/a | yes |
 | <a name="input_notification_email"></a> [notification\_email](#input\_notification\_email) | Where to send email alerts | `string` | `"DG-Team-DevOps@xenit.se"` | no |
+| <a name="input_nsg_rules"></a> [nsg\_rules](#input\_nsg\_rules) | Rules for trafic in the NSG associated to AKS | <pre>list(object({<br/>    name                       = string<br/>    priority                   = number<br/>    direction                  = string<br/>    access                     = string<br/>    protocol                   = string<br/>    source_port_range          = string<br/>    destination_port_range     = string<br/>    source_address_prefix      = string<br/>    destination_address_prefix = string<br/>  }))</pre> | `[]` | no |
+| <a name="input_nsg_rules_enabled"></a> [nsg\_rules\_enabled](#input\_nsg\_rules\_enabled) | Is NSG being used? If so, apply rules | `bool` | `true` | no |
 | <a name="input_ssh_public_key"></a> [ssh\_public\_key](#input\_ssh\_public\_key) | SSH public key to add to servers | `string` | n/a | yes |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | n/a | yes |

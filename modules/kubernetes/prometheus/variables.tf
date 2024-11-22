@@ -60,6 +60,11 @@ variable "remote_write_url" {
   type        = string
 }
 
+variable "remote_write_url_alloy" {
+  description = "The URL where to send prometheus remote_write data for alloy"
+  type        = string
+}
+
 variable "resource_group_name" {
   description = "The Azure resource group name"
   type        = string

@@ -11,7 +11,7 @@ This module is used to create AKS clusters.
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.7.0 |
 | <a name="requirement_flux"></a> [flux](#requirement\_flux) | 1.4.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.16.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.23.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.5.1 |
 
@@ -22,7 +22,7 @@ This module is used to create AKS clusters.
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.7.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
-| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
+| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.16.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
 
 ## Modules
@@ -73,7 +73,7 @@ This module is used to create AKS clusters.
 | Name | Type |
 |------|------|
 | [helm_release.aks_core_extras](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
-| [kubectl_manifest.priority_expander](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
+| [kubectl_manifest.priority_expander](https://registry.terraform.io/providers/gavinbunney/kubectl/1.16.0/docs/resources/manifest) | resource |
 | [kubernetes_cluster_role.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.get_nodes](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role.get_vpa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role) | resource |

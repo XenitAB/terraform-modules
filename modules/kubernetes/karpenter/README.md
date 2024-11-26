@@ -9,7 +9,7 @@ This module is used to add self-hosted [`karpenter`](https://github.com/Azure/ka
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.7.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.16.0 |
 | <a name="requirement_time"></a> [time](#requirement\_time) | 0.12.1 |
 
 ## Providers
@@ -18,7 +18,7 @@ This module is used to add self-hosted [`karpenter`](https://github.com/Azure/ka
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.7.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
-| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
+| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.16.0 |
 | <a name="provider_time"></a> [time](#provider\_time) | 0.12.1 |
 
 ## Modules
@@ -33,9 +33,9 @@ No modules.
 | [azurerm_role_assignment.karpenter_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
 | [azurerm_user_assigned_identity.karpenter](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/user_assigned_identity) | resource |
 | [helm_release.karpenter](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
-| [kubectl_manifest.node_classes](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
-| [kubectl_manifest.node_pools](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
-| [kubectl_manifest.secret](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
+| [kubectl_manifest.node_classes](https://registry.terraform.io/providers/gavinbunney/kubectl/1.16.0/docs/resources/manifest) | resource |
+| [kubectl_manifest.node_pools](https://registry.terraform.io/providers/gavinbunney/kubectl/1.16.0/docs/resources/manifest) | resource |
+| [kubectl_manifest.secret](https://registry.terraform.io/providers/gavinbunney/kubectl/1.16.0/docs/resources/manifest) | resource |
 | [time_sleep.wait_for_karpenter](https://registry.terraform.io/providers/hashicorp/time/0.12.1/docs/resources/sleep) | resource |
 
 ## Inputs

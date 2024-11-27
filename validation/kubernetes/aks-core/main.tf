@@ -3,7 +3,17 @@ terraform {
 
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
+  envoy_gateway = {
+    enabled = true
+    envoy_gateway_config = {
+      logging_level             = "debug"
+      replicas_count            = 42
+      resources_memory_limit    = "30g"
+      resources_cpu_requests    = "5000mi"
+      resources_memory_requests = "50g"
+    }
 
+  }
   grafana_k8s_monitor_config = {
     grafana_cloud_prometheus_host = "sda"
     grafana_cloud_loki_host       = "asdw"
@@ -21,18 +31,19 @@ module "aks_core" {
     grafana_otelcol_auth_basic_username = "some-integers"
     grafana_otelcol_exporter_endpoint   = "some-url"
   }
-  name                    = "baz"
-  aks_name_suffix         = 1
-  core_name               = "core"
-  dns_zones               = ["a.com"]
-  oidc_issuer_url         = "url"
-  location_short          = "foo"
-  global_location_short   = "sc"
-  environment             = "bar"
-  subscription_name       = "baz"
-  group_name_prefix       = "aks"
-  namespaces              = []
-  aad_pod_identity_config = {}
+  envoy_tls_policy_enabled = true
+  name                     = "baz"
+  aks_name_suffix          = 1
+  core_name                = "core"
+  dns_zones                = ["a.com"]
+  oidc_issuer_url          = "url"
+  location_short           = "foo"
+  global_location_short    = "sc"
+  environment              = "bar"
+  subscription_name        = "baz"
+  group_name_prefix        = "aks"
+  namespaces               = []
+  aad_pod_identity_config  = {}
   velero_config = {
     azure_storage_account_name      = "foo"
     azure_storage_account_container = "bar"
@@ -104,4 +115,5 @@ module "aks_core" {
     namespace_selector              = ["platform"]
   }
   external_dns_hostname = "foobar.com"
+  gateway_api_enabled   = true
 }

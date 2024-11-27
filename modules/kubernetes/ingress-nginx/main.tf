@@ -12,23 +12,35 @@ terraform {
       source  = "xenitab/git"
       version = "0.0.3"
     }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.23.0"
+    }
+  }
+}
+
+resource "kubernetes_namespace" "ingress_nginx" {
+  metadata {
+    name = "ingress-nginx"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+      "name"              = "ingress-nginx"
+    }
   }
 }
 
 resource "git_repository_file" "kustomization" {
+  depends_on = [kubernetes_namespace.ingress_nginx]
+
   path = "clusters/${var.cluster_id}/ingress-nginx.yaml"
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
     cluster_id = var.cluster_id
   })
 }
 
-resource "git_repository_file" "namespace" {
-  path = "platform/${var.cluster_id}/ingress-nginx/namespace.yaml"
-  content = templatefile("${path.module}/templates/namespace.yaml.tpl", {
-  })
-}
-
 resource "git_repository_file" "ingress_nginx" {
+  depends_on = [kubernetes_namespace.ingress_nginx]
+
   path = "platform/${var.cluster_id}/ingress-nginx/ingress-nginx.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx.yaml.tpl", {
     ingress_class          = "nginx"
@@ -52,6 +64,7 @@ resource "git_repository_file" "ingress_nginx" {
 }
 
 resource "git_repository_file" "ingress_nginx_private" {
+  depends_on = [kubernetes_namespace.ingress_nginx]
   for_each = {
     for s in ["ingress-nginx-private"] :
     s => s

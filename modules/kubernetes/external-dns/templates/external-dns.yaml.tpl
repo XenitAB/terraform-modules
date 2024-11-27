@@ -1,11 +1,3 @@
-apiVersion: v1
-kind: Namespace
-metadata:
- name: external-dns
- labels:
-   name: "external-dns"
-   xkf.xenit.io/kind: "platform"
----
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
@@ -35,6 +27,12 @@ spec:
       %{~ for item in sources ~}
       - "${item}"
       %{~ endfor ~}
+    %{~ if length(extra_args) > 0 ~}
+    extraArgs:
+      %{~ for arg in extra_args ~}
+      - "${arg}"
+      %{~ endfor ~}
+    %{~ endif ~}
     logFormat: json
     securityContext:
       allowPrivilegeEscalation: false

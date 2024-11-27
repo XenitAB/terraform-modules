@@ -242,6 +242,11 @@ variable "azure_policy_config" {
     ]
   }
 }
+variable "envoy_tls_policy_enabled" {
+  description = "An option to remove the gatekeeper mutation for tls settings"
+  type        = bool
+  default     = false
+}
 
 variable "gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
@@ -313,6 +318,15 @@ variable "external_dns_enabled" {
   description = "Should External DNS be enabled"
   type        = bool
   default     = true
+}
+
+variable "external_dns_config" {
+  description = "ExternalDNS config"
+  type = object({
+    extra_args = optional(list(string), [])
+    sources    = optional(list(string), ["ingress", "service"])
+  })
+  default = {}
 }
 
 variable "mirrord_enabled" {
@@ -459,7 +473,6 @@ variable "grafana_k8s_monitoring_enabled" {
   type        = bool
   default     = false
 }
-
 
 variable "grafana_k8s_monitor_config" {
   description = "Grafana k8s monitor chart config"
@@ -626,7 +639,7 @@ variable "additional_storage_classes" {
     provisioner    = string
     reclaim_policy = string
     binding_mode   = string
-    sku_name       = string
+    parameters     = map(string)
   }))
   default = []
 }
@@ -653,6 +666,18 @@ variable "oidc_issuer_url" {
   type        = string
 }
 
+variable "use_private_ingress" {
+  description = "If true, private ingress will be used by azad-kube-proxy"
+  type        = bool
+  default     = false
+}
+
+variable "cilium_enabled" {
+  description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
+  type        = bool
+  default     = false
+}
+
 variable "azure_service_operator_enabled" {
   description = "If Azure Service Operator should be enabled"
   type        = bool
@@ -677,4 +702,162 @@ variable "azure_service_operator_config" {
     condition     = var.azure_service_operator_config.cluster_config.crd_pattern != "*"
     error_message = "Installing all CRD:s in the cluster is not supported, please limit to the ones needed"
   }
+}
+
+variable "gateway_api_enabled" {
+  description = "If Gateway API should be enabled"
+  type        = bool
+  default     = true
+}
+
+variable "gateway_api_config" {
+  description = "The Gateway API configuration"
+  type = object({
+    api_version       = optional(string, "v1.2.0")
+    api_channel       = optional(string, "standard")
+    gateway_name      = optional(string, "")
+    gateway_namespace = optional(string, "")
+  })
+  default = {}
+
+  validation {
+    condition     = contains(["standard", "experimental"], var.gateway_api_config.api_channel)
+    error_message = "Invalid API channel: ${var.gateway_api_config.api_channel}. Allowed vallues: ['standard', 'experimental']"
+  }
+}
+
+variable "nginx_gateway_enabled" {
+  description = "Should NGINX Gateway Fabric be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "nginx_gateway_config" {
+  description = "Gateway Fabric configuration"
+  type = object({
+    logging_level     = optional(string, "info")
+    replica_count     = optional(number, 2)
+    telemetry_enabled = optional(bool, true)
+    telemetry_config = optional(object({
+      endpoint    = optional(string, "")
+      interval    = optional(string, "")
+      batch_size  = optional(number, 0)
+      batch_count = optional(number, 0)
+    }), {})
+  })
+  default = {}
+}
+
+variable "karpenter_enabled" {
+  description = "If Karpenter should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "karpenter_config" {
+  description = "Karpenter configuration for the AKS cluster"
+  type = object({
+    node_ttl      = optional(string, "168h")
+    replica_count = optional(number, 2)
+    node_classes = optional(list(object({
+      name         = optional(string, "default")
+      image_family = optional(string, "Ubuntu2204")
+      kubelet = optional(object({
+        container_log_max_size  = optional(string, "10Mi")
+        cpu_cfs_quota           = optional(bool, true)
+        cpu_cfs_quota_period    = optional(string, "100ms")
+        cpu_manager_policy      = optional(string, "none")
+        topology_manager_policy = optional(string, "none")
+      }), {})
+    })), [{}])
+    node_pools = optional(list(object({
+      name              = string
+      consolidate_after = optional(string, "5s")
+      description       = string
+      disruption_budgets = optional(list(object({
+        duration = optional(string, null)
+        nodes    = optional(string, "10%")
+        reasons  = optional(list(string), ["Drifted", "Empty", "Underutilized"])
+        schedule = optional(string, null)
+      })), [])
+      limits = object({
+        cpu    = string
+        memory = string
+      })
+      node_annotations = optional(map(string), {})
+      node_class_ref   = optional(string, "default")
+      node_labels      = optional(map(string), {})
+      node_requirements = optional(list(object({
+        key      = string
+        operator = string
+        values   = list(string)
+      })), [])
+      node_taints = optional(list(object({
+        key    = string
+        effect = string
+        value  = string
+      })), [])
+      node_ttl = optional(string, "168h")
+      weight   = optional(number, 1)
+    })), [])
+    settings = optional(object({
+      batch_idle_duration = optional(string, "1s")
+      batch_max_duration  = optional(string, "10s")
+    }), {})
+  })
+  default = {
+    bootstrap_token  = ""
+    cluster_endpoint = ""
+    node_identities  = ""
+    ssh_public_key   = ""
+    vnet_subnet_id   = ""
+  }
+
+  validation {
+    condition = alltrue([
+      for nc in var.karpenter_config.node_classes : contains(["Ubuntu2204", "AzureLinux"], nc.image_family)
+    ])
+    error_message = "The AKSNodeClass imageFamily must be either 'Ubuntu2204' or 'AzureLinux'."
+  }
+}
+
+
+variable "envoy_gateway" {
+  description = "Should we deploy envoy-gateway"
+  type = object({
+    enabled = optional(bool, false)
+    envoy_gateway_config = optional(object({
+      logging_level             = optional(string, "info")
+      replicas_count            = optional(number, 2)
+      resources_memory_limit    = optional(string, "")
+      resources_cpu_requests    = optional(string, "")
+      resources_memory_requests = optional(string, "")
+    }), {})
+  })
+  default = {}
+}
+
+variable "popeye_enabled" {
+  description = "If the popeye module should be installed"
+  type        = bool
+  default     = false
+}
+
+variable "popeye_config" {
+  description = "The popeye configuration"
+  type = object({
+    allowed_registries = optional(list(string), [])
+    cron_jobs = optional(list(object({
+      namespace     = optional(string, "default")
+      resources     = optional(string, "cj,cm,deploy,ds,gw,gwc,gwr,hpa,ing,job,np,pdb,po,pv,pvc,ro,rb,sa,sec,sts,svc")
+      output_format = optional(string, "html")
+      schedule      = optional(string, "0 0 * * 1")
+    })), [{}])
+    storage_account = optional(object({
+      resource_group_name = optional(string, "")
+      account_name        = optional(string, "")
+      file_share_size     = optional(string, "1Gi")
+    }), {})
+  })
+  default = {}
 }

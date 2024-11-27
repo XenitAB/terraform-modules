@@ -17,6 +17,30 @@ locals {
   auto_scaler_expander = var.aks_config.priority_expander_config == null ? "least-waste" : "priority"
 }
 
+resource "azurerm_user_assigned_identity" "aks" {
+  for_each = {
+    for c in ["cilium"] :
+    c => c
+    if var.cilium_enabled
+  }
+
+  name                = "uai-aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
+}
+
+resource "azurerm_role_assignment" "aks" {
+  for_each = {
+    for c in ["cilium"] :
+    c => c
+    if var.cilium_enabled
+  }
+
+  scope                = data.azurerm_resource_group.this.id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_user_assigned_identity.aks[each.key].principal_id
+}
+
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
@@ -38,7 +62,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   oidc_issuer_enabled       = true
   workload_identity_enabled = true
 
-  node_os_channel_upgrade = "Unmanaged"
+  node_os_upgrade_channel = "Unmanaged"
 
   auto_scaler_profile {
     # Pods should not depend on local storage like EmptyDir or HostPath
@@ -49,9 +73,11 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   network_profile {
-    network_plugin    = "kubenet"
-    network_policy    = "calico"
-    load_balancer_sku = "standard"
+    network_plugin      = var.cilium_enabled ? "azure" : "kubenet"
+    network_plugin_mode = var.cilium_enabled ? "overlay" : null
+    network_policy      = var.cilium_enabled ? "cilium" : "calico"
+    network_data_plane  = var.cilium_enabled ? "cilium" : "azure"
+    load_balancer_sku   = "standard"
     load_balancer_profile {
       outbound_ip_prefix_ids = [
         var.aks_public_ip_prefix_id
@@ -60,11 +86,11 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 
   identity {
-    type = "SystemAssigned"
+    type         = var.cilium_enabled ? "UserAssigned" : "SystemAssigned"
+    identity_ids = var.cilium_enabled ? [azurerm_user_assigned_identity.aks["cilium"].id] : []
   }
 
   azure_active_directory_role_based_access_control {
-    managed                = true
     admin_group_object_ids = [var.aad_groups.cluster_admin.id]
   }
 
@@ -103,7 +129,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     vm_size                      = var.aks_default_node_pool_vm_size
     os_disk_type                 = "Ephemeral"
     os_disk_size_gb              = local.vm_skus_disk_size_gb[var.aks_default_node_pool_vm_size]
-    enable_auto_scaling          = false
+    auto_scaling_enabled         = false
     node_count                   = var.aks_config.default_node_pool_size
     only_critical_addons_enabled = true
 
@@ -126,7 +152,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   vnet_subnet_id        = data.azurerm_subnet.this.id
   zones                 = each.value.zones
 
-  enable_auto_scaling  = true
+  auto_scaling_enabled = true
   kubelet_disk_type    = each.value.kubelet_disk_type
   os_disk_type         = "Ephemeral"
   os_disk_size_gb      = local.vm_skus_disk_size_gb[each.value.vm_size]
@@ -142,7 +168,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   node_labels = merge({ "xkf.xenit.io/node-ttl" = "168h" }, each.value.node_labels, { "xkf.xenit.io/node-pool" = each.value.name })
 
   kubelet_config {
-    pod_max_pid = 1000
+    pod_max_pid           = 1000
+    cpu_cfs_quota_enabled = false
   }
 
   dynamic "upgrade_settings" {

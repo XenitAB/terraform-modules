@@ -78,11 +78,13 @@ module "azure_policy" {
 
   source = "../../kubernetes/azure-policy"
 
-  aks_name            = var.name
-  aks_name_suffix     = local.aks_name_suffix
-  azure_policy_config = var.azure_policy_config
-  environment         = var.environment
-  location_short      = var.location_short
+  aks_name                 = var.name
+  aks_name_suffix          = local.aks_name_suffix
+  azure_policy_config      = var.azure_policy_config
+  environment              = var.environment
+  location_short           = var.location_short
+  envoy_tls_policy_enabled = var.envoy_tls_policy_enabled
+
   tenant_namespaces = [
     for namespace in var.namespaces : namespace.name
   ]
@@ -110,7 +112,7 @@ module "azure_service_operator" {
 }
 
 module "cert_manager" {
-  depends_on = [module.cert_manager_crd]
+  depends_on = [module.gateway_api, module.cert_manager_crd]
 
   for_each = {
     for s in ["cert-manager"] :
@@ -120,14 +122,18 @@ module "cert_manager" {
 
   source = "../../kubernetes/cert-manager"
 
+  aad_groups                 = var.aad_groups
   cluster_id                 = local.cluster_id
   dns_zones                  = local.dns_zones
   global_resource_group_name = data.azurerm_resource_group.global.name
   location                   = data.azurerm_resource_group.this.location
+  namespaces                 = var.namespaces
   notification_email         = var.cert_manager_config.notification_email
   oidc_issuer_url            = var.oidc_issuer_url
   resource_group_name        = data.azurerm_resource_group.this.name
   subscription_id            = data.azurerm_client_config.current.subscription_id
+  gateway_api_enabled        = var.gateway_api_enabled
+  gateway_api_config         = var.gateway_api_config
 }
 
 module "cert_manager_crd" {
@@ -141,7 +147,7 @@ module "cert_manager_crd" {
 
   chart_repository = "https://charts.jetstack.io"
   chart_name       = "cert-manager"
-  chart_version    = "v1.7.1"
+  chart_version    = "v1.15.3"
   values = {
     "installCRDs" = "true"
   }
@@ -193,7 +199,24 @@ module "datadog" {
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
+module "envoy_gateway" {
+  depends_on = [module.gateway_api]
+
+  for_each = {
+    for s in ["envoy_gateway"] :
+    s => s
+    if var.envoy_gateway.enabled
+  }
+
+  source = "../../kubernetes/envoy-gateway"
+
+  cluster_id           = local.cluster_id
+  envoy_gateway_config = var.envoy_gateway.envoy_gateway_config
+}
+
 module "external_dns" {
+  depends_on = [module.gateway_api]
+
   for_each = {
     for s in ["external-dns"] :
     s => s
@@ -202,6 +225,7 @@ module "external_dns" {
 
   source = "../../kubernetes/external-dns"
 
+  aad_groups                 = var.aad_groups
   cluster_id                 = local.cluster_id
   dns_provider               = "azure"
   dns_zones                  = local.dns_zones
@@ -209,10 +233,13 @@ module "external_dns" {
   global_resource_group_name = data.azurerm_resource_group.global.name
   location                   = data.azurerm_resource_group.this.location
   location_short             = var.location_short
+  namespaces                 = var.namespaces
   oidc_issuer_url            = var.oidc_issuer_url
   resource_group_name        = data.azurerm_resource_group.this.name
   subscription_id            = data.azurerm_client_config.current.subscription_id
   txt_owner_id               = "${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  sources                    = var.external_dns_config.sources
+  extra_args                 = var.external_dns_config.extra_args
 }
 
 module "falco" {
@@ -224,7 +251,8 @@ module "falco" {
 
   source = "../../kubernetes/falco"
 
-  cluster_id = local.cluster_id
+  cluster_id     = local.cluster_id
+  cilium_enabled = var.cilium_enabled
 }
 
 module "fluxcd" {
@@ -233,6 +261,8 @@ module "fluxcd" {
     s => s
     if var.fluxcd_enabled
   }
+
+  depends_on = [module.karpenter]
 
   source = "../../kubernetes/fluxcd"
 
@@ -261,6 +291,19 @@ module "gatekeeper" {
   exclude_namespaces             = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
   mirrord_enabled                = var.mirrord_enabled
   telepresence_enabled           = var.telepresence_enabled
+}
+
+module "gateway_api" {
+  for_each = {
+    for s in ["gateway-api"] :
+    s => s
+    if var.gateway_api_enabled
+  }
+
+  source = "../../kubernetes/gateway-api"
+
+  cluster_id         = local.cluster_id
+  gateway_api_config = var.gateway_api_config
 }
 
 module "grafana_agent" {
@@ -337,6 +380,7 @@ module "grafana_alloy" {
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
 }
+
 module "grafana_k8s_monitoring" {
 
   for_each = {
@@ -391,17 +435,83 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
+  aad_groups            = var.aad_groups
   external_dns_hostname = var.external_dns_hostname
   default_certificate = {
     enabled  = true
     dns_zone = var.cert_manager_config.dns_zone[0]
   }
+  namespaces              = var.namespaces
   private_ingress_enabled = var.ingress_nginx_config.private_ingress_enabled
   customization           = var.ingress_nginx_config.customization
   customization_private   = var.ingress_nginx_config.customization_private
   linkerd_enabled         = var.linkerd_enabled
   datadog_enabled         = var.datadog_enabled
   cluster_id              = local.cluster_id
+}
+
+module "karpenter" {
+  for_each = {
+    for s in ["karpenter"] :
+    s => s
+    if var.karpenter_enabled
+  }
+
+  source = "../../kubernetes/karpenter"
+
+  aks_config = {
+    cluster_id       = local.cluster_id
+    cluster_name     = data.azurerm_kubernetes_cluster.this.name
+    cluster_endpoint = data.azurerm_kubernetes_cluster.this.kube_config[0].host
+    bootstrap_token = join(".", [
+      base64decode(data.kubernetes_resources.bootstrap_token.objects[0].data.token-id),
+      base64decode(data.kubernetes_resources.bootstrap_token.objects[0].data.token-secret)
+    ])
+    default_node_pool_size = data.azurerm_kubernetes_cluster.this.agent_pool_profile[0].count
+    node_identities        = data.azurerm_kubernetes_cluster.this.kubelet_identity[0].user_assigned_identity_id
+    node_resource_group    = data.azurerm_kubernetes_cluster.this.node_resource_group
+    oidc_issuer_url        = var.oidc_issuer_url
+    ssh_public_key         = data.azurerm_kubernetes_cluster.this.linux_profile[0].ssh_key[0].key_data
+    vnet_subnet_id         = data.azurerm_kubernetes_cluster.this.agent_pool_profile[0].vnet_subnet_id
+  }
+
+  karpenter_config    = var.karpenter_config
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
+  subscription_id     = data.azurerm_client_config.current.subscription_id
+}
+
+module "nginx_gateway_fabric" {
+  depends_on = [module.gateway_api]
+
+  for_each = {
+    for s in ["nginx-gateway"] :
+    s => s
+    if var.nginx_gateway_enabled
+  }
+
+  source = "../../kubernetes/nginx-gateway-fabric"
+
+  cluster_id     = local.cluster_id
+  gateway_config = var.nginx_gateway_config
+  nginx_config   = var.ingress_nginx_config.customization
+}
+
+module "popeye" {
+  for_each = {
+    for s in ["popeye"] :
+    s => s
+    if var.popeye_enabled
+  }
+
+  source = "../../kubernetes/popeye"
+
+  aks_managed_identity_id = var.cilium_enabled ? data.azurerm_kubernetes_cluster.this.identity[0].identity_ids[0] : data.azurerm_kubernetes_cluster.this.identity[0].principal_id
+  cluster_id              = local.cluster_id
+  location                = data.azurerm_key_vault.core.location
+  oidc_issuer_url         = var.oidc_issuer_url
+  popeye_config           = var.popeye_config
+  resource_group_name     = data.azurerm_resource_group.this.name
 }
 
 module "linkerd" {
@@ -417,7 +527,7 @@ module "linkerd" {
 }
 
 module "linkerd_crd" {
-  source = "../../kubernetes/helm-crd-oci"
+  source = "../../kubernetes/helm-crd"
 
   for_each = {
     for s in ["linkerd"] :
@@ -425,16 +535,16 @@ module "linkerd_crd" {
     if var.linkerd_enabled
   }
 
-  chart         = "oci://ghcr.io/xenitab/helm-charts/linkerd-crds"
-  chart_name    = "linkerd-crd"
-  chart_version = "2.12.2"
+  chart_repository = "https://helm.linkerd.io/stable"
+  chart_name       = "linkerd-crds"
+  chart_version    = "1.8.0"
 }
 
 module "node_local_dns" {
   for_each = {
     for s in ["node-local-dns"] :
     s => s
-    if var.node_local_dns_enabled
+    if var.node_local_dns_enabled && !var.cilium_enabled
   }
 
   source = "../../kubernetes/node-local-dns"
@@ -442,6 +552,7 @@ module "node_local_dns" {
   cluster_id       = local.cluster_id
   dns_ip           = "10.0.0.10"
   coredns_upstream = var.coredns_upstream
+  cilium_enabled   = var.cilium_enabled
 }
 
 module "node_ttl" {
@@ -488,6 +599,7 @@ module "prometheus" {
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
   aad_pod_identity_enabled = var.aad_pod_identity_enabled
+  cilium_enabled           = var.cilium_enabled
   falco_enabled            = var.falco_enabled
   flux_enabled             = var.fluxcd_enabled
   gatekeeper_enabled       = var.gatekeeper_enabled

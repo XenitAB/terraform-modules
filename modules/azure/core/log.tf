@@ -24,14 +24,15 @@ data "azurecaf_name" "azurerm_storage_account_log" {
 
 #tfsec:ignore:azure-storage-queue-services-logging-enabled
 resource "azurerm_storage_account" "log" {
-  name                            = data.azurecaf_name.azurerm_storage_account_log.result
-  resource_group_name             = data.azurerm_resource_group.log.name
-  location                        = data.azurerm_resource_group.log.location
-  account_tier                    = "Standard"
-  account_replication_type        = "GRS"
-  min_tls_version                 = "TLS1_2"
-  allow_nested_items_to_be_public = false
-  is_hns_enabled                  = true # Makes it possible to use power BI on the storage account
+  name                             = data.azurecaf_name.azurerm_storage_account_log.result
+  resource_group_name              = data.azurerm_resource_group.log.name
+  location                         = data.azurerm_resource_group.log.location
+  account_tier                     = "Standard"
+  account_replication_type         = "GRS"
+  min_tls_version                  = "TLS1_2"
+  allow_nested_items_to_be_public  = false
+  is_hns_enabled                   = true # Makes it possible to use power BI on the storage account
+  cross_tenant_replication_enabled = true
 }
 
 data "azurecaf_name" "azurerm_monitor_action_group_this" {

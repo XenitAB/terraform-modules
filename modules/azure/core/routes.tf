@@ -19,7 +19,7 @@ resource "azurerm_route_table" "this" {
   name                          = data.azurecaf_name.azurerm_route_table_this[each.key].result
   location                      = data.azurerm_resource_group.this.location
   resource_group_name           = data.azurerm_resource_group.this.name
-  disable_bgp_route_propagation = each.value.disable_bgp_route_propagation
+  bgp_route_propagation_enabled = each.value.disable_bgp_route_propagation
 }
 
 resource "azurerm_route" "this" {

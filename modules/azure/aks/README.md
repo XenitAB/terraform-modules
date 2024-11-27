@@ -15,7 +15,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.107.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.7.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.5.1 |
 
 ## Providers
@@ -23,7 +23,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | Name | Version |
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.107.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.7.0 |
 
 ## Modules
 
@@ -38,39 +38,47 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | [azuread_group_member.aks_cluster_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
 | [azuread_group_member.aks_managed_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
 | [azuread_group_member.tenant](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
-| [azurerm_federated_identity_credential.tenant](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/federated_identity_credential) | resource |
-| [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/kubernetes_cluster) | resource |
-| [azurerm_kubernetes_cluster_node_pool.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/kubernetes_cluster_node_pool) | resource |
-| [azurerm_log_analytics_workspace.xks_audit](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/log_analytics_workspace) | resource |
-| [azurerm_log_analytics_workspace.xks_op](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/log_analytics_workspace) | resource |
-| [azurerm_monitor_diagnostic_setting.log_analytics_workspace_audit](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/monitor_diagnostic_setting) | resource |
-| [azurerm_monitor_diagnostic_setting.log_eventhub_audit](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/monitor_diagnostic_setting) | resource |
-| [azurerm_monitor_diagnostic_setting.log_storage_account_audit](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/monitor_diagnostic_setting) | resource |
-| [azurerm_resource_policy_assignment.agentless_discovery](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/resource_policy_assignment) | resource |
-| [azurerm_resource_policy_assignment.kubernetes_sensor](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/resource_policy_assignment) | resource |
-| [azurerm_resource_policy_assignment.vulnerability_assessments](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/resource_policy_assignment) | resource |
-| [azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.cluster_admin](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/role_assignment) | resource |
-| [azurerm_security_center_auto_provisioning.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/security_center_auto_provisioning) | resource |
-| [azurerm_security_center_subscription_pricing.containers](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/security_center_subscription_pricing) | resource |
-| [azurerm_storage_management_policy.log_storage_account_audit_policy](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/storage_management_policy) | resource |
-| [azurerm_user_assigned_identity.tenant](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/resources/user_assigned_identity) | resource |
+| [azurerm_federated_identity_credential.tenant](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/federated_identity_credential) | resource |
+| [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/kubernetes_cluster) | resource |
+| [azurerm_kubernetes_cluster_node_pool.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/kubernetes_cluster_node_pool) | resource |
+| [azurerm_log_analytics_workspace.xks_audit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/log_analytics_workspace) | resource |
+| [azurerm_log_analytics_workspace.xks_op](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/log_analytics_workspace) | resource |
+| [azurerm_monitor_diagnostic_setting.log_analytics_workspace_audit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_monitor_diagnostic_setting.log_eventhub_audit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_monitor_diagnostic_setting.log_storage_account_audit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_network_security_rule.additonal_security_rules](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/network_security_rule) | resource |
+| [azurerm_network_security_rule.allow_internet_azure_lb](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/network_security_rule) | resource |
+| [azurerm_resource_policy_assignment.agentless_discovery](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/resource_policy_assignment) | resource |
+| [azurerm_resource_policy_assignment.kubernetes_sensor](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/resource_policy_assignment) | resource |
+| [azurerm_resource_policy_assignment.vulnerability_assessments](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/resource_policy_assignment) | resource |
+| [azurerm_role_assignment.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.aks_managed_identity_noderg_managed_identity_operator](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.aks_managed_identity_noderg_virtual_machine_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.cluster_admin](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
+| [azurerm_security_center_auto_provisioning.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/security_center_auto_provisioning) | resource |
+| [azurerm_security_center_subscription_pricing.containers](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/security_center_subscription_pricing) | resource |
+| [azurerm_storage_management_policy.log_storage_account_audit_policy](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/storage_management_policy) | resource |
+| [azurerm_user_assigned_identity.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/user_assigned_identity) | resource |
+| [azurerm_user_assigned_identity.tenant](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/user_assigned_identity) | resource |
 | [azuread_group.tenant_resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/group) | data source |
-| [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/data-sources/resource_group) | data source |
-| [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/data-sources/resource_group) | data source |
-| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/data-sources/resource_group) | data source |
-| [azurerm_storage_account.log](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/data-sources/storage_account) | data source |
-| [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/3.107.0/docs/data-sources/subnet) | data source |
+| [azurerm_public_ip.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/public_ip) | data source |
+| [azurerm_resource_group.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
+| [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
+| [azurerm_resources.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resources) | data source |
+| [azurerm_storage_account.log](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/storage_account) | data source |
+| [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/subnet) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_aad_groups"></a> [aad\_groups](#input\_aad\_groups) | Configuration for Azure AD Groups (AAD Groups) | <pre>object({<br/>    view = map(any)<br/>    edit = map(any)<br/>    cluster_admin = object({<br/>      id   = string<br/>      name = string<br/>    })<br/>    cluster_view = object({<br/>      id   = string<br/>      name = string<br/>    })<br/>    aks_managed_identity = object({<br/>      id   = string<br/>      name = string<br/>    })<br/>  })</pre> | n/a | yes |
+| <a name="input_add_default_security_lb_rule"></a> [add\_default\_security\_lb\_rule](#input\_add\_default\_security\_lb\_rule) | Should default LB rule (allow internat to azure lb ips) be applied to NSG? | `bool` | `false` | no |
+| <a name="input_additonal_security_rules"></a> [additonal\_security\_rules](#input\_additonal\_security\_rules) | Rules for trafic in the NSG associated to AKS | <pre>list(object({<br/>    name                       = string<br/>    priority                   = number<br/>    direction                  = string<br/>    access                     = string<br/>    protocol                   = string<br/>    source_port_range          = string<br/>    destination_port_range     = string<br/>    source_address_prefix      = string<br/>    destination_address_prefix = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_aks_audit_log_retention"></a> [aks\_audit\_log\_retention](#input\_aks\_audit\_log\_retention) | The aks audit log retention in days, 0 = infinite | `number` | `30` | no |
 | <a name="input_aks_authorized_ips"></a> [aks\_authorized\_ips](#input\_aks\_authorized\_ips) | Authorized IPs to access AKS API | `list(string)` | n/a | yes |
 | <a name="input_aks_automation_config"></a> [aks\_automation\_config](#input\_aks\_automation\_config) | AKS automation configuration | <pre>object({<br/>    public_network_access_enabled = optional(bool, false),<br/>    alerts_config = optional(object({<br/>      enabled     = optional(bool, true),<br/>      frequency   = optional(string, ""),<br/>      window_size = optional(string, ""),<br/>      severity    = optional(number, 3),<br/>      email_to    = optional(string, ""),<br/>    }), {}),<br/>    runbook_schedules = optional(list(object({<br/>      name        = string,<br/>      frequency   = string,<br/>      interval    = optional(number, null),<br/>      start_time  = string, # ISO 8601 format<br/>      timezone    = optional(string, "Europe/Stockholm")<br/>      expiry_time = optional(string, ""),<br/>      description = string,<br/>      week_days   = optional(list(string), []),<br/>      operation   = string,<br/>      node_pools  = optional(list(string), []),<br/>    })), [])<br/>  })</pre> | `{}` | no |
@@ -86,6 +94,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | <a name="input_audit_config"></a> [audit\_config](#input\_audit\_config) | Kubernetes audit log configuration | <pre>object({<br/>    destination_type = optional(string, "StorageAccount")<br/>    analytics_workspace = optional(object({<br/>      sku_name       = optional(string, "PerGB2018")<br/>      daily_quota_gb = optional(number, -1)<br/>      reservation_gb = optional(number, 0)<br/>      retention_days = optional(number, 30)<br/>    }), {})<br/>  })</pre> | `{}` | no |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
 | <a name="input_azure_policy_enabled"></a> [azure\_policy\_enabled](#input\_azure\_policy\_enabled) | If the Azure Policy for Kubernetes add-on should be enabled | `bool` | `false` | no |
+| <a name="input_cilium_enabled"></a> [cilium\_enabled](#input\_cilium\_enabled) | If enabled, will use Azure CNI with Cilium instead of kubenet | `bool` | `false` | no |
 | <a name="input_core_name"></a> [core\_name](#input\_core\_name) | The commonName for the core infrastructure | `string` | n/a | yes |
 | <a name="input_defender_config"></a> [defender\_config](#input\_defender\_config) | The Microsoft Defender for containers configuration | <pre>object({<br/>    analytics_workspace = optional(object({<br/>      sku_name       = optional(string, "PerGB2018")<br/>      daily_quota_gb = optional(number, -1)<br/>      reservation_gb = optional(number, 0)<br/>      retention_days = optional(number, 30)<br/>    }), {})<br/>    kubernetes_discovery_enabled      = optional(bool, false)<br/>    kubernetes_sensor_enabled         = optional(bool, true)<br/>    vulnerability_assessments_enabled = optional(bool, true)<br/>  })</pre> | `{}` | no |
 | <a name="input_defender_enabled"></a> [defender\_enabled](#input\_defender\_enabled) | If Defender for Containers should be enabled | `bool` | `false` | no |

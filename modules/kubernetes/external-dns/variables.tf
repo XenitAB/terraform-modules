@@ -1,3 +1,23 @@
+variable "aad_groups" {
+  description = "Configuration for Azure AD Groups (AAD Groups)"
+  type = object({
+    view = map(any)
+    edit = map(any)
+    cluster_admin = object({
+      id   = string
+      name = string
+    })
+    cluster_view = object({
+      id   = string
+      name = string
+    })
+    aks_managed_identity = object({
+      id   = string
+      name = string
+    })
+  })
+}
+
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
@@ -18,6 +38,11 @@ variable "environment" {
   type        = string
 }
 
+variable "extra_args" {
+  description = "Extra command line arguments that is not covered by the Helm chart values"
+  type        = list(string)
+}
+
 variable "global_resource_group_name" {
   description = "The Azure global resource group name"
   type        = string
@@ -33,6 +58,23 @@ variable "location_short" {
   type        = string
 }
 
+variable "namespaces" {
+  description = "The namespaces that should be created in Kubernetes."
+  type = list(
+    object({
+      name   = string
+      labels = map(string)
+      flux = optional(object({
+        provider            = string
+        project             = optional(string)
+        repository          = string
+        include_tenant_name = optional(bool, false)
+        create_crds         = optional(bool, false)
+      }))
+    })
+  )
+}
+
 variable "oidc_issuer_url" {
   description = "Kubernetes OIDC issuer URL for workload identity."
   type        = string
@@ -46,7 +88,6 @@ variable "resource_group_name" {
 variable "sources" {
   description = "k8s resource types to observe"
   type        = list(string)
-  default     = ["ingress", "service"]
 }
 
 variable "subscription_id" {

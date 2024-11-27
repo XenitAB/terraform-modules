@@ -1,0 +1,14 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: popeye-reports
+  labels:
+    xkf.xenit.io/kind: "platform"
+provisioner: kubernetes.io/azure-file
+parameters:
+  location: {{ .Values.azure.storageAccount.location }}
+  skuName: StandardSSD_ZRS
+  resourceGroup: {{ .Values.azure.storageAccount.resourceGroup }}
+  storageAccount: {{ .Values.azure.storageAccount.name }}
+  shareName: popeye-reports
+  secretName: popeye-secret

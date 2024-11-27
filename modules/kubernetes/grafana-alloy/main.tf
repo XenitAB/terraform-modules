@@ -9,7 +9,7 @@ terraform {
 
   required_providers {
     azurerm = {
-      version = "3.107.0"
+      version = "4.7.0"
       source  = "hashicorp/azurerm"
     }
     git = {

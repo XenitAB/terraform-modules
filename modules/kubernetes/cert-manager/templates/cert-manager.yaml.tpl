@@ -1,11 +1,3 @@
-apiVersion: v1
-kind: Namespace
-metadata:
- name: cert-manager
- labels:
-   name: cert-manager
-   xkf.xenit.io/kind: platform
----
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
@@ -32,6 +24,12 @@ spec:
   values:
     global:
       priorityClassName: "platform-medium"
+    %{~ if gateway_api_enabled ~}
+    config:
+      apiVersion: controller.config.cert-manager.io/v1alpha1
+      kind: ControllerConfiguration
+      enableGatewayAPI: true
+    %{~ endif ~}
     podLabels:
       azure.workload.identity/use: "true"
     serviceAccount:
@@ -78,3 +76,11 @@ spec:
           dnsZones: 
             - ${zone}
 %{ endfor }
+       %{~ if gateway_api_enabled ~}
+      - http01:
+          gatewayHTTPRoute:
+            parentRefs: 
+            - name: ${gateway_solver_name}
+              namespace: ${gateway_solver_namespace}
+              kind: Gateway
+      %{~ endif ~}

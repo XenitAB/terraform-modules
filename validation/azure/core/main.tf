@@ -22,19 +22,31 @@ module "core" {
         name              = "servers"
         cidr              = "10.180.0.0/24"
         service_endpoints = []
-        aks_subnet        = false
+        create_nsg        = false
       },
       {
         name              = "aks1"
         cidr              = "10.180.1.0/24"
         service_endpoints = []
-        aks_subnet        = true
+        create_nsg        = true
+        security_rules = [{
+          name                       = "test1"
+          priority                   = 100
+          direction                  = "Inbound"
+          access                     = "Allow"
+          protocol                   = "Tcp"
+          source_port_range          = "*"
+          destination_port_range     = "80,443"
+          source_address_prefix      = "1.2.3.4"
+          destination_address_prefix = "*"
+          },
+        ]
       },
       {
         name              = "aks2"
         cidr              = "10.180.2.0/24"
         service_endpoints = []
-        aks_subnet        = true
+        create_nsg        = true
       },
     ]
   }

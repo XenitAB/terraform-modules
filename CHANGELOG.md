@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: Add option to set NSG rules by @CalleB3 in [#1251](https://github.com/XenitAB/terraform-modules/pulls/1251)
 - Feat: add envoy gateway by @optocoupler in [#1236](https://github.com/XenitAB/terraform-modules/pulls/1236)
 - Feat: add support for specifying parameters for additional storage classes by @landerss1 in [#1248](https://github.com/XenitAB/terraform-modules/pulls/1248)
 - Feat: add support for popeye k8s linter by @landerss1 in [#1239](https://github.com/XenitAB/terraform-modules/pulls/1239)
@@ -37,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: defender-shenanigans by @optocoupler in [#1258](https://github.com/XenitAB/terraform-modules/pulls/1258)
 - Fix: gateway_envoy seemless integration by @optocoupler in [#1254](https://github.com/XenitAB/terraform-modules/pulls/1254)
 - Fix: ignore metadata changes for flux namespace by @landerss1 in [#1246](https://github.com/XenitAB/terraform-modules/pulls/1246)
 - Fix: add required name label to ingress-nginx namespace by @landerss1 in [#1244](https://github.com/XenitAB/terraform-modules/pulls/1244)
@@ -75,6 +77,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: bumping kubectl provider version by @optocoupler in [#1257](https://github.com/XenitAB/terraform-modules/pulls/1257)
 - Chore: Upgrade azad-kube-proxy to 0.0.48 by @CalleB3 in [#1234](https://github.com/XenitAB/terraform-modules/pulls/1234)
 - Chore: Upgrade Azurerm to 4.7.0 by @CalleB3 in [#1230](https://github.com/XenitAB/terraform-modules/pulls/1230)
 - Chore: update cert-manager CRDs to v1.15.3 by @landerss1 in [#1227](https://github.com/XenitAB/terraform-modules/pulls/1227)

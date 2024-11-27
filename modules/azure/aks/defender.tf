@@ -13,13 +13,18 @@ resource "azurerm_security_center_subscription_pricing" "containers" {
   resource_type = "Containers"
 
   extension {
-    name                            = "ContainerRegistriesVulnerabilityAssessments"
-    additional_extension_properties = {}
+    name = "AgentlessVmScanning"
+    additional_extension_properties = {
+      ExclusionTags = "[]"
+    }
   }
 
   extension {
-    name                            = "AgentlessDiscoveryForKubernetes"
-    additional_extension_properties = {}
+    name = "ContainerRegistriesVulnerabilityAssessments"
+  }
+
+  extension {
+    name = "AgentlessDiscoveryForKubernetes"
   }
 }
 

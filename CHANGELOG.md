@@ -70,6 +70,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚜 Refactor
+- Refactor: remove azad-kube-proxy module by @optocoupler in [#1224](https://github.com/XenitAB/terraform-modules/pulls/1224)
 - Refactor: associate AKS default NSG with vnet subnet  by @landerss1 in [#1237](https://github.com/XenitAB/terraform-modules/pulls/1237)
 - Refactor: use Microsoft provider for Azure DevOps by @landerss1 in [#1177](https://github.com/XenitAB/terraform-modules/pulls/1177)
 - Refactor: explicitly set AKS SKU tier and node count by @landerss1 in [#1168](https://github.com/XenitAB/terraform-modules/pulls/1168)

@@ -481,6 +481,20 @@ module "karpenter" {
   subscription_id     = data.azurerm_client_config.current.subscription_id
 }
 
+module "litmus" {
+  for_each = {
+    for s in ["litmus"] :
+    s => s
+    if var.litmus_enabled
+  }
+
+  source = "../../kubernetes/litmus"
+
+  azure_key_vault_name          = data.azurerm_key_vault.core.name
+  cluster_id                    = local.cluster_id
+  key_vault_resource_group_name = data.azurerm_key_vault.core.resource_group_name
+}
+
 module "nginx_gateway_fabric" {
   depends_on = [module.gateway_api]
 

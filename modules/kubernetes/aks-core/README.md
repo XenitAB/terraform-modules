@@ -52,6 +52,7 @@ This module is used to create AKS clusters.
 | <a name="module_karpenter"></a> [karpenter](#module\_karpenter) | ../../kubernetes/karpenter | n/a |
 | <a name="module_linkerd"></a> [linkerd](#module\_linkerd) | ../../kubernetes/linkerd | n/a |
 | <a name="module_linkerd_crd"></a> [linkerd\_crd](#module\_linkerd\_crd) | ../../kubernetes/helm-crd | n/a |
+| <a name="module_litmus"></a> [litmus](#module\_litmus) | ../../kubernetes/litmus | n/a |
 | <a name="module_nginx_gateway_fabric"></a> [nginx\_gateway\_fabric](#module\_nginx\_gateway\_fabric) | ../../kubernetes/nginx-gateway-fabric | n/a |
 | <a name="module_node_local_dns"></a> [node\_local\_dns](#module\_node\_local\_dns) | ../../kubernetes/node-local-dns | n/a |
 | <a name="module_node_ttl"></a> [node\_ttl](#module\_node\_ttl) | ../../kubernetes/node-ttl | n/a |
@@ -171,6 +172,7 @@ This module is used to create AKS clusters.
 | <a name="input_kubernetes_default_limit_range"></a> [kubernetes\_default\_limit\_range](#input\_kubernetes\_default\_limit\_range) | Default limit range for tenant namespaces | <pre>object({<br/>    default_request = object({<br/>      cpu    = string<br/>      memory = string<br/>    })<br/>    default = object({<br/>      memory = string<br/>    })<br/>  })</pre> | <pre>{<br/>  "default": {<br/>    "memory": "256Mi"<br/>  },<br/>  "default_request": {<br/>    "cpu": "50m",<br/>    "memory": "32Mi"<br/>  }<br/>}</pre> | no |
 | <a name="input_kubernetes_network_policy_default_deny"></a> [kubernetes\_network\_policy\_default\_deny](#input\_kubernetes\_network\_policy\_default\_deny) | If network policies should by default deny cross namespace traffic | `bool` | `true` | no |
 | <a name="input_linkerd_enabled"></a> [linkerd\_enabled](#input\_linkerd\_enabled) | Should linkerd be enabled | `bool` | `false` | no |
+| <a name="input_litmus_enabled"></a> [litmus\_enabled](#input\_litmus\_enabled) | If LitmusChaos should be enabled | `bool` | `false` | no |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name. | `string` | n/a | yes |
 | <a name="input_mirrord_enabled"></a> [mirrord\_enabled](#input\_mirrord\_enabled) | Should mirrord be enabled | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | The commonName to use for the deploy | `string` | n/a | yes |

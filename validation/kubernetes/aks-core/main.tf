@@ -116,5 +116,5 @@ module "aks_core" {
   }
   external_dns_hostname = "foobar.com"
   gateway_api_enabled   = true
-  litmus_enabled = true
+  litmus_enabled        = true
 }

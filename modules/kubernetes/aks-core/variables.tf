@@ -855,3 +855,9 @@ variable "popeye_config" {
   })
   default = {}
 }
+
+variable "litmus_enabled" {
+  description = "If LitmusChaos should be enabled"
+  type        = bool
+  default     = false
+}

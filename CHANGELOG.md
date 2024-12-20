@@ -79,6 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: bump orhun/git-cliff-action from 3 to 4 by @landerss1 in [#1165](https://github.com/XenitAB/terraform-modules/pulls/1165)
 - Chore: bumping kubectl provider version by @optocoupler in [#1257](https://github.com/XenitAB/terraform-modules/pulls/1257)
 - Chore: Upgrade azad-kube-proxy to 0.0.48 by @CalleB3 in [#1234](https://github.com/XenitAB/terraform-modules/pulls/1234)
 - Chore: Upgrade Azurerm to 4.7.0 by @CalleB3 in [#1230](https://github.com/XenitAB/terraform-modules/pulls/1230)

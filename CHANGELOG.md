@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: add support for LitmusChaos by @landerss1 in [#1260](https://github.com/XenitAB/terraform-modules/pulls/1260)
 - Feat: Add option to set NSG rules by @CalleB3 in [#1251](https://github.com/XenitAB/terraform-modules/pulls/1251)
 - Feat: add envoy gateway by @optocoupler in [#1236](https://github.com/XenitAB/terraform-modules/pulls/1236)
 - Feat: add support for specifying parameters for additional storage classes by @landerss1 in [#1248](https://github.com/XenitAB/terraform-modules/pulls/1248)

@@ -63,6 +63,8 @@ spec:
             name: "plugins"
     podLabels:
       azure.workload.identity/use: "true"
+    labels:
+      azure.workload.identity/use: "true"
     priorityClassName: "platform-low"
     serviceAccount:
       server:
@@ -70,3 +72,5 @@ spec:
         name: velero
         annotations:
           azure.workload.identity/client-id: ${client_id}
+          azure.workload.identity/tenant-id: ${tenant_id}
+

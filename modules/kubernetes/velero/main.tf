@@ -35,6 +35,7 @@ resource "git_repository_file" "velero" {
     resource_group_name = var.resource_group_name,
     subscription_id     = var.subscription_id,
     unique_suffix       = var.unique_suffix,
+    tenant_id           = azurerm_user_assigned_identity.velero.tenant_id,
   })
 }
 

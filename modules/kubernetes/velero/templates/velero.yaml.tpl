@@ -27,15 +27,15 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: velero
-      version: v2.23.6
+      version: v5.1.5
   interval: 1m0s
   values:
     configuration:
-      provider: "azure"
       logLevel: "warning"
       logFormat: "json"
       backupStorageLocation:
-        name: "default"
+      - name: "default"
+        provider: azure
         %{ if azure_config.storage_account_container != "" }
         bucket: "${azure_config.storage_account_container}"
         %{ else }
@@ -57,11 +57,13 @@ spec:
             AZURE_CLOUD_NAME=AzurePublicCloud
     initContainers:
       - name: "velero-plugin-for-microsoft-azure"
-        image: "velero/velero-plugin-for-microsoft-azure:v1.1.1"
+        image: "velero/velero-plugin-for-microsoft-azure:v1.8.0"
         volumeMounts:
           - mountPath: "/target"
             name: "plugins"
     podLabels:
+      azure.workload.identity/use: "true"
+    labels:
       azure.workload.identity/use: "true"
     priorityClassName: "platform-low"
     serviceAccount:
@@ -70,3 +72,5 @@ spec:
         name: velero
         annotations:
           azure.workload.identity/client-id: ${client_id}
+          azure.workload.identity/tenant-id: ${tenant_id}
+

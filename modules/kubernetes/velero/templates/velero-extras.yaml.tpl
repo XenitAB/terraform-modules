@@ -23,5 +23,5 @@ spec:
   schedule: "15 */1 * * *"
   template:
     snapshotVolumes: false
-    ttl: 960h0m0s
+    ttl: 96h0m0s
 

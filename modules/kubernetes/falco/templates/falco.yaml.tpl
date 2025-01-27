@@ -36,7 +36,7 @@ spec:
 
     falcoctl:
       artifact:
-        install
+        install:
           enabled: false
         follow:
           enabled: false

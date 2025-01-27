@@ -34,6 +34,13 @@ spec:
     driver:
       kind: ebpf
 
+    falcoctl:
+      artifact:
+        install
+          enabled: false
+        follow:
+          enabled: false
+
     falco:
       grpc:
         enabled: true

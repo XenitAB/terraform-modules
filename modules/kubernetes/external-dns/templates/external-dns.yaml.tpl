@@ -19,7 +19,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: external-dns
-      version: 8.3.8
+      version: 8.7.3
   interval: 1m0s
   values:
     provider: "azure"

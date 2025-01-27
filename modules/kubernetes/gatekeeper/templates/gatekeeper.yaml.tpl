@@ -28,7 +28,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: gatekeeper
-      version: 3.9.0
+      version: 3.18.2
   interval: 1m0s
   install:
     crds: CreateReplace

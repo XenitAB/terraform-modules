@@ -27,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: falco
-      version: v2.3.0
+      version: v4.17.2
   interval: 1m0s
   values:
     # Use EBPF instead of kernel module

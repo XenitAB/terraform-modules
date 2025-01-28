@@ -27,12 +27,19 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: falco
-      version: v2.3.0
+      version: v4.17.2
   interval: 1m0s
   values:
     # Use EBPF instead of kernel module
     driver:
       kind: ebpf
+
+    falcoctl:
+      artifact:
+        install:
+          enabled: false
+        follow:
+          enabled: false
 
     falco:
       grpc:

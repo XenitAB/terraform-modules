@@ -147,7 +147,7 @@ module "cert_manager_crd" {
 
   chart_repository = "https://charts.jetstack.io"
   chart_name       = "cert-manager"
-  chart_version    = "v1.15.3"
+  chart_version    = "v1.16.3"
   values = {
     "installCRDs" = "true"
   }
@@ -712,7 +712,7 @@ module "trivy_crd" {
 
   chart_repository = "https://aquasecurity.github.io/helm-charts/"
   chart_name       = "trivy-operator"
-  chart_version    = "0.11.0"
+  chart_version    = "0.23.0"
 }
 
 module "velero" {

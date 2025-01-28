@@ -19,7 +19,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: cert-manager
-      version: v1.15.3
+      version: v1.16.3
   interval: 1m0s
   values:
     global:
@@ -35,14 +35,15 @@ spec:
     serviceAccount:
       annotations:
         azure.workload.identity/client-id: ${client_id}
+    resources:
+      requests:
+        cpu: 15m
+        memory: 150Mi
     webhook:
       resources:
         requests:
           cpu: 30m
           memory: 100Mi
-    requests:
-      cpu: 15m
-      memory: 150Mi
     cainjector:
       resources:
         requests:

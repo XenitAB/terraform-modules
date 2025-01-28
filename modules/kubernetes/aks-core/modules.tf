@@ -712,7 +712,7 @@ module "trivy_crd" {
 
   chart_repository = "https://aquasecurity.github.io/helm-charts/"
   chart_name       = "trivy-operator"
-  chart_version    = "0.11.0"
+  chart_version    = "0.23.0"
 }
 
 module "velero" {

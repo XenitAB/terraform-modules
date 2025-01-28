@@ -19,7 +19,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: starboard-exporter
-      version: v0.7.8
+      version: v0.8.0
   interval: 1m0s
   values:
     global:

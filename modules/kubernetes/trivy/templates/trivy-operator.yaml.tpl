@@ -19,7 +19,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: trivy-operator
-      version: 0.21.4
+      version: 0.23.0
   interval: 1m0s
   values:
     # targetNamespace defines where you want trivy-operator to operate. By
@@ -34,7 +34,7 @@ spec:
       mode: ClientServer
       severity: MEDIUM,HIGH,CRITICAL
       ignoreUnfixed: true
-      serverUrl: "http://trivy.trivy.svc.cluster.local:4954"
+      serverURL: "http://trivy.trivy.svc.cluster.local:4954"
 
     operator:
       # configAuditScannerEnabled the flag to enable configuration audit scanner

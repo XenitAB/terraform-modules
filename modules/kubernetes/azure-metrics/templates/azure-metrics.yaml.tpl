@@ -27,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: azure-metrics
-      version: v1.2.1
+      version: v1.2.8
   interval: 1m0s
   values:
     fullnameOverride: "azure-metrics-exporter"

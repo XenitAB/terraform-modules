@@ -35,14 +35,15 @@ spec:
     serviceAccount:
       annotations:
         azure.workload.identity/client-id: ${client_id}
+    resources:
+      requests:
+        cpu: 15m
+        memory: 150Mi
     webhook:
       resources:
         requests:
           cpu: 30m
           memory: 100Mi
-    requests:
-      cpu: 15m
-      memory: 150Mi
     cainjector:
       resources:
         requests:

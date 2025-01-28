@@ -28,7 +28,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: spegel
-      version: v0.0.23
+      version: v0.0.30
   interval: 1m0s
   values:
     resources:

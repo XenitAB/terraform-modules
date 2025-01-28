@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m0s
   type: "oci"
-  url: "oci://registry-1.docker.io/bitnamicharts/external-dns"
+  url: "oci://registry-1.docker.io/bitnamicharts"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease

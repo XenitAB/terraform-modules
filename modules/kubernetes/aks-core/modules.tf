@@ -677,7 +677,6 @@ module "reloader" {
 }
 
 module "trivy" {
-  depends_on = [module.trivy_crd]
 
   for_each = {
     for s in ["trivy"] :
@@ -699,20 +698,6 @@ module "trivy" {
   starboard_exporter_enabled      = var.trivy_config.starboard_exporter_enabled
   unique_suffix                   = var.unique_suffix
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
-}
-
-module "trivy_crd" {
-  for_each = {
-    for s in ["trivy"] :
-    s => s
-    if var.trivy_enabled && !var.defender_enabled
-  }
-
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://aquasecurity.github.io/helm-charts/"
-  chart_name       = "trivy-operator"
-  chart_version    = "0.23.0"
 }
 
 module "velero" {

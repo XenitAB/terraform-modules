@@ -12,7 +12,6 @@ locals {
     "falco",
     "flux-system",
     "ingress-nginx",
-    "ingress-healthz",
     "linkerd",
     "linkerd-cni",
     "reloader",
@@ -406,22 +405,6 @@ module "grafana_k8s_monitoring" {
     include_namespaces_piped      = var.grafana_k8s_monitor_config.include_namespaces_piped
     exclude_namespaces            = var.grafana_k8s_monitor_config.exclude_namespaces
   }
-}
-module "ingress_healthz" {
-  depends_on = [module.linkerd]
-
-  for_each = {
-    for s in ["ingress-healthz"] :
-    s => s
-    if var.ingress_healthz_enabled
-  }
-  source = "../../kubernetes/ingress-healthz"
-
-  environment     = var.environment
-  dns_zone        = var.cert_manager_config.dns_zone[0]
-  location_short  = var.location_short
-  linkerd_enabled = var.linkerd_enabled
-  cluster_id      = local.cluster_id
 }
 
 module "ingress_nginx" {

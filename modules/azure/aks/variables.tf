@@ -130,7 +130,6 @@ variable "aks_config" {
       name              = string
       version           = string
       vm_size           = string
-      kubelet_disk_type = optional(string, "OS")
       zones             = optional(list(string), ["1", "2", "3"])
       min_count         = number
       max_count         = number

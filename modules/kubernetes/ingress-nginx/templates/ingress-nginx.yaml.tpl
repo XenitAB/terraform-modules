@@ -26,8 +26,8 @@ spec:
     controller:
       image:
         chroot: true
-      replicaCount: 3
-      minAvailable: 2
+      replicaCount: ${replicas}
+      minAvailable: ${min_replicas}
       resources:
         requests:
           cpu: 100m
@@ -124,6 +124,12 @@ spec:
                         - ingress-${ingress_class}
                 topologyKey: topology.kubernetes.io/zone
               weight: 100
+
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
 
 %{~ if default_certificate.enabled ~}
 ---

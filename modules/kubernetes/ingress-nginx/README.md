@@ -44,8 +44,10 @@ No modules.
 | <a name="input_default_certificate"></a> [default\_certificate](#input\_default\_certificate) | If enalbed and configured nginx will be configured with a default certificate. | <pre>object({<br/>    enabled  = bool,<br/>    dns_zone = string,<br/>  })</pre> | <pre>{<br/>  "dns_zone": "",<br/>  "enabled": false<br/>}</pre> | no |
 | <a name="input_external_dns_hostname"></a> [external\_dns\_hostname](#input\_external\_dns\_hostname) | Hostname for external-dns to use | `string` | `""` | no |
 | <a name="input_linkerd_enabled"></a> [linkerd\_enabled](#input\_linkerd\_enabled) | Should linkerd be enabled | `bool` | `false` | no |
+| <a name="input_min_replicas"></a> [min\_replicas](#input\_min\_replicas) | The desired number of minimum replicas | `number` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes. | <pre>list(<br/>    object({<br/>      name   = string<br/>      labels = map(string)<br/>      flux = optional(object({<br/>        provider            = string<br/>        project             = optional(string)<br/>        repository          = string<br/>        include_tenant_name = optional(bool, false)<br/>        create_crds         = optional(bool, false)<br/>      }))<br/>    })<br/>  )</pre> | n/a | yes |
 | <a name="input_private_ingress_enabled"></a> [private\_ingress\_enabled](#input\_private\_ingress\_enabled) | If true will create a private ingress controller. Otherwise only a public ingress controller will be created. | `bool` | `false` | no |
+| <a name="input_replicas"></a> [replicas](#input\_replicas) | The desired number of replicas | `number` | n/a | yes |
 
 ## Outputs
 

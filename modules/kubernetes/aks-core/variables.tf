@@ -292,6 +292,8 @@ variable "ingress_nginx_enabled" {
 variable "ingress_nginx_config" {
   description = "Ingress configuration"
   type = object({
+    replicas                = optional(number, 3)
+    min_replicas            = optional(number, 2)
     private_ingress_enabled = bool
     customization = optional(object({
       allow_snippet_annotations = bool

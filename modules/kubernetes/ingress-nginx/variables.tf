@@ -102,3 +102,13 @@ variable "private_ingress_enabled" {
   type        = bool
   default     = false
 }
+
+variable "replicas" {
+  description = "The desired number of replicas"
+  type        = number
+}
+
+variable "min_replicas" {
+  description = "The desired number of minimum replicas"
+  type        = number
+}

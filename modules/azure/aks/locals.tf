@@ -4,6 +4,9 @@ locals {
   vm_skus_disk_size_gb = {
     # AMD64
 
+    "Standard_B2als_v2" = 1023
+    "Standard_B8as_v2"  = 1023
+
     "Standard_D2ds_v5"  = 75
     "Standard_D4ds_v5"  = 150
     "Standard_D8ds_v5"  = 300

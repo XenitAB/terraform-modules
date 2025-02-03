@@ -432,6 +432,8 @@ module "ingress_nginx" {
   linkerd_enabled         = var.linkerd_enabled
   datadog_enabled         = var.datadog_enabled
   cluster_id              = local.cluster_id
+  replicas                = var.ingress_nginx_config.replicas
+  min_replicas            = var.ingress_nginx_config.min_replicas
 }
 
 module "karpenter" {

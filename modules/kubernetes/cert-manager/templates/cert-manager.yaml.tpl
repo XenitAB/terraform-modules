@@ -35,10 +35,11 @@ spec:
     serviceAccount:
       annotations:
         azure.workload.identity/client-id: ${client_id}
-    resources:
-      requests:
-        cpu: 15m
-        memory: 150Mi
+    tolerations:
+      - key: "kubernetes.azure.com/scalesetpriority"
+        operator: "Equal"
+        value: "spot"
+        effect: "NoSchedule"
     webhook:
       resources:
         requests:

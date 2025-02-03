@@ -125,6 +125,12 @@ spec:
                 topologyKey: topology.kubernetes.io/zone
               weight: 100
 
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+
 %{~ if default_certificate.enabled ~}
 ---
 apiVersion: cert-manager.io/v1

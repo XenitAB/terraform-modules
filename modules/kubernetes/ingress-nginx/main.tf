@@ -47,6 +47,8 @@ resource "git_repository_file" "ingress_nginx" {
     ingress_nginx_name     = "ingress-nginx"
     default_ingress_class  = true
     internal_load_balancer = false
+    replicas               = var.replicas
+    min_replicas           = var.min_replicas
     external_dns_hostname  = var.external_dns_hostname
     default_certificate = {
       enabled         = var.default_certificate.enabled
@@ -77,6 +79,8 @@ resource "git_repository_file" "ingress_nginx_private" {
     ingress_nginx_name     = "ingress-nginx-private"
     default_ingress_class  = false
     internal_load_balancer = true
+    replicas               = var.replicas
+    min_replicas           = var.min_replicas
     external_dns_hostname  = var.external_dns_hostname
     default_certificate = {
       enabled         = var.default_certificate.enabled

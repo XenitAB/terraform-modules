@@ -26,8 +26,8 @@ spec:
     controller:
       image:
         chroot: true
-      replicaCount: 3
-      minAvailable: 2
+      replicaCount: ${replicas}
+      minAvailable: ${min_replicas}
       resources:
         requests:
           cpu: 100m

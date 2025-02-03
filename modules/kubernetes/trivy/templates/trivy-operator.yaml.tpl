@@ -19,7 +19,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: trivy-operator
-      version: 0.23.0
+      version: 0.25.0
   interval: 1m0s
   values:
     # targetNamespace defines where you want trivy-operator to operate. By

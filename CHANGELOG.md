@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: allow cert-manager to run on spot nodes by @landerss1 in [#1281](https://github.com/XenitAB/terraform-modules/pulls/1281)
+- Feat: allow scheduling ingress-nginx on spot nodes by @landerss1 in [#1280](https://github.com/XenitAB/terraform-modules/pulls/1280)
+- Feat: make ingress-nginx replicas configurable by @landerss1 in [#1279](https://github.com/XenitAB/terraform-modules/pulls/1279)
 - Feat: add support for LitmusChaos by @landerss1 in [#1260](https://github.com/XenitAB/terraform-modules/pulls/1260)
 - Feat: Add option to set NSG rules by @CalleB3 in [#1251](https://github.com/XenitAB/terraform-modules/pulls/1251)
 - Feat: add envoy gateway by @optocoupler in [#1236](https://github.com/XenitAB/terraform-modules/pulls/1236)
@@ -39,6 +42,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: Upgrade Velero and plugin to support Workload Identity by @CalleB3 in [#1266](https://github.com/XenitAB/terraform-modules/pulls/1266)
+- Fix: the temporary disk setting causes issues with nodepools by @optocoupler in [#1265](https://github.com/XenitAB/terraform-modules/pulls/1265)
 - Fix: defender-shenanigans by @optocoupler in [#1258](https://github.com/XenitAB/terraform-modules/pulls/1258)
 - Fix: gateway_envoy seemless integration by @optocoupler in [#1254](https://github.com/XenitAB/terraform-modules/pulls/1254)
 - Fix: ignore metadata changes for flux namespace by @landerss1 in [#1246](https://github.com/XenitAB/terraform-modules/pulls/1246)
@@ -79,6 +84,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: update list of supported VM skus by @landerss1 in [#1277](https://github.com/XenitAB/terraform-modules/pulls/1277)
+- Chore: bump orhun/git-cliff-action from 3 to 4 by @landerss1 in [#1165](https://github.com/XenitAB/terraform-modules/pulls/1165)
 - Chore: bumping kubectl provider version by @optocoupler in [#1257](https://github.com/XenitAB/terraform-modules/pulls/1257)
 - Chore: Upgrade azad-kube-proxy to 0.0.48 by @CalleB3 in [#1234](https://github.com/XenitAB/terraform-modules/pulls/1234)
 - Chore: Upgrade Azurerm to 4.7.0 by @CalleB3 in [#1230](https://github.com/XenitAB/terraform-modules/pulls/1230)

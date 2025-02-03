@@ -25,4 +25,6 @@ module "ingress_nginx" {
       }
     }
   ]
+  replicas     = 3
+  min_replicas = 2
 }

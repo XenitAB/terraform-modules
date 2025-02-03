@@ -27,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: trivy
-      version: v0.10.1
+      version: v0.25.0
   interval: 1m0s
   values:
     trivy:

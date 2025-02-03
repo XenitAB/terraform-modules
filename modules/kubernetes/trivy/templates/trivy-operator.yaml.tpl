@@ -63,3 +63,20 @@ spec:
       name: trivy-operator
       annotations:
         azure.workload.identity/client-id: ${client_id}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: trivy-operator-monitor
+  namespace: trivy
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: trivy-operator
+  namespaceSelector:
+    matchNames:
+      - trivy
+  endpoints:
+  - port: metrics
+    path: /metrics
+    interval: 180s

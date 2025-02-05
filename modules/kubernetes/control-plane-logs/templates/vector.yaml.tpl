@@ -27,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: vector
-      version: v0.32.1
+      version: v0.40.0
   interval: 1m0s
   values:
     role: "Stateless-Aggregator"

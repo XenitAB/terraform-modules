@@ -147,7 +147,7 @@ module "cert_manager_crd" {
 
   chart_repository = "https://charts.jetstack.io"
   chart_name       = "cert-manager"
-  chart_version    = "v1.15.3"
+  chart_version    = "v1.16.3"
   values = {
     "installCRDs" = "true"
   }
@@ -407,22 +407,6 @@ module "grafana_k8s_monitoring" {
     exclude_namespaces            = var.grafana_k8s_monitor_config.exclude_namespaces
   }
 }
-module "ingress_healthz" {
-  depends_on = [module.linkerd]
-
-  for_each = {
-    for s in ["ingress-healthz"] :
-    s => s
-    if var.ingress_healthz_enabled
-  }
-  source = "../../kubernetes/ingress-healthz"
-
-  environment     = var.environment
-  dns_zone        = var.cert_manager_config.dns_zone[0]
-  location_short  = var.location_short
-  linkerd_enabled = var.linkerd_enabled
-  cluster_id      = local.cluster_id
-}
 
 module "ingress_nginx" {
   depends_on = [module.linkerd]
@@ -679,7 +663,6 @@ module "reloader" {
 }
 
 module "trivy" {
-  depends_on = [module.trivy_crd]
 
   for_each = {
     for s in ["trivy"] :
@@ -701,20 +684,6 @@ module "trivy" {
   starboard_exporter_enabled      = var.trivy_config.starboard_exporter_enabled
   unique_suffix                   = var.unique_suffix
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
-}
-
-module "trivy_crd" {
-  for_each = {
-    for s in ["trivy"] :
-    s => s
-    if var.trivy_enabled && !var.defender_enabled
-  }
-
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://aquasecurity.github.io/helm-charts/"
-  chart_name       = "trivy-operator"
-  chart_version    = "0.11.0"
 }
 
 module "velero" {

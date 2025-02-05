@@ -84,6 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: Update cluster components by @landerss1 in [#1267](https://github.com/XenitAB/terraform-modules/pulls/1267)
 - Chore: update list of supported VM skus by @landerss1 in [#1277](https://github.com/XenitAB/terraform-modules/pulls/1277)
 - Chore: bump orhun/git-cliff-action from 3 to 4 by @landerss1 in [#1165](https://github.com/XenitAB/terraform-modules/pulls/1165)
 - Chore: bumping kubectl provider version by @optocoupler in [#1257](https://github.com/XenitAB/terraform-modules/pulls/1257)

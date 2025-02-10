@@ -20,7 +20,8 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana-k8s-monitoring
-      version: 1.4.8
+      version: 2.0.8
+
   values:
     global:
       scrapeInterval: "90s"

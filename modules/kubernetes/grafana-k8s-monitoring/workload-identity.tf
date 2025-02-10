@@ -10,7 +10,7 @@ resource "azurerm_federated_identity_credential" "grafana_k8s_monitor" {
   parent_id           = azurerm_user_assigned_identity.grafana_k8s_monitor.id
   audience            = ["api://AzureADTokenExchange"]
   issuer              = var.oidc_issuer_url
-  subject             = "system:serviceaccount:grafana-k8s-monitoring:grafana-k8s-monitoring-alloy-logs"
+  subject             = "system:serviceaccount:grafana-k8s-monitoring:grafana-k8s-monitoring-alloy-metrics"
 }
 
 resource "azurerm_key_vault_access_policy" "grafana_k8s_monitor" {

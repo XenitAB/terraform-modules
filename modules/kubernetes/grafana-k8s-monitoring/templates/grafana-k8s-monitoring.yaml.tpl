@@ -89,8 +89,11 @@ spec:
 
     clusterEvents:
       enabled: true
+
     podLogs:
       enabled: true
+      excludeNamespaces: ${grafana_k8s_monitor_config.exclude_namespaces}
+
     applicationObservability:
       enabled: true
       receivers:
@@ -107,6 +110,7 @@ spec:
       processors:
         grafanaCloudMetrics:
           enabled: true
+    
     integrations:
       alloy:
         instances:
@@ -117,6 +121,7 @@ spec:
                 - alloy-singleton
                 - alloy-logs
                 - alloy-receiver
+    
     alloy-metrics:
       enabled: true
       alloy:

@@ -485,7 +485,6 @@ variable "grafana_k8s_monitor_config" {
     grafana_cloud_tempo_host      = optional(string, "")
     cluster_name                  = string
     include_namespaces            = optional(string, "")
-    include_namespaces_piped      = optional(string, "")
     exclude_namespaces            = optional(string, "")
   })
 }

@@ -403,7 +403,6 @@ module "grafana_k8s_monitoring" {
     grafana_cloud_loki_host       = var.grafana_k8s_monitor_config.grafana_cloud_loki_host
     grafana_cloud_tempo_host      = var.grafana_k8s_monitor_config.grafana_cloud_tempo_host
     include_namespaces            = var.grafana_k8s_monitor_config.include_namespaces
-    include_namespaces_piped      = var.grafana_k8s_monitor_config.include_namespaces_piped
     exclude_namespaces            = var.grafana_k8s_monitor_config.exclude_namespaces
   }
 }

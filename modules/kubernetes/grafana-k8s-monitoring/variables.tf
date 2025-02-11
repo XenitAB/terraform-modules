@@ -7,7 +7,6 @@ variable "grafana_k8s_monitor_config" {
     grafana_cloud_tempo_host      = string
     azure_key_vault_name          = string
     include_namespaces            = string
-    include_namespaces_piped      = string
     exclude_namespaces            = string
   })
   default = {
@@ -15,8 +14,7 @@ variable "grafana_k8s_monitor_config" {
     grafana_cloud_loki_host       = ""
     grafana_cloud_tempo_host      = ""
     azure_key_vault_name          = ""
-    include_namespaces            = "aad-pod-identity,azad-kube-proxy,azure-metrics,calico-system,cert-manager,controle-plane-logs,falco,flux-system,gatekeeper-system,grafana-agent,grafana-k8s-monitoring,ingress-healthz,ingress-nginx,kube-node-lease,kube-public,kube-system,node-ttl,reloader,spegel,tigera-operator,trivy,vpa"
-    include_namespaces_piped      = "aad-pod-identity|azad-kube-proxy|azure-metrics|calico-system|cert-manager|controle-plane-logs|falco|flux-system|gatekeeper-system|grafana-agent|grafana-k8s-monitoring|ingress-healthz|ingress-nginx|kube-node-lease|kube-public|kube-system|node-ttl|reloader|spegel|tigera-operator|trivy|vpa"
+    include_namespaces            = ""
     exclude_namespaces            = ""
   }
 }

@@ -22,7 +22,7 @@ module "aks_core" {
     azure_key_vault_name          = "yaba"
     include_namespaces            = "one,two,three"
     include_namespaces_piped      = "one|two|three"
-    exclude_namespaces            = "threetwoone"
+    exclude_namespaces            = ["threetwoone"]
   }
   grafana_alloy_config = {
     cluster_name                        = "awesome_cluster"

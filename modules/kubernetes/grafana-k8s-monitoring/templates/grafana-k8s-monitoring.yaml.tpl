@@ -82,17 +82,20 @@ spec:
       enabled: true
       podMonitors:
         enabled: true
-        excludeNamespaces: ${grafana_k8s_monitor_config.exclude_namespaces}
+        excludeNamespaces: 
+          ${grafana_k8s_monitor_config.exclude_namespaces}
       serviceMonitors:
         enabled: true
-        excludeNamespaces: ${grafana_k8s_monitor_config.exclude_namespaces}
+        excludeNamespaces: 
+          ${grafana_k8s_monitor_config.exclude_namespaces}
 
     clusterEvents:
       enabled: true
 
     podLogs:
       enabled: true
-      excludeNamespaces: ${grafana_k8s_monitor_config.exclude_namespaces}
+      excludeNamespaces: 
+        ${grafana_k8s_monitor_config.exclude_namespaces}
 
     applicationObservability:
       enabled: true

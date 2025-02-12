@@ -83,24 +83,24 @@ spec:
       podMonitors:
         enabled: true
         excludeNamespaces: 
-        %{ for ns in exclude_namespaces ~}
-        - ${ns}
-        %{ endfor }
+      %{ for ns in exclude_namespaces ~}
+      - ${ns}
+      %{ endfor }
       serviceMonitors:
         enabled: true
         excludeNamespaces: 
-          %{ for ns in exclude_namespaces ~}
-          - ${ns}
-          %{ endfor }
+      %{ for ns in exclude_namespaces ~}
+      - ${ns}
+      %{ endfor }
     clusterEvents:
       enabled: true
 
     podLogs:
       enabled: true
       excludeNamespaces: 
-        %{ for ns in exclude_namespaces ~}
-        - ${ns}
-        %{ endfor }
+    %{ for ns in exclude_namespaces ~}
+    - ${ns}
+    %{ endfor }
 
     applicationObservability:
       enabled: true

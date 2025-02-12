@@ -20,55 +20,122 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana-k8s-monitoring
-      version: 1.4.8
+      version: 2.0.8
+
   values:
-    alloy:
-      alloy:
-        resources:
-          requests:
-            cpu: "1m"
-            memory: "2G"
-
-        storagePath: /var/lib/alloy
-        mounts:
-          extra:
-            - name: alloy-wal
-              mountPath: /var/lib/alloy
-      controller:
-        autoscaling:
+    global:
+      scrapeInterval: "90s"
+    cluster:
+      name: "${cluster_name}"
+    destinations:
+      - name: xenitsweden-prom
+        type: prometheus
+        url: https://prometheus-prod-39-prod-eu-north-0.grafana.net/api/prom/push
+        auth:
+          type: basic
+          username: username
+          password: password
+        secret:
+          create: false
+          name: prometheus-grafana-cloud
+          namespace: grafana-k8s-monitoring
+      - name: xenitsweden-logs
+        type: loki
+        url: https://logs-prod-025.grafana.net/loki/api/v1/push
+        auth:
+          type: basic
+          username: username
+          password: password
+        secret:
+          create: false
+          name: loki-grafana-cloud
+          namespace: grafana-k8s-monitoring
+      - name: xenitsweden-traces
+        type: otlp
+        url: https://tempo-prod-18-prod-eu-north-0.grafana.net:443
+        protocol: grpc
+        auth:
+          type: basic
+          username: username
+          password: password
+        secret:
+          create: false
+          name: tempo-grafana-cloud
+          namespace: grafana-k8s-monitoring
+        metrics:
+          enabled: false
+        logs:
+          enabled: false
+        traces:
           enabled: true
-          minReplicas: 2
-          maxReplicas: 10
-          targetCPUUtilizationPercentage: 0
-          targetMemoryUtilizationPercentage: 80
+    clusterMetrics:
+      enabled: true
+      kube-state-metrics:
+        podAnnotations: {kubernetes.azure.com/set-kube-service-host-fqdn: "true"}
+      opencost:
+        enabled: false
+      kepler:
+        enabled: true
+    annotationAutodiscovery:
+      enabled: true
+    prometheusOperatorObjects:
+      enabled: true
+      podMonitors:
+        enabled: true
+        excludeNamespaces: ${grafana_k8s_monitor_config.exclude_namespaces}
+      serviceMonitors:
+        enabled: true
+        excludeNamespaces: ${grafana_k8s_monitor_config.exclude_namespaces}
 
-        enableStatefulSetAutoDeletePVC: true
-        volumeClaimTemplates:
-          - metadata:
-              name: alloy-wal
-            spec:
-              accessModes: ["ReadWriteOnce"]
-              storageClassName: "default"
-              resources:
-                requests:
-                  storage: 5Gi
-    alloy-logs:
+    clusterEvents:
+      enabled: true
+
+    podLogs:
+      enabled: true
+      excludeNamespaces: ${grafana_k8s_monitor_config.exclude_namespaces}
+
+    applicationObservability:
+      enabled: true
+      receivers:
+        otlp:
+          grpc:
+            enabled: true
+            port: 4317
+          http:
+            enabled: true
+            port: 4318
+        zipkin:
+          enabled: true
+          port: 9411
+      processors:
+        grafanaCloudMetrics:
+          enabled: true
+    
+    integrations:
+      alloy:
+        instances:
+          - name: alloy
+            labelSelectors:
+              app.kubernetes.io/name:
+                - alloy-metrics
+                - alloy-singleton
+                - alloy-logs
+                - alloy-receiver
+    
+    alloy-metrics:
+      enabled: true
       alloy:
         storagePath: /var/lib/alloy
         mounts:
           extra:
-            - name: alloy-log-positions
-              mountPath: /var/lib/alloy
             - name: secret-store
               mountPath: "/mnt/secrets-store"
               readOnly: true
       controller:
+        podAnnotations: {kubernetes.azure.com/set-kube-service-host-fqdn: "true"}
+        enableStatefulSetAutoDeletePVC: true
         volumes:
           extra:
-            - name: alloy-log-positions
-              hostPath:
-                path: /var/alloy-log-storage
-                type: DirectoryOrCreate
             - name: secret-store
               csi:
                 driver: secrets-store.csi.k8s.io
@@ -76,81 +143,34 @@ spec:
                 volumeAttributes:
                   secretProviderClass: grafana-k8s-monitor-secrets
 
-    cluster:
-      name: "${cluster_name}"
-    externalServices:
-      prometheus:
-        secret:
-          create: false
-          name: prometheus-grafana-cloud
-          namespace: grafana-k8s-monitoring
-      loki:
-        secret:
-          create: false
-          name: loki-grafana-cloud
-          namespace: grafana-k8s-monitoring
-      tempo:
-        secret:
-          create: false
-          name: tempo-grafana-cloud
-          namespace: grafana-k8s-monitoring
-    metrics:
+    alloy-singleton:
       enabled: true
-      extraMetricRelabelingRules: |-
-        rule {
-            source_labels = ["namespace"]
-            regex = "^$|${grafana_k8s_monitor_config.include_namespaces_piped}"
-            action = "keep"
-        }
-      podMonitors:
-        namespaces: [${grafana_k8s_monitor_config.include_namespaces}]
-      serviceMonitors:
-        namespaces: [${grafana_k8s_monitor_config.include_namespaces}]
+      controller:
+        podAnnotations: {kubernetes.azure.com/set-kube-service-host-fqdn: "true"}
+    alloy-logs:
+      enabled: true
+      controller:
+        podAnnotations: {kubernetes.azure.com/set-kube-service-host-fqdn: "true"}
+    alloy-receiver:
+      enabled: true
       alloy:
-        metricsTuning:
-          useIntegrationAllowList: true
-      cost:
-        enabled: true
-      kepler:
-        enabled: true
-      node-exporter:
-        enabled: true
-    logs:
-      enabled: true
-      pod_logs:
-        enabled: true
-        excludeNamespaces: [${grafana_k8s_monitor_config.exclude_namespaces}]
-      cluster_events:
-        enabled: true
-    traces:
-      enabled: true
-    receivers:
-      grpc:
-        enabled: true
-      http:
-        enabled: true
-      zipkin:
-        enabled: true
-      grafanaCloudMetrics:
-        enabled: false
-    opencost:
-      enabled: false
-      opencost:
-        exporter:
-          defaultClusterId: "${cluster_name}"
-        prometheus:
-          existingSecretName: "prometheus-grafana-cloud"
-          external:
-            url: "${grafana_k8s_monitor_config.grafana_cloud_prometheus_host}"
-    kube-state-metrics:
-      enabled: true
-    prometheus-node-exporter:
-      enabled: true
-    prometheus-operator-crds:
-      enabled: false
-    kepler:
-      enabled: false
-    alloy-events: {}
+        extraPorts:
+          - name: otlp-grpc
+            port: 4317
+            targetPort: 4317
+            protocol: TCP
+          - name: otlp-http
+            port: 4318
+            targetPort: 4318
+            protocol: TCP
+          - name: zipkin
+            port: 9411
+            targetPort: 9411
+            protocol: TCP
+
+    crds:
+      deploy: true
+
 ---
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass

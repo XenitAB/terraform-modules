@@ -99,7 +99,7 @@ spec:
       enabled: true
       excludeNamespaces: 
     %{ for ns in exclude_namespaces ~}
-  - ${ns}
+   - ${ns}
     %{ endfor }
 
     applicationObservability:

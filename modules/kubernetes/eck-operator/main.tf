@@ -34,7 +34,7 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "git_repository_file" "kustomization" {
-  path       = "clusters/${var.cluster_id}/eck-operator.yaml.yaml"
+  path       = "clusters/${var.cluster_id}/eck-operator.yaml"
   depends_on = [kubernetes_namespace.this]
   content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
     cluster_id = var.cluster_id,
@@ -42,7 +42,7 @@ resource "git_repository_file" "kustomization" {
 }
 
 resource "git_repository_file" "eck_operator" {
-  path = "platform/${var.cluster_id}/eck-operator.yaml/eck-operator.yaml"
+  path = "platform/${var.cluster_id}/eck-operator/eck-operator.yaml"
   content = templatefile("${path.module}/templates/eck-operator.yaml.tpl", {
     eck_managed_namespaces = var.eck_managed_namespaces
   })

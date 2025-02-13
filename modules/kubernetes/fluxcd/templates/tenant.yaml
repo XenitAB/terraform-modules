@@ -46,7 +46,7 @@ spec:
   serviceAccountName: flux
   interval: 5m
 %{ if include_tenant_name == true }
-  path: ./tenant/${name}/${environment}
+  path: ./tenant/${environment}/${name}
 %{ else }
   path: ./tenant/${environment}
 %{ endif }

@@ -98,7 +98,7 @@ resource "git_repository_file" "tenant" {
     create_crds         = each.value.fluxcd.create_crds,
     environment         = var.environment,
     name                = each.key,
-    include_tenant_name = var.git_provider.include_tenant_name,
+    include_tenant_name = var.namespaces.include_tenant_name,
     provider_type       = var.git_provider.type
     url = join("/", compact([
       local.git_auth_proxy_url,

@@ -60,7 +60,6 @@ module "aks_core" {
     git_provider = {
       organization        = "my-org"
       type                = "azuredevops"
-      include_tenant_name = true
       azure_devops = {
         pat = "my-pat"
       }

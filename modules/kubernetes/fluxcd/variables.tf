@@ -13,7 +13,6 @@ variable "git_provider" {
   type = object({
     organization        = string
     type                = optional(string, "azuredevops")
-    include_tenant_name = optional(bool, false)
     github = optional(object({
       application_id  = number
       installation_id = number

@@ -8,7 +8,6 @@ module "fluxcd" {
   git_provider = {
     organization        = "acme"
     type                = "azuredevops"
-    include_tenant_name = false
     azure_devops = {
       pat = "string"
     }

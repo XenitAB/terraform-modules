@@ -199,6 +199,19 @@ module "datadog" {
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
+module "eck_operator" {
+
+  for_each = {
+    for s in ["eck_operator"] :
+    s => s
+    if var.eck_operator_enabled
+  }
+
+  source                 = "../../kubernetes/eck-operator"
+  cluster_id             = local.cluster_id
+  eck_managed_namespaces = var.eck_operator_config.eck_managed_namespaces
+}
+
 module "envoy_gateway" {
   depends_on = [module.gateway_api]
 

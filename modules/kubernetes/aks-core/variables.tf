@@ -810,6 +810,21 @@ variable "karpenter_config" {
   }
 }
 
+variable "eck_operator_enabled" {
+  description = "Should we install the eck-operator in the cluster"
+  type        = bool
+  default     = false
+}
+
+variable "eck_operator_config" {
+  description = "Configuration for ECK operator"
+  type = object({
+    eck_managed_namespaces = optional(list(string))
+  })
+  default = {
+    eck_managed_namespaces = []
+  }
+}
 
 variable "envoy_gateway" {
   description = "Should we deploy envoy-gateway"

@@ -42,7 +42,7 @@ resource "git_repository_file" "kustomization" {
 }
 
 resource "git_repository_file" "eck_operator" {
-  path = "platform/${var.cluster_id}/eck-operator.yaml/eck-operator.yaml"
+  path = "platform/${var.cluster_id}/eck-operator/eck-operator.yaml"
   content = templatefile("${path.module}/templates/eck-operator.yaml.tpl", {
     eck_managed_namespaces = var.eck_managed_namespaces
   })

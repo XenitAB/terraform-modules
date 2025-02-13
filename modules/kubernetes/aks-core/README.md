@@ -37,6 +37,7 @@ This module is used to create AKS clusters.
 | <a name="module_cert_manager_crd"></a> [cert\_manager\_crd](#module\_cert\_manager\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_control_plane_logs"></a> [control\_plane\_logs](#module\_control\_plane\_logs) | ../../kubernetes/control-plane-logs | n/a |
 | <a name="module_datadog"></a> [datadog](#module\_datadog) | ../../kubernetes/datadog | n/a |
+| <a name="module_eck_operator"></a> [eck\_operator](#module\_eck\_operator) | ../../kubernetes/eck-operator | n/a |
 | <a name="module_envoy_gateway"></a> [envoy\_gateway](#module\_envoy\_gateway) | ../../kubernetes/envoy-gateway | n/a |
 | <a name="module_external_dns"></a> [external\_dns](#module\_external\_dns) | ../../kubernetes/external-dns | n/a |
 | <a name="module_falco"></a> [falco](#module\_falco) | ../../kubernetes/falco | n/a |
@@ -140,6 +141,8 @@ This module is used to create AKS clusters.
 | <a name="input_datadog_enabled"></a> [datadog\_enabled](#input\_datadog\_enabled) | Should Datadog be enabled | `bool` | `false` | no |
 | <a name="input_defender_enabled"></a> [defender\_enabled](#input\_defender\_enabled) | If Defender for Containers should be enabled | `bool` | `false` | no |
 | <a name="input_dns_zones"></a> [dns\_zones](#input\_dns\_zones) | List of DNS Zones | `list(string)` | n/a | yes |
+| <a name="input_eck_operator_config"></a> [eck\_operator\_config](#input\_eck\_operator\_config) | Configuration for ECK operator | <pre>object({<br/>    eck_managed_namespaces = optional(list(string))<br/>  })</pre> | <pre>{<br/>  "eck_managed_namespaces": []<br/>}</pre> | no |
+| <a name="input_eck_operator_enabled"></a> [eck\_operator\_enabled](#input\_eck\_operator\_enabled) | Should we install the eck-operator in the cluster | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_envoy_gateway"></a> [envoy\_gateway](#input\_envoy\_gateway) | Should we deploy envoy-gateway | <pre>object({<br/>    enabled = optional(bool, false)<br/>    envoy_gateway_config = optional(object({<br/>      logging_level             = optional(string, "info")<br/>      replicas_count            = optional(number, 2)<br/>      resources_memory_limit    = optional(string, "")<br/>      resources_cpu_requests    = optional(string, "")<br/>      resources_memory_requests = optional(string, "")<br/>    }), {})<br/>  })</pre> | `{}` | no |
 | <a name="input_envoy_tls_policy_enabled"></a> [envoy\_tls\_policy\_enabled](#input\_envoy\_tls\_policy\_enabled) | An option to remove the gatekeeper mutation for tls settings | `bool` | `false` | no |

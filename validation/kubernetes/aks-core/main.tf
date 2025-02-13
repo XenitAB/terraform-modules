@@ -58,8 +58,8 @@ module "aks_core" {
   }
   fluxcd_config = {
     git_provider = {
-      organization        = "my-org"
-      type                = "azuredevops"
+      organization = "my-org"
+      type         = "azuredevops"
       azure_devops = {
         pat = "my-pat"
       }

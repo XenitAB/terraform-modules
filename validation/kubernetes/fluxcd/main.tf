@@ -6,8 +6,8 @@ module "fluxcd" {
   environment = "dev"
   cluster_id  = "foobar"
   git_provider = {
-    organization        = "acme"
-    type                = "azuredevops"
+    organization = "acme"
+    type         = "azuredevops"
     azure_devops = {
       pat = "string"
     }

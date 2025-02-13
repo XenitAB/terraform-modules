@@ -11,9 +11,8 @@ variable "cluster_id" {
 variable "git_provider" {
   description = "Git provider for repositories."
   type = object({
-    organization        = string
-    type                = optional(string, "azuredevops")
-    include_tenant_name = optional(bool, false)
+    organization = string
+    type         = optional(string, "azuredevops")
     github = optional(object({
       application_id  = number
       installation_id = number

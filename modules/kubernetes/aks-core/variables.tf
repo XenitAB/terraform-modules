@@ -126,9 +126,8 @@ variable "fluxcd_config" {
   description = "Configuration for FluxCD"
   type = object({
     git_provider = object({
-      organization        = string
-      type                = optional(string, "azuredevops")
-      include_tenant_name = optional(bool, false)
+      organization = string
+      type         = optional(string, "azuredevops")
       github = optional(object({
         application_id  = number
         installation_id = number

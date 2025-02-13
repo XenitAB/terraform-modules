@@ -83,19 +83,24 @@ spec:
       podMonitors:
         enabled: true
         excludeNamespaces: 
-          ${grafana_k8s_monitor_config.exclude_namespaces}
+      %{ for ns in exclude_namespaces ~}
+    - ${ns}
+      %{ endfor }
       serviceMonitors:
         enabled: true
         excludeNamespaces: 
-          ${grafana_k8s_monitor_config.exclude_namespaces}
-
+      %{ for ns in exclude_namespaces ~}
+    - ${ns}
+      %{ endfor }
     clusterEvents:
       enabled: true
 
     podLogs:
       enabled: true
       excludeNamespaces: 
-        ${grafana_k8s_monitor_config.exclude_namespaces}
+    %{ for ns in exclude_namespaces ~}
+   - ${ns}
+    %{ endfor }
 
     applicationObservability:
       enabled: true

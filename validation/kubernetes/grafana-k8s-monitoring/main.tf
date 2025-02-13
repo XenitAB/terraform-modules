@@ -18,6 +18,6 @@ module "grafana-k8s-monitoring" {
     grafana_cloud_tempo_host      = "bar123"
     azure_key_vault_name          = "boobooyaba"
     include_namespaces            = "one,two,three"
-    exclude_namespaces            = "three,two,one"
+    exclude_namespaces            = ["threetwoone"]
   }
 }

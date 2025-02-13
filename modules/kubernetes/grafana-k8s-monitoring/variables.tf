@@ -7,7 +7,7 @@ variable "grafana_k8s_monitor_config" {
     grafana_cloud_tempo_host      = string
     azure_key_vault_name          = string
     include_namespaces            = string
-    exclude_namespaces            = string
+    exclude_namespaces            = optional(list(string), [])
   })
   default = {
     grafana_cloud_prometheus_host = ""
@@ -15,7 +15,7 @@ variable "grafana_k8s_monitor_config" {
     grafana_cloud_tempo_host      = ""
     azure_key_vault_name          = ""
     include_namespaces            = ""
-    exclude_namespaces            = ""
+    exclude_namespaces            = [""]
   }
 }
 variable "cluster_name" {

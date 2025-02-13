@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: adding support for ECK by @optocoupler in [#1288](https://github.com/XenitAB/terraform-modules/pulls/1288)
 - Feat: allow cert-manager to run on spot nodes by @landerss1 in [#1281](https://github.com/XenitAB/terraform-modules/pulls/1281)
 - Feat: allow scheduling ingress-nginx on spot nodes by @landerss1 in [#1280](https://github.com/XenitAB/terraform-modules/pulls/1280)
 - Feat: make ingress-nginx replicas configurable by @landerss1 in [#1279](https://github.com/XenitAB/terraform-modules/pulls/1279)
@@ -42,6 +43,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: fixing a bad copy/paste for the folder structure of the new ECK module by @optocoupler in [#1290](https://github.com/XenitAB/terraform-modules/pulls/1290)
+- Fix: bad copy pasta by @optocoupler in [#1289](https://github.com/XenitAB/terraform-modules/pulls/1289)
+- Fix: flux wrongful use of include_tenant_name by @CalleB3 in [#1287](https://github.com/XenitAB/terraform-modules/pulls/1287)
+- Fix: bad parsing of list by @optocoupler in [#1286](https://github.com/XenitAB/terraform-modules/pulls/1286)
+- Fix: indentation of variable by @optocoupler in [#1285](https://github.com/XenitAB/terraform-modules/pulls/1285)
 - Fix: Upgrade Velero and plugin to support Workload Identity by @CalleB3 in [#1266](https://github.com/XenitAB/terraform-modules/pulls/1266)
 - Fix: the temporary disk setting causes issues with nodepools by @optocoupler in [#1265](https://github.com/XenitAB/terraform-modules/pulls/1265)
 - Fix: defender-shenanigans by @optocoupler in [#1258](https://github.com/XenitAB/terraform-modules/pulls/1258)
@@ -84,6 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: upgrading grafana k8s monitoring chart by @optocoupler in [#1283](https://github.com/XenitAB/terraform-modules/pulls/1283)
 - Chore: Update cluster components by @landerss1 in [#1267](https://github.com/XenitAB/terraform-modules/pulls/1267)
 - Chore: update list of supported VM skus by @landerss1 in [#1277](https://github.com/XenitAB/terraform-modules/pulls/1277)
 - Chore: bump orhun/git-cliff-action from 3 to 4 by @landerss1 in [#1165](https://github.com/XenitAB/terraform-modules/pulls/1165)

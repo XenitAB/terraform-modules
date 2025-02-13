@@ -29,7 +29,7 @@ resource "kubernetes_namespace" "this" {
       name                = "eck-system"
       "xkf.xenit.io/kind" = "platform"
     }
-    name = "eck-operator"
+    name = "eck-system"
   }
 }
 

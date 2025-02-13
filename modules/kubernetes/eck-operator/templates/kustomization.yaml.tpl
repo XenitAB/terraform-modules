@@ -10,5 +10,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: "./platform/${cluster_id}/eck-operator.yaml/"
+  path: "./platform/${cluster_id}/eck-operator/"
   prune: true

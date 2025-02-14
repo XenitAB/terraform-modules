@@ -663,6 +663,18 @@ module "promtail" {
   resource_group_name = data.azurerm_resource_group.this.name
 }
 
+module "rabbitmq_operator" {
+  for_each = {
+    for s in ["rabbitmq"] :
+    s => s
+    if var.rabbitmq_enabled
+  }
+
+  source          = "../../kubernetes/rabbitmq-operator"
+  cluster_id      = local.cluster_id
+  rabbitmq_config = var.rabbitmq_config
+}
+
 module "reloader" {
   for_each = {
     for s in ["reloader"] :

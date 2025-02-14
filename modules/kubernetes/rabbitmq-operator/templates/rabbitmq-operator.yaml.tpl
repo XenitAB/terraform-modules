@@ -34,9 +34,9 @@ spec:
     clusterOperator:
       replicaCount: ${replica_count}
       watchNamespaces:
-        %{ for ns in watch_namespaces ~}
-      - ${ns}
-        %{ endfor }
+%{ for ns in watch_namespaces ~}
+- ${ns}
+%{ endfor }
       pdb:
         create: ${min_available > 0}
         minAvailable: ${min_available}

@@ -35,7 +35,7 @@ spec:
       replicaCount: ${replica_count}
       watchNamespaces:
       %{ for ns in watch_namespaces ~}
-    - ${ns}
+      - ${ns}
       %{ endfor }
       pdb:
         create: ${min_available > 0}

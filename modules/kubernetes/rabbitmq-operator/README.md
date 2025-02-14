@@ -6,7 +6,7 @@ This module is used to add [`rabbitmq-operator`](https://www.rabbitmq.com/kubern
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
 
 ## Providers
@@ -24,7 +24,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [git_repository_file.kustomization](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.rabbitmq-operator](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.rabbitmq_operator](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 
 ## Inputs
 

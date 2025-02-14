@@ -5,7 +5,7 @@
   */
 
 terraform {
-  required_version = ">= 1.6.0"
+  required_version = ">= 1.3.0"
 
   required_providers {
     git = {
@@ -22,7 +22,7 @@ resource "git_repository_file" "kustomization" {
   })
 }
 
-resource "git_repository_file" "rabbitmq-operator" {
+resource "git_repository_file" "rabbitmq_operator" {
   path = "platform/${var.cluster_id}/rabbitmq-operator/rabbitmq-operator.yaml"
   content = templatefile("${path.module}/templates/rabbitmq-operator.yaml.tpl", {
     min_available           = var.rabbitmq_config.min_available

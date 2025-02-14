@@ -870,3 +870,22 @@ variable "litmus_enabled" {
   type        = bool
   default     = false
 }
+
+variable "rabbitmq_enabled" {
+  description = "If rabbitmq operator should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "rabbitmq_config" {
+  description = "The RabbitMQ operator configuration"
+  type = object({
+    min_available           = optional(number, 0)
+    replica_count           = optional(number, 1)
+    network_policy_enabled  = optional(bool, false)
+    spot_instances_enabled  = optional(bool, true)
+    tology_operator_enabled = optional(bool, false)
+    watch_namespaces        = optional(list(string), [])
+  })
+  default = {}
+}

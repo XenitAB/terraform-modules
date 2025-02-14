@@ -39,6 +39,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`popeye`](popeye/README.md)
 - [`prometheus`](prometheus/README.md)
 - [`promtail`](promtail/README.md)
+- [`rabbitmq-operator`](rabbitmq-operator/README.md)
 - [`reloader`](reloader/README.md)
 - [`spegel`](spegel/README.md)
 - [`telepresence`](telepresence/README.md)

@@ -60,6 +60,7 @@ This module is used to create AKS clusters.
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../../kubernetes/prometheus | n/a |
 | <a name="module_prometheus_crd"></a> [prometheus\_crd](#module\_prometheus\_crd) | ../../kubernetes/helm-crd | n/a |
 | <a name="module_promtail"></a> [promtail](#module\_promtail) | ../../kubernetes/promtail | n/a |
+| <a name="module_rabbitmq_operator"></a> [rabbitmq\_operator](#module\_rabbitmq\_operator) | ../../kubernetes/rabbitmq-operator | n/a |
 | <a name="module_reloader"></a> [reloader](#module\_reloader) | ../../kubernetes/reloader | n/a |
 | <a name="module_spegel"></a> [spegel](#module\_spegel) | ../../kubernetes/spegel | n/a |
 | <a name="module_telepresence"></a> [telepresence](#module\_telepresence) | ../../kubernetes/telepresence | n/a |
@@ -190,6 +191,8 @@ This module is used to create AKS clusters.
 | <a name="input_prometheus_volume_claim_storage_class_name"></a> [prometheus\_volume\_claim\_storage\_class\_name](#input\_prometheus\_volume\_claim\_storage\_class\_name) | Configuration for prometheus volume claim storage class name | `string` | `"managed-csi-zrs"` | no |
 | <a name="input_promtail_config"></a> [promtail\_config](#input\_promtail\_config) | Configuration for promtail | <pre>object({<br/>    azure_key_vault_name = string<br/>    loki_address         = string<br/>    excluded_namespaces  = list(string)<br/>  })</pre> | <pre>{<br/>  "azure_key_vault_name": "",<br/>  "excluded_namespaces": [],<br/>  "loki_address": ""<br/>}</pre> | no |
 | <a name="input_promtail_enabled"></a> [promtail\_enabled](#input\_promtail\_enabled) | Should promtail be enabled | `bool` | `false` | no |
+| <a name="input_rabbitmq_config"></a> [rabbitmq\_config](#input\_rabbitmq\_config) | The RabbitMQ operator configuration | <pre>object({<br/>    min_available           = optional(number, 0)<br/>    replica_count           = optional(number, 1)<br/>    network_policy_enabled  = optional(bool, false)<br/>    spot_instances_enabled  = optional(bool, true)<br/>    tology_operator_enabled = optional(bool, false)<br/>    watch_namespaces        = optional(list(string), [])<br/>  })</pre> | `{}` | no |
+| <a name="input_rabbitmq_enabled"></a> [rabbitmq\_enabled](#input\_rabbitmq\_enabled) | If rabbitmq operator should be enabled | `bool` | `false` | no |
 | <a name="input_reloader_enabled"></a> [reloader\_enabled](#input\_reloader\_enabled) | Should Reloader be enabled | `bool` | `true` | no |
 | <a name="input_spegel_enabled"></a> [spegel\_enabled](#input\_spegel\_enabled) | Should Spegel be enabled | `bool` | `true` | no |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |

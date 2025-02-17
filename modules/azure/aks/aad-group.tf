@@ -26,6 +26,12 @@ resource "azurerm_role_assignment" "cluster_view" {
   principal_id         = var.aad_groups.cluster_view.id
 }
 
+resource "azurerm_role_assignment" "network_contributor" {
+  scope                = data.azurerm_subscription.current.id
+  role_definition_name = "Network Contributor"
+  principal_id         = azurerm_kubernetes_cluster.this.identity[0].principal_id
+}
+
 resource "azuread_group_member" "aks_managed_identity" {
   group_object_id  = var.aad_groups.aks_managed_identity.id
   member_object_id = azurerm_kubernetes_cluster.this.kubelet_identity[0].object_id

@@ -31,6 +31,9 @@ terraform {
   }
 }
 
+data "azurerm_subscription" "current" {
+}
+
 data "azurerm_resource_group" "this" {
   name = "rg-${var.environment}-${var.location_short}-${var.name}"
 }

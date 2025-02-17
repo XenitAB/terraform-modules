@@ -57,6 +57,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | [azurerm_role_assignment.cluster_admin](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.cluster_view](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.edit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.network_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.view](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
 | [azurerm_security_center_auto_provisioning.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/security_center_auto_provisioning) | resource |
 | [azurerm_security_center_subscription_pricing.containers](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/security_center_subscription_pricing) | resource |
@@ -71,6 +72,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | [azurerm_resources.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resources) | data source |
 | [azurerm_storage_account.log](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/storage_account) | data source |
 | [azurerm_subnet.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/subnet) | data source |
+| [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/subscription) | data source |
 
 ## Inputs
 

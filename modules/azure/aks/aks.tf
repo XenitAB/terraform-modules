@@ -145,6 +145,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   for_each = {
     for nodePool in var.aks_config.node_pools :
     nodePool.name => nodePool
+    if nodePool.name != null
   }
 
   name                  = each.value.name

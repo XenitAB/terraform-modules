@@ -166,13 +166,6 @@ variable "aks_config" {
 
   validation {
     condition = alltrue([
-      for np in var.aks_config.node_pools : split(".", np.version)[1] <= split(".", var.aks_config.version)[1]
-    ])
-    error_message = "The node Kubernetes version should not be newer than the cluster version, upgrade the cluster first."
-  }
-
-  validation {
-    condition = alltrue([
       for np in var.aks_config.node_pools : length(np.name) <= 12
     ])
     error_message = "The name value cannot be longer than 12 characters."

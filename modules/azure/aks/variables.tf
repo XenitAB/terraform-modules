@@ -160,13 +160,6 @@ variable "aks_config" {
   })
 
   validation {
-    condition = alltrue([
-      for np in concat(var.aks_config.node_pools, [{ version : var.aks_config.version }]) : can(regex("^1.(28|29|30|31)", np.version))
-    ])
-    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.28, 1.29, 1.30 or 1.31."
-  }
-
-  validation {
     condition     = contains(["Free", "Standard", "Premium"], var.aks_config.sku_tier)
     error_message = "Invalid pricing_tier: ${var.aks_config.sku_tier}. Allowed vallues: ['Free', 'Standard', 'Premium']"
   }

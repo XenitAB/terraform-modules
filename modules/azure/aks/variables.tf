@@ -164,34 +164,6 @@ variable "aks_config" {
     error_message = "Invalid pricing_tier: ${var.aks_config.sku_tier}. Allowed vallues: ['Free', 'Standard', 'Premium']"
   }
 
-  validation {
-    condition = alltrue([
-      for np in var.aks_config.node_pools : length(np.name) <= 12
-    ])
-    error_message = "The name value cannot be longer than 12 characters."
-  }
-
-  validation {
-    condition = alltrue([
-      for np in var.aks_config.node_pools : can(regex("^[a-z0-9]+$", np.name))
-    ])
-    error_message = "The name value has to be lowercase alphanumeric."
-  }
-
-  validation {
-    condition = alltrue([
-      for np in var.aks_config.node_pools : can(regex("^[a-z]", np.name))
-    ])
-    error_message = "The name value has to begin with a lowercase letter."
-  }
-
-  validation {
-    condition = alltrue([
-      for np in var.aks_config.node_pools : can(regex("[12]$", np.name))
-    ])
-    error_message = "The name value should end with a 1 or 2 to enable blue green pool creation."
-  }
-
   # Spot max price is set when spot is enabled
   validation {
     condition = alltrue([

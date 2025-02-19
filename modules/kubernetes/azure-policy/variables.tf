@@ -100,9 +100,3 @@ variable "tenant_namespaces" {
   type        = list(string)
   default     = []
 }
-
-variable "envoy_tls_policy_enabled" {
-  description = "An option to remove the gatekeeper mutation for tls settings"
-  type        = bool
-  default     = true
-}

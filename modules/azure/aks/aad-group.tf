@@ -29,7 +29,7 @@ resource "azurerm_role_assignment" "cluster_view" {
 resource "azurerm_role_assignment" "network_contributor" {
   scope                = data.azurerm_subscription.current.id
   role_definition_name = "Network Contributor"
-  principal_id         = azurerm_kubernetes_cluster.this.identity[0].principal_id
+  principal_id         = var.cilium_enabled ? azurerm_user_assigned_identity.aks["cilium"].principal_id : azurerm_kubernetes_cluster.this.identity[0].principal_id
 }
 
 resource "azuread_group_member" "aks_managed_identity" {

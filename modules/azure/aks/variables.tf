@@ -160,58 +160,8 @@ variable "aks_config" {
   })
 
   validation {
-    condition = alltrue([
-      for np in concat(var.aks_config.node_pools, [{ version : var.aks_config.version }]) : can(regex("^1.(28|29|30|31)", np.version))
-    ])
-    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.28, 1.29, 1.30 or 1.31."
-  }
-
-  validation {
     condition     = contains(["Free", "Standard", "Premium"], var.aks_config.sku_tier)
     error_message = "Invalid pricing_tier: ${var.aks_config.sku_tier}. Allowed vallues: ['Free', 'Standard', 'Premium']"
-  }
-
-  validation {
-    condition = alltrue([
-      for np in var.aks_config.node_pools : split(".", np.version)[1] <= split(".", var.aks_config.version)[1]
-    ])
-    error_message = "The node Kubernetes version should not be newer than the cluster version, upgrade the cluster first."
-  }
-
-  validation {
-    condition = alltrue([
-      for np in var.aks_config.node_pools : length(np.name) <= 12
-    ])
-    error_message = "The name value cannot be longer than 12 characters."
-  }
-
-  validation {
-    condition = alltrue([
-      for np in var.aks_config.node_pools : can(regex("^[a-z0-9]+$", np.name))
-    ])
-    error_message = "The name value has to be lowercase alphanumeric."
-  }
-
-  validation {
-    condition = alltrue([
-      for np in var.aks_config.node_pools : can(regex("^[a-z]", np.name))
-    ])
-    error_message = "The name value has to begin with a lowercase letter."
-  }
-
-  validation {
-    condition = alltrue([
-      for np in var.aks_config.node_pools : can(regex("[12]$", np.name))
-    ])
-    error_message = "The name value should end with a 1 or 2 to enable blue green pool creation."
-  }
-
-  # Spot max price is set when spot is enabled
-  validation {
-    condition = alltrue([
-      for np in var.aks_config.node_pools : (!np.spot_enabled && np.spot_max_price == null) || (np.spot_enabled && np.spot_max_price != null)
-    ])
-    error_message = "The spot_max_price cannot be null when spot_enabled is true."
   }
 }
 

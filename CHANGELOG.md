@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: aks validation should allow no nodepools elements by @landerss1 in [#1297](https://github.com/XenitAB/terraform-modules/pulls/1297)
 - Fix: make network contributor role work with cilium by @landerss1 in [#1296](https://github.com/XenitAB/terraform-modules/pulls/1296)
 - Fix: add required network contributor role at subscription level by @landerss1 in [#1293](https://github.com/XenitAB/terraform-modules/pulls/1293)
 - Fix: fixing a bad copy/paste for the folder structure of the new ECK module by @optocoupler in [#1290](https://github.com/XenitAB/terraform-modules/pulls/1290)
@@ -94,6 +95,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: bump azurerm provider to v 4.19.0 by @landerss1 in [#1299](https://github.com/XenitAB/terraform-modules/pulls/1299)
 - Chore: upgrading grafana k8s monitoring chart by @optocoupler in [#1283](https://github.com/XenitAB/terraform-modules/pulls/1283)
 - Chore: Update cluster components by @landerss1 in [#1267](https://github.com/XenitAB/terraform-modules/pulls/1267)
 - Chore: update list of supported VM skus by @landerss1 in [#1277](https://github.com/XenitAB/terraform-modules/pulls/1277)

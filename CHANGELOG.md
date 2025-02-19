@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: upgrade Karpenter and enable spotToSpotConsolidation by @CalleB3 in [#1295](https://github.com/XenitAB/terraform-modules/pulls/1295)
+- Feat: add support for Rabbitmq operator by @landerss1 in [#1291](https://github.com/XenitAB/terraform-modules/pulls/1291)
 - Feat: adding support for ECK by @optocoupler in [#1288](https://github.com/XenitAB/terraform-modules/pulls/1288)
 - Feat: allow cert-manager to run on spot nodes by @landerss1 in [#1281](https://github.com/XenitAB/terraform-modules/pulls/1281)
 - Feat: allow scheduling ingress-nginx on spot nodes by @landerss1 in [#1280](https://github.com/XenitAB/terraform-modules/pulls/1280)
@@ -43,6 +45,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: make network contributor role work with cilium by @landerss1 in [#1296](https://github.com/XenitAB/terraform-modules/pulls/1296)
+- Fix: add required network contributor role at subscription level by @landerss1 in [#1293](https://github.com/XenitAB/terraform-modules/pulls/1293)
 - Fix: fixing a bad copy/paste for the folder structure of the new ECK module by @optocoupler in [#1290](https://github.com/XenitAB/terraform-modules/pulls/1290)
 - Fix: bad copy pasta by @optocoupler in [#1289](https://github.com/XenitAB/terraform-modules/pulls/1289)
 - Fix: flux wrongful use of include_tenant_name by @CalleB3 in [#1287](https://github.com/XenitAB/terraform-modules/pulls/1287)

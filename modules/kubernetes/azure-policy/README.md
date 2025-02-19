@@ -7,13 +7,13 @@ Adds [`Azure Policy for Kubernetes`](https://github.com/Azure/azure-policy) to a
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.7.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.7.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
 
 ## Modules
 
@@ -23,20 +23,20 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_policy_definition.azure_identity_format](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
-| [azurerm_policy_definition.azure_remove_node_spot_taints](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
-| [azurerm_policy_definition.envoy_gateway_require_tls](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
-| [azurerm_policy_definition.flux_disable_cross_namespace_source](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
-| [azurerm_policy_definition.flux_require_service_account](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
-| [azurerm_policy_definition.k8s_block_node_port](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
-| [azurerm_policy_definition.k8s_pod_priority_class](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
-| [azurerm_policy_definition.k8s_require_ingress_class](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
-| [azurerm_policy_definition.k8s_secrets_store_csi_unique_volume](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
-| [azurerm_policy_definition.mutations](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_definition) | resource |
-| [azurerm_policy_set_definition.xks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/policy_set_definition) | resource |
-| [azurerm_resource_policy_assignment.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/resource_policy_assignment) | resource |
-| [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/kubernetes_cluster) | data source |
-| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
+| [azurerm_policy_definition.azure_identity_format](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_definition) | resource |
+| [azurerm_policy_definition.azure_remove_node_spot_taints](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_definition) | resource |
+| [azurerm_policy_definition.envoy_gateway_require_tls](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_definition) | resource |
+| [azurerm_policy_definition.flux_disable_cross_namespace_source](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_definition) | resource |
+| [azurerm_policy_definition.flux_require_service_account](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_definition) | resource |
+| [azurerm_policy_definition.k8s_block_node_port](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_definition) | resource |
+| [azurerm_policy_definition.k8s_pod_priority_class](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_definition) | resource |
+| [azurerm_policy_definition.k8s_require_ingress_class](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_definition) | resource |
+| [azurerm_policy_definition.k8s_secrets_store_csi_unique_volume](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_definition) | resource |
+| [azurerm_policy_definition.mutations](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_definition) | resource |
+| [azurerm_policy_set_definition.xks](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_set_definition) | resource |
+| [azurerm_resource_policy_assignment.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/resource_policy_assignment) | resource |
+| [azurerm_kubernetes_cluster.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/kubernetes_cluster) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/resource_group) | data source |
 
 ## Inputs
 

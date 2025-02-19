@@ -7,7 +7,7 @@ Adds [grafana-k8s-monitoring](https://github.com/grafana/k8s-monitoring-helm/tre
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.7.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.23.0 |
 

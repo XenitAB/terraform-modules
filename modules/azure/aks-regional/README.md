@@ -8,7 +8,7 @@ This module is used to create resources that are used by AKS clusters.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.7.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.5.1 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.4 |
 
@@ -17,7 +17,7 @@ This module is used to create resources that are used by AKS clusters.
 | Name | Version |
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.7.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
 
 ## Modules
@@ -29,26 +29,26 @@ No modules.
 | Name | Type |
 |------|------|
 | [azuread_group_member.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
-| [azurerm_eventhub.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/eventhub) | resource |
-| [azurerm_eventhub_namespace.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/eventhub_namespace) | resource |
-| [azurerm_eventhub_namespace_authorization_rule.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/eventhub_namespace_authorization_rule) | resource |
-| [azurerm_eventhub_namespace_authorization_rule.listen](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/eventhub_namespace_authorization_rule) | resource |
-| [azurerm_key_vault_access_policy.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/key_vault_access_policy) | resource |
-| [azurerm_key_vault_secret.eventhub_connection_string](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/key_vault_secret) | resource |
-| [azurerm_key_vault_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/key_vault_secret) | resource |
-| [azurerm_public_ip_prefix.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/public_ip_prefix) | resource |
-| [azurerm_role_assignment.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.vnet](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/role_assignment) | resource |
-| [azurerm_user_assigned_identity.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/user_assigned_identity) | resource |
-| [azurerm_user_assigned_identity.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/resources/user_assigned_identity) | resource |
+| [azurerm_eventhub.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/eventhub) | resource |
+| [azurerm_eventhub_namespace.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/eventhub_namespace) | resource |
+| [azurerm_eventhub_namespace_authorization_rule.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/eventhub_namespace_authorization_rule) | resource |
+| [azurerm_eventhub_namespace_authorization_rule.listen](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/eventhub_namespace_authorization_rule) | resource |
+| [azurerm_key_vault_access_policy.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_secret.eventhub_connection_string](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/key_vault_secret) | resource |
+| [azurerm_key_vault_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/key_vault_secret) | resource |
+| [azurerm_public_ip_prefix.aks](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/public_ip_prefix) | resource |
+| [azurerm_role_assignment.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.vnet](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
+| [azurerm_user_assigned_identity.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/user_assigned_identity) | resource |
+| [azurerm_user_assigned_identity.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/user_assigned_identity) | resource |
 | [tls_private_key.ssh_key](https://registry.terraform.io/providers/hashicorp/tls/4.0.4/docs/resources/private_key) | resource |
 | [azuread_group.resource_group_contributor](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/group) | data source |
-| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/client_config) | data source |
-| [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/key_vault) | data source |
-| [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
-| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/resource_group) | data source |
-| [azurerm_virtual_network.vnet](https://registry.terraform.io/providers/hashicorp/azurerm/4.7.0/docs/data-sources/virtual_network) | data source |
+| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/client_config) | data source |
+| [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/key_vault) | data source |
+| [azurerm_resource_group.log](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/resource_group) | data source |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/resource_group) | data source |
+| [azurerm_virtual_network.vnet](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/virtual_network) | data source |
 
 ## Inputs
 

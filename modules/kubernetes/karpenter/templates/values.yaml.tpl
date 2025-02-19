@@ -41,6 +41,8 @@ controller:
     settings:
       batchMaxDuration: ${batch_max_duration}
       batchIdleDuration: ${batch_idle_duration}
+      featureGates:
+        spotToSpotConsolidation: true
 serviceAccount:
     name: karpenter-sa
     annotations:

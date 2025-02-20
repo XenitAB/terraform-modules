@@ -31,7 +31,6 @@ module "aks_core" {
     grafana_otelcol_auth_basic_username = "some-integers"
     grafana_otelcol_exporter_endpoint   = "some-url"
   }
-  envoy_tls_policy_enabled = true
   name                     = "baz"
   aks_name_suffix          = 1
   core_name                = "core"

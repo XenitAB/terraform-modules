@@ -436,15 +436,17 @@ module "ingress_nginx" {
     enabled  = true
     dns_zone = var.cert_manager_config.dns_zone[0]
   }
-  namespaces              = var.namespaces
-  private_ingress_enabled = var.ingress_nginx_config.private_ingress_enabled
-  customization           = var.ingress_nginx_config.customization
-  customization_private   = var.ingress_nginx_config.customization_private
-  linkerd_enabled         = var.linkerd_enabled
-  datadog_enabled         = var.datadog_enabled
-  cluster_id              = local.cluster_id
-  replicas                = var.ingress_nginx_config.replicas
-  min_replicas            = var.ingress_nginx_config.min_replicas
+  namespaces                          = var.namespaces
+  private_ingress_enabled             = var.ingress_nginx_config.private_ingress_enabled
+  customization                       = var.ingress_nginx_config.customization
+  customization_private               = var.ingress_nginx_config.customization_private
+  linkerd_enabled                     = var.linkerd_enabled
+  datadog_enabled                     = var.datadog_enabled
+  cluster_id                          = local.cluster_id
+  replicas                            = var.ingress_nginx_config.replicas
+  min_replicas                        = var.ingress_nginx_config.min_replicas
+  nginx_healthz_ingress_hostname      = var.cert_manager_config.dns_zone[0]
+  nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
 }
 
 module "karpenter" {

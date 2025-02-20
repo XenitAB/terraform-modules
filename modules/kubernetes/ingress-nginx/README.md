@@ -46,6 +46,8 @@ No modules.
 | <a name="input_linkerd_enabled"></a> [linkerd\_enabled](#input\_linkerd\_enabled) | Should linkerd be enabled | `bool` | `false` | no |
 | <a name="input_min_replicas"></a> [min\_replicas](#input\_min\_replicas) | The desired number of minimum replicas | `number` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes. | <pre>list(<br/>    object({<br/>      name   = string<br/>      labels = map(string)<br/>      flux = optional(object({<br/>        provider            = string<br/>        project             = optional(string)<br/>        repository          = string<br/>        include_tenant_name = optional(bool, false)<br/>        create_crds         = optional(bool, false)<br/>      }))<br/>    })<br/>  )</pre> | n/a | yes |
+| <a name="input_nginx_healthz_ingress_hostname"></a> [nginx\_healthz\_ingress\_hostname](#input\_nginx\_healthz\_ingress\_hostname) | The hostname where we can reach the health endpoint | `string` | n/a | yes |
+| <a name="input_nginx_healthz_ingress_whitelist_ips"></a> [nginx\_healthz\_ingress\_whitelist\_ips](#input\_nginx\_healthz\_ingress\_whitelist\_ips) | A comma separated string of ranges and or individual ips to be whitelisted for the healthz ingress | `string` | `""` | no |
 | <a name="input_private_ingress_enabled"></a> [private\_ingress\_enabled](#input\_private\_ingress\_enabled) | If true will create a private ingress controller. Otherwise only a public ingress controller will be created. | `bool` | `false` | no |
 | <a name="input_replicas"></a> [replicas](#input\_replicas) | The desired number of replicas | `number` | n/a | yes |
 

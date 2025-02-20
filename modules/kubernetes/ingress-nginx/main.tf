@@ -55,13 +55,15 @@ resource "git_repository_file" "ingress_nginx" {
       dns_zone        = var.default_certificate.dns_zone
       namespaced_name = "ingress-nginx/ingress-nginx"
     }
-    private_ingress_enabled   = var.private_ingress_enabled
-    allow_snippet_annotations = var.customization.allow_snippet_annotations
-    http_snippet              = var.customization.http_snippet
-    extra_config              = var.customization.extra_config
-    extra_headers             = var.customization.extra_headers
-    linkerd_enabled           = var.linkerd_enabled
-    datadog_enabled           = var.datadog_enabled
+    private_ingress_enabled             = var.private_ingress_enabled
+    allow_snippet_annotations           = var.customization.allow_snippet_annotations
+    http_snippet                        = var.customization.http_snippet
+    extra_config                        = var.customization.extra_config
+    extra_headers                       = var.customization.extra_headers
+    linkerd_enabled                     = var.linkerd_enabled
+    datadog_enabled                     = var.datadog_enabled
+    nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
+    nginx_healthz_ingress_hostname      = var.nginx_healthz_ingress_hostname
   })
 }
 
@@ -87,12 +89,14 @@ resource "git_repository_file" "ingress_nginx_private" {
       dns_zone        = var.default_certificate.dns_zone
       namespaced_name = "ingress-nginx/ingress-nginx"
     }
-    private_ingress_enabled   = var.private_ingress_enabled
-    allow_snippet_annotations = var.customization_private.allow_snippet_annotations == null ? var.customization.allow_snippet_annotations : var.customization_private.allow_snippet_annotations
-    http_snippet              = var.customization_private.http_snippet == null ? var.customization.http_snippet : var.customization_private.http_snippet
-    extra_config              = merge(var.customization.extra_config, var.customization_private.extra_config)
-    extra_headers             = merge(var.customization.extra_headers, var.customization_private.extra_config)
-    linkerd_enabled           = var.linkerd_enabled
-    datadog_enabled           = var.datadog_enabled
+    private_ingress_enabled             = var.private_ingress_enabled
+    allow_snippet_annotations           = var.customization_private.allow_snippet_annotations == null ? var.customization.allow_snippet_annotations : var.customization_private.allow_snippet_annotations
+    http_snippet                        = var.customization_private.http_snippet == null ? var.customization.http_snippet : var.customization_private.http_snippet
+    extra_config                        = merge(var.customization.extra_config, var.customization_private.extra_config)
+    extra_headers                       = merge(var.customization.extra_headers, var.customization_private.extra_config)
+    linkerd_enabled                     = var.linkerd_enabled
+    datadog_enabled                     = var.datadog_enabled
+    nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
+    nginx_healthz_ingress_hostname      = var.nginx_healthz_ingress_hostname
   })
 }

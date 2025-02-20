@@ -112,7 +112,8 @@ module "aks_core" {
     resource_selector               = ["platform"]
     namespace_selector              = ["platform"]
   }
-  external_dns_hostname = "foobar.com"
-  gateway_api_enabled   = true
-  litmus_enabled        = true
+  external_dns_hostname               = "foobar.com"
+  gateway_api_enabled                 = true
+  litmus_enabled                      = true
+  nginx_healthz_ingress_whitelist_ips = ""
 }

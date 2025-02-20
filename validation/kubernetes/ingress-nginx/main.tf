@@ -25,6 +25,8 @@ module "ingress_nginx" {
       }
     }
   ]
-  replicas     = 3
-  min_replicas = 2
+  replicas                            = 3
+  min_replicas                        = 2
+  nginx_healthz_ingress_hostname      = "yabadabadee.com"
+  nginx_healthz_ingress_whitelist_ips = "a string"
 }

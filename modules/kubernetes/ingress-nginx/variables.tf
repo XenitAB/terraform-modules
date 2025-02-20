@@ -112,3 +112,14 @@ variable "min_replicas" {
   description = "The desired number of minimum replicas"
   type        = number
 }
+
+variable "nginx_healthz_ingress_hostname" {
+  description = "The hostname where we can reach the health endpoint"
+  type        = string
+}
+
+variable "nginx_healthz_ingress_whitelist_ips" {
+  description = "A comma separated string of ranges and or individual ips to be whitelisted for the healthz ingress"
+  type        = string
+  default     = ""
+}

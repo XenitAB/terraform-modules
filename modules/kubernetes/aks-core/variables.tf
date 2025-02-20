@@ -884,3 +884,9 @@ variable "rabbitmq_config" {
   })
   default = {}
 }
+
+variable "nginx_healthz_ingress_whitelist_ips" {
+  description = "A comma separated string of ranges and or individual ips to be whitelisted for the healthz ingress"
+  type        = string
+  default     = ""
+}

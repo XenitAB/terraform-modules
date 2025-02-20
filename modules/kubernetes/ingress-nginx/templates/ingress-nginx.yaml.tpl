@@ -147,7 +147,9 @@ spec:
     kind: ClusterIssuer
     name: letsencrypt
 %{~ endif ~}
+
 ---
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

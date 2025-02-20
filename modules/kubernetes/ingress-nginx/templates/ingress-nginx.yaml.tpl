@@ -159,7 +159,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     nginx.ingress.kubernetes.io/proxy-body-size: 50m
     nginx.ingress.kubernetes.io/whitelist-source-range: >-
-      "${nginx_healthz_ingress_whitelist_ips}"
+      ${nginx_healthz_ingress_whitelist_ips}
 spec:
   ingressClassName: nginx
   tls:

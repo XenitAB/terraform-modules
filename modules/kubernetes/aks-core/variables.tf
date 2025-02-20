@@ -241,11 +241,6 @@ variable "azure_policy_config" {
     ]
   }
 }
-variable "envoy_tls_policy_enabled" {
-  description = "An option to remove the gatekeeper mutation for tls settings"
-  type        = bool
-  default     = false
-}
 
 variable "gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"

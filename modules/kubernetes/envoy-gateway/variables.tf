@@ -14,3 +14,9 @@ variable "envoy_gateway_config" {
   })
   default = {}
 }
+
+variable "tenant_namespaces" {
+  description = "List of tenant namespaces for Flux"
+  type        = list(string)
+  default     = []
+}

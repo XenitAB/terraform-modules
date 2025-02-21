@@ -1,4 +1,4 @@
 nameOverride: ""
 fullnameOverride: ""
 spotInstancesHack:
-  enabled: true
+  enabled: false

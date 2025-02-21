@@ -1,0 +1,99 @@
+{{ if .Values.spotInstances.useHack }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    name: xks
+    xkf.xenit.io/kind: platform
+  name: xks
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: xks-ds-account
+  namespace: xks
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: xks-ds-node-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:node
+subjects:
+- kind: ServiceAccount
+  name: xks-ds-account
+  namespace: xks
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: xks:webhooks
+rules:
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - validatingwebhookconfigurations
+  verbs:
+  - get
+  - list
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: xks-ds-webhook-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: xks:webhooks
+subjects:
+- kind: ServiceAccount
+  name: xks-ds-account
+  namespace: xks
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: xks-spot-instances
+  namespace: xks
+  labels:
+    k8s-app: xks-spot-instances
+spec:
+  selector:
+    matchLabels:
+      name: xks-spot-instances
+  template:
+    metadata:
+      labels:
+        name: xks-spot-instances
+    spec:
+      serviceAccountName: xks-ds-account
+      tolerations:
+      - key: kubernetes.azure.com/scalesetpriority
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: busybox
+        image: busybox:1.31
+        command: 
+         - "sh"
+         - "-c"
+         - "sleep infinity"
+      initContainers:
+      - name: kubectl-patch
+        image: bitnami/kubectl:1.31
+        command:
+         - "bin/bash"
+         - "-c"
+         - "kubectl patch ValidatingWebhookConfiguration aks-node-validating-webhook --type='json' -p='[{\"op\": \"replace\", \"path\": \"/webhooks/0/rules/0/operations/0\", \"value\":\"CREATE\"}]';exit 0"
+      - name: kubectl-taint
+        image: bitnami/kubectl:1.31
+        command:
+         - "bin/bash"
+         - "-c"
+         - "kubectl taint nodes $(kubectl get pod $HOSTNAME -o jsonpath='{.spec.nodeName}') kubernetes.azure.com/scalesetpriority=spot:NoSchedule-;exit 0"
+      nodeSelector:
+        kubernetes.azure.com/scalesetpriority: spot
+{{ end }}

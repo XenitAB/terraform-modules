@@ -114,6 +114,10 @@ resource "azurerm_kubernetes_cluster" "this" {
     }
   }
 
+  workload_autoscaler_profile {
+    keda_enabled = var.keda_enabled
+  }
+
   key_vault_secrets_provider {
     secret_rotation_enabled = true
   }

@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: add support for KEDA autoscaling by @landerss1 in [#1304](https://github.com/XenitAB/terraform-modules/pulls/1304)
+- Feat: add support for removing spot instances taints in clusters that are automated to start/stop by @landerss1 in [#1303](https://github.com/XenitAB/terraform-modules/pulls/1303)
+- Feat: adding an ingress so we can easily alert for cluster health status by @optocoupler in [#1302](https://github.com/XenitAB/terraform-modules/pulls/1302)
 - Feat: upgrade Karpenter and enable spotToSpotConsolidation by @CalleB3 in [#1295](https://github.com/XenitAB/terraform-modules/pulls/1295)
 - Feat: add support for Rabbitmq operator by @landerss1 in [#1291](https://github.com/XenitAB/terraform-modules/pulls/1291)
 - Feat: adding support for ECK by @optocoupler in [#1288](https://github.com/XenitAB/terraform-modules/pulls/1288)
@@ -45,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: moving envoy out of azure-policy module by @optocoupler in [#1300](https://github.com/XenitAB/terraform-modules/pulls/1300)
 - Fix: aks validation should allow no nodepools elements by @landerss1 in [#1297](https://github.com/XenitAB/terraform-modules/pulls/1297)
 - Fix: make network contributor role work with cilium by @landerss1 in [#1296](https://github.com/XenitAB/terraform-modules/pulls/1296)
 - Fix: add required network contributor role at subscription level by @landerss1 in [#1293](https://github.com/XenitAB/terraform-modules/pulls/1293)

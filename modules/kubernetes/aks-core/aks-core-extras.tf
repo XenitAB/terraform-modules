@@ -14,4 +14,9 @@ resource "helm_release" "aks_core_extras" {
   name        = "aks-core-extras-extras"
   namespace   = "default"
   max_history = 3
+
+  set {
+      name  = "spotInstancesHack.enabled"
+      value = var.spot_instances_hack_enabled
+  }
 }

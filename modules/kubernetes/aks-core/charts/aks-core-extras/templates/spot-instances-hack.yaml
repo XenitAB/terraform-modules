@@ -1,4 +1,4 @@
-{{ if eq .Values.spotInstancesHack.enabled true }}
+{{- if .Values.spotInstancesHack.enabled }}
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -96,4 +96,4 @@ spec:
          - "kubectl taint nodes $(kubectl get pod $HOSTNAME -o jsonpath='{.spec.nodeName}') kubernetes.azure.com/scalesetpriority=spot:NoSchedule-;exit 0"
       nodeSelector:
         kubernetes.azure.com/scalesetpriority: spot
-{{ end }}
+{{- end }}

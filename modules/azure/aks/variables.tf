@@ -361,3 +361,9 @@ variable "additonal_security_rules" {
   }))
   default = []
 }
+
+variable "keda_enabled" {
+  description = "If KEDA autoscaler should be enabled"
+  type        = bool
+  default     = false
+}

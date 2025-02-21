@@ -890,3 +890,9 @@ variable "nginx_healthz_ingress_whitelist_ips" {
   type        = string
   default     = ""
 }
+
+variable "spot_instances_hack_enabled" {
+  description = "If the hack to remove spot node taints should be deployed"
+  type        = bool
+  default     = false
+}

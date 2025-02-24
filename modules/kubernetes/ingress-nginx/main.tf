@@ -62,6 +62,7 @@ resource "git_repository_file" "ingress_nginx" {
     extra_headers                       = var.customization.extra_headers
     linkerd_enabled                     = var.linkerd_enabled
     datadog_enabled                     = var.datadog_enabled
+    nginx_healthz_ingress_enabled       = true
     nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
     nginx_healthz_ingress_hostname      = var.nginx_healthz_ingress_hostname
   })
@@ -96,6 +97,7 @@ resource "git_repository_file" "ingress_nginx_private" {
     extra_headers                       = merge(var.customization.extra_headers, var.customization_private.extra_config)
     linkerd_enabled                     = var.linkerd_enabled
     datadog_enabled                     = var.datadog_enabled
+    nginx_healthz_ingress_enabled       = false
     nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
     nginx_healthz_ingress_hostname      = var.nginx_healthz_ingress_hostname
   })

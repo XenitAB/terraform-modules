@@ -146,6 +146,7 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt
+
 %{~ endif ~}
 %{~ if nginx_healthz_ingress_enabled ~}
 ---

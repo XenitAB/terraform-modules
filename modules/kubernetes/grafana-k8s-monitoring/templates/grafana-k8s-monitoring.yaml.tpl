@@ -71,6 +71,14 @@ spec:
     clusterMetrics:
       enabled: true
       kube-state-metrics:
+      %{ if length(exclude_namespaces) > 0 }
+        extraMetricProcessingRules: |-
+          rule {
+            source_labels = ["namespace"]
+            regex = "${join("|", exclude_namespaces)}"
+            action = "drop"
+          }
+      %{ endif }
         podAnnotations: {kubernetes.azure.com/set-kube-service-host-fqdn: "true"}
       opencost:
         enabled: false
@@ -97,6 +105,14 @@ spec:
 
     podLogs:
       enabled: true
+      %{ if length(exclude_namespaces) > 0 }
+      extraDiscoveryRules: |-
+        rule {
+          source_labels = ["__meta_kubernetes_namespace"]
+          regex = "${join("|", exclude_namespaces)}"
+          action = "drop"
+        }
+      %{ endif }
       excludeNamespaces: 
     %{ for ns in exclude_namespaces ~}
    - ${ns}

@@ -61,6 +61,7 @@ spec:
           - image-reflector-controller
   podMetricsEndpoints:
     - port: http-prom
+
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization

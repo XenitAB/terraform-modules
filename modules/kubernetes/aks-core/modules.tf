@@ -430,7 +430,6 @@ module "grafana_k8s_monitoring" {
   promtail_enabled         = var.promtail_enabled
   spegel_enabled           = var.spegel_enabled
   trivy_enabled            = var.trivy_enabled
-  vpa_enabled              = var.vpa_enabled
 }
 
 module "ingress_nginx" {

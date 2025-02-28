@@ -1,4 +1,4 @@
-coreos.com/v1
+apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   namespace: flux-system

@@ -56,22 +56,3 @@ spec:
       requests:
         cpu: 15m
         memory: 78Mi
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: external-dns
-  namespace: external-dns
-  labels:
-    xkf.xenit.io/monitoring: platform
-spec:
-  endpoints:
-  - path: /metrics
-    port: http
-  namespaceSelector:
-    matchNames:
-    - external-dns
-  selector:
-    matchLabels:
-      app.kubernetes.io/instance: external-dns
-      app.kubernetes.io/name: external-dns

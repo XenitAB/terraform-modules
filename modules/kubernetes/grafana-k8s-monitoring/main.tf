@@ -52,3 +52,23 @@ resource "git_repository_file" "grafana_k8s_monitoring" {
     exclude_namespaces         = var.grafana_k8s_monitor_config.exclude_namespaces
   })
 }
+
+
+resource "git_repository_file" "monitors" {
+  path = "platform/${var.cluster_id}/grafana-k8s-monitoring/monitors.yaml"
+  content = templatefile("${path.module}/templates/monitors.yaml.tpl", {
+    falco_enabled            = var.falco_enabled,
+    gatekeeper_enabled       = var.gatekeeper_enabled,
+    linkerd_enabled          = var.linkerd_enabled,
+    flux_enabled             = var.flux_enabled,
+    aad_pod_identity_enabled = var.aad_pod_identity_enabled,
+    azad_kube_proxy_enabled  = var.azad_kube_proxy_enabled,
+    trivy_enabled            = var.trivy_enabled,
+    grafana_agent_enabled    = var.grafana_agent_enabled,
+    node_local_dns_enabled   = var.node_local_dns_enabled,
+    promtail_enabled         = var.promtail_enabled,
+    node_ttl_enabled         = var.node_ttl_enabled,
+    spegel_enabled           = var.spegel_enabled,
+    cilium_enabled           = var.cilium_enabled,
+  })
+}

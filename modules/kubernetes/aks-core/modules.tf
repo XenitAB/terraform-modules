@@ -417,6 +417,20 @@ module "grafana_k8s_monitoring" {
     include_namespaces            = var.grafana_k8s_monitor_config.include_namespaces
     exclude_namespaces            = var.grafana_k8s_monitor_config.exclude_namespaces
   }
+
+  aad_pod_identity_enabled = var.aad_pod_identity_enabled
+  cilium_enabled           = var.cilium_enabled
+  falco_enabled            = var.falco_enabled
+  flux_enabled             = var.fluxcd_enabled
+  gatekeeper_enabled       = var.gatekeeper_enabled
+  grafana_agent_enabled    = var.grafana_agent_enabled
+  linkerd_enabled          = var.linkerd_enabled
+  node_local_dns_enabled   = var.node_local_dns_enabled
+  node_ttl_enabled         = var.node_ttl_enabled
+  promtail_enabled         = var.promtail_enabled
+  spegel_enabled           = var.spegel_enabled
+  trivy_enabled            = var.trivy_enabled
+  vpa_enabled              = var.vpa_enabled
 }
 
 module "ingress_nginx" {

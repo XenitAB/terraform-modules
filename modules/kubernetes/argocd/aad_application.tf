@@ -2,7 +2,7 @@ resource "azuread_application" "dex" {
   display_name = "ArgoCD Dex connector"
 
   web {
-    redirect_uris = ["https://${var.argocd_config.global_domain}/dex/callback"]
+    redirect_uris = ["https://${var.argocd_config.global_domain}/api/dex/callback"]
   }
 }
 

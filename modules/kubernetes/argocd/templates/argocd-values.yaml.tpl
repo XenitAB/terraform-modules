@@ -59,3 +59,5 @@ configs:
           tenant: ${tenant}
           groups:
             - az-sub-xks-all-owner
+  params:
+    - "server.insecure": "true"

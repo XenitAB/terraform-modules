@@ -31,6 +31,8 @@ resource "kubernetes_namespace" "argocd" {
 }
 
 resource "helm_release" "argocd" {
+  depends_on = [ kubernetes_namespace.argocd ]
+  
   chart       = "oci://ghcr.io/argoproj/argo-helm/argo-cd"
   name        = "argo-cd"
   namespace   = "argocd"

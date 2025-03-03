@@ -44,16 +44,18 @@ server:
         # Based on the ingress controller used secret might be optional
         secretName: argocd-tls
 
-dex.config: |
-  connectors:
-  - type: microsoft
-    id: microsoft
-    name: Microsoft
-    config:
-      # Credentials can be string literals or pulled from the environment.
-      clientID: ${client_id}
-      clientSecret: ${client_secret}
-      redirectURI: http://127.0.0.1:5556/dex/callback
-      tenant: ${tenant}
-      groups:
-        - az-sub-xks-all-owner
+configs:
+  cm:
+    dex.config: |
+      connectors:
+      - type: microsoft
+        id: microsoft
+        name: Microsoft
+        config:
+          # Credentials can be string literals or pulled from the environment.
+          clientID: ${client_id}
+          clientSecret: ${client_secret}
+          redirectURI: http://127.0.0.1:5556/dex/callback
+          tenant: ${tenant}
+          groups:
+            - az-sub-xks-all-owner

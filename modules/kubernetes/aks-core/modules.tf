@@ -48,6 +48,18 @@ module "aad_pod_identity" {
   }]
 }
 
+module "argocd" {
+  for_each = {
+    for s in ["argocd"] :
+    s => s
+    if var.argocd_enabled
+  }
+
+  source = "../../kubernetes/argocd"
+
+  argocd_config = var.argocd_config
+}
+
 module "azure_metrics" {
   for_each = {
     for s in ["azure-metrics"] :

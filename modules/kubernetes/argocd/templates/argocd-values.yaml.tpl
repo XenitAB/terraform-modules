@@ -60,4 +60,4 @@ configs:
           groups:
             - az-sub-xks-all-owner
   params:
-    - "server.insecure": "true"
+    server.insecure: "true"

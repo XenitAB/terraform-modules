@@ -13,17 +13,6 @@ controller:
       #azure.workload.identity/tenant-id": "$TENANT_ID"
   replicas: ${controller_min_replicas}
 
-server:
-  autoscaling:
-    enabled: true
-    minReplicas: ${server_min_replicas}
-  podLabels:
-    azure.workload.identity/use: "true" 
-  serviceAccount:
-    annotations:
-      azure.workload.identity/client-id: "5851df2a-5cc7-4030-bf5a-48dcc5f6cf42"
-      #azure.workload.identity/tenant-id": "$TENANT_ID"
-
 repoServer:
   autoscaling:
     enabled: true
@@ -42,6 +31,9 @@ configs:
     server.insecure: true
 
 server:
+  autoscaling:
+    enabled: true
+    minReplicas: ${server_min_replicas}
   ingress:
     enabled: true
     ingressClassName: nginx
@@ -54,9 +46,15 @@ server:
       - hosts:
         - ${global_domain}
         secretName: argocd-tls
+  podLabels:
+    azure.workload.identity/use: "true" 
+  serviceAccount:
+    annotations:
+      azure.workload.identity/client-id: "5851df2a-5cc7-4030-bf5a-48dcc5f6cf42"
 
 configs:
   cm:
+    admin.enabled: false
     dex.config: |
       connectors:
       - type: microsoft

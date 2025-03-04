@@ -12,6 +12,19 @@ controller:
       azure.workload.identity/client-id: "5851df2a-5cc7-4030-bf5a-48dcc5f6cf42"
       azure.workload.identity/tenant-id: "a1b44af3-4c00-4531-ae80-f3f67fba126f"
   replicas: ${controller_min_replicas}
+  volumes:
+  - name: azure-identity-token
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          audience: api://AzureADTokenExchange
+          expirationSeconds: 3600
+          path: azure-identity-token
+  volumeMounts:
+  - mountPath: /var/run/secrets/tokens
+    name: azure-identity-token
+    readOnly: true
 
 repoServer:
   autoscaling:
@@ -54,6 +67,19 @@ server:
     annotations:
       azure.workload.identity/client-id: "5851df2a-5cc7-4030-bf5a-48dcc5f6cf42"
       azure.workload.identity/tenant-id: "a1b44af3-4c00-4531-ae80-f3f67fba126f"
+  volumes:
+  - name: azure-identity-token
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          audience: api://AzureADTokenExchange
+          expirationSeconds: 3600
+          path: azure-identity-token
+  volumeMounts:
+  - mountPath: /var/run/secrets/tokens
+    name: azure-identity-token
+    readOnly: true
 
 configs:
   cm:

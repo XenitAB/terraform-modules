@@ -87,6 +87,8 @@ spec:
     annotationAutodiscovery:
       enabled: true
     prometheusOperatorObjects:
+      crds:
+        deploy: true
       enabled: true
       podMonitors:
         enabled: true

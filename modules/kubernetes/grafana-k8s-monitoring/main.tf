@@ -55,7 +55,7 @@ resource "git_repository_file" "grafana_k8s_monitoring" {
 
 
 resource "git_repository_file" "monitors" {
-  path = "platform/${var.cluster_id}/grafana-k8s-monitoring/monitors.yaml"
+  path = "platform/${var.cluster_id}/monitors/monitors.yaml"
   content = templatefile("${path.module}/templates/monitors.yaml.tpl", {
     falco_enabled            = var.falco_enabled,
     gatekeeper_enabled       = var.gatekeeper_enabled,

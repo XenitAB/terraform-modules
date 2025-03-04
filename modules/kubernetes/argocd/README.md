@@ -28,12 +28,13 @@ No modules.
 | [azuread_application_password.dex](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application_password) | resource |
 | [helm_release.argocd](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
 | [kubernetes_namespace.argocd](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
+| [azuread_group.all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/group) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_argocd_config"></a> [argocd\_config](#input\_argocd\_config) | ArgoCD configuration | <pre>object({<br/>    application_set_replicas = optional(number, 2)<br/>    controller_min_replicas  = optional(number, 1)<br/>    repo_server_min_replicas = optional(number, 2)<br/>    server_min_replicas      = optional(number, 2)<br/>    redis_enabled            = optional(bool, true)<br/>    global_domain            = string<br/>    ingress_whitelist_ip     = string<br/>    tenant                   = string<br/>  })</pre> | n/a | yes |
+| <a name="input_argocd_config"></a> [argocd\_config](#input\_argocd\_config) | ArgoCD configuration | <pre>object({<br/>    aad_group_name           = optional(string, "az-sub-xks-all-owner")<br/>    application_set_replicas = optional(number, 2)<br/>    controller_min_replicas  = optional(number, 1)<br/>    repo_server_min_replicas = optional(number, 2)<br/>    server_min_replicas      = optional(number, 2)<br/>    redis_enabled            = optional(bool, true)<br/>    global_domain            = string<br/>    ingress_whitelist_ip     = string<br/>    tenant                   = string<br/>  })</pre> | n/a | yes |
 
 ## Outputs
 

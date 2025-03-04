@@ -31,8 +31,8 @@ resource "kubernetes_namespace" "argocd" {
 }
 
 resource "helm_release" "argocd" {
-  depends_on = [ kubernetes_namespace.argocd ]
-  
+  depends_on = [kubernetes_namespace.argocd]
+
   chart       = "oci://ghcr.io/argoproj/argo-helm/argo-cd"
   name        = "argo-cd"
   namespace   = "argocd"
@@ -48,5 +48,6 @@ resource "helm_release" "argocd" {
     client_id                = azuread_application.dex.client_id
     client_secret            = azuread_application_password.dex.value
     tenant                   = var.argocd_config.tenant
+    aad_group_name           = var.argocd_config.aad_group_name
   })]
 }

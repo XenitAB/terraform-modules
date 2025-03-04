@@ -41,7 +41,6 @@ server:
     extraTls:
       - hosts:
         - ${global_domain}
-        # Based on the ingress controller used secret might be optional
         secretName: argocd-tls
 
 configs:

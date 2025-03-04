@@ -5,12 +5,24 @@ redis-ha:
   enabled: true
 
 controller:
+  podLabels:
+    azure.workload.identity/use: "true" 
+  serviceAccount:
+    annotations:
+      azure.workload.identity/client-id: "5851df2a-5cc7-4030-bf5a-48dcc5f6cf42"
+      #azure.workload.identity/tenant-id": "$TENANT_ID"
   replicas: ${controller_min_replicas}
 
 server:
   autoscaling:
     enabled: true
     minReplicas: ${server_min_replicas}
+  podLabels:
+    azure.workload.identity/use: "true" 
+  serviceAccount:
+    annotations:
+      azure.workload.identity/client-id: "5851df2a-5cc7-4030-bf5a-48dcc5f6cf42"
+      #azure.workload.identity/tenant-id": "$TENANT_ID"
 
 repoServer:
   autoscaling:

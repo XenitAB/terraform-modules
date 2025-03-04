@@ -10,7 +10,7 @@ controller:
   serviceAccount:
     annotations:
       azure.workload.identity/client-id: "5851df2a-5cc7-4030-bf5a-48dcc5f6cf42"
-      #azure.workload.identity/tenant-id": "$TENANT_ID"
+      azure.workload.identity/tenant-id: "a1b44af3-4c00-4531-ae80-f3f67fba126f"
   replicas: ${controller_min_replicas}
 
 repoServer:
@@ -46,11 +46,14 @@ server:
       - hosts:
         - ${global_domain}
         secretName: argocd-tls
+  log:
+    level: debug
   podLabels:
     azure.workload.identity/use: "true" 
   serviceAccount:
     annotations:
       azure.workload.identity/client-id: "5851df2a-5cc7-4030-bf5a-48dcc5f6cf42"
+      azure.workload.identity/tenant-id: "a1b44af3-4c00-4531-ae80-f3f67fba126f"
 
 configs:
   cm:

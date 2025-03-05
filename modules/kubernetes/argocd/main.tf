@@ -36,7 +36,7 @@ resource "helm_release" "argocd" {
   chart       = "oci://ghcr.io/argoproj/argo-helm/argo-cd"
   name        = "argo-cd"
   namespace   = "argocd"
-  version     = "7.8.7"
+  version     = "7.8.8"
   max_history = 3
   values = [templatefile("${path.module}/templates/argocd-values.yaml.tpl", {
     controller_min_replicas  = var.argocd_config.controller_min_replicas

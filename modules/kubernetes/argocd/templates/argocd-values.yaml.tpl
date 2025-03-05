@@ -33,7 +33,7 @@ controller:
   - mountPath: /var/run/secrets/tokens
     name: azure-identity-token
     readOnly: true
-  - mountPath: /var/run/secrets/tokens
+  - mountPath: /var/run/secrets/optigroup
     name: optigroup-azure-identity-token
     readOnly: true
 
@@ -99,7 +99,7 @@ server:
   - mountPath: /var/run/secrets/tokens
     name: azure-identity-token
     readOnly: true
-  - mountPath: /var/run/secrets/tokens
+  - mountPath: /var/run/secrets/optigroup
     name: optigroup-azure-identity-token
     readOnly: true
 

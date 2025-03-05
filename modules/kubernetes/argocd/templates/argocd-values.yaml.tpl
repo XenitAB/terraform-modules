@@ -99,3 +99,7 @@ configs:
             - ${aad_group_name}
   params:
     server.insecure: "true"
+  rbac:
+    create: true
+    policy.csv: |
+      g, ${aad_group_name}, role:admin

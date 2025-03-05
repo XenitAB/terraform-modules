@@ -21,9 +21,20 @@ controller:
           audience: api://AzureADTokenExchange
           expirationSeconds: 3600
           path: azure-identity-token
+  - name: optigroup-azure-identity-token
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          audience: api://AzureADTokenExchange
+          expirationSeconds: 3600
+          path: optigroup-azure-identity-token
   volumeMounts:
   - mountPath: /var/run/secrets/tokens
     name: azure-identity-token
+    readOnly: true
+  - mountPath: /var/run/secrets/tokens
+    name: optigroup-azure-identity-token
     readOnly: true
 
 repoServer:
@@ -76,9 +87,20 @@ server:
           audience: api://AzureADTokenExchange
           expirationSeconds: 3600
           path: azure-identity-token
+  - name: optigroup-azure-identity-token
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          audience: api://AzureADTokenExchange
+          expirationSeconds: 3600
+          path: optigroup-azure-identity-token
   volumeMounts:
   - mountPath: /var/run/secrets/tokens
     name: azure-identity-token
+    readOnly: true
+  - mountPath: /var/run/secrets/tokens
+    name: optigroup-azure-identity-token
     readOnly: true
 
 configs:

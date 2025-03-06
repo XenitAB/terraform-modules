@@ -48,6 +48,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: consolidation attempt rework by @optocoupler in [#1314](https://github.com/XenitAB/terraform-modules/pulls/1314)
+- Fix: typo by @optocoupler in [#1312](https://github.com/XenitAB/terraform-modules/pulls/1312)
 - Fix: not a good solution when there are multiple tennats so instead w… by @optocoupler in [#1310](https://github.com/XenitAB/terraform-modules/pulls/1310)
 - Fix: flux monitoring for production clusters by @optocoupler in [#1309](https://github.com/XenitAB/terraform-modules/pulls/1309)
 - Fix: removing all tenant namespaces from metrics and logs by @optocoupler in [#1308](https://github.com/XenitAB/terraform-modules/pulls/1308)
@@ -104,6 +106,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: user friendlines for a newtork policy name by @optocoupler in [#1315](https://github.com/XenitAB/terraform-modules/pulls/1315)
 - Chore: consolidating all monitoring resources to avoid CRD issues by @optocoupler in [#1311](https://github.com/XenitAB/terraform-modules/pulls/1311)
 - Chore: bump azurerm provider to v 4.19.0 by @landerss1 in [#1299](https://github.com/XenitAB/terraform-modules/pulls/1299)
 - Chore: upgrading grafana k8s monitoring chart by @optocoupler in [#1283](https://github.com/XenitAB/terraform-modules/pulls/1283)

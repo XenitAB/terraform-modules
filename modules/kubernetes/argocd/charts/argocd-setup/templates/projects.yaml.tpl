@@ -1,0 +1,17 @@
+{{- range .Values.clusters }}
+{{- $cluster := . }}
+{{- range .tenants }}
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{- $.Values.tenant_name -}}-{{- $cluster.environment -}}-{{- .namespace -}}
+spec:
+  # Allow manifests to deploy from specific repository (url) only
+  sourceRepos:
+  - '{{- .repo_url -}}'
+  # Only permit applications to deploy to the guestbook namespace in the same cluster
+  destinations:
+  - namespace: '{{- .namespace -}}'
+    server: '{{- $cluster.api_server -}}'
+{{- end }}
+{{- end }}

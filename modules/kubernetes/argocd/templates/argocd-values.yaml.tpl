@@ -9,32 +9,23 @@ controller:
     azure.workload.identity/use: "true" 
   serviceAccount:
     annotations:
-      azure.workload.identity/client-id: "5851df2a-5cc7-4030-bf5a-48dcc5f6cf42"
-      azure.workload.identity/tenant-id: "a1b44af3-4c00-4531-ae80-f3f67fba126f"
+      azure.workload.identity/client-id: "${client_id}"
+      azure.workload.identity/tenant-id: "${tenant_id}"
   replicas: ${controller_min_replicas}
   volumes:
-  - name: azure-identity-token
+  - name: azure-federated-tokens
     projected:
       defaultMode: 420
       sources:
+      %{ for cluster in clusters ~}
       - serviceAccountToken:
           audience: api://AzureADTokenExchange
           expirationSeconds: 3600
-          path: azure-identity-token
-  - name: optigroup-azure-identity-token
-    projected:
-      defaultMode: 420
-      sources:
-      - serviceAccountToken:
-          audience: api://AzureADTokenExchange
-          expirationSeconds: 3600
-          path: optigroup-azure-identity-token
+          path: ${tenant_name}-${cluster.environment}-federated-token-file
+      %{ endfor }
   volumeMounts:
   - mountPath: /var/run/secrets/tokens
-    name: azure-identity-token
-    readOnly: true
-  - mountPath: /var/run/secrets/optigroup
-    name: optigroup-azure-identity-token
+    name: azure-federated-tokens
     readOnly: true
 
 repoServer:
@@ -46,7 +37,7 @@ applicationSet:
   replicas: ${application_set_replicas}
 
 global:
-  domain: argocd.sand.unbox.xenit.io
+  domain: ${global_domain}
   # Do we want to be able to run argo on system pool or spot instances?
   # tolerations: 
 
@@ -76,31 +67,22 @@ server:
     azure.workload.identity/use: "true" 
   serviceAccount:
     annotations:
-      azure.workload.identity/client-id: "5851df2a-5cc7-4030-bf5a-48dcc5f6cf42"
-      azure.workload.identity/tenant-id: "a1b44af3-4c00-4531-ae80-f3f67fba126f"
+      azure.workload.identity/client-id: "${client_id}"
+      azure.workload.identity/tenant-id: "${tenant_id}"
   volumes:
-  - name: azure-identity-token
+  - name: azure-federated-tokens
     projected:
       defaultMode: 420
       sources:
+      %{ for cluster in clusters ~}
       - serviceAccountToken:
           audience: api://AzureADTokenExchange
           expirationSeconds: 3600
-          path: azure-identity-token
-  - name: optigroup-azure-identity-token
-    projected:
-      defaultMode: 420
-      sources:
-      - serviceAccountToken:
-          audience: api://AzureADTokenExchange
-          expirationSeconds: 3600
-          path: optigroup-azure-identity-token
+          path: ${tenant_name}-${cluster.environment}-federated-token-file
+      %{ endfor }
   volumeMounts:
   - mountPath: /var/run/secrets/tokens
-    name: azure-identity-token
-    readOnly: true
-  - mountPath: /var/run/secrets/optigroup
-    name: optigroup-azure-identity-token
+    name: azure-federated-tokens
     readOnly: true
 
 configs:
@@ -113,10 +95,10 @@ configs:
         name: Microsoft
         config:
           # Credentials can be string literals or pulled from the environment.
-          clientID: ${client_id}
-          clientSecret: ${client_secret}
+          clientID: ${dex_client_id}
+          clientSecret: ${dex_client_secret}
           redirectURI: http://127.0.0.1:5556/dex/callback
-          tenant: ${tenant}
+          tenant: ${tenant_name}
           groups:
             - ${aad_group_name}
   params:

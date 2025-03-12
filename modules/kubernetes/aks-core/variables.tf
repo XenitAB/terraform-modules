@@ -912,13 +912,24 @@ variable "argocd_config" {
     repo_server_min_replicas = optional(number, 2)
     server_min_replicas      = optional(number, 2)
     redis_enabled            = optional(bool, true)
-    global_domain            = string
-    ingress_whitelist_ip     = string
-    tenant                   = string
+    global_domain            = optional(string, "")
+    ingress_whitelist_ip     = optional(string, "")
+    tenant_name              = optional(string, "")
+    clusters = optional(list(object({
+      name            = string
+      api_server      = string
+      oidc_issuer_url = string
+      environment     = string
+      azure_client_id = string
+      azure_tenant_id = string
+      ca_data         = string
+      tenants = optional(list(object({
+        namespace   = string
+        repo_url    = string
+        repo_path   = string
+        secret_name = string
+      })), [])
+    })), [])
   })
-  default = {
-    global_domain        = ""
-    ingress_whitelist_ip = ""
-    tenant               = ""
-  }
+  default = {}
 }

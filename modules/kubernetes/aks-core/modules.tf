@@ -57,7 +57,12 @@ module "argocd" {
 
   source = "../../kubernetes/argocd"
 
-  argocd_config = var.argocd_config
+  argocd_config            = var.argocd_config
+  cluster_id               = local.cluster_id
+  resource_group_name      = data.azurerm_resource_group.this.name
+  location                 = data.azurerm_resource_group.this.location
+  core_resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"
+  key_vault_name           = data.azurerm_key_vault.core.name
 }
 
 module "azure_metrics" {

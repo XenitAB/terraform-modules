@@ -5,7 +5,7 @@ resource "azurerm_user_assigned_identity" "argocd" {
 }
 
 resource "azurerm_role_assignment" "argocd_admin" {
-  scope                = var.cluster_id
+  scope                = var.aks_cluster_id
   role_definition_name = "Azure Kubernetes Service Cluster Admin Role"
   principal_id         = azurerm_user_assigned_identity.argocd.principal_id
   principal_type       = "ServicePrincipal"

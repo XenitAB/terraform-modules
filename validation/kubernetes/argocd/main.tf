@@ -7,6 +7,7 @@ provider "helm" {}
 module "argocd" {
   source = "../../../modules/kubernetes/argocd"
 
+  aks_cluster_id = "/subscriptions/...."
   argocd_config = {
     global_domain        = "example.com"
     ingress_whitelist_ip = "10.0.2.0"

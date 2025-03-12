@@ -1,3 +1,8 @@
+variable "aks_cluster_id" {
+  description = "AKS cluster id."
+  type        = string
+}
+
 variable "argocd_config" {
   description = "ArgoCD configuration"
   type = object({
@@ -34,6 +39,11 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "core_resource_group_name" {
+  description = "The Azure core resource group name"
+  type        = string
+}
+
 variable "location" {
   description = "The Azure region name."
   type        = string
@@ -41,11 +51,6 @@ variable "location" {
 
 variable "resource_group_name" {
   description = "The Azure resource group name"
-  type        = string
-}
-
-variable "core_resource_group_name" {
-  description = "The Azure core resource group name"
   type        = string
 }
 

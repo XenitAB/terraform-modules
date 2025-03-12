@@ -89,8 +89,8 @@ resource "helm_release" "argocd" {
     application_set_replicas = var.argocd_config.application_set_replicas
     ingress_whitelist_ip     = var.argocd_config.ingress_whitelist_ip
     global_domain            = var.argocd_config.global_domain
-    dex_client_id            = azuread_application.dex.client_id
-    dex_client_secret        = azuread_application_password.dex.value
+    dex_client_id            = azuread_application.dex["argocd"].client_id
+    dex_client_secret        = azuread_application_password.dex["argocd"].value
     tenant_name              = var.argocd_config.tenant_name
     aad_group_name           = var.argocd_config.aad_group_name
     clusters                 = var.argocd_config.clusters

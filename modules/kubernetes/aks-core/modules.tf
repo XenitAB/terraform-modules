@@ -57,6 +57,7 @@ module "argocd" {
 
   source = "../../kubernetes/argocd"
 
+  aks_cluster_id           = data.azurerm_kubernetes_cluster.this.id
   argocd_config            = var.argocd_config
   cluster_id               = local.cluster_id
   resource_group_name      = data.azurerm_resource_group.this.name

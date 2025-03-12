@@ -3,6 +3,12 @@ data "azuread_group" "all_owner" {
 }
 
 resource "azuread_application" "dex" {
+  for_each = {
+    for s in ["argocd"] :
+    s => s
+    if length(var.argocd_config.clusters) > 0
+  }
+
   display_name = "ArgoCD Dex connector"
 
   app_role {
@@ -34,7 +40,13 @@ resource "azuread_application" "dex" {
 }
 
 resource "azuread_application_password" "dex" {
-  application_id = azuread_application.dex.id
+  for_each = {
+    for s in ["argocd"] :
+    s => s
+    if length(var.argocd_config.clusters) > 0
+  }
+
+  application_id = azuread_application.dex["argocd"].id
   end_date       = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {

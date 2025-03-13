@@ -4,7 +4,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: {{- $a<ure_tenant.tenant_name -}}-{{- .environment -}}-secret
+  name: {{- $azure_tenant.tenant_name -}}-{{- .environment -}}-secret
   labels:
     argocd.argoproj.io/secret-type: cluster
 type: Opaque

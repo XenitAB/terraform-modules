@@ -22,7 +22,7 @@ terraform {
 }
 
 locals {
-  key_vault_secret_names = flatten([
+  key_vault_secret_names = distinct(flatten([
     for azure_tenant in var.argocd_config.azure_tenants : [
       for cluster in azure_tenant.clusters : [
         for tenant in cluster.tenants : [
@@ -30,7 +30,7 @@ locals {
         ]
       ]
     ]
-  ])
+  ]))
 
   key_vault_secret_values = [
     for s in local.key_vault_secret_names :
@@ -48,7 +48,7 @@ data "azurerm_key_vault" "core" {
 
 data "azurerm_key_vault_secret" "pat" {
   for_each = tomap({
-    for secret in distinct(local.key_vault_secret_names) : secret => secret
+    for secret in local.key_vault_secret_names : secret => secret
   })
   name         = each.key
   key_vault_id = data.azurerm_key_vault.core.id

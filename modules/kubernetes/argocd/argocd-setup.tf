@@ -14,7 +14,7 @@ resource "helm_release" "argocd_hub_setup" {
 
   set_sensitive {
     name  = "secrets"
-    value = local.key_vault_secret_values
+    value = yamlencode(local.key_vault_secret_values)
   }
 }
 

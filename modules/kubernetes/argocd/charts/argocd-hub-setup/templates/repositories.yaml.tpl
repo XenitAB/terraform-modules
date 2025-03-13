@@ -15,11 +15,11 @@ metadata:
     argocd.argoproj.io/secret-type: repository
 type: Opaque
 data:
-  name: '{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}-{{- .namespace -}}'
-  type: git
-  url: '{{ .repo_url }}'
-  username: git
-  password: '{{- get $secrets .secret_name -}}'
+  name: {{- printf %s-%s-%s $azure_tenant.tenant_name $cluster.environment .namespace | b64enc -}}
+  type: Z2l0
+  url: {{ .repo_url | b64enc }}
+  username: Z2l0
+  password: {{- get $secrets .secret_name | b64enc -}}
 ---
 {{- end }}
 {{- end }}

@@ -12,7 +12,7 @@ resource "azurerm_role_assignment" "argocd_admin" {
 }
 
 resource "azurerm_federated_identity_credential" "argocd_server" {
-  name                = azurerm_user_assigned_identity.argocd.name
+  name                = "argocd-server"
   resource_group_name = azurerm_user_assigned_identity.argocd.resource_group_name
   parent_id           = azurerm_user_assigned_identity.argocd.id
   audience            = ["api://AzureADTokenExchange"]
@@ -21,7 +21,7 @@ resource "azurerm_federated_identity_credential" "argocd_server" {
 }
 
 resource "azurerm_federated_identity_credential" "argocd_application_controller" {
-  name                = azurerm_user_assigned_identity.argocd.name
+  name                = "argocd-application-controller"
   resource_group_name = azurerm_user_assigned_identity.argocd.resource_group_name
   parent_id           = azurerm_user_assigned_identity.argocd.id
   audience            = ["api://AzureADTokenExchange"]

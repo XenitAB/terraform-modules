@@ -17,14 +17,14 @@ controller:
     projected:
       defaultMode: 420
       sources:
-      %{ for tenant in azure_tenants ~}
-      %{ for cluster in tenant.clusters ~}
+%{ for tenant in azure_tenants ~}
+%{ for cluster in tenant.clusters ~}
       - serviceAccountToken:
           audience: api://AzureADTokenExchange
           expirationSeconds: 3600
           path: ${tenant.tenant_name}-${cluster.environment}-federated-token-file
-      %{ endfor }
-      %{ endfor }
+%{ endfor }
+%{ endfor }
   volumeMounts:
   - mountPath: /var/run/secrets/tokens
     name: azure-federated-tokens
@@ -76,14 +76,14 @@ server:
     projected:
       defaultMode: 420
       sources:
-      %{ for tenant in azure_tenants ~}
-      %{ for cluster in tenant.clusters ~}
+%{ for tenant in azure_tenants ~}
+%{ for cluster in tenant.clusters ~}
       - serviceAccountToken:
           audience: api://AzureADTokenExchange
           expirationSeconds: 3600
           path: ${tenant.tenant_name}-${cluster.environment}-federated-token-file
-      %{ endfor }
-      %{ endfor }
+%{ endfor }
+%{ endfor }
   volumeMounts:
   - mountPath: /var/run/secrets/tokens
     name: azure-federated-tokens

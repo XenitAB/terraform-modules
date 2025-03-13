@@ -10,13 +10,12 @@ resource "helm_release" "argocd_hub_setup" {
   name        = "argocd-hub-setup"
   namespace   = "argocd"
   max_history = 3
-  values      = [yamlencode(merge({secrets: local.key_vault_secret_values},{ "uai_id" : azurerm_user_assigned_identity.argocd.principal_id }, var.argocd_config))]
+  values      = [yamlencode(merge({ "uai_id" : azurerm_user_assigned_identity.argocd.principal_id }, var.argocd_config))]
 
-  # This ends with range iteration error
-  #set_sensitive {
-  #  name  = "secrets"
-  #  value = yamlencode(local.key_vault_secret_values)
-  #}
+  set_sensitive {
+    name  = "secrets"
+    value = yamlencode(local.key_vault_secret_values)
+  }
 }
 
 resource "helm_release" "argocd_spoke_setup" {

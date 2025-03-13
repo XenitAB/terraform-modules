@@ -13,7 +13,7 @@ resource "helm_release" "argocd_hub_setup" {
   values      = [yamlencode(merge({ "uai_id" : azurerm_user_assigned_identity.argocd.principal_id }, var.argocd_config))]
 
   set {
-    name  = "secrets"
+    name  = "secret_names"
     value = yamlencode(local.key_vault_secret_values)
   }
 }

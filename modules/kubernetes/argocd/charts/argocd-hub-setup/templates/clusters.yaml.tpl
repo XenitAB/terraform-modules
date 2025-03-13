@@ -10,7 +10,7 @@ metadata:
 type: Opaque
 stringData:
   name: "{{- $azure_tenant.tenant_name -}}-{{- .environment -}}"
-  server: {{- .api_server | quote }}
+  server: "{{- .api_server }}"
   config: |
     {
       "execProviderConfig": {

@@ -12,7 +12,7 @@ resource "helm_release" "argocd_hub_setup" {
   max_history = 3
   values      = [yamlencode(merge({ "uai_id" : azurerm_user_assigned_identity.argocd.principal_id }, var.argocd_config))]
 
-  set_sensitive {
+  set {
     name  = "secrets"
     value = yamlencode(local.key_vault_secret_values)
   }

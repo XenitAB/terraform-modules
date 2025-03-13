@@ -17,11 +17,13 @@ controller:
     projected:
       defaultMode: 420
       sources:
-      %{ for cluster in clusters ~}
+      %{ for tenant in azure_tenants ~}
+      %{ for cluster in tenant.clusters ~}
       - serviceAccountToken:
           audience: api://AzureADTokenExchange
           expirationSeconds: 3600
-          path: ${tenant_name}-${cluster.environment}-federated-token-file
+          path: ${tenant.tenant_name}-${cluster.environment}-federated-token-file
+      %{ endfor }
       %{ endfor }
   volumeMounts:
   - mountPath: /var/run/secrets/tokens
@@ -74,11 +76,13 @@ server:
     projected:
       defaultMode: 420
       sources:
-      %{ for cluster in clusters ~}
+      %{ for tenant in azure_tenants ~}
+      %{ for cluster in tenant.clusters ~}
       - serviceAccountToken:
           audience: api://AzureADTokenExchange
           expirationSeconds: 3600
-          path: ${tenant_name}-${cluster.environment}-federated-token-file
+          path: ${tenant.tenant_name}-${cluster.environment}-federated-token-file
+      %{ endfor }
       %{ endfor }
   volumeMounts:
   - mountPath: /var/run/secrets/tokens
@@ -98,7 +102,7 @@ configs:
           clientID: ${dex_client_id}
           clientSecret: ${dex_client_secret}
           redirectURI: http://127.0.0.1:5556/dex/callback
-          tenant: ${tenant_name}
+          tenant: ${dex_tenant_name}
           groups:
             - ${aad_group_name}
   params:

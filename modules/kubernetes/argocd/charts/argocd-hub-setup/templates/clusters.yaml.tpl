@@ -1,13 +1,15 @@
-{{- range .Values.clusters }}
+{{- range .Values.azure_tenants }}
+{{- $azure_tenant := . }}
+{{- range .clusters }}
 apiVersion: v1
 kind: Secret
 metadata:
-  name: {{- $.Values.tenant_name -}}-{{- .environment -}}-secret
+  name: {{- $a<ure_tenant.tenant_name -}}-{{- .environment -}}-secret
   labels:
     argocd.argoproj.io/secret-type: cluster
 type: Opaque
 stringData:
-  name: {{- .name | quote }}
+  name: {{- $azure_tenant.tenant_name -}}-{{- .environment -}}
   server: {{- .api_server | quote }}
   config: |
     {
@@ -16,8 +18,8 @@ stringData:
         "env": {
           "AAD_ENVIRONMENT_NAME": "AzurePublicCloud",
           "AZURE_CLIENT_ID": {{- .azure_client_id | quote }},
-          "AZURE_TENANT_ID": {{- .azure_tenant_id | quote }},
-          "AZURE_FEDERATED_TOKEN_FILE": "/var/run/secrets/tokens/{{- $.Values.tenant_name }}-{{- .environment }}-federated-token-file",
+          "AZURE_TENANT_ID": {{- $azure_tenant.tenant_id | quote }},
+          "AZURE_FEDERATED_TOKEN_FILE": "/var/run/secrets/tokens/{{- $azure_tenant.tenant_name -}}-{{- .environment -}}-federated-token-file",
           "AZURE_AUTHORITY_HOST": "https://login.microsoftonline.com/",
           "AAD_LOGIN_METHOD": "workloadidentity"
         },
@@ -30,17 +32,5 @@ stringData:
       }
     }
 ---
-{{- end }} 
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: argocd-clusteradmin
-subjects:
-  - kind: User
-    apiGroup: rbac.authorization.k8s.io
-    name: {{- .Values.uaid_id -}}
-    namespace: default
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
+{{- end }}
+{{- end }}  

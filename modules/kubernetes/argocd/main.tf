@@ -23,9 +23,11 @@ terraform {
 
 locals {
   key_vault_secret_names = flatten([
-    for cluster in var.argocd_config.clusters : [
-      for tenant in cluster.tenants : [
-        tenant.secret_name
+    for azure_tenant in var.argocd_config.azure_tenants : [
+      for cluster in azure_tenant.clusters : [
+        for tenant in cluster.tenants : [
+          tenant.secret_name
+        ]
       ]
     ]
   ])
@@ -55,7 +57,7 @@ resource "kubernetes_namespace" "argocd" {
   for_each = {
     for s in ["argocd"] :
     s => s
-    if length(var.argocd_config.clusters) > 0
+    if length(var.argocd_config.azure_tenants) > 0
   }
 
   metadata {
@@ -70,7 +72,7 @@ resource "helm_release" "argocd" {
   for_each = {
     for s in ["argocd"] :
     s => s
-    if length(var.argocd_config.clusters) > 0
+    if length(var.argocd_config.azure_tenants) > 0
   }
 
   depends_on  = [kubernetes_namespace.argocd]
@@ -89,10 +91,10 @@ resource "helm_release" "argocd" {
     application_set_replicas = var.argocd_config.application_set_replicas
     ingress_whitelist_ip     = var.argocd_config.ingress_whitelist_ip
     global_domain            = var.argocd_config.global_domain
+    dex_tenant_name          = var.argocd_config.dex_tenant_name
     dex_client_id            = azuread_application.dex["argocd"].client_id
     dex_client_secret        = azuread_application_password.dex["argocd"].value
-    tenant_name              = var.argocd_config.tenant_name
     aad_group_name           = var.argocd_config.aad_group_name
-    clusters                 = var.argocd_config.clusters
+    azure_tenants            = var.argocd_config.azure_tenants
   })]
 }

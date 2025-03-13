@@ -914,22 +914,26 @@ variable "argocd_config" {
     redis_enabled            = optional(bool, true)
     global_domain            = optional(string, "")
     ingress_whitelist_ip     = optional(string, "")
-    tenant_name              = optional(string, "")
-    clusters = optional(list(object({
-      name            = string
-      api_server      = string
-      oidc_issuer_url = string
-      environment     = string
-      azure_client_id = string
-      azure_tenant_id = string
-      ca_data         = string
-      tenants = optional(list(object({
-        namespace   = string
-        repo_url    = string
-        repo_path   = string
-        secret_name = string
-      })), [])
+    dex_tenant_name          = optional(string, "")
+    oidc_issuer_url          = optional(string, "")
+    azure_tenants = optional(list(object({
+      tenant_name = string
+      tenant_id   = string
+      clusters = list(object({
+        name            = string
+        api_server      = string
+        environment     = string
+        azure_client_id = string
+        ca_data         = string
+        tenants = list(object({
+          namespace   = string
+          repo_url    = string
+          repo_path   = string
+          secret_name = string
+        }))
+      }))
     })), [])
+
   })
   default = {}
 }

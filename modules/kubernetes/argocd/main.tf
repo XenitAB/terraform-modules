@@ -48,7 +48,7 @@ data "azurerm_key_vault" "core" {
 
 data "azurerm_key_vault_secret" "pat" {
   for_each = tomap({
-    for secret in local.key_vault_secret_names : secret => secret
+    for secret in distinct(local.key_vault_secret_names) : secret => secret
   })
   name         = each.key
   key_vault_id = data.azurerm_key_vault.core.id

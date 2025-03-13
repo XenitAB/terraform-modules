@@ -32,18 +32,11 @@ locals {
     ]
   ]))
 
-  #key_vault_secret_values = [
-  #  for s in local.key_vault_secret_names :
-  #  {
-  #    name : s
-  #    value : data.azurerm_key_vault_secret.pat[s].value
-  #  }
-  #]
-
   key_vault_secret_values = [
-    for secret_name in local.key_vault_secret_names :
+    for secret in local.key_vault_secret_names :
     {
-      secret_name : data.azurerm_key_vault_secret.pat[secret_name].value
+      name  : s
+      value : data.azurerm_key_vault_secret.pat[secret].value
     }
   ]
 }

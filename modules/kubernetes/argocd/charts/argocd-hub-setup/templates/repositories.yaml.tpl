@@ -15,7 +15,7 @@ metadata:
     argocd.argoproj.io/secret-type: repository
 type: Opaque
 data:
-  name: {{- printf %s-%s-%s $azure_tenant.tenant_name $cluster.environment .namespace | b64enc -}}
+  name: {{- printf "%s-%s-%s" $azure_tenant.tenant_name $cluster.environment .namespace | b64enc -}}
   type: Z2l0
   url: {{ .repo_url | b64enc }}
   username: Z2l0

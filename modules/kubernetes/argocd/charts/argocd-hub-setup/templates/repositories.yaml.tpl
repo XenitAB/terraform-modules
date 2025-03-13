@@ -10,7 +10,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: repo-{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}-{{- .namespace -}}
+  name: 'repo-{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}-{{- .namespace -}}'
   labels:
     argocd.argoproj.io/secret-type: repository
 type: Opaque

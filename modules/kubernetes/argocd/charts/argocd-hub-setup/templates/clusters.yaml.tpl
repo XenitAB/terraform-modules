@@ -4,13 +4,13 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: "{{- $azure_tenant.tenant_name -}}-{{- .environment -}}-secret"
+  name: 'cluster-{{- $azure_tenant.tenant_name -}}-{{- .environment -}}'
   labels:
     argocd.argoproj.io/secret-type: cluster
 type: Opaque
 stringData:
-  name: "{{- $azure_tenant.tenant_name -}}-{{- .environment -}}"
-  server: "{{- .api_server }}"
+  name: '{{- $azure_tenant.tenant_name -}}-{{- .environment -}}'
+  server: '{{- .api_server }}'
   config: |
     {
       "execProviderConfig": {

@@ -1,5 +1,5 @@
 {{- $secrets := dict }}
-{{- range .Values.secrets }}
+{{- range .Values.repositories.secrets }}
 {{- $_ := set $secrets  .name .value }}
 {{- end }}
 {{- range .Values.azure_tenants }}

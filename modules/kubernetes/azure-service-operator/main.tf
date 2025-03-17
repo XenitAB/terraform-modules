@@ -19,13 +19,6 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/azure-service-operator.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "azure_service_operator_cluster" {
   path = "platform/${var.cluster_id}/azure-service-operator/azure-service-operator-cluster.yaml"
   content = templatefile("${path.module}/templates/azure-service-operator-cluster.yaml.tpl", {

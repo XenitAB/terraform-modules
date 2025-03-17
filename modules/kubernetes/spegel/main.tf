@@ -15,15 +15,8 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/spegel.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "spegel" {
-  path = "platform/${var.cluster_id}/spegel/spegel.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/spegel.yaml"
   content = templatefile("${path.module}/templates/spegel.yaml.tpl", {
     private_registry = var.private_registry
   })

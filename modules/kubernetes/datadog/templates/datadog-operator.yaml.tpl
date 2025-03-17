@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana-agent-operator
+  name: datadog
   namespace: argocd
 spec:
   project: ${project_name}
   destination:
     server: ${server_name}
-    namespace: grafana-agent
+    namespace: datadog
   revisionHistoryLimit: 5
   syncPolicy:
     syncOptions:
@@ -16,22 +16,23 @@ spec:
     - ApplyOutOfSyncOnly=true
     - Replace=true
   source:
-    repoURL: https://grafana.github.io/helm-charts
-    targetRevision: v0.3.21
-    chart: grafana-agent-operator
+    repoURL: https://helm.datadoghq.com
+    targetRevision: 1.0.2
+    chart: datadog
     helm:
       valuesObject:
+        apiKeyExistingSecret: datadog-operator-apikey
+        appKeyExistingSecret: datadog-operator-appkey
+        installCRDs: true
+        image:
+          tag: 1.0.2
+        datadogMonitor:
+          enabled: true
         resources:
           requests:
-            cpu: 25m
-            memory: 80Mi
-          limits:
-            memory: 256Mi
-        kubeletService:
-          namespace: grafana-agent
-        serviceAccount:
-          name: grafana-
+            cpu: 15m
+            memory: 50Mi
   sources:
     - repoURL: ${repo_url}
       targetRevision: HEAD
-      path: platform/${tenant_name}/${cluster_id}/k8s-manifests/grafana-agent
+      path: platform/${tenant_name}/${cluster_id}/k8s-manifests/datadog-operator

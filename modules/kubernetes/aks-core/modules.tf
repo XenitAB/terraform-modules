@@ -37,7 +37,7 @@ module "aad_pod_identity" {
   for_each = {
     for s in ["aad-pod-identity"] :
     s => s
-    if var.aad_pod_identity_enabled
+    if var.platform_config.aad_pod_identity_enabled
   }
 
   source           = "../../kubernetes/aad-pod-identity"
@@ -73,7 +73,7 @@ module "azure_policy" {
   for_each = {
     for s in ["azure_policy"] :
     s => s
-    if var.azure_policy_enabled && !var.gatekeeper_enabled
+    if var.platform_config.azure_policy_enabled && !var.platform_config.gatekeeper_enabled
   }
 
   source = "../../kubernetes/azure-policy"
@@ -93,7 +93,7 @@ module "azure_service_operator" {
   for_each = {
     for s in ["azure_service_operator"] :
     s => s
-    if var.azure_service_operator_enabled
+    if var.platform_config.azure_service_operator_enabled
   }
 
   source = "../../kubernetes/azure-service-operator"
@@ -116,7 +116,7 @@ module "cert_manager" {
   for_each = {
     for s in ["cert-manager"] :
     s => s
-    if var.cert_manager_enabled
+    if var.platform_config.cert_manager_enabled
   }
 
   source = "../../kubernetes/cert-manager"
@@ -131,7 +131,7 @@ module "cert_manager" {
   oidc_issuer_url            = var.oidc_issuer_url
   resource_group_name        = data.azurerm_resource_group.this.name
   subscription_id            = data.azurerm_client_config.current.subscription_id
-  gateway_api_enabled        = var.gateway_api_enabled
+  gateway_api_enabled        = var.platform_config.gateway_api_enabled
   gateway_api_config         = var.gateway_api_config
 }
 
@@ -139,7 +139,7 @@ module "cert_manager_crd" {
   for_each = {
     for s in ["cert-manager"] :
     s => s
-    if var.cert_manager_enabled
+    if var.platform_config.cert_manager_enabled
   }
 
   source = "../../kubernetes/helm-crd"
@@ -156,7 +156,7 @@ module "control_plane_logs" {
   for_each = {
     for s in ["control_plane_logs"] :
     s => s
-    if var.control_plane_logs_enabled
+    if var.platform_config.control_plane_logs_enabled
   }
 
   source = "../../kubernetes/control-plane-logs"
@@ -178,7 +178,7 @@ module "datadog" {
   for_each = {
     for s in ["datadog"] :
     s => s
-    if var.datadog_enabled
+    if var.platform_config.datadog_enabled
   }
 
   source = "../../kubernetes/datadog"
@@ -203,7 +203,7 @@ module "eck_operator" {
   for_each = {
     for s in ["eck_operator"] :
     s => s
-    if var.eck_operator_enabled
+    if var.platform_config.eck_operator_enabled
   }
 
   source                 = "../../kubernetes/eck-operator"
@@ -264,52 +264,30 @@ module "falco" {
   source = "../../kubernetes/falco"
 
   cluster_id     = local.cluster_id
-  cilium_enabled = var.cilium_enabled
-}
-
-module "fluxcd" {
-  for_each = {
-    for s in ["fluxcd"] :
-    s => s
-    if var.fluxcd_enabled
-  }
-
-  depends_on = [module.karpenter]
-
-  source = "../../kubernetes/fluxcd"
-
-  environment  = var.environment
-  cluster_id   = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
-  git_provider = var.fluxcd_config.git_provider
-  bootstrap    = var.fluxcd_config.bootstrap
-  namespaces = [for ns in var.namespaces : {
-    name   = ns.name
-    labels = ns.labels
-    fluxcd = ns.flux
-  }]
+  cilium_enabled = var.platform_config.cilium_enabled
 }
 
 module "gatekeeper" {
   for_each = {
     for s in ["gatekeeper"] :
     s => s
-    if var.gatekeeper_enabled && !var.azure_policy_enabled
+    if var.platform_config.gatekeeper_enabled && !var.platform_config.azure_policy_enabled
   }
 
   source = "../../kubernetes/gatekeeper"
 
   cluster_id                     = local.cluster_id
-  azure_service_operator_enabled = var.azure_service_operator_enabled
+  azure_service_operator_enabled = var.platform_config.azure_service_operator_enabled
   exclude_namespaces             = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
-  mirrord_enabled                = var.mirrord_enabled
-  telepresence_enabled           = var.telepresence_enabled
+  mirrord_enabled                = var.platform_config.mirrord_enabled
+  telepresence_enabled           = var.platform_config.telepresence_enabled
 }
 
 module "gateway_api" {
   for_each = {
     for s in ["gateway-api"] :
     s => s
-    if var.gateway_api_enabled
+    if var.platform_config.gateway_api_enabled
   }
 
   source = "../../kubernetes/gateway-api"
@@ -324,7 +302,7 @@ module "grafana_agent" {
   for_each = {
     for s in ["grafana-agent"] :
     s => s
-    if var.grafana_agent_enabled
+    if var.platform_config.grafana_agent_enabled
   }
 
   source = "../../kubernetes/grafana-agent"
@@ -356,7 +334,7 @@ module "grafana_agent_crd" {
   for_each = {
     for s in ["grafana-agent"] :
     s => s
-    if var.grafana_agent_enabled
+    if var.platform_config.grafana_agent_enabled
   }
 
   source = "../../kubernetes/helm-crd"
@@ -371,7 +349,7 @@ module "grafana_alloy" {
   for_each = {
     for s in ["grafana-alloy"] :
     s => s
-    if var.grafana_alloy_enabled
+    if var.platform_config.grafana_alloy_enabled
   }
 
   source = "../../kubernetes/grafana-alloy"
@@ -398,7 +376,7 @@ module "grafana_k8s_monitoring" {
   for_each = {
     for s in ["grafana_k8s_monitoring"] :
     s => s
-    if var.grafana_k8s_monitoring_enabled
+    if var.platform_config.grafana_k8s_monitoring_enabled
   }
 
   source = "../../kubernetes/grafana-k8s-monitoring"
@@ -418,18 +396,18 @@ module "grafana_k8s_monitoring" {
     exclude_namespaces            = var.grafana_k8s_monitor_config.exclude_namespaces
   }
 
-  aad_pod_identity_enabled = var.aad_pod_identity_enabled
-  cilium_enabled           = var.cilium_enabled
+  aad_pod_identity_enabled = var.platform_config.aad_pod_identity_enabled
+  cilium_enabled           = var.platform_config.cilium_enabled
   falco_enabled            = var.falco_enabled
   flux_enabled             = var.fluxcd_enabled
-  gatekeeper_enabled       = var.gatekeeper_enabled
-  grafana_agent_enabled    = var.grafana_agent_enabled
-  linkerd_enabled          = var.linkerd_enabled
-  node_local_dns_enabled   = var.node_local_dns_enabled
-  node_ttl_enabled         = var.node_ttl_enabled
-  promtail_enabled         = var.promtail_enabled
-  spegel_enabled           = var.spegel_enabled
-  trivy_enabled            = var.trivy_enabled
+  gatekeeper_enabled       = var.platform_config.gatekeeper_enabled
+  grafana_agent_enabled    = var.platform_config.grafana_agent_enabled
+  linkerd_enabled          = var.platform_config.linkerd_enabled
+  node_local_dns_enabled   = var.platform_config.node_local_dns_enabled
+  node_ttl_enabled         = var.platform_config.node_ttl_enabled
+  promtail_enabled         = var.platform_config.promtail_enabled
+  spegel_enabled           = var.platform_config.spegel_enabled
+  trivy_enabled            = var.platform_config.trivy_enabled
 }
 
 module "ingress_nginx" {
@@ -438,13 +416,13 @@ module "ingress_nginx" {
   for_each = {
     for s in ["ingress-nginx"] :
     s => s
-    if var.ingress_nginx_enabled
+    if var.platform_config.ingress_nginx_enabled
   }
 
   source = "../../kubernetes/ingress-nginx"
 
   aad_groups            = var.aad_groups
-  external_dns_hostname = var.external_dns_hostname
+  external_dns_hostname = var.platform_config.external_dns_hostname
   default_certificate = {
     enabled  = true
     dns_zone = var.cert_manager_config.dns_zone[0]
@@ -453,8 +431,8 @@ module "ingress_nginx" {
   private_ingress_enabled             = var.ingress_nginx_config.private_ingress_enabled
   customization                       = var.ingress_nginx_config.customization
   customization_private               = var.ingress_nginx_config.customization_private
-  linkerd_enabled                     = var.linkerd_enabled
-  datadog_enabled                     = var.datadog_enabled
+  linkerd_enabled                     = var.platform_config.linkerd_enabled
+  datadog_enabled                     = var.platform_config.datadog_enabled
   cluster_id                          = local.cluster_id
   replicas                            = var.ingress_nginx_config.replicas
   min_replicas                        = var.ingress_nginx_config.min_replicas
@@ -466,7 +444,7 @@ module "karpenter" {
   for_each = {
     for s in ["karpenter"] :
     s => s
-    if var.karpenter_enabled
+    if var.platform_config.karpenter_enabled
   }
 
   source = "../../kubernetes/karpenter"
@@ -497,7 +475,7 @@ module "litmus" {
   for_each = {
     for s in ["litmus"] :
     s => s
-    if var.litmus_enabled
+    if var.platform_config.litmus_enabled
   }
 
   source = "../../kubernetes/litmus"
@@ -513,7 +491,7 @@ module "nginx_gateway_fabric" {
   for_each = {
     for s in ["nginx-gateway"] :
     s => s
-    if var.nginx_gateway_enabled
+    if var.platform_config.nginx_gateway_enabled
   }
 
   source = "../../kubernetes/nginx-gateway-fabric"
@@ -527,12 +505,12 @@ module "popeye" {
   for_each = {
     for s in ["popeye"] :
     s => s
-    if var.popeye_enabled
+    if var.platform_config.popeye_enabled
   }
 
   source = "../../kubernetes/popeye"
 
-  aks_managed_identity_id = var.cilium_enabled ? data.azurerm_kubernetes_cluster.this.identity[0].identity_ids[0] : data.azurerm_kubernetes_cluster.this.identity[0].principal_id
+  aks_managed_identity_id = var.platform_config.cilium_enabled ? data.azurerm_kubernetes_cluster.this.identity[0].identity_ids[0] : data.azurerm_kubernetes_cluster.this.identity[0].principal_id
   cluster_id              = local.cluster_id
   location                = data.azurerm_key_vault.core.location
   oidc_issuer_url         = var.oidc_issuer_url
@@ -546,7 +524,7 @@ module "linkerd" {
   for_each = {
     for s in ["linkerd"] :
     s => s
-    if var.linkerd_enabled
+    if var.platform_config.linkerd_enabled
   }
 
   source = "../../kubernetes/linkerd"
@@ -558,7 +536,7 @@ module "linkerd_crd" {
   for_each = {
     for s in ["linkerd"] :
     s => s
-    if var.linkerd_enabled
+    if var.platform_config.linkerd_enabled
   }
 
   chart_repository = "https://helm.linkerd.io/stable"
@@ -570,7 +548,7 @@ module "node_local_dns" {
   for_each = {
     for s in ["node-local-dns"] :
     s => s
-    if var.node_local_dns_enabled && !var.cilium_enabled
+    if var.platform_config.node_local_dns_enabled && !var.platform_config.cilium_enabled
   }
 
   source = "../../kubernetes/node-local-dns"
@@ -578,14 +556,14 @@ module "node_local_dns" {
   cluster_id       = local.cluster_id
   dns_ip           = "10.0.0.10"
   coredns_upstream = var.coredns_upstream
-  cilium_enabled   = var.cilium_enabled
+  cilium_enabled   = var.platform_config.cilium_enabled
 }
 
 module "node_ttl" {
   for_each = {
     for s in ["node-ttl"] :
     s => s
-    if var.node_ttl_enabled
+    if var.platform_config.node_ttl_enabled
   }
 
   source = "../../kubernetes/node-ttl"
@@ -600,7 +578,7 @@ module "prometheus" {
   for_each = {
     for s in ["prometheus"] :
     s => s
-    if var.prometheus_enabled
+    if var.platform_config.prometheus_enabled
   }
 
   source = "../../kubernetes/prometheus"
@@ -624,26 +602,26 @@ module "prometheus" {
   volume_claim_storage_class_name = var.prometheus_volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
-  aad_pod_identity_enabled = var.aad_pod_identity_enabled
-  cilium_enabled           = var.cilium_enabled
+  aad_pod_identity_enabled = var.platform_config.aad_pod_identity_enabled
+  cilium_enabled           = var.platform_config.cilium_enabled
   falco_enabled            = var.falco_enabled
   flux_enabled             = var.fluxcd_enabled
-  gatekeeper_enabled       = var.gatekeeper_enabled
-  grafana_agent_enabled    = var.grafana_agent_enabled
-  linkerd_enabled          = var.linkerd_enabled
-  node_local_dns_enabled   = var.node_local_dns_enabled
-  node_ttl_enabled         = var.node_ttl_enabled
-  promtail_enabled         = var.promtail_enabled
-  spegel_enabled           = var.spegel_enabled
-  trivy_enabled            = var.trivy_enabled
-  vpa_enabled              = var.vpa_enabled
+  gatekeeper_enabled       = var.platform_config.gatekeeper_enabled
+  grafana_agent_enabled    = var.platform_config.grafana_agent_enabled
+  linkerd_enabled          = var.platform_config.linkerd_enabled
+  node_local_dns_enabled   = var.platform_config.node_local_dns_enabled
+  node_ttl_enabled         = var.platform_config.node_ttl_enabled
+  promtail_enabled         = var.platform_config.promtail_enabled
+  spegel_enabled           = var.platform_config.spegel_enabled
+  trivy_enabled            = var.platform_config.trivy_enabled
+  vpa_enabled              = var.platform_config.vpa_enabled
 }
 
 module "prometheus_crd" {
   for_each = {
     for s in ["prometheus"] :
     s => s
-    if var.prometheus_enabled
+    if var.platform_config.prometheus_enabled
   }
 
   source = "../../kubernetes/helm-crd"
@@ -657,7 +635,7 @@ module "promtail" {
   for_each = {
     for s in ["promtail"] :
     s => s
-    if var.promtail_enabled
+    if var.platform_config.promtail_enabled
   }
 
   source = "../../kubernetes/promtail"
@@ -681,7 +659,7 @@ module "rabbitmq_operator" {
   for_each = {
     for s in ["rabbitmq"] :
     s => s
-    if var.rabbitmq_enabled
+    if var.platform_config.rabbitmq_enabled
   }
 
   source          = "../../kubernetes/rabbitmq-operator"
@@ -693,7 +671,7 @@ module "reloader" {
   for_each = {
     for s in ["reloader"] :
     s => s
-    if var.reloader_enabled
+    if var.platform_config.reloader_enabled
   }
 
   source     = "../../kubernetes/reloader"
@@ -705,7 +683,7 @@ module "trivy" {
   for_each = {
     for s in ["trivy"] :
     s => s
-    if var.trivy_enabled && !var.defender_enabled
+    if var.platform_config.trivy_enabled && !var.platform_config.defender_enabled
   }
 
   source = "../../kubernetes/trivy"
@@ -728,7 +706,7 @@ module "velero" {
   for_each = {
     for s in ["velero"] :
     s => s
-    if var.velero_enabled
+    if var.platform_config.velero_enabled
   }
 
   source = "../../kubernetes/velero"
@@ -751,7 +729,7 @@ module "vpa" {
   for_each = {
     for s in ["vpa"] :
     s => s
-    if var.vpa_enabled
+    if var.platform_config.vpa_enabled
   }
 
   source = "../../kubernetes/vpa"
@@ -763,7 +741,7 @@ module "spegel" {
   for_each = {
     for s in ["spegel"] :
     s => s
-    if var.spegel_enabled
+    if var.platform_config.spegel_enabled
   }
 
   source = "../../kubernetes/spegel"
@@ -776,7 +754,7 @@ module "telepresence" {
   for_each = {
     for s in ["telepresence"] :
     s => s
-    if var.telepresence_enabled
+    if var.platform_config.telepresence_enabled
   }
 
   source = "../../kubernetes/telepresence"

@@ -16,15 +16,8 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/reloader.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "reloader" {
-  path = "platform/${var.cluster_id}/reloader/reloader.yaml"
+  path = "platform/${var.tenants_name}/${var.cluster_id}/argocd-applications/reloader.yaml"
   content = templatefile("${path.module}/templates/reloader.yaml.tpl", {
   })
 }

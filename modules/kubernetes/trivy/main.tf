@@ -27,22 +27,15 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/trivy.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id,
-  })
-}
-
 resource "git_repository_file" "trivy_operator" {
-  path = "platform/${var.cluster_id}/trivy/trivy-operator.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy-operator.yaml"
   content = templatefile("${path.module}/templates/trivy-operator.yaml.tpl", {
     client_id = azurerm_user_assigned_identity.trivy.client_id,
   })
 }
 
 resource "git_repository_file" "trivy" {
-  path = "platform/${var.cluster_id}/trivy/trivy.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy.yaml"
   content = templatefile("${path.module}/templates/trivy.yaml.tpl", {
     client_id                       = azurerm_user_assigned_identity.trivy.client_id,
     volume_claim_storage_class_name = var.volume_claim_storage_class_name,
@@ -56,7 +49,7 @@ resource "git_repository_file" "starboard_eporter" {
     if var.starboard_exporter_enabled
   }
 
-  path = "platform/${var.cluster_id}/trivy/starboard-eporter.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/starboard-eporter.yaml"
   content = templatefile("${path.module}/templates/starboard-exporter.yaml.tpl", {
   })
 }

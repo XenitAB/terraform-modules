@@ -15,15 +15,8 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/rabbitmq-operator.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "rabbitmq_operator" {
-  path = "platform/${var.cluster_id}/rabbitmq-operator/rabbitmq-operator.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/rabbitmq-operator.yaml"
   content = templatefile("${path.module}/templates/rabbitmq-operator.yaml.tpl", {
     min_available           = var.rabbitmq_config.min_available
     replica_count           = var.rabbitmq_config.replica_count

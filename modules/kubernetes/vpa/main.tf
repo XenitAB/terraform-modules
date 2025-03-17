@@ -19,14 +19,12 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/vpa.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
+resource "git_repository_file" "vpa" {
+  path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/vpa.yaml"
+  content = templatefile("${path.module}/templates/vpa.yaml.tpl", {})
 }
 
-resource "git_repository_file" "vpa" {
-  path    = "platform/${var.cluster_id}/vpa/vpa.yaml"
-  content = templatefile("${path.module}/templates/vpa.yaml.tpl", {})
+resource "git_repository_file" "goldilocks" {
+  path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/goldilocks.yaml"
+  content = templatefile("${path.module}/templates/goldilocks.yaml.tpl", {})
 }

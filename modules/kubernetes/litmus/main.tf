@@ -16,10 +16,6 @@ terraform {
       source  = "xenitab/git"
       version = "0.0.3"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
   }
 }
 
@@ -33,28 +29,8 @@ data "azurerm_key_vault_secret" "mongodb" {
   key_vault_id = data.azurerm_key_vault.core.id
 }
 
-resource "kubernetes_namespace" "litmus" {
-  metadata {
-    name = "litmus"
-    labels = {
-      "xkf.xenit.io/kind" = "platform"
-    }
-  }
-}
-
-resource "git_repository_file" "kustomization" {
-  depends_on = [kubernetes_namespace.litmus]
-
-  path = "clusters/${var.cluster_id}/litmuschaos.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "litmus" {
-  depends_on = [kubernetes_namespace.litmus]
-
-  path = "platform/${var.cluster_id}/litmus/litmuschaos.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/litmuschaos.yaml"
   content = templatefile("${path.module}/templates/litmuschaos.yaml.tpl", {
     cluster_id            = var.cluster_id
     mongodb_root_password = data.azurerm_key_vault_secret.mongodb.value

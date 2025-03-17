@@ -8,41 +8,15 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    azurerm = {
-      version = "4.19.0"
-      source  = "hashicorp/azurerm"
-    }
     git = {
       source  = "xenitab/git"
       version = "0.0.3"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
   }
-}
-
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = "eck-system"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "eck-system"
-  }
-}
-
-resource "git_repository_file" "kustomization" {
-  path       = "clusters/${var.cluster_id}/eck-operator.yaml"
-  depends_on = [kubernetes_namespace.this]
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id,
-  })
 }
 
 resource "git_repository_file" "eck_operator" {
-  path = "platform/${var.cluster_id}/eck-operator/eck-operator.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/eck-operator.yaml"
   content = templatefile("${path.module}/templates/eck-operator.yaml.tpl", {
     eck_managed_namespaces = var.eck_managed_namespaces
   })

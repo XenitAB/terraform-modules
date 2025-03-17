@@ -17,22 +17,15 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/falco.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "falco" {
-  path = "platform/${var.cluster_id}/falco/falco.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/falco.yaml"
   content = templatefile("${path.module}/templates/falco.yaml.tpl", {
     cilium_enabled = var.cilium_enabled
   })
 }
 
 resource "git_repository_file" "falco_exporter" {
-  path = "platform/${var.cluster_id}/falco/falco-exporter.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/falco-exporter.yaml"
   content = templatefile("${path.module}/templates/falco-exporter.yaml.tpl", {
   })
 }

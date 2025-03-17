@@ -1,54 +1,44 @@
-apiVersion: v1
-kind: Namespace
-metadata:
- name: spegel
- labels:
-   name: spegel
-   xkf.xenit.io/kind: platform
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: spegel
-  namespace: spegel
+  namespace: argocd
 spec:
-  type: "oci"
-  interval: 1m0s
-  url: "oci://ghcr.io/spegel-org/helm-charts"
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: spegel
-  namespace: spegel
-spec:
-  chart:
-    spec:
-      chart: spegel
-      sourceRef:
-        kind: HelmRepository
-        name: spegel
-      version: v0.0.30
-  interval: 1m0s
-  values:
-    resources:
-      requests:
-        cpu: 15m
-        memory: 40Mi
-      limits:
-        memory: 140Mi
-    spegel:
-      mirrorResolveTimeout: "1s"
-      registries:
-        - https://cgr.dev
-        - https://docker.io
-        - https://ghcr.io
-        - https://quay.io
-        - https://mcr.microsoft.com
-        - https://gcr.io
-        - https://registry.k8s.io
-        - https://k8s.gcr.io
-        - https://lscr.io
-        %{~ if private_registry != "" ~}
-        - ${ private_registry }
-        %{~ endif ~}
+  project: ${project_name}
+  destination:
+    server: ${server_name}
+    namespace: spegel
+  revisionHistoryLimit: 5
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+    - ApplyOutOfSyncOnly=true
+    - Replace=true
+  source:
+    repoURL: oci://ghcr.io/spegel-org/helm-charts
+    targetRevision: v0.0.30
+    chart: spegel
+    helm:
+      valuesObject:
+        resources:
+          requests:
+            cpu: 15m
+            memory: 40Mi
+          limits:
+            memory: 140Mi
+        spegel:
+          mirrorResolveTimeout: "1s"
+          registries:
+            - https://cgr.dev
+            - https://docker.io
+            - https://ghcr.io
+            - https://quay.io
+            - https://mcr.microsoft.com
+            - https://gcr.io
+            - https://registry.k8s.io
+            - https://k8s.gcr.io
+            - https://lscr.io
+            %{~ if private_registry != "" ~}
+            - ${ private_registry }
+            %{~ endif ~}

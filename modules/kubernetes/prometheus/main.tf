@@ -19,75 +19,72 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/prometheus.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 # Prometheus operator and other core monitoring components.
 resource "git_repository_file" "prometheus_operator" {
-  path = "platform/${var.cluster_id}/prometheus/prometheus-operator.yaml"
-  content = templatefile("${path.module}/templates/prometheus-operator.yaml.tpl", {
-    vpa_enabled = var.vpa_enabled,
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kube-prometheus-stack.yaml"
+  content = templatefile("${path.module}/templates/kube-prometheus-stack.yaml.tpl", {
+    vpa_enabled = var.vpa_enabled
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
   })
 }
 
 resource "git_repository_file" "prometheus" {
-  path = "platform/${var.cluster_id}/prometheus/prometheus.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/kube-prometheus-stack/prometheus.yaml"
   content = templatefile("${path.module}/templates/prometheus.yaml.tpl", {
-    cluster_name                    = var.cluster_name,
-    environment                     = var.environment,
-    region                          = var.region,
-    tenant_id                       = data.azurerm_user_assigned_identity.xenit.tenant_id,
-    remote_write_authenticated      = var.remote_write_authenticated,
-    remote_write_url                = var.remote_write_url,
-    volume_claim_storage_class_name = var.volume_claim_storage_class_name,
-    volume_claim_size               = var.volume_claim_size,
-    resource_selector               = "[${join(", ", var.resource_selector)}]",
-    namespace_selector              = "[${join(", ", var.namespace_selector)}]",
+    cluster_name                    = var.cluster_name
+    environment                     = var.environment
+    region                          = var.region
+    tenant_id                       = data.azurerm_user_assigned_identity.xenit.tenant_id
+    remote_write_authenticated      = var.remote_write_authenticated
+    remote_write_url                = var.remote_write_url
+    volume_claim_storage_class_name = var.volume_claim_storage_class_name
+    volume_claim_size               = var.volume_claim_size
+    resource_selector               = "[${join(", ", var.resource_selector)}]"
+    namespace_selector              = "[${join(", ", var.namespace_selector)}]"
+    tenant_name                     = var.tenant_name
+    cluster_id                      = var.cluster_id
   })
 }
 
 resource "git_repository_file" "rbac" {
-  path = "platform/${var.cluster_id}/prometheus/rbac.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/kube-prometheus-stack/rbac.yaml"
   content = templatefile("${path.module}/templates/rbac.yaml.tpl", {
-    client_id = data.azurerm_user_assigned_identity.xenit.client_id,
+    client_id = data.azurerm_user_assigned_identity.xenit.client_id
   })
 }
 
 resource "git_repository_file" "monitors" {
-  path = "platform/${var.cluster_id}/prometheus/monitors.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/kube-prometheus-stack/monitors.yaml"
   content = templatefile("${path.module}/templates/monitors.yaml.tpl", {
-    falco_enabled            = var.falco_enabled,
-    gatekeeper_enabled       = var.gatekeeper_enabled,
-    linkerd_enabled          = var.linkerd_enabled,
-    flux_enabled             = var.flux_enabled,
-    aad_pod_identity_enabled = var.aad_pod_identity_enabled,
-    azad_kube_proxy_enabled  = var.azad_kube_proxy_enabled,
-    trivy_enabled            = var.trivy_enabled,
-    grafana_agent_enabled    = var.grafana_agent_enabled,
-    node_local_dns_enabled   = var.node_local_dns_enabled,
-    promtail_enabled         = var.promtail_enabled,
-    node_ttl_enabled         = var.node_ttl_enabled,
-    spegel_enabled           = var.spegel_enabled,
-    cilium_enabled           = var.cilium_enabled,
+    falco_enabled            = var.falco_enabled
+    gatekeeper_enabled       = var.gatekeeper_enabled
+    linkerd_enabled          = var.linkerd_enabled
+    flux_enabled             = var.flux_enabled
+    aad_pod_identity_enabled = var.aad_pod_identity_enabled
+    azad_kube_proxy_enabled  = var.azad_kube_proxy_enabled
+    trivy_enabled            = var.trivy_enabled
+    grafana_agent_enabled    = var.grafana_agent_enabled
+    node_local_dns_enabled   = var.node_local_dns_enabled
+    promtail_enabled         = var.promtail_enabled
+    node_ttl_enabled         = var.node_ttl_enabled
+    spegel_enabled           = var.spegel_enabled
+    cilium_enabled           = var.cilium_enabled
   })
 }
 
 resource "git_repository_file" "secret_provider_class" {
-  path = "platform/${var.cluster_id}/prometheus/secret-provider-class.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/kube-prometheus-stack/secret-provider-class.yaml"
   content = templatefile("${path.module}/templates/secret-provider-class.yaml.tpl", {
-    azure_key_vault_name = var.azure_config.azure_key_vault_name,
-    client_id            = data.azurerm_user_assigned_identity.xenit.client_id,
-    tenant_id            = data.azurerm_user_assigned_identity.xenit.tenant_id,
+    azure_key_vault_name = var.azure_config.azure_key_vault_name
+    client_id            = data.azurerm_user_assigned_identity.xenit.client_id
+    tenant_id            = data.azurerm_user_assigned_identity.xenit.tenant_id
   })
 }
 
 # https://github.com/enix/x509-certificate-exporter
 resource "git_repository_file" "x509_certificate_exporter" {
-  path = "platform/${var.cluster_id}/prometheus/x509-certificate-exporter.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/x509-certificate-exporter.yaml"
   content = templatefile("${path.module}/templates/x509-certificate-exporter.yaml.tpl", {
   })
 }

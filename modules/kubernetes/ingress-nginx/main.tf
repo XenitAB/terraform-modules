@@ -12,36 +12,11 @@ terraform {
       source  = "xenitab/git"
       version = "0.0.3"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
   }
-}
-
-resource "kubernetes_namespace" "ingress_nginx" {
-  metadata {
-    name = "ingress-nginx"
-    labels = {
-      "xkf.xenit.io/kind" = "platform"
-      "name"              = "ingress-nginx"
-    }
-  }
-}
-
-resource "git_repository_file" "kustomization" {
-  depends_on = [kubernetes_namespace.ingress_nginx]
-
-  path = "clusters/${var.cluster_id}/ingress-nginx.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
 }
 
 resource "git_repository_file" "ingress_nginx" {
-  depends_on = [kubernetes_namespace.ingress_nginx]
-
-  path = "platform/${var.cluster_id}/ingress-nginx/ingress-nginx.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx.yaml.tpl", {
     ingress_class          = "nginx"
     ingress_nginx_name     = "ingress-nginx"
@@ -69,14 +44,13 @@ resource "git_repository_file" "ingress_nginx" {
 }
 
 resource "git_repository_file" "ingress_nginx_private" {
-  depends_on = [kubernetes_namespace.ingress_nginx]
   for_each = {
     for s in ["ingress-nginx-private"] :
     s => s
-    if var.private_ingress_enabled
+    if var.platform_config.private_ingress_enabled
   }
 
-  path = "platform/${var.cluster_id}/ingress-nginx/ingress-nginx-private.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx-private.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx.yaml.tpl", {
     ingress_class          = "nginx-private"
     ingress_nginx_name     = "ingress-nginx-private"
@@ -98,6 +72,21 @@ resource "git_repository_file" "ingress_nginx_private" {
     linkerd_enabled                     = var.linkerd_enabled
     datadog_enabled                     = var.datadog_enabled
     nginx_healthz_ingress_enabled       = false
+    nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
+    nginx_healthz_ingress_hostname      = var.nginx_healthz_ingress_hostname
+  })
+}
+
+resource "git_repository_file" "ingress_nginx_extras" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/ingres-nginx/ingress-nginx.yaml"
+  content = templatefile("${path.module}/templates/ingress-nginx-extras.yaml.tpl", {
+    ingress_nginx_name = "ingress-nginx"
+    default_certificate = {
+      enabled         = var.default_certificate.enabled
+      dns_zone        = var.default_certificate.dns_zone
+      namespaced_name = "ingress-nginx/ingress-nginx"
+    }
+    nginx_healthz_ingress_enabled       = true
     nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
     nginx_healthz_ingress_hostname      = var.nginx_healthz_ingress_hostname
   })

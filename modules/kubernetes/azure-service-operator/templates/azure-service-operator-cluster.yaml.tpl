@@ -1,41 +1,32 @@
-apiVersion: v1
-kind: Namespace
-metadata:
- name: azureserviceoperator-system
- labels:
-   name: azureserviceoperator-system
-   xkf.xenit.io/kind: platform
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: aso2
-  namespace: azureserviceoperator-system
-spec:
-  interval: 1m0s
-  url: "https://raw.githubusercontent.com/Azure/azure-service-operator/main/v2/charts"
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: azure-service-operator
-  namespace: azureserviceoperator-system
+  namespace: argocd
 spec:
-  chart:
-    spec:
-      chart: azure-service-operator
-      sourceRef:
-        kind: HelmRepository
-        name: aso2
-      version: v2.7.0
-  interval: 1m0s
-  values:
-    azureSyncPeriod: "${sync_period}"
-    crdPattern: "${crd_pattern}"
-    metrics:
-      enable: ${enable_metrics}
-    networkPolicies:
-      enable: false
+  project: ${project_name}
+  destination:
+    server: ${server_name}
+    namespace: azureserviceoperator-system
+  revisionHistoryLimit: 5
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+    - ApplyOutOfSyncOnly=true
+    - Replace=true
+  source:
+    repoURL: https://raw.githubusercontent.com/Azure/azure-service-operator/main/v2/charts
+    targetRevision: v2.7.0
+    chart: azure-service-operator
+    helm:
+      valuesObject:
+        azureSyncPeriod: "${sync_period}"
+        crdPattern: "${crd_pattern}"
+        metrics:
+          enable: ${enable_metrics}
+        networkPolicies:
+          enable: false
 
     
     

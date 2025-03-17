@@ -1,40 +1,38 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: envoy-gateway
-  namespace: envoy-gateway
+  namespace: argocd
 spec:
-  interval: 1m0s
-  type: oci
-  url: "oci://docker.io/envoyproxy/"
----
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: envoy-gateway
-  namespace: envoy-gateway
-spec:
-  chart:
-    spec:
-      chart: gateway-helm
-      sourceRef:
-        kind: HelmRepository
-        name: envoy-gateway
-      version: "v0.0.0-latest"
-  interval: 1m0s
-  values:
-    config:
-      envoyGateway:
-        logging:
-          level:
-            default: ${envoy_gateway_config.logging_level}
-    deployment:
-      replicas: ${envoy_gateway_config.replicas_count}
-      envoyGateway:
-        resources:
-          limits:
-            memory: ${envoy_gateway_config.resources_memory_limit}
-          requests:
-            cpu: ${envoy_gateway_config.resources_cpu_requests}
-            memory: ${envoy_gateway_config.resources_memory_requests}
+  project: ${project_name}
+  destination:
+    server: ${server_name}
+    namespace: envoy-gateway
+  revisionHistoryLimit: 5
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+    - ApplyOutOfSyncOnly=true
+    - Replace=true
+  source:
+    repoURL: oci://docker.io/envoyproxy
+    targetRevision: v0.0.0-latest
+    chart: gateway-helm
+    helm:
+      valuesObject:
+        config:
+          envoyGateway:
+            logging:
+              level:
+                default: ${envoy_gateway_config.logging_level}
+        deployment:
+          replicas: ${envoy_gateway_config.replicas_count}
+          envoyGateway:
+            resources:
+              limits:
+                memory: ${envoy_gateway_config.resources_memory_limit}
+              requests:
+                cpu: ${envoy_gateway_config.resources_cpu_requests}
+                memory: ${envoy_gateway_config.resources_memory_requests}
  

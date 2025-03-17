@@ -21,16 +21,6 @@ terraform {
   }
 }
 
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = "grafana-agent"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "grafana-agent"
-  }
-}
-
 resource "kubernetes_secret" "this" {
   depends_on = [kubernetes_namespace.this]
 
@@ -49,24 +39,16 @@ resource "kubernetes_secret" "this" {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/grafana-agent.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id               = var.cluster_id
-    remote_write_logs_url    = var.remote_write_urls.logs
-    remote_write_metrics_url = var.remote_write_urls.metrics
-    remote_write_traces_url  = var.remote_write_urls.traces
-  })
-}
-
 resource "git_repository_file" "grafana_agent" {
-  path = "platform/${var.cluster_id}/grafana-agent/grafana-agent.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-agent.yaml"
   content = templatefile("${path.module}/templates/grafana-agent.yaml.tpl", {
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
   })
 }
 
 resource "git_repository_file" "grafana_agent_extras" {
-  path = "platform/${var.cluster_id}/grafana-agent/grafana-agent-extras.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/grafana-agent/grafana-agent-extras.yaml"
   content = templatefile("${path.module}/templates/grafana-agent-extras.yaml.tpl", {
     credentials_secret_name     = kubernetes_secret.this.metadata[0].name
     remote_write_metrics_url    = var.remote_write_urls.metrics
@@ -81,7 +63,7 @@ resource "git_repository_file" "grafana_agent_extras" {
 }
 
 resource "git_repository_file" "kube_state_metrics" {
-  path = "platform/${var.cluster_id}/grafana-agent/kube-state-metrics.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kube-state-metrics.yaml"
   content = templatefile("${path.module}/templates/kube-state-metrics.yaml.tpl", {
     namespaces_csv = join(",", compact(concat(var.namespace_include, var.extra_namespaces)))
   })

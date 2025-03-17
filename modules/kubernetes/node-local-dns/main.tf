@@ -15,13 +15,6 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/node-local-dns.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "node_local_dns" {
   path = "platform/${var.cluster_id}/node-local-dns/node-local-dns.yaml"
   content = templatefile("${path.module}/templates/node-local-dns.yaml.tpl", {

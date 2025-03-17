@@ -19,15 +19,8 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/velero.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id,
-  })
-}
-
 resource "git_repository_file" "velero" {
-  path = "platform/${var.cluster_id}/velero/velero.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/velero.yaml"
   content = templatefile("${path.module}/templates/velero.yaml.tpl", {
     azure_config        = var.azure_config,
     client_id           = azurerm_user_assigned_identity.velero.client_id,
@@ -40,7 +33,7 @@ resource "git_repository_file" "velero" {
 }
 
 resource "git_repository_file" "velero_extras" {
-  path = "platform/${var.cluster_id}/velero/velero-extras.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/velero/velero-extras.yaml"
   content = templatefile("${path.module}/templates/velero-extras.yaml.tpl", {
   })
 }

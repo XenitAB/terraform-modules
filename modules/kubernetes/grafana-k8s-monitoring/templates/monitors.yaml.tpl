@@ -23,7 +23,6 @@ spec:
           - image-reflector-controller
   podMetricsEndpoints:
     - port: http-prom
-
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -461,7 +460,6 @@ spec:
   endpoints:
     - port: metrics
 %{ endif }
-
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor

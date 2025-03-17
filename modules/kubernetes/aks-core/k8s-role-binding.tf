@@ -128,7 +128,7 @@ resource "kubernetes_role_binding" "trivy_reports" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
-    if var.trivy_enabled
+    if var.platform_config.trivy_enabled
   }
 
   metadata {

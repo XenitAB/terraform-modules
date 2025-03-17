@@ -16,15 +16,8 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/telepresence.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "telepresence" {
-  path = "platform/${var.cluster_id}/telepresence/telepresence.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/telepresence.yaml"
   content = templatefile("${path.module}/templates/telepresence.yaml.tpl", {
     telepresence_config = var.telepresence_config
   })

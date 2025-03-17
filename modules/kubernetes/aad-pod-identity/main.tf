@@ -15,15 +15,8 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/aad-pod-identity.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "aad_pod_identity" {
-  path = "platform/${var.cluster_id}/aad-pod-identity/aad-pod-identity.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/aad-pod-identity.yaml"
   content = templatefile("${path.module}/templates/aad-pod-identity.yaml.tpl", {
     namespaces       = var.namespaces,
     aad_pod_identity = var.aad_pod_identity

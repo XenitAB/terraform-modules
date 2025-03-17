@@ -15,15 +15,8 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/node-ttl.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "node_ttl" {
-  path = "platform/${var.cluster_id}/node-ttl/node-ttl.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/node-ttl.yaml"
   content = templatefile("${path.module}/templates/node-ttl.yaml.tpl", {
     status_config_map_namespace = var.status_config_map_namespace
   })

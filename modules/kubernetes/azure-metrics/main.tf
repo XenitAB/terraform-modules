@@ -20,15 +20,8 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/azure-metrics.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id,
-  })
-}
-
 resource "git_repository_file" "azure_metrics" {
-  path = "platform/${var.cluster_id}/azure-metrics/azure-metrics.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/azure-metrics.yaml"
   content = templatefile("${path.module}/templates/azure-metrics.yaml.tpl", {
     client_id               = azurerm_user_assigned_identity.azure_metrics.client_id,
     subscription_id         = var.subscription_id,

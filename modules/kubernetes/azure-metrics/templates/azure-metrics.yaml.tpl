@@ -1,51 +1,42 @@
-apiVersion: v1
-kind: Namespace
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: azure-metrics
-  labels:
-    name: azure-metrics
-    xkf.xenit.io/kind: platform
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: azure-metrics
-  namespace: azure-metrics
+  namespace: argocd
 spec:
-  interval: 1m0s
-  url: "https://webdevops.github.io/helm-charts/"
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: azure-metrics
-  namespace: azure-metrics
-spec:
-  chart:
-    spec:
-      chart: azure-metrics-exporter
-      sourceRef:
-        kind: HelmRepository
-        name: azure-metrics
-      version: v1.2.8
-  interval: 1m0s
-  values:
-    fullnameOverride: "azure-metrics-exporter"
-    image:
-      tag: "24.2.0"
-    resources:
-      requests:
-        cpu: 15m
-        memory: 25Mi
-    podLabels:
-      azure.workload.identity/use: "true"
-    serviceAccount:
-      # name must correlate with azurerm_federated_identity_credential.azure_metrics.subject
-      name: azure-metrics-exporter
-      annotations:
-        azure.workload.identity/client-id: ${client_id}
-    netpol:
-      enabled: false
+  project: ${project_name}
+  destination:
+    server: ${server_name}
+    namespace: azure-metrics
+  revisionHistoryLimit: 5
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+    - ApplyOutOfSyncOnly=true
+    - Replace=true
+  source:
+    repoURL: https://webdevops.github.io/helm-charts
+    targetRevision: v1.2.8
+    chart: azure-metrics-exporter
+    helm:
+      valuesObject:
+        fullnameOverride: "azure-metrics-exporter"
+        image:
+          tag: "24.2.0"
+        resources:
+          requests:
+            cpu: 15m
+            memory: 25Mi
+        podLabels:
+          azure.workload.identity/use: "true"
+        serviceAccount:
+          # name must correlate with azurerm_federated_identity_credential.azure_metrics.subject
+          name: azure-metrics-exporter
+          annotations:
+            azure.workload.identity/client-id: ${client_id}
+        netpol:
+          enabled: false
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor

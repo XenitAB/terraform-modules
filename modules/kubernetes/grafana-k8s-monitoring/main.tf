@@ -16,33 +16,11 @@ terraform {
       source  = "xenitab/git"
       version = "0.0.3"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
   }
-}
-
-resource "kubernetes_namespace" "this" {
-  metadata {
-    labels = {
-      name                = "grafana-k8s-monitoring"
-      "xkf.xenit.io/kind" = "platform"
-    }
-    name = "grafana-k8s-monitoring"
-  }
-}
-
-resource "git_repository_file" "kustomization" {
-  path       = "clusters/${var.cluster_id}/grafana-k8s-monitoring.yaml"
-  depends_on = [kubernetes_namespace.this]
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id,
-  })
 }
 
 resource "git_repository_file" "grafana_k8s_monitoring" {
-  path = "platform/${var.cluster_id}/grafana-k8s-monitoring/grafana-k8s-monitoring.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-k8s-monitoring.yaml"
   content = templatefile("${path.module}/templates/grafana-k8s-monitoring.yaml.tpl", {
     grafana_k8s_monitor_config = var.grafana_k8s_monitor_config
     cluster_name               = var.cluster_name
@@ -50,12 +28,14 @@ resource "git_repository_file" "grafana_k8s_monitoring" {
     client_id                  = azurerm_user_assigned_identity.grafana_k8s_monitor.client_id,
     key_vault_name             = var.grafana_k8s_monitor_config.azure_key_vault_name,
     exclude_namespaces         = var.grafana_k8s_monitor_config.exclude_namespaces
+    tenant_name                = var.tenant_name
+    cluster_id                 = var.cluster_id
   })
 }
 
 
 resource "git_repository_file" "monitors" {
-  path = "platform/${var.cluster_id}/monitors/monitors.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/grafana-k8s-monitoring/monitors.yaml"
   content = templatefile("${path.module}/templates/monitors.yaml.tpl", {
     falco_enabled            = var.falco_enabled,
     gatekeeper_enabled       = var.gatekeeper_enabled,
@@ -70,5 +50,14 @@ resource "git_repository_file" "monitors" {
     node_ttl_enabled         = var.node_ttl_enabled,
     spegel_enabled           = var.spegel_enabled,
     cilium_enabled           = var.cilium_enabled,
+  })
+}
+
+resource "git_repository_file" "secret_provider_class" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/grafana-k8s-monitoring/secret-provider-class.yaml"
+  content = templatefile("${path.module}/templates/secret-provider-class.yaml.tpl", {
+    tenant_id      = azurerm_user_assigned_identity.grafana_k8s_monitor.tenant_id,
+    client_id      = azurerm_user_assigned_identity.grafana_k8s_monitor.client_id,
+    key_vault_name = var.grafana_k8s_monitor_config.azure_key_vault_name,
   })
 }

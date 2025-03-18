@@ -120,3 +120,9 @@ variable "cilium_enabled" {
   type        = bool
   default     = false
 }
+
+variable "azure_metrics_enabled" {
+  description = "Whether we install azure metrics monitors or not"
+  type        = bool
+  default     = false
+}

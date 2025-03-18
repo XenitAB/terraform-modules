@@ -164,5 +164,5 @@ variable "cilium_enabled" {
 
 variable "tenant_name" {
   description = "The name of the tenant"
-  type = string
+  type        = string
 }

@@ -62,5 +62,5 @@ variable "subscription_id" {
 
 variable "tenant_name" {
   description = "The name of the tenant"
-  type = string
+  type        = string
 }

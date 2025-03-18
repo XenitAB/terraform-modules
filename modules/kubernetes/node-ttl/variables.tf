@@ -10,5 +10,5 @@ variable "status_config_map_namespace" {
 
 variable "tenant_name" {
   description = "The name of the tenant"
-  type = string
+  type        = string
 }

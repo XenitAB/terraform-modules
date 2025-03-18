@@ -17,7 +17,7 @@ variable "envoy_gateway_config" {
 
 variable "tenant_name" {
   description = "The name of the tenant"
-  type = string
+  type        = string
 }
 
 variable "tenant_namespaces" {

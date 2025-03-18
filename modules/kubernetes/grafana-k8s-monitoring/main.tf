@@ -49,6 +49,7 @@ resource "git_repository_file" "monitors" {
     node_ttl_enabled         = var.node_ttl_enabled,
     spegel_enabled           = var.spegel_enabled,
     cilium_enabled           = var.cilium_enabled,
+    azure_metrics_enabled    = var.azure_metrics_enabled
   })
 }
 

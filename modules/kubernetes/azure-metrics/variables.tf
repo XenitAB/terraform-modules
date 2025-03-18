@@ -59,3 +59,8 @@ variable "subscription_id" {
   description = "The subscription id where your kubernetes cluster is deployed"
   type        = string
 }
+
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type = string
+}

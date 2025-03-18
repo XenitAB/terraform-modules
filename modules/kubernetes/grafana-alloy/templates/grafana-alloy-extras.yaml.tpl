@@ -12,16 +12,6 @@ data:
       }
     }
 
-    prometheus.scrape "flux_system_pods" {
-      job_name = "integrations/flux_system_pods"
-      targets = discovery.kubernetes.pods.targets
-      scrape_interval = "60s"
-      forward_to     = [prometheus.relabel.metrics_service.receiver]
-      clustering {
-        enabled = true
-      }
-    }
-
     prometheus.relabel "metrics_service" {
       max_cache_size = 100000
       rule {
@@ -29,11 +19,6 @@ data:
         regex = ""
         replacement = "${grafana_alloy_config.cluster_name}"
         target_label = "cluster"
-      }
-      rule {
-          source_labels = ["namespace"]
-          regex = "^$|flux-system"
-          action = "keep"
       }
       forward_to = [prometheus.remote_write.metrics_service.receiver]
     }

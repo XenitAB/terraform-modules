@@ -96,7 +96,7 @@ variable "location_short" {
 }
 
 variable "tenant_namespaces" {
-  description = "List of tenant namespaces for Flux"
+  description = "List of tenant namespaces"
   type        = list(string)
   default     = []
 }

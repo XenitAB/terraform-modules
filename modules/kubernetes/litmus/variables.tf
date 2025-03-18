@@ -12,3 +12,8 @@ variable "key_vault_resource_group_name" {
   description = "The resource group name where the core key vault is to be found"
   type        = string
 }
+
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type = string
+}

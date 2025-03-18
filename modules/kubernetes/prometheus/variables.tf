@@ -103,12 +103,6 @@ variable "linkerd_enabled" {
   default     = false
 }
 
-variable "flux_enabled" {
-  description = "Should flux-system be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "aad_pod_identity_enabled" {
   description = "Should aad pod dentity be enabled"
   type        = bool
@@ -166,4 +160,9 @@ variable "cilium_enabled" {
   description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
   type        = bool
   default     = false
+}
+
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type = string
 }

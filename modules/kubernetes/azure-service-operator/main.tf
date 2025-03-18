@@ -20,7 +20,7 @@ terraform {
 }
 
 resource "git_repository_file" "azure_service_operator_cluster" {
-  path = "platform/${var.cluster_id}/azure-service-operator/azure-service-operator-cluster.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/azure-service-operator.yaml"
   content = templatefile("${path.module}/templates/azure-service-operator-cluster.yaml.tpl", {
     crd_pattern    = var.azure_service_operator_config.cluster_config.crd_pattern,
     enable_metrics = var.azure_service_operator_config.cluster_config.enable_metrics,
@@ -31,7 +31,7 @@ resource "git_repository_file" "azure_service_operator_cluster" {
 resource "git_repository_file" "azure_service_operator_tenant" {
   for_each = { for ns in var.azure_service_operator_config.tenant_namespaces : ns.name => ns }
 
-  path = "platform/${var.cluster_id}/azure-service-operator/azure-service-operator-${each.key}.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/azure-service-operator/azure-service-operator-${each.key}.yaml"
   content = templatefile("${path.module}/templates/azure-service-operator-tenant.yaml.tpl", {
     tenant_id        = var.tenant_id,
     subscription_id  = var.subscription_id,

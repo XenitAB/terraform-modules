@@ -95,6 +95,11 @@ variable "subscription_id" {
   type        = string
 }
 
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type = string
+}
+
 variable "txt_owner_id" {
   description = "The txt-owner-id for external-dns"
   type        = string

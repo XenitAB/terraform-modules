@@ -58,3 +58,8 @@ variable "resource_group_name" {
   description = "The Azure resource group name"
   type        = string
 }
+
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type = string
+}

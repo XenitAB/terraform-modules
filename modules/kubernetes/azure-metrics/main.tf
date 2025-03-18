@@ -23,7 +23,13 @@ terraform {
 resource "git_repository_file" "azure_metrics" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/azure-metrics.yaml"
   content = templatefile("${path.module}/templates/azure-metrics.yaml.tpl", {
-    client_id               = azurerm_user_assigned_identity.azure_metrics.client_id,
+    client_id = azurerm_user_assigned_identity.azure_metrics.client_id,
+  })
+}
+
+resource "git_repository_file" "monitors" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/azure-metrics/monitors.yaml"
+  content = templatefile("${path.module}/templates/monitors.yaml.tpl", {
     subscription_id         = var.subscription_id,
     podmonitor_kubernetes   = var.podmonitor_kubernetes,
     podmonitor_loadbalancer = var.podmonitor_loadbalancer,

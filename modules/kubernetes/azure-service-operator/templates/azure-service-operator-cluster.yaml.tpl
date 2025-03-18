@@ -27,6 +27,10 @@ spec:
           enable: ${enable_metrics}
         networkPolicies:
           enable: false
+  sources:
+    - repoURL: ${repo_url}
+      targetRevision: HEAD
+      path: platform/${tenant_name}/${cluster_id}/k8s-manifests/azure-service-operator
 
     
     

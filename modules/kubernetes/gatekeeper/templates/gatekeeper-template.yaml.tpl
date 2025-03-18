@@ -20,40 +20,6 @@ spec:
 apiVersion: templates.gatekeeper.sh/v1
 kind: ConstraintTemplate
 metadata:
-  name: fluxdisablecrossnamespacesource
-spec:
-  crd:
-    spec:
-      names:
-        kind: FluxDisableCrossNamespaceSource
-  targets:
-  - rego: "package fluxdisablecrossnamespacesource\n\nviolation[{\"msg\": msg}] {\n\tcheck_kind(input.review.kind.kind)\n\tinput.review.object.spec.sourceRef.namespace\n\tinput.review.object.spec.sourceRef.namespace
-      != input.review.object.metadata.namespace\n\tmsg := sprintf(`'%v' in namespace
-      '%v' cant use source in different namespace '%v'`, [input.review.kind.kind,
-      input.review.object.metadata.namespace, input.review.object.spec.sourceRef.namespace])\n}\n\ncheck_kind(kind)
-      {\n\tkind == \"HelmRelease\"\n}\n\ncheck_kind(kind) {\n\tkind == \"Kustomization\"\n}"
-    target: admission.k8s.gatekeeper.sh
----
-apiVersion: templates.gatekeeper.sh/v1
-kind: ConstraintTemplate
-metadata:
-  name: fluxrequireserviceaccount
-spec:
-  crd:
-    spec:
-      names:
-        kind: FluxRequireServiceAccount
-  targets:
-  - rego: "package fluxrequireserviceaccount\n\nviolation[{\"msg\": msg}] {\n\tcheck_kind(input.review.kind.kind)\n\tcheck_service_account(input.review.object.spec)\n\tmsg
-      := sprintf(`'%v' has to specify a serviceAccountName`, [input.review.kind.kind])\n}\n\ncheck_kind(kind)
-      {\n\tkind == \"HelmRelease\"\n}\n\ncheck_kind(kind) {\n\tkind == \"Kustomization\"\n}\n\ncheck_service_account(spec)
-      {\n\tspec.serviceAccountName == \"\"\n}\n\ncheck_service_account(spec) {\n\tnot
-      spec.serviceAccountName\n}"
-    target: admission.k8s.gatekeeper.sh
----
-apiVersion: templates.gatekeeper.sh/v1
-kind: ConstraintTemplate
-metadata:
   name: k8sallowedrepos
   annotations:
     metadata.gatekeeper.sh/title: "Allowed Repositories"

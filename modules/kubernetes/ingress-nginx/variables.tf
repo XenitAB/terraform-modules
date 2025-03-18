@@ -123,3 +123,8 @@ variable "nginx_healthz_ingress_whitelist_ips" {
   type        = string
   default     = ""
 }
+
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type = string
+}

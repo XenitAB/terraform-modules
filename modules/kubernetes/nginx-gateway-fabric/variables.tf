@@ -27,3 +27,8 @@ variable "nginx_config" {
     extra_headers             = optional(map(string), {})
   })
 }
+
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type = string
+}

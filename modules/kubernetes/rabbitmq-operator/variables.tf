@@ -15,3 +15,8 @@ variable "rabbitmq_config" {
   })
   default = {}
 }
+
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type = string
+}

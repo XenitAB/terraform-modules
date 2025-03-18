@@ -40,6 +40,11 @@ variable "subscription_id" {
   type        = string
 }
 
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type = string
+}
+
 variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string

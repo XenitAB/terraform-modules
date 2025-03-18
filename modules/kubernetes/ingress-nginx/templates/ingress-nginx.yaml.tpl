@@ -122,3 +122,7 @@ spec:
               operator: "Equal"
               value: "spot"
               effect: "NoSchedule"
+  sources:
+    - repoURL: ${repo_url}
+      targetRevision: HEAD
+      path: platform/${tenant_name}/${cluster_id}/k8s-manifests/ingress-nginx

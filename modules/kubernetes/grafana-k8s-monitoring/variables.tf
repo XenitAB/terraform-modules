@@ -1,4 +1,3 @@
-
 variable "grafana_k8s_monitor_config" {
   description = "Configuration for the username and password"
   type = object({
@@ -18,18 +17,22 @@ variable "grafana_k8s_monitor_config" {
     exclude_namespaces            = [""]
   }
 }
+
 variable "cluster_name" {
   description = "Unique identifier of the cluster across instances."
   type        = string
 }
+
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
 }
+
 variable "key_vault_id" {
   description = "Core key vault id"
   type        = string
 }
+
 variable "oidc_issuer_url" {
   description = "Kubernetes OIDC issuer URL for workload identity."
   type        = string
@@ -39,14 +42,13 @@ variable "resource_group_name" {
   description = "The Azure resource group name"
   type        = string
 }
+
 variable "location" {
   description = "The Azure region name."
   type        = string
 }
 
 # Opt In Monitors
-
-
 variable "falco_enabled" {
   description = "Should Falco be enabled"
   type        = bool
@@ -61,12 +63,6 @@ variable "gatekeeper_enabled" {
 
 variable "linkerd_enabled" {
   description = "Should linkerd be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "flux_enabled" {
-  description = "Should flux-system be enabled"
   type        = bool
   default     = false
 }
@@ -118,6 +114,7 @@ variable "spegel_enabled" {
   type        = bool
   default     = false
 }
+
 variable "cilium_enabled" {
   description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
   type        = bool

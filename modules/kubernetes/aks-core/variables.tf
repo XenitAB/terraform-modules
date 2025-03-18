@@ -257,35 +257,6 @@ variable "falco_enabled" {
   default     = true
 }
 
-variable "fluxcd_config" {
-  description = "Configuration for FluxCD"
-  type = object({
-    git_provider = object({
-      organization = string
-      type         = optional(string, "azuredevops")
-      github = optional(object({
-        application_id  = number
-        installation_id = number
-        private_key     = string
-      }))
-      azure_devops = optional(object({
-        pat = string
-      }))
-    })
-    bootstrap = object({
-      disable_secret_creation = optional(bool, true)
-      project                 = optional(string)
-      repository              = string
-    })
-  })
-}
-
-variable "fluxcd_enabled" {
-  description = "Should fluxcd be enabled"
-  type        = bool
-  default     = true
-}
-
 variable "gatekeeper_config" {
   description = "Configuration for OPA Gatekeeper"
   type = object({

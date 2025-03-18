@@ -8,10 +8,6 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    azurerm = {
-      version = "4.19.0"
-      source  = "hashicorp/azurerm"
-    }
     git = {
       source  = "xenitab/git"
       version = "0.0.3"
@@ -60,7 +56,6 @@ resource "git_repository_file" "monitors" {
     falco_enabled            = var.falco_enabled
     gatekeeper_enabled       = var.gatekeeper_enabled
     linkerd_enabled          = var.linkerd_enabled
-    flux_enabled             = var.flux_enabled
     aad_pod_identity_enabled = var.aad_pod_identity_enabled
     azad_kube_proxy_enabled  = var.azad_kube_proxy_enabled
     trivy_enabled            = var.trivy_enabled
@@ -73,16 +68,6 @@ resource "git_repository_file" "monitors" {
   })
 }
 
-resource "git_repository_file" "secret_provider_class" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/kube-prometheus-stack/secret-provider-class.yaml"
-  content = templatefile("${path.module}/templates/secret-provider-class.yaml.tpl", {
-    azure_key_vault_name = var.azure_config.azure_key_vault_name
-    client_id            = data.azurerm_user_assigned_identity.xenit.client_id
-    tenant_id            = data.azurerm_user_assigned_identity.xenit.tenant_id
-  })
-}
-
-# https://github.com/enix/x509-certificate-exporter
 resource "git_repository_file" "x509_certificate_exporter" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/x509-certificate-exporter.yaml"
   content = templatefile("${path.module}/templates/x509-certificate-exporter.yaml.tpl", {

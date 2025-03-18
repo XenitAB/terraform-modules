@@ -1,7 +1,6 @@
 locals {
   exclude_namespaces = [
     "aad-pod-identity",
-    "azdo-proxy",
     "azure-metrics",
     "azureserviceoperator-system",
     "calico-system",
@@ -10,9 +9,7 @@ locals {
     "datadog",
     "external-dns",
     "falco",
-    "flux-system",
     "ingress-nginx",
-    "ingress-healthz",
     "linkerd",
     "linkerd-cni",
     "reloader",
@@ -399,7 +396,6 @@ module "grafana_k8s_monitoring" {
   aad_pod_identity_enabled = var.platform_config.aad_pod_identity_enabled
   cilium_enabled           = var.platform_config.cilium_enabled
   falco_enabled            = var.falco_enabled
-  flux_enabled             = var.fluxcd_enabled
   gatekeeper_enabled       = var.platform_config.gatekeeper_enabled
   grafana_agent_enabled    = var.platform_config.grafana_agent_enabled
   linkerd_enabled          = var.platform_config.linkerd_enabled
@@ -471,6 +467,32 @@ module "karpenter" {
   subscription_id     = data.azurerm_client_config.current.subscription_id
 }
 
+module "linkerd" {
+  depends_on = [module.cert_manager_crd, module.linkerd_crd]
+
+  for_each = {
+    for s in ["linkerd"] :
+    s => s
+    if var.platform_config.linkerd_enabled
+  }
+
+  source = "../../kubernetes/linkerd"
+}
+
+module "linkerd_crd" {
+  source = "../../kubernetes/helm-crd"
+
+  for_each = {
+    for s in ["linkerd"] :
+    s => s
+    if var.platform_config.linkerd_enabled
+  }
+
+  chart_repository = "https://helm.linkerd.io/stable"
+  chart_name       = "linkerd-crds"
+  chart_version    = "1.8.0"
+}
+
 module "litmus" {
   for_each = {
     for s in ["litmus"] :
@@ -501,49 +523,6 @@ module "nginx_gateway_fabric" {
   nginx_config   = var.ingress_nginx_config.customization
 }
 
-module "popeye" {
-  for_each = {
-    for s in ["popeye"] :
-    s => s
-    if var.platform_config.popeye_enabled
-  }
-
-  source = "../../kubernetes/popeye"
-
-  aks_managed_identity_id = var.platform_config.cilium_enabled ? data.azurerm_kubernetes_cluster.this.identity[0].identity_ids[0] : data.azurerm_kubernetes_cluster.this.identity[0].principal_id
-  cluster_id              = local.cluster_id
-  location                = data.azurerm_key_vault.core.location
-  oidc_issuer_url         = var.oidc_issuer_url
-  popeye_config           = var.popeye_config
-  resource_group_name     = data.azurerm_resource_group.this.name
-}
-
-module "linkerd" {
-  depends_on = [module.cert_manager_crd, module.linkerd_crd]
-
-  for_each = {
-    for s in ["linkerd"] :
-    s => s
-    if var.platform_config.linkerd_enabled
-  }
-
-  source = "../../kubernetes/linkerd"
-}
-
-module "linkerd_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  for_each = {
-    for s in ["linkerd"] :
-    s => s
-    if var.platform_config.linkerd_enabled
-  }
-
-  chart_repository = "https://helm.linkerd.io/stable"
-  chart_name       = "linkerd-crds"
-  chart_version    = "1.8.0"
-}
-
 module "node_local_dns" {
   for_each = {
     for s in ["node-local-dns"] :
@@ -570,6 +549,23 @@ module "node_ttl" {
 
   cluster_id                  = local.cluster_id
   status_config_map_namespace = "kube-system"
+}
+
+module "popeye" {
+  for_each = {
+    for s in ["popeye"] :
+    s => s
+    if var.platform_config.popeye_enabled
+  }
+
+  source = "../../kubernetes/popeye"
+
+  aks_managed_identity_id = var.platform_config.cilium_enabled ? data.azurerm_kubernetes_cluster.this.identity[0].identity_ids[0] : data.azurerm_kubernetes_cluster.this.identity[0].principal_id
+  cluster_id              = local.cluster_id
+  location                = data.azurerm_key_vault.core.location
+  oidc_issuer_url         = var.oidc_issuer_url
+  popeye_config           = var.popeye_config
+  resource_group_name     = data.azurerm_resource_group.this.name
 }
 
 module "prometheus" {
@@ -605,7 +601,6 @@ module "prometheus" {
   aad_pod_identity_enabled = var.platform_config.aad_pod_identity_enabled
   cilium_enabled           = var.platform_config.cilium_enabled
   falco_enabled            = var.falco_enabled
-  flux_enabled             = var.fluxcd_enabled
   gatekeeper_enabled       = var.platform_config.gatekeeper_enabled
   grafana_agent_enabled    = var.platform_config.grafana_agent_enabled
   linkerd_enabled          = var.platform_config.linkerd_enabled

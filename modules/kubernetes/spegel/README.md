@@ -31,6 +31,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_private_registry"></a> [private\_registry](#input\_private\_registry) | Private registry to add to Spegels mirror list. | `string` | `""` | no |
+| <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | The name of the tenant | `string` | n/a | yes |
 
 ## Outputs
 

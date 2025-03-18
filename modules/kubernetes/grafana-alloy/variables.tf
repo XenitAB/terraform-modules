@@ -1,15 +1,6 @@
-variable "grafana_alloy_config" {
-  description = "Configuration for the username and password"
-  type = object({
-    grafana_otelcol_auth_basic_username = string
-    grafana_otelcol_exporter_endpoint   = string
-    cluster_name                        = string
-  })
-  default = {
-    grafana_otelcol_auth_basic_username = ""
-    grafana_otelcol_exporter_endpoint   = ""
-    cluster_name                        = ""
-  }
+variable "aks_name" {
+  description = "The AKS cluster short name, e.g. 'aks'."
+  type        = string
 }
 
 variable "azure_config" {
@@ -24,11 +15,6 @@ variable "azure_config" {
   }
 }
 
-variable "aks_name" {
-  description = "The AKS cluster short name, e.g. 'aks'."
-  type        = string
-}
-
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
@@ -37,6 +23,20 @@ variable "cluster_id" {
 variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string
+}
+
+variable "grafana_alloy_config" {
+  description = "Configuration for the username and password"
+  type = object({
+    grafana_otelcol_auth_basic_username = string
+    grafana_otelcol_exporter_endpoint   = string
+    cluster_name                        = string
+  })
+  default = {
+    grafana_otelcol_auth_basic_username = ""
+    grafana_otelcol_exporter_endpoint   = ""
+    cluster_name                        = ""
+  }
 }
 
 variable "location_short" {

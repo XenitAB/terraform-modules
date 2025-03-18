@@ -20,6 +20,11 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
 variable "location" {
   description = "The Azure region name."
   type        = string
@@ -49,9 +54,4 @@ variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string
   default     = ""
-}
-
-variable "environment" {
-  description = "The environment name to use for the deploy"
-  type        = string
 }

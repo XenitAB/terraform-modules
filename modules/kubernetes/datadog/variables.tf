@@ -3,7 +3,6 @@ variable "apm_ignore_resources" {
   type        = list(string)
 }
 
-
 variable "azure_config" {
   description = "Azure specific configuration"
   type = object({

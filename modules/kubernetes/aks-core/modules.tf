@@ -43,6 +43,7 @@ module "aad_pod_identity" {
   namespaces = [for ns in var.namespaces : {
     name = ns.name
   }]
+  tenant_name = var.platform_config.tenant_name
 }
 
 module "azure_metrics" {
@@ -64,6 +65,7 @@ module "azure_metrics" {
   oidc_issuer_url      = var.oidc_issuer_url
   resource_group_name  = data.azurerm_resource_group.this.name
   subscription_id      = data.azurerm_client_config.current.subscription_id
+  tenant_name          = var.platform_config.tenant_name
 }
 
 module "azure_policy" {
@@ -105,6 +107,7 @@ module "azure_service_operator" {
   oidc_issuer_url               = var.oidc_issuer_url
   subscription_id               = data.azurerm_client_config.current.subscription_id
   tenant_id                     = data.azurerm_client_config.current.tenant_id
+  tenant_name                   = var.platform_config.tenant_name
 }
 
 module "cert_manager" {
@@ -130,6 +133,7 @@ module "cert_manager" {
   subscription_id            = data.azurerm_client_config.current.subscription_id
   gateway_api_enabled        = var.platform_config.gateway_api_enabled
   gateway_api_config         = var.gateway_api_config
+  tenant_name                = var.platform_config.tenant_name
 }
 
 module "cert_manager_crd" {
@@ -169,6 +173,7 @@ module "control_plane_logs" {
   location_short      = var.location_short
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
+  tenant_name         = var.platform_config.tenant_name
 }
 
 module "datadog" {
@@ -193,6 +198,7 @@ module "datadog" {
   namespace_include   = var.datadog_config.namespaces
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
+  tenant_name         = var.platform_config.tenant_name
 }
 
 module "eck_operator" {
@@ -206,6 +212,7 @@ module "eck_operator" {
   source                 = "../../kubernetes/eck-operator"
   cluster_id             = local.cluster_id
   eck_managed_namespaces = var.eck_operator_config.eck_managed_namespaces
+  tenant_name            = var.platform_config.tenant_name
 }
 
 module "envoy_gateway" {
@@ -221,6 +228,7 @@ module "envoy_gateway" {
 
   cluster_id           = local.cluster_id
   envoy_gateway_config = var.envoy_gateway.envoy_gateway_config
+  tenant_name          = var.platform_config.tenant_name
 }
 
 module "external_dns" {
@@ -249,6 +257,7 @@ module "external_dns" {
   txt_owner_id               = "${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   sources                    = var.external_dns_config.sources
   extra_args                 = var.external_dns_config.extra_args
+  tenant_name                = var.platform_config.tenant_name
 }
 
 module "falco" {
@@ -262,6 +271,7 @@ module "falco" {
 
   cluster_id     = local.cluster_id
   cilium_enabled = var.platform_config.cilium_enabled
+  tenant_name    = var.platform_config.tenant_name
 }
 
 module "gatekeeper" {
@@ -278,6 +288,7 @@ module "gatekeeper" {
   exclude_namespaces             = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
   mirrord_enabled                = var.platform_config.mirrord_enabled
   telepresence_enabled           = var.platform_config.telepresence_enabled
+  tenant_name                    = var.platform_config.tenant_name
 }
 
 module "gateway_api" {
@@ -325,6 +336,7 @@ module "grafana_agent" {
   namespace_include       = length(var.namespaces) > 0 ? var.namespaces[*].name : []
   extra_namespaces        = var.grafana_agent_config.extra_namespaces
   include_kubelet_metrics = var.grafana_agent_config.include_kubelet_metrics
+  tenant_name             = var.platform_config.tenant_name
 }
 
 module "grafana_agent_crd" {
@@ -366,6 +378,7 @@ module "grafana_alloy" {
   location_short      = var.location_short
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
+  tenant_name         = var.platform_config.tenant_name
 }
 
 module "grafana_k8s_monitoring" {
@@ -434,6 +447,7 @@ module "ingress_nginx" {
   min_replicas                        = var.ingress_nginx_config.min_replicas
   nginx_healthz_ingress_hostname      = var.cert_manager_config.dns_zone[0]
   nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
+  tenant_name                         = var.platform_config.tenant_name
 }
 
 module "karpenter" {
@@ -505,6 +519,7 @@ module "litmus" {
   azure_key_vault_name          = data.azurerm_key_vault.core.name
   cluster_id                    = local.cluster_id
   key_vault_resource_group_name = data.azurerm_key_vault.core.resource_group_name
+  tenant_name                   = var.platform_config.tenant_name
 }
 
 module "nginx_gateway_fabric" {
@@ -521,6 +536,7 @@ module "nginx_gateway_fabric" {
   cluster_id     = local.cluster_id
   gateway_config = var.nginx_gateway_config
   nginx_config   = var.ingress_nginx_config.customization
+  tenant_name    = var.platform_config.tenant_name
 }
 
 module "node_local_dns" {
@@ -549,6 +565,7 @@ module "node_ttl" {
 
   cluster_id                  = local.cluster_id
   status_config_map_namespace = "kube-system"
+  tenant_name                 = var.platform_config.tenant_name
 }
 
 module "popeye" {
@@ -566,6 +583,7 @@ module "popeye" {
   oidc_issuer_url         = var.oidc_issuer_url
   popeye_config           = var.popeye_config
   resource_group_name     = data.azurerm_resource_group.this.name
+  tenant_name             = var.platform_config.tenant_name
 }
 
 module "prometheus" {
@@ -610,6 +628,7 @@ module "prometheus" {
   spegel_enabled           = var.platform_config.spegel_enabled
   trivy_enabled            = var.platform_config.trivy_enabled
   vpa_enabled              = var.platform_config.vpa_enabled
+  tenant_name              = var.platform_config.tenant_name
 }
 
 module "prometheus_crd" {
@@ -648,6 +667,7 @@ module "promtail" {
   oidc_issuer_url     = var.oidc_issuer_url
   region              = var.location_short
   resource_group_name = data.azurerm_resource_group.this.name
+  tenant_name         = var.platform_config.tenant_name
 }
 
 module "rabbitmq_operator" {
@@ -660,6 +680,7 @@ module "rabbitmq_operator" {
   source          = "../../kubernetes/rabbitmq-operator"
   cluster_id      = local.cluster_id
   rabbitmq_config = var.rabbitmq_config
+  tenant_name     = var.platform_config.tenant_name
 }
 
 module "reloader" {
@@ -669,8 +690,37 @@ module "reloader" {
     if var.platform_config.reloader_enabled
   }
 
-  source     = "../../kubernetes/reloader"
-  cluster_id = local.cluster_id
+  source      = "../../kubernetes/reloader"
+  cluster_id  = local.cluster_id
+  tenant_name = var.platform_config.tenant_name
+}
+
+module "spegel" {
+  for_each = {
+    for s in ["spegel"] :
+    s => s
+    if var.platform_config.spegel_enabled
+  }
+
+  source = "../../kubernetes/spegel"
+
+  cluster_id       = local.cluster_id
+  private_registry = "https://${data.azurerm_container_registry.acr.login_server}"
+  tenant_name      = var.platform_config.tenant_name
+}
+
+module "telepresence" {
+  for_each = {
+    for s in ["telepresence"] :
+    s => s
+    if var.platform_config.telepresence_enabled
+  }
+
+  source = "../../kubernetes/telepresence"
+
+  cluster_id          = local.cluster_id
+  telepresence_config = var.telepresence_config
+  tenant_name         = var.platform_config.tenant_name
 }
 
 module "trivy" {
@@ -695,6 +745,7 @@ module "trivy" {
   starboard_exporter_enabled      = var.trivy_config.starboard_exporter_enabled
   unique_suffix                   = var.unique_suffix
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
+  tenant_name                     = var.platform_config.tenant_name
 }
 
 module "velero" {
@@ -718,6 +769,7 @@ module "velero" {
   subscription_id     = data.azurerm_client_config.current.subscription_id
   unique_suffix       = var.unique_suffix
   environment         = var.environment
+  tenant_name         = var.platform_config.tenant_name
 }
 
 module "vpa" {
@@ -729,31 +781,6 @@ module "vpa" {
 
   source = "../../kubernetes/vpa"
 
-  cluster_id = local.cluster_id
-}
-
-module "spegel" {
-  for_each = {
-    for s in ["spegel"] :
-    s => s
-    if var.platform_config.spegel_enabled
-  }
-
-  source = "../../kubernetes/spegel"
-
-  cluster_id       = local.cluster_id
-  private_registry = "https://${data.azurerm_container_registry.acr.login_server}"
-}
-
-module "telepresence" {
-  for_each = {
-    for s in ["telepresence"] :
-    s => s
-    if var.platform_config.telepresence_enabled
-  }
-
-  source = "../../kubernetes/telepresence"
-
-  cluster_id          = local.cluster_id
-  telepresence_config = var.telepresence_config
+  cluster_id  = local.cluster_id
+  tenant_name = var.platform_config.tenant_name
 }

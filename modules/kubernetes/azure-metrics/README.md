@@ -32,7 +32,6 @@ No modules.
 | [azurerm_role_assignment.azure_metrics_lb_reader](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
 | [azurerm_user_assigned_identity.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/user_assigned_identity) | resource |
 | [git_repository_file.azure_metrics](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.monitors](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 
 ## Inputs
 
@@ -50,6 +49,7 @@ No modules.
 | <a name="input_podmonitor_loadbalancer"></a> [podmonitor\_loadbalancer](#input\_podmonitor\_loadbalancer) | Enable podmonitor for loadbalancers? | `bool` | `true` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The Azure resource group name | `string` | n/a | yes |
 | <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The subscription id where your kubernetes cluster is deployed | `string` | n/a | yes |
+| <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | The name of the tenant | `string` | n/a | yes |
 
 ## Outputs
 

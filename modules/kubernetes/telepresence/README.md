@@ -31,6 +31,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_telepresence_config"></a> [telepresence\_config](#input\_telepresence\_config) | Config to use when deploying traffic manager to the cluster | <pre>object({<br/>    allow_conflicting_subnets = optional(list(string), [])<br/>    client_rbac = object({<br/>      create     = bool<br/>      namespaced = bool<br/>      namespaces = optional(list(string), ["ambassador"])<br/>      subjects   = optional(list(string), [])<br/>    })<br/>    manager_rbac = object({<br/>      create     = bool<br/>      namespaced = bool<br/>      namespaces = optional(list(string), [])<br/>    })<br/>  })</pre> | n/a | yes |
+| <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | The name of the tenant | `string` | n/a | yes |
 
 ## Outputs
 

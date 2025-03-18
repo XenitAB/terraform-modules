@@ -37,7 +37,3 @@ spec:
             azure.workload.identity/client-id: ${client_id}
         netpol:
           enabled: false
-  sources:
-    - repoURL: ${repo_url}
-      targetRevision: HEAD
-      path: platform/${tenant_name}/${cluster_id}/k8s-manifests/azure-metrics

@@ -31,6 +31,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_status_config_map_namespace"></a> [status\_config\_map\_namespace](#input\_status\_config\_map\_namespace) | Namespace where Cluster Autoscaler status ConfigMap is created | `string` | n/a | yes |
+| <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | The name of the tenant | `string` | n/a | yes |
 
 ## Outputs
 

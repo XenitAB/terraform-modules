@@ -43,6 +43,7 @@ No modules.
 | <a name="input_include_kubelet_metrics"></a> [include\_kubelet\_metrics](#input\_include\_kubelet\_metrics) | If kubelet metrics shall be included for the namespaces in 'namespace\_include' | `bool` | `false` | no |
 | <a name="input_namespace_include"></a> [namespace\_include](#input\_namespace\_include) | A list of the namespaces that kube-state-metrics and kubelet metrics | `list(string)` | n/a | yes |
 | <a name="input_remote_write_urls"></a> [remote\_write\_urls](#input\_remote\_write\_urls) | the remote write urls | <pre>object({<br/>    metrics = string<br/>    logs    = string<br/>    traces  = string<br/>  })</pre> | <pre>{<br/>  "logs": "",<br/>  "metrics": "",<br/>  "traces": ""<br/>}</pre> | no |
+| <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | The name of the tenant | `string` | n/a | yes |
 
 ## Outputs
 

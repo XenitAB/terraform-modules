@@ -23,12 +23,6 @@ variable "cluster_id" {
   type        = string
 }
 
-variable "datadog_enabled" {
-  description = "Should datadog be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "customization" {
   description = "Global customization that will be applied to all ingress controllers."
   type = object({
@@ -56,6 +50,12 @@ variable "customization_private" {
   default = {}
 }
 
+variable "datadog_enabled" {
+  description = "Should datadog be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "default_certificate" {
   description = "If enalbed and configured nginx will be configured with a default certificate."
   type = object({
@@ -80,6 +80,11 @@ variable "linkerd_enabled" {
   default     = false
 }
 
+variable "min_replicas" {
+  description = "The desired number of minimum replicas"
+  type        = number
+}
+
 variable "namespaces" {
   description = "The namespaces that should be created in Kubernetes."
   type = list(
@@ -97,22 +102,6 @@ variable "namespaces" {
   )
 }
 
-variable "private_ingress_enabled" {
-  description = "If true will create a private ingress controller. Otherwise only a public ingress controller will be created."
-  type        = bool
-  default     = false
-}
-
-variable "replicas" {
-  description = "The desired number of replicas"
-  type        = number
-}
-
-variable "min_replicas" {
-  description = "The desired number of minimum replicas"
-  type        = number
-}
-
 variable "nginx_healthz_ingress_hostname" {
   description = "The hostname where we can reach the health endpoint"
   type        = string
@@ -122,6 +111,17 @@ variable "nginx_healthz_ingress_whitelist_ips" {
   description = "A comma separated string of ranges and or individual ips to be whitelisted for the healthz ingress"
   type        = string
   default     = ""
+}
+
+variable "private_ingress_enabled" {
+  description = "If true will create a private ingress controller. Otherwise only a public ingress controller will be created."
+  type        = bool
+  default     = false
+}
+
+variable "replicas" {
+  description = "The desired number of replicas"
+  type        = number
 }
 
 variable "tenant_name" {

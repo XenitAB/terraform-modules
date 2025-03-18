@@ -6,6 +6,11 @@ variable "aad_pod_identity" {
   }))
 }
 
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}
+
 variable "namespaces" {
   description = "Namespaces to create AzureIdentity and AzureIdentityBindings in."
   type = list(
@@ -13,11 +18,6 @@ variable "namespaces" {
       name = string
     })
   )
-}
-
-variable "cluster_id" {
-  description = "Unique identifier of the cluster across regions and instances."
-  type        = string
 }
 
 variable "tenant_name" {

@@ -1,20 +1,11 @@
-variable "remote_write_urls" {
-  description = "the remote write urls"
-  type = object({
-    metrics = string
-    logs    = string
-    traces  = string
-  })
-  default = {
-    metrics = ""
-    logs    = ""
-    traces  = ""
-  }
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
 }
-variable "extra_namespaces" {
-  type        = list(string)
-  description = "List of namespaces that should be enabled"
-  default     = ["ingress-nginx"]
+
+variable "cluster_name" {
+  description = "the cluster name"
+  type        = string
 }
 
 variable "credentials" {
@@ -30,19 +21,15 @@ variable "credentials" {
   sensitive = true
 }
 
-variable "cluster_name" {
-  description = "the cluster name"
-  type        = string
-}
-
 variable "environment" {
   description = "the name of the environment"
   type        = string
 }
 
-variable "namespace_include" {
-  description = "A list of the namespaces that kube-state-metrics and kubelet metrics"
+variable "extra_namespaces" {
   type        = list(string)
+  description = "List of namespaces that should be enabled"
+  default     = ["ingress-nginx"]
 }
 
 variable "include_kubelet_metrics" {
@@ -51,9 +38,23 @@ variable "include_kubelet_metrics" {
   default     = false
 }
 
-variable "cluster_id" {
-  description = "Unique identifier of the cluster across regions and instances."
-  type        = string
+variable "namespace_include" {
+  description = "A list of the namespaces that kube-state-metrics and kubelet metrics"
+  type        = list(string)
+}
+
+variable "remote_write_urls" {
+  description = "the remote write urls"
+  type = object({
+    metrics = string
+    logs    = string
+    traces  = string
+  })
+  default = {
+    metrics = ""
+    logs    = ""
+    traces  = ""
+  }
 }
 
 variable "tenant_name" {

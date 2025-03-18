@@ -52,6 +52,7 @@ No modules.
 | <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | The AKS token exchange URL | `string` | n/a | yes |
 | <a name="input_popeye_config"></a> [popeye\_config](#input\_popeye\_config) | The popeye configuration | <pre>object({<br/>    allowed_registries = optional(list(string), [])<br/>    cron_jobs = optional(list(object({<br/>      namespace     = optional(string, "default")<br/>      resources     = optional(string, "cj,cm,deploy,ds,gw,gwc,gwr,hpa,ing,job,np,pdb,po,pv,pvc,ro,rb,sa,sec,sts,svc")<br/>      output_format = optional(string, "html")<br/>      schedule      = optional(string, "0 0 * * 1")<br/>    })), [{}])<br/>    storage_account = optional(object({<br/>      resource_group_name = optional(string, "")<br/>      account_name        = optional(string, "")<br/>      file_share_size     = optional(string, "1Gi")<br/>    }), {})<br/>  })</pre> | `{}` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The Azure AKS resource group name | `string` | n/a | yes |
+| <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | The name of the tenant | `string` | n/a | yes |
 
 ## Outputs
 

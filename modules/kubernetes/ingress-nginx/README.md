@@ -48,6 +48,7 @@ No modules.
 | <a name="input_nginx_healthz_ingress_whitelist_ips"></a> [nginx\_healthz\_ingress\_whitelist\_ips](#input\_nginx\_healthz\_ingress\_whitelist\_ips) | A comma separated string of ranges and or individual ips to be whitelisted for the healthz ingress | `string` | `""` | no |
 | <a name="input_private_ingress_enabled"></a> [private\_ingress\_enabled](#input\_private\_ingress\_enabled) | If true will create a private ingress controller. Otherwise only a public ingress controller will be created. | `bool` | `false` | no |
 | <a name="input_replicas"></a> [replicas](#input\_replicas) | The desired number of replicas | `number` | n/a | yes |
+| <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | The name of the tenant | `string` | n/a | yes |
 
 ## Outputs
 

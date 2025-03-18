@@ -31,6 +31,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_rabbitmq_config"></a> [rabbitmq\_config](#input\_rabbitmq\_config) | The RabbitMQ operator configuration | <pre>object({<br/>    min_available           = optional(number, 0)<br/>    replica_count           = optional(number, 1)<br/>    network_policy_enabled  = optional(bool, false)<br/>    spot_instances_enabled  = optional(bool, true)<br/>    tology_operator_enabled = optional(bool, false)<br/>    watch_namespaces        = optional(list(string), [])<br/>  })</pre> | `{}` | no |
+| <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | The name of the tenant | `string` | n/a | yes |
 
 ## Outputs
 

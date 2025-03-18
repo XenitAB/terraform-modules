@@ -32,6 +32,7 @@ No modules.
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_gateway_config"></a> [gateway\_config](#input\_gateway\_config) | Gateway Fabric configuration | <pre>object({<br/>    logging_level     = optional(string, "info")<br/>    replica_count     = optional(number, 2)<br/>    telemetry_enabled = optional(bool, true)<br/>    telemetry_config = optional(object({<br/>      endpoint    = optional(string, "")<br/>      interval    = optional(string, "")<br/>      batch_size  = optional(number, 0)<br/>      batch_count = optional(number, 0)<br/>    }), {})<br/>  })</pre> | n/a | yes |
 | <a name="input_nginx_config"></a> [nginx\_config](#input\_nginx\_config) | Global nginx configuration that will be applied to GatewayClass. | <pre>object({<br/>    allow_snippet_annotations = optional(bool, false)<br/>    http_snippet              = optional(string, "")<br/>    extra_config              = optional(map(string), {})<br/>    extra_headers             = optional(map(string), {})<br/>  })</pre> | n/a | yes |
+| <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | The name of the tenant | `string` | n/a | yes |
 
 ## Outputs
 

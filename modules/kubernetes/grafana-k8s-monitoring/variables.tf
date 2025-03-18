@@ -1,3 +1,55 @@
+variable "aad_pod_identity_enabled" {
+  description = "Should aad pod dentity be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "azad_kube_proxy_enabled" {
+  description = "Should azad-kube-proxy be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "azure_metrics_enabled" {
+  description = "Whether we install azure metrics monitors or not"
+  type        = bool
+  default     = false
+}
+
+variable "cilium_enabled" {
+  description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
+  type        = bool
+  default     = false
+}
+
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}
+
+variable "cluster_name" {
+  description = "Unique identifier of the cluster across instances."
+  type        = string
+}
+
+variable "falco_enabled" {
+  description = "Should Falco be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "gatekeeper_enabled" {
+  description = "Should OPA Gatekeeper be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "grafana_agent_enabled" {
+  description = "Should grafana-agent be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "grafana_k8s_monitor_config" {
   description = "Configuration for the username and password"
   type = object({
@@ -18,47 +70,9 @@ variable "grafana_k8s_monitor_config" {
   }
 }
 
-variable "cluster_name" {
-  description = "Unique identifier of the cluster across instances."
-  type        = string
-}
-
-variable "cluster_id" {
-  description = "Unique identifier of the cluster across regions and instances."
-  type        = string
-}
-
 variable "key_vault_id" {
   description = "Core key vault id"
   type        = string
-}
-
-variable "oidc_issuer_url" {
-  description = "Kubernetes OIDC issuer URL for workload identity."
-  type        = string
-}
-
-variable "resource_group_name" {
-  description = "The Azure resource group name"
-  type        = string
-}
-
-variable "location" {
-  description = "The Azure region name."
-  type        = string
-}
-
-# Opt In Monitors
-variable "falco_enabled" {
-  description = "Should Falco be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "gatekeeper_enabled" {
-  description = "Should OPA Gatekeeper be enabled"
-  type        = bool
-  default     = false
 }
 
 variable "linkerd_enabled" {
@@ -67,38 +81,13 @@ variable "linkerd_enabled" {
   default     = false
 }
 
-variable "aad_pod_identity_enabled" {
-  description = "Should aad pod dentity be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "azad_kube_proxy_enabled" {
-  description = "Should azad-kube-proxy be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "grafana_agent_enabled" {
-  description = "Should grafana-agent be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "trivy_enabled" {
-  description = "Should trivy be enabled"
-  type        = bool
-  default     = false
+variable "location" {
+  description = "The Azure region name."
+  type        = string
 }
 
 variable "node_local_dns_enabled" {
   description = "Should node local DNS be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "promtail_enabled" {
-  description = "Should promtail be enabled"
   type        = bool
   default     = false
 }
@@ -109,20 +98,35 @@ variable "node_ttl_enabled" {
   default     = false
 }
 
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
+  type        = string
+}
+
+variable "promtail_enabled" {
+  description = "Should promtail be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "resource_group_name" {
+  description = "The Azure resource group name"
+  type        = string
+}
+
 variable "spegel_enabled" {
   description = "Should Spegel be enabled"
   type        = bool
   default     = false
 }
 
-variable "cilium_enabled" {
-  description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
-  type        = bool
-  default     = false
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type        = string
 }
 
-variable "azure_metrics_enabled" {
-  description = "Whether we install azure metrics monitors or not"
+variable "trivy_enabled" {
+  description = "Should trivy be enabled"
   type        = bool
   default     = false
 }

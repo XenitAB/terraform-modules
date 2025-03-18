@@ -535,6 +535,7 @@ variable "oidc_issuer_url" {
 variable "platform_config" {
   description = "Options for configuring the platform components"
   type = object({
+    tenant_name                    = string
     aad_pod_identity_enabled       = optional(bool, false)
     argocd_enabled                 = optional(bool, true)
     azure_metrics_enabled          = optional(bool, false)

@@ -90,6 +90,8 @@ resource "git_repository_file" "ingress_nginx_private" {
 resource "git_repository_file" "ingress_nginx_extras" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/ingres-nginx/ingress-nginx.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx-extras.yaml.tpl", {
+    aad_groups         = var.aad_groups
+    namespaces         = var.namespaces
     ingress_nginx_name = "ingress-nginx"
     default_certificate = {
       enabled         = var.default_certificate.enabled

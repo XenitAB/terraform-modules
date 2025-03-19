@@ -1,3 +1,41 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: logs-cert-manager
+  labels:
+    xkf.xenit.io/kind: platform
+rules:
+  - verbs:
+      - list
+      - view
+      - logs
+    apiGroups:
+      - ''
+    resources:
+      - pods
+---
+%{ for namespace in namespaces ~}
+%{ for name, id in aad_groups ~}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ${namespace}-logs-cert-manager
+  namespace: cert-manager
+  labels:
+    aad-group-name: ${name}
+    xkf.xenit.io/kind: platform
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: ${id}
+    namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: logs-cert-manager
+---
+%{ endfor }
+%{ endfor }
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:

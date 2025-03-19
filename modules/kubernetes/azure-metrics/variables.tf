@@ -47,18 +47,6 @@ variable "oidc_issuer_url" {
   type        = string
 }
 
-variable "podmonitor_loadbalancer" {
-  description = "Enable podmonitor for loadbalancers?"
-  type        = bool
-  default     = true
-}
-
-variable "podmonitor_kubernetes" {
-  description = "Enable podmonitor for kubernetes?"
-  type        = bool
-  default     = true
-}
-
 variable "resource_group_name" {
   description = "The Azure resource group name"
   type        = string

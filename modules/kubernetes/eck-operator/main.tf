@@ -19,5 +19,7 @@ resource "git_repository_file" "eck_operator" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/eck-operator.yaml"
   content = templatefile("${path.module}/templates/eck-operator.yaml.tpl", {
     eck_managed_namespaces = var.eck_managed_namespaces
+    project                = var.fleet_infra_config.argocd_project_name
+    server                 = var.fleet_infra_config.k8s_api_server_url
   })
 }

@@ -377,7 +377,7 @@ spec:
       app.kubernetes.io/instance: external-dns
       app.kubernetes.io/name: external-dns
 
-%{ if azure_metrics }
+%{ if azure_metrics_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor

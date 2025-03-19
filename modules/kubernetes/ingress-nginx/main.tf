@@ -40,6 +40,11 @@ resource "git_repository_file" "ingress_nginx" {
     nginx_healthz_ingress_enabled       = true
     nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
     nginx_healthz_ingress_hostname      = var.nginx_healthz_ingress_hostname
+    tenant_name                         = var.tenant_name
+    cluster_id                          = var.cluster_id
+    project                             = var.fleet_infra_config.argocd_project_name
+    server                              = var.fleet_infra_config.k8s_api_server_url
+    repo_url                            = var.fleet_infra_config.git_repo_url
   })
 }
 
@@ -47,7 +52,7 @@ resource "git_repository_file" "ingress_nginx_private" {
   for_each = {
     for s in ["ingress-nginx-private"] :
     s => s
-    if var.platform_config.private_ingress_enabled
+    if var.private_ingress_enabled
   }
 
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx-private.yaml"
@@ -74,6 +79,11 @@ resource "git_repository_file" "ingress_nginx_private" {
     nginx_healthz_ingress_enabled       = false
     nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
     nginx_healthz_ingress_hostname      = var.nginx_healthz_ingress_hostname
+    tenant_name                         = var.tenant_name
+    cluster_id                          = var.cluster_id
+    project                             = var.fleet_infra_config.argocd_project_name
+    server                              = var.fleet_infra_config.k8s_api_server_url
+    repo_url                            = var.fleet_infra_config.git_repo_url
   })
 }
 

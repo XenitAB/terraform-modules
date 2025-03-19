@@ -29,6 +29,15 @@ variable "environment" {
   type        = string
 }
 
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "key_vault_id" {
   description = "Core key vault id"
   type        = string

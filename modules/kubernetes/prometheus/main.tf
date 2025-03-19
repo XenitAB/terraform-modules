@@ -22,6 +22,9 @@ resource "git_repository_file" "prometheus_operator" {
     vpa_enabled = var.vpa_enabled
     tenant_name = var.tenant_name
     cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
   })
 }
 
@@ -71,5 +74,7 @@ resource "git_repository_file" "monitors" {
 resource "git_repository_file" "x509_certificate_exporter" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/x509-certificate-exporter.yaml"
   content = templatefile("${path.module}/templates/x509-certificate-exporter.yaml.tpl", {
+    project = var.fleet_infra_config.argocd_project_name
+    server  = var.fleet_infra_config.k8s_api_server_url
   })
 }

@@ -3,6 +3,15 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "gateway_api_config" {
   description = "The Gateway API configuration"
   type = object({
@@ -17,4 +26,9 @@ variable "gateway_api_config" {
     condition     = contains(["standard", "experimental"], var.gateway_api_config.api_channel)
     error_message = "Invalid API channel: ${var.gateway_api_config.api_channel}. Allowed vallues: ['standard', 'experimental']"
   }
+}
+
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type        = string
 }

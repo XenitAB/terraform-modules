@@ -1,6 +1,4 @@
 resource "kubernetes_cluster_role" "logs_cert_manager" {
-  depends_on = [kubernetes_namespace.cert_manager]
-
   metadata {
     name = "logs-cert-manager"
     labels = {
@@ -15,8 +13,7 @@ resource "kubernetes_cluster_role" "logs_cert_manager" {
 }
 
 resource "kubernetes_role_binding" "logs_cert_manager" {
-  depends_on = [kubernetes_namespace.cert_manager]
-  for_each   = { for ns in var.namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "${each.value.name}-logs-cert-manager"

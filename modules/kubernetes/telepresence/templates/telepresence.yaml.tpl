@@ -4,9 +4,9 @@ metadata:
   name: telepresence
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: ambassador
   revisionHistoryLimit: 5
   syncPolicy:

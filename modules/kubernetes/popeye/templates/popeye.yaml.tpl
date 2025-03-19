@@ -4,9 +4,9 @@ metadata:
   name: popeye
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: popeye
   revisionHistoryLimit: 5
   syncPolicy:

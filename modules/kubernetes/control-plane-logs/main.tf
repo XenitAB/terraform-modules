@@ -26,18 +26,23 @@ terraform {
 resource "git_repository_file" "vector" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/control-plane-logs.yaml"
   content = templatefile("${path.module}/templates/vector.yaml.tpl", {
-    client_id = data.azurerm_user_assigned_identity.xenit.client_id,
+    client_id   = data.azurerm_user_assigned_identity.xenit.client_id
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
   })
 }
 
 resource "git_repository_file" "vector_extras" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/control-plane-logs/vector-extras.yaml"
   content = templatefile("${path.module}/templates/vector-extras.yaml.tpl", {
-    azure_key_vault_name = var.azure_config.azure_key_vault_name,
-    client_id            = data.azurerm_user_assigned_identity.xenit.client_id,
-    eventhub_hostname    = var.azure_config.eventhub_hostname,
-    eventhub_name        = var.azure_config.eventhub_name,
-    tenant_id            = data.azurerm_user_assigned_identity.xenit.tenant_id,
+    azure_key_vault_name = var.azure_config.azure_key_vault_name
+    client_id            = data.azurerm_user_assigned_identity.xenit.client_id
+    eventhub_hostname    = var.azure_config.eventhub_hostname
+    eventhub_name        = var.azure_config.eventhub_name
+    tenant_id            = data.azurerm_user_assigned_identity.xenit.tenant_id
     tenant_name          = var.tenant_name
     cluster_id           = var.cluster_id
   })

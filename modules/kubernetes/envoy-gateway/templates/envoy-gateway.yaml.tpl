@@ -4,9 +4,9 @@ metadata:
   name: envoy-gateway
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: envoy-gateway
   revisionHistoryLimit: 5
   syncPolicy:

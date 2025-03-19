@@ -4,9 +4,9 @@ metadata:
   name: falco
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: falco
   revisionHistoryLimit: 5
   syncPolicy:

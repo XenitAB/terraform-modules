@@ -4,9 +4,9 @@ metadata:
   name: vpa
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: vpa
   revisionHistoryLimit: 5
   syncPolicy:

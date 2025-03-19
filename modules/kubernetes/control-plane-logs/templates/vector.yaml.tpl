@@ -4,9 +4,9 @@ metadata:
   name: controle-plane-logs
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: controle-plane-logs
   revisionHistoryLimit: 5
   syncPolicy:

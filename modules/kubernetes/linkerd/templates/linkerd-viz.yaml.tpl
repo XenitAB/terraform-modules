@@ -1,27 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: eck-operator
+  name: linkerd-viz
   namespace: argocd
 spec:
   project: ${project}
   destination:
     server: ${server}
-    namespace: eck-system
+    namespace: linkerd-viz
   revisionHistoryLimit: 5
   syncPolicy:
     syncOptions:
-    - CreateNamespace=true
+    - CreateNamespace=false
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
     - Replace=true
   source:
-    repoURL: https://helm.elastic.co
-    targetRevision: 2.16.1
-    chart: eck-operator
+    repoURL: https://helm.linkerd.io/stable
+    targetRevision: 30.3.4
+    chart: linkerd-viz
     helm:
       valuesObject:
-        managedNamespaces:
-%{ for ns in eck_managed_namespaces ~}
-        - ${ns}
-%{ endfor }
+        installNamespace: false
+        defaultRegistry: ghcr.io/linkerd

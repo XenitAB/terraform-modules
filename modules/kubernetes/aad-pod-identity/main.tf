@@ -20,5 +20,7 @@ resource "git_repository_file" "aad_pod_identity" {
   content = templatefile("${path.module}/templates/aad-pod-identity.yaml.tpl", {
     namespaces       = var.namespaces,
     aad_pod_identity = var.aad_pod_identity
+    project          = var.fleet_infra_config.argocd_project_name
+    server           = var.fleet_infra_config.k8s_api_server_url
   })
 }

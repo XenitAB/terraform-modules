@@ -53,13 +53,17 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
     }
     helm = {
       source  = "hashicorp/helm"
       version = "2.11.0"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.23.0"
     }
     tls = {
       source  = "hashicorp/tls"
@@ -68,7 +72,6 @@ terraform {
   }
 }
 
-# Create namespaces
 resource "kubernetes_namespace" "this" {
   metadata {
     labels = {
@@ -186,7 +189,7 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
   type = "kubernetes.io/tls"
 }
 
-# Install linkerd helm charts
+# Keep this as a helm release, because this needs to be installed first, until we can fully deprecate linkerd
 resource "helm_release" "linkerd_extras" {
   depends_on = [
     kubernetes_secret.linkerd_trust_anchor,
@@ -199,36 +202,22 @@ resource "helm_release" "linkerd_extras" {
   max_history = 3
 }
 
-#tf-latest-version:ignore
-resource "helm_release" "linkerd" {
-  depends_on = [helm_release.linkerd_extras]
-
-  repository  = "https://helm.linkerd.io/stable"
-  chart       = "linkerd-control-plane"
-  name        = "linkerd"
-  namespace   = kubernetes_namespace.this.metadata[0].name
-  version     = "1.9.4"
-  max_history = 3
-  values = [
-    templatefile("${path.module}/templates/values.yaml.tpl", {
-      linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem),
-      webhook_issuer_pem       = indent(4, tls_self_signed_cert.webhook_issuer_tls.cert_pem),
-    }),
-  ]
+resource "git_repository_file" "linkerd" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd.yaml"
+  content = templatefile("${path.module}/templates/linkerd.yaml.tpl", {
+    linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem)
+    webhook_issuer_pem       = indent(4, tls_self_signed_cert.webhook_issuer_tls.cert_pem)
+    project                  = var.fleet_infra_config.argocd_project_name
+    server                   = var.fleet_infra_config.k8s_api_server_url
+  })
 }
 
-# Install linkerd viz extension https://github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz
-#tf-latest-version:ignore
-resource "helm_release" "linkerd_viz" {
-  depends_on = [helm_release.linkerd]
-
-  repository  = "https://helm.linkerd.io/stable"
-  chart       = "linkerd-viz"
-  name        = "linkerd-viz"
-  namespace   = kubernetes_namespace.viz.metadata[0].name
-  version     = "30.3.4"
-  max_history = 3
-  values = [
-    templatefile("${path.module}/templates/values-viz.yaml.tpl", {}),
-  ]
+resource "git_repository_file" "linkerd_viz" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd-viz.yaml"
+  content = templatefile("${path.module}/templates/linkerd-viz.yaml.tpl", {
+    linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem)
+    webhook_issuer_pem       = indent(4, tls_self_signed_cert.webhook_issuer_tls.cert_pem)
+    project                  = var.fleet_infra_config.argocd_project_name
+    server                   = var.fleet_infra_config.k8s_api_server_url
+  })
 }

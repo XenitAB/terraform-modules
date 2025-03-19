@@ -26,5 +26,7 @@ resource "git_repository_file" "ingress_nginx" {
     http_snippet              = var.nginx_config.http_snippet
     extra_config              = var.nginx_config.extra_config
     extra_headers             = var.nginx_config.extra_headers
+    project                   = var.fleet_infra_config.argocd_project_name
+    server                    = var.fleet_infra_config.k8s_api_server_url
   })
 }

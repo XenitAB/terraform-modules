@@ -4,9 +4,9 @@ metadata:
   name: azure-service-operator
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: azureserviceoperator-system
   revisionHistoryLimit: 5
   syncPolicy:

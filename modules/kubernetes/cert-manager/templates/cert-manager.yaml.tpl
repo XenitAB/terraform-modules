@@ -4,9 +4,9 @@ metadata:
   name: cert-manager
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: cert-manager
   revisionHistoryLimit: 5
   syncPolicy:

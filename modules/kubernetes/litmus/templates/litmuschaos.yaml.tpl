@@ -4,9 +4,9 @@ metadata:
   name: litmuschaos
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: litmus
   revisionHistoryLimit: 5
   syncPolicy:

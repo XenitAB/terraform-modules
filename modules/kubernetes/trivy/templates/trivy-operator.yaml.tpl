@@ -4,9 +4,9 @@ metadata:
   name: trivy-operator
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: trivy
   revisionHistoryLimit: 5
   syncPolicy:

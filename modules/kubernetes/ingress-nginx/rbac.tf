@@ -1,6 +1,4 @@
 resource "kubernetes_cluster_role" "logs_ingress_nginx" {
-  depends_on = [kubernetes_namespace.ingress_nginx]
-
   metadata {
     name = "logs-ingress-nginx"
     labels = {
@@ -16,8 +14,7 @@ resource "kubernetes_cluster_role" "logs_ingress_nginx" {
 }
 
 resource "kubernetes_role_binding" "logs_ingress_nginx" {
-  depends_on = [kubernetes_namespace.ingress_nginx]
-  for_each   = { for ns in var.namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "${each.value.name}-logs-ingress-nginx"

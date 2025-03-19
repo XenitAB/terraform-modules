@@ -30,7 +30,9 @@ terraform {
 resource "git_repository_file" "trivy_operator" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy-operator.yaml"
   content = templatefile("${path.module}/templates/trivy-operator.yaml.tpl", {
-    client_id = azurerm_user_assigned_identity.trivy.client_id,
+    client_id = azurerm_user_assigned_identity.trivy.client_id
+    project   = var.fleet_infra_config.argocd_project_name
+    server    = var.fleet_infra_config.k8s_api_server_url
   })
 }
 
@@ -38,7 +40,9 @@ resource "git_repository_file" "trivy" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy.yaml"
   content = templatefile("${path.module}/templates/trivy.yaml.tpl", {
     client_id                       = azurerm_user_assigned_identity.trivy.client_id,
-    volume_claim_storage_class_name = var.volume_claim_storage_class_name,
+    volume_claim_storage_class_name = var.volume_claim_storage_class_name
+    project                         = var.fleet_infra_config.argocd_project_name
+    server                          = var.fleet_infra_config.k8s_api_server_url
   })
 }
 
@@ -51,5 +55,7 @@ resource "git_repository_file" "starboard_eporter" {
 
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/starboard-eporter.yaml"
   content = templatefile("${path.module}/templates/starboard-exporter.yaml.tpl", {
+    project = var.fleet_infra_config.argocd_project_name
+    server  = var.fleet_infra_config.k8s_api_server_url
   })
 }

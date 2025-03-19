@@ -8,6 +8,15 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "location" {
   description = "The Azure region name."
   type        = string

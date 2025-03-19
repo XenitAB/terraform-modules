@@ -4,9 +4,9 @@ metadata:
   name: node-ttl
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: node-ttl
   revisionHistoryLimit: 5
   syncPolicy:

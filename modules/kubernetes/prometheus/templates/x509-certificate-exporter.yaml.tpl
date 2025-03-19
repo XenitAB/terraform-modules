@@ -4,9 +4,9 @@ metadata:
   name: x509-certificate-exporter
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: prometheus
   revisionHistoryLimit: 5
   syncPolicy:

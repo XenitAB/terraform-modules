@@ -49,12 +49,6 @@ variable "aks_name_suffix" {
   type        = number
 }
 
-variable "azure_metrics_enabled" {
-  description = "Should AZ Metrics be enabled"
-  type        = bool
-  default     = true
-}
-
 variable "azure_policy_config" {
   description = "A list of Azure policy mutations to create and include in the XKS policy set definition"
   type = object({
@@ -245,16 +239,10 @@ variable "external_dns_config" {
   default = {}
 }
 
-variable "external_dns_enabled" {
-  description = "Should External DNS be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "falco_enabled" {
-  description = "Should Falco be enabled"
-  type        = bool
-  default     = true
+variable "external_dns_hostname" {
+  description = "hostname for ingress-nginx to use for external-dns"
+  type        = string
+  default     = ""
 }
 
 variable "gatekeeper_config" {
@@ -535,13 +523,18 @@ variable "oidc_issuer_url" {
 variable "platform_config" {
   description = "Options for configuring the platform components"
   type = object({
-    tenant_name                    = string
+    tenant_name = string
+    fleet_infra_config = object({
+      git_repo_url        = string
+      argocd_project_name = string
+      k8s_api_server_url  = string
+    })
     aad_pod_identity_enabled       = optional(bool, false)
     argocd_enabled                 = optional(bool, true)
     azure_metrics_enabled          = optional(bool, false)
     azure_policy_enabled           = optional(bool, false)
     azure_service_operator_enabled = optional(bool, false)
-    cert_manager_enabled_enabled   = optional(bool, true)
+    cert_manager_enabled           = optional(bool, true)
     cilium_enabled                 = optional(bool, false)
     control_plane_logs_enabled     = optional(bool, false)
     datadog_enabled                = optional(bool, false)

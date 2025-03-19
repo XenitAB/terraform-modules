@@ -22,13 +22,15 @@ terraform {
 resource "git_repository_file" "external_dns" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/external-dns.yaml"
   content = templatefile("${path.module}/templates/external-dns.yaml.tpl", {
-    client_id           = azurerm_user_assigned_identity.external_dns.client_id,
-    provider            = var.dns_provider,
-    resource_group_name = var.global_resource_group_name,
-    sources             = var.sources,
-    extra_args          = var.extra_args,
-    subscription_id     = var.subscription_id,
-    tenant_id           = azurerm_user_assigned_identity.external_dns.tenant_id,
-    txt_owner_id        = var.txt_owner_id,
+    client_id           = azurerm_user_assigned_identity.external_dns.client_id
+    provider            = var.dns_provider
+    resource_group_name = var.global_resource_group_name
+    sources             = var.sources
+    extra_args          = var.extra_args
+    subscription_id     = var.subscription_id
+    tenant_id           = azurerm_user_assigned_identity.external_dns.tenant_id
+    txt_owner_id        = var.txt_owner_id
+    project             = var.fleet_infra_config.argocd_project_name
+    server              = var.fleet_infra_config.k8s_api_server_url
   })
 }

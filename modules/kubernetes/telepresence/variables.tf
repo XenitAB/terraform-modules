@@ -3,6 +3,15 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "telepresence_config" {
   description = "Config to use when deploying traffic manager to the cluster"
   type = object({

@@ -55,20 +55,6 @@ module "aks_core" {
     notification_email = "foo"
     dns_zone           = ["bar", "faa"]
   }
-  fluxcd_config = {
-    git_provider = {
-      organization = "my-org"
-      type         = "azuredevops"
-      azure_devops = {
-        pat = "my-pat"
-      }
-    }
-    bootstrap = {
-      disable_secret_creation = true
-      project                 = "my-proj"
-      repository              = "my-repo"
-    }
-  }
   priority_expander_config = { "10" : [".*standard.*"], "20" : [".*spot.*"] }
   aad_groups = {
     view = {
@@ -96,12 +82,10 @@ module "aks_core" {
       name = "name"
     }
   }
-  trivy_enabled = true
-  trivy_config  = {}
+  trivy_config = {}
   ingress_nginx_config = {
     private_ingress_enabled = false
   }
-  prometheus_enabled = true
   prometheus_config = {
     azure_key_vault_name            = "foobar"
     tenant_id                       = ""
@@ -112,8 +96,39 @@ module "aks_core" {
     resource_selector               = ["platform"]
     namespace_selector              = ["platform"]
   }
-  external_dns_hostname               = "foobar.com"
-  gateway_api_enabled                 = true
-  litmus_enabled                      = true
   nginx_healthz_ingress_whitelist_ips = ""
+  platform_config = {
+    tenant_name = "my-tenant-name"
+    fleet_infra_config = {
+      git_repo_url        = "https://some-git-repo.git"
+      argocd_project_name = "default"
+      k8s_api_server_url  = "https://kubernetes.default.svc"
+    }
+    aad_pod_identity_enabled       = true
+    azure_metrics_enabled          = true
+    azure_policy_enabled           = true
+    azure_service_operator_enabled = true
+    cilium_enabled                 = true
+    control_plane_logs_enabled     = true
+    datadog_enabled                = true
+    eck_operator_enabled           = true
+    gateway_api_enabled            = true
+    grafana_agent_enabled          = true
+    grafana_alloy_enabled          = true
+    grafana_k8s_monitoring_enabled = true
+    karpenter_enabled              = true
+    linkerd_enabled                = true
+    litmus_enabled                 = true
+    mirrord_enabled                = true
+    nginx_gateway_enabled          = true
+    popeye_enabled                 = true
+    prometheus_enabled             = true
+    promtail_enabled               = true
+    rabbitmq_enabled               = true
+    spot_instances_hack_enabled    = true
+    telepresence_enabled           = true
+    trivy_enabled                  = true
+    velero_enabled                 = true
+    vpa_enabled                    = true
+  }
 }

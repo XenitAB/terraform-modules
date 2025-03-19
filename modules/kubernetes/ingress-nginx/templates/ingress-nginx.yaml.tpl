@@ -5,9 +5,9 @@ metadata:
   name: ${ingress_nginx_name}
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: ingress-nginx
   revisionHistoryLimit: 5
   syncPolicy:

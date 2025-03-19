@@ -1,6 +1,4 @@
 resource "kubernetes_cluster_role" "logs_external_dns" {
-  depends_on = [kubernetes_namespace.external_dns]
-
   metadata {
     name = "logs-external-dns"
     labels = {
@@ -16,8 +14,7 @@ resource "kubernetes_cluster_role" "logs_external_dns" {
 }
 
 resource "kubernetes_role_binding" "logs_external_dns" {
-  depends_on = [kubernetes_namespace.external_dns]
-  for_each   = { for ns in var.namespaces : ns.name => ns }
+  for_each = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
     name      = "${each.value.name}-logs-external-dns"

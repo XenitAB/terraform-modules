@@ -4,9 +4,9 @@ metadata:
   name: gatekeeper
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: gatekeeper-system
   revisionHistoryLimit: 5
   syncPolicy:

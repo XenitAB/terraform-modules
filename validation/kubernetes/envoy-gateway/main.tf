@@ -17,4 +17,11 @@ module "envoy-gateway" {
     resources_memory_requests = "50g"
     envoy_tls_policy_enabled  = true
   }
+  azure_policy_enabled = true
+  tenant_name          = "foo"
+  fleet_infra_config = {
+    argocd_project_name = "foo-fleet-infra"
+    git_repo_url        = "http://some-git-repo.git"
+    k8s_api_server_url  = "http://kubernetes.default.svc"
+  }
 }

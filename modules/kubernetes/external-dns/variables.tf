@@ -43,6 +43,15 @@ variable "extra_args" {
   type        = list(string)
 }
 
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "global_resource_group_name" {
   description = "The Azure global resource group name"
   type        = string

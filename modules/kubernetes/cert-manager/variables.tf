@@ -34,6 +34,15 @@ variable "dns_zones" {
   type        = map(string)
 }
 
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "gateway_api_enabled" {
   description = "If Gateway API should be enabled"
   type        = bool

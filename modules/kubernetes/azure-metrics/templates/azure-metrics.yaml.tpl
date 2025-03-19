@@ -4,9 +4,9 @@ metadata:
   name: azure-metrics
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
     namespace: azure-metrics
   revisionHistoryLimit: 5
   syncPolicy:

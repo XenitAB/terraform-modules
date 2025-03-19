@@ -4,9 +4,9 @@ metadata:
   name: gateway-api-crds
   namespace: argocd
 spec:
-  project: ${project_name}
+  project: ${project}
   destination:
-    server: ${server_name}
+    server: ${server}
   revisionHistoryLimit: 5
   syncPolicy:
     syncOptions:

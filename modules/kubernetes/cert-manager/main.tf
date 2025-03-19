@@ -24,6 +24,11 @@ resource "git_repository_file" "cert_manager" {
   content = templatefile("${path.module}/templates/cert-manager.yaml.tpl", {
     client_id           = azurerm_user_assigned_identity.cert_manager.client_id
     gateway_api_enabled = var.gateway_api_enabled
+    tenant_name         = var.tenant_name
+    cluster_id          = var.cluster_id
+    project             = var.fleet_infra_config.argocd_project_name
+    server              = var.fleet_infra_config.k8s_api_server_url
+    repo_url            = var.fleet_infra_config.git_repo_url
   })
 }
 

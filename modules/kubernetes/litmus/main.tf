@@ -34,5 +34,7 @@ resource "git_repository_file" "litmus" {
   content = templatefile("${path.module}/templates/litmuschaos.yaml.tpl", {
     cluster_id            = var.cluster_id
     mongodb_root_password = data.azurerm_key_vault_secret.mongodb.value
+    project               = var.fleet_infra_config.argocd_project_name
+    server                = var.fleet_infra_config.k8s_api_server_url
   })
 }

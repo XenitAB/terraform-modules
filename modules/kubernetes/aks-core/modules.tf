@@ -43,14 +43,15 @@ module "aad_pod_identity" {
   namespaces = [for ns in var.namespaces : {
     name = ns.name
   }]
-  tenant_name = var.platform_config.tenant_name
+  tenant_name        = var.platform_config.tenant_name
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "azure_metrics" {
   for_each = {
     for s in ["azure-metrics"] :
     s => s
-    if var.azure_metrics_enabled
+    if var.platform_config.azure_metrics_enabled
   }
 
   source = "../../kubernetes/azure-metrics"
@@ -66,6 +67,7 @@ module "azure_metrics" {
   resource_group_name  = data.azurerm_resource_group.this.name
   subscription_id      = data.azurerm_client_config.current.subscription_id
   tenant_name          = var.platform_config.tenant_name
+  fleet_infra_config   = var.platform_config.fleet_infra_config
 }
 
 module "azure_policy" {
@@ -108,6 +110,7 @@ module "azure_service_operator" {
   subscription_id               = data.azurerm_client_config.current.subscription_id
   tenant_id                     = data.azurerm_client_config.current.tenant_id
   tenant_name                   = var.platform_config.tenant_name
+  fleet_infra_config            = var.platform_config.fleet_infra_config
 }
 
 module "cert_manager" {
@@ -134,6 +137,7 @@ module "cert_manager" {
   gateway_api_enabled        = var.platform_config.gateway_api_enabled
   gateway_api_config         = var.gateway_api_config
   tenant_name                = var.platform_config.tenant_name
+  fleet_infra_config         = var.platform_config.fleet_infra_config
 }
 
 module "cert_manager_crd" {
@@ -174,6 +178,7 @@ module "control_plane_logs" {
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
   tenant_name         = var.platform_config.tenant_name
+  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "datadog" {
@@ -199,6 +204,7 @@ module "datadog" {
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
   tenant_name         = var.platform_config.tenant_name
+  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "eck_operator" {
@@ -213,6 +219,7 @@ module "eck_operator" {
   cluster_id             = local.cluster_id
   eck_managed_namespaces = var.eck_operator_config.eck_managed_namespaces
   tenant_name            = var.platform_config.tenant_name
+  fleet_infra_config     = var.platform_config.fleet_infra_config
 }
 
 module "envoy_gateway" {
@@ -226,9 +233,11 @@ module "envoy_gateway" {
 
   source = "../../kubernetes/envoy-gateway"
 
+  azure_policy_enabled = var.platform_config.azure_policy_enabled
   cluster_id           = local.cluster_id
   envoy_gateway_config = var.envoy_gateway.envoy_gateway_config
   tenant_name          = var.platform_config.tenant_name
+  fleet_infra_config   = var.platform_config.fleet_infra_config
 }
 
 module "external_dns" {
@@ -237,7 +246,7 @@ module "external_dns" {
   for_each = {
     for s in ["external-dns"] :
     s => s
-    if var.external_dns_enabled
+    if var.platform_config.external_dns_enabled
   }
 
   source = "../../kubernetes/external-dns"
@@ -258,20 +267,22 @@ module "external_dns" {
   sources                    = var.external_dns_config.sources
   extra_args                 = var.external_dns_config.extra_args
   tenant_name                = var.platform_config.tenant_name
+  fleet_infra_config         = var.platform_config.fleet_infra_config
 }
 
 module "falco" {
   for_each = {
     for s in ["falco"] :
     s => s
-    if var.falco_enabled
+    if var.platform_config.falco_enabled
   }
 
   source = "../../kubernetes/falco"
 
-  cluster_id     = local.cluster_id
-  cilium_enabled = var.platform_config.cilium_enabled
-  tenant_name    = var.platform_config.tenant_name
+  cluster_id         = local.cluster_id
+  cilium_enabled     = var.platform_config.cilium_enabled
+  tenant_name        = var.platform_config.tenant_name
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "gatekeeper" {
@@ -289,6 +300,7 @@ module "gatekeeper" {
   mirrord_enabled                = var.platform_config.mirrord_enabled
   telepresence_enabled           = var.platform_config.telepresence_enabled
   tenant_name                    = var.platform_config.tenant_name
+  fleet_infra_config             = var.platform_config.fleet_infra_config
 }
 
 module "gateway_api" {
@@ -302,6 +314,8 @@ module "gateway_api" {
 
   cluster_id         = local.cluster_id
   gateway_api_config = var.gateway_api_config
+  tenant_name        = var.platform_config.tenant_name
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "grafana_agent" {
@@ -337,6 +351,7 @@ module "grafana_agent" {
   extra_namespaces        = var.grafana_agent_config.extra_namespaces
   include_kubelet_metrics = var.grafana_agent_config.include_kubelet_metrics
   tenant_name             = var.platform_config.tenant_name
+  fleet_infra_config      = var.platform_config.fleet_infra_config
 }
 
 module "grafana_agent_crd" {
@@ -379,6 +394,7 @@ module "grafana_alloy" {
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
   tenant_name         = var.platform_config.tenant_name
+  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "grafana_k8s_monitoring" {
@@ -405,10 +421,9 @@ module "grafana_k8s_monitoring" {
     include_namespaces            = var.grafana_k8s_monitor_config.include_namespaces
     exclude_namespaces            = var.grafana_k8s_monitor_config.exclude_namespaces
   }
-
   aad_pod_identity_enabled = var.platform_config.aad_pod_identity_enabled
   cilium_enabled           = var.platform_config.cilium_enabled
-  falco_enabled            = var.falco_enabled
+  falco_enabled            = var.platform_config.falco_enabled
   gatekeeper_enabled       = var.platform_config.gatekeeper_enabled
   grafana_agent_enabled    = var.platform_config.grafana_agent_enabled
   linkerd_enabled          = var.platform_config.linkerd_enabled
@@ -417,6 +432,9 @@ module "grafana_k8s_monitoring" {
   promtail_enabled         = var.platform_config.promtail_enabled
   spegel_enabled           = var.platform_config.spegel_enabled
   trivy_enabled            = var.platform_config.trivy_enabled
+  tenant_name              = var.platform_config.tenant_name
+  fleet_infra_config       = var.platform_config.fleet_infra_config
+  subscription_id          = data.azurerm_client_config.current.subscription_id
 }
 
 module "ingress_nginx" {
@@ -431,7 +449,7 @@ module "ingress_nginx" {
   source = "../../kubernetes/ingress-nginx"
 
   aad_groups            = var.aad_groups
-  external_dns_hostname = var.platform_config.external_dns_hostname
+  external_dns_hostname = var.external_dns_hostname
   default_certificate = {
     enabled  = true
     dns_zone = var.cert_manager_config.dns_zone[0]
@@ -448,6 +466,7 @@ module "ingress_nginx" {
   nginx_healthz_ingress_hostname      = var.cert_manager_config.dns_zone[0]
   nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
   tenant_name                         = var.platform_config.tenant_name
+  fleet_infra_config                  = var.platform_config.fleet_infra_config
 }
 
 module "karpenter" {
@@ -490,7 +509,10 @@ module "linkerd" {
     if var.platform_config.linkerd_enabled
   }
 
-  source = "../../kubernetes/linkerd"
+  cluster_id         = local.cluster_id
+  source             = "../../kubernetes/linkerd"
+  tenant_name        = var.platform_config.tenant_name
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "linkerd_crd" {
@@ -520,6 +542,7 @@ module "litmus" {
   cluster_id                    = local.cluster_id
   key_vault_resource_group_name = data.azurerm_key_vault.core.resource_group_name
   tenant_name                   = var.platform_config.tenant_name
+  fleet_infra_config            = var.platform_config.fleet_infra_config
 }
 
 module "nginx_gateway_fabric" {
@@ -533,10 +556,11 @@ module "nginx_gateway_fabric" {
 
   source = "../../kubernetes/nginx-gateway-fabric"
 
-  cluster_id     = local.cluster_id
-  gateway_config = var.nginx_gateway_config
-  nginx_config   = var.ingress_nginx_config.customization
-  tenant_name    = var.platform_config.tenant_name
+  cluster_id         = local.cluster_id
+  gateway_config     = var.nginx_gateway_config
+  nginx_config       = var.ingress_nginx_config.customization
+  tenant_name        = var.platform_config.tenant_name
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "node_local_dns" {
@@ -566,6 +590,7 @@ module "node_ttl" {
   cluster_id                  = local.cluster_id
   status_config_map_namespace = "kube-system"
   tenant_name                 = var.platform_config.tenant_name
+  fleet_infra_config          = var.platform_config.fleet_infra_config
 }
 
 module "popeye" {
@@ -584,6 +609,7 @@ module "popeye" {
   popeye_config           = var.popeye_config
   resource_group_name     = data.azurerm_resource_group.this.name
   tenant_name             = var.platform_config.tenant_name
+  fleet_infra_config      = var.platform_config.fleet_infra_config
 }
 
 module "prometheus" {
@@ -618,7 +644,7 @@ module "prometheus" {
 
   aad_pod_identity_enabled = var.platform_config.aad_pod_identity_enabled
   cilium_enabled           = var.platform_config.cilium_enabled
-  falco_enabled            = var.falco_enabled
+  falco_enabled            = var.platform_config.falco_enabled
   gatekeeper_enabled       = var.platform_config.gatekeeper_enabled
   grafana_agent_enabled    = var.platform_config.grafana_agent_enabled
   linkerd_enabled          = var.platform_config.linkerd_enabled
@@ -629,6 +655,7 @@ module "prometheus" {
   trivy_enabled            = var.platform_config.trivy_enabled
   vpa_enabled              = var.platform_config.vpa_enabled
   tenant_name              = var.platform_config.tenant_name
+  fleet_infra_config       = var.platform_config.fleet_infra_config
 }
 
 module "prometheus_crd" {
@@ -668,6 +695,7 @@ module "promtail" {
   region              = var.location_short
   resource_group_name = data.azurerm_resource_group.this.name
   tenant_name         = var.platform_config.tenant_name
+  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "rabbitmq_operator" {
@@ -677,10 +705,11 @@ module "rabbitmq_operator" {
     if var.platform_config.rabbitmq_enabled
   }
 
-  source          = "../../kubernetes/rabbitmq-operator"
-  cluster_id      = local.cluster_id
-  rabbitmq_config = var.rabbitmq_config
-  tenant_name     = var.platform_config.tenant_name
+  source             = "../../kubernetes/rabbitmq-operator"
+  cluster_id         = local.cluster_id
+  rabbitmq_config    = var.rabbitmq_config
+  tenant_name        = var.platform_config.tenant_name
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "reloader" {
@@ -690,9 +719,10 @@ module "reloader" {
     if var.platform_config.reloader_enabled
   }
 
-  source      = "../../kubernetes/reloader"
-  cluster_id  = local.cluster_id
-  tenant_name = var.platform_config.tenant_name
+  source             = "../../kubernetes/reloader"
+  cluster_id         = local.cluster_id
+  tenant_name        = var.platform_config.tenant_name
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "spegel" {
@@ -704,9 +734,10 @@ module "spegel" {
 
   source = "../../kubernetes/spegel"
 
-  cluster_id       = local.cluster_id
-  private_registry = "https://${data.azurerm_container_registry.acr.login_server}"
-  tenant_name      = var.platform_config.tenant_name
+  cluster_id         = local.cluster_id
+  private_registry   = "https://${data.azurerm_container_registry.acr.login_server}"
+  tenant_name        = var.platform_config.tenant_name
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "telepresence" {
@@ -721,6 +752,7 @@ module "telepresence" {
   cluster_id          = local.cluster_id
   telepresence_config = var.telepresence_config
   tenant_name         = var.platform_config.tenant_name
+  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "trivy" {
@@ -746,6 +778,7 @@ module "trivy" {
   unique_suffix                   = var.unique_suffix
   volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
   tenant_name                     = var.platform_config.tenant_name
+  fleet_infra_config              = var.platform_config.fleet_infra_config
 }
 
 module "velero" {
@@ -770,6 +803,7 @@ module "velero" {
   unique_suffix       = var.unique_suffix
   environment         = var.environment
   tenant_name         = var.platform_config.tenant_name
+  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "vpa" {
@@ -781,6 +815,7 @@ module "vpa" {
 
   source = "../../kubernetes/vpa"
 
-  cluster_id  = local.cluster_id
-  tenant_name = var.platform_config.tenant_name
+  cluster_id         = local.cluster_id
+  tenant_name        = var.platform_config.tenant_name
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }

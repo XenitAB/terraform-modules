@@ -22,9 +22,14 @@ terraform {
 resource "git_repository_file" "azure_service_operator_cluster" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/azure-service-operator.yaml"
   content = templatefile("${path.module}/templates/azure-service-operator-cluster.yaml.tpl", {
-    crd_pattern    = var.azure_service_operator_config.cluster_config.crd_pattern,
-    enable_metrics = var.azure_service_operator_config.cluster_config.enable_metrics,
-    sync_period    = var.azure_service_operator_config.cluster_config.sync_period,
+    crd_pattern    = var.azure_service_operator_config.cluster_config.crd_pattern
+    enable_metrics = var.azure_service_operator_config.cluster_config.enable_metrics
+    sync_period    = var.azure_service_operator_config.cluster_config.sync_period
+    tenant_name    = var.tenant_name
+    cluster_id     = var.cluster_id
+    project        = var.fleet_infra_config.argocd_project_name
+    server         = var.fleet_infra_config.k8s_api_server_url
+    repo_url       = var.fleet_infra_config.git_repo_url
   })
 }
 
@@ -33,9 +38,9 @@ resource "git_repository_file" "azure_service_operator_tenant" {
 
   path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/azure-service-operator/azure-service-operator-${each.key}.yaml"
   content = templatefile("${path.module}/templates/azure-service-operator-tenant.yaml.tpl", {
-    tenant_id        = var.tenant_id,
-    subscription_id  = var.subscription_id,
-    client_id        = azurerm_user_assigned_identity.tenant[each.key].client_id,
-    tenant_namespace = each.value.name,
+    tenant_id        = var.tenant_id
+    subscription_id  = var.subscription_id
+    client_id        = azurerm_user_assigned_identity.tenant[each.key].client_id
+    tenant_namespace = each.value.name
   })
 }

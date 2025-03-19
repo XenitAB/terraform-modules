@@ -22,8 +22,6 @@ terraform {
 }
 
 resource "kubernetes_secret" "this" {
-  depends_on = [kubernetes_namespace.this]
-
   metadata {
     name      = "grafana-agent-credentials"
     namespace = "grafana-agent"
@@ -44,6 +42,9 @@ resource "git_repository_file" "grafana_agent" {
   content = templatefile("${path.module}/templates/grafana-agent.yaml.tpl", {
     tenant_name = var.tenant_name
     cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
   })
 }
 
@@ -66,5 +67,7 @@ resource "git_repository_file" "kube_state_metrics" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kube-state-metrics.yaml"
   content = templatefile("${path.module}/templates/kube-state-metrics.yaml.tpl", {
     namespaces_csv = join(",", compact(concat(var.namespace_include, var.extra_namespaces)))
+    project        = var.fleet_infra_config.argocd_project_name
+    server         = var.fleet_infra_config.k8s_api_server_url
   })
 }

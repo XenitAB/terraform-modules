@@ -32,6 +32,15 @@ variable "extra_namespaces" {
   default     = ["ingress-nginx"]
 }
 
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "include_kubelet_metrics" {
   description = "If kubelet metrics shall be included for the namespaces in 'namespace_include'"
   type        = bool

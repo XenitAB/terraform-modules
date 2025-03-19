@@ -25,6 +25,15 @@ variable "environment" {
   type        = string
 }
 
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "grafana_alloy_config" {
   description = "Configuration for the username and password"
   type = object({

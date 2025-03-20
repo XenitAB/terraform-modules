@@ -1,21 +1,9 @@
 variable "aad_groups" {
   description = "Configuration for Azure AD Groups (AAD Groups)"
-  type = object({
-    view = map(any)
-    edit = map(any)
-    cluster_admin = object({
-      id   = string
-      name = string
-    })
-    cluster_view = object({
-      id   = string
-      name = string
-    })
-    aks_managed_identity = object({
-      id   = string
-      name = string
-    })
-  })
+  type = list(object({
+    id   = string
+    name = string
+  }))
 }
 
 variable "cluster_id" {

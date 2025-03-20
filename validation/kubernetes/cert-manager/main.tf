@@ -7,15 +7,12 @@ provider "helm" {}
 module "cert_manager" {
   source = "../../../modules/kubernetes/cert-manager"
 
-  aad_groups = {
-    view = null
-    edit = {
-      "id-1" : "name-1"
+  aad_groups = [
+    {
+      id   = "id"
+      name = "name"
     }
-    cluster_admin        = null
-    cluster_view         = null
-    aks_managed_identity = null
-  }
+  ]
   cluster_id = "foobar"
   dns_zones = {
     "a.com" = "id"

@@ -3,15 +3,12 @@ terraform {}
 module "external_dns" {
   source = "../../../modules/kubernetes/external-dns"
 
-  aad_groups = {
-    view = null
-    edit = {
-      "id-1" : "name-1"
+  aad_groups = [
+    {
+      id   = "id"
+      name = "name"
     }
-    cluster_admin        = null
-    cluster_view         = null
-    aks_managed_identity = null
-  }
+  ]
   cluster_id   = "foo"
   dns_provider = "azure"
   dns_zones = {

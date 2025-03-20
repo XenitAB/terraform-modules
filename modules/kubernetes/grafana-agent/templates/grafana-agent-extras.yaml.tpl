@@ -408,5 +408,17 @@ spec:
   selector:
     name: grafana-agent-traces
 %{ endif }
-
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ${credentials_secret_name}
+  namespace: grafana-agent
+data:
+  metrics_username: ${metrics_username}
+  metrics_password: ${metrics_password}
+  logs_username: ${logs_username}
+  logs_password: ${logs_password}
+  traces_username: ${traces_username}
+  traces_password: ${traces_password}
 

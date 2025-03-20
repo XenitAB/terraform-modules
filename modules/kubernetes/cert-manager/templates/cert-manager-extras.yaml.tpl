@@ -19,7 +19,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: ${namespace}-logs-cert-manager
+  name: ${namespace.name}-logs-cert-manager
   namespace: cert-manager
   labels:
     aad-group-name: ${name}

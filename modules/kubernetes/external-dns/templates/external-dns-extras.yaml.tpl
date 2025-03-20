@@ -19,7 +19,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: ${namespace}-logs-external-dns
+  name: ${namespace.name}-logs-external-dns
   namespace: external-dns
   labels:
     aad-group-name: ${name}

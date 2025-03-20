@@ -28,6 +28,13 @@ locals {
     for zone in data.azurerm_dns_zone.this :
     zone.name => zone.id
   }
+  aad_groups_view = [
+    for group in var.aad_groups.view :
+    {
+      id   = group.id
+      name = group.name
+    }
+  ]
 }
 
 module "aad_pod_identity" {
@@ -124,7 +131,7 @@ module "cert_manager" {
 
   source = "../../kubernetes/cert-manager"
 
-  aad_groups                 = var.aad_groups
+  aad_groups                 = local.aad_groups_view
   cluster_id                 = local.cluster_id
   dns_zones                  = local.dns_zones
   global_resource_group_name = data.azurerm_resource_group.global.name
@@ -251,7 +258,7 @@ module "external_dns" {
 
   source = "../../kubernetes/external-dns"
 
-  aad_groups                 = var.aad_groups
+  aad_groups                 = local.aad_groups_view
   cluster_id                 = local.cluster_id
   dns_provider               = "azure"
   dns_zones                  = local.dns_zones
@@ -448,7 +455,7 @@ module "ingress_nginx" {
 
   source = "../../kubernetes/ingress-nginx"
 
-  aad_groups            = var.aad_groups
+  aad_groups            = local.aad_groups_view
   external_dns_hostname = var.external_dns_hostname
   default_certificate = {
     enabled  = true

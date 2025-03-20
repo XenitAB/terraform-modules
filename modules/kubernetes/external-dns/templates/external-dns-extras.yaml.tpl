@@ -15,19 +15,19 @@ rules:
       - pods
 ---
 %{ for namespace in namespaces ~}
-%{ for name, id in aad_groups ~}
+%{ for group in aad_groups ~}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: ${namespace.name}-logs-external-dns
   namespace: external-dns
   labels:
-    aad-group-name: ${name}
+    aad-group-name: ${group.name}
     xkf.xenit.io/kind: platform
 subjects:
   - kind: Group
     apiGroup: rbac.authorization.k8s.io
-    name: ${id}
+    name: ${group.id}
     namespace: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io

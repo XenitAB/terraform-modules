@@ -35,7 +35,7 @@ resource "git_repository_file" "cert_manager" {
 resource "git_repository_file" "cert_manager_extras" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/cert-manager/cert-manager-extras.yaml"
   content = templatefile("${path.module}/templates/cert-manager-extras.yaml.tpl", {
-    aad_groups               = var.aad_groups.view
+    aad_groups               = var.aad_groups
     namespaces               = var.namespaces
     acme_server              = var.acme_server
     client_id                = azurerm_user_assigned_identity.cert_manager.client_id

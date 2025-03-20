@@ -5,8 +5,9 @@ module "external_dns" {
 
   aad_groups = [
     {
-      id   = "id"
-      name = "name"
+      namespace = "foo"
+      id        = "id"
+      name      = "name"
     }
   ]
   cluster_id   = "foo"

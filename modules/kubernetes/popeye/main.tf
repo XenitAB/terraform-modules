@@ -87,6 +87,12 @@ resource "git_repository_file" "helmignore" {
   })
 }
 
+resource "git_repository_file" "chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/Chart.yaml"
+  content = templatefile("${path.module}/charts/popeye/Chart.yaml", {
+  })
+}
+
 resource "git_repository_file" "values" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/values.yaml"
   content = templatefile("${path.module}/charts/popeye/values.yaml.tpl", {

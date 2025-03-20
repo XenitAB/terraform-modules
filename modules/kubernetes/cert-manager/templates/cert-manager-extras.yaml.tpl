@@ -14,12 +14,11 @@ rules:
     resources:
       - pods
 ---
-%{ for namespace in namespaces ~}
 %{ for group in aad_groups ~}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: ${namespace.name}-logs-cert-manager
+  name: ${group.namespace}-logs-cert-manager
   namespace: cert-manager
   labels:
     aad-group-name: ${group.name}
@@ -34,7 +33,6 @@ roleRef:
   kind: ClusterRole
   name: logs-cert-manager
 ---
-%{ endfor }
 %{ endfor }
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer

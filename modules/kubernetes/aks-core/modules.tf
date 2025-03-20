@@ -29,10 +29,11 @@ locals {
     zone.name => zone.id
   }
   aad_groups_view = [
-    for group in var.aad_groups.view :
+    for key, group in var.aad_groups.view :
     {
-      id   = group.id
-      name = group.name
+      namespace = key
+      id        = group.id
+      name      = group.name
     }
   ]
 }

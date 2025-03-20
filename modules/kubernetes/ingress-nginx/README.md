@@ -31,7 +31,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_aad_groups"></a> [aad\_groups](#input\_aad\_groups) | Configuration for Azure AD Groups (AAD Groups) | <pre>list(object({<br/>    id   = string<br/>    name = string<br/>  }))</pre> | n/a | yes |
+| <a name="input_aad_groups"></a> [aad\_groups](#input\_aad\_groups) | Configuration for Azure AD Groups (AAD Groups) | <pre>list(object({<br/>    namespace = string<br/>    id        = string<br/>    name      = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_customization"></a> [customization](#input\_customization) | Global customization that will be applied to all ingress controllers. | <pre>object({<br/>    allow_snippet_annotations = bool<br/>    http_snippet              = string<br/>    extra_config              = map(string)<br/>    extra_headers             = map(string)<br/>  })</pre> | <pre>{<br/>  "allow_snippet_annotations": false,<br/>  "extra_config": {},<br/>  "extra_headers": {},<br/>  "http_snippet": ""<br/>}</pre> | no |
 | <a name="input_customization_private"></a> [customization\_private](#input\_customization\_private) | Private specific customization, will override the global customization. | <pre>object({<br/>    allow_snippet_annotations = optional(bool)<br/>    http_snippet              = optional(string)<br/>    extra_config              = optional(map(string))<br/>    extra_headers             = optional(map(string))<br/>  })</pre> | `{}` | no |

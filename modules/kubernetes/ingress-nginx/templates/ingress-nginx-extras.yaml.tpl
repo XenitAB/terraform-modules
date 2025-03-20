@@ -14,12 +14,11 @@ rules:
     resources:
       - pods
 ---
-%{ for namespace in namespaces ~}
 %{ for group in aad_groups ~}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: ${namespace.name}-logs-ingress-nginx
+  name: ${group.namespace}-logs-ingress-nginx
   namespace: ingress-nginx
   labels:
     aad-group-name: ${group.name}
@@ -34,7 +33,6 @@ roleRef:
   kind: ClusterRole
   name: logs-ingress-nginx
 ---
-%{ endfor }
 %{ endfor }
 %{~ if default_certificate.enabled ~}
 apiVersion: cert-manager.io/v1

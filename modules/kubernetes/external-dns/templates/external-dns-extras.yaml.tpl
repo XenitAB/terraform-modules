@@ -14,12 +14,11 @@ rules:
     resources:
       - pods
 ---
-%{ for namespace in namespaces ~}
 %{ for group in aad_groups ~}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: ${namespace.name}-logs-external-dns
+  name: ${group.namespace}-logs-external-dns
   namespace: external-dns
   labels:
     aad-group-name: ${group.name}
@@ -34,5 +33,4 @@ roleRef:
   kind: ClusterRole
   name: logs-external-dns
 ---
-%{ endfor }
 %{ endfor }

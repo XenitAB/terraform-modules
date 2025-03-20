@@ -9,8 +9,9 @@ module "cert_manager" {
 
   aad_groups = [
     {
-      id   = "id"
-      name = "name"
+      namespace = "foo"
+      id        = "id"
+      name      = "name"
     }
   ]
   cluster_id = "foobar"

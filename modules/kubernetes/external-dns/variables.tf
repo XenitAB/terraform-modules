@@ -1,8 +1,9 @@
 variable "aad_groups" {
   description = "Configuration for Azure AD Groups (AAD Groups)"
   type = list(object({
-    id   = string
-    name = string
+    namespace = string
+    id        = string
+    name      = string
   }))
 }
 

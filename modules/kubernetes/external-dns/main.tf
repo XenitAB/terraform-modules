@@ -38,7 +38,7 @@ resource "git_repository_file" "external_dns" {
 resource "git_repository_file" "external_dns_extras" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/external-dns/external-dns-extras.yaml"
   content = templatefile("${path.module}/templates/external-dns-extras.yaml.tpl", {
-    aad_groups = var.aad_groups
+    aad_groups = var.aad_groups.view
     namespaces = var.namespaces
   })
 }

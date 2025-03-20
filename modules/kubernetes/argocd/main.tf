@@ -35,7 +35,7 @@ locals {
   key_vault_secret_values = [
     for secret in local.key_vault_secret_names :
     {
-      name  : secret
+      name : secret
       value : data.azurerm_key_vault_secret.pat[secret].value
     }
   ]

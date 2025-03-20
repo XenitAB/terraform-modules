@@ -926,6 +926,7 @@ variable "argocd_config" {
         azure_client_id = string
         ca_data         = string
         tenants = list(object({
+          name        = string
           namespace   = string
           repo_url    = string
           repo_path   = string

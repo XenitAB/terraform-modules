@@ -10,7 +10,7 @@ resource "helm_release" "argocd_hub_setup" {
   name        = "argocd-hub-setup"
   namespace   = "argocd"
   max_history = 3
-  values      = [yamlencode(merge({ "uai_id" : azurerm_user_assigned_identity.argocd.principal_id }, var.argocd_config, { "secrets": local.key_vault_secret_values }))]
+  values      = [yamlencode(merge({ "uai_id" : azurerm_user_assigned_identity.argocd.principal_id }, var.argocd_config, { "secrets" : local.key_vault_secret_values }))]
 
   #set_sensitive {
   #  name  = "repositories"

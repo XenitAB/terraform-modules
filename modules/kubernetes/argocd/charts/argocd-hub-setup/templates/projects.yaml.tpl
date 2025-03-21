@@ -10,11 +10,17 @@ metadata:
 spec:
   # Allow manifests to deploy from specific repository (url) only
   sourceRepos:
-  - '{{- .repo_url -}}'
-  # Only permit applications to deploy to these namespace in the same cluster
+  #- '{{- .repo_url -}}'
+  - '*'
+  # Only permit applications to deploy to these namespace in the given cluster
   destinations:
+  - namespace: 'argocd'
+    server: https://kubernetes.default.svc
   - namespace: '{{- .namespace -}}'
     server: '{{- $cluster.api_server -}}'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
 ---
 {{- end }}
 {{- end }}

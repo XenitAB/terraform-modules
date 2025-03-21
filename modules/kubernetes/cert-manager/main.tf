@@ -19,6 +19,14 @@ terraform {
   }
 }
 
+resource "git_repository_file" "cert_manager_crds" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/cert-manager-crds.yaml"
+  content = templatefile("${path.module}/templates/cert-manager-crds.yaml.tpl", {
+    project = var.fleet_infra_config.argocd_project_name
+    server  = var.fleet_infra_config.k8s_api_server_url
+  })
+}
+
 resource "git_repository_file" "cert_manager" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/cert-manager.yaml"
   content = templatefile("${path.module}/templates/cert-manager.yaml.tpl", {

@@ -14,7 +14,7 @@ spec:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
-    - Replace=true
+    - ServerSideApply=true
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 42.1.1

@@ -15,16 +15,6 @@ variable "azad_kube_proxy_enabled" {
   default     = false
 }
 
-variable "azure_config" {
-  description = "Azure specific configuration"
-  type = object({
-    azure_key_vault_name = string
-  })
-  default = {
-    azure_key_vault_name = ""
-  }
-}
-
 variable "cilium_enabled" {
   description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
   type        = bool

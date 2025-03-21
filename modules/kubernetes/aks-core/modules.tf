@@ -92,10 +92,6 @@ module "azure_policy" {
   azure_policy_config = var.azure_policy_config
   environment         = var.environment
   location_short      = var.location_short
-
-  tenant_namespaces = [
-    for namespace in var.namespaces : namespace.name
-  ]
 }
 
 module "azure_service_operator" {
@@ -122,8 +118,6 @@ module "azure_service_operator" {
 }
 
 module "cert_manager" {
-  depends_on = [module.gateway_api, module.cert_manager_crd]
-
   for_each = {
     for s in ["cert-manager"] :
     s => s
@@ -146,23 +140,6 @@ module "cert_manager" {
   gateway_api_config         = var.gateway_api_config
   tenant_name                = var.platform_config.tenant_name
   fleet_infra_config         = var.platform_config.fleet_infra_config
-}
-
-module "cert_manager_crd" {
-  for_each = {
-    for s in ["cert-manager"] :
-    s => s
-    if var.platform_config.cert_manager_enabled
-  }
-
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://charts.jetstack.io"
-  chart_name       = "cert-manager"
-  chart_version    = "v1.16.3"
-  values = {
-    "installCRDs" = "true"
-  }
 }
 
 module "control_plane_logs" {
@@ -327,8 +304,6 @@ module "gateway_api" {
 }
 
 module "grafana_agent" {
-  depends_on = [module.grafana_agent_crd]
-
   for_each = {
     for s in ["grafana-agent"] :
     s => s
@@ -360,20 +335,6 @@ module "grafana_agent" {
   include_kubelet_metrics = var.grafana_agent_config.include_kubelet_metrics
   tenant_name             = var.platform_config.tenant_name
   fleet_infra_config      = var.platform_config.fleet_infra_config
-}
-
-module "grafana_agent_crd" {
-  for_each = {
-    for s in ["grafana-agent"] :
-    s => s
-    if var.platform_config.grafana_agent_enabled
-  }
-
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://grafana.github.io/helm-charts"
-  chart_name       = "grafana-agent-operator"
-  chart_version    = "0.1.5"
 }
 
 module "grafana_alloy" {
@@ -509,8 +470,6 @@ module "karpenter" {
 }
 
 module "linkerd" {
-  depends_on = [module.cert_manager_crd, module.linkerd_crd]
-
   for_each = {
     for s in ["linkerd"] :
     s => s
@@ -521,20 +480,6 @@ module "linkerd" {
   source             = "../../kubernetes/linkerd"
   tenant_name        = var.platform_config.tenant_name
   fleet_infra_config = var.platform_config.fleet_infra_config
-}
-
-module "linkerd_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  for_each = {
-    for s in ["linkerd"] :
-    s => s
-    if var.platform_config.linkerd_enabled
-  }
-
-  chart_repository = "https://helm.linkerd.io/stable"
-  chart_name       = "linkerd-crds"
-  chart_version    = "1.8.0"
 }
 
 module "litmus" {
@@ -621,8 +566,6 @@ module "popeye" {
 }
 
 module "prometheus" {
-  depends_on = [module.prometheus_crd]
-
   for_each = {
     for s in ["prometheus"] :
     s => s
@@ -631,11 +574,7 @@ module "prometheus" {
 
   source = "../../kubernetes/prometheus"
 
-  aks_name = var.name
-  azure_config = {
-    azure_key_vault_name = var.prometheus_config.azure_key_vault_name
-  }
-
+  aks_name                        = var.name
   cluster_id                      = local.cluster_id
   cluster_name                    = "${var.name}${local.aks_name_suffix}"
   environment                     = var.environment
@@ -664,20 +603,6 @@ module "prometheus" {
   vpa_enabled              = var.platform_config.vpa_enabled
   tenant_name              = var.platform_config.tenant_name
   fleet_infra_config       = var.platform_config.fleet_infra_config
-}
-
-module "prometheus_crd" {
-  for_each = {
-    for s in ["prometheus"] :
-    s => s
-    if var.platform_config.prometheus_enabled
-  }
-
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://prometheus-community.github.io/helm-charts"
-  chart_name       = "kube-prometheus-stack"
-  chart_version    = "42.1.1"
 }
 
 module "promtail" {

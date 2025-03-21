@@ -189,6 +189,14 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
   type = "kubernetes.io/tls"
 }
 
+resource "git_repository_file" "linkerd_crds" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd-crds.yaml"
+  content = templatefile("${path.module}/templates/linkerd-crds.yaml.tpl", {
+    project = var.fleet_infra_config.argocd_project_name
+    server  = var.fleet_infra_config.k8s_api_server_url
+  })
+}
+
 # Keep this as a helm release, because this needs to be installed first, until we can fully deprecate linkerd
 resource "helm_release" "linkerd_extras" {
   depends_on = [

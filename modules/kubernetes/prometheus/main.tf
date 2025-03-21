@@ -8,6 +8,10 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
+    azurerm = {
+      version = "4.19.0"
+      source  = "hashicorp/azurerm"
+    }
     git = {
       source  = "xenitab/git"
       version = "0.0.3"

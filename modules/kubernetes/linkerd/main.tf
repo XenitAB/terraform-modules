@@ -189,8 +189,32 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
   type = "kubernetes.io/tls"
 }
 
+resource "git_repository_file" "datadog_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/datadog/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
+}
+
+resource "git_repository_file" "datadog_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/datadog/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
+}
+
+# App-of-apps
+resource "git_repository_file" "linkerd_app" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/linkerd-app.yaml"
+  content = templatefile("${path.module}/templates/linkerd-app.yaml.tpl", {
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
+  })
+}
+
 resource "git_repository_file" "linkerd_crds" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd-crds.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd/templates/linkerd-crds.yaml"
   content = templatefile("${path.module}/templates/linkerd-crds.yaml.tpl", {
     project = var.fleet_infra_config.argocd_project_name
     server  = var.fleet_infra_config.k8s_api_server_url
@@ -211,7 +235,7 @@ resource "helm_release" "linkerd_extras" {
 }
 
 resource "git_repository_file" "linkerd" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd/templates/linkerd.yaml"
   content = templatefile("${path.module}/templates/linkerd.yaml.tpl", {
     linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem)
     webhook_issuer_pem       = indent(4, tls_self_signed_cert.webhook_issuer_tls.cert_pem)
@@ -221,7 +245,7 @@ resource "git_repository_file" "linkerd" {
 }
 
 resource "git_repository_file" "linkerd_viz" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd-viz.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd/templates/linkerd-viz.yaml"
   content = templatefile("${path.module}/templates/linkerd-viz.yaml.tpl", {
     linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem)
     webhook_issuer_pem       = indent(4, tls_self_signed_cert.webhook_issuer_tls.cert_pem)

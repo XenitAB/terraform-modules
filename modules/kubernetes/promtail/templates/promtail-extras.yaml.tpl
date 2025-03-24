@@ -1,43 +1,21 @@
-apiVersion: secrets-store.csi.x-k8s.io/v1
-kind: SecretProviderClass
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: promtail
-  namespace: promtail
+  name: promtail-extras
+  namespace: argocd
 spec:
-  provider: "azure"
-  parameters:
-    clientID: ${client_id}
-    keyvaultName: ${azure_config.azure_key_vault_name}
-    tenantId: ${tenant_id}
-    objects:  |
-      array:
-        - |
-          objectName: "${azure_config.keyvault_secret_name}"
-          objectType: secret
-  secretObjects:
-    - secretName: "${k8s_secret_name}"
-      type: kubernetes.io/tls
-      data:
-        - objectName: "${azure_config.keyvault_secret_name}"
-          key: tls.key
-        - objectName: "${azure_config.keyvault_secret_name}"
-          key: tls.crt
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: promtail-metrics
-  namespace: promtail
-  labels:
-    app.kubernetes.io/instance: promtail
-    app.kubernetes.io/name: promtail
-spec:
-  clusterIP: None
-  ports:
-    - name: http-metrics
-      port: 3101
-      targetPort: http-metrics
-      protocol: TCP
-  selector:
-    app.kubernetes.io/instance: promtail
-    app.kubernetes.io/name: promtail
+  project: ${project}
+  destination:
+    server: ${server}
+    namespace: promtail
+  revisionHistoryLimit: 5
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+    - ApplyOutOfSyncOnly=true
+    - Replace=true
+  source:
+    repoURL: ${repo_url}
+    targetRevision: HEAD
+    path: platform/${tenant_name}/${cluster_id}/argocd-applications/promtail/manifests

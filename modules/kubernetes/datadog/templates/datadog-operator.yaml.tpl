@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: datadog
+  name: datadog-operator
   namespace: argocd
 spec:
   project: ${project}
@@ -32,7 +32,3 @@ spec:
           requests:
             cpu: 15m
             memory: 50Mi
-  sources:
-    - repoURL: ${repo_url}
-      targetRevision: HEAD
-      path: platform/${tenant_name}/${cluster_id}/k8s-manifests/datadog-operator

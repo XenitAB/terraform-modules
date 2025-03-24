@@ -16,7 +16,7 @@ terraform {
 }
 
 resource "git_repository_file" "spegel" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/spegel.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/spegel.yaml"
   content = templatefile("${path.module}/templates/spegel.yaml.tpl", {
     private_registry = var.private_registry
     project          = var.fleet_infra_config.argocd_project_name

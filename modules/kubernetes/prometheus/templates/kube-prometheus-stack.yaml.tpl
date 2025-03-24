@@ -113,7 +113,3 @@ spec:
             monitor:
               additionalLabels:
                 xkf.xenit.io/monitoring: platform
-  sources:
-    - repoURL: ${repo_url}
-      targetRevision: HEAD
-      path: platform/${tenant_name}/${cluster_id}/k8s-manifests/grafana-k8s-monitoring

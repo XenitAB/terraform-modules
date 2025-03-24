@@ -17,7 +17,7 @@ terraform {
 }
 
 resource "git_repository_file" "telepresence" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/telepresence.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/telepresence.yaml"
   content = templatefile("${path.module}/templates/telepresence.yaml.tpl", {
     telepresence_config = var.telepresence_config
     project             = var.fleet_infra_config.argocd_project_name

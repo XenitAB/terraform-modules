@@ -19,8 +19,32 @@ terraform {
   }
 }
 
+resource "git_repository_file" "cert_manager_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/cert-manager/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
+}
+
+resource "git_repository_file" "cert_manager_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/cert-manager/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
+}
+
+# App-of-apps
+resource "git_repository_file" "cert_manager_app" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/cert-manager-app.yaml"
+  content = templatefile("${path.module}/templates/cert-manager-app.yaml.tpl", {
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
+  })
+}
+
 resource "git_repository_file" "cert_manager_crds" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/cert-manager-crds.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/cert-manager/templates/cert-manager-crds.yaml"
   content = templatefile("${path.module}/templates/cert-manager-crds.yaml.tpl", {
     project = var.fleet_infra_config.argocd_project_name
     server  = var.fleet_infra_config.k8s_api_server_url
@@ -28,21 +52,29 @@ resource "git_repository_file" "cert_manager_crds" {
 }
 
 resource "git_repository_file" "cert_manager" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/cert-manager.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/cert-manager/templates/cert-manager.yaml"
   content = templatefile("${path.module}/templates/cert-manager.yaml.tpl", {
-    client_id           = azurerm_user_assigned_identity.cert_manager.client_id
-    gateway_api_enabled = var.gateway_api_enabled
-    tenant_name         = var.tenant_name
-    cluster_id          = var.cluster_id
     project             = var.fleet_infra_config.argocd_project_name
     server              = var.fleet_infra_config.k8s_api_server_url
-    repo_url            = var.fleet_infra_config.git_repo_url
+    client_id           = azurerm_user_assigned_identity.cert_manager.client_id
+    gateway_api_enabled = var.gateway_api_enabled
   })
 }
 
 resource "git_repository_file" "cert_manager_extras" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/cert-manager/cert-manager-extras.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/cert-manager/templates/cert-manager-extras.yaml"
   content = templatefile("${path.module}/templates/cert-manager-extras.yaml.tpl", {
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
+  })
+}
+
+resource "git_repository_file" "cert_manager_manifests" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/cert-manager/manifests/cert-manager-extras.yaml"
+  content = templatefile("${path.module}/templates/cert-manager-manifests.yaml.tpl", {
     aad_groups               = var.aad_groups
     namespaces               = var.namespaces
     acme_server              = var.acme_server

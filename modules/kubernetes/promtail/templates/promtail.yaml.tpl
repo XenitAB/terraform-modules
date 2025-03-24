@@ -88,7 +88,3 @@ spec:
           name: promtail
           annotations:
             azure.workload.identity/client-id: ${client_id}
-    sources:
-    - repoURL: ${repo_url}
-      targetRevision: HEAD
-      path: platform/${tenant_name}/${cluster_id}/k8s-manifests/promtail

@@ -58,7 +58,3 @@ spec:
                 readOnly: true
                 volumeAttributes:
                   secretProviderClass: grafana-alloy-secrets
-  sources:
-    - repoURL: ${repo_url}
-      targetRevision: HEAD
-      path: platform/${tenant_name}/${cluster_id}/k8s-manifests/grafana-alloy

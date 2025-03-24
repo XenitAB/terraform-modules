@@ -19,8 +19,32 @@ terraform {
   }
 }
 
+resource "git_repository_file" "vpa_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/vpa/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
+}
+
+resource "git_repository_file" "vpa_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/vpa/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
+}
+
+# App-of-apps
+resource "git_repository_file" "vpa_app" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/vpa-app.yaml"
+  content = templatefile("${path.module}/templates/vpa.yaml.tpl", {
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
+  })
+}
+
 resource "git_repository_file" "vpa" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/vpa.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/vpa/templates/vpa.yaml"
   content = templatefile("${path.module}/templates/vpa.yaml.tpl", {
     project = var.fleet_infra_config.argocd_project_name
     server  = var.fleet_infra_config.k8s_api_server_url
@@ -28,7 +52,7 @@ resource "git_repository_file" "vpa" {
 }
 
 resource "git_repository_file" "goldilocks" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/goldilocks.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/vpa/templates/goldilocks.yaml"
   content = templatefile("${path.module}/templates/goldilocks.yaml.tpl", {
     project = var.fleet_infra_config.argocd_project_name
     server  = var.fleet_infra_config.k8s_api_server_url

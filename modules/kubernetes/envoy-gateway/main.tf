@@ -20,7 +20,7 @@ terraform {
 }
 
 resource "git_repository_file" "envoy_gateway" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/envoy-gateway.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/envoy-gateway.yaml"
   content = templatefile("${path.module}/templates/envoy-gateway.yaml.tpl", {
     envoy_gateway_config = var.envoy_gateway_config
     project              = var.fleet_infra_config.argocd_project_name

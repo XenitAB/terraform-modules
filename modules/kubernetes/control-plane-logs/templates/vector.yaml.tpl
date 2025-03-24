@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: controle-plane-logs
+  name: vector
   namespace: argocd
 spec:
   project: ${project}
@@ -80,7 +80,3 @@ spec:
           automountToken: false
           annotations:
             azure.workload.identity/client-id: ${client_id}
-  sources:
-    - repoURL: ${repo_url}
-      targetRevision: HEAD
-      path: platform/${tenant_name}/${cluster_id}/k8s-manifests/control-plane-logs

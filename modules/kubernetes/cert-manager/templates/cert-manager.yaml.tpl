@@ -52,7 +52,3 @@ spec:
               memory: 250Mi
         dns01RecursiveNameserversOnly: true
         dns01RecursiveNameservers: "8.8.8.8:53,1.1.1.1:53"
-  sources:
-    - repoURL: ${repo_url}
-      targetRevision: HEAD
-      path: platform/${tenant_name}/${cluster_id}/k8s-manifests/cert-manager

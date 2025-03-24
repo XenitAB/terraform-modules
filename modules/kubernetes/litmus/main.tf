@@ -30,7 +30,7 @@ data "azurerm_key_vault_secret" "mongodb" {
 }
 
 resource "git_repository_file" "litmus" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/litmuschaos.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/litmuschaos.yaml"
   content = templatefile("${path.module}/templates/litmuschaos.yaml.tpl", {
     cluster_id            = var.cluster_id
     mongodb_root_password = data.azurerm_key_vault_secret.mongodb.value

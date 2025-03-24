@@ -19,26 +19,57 @@ terraform {
   }
 }
 
+resource "git_repository_file" "grafana_k8s_monitoring_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-k8s-monitoring/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
+}
+
+resource "git_repository_file" "grafana_k8s_monitoring_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-k8s-monitoring/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
+}
+
+# App-of-apps
+resource "git_repository_file" "grafana_k8s_monitoring_app" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/grafana-k8s-monitoring-app.yaml"
+  content = templatefile("${path.module}/templates/grafana-k8s-monitoring-app.yaml.tpl", {
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
+  })
+}
+
 resource "git_repository_file" "grafana_k8s_monitoring" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-k8s-monitoring.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-k8s-monitoring/templates/grafana-k8s-monitoring.yaml"
   content = templatefile("${path.module}/templates/grafana-k8s-monitoring.yaml.tpl", {
+    project                    = var.fleet_infra_config.argocd_project_name
+    server                     = var.fleet_infra_config.k8s_api_server_url
     grafana_k8s_monitor_config = var.grafana_k8s_monitor_config
     cluster_name               = var.cluster_name
     tenant_id                  = azurerm_user_assigned_identity.grafana_k8s_monitor.tenant_id
     client_id                  = azurerm_user_assigned_identity.grafana_k8s_monitor.client_id
     key_vault_name             = var.grafana_k8s_monitor_config.azure_key_vault_name
     exclude_namespaces         = var.grafana_k8s_monitor_config.exclude_namespaces
-    tenant_name                = var.tenant_name
-    cluster_id                 = var.cluster_id
-    project                    = var.fleet_infra_config.argocd_project_name
-    server                     = var.fleet_infra_config.k8s_api_server_url
-    repo_url                   = var.fleet_infra_config.git_repo_url
   })
 }
 
+resource "git_repository_file" "grafana_k8s_monitoring_extras" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-k8s-monitoring/templates/grafana-k8s-monitoring-extras.yaml"
+  content = templatefile("${path.module}/templates/grafana-k8s-monitoring-extras.yaml.tpl", {
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
+  })
+}
 
 resource "git_repository_file" "monitors" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/grafana-k8s-monitoring/monitors.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-k8s-monitoring/manifests/monitors.yaml"
   content = templatefile("${path.module}/templates/monitors.yaml.tpl", {
     falco_enabled            = var.falco_enabled
     gatekeeper_enabled       = var.gatekeeper_enabled
@@ -58,7 +89,7 @@ resource "git_repository_file" "monitors" {
 }
 
 resource "git_repository_file" "secret_provider_class" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/grafana-k8s-monitoring/secret-provider-class.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-k8s-monitoring/manifests/secret-provider-class.yaml"
   content = templatefile("${path.module}/templates/secret-provider-class.yaml.tpl", {
     tenant_id      = azurerm_user_assigned_identity.grafana_k8s_monitor.tenant_id
     client_id      = azurerm_user_assigned_identity.grafana_k8s_monitor.client_id

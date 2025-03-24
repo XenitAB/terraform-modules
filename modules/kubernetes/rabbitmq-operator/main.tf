@@ -16,7 +16,7 @@ terraform {
 }
 
 resource "git_repository_file" "rabbitmq_operator" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/rabbitmq-operator.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/rabbitmq-operator.yaml"
   content = templatefile("${path.module}/templates/rabbitmq-operator.yaml.tpl", {
     min_available           = var.rabbitmq_config.min_available
     replica_count           = var.rabbitmq_config.replica_count

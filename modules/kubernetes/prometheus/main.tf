@@ -19,9 +19,32 @@ terraform {
   }
 }
 
-# Prometheus operator and other core monitoring components.
+resource "git_repository_file" "prometheus_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/prometheus/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
+}
+
+resource "git_repository_file" "prometheus_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/prometheus/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
+}
+
+# App-of-apps
+resource "git_repository_file" "prometheus_app" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/prometheus-app.yaml"
+  content = templatefile("${path.module}/templates/prometheus-app.yaml.tpl", {
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
+  })
+}
+
 resource "git_repository_file" "prometheus_operator" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kube-prometheus-stack.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/prometheus/templates/kube-prometheus-stack.yaml"
   content = templatefile("${path.module}/templates/kube-prometheus-stack.yaml.tpl", {
     vpa_enabled = var.vpa_enabled
     tenant_name = var.tenant_name
@@ -32,8 +55,27 @@ resource "git_repository_file" "prometheus_operator" {
   })
 }
 
+resource "git_repository_file" "x509_certificate_exporter" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/prometheus/templates/x509-certificate-exporter.yaml"
+  content = templatefile("${path.module}/templates/x509-certificate-exporter.yaml.tpl", {
+    project = var.fleet_infra_config.argocd_project_name
+    server  = var.fleet_infra_config.k8s_api_server_url
+  })
+}
+
+resource "git_repository_file" "prometheus_extras" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/prometheus/templates/prometheus-extras.yaml"
+  content = templatefile("${path.module}/templates/prometheus-extras.yaml.tpl", {
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
+  })
+}
+
 resource "git_repository_file" "prometheus" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/kube-prometheus-stack/prometheus.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/prometheus/manifests/prometheus.yaml"
   content = templatefile("${path.module}/templates/prometheus.yaml.tpl", {
     cluster_name                    = var.cluster_name
     environment                     = var.environment
@@ -51,14 +93,14 @@ resource "git_repository_file" "prometheus" {
 }
 
 resource "git_repository_file" "rbac" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/kube-prometheus-stack/rbac.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/prometheus/manifests/rbac.yaml"
   content = templatefile("${path.module}/templates/rbac.yaml.tpl", {
     client_id = data.azurerm_user_assigned_identity.xenit.client_id
   })
 }
 
 resource "git_repository_file" "monitors" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/kube-prometheus-stack/monitors.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/prometheus/manifests/monitors.yaml"
   content = templatefile("${path.module}/templates/monitors.yaml.tpl", {
     falco_enabled            = var.falco_enabled
     gatekeeper_enabled       = var.gatekeeper_enabled
@@ -75,10 +117,3 @@ resource "git_repository_file" "monitors" {
   })
 }
 
-resource "git_repository_file" "x509_certificate_exporter" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/x509-certificate-exporter.yaml"
-  content = templatefile("${path.module}/templates/x509-certificate-exporter.yaml.tpl", {
-    project = var.fleet_infra_config.argocd_project_name
-    server  = var.fleet_infra_config.k8s_api_server_url
-  })
-}

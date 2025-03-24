@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager-crd
+  name: cert-manager-crds
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-1"

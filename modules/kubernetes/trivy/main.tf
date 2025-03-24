@@ -27,8 +27,32 @@ terraform {
   }
 }
 
+resource "git_repository_file" "trivy_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
+}
+
+resource "git_repository_file" "trivy_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
+}
+
+# App-of-apps
+resource "git_repository_file" "trivy_app" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/trivy-app.yaml"
+  content = templatefile("${path.module}/templates/trivy-app.yaml.tpl", {
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
+  })
+}
+
 resource "git_repository_file" "trivy_operator" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy-operator.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/templates/trivy-operator.yaml"
   content = templatefile("${path.module}/templates/trivy-operator.yaml.tpl", {
     client_id = azurerm_user_assigned_identity.trivy.client_id
     project   = var.fleet_infra_config.argocd_project_name
@@ -37,7 +61,7 @@ resource "git_repository_file" "trivy_operator" {
 }
 
 resource "git_repository_file" "trivy" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/templates/trivy.yaml"
   content = templatefile("${path.module}/templates/trivy.yaml.tpl", {
     client_id                       = azurerm_user_assigned_identity.trivy.client_id,
     volume_claim_storage_class_name = var.volume_claim_storage_class_name
@@ -46,14 +70,14 @@ resource "git_repository_file" "trivy" {
   })
 }
 
-resource "git_repository_file" "starboard_eporter" {
+resource "git_repository_file" "starboard_exporter" {
   for_each = {
-    for s in ["starboard_eporter"] :
+    for s in ["starboard_exporter"] :
     s => s
     if var.starboard_exporter_enabled
   }
 
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/starboard-eporter.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/templates/starboard-eporter.yaml"
   content = templatefile("${path.module}/templates/starboard-exporter.yaml.tpl", {
     project = var.fleet_infra_config.argocd_project_name
     server  = var.fleet_infra_config.k8s_api_server_url

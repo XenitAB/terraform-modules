@@ -16,7 +16,7 @@ terraform {
 }
 
 resource "git_repository_file" "ingress_nginx" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/nginx-gateway-fabric.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/nginx-gateway-fabric.yaml"
   content = templatefile("${path.module}/templates/nginx-gateway-fabric.yaml.tpl", {
     logging_level             = var.gateway_config.logging_level
     replica_count             = var.gateway_config.replica_count

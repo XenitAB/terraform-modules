@@ -30,8 +30,4 @@ spec:
         kubeletService:
           namespace: grafana-agent
         serviceAccount:
-          name: grafana-
-  sources:
-    - repoURL: ${repo_url}
-      targetRevision: HEAD
-      path: platform/${tenant_name}/${cluster_id}/k8s-manifests/grafana-agent
+          name: grafana-agent

@@ -25,7 +25,7 @@ data "azurerm_storage_account" "log" {
 }
 
 resource "git_repository_file" "popeye" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/templates/popeye.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/templates/popeye.yaml"
   content = templatefile("${path.module}/templates/popeye.yaml.tpl", {
     project  = var.fleet_infra_config.argocd_project_name
     server   = var.fleet_infra_config.k8s_api_server_url

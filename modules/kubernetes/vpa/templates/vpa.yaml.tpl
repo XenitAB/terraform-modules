@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: vpa
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   project: ${project}
   destination:
@@ -10,6 +12,9 @@ spec:
     namespace: vpa
   revisionHistoryLimit: 5
   syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true

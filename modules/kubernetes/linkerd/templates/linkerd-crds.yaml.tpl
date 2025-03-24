@@ -12,6 +12,9 @@ spec:
     namespace: linkerd
   revisionHistoryLimit: 5
   syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
     syncOptions:
     - CreateNamespace=false
     - RespectIgnoreDifferences=true

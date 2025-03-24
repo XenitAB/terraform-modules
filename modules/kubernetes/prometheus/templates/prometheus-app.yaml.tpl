@@ -10,6 +10,9 @@ spec:
     namespace: prometheus
   revisionHistoryLimit: 5
   syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true

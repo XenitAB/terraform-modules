@@ -3,12 +3,17 @@ kind: Application
 metadata:
   name: gateway-api-crds
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: ${project}
   destination:
     server: ${server}
   revisionHistoryLimit: 5
   syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
     syncOptions:
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true

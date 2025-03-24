@@ -12,6 +12,9 @@ spec:
     namespace: cert-manager
   revisionHistoryLimit: 5
   syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
     syncOptions:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true

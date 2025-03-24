@@ -10,6 +10,9 @@ spec:
     namespace: grafana-agent
   revisionHistoryLimit: 5
   syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true

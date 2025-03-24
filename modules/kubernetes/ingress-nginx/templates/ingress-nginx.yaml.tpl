@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: ${ingress_nginx_name}
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: ${project}
   destination:
@@ -11,6 +13,9 @@ spec:
     namespace: ingress-nginx
   revisionHistoryLimit: 5
   syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true

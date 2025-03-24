@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: linkerd-viz
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: ${project}
   destination:
@@ -10,6 +12,9 @@ spec:
     namespace: linkerd-viz
   revisionHistoryLimit: 5
   syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
     - CreateNamespace=false
     - RespectIgnoreDifferences=true

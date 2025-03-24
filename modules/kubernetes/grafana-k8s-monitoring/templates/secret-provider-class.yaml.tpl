@@ -3,6 +3,8 @@ kind: SecretProviderClass
 metadata:
   name: grafana-k8s-monitor-secrets
   namespace: grafana-k8s-monitoring
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   provider: azure
   parameters:

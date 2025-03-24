@@ -15,7 +15,7 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
+resource "git_repository_file" "gateway_api_crds" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/gateway-api-crds.yaml"
   content = templatefile("${path.module}/templates/gateway-api-crds.yaml.tpl", {
     cluster_id  = var.cluster_id

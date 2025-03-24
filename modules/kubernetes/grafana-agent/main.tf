@@ -73,7 +73,7 @@ resource "git_repository_file" "grafana_agent_extras" {
 }
 
 resource "git_repository_file" "grafana_agent_manifests" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/grafana-agent/grafana-agent-extras.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-agent/manifests/grafana-agent-extras.yaml"
   content = templatefile("${path.module}/templates/grafana-agent-manifests.yaml.tpl", {
     credentials_secret_name     = "grafana-agent-credentials"
     remote_write_metrics_url    = var.remote_write_urls.metrics

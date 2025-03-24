@@ -25,7 +25,7 @@ data "azurerm_storage_account" "log" {
 }
 
 resource "git_repository_file" "popeye" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/templates/popeye.yaml"
   content = templatefile("${path.module}/templates/popeye.yaml.tpl", {
     project  = var.fleet_infra_config.argocd_project_name
     server   = var.fleet_infra_config.k8s_api_server_url
@@ -34,67 +34,67 @@ resource "git_repository_file" "popeye" {
 }
 
 resource "git_repository_file" "cluster_role_binding" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/templates/cluster-role-binding.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/charts/popeye/templates/cluster-role-binding.yaml"
   content = templatefile("${path.module}/charts/popeye/templates/cluster-role-binding.yaml", {
   })
 }
 
 resource "git_repository_file" "cluster_role" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/templates/cluster-role.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/charts/popeye/templates/cluster-role.yaml"
   content = templatefile("${path.module}/charts/popeye/templates/cluster-role.yaml", {
   })
 }
 
 resource "git_repository_file" "config_map" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/templates/config-map.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/charts/popeye/templates/config-map.yaml"
   content = templatefile("${path.module}/charts/popeye/templates/config-map.yaml", {
   })
 }
 
 resource "git_repository_file" "cronjob" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/templates/cronjob.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/charts/popeye/templates/cronjob.yaml"
   content = templatefile("${path.module}/charts/popeye/templates/cronjob.yaml", {
   })
 }
 
 resource "git_repository_file" "pvc" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/templates/pvc.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/charts/popeye/templates/pvc.yaml"
   content = templatefile("${path.module}/charts/popeye/templates/pvc.yaml", {
   })
 }
 
 resource "git_repository_file" "secret" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/templates/secret.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/charts/popeye/templates/secret.yaml"
   content = templatefile("${path.module}/charts/popeye/templates/secret.yaml", {
   })
 }
 
 resource "git_repository_file" "service_account" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/templates/service-account.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/charts/popeye/templates/service-account.yaml"
   content = templatefile("${path.module}/charts/popeye/templates/service-account.yaml", {
   })
 }
 
 resource "git_repository_file" "storage_class" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/templates/storage-class.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/charts/popeye/templates/storage-class.yaml"
   content = templatefile("${path.module}/charts/popeye/templates/storage-class.yaml", {
   })
 }
 
 resource "git_repository_file" "helmignore" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/.helmignore"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/charts/popeye/.helmignore"
   content = templatefile("${path.module}/charts/popeye/.helmignore", {
   })
 }
 
 resource "git_repository_file" "chart" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/Chart.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/charts/popeye/Chart.yaml"
   content = templatefile("${path.module}/charts/popeye/Chart.yaml", {
   })
 }
 
 resource "git_repository_file" "values" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/k8s-manifests/popeye/charts/popeye/values.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/popeye/charts/popeye/values.yaml"
   content = templatefile("${path.module}/charts/popeye/values.yaml.tpl", {
     allowed_registries   = var.popeye_config.allowed_registries
     client_id            = azurerm_user_assigned_identity.popeye.client_id

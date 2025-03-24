@@ -101,7 +101,7 @@ resource "git_repository_file" "platform_chart" {
   })
 }
 
-resource "git_repository_file" "velero_values" {
+resource "git_repository_file" "platform_values" {
   path = "platform/${var.platform_config.tenant_name}/${local.cluster_id}/values.yaml"
   content = templatefile("${path.module}/templates/values.yaml", {
   })

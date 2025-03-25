@@ -34,7 +34,6 @@ resource "git_repository_file" "ingress_nginx_app" {
     tenant_name        = var.tenant_name
     cluster_id         = var.cluster_id
     project            = var.fleet_infra_config.argocd_project_name
-    server             = var.fleet_infra_config.k8s_api_server_url
     repo_url           = var.fleet_infra_config.git_repo_url
     ingress_nginx_name = "ingress-nginx"
   })
@@ -112,7 +111,6 @@ resource "git_repository_file" "ingress_nginx_extras" {
     tenant_name        = var.tenant_name
     cluster_id         = var.cluster_id
     project            = var.fleet_infra_config.argocd_project_name
-    server             = var.fleet_infra_config.k8s_api_server_url
     repo_url           = var.fleet_infra_config.git_repo_url
     ingress_nginx_name = "ingress-nginx"
   })

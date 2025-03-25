@@ -69,7 +69,7 @@ This module is used to create AKS clusters.
 | Name | Type |
 |------|------|
 | [git_repository_file.platform_chart](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.velero_values](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.platform_values](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
 | [helm_release.aks_core_extras](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
 | [kubectl_manifest.priority_expander](https://registry.terraform.io/providers/gavinbunney/kubectl/1.16.0/docs/resources/manifest) | resource |
 | [kubernetes_cluster_role.custom_resource_edit](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/cluster_role) | resource |

@@ -26,7 +26,7 @@ spec:
     chart: cert-manager
     helm:
       valuesObject:
-        installCRDs: false
+        installCRDs: true
         global:
           priorityClassName: "platform-medium"
         %{~ if gateway_api_enabled ~}

@@ -6,7 +6,7 @@ metadata:
 spec:
   project: ${project}
   destination:
-    server: ${server}
+    server: https://kubernetes.default.svc
     namespace: prometheus
   revisionHistoryLimit: 5
   syncPolicy:

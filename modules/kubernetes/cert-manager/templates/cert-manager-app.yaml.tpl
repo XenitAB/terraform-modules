@@ -6,7 +6,7 @@ metadata:
 spec:
   project: ${project}
   destination:
-    server: ${server}
+    server: https://kubernetes.default.svc
     namespace: cert-manager
   revisionHistoryLimit: 5
   syncPolicy:

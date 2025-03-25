@@ -8,7 +8,7 @@ metadata:
 spec:
   project: ${project}
   destination:
-    server: ${server}
+    server: https://kubernetes.default.svc
     namespace: grafana-alloy
   revisionHistoryLimit: 5
   syncPolicy:

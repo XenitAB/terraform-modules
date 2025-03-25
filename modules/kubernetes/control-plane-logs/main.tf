@@ -42,7 +42,6 @@ resource "git_repository_file" "control_plane_logs" {
     tenant_name = var.tenant_name
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
-    server      = var.fleet_infra_config.k8s_api_server_url
     repo_url    = var.fleet_infra_config.git_repo_url
   })
 }
@@ -66,7 +65,6 @@ resource "git_repository_file" "vector_extras" {
     tenant_name = var.tenant_name
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
-    server      = var.fleet_infra_config.k8s_api_server_url
     repo_url    = var.fleet_infra_config.git_repo_url
   })
 }

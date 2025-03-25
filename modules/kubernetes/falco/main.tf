@@ -36,13 +36,12 @@ resource "git_repository_file" "falco_app" {
     tenant_name = var.tenant_name
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
-    server      = var.fleet_infra_config.k8s_api_server_url
     repo_url    = var.fleet_infra_config.git_repo_url
   })
 }
 
 resource "git_repository_file" "falco" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/falco/falco.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/falco/templates/falco.yaml"
   content = templatefile("${path.module}/templates/falco.yaml.tpl", {
     cilium_enabled = var.cilium_enabled
     project        = var.fleet_infra_config.argocd_project_name
@@ -51,7 +50,7 @@ resource "git_repository_file" "falco" {
 }
 
 resource "git_repository_file" "falco_exporter" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/falco/falco-exporter.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/falco/templates/falco-exporter.yaml"
   content = templatefile("${path.module}/templates/falco-exporter.yaml.tpl", {
     project = var.fleet_infra_config.argocd_project_name
     server  = var.fleet_infra_config.k8s_api_server_url

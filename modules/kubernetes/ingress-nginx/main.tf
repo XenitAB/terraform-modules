@@ -107,7 +107,7 @@ resource "git_repository_file" "ingress_nginx_private" {
 }
 
 resource "git_repository_file" "ingress_nginx_extras" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/cert-manager/templates/ingress-nginx-extras.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx/templates/ingress-nginx-extras.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx-extras.yaml.tpl", {
     tenant_name        = var.tenant_name
     cluster_id         = var.cluster_id

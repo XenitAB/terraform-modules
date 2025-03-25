@@ -15,6 +15,9 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    managedNamespaceMetadata:
+      labels:
+        xkf.xenit.io/kind: platform
     syncOptions:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true

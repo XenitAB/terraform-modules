@@ -69,8 +69,4 @@ spec:
             annotations:
               azure.workload.identity/client-id: ${client_id}
               azure.workload.identity/tenant-id: ${tenant_id}
-  sources:
-  - repoURL: ${repo_url}
-    targetRevision: HEAD
-    path: platform/${tenant_name}/${cluster_id}/k8s-manifests/velero
 

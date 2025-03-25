@@ -56,6 +56,7 @@ spec:
         %{~ endif ~}
       allowSnippetAnnotations: ${allow_snippet_annotations}
       config:
+        annotations-risk-level: "Critical"
         %{~ for key, value in extra_config ~}
         ${key}: "${value}"
         %{~ endfor ~}

@@ -25,6 +25,7 @@ spec:
     targetRevision: v2.18.1
     chart: telepresence
     helm:
+      releaseName: traffic-manager
       valuesObject:
         client:
           %{ if length(telepresence_config.allow_conflicting_subnets) > 0 }

@@ -34,7 +34,7 @@ resource "git_repository_file" "vpa_values" {
 # App-of-apps
 resource "git_repository_file" "vpa_app" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/vpa-app.yaml"
-  content = templatefile("${path.module}/templates/vpa.yaml.tpl", {
+  content = templatefile("${path.module}/templates/vpa-app.yaml.tpl", {
     tenant_name = var.tenant_name
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name

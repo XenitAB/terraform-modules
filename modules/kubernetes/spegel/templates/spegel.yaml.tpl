@@ -21,7 +21,7 @@ spec:
     - ApplyOutOfSyncOnly=true
     - Replace=true
   source:
-    repoURL: oci://ghcr.io/spegel-org/helm-charts
+    repoURL: ghcr.io/spegel-org/helm-charts
     targetRevision: v0.0.30
     chart: spegel
     helm:

@@ -21,7 +21,7 @@ spec:
     - ApplyOutOfSyncOnly=true
     - Replace=true
   source:
-    repoURL: oci://registry-1.docker.io/bitnamicharts
+    repoURL: registry-1.docker.io/bitnamicharts
     targetRevision: 8.7.3
     chart: external-dns
     helm:

@@ -21,7 +21,7 @@ spec:
     - ApplyOutOfSyncOnly=true
     - Replace=true
   source:
-    repoURL: oci://ghcr.io/xenitab/helm-charts
+    repoURL: ghcr.io/xenitab/helm-charts
     targetRevision: v0.0.6
     chart: node-ttl
     helm:

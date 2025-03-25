@@ -21,7 +21,7 @@ spec:
     - ApplyOutOfSyncOnly=true
     - Replace=true
   source:
-    repoURL: oci://ghcr.io/nginxinc/charts
+    repoURL: ghcr.io/nginxinc/charts
     targetRevision: 1.4.0
     chart: nginx-gateway-fabric
     helm:

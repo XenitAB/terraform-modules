@@ -20,7 +20,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: ${ingress_nginx_name}
-      version: 4.11.2
+      version: 4.12.1
   interval: 1m0s
   values:
     controller:

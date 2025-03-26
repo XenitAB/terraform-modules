@@ -1,7 +1,7 @@
 apiVersion: mutations.gatekeeper.sh/v1beta1
 kind: Assign
 metadata:
-  name: container-disallow-privilege-escalation
+  name: container-disallow-privileged-containers
 spec:
   match:
     excludedNamespaces:

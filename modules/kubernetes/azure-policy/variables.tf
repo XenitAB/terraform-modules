@@ -32,6 +32,11 @@ variable "azure_policy_config" {
         template     = "container-disallow-privilege-escalation.yaml.tpl"
       },
       {
+        name         = "ContainerNoPrivilegedContainer"
+        display_name = "Containers should not be privileged"
+        template     = "container-disallow-privileged-container.yaml.tpl"
+      },
+      {
         name         = "ContainerDropCapabilities"
         display_name = "Containers should drop disallowed capabilities"
         template     = "container-drop-capabilities.yaml.tpl"

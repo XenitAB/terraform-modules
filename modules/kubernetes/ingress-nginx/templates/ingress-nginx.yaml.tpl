@@ -56,8 +56,7 @@ spec:
         %{~ endif ~}
       allowSnippetAnnotations: ${allow_snippet_annotations}
       config:
-        annotations-risk-level: "Critical"
-        %{~ for key, value in extra_config ~}
+        %{~ for key, value in extra_config ~} 
         ${key}: "${value}"
         %{~ endfor ~}
         server-tokens: "false"
@@ -70,6 +69,7 @@ spec:
           ${http_snippet}
         %{~ endif ~}
         %{~ if allow_snippet_annotations ~}
+        annotations-risk-level: "Critical"
         annotation-value-word-blocklist: load_module,lua_package,_by_lua,location,root,proxy_pass,serviceaccount,{,},',\
         %{~ endif ~}
 

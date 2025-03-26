@@ -20,7 +20,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: ${ingress_nginx_name}
-      version: 4.11.2
+      version: 4.12.1
   interval: 1m0s
   values:
     controller:
@@ -56,7 +56,7 @@ spec:
         %{~ endif ~}
       allowSnippetAnnotations: ${allow_snippet_annotations}
       config:
-        %{~ for key, value in extra_config ~}
+        %{~ for key, value in extra_config ~} 
         ${key}: "${value}"
         %{~ endfor ~}
         server-tokens: "false"
@@ -69,6 +69,7 @@ spec:
           ${http_snippet}
         %{~ endif ~}
         %{~ if allow_snippet_annotations ~}
+        annotations-risk-level: "Critical"
         annotation-value-word-blocklist: load_module,lua_package,_by_lua,location,root,proxy_pass,serviceaccount,{,},',\
         %{~ endif ~}
 

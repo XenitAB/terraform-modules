@@ -12,6 +12,7 @@ module "linkerd" {
     helm       = helm
   }
   tenant_name = "foo"
+  environment = "dev"
   cluster_id  = "aks-unique-name"
   fleet_infra_config = {
     argocd_project_name = "foo-fleet-infra"

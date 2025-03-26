@@ -49,6 +49,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_aks_managed_identity_id"></a> [aks\_managed\_identity\_id](#input\_aks\_managed\_identity\_id) | The principal id of the AKS managed identity | `string` | n/a | yes |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | The AKS cluster id | `string` | n/a | yes |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_fleet_infra_config"></a> [fleet\_infra\_config](#input\_fleet\_infra\_config) | Fleet infra configuration | <pre>object({<br/>    git_repo_url        = string<br/>    argocd_project_name = string<br/>    k8s_api_server_url  = string<br/>  })</pre> | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | The Azure region name. | `string` | n/a | yes |
 | <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | The AKS token exchange URL | `string` | n/a | yes |

@@ -36,6 +36,7 @@ resource "git_repository_file" "grafana_k8s_monitoring_app" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/grafana-k8s-monitoring-app.yaml"
   content = templatefile("${path.module}/templates/grafana-k8s-monitoring-app.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url
@@ -45,6 +46,8 @@ resource "git_repository_file" "grafana_k8s_monitoring_app" {
 resource "git_repository_file" "grafana_k8s_monitoring" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-k8s-monitoring/templates/grafana-k8s-monitoring.yaml"
   content = templatefile("${path.module}/templates/grafana-k8s-monitoring.yaml.tpl", {
+    tenant_name                = var.tenant_name
+    environment                = var.environment
     project                    = var.fleet_infra_config.argocd_project_name
     server                     = var.fleet_infra_config.k8s_api_server_url
     grafana_k8s_monitor_config = var.grafana_k8s_monitor_config
@@ -60,6 +63,7 @@ resource "git_repository_file" "grafana_k8s_monitoring_extras" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-k8s-monitoring/templates/grafana-k8s-monitoring-extras.yaml"
   content = templatefile("${path.module}/templates/grafana-k8s-monitoring-extras.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url

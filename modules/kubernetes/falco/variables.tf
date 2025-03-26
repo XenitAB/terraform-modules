@@ -9,6 +9,11 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
 variable "fleet_infra_config" {
   description = "Fleet infra configuration"
   type = object({

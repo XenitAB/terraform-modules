@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: grafana-alloy-app
-  namespace: argocd
+  namespace: ${tenant_name}-${environment}
 spec:
   project: ${project}
   destination:

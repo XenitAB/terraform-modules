@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: ${ingress_nginx_name}
-  namespace: argocd
+  namespace: ${tenant_name}-${environment}
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 spec:

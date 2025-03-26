@@ -22,6 +22,7 @@ module "aad_pod_identity" {
   ]
 
   tenant_name = "foo"
+  environment = "dev"
   fleet_infra_config = {
     argocd_project_name = "foo-fleet-infra"
     git_repo_url        = "http://some-git-repo.git"

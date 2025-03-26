@@ -36,6 +36,7 @@ resource "git_repository_file" "velero_app" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/velero-app.yaml"
   content = templatefile("${path.module}/templates/velero-app.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url
@@ -64,6 +65,7 @@ resource "git_repository_file" "velero_extras" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/velero/templates/velero-extras.yaml"
   content = templatefile("${path.module}/templates/velero-extras.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url

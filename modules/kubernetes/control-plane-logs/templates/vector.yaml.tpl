@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: vector
-  namespace: argocd
+  namespace: ${tenant_name}-${environment}
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:

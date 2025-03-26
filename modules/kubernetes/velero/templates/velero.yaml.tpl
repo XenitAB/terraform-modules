@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: velero
-  namespace: argocd
+  namespace: ${tenant_name}-${environment}
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:

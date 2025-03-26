@@ -9,6 +9,11 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
 variable "exclude_namespaces" {
   description = "Namespaces to exclude from admission and mutation."
   type        = list(string)

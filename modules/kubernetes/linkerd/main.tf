@@ -206,6 +206,7 @@ resource "git_repository_file" "linkerd_app" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/linkerd-app.yaml"
   content = templatefile("${path.module}/templates/linkerd-app.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url
@@ -215,8 +216,10 @@ resource "git_repository_file" "linkerd_app" {
 resource "git_repository_file" "linkerd_crds" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd/templates/linkerd-crds.yaml"
   content = templatefile("${path.module}/templates/linkerd-crds.yaml.tpl", {
-    project = var.fleet_infra_config.argocd_project_name
-    server  = var.fleet_infra_config.k8s_api_server_url
+    tenant_name = var.tenant_name
+    environment = var.environment
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
   })
 }
 
@@ -238,6 +241,8 @@ resource "git_repository_file" "linkerd" {
   content = templatefile("${path.module}/templates/linkerd.yaml.tpl", {
     linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem)
     webhook_issuer_pem       = indent(4, tls_self_signed_cert.webhook_issuer_tls.cert_pem)
+    tenant_name              = var.tenant_name
+    environment              = var.environment
     project                  = var.fleet_infra_config.argocd_project_name
     server                   = var.fleet_infra_config.k8s_api_server_url
   })
@@ -248,6 +253,8 @@ resource "git_repository_file" "linkerd_viz" {
   content = templatefile("${path.module}/templates/linkerd-viz.yaml.tpl", {
     linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem)
     webhook_issuer_pem       = indent(4, tls_self_signed_cert.webhook_issuer_tls.cert_pem)
+    tenant_name              = var.tenant_name
+    environment              = var.environment
     project                  = var.fleet_infra_config.argocd_project_name
     server                   = var.fleet_infra_config.k8s_api_server_url
   })

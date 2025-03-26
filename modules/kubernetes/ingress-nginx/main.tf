@@ -32,6 +32,7 @@ resource "git_repository_file" "ingress_nginx_app" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/ingress-nginx-app.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx-app.yaml.tpl", {
     tenant_name        = var.tenant_name
+    environment        = var.environment
     cluster_id         = var.cluster_id
     project            = var.fleet_infra_config.argocd_project_name
     repo_url           = var.fleet_infra_config.git_repo_url
@@ -42,6 +43,8 @@ resource "git_repository_file" "ingress_nginx_app" {
 resource "git_repository_file" "ingress_nginx" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx/templates/ingress-nginx.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx.yaml.tpl", {
+    tenant_name            = var.tenant_name
+    environment            = var.environment
     project                = var.fleet_infra_config.argocd_project_name
     server                 = var.fleet_infra_config.k8s_api_server_url
     ingress_class          = "nginx"
@@ -78,6 +81,8 @@ resource "git_repository_file" "ingress_nginx_private" {
 
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx/templates/ingress-nginx-private.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx.yaml.tpl", {
+    tenant_name            = var.tenant_name
+    environment            = var.environment
     project                = var.fleet_infra_config.argocd_project_name
     server                 = var.fleet_infra_config.k8s_api_server_url
     ingress_class          = "nginx-private"
@@ -109,6 +114,7 @@ resource "git_repository_file" "ingress_nginx_extras" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx/templates/ingress-nginx-extras.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx-extras.yaml.tpl", {
     tenant_name        = var.tenant_name
+    environment        = var.environment
     cluster_id         = var.cluster_id
     project            = var.fleet_infra_config.argocd_project_name
     repo_url           = var.fleet_infra_config.git_repo_url

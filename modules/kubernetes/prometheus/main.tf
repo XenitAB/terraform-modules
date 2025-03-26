@@ -36,6 +36,7 @@ resource "git_repository_file" "prometheus_app" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/prometheus-app.yaml"
   content = templatefile("${path.module}/templates/prometheus-app.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url
@@ -47,6 +48,7 @@ resource "git_repository_file" "prometheus_operator" {
   content = templatefile("${path.module}/templates/kube-prometheus-stack.yaml.tpl", {
     vpa_enabled = var.vpa_enabled
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     server      = var.fleet_infra_config.k8s_api_server_url
@@ -57,8 +59,10 @@ resource "git_repository_file" "prometheus_operator" {
 resource "git_repository_file" "x509_certificate_exporter" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/prometheus/templates/x509-certificate-exporter.yaml"
   content = templatefile("${path.module}/templates/x509-certificate-exporter.yaml.tpl", {
-    project = var.fleet_infra_config.argocd_project_name
-    server  = var.fleet_infra_config.k8s_api_server_url
+    tenant_name = var.tenant_name
+    environment = var.environment
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
   })
 }
 
@@ -66,6 +70,7 @@ resource "git_repository_file" "prometheus_extras" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/prometheus/templates/prometheus-extras.yaml"
   content = templatefile("${path.module}/templates/prometheus-extras.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url

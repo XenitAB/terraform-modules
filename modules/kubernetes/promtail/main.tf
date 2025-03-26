@@ -46,6 +46,7 @@ resource "git_repository_file" "promtail_app" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/promtail-app.yaml"
   content = templatefile("${path.module}/templates/promtail-app.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url
@@ -57,6 +58,7 @@ resource "git_repository_file" "promtail" {
   content = templatefile("${path.module}/templates/promtail.yaml.tpl", {
     region              = var.region
     environment         = var.environment
+    tenant_name         = var.tenant_name
     cluster_name        = var.cluster_name
     namespace           = local.namespace
     excluded_namespaces = var.excluded_namespaces
@@ -74,6 +76,7 @@ resource "git_repository_file" "promtail_extras" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/cert-manager/templates/promtail-extras.yaml"
   content = templatefile("${path.module}/templates/promtail-extras.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url

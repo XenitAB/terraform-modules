@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: grafana-k8s-monitoring-app
-  namespace: argocd
+  namespace: ${tenant_name}-${environment}
 spec:
   project: ${project}
   destination:

@@ -57,6 +57,11 @@ variable "default_certificate" {
   }
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
 variable "external_dns_hostname" {
   description = "Hostname for external-dns to use"
   type        = string

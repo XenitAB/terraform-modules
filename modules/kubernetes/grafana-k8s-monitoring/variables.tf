@@ -32,6 +32,11 @@ variable "cluster_name" {
   type        = string
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
 variable "falco_enabled" {
   description = "Should Falco be enabled"
   type        = bool

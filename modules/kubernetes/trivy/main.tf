@@ -44,6 +44,7 @@ resource "git_repository_file" "trivy_app" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/trivy-app.yaml"
   content = templatefile("${path.module}/templates/trivy-app.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url
@@ -53,9 +54,11 @@ resource "git_repository_file" "trivy_app" {
 resource "git_repository_file" "trivy_operator" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/templates/trivy-operator.yaml"
   content = templatefile("${path.module}/templates/trivy-operator.yaml.tpl", {
-    client_id = azurerm_user_assigned_identity.trivy.client_id
-    project   = var.fleet_infra_config.argocd_project_name
-    server    = var.fleet_infra_config.k8s_api_server_url
+    tenant_name = var.tenant_name
+    environment = var.environment
+    client_id   = azurerm_user_assigned_identity.trivy.client_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
   })
 }
 
@@ -64,6 +67,8 @@ resource "git_repository_file" "trivy" {
   content = templatefile("${path.module}/templates/trivy.yaml.tpl", {
     client_id                       = azurerm_user_assigned_identity.trivy.client_id,
     volume_claim_storage_class_name = var.volume_claim_storage_class_name
+    tenant_name                     = var.tenant_name
+    environment                     = var.environment
     project                         = var.fleet_infra_config.argocd_project_name
     server                          = var.fleet_infra_config.k8s_api_server_url
   })
@@ -78,7 +83,9 @@ resource "git_repository_file" "starboard_exporter" {
 
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/templates/starboard-eporter.yaml"
   content = templatefile("${path.module}/templates/starboard-exporter.yaml.tpl", {
-    project = var.fleet_infra_config.argocd_project_name
-    server  = var.fleet_infra_config.k8s_api_server_url
+    tenant_name = var.tenant_name
+    environment = var.environment
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
   })
 }

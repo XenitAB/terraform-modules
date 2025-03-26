@@ -32,6 +32,7 @@ module "popeye" {
   oidc_issuer_url         = "https://some-url"
   resource_group_name     = "aks-resource-group-name"
   tenant_name             = "foo"
+  environment             = "dev"
   fleet_infra_config = {
     argocd_project_name = "foo-fleet-infra"
     git_repo_url        = "http://some-git-repo.git"

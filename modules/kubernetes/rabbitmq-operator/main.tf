@@ -24,6 +24,8 @@ resource "git_repository_file" "rabbitmq_operator" {
     spot_instances_enabled  = var.rabbitmq_config.spot_instances_enabled
     tology_operator_enabled = var.rabbitmq_config.tology_operator_enabled
     watch_namespaces        = var.rabbitmq_config.watch_namespaces
+    tenant_name             = var.tenant_name
+    environment             = var.environment
     project                 = var.fleet_infra_config.argocd_project_name
     server                  = var.fleet_infra_config.k8s_api_server_url
   })

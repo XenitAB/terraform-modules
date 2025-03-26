@@ -40,6 +40,7 @@ resource "git_repository_file" "control_plane_logs" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/control-plane-logs-app.yaml"
   content = templatefile("${path.module}/templates/control-plane-logs-app.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url
@@ -51,6 +52,7 @@ resource "git_repository_file" "vector" {
   content = templatefile("${path.module}/templates/vector.yaml.tpl", {
     client_id   = data.azurerm_user_assigned_identity.xenit.client_id
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     server      = var.fleet_infra_config.k8s_api_server_url
@@ -63,6 +65,7 @@ resource "git_repository_file" "vector_extras" {
   content = templatefile("${path.module}/templates/vector-extras.yaml.tpl", {
     client_id   = data.azurerm_user_assigned_identity.xenit.client_id
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url

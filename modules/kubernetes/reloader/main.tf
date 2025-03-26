@@ -19,7 +19,9 @@ terraform {
 resource "git_repository_file" "reloader" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/reloader.yaml"
   content = templatefile("${path.module}/templates/reloader.yaml.tpl", {
-    project = var.fleet_infra_config.argocd_project_name
-    server  = var.fleet_infra_config.k8s_api_server_url
+    tenant_name = var.tenant_name
+    environment = var.environment
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
   })
 }

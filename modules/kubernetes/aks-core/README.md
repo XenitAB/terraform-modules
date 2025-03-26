@@ -51,7 +51,6 @@ This module is used to create AKS clusters.
 | <a name="module_linkerd"></a> [linkerd](#module\_linkerd) | ../../kubernetes/linkerd | n/a |
 | <a name="module_litmus"></a> [litmus](#module\_litmus) | ../../kubernetes/litmus | n/a |
 | <a name="module_nginx_gateway_fabric"></a> [nginx\_gateway\_fabric](#module\_nginx\_gateway\_fabric) | ../../kubernetes/nginx-gateway-fabric | n/a |
-| <a name="module_node_local_dns"></a> [node\_local\_dns](#module\_node\_local\_dns) | ../../kubernetes/node-local-dns | n/a |
 | <a name="module_node_ttl"></a> [node\_ttl](#module\_node\_ttl) | ../../kubernetes/node-ttl | n/a |
 | <a name="module_popeye"></a> [popeye](#module\_popeye) | ../../kubernetes/popeye | n/a |
 | <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ../../kubernetes/prometheus | n/a |

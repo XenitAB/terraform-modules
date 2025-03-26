@@ -46,6 +46,7 @@ resource "git_repository_file" "datadog_app" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/datadog-app.yaml"
   content = templatefile("${path.module}/templates/datadog-app.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url
@@ -56,6 +57,7 @@ resource "git_repository_file" "datadog_operator" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/datadog/templates/datadog-operator.yaml"
   content = templatefile("${path.module}/templates/datadog-operator.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     server      = var.fleet_infra_config.k8s_api_server_url
@@ -67,6 +69,7 @@ resource "git_repository_file" "datadog_extras" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/datadog/templates/datadog-extras.yaml"
   content = templatefile("${path.module}/templates/datadog-extras.yaml.tpl", {
     tenant_name = var.tenant_name
+    environment = var.environment
     cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     repo_url    = var.fleet_infra_config.git_repo_url

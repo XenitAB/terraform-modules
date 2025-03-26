@@ -23,6 +23,11 @@ variable "dns_zones" {
   type        = map(string)
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
 variable "fleet_infra_config" {
   description = "Fleet infra configuration"
   type = object({

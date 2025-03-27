@@ -20,6 +20,8 @@ spec:
   destinations:
   - namespace: 'argocd'
     server: https://kubernetes.default.svc
+  - namespace: '{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}'
+    server: https://kubernetes.default.svc
   - namespace: '{{- .namespace -}}'
     server: '{{- $cluster.api_server -}}'
   clusterResourceWhitelist:

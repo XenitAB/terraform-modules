@@ -118,6 +118,7 @@ resource "git_repository_file" "ingress_nginx_extras" {
     cluster_id         = var.cluster_id
     project            = var.fleet_infra_config.argocd_project_name
     repo_url           = var.fleet_infra_config.git_repo_url
+    server             = var.fleet_infra_config.k8s_api_server_url
     ingress_nginx_name = "ingress-nginx"
   })
 }

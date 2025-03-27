@@ -8,7 +8,7 @@ metadata:
 spec:
   project: ${project}
   destination:
-    server: https://kubernetes.default.svc
+    server: ${server}
     namespace: external-dns
   revisionHistoryLimit: 5
   syncPolicy:

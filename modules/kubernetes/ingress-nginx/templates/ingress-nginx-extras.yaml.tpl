@@ -8,7 +8,7 @@ metadata:
 spec:
   project: ${project}
   destination:
-    server: https://kubernetes.default.svc
+    server: ${server}
     namespace: ingress_nginx
   revisionHistoryLimit: 5
   syncPolicy:

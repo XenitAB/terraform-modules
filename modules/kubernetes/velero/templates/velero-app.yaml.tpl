@@ -7,7 +7,6 @@ spec:
   project: ${project}
   destination:
     server: https://kubernetes.default.svc
-    namespace: velero
   revisionHistoryLimit: 5
   syncPolicy:
     automated:

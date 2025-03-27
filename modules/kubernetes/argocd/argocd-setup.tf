@@ -9,7 +9,7 @@ resource "helm_release" "argocd_hub_setup" {
   chart       = "${path.module}/charts/argocd-hub-setup"
   name        = "argocd-hub-setup"
   namespace   = "argocd"
-  version     = "0.1.1"
+  version     = "0.1.2"
   max_history = 3
   values      = [yamlencode(merge({ "uai_id" : azurerm_user_assigned_identity.argocd.principal_id }, var.argocd_config, { "secrets" : local.key_vault_secret_values }))]
 

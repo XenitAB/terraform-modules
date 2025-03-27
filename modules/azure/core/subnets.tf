@@ -14,6 +14,17 @@ resource "azurerm_subnet" "this" {
   service_endpoints                             = each.value.subnet_service_endpoints
   private_link_service_network_policies_enabled = true
   private_endpoint_network_policies             = "Enabled"
+
+  dynamic "delegation" {
+    for_each = each.value.delegations
+    content {
+      name = delegation.value.name
+      service_delegation {
+        name    = delegation.value.service_delegation.name
+        actions = delegation.value.service_delegation.actions
+      }
+    }
+  }
 }
 
 resource "azurerm_subnet" "aks" {
@@ -30,4 +41,15 @@ resource "azurerm_subnet" "aks" {
   service_endpoints                             = each.value.subnet_service_endpoints
   private_link_service_network_policies_enabled = true
   private_endpoint_network_policies             = "Enabled"
+
+  dynamic "delegation" {
+    for_each = each.value.delegations
+    content {
+      name = delegation.value.name
+      service_delegation {
+        name    = delegation.value.service_delegation.name
+        actions = delegation.value.service_delegation.actions
+      }
+    }
+  }
 }

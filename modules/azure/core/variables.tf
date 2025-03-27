@@ -28,6 +28,13 @@ variable "vnet_config" {
       cidr              = string
       service_endpoints = list(string)
       create_nsg        = bool
+      delegations = optional(list(object({
+        name = string
+        service_delegation = object({
+          name    = string
+          actions = optional(list(string))
+        })
+      })), [])
       security_rules = optional(list(object({
         name                       = optional(string)
         priority                   = optional(number)

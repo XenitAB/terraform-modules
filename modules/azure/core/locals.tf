@@ -33,6 +33,7 @@ locals {
       subnet_cidr              = subnet.cidr
       subnet_service_endpoints = subnet.service_endpoints
       subnet_create_nsg        = subnet.create_nsg
+      delegations              = subnet.delegations == null ? [] : subnet.delegations
     }
   ]
 

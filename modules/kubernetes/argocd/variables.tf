@@ -34,7 +34,6 @@ variable "argocd_config" {
         }))
       }))
     })), [])
-
   })
   default = {}
 }

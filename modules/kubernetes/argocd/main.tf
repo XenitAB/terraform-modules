@@ -22,6 +22,8 @@ terraform {
 }
 
 locals {
+  application_namespaces = format("%s-*", join("-*, ", [for s in var.argocd_config.azure_tenants : s.tenant_name]))
+
   key_vault_secret_names = distinct(flatten([
     for azure_tenant in var.argocd_config.azure_tenants : [
       for cluster in azure_tenant.clusters : [
@@ -98,5 +100,6 @@ resource "helm_release" "argocd" {
     dex_client_secret        = azuread_application_password.dex["argocd"].value
     aad_group_name           = var.argocd_config.aad_group_name
     azure_tenants            = var.argocd_config.azure_tenants
+    application_namespaces   = local.application_namespaces
   })]
 }

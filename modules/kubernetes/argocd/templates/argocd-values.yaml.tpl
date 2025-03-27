@@ -92,6 +92,8 @@ server:
 configs:
   cm:
     admin.enabled: false
+    application.namespaces: ${application_namespaces}
+    application.resourceTrackingMethod: annotation
     dex.config: |
       connectors:
       - type: microsoft

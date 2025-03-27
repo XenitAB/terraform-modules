@@ -8,6 +8,10 @@ kind: AppProject
 metadata:
   name: '{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}-{{- .name -}}'
 spec:
+  # Allow Application resources to deploy only into these namespaces
+  sourceNamespaces:
+  - argocd
+  - {{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}
   # Allow manifests to deploy from specific repository (url) only
   sourceRepos:
   #- '{{- .repo_url -}}'

@@ -92,7 +92,6 @@ server:
 configs:
   cm:
     admin.enabled: false
-    application.namespaces: ${application_namespaces}
     application.resourceTrackingMethod: annotation
     dex.config: |
       connectors:
@@ -121,6 +120,7 @@ configs:
       end
       return hs
   params:
+    application.namespaces: ${application_namespaces}
     server.insecure: "true"
   rbac:
     create: true

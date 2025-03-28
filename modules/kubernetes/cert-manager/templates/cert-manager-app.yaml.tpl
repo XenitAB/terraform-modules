@@ -6,6 +6,7 @@ metadata:
 spec:
   project: ${project}
   destination:
+    namespace: ${tenant_name}-${environment}
     server: https://kubernetes.default.svc
   revisionHistoryLimit: 5
   syncPolicy:

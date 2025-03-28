@@ -20,6 +20,12 @@ spec:
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
     - Replace=true
+  - group: admissionregistration.k8s.io
+    kind: ValidatingWebhookConfiguration
+    name: gatekeeper-validating-webhook-configuration
+    jqPathExpressions:
+    - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "control-plane")
+    - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "kubernetes.azure.com/managedby")
   source:
     repoURL: https://charts.jetstack.io
     targetRevision: v1.16.3

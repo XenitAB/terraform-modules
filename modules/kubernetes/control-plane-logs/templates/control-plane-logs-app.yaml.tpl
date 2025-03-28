@@ -6,6 +6,7 @@ metadata:
 spec:
   project: ${project}
   destination:
+    namespace: ${tenant_name}-${environment}
     server: https://kubernetes.default.svc
   revisionHistoryLimit: 5
   syncPolicy:
@@ -23,4 +24,4 @@ spec:
   source:
     repoURL: ${repo_url}
     targetRevision: HEAD
-    path: platform/${tenant_name}/${cluster_id}/argocd-applications/controle-plane-logs
+    path: platform/${tenant_name}/${cluster_id}/argocd-applications/control-plane-logs

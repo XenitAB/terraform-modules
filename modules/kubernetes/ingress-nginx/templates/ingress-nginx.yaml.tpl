@@ -23,7 +23,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.11.2
+    targetRevision: 4.12.1
     chart: ingress-nginx
     helm:
       valuesObject:

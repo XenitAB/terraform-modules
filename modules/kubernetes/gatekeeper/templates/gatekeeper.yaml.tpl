@@ -20,6 +20,19 @@ spec:
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
     - Replace=true
+  ignoreDifferences:
+  - group: admissionregistration.k8s.io
+    kind: MutatingWebhookConfiguration
+    name: gatekeeper-mutating-webhook-configuration
+    jqPathExpressions:
+    - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "control-plane")
+    - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "kubernetes.azure.com/managedby")
+  - group: admissionregistration.k8s.io
+    kind: ValidatingWebhookConfiguration
+    name: gatekeeper-validating-webhook-configuration
+    jqPathExpressions:
+    - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "control-plane")
+    - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "kubernetes.azure.com/managedby")
   source:
     repoURL: https://open-policy-agent.github.io/gatekeeper/charts
     targetRevision: 3.18.2

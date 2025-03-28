@@ -23,6 +23,13 @@ spec:
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
     - Replace=true
+  ignoreDifferences:
+  - group: admissionregistration.k8s.io
+    kind: MutatingWebhookConfiguration
+    name: agent-injector-webhook-ambassador
+    jqPathExpressions:
+    - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "control-plane")
+    - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "kubernetes.azure.com/managedby")
   source:
     repoURL: https://app.getambassador.io
     targetRevision: v2.18.1

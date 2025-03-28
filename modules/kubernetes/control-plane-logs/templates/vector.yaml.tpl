@@ -9,7 +9,7 @@ spec:
   project: ${project}
   destination:
     server: ${server}
-    namespace: controle-plane-logs
+    namespace: control-plane-logs
   revisionHistoryLimit: 5
   syncPolicy:
     automated:
@@ -20,6 +20,14 @@ spec:
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
     - Replace=true
+  ignoreDifferences:
+  - group: apps
+    kind: Deployment
+    name: vector
+    jqPathExpressions:
+    - .spec.minReadySeconds
+    - .spec.template.spec.containers[0].ports
+    - .spec.template.spec.securityContext
   source:
     repoURL: https://helm.vector.dev
     targetRevision: v0.40.0

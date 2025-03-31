@@ -20,7 +20,6 @@ spec:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
-    - Replace=true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
     targetRevision: 4.12.1

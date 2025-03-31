@@ -26,4 +26,4 @@ spec:
   source:
     repoURL: ${repo_url}
     targetRevision: HEAD
-    chart: platform/${tenant_name}/${cluster_id}/argocd-applications/popeye/charts/popeye
+    path: platform/${tenant_name}/${cluster_id}/argocd-applications/popeye/charts/popeye

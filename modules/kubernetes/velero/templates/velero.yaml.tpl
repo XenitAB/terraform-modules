@@ -19,7 +19,6 @@ spec:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
-    - Replace=true
   source:
     repoURL: https://vmware-tanzu.github.io/helm-charts
     targetRevision: v5.1.5

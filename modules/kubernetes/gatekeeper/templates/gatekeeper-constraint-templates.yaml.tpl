@@ -3593,7 +3593,7 @@ spec:
               type: array
               items:
                 type: string
-          exemptImages:
+            exemptImages:
               description: |-
                 Any container that uses an image that matches an entry in this list will be excluded from enforcement. Prefix-matching can be signified with `*`. For example: `my-image-*`.
                 It is recommended that users use the fully-qualified Docker image name (e.g. start with a domain name) in order to avoid unexpectedly exempting images from an untrusted repository.

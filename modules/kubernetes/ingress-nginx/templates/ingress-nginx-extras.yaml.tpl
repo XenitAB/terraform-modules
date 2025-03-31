@@ -9,18 +9,17 @@ spec:
   project: ${project}
   destination:
     server: ${server}
-    namespace: ingress_nginx
+    namespace: ingress-nginx
   revisionHistoryLimit: 5
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
     - Replace=true
   source:
     repoURL: ${repo_url}
     targetRevision: HEAD
-    path: platform/${tenant_name}/${cluster_id}/argocd-applications/ingress_nginx/manifests
+    path: platform/${tenant_name}/${cluster_id}/argocd-applications/ingress-nginx/manifests

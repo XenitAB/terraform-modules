@@ -4,7 +4,8 @@ metadata:
   name: gatekeeper
   namespace: ${tenant_name}-${environment}
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/compare-options: IncludeMutationWebhook=true
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: ${project}
   destination:

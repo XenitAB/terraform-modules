@@ -52,9 +52,9 @@ resource "git_repository_file" "gatekeeper" {
   })
 }
 
-resource "git_repository_file" "gatekeeper_extras" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/gatekeeper/templates/gatekeeper-extras.yaml"
-  content = templatefile("${path.module}/templates/gatekeeper-extras.yaml.tpl", {
+resource "git_repository_file" "gatekeeper_templates" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/gatekeeper/templates/gatekeeper-templates.yaml"
+  content = templatefile("${path.module}/templates/gatekeeper-templates.yaml.tpl", {
     tenant_name = var.tenant_name
     environment = var.environment
     cluster_id  = var.cluster_id
@@ -64,14 +64,26 @@ resource "git_repository_file" "gatekeeper_extras" {
   })
 }
 
-resource "git_repository_file" "gatekeeper_template" {
-  path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/gatekeeper/manifests/gatekeeper-template.yaml"
-  content = templatefile("${path.module}/templates/gatekeeper-templates.yaml.tpl", {})
+resource "git_repository_file" "gatekeeper_config" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/gatekeeper/templates/gatekeeper-config.yaml"
+  content = templatefile("${path.module}/templates/gatekeeper-config.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
+    server      = var.fleet_infra_config.k8s_api_server_url
+  })
 }
 
-resource "git_repository_file" "gatekeeper_config" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/gatekeeper/manifests/gatekeeper-config.yaml"
-  content = templatefile("${path.module}/templates/gatekeeper-config.yaml.tpl", {
+resource "git_repository_file" "gatekeeper_template_manifest" {
+  path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/gatekeeper/manifests/templates/gatekeeper-templates.yaml"
+  content = templatefile("${path.module}/templates/gatekeeper-constraint-templates.yaml.tpl", {})
+}
+
+resource "git_repository_file" "gatekeeper_config_manifest" {
+  path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/gatekeeper/manifests/config/gatekeeper-config.yaml"
+  content = templatefile("${path.module}/templates/gatekeeper-config-manifests.yaml.tpl", {
     exclude_namespaces             = var.exclude_namespaces
     azure_service_operator_enabled = var.azure_service_operator_enabled
     mirrord_enabled                = var.mirrord_enabled

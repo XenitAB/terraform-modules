@@ -29,6 +29,7 @@ resource "git_repository_file" "popeye" {
   content = templatefile("${path.module}/templates/popeye.yaml.tpl", {
     tenant_name = var.tenant_name
     environment = var.environment
+    cluster_id  = var.cluster_id
     project     = var.fleet_infra_config.argocd_project_name
     server      = var.fleet_infra_config.k8s_api_server_url
     repo_url    = var.fleet_infra_config.git_repo_url

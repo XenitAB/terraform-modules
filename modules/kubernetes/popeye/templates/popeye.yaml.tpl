@@ -25,5 +25,5 @@ spec:
     - Replace=true
   source:
     repoURL: ${repo_url}
-    targetRevision: 0.1.0
-    chart: popeye
+    targetRevision: HEAD
+    chart: platform/${tenant_name}/${cluster_id}/argocd-applications/popeye/charts/popeye

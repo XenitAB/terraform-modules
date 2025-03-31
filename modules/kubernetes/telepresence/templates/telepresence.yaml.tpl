@@ -4,6 +4,7 @@ metadata:
   name: telepresence
   namespace: ${tenant_name}-${environment}
   annotations:
+    argocd.argoproj.io/compare-options: IncludeMutationWebhook=true
     argocd.argoproj.io/sync-wave: "3"
 spec:
   project: ${project}

@@ -106,6 +106,13 @@ configs:
           tenant: ${dex_tenant_name}
           groups:
             - ${aad_group_name}
+    resource.compareoptions: |
+      ignoreAggregatedRoles: true
+      # disables status field diffing in specified resource types
+      # 'crd' - CustomResourceDefinitions (default)
+      # 'all' - all resources
+      # 'none' - disabled
+      ignoreResourceStatusField: crd
     resource.customizations.health.argoproj.io_Application: |
       hs = {}
       hs.status = "Progressing"
@@ -121,6 +128,7 @@ configs:
       return hs
   params:
     application.namespaces: ${application_namespaces}
+    controller.diff.server.side: "true"
     server.insecure: "true"
   rbac:
     create: true

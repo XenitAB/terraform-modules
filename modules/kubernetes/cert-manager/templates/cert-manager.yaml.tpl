@@ -20,7 +20,6 @@ spec:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
-    - Replace=true
   ignoreDifferences:
   - group: admissionregistration.k8s.io
     kind: ValidatingWebhookConfiguration

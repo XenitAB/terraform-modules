@@ -128,6 +128,8 @@ configs:
         end
       end
       return hs
+    # The maximum size of the payload that can be sent to the webhook server.
+    webhook.maxPayloadSizeMB: "10"
 
   params:
     # List of additional namespaces where applications may be created in and

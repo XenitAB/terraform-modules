@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: grafana-k8s-monitoring-app
   namespace: ${tenant_name}-${environment}
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
 spec:
   project: ${project}
   destination:

@@ -4,6 +4,7 @@ metadata:
   name: x509-certificate-exporter
   namespace: ${tenant_name}-${environment}
   annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: ${project}

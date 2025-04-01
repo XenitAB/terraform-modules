@@ -4,6 +4,7 @@ metadata:
   name: gatekeeper-config
   namespace: ${tenant_name}-${environment}
   annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
     argocd.argoproj.io/sync-wave: "0"
 spec:
   project: ${project}

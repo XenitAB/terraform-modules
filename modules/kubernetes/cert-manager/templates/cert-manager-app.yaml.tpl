@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: cert-manager-app
   namespace: ${tenant_name}-${environment}
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
 spec:
   project: ${project}
   destination:

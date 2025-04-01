@@ -4,6 +4,7 @@ metadata:
   name: azure-service-operator-cluster
   namespace: ${tenant_name}-${environment}
   annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
     argocd.argoproj.io/sync-wave: "0"
 spec:
   project: ${project}

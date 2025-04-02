@@ -20,7 +20,6 @@ spec:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
-    - Replace=true
   source:
     repoURL: https://raw.githubusercontent.com/Azure/azure-service-operator/main/v2/charts
     targetRevision: v2.7.0

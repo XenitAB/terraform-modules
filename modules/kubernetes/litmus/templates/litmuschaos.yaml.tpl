@@ -28,8 +28,8 @@ spec:
     repoURL: https://litmuschaos.github.io/litmus-helm
     targetRevision: 3.12.0
     chart: litmus
-    helm:
-      valuesObject:
+    #helm:
+      #valuesObject:
         #portal:
         #  server:
         #    waitForMongodb:

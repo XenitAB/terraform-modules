@@ -11,16 +11,6 @@ locals {
     })
   )
 
-  flux_disable_cross_namespace_source = base64encode(
-    templatefile("${path.module}/templates/flux-disable-cross-namespace-source.yaml.tpl", {
-    })
-  )
-
-  flux_require_service_account = base64encode(
-    templatefile("${path.module}/templates/flux-require-service-account.yaml.tpl", {
-    })
-  )
-
   k8s_block_node_port = base64encode(
     templatefile("${path.module}/templates/k8s-block-node-port.yaml.tpl", {
     })

@@ -48,6 +48,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: not a good solution when there are multiple tennats so instead w… by @optocoupler in [#1310](https://github.com/XenitAB/terraform-modules/pulls/1310)
+- Fix: flux monitoring for production clusters by @optocoupler in [#1309](https://github.com/XenitAB/terraform-modules/pulls/1309)
+- Fix: removing all tenant namespaces from metrics and logs by @optocoupler in [#1308](https://github.com/XenitAB/terraform-modules/pulls/1308)
+- Fix: nginx templating syntax by @CalleB3 in [#1307](https://github.com/XenitAB/terraform-modules/pulls/1307)
+- Fix: only create nginx_ingress_healthz for public ingress by @CalleB3 in [#1305](https://github.com/XenitAB/terraform-modules/pulls/1305)
 - Fix: moving envoy out of azure-policy module by @optocoupler in [#1300](https://github.com/XenitAB/terraform-modules/pulls/1300)
 - Fix: aks validation should allow no nodepools elements by @landerss1 in [#1297](https://github.com/XenitAB/terraform-modules/pulls/1297)
 - Fix: make network contributor role work with cilium by @landerss1 in [#1296](https://github.com/XenitAB/terraform-modules/pulls/1296)
@@ -99,6 +104,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: consolidating all monitoring resources to avoid CRD issues by @optocoupler in [#1311](https://github.com/XenitAB/terraform-modules/pulls/1311)
 - Chore: bump azurerm provider to v 4.19.0 by @landerss1 in [#1299](https://github.com/XenitAB/terraform-modules/pulls/1299)
 - Chore: upgrading grafana k8s monitoring chart by @optocoupler in [#1283](https://github.com/XenitAB/terraform-modules/pulls/1283)
 - Chore: Update cluster components by @landerss1 in [#1267](https://github.com/XenitAB/terraform-modules/pulls/1267)

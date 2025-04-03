@@ -6,6 +6,25 @@ variable "aad_pod_identity" {
   }))
 }
 
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}
+
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "namespaces" {
   description = "Namespaces to create AzureIdentity and AzureIdentityBindings in."
   type = list(
@@ -15,7 +34,7 @@ variable "namespaces" {
   )
 }
 
-variable "cluster_id" {
-  description = "Unique identifier of the cluster across regions and instances."
+variable "tenant_name" {
+  description = "The name of the tenant"
   type        = string
 }

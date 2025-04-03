@@ -1,56 +1,3 @@
-variable "location_short" {
-  description = "The Azure region short name."
-  type        = string
-}
-
-variable "subscription_name" {
-  description = "The commonName for the subscription"
-  type        = string
-}
-
-variable "global_location_short" {
-  description = "The Azure region short name where the global resources resides."
-  type        = string
-}
-
-variable "environment" {
-  description = "The environment name to use for the deploy"
-  type        = string
-}
-
-variable "group_name_separator" {
-  description = "Separator for group names"
-  type        = string
-  default     = "-"
-}
-
-variable "group_name_prefix" {
-  description = "Prefix for Azure AD groups"
-  type        = string
-}
-
-variable "name" {
-  description = "The commonName to use for the deploy"
-  type        = string
-}
-
-variable "aks_name_suffix" {
-  description = "The suffix for the aks clusters"
-  type        = number
-}
-
-variable "unique_suffix" {
-  description = "Unique suffix that is used in globally unique resources names"
-  type        = string
-  default     = ""
-}
-
-variable "priority_expander_config" {
-  description = "Cluster auto scaler priority expander configuration."
-  type        = map(list(string))
-  default     = null
-}
-
 variable "aad_groups" {
   description = "Configuration for aad groups"
   type = object({
@@ -71,86 +18,6 @@ variable "aad_groups" {
   })
 }
 
-variable "namespaces" {
-  description = "The namespaces that should be created in Kubernetes."
-  type = list(
-    object({
-      name   = string
-      labels = map(string)
-      flux = optional(object({
-        provider            = string
-        project             = optional(string)
-        repository          = string
-        include_tenant_name = optional(bool, false)
-        create_crds         = optional(bool, false)
-      }))
-    })
-  )
-}
-
-variable "kubernetes_network_policy_default_deny" {
-  description = "If network policies should by default deny cross namespace traffic"
-  type        = bool
-  default     = true
-}
-
-variable "kubernetes_default_limit_range" {
-  description = "Default limit range for tenant namespaces"
-  type = object({
-    default_request = object({
-      cpu    = string
-      memory = string
-    })
-    default = object({
-      memory = string
-    })
-  })
-  default = {
-    default_request = {
-      cpu    = "50m"
-      memory = "32Mi"
-    }
-    default = {
-      memory = "256Mi"
-    }
-  }
-}
-
-variable "fluxcd_enabled" {
-  description = "Should fluxcd be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "fluxcd_config" {
-  description = "Configuration for FluxCD"
-  type = object({
-    git_provider = object({
-      organization = string
-      type         = optional(string, "azuredevops")
-      github = optional(object({
-        application_id  = number
-        installation_id = number
-        private_key     = string
-      }))
-      azure_devops = optional(object({
-        pat = string
-      }))
-    })
-    bootstrap = object({
-      disable_secret_creation = optional(bool, true)
-      project                 = optional(string)
-      repository              = string
-    })
-  })
-}
-
-variable "aad_pod_identity_enabled" {
-  description = "Should aad-pod-identity be enabled"
-  type        = bool
-  default     = true
-}
-
 variable "aad_pod_identity_config" {
   description = "Configuration for aad pod identity"
   type = map(object({
@@ -159,10 +26,27 @@ variable "aad_pod_identity_config" {
   }))
 }
 
-variable "azure_policy_enabled" {
-  description = "If the Azure Policy for Kubernetes add-on should be enabled"
-  type        = bool
-  default     = false
+variable "acr_name_override" {
+  description = "Override default name of ACR"
+  type        = string
+  default     = ""
+}
+
+variable "additional_storage_classes" {
+  description = "List of additional storage classes to create"
+  type = list(object({
+    name           = string
+    provisioner    = string
+    reclaim_policy = string
+    binding_mode   = string
+    parameters     = map(string)
+  }))
+  default = []
+}
+
+variable "aks_name_suffix" {
+  description = "The suffix for the aks clusters"
+  type        = number
 }
 
 variable "azure_policy_config" {
@@ -242,26 +126,24 @@ variable "azure_policy_config" {
   }
 }
 
-variable "gatekeeper_enabled" {
-  description = "Should OPA Gatekeeper be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "gatekeeper_config" {
-  description = "Configuration for OPA Gatekeeper"
+variable "azure_service_operator_config" {
+  description = "Azure Service Operator configuration"
   type = object({
-    exclude_namespaces = list(string)
+    cluster_config = optional(object({
+      sync_period    = optional(string, "1m")
+      enable_metrics = optional(bool, false)
+      crd_pattern    = optional(string, "") # never set this to '*', limit this to the resources that are actually needed
+    }), {})
+    tenant_namespaces = optional(list(object({
+      name = string
+    })), [])
   })
-  default = {
-    exclude_namespaces = []
-  }
-}
+  default = {}
 
-variable "cert_manager_enabled" {
-  description = "Should Cert Manager be enabled"
-  type        = bool
-  default     = true
+  validation {
+    condition     = var.azure_service_operator_config.cluster_config.crd_pattern != "*"
+    error_message = "Installing all CRD:s in the cluster is not supported, please limit to the ones needed"
+  }
 }
 
 variable "cert_manager_config" {
@@ -272,117 +154,28 @@ variable "cert_manager_config" {
   })
 }
 
+variable "control_plane_logs_config" {
+  description = "Configuration for control plane log"
+  type = object({
+    azure_key_vault_name = string
+    eventhub_hostname    = string
+    eventhub_name        = string
+  })
+  default = {
+    azure_key_vault_name = ""
+    eventhub_hostname    = ""
+    eventhub_name        = ""
+  }
+}
+
 variable "core_name" {
   description = "The name for the core infrastructure"
   type        = string
 }
 
-variable "ingress_nginx_enabled" {
-  description = "Should Ingress NGINX be enabled"
+variable "coredns_upstream" {
   type        = bool
-  default     = true
-}
-
-variable "ingress_nginx_config" {
-  description = "Ingress configuration"
-  type = object({
-    replicas                = optional(number, 3)
-    min_replicas            = optional(number, 2)
-    private_ingress_enabled = bool
-    customization = optional(object({
-      allow_snippet_annotations = bool
-      http_snippet              = string
-      extra_config              = map(string)
-      extra_headers             = map(string)
-    }))
-    customization_private = optional(object({
-      allow_snippet_annotations = optional(bool)
-      http_snippet              = optional(string)
-      extra_config              = optional(map(string))
-      extra_headers             = optional(map(string))
-    }))
-  })
-}
-
-variable "external_dns_hostname" {
-  description = "hostname for ingress-nginx to use for external-dns"
-  type        = string
-  default     = ""
-}
-
-variable "external_dns_enabled" {
-  description = "Should External DNS be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "external_dns_config" {
-  description = "ExternalDNS config"
-  type = object({
-    extra_args = optional(list(string), [])
-    sources    = optional(list(string), ["ingress", "service"])
-  })
-  default = {}
-}
-
-variable "mirrord_enabled" {
-  description = "Should mirrord be enabled"
-  type        = bool
-  default     = false
-}
-
-
-variable "telepresence_enabled" {
-  description = "Should Telepresence be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "telepresence_config" {
-  description = "Config to use when deploying traffic manager to the cluster"
-  type = object({
-    allow_conflicting_subnets = optional(list(string), [])
-    client_rbac = object({
-      create     = bool
-      namespaced = bool
-      namespaces = optional(list(string), ["ambassador"])
-      subjects   = optional(list(string), [])
-    })
-    manager_rbac = object({
-      create     = bool
-      namespaced = bool
-      namespaces = optional(list(string), [])
-    })
-  })
-  default = {
-    client_rbac : {
-      create : false
-      namespaced : false
-    }
-    manager_rbac : {
-      create : true
-      namespaced : true
-    }
-  }
-}
-
-variable "velero_enabled" {
-  description = "Should Velero be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "velero_config" {
-  description = "Velero configuration"
-  type = object({
-    azure_storage_account_name      = string
-    azure_storage_account_container = string
-  })
-}
-
-variable "datadog_enabled" {
-  description = "Should Datadog be enabled"
-  type        = bool
+  description = "Should coredns be used as the last route instead of upstream dns?"
   default     = false
 }
 
@@ -402,10 +195,85 @@ variable "datadog_config" {
   }
 }
 
-variable "grafana_agent_enabled" {
-  description = "Should Grafana-Agent be enabled"
-  type        = bool
-  default     = false
+variable "dns_zones" {
+  description = "List of DNS Zones"
+  type        = list(string)
+}
+
+variable "eck_operator_config" {
+  description = "Configuration for ECK operator"
+  type = object({
+    eck_managed_namespaces = optional(list(string))
+  })
+  default = {
+    eck_managed_namespaces = []
+  }
+}
+
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
+variable "envoy_gateway" {
+  description = "Should we deploy envoy-gateway"
+  type = object({
+    enabled = optional(bool, false)
+    envoy_gateway_config = optional(object({
+      logging_level             = optional(string, "info")
+      replicas_count            = optional(number, 2)
+      resources_memory_limit    = optional(string, "")
+      resources_cpu_requests    = optional(string, "")
+      resources_memory_requests = optional(string, "")
+    }), {})
+  })
+  default = {}
+}
+
+variable "external_dns_config" {
+  description = "ExternalDNS config"
+  type = object({
+    extra_args = optional(list(string), [])
+    sources    = optional(list(string), ["ingress", "service"])
+  })
+  default = {}
+}
+
+variable "external_dns_hostname" {
+  description = "hostname for ingress-nginx to use for external-dns"
+  type        = string
+  default     = ""
+}
+
+variable "gatekeeper_config" {
+  description = "Configuration for OPA Gatekeeper"
+  type = object({
+    exclude_namespaces = list(string)
+  })
+  default = {
+    exclude_namespaces = []
+  }
+}
+
+variable "gateway_api_config" {
+  description = "The Gateway API configuration"
+  type = object({
+    api_version       = optional(string, "v1.2.0")
+    api_channel       = optional(string, "standard")
+    gateway_name      = optional(string, "")
+    gateway_namespace = optional(string, "")
+  })
+  default = {}
+
+  validation {
+    condition     = contains(["standard", "experimental"], var.gateway_api_config.api_channel)
+    error_message = "Invalid API channel: ${var.gateway_api_config.api_channel}. Allowed vallues: ['standard', 'experimental']"
+  }
+}
+
+variable "global_location_short" {
+  description = "The Azure region short name where the global resources resides."
+  type        = string
 }
 
 variable "grafana_agent_config" {
@@ -447,12 +315,6 @@ variable "grafana_agent_config" {
   }
 }
 
-variable "grafana_alloy_enabled" {
-  description = "Should Grafana-Alloy be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "grafana_alloy_config" {
   description = "Grafana Alloy config"
   type = object({
@@ -462,12 +324,6 @@ variable "grafana_alloy_config" {
     grafana_otelcol_auth_basic_username = string
     grafana_otelcol_exporter_endpoint   = string
   })
-}
-
-variable "grafana_k8s_monitoring_enabled" {
-  description = "Should Grafana-k8s-chart be enabled/deployed"
-  type        = bool
-  default     = false
 }
 
 variable "grafana_k8s_monitor_config" {
@@ -483,258 +339,36 @@ variable "grafana_k8s_monitor_config" {
   })
 }
 
-variable "falco_enabled" {
-  description = "Should Falco be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "reloader_enabled" {
-  description = "Should Reloader be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "prometheus_enabled" {
-  description = "Should prometheus be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "prometheus_volume_claim_storage_class_name" {
-  description = "Configuration for prometheus volume claim storage class name"
-  type        = string
-  default     = "managed-csi-zrs"
-}
-
-variable "prometheus_config" {
-  description = "Configuration for prometheus"
-  type = object({
-    azure_key_vault_name       = string
-    tenant_id                  = string
-    remote_write_authenticated = bool
-    remote_write_url           = string
-    volume_claim_size          = string
-    resource_selector          = list(string)
-    namespace_selector         = list(string)
-  })
-}
-
-variable "promtail_enabled" {
-  description = "Should promtail be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "promtail_config" {
-  description = "Configuration for promtail"
-  type = object({
-    azure_key_vault_name = string
-    loki_address         = string
-    excluded_namespaces  = list(string)
-  })
-  default = {
-    azure_key_vault_name = ""
-    loki_address         = ""
-    excluded_namespaces  = []
-  }
-}
-
-variable "linkerd_enabled" {
-  description = "Should linkerd be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "trivy_enabled" {
-  description = "Should trivy be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "trivy_volume_claim_storage_class_name" {
-  description = "Configuration for trivy volume claim storage class name"
-  type        = string
-  default     = "managed-csi-zrs"
-}
-
-variable "trivy_config" {
-  description = "Configuration for trivy"
-  type = object({
-    starboard_exporter_enabled = optional(bool, true)
-  })
-}
-
-variable "azure_metrics_enabled" {
-  description = "Should AZ Metrics be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "vpa_enabled" {
-  description = "Should VPA be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "node_local_dns_enabled" {
-  description = "Should VPA be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "node_ttl_enabled" {
-  description = "Should Node TTL be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "spegel_enabled" {
-  description = "Should Spegel be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "control_plane_logs_enabled" {
-  description = "Should Control plan be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "control_plane_logs_config" {
-  description = "Configuration for control plane log"
-  type = object({
-    azure_key_vault_name = string
-    eventhub_hostname    = string
-    eventhub_name        = string
-  })
-  default = {
-    azure_key_vault_name = ""
-    eventhub_hostname    = ""
-    eventhub_name        = ""
-  }
-}
-
-variable "acr_name_override" {
-  description = "Override default name of ACR"
-  type        = string
-  default     = ""
-}
-
-variable "additional_storage_classes" {
-  description = "List of additional storage classes to create"
-  type = list(object({
-    name           = string
-    provisioner    = string
-    reclaim_policy = string
-    binding_mode   = string
-    parameters     = map(string)
-  }))
-  default = []
-}
-
-variable "defender_enabled" {
-  description = "If Defender for Containers should be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "coredns_upstream" {
-  type        = bool
-  description = "Should coredns be used as the last route instead of upstream dns?"
-  default     = false
-}
-
-variable "dns_zones" {
-  description = "List of DNS Zones"
-  type        = list(string)
-}
-
-variable "oidc_issuer_url" {
-  description = "Kubernetes OIDC issuer URL for workload identity."
+variable "group_name_prefix" {
+  description = "Prefix for Azure AD groups"
   type        = string
 }
 
-variable "cilium_enabled" {
-  description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
-  type        = bool
-  default     = false
+variable "group_name_separator" {
+  description = "Separator for group names"
+  type        = string
+  default     = "-"
 }
 
-variable "azure_service_operator_enabled" {
-  description = "If Azure Service Operator should be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "azure_service_operator_config" {
-  description = "Azure Service Operator configuration"
+variable "ingress_nginx_config" {
+  description = "Ingress configuration"
   type = object({
-    cluster_config = optional(object({
-      sync_period    = optional(string, "1m")
-      enable_metrics = optional(bool, false)
-      crd_pattern    = optional(string, "") # never set this to '*', limit this to the resources that are actually needed
-    }), {})
-    tenant_namespaces = optional(list(object({
-      name = string
-    })), [])
+    replicas                = optional(number, 3)
+    min_replicas            = optional(number, 2)
+    private_ingress_enabled = bool
+    customization = optional(object({
+      allow_snippet_annotations = bool
+      http_snippet              = string
+      extra_config              = map(string)
+      extra_headers             = map(string)
+    }))
+    customization_private = optional(object({
+      allow_snippet_annotations = optional(bool)
+      http_snippet              = optional(string)
+      extra_config              = optional(map(string))
+      extra_headers             = optional(map(string))
+    }))
   })
-  default = {}
-
-  validation {
-    condition     = var.azure_service_operator_config.cluster_config.crd_pattern != "*"
-    error_message = "Installing all CRD:s in the cluster is not supported, please limit to the ones needed"
-  }
-}
-
-variable "gateway_api_enabled" {
-  description = "If Gateway API should be enabled"
-  type        = bool
-  default     = true
-}
-
-variable "gateway_api_config" {
-  description = "The Gateway API configuration"
-  type = object({
-    api_version       = optional(string, "v1.2.0")
-    api_channel       = optional(string, "standard")
-    gateway_name      = optional(string, "")
-    gateway_namespace = optional(string, "")
-  })
-  default = {}
-
-  validation {
-    condition     = contains(["standard", "experimental"], var.gateway_api_config.api_channel)
-    error_message = "Invalid API channel: ${var.gateway_api_config.api_channel}. Allowed vallues: ['standard', 'experimental']"
-  }
-}
-
-variable "nginx_gateway_enabled" {
-  description = "Should NGINX Gateway Fabric be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "nginx_gateway_config" {
-  description = "Gateway Fabric configuration"
-  type = object({
-    logging_level     = optional(string, "info")
-    replica_count     = optional(number, 2)
-    telemetry_enabled = optional(bool, true)
-    telemetry_config = optional(object({
-      endpoint    = optional(string, "")
-      interval    = optional(string, "")
-      batch_size  = optional(number, 0)
-      batch_count = optional(number, 0)
-    }), {})
-  })
-  default = {}
-}
-
-variable "karpenter_enabled" {
-  description = "If Karpenter should be enabled"
-  type        = bool
-  default     = false
 }
 
 variable "karpenter_config" {
@@ -804,41 +438,135 @@ variable "karpenter_config" {
   }
 }
 
-variable "eck_operator_enabled" {
-  description = "Should we install the eck-operator in the cluster"
-  type        = bool
-  default     = false
-}
-
-variable "eck_operator_config" {
-  description = "Configuration for ECK operator"
+variable "kubernetes_default_limit_range" {
+  description = "Default limit range for tenant namespaces"
   type = object({
-    eck_managed_namespaces = optional(list(string))
+    default_request = object({
+      cpu    = string
+      memory = string
+    })
+    default = object({
+      memory = string
+    })
   })
   default = {
-    eck_managed_namespaces = []
+    default_request = {
+      cpu    = "50m"
+      memory = "32Mi"
+    }
+    default = {
+      memory = "256Mi"
+    }
   }
 }
 
-variable "envoy_gateway" {
-  description = "Should we deploy envoy-gateway"
+variable "kubernetes_network_policy_default_deny" {
+  description = "If network policies should by default deny cross namespace traffic"
+  type        = bool
+  default     = true
+}
+
+variable "location_short" {
+  description = "The Azure region short name."
+  type        = string
+}
+
+variable "name" {
+  description = "The commonName to use for the deploy"
+  type        = string
+}
+
+variable "namespaces" {
+  description = "The namespaces that should be created in Kubernetes."
+  type = list(
+    object({
+      name   = string
+      labels = map(string)
+      flux = optional(object({
+        provider            = string
+        project             = optional(string)
+        repository          = string
+        include_tenant_name = optional(bool, false)
+        create_crds         = optional(bool, false)
+      }))
+    })
+  )
+}
+
+variable "nginx_gateway_config" {
+  description = "Gateway Fabric configuration"
   type = object({
-    enabled = optional(bool, false)
-    envoy_gateway_config = optional(object({
-      logging_level             = optional(string, "info")
-      replicas_count            = optional(number, 2)
-      resources_memory_limit    = optional(string, "")
-      resources_cpu_requests    = optional(string, "")
-      resources_memory_requests = optional(string, "")
+    logging_level     = optional(string, "info")
+    replica_count     = optional(number, 2)
+    telemetry_enabled = optional(bool, true)
+    telemetry_config = optional(object({
+      endpoint    = optional(string, "")
+      interval    = optional(string, "")
+      batch_size  = optional(number, 0)
+      batch_count = optional(number, 0)
     }), {})
   })
   default = {}
 }
 
-variable "popeye_enabled" {
-  description = "If the popeye module should be installed"
-  type        = bool
-  default     = false
+variable "nginx_healthz_ingress_whitelist_ips" {
+  description = "A comma separated string of ranges and or individual ips to be whitelisted for the healthz ingress"
+  type        = string
+  default     = ""
+}
+
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
+  type        = string
+}
+
+variable "platform_config" {
+  description = "Options for configuring the platform components"
+  type = object({
+    tenant_name = string
+    fleet_infra_config = object({
+      git_repo_url        = string
+      argocd_project_name = string
+      k8s_api_server_url  = string
+    })
+    aad_pod_identity_enabled       = optional(bool, false)
+    argocd_enabled                 = optional(bool, true)
+    azure_metrics_enabled          = optional(bool, false)
+    azure_policy_enabled           = optional(bool, false)
+    azure_service_operator_enabled = optional(bool, false)
+    cert_manager_enabled           = optional(bool, true)
+    cilium_enabled                 = optional(bool, false)
+    control_plane_logs_enabled     = optional(bool, false)
+    datadog_enabled                = optional(bool, false)
+    defender_enabled               = optional(bool, false)
+    eck_operator_enabled           = optional(bool, false)
+    external_dns_enabled           = optional(bool, true)
+    falco_enabled                  = optional(bool, true)
+    gatekeeper_enabled             = optional(bool, true)
+    gateway_api_enabled            = optional(bool, false)
+    grafana_agent_enabled          = optional(bool, false)
+    grafana_alloy_enabled          = optional(bool, false)
+    grafana_k8s_monitoring_enabled = optional(bool, false)
+    ingress_nginx_enabled          = optional(bool, true)
+    karpenter_enabled              = optional(bool, false)
+    linkerd_enabled                = optional(bool, false)
+    litmus_enabled                 = optional(bool, false)
+    mirrord_enabled                = optional(bool, false)
+    nginx_gateway_enabled          = optional(bool, false)
+    node_local_dns_enabled         = optional(bool, true)
+    node_ttl_enabled               = optional(bool, true)
+    popeye_enabled                 = optional(bool, false)
+    prometheus_enabled             = optional(bool, false)
+    promtail_enabled               = optional(bool, false)
+    rabbitmq_enabled               = optional(bool, false)
+    reloader_enabled               = optional(bool, true)
+    spegel_enabled                 = optional(bool, true)
+    spot_instances_hack_enabled    = optional(bool, false)
+    telepresence_enabled           = optional(bool, false)
+    trivy_enabled                  = optional(bool, false)
+    velero_enabled                 = optional(bool, false)
+    vpa_enabled                    = optional(bool, false)
+  })
 }
 
 variable "popeye_config" {
@@ -860,16 +588,43 @@ variable "popeye_config" {
   default = {}
 }
 
-variable "litmus_enabled" {
-  description = "If LitmusChaos should be enabled"
-  type        = bool
-  default     = false
+variable "priority_expander_config" {
+  description = "Cluster auto scaler priority expander configuration."
+  type        = map(list(string))
+  default     = null
 }
 
-variable "rabbitmq_enabled" {
-  description = "If rabbitmq operator should be enabled"
-  type        = bool
-  default     = false
+variable "prometheus_config" {
+  description = "Configuration for prometheus"
+  type = object({
+    azure_key_vault_name       = string
+    tenant_id                  = string
+    remote_write_authenticated = bool
+    remote_write_url           = string
+    volume_claim_size          = string
+    resource_selector          = list(string)
+    namespace_selector         = list(string)
+  })
+}
+
+variable "prometheus_volume_claim_storage_class_name" {
+  description = "Configuration for prometheus volume claim storage class name"
+  type        = string
+  default     = "managed-csi-zrs"
+}
+
+variable "promtail_config" {
+  description = "Configuration for promtail"
+  type = object({
+    azure_key_vault_name = string
+    loki_address         = string
+    excluded_namespaces  = list(string)
+  })
+  default = {
+    azure_key_vault_name = ""
+    loki_address         = ""
+    excluded_namespaces  = []
+  }
 }
 
 variable "rabbitmq_config" {
@@ -885,17 +640,65 @@ variable "rabbitmq_config" {
   default = {}
 }
 
-variable "nginx_healthz_ingress_whitelist_ips" {
-  description = "A comma separated string of ranges and or individual ips to be whitelisted for the healthz ingress"
+variable "subscription_name" {
+  description = "The commonName for the subscription"
+  type        = string
+}
+
+variable "telepresence_config" {
+  description = "Config to use when deploying traffic manager to the cluster"
+  type = object({
+    allow_conflicting_subnets = optional(list(string), [])
+    client_rbac = object({
+      create     = bool
+      namespaced = bool
+      namespaces = optional(list(string), ["ambassador"])
+      subjects   = optional(list(string), [])
+    })
+    manager_rbac = object({
+      create     = bool
+      namespaced = bool
+      namespaces = optional(list(string), [])
+    })
+  })
+  default = {
+    client_rbac : {
+      create : false
+      namespaced : false
+    }
+    manager_rbac : {
+      create : true
+      namespaced : true
+    }
+  }
+}
+
+variable "trivy_config" {
+  description = "Configuration for trivy"
+  type = object({
+    starboard_exporter_enabled = optional(bool, true)
+  })
+}
+
+
+variable "trivy_volume_claim_storage_class_name" {
+  description = "Configuration for trivy volume claim storage class name"
+  type        = string
+  default     = "managed-csi-zrs"
+}
+
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
   type        = string
   default     = ""
 }
 
-variable "spot_instances_hack_enabled" {
-  description = "If the hack to remove spot node taints should be deployed"
-  type        = bool
-  default     = false
-}
+variable "velero_config" {
+  description = "Velero configuration"
+  type = object({
+    azure_storage_account_name      = string
+    azure_storage_account_container = string
+  })
 
 variable "argocd_enabled" {
   description = "ArgoCD enabled"

@@ -1,21 +1,10 @@
 variable "aad_groups" {
   description = "Configuration for Azure AD Groups (AAD Groups)"
-  type = object({
-    view = map(any)
-    edit = map(any)
-    cluster_admin = object({
-      id   = string
-      name = string
-    })
-    cluster_view = object({
-      id   = string
-      name = string
-    })
-    aks_managed_identity = object({
-      id   = string
-      name = string
-    })
-  })
+  type = list(object({
+    namespace = string
+    id        = string
+    name      = string
+  }))
 }
 
 variable "cluster_id" {
@@ -41,6 +30,15 @@ variable "environment" {
 variable "extra_args" {
   description = "Extra command line arguments that is not covered by the Helm chart values"
   type        = list(string)
+}
+
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
 }
 
 variable "global_resource_group_name" {
@@ -92,6 +90,11 @@ variable "sources" {
 
 variable "subscription_id" {
   description = "The Azure subscription id"
+  type        = string
+}
+
+variable "tenant_name" {
+  description = "The name of the tenant"
   type        = string
 }
 

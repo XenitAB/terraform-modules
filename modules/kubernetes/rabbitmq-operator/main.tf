@@ -15,15 +15,8 @@ terraform {
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/rabbitmq-operator.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "rabbitmq_operator" {
-  path = "platform/${var.cluster_id}/rabbitmq-operator/rabbitmq-operator.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/rabbitmq-operator.yaml"
   content = templatefile("${path.module}/templates/rabbitmq-operator.yaml.tpl", {
     min_available           = var.rabbitmq_config.min_available
     replica_count           = var.rabbitmq_config.replica_count
@@ -31,5 +24,9 @@ resource "git_repository_file" "rabbitmq_operator" {
     spot_instances_enabled  = var.rabbitmq_config.spot_instances_enabled
     tology_operator_enabled = var.rabbitmq_config.tology_operator_enabled
     watch_namespaces        = var.rabbitmq_config.watch_namespaces
+    tenant_name             = var.tenant_name
+    environment             = var.environment
+    project                 = var.fleet_infra_config.argocd_project_name
+    server                  = var.fleet_infra_config.k8s_api_server_url
   })
 }

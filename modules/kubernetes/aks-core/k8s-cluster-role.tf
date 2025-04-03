@@ -12,20 +12,6 @@ resource "kubernetes_cluster_role" "list_namespaces" {
   }
 }
 
-resource "kubernetes_cluster_role" "helm_release" {
-  metadata {
-    name = "helm-release"
-    labels = {
-      "xkf.xenit.io/kind" = "platform"
-    }
-  }
-  rule {
-    api_groups = ["helm.fluxcd.io"]
-    resources  = ["*"]
-    verbs      = ["*"]
-  }
-}
-
 resource "kubernetes_cluster_role" "custom_resource_edit" {
   metadata {
     name = "custom-resource-edit"
@@ -35,10 +21,6 @@ resource "kubernetes_cluster_role" "custom_resource_edit" {
   }
   rule {
     api_groups = [
-      "helm.toolkit.fluxcd.io",
-      "kustomize.toolkit.fluxcd.io",
-      "source.toolkit.fluxcd.io",
-      "notification.toolkit.fluxcd.io",
       "datadogmetrics.datadoghq.com",
       "datadogmonitors.datadoghq.com",
       "secrets-store.csi.x-k8s.io",
@@ -66,7 +48,7 @@ resource "kubernetes_cluster_role" "trivy_reports" {
   for_each = {
     for s in ["trivy"] :
     s => s
-    if var.trivy_enabled
+    if var.platform_config.trivy_enabled
   }
 
   metadata {

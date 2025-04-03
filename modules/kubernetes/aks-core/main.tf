@@ -16,6 +16,10 @@ terraform {
       version = "2.50.0"
       source  = "hashicorp/azuread"
     }
+    git = {
+      source  = "xenitab/git"
+      version = "0.0.3"
+    }
     random = {
       source  = "hashicorp/random"
       version = "3.5.1"
@@ -23,10 +27,6 @@ terraform {
     kubernetes = {
       source  = "hashicorp/kubernetes"
       version = "2.23.0"
-    }
-    flux = {
-      source  = "fluxcd/flux"
-      version = "1.4.0"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
@@ -93,5 +93,17 @@ data "kubernetes_resources" "bootstrap_token" {
   kind           = "Secret"
   field_selector = "type=bootstrap.kubernetes.io/token"
   api_version    = "v1"
+}
+
+resource "git_repository_file" "platform_chart" {
+  path = "platform/${var.platform_config.tenant_name}/${local.cluster_id}/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
+}
+
+resource "git_repository_file" "platform_values" {
+  path = "platform/${var.platform_config.tenant_name}/${local.cluster_id}/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
 }
 

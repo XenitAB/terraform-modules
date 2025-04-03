@@ -49,7 +49,7 @@ resource "kubernetes_role_binding" "edit" {
 }
 
 resource "kubernetes_role_binding" "helm_release" {
-  depends_on = [kubernetes_namespace.tenant, kubernetes_cluster_role.helm_release]
+  depends_on = [kubernetes_namespace.tenant]
   for_each   = { for ns in var.namespaces : ns.name => ns }
 
   metadata {
@@ -128,7 +128,7 @@ resource "kubernetes_role_binding" "trivy_reports" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
-    if var.trivy_enabled
+    if var.platform_config.trivy_enabled
   }
 
   metadata {

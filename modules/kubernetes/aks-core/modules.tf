@@ -16,6 +16,24 @@ module "aad_pod_identity" {
   fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
+module "argocd" {
+  for_each = {
+    for s in ["argocd"] :
+    s => s
+    if var.argocd_enabled
+  }
+
+  source = "../../kubernetes/argocd"
+
+  aks_cluster_id           = data.azurerm_kubernetes_cluster.this.id
+  argocd_config            = var.argocd_config
+  cluster_id               = local.cluster_id
+  resource_group_name      = data.azurerm_resource_group.this.name
+  location                 = data.azurerm_resource_group.this.location
+  core_resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"
+  key_vault_name           = data.azurerm_key_vault.core.name
+}
+
 module "azure_metrics" {
   for_each = {
     for s in ["azure-metrics"] :

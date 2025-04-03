@@ -82,7 +82,7 @@ resource "git_repository_file" "gatekeeper_template_manifest" {
 }
 
 resource "git_repository_file" "gatekeeper_config_manifest" {
-  path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/gatekeeper/manifests/config/gatekeeper-config.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/gatekeeper/manifests/config/gatekeeper-config.yaml"
   content = templatefile("${path.module}/templates/gatekeeper-config-manifests.yaml.tpl", {
     exclude_namespaces             = var.exclude_namespaces
     azure_service_operator_enabled = var.azure_service_operator_enabled

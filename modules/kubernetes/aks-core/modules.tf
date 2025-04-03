@@ -17,6 +17,8 @@ module "aad_pod_identity" {
 }
 
 module "argocd" {
+  depends_on = [module.karpenter]
+
   for_each = {
     for s in ["argocd"] :
     s => s
@@ -32,6 +34,7 @@ module "argocd" {
   location                 = data.azurerm_resource_group.this.location
   core_resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"
   key_vault_name           = data.azurerm_key_vault.core.name
+  fleet_infra_config       = var.platform_config.fleet_infra_config
 }
 
 module "azure_metrics" {
@@ -251,6 +254,28 @@ module "falco" {
   tenant_name        = var.platform_config.tenant_name
   environment        = var.environment
   fleet_infra_config = var.platform_config.fleet_infra_config
+}
+
+module "fluxcd" {
+  depends_on = [module.karpenter]
+
+  for_each = {
+    for s in ["fluxcd"] :
+    s => s
+    if var.platform_config.fluxcd_enabled
+  }
+
+  source = "../../kubernetes/fluxcd"
+
+  environment  = var.environment
+  cluster_id   = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
+  git_provider = var.fluxcd_config.git_provider
+  bootstrap    = var.fluxcd_config.bootstrap
+  namespaces = [for ns in var.namespaces : {
+    name   = ns.name
+    labels = ns.labels
+    fluxcd = ns.flux
+  }]
 }
 
 module "gatekeeper" {

@@ -21,6 +21,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`eks-core`](eks-core/README.md)
 - [`external-dns`](external-dns/README.md)
 - [`falco`](falco/README.md)
+- [`fluxcd`](fluxcd/README.md)
 - [`gatekeeper`](gatekeeper/README.md)
 - [`gateway-api`](gateway-api/README.md)
 - [`grafana-agent`](grafana-agent/README.md)

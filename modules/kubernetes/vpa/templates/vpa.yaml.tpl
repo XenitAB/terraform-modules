@@ -23,7 +23,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://charts.fairwinds.com/stable
-    targetRevision: 1.6.1
+    targetRevision: 4.7.2
     chart: vpa
     helm:
       valuesObject:

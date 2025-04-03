@@ -9,6 +9,7 @@ locals {
     "datadog",
     "external-dns",
     "falco",
+    "flux-system",
     "ingress-nginx",
     "linkerd",
     "linkerd-cni",

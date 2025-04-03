@@ -55,6 +55,20 @@ module "aks_core" {
     notification_email = "foo"
     dns_zone           = ["bar", "faa"]
   }
+  fluxcd_config = {
+    git_provider = {
+      organization = "my-org"
+      type         = "azuredevops"
+      azure_devops = {
+        pat = "my-pat"
+      }
+    }
+    bootstrap = {
+      disable_secret_creation = true
+      project                 = "my-proj"
+      repository              = "my-repo"
+    }
+  }
   priority_expander_config = { "10" : [".*standard.*"], "20" : [".*spot.*"] }
   aad_groups = {
     view = {

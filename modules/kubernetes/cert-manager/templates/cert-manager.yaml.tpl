@@ -29,7 +29,7 @@ spec:
     - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "kubernetes.azure.com/managedby")
   source:
     repoURL: https://charts.jetstack.io
-    targetRevision: v1.16.3
+    targetRevision: v1.17.1
     chart: cert-manager
     helm:
       valuesObject:

@@ -23,7 +23,7 @@ spec:
     - Replace=true
   source:
     repoURL: registry-1.docker.io/bitnamicharts
-    targetRevision: 8.7.3
+    targetRevision: 8.7.8
     chart: external-dns
     helm:
       valuesObject:

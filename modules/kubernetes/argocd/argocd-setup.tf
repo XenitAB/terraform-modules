@@ -11,7 +11,14 @@ resource "helm_release" "argocd_hub_setup" {
   namespace   = "argocd"
   version     = "0.1.3"
   max_history = 3
-  values      = [yamlencode(merge({ "uai_id" : azurerm_user_assigned_identity.argocd.principal_id }, var.argocd_config, { "secrets" : local.key_vault_secret_values }))]
+  values = [
+    yamlencode(merge(
+      var.argocd_config,
+      var.fleet_infra_config,
+      { "uai_id" : azurerm_user_assigned_identity.argocd.principal_id },
+      { "secrets" : local.key_vault_secret_values }
+    ))
+  ]
 
   #set_sensitive {
   #  name  = "repositories"

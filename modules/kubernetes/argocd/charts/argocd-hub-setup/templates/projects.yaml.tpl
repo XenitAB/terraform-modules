@@ -27,6 +27,12 @@ spec:
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
+  {{- if .Values.sync_windows }}
+  syncWindows:
+  {{- range .Values.sync_windows }}
+  - {{- . }}
+  {{- end }}
+  {{- end }}
 ---
 {{- end }}
 {{- end }}

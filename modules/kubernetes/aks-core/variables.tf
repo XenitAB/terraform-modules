@@ -173,12 +173,6 @@ variable "core_name" {
   type        = string
 }
 
-variable "coredns_upstream" {
-  type        = bool
-  description = "Should coredns be used as the last route instead of upstream dns?"
-  default     = false
-}
-
 variable "datadog_config" {
   description = "Datadog configuration"
   type = object({
@@ -243,6 +237,29 @@ variable "external_dns_hostname" {
   description = "hostname for ingress-nginx to use for external-dns"
   type        = string
   default     = ""
+}
+
+variable "fluxcd_config" {
+  description = "Configuration for FluxCD"
+  type = object({
+    git_provider = object({
+      organization = string
+      type         = optional(string, "azuredevops")
+      github = optional(object({
+        application_id  = number
+        installation_id = number
+        private_key     = string
+      }))
+      azure_devops = optional(object({
+        pat = string
+      }))
+    })
+    bootstrap = object({
+      disable_secret_creation = optional(bool, true)
+      project                 = optional(string)
+      repository              = string
+    })
+  })
 }
 
 variable "gatekeeper_config" {
@@ -542,6 +559,7 @@ variable "platform_config" {
     eck_operator_enabled           = optional(bool, false)
     external_dns_enabled           = optional(bool, true)
     falco_enabled                  = optional(bool, true)
+    fluxcd_enabled                 = optional(bool, true)
     gatekeeper_enabled             = optional(bool, true)
     gateway_api_enabled            = optional(bool, false)
     grafana_agent_enabled          = optional(bool, false)
@@ -699,6 +717,7 @@ variable "velero_config" {
     azure_storage_account_name      = string
     azure_storage_account_container = string
   })
+}
 
 variable "argocd_enabled" {
   description = "ArgoCD enabled"

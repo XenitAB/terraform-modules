@@ -19,4 +19,9 @@ module "argocd" {
   location                 = "location"
   core_resource_group_name = "rg-core"
   key_vault_name           = "my-keyvault"
+  fleet_infra_config = {
+    git_repo_url        = "https://some-git-repo.git"
+    argocd_project_name = "default"
+    k8s_api_server_url  = "https://kubernetes.default.svc"
+  }
 }

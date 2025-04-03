@@ -128,10 +128,18 @@ configs:
         end
       end
       return hs
+    resource.customizations.ignoreDifferences.all:
+      jqPathExpressions:
+      - .metadata.labels select(.key == "argocd.argoproj.io/instance")
     # The maximum size of the payload that can be sent to the webhook server.
     webhook.maxPayloadSizeMB: "10"
 
   params:
+    # Application reconciliation timeout is the sync interval
+    timeout.reconciliation: 300s
+    # The jitter is the maximum duration that can be added to the sync timeout,
+    # allowing syncs to be spread out and not cause unwanted peaks
+    timeout.reconciliation.jitter: "180s"
     # List of additional namespaces where applications may be created in and
     # reconciled from. The namespace where Argo CD is installed to will always
     # be allowed.

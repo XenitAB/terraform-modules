@@ -70,16 +70,18 @@ spec:
           enabled: true
     clusterMetrics:
       enabled: true
-      %{ if length(node_exporter_node_affinity_key) > 0 }
+      %{ if length(node_exporter_node_affinity) > 0 }
       node-exporter:
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                    - key: ${node_exporter_node_affinity_key}
+                    %{~ for key, value in node_exporter_node_affinity ~}
+                    - key: "${key}"
                       operator: NotIn
-                      values: [${node_exporter_node_affinity_value}]
+                      values: ["${value}"]
+                    %{~ endfor ~}
       %{ endif }
       kube-state-metrics:
       %{ if length(exclude_namespaces) > 0 }

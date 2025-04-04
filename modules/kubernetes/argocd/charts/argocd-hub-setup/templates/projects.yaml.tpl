@@ -1,3 +1,4 @@
+{{- $sync_windows := .Values.sync_windows }}
 {{- range .Values.azure_tenants }}
 {{- $azure_tenant := . }}
 {{- range .clusters }}
@@ -29,13 +30,13 @@ spec:
     kind: '*'
   #{{- if .Values.sync_windows }}
   syncWindows:
-  {{- range .Values.sync_windows }}
+  {{- range $sync_windows }}
   - kind: {{- .kind | quote }}
     schedule: {{- .schedule | quote }}
     duration: {{- .duration | quote }}
     manualSync: {{- .manual_sync }}
-  #{{- end }}
   {{- end }}
+  #{{- end }}
 ---
 {{- end }}
 {{- end }}

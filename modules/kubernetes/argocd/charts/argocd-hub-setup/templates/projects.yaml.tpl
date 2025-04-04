@@ -28,7 +28,6 @@ spec:
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
-  #{{- if .Values.sync_windows }}
   syncWindows:
   {{- range $sync_windows }}
   - kind: {{- .kind | quote }}
@@ -36,7 +35,6 @@ spec:
     duration: {{- .duration | quote }}
     manualSync: {{- .manual_sync }}
   {{- end }}
-  #{{- end }}
 ---
 {{- end }}
 {{- end }}

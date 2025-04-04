@@ -9,7 +9,7 @@ resource "azuread_application" "dex" {
     if length(var.argocd_config.azure_tenants) > 0
   }
 
-  display_name = "ArgoCD Dex connector"
+  display_name = "ArgoCD Dex connector for XKS management cluster"
 
   app_role {
     allowed_member_types = ["User"]

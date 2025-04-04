@@ -1,3 +1,4 @@
+{{- $git_repo_url := .Values.git_repo_url }}
 {{- range .Values.azure_tenants }}
 {{- $azure_tenant := . }}
 {{- range .clusters }}
@@ -16,7 +17,7 @@ spec:
   revisionHistoryLimit: 5
   source:'
     path: 'platform/{{- $azure_tenant.tenant_name -}}/{{- .name -}}'
-    repoURL: '{{- .Values.fleet_infra_config.git_repo_url }}'
+    repoURL: '{{- $git_repo_url }}'
     targetRevision: HEAD
   automated:
     prune: false

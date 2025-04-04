@@ -78,9 +78,9 @@ spec:
               nodeSelectorTerms:
                 - matchExpressions:
                     %{~ for key, value in node_exporter_node_affinity ~}
-                    - key: "${key}"
+                    - key: ${key}
                       operator: NotIn
-                      values: ["${value}"]
+                      values: [${value}]
                     %{~ endfor ~}
       %{ endif }
       kube-state-metrics:

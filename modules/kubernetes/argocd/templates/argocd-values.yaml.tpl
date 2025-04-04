@@ -108,13 +108,13 @@ configs:
           tenant: ${dex_tenant_name}
           groups:
             - ${aad_group_name}
-    resource.compareoptions: |
-      ignoreAggregatedRoles: true
+    #resource.compareoptions: |
+      #ignoreAggregatedRoles: true
       # disables status field diffing in specified resource types
       # 'crd' - CustomResourceDefinitions (default)
       # 'all' - all resources
       # 'none' - disabled
-      ignoreResourceStatusField: crd
+      #ignoreResourceStatusField: crd
     resource.customizations.health.argoproj.io_Application: |
       hs = {}
       hs.status = "Progressing"
@@ -165,7 +165,7 @@ configs:
     # The initial backoff delay on the first retry attempt in ms. Subsequent retries will double this backoff time up to a maximum threshold
     controller.k8sclient.retry.base.backoff: "200"
     # Grace period in seconds for ignoring consecutive errors while communicating with repo server.
-    controller.repo.error.grace.period.seconds: "180"
+    controller.repo.error.grace.period.seconds: "180s"
     # Limit on number of concurrent manifests generate requests. Any value less the 1 means no limit.
     reposerver.parallelism.limit: "100"
     # Number of concurrent git ls-remote requests. Any value less than 1 means no limit.

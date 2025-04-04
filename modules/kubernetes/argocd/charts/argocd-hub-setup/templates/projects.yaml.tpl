@@ -27,14 +27,14 @@ spec:
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
-  {{- if .Values.sync_windows }}
+  #{{- if .Values.sync_windows }}
   syncWindows:
   {{- range .Values.sync_windows }}
   - kind: {{- .kind | quote }}
     schedule: {{- .schedule | quote }}
     duration: {{- .duration | quote }}
     manualSync: {{- .manual_sync }}
-  {{- end }}
+  #{{- end }}
   {{- end }}
 ---
 {{- end }}

@@ -1,7 +1,7 @@
 {{- $git_repo_url := .Values.git_repo_url }}
 {{- range .Values.azure_tenants }}
 {{- $azure_tenant := . }}
-{{- range .clusters }}
+{{- range $azure_tenant.clusters }}
 {{- $cluster := . }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application

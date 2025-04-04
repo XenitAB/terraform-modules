@@ -6,16 +6,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: '{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}-platform'
-  namespace: '{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}'
+  name: {{- printf "%s-%s-platform" $azure_tenant.tenant_name $cluster.environment -}}
+  namespace: {{- printf "%s-%s" $azure_tenant.tenant_name $cluster.environment -}}
 spec:
  destination:
-    namespace: '{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}'
+    namespace: {{- printf "%s-%s" $azure_tenant.tenant_name $cluster.environment -}}
     server: https://kubernetes.default.svc
-  project: '{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}-platform'
+  project: {{- printf "%s-%s-platform" $azure_tenant.tenant_name $cluster.environment -}}
   revisionHistoryLimit: 5
   source:'
-    path: 'platform/{{- $azure_tenant.tenant_name -}}/{{- $cluster.name -}}'
+    path: {{- printf "platform/%s/%s" $azure_tenant.tenant_name $cluster.name -}}
     repoURL: '{{- $git_repo_url }}'
     targetRevision: HEAD
   automated:

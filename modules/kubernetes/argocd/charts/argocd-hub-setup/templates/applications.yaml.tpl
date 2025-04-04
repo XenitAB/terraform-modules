@@ -15,7 +15,7 @@ spec:
   project: '{{- $azure_tenant.tenant_name -}}-{{- .environment -}}-platform'
   revisionHistoryLimit: 5
   source:'
-    path: 'platform/{{- $azure_tenant.tenant_name -}}/{{- .name -}'
+    path: 'platform/{{- $azure_tenant.tenant_name -}}/{{- .name -}}'
     repoURL: '{{- .Values.fleet_infra_config.git_repo_url. }}'
     targetRevision: HEAD
   automated:

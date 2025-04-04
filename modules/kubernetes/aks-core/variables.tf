@@ -69,10 +69,10 @@ variable "argocd_config" {
     dex_tenant_name          = optional(string, "")
     oidc_issuer_url          = optional(string, "")
     sync_windows = optional(list(object({
-      kind       = string
-      schedule   = string
-      duration   = string
-      manualSync = bool
+      kind        = string
+      schedule    = string
+      duration    = string
+      manual_sync = optional(bool, true)
     })), [])
     azure_tenants = optional(list(object({
       tenant_name = string

@@ -16,6 +16,12 @@ variable "argocd_config" {
     ingress_whitelist_ip     = optional(string, "")
     dex_tenant_name          = optional(string, "")
     oidc_issuer_url          = optional(string, "")
+    sync_windows = optional(list(object({
+      kind       = string
+      schedule   = string
+      duration   = string
+      manualSync = bool
+    })), [])
     azure_tenants = optional(list(object({
       tenant_name = string
       tenant_id   = string
@@ -23,8 +29,8 @@ variable "argocd_config" {
         name            = string
         api_server      = string
         environment     = string
-        azure_client_id = string
-        ca_data         = string
+        azure_client_id = optional(string, "")
+        ca_data         = optional(string, "")
         tenants = list(object({
           name        = string
           namespace   = string

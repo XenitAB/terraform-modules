@@ -23,7 +23,6 @@ resource "git_repository_file" "gateway_api_crds" {
     api_version = var.gateway_api_config.api_version
     api_channel = var.gateway_api_config.api_channel
     tenant_name = var.tenant_name
-    environment = var.environment
     project     = var.fleet_infra_config.argocd_project_name
     server      = var.fleet_infra_config.k8s_api_server_url
   })

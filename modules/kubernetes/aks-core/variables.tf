@@ -49,6 +49,53 @@ variable "aks_name_suffix" {
   type        = number
 }
 
+variable "argocd_enabled" {
+  description = "ArgoCD enabled"
+  type        = bool
+  default     = false
+}
+
+variable "argocd_config" {
+  description = "ArgoCD configuration"
+  type = object({
+    aad_group_name           = optional(string, "az-sub-xks-all-owner")
+    application_set_replicas = optional(number, 2)
+    controller_min_replicas  = optional(number, 1)
+    repo_server_min_replicas = optional(number, 2)
+    server_min_replicas      = optional(number, 2)
+    redis_enabled            = optional(bool, true)
+    global_domain            = optional(string, "")
+    ingress_whitelist_ip     = optional(string, "")
+    dex_tenant_name          = optional(string, "")
+    oidc_issuer_url          = optional(string, "")
+    sync_windows = optional(list(object({
+      kind       = string
+      schedule   = string
+      duration   = string
+      manualSync = bool
+    })), [])
+    azure_tenants = optional(list(object({
+      tenant_name = string
+      tenant_id   = string
+      clusters = list(object({
+        name            = string
+        api_server      = string
+        environment     = string
+        azure_client_id = optional(string, "")
+        ca_data         = optional(string, "")
+        tenants = list(object({
+          name        = string
+          namespace   = string
+          repo_url    = string
+          repo_path   = string
+          secret_name = string
+        }))
+      }))
+    })), [])
+  })
+  default = {}
+}
+
 variable "azure_policy_config" {
   description = "A list of Azure policy mutations to create and include in the XKS policy set definition"
   type = object({
@@ -717,45 +764,4 @@ variable "velero_config" {
     azure_storage_account_name      = string
     azure_storage_account_container = string
   })
-}
-
-variable "argocd_enabled" {
-  description = "ArgoCD enabled"
-  type        = bool
-  default     = false
-}
-
-variable "argocd_config" {
-  description = "ArgoCD configuration"
-  type = object({
-    aad_group_name           = optional(string, "az-sub-xks-all-owner")
-    application_set_replicas = optional(number, 2)
-    controller_min_replicas  = optional(number, 1)
-    repo_server_min_replicas = optional(number, 2)
-    server_min_replicas      = optional(number, 2)
-    redis_enabled            = optional(bool, true)
-    global_domain            = optional(string, "")
-    ingress_whitelist_ip     = optional(string, "")
-    dex_tenant_name          = optional(string, "")
-    oidc_issuer_url          = optional(string, "")
-    azure_tenants = optional(list(object({
-      tenant_name = string
-      tenant_id   = string
-      clusters = list(object({
-        name            = string
-        api_server      = string
-        environment     = string
-        azure_client_id = string
-        ca_data         = string
-        tenants = list(object({
-          name        = string
-          namespace   = string
-          repo_url    = string
-          repo_path   = string
-          secret_name = string
-        }))
-      }))
-    })), [])
-  })
-  default = {}
 }

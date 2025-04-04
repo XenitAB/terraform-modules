@@ -1,6 +1,7 @@
 {{- range .Values.azure_tenants }}
 {{- $azure_tenant := . }}
 {{- range .clusters }}
+{{- if ne .api_server 'https://kubernetes.default.svc'}}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -32,5 +33,6 @@ stringData:
       }
     }
 ---
+{{- end }}
 {{- end }}
 {{- end }}  

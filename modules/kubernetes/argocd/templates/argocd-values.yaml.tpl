@@ -108,13 +108,13 @@ configs:
           tenant: ${dex_tenant_name}
           groups:
             - ${aad_group_name}
-    #resource.compareoptions: |
-      #ignoreAggregatedRoles: true
+    resource.compareoptions: |
+      ignoreAggregatedRoles: true
       # disables status field diffing in specified resource types
       # 'crd' - CustomResourceDefinitions (default)
       # 'all' - all resources
       # 'none' - disabled
-      #ignoreResourceStatusField: crd
+      ignoreResourceStatusField: crd
     resource.customizations.health.argoproj.io_Application: |
       hs = {}
       hs.status = "Progressing"
@@ -128,9 +128,6 @@ configs:
         end
       end
       return hs
-    resource.customizations.ignoreDifferences.all:
-      jqPathExpressions:
-      - .metadata.labels select(.key == "argocd.argoproj.io/instance")
     # The maximum size of the payload that can be sent to the webhook server.
     webhook.maxPayloadSizeMB: "10"
 

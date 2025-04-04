@@ -22,7 +22,7 @@ module "argocd" {
   for_each = {
     for s in ["argocd"] :
     s => s
-    if var.argocd_enabled
+    if var.platform_config.argocd_enabled
   }
 
   source = "../../kubernetes/argocd"

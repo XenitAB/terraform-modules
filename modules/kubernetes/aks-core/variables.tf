@@ -49,12 +49,6 @@ variable "aks_name_suffix" {
   type        = number
 }
 
-variable "argocd_enabled" {
-  description = "ArgoCD enabled"
-  type        = bool
-  default     = false
-}
-
 variable "argocd_config" {
   description = "ArgoCD configuration"
   type = object({

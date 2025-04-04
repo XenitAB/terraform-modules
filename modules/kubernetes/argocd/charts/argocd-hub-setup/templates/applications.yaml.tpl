@@ -7,8 +7,6 @@ kind: Application
 metadata:
   name: '{{- $azure_tenant.tenant_name -}}-{{- .environment -}}-platform'
   namespace: '{{- $azure_tenant.tenant_name -}}-{{- .environment -}}'
-  annotations:
-    argocd.argoproj.io/manifest-generate-paths: .
 spec:
  destination:
     namespace: '{{- $azure_tenant.tenant_name -}}-{{- .environment -}}'

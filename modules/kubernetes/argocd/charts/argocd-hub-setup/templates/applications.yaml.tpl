@@ -9,7 +9,7 @@ metadata:
   name: {{ printf "%s-%s-platform" $azure_tenant.tenant_name $cluster.environment }}
   namespace: {{ printf "%s-%s" $azure_tenant.tenant_name $cluster.environment }}
 spec:
- destination:
+  destination:
     namespace: {{ printf "%s-%s" $azure_tenant.tenant_name $cluster.environment }}
     server: https://kubernetes.default.svc
   project: {{ printf "%s-%s-platform" $azure_tenant.tenant_name $cluster.environment }}

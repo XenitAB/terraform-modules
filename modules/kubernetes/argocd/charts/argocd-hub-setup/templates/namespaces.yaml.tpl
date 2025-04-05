@@ -5,10 +5,9 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: '{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}'
+  name: {{ printf "%s-%s" $azure_tenant.tenant_name $cluster.environment }}
   labels:
     xkf.xenit.io/kind: platform
-  selfLink: /api/v1/namespaces/argocd
 spec:
   finalizers:
     - kubernetes

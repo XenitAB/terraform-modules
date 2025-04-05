@@ -7,33 +7,33 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: '{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}-{{- .name -}}'
+  name: {{ printf "%s-%s-%s" $azure_tenant.tenant_name $cluster.environment .name }}
 spec:
   # Allow Application resources to deploy only into these namespaces
   sourceNamespaces:
-  - 'argocd'
-  - '{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}'
+  - "argocd"
+  - {{ printf "%s-%s" $azure_tenant.tenant_name $cluster.environment | quote }}
   # Allow manifests to deploy from specific repository (url) only
   sourceRepos:
   #- '{{- .repo_url -}}'
-  - '*'
+  - "*"
   # Only permit applications to deploy to these namespace in the given cluster
   destinations:
-  - namespace: 'argocd'
-    server: https://kubernetes.default.svc
-  - namespace: '{{- $azure_tenant.tenant_name -}}-{{- $cluster.environment -}}'
-    server: https://kubernetes.default.svc
-  - namespace: '{{- .namespace -}}'
-    server: '{{- $cluster.api_server -}}'
+  - namespace: "argocd"
+    server: "https://kubernetes.default.svc"
+  - namespace: {{ printf "%s-%s" $azure_tenant.tenant_name $cluster.environment | quote }}
+    server: "https://kubernetes.default.svc"
+  - namespace: {{ .namespace | quote }}
+    server: {{ $cluster.api_server | quote }}
   clusterResourceWhitelist:
-  - group: '*'
-    kind: '*'
+  - group: "*"
+    kind: "*"
   syncWindows:
   {{- range $sync_windows }}
-  - kind: {{- .kind | quote }}
-    schedule: {{- .schedule | quote }}
-    duration: {{- .duration | quote }}
-    manualSync: {{- .manual_sync }}
+  - kind: {{ .kind | quote }}
+    schedule: {{ .schedule | quote }}
+    duration: {{ .duration | quote }}
+    manualSync: {{ .manual_sync }}
   {{- end }}
 ---
 {{- end }}

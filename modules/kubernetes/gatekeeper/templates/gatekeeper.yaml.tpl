@@ -27,12 +27,14 @@ spec:
     kind: MutatingWebhookConfiguration
     name: gatekeeper-mutating-webhook-configuration
     jqPathExpressions:
+    - .metadata.generation
     - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "control-plane")
     - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "kubernetes.azure.com/managedby")
   - group: admissionregistration.k8s.io
     kind: ValidatingWebhookConfiguration
     name: gatekeeper-validating-webhook-configuration
     jqPathExpressions:
+    - .metadata.generation
     - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "control-plane")
     - .webhooks[].namespaceSelector.matchExpressions[] | select(.key == "kubernetes.azure.com/managedby")
   source:

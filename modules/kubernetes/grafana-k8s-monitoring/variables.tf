@@ -8,8 +8,10 @@ variable "grafana_k8s_monitor_config" {
     azure_key_vault_name          = string
     include_namespaces            = string
     exclude_namespaces            = optional(list(string), [])
+    node_exporter_node_affinity   = optional(map(string))
   })
   default = {
+    node_exporter_node_affinity   = {}
     grafana_cloud_prometheus_host = ""
     grafana_cloud_loki_host       = ""
     grafana_cloud_tempo_host      = ""

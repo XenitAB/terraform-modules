@@ -480,6 +480,7 @@ variable "grafana_k8s_monitor_config" {
     cluster_name                  = string
     include_namespaces            = optional(string, "")
     exclude_namespaces            = optional(list(string), [])
+    node_exporter_node_affinity   = optional(map(string), {})
   })
 }
 

@@ -416,6 +416,7 @@ module "grafana_k8s_monitoring" {
     grafana_cloud_tempo_host      = var.grafana_k8s_monitor_config.grafana_cloud_tempo_host
     include_namespaces            = var.grafana_k8s_monitor_config.include_namespaces
     exclude_namespaces            = var.grafana_k8s_monitor_config.exclude_namespaces
+    node_exporter_node_affinity   = var.grafana_k8s_monitor_config.node_exporter_node_affinity
   }
 
   aad_pod_identity_enabled = var.aad_pod_identity_enabled

@@ -32,6 +32,7 @@ spec:
   {{- range $sync_windows }}
   - kind: {{ .kind | quote }}
     schedule: {{ .schedule | quote }}
+    timeZone: "Europe/Stockholm"
     duration: {{ .duration | quote }}
     manualSync: {{ .manual_sync }}
   {{- end }}

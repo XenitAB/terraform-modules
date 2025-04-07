@@ -36,7 +36,6 @@ resource "helm_release" "argocd_spoke_setup" {
   depends_on  = [helm_release.argocd]
   chart       = "${path.module}/charts/argocd-spoke-setup"
   name        = "argocd-spoke-setup"
-  namespace   = "argocd"
   max_history = 3
   values      = [yamlencode({ "uai_id" : azurerm_user_assigned_identity.argocd.principal_id })]
 }

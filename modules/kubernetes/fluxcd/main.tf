@@ -69,7 +69,8 @@ resource "kubernetes_namespace" "flux_system" {
 resource "flux_bootstrap_git" "this" {
   depends_on = [helm_release.git_auth_proxy]
 
-  path                    = "clusters/${var.cluster_id}"
+  #path                    = "clusters/${var.cluster_id}"
+  path                    = "tenants/${var.cluster_id}"
   disable_secret_creation = var.bootstrap.disable_secret_creation
   components              = toset(["source-controller", "kustomize-controller", "helm-controller", "notification-controller"])
   kustomization_override = templatefile("${path.module}/templates/kustomization-override.yaml.tpl", {

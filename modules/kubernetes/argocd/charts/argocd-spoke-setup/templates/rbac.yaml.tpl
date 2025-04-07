@@ -5,7 +5,7 @@ metadata:
 subjects:
   - kind: User
     apiGroup: rbac.authorization.k8s.io
-    name: {{- .Values.uai_id -}}
+    name: {{ .Values.uai_id }}
     namespace: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io

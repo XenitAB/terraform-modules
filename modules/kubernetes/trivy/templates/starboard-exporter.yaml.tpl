@@ -20,7 +20,6 @@ spec:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
-    - Replace=true
   source:
     repoURL: https://giantswarm.github.io/giantswarm-catalog
     targetRevision: v0.8.0

@@ -26,6 +26,7 @@ spec:
     chart: velero
     helm:
       valuesObject:
+        upgradeCRDS: true
         configuration:
           logLevel: "warning"
           logFormat: "json"
@@ -44,7 +45,7 @@ spec:
               %{ else }
               storageAccount: "strg${environment}velero${unique_suffix}"
               %{ endif }
-        snapshotsEnable: false
+        snapshotsEnabled: false
         credentials:
           secretContents:
               cloud: |

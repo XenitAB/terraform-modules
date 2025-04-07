@@ -2,7 +2,7 @@ apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
   name: vector
-  namespace: controle-plane-logs
+  namespace: control-plane-logs
 spec:
   provider: "azure"
   parameters:
@@ -25,7 +25,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: "vector"
-  namespace: controle-plane-logs
+  namespace: control-plane-logs
   labels:
     app.kubernetes.io/instance: vector
     app.kubernetes.io/managed-by: Helm

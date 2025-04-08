@@ -57,7 +57,7 @@ server:
     enabled: true
     ingressClassName: nginx
     annotations:
-      cert-manager.io/issuer: "letsencrypt"
+      cert-manager.io/cluster-issuer: "letsencrypt"
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
       nginx.ingress.kubernetes.io/limit-whitelist: "${ingress_whitelist_ip}"

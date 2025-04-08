@@ -21,6 +21,11 @@ spec:
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
     - Replace=true
+  ignoreDifferences:
+    - group: templates.gatekeeper.sh
+      kind: ConstraintTemplate
+      jqPathExpressions:
+        - .metadata.labels
   source:
     repoURL: ${repo_url}
     targetRevision: HEAD

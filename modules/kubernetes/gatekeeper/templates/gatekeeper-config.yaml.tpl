@@ -21,6 +21,23 @@ spec:
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
     - Replace=true
+  ignoreDifferences:
+    - group: config.gatekeeper.sh
+      kind: Config
+      jqPathExpressions:
+        - .metadata.labels
+    - group: constraints.gatekeeper.sh
+      kind: '*'
+      jqPathExpressions:
+        - .metadata.labels
+    - group: mutations.gatekeeper.sh
+      kind: Assign
+      jqPathExpressions:
+        - .metadata.labels
+    - group: mutations.gatekeeper.sh
+      kind: ModifySet
+      jqPathExpressions:
+        - .metadata.labels
   source:
     repoURL: ${repo_url}
     targetRevision: HEAD

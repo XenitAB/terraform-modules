@@ -20,13 +20,13 @@ terraform {
 }
 
 resource "git_repository_file" "grafana_alloy_chart" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana_alloy/Chart.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-alloy/Chart.yaml"
   content = templatefile("${path.module}/templates/Chart.yaml", {
   })
 }
 
 resource "git_repository_file" "grafana_alloy_values" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana_alloy/values.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-alloy/values.yaml"
   content = templatefile("${path.module}/templates/values.yaml", {
   })
 }

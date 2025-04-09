@@ -278,7 +278,7 @@ module "fluxcd" {
   }]
 
   providers = {
-    git.tenant = git.tenant
+    git = git.tenant
   }
 }
 

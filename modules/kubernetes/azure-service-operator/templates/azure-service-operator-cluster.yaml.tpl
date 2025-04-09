@@ -22,7 +22,7 @@ spec:
     - ApplyOutOfSyncOnly=true
   source:
     repoURL: https://raw.githubusercontent.com/Azure/azure-service-operator/main/v2/charts
-    targetRevision: v2.12.0
+    targetRevision: v2.11.0
     chart: azure-service-operator
     helm:
       valuesObject:

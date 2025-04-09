@@ -14,10 +14,10 @@ terraform {
       source  = "fluxcd/flux"
       version = "1.4.0"
     }
-    git = {
-      source  = "xenitab/git"
-      version = "0.0.3"
-    }
+    #git = {
+    #  source  = "xenitab/git"
+    #  version = "0.0.3"
+    #}
   }
 }
 

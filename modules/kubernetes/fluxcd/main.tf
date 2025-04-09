@@ -78,14 +78,6 @@ resource "flux_bootstrap_git" "this" {
   })
 }
 
-resource "git_repository_file" "cluster_tenants" {
-  override_on_create = true
-  path               = "clusters/${var.cluster_id}/tenants.yaml"
-  content = templatefile("${path.module}/templates/cluster-tenants.yaml", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "tenant" {
   for_each = {
     for ns in var.namespaces :
@@ -93,6 +85,7 @@ resource "git_repository_file" "tenant" {
     if ns.fluxcd != null
   }
 
+  provider           = git.tenant 
   override_on_create = true
   path               = "tenants/${var.cluster_id}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {

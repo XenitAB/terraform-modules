@@ -276,6 +276,10 @@ module "fluxcd" {
     labels = ns.labels
     fluxcd = ns.flux
   }]
+
+  providers = {
+    git = git.tenant
+  }
 }
 
 module "gatekeeper" {

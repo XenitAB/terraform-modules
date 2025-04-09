@@ -17,7 +17,6 @@ terraform {
     git = {
       source  = "xenitab/git"
       version = "0.0.3"
-      configuration_aliases = [git.tenant]
     }
   }
 }
@@ -86,7 +85,6 @@ resource "git_repository_file" "tenant" {
     if ns.fluxcd != null
   }
 
-  provider           = git.tenant 
   override_on_create = true
   path               = "tenants/${var.cluster_id}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {

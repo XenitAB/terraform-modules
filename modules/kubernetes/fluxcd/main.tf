@@ -21,6 +21,9 @@ terraform {
     }
   }
 }
+provider "git" {
+  alias = "tenant"
+}
 
 locals {
   git_auth_proxy_url = "http://git-auth-proxy.git-auth-proxy.svc.cluster.local"

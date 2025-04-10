@@ -85,7 +85,8 @@ resource "git_repository_file" "tenant" {
     if ns.fluxcd != null
   }
 
-  path    = "tenants/${var.cluster_id}/${each.key}.yaml"
+  override_on_create = true
+  path               = "tenants/${var.cluster_id}/${each.key}.yaml"
   content = templatefile("${path.module}/templates/tenant.yaml", {
     create_crds         = each.value.fluxcd.create_crds,
     environment         = var.environment,

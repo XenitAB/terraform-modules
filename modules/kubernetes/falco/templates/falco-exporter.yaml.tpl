@@ -22,4 +22,6 @@ spec:
       version: 0.12.2
   interval: 1m0s
   values:
+    image:
+      tag: "0.8.7"
     priorityClassName: platform-high

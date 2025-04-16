@@ -27,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: fairwinds
-      version: 1.6.1
+      version: 4.7.2
   interval: 1m0s
   install:
     crds: CreateReplace
@@ -36,10 +36,6 @@ spec:
   values:
     priorityClassName: platform-medium
     recommender:
-      image:
-        repository: registry.k8s.io/autoscaling/vpa-recommender
-        pullPolicy: IfNotPresent
-        tag: "0.12.0"
       extraArgs:
         pod-recommendation-min-cpu-millicores: 15
         pod-recommendation-min-memory-mb: 24
@@ -67,15 +63,17 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: fairwinds
-      version: 6.5.1
+      version: 9.0.1
   interval: 1m0s
   values:
+    image:
+      tag: v4.13.4
     dashboard:
       enabled: false
     controller:
       flags:
         on-by-default: "true"
-        exclude-namespaces: "kube-system"
+        exclude-namespaces: "calico-system,kube-system,tigera-operator"
       rbac:
         extraRules:
           - apiGroups:

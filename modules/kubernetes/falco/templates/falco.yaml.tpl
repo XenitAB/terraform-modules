@@ -27,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: falco
-      version: v4.17.2
+      version: 4.21.3
   interval: 1m0s
   values:
     # Use EBPF instead of kernel module
@@ -86,7 +86,6 @@ spec:
             (container.image.repository = "ghcr.io/xenitab/git-auth-proxy") or
             (container.image.repository = "docker.io/grafana/loki") or
             (container.image.repository = "grafana/fluent-bit-plugin-loki") or
-            (container.image.repository = "ghcr.io/xenitab/azad-kube-proxy") or
             (container.image.repository = "cr.l5d.io/linkerd/controller") or
             (container.image.repository = "mcr.microsoft.com/oss/azure/aad-pod-identity/nmi") or
             (container.image.repository = "quay.io/jetstack/cert-manager-cainjector") or

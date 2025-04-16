@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### ⚙️ Miscellaneous
+- Chore: upgrade falco charts to latest version by @landerss1 in [#1327](https://github.com/XenitAB/terraform-modules/pulls/1327)
+- Chore: upgrade reloader to latest version by @landerss1 in [#1326](https://github.com/XenitAB/terraform-modules/pulls/1326)
+- Chore: upgrade vpa charts to latest by @landerss1 in [#1325](https://github.com/XenitAB/terraform-modules/pulls/1325)
+- Chore: upgrade trivy module to latest by @landerss1 in [#1322](https://github.com/XenitAB/terraform-modules/pulls/1322)
+
+
+
+## [2025.04.1](https://github.com/XenitAB/terraform-modules/releases/tag/2025.04.1)
+
 ### ⛓️‍💥 Breaking Changes
 - Fix!: resolve dependency and timing issues when applying aks-core module in an empty cluster by @landerss1 in [#1240](https://github.com/XenitAB/terraform-modules/pulls/1240)
 

@@ -711,18 +711,19 @@ module "trivy" {
 
   source = "../../kubernetes/trivy"
 
-  acr_name_override               = var.acr_name_override
-  aks_managed_identity            = data.azuread_group.aks_managed_identity.id
-  aks_name                        = var.name
-  cluster_id                      = local.cluster_id
-  environment                     = var.environment
-  location                        = data.azurerm_resource_group.this.location
-  location_short                  = var.location_short
-  oidc_issuer_url                 = var.oidc_issuer_url
-  resource_group_name             = data.azurerm_resource_group.this.name
-  starboard_exporter_enabled      = var.trivy_config.starboard_exporter_enabled
-  unique_suffix                   = var.unique_suffix
-  volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
+  acr_name_override                = var.acr_name_override
+  aks_managed_identity             = data.azuread_group.aks_managed_identity.id
+  aks_name                         = var.name
+  cluster_id                       = local.cluster_id
+  environment                      = var.environment
+  location                         = data.azurerm_resource_group.this.location
+  location_short                   = var.location_short
+  oidc_issuer_url                  = var.oidc_issuer_url
+  resource_group_name              = data.azurerm_resource_group.this.name
+  metrics_vulnerability_id_enabled = var.trivy_config.metrics_vulnerability_id_enabled
+  starboard_exporter_enabled       = var.trivy_config.starboard_exporter_enabled
+  unique_suffix                    = var.unique_suffix
+  volume_claim_storage_class_name  = var.trivy_volume_claim_storage_class_name
 }
 
 module "velero" {

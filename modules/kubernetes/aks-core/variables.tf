@@ -562,7 +562,8 @@ variable "trivy_volume_claim_storage_class_name" {
 variable "trivy_config" {
   description = "Configuration for trivy"
   type = object({
-    starboard_exporter_enabled = optional(bool, true)
+    metrics_vulnerability_id_enabled = optional(bool, false)
+    starboard_exporter_enabled       = optional(bool, true)
   })
 }
 

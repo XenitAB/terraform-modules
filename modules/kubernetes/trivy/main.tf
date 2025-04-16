@@ -37,7 +37,8 @@ resource "git_repository_file" "kustomization" {
 resource "git_repository_file" "trivy_operator" {
   path = "platform/${var.cluster_id}/trivy/trivy-operator.yaml"
   content = templatefile("${path.module}/templates/trivy-operator.yaml.tpl", {
-    client_id = azurerm_user_assigned_identity.trivy.client_id,
+    client_id                        = azurerm_user_assigned_identity.trivy.client_id,
+    metrics_vulnerability_id_enabled = var.metrics_vulnerability_id_enabled
   })
 }
 

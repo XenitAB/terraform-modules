@@ -44,6 +44,12 @@ variable "resource_group_name" {
   type        = string
 }
 
+variable "metrics_vulnerability_id_enabled" {
+  description = "If metrics about cve vulnerabilities id should be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "starboard_exporter_enabled" {
   description = "If the starboard-exporter Helm chart should be deployed"
   type        = bool

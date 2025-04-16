@@ -19,7 +19,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: trivy-operator
-      version: 0.25.0
+      version: 0.27.0
   interval: 1m0s
   values:
     # targetNamespace defines where you want trivy-operator to operate. By
@@ -37,6 +37,8 @@ spec:
       serverURL: "http://trivy.trivy.svc.cluster.local:4954"
 
     operator:
+      # metricsVulnIdEnabled the flag to enable metrics about cve vulns id
+      metricsVulnIdEnabled: true
       # configAuditScannerEnabled the flag to enable configuration audit scanner
       configAuditScannerEnabled: false
       # vulnerabilityScannerScanOnlyCurrentRevisions the flag to only create vulnerability scans on the current revision of a deployment.

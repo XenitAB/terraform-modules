@@ -27,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: fairwinds
-      version: 1.6.1
+      version: 4.7.2
   interval: 1m0s
   install:
     crds: CreateReplace
@@ -67,7 +67,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: fairwinds
-      version: 6.5.1
+      version: 9.0.1
   interval: 1m0s
   values:
     dashboard:

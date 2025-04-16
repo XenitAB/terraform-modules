@@ -36,10 +36,6 @@ spec:
   values:
     priorityClassName: platform-medium
     recommender:
-      image:
-        repository: registry.k8s.io/autoscaling/vpa-recommender
-        pullPolicy: IfNotPresent
-        tag: "0.12.0"
       extraArgs:
         pod-recommendation-min-cpu-millicores: 15
         pod-recommendation-min-memory-mb: 24
@@ -70,6 +66,8 @@ spec:
       version: 9.0.1
   interval: 1m0s
   values:
+    image:
+      tag: v4.13.4
     dashboard:
       enabled: false
     controller:
@@ -86,6 +84,12 @@ spec:
               - 'get'
               - 'list'
               - 'watch'
+          - apiGroups:
+              - 'operator.tigera.io'
+            resources:
+              - 'installations'
+            verbs:
+              - 'list'
       resources:
         limits:
           cpu: 100m

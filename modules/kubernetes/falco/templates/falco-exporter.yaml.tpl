@@ -19,7 +19,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: falco-exporter
-      version: v0.12.1
+      version: 0.12.2
   interval: 1m0s
   values:
     priorityClassName: platform-high

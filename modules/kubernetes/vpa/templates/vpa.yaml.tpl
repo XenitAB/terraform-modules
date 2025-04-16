@@ -73,7 +73,7 @@ spec:
     controller:
       flags:
         on-by-default: "true"
-        exclude-namespaces: "kube-system"
+        exclude-namespaces: "calico-system,kube-system,tigera-operator"
       rbac:
         extraRules:
           - apiGroups:
@@ -84,12 +84,6 @@ spec:
               - 'get'
               - 'list'
               - 'watch'
-          - apiGroups:
-              - 'operator.tigera.io'
-            resources:
-              - 'installations'
-            verbs:
-              - 'list'
       resources:
         limits:
           cpu: 100m

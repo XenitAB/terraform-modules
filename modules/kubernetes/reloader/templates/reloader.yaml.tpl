@@ -27,7 +27,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: reloader
-      version: v0.0.102
+      version: 2.0.0
   interval: 1m0s
   values:
     deployment:

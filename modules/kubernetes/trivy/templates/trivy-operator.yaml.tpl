@@ -38,7 +38,7 @@ spec:
 
     operator:
       # metricsVulnIdEnabled the flag to enable metrics about cve vulns id
-      metricsVulnIdEnabled: true
+      metricsVulnIdEnabled: ${metrics_vulnerability_id_enabled}
       # configAuditScannerEnabled the flag to enable configuration audit scanner
       configAuditScannerEnabled: false
       # vulnerabilityScannerScanOnlyCurrentRevisions the flag to only create vulnerability scans on the current revision of a deployment.

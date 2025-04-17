@@ -44,7 +44,7 @@ resource "helm_release" "git_auth_proxy" {
   chart       = "oci://ghcr.io/xenitab/helm-charts/git-auth-proxy"
   name        = "git-auth-proxy"
   namespace   = kubernetes_namespace.git_auth_proxy.metadata[0].name
-  version     = "v0.8.1"
+  version     = "v0.9.0"
   max_history = 3
   values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
     git_provider = var.git_provider

@@ -28,7 +28,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: node-ttl
-      version: v0.0.7
+      version: v0.0.8
   interval: 1m0s
   values:
     resources:

@@ -100,6 +100,7 @@ variable "azuread_apps" {
 variable "aad_sp_passwords" {
   description = "Application password per resource group."
   type        = map(string)
+  default     = null
 }
 
 variable "resource_name_overrides" {

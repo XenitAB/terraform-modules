@@ -48,6 +48,8 @@ global:
   domain: ${global_domain}
   # Do we want to be able to run argo on system pool or spot instances?
   # tolerations: 
+  networkPolicy:
+    create: true
 
 server:
   autoscaling:

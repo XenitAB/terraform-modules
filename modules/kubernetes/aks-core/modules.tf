@@ -238,6 +238,7 @@ module "external_dns" {
   extra_args                 = var.external_dns_config.extra_args
   tenant_name                = var.platform_config.tenant_name
   fleet_infra_config         = var.platform_config.fleet_infra_config
+  rbac_create                = var.external_dns_config.rbac_create
 }
 
 module "falco" {

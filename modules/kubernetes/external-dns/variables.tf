@@ -78,6 +78,12 @@ variable "oidc_issuer_url" {
   type        = string
 }
 
+variable "rbac_create" {
+  description = "If role assignments should be created for the hosted zones"
+  type        = bool
+  default     = true
+}
+
 variable "resource_group_name" {
   description = "The Azure resource group name"
   type        = string

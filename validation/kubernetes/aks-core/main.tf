@@ -1,5 +1,13 @@
 terraform {
+  required_providers {
+     git = {
+      source  = "xenitab/git"
+      version = "0.0.4"
+    }
+  }
 }
+
+provider "git" {}
 
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
@@ -144,5 +152,10 @@ module "aks_core" {
     trivy_enabled                  = true
     velero_enabled                 = true
     vpa_enabled                    = true
+  }
+
+  providers = {
+    git        = git
+    git.tenant = git
   }
 }

@@ -268,8 +268,9 @@ variable "envoy_gateway" {
 variable "external_dns_config" {
   description = "ExternalDNS config"
   type = object({
-    extra_args = optional(list(string), [])
-    sources    = optional(list(string), ["ingress", "service"])
+    extra_args  = optional(list(string), [])
+    rbac_create = optional(bool, true),
+    sources     = optional(list(string), ["ingress", "service"])
   })
   default = {}
 }

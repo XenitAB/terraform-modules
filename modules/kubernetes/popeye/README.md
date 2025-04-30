@@ -8,14 +8,14 @@ This module is used to add Popeye [`popeye`](https://github.com/derailed/popeye)
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
-| <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
+| <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
-| <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
+| <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
 ## Modules
 
@@ -29,18 +29,18 @@ No modules.
 | [azurerm_role_assignment.aks_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.popeye_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
 | [azurerm_user_assigned_identity.popeye](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/user_assigned_identity) | resource |
-| [git_repository_file.chart](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.cluster_role](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.cluster_role_binding](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.config_map](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.cronjob](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.helmignore](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.popeye](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.pvc](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.secret](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.service_account](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.storage_class](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.values](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.cluster_role](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.cluster_role_binding](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.config_map](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.cronjob](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.helmignore](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.popeye](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.pvc](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.secret](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.service_account](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.storage_class](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.values](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [azurerm_storage_account.log](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/storage_account) | data source |
 
 ## Inputs

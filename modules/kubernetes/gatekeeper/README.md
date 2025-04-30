@@ -7,13 +7,13 @@ Adds [`gatekeeper`](https://github.com/open-policy-agent/gatekeeper) to a Kubern
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
+| <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
+| <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
 ## Modules
 
@@ -23,14 +23,14 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [git_repository_file.gatekeeper](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.gatekeeper_app](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.gatekeeper_chart](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.gatekeeper_config](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.gatekeeper_config_manifest](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.gatekeeper_template_manifest](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.gatekeeper_templates](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.gatekeeper_values](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.gatekeeper](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.gatekeeper_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.gatekeeper_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.gatekeeper_config](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.gatekeeper_config_manifest](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.gatekeeper_template_manifest](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.gatekeeper_templates](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.gatekeeper_values](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 
 ## Inputs
 

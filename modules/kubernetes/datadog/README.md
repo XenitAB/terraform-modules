@@ -13,14 +13,14 @@ https://docs.datadoghq.com/account_management/api-app-keys/
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
-| <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
+| <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
-| <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
+| <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
 ## Modules
 
@@ -33,13 +33,13 @@ No modules.
 | [azurerm_federated_identity_credential.datadog](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/federated_identity_credential) | resource |
 | [azurerm_key_vault_access_policy.datadog](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_user_assigned_identity.datadog](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/user_assigned_identity) | resource |
-| [git_repository_file.azure_config](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.datadog_app](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.datadog_chart](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.datadog_extras](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.datadog_manifests](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.datadog_operator](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.datadog_values](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.azure_config](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.datadog_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.datadog_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.datadog_extras](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.datadog_manifests](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.datadog_operator](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.datadog_values](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 
 ## Inputs
 

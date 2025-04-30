@@ -8,13 +8,13 @@ Adds [`grafana-agent`](https://grafana.com/docs/agent/latest/) (the operator) am
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
+| <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
+| <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
 ## Modules
 
@@ -24,13 +24,13 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [git_repository_file.grafana_agent](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.grafana_agent_app](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.grafana_agent_chart](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.grafana_agent_extras](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.grafana_agent_manifests](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.grafana_agent_values](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
-| [git_repository_file.kube_state_metrics](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.grafana_agent](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.grafana_agent_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.grafana_agent_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.grafana_agent_extras](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.grafana_agent_manifests](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.grafana_agent_values](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.kube_state_metrics](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 
 ## Inputs
 

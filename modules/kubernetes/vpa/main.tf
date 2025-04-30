@@ -14,7 +14,7 @@ terraform {
   required_providers {
     git = {
       source  = "xenitab/git"
-      version = "0.0.3"
+      version = ">=0.0.4"
     }
   }
 }

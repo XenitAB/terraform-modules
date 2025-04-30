@@ -7,13 +7,13 @@ Adds [`Reloader`](https://github.com/stakater/Reloader) to a Kubernetes clusters
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_git"></a> [git](#requirement\_git) | 0.0.3 |
+| <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_git"></a> [git](#provider\_git) | 0.0.3 |
+| <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
 ## Modules
 
@@ -23,7 +23,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [git_repository_file.reloader](https://registry.terraform.io/providers/xenitab/git/0.0.3/docs/resources/repository_file) | resource |
+| [git_repository_file.reloader](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 
 ## Inputs
 

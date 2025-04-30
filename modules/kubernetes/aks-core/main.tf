@@ -79,6 +79,7 @@ data "azurerm_dns_zone" "this" {
   for_each = {
     for dns in var.dns_zones :
     dns => dns
+    if var.external_dns_config.rbac_create
   }
   name                = each.key
   resource_group_name = data.azurerm_resource_group.global.name

@@ -123,6 +123,7 @@ module "cert_manager" {
   tenant_name                = var.platform_config.tenant_name
   environment                = var.environment
   fleet_infra_config         = var.platform_config.fleet_infra_config
+  rbac_create                = var.cert_manager_config.rbac_create
 }
 
 module "control_plane_logs" {

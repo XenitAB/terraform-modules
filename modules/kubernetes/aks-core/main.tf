@@ -17,9 +17,9 @@ terraform {
       source  = "hashicorp/azuread"
     }
     git = {
-      source  = "xenitab/git"
-      version = ">=0.0.4"
-      configuration_aliases = [ git.tenant ]
+      source                = "xenitab/git"
+      version               = ">=0.0.4"
+      configuration_aliases = [git.tenant]
     }
     random = {
       source  = "hashicorp/random"

@@ -192,6 +192,7 @@ variable "cert_manager_config" {
   type = object({
     notification_email = string
     dns_zone           = list(string)
+    rbac_create        = optional(bool, true)
   })
 }
 

@@ -7,7 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### 🚀 New Features
+- Feat: make it possible to enable ACR admin account by @landerss1 in [#1334](https://github.com/XenitAB/terraform-modules/pulls/1334)
+
+
+
+### 🐛 Bug Fixes
+
+
+
 ### ⚙️ Miscellaneous
+- Chore: upgrade node-ttl to v0.0.9 by @landerss1 in [#1333](https://github.com/XenitAB/terraform-modules/pulls/1333)
+- Chore: upgrade git-auth-proxy to latest version by @landerss1 in [#1330](https://github.com/XenitAB/terraform-modules/pulls/1330)
+- Chore: upgrade node-ttl to latest version by @landerss1 in [#1328](https://github.com/XenitAB/terraform-modules/pulls/1328)
 - Chore: upgrade falco charts to latest version by @landerss1 in [#1327](https://github.com/XenitAB/terraform-modules/pulls/1327)
 - Chore: upgrade reloader to latest version by @landerss1 in [#1326](https://github.com/XenitAB/terraform-modules/pulls/1326)
 - Chore: upgrade vpa charts to latest by @landerss1 in [#1325](https://github.com/XenitAB/terraform-modules/pulls/1325)

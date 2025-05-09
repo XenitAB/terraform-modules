@@ -61,3 +61,9 @@ variable "acr_name_override" {
   type        = string
   default     = ""
 }
+
+variable "acr_admin_enabled" {
+  description = "If ACR admin account should be enabled"
+  type        = bool
+  default     = false
+}

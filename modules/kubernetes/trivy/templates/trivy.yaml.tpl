@@ -23,7 +23,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://aquasecurity.github.io/helm-charts/
-    targetRevision: v0.11.0
+    targetRevision: v0.13.0
     chart: trivy
     helm:
       valuesObject:

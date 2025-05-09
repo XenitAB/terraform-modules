@@ -23,8 +23,10 @@ spec:
     - Replace=true
   source:
     repoURL: https://falcosecurity.github.io/charts
-    targetRevision: v0.12.1
+    targetRevision: 0.12.2
     chart: falco-exporter
     helm:
       valuesObject:
+        image:
+          tag: "0.8.7"
         priorityClassName: platform-high

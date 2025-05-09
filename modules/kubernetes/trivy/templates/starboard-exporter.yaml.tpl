@@ -22,7 +22,7 @@ spec:
     - ApplyOutOfSyncOnly=true
   source:
     repoURL: https://giantswarm.github.io/giantswarm-catalog
-    targetRevision: v0.8.0
+    targetRevision: v0.8.1
     chart: starboard-exporter
     helm:
       valuesObject:

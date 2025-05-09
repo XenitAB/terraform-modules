@@ -23,7 +23,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://falcosecurity.github.io/charts
-    targetRevision: v4.17.2
+    targetRevision: 4.21.3
     chart: falco
     helm:
       valuesObject:

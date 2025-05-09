@@ -3,7 +3,7 @@ resource "azurerm_container_registry" "acr" {
   resource_group_name = resource.azurerm_resource_group.this.name
   location            = resource.azurerm_resource_group.this.location
   sku                 = "Standard"
-  admin_enabled       = false
+  admin_enabled       = var.acr_admin_enabled
 }
 
 resource "azurerm_container_registry_task" "acr_purge_task" {

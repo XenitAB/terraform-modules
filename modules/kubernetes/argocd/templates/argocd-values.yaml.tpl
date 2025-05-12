@@ -2,7 +2,7 @@ crds:
   keep: true
 
 redis-ha:
-  enabled: true
+  enabled: false
   replicas: 2
   haproxy:
     enabled: false

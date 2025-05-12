@@ -3,6 +3,7 @@ crds:
 
 redis-ha:
   enabled: true
+  replicas: 2
 
 controller:
   env:

@@ -4,6 +4,8 @@ crds:
 redis-ha:
   enabled: true
   replicas: 2
+  haproxy:
+    enabled: false
 
 controller:
   env:

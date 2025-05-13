@@ -278,17 +278,17 @@ module "fluxcd" {
 
   source = "../../kubernetes/fluxcd"
 
-  environment  = var.environment
-  cluster_id   = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
-  git_provider = var.fluxcd_config.git_provider
-  bootstrap    = var.fluxcd_config.bootstrap
-  location_short                   = var.location_short
-  oidc_issuer_url                  = var.oidc_issuer_url
-  resource_group_name              = data.azurerm_resource_group.this.name
-  acr_name_override                = var.acr_name_override
-  aks_managed_identity             = data.azuread_group.aks_managed_identity.id
-  aks_name                         = var.name
-  location                         = data.azurerm_resource_group.this.location
+  environment          = var.environment
+  cluster_id           = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
+  git_provider         = var.fluxcd_config.git_provider
+  bootstrap            = var.fluxcd_config.bootstrap
+  location_short       = var.location_short
+  oidc_issuer_url      = var.oidc_issuer_url
+  resource_group_name  = data.azurerm_resource_group.this.name
+  acr_name_override    = var.acr_name_override
+  aks_managed_identity = data.azuread_group.aks_managed_identity.id
+  aks_name             = var.name
+  location             = data.azurerm_resource_group.this.location
   namespaces = [for ns in var.namespaces : {
     name   = ns.name
     labels = ns.labels

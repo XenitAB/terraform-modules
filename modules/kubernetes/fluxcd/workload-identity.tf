@@ -16,7 +16,7 @@ resource "azurerm_federated_identity_credential" "flux_system" {
 resource "azurerm_role_assignment" "flux_system_acr" {
   scope                = data.azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"
-  principal_id         = azurerm_user_assigned_identity.trivy.principal_id
+  principal_id         = azurerm_user_assigned_identity.flux_system.id
 }
 
 data "azurerm_resource_group" "global" {
@@ -29,7 +29,7 @@ data "azurerm_container_registry" "acr" {
 }
 
 resource "azurerm_role_assignment" "flux_managed" {
-  scope                = azurerm_user_assigned_identity.trivy.id
+  scope                = azurerm_user_assigned_identity.flux_system.id
   role_definition_name = "Managed Identity Operator"
   principal_id         = var.aks_managed_identity
 }

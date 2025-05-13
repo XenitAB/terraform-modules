@@ -55,3 +55,45 @@ variable "namespaces" {
   )
   default = []
 }
+
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
+  type        = string
+}
+
+variable "resource_group_name" {
+  description = "The Azure resource group name"
+  type        = string
+}
+
+variable "location" {
+  description = "The Azure region name."
+  type        = string
+}
+
+variable "location_short" {
+  description = "The Azure region short name."
+  type        = string
+}
+
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
+  type        = string
+  default     = ""
+}
+
+variable "aks_name" {
+  description = "The commonName to use for the deploy"
+  type        = string
+}
+
+variable "acr_name_override" {
+  description = "Override default name of ACR"
+  type        = string
+  default     = ""
+}
+
+variable "aks_managed_identity" {
+  description = "AKS Azure AD managed identity"
+  type        = string
+}

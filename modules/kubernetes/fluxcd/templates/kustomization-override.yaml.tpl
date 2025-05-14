@@ -85,4 +85,4 @@ patches:
         annotations:
           azure.workload.identity/client-id: ${client_id}
         labels:
-          zure.workload.identity/use: "true"
+          azure.workload.identity/use: "true"

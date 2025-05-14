@@ -2,6 +2,10 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
+    azurerm = {
+      version = "4.19.0"
+      source  = "hashicorp/azurerm"
+    }
     kubernetes = {
       source  = "hashicorp/kubernetes"
       version = "2.23.0"
@@ -73,7 +77,8 @@ resource "flux_bootstrap_git" "this" {
   disable_secret_creation = var.bootstrap.disable_secret_creation
   components              = toset(["source-controller", "kustomize-controller", "helm-controller", "notification-controller"])
   kustomization_override = templatefile("${path.module}/templates/kustomization-override.yaml.tpl", {
-    url = join("/", compact([local.git_auth_proxy_url, var.git_provider.organization, var.bootstrap.project, local.git_path_separator, var.bootstrap.repository]))
+    url       = join("/", compact([local.git_auth_proxy_url, var.git_provider.organization, var.bootstrap.project, local.git_path_separator, var.bootstrap.repository]))
+    client_id = azurerm_user_assigned_identity.flux_system.client_id
   })
 }
 

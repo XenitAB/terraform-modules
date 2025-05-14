@@ -189,14 +189,14 @@ resource "kubernetes_secret" "webhook_issuer_tls" {
   type = "kubernetes.io/tls"
 }
 
-resource "git_repository_file" "datadog_chart" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/datadog/Chart.yaml"
+resource "git_repository_file" "linkerd_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd/Chart.yaml"
   content = templatefile("${path.module}/templates/Chart.yaml", {
   })
 }
 
-resource "git_repository_file" "datadog_values" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/datadog/values.yaml"
+resource "git_repository_file" "linkerd_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd/values.yaml"
   content = templatefile("${path.module}/templates/values.yaml", {
   })
 }

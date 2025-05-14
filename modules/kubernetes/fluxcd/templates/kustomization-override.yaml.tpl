@@ -29,8 +29,13 @@ patches:
       metadata:
         name: source-controller
         namespace: flux-system
+        labels:
+          azure.workload.identity/use: "true"
       spec:
         template:
+          metadata:
+            labels:
+              azure.workload.identity/use: "true"
           spec:
             priorityClassName: platform-medium
   - patch: |-
@@ -71,3 +76,13 @@ patches:
                   - '--log-level=info'
                   - '--log-encoding=json'
                   - '--enable-leader-election'
+  - patch: |-
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: source-controller
+        namespace: flux-system
+        annotations:
+          azure.workload.identity/client-id: ${client_id}
+        labels:
+          zure.workload.identity/use: "true"

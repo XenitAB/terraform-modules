@@ -29,8 +29,6 @@ patches:
       metadata:
         name: source-controller
         namespace: flux-system
-        labels:
-          azure.workload.identity/use: "true"
       spec:
         template:
           metadata:
@@ -84,5 +82,4 @@ patches:
         namespace: flux-system
         annotations:
           azure.workload.identity/client-id: ${client_id}
-        labels:
-          azure.workload.identity/use: "true"
+

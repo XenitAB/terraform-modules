@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: giving flux acr permissions by @optocoupler in [#1335](https://github.com/XenitAB/terraform-modules/pulls/1335)
 - Feat: make it possible to enable ACR admin account by @landerss1 in [#1334](https://github.com/XenitAB/terraform-modules/pulls/1334)
 
 

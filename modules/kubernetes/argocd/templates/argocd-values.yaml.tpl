@@ -175,7 +175,6 @@ configs:
     # Git requests timeout.
     reposerver.git.request.timeout: "15s"
     # Run server without TLS
-    server.insecure: "false"
     server.insecure: "true"
     # The maximum number of retries for each request
     server.k8sclient.retry.max: "3"

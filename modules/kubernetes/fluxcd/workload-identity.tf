@@ -16,7 +16,7 @@ resource "azurerm_federated_identity_credential" "flux_system" {
 resource "azurerm_role_assignment" "flux_system_acr" {
   scope                = data.azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"
-  principal_id         = azurerm_user_assigned_identity.flux_system.id
+  principal_id         = azurerm_user_assigned_identity.flux_system.principal_id
 }
 
 data "azurerm_resource_group" "global" {

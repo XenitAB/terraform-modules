@@ -10,7 +10,7 @@ resource "azurerm_federated_identity_credential" "flux_system" {
   parent_id           = azurerm_user_assigned_identity.flux_system.id
   audience            = ["api://AzureADTokenExchange"]
   issuer              = var.oidc_issuer_url
-  subject             = "system:serviceaccount:flux_system:source-controller"
+  subject             = "system:serviceaccount:flux-system:source-controller"
 }
 
 resource "azurerm_role_assignment" "flux_system_acr" {

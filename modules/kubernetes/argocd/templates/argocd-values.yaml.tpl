@@ -8,9 +8,10 @@ redis-ha:
     enabled: false
 
 controller:
+  replicas: ${controller_min_replicas}
   env:
-    - name: ARGOCD_CONTROLLER_REPLICAS
-      value: "${controller_min_replicas}"
+    - name: ARGOCD_ENABLE_K8S_EVENTS
+      value: "none"
   podLabels:
     azure.workload.identity/use: "true" 
   serviceAccount:
@@ -119,7 +120,7 @@ configs:
       # 'crd' - CustomResourceDefinitions (default)
       # 'all' - all resources
       # 'none' - disabled
-      ignoreResourceStatusField: crd
+      ignoreResourceStatusField: all
     resource.customizations.health.argoproj.io_Application: |
       hs = {}
       hs.status = "Progressing"
@@ -133,6 +134,11 @@ configs:
         end
       end
       return hs
+    resource.exclusions: |
+      - apiGroups:
+        - "aquasecurity.github.io"
+        kinds:
+        - VulnerabilityReport
     # The maximum size of the payload that can be sent to the webhook server.
     webhook.maxPayloadSizeMB: "10"
 

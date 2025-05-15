@@ -91,7 +91,7 @@ resource "kubernetes_network_policy" "tenant" {
       from {
         namespace_selector {
           match_labels = {
-            kubernetes.io/metadata.name = "grafana-k8s-monitoring"
+            "kubernetes.io/metadata.name" = "grafana-k8s-monitoring"
           }
         }
       }

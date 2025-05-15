@@ -94,9 +94,3 @@ variable "location_short" {
   description = "The Azure region short name."
   type        = string
 }
-
-variable "tenant_namespaces" {
-  description = "List of tenant namespaces for Flux"
-  type        = list(string)
-  default     = []
-}

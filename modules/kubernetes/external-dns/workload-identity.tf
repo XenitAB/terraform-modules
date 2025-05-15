@@ -12,6 +12,7 @@ resource "azurerm_role_assignment" "external_dns_contributor" {
   for_each = {
     for dns in var.dns_zones :
     dns => dns
+    if var.rbac_create
   }
   scope                = each.key
   role_definition_name = "Contributor"

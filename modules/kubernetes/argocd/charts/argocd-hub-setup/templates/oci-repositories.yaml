@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  name: nginxinc-helm-charts-oci
+  namespace: argocd
+stringData:
+  url: ghcr.io/nginxinc/charts
+  name: nginxcharts
+  type: helm
+  enableOCI: "true"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  name: xenit-helm-charts-oci
+  namespace: argocd
+stringData:
+  url: ghcr.io/xenitab/helm-charts
+  name: xenitcharts
+  type: helm
+  enableOCI: "true"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  name: docker-registry-helm-charts-oci
+  namespace: argocd
+stringData:
+  url: registry-1.docker.io/bitnamicharts
+  name: nginxcharts
+  type: helm
+  enableOCI: "true"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  name: spegel-helm-charts-oci
+  namespace: argocd
+stringData:
+  url: ghcr.io/spegel-org/helm-charts
+  name: spegelcharts
+  type: helm
+  enableOCI: "true"
+
+

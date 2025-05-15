@@ -3,6 +3,20 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "telepresence_config" {
   description = "Config to use when deploying traffic manager to the cluster"
   type = object({
@@ -19,4 +33,9 @@ variable "telepresence_config" {
       namespaces = optional(list(string), [])
     })
   })
+}
+
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type        = string
 }

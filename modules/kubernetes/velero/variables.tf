@@ -20,6 +20,20 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "location" {
   description = "The Azure region name."
   type        = string
@@ -40,13 +54,13 @@ variable "subscription_id" {
   type        = string
 }
 
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type        = string
+}
+
 variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string
   default     = ""
-}
-
-variable "environment" {
-  description = "The environment name to use for the deploy"
-  type        = string
 }

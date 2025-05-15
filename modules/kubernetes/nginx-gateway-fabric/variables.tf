@@ -3,6 +3,20 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "gateway_config" {
   description = "Gateway Fabric configuration"
   type = object({
@@ -26,4 +40,9 @@ variable "nginx_config" {
     extra_config              = optional(map(string), {})
     extra_headers             = optional(map(string), {})
   })
+}
+
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type        = string
 }

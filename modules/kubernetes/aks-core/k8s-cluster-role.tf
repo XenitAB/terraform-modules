@@ -66,7 +66,7 @@ resource "kubernetes_cluster_role" "trivy_reports" {
   for_each = {
     for s in ["trivy"] :
     s => s
-    if var.trivy_enabled
+    if var.platform_config.trivy_enabled
   }
 
   metadata {

@@ -18,6 +18,15 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string
@@ -38,18 +47,6 @@ variable "oidc_issuer_url" {
   type        = string
 }
 
-variable "podmonitor_loadbalancer" {
-  description = "Enable podmonitor for loadbalancers?"
-  type        = bool
-  default     = true
-}
-
-variable "podmonitor_kubernetes" {
-  description = "Enable podmonitor for kubernetes?"
-  type        = bool
-  default     = true
-}
-
 variable "resource_group_name" {
   description = "The Azure resource group name"
   type        = string
@@ -57,5 +54,10 @@ variable "resource_group_name" {
 
 variable "subscription_id" {
   description = "The subscription id where your kubernetes cluster is deployed"
+  type        = string
+}
+
+variable "tenant_name" {
+  description = "The name of the tenant"
   type        = string
 }

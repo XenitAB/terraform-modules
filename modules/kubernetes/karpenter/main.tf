@@ -42,7 +42,7 @@ resource "helm_release" "karpenter" {
   chart       = "karpenter"
   name        = "karpenter"
   namespace   = "kube-system"
-  version     = "0.7.2"
+  version     = "0.7.5"
   max_history = 3
   skip_crds   = false
   wait        = true
@@ -77,7 +77,7 @@ resource "kubectl_manifest" "node_classes" {
     class.name => class
   }
 
-  server_side_apply = true
+  server_side_apply = false
   apply_only        = true
   yaml_body = templatefile("${path.module}/templates/node-classes.yaml.tpl", {
     class = each.value
@@ -91,7 +91,7 @@ resource "kubectl_manifest" "node_pools" {
     pool.name => pool
   }
 
-  server_side_apply = true
+  server_side_apply = false
   apply_only        = true
   yaml_body = templatefile("${path.module}/templates/node-pools.yaml.tpl", {
     pool = each.value

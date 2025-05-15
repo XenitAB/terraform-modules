@@ -8,13 +8,9 @@ terraform {
   required_version = ">= 1.3.0"
 
   required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
     git = {
       source  = "xenitab/git"
-      version = "0.0.3"
+      version = ">=0.0.4"
     }
     azurerm = {
       version = "4.19.0"
@@ -23,30 +19,24 @@ terraform {
   }
 }
 
-resource "kubernetes_namespace" "envoy_gateway" {
-  metadata {
-    name = "envoy-gateway"
-    labels = {
-      "xkf.xenit.io/kind" = "platform"
-    }
-  }
-}
-
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/envoy-gateway.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
-  })
-}
-
 resource "git_repository_file" "envoy_gateway" {
-  path = "platform/${var.cluster_id}/envoy-gateway/envoy-gateway.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/envoy-gateway.yaml"
   content = templatefile("${path.module}/templates/envoy-gateway.yaml.tpl", {
     envoy_gateway_config = var.envoy_gateway_config
+    tenant_name          = var.tenant_name
+    environment          = var.environment
+    project              = var.fleet_infra_config.argocd_project_name
+    server               = var.fleet_infra_config.k8s_api_server_url
   })
 }
 
 resource "azurerm_policy_definition" "envoy_gateway_require_tls" {
+  for_each = {
+    for s in ["envoy_gateway"] :
+    s => s
+    if var.azure_policy_enabled
+  }
+
   name         = "EnvoyGatewayRequireTLS"
   display_name = "Envoy Gatway must have traffic policy"
   policy_type  = "Custom"
@@ -122,7 +112,13 @@ resource "azurerm_policy_definition" "envoy_gateway_require_tls" {
     PARAMETERS
 }
 
-resource "azurerm_policy_set_definition" "xks" {
+resource "azurerm_policy_set_definition" "tls" {
+  for_each = {
+    for s in ["envoy_gateway"] :
+    s => s
+    if var.azure_policy_enabled
+  }
+
   name         = "XKSDefaultPolicySet"
   policy_type  = "Custom"
   description  = "This policy set defines a baseline standard for XKS tenant clusters"
@@ -135,7 +131,7 @@ resource "azurerm_policy_set_definition" "xks" {
     METADATA
 
   policy_definition_reference {
-    policy_definition_id = azurerm_policy_definition.envoy_gateway_require_tls.id
+    policy_definition_id = azurerm_policy_definition.envoy_gateway_require_tls[0].id
     parameter_values     = <<VALUE
     {
       "effect": {
@@ -150,5 +146,6 @@ resource "azurerm_policy_set_definition" "xks" {
     }
     VALUE
   }
-
 }
+
+# TO-DO: There is a azurerm_resource_policy_assignment missing here.

@@ -15,24 +15,18 @@ terraform {
     }
     git = {
       source  = "xenitab/git"
-      version = "0.0.3"
+      version = ">=0.0.4"
     }
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/azure-metrics.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id,
-  })
-}
-
 resource "git_repository_file" "azure_metrics" {
-  path = "platform/${var.cluster_id}/azure-metrics/azure-metrics.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/azure-metrics.yaml"
   content = templatefile("${path.module}/templates/azure-metrics.yaml.tpl", {
-    client_id               = azurerm_user_assigned_identity.azure_metrics.client_id,
-    subscription_id         = var.subscription_id,
-    podmonitor_kubernetes   = var.podmonitor_kubernetes,
-    podmonitor_loadbalancer = var.podmonitor_loadbalancer,
+    tenant_name = var.tenant_name
+    environment = var.environment
+    client_id   = azurerm_user_assigned_identity.azure_metrics.client_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
   })
 }

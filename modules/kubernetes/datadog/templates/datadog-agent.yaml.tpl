@@ -3,6 +3,8 @@ kind: DatadogAgent
 metadata:
   name: datadog
   namespace: datadog
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   global:
     clusterName: ${location}-${environment}

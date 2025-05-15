@@ -46,16 +46,17 @@ resource "git_repository_file" "grafana_k8s_monitoring_app" {
 resource "git_repository_file" "grafana_k8s_monitoring" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-k8s-monitoring/templates/grafana-k8s-monitoring.yaml"
   content = templatefile("${path.module}/templates/grafana-k8s-monitoring.yaml.tpl", {
-    tenant_name                = var.tenant_name
-    environment                = var.environment
-    project                    = var.fleet_infra_config.argocd_project_name
-    server                     = var.fleet_infra_config.k8s_api_server_url
-    grafana_k8s_monitor_config = var.grafana_k8s_monitor_config
-    cluster_name               = var.cluster_name
-    tenant_id                  = azurerm_user_assigned_identity.grafana_k8s_monitor.tenant_id
-    client_id                  = azurerm_user_assigned_identity.grafana_k8s_monitor.client_id
-    key_vault_name             = var.grafana_k8s_monitor_config.azure_key_vault_name
-    exclude_namespaces         = var.grafana_k8s_monitor_config.exclude_namespaces
+    tenant_name                 = var.tenant_name
+    environment                 = var.environment
+    project                     = var.fleet_infra_config.argocd_project_name
+    server                      = var.fleet_infra_config.k8s_api_server_url
+    grafana_k8s_monitor_config  = var.grafana_k8s_monitor_config
+    cluster_name                = var.cluster_name
+    tenant_id                   = azurerm_user_assigned_identity.grafana_k8s_monitor.tenant_id
+    client_id                   = azurerm_user_assigned_identity.grafana_k8s_monitor.client_id
+    key_vault_name              = var.grafana_k8s_monitor_config.azure_key_vault_name
+    exclude_namespaces          = var.grafana_k8s_monitor_config.exclude_namespaces
+    node_exporter_node_affinity = var.grafana_k8s_monitor_config.node_exporter_node_affinity
   })
 }
 

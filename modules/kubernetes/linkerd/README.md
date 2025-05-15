@@ -73,11 +73,11 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [git_repository_file.datadog_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
-| [git_repository_file.datadog_values](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.linkerd](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.linkerd_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.linkerd_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.linkerd_crds](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.linkerd_values](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.linkerd_viz](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [helm_release.linkerd_extras](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |

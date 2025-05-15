@@ -1,27 +1,32 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: falco-exporter
-  namespace: falco
+  namespace: ${tenant_name}-${environment}
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    argocd.argoproj.io/sync-wave: "1"
 spec:
-  interval: 1m0s
-  url: "https://falcosecurity.github.io/charts"
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: falco-exporter
-  namespace: falco
-spec:
-  chart:
-    spec:
-      chart: falco-exporter
-      sourceRef:
-        kind: HelmRepository
-        name: falco-exporter
-      version: 0.12.2
-  interval: 1m0s
-  values:
-    image:
-      tag: "0.8.7"
-    priorityClassName: platform-high
+  project: ${project}
+  destination:
+    server: ${server}
+    namespace: falco
+  revisionHistoryLimit: 5
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+    - ApplyOutOfSyncOnly=true
+    - Replace=true
+  source:
+    repoURL: https://falcosecurity.github.io/charts
+    targetRevision: 0.12.2
+    chart: falco-exporter
+    helm:
+      valuesObject:
+        image:
+          tag: "0.8.7"
+        priorityClassName: platform-high

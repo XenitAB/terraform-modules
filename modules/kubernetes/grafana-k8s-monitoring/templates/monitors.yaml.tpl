@@ -1,31 +1,4 @@
 apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  namespace: flux-system
-  name: flux-system
-  labels:
-    app.kubernetes.io/part-of: flux
-    app.kubernetes.io/component: monitoring
-spec:
-  namespaceSelector:
-    matchNames:
-      - flux-system
-  selector:
-    matchExpressions:
-      - key: app
-        operator: In
-        values:
-          - helm-controller
-          - source-controller
-          - kustomize-controller
-          - notification-controller
-          - image-automation-controller
-          - image-reflector-controller
-  podMetricsEndpoints:
-    - port: http-prom
-
----
-apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
@@ -144,83 +117,6 @@ spec:
   podMetricsEndpoints:
     - path: /metrics
       port: metrics
-%{ endif }
-%{ if flux_enabled }
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: helm-controller
-  namespace: flux-system
-  labels:
-    xkf.xenit.io/monitoring: platform
-spec:
-  selector:
-    matchLabels:
-      app: helm-controller
-  podMetricsEndpoints:
-    - port: http-prom
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: kustomize-controller
-  namespace: flux-system
-  labels:
-    xkf.xenit.io/monitoring: platform
-spec:
-  selector:
-    matchLabels:
-      app: kustomize-controller
-  podMetricsEndpoints:
-    - port: http-prom
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: notification-controller
-  namespace: flux-system
-  labels:
-    xkf.xenit.io/monitoring: platform
-spec:
-  selector:
-    matchLabels:
-      app: notification-controller
-  podMetricsEndpoints:
-    - port: http-prom
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: source-controller
-  namespace: flux-system
-  labels:
-    xkf.xenit.io/monitoring: platform
-spec:
-  selector:
-    matchLabels:
-      app: source-controller
-  podMetricsEndpoints:
-    - port: http-prom
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: git-auth-proxy
-  namespace: flux-system
-  labels:
-    xkf.xenit.io/monitoring: platform
-spec:
-  endpoints:
-  - interval: 30s
-    port: metrics
-  namespaceSelector:
-    matchNames:
-    - flux-system
-  selector:
-    matchLabels:
-      app.kubernetes.io/instance: git-auth-proxy
-      app.kubernetes.io/name: git-auth-proxy
 %{ endif }
 %{ if falco_enabled }
 ---
@@ -461,7 +357,6 @@ spec:
   endpoints:
     - port: metrics
 %{ endif }
-
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -481,3 +376,94 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: external-dns
       app.kubernetes.io/name: external-dns
+
+%{ if azure_metrics_enabled }
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: azure-metrics-exporter
+    app.kubernetes.io/instance: azure-metrics
+    xkf.xenit.io/monitoring: platform
+  name: azure-metrics-exporter
+  namespace: azure-metrics
+spec:
+  podMetricsEndpoints:
+  - interval: 60s
+    port: http-metrics
+    path: /metrics
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: azure-metrics-exporter
+      app.kubernetes.io/instance: azure-metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: azure-metrics-exporter
+    app.kubernetes.io/instance: azure-metrics
+    xkf.xenit.io/monitoring: platform
+  name: azure-metrics-exporter-loadbalancers
+  namespace: azure-metrics
+spec:
+  podMetricsEndpoints:
+  - interval: 60s
+    port: http-metrics
+    path: /probe/metrics/list
+    params:
+      name: ["azure-metric"]
+      subscription:
+        - ${subscription_id}
+      template:
+        - '{name}_{metric}_{aggregation}_{unit}'
+      resourceType:
+        - Microsoft.Network/loadBalancers
+      aggregation:
+        - average
+        - total
+      metric:
+        - SnatConnectionCount
+        - AllocatedSnatPorts
+        - UsedSnatPorts
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: azure-metrics-exporter
+      app.kubernetes.io/instance: azure-metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: azure-metrics-exporter
+    app.kubernetes.io/instance: azure-metrics
+    xkf.xenit.io/monitoring: platform
+  name: azure-metrics-exporter-kubernetes
+  namespace: azure-metrics
+spec:
+  podMetricsEndpoints:
+  - interval: 60s
+    port: http-metrics
+    path: /probe/metrics/list
+    params:
+      name: ["azure-metric"]
+      subscription:
+        - ${subscription_id}
+      template:
+        - '{metric}'
+      resourceType:
+        - Microsoft.ContainerService/managedClusters
+      aggregation:
+        - average
+        - total
+      metric:
+        - cluster_autoscaler_cluster_safe_to_autoscale
+        - cluster_autoscaler_scale_down_in_cooldown
+        - cluster_autoscaler_unneeded_nodes_count
+        - cluster_autoscaler_unschedulable_pods_count
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: azure-metrics-exporter
+      app.kubernetes.io/instance: azure-metrics
+%{ endif }

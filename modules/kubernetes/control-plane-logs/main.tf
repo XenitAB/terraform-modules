@@ -18,32 +18,70 @@ terraform {
     }
     git = {
       source  = "xenitab/git"
-      version = "0.0.3"
+      version = ">=0.0.4"
     }
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/control-plane-logs.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id,
+resource "git_repository_file" "control_plane_logs_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/control-plane-logs/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
+}
+
+resource "git_repository_file" "control_plane_logs_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/control-plane-logs/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
+}
+
+# App-of-apps
+resource "git_repository_file" "control_plane_logs" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/control-plane-logs-app.yaml"
+  content = templatefile("${path.module}/templates/control-plane-logs-app.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
   })
 }
 
 resource "git_repository_file" "vector" {
-  path = "platform/${var.cluster_id}/control-plane-logs/vector.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/control-plane-logs/templates/vector.yaml"
   content = templatefile("${path.module}/templates/vector.yaml.tpl", {
-    client_id = data.azurerm_user_assigned_identity.xenit.client_id,
+    client_id   = data.azurerm_user_assigned_identity.xenit.client_id
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
   })
 }
 
 resource "git_repository_file" "vector_extras" {
-  path = "platform/${var.cluster_id}/control-plane-logs/vector-extras.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/control-plane-logs/templates/vector-extras.yaml"
   content = templatefile("${path.module}/templates/vector-extras.yaml.tpl", {
-    azure_key_vault_name = var.azure_config.azure_key_vault_name,
-    client_id            = data.azurerm_user_assigned_identity.xenit.client_id,
-    eventhub_hostname    = var.azure_config.eventhub_hostname,
-    eventhub_name        = var.azure_config.eventhub_name,
-    tenant_id            = data.azurerm_user_assigned_identity.xenit.tenant_id,
+    client_id   = data.azurerm_user_assigned_identity.xenit.client_id
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
+    server      = var.fleet_infra_config.k8s_api_server_url
+  })
+}
+
+resource "git_repository_file" "vector_manifests" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/control-plane-logs/manifests/vector-extras.yaml"
+  content = templatefile("${path.module}/templates/vector-manifests.yaml.tpl", {
+    azure_key_vault_name = var.azure_config.azure_key_vault_name
+    client_id            = data.azurerm_user_assigned_identity.xenit.client_id
+    eventhub_hostname    = var.azure_config.eventhub_hostname
+    eventhub_name        = var.azure_config.eventhub_name
+    tenant_id            = data.azurerm_user_assigned_identity.xenit.tenant_id
+    tenant_name          = var.tenant_name
+    cluster_id           = var.cluster_id
   })
 }

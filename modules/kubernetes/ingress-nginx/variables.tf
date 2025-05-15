@@ -1,32 +1,15 @@
 variable "aad_groups" {
   description = "Configuration for Azure AD Groups (AAD Groups)"
-  type = object({
-    view = map(any)
-    edit = map(any)
-    cluster_admin = object({
-      id   = string
-      name = string
-    })
-    cluster_view = object({
-      id   = string
-      name = string
-    })
-    aks_managed_identity = object({
-      id   = string
-      name = string
-    })
-  })
+  type = list(object({
+    namespace = string
+    id        = string
+    name      = string
+  }))
 }
 
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
-}
-
-variable "datadog_enabled" {
-  description = "Should datadog be enabled"
-  type        = bool
-  default     = false
 }
 
 variable "customization" {
@@ -56,6 +39,12 @@ variable "customization_private" {
   default = {}
 }
 
+variable "datadog_enabled" {
+  description = "Should datadog be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "default_certificate" {
   description = "If enalbed and configured nginx will be configured with a default certificate."
   type = object({
@@ -68,16 +57,35 @@ variable "default_certificate" {
   }
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
 variable "external_dns_hostname" {
   description = "Hostname for external-dns to use"
   type        = string
   default     = ""
 }
 
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "linkerd_enabled" {
   description = "Should linkerd be enabled"
   type        = bool
   default     = false
+}
+
+variable "min_replicas" {
+  description = "The desired number of minimum replicas"
+  type        = number
 }
 
 variable "namespaces" {
@@ -97,6 +105,17 @@ variable "namespaces" {
   )
 }
 
+variable "nginx_healthz_ingress_hostname" {
+  description = "The hostname where we can reach the health endpoint"
+  type        = string
+}
+
+variable "nginx_healthz_ingress_whitelist_ips" {
+  description = "A comma separated string of ranges and or individual ips to be whitelisted for the healthz ingress"
+  type        = string
+  default     = ""
+}
+
 variable "private_ingress_enabled" {
   description = "If true will create a private ingress controller. Otherwise only a public ingress controller will be created."
   type        = bool
@@ -108,18 +127,7 @@ variable "replicas" {
   type        = number
 }
 
-variable "min_replicas" {
-  description = "The desired number of minimum replicas"
-  type        = number
-}
-
-variable "nginx_healthz_ingress_hostname" {
-  description = "The hostname where we can reach the health endpoint"
+variable "tenant_name" {
+  description = "The name of the tenant"
   type        = string
-}
-
-variable "nginx_healthz_ingress_whitelist_ips" {
-  description = "A comma separated string of ranges and or individual ips to be whitelisted for the healthz ingress"
-  type        = string
-  default     = ""
 }

@@ -1,29 +1,36 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: elastic
-  namespace: eck-system
-spec:
-  interval: 1m0s
-  url: "https://helm.elastic.co"
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: eck-operator
-  namespace: eck-system
+  namespace: ${tenant_name}-${environment}
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    argocd.argoproj.io/sync-wave: "2"
 spec:
-  interval: 1m0s
-  chart:
-    spec:
-      chart: eck-operator
-      sourceRef:
-        kind: HelmRepository
-        name: elastic
-      version: 2.16.1
-
-  values:
-    managedNamespaces:
-      %{ for ns in eck_managed_namespaces ~}
-    - ${ns}
-      %{ endfor }
+  project: ${project}
+  destination:
+    server: ${server}
+    namespace: eck-system
+  revisionHistoryLimit: 5
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    managedNamespaceMetadata:
+      labels:
+        xkf.xenit.io/kind: platform
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+    - ApplyOutOfSyncOnly=true
+    - Replace=true
+  source:
+    repoURL: https://helm.elastic.co
+    targetRevision: 2.16.1
+    chart: eck-operator
+    helm:
+      valuesObject:
+        managedNamespaces:
+%{ for ns in eck_managed_namespaces ~}
+        - ${ns}
+%{ endfor }

@@ -67,8 +67,6 @@ spec:
       url: ${remote_write_url}
       headers: 
         THANOS-TENANT: ${tenant_id}
-
-
       # Setting according to others observation
       # https://github.com/prometheus/prometheus/pull/9634
       # Check docs for more information about settings

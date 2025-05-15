@@ -13,7 +13,6 @@ module "azure_policy" {
     exclude_namespaces = []
     mutations          = []
   }
-  environment       = "dev"
-  location_short    = "we"
-  tenant_namespaces = []
+  environment    = "dev"
+  location_short = "we"
 }

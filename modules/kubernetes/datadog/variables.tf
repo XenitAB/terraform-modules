@@ -3,7 +3,6 @@ variable "apm_ignore_resources" {
   type        = list(string)
 }
 
-
 variable "azure_config" {
   description = "Azure specific configuration"
   type = object({
@@ -28,6 +27,15 @@ variable "datadog_site" {
 variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string
+}
+
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
 }
 
 variable "key_vault_id" {
@@ -57,5 +65,10 @@ variable "oidc_issuer_url" {
 
 variable "resource_group_name" {
   description = "The Azure resource group name"
+  type        = string
+}
+
+variable "tenant_name" {
+  description = "The name of the tenant"
   type        = string
 }

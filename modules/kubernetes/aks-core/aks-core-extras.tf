@@ -17,6 +17,6 @@ resource "helm_release" "aks_core_extras" {
 
   set {
     name  = "spotInstancesHack.enabled"
-    value = var.spot_instances_hack_enabled
+    value = var.platform_config.spot_instances_hack_enabled
   }
 }

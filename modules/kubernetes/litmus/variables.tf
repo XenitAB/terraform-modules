@@ -8,7 +8,26 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
 variable "key_vault_resource_group_name" {
   description = "The resource group name where the core key vault is to be found"
+  type        = string
+}
+
+variable "tenant_name" {
+  description = "The name of the tenant"
   type        = string
 }

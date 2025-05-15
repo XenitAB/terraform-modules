@@ -1,34 +1,39 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: grafana-agent-operator
-  namespace: grafana-agent
+  namespace: ${tenant_name}-${environment}
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    argocd.argoproj.io/sync-wave: "1"
 spec:
-  interval: 1m0s
-  url: "https://grafana.github.io/helm-charts"
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: grafana-agent-operator
-  namespace: grafana-agent
-spec:
-  chart:
-    spec:
-      chart: grafana-agent-operator
-      sourceRef:
-        kind: HelmRepository
-        name: grafana-agent-operator
-      version: v0.3.21
-  interval: 1m0s
-  values:
-    resources:
-      requests:
-        cpu: 25m
-        memory: 80Mi
-      limits:
-        memory: 256Mi
-    kubeletService:
-      namespace: grafana-agent
-    serviceAccount:
-      name: grafana-agent
+  project: ${project}
+  destination:
+    server: ${server}
+    namespace: grafana-agent
+  revisionHistoryLimit: 5
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+    - ApplyOutOfSyncOnly=true
+    - Replace=true
+  source:
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: v0.3.21
+    chart: grafana-agent-operator
+    helm:
+      valuesObject:
+        resources:
+          requests:
+            cpu: 25m
+            memory: 80Mi
+          limits:
+            memory: 256Mi
+        kubeletService:
+          namespace: grafana-agent
+        serviceAccount:
+          name: grafana-agent

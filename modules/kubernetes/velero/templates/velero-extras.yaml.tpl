@@ -1,27 +1,27 @@
-apiVersion: velero.io/v1
-kind: Schedule
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: daily-full-backups
-  namespace: velero
-  labels:
-    frequency: daily
-    full: "true"
+  name: velero-extras
+  namespace: ${tenant_name}-${environment}
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    argocd.argoproj.io/sync-wave: "3"
 spec:
-  schedule: "0 2 * * *"
-  template:
-    ttl: 960h0m0s
----
-apiVersion: velero.io/v1
-kind: Schedule
-metadata:
-  name: hourly-minimal-backups
-  namespace: velero
-  labels:
-    frequency: hourly
-    full: "false"
-spec:
-  schedule: "15 */1 * * *"
-  template:
-    snapshotVolumes: false
-    ttl: 96h0m0s
-
+  project: ${project}
+  destination:
+    server: ${server}
+    namespace: velero
+  revisionHistoryLimit: 5
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+    - ApplyOutOfSyncOnly=true
+    - Replace=true
+  source:
+    repoURL: ${repo_url}
+    targetRevision: HEAD
+    path: platform/${tenant_name}/${cluster_id}/argocd-applications/velero/manifests

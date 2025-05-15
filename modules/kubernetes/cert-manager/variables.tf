@@ -1,21 +1,10 @@
 variable "aad_groups" {
   description = "Configuration for Azure AD Groups (AAD Groups)"
-  type = object({
-    view = map(any)
-    edit = map(any)
-    cluster_admin = object({
-      id   = string
-      name = string
-    })
-    cluster_view = object({
-      id   = string
-      name = string
-    })
-    aks_managed_identity = object({
-      id   = string
-      name = string
-    })
-  })
+  type = list(object({
+    namespace = string
+    id        = string
+    name      = string
+  }))
 }
 
 variable "acme_server" {
@@ -32,6 +21,20 @@ variable "cluster_id" {
 variable "dns_zones" {
   description = "Map of DNS zones with id"
   type        = map(string)
+}
+
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
 }
 
 variable "gateway_api_enabled" {
@@ -85,6 +88,12 @@ variable "oidc_issuer_url" {
   type        = string
 }
 
+variable "rbac_create" {
+  description = "If role assignments should be created for the hosted zones"
+  type        = bool
+  default     = true
+}
+
 variable "resource_group_name" {
   description = "The Azure resource group name"
   type        = string
@@ -92,5 +101,10 @@ variable "resource_group_name" {
 
 variable "subscription_id" {
   description = "The Azure subscription id"
+  type        = string
+}
+
+variable "tenant_name" {
+  description = "The name of the tenant"
   type        = string
 }

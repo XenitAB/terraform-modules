@@ -280,6 +280,7 @@ module "fluxcd" {
   aks_managed_identity = data.azuread_group.aks_managed_identity.id
   aks_name             = var.name
   location             = data.azurerm_resource_group.this.location
+  unique_suffix        = var.unique_suffix
   namespaces = [for ns in var.namespaces : {
     name   = ns.name
     labels = ns.labels

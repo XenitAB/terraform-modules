@@ -10,39 +10,43 @@ terraform {
   required_providers {
     git = {
       source  = "xenitab/git"
-      version = "0.0.3"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+      version = ">=0.0.4"
     }
   }
 }
 
-resource "kubernetes_namespace" "ingress_nginx" {
-  metadata {
-    name = "ingress-nginx"
-    labels = {
-      "xkf.xenit.io/kind" = "platform"
-      "name"              = "ingress-nginx"
-    }
-  }
+resource "git_repository_file" "ingress_nginx_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
 }
 
-resource "git_repository_file" "kustomization" {
-  depends_on = [kubernetes_namespace.ingress_nginx]
+resource "git_repository_file" "ingress_nginx_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
+}
 
-  path = "clusters/${var.cluster_id}/ingress-nginx.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id
+# App-of-apps
+resource "git_repository_file" "ingress_nginx_app" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/ingress-nginx-app.yaml"
+  content = templatefile("${path.module}/templates/ingress-nginx-app.yaml.tpl", {
+    tenant_name        = var.tenant_name
+    environment        = var.environment
+    cluster_id         = var.cluster_id
+    project            = var.fleet_infra_config.argocd_project_name
+    repo_url           = var.fleet_infra_config.git_repo_url
+    ingress_nginx_name = "ingress-nginx"
   })
 }
 
 resource "git_repository_file" "ingress_nginx" {
-  depends_on = [kubernetes_namespace.ingress_nginx]
-
-  path = "platform/${var.cluster_id}/ingress-nginx/ingress-nginx.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx/templates/ingress-nginx.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx.yaml.tpl", {
+    tenant_name            = var.tenant_name
+    environment            = var.environment
+    project                = var.fleet_infra_config.argocd_project_name
+    server                 = var.fleet_infra_config.k8s_api_server_url
     ingress_class          = "nginx"
     ingress_nginx_name     = "ingress-nginx"
     default_ingress_class  = true
@@ -69,15 +73,18 @@ resource "git_repository_file" "ingress_nginx" {
 }
 
 resource "git_repository_file" "ingress_nginx_private" {
-  depends_on = [kubernetes_namespace.ingress_nginx]
   for_each = {
     for s in ["ingress-nginx-private"] :
     s => s
     if var.private_ingress_enabled
   }
 
-  path = "platform/${var.cluster_id}/ingress-nginx/ingress-nginx-private.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx/templates/ingress-nginx-private.yaml"
   content = templatefile("${path.module}/templates/ingress-nginx.yaml.tpl", {
+    tenant_name            = var.tenant_name
+    environment            = var.environment
+    project                = var.fleet_infra_config.argocd_project_name
+    server                 = var.fleet_infra_config.k8s_api_server_url
     ingress_class          = "nginx-private"
     ingress_nginx_name     = "ingress-nginx-private"
     default_ingress_class  = false
@@ -98,6 +105,36 @@ resource "git_repository_file" "ingress_nginx_private" {
     linkerd_enabled                     = var.linkerd_enabled
     datadog_enabled                     = var.datadog_enabled
     nginx_healthz_ingress_enabled       = false
+    nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
+    nginx_healthz_ingress_hostname      = var.nginx_healthz_ingress_hostname
+  })
+}
+
+resource "git_repository_file" "ingress_nginx_extras" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx/templates/ingress-nginx-extras.yaml"
+  content = templatefile("${path.module}/templates/ingress-nginx-extras.yaml.tpl", {
+    tenant_name        = var.tenant_name
+    environment        = var.environment
+    cluster_id         = var.cluster_id
+    project            = var.fleet_infra_config.argocd_project_name
+    repo_url           = var.fleet_infra_config.git_repo_url
+    server             = var.fleet_infra_config.k8s_api_server_url
+    ingress_nginx_name = "ingress-nginx"
+  })
+}
+
+resource "git_repository_file" "ingress_nginx_manifests" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/ingress-nginx/manifests/ingress-nginx-extras.yaml"
+  content = templatefile("${path.module}/templates/ingress-nginx-manifests.yaml.tpl", {
+    aad_groups         = var.aad_groups
+    namespaces         = var.namespaces
+    ingress_nginx_name = "ingress-nginx"
+    default_certificate = {
+      enabled         = var.default_certificate.enabled
+      dns_zone        = var.default_certificate.dns_zone
+      namespaced_name = "ingress-nginx/ingress-nginx"
+    }
+    nginx_healthz_ingress_enabled       = true
     nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
     nginx_healthz_ingress_hostname      = var.nginx_healthz_ingress_hostname
   })

@@ -14,33 +14,67 @@ terraform {
     }
     git = {
       source  = "xenitab/git"
-      version = "0.0.3"
+      version = ">=0.0.4"
     }
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/velero.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id,
+resource "git_repository_file" "velero_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/velero/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
+}
+
+resource "git_repository_file" "velero_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/velero/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
+}
+
+# App-of-apps
+resource "git_repository_file" "velero_app" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/velero-app.yaml"
+  content = templatefile("${path.module}/templates/velero-app.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
   })
 }
 
 resource "git_repository_file" "velero" {
-  path = "platform/${var.cluster_id}/velero/velero.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/velero/templates/velero.yaml"
   content = templatefile("${path.module}/templates/velero.yaml.tpl", {
-    azure_config        = var.azure_config,
-    client_id           = azurerm_user_assigned_identity.velero.client_id,
-    environment         = var.environment,
-    resource_group_name = var.resource_group_name,
-    subscription_id     = var.subscription_id,
-    unique_suffix       = var.unique_suffix,
-    tenant_id           = azurerm_user_assigned_identity.velero.tenant_id,
+    azure_config        = var.azure_config
+    client_id           = azurerm_user_assigned_identity.velero.client_id
+    environment         = var.environment
+    resource_group_name = var.resource_group_name
+    subscription_id     = var.subscription_id
+    unique_suffix       = var.unique_suffix
+    tenant_id           = azurerm_user_assigned_identity.velero.tenant_id
+    tenant_name         = var.tenant_name
+    cluster_id          = var.cluster_id
+    project             = var.fleet_infra_config.argocd_project_name
+    server              = var.fleet_infra_config.k8s_api_server_url
+    repo_url            = var.fleet_infra_config.git_repo_url
   })
 }
 
 resource "git_repository_file" "velero_extras" {
-  path = "platform/${var.cluster_id}/velero/velero-extras.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/velero/templates/velero-extras.yaml"
   content = templatefile("${path.module}/templates/velero-extras.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
+    server      = var.fleet_infra_config.k8s_api_server_url
+  })
+}
+
+resource "git_repository_file" "velero_manifests" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/velero/manifests/velero-extras.yaml"
+  content = templatefile("${path.module}/templates/velero-manifests.yaml.tpl", {
   })
 }

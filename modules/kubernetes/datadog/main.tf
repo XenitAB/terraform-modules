@@ -19,7 +19,7 @@ terraform {
     }
     git = {
       source  = "xenitab/git"
-      version = "0.0.3"
+      version = ">=0.0.4"
     }
   }
 }
@@ -29,40 +29,70 @@ locals {
   apm_ignore_resources     = join(",", formatlist("%s", var.apm_ignore_resources))
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/datadog.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id,
+resource "git_repository_file" "datadog_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/datadog/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
+}
+
+resource "git_repository_file" "datadog_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/datadog/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
+}
+
+# App-of-apps
+resource "git_repository_file" "datadog_app" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/datadog-app.yaml"
+  content = templatefile("${path.module}/templates/datadog-app.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
   })
 }
 
 resource "git_repository_file" "datadog_operator" {
-  path = "platform/${var.cluster_id}/datadog-operator/datadog-operator.yaml"
-  content = templatefile("${path.module}/templates/datadog-operator.yaml", {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/datadog/templates/datadog-operator.yaml"
+  content = templatefile("${path.module}/templates/datadog-operator.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
   })
 }
 
-resource "git_repository_file" "datadog" {
-  path = "platform/${var.cluster_id}/datadog/datadog-agent.yaml"
+resource "git_repository_file" "datadog_extras" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/datadog/templates/datadog-extras.yaml"
+  content = templatefile("${path.module}/templates/datadog-extras.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
+    server      = var.fleet_infra_config.k8s_api_server_url
+  })
+}
+
+resource "git_repository_file" "datadog_manifests" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/datadog/manifests/datadog-agent.yaml"
   content = templatefile("${path.module}/templates/datadog-agent.yaml.tpl", {
-    location             = var.location_short,
-    environment          = var.environment,
-    datadog_site         = var.datadog_site,
-    namespace_include    = local.container_filter_include,
-    apm_ignore_resources = local.apm_ignore_resources,
+    location             = var.location_short
+    environment          = var.environment
+    datadog_site         = var.datadog_site
+    namespace_include    = local.container_filter_include
+    apm_ignore_resources = local.apm_ignore_resources
   })
 }
 
 resource "git_repository_file" "azure_config" {
-  for_each = {
-    for s in ["azure-config"] :
-    s => s
-  }
-
-  path = "platform/${var.cluster_id}/datadog-operator/azure-config.yaml"
-  content = templatefile("${path.module}/templates/azure-config.yaml.tpl", {
-    key_vault_name = var.azure_config.azure_key_vault_name,
-    tenant_id      = azurerm_user_assigned_identity.datadog.tenant_id,
-    client_id      = azurerm_user_assigned_identity.datadog.client_id,
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/datadog/manifests/azure-config.yaml"
+  content = templatefile("${path.module}/templates/datadog-manifests.yaml.tpl", {
+    key_vault_name = var.azure_config.azure_key_vault_name
+    tenant_id      = azurerm_user_assigned_identity.datadog.tenant_id
+    client_id      = azurerm_user_assigned_identity.datadog.client_id
   })
 }

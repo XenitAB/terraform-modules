@@ -22,42 +22,70 @@ terraform {
     }
     git = {
       source  = "xenitab/git"
-      version = "0.0.3"
+      version = ">=0.0.4"
     }
   }
 }
 
-resource "git_repository_file" "kustomization" {
-  path = "clusters/${var.cluster_id}/trivy.yaml"
-  content = templatefile("${path.module}/templates/kustomization.yaml.tpl", {
-    cluster_id = var.cluster_id,
+resource "git_repository_file" "trivy_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
+}
+
+resource "git_repository_file" "trivy_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
+}
+
+# App-of-apps
+resource "git_repository_file" "trivy_app" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/trivy-app.yaml"
+  content = templatefile("${path.module}/templates/trivy-app.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
   })
 }
 
 resource "git_repository_file" "trivy_operator" {
-  path = "platform/${var.cluster_id}/trivy/trivy-operator.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/templates/trivy-operator.yaml"
   content = templatefile("${path.module}/templates/trivy-operator.yaml.tpl", {
-    client_id                        = azurerm_user_assigned_identity.trivy.client_id,
-    metrics_vulnerability_id_enabled = var.metrics_vulnerability_id_enabled
+    tenant_name = var.tenant_name
+    environment = var.environment
+    client_id   = azurerm_user_assigned_identity.trivy.client_id
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
   })
 }
 
 resource "git_repository_file" "trivy" {
-  path = "platform/${var.cluster_id}/trivy/trivy.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/templates/trivy.yaml"
   content = templatefile("${path.module}/templates/trivy.yaml.tpl", {
     client_id                       = azurerm_user_assigned_identity.trivy.client_id,
-    volume_claim_storage_class_name = var.volume_claim_storage_class_name,
+    volume_claim_storage_class_name = var.volume_claim_storage_class_name
+    tenant_name                     = var.tenant_name
+    environment                     = var.environment
+    project                         = var.fleet_infra_config.argocd_project_name
+    server                          = var.fleet_infra_config.k8s_api_server_url
   })
 }
 
-resource "git_repository_file" "starboard_eporter" {
+resource "git_repository_file" "starboard_exporter" {
   for_each = {
-    for s in ["starboard_eporter"] :
+    for s in ["starboard_exporter"] :
     s => s
     if var.starboard_exporter_enabled
   }
 
-  path = "platform/${var.cluster_id}/trivy/starboard-eporter.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/templates/starboard-eporter.yaml"
   content = templatefile("${path.module}/templates/starboard-exporter.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
   })
 }

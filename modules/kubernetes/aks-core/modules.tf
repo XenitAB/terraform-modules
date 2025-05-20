@@ -1,43 +1,8 @@
-locals {
-  exclude_namespaces = [
-    "aad-pod-identity",
-    "azdo-proxy",
-    "azure-metrics",
-    "azureserviceoperator-system",
-    "calico-system",
-    "cert-manager",
-    "controle-plane-logs",
-    "datadog",
-    "external-dns",
-    "falco",
-    "flux-system",
-    "ingress-nginx",
-    "ingress-healthz",
-    "linkerd",
-    "linkerd-cni",
-    "reloader",
-    "trivy",
-    "tigera-operator",
-    "velero",
-    "grafana-agent",
-    "promtail",
-    "prometheus",
-    "node-ttl",
-    "spegel",
-    "vpa",
-  ]
-  cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
-  dns_zones = {
-    for zone in data.azurerm_dns_zone.this :
-    zone.name => zone.id
-  }
-}
-
 module "aad_pod_identity" {
   for_each = {
     for s in ["aad-pod-identity"] :
     s => s
-    if var.aad_pod_identity_enabled
+    if var.platform_config.aad_pod_identity_enabled
   }
 
   source           = "../../kubernetes/aad-pod-identity"
@@ -46,13 +11,37 @@ module "aad_pod_identity" {
   namespaces = [for ns in var.namespaces : {
     name = ns.name
   }]
+  environment        = var.environment
+  tenant_name        = var.platform_config.tenant_name
+  fleet_infra_config = var.platform_config.fleet_infra_config
+}
+
+module "argocd" {
+  depends_on = [module.karpenter]
+
+  for_each = {
+    for s in ["argocd"] :
+    s => s
+    if var.platform_config.argocd_enabled
+  }
+
+  source = "../../kubernetes/argocd"
+
+  aks_cluster_id           = data.azurerm_kubernetes_cluster.this.id
+  argocd_config            = var.argocd_config
+  cluster_id               = local.cluster_id
+  resource_group_name      = data.azurerm_resource_group.this.name
+  location                 = data.azurerm_resource_group.this.location
+  core_resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"
+  key_vault_name           = data.azurerm_key_vault.core.name
+  fleet_infra_config       = var.platform_config.fleet_infra_config
 }
 
 module "azure_metrics" {
   for_each = {
     for s in ["azure-metrics"] :
     s => s
-    if var.azure_metrics_enabled
+    if var.platform_config.azure_metrics_enabled
   }
 
   source = "../../kubernetes/azure-metrics"
@@ -67,13 +56,15 @@ module "azure_metrics" {
   oidc_issuer_url      = var.oidc_issuer_url
   resource_group_name  = data.azurerm_resource_group.this.name
   subscription_id      = data.azurerm_client_config.current.subscription_id
+  tenant_name          = var.platform_config.tenant_name
+  fleet_infra_config   = var.platform_config.fleet_infra_config
 }
 
 module "azure_policy" {
   for_each = {
     for s in ["azure_policy"] :
     s => s
-    if var.azure_policy_enabled && !var.gatekeeper_enabled
+    if var.platform_config.azure_policy_enabled && !var.platform_config.gatekeeper_enabled
   }
 
   source = "../../kubernetes/azure-policy"
@@ -83,17 +74,13 @@ module "azure_policy" {
   azure_policy_config = var.azure_policy_config
   environment         = var.environment
   location_short      = var.location_short
-
-  tenant_namespaces = [
-    for namespace in var.namespaces : namespace.name
-  ]
 }
 
 module "azure_service_operator" {
   for_each = {
     for s in ["azure_service_operator"] :
     s => s
-    if var.azure_service_operator_enabled
+    if var.platform_config.azure_service_operator_enabled
   }
 
   source = "../../kubernetes/azure-service-operator"
@@ -108,20 +95,20 @@ module "azure_service_operator" {
   oidc_issuer_url               = var.oidc_issuer_url
   subscription_id               = data.azurerm_client_config.current.subscription_id
   tenant_id                     = data.azurerm_client_config.current.tenant_id
+  tenant_name                   = var.platform_config.tenant_name
+  fleet_infra_config            = var.platform_config.fleet_infra_config
 }
 
 module "cert_manager" {
-  depends_on = [module.gateway_api, module.cert_manager_crd]
-
   for_each = {
     for s in ["cert-manager"] :
     s => s
-    if var.cert_manager_enabled
+    if var.platform_config.cert_manager_enabled
   }
 
   source = "../../kubernetes/cert-manager"
 
-  aad_groups                 = var.aad_groups
+  aad_groups                 = local.aad_groups_view
   cluster_id                 = local.cluster_id
   dns_zones                  = local.dns_zones
   global_resource_group_name = data.azurerm_resource_group.global.name
@@ -131,32 +118,19 @@ module "cert_manager" {
   oidc_issuer_url            = var.oidc_issuer_url
   resource_group_name        = data.azurerm_resource_group.this.name
   subscription_id            = data.azurerm_client_config.current.subscription_id
-  gateway_api_enabled        = var.gateway_api_enabled
+  gateway_api_enabled        = var.platform_config.gateway_api_enabled
   gateway_api_config         = var.gateway_api_config
-}
-
-module "cert_manager_crd" {
-  for_each = {
-    for s in ["cert-manager"] :
-    s => s
-    if var.cert_manager_enabled
-  }
-
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://charts.jetstack.io"
-  chart_name       = "cert-manager"
-  chart_version    = "v1.16.3"
-  values = {
-    "installCRDs" = "true"
-  }
+  tenant_name                = var.platform_config.tenant_name
+  environment                = var.environment
+  fleet_infra_config         = var.platform_config.fleet_infra_config
+  rbac_create                = var.cert_manager_config.rbac_create
 }
 
 module "control_plane_logs" {
   for_each = {
     for s in ["control_plane_logs"] :
     s => s
-    if var.control_plane_logs_enabled
+    if var.platform_config.control_plane_logs_enabled
   }
 
   source = "../../kubernetes/control-plane-logs"
@@ -172,13 +146,15 @@ module "control_plane_logs" {
   location_short      = var.location_short
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
+  tenant_name         = var.platform_config.tenant_name
+  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "datadog" {
   for_each = {
     for s in ["datadog"] :
     s => s
-    if var.datadog_enabled
+    if var.platform_config.datadog_enabled
   }
 
   source = "../../kubernetes/datadog"
@@ -196,6 +172,8 @@ module "datadog" {
   namespace_include   = var.datadog_config.namespaces
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
+  tenant_name         = var.platform_config.tenant_name
+  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "eck_operator" {
@@ -203,12 +181,15 @@ module "eck_operator" {
   for_each = {
     for s in ["eck_operator"] :
     s => s
-    if var.eck_operator_enabled
+    if var.platform_config.eck_operator_enabled
   }
 
   source                 = "../../kubernetes/eck-operator"
   cluster_id             = local.cluster_id
   eck_managed_namespaces = var.eck_operator_config.eck_managed_namespaces
+  tenant_name            = var.platform_config.tenant_name
+  environment            = var.environment
+  fleet_infra_config     = var.platform_config.fleet_infra_config
 }
 
 module "envoy_gateway" {
@@ -222,8 +203,12 @@ module "envoy_gateway" {
 
   source = "../../kubernetes/envoy-gateway"
 
+  azure_policy_enabled = var.platform_config.azure_policy_enabled
   cluster_id           = local.cluster_id
   envoy_gateway_config = var.envoy_gateway.envoy_gateway_config
+  tenant_name          = var.platform_config.tenant_name
+  environment          = var.environment
+  fleet_infra_config   = var.platform_config.fleet_infra_config
 }
 
 module "external_dns" {
@@ -232,12 +217,12 @@ module "external_dns" {
   for_each = {
     for s in ["external-dns"] :
     s => s
-    if var.external_dns_enabled
+    if var.platform_config.external_dns_enabled
   }
 
   source = "../../kubernetes/external-dns"
 
-  aad_groups                 = var.aad_groups
+  aad_groups                 = local.aad_groups_view
   cluster_id                 = local.cluster_id
   dns_provider               = "azure"
   dns_zones                  = local.dns_zones
@@ -252,29 +237,35 @@ module "external_dns" {
   txt_owner_id               = "${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
   sources                    = var.external_dns_config.sources
   extra_args                 = var.external_dns_config.extra_args
+  tenant_name                = var.platform_config.tenant_name
+  fleet_infra_config         = var.platform_config.fleet_infra_config
+  rbac_create                = var.external_dns_config.rbac_create
 }
 
 module "falco" {
   for_each = {
     for s in ["falco"] :
     s => s
-    if var.falco_enabled
+    if var.platform_config.falco_enabled
   }
 
   source = "../../kubernetes/falco"
 
-  cluster_id     = local.cluster_id
-  cilium_enabled = var.cilium_enabled
+  cluster_id         = local.cluster_id
+  cilium_enabled     = var.platform_config.cilium_enabled
+  tenant_name        = var.platform_config.tenant_name
+  environment        = var.environment
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "fluxcd" {
+  depends_on = [module.karpenter]
+
   for_each = {
     for s in ["fluxcd"] :
     s => s
-    if var.fluxcd_enabled
+    if var.platform_config.fluxcd_enabled
   }
-
-  depends_on = [module.karpenter]
 
   source = "../../kubernetes/fluxcd"
 
@@ -289,49 +280,58 @@ module "fluxcd" {
   aks_managed_identity = data.azuread_group.aks_managed_identity.id
   aks_name             = var.name
   location             = data.azurerm_resource_group.this.location
+  unique_suffix        = var.unique_suffix
   namespaces = [for ns in var.namespaces : {
     name   = ns.name
     labels = ns.labels
     fluxcd = ns.flux
   }]
+
+  providers = {
+    git = git.tenant
+  }
 }
 
 module "gatekeeper" {
   for_each = {
     for s in ["gatekeeper"] :
     s => s
-    if var.gatekeeper_enabled && !var.azure_policy_enabled
+    if var.platform_config.gatekeeper_enabled && !var.platform_config.azure_policy_enabled
   }
 
   source = "../../kubernetes/gatekeeper"
 
   cluster_id                     = local.cluster_id
-  azure_service_operator_enabled = var.azure_service_operator_enabled
+  azure_service_operator_enabled = var.platform_config.azure_service_operator_enabled
   exclude_namespaces             = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
-  mirrord_enabled                = var.mirrord_enabled
-  telepresence_enabled           = var.telepresence_enabled
+  mirrord_enabled                = var.platform_config.mirrord_enabled
+  telepresence_enabled           = var.platform_config.telepresence_enabled
+  tenant_name                    = var.platform_config.tenant_name
+  environment                    = var.environment
+  fleet_infra_config             = var.platform_config.fleet_infra_config
 }
 
 module "gateway_api" {
   for_each = {
     for s in ["gateway-api"] :
     s => s
-    if var.gateway_api_enabled
+    if var.platform_config.gateway_api_enabled
   }
 
   source = "../../kubernetes/gateway-api"
 
   cluster_id         = local.cluster_id
   gateway_api_config = var.gateway_api_config
+  tenant_name        = var.platform_config.tenant_name
+  environment        = var.environment
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "grafana_agent" {
-  depends_on = [module.grafana_agent_crd]
-
   for_each = {
     for s in ["grafana-agent"] :
     s => s
-    if var.grafana_agent_enabled
+    if var.platform_config.grafana_agent_enabled
   }
 
   source = "../../kubernetes/grafana-agent"
@@ -357,20 +357,8 @@ module "grafana_agent" {
   namespace_include       = length(var.namespaces) > 0 ? var.namespaces[*].name : []
   extra_namespaces        = var.grafana_agent_config.extra_namespaces
   include_kubelet_metrics = var.grafana_agent_config.include_kubelet_metrics
-}
-
-module "grafana_agent_crd" {
-  for_each = {
-    for s in ["grafana-agent"] :
-    s => s
-    if var.grafana_agent_enabled
-  }
-
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://grafana.github.io/helm-charts"
-  chart_name       = "grafana-agent-operator"
-  chart_version    = "0.1.5"
+  tenant_name             = var.platform_config.tenant_name
+  fleet_infra_config      = var.platform_config.fleet_infra_config
 }
 
 module "grafana_alloy" {
@@ -378,7 +366,7 @@ module "grafana_alloy" {
   for_each = {
     for s in ["grafana-alloy"] :
     s => s
-    if var.grafana_alloy_enabled
+    if var.platform_config.grafana_alloy_enabled
   }
 
   source = "../../kubernetes/grafana-alloy"
@@ -398,6 +386,8 @@ module "grafana_alloy" {
   location_short      = var.location_short
   oidc_issuer_url     = var.oidc_issuer_url
   resource_group_name = data.azurerm_resource_group.this.name
+  tenant_name         = var.platform_config.tenant_name
+  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "grafana_k8s_monitoring" {
@@ -405,7 +395,7 @@ module "grafana_k8s_monitoring" {
   for_each = {
     for s in ["grafana_k8s_monitoring"] :
     s => s
-    if var.grafana_k8s_monitoring_enabled
+    if var.platform_config.grafana_k8s_monitoring_enabled
   }
 
   source = "../../kubernetes/grafana-k8s-monitoring"
@@ -425,19 +415,21 @@ module "grafana_k8s_monitoring" {
     exclude_namespaces            = var.grafana_k8s_monitor_config.exclude_namespaces
     node_exporter_node_affinity   = var.grafana_k8s_monitor_config.node_exporter_node_affinity
   }
-
-  aad_pod_identity_enabled = var.aad_pod_identity_enabled
-  cilium_enabled           = var.cilium_enabled
-  falco_enabled            = var.falco_enabled
-  flux_enabled             = var.fluxcd_enabled
-  gatekeeper_enabled       = var.gatekeeper_enabled
-  grafana_agent_enabled    = var.grafana_agent_enabled
-  linkerd_enabled          = var.linkerd_enabled
-  node_local_dns_enabled   = var.node_local_dns_enabled
-  node_ttl_enabled         = var.node_ttl_enabled
-  promtail_enabled         = var.promtail_enabled
-  spegel_enabled           = var.spegel_enabled
-  trivy_enabled            = var.trivy_enabled
+  aad_pod_identity_enabled = var.platform_config.aad_pod_identity_enabled
+  cilium_enabled           = var.platform_config.cilium_enabled
+  falco_enabled            = var.platform_config.falco_enabled
+  gatekeeper_enabled       = var.platform_config.gatekeeper_enabled
+  grafana_agent_enabled    = var.platform_config.grafana_agent_enabled
+  linkerd_enabled          = var.platform_config.linkerd_enabled
+  node_local_dns_enabled   = var.platform_config.node_local_dns_enabled
+  node_ttl_enabled         = var.platform_config.node_ttl_enabled
+  promtail_enabled         = var.platform_config.promtail_enabled
+  spegel_enabled           = var.platform_config.spegel_enabled
+  trivy_enabled            = var.platform_config.trivy_enabled
+  tenant_name              = var.platform_config.tenant_name
+  environment              = var.environment
+  fleet_infra_config       = var.platform_config.fleet_infra_config
+  subscription_id          = data.azurerm_client_config.current.subscription_id
 }
 
 module "ingress_nginx" {
@@ -446,12 +438,12 @@ module "ingress_nginx" {
   for_each = {
     for s in ["ingress-nginx"] :
     s => s
-    if var.ingress_nginx_enabled
+    if var.platform_config.ingress_nginx_enabled
   }
 
   source = "../../kubernetes/ingress-nginx"
 
-  aad_groups            = var.aad_groups
+  aad_groups            = local.aad_groups_view
   external_dns_hostname = var.external_dns_hostname
   default_certificate = {
     enabled  = true
@@ -461,20 +453,23 @@ module "ingress_nginx" {
   private_ingress_enabled             = var.ingress_nginx_config.private_ingress_enabled
   customization                       = var.ingress_nginx_config.customization
   customization_private               = var.ingress_nginx_config.customization_private
-  linkerd_enabled                     = var.linkerd_enabled
-  datadog_enabled                     = var.datadog_enabled
+  linkerd_enabled                     = var.platform_config.linkerd_enabled
+  datadog_enabled                     = var.platform_config.datadog_enabled
   cluster_id                          = local.cluster_id
   replicas                            = var.ingress_nginx_config.replicas
   min_replicas                        = var.ingress_nginx_config.min_replicas
   nginx_healthz_ingress_hostname      = var.cert_manager_config.dns_zone[0]
   nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
+  tenant_name                         = var.platform_config.tenant_name
+  environment                         = var.environment
+  fleet_infra_config                  = var.platform_config.fleet_infra_config
 }
 
 module "karpenter" {
   for_each = {
     for s in ["karpenter"] :
     s => s
-    if var.karpenter_enabled
+    if var.platform_config.karpenter_enabled
   }
 
   source = "../../kubernetes/karpenter"
@@ -501,11 +496,25 @@ module "karpenter" {
   subscription_id     = data.azurerm_client_config.current.subscription_id
 }
 
+module "linkerd" {
+  for_each = {
+    for s in ["linkerd"] :
+    s => s
+    if var.platform_config.linkerd_enabled
+  }
+
+  cluster_id         = local.cluster_id
+  source             = "../../kubernetes/linkerd"
+  tenant_name        = var.platform_config.tenant_name
+  environment        = var.environment
+  fleet_infra_config = var.platform_config.fleet_infra_config
+}
+
 module "litmus" {
   for_each = {
     for s in ["litmus"] :
     s => s
-    if var.litmus_enabled
+    if var.platform_config.litmus_enabled
   }
 
   source = "../../kubernetes/litmus"
@@ -513,6 +522,9 @@ module "litmus" {
   azure_key_vault_name          = data.azurerm_key_vault.core.name
   cluster_id                    = local.cluster_id
   key_vault_resource_group_name = data.azurerm_key_vault.core.resource_group_name
+  tenant_name                   = var.platform_config.tenant_name
+  environment                   = var.environment
+  fleet_infra_config            = var.platform_config.fleet_infra_config
 }
 
 module "nginx_gateway_fabric" {
@@ -521,103 +533,65 @@ module "nginx_gateway_fabric" {
   for_each = {
     for s in ["nginx-gateway"] :
     s => s
-    if var.nginx_gateway_enabled
+    if var.platform_config.nginx_gateway_enabled
   }
 
   source = "../../kubernetes/nginx-gateway-fabric"
 
-  cluster_id     = local.cluster_id
-  gateway_config = var.nginx_gateway_config
-  nginx_config   = var.ingress_nginx_config.customization
-}
-
-module "popeye" {
-  for_each = {
-    for s in ["popeye"] :
-    s => s
-    if var.popeye_enabled
-  }
-
-  source = "../../kubernetes/popeye"
-
-  aks_managed_identity_id = var.cilium_enabled ? data.azurerm_kubernetes_cluster.this.identity[0].identity_ids[0] : data.azurerm_kubernetes_cluster.this.identity[0].principal_id
-  cluster_id              = local.cluster_id
-  location                = data.azurerm_key_vault.core.location
-  oidc_issuer_url         = var.oidc_issuer_url
-  popeye_config           = var.popeye_config
-  resource_group_name     = data.azurerm_resource_group.this.name
-}
-
-module "linkerd" {
-  depends_on = [module.cert_manager_crd, module.linkerd_crd]
-
-  for_each = {
-    for s in ["linkerd"] :
-    s => s
-    if var.linkerd_enabled
-  }
-
-  source = "../../kubernetes/linkerd"
-}
-
-module "linkerd_crd" {
-  source = "../../kubernetes/helm-crd"
-
-  for_each = {
-    for s in ["linkerd"] :
-    s => s
-    if var.linkerd_enabled
-  }
-
-  chart_repository = "https://helm.linkerd.io/stable"
-  chart_name       = "linkerd-crds"
-  chart_version    = "1.8.0"
-}
-
-module "node_local_dns" {
-  for_each = {
-    for s in ["node-local-dns"] :
-    s => s
-    if var.node_local_dns_enabled && !var.cilium_enabled
-  }
-
-  source = "../../kubernetes/node-local-dns"
-
-  cluster_id       = local.cluster_id
-  dns_ip           = "10.0.0.10"
-  coredns_upstream = var.coredns_upstream
-  cilium_enabled   = var.cilium_enabled
+  cluster_id         = local.cluster_id
+  gateway_config     = var.nginx_gateway_config
+  nginx_config       = var.ingress_nginx_config.customization
+  tenant_name        = var.platform_config.tenant_name
+  environment        = var.environment
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "node_ttl" {
   for_each = {
     for s in ["node-ttl"] :
     s => s
-    if var.node_ttl_enabled
+    if var.platform_config.node_ttl_enabled
   }
 
   source = "../../kubernetes/node-ttl"
 
   cluster_id                  = local.cluster_id
   status_config_map_namespace = "kube-system"
+  tenant_name                 = var.platform_config.tenant_name
+  environment                 = var.environment
+  fleet_infra_config          = var.platform_config.fleet_infra_config
+}
+
+module "popeye" {
+  for_each = {
+    for s in ["popeye"] :
+    s => s
+    if var.platform_config.popeye_enabled
+  }
+
+  source = "../../kubernetes/popeye"
+
+  aks_managed_identity_id = var.platform_config.cilium_enabled ? data.azurerm_kubernetes_cluster.this.identity[0].identity_ids[0] : data.azurerm_kubernetes_cluster.this.identity[0].principal_id
+  cluster_id              = local.cluster_id
+  location                = data.azurerm_key_vault.core.location
+  oidc_issuer_url         = var.oidc_issuer_url
+  popeye_config           = var.popeye_config
+  resource_group_name     = data.azurerm_resource_group.this.name
+  tenant_name             = var.platform_config.tenant_name
+  environment             = var.environment
+  fleet_infra_config      = var.platform_config.fleet_infra_config
 }
 
 module "prometheus" {
-  depends_on = [module.prometheus_crd]
-
   for_each = {
     for s in ["prometheus"] :
     s => s
-    if var.prometheus_enabled
+    if var.platform_config.prometheus_enabled
   }
 
   source = "../../kubernetes/prometheus"
 
-  aks_name = var.name
-  azure_config = {
-    azure_key_vault_name = var.prometheus_config.azure_key_vault_name
-  }
-
+  aks_name                        = var.name
   cluster_id                      = local.cluster_id
   cluster_name                    = "${var.name}${local.aks_name_suffix}"
   environment                     = var.environment
@@ -632,40 +606,27 @@ module "prometheus" {
   volume_claim_storage_class_name = var.prometheus_volume_claim_storage_class_name
   volume_claim_size               = var.prometheus_config.volume_claim_size
 
-  aad_pod_identity_enabled = var.aad_pod_identity_enabled
-  cilium_enabled           = var.cilium_enabled
-  falco_enabled            = var.falco_enabled
-  flux_enabled             = var.fluxcd_enabled
-  gatekeeper_enabled       = var.gatekeeper_enabled
-  grafana_agent_enabled    = var.grafana_agent_enabled
-  linkerd_enabled          = var.linkerd_enabled
-  node_local_dns_enabled   = var.node_local_dns_enabled
-  node_ttl_enabled         = var.node_ttl_enabled
-  promtail_enabled         = var.promtail_enabled
-  spegel_enabled           = var.spegel_enabled
-  trivy_enabled            = var.trivy_enabled
-  vpa_enabled              = var.vpa_enabled
-}
-
-module "prometheus_crd" {
-  for_each = {
-    for s in ["prometheus"] :
-    s => s
-    if var.prometheus_enabled
-  }
-
-  source = "../../kubernetes/helm-crd"
-
-  chart_repository = "https://prometheus-community.github.io/helm-charts"
-  chart_name       = "kube-prometheus-stack"
-  chart_version    = "42.1.1"
+  aad_pod_identity_enabled = var.platform_config.aad_pod_identity_enabled
+  cilium_enabled           = var.platform_config.cilium_enabled
+  falco_enabled            = var.platform_config.falco_enabled
+  gatekeeper_enabled       = var.platform_config.gatekeeper_enabled
+  grafana_agent_enabled    = var.platform_config.grafana_agent_enabled
+  linkerd_enabled          = var.platform_config.linkerd_enabled
+  node_local_dns_enabled   = var.platform_config.node_local_dns_enabled
+  node_ttl_enabled         = var.platform_config.node_ttl_enabled
+  promtail_enabled         = var.platform_config.promtail_enabled
+  spegel_enabled           = var.platform_config.spegel_enabled
+  trivy_enabled            = var.platform_config.trivy_enabled
+  vpa_enabled              = var.platform_config.vpa_enabled
+  tenant_name              = var.platform_config.tenant_name
+  fleet_infra_config       = var.platform_config.fleet_infra_config
 }
 
 module "promtail" {
   for_each = {
     for s in ["promtail"] :
     s => s
-    if var.promtail_enabled
+    if var.platform_config.promtail_enabled
   }
 
   source = "../../kubernetes/promtail"
@@ -683,29 +644,69 @@ module "promtail" {
   oidc_issuer_url     = var.oidc_issuer_url
   region              = var.location_short
   resource_group_name = data.azurerm_resource_group.this.name
+  tenant_name         = var.platform_config.tenant_name
+  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "rabbitmq_operator" {
   for_each = {
     for s in ["rabbitmq"] :
     s => s
-    if var.rabbitmq_enabled
+    if var.platform_config.rabbitmq_enabled
   }
 
-  source          = "../../kubernetes/rabbitmq-operator"
-  cluster_id      = local.cluster_id
-  rabbitmq_config = var.rabbitmq_config
+  source             = "../../kubernetes/rabbitmq-operator"
+  cluster_id         = local.cluster_id
+  rabbitmq_config    = var.rabbitmq_config
+  tenant_name        = var.platform_config.tenant_name
+  environment        = var.environment
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "reloader" {
   for_each = {
     for s in ["reloader"] :
     s => s
-    if var.reloader_enabled
+    if var.platform_config.reloader_enabled
   }
 
-  source     = "../../kubernetes/reloader"
-  cluster_id = local.cluster_id
+  source             = "../../kubernetes/reloader"
+  cluster_id         = local.cluster_id
+  tenant_name        = var.platform_config.tenant_name
+  environment        = var.environment
+  fleet_infra_config = var.platform_config.fleet_infra_config
+}
+
+module "spegel" {
+  for_each = {
+    for s in ["spegel"] :
+    s => s
+    if var.platform_config.spegel_enabled
+  }
+
+  source = "../../kubernetes/spegel"
+
+  cluster_id         = local.cluster_id
+  private_registry   = "https://${data.azurerm_container_registry.acr.login_server}"
+  tenant_name        = var.platform_config.tenant_name
+  environment        = var.environment
+  fleet_infra_config = var.platform_config.fleet_infra_config
+}
+
+module "telepresence" {
+  for_each = {
+    for s in ["telepresence"] :
+    s => s
+    if var.platform_config.telepresence_enabled
+  }
+
+  source = "../../kubernetes/telepresence"
+
+  cluster_id          = local.cluster_id
+  telepresence_config = var.telepresence_config
+  tenant_name         = var.platform_config.tenant_name
+  environment         = var.environment
+  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "trivy" {
@@ -713,31 +714,32 @@ module "trivy" {
   for_each = {
     for s in ["trivy"] :
     s => s
-    if var.trivy_enabled && !var.defender_enabled
+    if var.platform_config.trivy_enabled && !var.platform_config.defender_enabled
   }
 
   source = "../../kubernetes/trivy"
 
-  acr_name_override                = var.acr_name_override
-  aks_managed_identity             = data.azuread_group.aks_managed_identity.id
-  aks_name                         = var.name
-  cluster_id                       = local.cluster_id
-  environment                      = var.environment
-  location                         = data.azurerm_resource_group.this.location
-  location_short                   = var.location_short
-  oidc_issuer_url                  = var.oidc_issuer_url
-  resource_group_name              = data.azurerm_resource_group.this.name
-  metrics_vulnerability_id_enabled = var.trivy_config.metrics_vulnerability_id_enabled
-  starboard_exporter_enabled       = var.trivy_config.starboard_exporter_enabled
-  unique_suffix                    = var.unique_suffix
-  volume_claim_storage_class_name  = var.trivy_volume_claim_storage_class_name
+  acr_name_override               = var.acr_name_override
+  aks_managed_identity            = data.azuread_group.aks_managed_identity.id
+  aks_name                        = var.name
+  cluster_id                      = local.cluster_id
+  environment                     = var.environment
+  location                        = data.azurerm_resource_group.this.location
+  location_short                  = var.location_short
+  oidc_issuer_url                 = var.oidc_issuer_url
+  resource_group_name             = data.azurerm_resource_group.this.name
+  starboard_exporter_enabled      = var.trivy_config.starboard_exporter_enabled
+  unique_suffix                   = var.unique_suffix
+  volume_claim_storage_class_name = var.trivy_volume_claim_storage_class_name
+  tenant_name                     = var.platform_config.tenant_name
+  fleet_infra_config              = var.platform_config.fleet_infra_config
 }
 
 module "velero" {
   for_each = {
     for s in ["velero"] :
     s => s
-    if var.velero_enabled
+    if var.platform_config.velero_enabled
   }
 
   source = "../../kubernetes/velero"
@@ -754,42 +756,21 @@ module "velero" {
   subscription_id     = data.azurerm_client_config.current.subscription_id
   unique_suffix       = var.unique_suffix
   environment         = var.environment
+  tenant_name         = var.platform_config.tenant_name
+  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "vpa" {
   for_each = {
     for s in ["vpa"] :
     s => s
-    if var.vpa_enabled
+    if var.platform_config.vpa_enabled
   }
 
   source = "../../kubernetes/vpa"
 
-  cluster_id = local.cluster_id
-}
-
-module "spegel" {
-  for_each = {
-    for s in ["spegel"] :
-    s => s
-    if var.spegel_enabled
-  }
-
-  source = "../../kubernetes/spegel"
-
-  cluster_id       = local.cluster_id
-  private_registry = "https://${data.azurerm_container_registry.acr.login_server}"
-}
-
-module "telepresence" {
-  for_each = {
-    for s in ["telepresence"] :
-    s => s
-    if var.telepresence_enabled
-  }
-
-  source = "../../kubernetes/telepresence"
-
-  cluster_id          = local.cluster_id
-  telepresence_config = var.telepresence_config
+  cluster_id         = local.cluster_id
+  tenant_name        = var.platform_config.tenant_name
+  environment        = var.environment
+  fleet_infra_config = var.platform_config.fleet_infra_config
 }

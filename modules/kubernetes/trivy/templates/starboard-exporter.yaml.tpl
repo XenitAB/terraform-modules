@@ -1,34 +1,38 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: starboard-exporter
-  namespace: trivy
+  namespace: ${tenant_name}-${environment}
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    argocd.argoproj.io/sync-wave: "2"
 spec:
-  interval: 1m0s
-  url: "https://giantswarm.github.io/giantswarm-catalog/"
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: starboard-exporter
-  namespace: trivy
-spec:
-  chart:
-    spec:
-      chart: starboard-exporter
-      sourceRef:
-        kind: HelmRepository
-        name: starboard-exporter
-      version: v0.8.1
-  interval: 1m0s
-  values:
-    global:
-      podSecurityStandards:
-        # Don't create a psp
-        enforced: true
-    monitoring:
-      grafanaDashboard:
-        # Don't create Grafana dashboard ConfigMap
-        enabled: false
-    networkpolicy:
-      enabled: false
+  project: ${project}
+  destination:
+    server: ${server}
+    namespace: trivy
+  revisionHistoryLimit: 5
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+    - ApplyOutOfSyncOnly=true
+  source:
+    repoURL: https://giantswarm.github.io/giantswarm-catalog
+    targetRevision: v0.8.1
+    chart: starboard-exporter
+    helm:
+      valuesObject:
+        global:
+          podSecurityStandards:
+            # Don't create a psp
+            enforced: true
+        monitoring:
+          grafanaDashboard:
+            # Don't create Grafana dashboard ConfigMap
+            enabled: false
+        networkpolicy:
+          enabled: false

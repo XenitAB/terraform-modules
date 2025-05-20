@@ -15,7 +15,6 @@ spec:
       - datadog
       - external-dns
       - falco
-      - flux-system
       - ingress-nginx
       - prometheus
       - reloader

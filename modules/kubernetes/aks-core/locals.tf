@@ -10,6 +10,7 @@ locals {
     "external-dns",
     "falco",
     "flux-system",
+    "grafana-k8s-monitoring",
     "ingress-nginx",
     "linkerd",
     "linkerd-cni",

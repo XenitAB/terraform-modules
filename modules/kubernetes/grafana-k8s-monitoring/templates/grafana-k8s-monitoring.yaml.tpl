@@ -74,77 +74,19 @@ spec:
               enabled: true
         clusterMetrics:
           enabled: true
-    clusterMetrics:
-      enabled: true
-      %{ if length(node_exporter_node_affinity) > 0 }
-      node-exporter:
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    %{~ for key, value in node_exporter_node_affinity ~}
-                    - key: ${key}
-                      operator: NotIn
-                      values:
-                        - "${value}"
-                    %{~ endfor ~}
-      %{ endif }
-      kube-state-metrics:
-      %{ if length(exclude_namespaces) > 0 }
-        extraMetricProcessingRules: |-
-          rule {
-            source_labels = ["namespace"]
-            regex = "${join("|", exclude_namespaces)}"
-            action = "drop"
-          }
-      %{ endif }
-        podAnnotations: {kubernetes.azure.com/set-kube-service-host-fqdn: "true"}
-      opencost:
-        enabled: false
-      kepler:
-        enabled: true
-    annotationAutodiscovery:
-      enabled: true
-    prometheusOperatorObjects:
-      crds:
-        deploy: true
-      enabled: true
-      podMonitors:
-        enabled: true
-        excludeNamespaces: 
-      %{ for ns in exclude_namespaces ~}
-    - ${ns}
-      %{ endfor }
-      serviceMonitors:
-        enabled: true
-        excludeNamespaces: 
-      %{ for ns in exclude_namespaces ~}
-    - ${ns}
-      %{ endfor }
-    clusterEvents:
-      enabled: true
-
-    podLogs:
-      enabled: true
-      %{ if length(exclude_namespaces) > 0 }
-      extraDiscoveryRules: |-
-        rule {
-          source_labels = ["__meta_kubernetes_namespace"]
-          regex = "${join("|", exclude_namespaces)}"
-          action = "drop"
-        }
-      %{ endif }
-      excludeNamespaces: 
-    %{ for ns in exclude_namespaces ~}
-   - ${ns}
-    %{ endfor }
-
-    applicationObservability:
-      enabled: true
-      receivers:
-        otlp:
-          grpc:
+          kube-state-metrics:
+          %{ if length(exclude_namespaces) > 0 }
+            extraMetricProcessingRules: |-
+              rule {
+                source_labels = ["namespace"]
+                regex = "${join("|", exclude_namespaces)}"
+                action = "drop"
+              }
+          %{ endif }
+            podAnnotations: {kubernetes.azure.com/set-kube-service-host-fqdn: "true"}
+          opencost:
+            enabled: false
+          kepler:
             enabled: true
         annotationAutodiscovery:
           enabled: true

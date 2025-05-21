@@ -12,6 +12,12 @@ controller:
   env:
     - name: ARGOCD_ENABLE_K8S_EVENTS
       value: "none"
+    - name: ARGOCD_CONTROLLER_REPLICAS
+      value: "${controller_num_shards}"
+    - name: ARGOCD_K8S_CLIENT_QPS
+      value: "${argocd_k8s_client_qps}"
+    - name: ARGOCD_K8S_CLIENT_BURST
+      value: "${argocd_k8s_client_burst}"
   podLabels:
     azure.workload.identity/use: "true" 
   serviceAccount:
@@ -157,7 +163,7 @@ configs:
     # diff cache is unavailable).
     controller.diff.server.side: "true"
     # Number of application operation processors (default 10)
-    controller.operation.processors: "25"
+    controller.operation.processors: "100"
     # Number of application status processors (default 20)
     controller.status.processors: "50"
     # Specifies exponential backoff timeout parameters between application self heal attempts

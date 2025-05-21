@@ -89,11 +89,11 @@ resource "helm_release" "argocd" {
   values = [templatefile("${path.module}/templates/argocd-values.yaml.tpl", {
     client_id                       = azurerm_user_assigned_identity.argocd.client_id
     tenant_id                       = azurerm_user_assigned_identity.argocd.tenant_id
-    controller_min_replicas         = var.argocd_config.controller_min_replicas
-    server_min_replicas             = var.argocd_config.server_min_replicas
-    repo_server_min_replicas        = var.argocd_config.repo_server_min_replicas
+    controller_replicas             = var.argocd_config.controller_replicas
+    server_replicas                 = var.argocd_config.server_replicas
+    repo_server_replicas            = var.argocd_config.repo_server_replicas
     application_set_replicas        = var.argocd_config.application_set_replicas
-    controller_num_shards           = var.argocd_config.controller_num_shards
+    dynamic_sharding                = var.argocd_config.dynamic_sharding
     controller_status_processors    = var.argocd_config.controller_status_processors
     controller_operation_processors = var.argocd_config.controller_operation_processors
     argocd_k8s_client_qps           = var.argocd_config.argocd_k8s_client_qps

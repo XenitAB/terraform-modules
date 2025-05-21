@@ -143,9 +143,45 @@ configs:
       return hs
     resource.exclusions: |
       - apiGroups:
+        - "aadpodidentity.k8s.io"
+        kinds:
+        - AzureAssignedIdentity
+        - AzureIdentity
+        - AzureIdentityBinding
+        - AzurePodIdentityException
+      - apiGroups:
+        - "acme.cert-manager.io"
+        kinds:
+        - Challenge
+        - Order
+      - apiGroups:
         - "aquasecurity.github.io"
         kinds:
+        - ClusterSbomReport
+        - ExposedSecretReport
+        - SbomReport
         - VulnerabilityReport
+      - apiGroups:
+        - certificates.k8s.io
+        kinds:
+        - CertificateSigningRequest
+      - apiGroups:
+        - cert-manager.io
+        kinds:
+        - CertificateRequest
+      - apiGroups:
+        - cilium.io
+        kinds:
+        - CiliumIdentity
+        - CiliumEndpoint
+        - CiliumEndpointSlice
+      - apiGroups:
+        - ''
+        - discovery.k8s.io
+        kinds:
+        - Endpoints
+        - EndpointSlice
+
     # The maximum size of the payload that can be sent to the webhook server.
     webhook.maxPayloadSizeMB: "10"
 

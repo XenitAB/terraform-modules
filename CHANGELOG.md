@@ -13,12 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: enable tuning of vital ArgoCD parameters by @landerss1 in [#1344](https://github.com/XenitAB/terraform-modules/pulls/1344)
 - Feat: giving flux acr permissions by @optocoupler in [#1335](https://github.com/XenitAB/terraform-modules/pulls/1335)
 - Feat: make it possible to enable ACR admin account by @landerss1 in [#1334](https://github.com/XenitAB/terraform-modules/pulls/1334)
 
 
 
 ### 🐛 Bug Fixes
+- Fix: add grafana-k8s-monitoring as a gatekeeper excluded namespace by @landerss1 in [#1342](https://github.com/XenitAB/terraform-modules/pulls/1342)
+- Fix: linkerd template indentation and gatekeeper exclusion by @landerss1 in [#1341](https://github.com/XenitAB/terraform-modules/pulls/1341)
+- Fix: broken grafana-k8s-monitoring template by @landerss1 in [#1340](https://github.com/XenitAB/terraform-modules/pulls/1340)
 
 
 

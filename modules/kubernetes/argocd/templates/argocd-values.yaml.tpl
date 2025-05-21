@@ -18,8 +18,8 @@ controller:
     - name: ARGOCD_K8S_CLIENT_BURST
       value: "${argocd_k8s_client_burst}"
   pdb:
-    enabled:
-      minAvailable: 1
+    enabled: true
+    minAvailable: 1
   podLabels:
     azure.workload.identity/use: "true" 
   serviceAccount:

@@ -13,6 +13,7 @@ locals {
     "ingress-nginx",
     "linkerd",
     "linkerd-cni",
+    "linkerd-viz",
     "reloader",
     "trivy",
     "tigera-operator",

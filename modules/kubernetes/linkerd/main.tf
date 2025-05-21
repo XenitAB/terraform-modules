@@ -239,8 +239,8 @@ resource "helm_release" "linkerd_extras" {
 resource "git_repository_file" "linkerd" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd/templates/linkerd.yaml"
   content = templatefile("${path.module}/templates/linkerd.yaml.tpl", {
-    linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem)
-    webhook_issuer_pem       = indent(4, tls_self_signed_cert.webhook_issuer_tls.cert_pem)
+    linkerd_trust_anchor_pem = indent(8, tls_self_signed_cert.linkerd_trust_anchor.cert_pem)
+    webhook_issuer_pem       = indent(10, tls_self_signed_cert.webhook_issuer_tls.cert_pem)
     tenant_name              = var.tenant_name
     environment              = var.environment
     project                  = var.fleet_infra_config.argocd_project_name
@@ -251,11 +251,9 @@ resource "git_repository_file" "linkerd" {
 resource "git_repository_file" "linkerd_viz" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd/templates/linkerd-viz.yaml"
   content = templatefile("${path.module}/templates/linkerd-viz.yaml.tpl", {
-    linkerd_trust_anchor_pem = indent(2, tls_self_signed_cert.linkerd_trust_anchor.cert_pem)
-    webhook_issuer_pem       = indent(4, tls_self_signed_cert.webhook_issuer_tls.cert_pem)
-    tenant_name              = var.tenant_name
-    environment              = var.environment
-    project                  = var.fleet_infra_config.argocd_project_name
-    server                   = var.fleet_infra_config.k8s_api_server_url
+    tenant_name = var.tenant_name
+    environment = var.environment
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
   })
 }

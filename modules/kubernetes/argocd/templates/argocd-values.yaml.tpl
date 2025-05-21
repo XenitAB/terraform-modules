@@ -1,11 +1,22 @@
 crds:
   keep: true
 
+redis:
+  enabled: true
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
 redis-ha:
   enabled: false
   replicas: 2
   haproxy:
     enabled: false
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
 
 controller:
   replicas: ${controller_replicas}
@@ -17,6 +28,10 @@ controller:
       value: "${argocd_k8s_client_qps}"
     - name: ARGOCD_K8S_CLIENT_BURST
       value: "${argocd_k8s_client_burst}"
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
   pdb:
     enabled: true
     minAvailable: 1
@@ -51,6 +66,14 @@ repoServer:
   env:
     - name: ARGOCD_GIT_ATTEMPTS_COUNT
       value: "3"
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+notifications:
+  metrics:
+    enabled: true
 
 applicationSet:
   replicas: ${application_set_replicas}
@@ -80,6 +103,10 @@ server:
         secretName: argocd-tls
   log:
     level: debug
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
   podLabels:
     azure.workload.identity/use: "true" 
   serviceAccount:

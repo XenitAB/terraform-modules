@@ -8,17 +8,24 @@ redis-ha:
     enabled: false
 
 controller:
-  replicas: ${controller_min_replicas}
+  replicas: ${controller_replicas}
+  dynamicClusterDistribution: ${dynamic_sharding}
   env:
     - name: ARGOCD_ENABLE_K8S_EVENTS
       value: "none"
+    - name: ARGOCD_K8S_CLIENT_QPS
+      value: "${argocd_k8s_client_qps}"
+    - name: ARGOCD_K8S_CLIENT_BURST
+      value: "${argocd_k8s_client_burst}"
+  pdb:
+    enabled: true
+    minAvailable: 1
   podLabels:
     azure.workload.identity/use: "true" 
   serviceAccount:
     annotations:
       azure.workload.identity/client-id: "${client_id}"
       azure.workload.identity/tenant-id: "${tenant_id}"
-  replicas: ${controller_min_replicas}
   volumes:
   - name: azure-federated-tokens
     projected:
@@ -38,9 +45,9 @@ controller:
     readOnly: true
 
 repoServer:
+  replicas: ${repo_server_replicas}
   autoscaling:
     enabled: true
-    minReplicas: ${repo_server_min_replicas}
   env:
     - name: ARGOCD_GIT_ATTEMPTS_COUNT
       value: "3"
@@ -56,9 +63,9 @@ global:
     create: true
 
 server:
+  replicas: ${server_replicas}
   autoscaling:
     enabled: true
-    minReplicas: ${server_min_replicas}
   ingress:
     enabled: true
     ingressClassName: nginx
@@ -157,9 +164,9 @@ configs:
     # diff cache is unavailable).
     controller.diff.server.side: "true"
     # Number of application operation processors (default 10)
-    controller.operation.processors: "25"
+    controller.operation.processors: "${controller_operation_processors}"
     # Number of application status processors (default 20)
-    controller.status.processors: "50"
+    controller.status.processors: "${controller_status_processors}"
     # Specifies exponential backoff timeout parameters between application self heal attempts
     controller.self.heal.timeout.seconds: "5"
     controller.self.heal.backoff.factor: "3"

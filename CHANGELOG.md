@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: enable argocd metrics by @landerss1 in [#1347](https://github.com/XenitAB/terraform-modules/pulls/1347)
 - Feat: enable tuning of vital ArgoCD parameters by @landerss1 in [#1344](https://github.com/XenitAB/terraform-modules/pulls/1344)
 - Feat: giving flux acr permissions by @optocoupler in [#1335](https://github.com/XenitAB/terraform-modules/pulls/1335)
 - Feat: make it possible to enable ACR admin account by @landerss1 in [#1334](https://github.com/XenitAB/terraform-modules/pulls/1334)
@@ -20,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: restore flux related policies by @landerss1 in [#1349](https://github.com/XenitAB/terraform-modules/pulls/1349)
+- Fix: linkerd chart indentation errors by @landerss1 in [#1348](https://github.com/XenitAB/terraform-modules/pulls/1348)
 - Fix: add grafana-k8s-monitoring as a gatekeeper excluded namespace by @landerss1 in [#1342](https://github.com/XenitAB/terraform-modules/pulls/1342)
 - Fix: linkerd template indentation and gatekeeper exclusion by @landerss1 in [#1341](https://github.com/XenitAB/terraform-modules/pulls/1341)
 - Fix: broken grafana-k8s-monitoring template by @landerss1 in [#1340](https://github.com/XenitAB/terraform-modules/pulls/1340)
@@ -27,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: upgrade argocd chart to 8.0.6 by @landerss1 in [#1345](https://github.com/XenitAB/terraform-modules/pulls/1345)
 - Chore: upgrade node-ttl to v0.0.9 by @landerss1 in [#1333](https://github.com/XenitAB/terraform-modules/pulls/1333)
 - Chore: upgrade git-auth-proxy to latest version by @landerss1 in [#1330](https://github.com/XenitAB/terraform-modules/pulls/1330)
 - Chore: upgrade node-ttl to latest version by @landerss1 in [#1328](https://github.com/XenitAB/terraform-modules/pulls/1328)

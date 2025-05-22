@@ -201,6 +201,162 @@ resource "azurerm_policy_definition" "k8s_secrets_store_csi_unique_volume" {
     PARAMETERS
 }
 
+resource "azurerm_policy_definition" "flux_disable_cross_namespace_source" {
+  name         = "FluxDisableCrossNamespaceSource"
+  display_name = "Flux should disable cross namespace source"
+  policy_type  = "Custom"
+  mode         = "Microsoft.Kubernetes.Data"
+
+  metadata = <<METADATA
+    {
+      "category": "XKS"
+    }
+    METADATA
+
+  policy_rule = <<POLICY_RULE
+    {
+      "if": {
+        "field": "type",
+        "in": [
+          "Microsoft.ContainerService/managedClusters"
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "templateInfo": {
+            "sourceType": "Base64Encoded",
+            "content": "${local.flux_disable_cross_namespace_source}"
+          },
+          "apiGroups": [
+            "helm.toolkit.fluxcd.io",
+            "kustomize.toolkit.fluxcd.io"
+          ],
+          "kinds": [
+            "HelmRelease",
+            "Kustomization"
+          ],
+          "namespaces": "[parameters('namespaces')]",
+          "excludedNamespaces": "[parameters('excludedNamespaces')]"
+        }
+      }
+    }
+    POLICY_RULE
+
+  # Not including labelSelector parameter
+  parameters = <<PARAMETERS
+    {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
+        },
+        "allowedValues": [
+          "audit",
+          "deny",
+          "disabled"
+        ],
+        "defaultValue": "deny"
+      },
+      "excludedNamespaces": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Namespace exclusions",
+          "description": "List of Kubernetes namespaces to exclude from policy evaluation."
+        },
+        "defaultValue": []
+      },
+      "namespaces": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Namespace inclusions",
+          "description": "List of Kubernetes namespaces to only include in policy evaluation. An empty list means the policy is applied to all resources in all namespaces."
+        },
+        "defaultValue": []
+      }
+    }
+    PARAMETERS
+}
+
+resource "azurerm_policy_definition" "flux_require_service_account" {
+  name         = "FluxRequireServiceAccount"
+  display_name = "Flux requires service account"
+  policy_type  = "Custom"
+  mode         = "Microsoft.Kubernetes.Data"
+
+  metadata = <<METADATA
+    {
+      "category": "XKS"
+    }
+    METADATA
+
+  policy_rule = <<POLICY_RULE
+    {
+      "if": {
+        "field": "type",
+        "in": [
+          "Microsoft.ContainerService/managedClusters"
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "templateInfo": {
+            "sourceType": "Base64Encoded",
+            "content":  "${local.flux_require_service_account}" 
+          },
+          "apiGroups": [
+            "helm.toolkit.fluxcd.io",
+            "kustomize.toolkit.fluxcd.io"
+          ],
+          "kinds": [
+            "HelmRelease",
+            "Kustomization"
+          ],
+          "namespaces": "[parameters('namespaces')]",
+          "excludedNamespaces": "[parameters('excludedNamespaces')]"
+        }
+      }
+    }
+    POLICY_RULE
+
+  # Not including labelSelector parameter
+  parameters = <<PARAMETERS
+    {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
+        },
+        "allowedValues": [
+          "audit",
+          "deny",
+          "disabled"
+        ],
+        "defaultValue": "deny"
+      },
+      "excludedNamespaces": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Namespace exclusions",
+          "description": "List of Kubernetes namespaces to exclude from policy evaluation."
+        },
+        "defaultValue": []
+      },
+      "namespaces": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Namespace inclusions",
+          "description": "List of Kubernetes namespaces to only include in policy evaluation. An empty list means the policy is applied to all resources in all namespaces."
+        },
+        "defaultValue": []
+      }
+    }
+    PARAMETERS
+}
+
 resource "azurerm_policy_definition" "k8s_pod_priority_class" {
   name         = "K8sPodPriorityClass"
   display_name = "K8s pods should use allowed priority classes"
@@ -567,6 +723,37 @@ resource "azurerm_policy_set_definition" "xks" {
   }
 
   policy_definition_reference {
+    policy_definition_id = azurerm_policy_definition.flux_require_service_account.id
+    parameter_values     = <<VALUE
+    {
+      "effect": {
+        "value": "deny"
+      },
+      "namespaces": {
+        "value": ${jsonencode(var.tenant_namespaces)}
+      },
+      "excludedNamespaces": {
+        "value": "[concat(parameters('excludedNamespaces'),createArray('ambassador','azureserviceoperator-system'))]"
+      }
+    }
+    VALUE
+  }
+
+  policy_definition_reference {
+    policy_definition_id = azurerm_policy_definition.flux_disable_cross_namespace_source.id
+    parameter_values     = <<VALUE
+    {
+      "effect": {
+        "value": "deny"
+      },
+      "excludedNamespaces": {
+        "value": "[concat(parameters('excludedNamespaces'),createArray('flux-system'))]"
+      }
+    }
+    VALUE
+  }
+
+  policy_definition_reference {
     policy_definition_id = azurerm_policy_definition.k8s_block_node_port.id
     parameter_values     = <<VALUE
     {
@@ -653,7 +840,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azure-metrics','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','ingress-nginx','prometheus','reloader','spegel','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azure-metrics','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','vpa'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -686,7 +873,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azad-kube-proxy','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','ingress-nginx','node-ttl','prometheus','reloader','spegel','trivy','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azad-kube-proxy','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','node-ttl','prometheus','reloader','spegel','trivy','vpa'))]"
       },
        "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -803,7 +990,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('requiredDropCapabilities')]"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','azure-metrics','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','ingress-nginx','ingress-healthz','prometheus','reloader','spegel','trivy','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','azure-metrics','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','ingress-healthz','prometheus','reloader','spegel','trivy','vpa'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"

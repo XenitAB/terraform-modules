@@ -94,6 +94,26 @@ spec:
       - Pod
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: FluxRequireServiceAccount
+metadata:
+  name: require-service-account
+spec:
+  enforcementAction: deny
+  match:
+    excludedNamespaces:
+    - ambassador
+    - flux-system
+    kinds:
+    - apiGroups:
+      - helm.toolkit.fluxcd.io
+      kinds:
+      - HelmRelease
+    - apiGroups:
+      - kustomize.toolkit.fluxcd.io
+      kinds:
+      - Kustomization
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPodPriorityClass
 metadata:
   name: pod-priority-class
@@ -196,6 +216,25 @@ spec:
       - ""
       kinds:
       - Pod
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: FluxDisableCrossNamespaceSource
+metadata:
+  name: disable-cross-namespace-source
+spec:
+  enforcementAction: deny
+  match:
+    excludedNamespaces:
+    - flux-system
+    kinds:
+    - apiGroups:
+      - helm.toolkit.fluxcd.io
+      kinds:
+      - HelmRelease
+    - apiGroups:
+      - kustomize.toolkit.fluxcd.io
+      kinds:
+      - Kustomization
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: AzureIdentityFormat

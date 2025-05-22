@@ -74,6 +74,9 @@ module "azure_policy" {
   azure_policy_config = var.azure_policy_config
   environment         = var.environment
   location_short      = var.location_short
+  tenant_namespaces = [
+    for namespace in var.namespaces : namespace.name
+  ]
 }
 
 module "azure_service_operator" {

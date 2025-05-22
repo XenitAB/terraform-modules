@@ -239,8 +239,8 @@ resource "helm_release" "linkerd_extras" {
 resource "git_repository_file" "linkerd" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/linkerd/templates/linkerd.yaml"
   content = templatefile("${path.module}/templates/linkerd.yaml.tpl", {
-    linkerd_trust_anchor_pem = indent(8, tls_self_signed_cert.linkerd_trust_anchor.cert_pem)
-    webhook_issuer_pem       = indent(10, tls_self_signed_cert.webhook_issuer_tls.cert_pem)
+    linkerd_trust_anchor_pem = indent(10, tls_self_signed_cert.linkerd_trust_anchor.cert_pem)
+    webhook_issuer_pem       = indent(12, tls_self_signed_cert.webhook_issuer_tls.cert_pem)
     tenant_name              = var.tenant_name
     environment              = var.environment
     project                  = var.fleet_infra_config.argocd_project_name

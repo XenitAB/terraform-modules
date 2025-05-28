@@ -1,10 +1,56 @@
-variable "aks_automation_enabled" {
-  description = "Should AKS automation be enabled"
+variable "aad_groups" {
+  description = "Configuration for Azure AD Groups (AAD Groups)"
+  type = object({
+    view = map(any)
+    edit = map(any)
+    cluster_admin = object({
+      id   = string
+      name = string
+    })
+    cluster_view = object({
+      id   = string
+      name = string
+    })
+    aks_managed_identity = object({
+      id   = string
+      name = string
+    })
+  })
+}
+
+variable "add_default_security_lb_rule" {
   type        = bool
+  description = "Should default LB rule (allow internat to azure lb ips) be applied to NSG?"
   default     = false
 }
 
-# Monthly occurence currently not supported
+variable "additonal_security_rules" {
+  description = "Rules for trafic in the NSG associated to AKS"
+  type = list(object({
+    name                       = string
+    priority                   = number
+    direction                  = string
+    access                     = string
+    protocol                   = string
+    source_port_range          = string
+    destination_port_range     = string
+    source_address_prefix      = string
+    destination_address_prefix = string
+  }))
+  default = []
+}
+
+variable "aks_audit_log_retention" {
+  description = "The aks audit log retention in days, 0 = infinite"
+  type        = number
+  default     = 30
+}
+
+variable "aks_authorized_ips" {
+  description = "Authorized IPs to access AKS API"
+  type        = list(string)
+}
+
 variable "aks_automation_config" {
   description = "AKS automation configuration"
   type = object({
@@ -40,81 +86,10 @@ variable "aks_automation_config" {
   }
 }
 
-variable "notification_email" {
-  description = "Where to send email alerts"
-  type        = string
-  default     = "DG-Team-DevOps@xenit.se"
-}
-
-variable "aks_joblogs_retention_days" {
-  description = "How many days to keep logs from automation jobs"
-  type        = number
-  default     = 7
-}
-
-variable "location" {
-  description = "The Azure region"
-  type        = string
-  default     = "West Europe"
-}
-
-variable "location_short" {
-  description = "The Azure region short name"
-  type        = string
-}
-
-variable "environment" {
-  description = "The environment name to use for the deploy"
-  type        = string
-}
-
-variable "name" {
-  description = "The commonName to use for the deploy"
-  type        = string
-}
-
-variable "unique_suffix" {
-  description = "Unique suffix that is used in globally unique resources names"
-  type        = string
-}
-
-variable "group_name_separator" {
-  description = "Separator for group names"
-  type        = string
-  default     = "-"
-}
-
-variable "azure_ad_group_prefix" {
-  description = "Prefix for Azure AD Groups"
-  type        = string
-  default     = "az"
-}
-
-variable "subscription_name" {
-  description = "The commonName for the subscription"
-  type        = string
-}
-
-variable "core_name" {
-  description = "The commonName for the core infrastructure"
-  type        = string
-}
-
-variable "aks_name_suffix" {
-  description = "The suffix for the Azure Kubernetes Service (AKS) clusters"
-  type        = number
-}
-
-variable "aks_default_node_pool_vm_size" {
-  description = "The VM size of the AKS clusters default node pool. Do not override unless explicitly required."
-  type        = string
-  default     = "Standard_D2ds_v5"
-}
-
-variable "aks_default_node_pool_zones" {
-  description = "The default node pool zones."
-  type        = list(string)
-  default     = ["1", "2", "3"]
+variable "aks_automation_enabled" {
+  description = "Should AKS automation be enabled"
+  type        = bool
+  default     = false
 }
 
 variable "aks_config" {
@@ -127,6 +102,7 @@ variable "aks_config" {
     # see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md#configuration
     priority_expander_config = optional(map(list(string)))
     node_pools = list(object({
+      subnet_name       = optional(string, "")
       name              = string
       version           = string
       vm_size           = string
@@ -221,26 +197,27 @@ variable "aks_cost_analysis_enabled" {
   default     = false
 }
 
-variable "alerts_enabled" {
-  description = "If metric alerts on audit logs are enabled"
-  type        = bool
-  default     = false
-}
-
-variable "azure_policy_enabled" {
-  description = "If the Azure Policy for Kubernetes add-on should be enabled"
-  type        = bool
-  default     = false
-}
-
-variable "ssh_public_key" {
-  description = "SSH public key to add to servers"
+variable "aks_default_node_pool_vm_size" {
+  description = "The VM size of the AKS clusters default node pool. Do not override unless explicitly required."
   type        = string
+  default     = "Standard_D2ds_v5"
 }
 
-variable "aks_authorized_ips" {
-  description = "Authorized IPs to access AKS API"
+variable "aks_default_node_pool_zones" {
+  description = "The default node pool zones."
   type        = list(string)
+  default     = ["1", "2", "3"]
+}
+
+variable "aks_joblogs_retention_days" {
+  description = "How many days to keep logs from automation jobs"
+  type        = number
+  default     = 7
+}
+
+variable "aks_name_suffix" {
+  description = "The suffix for the Azure Kubernetes Service (AKS) clusters"
+  type        = number
 }
 
 variable "aks_public_ip_prefix_id" {
@@ -248,53 +225,8 @@ variable "aks_public_ip_prefix_id" {
   type        = string
 }
 
-variable "aad_groups" {
-  description = "Configuration for Azure AD Groups (AAD Groups)"
-  type = object({
-    view = map(any)
-    edit = map(any)
-    cluster_admin = object({
-      id   = string
-      name = string
-    })
-    cluster_view = object({
-      id   = string
-      name = string
-    })
-    aks_managed_identity = object({
-      id   = string
-      name = string
-    })
-  })
-}
-
-variable "namespaces" {
-  description = "The namespaces that should be created in Kubernetes"
-  type = list(
-    object({
-      name = string
-    })
-  )
-}
-
-variable "aks_audit_log_retention" {
-  description = "The aks audit log retention in days, 0 = infinite"
-  type        = number
-  default     = 30
-}
-
-variable "log_eventhub_name" {
-  description = "The eventhub name for k8s logs"
-  type        = string
-}
-
-variable "log_eventhub_authorization_rule_id" {
-  description = "The authoritzation rule id for event hub"
-  type        = string
-}
-
-variable "defender_enabled" {
-  description = "If Defender for Containers should be enabled"
+variable "alerts_enabled" {
+  description = "If metric alerts on audit logs are enabled"
   type        = bool
   default     = false
 }
@@ -318,6 +250,29 @@ variable "audit_config" {
   }
 }
 
+variable "azure_ad_group_prefix" {
+  description = "Prefix for Azure AD Groups"
+  type        = string
+  default     = "az"
+}
+
+variable "azure_policy_enabled" {
+  description = "If the Azure Policy for Kubernetes add-on should be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "cilium_enabled" {
+  description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
+  type        = bool
+  default     = false
+}
+
+variable "core_name" {
+  description = "The commonName for the core infrastructure"
+  type        = string
+}
+
 variable "defender_config" {
   description = "The Microsoft Defender for containers configuration"
   type = object({
@@ -334,36 +289,81 @@ variable "defender_config" {
   default = {}
 }
 
-variable "cilium_enabled" {
-  description = "If enabled, will use Azure CNI with Cilium instead of kubenet"
+variable "defender_enabled" {
+  description = "If Defender for Containers should be enabled"
   type        = bool
   default     = false
 }
 
-variable "add_default_security_lb_rule" {
-  type        = bool
-  description = "Should default LB rule (allow internat to azure lb ips) be applied to NSG?"
-  default     = false
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
 }
 
-variable "additonal_security_rules" {
-  description = "Rules for trafic in the NSG associated to AKS"
-  type = list(object({
-    name                       = string
-    priority                   = number
-    direction                  = string
-    access                     = string
-    protocol                   = string
-    source_port_range          = string
-    destination_port_range     = string
-    source_address_prefix      = string
-    destination_address_prefix = string
-  }))
-  default = []
+variable "group_name_separator" {
+  description = "Separator for group names"
+  type        = string
+  default     = "-"
 }
 
 variable "keda_enabled" {
   description = "If KEDA autoscaler should be enabled"
   type        = bool
   default     = false
+}
+
+variable "location" {
+  description = "The Azure region"
+  type        = string
+  default     = "West Europe"
+}
+
+variable "location_short" {
+  description = "The Azure region short name"
+  type        = string
+}
+
+variable "log_eventhub_authorization_rule_id" {
+  description = "The authoritzation rule id for event hub"
+  type        = string
+}
+
+variable "log_eventhub_name" {
+  description = "The eventhub name for k8s logs"
+  type        = string
+}
+
+variable "name" {
+  description = "The commonName to use for the deploy"
+  type        = string
+}
+
+variable "namespaces" {
+  description = "The namespaces that should be created in Kubernetes"
+  type = list(
+    object({
+      name = string
+    })
+  )
+}
+
+variable "notification_email" {
+  description = "Where to send email alerts"
+  type        = string
+  default     = "DG-Team-DevOps@xenit.se"
+}
+
+variable "ssh_public_key" {
+  description = "SSH public key to add to servers"
+  type        = string
+}
+
+variable "subscription_name" {
+  description = "The commonName for the subscription"
+  type        = string
+}
+
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
+  type        = string
 }

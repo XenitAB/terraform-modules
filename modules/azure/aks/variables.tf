@@ -137,9 +137,9 @@ variable "aks_config" {
 
   validation {
     condition = length(var.aks_config.node_pools) == 0 || alltrue([
-      for np in concat(var.aks_config.node_pools, [{ version : var.aks_config.version }]) : can(regex("^1.(28|29|30|31)", np.version))
+      for np in concat(var.aks_config.node_pools, [{ version : var.aks_config.version }]) : can(regex("^1.(29|30|31|32)", np.version))
     ])
-    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.28, 1.29, 1.30 or 1.31."
+    error_message = "The Kubernetes version has not been validated yet, supported versions are 1.29, 1.30, 1.31 or 1.32."
   }
 
   validation {

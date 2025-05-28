@@ -1,4 +1,4 @@
-apiVersion: karpenter.azure.com/v1
+apiVersion: karpenter.azure.com/v1beta1
 kind: AKSNodeClass
 metadata:
   name: ${class.name}

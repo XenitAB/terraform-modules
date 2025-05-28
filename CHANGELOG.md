@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: upgrade supported k8s versions by @landerss1 in [#1353](https://github.com/XenitAB/terraform-modules/pulls/1353)
 - Chore: upgrade karpenter to 1.4.0 by @landerss1 in [#1352](https://github.com/XenitAB/terraform-modules/pulls/1352)
 - Chore: upgrade argocd chart to 8.0.6 by @landerss1 in [#1345](https://github.com/XenitAB/terraform-modules/pulls/1345)
 - Chore: upgrade node-ttl to v0.0.9 by @landerss1 in [#1333](https://github.com/XenitAB/terraform-modules/pulls/1333)

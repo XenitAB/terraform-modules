@@ -1,5 +1,15 @@
-data "azurerm_subnet" "this" {
+data "azurerm_subnet" "default" {
   name                 = "sn-${var.environment}-${var.location_short}-${var.core_name}-${var.name}${local.aks_name_suffix}"
+  virtual_network_name = "vnet-${var.environment}-${var.location_short}-${var.core_name}"
+  resource_group_name  = "rg-${var.environment}-${var.location_short}-${var.core_name}"
+}
+
+data "azurerm_subnet" "node_pools" {
+  for_each = {
+    for np in var.aks_config.node_pools :
+    np.name => np
+  }
+  name                 = each.value.subnet_name == "" ? local.default_subnet_name : each.value.subnet_name
   virtual_network_name = "vnet-${var.environment}-${var.location_short}-${var.core_name}"
   resource_group_name  = "rg-${var.environment}-${var.location_short}-${var.core_name}"
 }
@@ -11,10 +21,6 @@ data "azurerm_resource_group" "log" {
 data "azurerm_storage_account" "log" {
   name                = "log${var.environment}${var.location_short}${var.core_name}${var.unique_suffix}"
   resource_group_name = data.azurerm_resource_group.log.name
-}
-
-locals {
-  auto_scaler_expander = var.aks_config.priority_expander_config == null ? "least-waste" : "priority"
 }
 
 resource "azurerm_user_assigned_identity" "aks" {
@@ -124,7 +130,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 
   default_node_pool {
     name           = "default"
-    vnet_subnet_id = data.azurerm_subnet.this.id
+    vnet_subnet_id = data.azurerm_subnet.default.id
     zones          = var.aks_default_node_pool_zones
 
     orchestrator_version = var.aks_config.version
@@ -153,7 +159,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
 
   name                  = each.value.name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
-  vnet_subnet_id        = data.azurerm_subnet.this.id
+  vnet_subnet_id        = data.azurerm_subnet.node_pools[each.value.name].id
   zones                 = each.value.zones
 
   auto_scaling_enabled = true

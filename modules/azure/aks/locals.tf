@@ -1,6 +1,8 @@
 # Replace this with a datasource when availible in the AzureRM provider.
 locals {
-  aks_name_suffix = var.aks_name_suffix != null ? var.aks_name_suffix : ""
+  aks_name_suffix      = var.aks_name_suffix != null ? var.aks_name_suffix : ""
+  auto_scaler_expander = var.aks_config.priority_expander_config == null ? "least-waste" : "priority"
+  default_subnet_name  = "sn-${var.environment}-${var.location_short}-${var.core_name}-${var.name}${local.aks_name_suffix}"
   vm_skus_disk_size_gb = {
     # AMD64
 

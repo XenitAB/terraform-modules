@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: separate subnets per node pool by @landerss1 in [#1350](https://github.com/XenitAB/terraform-modules/pulls/1350)
 - Feat: enable argocd metrics by @landerss1 in [#1347](https://github.com/XenitAB/terraform-modules/pulls/1347)
 - Feat: enable tuning of vital ArgoCD parameters by @landerss1 in [#1344](https://github.com/XenitAB/terraform-modules/pulls/1344)
 - Feat: giving flux acr permissions by @optocoupler in [#1335](https://github.com/XenitAB/terraform-modules/pulls/1335)
@@ -30,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: upgrade karpenter to 1.4.0 by @landerss1 in [#1352](https://github.com/XenitAB/terraform-modules/pulls/1352)
 - Chore: upgrade argocd chart to 8.0.6 by @landerss1 in [#1345](https://github.com/XenitAB/terraform-modules/pulls/1345)
 - Chore: upgrade node-ttl to v0.0.9 by @landerss1 in [#1333](https://github.com/XenitAB/terraform-modules/pulls/1333)
 - Chore: upgrade git-auth-proxy to latest version by @landerss1 in [#1330](https://github.com/XenitAB/terraform-modules/pulls/1330)

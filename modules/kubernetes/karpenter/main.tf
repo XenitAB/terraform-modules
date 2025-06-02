@@ -42,7 +42,7 @@ resource "helm_release" "karpenter" {
   chart       = "karpenter"
   name        = "karpenter"
   namespace   = "kube-system"
-  version     = "0.7.5"
+  version     = "1.4.0"
   max_history = 3
   skip_crds   = false
   wait        = true

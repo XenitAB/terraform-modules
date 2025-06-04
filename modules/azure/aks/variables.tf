@@ -367,3 +367,9 @@ variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string
 }
+
+variable "private_cluster_enabled" {
+  description = "Enable deployment of the AKS control‑plane with a **private** API server endpoint. When set to `true` the cluster will be created as a private cluster; when `false` (default) the API server will be public."
+  type        = bool
+  default     = false
+}

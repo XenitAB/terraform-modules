@@ -111,6 +111,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | <a name="input_name"></a> [name](#input\_name) | The commonName to use for the deploy | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes | <pre>list(<br/>    object({<br/>      name = string<br/>    })<br/>  )</pre> | n/a | yes |
 | <a name="input_notification_email"></a> [notification\_email](#input\_notification\_email) | Where to send email alerts | `string` | `"DG-Team-DevOps@xenit.se"` | no |
+| <a name="input_private_cluster_enabled"></a> [private\_cluster\_enabled](#input\_private\_cluster\_enabled) | Enable deployment of the AKS control‑plane with a **private** API server endpoint. When set to `true` the cluster will be created as a private cluster; when `false` (default) the API server will be public. | `bool` | `false` | no |
 | <a name="input_ssh_public_key"></a> [ssh\_public\_key](#input\_ssh\_public\_key) | SSH public key to add to servers | `string` | n/a | yes |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | The commonName for the subscription | `string` | n/a | yes |
 | <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | n/a | yes |

@@ -50,16 +50,17 @@ resource "azurerm_role_assignment" "aks" {
 # azure-container-use-rbac-permissions is ignored because the rule has not been updated in tfsec
 #tfsec:ignore:azure-container-limit-authorized-ips tfsec:ignore:azure-container-logging tfsec:ignore:azure-container-use-rbac-permissions
 resource "azurerm_kubernetes_cluster" "this" {
-  name                = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
-  location            = data.azurerm_resource_group.this.location
-  resource_group_name = data.azurerm_resource_group.this.name
-  dns_prefix          = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
-  kubernetes_version  = var.aks_config.version
-  sku_tier            = var.aks_config.sku_tier
-  run_command_enabled = false
+  name                    = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  location                = data.azurerm_resource_group.this.location
+  resource_group_name     = data.azurerm_resource_group.this.name
+  dns_prefix              = "aks-${var.environment}-${var.location_short}-${var.name}${local.aks_name_suffix}"
+  kubernetes_version      = var.aks_config.version
+  sku_tier                = var.aks_config.sku_tier
+  run_command_enabled     = false
+  private_cluster_enabled = var.private_cluster_enabled
 
   api_server_access_profile {
-    authorized_ip_ranges = var.aks_authorized_ips
+    authorized_ip_ranges = var.private_cluster_enabled ? [] : var.aks_authorized_ips
   }
 
   cost_analysis_enabled = var.aks_cost_analysis_enabled

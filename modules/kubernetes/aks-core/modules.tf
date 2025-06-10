@@ -245,6 +245,24 @@ module "external_dns" {
   rbac_create                = var.external_dns_config.rbac_create
 }
 
+module "external_secrets_operator" {
+  depends_on = [module.gateway_api]
+
+  for_each = {
+    for s in ["external-secrets"] :
+    s => s
+    if var.platform_config.external_secrets_operator_enabled
+  }
+
+  source = "../../kubernetes/external-secrets-operator"
+
+  cluster_id              = local.cluster_id
+  environment             = var.environment
+  external_secrets_config = var.external_secrets_config
+  tenant_name             = var.platform_config.tenant_name
+  fleet_infra_config      = var.platform_config.fleet_infra_config
+}
+
 module "falco" {
   for_each = {
     for s in ["falco"] :

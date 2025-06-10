@@ -20,6 +20,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`envoy-gateway`](envoy-gateway/README.md)
 - [`eks-core`](eks-core/README.md)
 - [`external-dns`](external-dns/README.md)
+- [`external-secrets-operator`](external-secrets-operator/README.md)
 - [`falco`](falco/README.md)
 - [`fluxcd`](fluxcd/README.md)
 - [`gatekeeper`](gatekeeper/README.md)

@@ -246,8 +246,6 @@ module "external_dns" {
 }
 
 module "external_secrets_operator" {
-  depends_on = [module.gateway_api]
-
   for_each = {
     for s in ["external-secrets"] :
     s => s

@@ -53,6 +53,7 @@ variable "argocd_config" {
   description = "ArgoCD configuration"
   type = object({
     aad_group_name                  = optional(string, "az-sub-xks-all-owner")
+    cluster_role                    = optional(string, "Spoke")
     application_set_replicas        = optional(number, 2)
     controller_replicas             = optional(number, 3)
     repo_server_replicas            = optional(number, 2)
@@ -93,6 +94,11 @@ variable "argocd_config" {
     })), [])
   })
   default = {}
+
+  validation {
+    condition     = contains(["Hub", "Spoke", "Hub-Spoke"], var.argocd_config.cluster_role)
+    error_message = "Invalid cluster role: ${var.argocd_config.cluster_role}. Allowed vallues: ['Hub', 'Spoke', 'Hub-Spoke']"
+  }
 }
 
 variable "azure_policy_config" {

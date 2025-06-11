@@ -30,11 +30,13 @@ module "argocd" {
   aks_cluster_id           = data.azurerm_kubernetes_cluster.this.id
   argocd_config            = var.argocd_config
   cluster_id               = local.cluster_id
+  environment              = var.environment
   resource_group_name      = data.azurerm_resource_group.this.name
   location                 = data.azurerm_resource_group.this.location
   core_resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"
   key_vault_name           = data.azurerm_key_vault.core.name
   fleet_infra_config       = var.platform_config.fleet_infra_config
+  tenant_name              = var.platform_config.tenant_name
 }
 
 module "azure_metrics" {

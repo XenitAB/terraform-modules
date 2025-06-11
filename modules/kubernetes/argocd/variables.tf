@@ -7,6 +7,7 @@ variable "argocd_config" {
   description = "ArgoCD configuration"
   type = object({
     aad_group_name                  = optional(string, "az-sub-xks-all-owner")
+    cluster_role                    = optional(string, "Spoke")
     application_set_replicas        = optional(number, 2)
     controller_replicas             = optional(number, 3)
     repo_server_replicas            = optional(number, 2)
@@ -47,6 +48,11 @@ variable "argocd_config" {
     })), [])
   })
   default = {}
+
+  validation {
+    condition     = contains(["Hub", "Spoke", "Hub-Spoke"], var.argocd_config.cluster_role)
+    error_message = "Invalid cluster role: ${var.argocd_config.cluster_role}. Allowed vallues: ['Hub', 'Spoke', 'Hub-Spoke']"
+  }
 }
 
 variable "cluster_id" {
@@ -59,6 +65,11 @@ variable "core_resource_group_name" {
   type        = string
 }
 
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
 variable "fleet_infra_config" {
   description = "Fleet infra config"
   type = object({
@@ -66,6 +77,11 @@ variable "fleet_infra_config" {
     argocd_project_name = string
     k8s_api_server_url  = string
   })
+}
+
+variable "key_vault_name" {
+  description = "The Azure core key vault name"
+  type        = string
 }
 
 variable "location" {
@@ -78,7 +94,7 @@ variable "resource_group_name" {
   type        = string
 }
 
-variable "key_vault_name" {
-  description = "The Azure core key vault name"
+variable "tenant_name" {
+  description = "The name of the tenant"
   type        = string
 }

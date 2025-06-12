@@ -132,7 +132,7 @@ spec:
       data:
         name: %{ base64encode("${tenant.name}-${cluster.environment}") }
         type: Z2l0
-        url: %{ base64encode("${tenant.repo_url") }
+        url: %{ base64encode("${tenant.repo_url}") }
         username: Z2l0
   data:
   - secretKey: password

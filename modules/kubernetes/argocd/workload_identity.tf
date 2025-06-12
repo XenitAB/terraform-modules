@@ -13,7 +13,7 @@ resource "azurerm_role_assignment" "argocd_admin" {
 
 resource "azurerm_federated_identity_credential" "argocd_server" {
   for_each = {
-    for s in [split(",", var.argocd_config.oidc_issuer_url)] :
+    for s in split(",", var.argocd_config.oidc_issuer_url) :
     s => s
     if var.argocd_config.oidc_issuer_url != ""
   }
@@ -28,7 +28,7 @@ resource "azurerm_federated_identity_credential" "argocd_server" {
 
 resource "azurerm_federated_identity_credential" "argocd_application_controller" {
   for_each = {
-    for s in [split(",", var.argocd_config.oidc_issuer_url)] :
+    for s in split(",", var.argocd_config.oidc_issuer_url) :
     s => s
     if var.argocd_config.oidc_issuer_url != ""
   }

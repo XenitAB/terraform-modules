@@ -118,8 +118,6 @@ kind: ExternalSecret
 metadata:
   name: repo-${tenant.name}-${cluster.environment}
   namespace: argocd
-  labels:
-    argocd.argoproj.io/secret-type: repository
 spec:
   refreshInterval: 10m
   secretStoreRef:
@@ -129,11 +127,14 @@ spec:
   target:
     name: repo-${tenant.name}-${cluster.environment}
     template:
+      metadata:
+        labels:
+          argocd.argoproj.io/secret-type: repository
       data:
-        name: %{ base64encode("${tenant.name}-${cluster.environment}") }
-        type: Z2l0
-        url: %{ base64encode("${tenant.repo_url}") }
-        username: Z2l0
+        name: ${tenant.name}-${cluster.environment}
+        type: git
+        url: ${tenant.repo_url}
+        username: git
   data:
   - secretKey: password
     remoteRef:

@@ -1,7 +1,7 @@
 apiVersion: external-secrets.io/v1
 kind: SecretStore
 metadata:
-  name: xks-core-kv-store
+  name: ${key_vault_name}
   namespace: argocd
 spec:
   provider:
@@ -124,15 +124,15 @@ spec:
   refreshInterval: 10m
   secretStoreRef:
     kind: SecretStore
-    name: xks-core-kv-store
+    name: ${key_vault_name}
     namespace: argocd
   target:
     name: repo-${tenant.name}-${cluster.environment}
     template:
       data:
-        name: base64encode("${tenant.name}-${cluster.environment}")
+        name: %{ base64encode("${tenant.name}-${cluster.environment}") }
         type: Z2l0
-        url: base64encode("${tenant.repo_url}")
+        url: %{ base64encode("${tenant.repo_url") }
         username: Z2l0
   data:
   - secretKey: password

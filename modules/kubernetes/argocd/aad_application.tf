@@ -6,7 +6,7 @@ resource "azuread_application" "dex" {
   for_each = {
     for s in ["argocd"] :
     s => s
-    if length(var.argocd_config.azure_tenants) > 0
+    if contains(["Hub", "Hub-Spoke"], var.argocd_config.cluster_role)
   }
 
   display_name = "ArgoCD Dex connector for XKS management cluster"
@@ -43,7 +43,7 @@ resource "azuread_application_password" "dex" {
   for_each = {
     for s in ["argocd"] :
     s => s
-    if length(var.argocd_config.azure_tenants) > 0
+    if contains(["Hub", "Hub-Spoke"], var.argocd_config.cluster_role)
   }
 
   application_id = azuread_application.dex["argocd"].id

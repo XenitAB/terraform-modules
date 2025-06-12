@@ -21,5 +21,5 @@ module "argocd" {
     argocd_project_name = "default"
     k8s_api_server_url  = "https://kubernetes.default.svc"
   }
-  tenant_name           = "acme"
+  tenant_name = "acme"
 }

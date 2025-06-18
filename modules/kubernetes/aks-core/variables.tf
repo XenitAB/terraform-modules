@@ -298,6 +298,18 @@ variable "external_dns_hostname" {
   default     = ""
 }
 
+variable "external_secrets_config" {
+  description = "External secrets operator config"
+  type = object({
+    log_level               = optional(string, "info")
+    metrics_enabled         = optional(bool, false)
+    pdb_enabled             = optional(bool, true)
+    replica_count           = optional(number, 2)
+    service_monitor_enabled = optional(bool, true)
+  })
+  default = {}
+}
+
 variable "fluxcd_config" {
   description = "Configuration for FluxCD"
   type = object({

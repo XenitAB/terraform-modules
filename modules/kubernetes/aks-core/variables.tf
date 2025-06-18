@@ -53,6 +53,7 @@ variable "argocd_config" {
   description = "ArgoCD configuration"
   type = object({
     aad_group_name                  = optional(string, "az-sub-xks-all-owner")
+    cluster_role                    = optional(string, "Spoke")
     application_set_replicas        = optional(number, 2)
     controller_replicas             = optional(number, 3)
     repo_server_replicas            = optional(number, 2)
@@ -66,7 +67,8 @@ variable "argocd_config" {
     global_domain                   = optional(string, "")
     ingress_whitelist_ip            = optional(string, "")
     dex_tenant_name                 = optional(string, "")
-    oidc_issuer_url                 = optional(string, "")
+    dex_redirect_domains            = optional(string, "")
+    oidc_issuer_url                 = optional(map(string), {})
     sync_windows = optional(list(object({
       kind        = string
       schedule    = string
@@ -83,6 +85,10 @@ variable "argocd_config" {
         azure_client_id = optional(string, "")
         ca_data         = optional(string, "")
         tenants = list(object({
+          # This will be used to only if cluster_role is set to 'Hub-Spoke' to create AppProject 
+          # roles that limit access to the project, based on the AAD group we create for each 
+          # tenant namespace.
+          aad_group   = optional(string, "")
           name        = string
           namespace   = string
           repo_url    = string
@@ -93,6 +99,11 @@ variable "argocd_config" {
     })), [])
   })
   default = {}
+
+  validation {
+    condition     = contains(["Hub", "Spoke", "Hub-Spoke"], var.argocd_config.cluster_role)
+    error_message = "Invalid cluster role: ${var.argocd_config.cluster_role}. Allowed vallues: ['Hub', 'Spoke', 'Hub-Spoke']"
+  }
 }
 
 variable "azure_policy_config" {

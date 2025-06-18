@@ -2,7 +2,7 @@ resource "helm_release" "argocd_hub_setup" {
   for_each = {
     for s in ["argocd"] :
     s => s
-    if length(var.argocd_config.azure_tenants) > 0
+    if contains(["Hub"], var.argocd_config.cluster_role)
   }
 
   depends_on  = [helm_release.argocd]
@@ -30,7 +30,7 @@ resource "helm_release" "argocd_spoke_setup" {
   for_each = {
     for s in ["argocd"] :
     s => s
-    if length(var.argocd_config.azure_tenants) == 0
+    if contains(["Hub-Spoke", "Spoke"], var.argocd_config.cluster_role)
   }
 
   depends_on  = [helm_release.argocd]

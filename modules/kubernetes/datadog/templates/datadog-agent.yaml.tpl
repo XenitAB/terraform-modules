@@ -25,7 +25,7 @@ spec:
       tolerations:
         - operator: Exists
       image:
-        name: "gcr.io/datadoghq/agent:7.45.0"
+        name: "gcr.io/datadoghq/agent:7.66.0"
       env:
         - name: DD_CONTAINER_EXCLUDE_LOGS
           value: "name:datadog-agent"
@@ -39,7 +39,7 @@ spec:
       replicas: 2
       priorityClassName: platform-low
       image:
-        name: "gcr.io/datadoghq/cluster-agent:7.45.0"
+        name: "gcr.io/datadoghq/cluster-agent:7.66.0"
       tolerations:
         - operator: Exists
       containers:

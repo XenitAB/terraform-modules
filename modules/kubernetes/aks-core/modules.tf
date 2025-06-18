@@ -30,11 +30,13 @@ module "argocd" {
   aks_cluster_id           = data.azurerm_kubernetes_cluster.this.id
   argocd_config            = var.argocd_config
   cluster_id               = local.cluster_id
+  environment              = var.environment
   resource_group_name      = data.azurerm_resource_group.this.name
   location                 = data.azurerm_resource_group.this.location
   core_resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"
   key_vault_name           = data.azurerm_key_vault.core.name
   fleet_infra_config       = var.platform_config.fleet_infra_config
+  tenant_name              = var.platform_config.tenant_name
 }
 
 module "azure_metrics" {
@@ -243,22 +245,6 @@ module "external_dns" {
   tenant_name                = var.platform_config.tenant_name
   fleet_infra_config         = var.platform_config.fleet_infra_config
   rbac_create                = var.external_dns_config.rbac_create
-}
-
-module "external_secrets_operator" {
-  for_each = {
-    for s in ["external-secrets"] :
-    s => s
-    if var.platform_config.external_secrets_operator_enabled
-  }
-
-  source = "../../kubernetes/external-secrets-operator"
-
-  cluster_id              = local.cluster_id
-  environment             = var.environment
-  external_secrets_config = var.external_secrets_config
-  tenant_name             = var.platform_config.tenant_name
-  fleet_infra_config      = var.platform_config.fleet_infra_config
 }
 
 module "falco" {

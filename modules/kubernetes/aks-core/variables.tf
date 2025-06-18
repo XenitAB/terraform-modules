@@ -53,6 +53,7 @@ variable "argocd_config" {
   description = "ArgoCD configuration"
   type = object({
     aad_group_name                  = optional(string, "az-sub-xks-all-owner")
+    cluster_role                    = optional(string, "Spoke")
     application_set_replicas        = optional(number, 2)
     controller_replicas             = optional(number, 3)
     repo_server_replicas            = optional(number, 2)
@@ -66,7 +67,8 @@ variable "argocd_config" {
     global_domain                   = optional(string, "")
     ingress_whitelist_ip            = optional(string, "")
     dex_tenant_name                 = optional(string, "")
-    oidc_issuer_url                 = optional(string, "")
+    dex_redirect_domains            = optional(string, "")
+    oidc_issuer_url                 = optional(map(string), {})
     sync_windows = optional(list(object({
       kind        = string
       schedule    = string
@@ -83,6 +85,10 @@ variable "argocd_config" {
         azure_client_id = optional(string, "")
         ca_data         = optional(string, "")
         tenants = list(object({
+          # This will be used to only if cluster_role is set to 'Hub-Spoke' to create AppProject 
+          # roles that limit access to the project, based on the AAD group we create for each 
+          # tenant namespace.
+          aad_group   = optional(string, "")
           name        = string
           namespace   = string
           repo_url    = string
@@ -93,6 +99,11 @@ variable "argocd_config" {
     })), [])
   })
   default = {}
+
+  validation {
+    condition     = contains(["Hub", "Spoke", "Hub-Spoke"], var.argocd_config.cluster_role)
+    error_message = "Invalid cluster role: ${var.argocd_config.cluster_role}. Allowed vallues: ['Hub', 'Spoke', 'Hub-Spoke']"
+  }
 }
 
 variable "azure_policy_config" {
@@ -285,18 +296,6 @@ variable "external_dns_hostname" {
   description = "hostname for ingress-nginx to use for external-dns"
   type        = string
   default     = ""
-}
-
-variable "external_secrets_config" {
-  description = "External secrets operator config"
-  type = object({
-    log_level               = optional(string, "info")
-    metrics_enabled         = optional(bool, false)
-    pdb_enabled             = optional(bool, true)
-    replica_count           = optional(number, 2)
-    service_monitor_enabled = optional(bool, true)
-  })
-  default = {}
 }
 
 variable "fluxcd_config" {
@@ -607,45 +606,44 @@ variable "platform_config" {
       argocd_project_name = string
       k8s_api_server_url  = string
     })
-    aad_pod_identity_enabled          = optional(bool, false)
-    argocd_enabled                    = optional(bool, true)
-    azure_metrics_enabled             = optional(bool, false)
-    azure_policy_enabled              = optional(bool, false)
-    azure_service_operator_enabled    = optional(bool, false)
-    cert_manager_enabled              = optional(bool, true)
-    cilium_enabled                    = optional(bool, false)
-    control_plane_logs_enabled        = optional(bool, false)
-    datadog_enabled                   = optional(bool, false)
-    defender_enabled                  = optional(bool, false)
-    eck_operator_enabled              = optional(bool, false)
-    external_dns_enabled              = optional(bool, true)
-    external_secrets_operator_enabled = optional(bool, false)
-    falco_enabled                     = optional(bool, true)
-    fluxcd_enabled                    = optional(bool, true)
-    gatekeeper_enabled                = optional(bool, true)
-    gateway_api_enabled               = optional(bool, false)
-    grafana_agent_enabled             = optional(bool, false)
-    grafana_alloy_enabled             = optional(bool, false)
-    grafana_k8s_monitoring_enabled    = optional(bool, false)
-    ingress_nginx_enabled             = optional(bool, true)
-    karpenter_enabled                 = optional(bool, false)
-    linkerd_enabled                   = optional(bool, false)
-    litmus_enabled                    = optional(bool, false)
-    mirrord_enabled                   = optional(bool, false)
-    nginx_gateway_enabled             = optional(bool, false)
-    node_local_dns_enabled            = optional(bool, true)
-    node_ttl_enabled                  = optional(bool, true)
-    popeye_enabled                    = optional(bool, false)
-    prometheus_enabled                = optional(bool, false)
-    promtail_enabled                  = optional(bool, false)
-    rabbitmq_enabled                  = optional(bool, false)
-    reloader_enabled                  = optional(bool, true)
-    spegel_enabled                    = optional(bool, true)
-    spot_instances_hack_enabled       = optional(bool, false)
-    telepresence_enabled              = optional(bool, false)
-    trivy_enabled                     = optional(bool, false)
-    velero_enabled                    = optional(bool, false)
-    vpa_enabled                       = optional(bool, false)
+    aad_pod_identity_enabled       = optional(bool, false)
+    argocd_enabled                 = optional(bool, true)
+    azure_metrics_enabled          = optional(bool, false)
+    azure_policy_enabled           = optional(bool, false)
+    azure_service_operator_enabled = optional(bool, false)
+    cert_manager_enabled           = optional(bool, true)
+    cilium_enabled                 = optional(bool, false)
+    control_plane_logs_enabled     = optional(bool, false)
+    datadog_enabled                = optional(bool, false)
+    defender_enabled               = optional(bool, false)
+    eck_operator_enabled           = optional(bool, false)
+    external_dns_enabled           = optional(bool, true)
+    falco_enabled                  = optional(bool, true)
+    fluxcd_enabled                 = optional(bool, true)
+    gatekeeper_enabled             = optional(bool, true)
+    gateway_api_enabled            = optional(bool, false)
+    grafana_agent_enabled          = optional(bool, false)
+    grafana_alloy_enabled          = optional(bool, false)
+    grafana_k8s_monitoring_enabled = optional(bool, false)
+    ingress_nginx_enabled          = optional(bool, true)
+    karpenter_enabled              = optional(bool, false)
+    linkerd_enabled                = optional(bool, false)
+    litmus_enabled                 = optional(bool, false)
+    mirrord_enabled                = optional(bool, false)
+    nginx_gateway_enabled          = optional(bool, false)
+    node_local_dns_enabled         = optional(bool, true)
+    node_ttl_enabled               = optional(bool, true)
+    popeye_enabled                 = optional(bool, false)
+    prometheus_enabled             = optional(bool, false)
+    promtail_enabled               = optional(bool, false)
+    rabbitmq_enabled               = optional(bool, false)
+    reloader_enabled               = optional(bool, true)
+    spegel_enabled                 = optional(bool, true)
+    spot_instances_hack_enabled    = optional(bool, false)
+    telepresence_enabled           = optional(bool, false)
+    trivy_enabled                  = optional(bool, false)
+    velero_enabled                 = optional(bool, false)
+    vpa_enabled                    = optional(bool, false)
   })
 }
 

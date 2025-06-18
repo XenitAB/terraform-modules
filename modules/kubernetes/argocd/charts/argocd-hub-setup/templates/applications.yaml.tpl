@@ -18,10 +18,10 @@ spec:
     path: {{ printf "platform/%s/%s" $azure_tenant.tenant_name $cluster.name }}
     repoURL: {{ $git_repo_url }}
     targetRevision: HEAD
-  automated:
-    prune: false
-    selfHeal: true
   syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
     syncOptions:
       - RespectIgnoreDifferences=true
       - ApplyOutOfSyncOnly=true

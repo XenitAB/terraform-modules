@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: add tenant support for ArgoCD by @landerss1 in [#1357](https://github.com/XenitAB/terraform-modules/pulls/1357)
+- Feat: add support for external secrets operator by @landerss1 in [#1356](https://github.com/XenitAB/terraform-modules/pulls/1356)
 - Feat: separate subnets per node pool by @landerss1 in [#1350](https://github.com/XenitAB/terraform-modules/pulls/1350)
 - Feat: enable argocd metrics by @landerss1 in [#1347](https://github.com/XenitAB/terraform-modules/pulls/1347)
 - Feat: enable tuning of vital ArgoCD parameters by @landerss1 in [#1344](https://github.com/XenitAB/terraform-modules/pulls/1344)
@@ -31,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: upgrade datadog by @landerss1 in [#1358](https://github.com/XenitAB/terraform-modules/pulls/1358)
+- Chore: upgrade supported k8s versions by @landerss1 in [#1353](https://github.com/XenitAB/terraform-modules/pulls/1353)
 - Chore: upgrade karpenter to 1.4.0 by @landerss1 in [#1352](https://github.com/XenitAB/terraform-modules/pulls/1352)
 - Chore: upgrade argocd chart to 8.0.6 by @landerss1 in [#1345](https://github.com/XenitAB/terraform-modules/pulls/1345)
 - Chore: upgrade node-ttl to v0.0.9 by @landerss1 in [#1333](https://github.com/XenitAB/terraform-modules/pulls/1333)

@@ -198,35 +198,35 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
 
     content {
       sysctl_config {
-        fs_aio_max_nr                      = var.sysctl_config.fs_aio_max_nr
-        fs_file_max                        = var.sysctl_config.fs_file_max
-        fs_inotify_max_user_watches        = var.sysctl_config.fs_inotify_max_user_watches
-        fs_nr_open                         = var.sysctl_config.fs_nr_open
-        kernel_threads_max                 = var.sysctl_config.kernel_threads_max
-        net_core_netdev_max_backlog        = var.sysctl_config.net_core_netdev_max_backlog
-        net_core_optmem_max                = var.sysctl_config.net_core_optmem_max
-        net_core_rmem_default              = var.sysctl_config.net_core_rmem_default
-        net_core_rmem_max                  = var.sysctl_config.net_core_rmem_max
-        net_core_somaxconn                 = var.sysctl_config.net_core_somaxconn
-        net_core_wmem_default              = var.sysctl_config.net_core_wmem_default
-        net_core_wmem_max                  = var.sysctl_config.net_core_wmem_max
-        net_ipv4_ip_local_port_range_max   = var.sysctl_config.net_ipv4_ip_local_port_range_max
-        net_ipv4_ip_local_port_range_min   = var.sysctl_config.net_ipv4_ip_local_port_range_min
-        net_ipv4_neigh_default_gc_thresh1  = var.sysctl_config.net_ipv4_neigh_default_gc_thresh1
-        net_ipv4_neigh_default_gc_thresh2  = var.sysctl_config.net_ipv4_neigh_default_gc_thresh2
-        net_ipv4_neigh_default_gc_thresh3  = var.sysctl_config.net_ipv4_neigh_default_gc_thresh3
-        net_ipv4_tcp_fin_timeout           = var.sysctl_config.net_ipv4_tcp_fin_timeout
-        net_ipv4_tcp_keepalive_intvl       = var.sysctl_config.net_ipv4_tcp_keepalive_intvl
-        net_ipv4_tcp_keepalive_probes      = var.sysctl_config.net_ipv4_tcp_keepalive_probes
-        net_ipv4_tcp_keepalive_time        = var.sysctl_config.net_ipv4_tcp_keepalive_time
-        net_ipv4_tcp_max_syn_backlog       = var.sysctl_config.net_ipv4_tcp_max_syn_backlog
-        net_ipv4_tcp_max_tw_buckets        = var.sysctl_config.net_ipv4_tcp_max_tw_buckets
-        net_ipv4_tcp_tw_reuse              = var.sysctl_config.net_ipv4_tcp_tw_reuse
-        net_netfilter_nf_conntrack_buckets = var.sysctl_config.net_netfilter_nf_conntrack_buckets
-        net_netfilter_nf_conntrack_max     = var.sysctl_config.net_netfilter_nf_conntrack_max
-        vm_max_map_count                   = var.sysctl_config.vm_max_map_count
-        vm_swappiness                      = var.sysctl_config.vm_swappiness
-        vm_vfs_cache_pressure              = var.sysctl_config.vm_vfs_cache_pressure
+        fs_aio_max_nr                      = each.value.sysctl_config.fs_aio_max_nr
+        fs_file_max                        = each.value.sysctl_config.fs_file_max
+        fs_inotify_max_user_watches        = each.value.sysctl_config.fs_inotify_max_user_watches
+        fs_nr_open                         = each.value.sysctl_config.fs_nr_open
+        kernel_threads_max                 = each.value.sysctl_config.kernel_threads_max
+        net_core_netdev_max_backlog        = each.value.sysctl_config.net_core_netdev_max_backlog
+        net_core_optmem_max                = each.value.sysctl_config.net_core_optmem_max
+        net_core_rmem_default              = each.value.sysctl_config.net_core_rmem_default
+        net_core_rmem_max                  = each.value.sysctl_config.net_core_rmem_max
+        net_core_somaxconn                 = each.value.sysctl_config.net_core_somaxconn
+        net_core_wmem_default              = each.value.sysctl_config.net_core_wmem_default
+        net_core_wmem_max                  = each.value.sysctl_config.net_core_wmem_max
+        net_ipv4_ip_local_port_range_max   = each.value.sysctl_config.net_ipv4_ip_local_port_range_max
+        net_ipv4_ip_local_port_range_min   = each.value.sysctl_config.net_ipv4_ip_local_port_range_min
+        net_ipv4_neigh_default_gc_thresh1  = each.value.sysctl_config.net_ipv4_neigh_default_gc_thresh1
+        net_ipv4_neigh_default_gc_thresh2  = each.value.sysctl_config.net_ipv4_neigh_default_gc_thresh2
+        net_ipv4_neigh_default_gc_thresh3  = each.value.sysctl_config.net_ipv4_neigh_default_gc_thresh3
+        net_ipv4_tcp_fin_timeout           = each.value.sysctl_config.net_ipv4_tcp_fin_timeout
+        net_ipv4_tcp_keepalive_intvl       = each.value.sysctl_config.net_ipv4_tcp_keepalive_intvl
+        net_ipv4_tcp_keepalive_probes      = each.value.sysctl_config.net_ipv4_tcp_keepalive_probes
+        net_ipv4_tcp_keepalive_time        = each.value.sysctl_config.net_ipv4_tcp_keepalive_time
+        net_ipv4_tcp_max_syn_backlog       = each.value.sysctl_config.net_ipv4_tcp_max_syn_backlog
+        net_ipv4_tcp_max_tw_buckets        = each.value.sysctl_config.net_ipv4_tcp_max_tw_buckets
+        net_ipv4_tcp_tw_reuse              = each.value.sysctl_config.net_ipv4_tcp_tw_reuse
+        net_netfilter_nf_conntrack_buckets = each.value.sysctl_config.net_netfilter_nf_conntrack_buckets
+        net_netfilter_nf_conntrack_max     = each.value.sysctl_config.net_netfilter_nf_conntrack_max
+        vm_max_map_count                   = each.value.sysctl_config.vm_max_map_count
+        vm_swappiness                      = each.value.sysctl_config.vm_swappiness
+        vm_vfs_cache_pressure              = each.value.sysctl_config.vm_vfs_cache_pressure
       }
     }
   }

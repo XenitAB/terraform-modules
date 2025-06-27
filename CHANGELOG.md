@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: remove life-cycle management on fluxcd tenant git files by @landerss1 in [#1359](https://github.com/XenitAB/terraform-modules/pulls/1359)
 - Chore: upgrade datadog by @landerss1 in [#1358](https://github.com/XenitAB/terraform-modules/pulls/1358)
 - Chore: upgrade supported k8s versions by @landerss1 in [#1353](https://github.com/XenitAB/terraform-modules/pulls/1353)
 - Chore: upgrade karpenter to 1.4.0 by @landerss1 in [#1352](https://github.com/XenitAB/terraform-modules/pulls/1352)

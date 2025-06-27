@@ -106,12 +106,4 @@ resource "git_repository_file" "tenant" {
       each.value.fluxcd.repository
     ]))
   })
-
-  lifecycle {
-    ignore_changes = [
-      author_name,
-      message,
-      content,
-    ]
-  }
 }

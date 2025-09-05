@@ -6,7 +6,7 @@ metadata:
     kubernetes.io/description: "${pool.description}"
 spec:
   disruption:
-    #consolidateAfter: ${pool.consolidate_after}
+    consolidateAfter: ${pool.consolidate_after}
     expireAfter: ${pool.node_ttl}
      %{~ if length(pool.disruption_budgets) > 0 ~}
      budgets:
@@ -67,4 +67,7 @@ spec:
         %{~ endfor ~}
       nodeClassRef:
         name: ${pool.node_class_ref}
+        group: AKSNodeClass
+        kind: karpenter.azure.com
+
   weight: ${pool.weight}

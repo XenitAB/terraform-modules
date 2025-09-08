@@ -82,3 +82,8 @@ variable "aks_managed_identity" {
   description = "AKS Azure AD managed identity"
   type        = string
 }
+variable "keyvault_name_override" {
+  description = "Override default name of core keyvault"
+  type        = string
+  default     = ""
+}

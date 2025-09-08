@@ -367,3 +367,8 @@ variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string
 }
+variable "log_storage_account_name_override" {
+  description = "Override default name of log storage account"
+  type        = string
+  default     = ""
+}

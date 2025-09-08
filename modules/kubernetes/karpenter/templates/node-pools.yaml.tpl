@@ -67,7 +67,7 @@ spec:
         %{~ endfor ~}
       nodeClassRef:
         name: ${pool.node_class_ref}
-        group: AKSNodeClass
-        kind: karpenter.azure.com
+        kind: AKSNodeClass
+        group: karpenter.azure.com
 
   weight: ${pool.weight}

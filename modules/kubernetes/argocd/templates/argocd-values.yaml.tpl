@@ -258,6 +258,8 @@ configs:
     server.k8sclient.retry.base.backoff: "200"
     # Number of webhook requests processed concurrently (default 50)
     server.webhook.parallelism.limit: "50"
+    # Size of http cookie
+    server.http.cookie.maxnumber: "30"
 
   rbac:
     create: true

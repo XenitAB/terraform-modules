@@ -4,6 +4,7 @@ metadata:
   name: remove-azure-node-spot-taints
 spec:
   match:
+    scope: Cluster
     kinds:
       - apiGroups: [""]
         kinds: ["Node"]

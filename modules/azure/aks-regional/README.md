@@ -61,6 +61,7 @@ No modules.
 | <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | List of DNS Zone to create | `list(string)` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_group_name_separator"></a> [group\_name\_separator](#input\_group\_name\_separator) | Separator for group names | `string` | `"-"` | no |
+| <a name="input_keyvault_name_override"></a> [keyvault\_name\_override](#input\_keyvault\_name\_override) | Override default name of core keyvault | `string` | `""` | no |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The name to use for the deploy | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes | <pre>list(<br/>    object({<br/>      name = string<br/>    })<br/>  )</pre> | n/a | yes |

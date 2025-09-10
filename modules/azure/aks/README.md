@@ -108,6 +108,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name | `string` | n/a | yes |
 | <a name="input_log_eventhub_authorization_rule_id"></a> [log\_eventhub\_authorization\_rule\_id](#input\_log\_eventhub\_authorization\_rule\_id) | The authoritzation rule id for event hub | `string` | n/a | yes |
 | <a name="input_log_eventhub_name"></a> [log\_eventhub\_name](#input\_log\_eventhub\_name) | The eventhub name for k8s logs | `string` | n/a | yes |
+| <a name="input_log_storage_account_name_override"></a> [log\_storage\_account\_name\_override](#input\_log\_storage\_account\_name\_override) | Override default name of log storage account | `string` | `""` | no |
 | <a name="input_name"></a> [name](#input\_name) | The commonName to use for the deploy | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | The namespaces that should be created in Kubernetes | <pre>list(<br/>    object({<br/>      name = string<br/>    })<br/>  )</pre> | n/a | yes |
 | <a name="input_notification_email"></a> [notification\_email](#input\_notification\_email) | Where to send email alerts | `string` | `"DG-Team-DevOps@xenit.se"` | no |

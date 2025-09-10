@@ -63,6 +63,7 @@ module "aks_core" {
     notification_email = "foo"
     dns_zone           = ["bar", "faa"]
   }
+  keyvault_name_override = "something"
   fluxcd_config = {
     git_provider = {
       organization = "my-org"

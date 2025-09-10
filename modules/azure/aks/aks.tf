@@ -19,7 +19,7 @@ data "azurerm_resource_group" "log" {
 }
 
 data "azurerm_storage_account" "log" {
-  name                = "log${var.environment}${var.location_short}${var.core_name}${var.unique_suffix}"
+  name                = var.log_storage_account_name_override == "" ? "log${var.environment}${var.location_short}${var.core_name}${var.unique_suffix}" : var.log_storage_account_name_override
   resource_group_name = data.azurerm_resource_group.log.name
 }
 

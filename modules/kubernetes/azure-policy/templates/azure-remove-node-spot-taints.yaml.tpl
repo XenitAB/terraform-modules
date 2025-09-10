@@ -3,6 +3,10 @@ kind: ModifySet
 metadata:
   name: remove-azure-node-spot-taints
 spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Node"]
   location: "spec.taints"
   applyTo:
     - groups: [""]

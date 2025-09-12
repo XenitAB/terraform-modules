@@ -96,6 +96,9 @@ server:
       cert-manager.io/cluster-issuer: "letsencrypt"
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+      nginx.ingress.kubernetes.io/client-header-buffer-size: 256k
+      nginx.ingress.kubernetes.io/large-client-header-buffers: 4 256k
+      nginx.ingress.kubernetes.io/proxy-buffer-size: 16k
       nginx.ingress.kubernetes.io/limit-whitelist: "${ingress_whitelist_ip}"
     extraTls:
       - hosts:

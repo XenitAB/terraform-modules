@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: Name override aks core keyvault value by @optocoupler in [#1366](https://github.com/XenitAB/terraform-modules/pulls/1366)
+- Feat: name override feature by @optocoupler in [#1365](https://github.com/XenitAB/terraform-modules/pulls/1365)
 - Feat: add tenant support for ArgoCD by @landerss1 in [#1357](https://github.com/XenitAB/terraform-modules/pulls/1357)
 - Feat: add support for external secrets operator by @landerss1 in [#1356](https://github.com/XenitAB/terraform-modules/pulls/1356)
 - Feat: separate subnets per node pool by @landerss1 in [#1350](https://github.com/XenitAB/terraform-modules/pulls/1350)
@@ -24,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: increase acceptable header size for argo ingress by @CalleB3 in [#1367](https://github.com/XenitAB/terraform-modules/pulls/1367)
+- Fix: Upgrade Karpenter and add nodeClassRef parameters by @CalleB3 in [#1364](https://github.com/XenitAB/terraform-modules/pulls/1364)
 - Fix: restore flux related policies by @landerss1 in [#1349](https://github.com/XenitAB/terraform-modules/pulls/1349)
 - Fix: linkerd chart indentation errors by @landerss1 in [#1348](https://github.com/XenitAB/terraform-modules/pulls/1348)
 - Fix: add grafana-k8s-monitoring as a gatekeeper excluded namespace by @landerss1 in [#1342](https://github.com/XenitAB/terraform-modules/pulls/1342)
@@ -33,6 +37,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: Bump argocd helm version by @optocoupler in [#1368](https://github.com/XenitAB/terraform-modules/pulls/1368)
+- Chore: bumping karpenter version by @optocoupler in [#1362](https://github.com/XenitAB/terraform-modules/pulls/1362)
+- Chore: remove life-cycle management on fluxcd tenant git files by @landerss1 in [#1359](https://github.com/XenitAB/terraform-modules/pulls/1359)
 - Chore: upgrade datadog by @landerss1 in [#1358](https://github.com/XenitAB/terraform-modules/pulls/1358)
 - Chore: upgrade supported k8s versions by @landerss1 in [#1353](https://github.com/XenitAB/terraform-modules/pulls/1353)
 - Chore: upgrade karpenter to 1.4.0 by @landerss1 in [#1352](https://github.com/XenitAB/terraform-modules/pulls/1352)

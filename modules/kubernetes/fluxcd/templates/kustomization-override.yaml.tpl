@@ -8,9 +8,11 @@ patches:
       - op: replace
         path: /spec/url
         value: ${url}
-      - op: replace
-        path: /spec/secretRef/name
-        value: flux-system
+      - op: remove
+        path: /spec/secretRef
+      - op: add
+        path: /spec/provider
+        value: azure
     target:
       group: source.toolkit.fluxcd.io
       version: v1
@@ -82,4 +84,3 @@ patches:
         namespace: flux-system
         annotations:
           azure.workload.identity/client-id: ${client_id}
-

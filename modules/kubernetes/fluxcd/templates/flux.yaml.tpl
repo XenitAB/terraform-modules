@@ -24,7 +24,7 @@ spec:
   source:
     repoURL: oci://ghcr.io/fluxcd/charts/flux2
     chart: flux2
-    targetRevision: ${flux_chart_version}
+  targetRevision: 2.16.4
     helm:
       values: |
         imageAutomationController:

@@ -13,24 +13,9 @@ terraform {
   }
 }
 
-locals {
-  # Map terraform git provider type to Flux GitRepository provider field
-  flux_git_provider = var.git_provider.type == "azuredevops" ? "azure" : var.git_provider.type
-}
-
 # ------------------------------------------------------------
 # Argo CD application pattern (no direct in-cluster bootstrap)
 # ------------------------------------------------------------
-
-# Some git providers (or older versions of the xenitab/git provider) can occasionally error
-# with 'stat <path>: no such file or directory' on the very first write into a deep directory
-# hierarchy when multiple modules race to create siblings under the same cluster folder.
-# We create a lightweight root placeholder file so the cluster root directory always exists
-# before we attempt to place app-of-apps or chart files. All other resources depend on this.
-resource "git_repository_file" "flux_root" {
-  path    = "platform/${var.tenant_name}/${var.cluster_id}/.flux-root"
-  content = "# placeholder to ensure directory exists for flux resources\n"
-}
 
 # 1. Flux app-of-apps Application (references chart directory with an Application for flux controllers)
 resource "git_repository_file" "flux_app_of_apps" {
@@ -86,7 +71,7 @@ resource "git_repository_file" "tenant" {
   content            = templatefile("${path.module}/templates/tenant.yaml", {
     environment      = var.environment,
     name             = each.key,
-    provider_type    = local.flux_git_provider,
+    provider_type    = var.git_provider.type,
     url              = (var.git_provider.type == "azuredevops" ?
       "https://dev.azure.com/${var.git_provider.organization}/${each.value.fluxcd.project}/_git/${each.value.fluxcd.repository}" :
       "https://github.com/${var.git_provider.organization}/${each.value.fluxcd.repository}.git"

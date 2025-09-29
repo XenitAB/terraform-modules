@@ -329,7 +329,7 @@ variable "fluxcd_config" {
       project                 = optional(string)
       repository              = string
     }))
-  flux2_chart_version = optional(string)
+    flux2_chart_version = optional(string)
   })
 }
 

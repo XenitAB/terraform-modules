@@ -24,13 +24,25 @@ locals {
 
 # 1. Flux app-of-apps Application (references chart directory with an Application for flux controllers)
 resource "git_repository_file" "flux_app_of_apps" {
-  path    = "platform/${var.tenant_name}/${var.cluster_id}/templates/flux-app.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/flux-app.yaml"
   content = templatefile("${path.module}/templates/flux-app.yaml.tpl", {
-    tenant_name        = var.tenant_name
-    environment        = var.environment
-    cluster_id         = var.cluster_id
-    project            = var.fleet_infra_config.argocd_project_name
-    repo_url           = var.fleet_infra_config.git_repo_url
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
+  })
+}
+
+# Additional Application to manage tenant GitRepository/Kustomization manifests
+resource "git_repository_file" "tenants_app" {
+  path    = "platform/${var.tenant_name}/${var.cluster_id}/templates/tenants-app.yaml"
+  content = templatefile("${path.module}/templates/tenants-app.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
   })
 }
 
@@ -48,13 +60,13 @@ resource "git_repository_file" "flux_values" {
 
 # 4. Flux controllers Application manifest (inside the chart)
 resource "git_repository_file" "flux_application" {
-  path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/templates/flux.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/templates/flux.yaml"
   content = templatefile("${path.module}/templates/flux.yaml.tpl", {
-    tenant_name        = var.tenant_name
-    environment        = var.environment
-    project            = var.fleet_infra_config.argocd_project_name
-    server             = var.fleet_infra_config.k8s_api_server_url
-    client_id          = azurerm_user_assigned_identity.flux_system.client_id
+    tenant_name = var.tenant_name
+    environment = var.environment
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    client_id   = azurerm_user_assigned_identity.flux_system.client_id
   })
 }
 
@@ -68,18 +80,18 @@ resource "git_repository_file" "tenant" {
 
   override_on_create = true
   path               = "tenants/${var.cluster_id}/${each.key}.yaml"
-  content = templatefile("${path.module}/templates/tenant.yaml", {
-    environment   = var.environment,
-    name          = each.key,
-    provider_type = local.flux_git_provider,
-    url = (var.git_provider.type == "azuredevops" ?
+  content            = templatefile("${path.module}/templates/tenant.yaml", {
+    environment      = var.environment,
+    name             = each.key,
+    provider_type    = local.flux_git_provider,
+    url              = (var.git_provider.type == "azuredevops" ?
       "https://dev.azure.com/${var.git_provider.organization}/${each.value.fluxcd.project}/_git/${each.value.fluxcd.repository}" :
       "https://github.com/${var.git_provider.organization}/${each.value.fluxcd.repository}.git"
     ),
-    tenant_path = (each.value.fluxcd.include_tenant_name ?
+    tenant_path      = (each.value.fluxcd.include_tenant_name ?
       "./tenant/${var.environment}/${each.key}" :
       "./tenant/${var.environment}"),
-    crd_block = (each.value.fluxcd.create_crds ? template(<<EOT
+    crd_block        = (each.value.fluxcd.create_crds ? template(<<EOT
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole

@@ -57,7 +57,7 @@ metadata:
 spec:
   type: ${provider_type}
   address: ${url}
-
-# Optional CRD RBAC (injected when create_crds=true)
-#${crd_block}
- 
+%{ if create_crds == true }
+---
+${crd_block}
+%{ endif }

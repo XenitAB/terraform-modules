@@ -59,5 +59,26 @@ spec:
   address: ${url}
 %{ if create_crds == true }
 ---
-${crd_block}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: flux-tenant-${name}-crd-manage
+rules:
+- apiGroups: ["apiextensions.k8s.io"]
+  resources: ["customresourcedefinitions"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: flux-tenant-${name}-crd-manage
+subjects:
+  - apiGroup: ""
+    kind: ServiceAccount
+    name: flux
+    namespace: ${name}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: flux-tenant-${name}-crd-manage
 %{ endif }

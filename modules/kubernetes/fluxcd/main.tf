@@ -54,7 +54,6 @@ resource "git_repository_file" "flux_application" {
     environment        = var.environment
     project            = var.fleet_infra_config.argocd_project_name
     server             = var.fleet_infra_config.k8s_api_server_url
-    flux_chart_version = var.flux2_chart_version
     client_id          = azurerm_user_assigned_identity.flux_system.client_id
   })
 }

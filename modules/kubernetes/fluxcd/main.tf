@@ -50,13 +50,12 @@ resource "git_repository_file" "flux_values" {
 resource "git_repository_file" "flux_application" {
   path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/templates/flux.yaml"
   content = templatefile("${path.module}/templates/flux.yaml.tpl", {
-    tenant_name          = var.tenant_name
-    environment          = var.environment
-    project              = var.fleet_infra_config.argocd_project_name
-    server               = var.fleet_infra_config.k8s_api_server_url
-    flux_chart_version   = var.flux2_chart_version
-    client_id            = azurerm_user_assigned_identity.flux_system.client_id
-    enable_workload_identity_all_controllers = var.enable_workload_identity_all_controllers
+    tenant_name        = var.tenant_name
+    environment        = var.environment
+    project            = var.fleet_infra_config.argocd_project_name
+    server             = var.fleet_infra_config.k8s_api_server_url
+    flux_chart_version = var.flux2_chart_version
+    client_id          = azurerm_user_assigned_identity.flux_system.client_id
   })
 }
 

@@ -106,8 +106,3 @@ variable "aks_managed_identity" {
   type        = string
 }
 
-variable "enable_workload_identity_all_controllers" {
-  description = "If true, create federated identity credentials and annotate service accounts for all Flux controllers (kustomize, helm, notification) in addition to source-controller."
-  type        = bool
-  default     = false
-}

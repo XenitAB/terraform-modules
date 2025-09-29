@@ -329,8 +329,7 @@ variable "fluxcd_config" {
       project                 = optional(string)
       repository              = string
     }))
-    flux2_chart_version                      = optional(string)
-    enable_workload_identity_all_controllers = optional(bool, false)
+  flux2_chart_version = optional(string)
   })
 }
 

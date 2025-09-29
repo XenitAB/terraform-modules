@@ -52,7 +52,6 @@ spec:
             create: true
             annotations:
               azure.workload.identity/client-id: ${client_id}
-%{ if enable_workload_identity_all_controllers ~}
           kustomizeController:
             create: true
             annotations:
@@ -65,7 +64,6 @@ spec:
             create: true
             annotations:
               azure.workload.identity/client-id: ${client_id}
-%{ endif ~}
         podLabels:
           azure.workload.identity/use: "true"
         tolerations: []

@@ -8,9 +8,9 @@ patches:
       - op: replace
         path: /spec/url
         value: ${url}
-      - op: replace
-        path: /spec/secretRef/name
-        value: flux-system
+      - op: add
+        path: /spec/provider
+        value: azure
     target:
       group: source.toolkit.fluxcd.io
       version: v1

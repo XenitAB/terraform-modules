@@ -14,16 +14,10 @@ resource "azurerm_federated_identity_credential" "flux_system" {
 }
 
 # Optional federated credentials for other controllers
-resource "azurerm_federated_identity_credential" "flux_controllers" {
-  for_each = var.enable_workload_identity_all_controllers ? toset(["kustomize-controller", "helm-controller", "notification-controller"]) : []
-
-  name                = "${azurerm_user_assigned_identity.flux_system.name}-${replace(each.key, "-", "_")}"
-  resource_group_name = azurerm_user_assigned_identity.flux_system.resource_group_name
-  parent_id           = azurerm_user_assigned_identity.flux_system.id
-  audience            = ["api://AzureADTokenExchange"]
-  issuer              = var.oidc_issuer_url
-  subject             = "system:serviceaccount:flux-system:${each.key}"
-}
+// All Flux controllers share the same managed identity via a single federated credential bound
+// to the source-controller service account. Other controllers' service accounts are annotated
+// with the same client-id (see flux.yaml.tpl). Azure workload identity does not require a distinct
+// federated credential per service account as long as they don't initiate token exchange directly.
 
 resource "azurerm_role_assignment" "flux_system_acr" {
   scope                = data.azurerm_container_registry.acr.id

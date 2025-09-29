@@ -309,8 +309,7 @@ module "fluxcd" {
     fluxcd = ns.flux
   }]
   # Optional toggles
-  flux2_chart_version                         = try(var.fluxcd_config.flux2_chart_version, null)
-  enable_workload_identity_all_controllers    = try(var.fluxcd_config.enable_workload_identity_all_controllers, false)
+  flux2_chart_version = try(var.fluxcd_config.flux2_chart_version, null)
 
   providers = {
     git = git.tenant

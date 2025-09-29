@@ -18,23 +18,31 @@ variable "git_provider" {
       installation_id = number
       private_key     = string
     }))
-    azure_devops = optional(object({
-      pat = string
-    }))
   })
 
   validation {
     condition     = contains(["github", "azuredevops"], var.git_provider.type)
-    error_message = "Invalid provider type: ${var.git_provider.type}. Allowed vallues: ['github', 'azuredevops']"
+    error_message = "Invalid provider type: ${var.git_provider.type}. Allowed values: ['github', 'azuredevops']"
   }
 }
 
-variable "bootstrap" {
-  description = "Repository configuration to use for bootstrap."
+variable "flux2_chart_version" {
+  description = "Flux2 Helm chart version to deploy via Argo CD Application."
+  type        = string
+  default     = "2.13.0"
+}
+
+variable "tenant_name" {
+  description = "Tenant name used for namespacing Argo CD applications."
+  type        = string
+}
+
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration for Argo CD integration."
   type = object({
-    disable_secret_creation = optional(bool, true)
-    project                 = optional(string)
-    repository              = string
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
   })
 }
 
@@ -96,4 +104,10 @@ variable "acr_name_override" {
 variable "aks_managed_identity" {
   description = "AKS Azure AD managed identity"
   type        = string
+}
+
+variable "enable_workload_identity_all_controllers" {
+  description = "If true, create federated identity credentials and annotate service accounts for all Flux controllers (kustomize, helm, notification) in addition to source-controller."
+  type        = bool
+  default     = false
 }

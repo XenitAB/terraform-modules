@@ -290,23 +290,27 @@ module "fluxcd" {
 
   source = "../../kubernetes/fluxcd"
 
-  environment          = var.environment
-  cluster_id           = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
-  git_provider         = var.fluxcd_config.git_provider
-  bootstrap            = var.fluxcd_config.bootstrap
-  location_short       = var.location_short
-  oidc_issuer_url      = var.oidc_issuer_url
-  resource_group_name  = data.azurerm_resource_group.this.name
-  acr_name_override    = var.acr_name_override
+  environment         = var.environment
+  cluster_id          = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
+  git_provider        = var.fluxcd_config.git_provider
+  tenant_name         = var.platform_config.tenant_name
+  fleet_infra_config  = var.platform_config.fleet_infra_config
+  location_short      = var.location_short
+  oidc_issuer_url     = var.oidc_issuer_url
+  resource_group_name = data.azurerm_resource_group.this.name
+  acr_name_override   = var.acr_name_override
   aks_managed_identity = data.azuread_group.aks_managed_identity.id
-  aks_name             = var.name
-  location             = data.azurerm_resource_group.this.location
-  unique_suffix        = var.unique_suffix
+  aks_name            = var.name
+  location            = data.azurerm_resource_group.this.location
+  unique_suffix       = var.unique_suffix
   namespaces = [for ns in var.namespaces : {
     name   = ns.name
     labels = ns.labels
     fluxcd = ns.flux
   }]
+  # Optional toggles
+  flux2_chart_version                         = try(var.fluxcd_config.flux2_chart_version, null)
+  enable_workload_identity_all_controllers    = try(var.fluxcd_config.enable_workload_identity_all_controllers, false)
 
   providers = {
     git = git.tenant

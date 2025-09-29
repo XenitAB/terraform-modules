@@ -1,62 +1,110 @@
+## Overview
+
+This module now provisions Flux v2 via a GitOps-first pattern using Argo CD Applications and Git commits only. It no longer performs an imperative bootstrap with the Flux provider nor deploys `git-auth-proxy`. All cluster-side Flux controllers are installed by Argo CD rendering the official `flux2` Helm chart (OCI) referenced from a generated Application manifest.
+
+Workload Identity (Azure AD workload / OIDC) is supported for the `source-controller` by default and can optionally be enabled for other controllers.
+
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | 1.4.0 |
-| <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.23.0 |
+| terraform | >= 1.3.0 |
+| azurerm   | 4.19.0 |
+| git       | >=0.0.4 |
 
-## Providers
+## Providers Used
 
-| Name | Version |
-|------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
-| <a name="provider_flux"></a> [flux](#provider\_flux) | 1.4.0 |
-| <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
+| Provider | Purpose |
+|----------|---------|
+| azurerm  | Identity + role assignments |
+| git      | Commit generated Argo/Flux manifests |
 
-## Modules
+## What Gets Generated in the Git Repository
 
-No modules.
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [azurerm_federated_identity_credential.flux_system](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/federated_identity_credential) | resource |
-| [azurerm_role_assignment.flux_managed](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.flux_system_acr](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
-| [azurerm_user_assigned_identity.flux_system](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/user_assigned_identity) | resource |
-| [flux_bootstrap_git.this](https://registry.terraform.io/providers/fluxcd/flux/1.4.0/docs/resources/bootstrap_git) | resource |
-| [git_repository_file.tenant](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
-| [helm_release.git_auth_proxy](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
-| [kubernetes_namespace.flux_system](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
-| [kubernetes_namespace.git_auth_proxy](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
-| [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/container_registry) | data source |
-| [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/resource_group) | data source |
+```
+platform/<tenant_name>/<cluster_id>/templates/flux-app.yaml                # App-of-apps Argo CD Application
+platform/<tenant_name>/<cluster_id>/argocd-applications/flux/Chart.yaml     # Meta chart scaffold
+platform/<tenant_name>/<cluster_id>/argocd-applications/flux/values.yaml    # Placeholder values
+platform/<tenant_name>/<cluster_id>/argocd-applications/flux/templates/flux.yaml  # Flux controllers Argo CD Application
+tenants/<cluster_id>/<tenant>.yaml                                         # Flux multitenancy (GitRepository/Kustomization/Provider/SA)
+```
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_acr_name_override"></a> [acr\_name\_override](#input\_acr\_name\_override) | Override default name of ACR | `string` | `""` | no |
-| <a name="input_aks_managed_identity"></a> [aks\_managed\_identity](#input\_aks\_managed\_identity) | AKS Azure AD managed identity | `string` | n/a | yes |
-| <a name="input_aks_name"></a> [aks\_name](#input\_aks\_name) | The commonName to use for the deploy | `string` | n/a | yes |
-| <a name="input_bootstrap"></a> [bootstrap](#input\_bootstrap) | Repository configuration to use for bootstrap. | <pre>object({<br/>    disable_secret_creation = optional(bool, true)<br/>    project                 = optional(string)<br/>    repository              = string<br/>  })</pre> | n/a | yes |
-| <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
-| <a name="input_environment"></a> [environment](#input\_environment) | Environment name of the cluster. | `string` | n/a | yes |
-| <a name="input_git_provider"></a> [git\_provider](#input\_git\_provider) | Git provider for repositories. | <pre>object({<br/>    organization = string<br/>    type         = optional(string, "azuredevops")<br/>    github = optional(object({<br/>      application_id  = number<br/>      installation_id = number<br/>      private_key     = string<br/>    }))<br/>    azure_devops = optional(object({<br/>      pat = string<br/>    }))<br/>  })</pre> | n/a | yes |
-| <a name="input_location"></a> [location](#input\_location) | The Azure region name. | `string` | n/a | yes |
-| <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name. | `string` | n/a | yes |
-| <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | Flux tenants to add. | <pre>list(<br/>    object({<br/>      name   = string<br/>      labels = optional(map(string), null)<br/>      fluxcd = optional(object({<br/>        provider            = string<br/>        project             = optional(string)<br/>        repository          = string<br/>        include_tenant_name = optional(bool, false)<br/>        create_crds         = optional(bool, true)<br/>      }))<br/>    })<br/>  )</pre> | `[]` | no |
-| <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | Kubernetes OIDC issuer URL for workload identity. | `string` | n/a | yes |
-| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The Azure resource group name | `string` | n/a | yes |
-| <a name="input_unique_suffix"></a> [unique\_suffix](#input\_unique\_suffix) | Unique suffix that is used in globally unique resources names | `string` | `""` | no |
+| acr_name_override | Override default name of ACR | `string` | `""` | no |
+| aks_managed_identity | AKS Azure AD managed identity | `string` | yes | yes |
+| aks_name | The commonName to use for the deploy | `string` | n/a | yes |
+| cluster_id | Unique identifier for the cluster | `string` | n/a | yes |
+| environment | Environment name | `string` | n/a | yes |
+| flux2_chart_version | Flux2 Helm chart version | `string` | `2.13.0` | no |
+| git_provider | Git provider config (github or azuredevops). PAT no longer used; Azure DevOps access must rely on public repos or future managed identity integration. | object | n/a | yes |
+| location | Azure region | `string` | n/a | yes |
+| location_short | Azure region short name | `string` | n/a | yes |
+| namespaces | Flux tenant definitions | list(object) | `[]` | no |
+| oidc_issuer_url | AKS OIDC issuer URL | `string` | n/a | yes |
+| resource_group_name | Resource group name | `string` | n/a | yes |
+| tenant_name | Logical tenant name used for Argo CD scoping | `string` | n/a | yes |
+| fleet_infra_config | Argo CD/fleet infra settings (repo URL, project, api server) | object | n/a | yes |
+| unique_suffix | Optional uniqueness affix for global names | `string` | `""` | no |
+| enable_workload_identity_all_controllers | Add federated creds & annotations for all controllers | `bool` | `false` | no |
+
+### namespaces.fluxcd object shape
+```
+fluxcd = {
+	provider            = string            # "github" | "azuredevops"
+	project             = optional(string)  # Azure DevOps project (PAT not required; repository must be accessible over anonymous https)
+	repository          = string            # Repo name
+	include_tenant_name = optional(bool, false)
+	create_crds         = optional(bool, true)
+}
+```
+
+## Workload Identity
+
+The module creates one user-assigned managed identity plus a federated credential for:
+- `system:serviceaccount:flux-system:source-controller` (always)
+- Optionally for: `kustomize-controller`, `helm-controller`, `notification-controller` when `enable_workload_identity_all_controllers = true`.
+
+Helm values inject `azure.workload.identity/client-id` annotations onto corresponding ServiceAccounts.
+
+## Migration Notes (from previous version)
+
+| Old Concept | New Equivalent |
+|-------------|----------------|
+| flux_bootstrap_git resource | Argo CD Application (`flux.yaml` inside chart) installing `flux2` chart |
+| git-auth-proxy | Removed (direct URLs used) |
+| kustomization-override patch | Replaced by Helm chart + static Application values |
+| bootstrap.* inputs | Deprecated (ignored) |
+
+If you previously passed `bootstrap` you may safely retain it in calling code; it is ignored. Remove it when convenient.
 
 ## Outputs
 
-No outputs.
+None currently. Potential future outputs: identity client id, tenant manifest paths.
+
+## Future Enhancements
+- Optional output for managed identity client ID
+- Additional Helm value overrides via module input
+- Support for image reflector/automation controllers toggle
+
+## Example Usage
+```
+module "fluxcd" {
+	source              = "../../kubernetes/fluxcd"
+	environment         = var.environment
+	cluster_id          = local.cluster_id
+	tenant_name         = var.platform_config.tenant_name
+	fleet_infra_config  = var.platform_config.fleet_infra_config
+	git_provider        = var.fluxcd_config.git_provider
+	oidc_issuer_url     = var.oidc_issuer_url
+	resource_group_name = data.azurerm_resource_group.this.name
+	location            = data.azurerm_resource_group.this.location
+	location_short      = var.location_short
+	aks_name            = var.name
+	aks_managed_identity = data.azuread_group.aks_managed_identity.id
+	namespaces          = [for ns in var.namespaces : { name = ns.name, labels = ns.labels, fluxcd = ns.flux }]
+	enable_workload_identity_all_controllers = true
+}
+```

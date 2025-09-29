@@ -322,15 +322,15 @@ variable "fluxcd_config" {
         installation_id = number
         private_key     = string
       }))
-      azure_devops = optional(object({
-        pat = string
-      }))
     })
-    bootstrap = object({
+    # Deprecated: bootstrap (legacy direct install) - retained for backward compatibility parsing
+    bootstrap = optional(object({
       disable_secret_creation = optional(bool, true)
       project                 = optional(string)
       repository              = string
-    })
+    }))
+    flux2_chart_version                      = optional(string)
+    enable_workload_identity_all_controllers = optional(bool, false)
   })
 }
 

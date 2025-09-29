@@ -32,13 +32,13 @@ resource "git_repository_file" "flux_app_of_apps" {
 # 2. Chart.yaml for our lightweight meta chart that embeds an Argo Application for flux
 resource "git_repository_file" "flux_chart" {
   path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/Chart.yaml"
-  content = templatefile("${path.module}/templates/flux-Chart.yaml.tpl", {})
+  content = templatefile("${path.module}/templates/chart.yaml", {})
 }
 
 # 3. values.yaml (currently minimal, placeholder for future overrides)
 resource "git_repository_file" "flux_values" {
   path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/values.yaml"
-  content = templatefile("${path.module}/templates/flux-values.yaml.tpl", {})
+  content = templatefile("${path.module}/templates/values.yaml", {})
 }
 
 # 4. Flux controllers Application manifest (inside the chart)

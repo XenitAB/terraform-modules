@@ -36,7 +36,7 @@ resource "git_repository_file" "flux_app_of_apps" {
 
 # Additional Application to manage tenant GitRepository/Kustomization manifests
 resource "git_repository_file" "tenants_app" {
-  path    = "platform/${var.tenant_name}/${var.cluster_id}/templates/tenants-app.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/tenants-app.yaml"
   content = templatefile("${path.module}/templates/tenants-app.yaml.tpl", {
     tenant_name = var.tenant_name
     environment = var.environment
@@ -80,18 +80,18 @@ resource "git_repository_file" "tenant" {
 
   override_on_create = true
   path               = "tenants/${var.cluster_id}/${each.key}.yaml"
-  content            = templatefile("${path.module}/templates/tenant.yaml", {
-    environment      = var.environment,
-    name             = each.key,
-    provider_type    = local.flux_git_provider,
-    url              = (var.git_provider.type == "azuredevops" ?
+  content = templatefile("${path.module}/templates/tenant.yaml", {
+    environment   = var.environment,
+    name          = each.key,
+    provider_type = local.flux_git_provider,
+    url = (var.git_provider.type == "azuredevops" ?
       "https://dev.azure.com/${var.git_provider.organization}/${each.value.fluxcd.project}/_git/${each.value.fluxcd.repository}" :
       "https://github.com/${var.git_provider.organization}/${each.value.fluxcd.repository}.git"
     ),
-    tenant_path      = (each.value.fluxcd.include_tenant_name ?
+    tenant_path = (each.value.fluxcd.include_tenant_name ?
       "./tenant/${var.environment}/${each.key}" :
-      "./tenant/${var.environment}"),
-    crd_block        = (each.value.fluxcd.create_crds ? template(<<EOT
+    "./tenant/${var.environment}"),
+    crd_block = (each.value.fluxcd.create_crds ? template(<<EOT
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole

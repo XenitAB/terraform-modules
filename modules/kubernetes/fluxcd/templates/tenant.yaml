@@ -32,8 +32,6 @@ metadata:
 spec:
   interval: 1m
   url: ${url}
-  secretRef:
-    name: flux
   ref:
     branch: main
 ---
@@ -45,11 +43,7 @@ metadata:
 spec:
   serviceAccountName: flux
   interval: 5m
-%{ if include_tenant_name == true }
-  path: ./tenant/${environment}/${name}
-%{ else }
-  path: ./tenant/${environment}
-%{ endif }
+  path: ${tenant_path}
   sourceRef:
     kind: GitRepository
     name: ${name}
@@ -63,9 +57,8 @@ metadata:
 spec:
   type: ${provider_type}
   address: ${url}
-  secretRef:
-    name: flux
-%{ if create_crds == true }
+---
+${crd_block}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -85,8 +78,4 @@ subjects:
     kind: ServiceAccount
     name: flux
     namespace: ${name}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: flux-tenant-${name}-crd-manage
-%{ endif }
+ 

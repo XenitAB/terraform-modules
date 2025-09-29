@@ -32,7 +32,7 @@ resource "git_repository_file" "flux_app_of_apps" {
 # 2. Chart.yaml for our lightweight meta chart that embeds an Argo Application for flux
 resource "git_repository_file" "flux_chart" {
   path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/Chart.yaml"
-  content = templatefile("${path.module}/templates/chart.yaml", {})
+  content = templatefile("${path.module}/templates/Chart.yaml", {})
 }
 
 # 3. values.yaml (currently minimal, placeholder for future overrides)
@@ -74,31 +74,7 @@ resource "git_repository_file" "tenant" {
     tenant_path      = (each.value.fluxcd.include_tenant_name ?
       "./tenant/${var.environment}/${each.key}" :
       "./tenant/${var.environment}"),
-    crd_block        = (each.value.fluxcd.create_crds ? template(<<EOT
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: flux-tenant-${each.key}-crd-manage
-rules:
-- apiGroups: ["apiextensions.k8s.io"]
-  resources: ["customresourcedefinitions"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: flux-tenant-${each.key}-crd-manage
-subjects:
-  - apiGroup: ""
-    kind: ServiceAccount
-    name: flux
-    namespace: ${each.key}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: flux-tenant-${each.key}-crd-manage
-EOT
-    , {}) : "")
+    create_crds         = each.value.fluxcd.create_crds,
+
   })
 }

@@ -22,8 +22,19 @@ locals {
 # Argo CD application pattern (no direct in-cluster bootstrap)
 # ------------------------------------------------------------
 
+# Some git providers (or older versions of the xenitab/git provider) can occasionally error
+# with 'stat <path>: no such file or directory' on the very first write into a deep directory
+# hierarchy when multiple modules race to create siblings under the same cluster folder.
+# We create a lightweight root placeholder file so the cluster root directory always exists
+# before we attempt to place app-of-apps or chart files. All other resources depend on this.
+resource "git_repository_file" "flux_root" {
+  path    = "platform/${var.tenant_name}/${var.cluster_id}/.flux-root"
+  content = "# placeholder to ensure directory exists for flux resources\n"
+}
+
 # 1. Flux app-of-apps Application (references chart directory with an Application for flux controllers)
 resource "git_repository_file" "flux_app_of_apps" {
+  depends_on = [git_repository_file.flux_root]
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/flux-app.yaml"
   content = templatefile("${path.module}/templates/flux-app.yaml.tpl", {
     tenant_name = var.tenant_name
@@ -36,18 +47,21 @@ resource "git_repository_file" "flux_app_of_apps" {
 
 # 2. Chart.yaml for our lightweight meta chart that embeds an Argo Application for flux
 resource "git_repository_file" "flux_chart" {
+  depends_on = [git_repository_file.flux_root]
   path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/Chart.yaml"
   content = templatefile("${path.module}/templates/flux-Chart.yaml.tpl", {})
 }
 
 # 3. values.yaml (currently minimal, placeholder for future overrides)
 resource "git_repository_file" "flux_values" {
+  depends_on = [git_repository_file.flux_root]
   path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/values.yaml"
   content = templatefile("${path.module}/templates/flux-values.yaml.tpl", {})
 }
 
 # 4. Flux controllers Application manifest (inside the chart)
 resource "git_repository_file" "flux_application" {
+  depends_on = [git_repository_file.flux_chart, git_repository_file.flux_values]
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/templates/flux.yaml"
   content = templatefile("${path.module}/templates/flux.yaml.tpl", {
     tenant_name = var.tenant_name
@@ -60,6 +74,7 @@ resource "git_repository_file" "flux_application" {
 
 # 5. Tenants definitions (GitRepositories + Kustomizations)
 resource "git_repository_file" "tenant" {
+  depends_on = [git_repository_file.flux_root]
   for_each = {
     for ns in var.namespaces :
     ns.name => ns

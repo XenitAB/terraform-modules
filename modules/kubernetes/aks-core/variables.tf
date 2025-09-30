@@ -93,6 +93,8 @@ variable "argocd_config" {
           namespace   = string
           repo_url    = string
           repo_path   = string
+          github_app_id          = string
+          github_installation_id = string
           secret_name = string
         }))
       }))

@@ -35,6 +35,7 @@ spec:
 
         # Enable required controllers
         sourceController:
+          priorityClassName: "platform-medium"
           create: true
           resources:
             requests:
@@ -51,6 +52,7 @@ spec:
             azure.workload.identity/use: "true"
 
         kustomizeController:
+          priorityClassName: "platform-medium"
           create: true
           resources:
             requests:
@@ -65,6 +67,7 @@ spec:
             azure.workload.identity/use: "true"
 
         helmController:
+          priorityClassName: "platform-medium"
           create: true
           resources:
             requests:
@@ -79,6 +82,7 @@ spec:
             azure.workload.identity/use: "true"
 
         notificationController:
+          priorityClassName: "platform-medium"
           create: true
           resources:
             requests:

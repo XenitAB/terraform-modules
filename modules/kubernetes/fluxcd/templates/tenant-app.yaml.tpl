@@ -24,4 +24,4 @@ spec:
   source:
     repoURL: ${repo_url}
     targetRevision: HEAD
-    path: platform/${tenant_name}/${cluster_id}/argocd-applications/flux/tenants
+    path: platform/${tenant_name}/${cluster_id}/argocd-applications/flux/tenants/${name}

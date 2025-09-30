@@ -61,7 +61,7 @@ resource "git_repository_file" "tenant_app" {
   }
 
   override_on_create = true
-  path               = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/tenants/${each.key}/${each.key}-app.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/templates/${each.key}-app.yaml"
   content            = templatefile("${path.module}/templates/tenant-app.yaml.tpl", {
     name             = each.key,
     tenant_name = var.tenant_name

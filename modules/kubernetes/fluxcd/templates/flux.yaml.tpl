@@ -22,7 +22,7 @@ spec:
       - ApplyOutOfSyncOnly=true
       - Replace=true
   source:
-    repoURL: oci://ghcr.io/fluxcd/charts/flux2
+    repoURL: https://fluxcd-community.github.io/helm-charts
     chart: flux2
     targetRevision: 2.16.4
     helm:

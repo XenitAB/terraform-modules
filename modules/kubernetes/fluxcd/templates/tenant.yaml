@@ -34,20 +34,7 @@ spec:
   url: ${url}
   ref:
     branch: main
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: ${name}
-  namespace: ${name}
-spec:
-  serviceAccountName: flux
-  interval: 5m
-  path: ${tenant_path}
-  sourceRef:
-    kind: GitRepository
-    name: ${name}
-  prune: true
+  provider: azure
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Provider

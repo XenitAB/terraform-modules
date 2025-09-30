@@ -27,43 +27,84 @@ spec:
     targetRevision: 2.16.4
     helm:
       values: |
+        # Disable image automation components we don't use currently
         imageAutomationController:
           create: false
-        imageReflectorController:
+        imageReflectionController:
           create: false
-        notificationController:
-          create: true
-        helmController:
-          create: true
-        kustomizeController:
-          create: true
+
+        # Enable required controllers
         sourceController:
           create: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          serviceAccount:
+            create: true
+            automount: true
+            annotations:
+              azure.workload.identity/client-id: ${client_id}
+          annotations:
+            azure.workload.identity/client-id: ${client_id}
+          labels:
+            azure.workload.identity/use: "true"
+
+        kustomizeController:
+          create: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          serviceAccount:
+            create: true
+            automount: true
+            annotations:
+              azure.workload.identity/client-id: ${client_id}
+          labels:
+            azure.workload.identity/use: "true"
+
+        helmController:
+          create: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          serviceAccount:
+            create: true
+            automount: true
+            annotations:
+              azure.workload.identity/client-id: ${client_id}
+          labels:
+            azure.workload.identity/use: "true"
+
+        notificationController:
+          create: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          serviceAccount:
+            create: true
+            automount: true
+            annotations:
+              azure.workload.identity/client-id: ${client_id}
+          labels:
+            azure.workload.identity/use: "true"
+
+        # Multi-tenancy lockdown (optional): only enable if you want cluster-admin scoped SA restriction
         multitenancy:
           enabled: true
-          managedTenants:
-            enabled: true
-        resources:
-          requests:
-            cpu: 50m
-            memory: 128Mi
-        serviceAccounts:
-          sourceController:
-            create: true
-            annotations:
-              azure.workload.identity/client-id: ${client_id}
-          kustomizeController:
-            create: true
-            annotations:
-              azure.workload.identity/client-id: ${client_id}
-          helmController:
-            create: true
-            annotations:
-              azure.workload.identity/client-id: ${client_id}
-          notificationController:
-            create: true
-            annotations:
-              azure.workload.identity/client-id: ${client_id}
-        podLabels:
-          azure.workload.identity/use: "true"
+          defaultServiceAccount: "default"
+          privileged: true
+
+        # Global log level (matches chart key)
+        logLevel: info
+
+        # Optional: add a PodMonitor via values if needed later (kept off by default)
+        prometheus:
+          podMonitor:
+            create: false
+
+        # Leave tolerations blank (chart expects an array)
         tolerations: []

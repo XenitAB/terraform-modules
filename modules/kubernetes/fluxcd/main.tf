@@ -53,7 +53,27 @@ resource "git_repository_file" "flux_application" {
   })
 }
 
-# 5. Tenants definitions (GitRepositories + Kustomizations)
+resource "git_repository_file" "tenant_app" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.fluxcd != null
+  }
+
+  override_on_create = true
+  path               = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/tenants/${each.key}/${each.key}-app.yaml"
+  content            = templatefile("${path.module}/templates/tenant-app.yaml.tpl", {
+    name             = each.key,
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
+    environment = var.environment
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
+
+  })
+}
+
 resource "git_repository_file" "tenant" {
   for_each = {
     for ns in var.namespaces :
@@ -62,7 +82,7 @@ resource "git_repository_file" "tenant" {
   }
 
   override_on_create = true
-  path               = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/templates/${each.key}.yaml"
+  path               = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/tenants/${each.key}/${each.key}.yaml"
   content            = templatefile("${path.module}/templates/tenant.yaml", {
     environment      = var.environment,
     name             = each.key,

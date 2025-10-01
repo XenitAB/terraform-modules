@@ -717,7 +717,23 @@ resource "azurerm_policy_set_definition" "xks" {
     PARAMETERS
 
   # Custom definitions
-
+  # The Value for namespaces before is empty because it should apply to all namespaces.
+  policy_definition_reference {
+    policy_definition_id = azurerm_policy_definition.k8s_pod_disruption_budget.id
+    parameter_values     = <<VALUE
+    {
+      "effect": {
+        "value": "deny"
+      },
+      "namespaces": {
+        "value": ""
+      },
+      "excludedNamespaces": {
+        "value": "[concat(parameters('excludedNamespaces'),createArray('ambassador','azureserviceoperator-system'))]"
+      }
+    }
+    VALUE
+  }
   policy_definition_reference {
     policy_definition_id = azurerm_policy_definition.azure_remove_node_spot_taints.id
   }
@@ -1043,3 +1059,82 @@ resource "azurerm_resource_policy_assignment" "this" {
 }
 
 
+resource "azurerm_policy_definition" "k8s_pod_disruption_budget" {
+  name         = "PDBdeploymentsMustMatch"
+  display_name = "PDB definitions must match replicaset count"
+  policy_type  = "Custom"
+  mode         = "Microsoft.Kubernetes.Data"
+
+  metadata = <<METADATA
+    {
+      "category": "XKS"
+    }
+    METADATA
+
+  policy_rule = <<POLICY_RULE
+    {
+      "if": {
+        "field": "type",
+        "in": [
+          "Microsoft.ContainerService/managedClusters"
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "templateInfo": {
+            "sourceType": "Base64Encoded",
+            "content":  "${local.k8s_pod_disruption_budget}" 
+          },
+          "apiGroups": [
+            "apps",
+            "policy"
+          ],
+          "kinds": [
+            "Deployment",
+            "ReplicaSet",
+            "StatefulSet",
+            "PodDisruptionBudget"
+          ],
+          "namespaces": "[parameters('namespaces')]",
+          "excludedNamespaces": "[parameters('excludedNamespaces')]"
+        }
+      }
+    }
+    POLICY_RULE
+
+  # Not including labelSelector parameter
+  parameters = <<PARAMETERS
+    {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
+        },
+        "allowedValues": [
+          "audit",
+          "deny",
+          "disabled"
+        ],
+        "defaultValue": "deny"
+      },
+      "excludedNamespaces": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Namespace exclusions",
+          "description": "List of Kubernetes namespaces to exclude from policy evaluation."
+        },
+        "defaultValue": []
+      },
+      "namespaces": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Namespace inclusions",
+          "description": "List of Kubernetes namespaces to only include in policy evaluation. An empty list means the policy is applied to all resources in all namespaces."
+        },
+        "defaultValue": []
+      }
+    }
+    PARAMETERS
+}

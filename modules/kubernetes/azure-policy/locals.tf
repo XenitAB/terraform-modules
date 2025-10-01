@@ -40,4 +40,9 @@ locals {
     templatefile("${path.module}/templates/k8s-secrets-store-csi-unique-volume.yaml.tpl", {
     })
   )
+  k8s_pod_disruption_budget = base64encode(
+    templatefile("${path.module}/templates/k8s-pod-disruption-budget.yaml.tpl", {
+    })
+  )
+
 }

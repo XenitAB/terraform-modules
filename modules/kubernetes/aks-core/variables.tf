@@ -429,8 +429,9 @@ variable "grafana_k8s_monitor_config" {
 }
 
 variable "keyvault_name_override" {
-  description = "Override for keyvult name"
+  description = "Override for keyvault name"
   type        = string
+  default     = ""
 }
 variable "group_name_prefix" {
   description = "Prefix for Azure AD groups"

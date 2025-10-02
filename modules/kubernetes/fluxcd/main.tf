@@ -91,10 +91,8 @@ resource "git_repository_file" "tenant" {
       "https://dev.azure.com/${var.git_provider.organization}/${each.value.fluxcd.project}/_git/${each.value.fluxcd.repository}" :
       "https://github.com/${var.git_provider.organization}/${each.value.fluxcd.repository}.git"
     ),
-    tenant_path      = (each.value.fluxcd.include_tenant_name ?
-      "./tenant/${var.environment}/${each.key}" :
-      "./tenant/${var.environment}"),
-    create_crds         = each.value.fluxcd.create_crds,
+    tenant_path      = (each.value.fluxcd.include_tenant_name ? "./tenant/${var.environment}/${each.key}" : "./tenant/${var.environment}"),
+    create_crds      = each.value.fluxcd.create_crds,
 
   })
 }

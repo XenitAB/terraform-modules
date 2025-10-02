@@ -44,10 +44,10 @@ data:
   azure.json: >-
     ${base64encode(<<EOT
 {
-  "tenantId": "${tenant_id}",
-  "subscriptionId": "${subscription_id}",
-  "resourceGroup": "${resource_group}",
-  "useWorkloadIdentityExtension": true
+"tenantId": "${tenant_id}",
+"subscriptionId": "${subscription_id}",
+"resourceGroup": "${resource_group}",
+"useWorkloadIdentityExtension": true
 }
 EOT
 )}

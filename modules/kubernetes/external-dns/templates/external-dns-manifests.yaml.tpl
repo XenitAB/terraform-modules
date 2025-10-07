@@ -34,7 +34,7 @@ roleRef:
   name: logs-external-dns
 ---
 %{ endfor }
----
+
 apiVersion: v1
 kind: Secret
 metadata:

@@ -72,7 +72,7 @@ resource "git_repository_file" "external_dns_extras" {
     server              = var.fleet_infra_config.k8s_api_server_url
     client_id           = azurerm_user_assigned_identity.external_dns.client_id
     tenant_id           = azurerm_user_assigned_identity.external_dns.tenant_id
-    resource_group_name = var.global_resource_group_name
+    global_resource_group_name = var.global_resource_group_name
 
   })
 }

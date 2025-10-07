@@ -84,6 +84,6 @@ resource "git_repository_file" "external_dns_manifests" {
     namespaces            = var.namespaces
     tenant_id             = azurerm_user_assigned_identity.external_dns.tenant_id
     subscription_id       = var.subscription_id
-    global_resource_group = var.global_resource_group_name
+    global_resource_group = data.azurerm_resource_group.global.name
   })
 }

@@ -46,7 +46,7 @@ data:
 {
 "tenantId": "${tenant_id}",
 "subscriptionId": "${subscription_id}",
-"resourceGroup": "${resource_group}",
+"resourceGroup": "${global_resource_group}",
 "useWorkloadIdentityExtension": true
 }
 EOT

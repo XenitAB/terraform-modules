@@ -80,10 +80,10 @@ resource "git_repository_file" "external_dns_extras" {
 resource "git_repository_file" "external_dns_manifests" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/external-dns/manifests/external-dns-extras.yaml"
   content = templatefile("${path.module}/templates/external-dns-manifests.yaml.tpl", {
-    aad_groups                 = var.aad_groups
-    namespaces                 = var.namespaces
-    tenant_id                  = azurerm_user_assigned_identity.external_dns.tenant_id
-    subscription_id            = var.subscription_id
-    global_resource_group_name = var.global_resource_group_name
+    aad_groups            = var.aad_groups
+    namespaces            = var.namespaces
+    tenant_id             = azurerm_user_assigned_identity.external_dns.tenant_id
+    subscription_id       = var.subscription_id
+    global_resource_group = var.global_resource_group_name
   })
 }

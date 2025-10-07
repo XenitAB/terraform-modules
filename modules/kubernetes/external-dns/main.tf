@@ -64,19 +64,26 @@ resource "git_repository_file" "external_dns" {
 resource "git_repository_file" "external_dns_extras" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/external-dns/templates/external-dns-extras.yaml"
   content = templatefile("${path.module}/templates/external-dns-extras.yaml.tpl", {
-    tenant_name = var.tenant_name
-    environment = var.environment
-    cluster_id  = var.cluster_id
-    project     = var.fleet_infra_config.argocd_project_name
-    repo_url    = var.fleet_infra_config.git_repo_url
-    server      = var.fleet_infra_config.k8s_api_server_url
+    tenant_name         = var.tenant_name
+    environment         = var.environment
+    cluster_id          = var.cluster_id
+    project             = var.fleet_infra_config.argocd_project_name
+    repo_url            = var.fleet_infra_config.git_repo_url
+    server              = var.fleet_infra_config.k8s_api_server_url
+    client_id           = azurerm_user_assigned_identity.external_dns.client_id
+    tenant_id           = azurerm_user_assigned_identity.external_dns.tenant_id
+    resource_group_name = var.global_resource_group_name
+
   })
 }
 
 resource "git_repository_file" "external_dns_manifests" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/external-dns/manifests/external-dns-extras.yaml"
   content = templatefile("${path.module}/templates/external-dns-manifests.yaml.tpl", {
-    aad_groups = var.aad_groups
-    namespaces = var.namespaces
+    aad_groups            = var.aad_groups
+    namespaces            = var.namespaces
+    tenant_id             = azurerm_user_assigned_identity.external_dns.tenant_id
+    subscription_id       = var.subscription_id
+    global_resource_group = data.azurerm_resource_group.global.name
   })
 }

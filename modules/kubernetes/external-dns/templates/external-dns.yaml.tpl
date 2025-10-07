@@ -22,12 +22,13 @@ spec:
     - ApplyOutOfSyncOnly=true
     - Replace=true
   source:
-    repoURL: registry-1.docker.io/bitnamicharts
-    targetRevision: 8.7.8
+    repoURL: https://kubernetes-sigs.github.io/external-dns/
+    targetRevision: 1.19.0
     chart: external-dns
     helm:
       valuesObject:
-        provider: "azure"
+        provider:
+          name: azure
         sources:
           %{~ for item in sources ~}
           - "${item}"
@@ -43,15 +44,22 @@ spec:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
         serviceAccount:
+          labels:
+            azure.workload.identity/use: "true"
           annotations:
             azure.workload.identity/client-id: ${client_id}
         podLabels: 
           azure.workload.identity/use: "true"
-        azure:
-          useWorkloadIdentityExtension: true
-          tenantId: "${tenant_id}"
-          subscriptionId: "${subscription_id}"
-          resourceGroup: "${resource_group_name}"
+
+        extraVolumes:
+          - name: azure-config-file
+            secret:
+              secretName: external-dns-azure
+        extraVolumeMounts:
+          - name: azure-config-file
+            mountPath: /etc/kubernetes
+            readOnly: true
+            
         policy: sync # will also delete the record
         registry: "txt"
         txtOwnerId: "${txt_owner_id}"

@@ -288,6 +288,7 @@ variable "external_dns_config" {
     extra_args  = optional(list(string), [])
     rbac_create = optional(bool, true),
     sources     = optional(list(string), ["ingress", "service"])
+    tenant_id   = optional(string, "")
   })
   default = {}
 }

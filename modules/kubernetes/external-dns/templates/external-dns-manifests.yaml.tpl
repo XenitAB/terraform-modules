@@ -34,3 +34,21 @@ roleRef:
   name: logs-external-dns
 ---
 %{ endfor }
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: external-dns-azure
+  namespace: external-dns
+data:
+  azure.json: >-
+    ${base64encode(<<EOT
+{
+"tenantId": "${tenant_id}",
+"subscriptionId": "${subscription_id}",
+"resourceGroup": "${global_resource_group}",
+"useWorkloadIdentityExtension": true
+}
+EOT
+)}
+type: Opaque

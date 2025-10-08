@@ -31,7 +31,7 @@ spec:
     - .spec.template.spec.securityContext
   source:
     repoURL: https://helm.vector.dev
-    targetRevision: 0.41.0
+    targetRevision: 0.46.0
     chart: vector
     helm:
       valuesObject:

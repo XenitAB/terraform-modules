@@ -76,20 +76,28 @@ spec:
         effect: NoSchedule
       containers:
       - name: busybox
-        image: busybox:stable
+        image: busybox:1.31
         command: 
          - "sh"
          - "-c"
          - "sleep infinity"
       initContainers:
       - name: kubectl-patch
-        image: registry.k8s.io/kubectl:v1.34.1
+        image: alpine/kubectl
         command:
-         - "kubectl patch ValidatingWebhookConfiguration aks-node-validating-webhook --type='json' -p='[{\"op\": \"replace\", \"path\": \"/webhooks/0/rules/0/operations/0\", \"value\":\"CREATE\"}]';exit 0"
-      - name: kubectl-taint
-        image: registry.k8s.io/kubectl:v1.34.1
+          - kubectl
+          - patch
+          - ValidatingWebhookConfiguration
+          - aks-node-validating-webhook
+          - '--type=json'
+          - '-p'
+          - >-
+            [{"op": "replace", "path": "/webhooks/0/rules/0/operations/0",
+            "value":"CREATE"}]
+        image: alpine/kubectl
         command:
-         - "kubectl taint nodes $(kubectl get pod $HOSTNAME -o jsonpath='{.spec.nodeName}') kubernetes.azure.com/scalesetpriority=spot:NoSchedule-;exit 0"
-      nodeSelector:
+         - "sh"
+         - "-c"
+         - "kubectl taint nodes $(kubectl get pod $HOSTNAME -o jsonpath='{.spec.nodeName}') kubernetes.azure.com/scalesetpriority=spot:NoSchedule- || true
         kubernetes.azure.com/scalesetpriority: spot
 {{- end }}

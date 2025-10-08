@@ -94,6 +94,7 @@ spec:
           - >-
             [{"op": "replace", "path": "/webhooks/0/rules/0/operations/0",
             "value":"CREATE"}]
+      - name: kubectl-taint
         image: alpine/kubectl
         command:
          - "sh"

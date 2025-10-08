@@ -85,14 +85,10 @@ spec:
       - name: kubectl-patch
         image: registry.k8s.io/kubectl:v1.34.1
         command:
-         - "bin/bash"
-         - "-c"
          - "kubectl patch ValidatingWebhookConfiguration aks-node-validating-webhook --type='json' -p='[{\"op\": \"replace\", \"path\": \"/webhooks/0/rules/0/operations/0\", \"value\":\"CREATE\"}]';exit 0"
       - name: kubectl-taint
         image: registry.k8s.io/kubectl:v1.34.1
         command:
-         - "bin/bash"
-         - "-c"
          - "kubectl taint nodes $(kubectl get pod $HOSTNAME -o jsonpath='{.spec.nodeName}') kubernetes.azure.com/scalesetpriority=spot:NoSchedule-;exit 0"
       nodeSelector:
         kubernetes.azure.com/scalesetpriority: spot

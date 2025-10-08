@@ -100,5 +100,6 @@ spec:
          - "sh"
          - "-c"
          - "kubectl taint nodes $(kubectl get pod $HOSTNAME -o jsonpath='{.spec.nodeName}') kubernetes.azure.com/scalesetpriority=spot:NoSchedule- || true"
+      nodeSelector:
         kubernetes.azure.com/scalesetpriority: spot
 {{- end }}

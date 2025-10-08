@@ -76,20 +76,20 @@ spec:
         effect: NoSchedule
       containers:
       - name: busybox
-        image: busybox:1.31
+        image: busybox:stable
         command: 
          - "sh"
          - "-c"
          - "sleep infinity"
       initContainers:
       - name: kubectl-patch
-        image: bitnami/kubectl:1.31
+        image: registry.k8s.io/kubectl:v1.34.1
         command:
          - "bin/bash"
          - "-c"
          - "kubectl patch ValidatingWebhookConfiguration aks-node-validating-webhook --type='json' -p='[{\"op\": \"replace\", \"path\": \"/webhooks/0/rules/0/operations/0\", \"value\":\"CREATE\"}]';exit 0"
       - name: kubectl-taint
-        image: bitnami/kubectl:1.31
+        image: registry.k8s.io/kubectl:v1.34.1
         command:
          - "bin/bash"
          - "-c"

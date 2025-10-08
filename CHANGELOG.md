@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: bump terraform-linters/setup-tflint from 4 to 6 by @yabracadabra in [#1374](https://github.com/XenitAB/terraform-modules/pulls/1374)
 - Chore: update nginx helm version to 4.13.3 by @yabracadabra in [#1377](https://github.com/XenitAB/terraform-modules/pulls/1377)
 - Chore: version control-plane-logs to 0.46.0 by @yabracadabra in [#1376](https://github.com/XenitAB/terraform-modules/pulls/1376)
 - Chore: versionbump cert-manager 1.18.2 by @yabracadabra in [#1375](https://github.com/XenitAB/terraform-modules/pulls/1375)

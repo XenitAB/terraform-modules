@@ -23,7 +23,7 @@ spec:
     - ApplyOutOfSyncOnly=true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.12.1
+    targetRevision: 4.13.3
     chart: ingress-nginx
     helm:
       valuesObject:

@@ -34,8 +34,11 @@ spec:
   url: ${url}
   ref:
     branch: main
+%{ if provider_type == azuredevops }
   provider: azure
+%{ endif }
 %{ if provider_type == github }
+  provider: github
   secretRef:
     name: ${name}-git-auth
 ---
@@ -50,7 +53,7 @@ data:
   type: Z2l0
   githubAppID: {{ .github_app_id | b64enc }}
   githubAppInstallationID: {{ .github_installation_id | b64enc }}
-  githubAppPrivateKey: {{ get $secrets .secret_name | b64enc }}
+  githubAppPrivateKey: {{ .github_app_key | b64enc }}
 %{ endif }
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1

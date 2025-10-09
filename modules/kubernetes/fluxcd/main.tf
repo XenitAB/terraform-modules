@@ -87,6 +87,7 @@ resource "git_repository_file" "tenant" {
     environment      = var.environment,
     name             = each.key,
     provider_type    = var.git_provider.type,
+    provider         = (var.git_provider.type == "azuredevops" ? "azure" : "github"),
     url              = (var.git_provider.type == "azuredevops" ?
       "https://dev.azure.com/${var.git_provider.organization}/${each.value.fluxcd.project}/_git/${each.value.fluxcd.repository}" :
       "https://github.com/${var.git_provider.organization}/${each.value.fluxcd.repository}.git"

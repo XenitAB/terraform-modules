@@ -83,17 +83,23 @@ spec:
          - "sleep infinity"
       initContainers:
       - name: kubectl-patch
-        image: bitnami/kubectl:1.31
+        image: alpine/kubectl
         command:
-         - "bin/bash"
-         - "-c"
-         - "kubectl patch ValidatingWebhookConfiguration aks-node-validating-webhook --type='json' -p='[{\"op\": \"replace\", \"path\": \"/webhooks/0/rules/0/operations/0\", \"value\":\"CREATE\"}]';exit 0"
+          - kubectl
+          - patch
+          - ValidatingWebhookConfiguration
+          - aks-node-validating-webhook
+          - '--type=json'
+          - '-p'
+          - >-
+            [{"op": "replace", "path": "/webhooks/0/rules/0/operations/0",
+            "value":"CREATE"}]
       - name: kubectl-taint
-        image: bitnami/kubectl:1.31
+        image: alpine/kubectl
         command:
-         - "bin/bash"
+         - "sh"
          - "-c"
-         - "kubectl taint nodes $(kubectl get pod $HOSTNAME -o jsonpath='{.spec.nodeName}') kubernetes.azure.com/scalesetpriority=spot:NoSchedule-;exit 0"
+         - "kubectl taint nodes $(kubectl get pod $HOSTNAME -o jsonpath='{.spec.nodeName}') kubernetes.azure.com/scalesetpriority=spot:NoSchedule- || true"
       nodeSelector:
         kubernetes.azure.com/scalesetpriority: spot
 {{- end }}

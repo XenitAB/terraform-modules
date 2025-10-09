@@ -83,7 +83,7 @@ resource "git_repository_file" "tenant" {
 
   override_on_create = true
   path               = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/tenants/${each.key}/${each.key}.yaml"
-  content            = templatefile("${path.module}/templates/tenant.yaml", {
+  content            = templatefile("${path.module}/templates/tenant.yaml.tpl", {
     environment      = var.environment,
     name             = each.key,
     provider_type    = var.git_provider.type,
@@ -94,9 +94,9 @@ resource "git_repository_file" "tenant" {
     ),
     tenant_path      = (each.value.fluxcd.include_tenant_name ? "./tenant/${var.environment}/${each.key}" : "./tenant/${var.environment}"),
     create_crds      = each.value.fluxcd.create_crds,
-    github_app_id    = var.git_provider.github.application_id,
-    github_installation_id = var.git_provider.github.installation_id,
-    github_app_key   = var.git_provider.github.private_key,
+    github_app_id    = base64encode(var.git_provider.github.application_id),
+    github_installation_id = base64encode(var.git_provider.github.installation_id),
+    github_app_key   = base64encode(var.git_provider.github.private_key),
 
   })
 }

@@ -34,11 +34,8 @@ spec:
   url: ${url}
   ref:
     branch: main
-%{ if provider_type == "azuredevops" }
-  provider: azure
-%{ endif }
+  provider: ${provider}
 %{ if provider_type == "github" }
-  provider: github
   secretRef:
     name: ${name}-git-auth
 ---

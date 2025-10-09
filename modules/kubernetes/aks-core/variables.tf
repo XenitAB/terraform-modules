@@ -319,19 +319,16 @@ variable "fluxcd_config" {
     git_provider = object({
       organization = string
       type         = optional(string, "azuredevops")
-      github = optional(object({
-        application_id  = optional(string)
-        installation_id = optional(string)
-        private_key     = optional(string)
-      }))
-    })
-    # Deprecated: bootstrap (legacy direct install) - retained for backward compatibility parsing
-    bootstrap = optional(object({
-      disable_secret_creation = optional(bool, true)
-      project                 = optional(string)
-      repository              = string
-    }))
-    flux2_chart_version = optional(string)
+    github = optional(object({
+      application_id  = optional(string, "")
+      installation_id = optional(string, "")
+      private_key     = optional(string, "")
+    }), {
+        application_id  = "",
+        installation_id = "",
+        private_key     = ""
+      })
+  })
   })
 }
 

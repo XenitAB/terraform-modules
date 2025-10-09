@@ -25,29 +25,12 @@ spec:
     - ApplyOutOfSyncOnly=true
     - Replace=true
   source:
-    repoURL: registry-1.docker.io/bitnamicharts
-    targetRevision: 4.4.3
-    chart: rabbitmq-cluster-operator
-    helm:
-      valuesObject:
-        clusterOperator:
-          replicaCount: ${replica_count}
-          watchNamespaces:
-%{ for ns in watch_namespaces ~}
-          - ${ns}
-%{ endfor }
-          pdb:
-            create: ${min_available > 0}
-            minAvailable: ${min_available}
-          %{ if spot_instances_enabled }
-          tolerations:
-          - key: kubernetes.azure.com/scalesetpriority
-            operator: Exists
-            effect: NoSchedule
-          %{ endif }
-          networkPolicy:
-            enabled: ${network_policy_enabled}
-          rbac:
-            create: true
-        msgTopologyOperator:
-          enabled: ${tology_operator_enabled}
+    repoURL: https://github.com/rabbitmq/cluster-operator
+    targetRevision: ${target_revision}
+    path: .
+  sources:
+  - repoURL: https://github.com/rabbitmq/cluster-operator
+    targetRevision: ${target_revision}
+    ref: repo
+  - repoURL: https://raw.githubusercontent.com/rabbitmq/cluster-operator/${target_revision}/cluster-operator.yml
+    targetRevision: HEAD

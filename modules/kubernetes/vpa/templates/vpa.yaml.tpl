@@ -23,7 +23,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://charts.fairwinds.com/stable
-    targetRevision: 4.7.2
+    targetRevision: 4.9.0
     chart: vpa
     helm:
       valuesObject:
@@ -32,7 +32,7 @@ spec:
           image:
             repository: registry.k8s.io/autoscaling/vpa-recommender
             pullPolicy: IfNotPresent
-            tag: "0.12.0"
+            tag: "1.4.1"
           extraArgs:
             pod-recommendation-min-cpu-millicores: 15
             pod-recommendation-min-memory-mb: 24

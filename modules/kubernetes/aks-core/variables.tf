@@ -320,9 +320,9 @@ variable "fluxcd_config" {
       organization = string
       type         = optional(string, "azuredevops")
       github = optional(object({
-        application_id  = number
-        installation_id = number
-        private_key     = string
+        application_id  = optional(number)
+        installation_id = optional(number)
+        private_key     = optional(string)
       }))
     })
     # Deprecated: bootstrap (legacy direct install) - retained for backward compatibility parsing

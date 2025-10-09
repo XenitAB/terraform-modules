@@ -12,6 +12,7 @@ module "rabbitmq-operator" {
     replica_count          = 2
     spot_instances_enabled = false
     watch_namespaces       = []
+    rabbitmq_config        = "main"
   }
   tenant_name = "foo"
   environment = "dev"

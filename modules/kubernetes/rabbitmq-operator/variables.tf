@@ -26,6 +26,7 @@ variable "rabbitmq_config" {
     spot_instances_enabled  = optional(bool, true)
     tology_operator_enabled = optional(bool, false)
     watch_namespaces        = optional(list(string), [])
+    target_revision         = optional(string, "main")
   })
   default = {}
 }

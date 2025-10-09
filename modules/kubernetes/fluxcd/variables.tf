@@ -14,9 +14,9 @@ variable "git_provider" {
     organization = string
     type         = optional(string, "azuredevops")
     github = optional(object({
-      application_id  = optional(number)
-      installation_id = optional(number)
-      private_key     = optional(string)
+      application_id  = optional(number, 0)
+      installation_id = optional(number, 0)
+      private_key     = optional(string, "")
     }))
   })
 

@@ -26,11 +26,5 @@ spec:
     - Replace=true
   source:
     repoURL: https://github.com/rabbitmq/cluster-operator
-    targetRevision: ${target_revision}
-    path: .
-  sources:
-  - repoURL: https://github.com/rabbitmq/cluster-operator
-    targetRevision: ${target_revision}
-    ref: repo
-  - repoURL: https://raw.githubusercontent.com/rabbitmq/cluster-operator/${target_revision}/cluster-operator.yml
-    targetRevision: HEAD
+    targetRevision: $(rabbitmq_config.target_revision) 
+    path: config/installation

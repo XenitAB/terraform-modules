@@ -12,21 +12,22 @@ module "fluxcd" {
   location_short       = "idk"
   environment          = "dev"
   cluster_id           = "foobar"
+  tenant_name = "foo"
+  fleet_infra_config = {
+    git_repo_url         = "https://dev.azure.com/acme/project-1/_git/repo-1"
+    k8s_api_server_url   = "https://k8s-api-server-url"
+    argocd_project_name  = "infra"
+    argocd_app_name      = "fluxcd"
+  }
   git_provider = {
     organization = "acme"
     type         = "azuredevops"
-    azure_devops = {
-      pat = "string"
-    }
-  }
-  bootstrap = {
-    repository = "my-repo"
   }
   namespaces = [
     {
       name = "tenant-1"
       fluxcd = {
-        provider    = "azuredevops"
+        provider    = "github"
         project     = "project-1"
         repository  = "repo-2"
         create_crds = false

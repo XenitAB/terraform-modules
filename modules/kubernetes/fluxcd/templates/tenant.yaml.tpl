@@ -35,7 +35,7 @@ spec:
   ref:
     branch: main 
   provider: ${provider}
-%{ if provider_type == github }
+%{ if provider_type == "github" }
   secretRef:
     name: ${name}-git-auth
 ---

@@ -22,7 +22,7 @@ spec:
     - ApplyOutOfSyncOnly=true
   source:
     repoURL: https://vmware-tanzu.github.io/helm-charts
-    targetRevision: v5.1.5
+    targetRevision: v11.0.0
     chart: velero
     helm:
       valuesObject:
@@ -54,7 +54,7 @@ spec:
                 AZURE_CLOUD_NAME=AzurePublicCloud
         initContainers:
           - name: "velero-plugin-for-microsoft-azure"
-            image: "velero/velero-plugin-for-microsoft-azure:v1.8.0"
+            image: "velero/velero-plugin-for-microsoft-azure:v1.13.0"
             volumeMounts:
               - mountPath: "/target"
                 name: "plugins"

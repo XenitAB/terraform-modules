@@ -46,8 +46,6 @@ metadata:
   namespace: ${name}
 type: Opaque
 data:
-  name: ${name}-git-auth
-  type: Opaque
   githubAppID: ${github_app_id}
   githubAppInstallationID: ${github_installation_id}
   githubAppPrivateKey: ${github_app_key}

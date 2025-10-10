@@ -18,9 +18,8 @@ data:
   name: {{ printf "%s-%s-%s" $azure_tenant.tenant_name $cluster.environment .name | b64enc }}
   type: Z2l0
   url: {{ .repo_url | b64enc }}
-  githubAppID: {{ .github_app_id | b64enc }}
-  githubAppInstallationID: {{ .github_installation_id | b64enc }}
-  githubAppPrivateKey: {{ get $secrets .secret_name | b64enc }}
+  username: Z2l0
+  password: {{ get $secrets .secret_name | b64enc }}
 ---
 {{- end }}
 {{- end }}

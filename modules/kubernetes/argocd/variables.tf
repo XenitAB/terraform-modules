@@ -42,12 +42,15 @@ variable "argocd_config" {
           # This will be used to only if cluster_role is set to 'Hub-Spoke' to create AppProject 
           # roles that limit access to the project, based on the AAD group we create for each 
           # tenant namespace.
-          aad_group   = optional(string, "")
-          name        = string
-          namespace   = string
-          repo_url    = string
-          repo_path   = string
-          secret_name = string
+          aad_group              = optional(string, "")
+          name                   = string
+          namespace              = string
+          repo_url               = string
+          repo_path              = string
+          github_app_id          = string
+          github_installation_id = string
+          secret_name            = string
+
         }))
       }))
     })), [])

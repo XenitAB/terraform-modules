@@ -29,7 +29,7 @@ locals {
     for secret in local.key_vault_secret_names :
     {
       name : secret
-      value : data.azurerm_key_vault_secret.pat[secret].value
+      value : data.azurerm_key_vault_secret.key[secret].value
     }
   ]
 

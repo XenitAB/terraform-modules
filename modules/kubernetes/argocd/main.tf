@@ -32,7 +32,7 @@ data "azurerm_key_vault" "core" {
   name                = var.key_vault_name
 }
 
-data "azurerm_key_vault_secret" "pat" {
+data "azurerm_key_vault_secret" "key" {
   for_each = tomap({
     for secret in local.key_vault_secret_names : secret => secret
   })

@@ -139,12 +139,12 @@ spec:
           argocd.argoproj.io/secret-type: repository
       data:
         name: ${tenant.name}-${cluster.environment}
+        type: git
         url: ${tenant.repo_url}
-        githubAppID: ${tenant.github_app_id}
-        githubAppInstallationID: ${tenant.github_installation_id}
+        username: git
       mergePolicy: Merge
   data:
-  - secretKey: githubAppPrivateKey
+  - secretKey: password
     remoteRef:
       key: ${tenant.secret_name}
 ---

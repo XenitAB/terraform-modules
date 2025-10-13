@@ -73,6 +73,10 @@ metadata:
 spec:
   type: ${provider_type}
   address: ${url}
+%{ if provider_type == "github" }
+  secretRef:
+    name: ${name}-git-auth
+%{ endif }
 %{ if create_crds == true }
 ---
 apiVersion: rbac.authorization.k8s.io/v1

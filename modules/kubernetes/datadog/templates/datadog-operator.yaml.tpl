@@ -24,7 +24,7 @@ spec:
   source:
     repoURL: https://helm.datadoghq.com
     targetRevision: 2.9.2
-    chart: datadog
+    chart: datadog-operator
     helm:
       valuesObject:
         apiKeyExistingSecret: datadog-operator-apikey

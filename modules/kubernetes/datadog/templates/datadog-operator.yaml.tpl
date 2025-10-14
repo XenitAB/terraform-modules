@@ -36,3 +36,5 @@ spec:
           requests:
             cpu: 15m
             memory: 50Mi
+        datadog:
+          kubeStateMetricsEnabled: false

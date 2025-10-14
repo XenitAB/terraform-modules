@@ -38,6 +38,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: bump valid k8s versions for upgrading by @CalleB3 in [#1386](https://github.com/XenitAB/terraform-modules/pulls/1386)
+- Chore: upgrade of vpa and vpa-recommender and goldilocks by @yabracadabra in [#1385](https://github.com/XenitAB/terraform-modules/pulls/1385)
+- Chore: upgrade velero helm to 11.0.0 and velero azure plugin image to 1.13.0 by @yabracadabra in [#1383](https://github.com/XenitAB/terraform-modules/pulls/1383)
+- Chore: migrating away from bitnami and bumping versions by @optocoupler in [#1378](https://github.com/XenitAB/terraform-modules/pulls/1378)
 - Chore: bump terraform-linters/setup-tflint from 4 to 6 by @yabracadabra in [#1374](https://github.com/XenitAB/terraform-modules/pulls/1374)
 - Chore: update nginx helm version to 4.13.3 by @yabracadabra in [#1377](https://github.com/XenitAB/terraform-modules/pulls/1377)
 - Chore: version control-plane-logs to 0.46.0 by @yabracadabra in [#1376](https://github.com/XenitAB/terraform-modules/pulls/1376)

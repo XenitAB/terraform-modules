@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: change chart name to datadog-operator by @yabracadabra in [#1388](https://github.com/XenitAB/terraform-modules/pulls/1388)
 - Fix: add default for keyvault_name_override by @CalleB3 in [#1373](https://github.com/XenitAB/terraform-modules/pulls/1373)
 - Fix: increase acceptable header size for argo ingress by @CalleB3 in [#1367](https://github.com/XenitAB/terraform-modules/pulls/1367)
 - Fix: Upgrade Karpenter and add nodeClassRef parameters by @CalleB3 in [#1364](https://github.com/XenitAB/terraform-modules/pulls/1364)
@@ -38,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: deprecate Telepresence module by @yabracadabra in [#1389](https://github.com/XenitAB/terraform-modules/pulls/1389)
 - Chore: bump valid k8s versions for upgrading by @CalleB3 in [#1386](https://github.com/XenitAB/terraform-modules/pulls/1386)
 - Chore: upgrade of vpa and vpa-recommender and goldilocks by @yabracadabra in [#1385](https://github.com/XenitAB/terraform-modules/pulls/1385)
 - Chore: upgrade velero helm to 11.0.0 and velero azure plugin image to 1.13.0 by @yabracadabra in [#1383](https://github.com/XenitAB/terraform-modules/pulls/1383)

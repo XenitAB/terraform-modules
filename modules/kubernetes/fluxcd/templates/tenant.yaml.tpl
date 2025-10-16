@@ -65,7 +65,7 @@ spec:
     name: ${name}
   prune: true
 ---
-apiVersion: notification.toolkit.fluxcd.io/v1beta2
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Provider
 metadata:
   name: ${name}

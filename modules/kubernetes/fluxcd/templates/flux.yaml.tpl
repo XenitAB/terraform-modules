@@ -82,6 +82,8 @@ spec:
             azure.workload.identity/use: "true"
 
         notificationController:
+          image: "ghcr.io/fluxcd/notification-controller"
+          tag: "v1.7.3"
           priorityClassName: "platform-medium"
           create: true
           resources:
@@ -95,6 +97,9 @@ spec:
               azure.workload.identity/client-id: ${client_id}
           labels:
             azure.workload.identity/use: "true"
+          container:
+            additionalArgs: [
+              --feature-gates=ObjectLevelWorkloadIdentity=true]
 
         # Multi-tenancy lockdown (optional): only enable if you want cluster-admin scoped SA restriction
         multitenancy:

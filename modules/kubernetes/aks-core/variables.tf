@@ -659,7 +659,6 @@ variable "platform_config" {
     reloader_enabled                  = optional(bool, true)
     spegel_enabled                    = optional(bool, true)
     spot_instances_hack_enabled       = optional(bool, false)
-    telepresence_enabled              = optional(bool, false)
     trivy_enabled                     = optional(bool, false)
     velero_enabled                    = optional(bool, false)
     vpa_enabled                       = optional(bool, false)
@@ -740,34 +739,6 @@ variable "rabbitmq_config" {
 variable "subscription_name" {
   description = "The commonName for the subscription"
   type        = string
-}
-
-variable "telepresence_config" {
-  description = "Config to use when deploying traffic manager to the cluster"
-  type = object({
-    allow_conflicting_subnets = optional(list(string), [])
-    client_rbac = object({
-      create     = bool
-      namespaced = bool
-      namespaces = optional(list(string), ["ambassador"])
-      subjects   = optional(list(string), [])
-    })
-    manager_rbac = object({
-      create     = bool
-      namespaced = bool
-      namespaces = optional(list(string), [])
-    })
-  })
-  default = {
-    client_rbac : {
-      create : false
-      namespaced : false
-    }
-    manager_rbac : {
-      create : true
-      namespaced : true
-    }
-  }
 }
 
 variable "trivy_config" {

@@ -34,12 +34,6 @@ variable "mirrord_enabled" {
   default     = false
 }
 
-variable "telepresence_enabled" {
-  description = "If Gatekeeper validations should make an exemption for telepresence agent."
-  type        = bool
-  default     = false
-}
-
 variable "tenant_name" {
   description = "The name of the tenant"
   type        = string

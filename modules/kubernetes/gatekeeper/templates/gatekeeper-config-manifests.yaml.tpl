@@ -306,15 +306,6 @@ spec:
     requiredDropCapabilities:
     - NET_RAW
     - CAP_SYS_ADMIN
-    %{ if mirrord_enabled || telepresence_enabled }
-    exemptImages:
-    %{ if mirrord_enabled }
-    - "ghcr.io/metalbear-co/mirrord:*"
-    %{ endif }
-    %{ if telepresence_enabled }
-    - "docker.io/datawire/tel2:*"
-    %{ endif }
-    %{ endif }
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredProbes

@@ -87,6 +87,5 @@ resource "git_repository_file" "gatekeeper_config_manifest" {
     exclude_namespaces             = var.exclude_namespaces
     azure_service_operator_enabled = var.azure_service_operator_enabled
     mirrord_enabled                = var.mirrord_enabled
-    telepresence_enabled           = var.telepresence_enabled
   })
 }

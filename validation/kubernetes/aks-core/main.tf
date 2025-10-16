@@ -150,7 +150,6 @@ module "aks_core" {
     promtail_enabled                  = true
     rabbitmq_enabled                  = true
     spot_instances_hack_enabled       = true
-    telepresence_enabled              = true
     trivy_enabled                     = true
     velero_enabled                    = true
     vpa_enabled                       = true

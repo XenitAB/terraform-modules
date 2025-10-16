@@ -326,7 +326,6 @@ module "gatekeeper" {
   azure_service_operator_enabled = var.platform_config.azure_service_operator_enabled
   exclude_namespaces             = concat(var.gatekeeper_config.exclude_namespaces, local.exclude_namespaces)
   mirrord_enabled                = var.platform_config.mirrord_enabled
-  telepresence_enabled           = var.platform_config.telepresence_enabled
   tenant_name                    = var.platform_config.tenant_name
   environment                    = var.environment
   fleet_infra_config             = var.platform_config.fleet_infra_config
@@ -712,22 +711,6 @@ module "spegel" {
   tenant_name        = var.platform_config.tenant_name
   environment        = var.environment
   fleet_infra_config = var.platform_config.fleet_infra_config
-}
-
-module "telepresence" {
-  for_each = {
-    for s in ["telepresence"] :
-    s => s
-    if var.platform_config.telepresence_enabled
-  }
-
-  source = "../../kubernetes/telepresence"
-
-  cluster_id          = local.cluster_id
-  telepresence_config = var.telepresence_config
-  tenant_name         = var.platform_config.tenant_name
-  environment         = var.environment
-  fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
 module "trivy" {

@@ -306,6 +306,10 @@ spec:
     requiredDropCapabilities:
     - NET_RAW
     - CAP_SYS_ADMIN
+    %{ if mirrord_enabled }
+    exemptImages:
+    - "ghcr.io/metalbear-co/mirrord:*"
+    %{ endif }
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredProbes

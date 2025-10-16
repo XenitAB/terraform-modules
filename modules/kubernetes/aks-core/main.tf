@@ -16,11 +16,6 @@ terraform {
       version = "2.50.0"
       source  = "hashicorp/azuread"
     }
-    git = {
-      source                = "xenitab/git"
-      version               = ">=0.0.4"
-      configuration_aliases = [git.tenant]
-    }
     random = {
       source  = "hashicorp/random"
       version = "3.5.1"
@@ -36,6 +31,10 @@ terraform {
     helm = {
       source  = "hashicorp/helm"
       version = "2.11.0"
+    }
+    git = {
+      source  = "xenitab/git"
+      version = ">=0.0.4"
     }
   }
 }

@@ -32,10 +32,24 @@ metadata:
 spec:
   interval: 1m
   url: ${url}
-  secretRef:
-    name: flux
   ref:
-    branch: main
+    branch: main 
+  provider: ${provider}
+%{ if provider_type == "github" }
+  secretRef:
+    name: ${name}-git-auth
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ${name}-git-auth
+  namespace: ${name}
+type: Opaque
+data:
+  githubAppID: ${github_app_id}
+  githubAppInstallationID: ${github_installation_id}
+  githubAppPrivateKey: ${github_app_key}
+%{ endif }
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -45,17 +59,13 @@ metadata:
 spec:
   serviceAccountName: flux
   interval: 5m
-%{ if include_tenant_name == true }
-  path: ./tenant/${environment}/${name}
-%{ else }
-  path: ./tenant/${environment}
-%{ endif }
+  path: ${tenant_path}
   sourceRef:
     kind: GitRepository
     name: ${name}
   prune: true
 ---
-apiVersion: notification.toolkit.fluxcd.io/v1beta2
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Provider
 metadata:
   name: ${name}
@@ -63,8 +73,10 @@ metadata:
 spec:
   type: ${provider_type}
   address: ${url}
+%{ if provider_type == "github" }
   secretRef:
-    name: flux
+    name: ${name}-git-auth
+%{ endif }
 %{ if create_crds == true }
 ---
 apiVersion: rbac.authorization.k8s.io/v1

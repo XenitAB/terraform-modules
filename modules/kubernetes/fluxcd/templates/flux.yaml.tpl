@@ -101,11 +101,6 @@ spec:
             additionalArgs: [
               --feature-gates=ObjectLevelWorkloadIdentity=true]
 
-        # Multi-tenancy lockdown (optional): only enable if you want cluster-admin scoped SA restriction
-        multitenancy:
-          enabled: true
-          defaultServiceAccount: "default"
-          privileged: true
 
         # Global log level (matches chart key)
         logLevel: info

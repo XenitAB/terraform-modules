@@ -308,9 +308,6 @@ module "fluxcd" {
     labels = ns.labels
     fluxcd = ns.flux
   }]
-  # Optional toggles
-  flux2_chart_version = try(var.fluxcd_config.flux2_chart_version, null)
-
 }
 
 module "gatekeeper" {

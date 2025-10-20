@@ -17,11 +17,11 @@ variable "git_provider" {
       application_id  = optional(string, "")
       installation_id = optional(string, "")
       private_key     = optional(string, "")
-    }), {
-        application_id  = "",
-        installation_id = "",
-        private_key     = ""
-      })
+      }), {
+      application_id  = "",
+      installation_id = "",
+      private_key     = ""
+    })
   })
 
   validation {

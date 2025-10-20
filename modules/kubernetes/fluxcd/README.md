@@ -22,6 +22,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [azurerm_federated_identity_credential.flux_system](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/federated_identity_credential) | resource |
+| [azurerm_federated_identity_credential.notification_controller](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/federated_identity_credential) | resource |
 | [azurerm_role_assignment.flux_managed](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.flux_system_acr](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
 | [azurerm_user_assigned_identity.flux_system](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/user_assigned_identity) | resource |
@@ -30,7 +31,7 @@ No modules.
 | [git_repository_file.flux_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.flux_values](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.tenant](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
-| [git_repository_file.tenants_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.tenant_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/container_registry) | data source |
 | [azurerm_resource_group.global](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/resource_group) | data source |
 
@@ -45,7 +46,7 @@ No modules.
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name of the cluster. | `string` | n/a | yes |
 | <a name="input_fleet_infra_config"></a> [fleet\_infra\_config](#input\_fleet\_infra\_config) | Fleet infra configuration for Argo CD integration. | <pre>object({<br/>    git_repo_url        = string<br/>    argocd_project_name = string<br/>    k8s_api_server_url  = string<br/>  })</pre> | n/a | yes |
 | <a name="input_flux2_chart_version"></a> [flux2\_chart\_version](#input\_flux2\_chart\_version) | Flux2 Helm chart version to deploy via Argo CD Application. | `string` | `"2.13.0"` | no |
-| <a name="input_git_provider"></a> [git\_provider](#input\_git\_provider) | Git provider for repositories. | <pre>object({<br/>    organization = string<br/>    type         = optional(string, "azuredevops")<br/>    github = optional(object({<br/>      application_id  = number<br/>      installation_id = number<br/>      private_key     = string<br/>    }))<br/>  })</pre> | n/a | yes |
+| <a name="input_git_provider"></a> [git\_provider](#input\_git\_provider) | Git provider for repositories. | <pre>object({<br/>    organization = string<br/>    type         = optional(string, "azuredevops")<br/>    github = optional(object({<br/>      application_id  = optional(string, "")<br/>      installation_id = optional(string, "")<br/>      private_key     = optional(string, "")<br/>    }), {<br/>        application_id  = "",<br/>        installation_id = "",<br/>        private_key     = ""<br/>      })<br/>  })</pre> | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | The Azure region name. | `string` | n/a | yes |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name. | `string` | n/a | yes |
 | <a name="input_namespaces"></a> [namespaces](#input\_namespaces) | Flux tenants to add. | <pre>list(<br/>    object({<br/>      name   = string<br/>      labels = optional(map(string), null)<br/>      fluxcd = optional(object({<br/>        provider            = string<br/>        project             = optional(string)<br/>        repository          = string<br/>        include_tenant_name = optional(bool, false)<br/>        create_crds         = optional(bool, true)<br/>      }))<br/>    })<br/>  )</pre> | `[]` | no |

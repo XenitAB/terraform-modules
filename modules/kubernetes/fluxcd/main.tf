@@ -61,9 +61,9 @@ resource "git_repository_file" "tenant_app" {
   }
 
   override_on_create = true
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/templates/${each.key}-app.yaml"
-  content            = templatefile("${path.module}/templates/tenant-app.yaml.tpl", {
-    name             = each.key,
+  path               = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/templates/${each.key}-app.yaml"
+  content = templatefile("${path.module}/templates/tenant-app.yaml.tpl", {
+    name        = each.key,
     tenant_name = var.tenant_name
     cluster_id  = var.cluster_id
     environment = var.environment
@@ -83,20 +83,20 @@ resource "git_repository_file" "tenant" {
 
   override_on_create = true
   path               = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/tenants/${each.key}/${each.key}.yaml"
-  content            = templatefile("${path.module}/templates/tenant.yaml.tpl", {
-    environment      = var.environment,
-    name             = each.key,
-    provider_type    = var.git_provider.type,
-    provider         = (var.git_provider.type == "azuredevops" ? "azure" : "github"),
-    url              = (var.git_provider.type == "azuredevops" ?
+  content = templatefile("${path.module}/templates/tenant.yaml.tpl", {
+    environment   = var.environment,
+    name          = each.key,
+    provider_type = var.git_provider.type,
+    provider      = (var.git_provider.type == "azuredevops" ? "azure" : "github"),
+    url = (var.git_provider.type == "azuredevops" ?
       "https://dev.azure.com/${var.git_provider.organization}/${each.value.fluxcd.project}/_git/${each.value.fluxcd.repository}" :
       "https://github.com/${var.git_provider.organization}/${each.value.fluxcd.repository}.git"
     ),
-    tenant_path      = (each.value.fluxcd.include_tenant_name ? "./tenant/${var.environment}/${each.key}" : "./tenant/${var.environment}"),
-    create_crds      = each.value.fluxcd.create_crds,
-    github_app_id    = base64encode(var.git_provider.github.application_id),
+    tenant_path            = (each.value.fluxcd.include_tenant_name ? "./tenant/${var.environment}/${each.key}" : "./tenant/${var.environment}"),
+    create_crds            = each.value.fluxcd.create_crds,
+    github_app_id          = base64encode(var.git_provider.github.application_id),
     github_installation_id = base64encode(var.git_provider.github.installation_id),
-    github_app_key   = base64encode(var.git_provider.github.private_key),
+    github_app_key         = base64encode(var.git_provider.github.private_key),
 
   })
 }

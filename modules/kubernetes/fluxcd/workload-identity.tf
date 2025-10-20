@@ -21,10 +21,10 @@ resource "azurerm_federated_identity_credential" "notification_controller" {
   subject             = "system:serviceaccount:flux-system:notification-controller"
 }
 # Optional federated credentials for other controllers
-// All Flux controllers share the same managed identity via a single federated credential bound
-// to the source-controller service account. Other controllers' service accounts are annotated
-// with the same client-id (see flux.yaml.tpl). Azure workload identity does not require a distinct
-// federated credential per service account as long as they don't initiate token exchange directly.
+# All Flux controllers share the same managed identity via a single federated credential bound
+# to the source-controller service account. Other controllers' service accounts are annotated
+# with the same client-id (see flux.yaml.tpl). Azure workload identity does not require a distinct
+# federated credential per service account as long as they don't initiate token exchange directly.
 
 resource "azurerm_role_assignment" "flux_system_acr" {
   scope                = data.azurerm_container_registry.acr.id

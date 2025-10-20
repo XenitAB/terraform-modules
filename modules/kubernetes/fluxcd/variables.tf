@@ -30,12 +30,6 @@ variable "git_provider" {
   }
 }
 
-variable "flux2_chart_version" {
-  description = "Flux2 Helm chart version to deploy via Argo CD Application."
-  type        = string
-  default     = "2.13.0"
-}
-
 variable "tenant_name" {
   description = "Tenant name used for namespacing Argo CD applications."
   type        = string

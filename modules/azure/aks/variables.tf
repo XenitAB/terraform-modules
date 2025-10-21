@@ -133,6 +133,7 @@ variable "aks_config" {
       node_soak_duration_in_minutes = 0
       max_surge                     = 33
     })
+    tags = optional(map(string), {})
   })
 
   validation {

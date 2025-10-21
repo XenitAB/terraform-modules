@@ -50,6 +50,10 @@ module "aks" {
         spot_max_price = null
       }
     ]
+    tags = {
+      environment = "dev"
+      project     = "xenit"
+    }
   }
   namespaces = [
     {

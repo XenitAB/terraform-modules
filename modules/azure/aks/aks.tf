@@ -149,6 +149,7 @@ resource "azurerm_kubernetes_cluster" "this" {
       max_surge                     = var.aks_config.upgrade_settings.max_surge
     }
   }
+  tags = var.aks_config.tags
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "this" {

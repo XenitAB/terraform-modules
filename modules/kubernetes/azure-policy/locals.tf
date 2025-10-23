@@ -1,6 +1,10 @@
 locals {
   system_namespaces = "'calico-system', 'gatekeeper-system', 'kube-system', 'tigera-operator'"
 
+  exclude_namespaces = join(", ", [
+    for ns in var.azure_policy_config.exclude_namespaces : "\"${ns}\""
+  ])
+
   azure_identity_format = base64encode(
     templatefile("${path.module}/templates/azure-identity-format.yaml.tpl", {
     })

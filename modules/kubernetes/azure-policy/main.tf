@@ -840,7 +840,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azure-metrics','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}, ${var.azure_policy_config.exclude_namespaces}),createArray('aad-pod-identity','ambassador','azure-metrics','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','vpa'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"

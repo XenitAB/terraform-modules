@@ -211,6 +211,7 @@ variable "cert_manager_config" {
     notification_email = string
     dns_zone           = list(string)
     rbac_create        = optional(bool, true)
+    logs_enabled       = optional(bool, true)
   })
 }
 
@@ -291,6 +292,7 @@ variable "external_dns_config" {
     rbac_create = optional(bool, true),
     sources     = optional(list(string), ["ingress", "service"])
     tenant_id   = optional(string, "")
+    logs_enabled = optional(bool, true)
   })
   default = {}
 }
@@ -449,6 +451,7 @@ variable "ingress_nginx_config" {
     replicas                = optional(number, 3)
     min_replicas            = optional(number, 2)
     private_ingress_enabled = bool
+    logs_enabled            = optional(bool, true)
     customization = optional(object({
       allow_snippet_annotations = bool
       http_snippet              = string

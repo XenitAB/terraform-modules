@@ -6,6 +6,8 @@ metadata:
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
     argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: ${project}
   destination:
@@ -22,7 +24,7 @@ spec:
     - ApplyOutOfSyncOnly=true
   source:
     repoURL: https://giantswarm.github.io/giantswarm-catalog
-    targetRevision: v0.8.1
+    targetRevision: v0.8.2
     chart: starboard-exporter
     helm:
       valuesObject:

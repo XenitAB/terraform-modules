@@ -6,6 +6,8 @@ metadata:
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
     argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: ${project}
   destination:
@@ -23,7 +25,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://aquasecurity.github.io/helm-charts/
-    targetRevision: v0.13.0
+    targetRevision: v0.19.1
     chart: trivy
     helm:
       valuesObject:

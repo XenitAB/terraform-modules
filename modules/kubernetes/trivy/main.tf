@@ -81,7 +81,7 @@ resource "git_repository_file" "starboard_exporter" {
     if var.starboard_exporter_enabled
   }
 
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/templates/starboard-eporter.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/trivy/templates/starboard-exporter.yaml"
   content = templatefile("${path.module}/templates/starboard-exporter.yaml.tpl", {
     tenant_name = var.tenant_name
     environment = var.environment

@@ -44,6 +44,10 @@ spec:
         podAnnotations:
           azure.workload.identity/client-id: ${client_id}
         operator:
+          podLabels: {
+            azure.workload.identity/use: "true"
+          }
+          
           # configAuditScannerEnabled the flag to enable configuration audit scanner
           configAuditScannerEnabled: false
           # vulnerabilityScannerScanOnlyCurrentRevisions the flag to only create vulnerability scans on the current revision of a deployment.
@@ -54,18 +58,17 @@ spec:
           infraAssessmentScannerEnabled: false
           # scannerReportTTL the flag to set how long a report should exist. "" means that the ScannerReportTTL feature is disabled
           ScannerReportTTL: "25h"
-          # Enable metrics
-          metricsVulnIdEnabled: true
+
+          # Metrics
+          metricsVulnIdEnabled: false
           # Additional metrics settings
-          metricsExposedSecretInfo: true
-          metricsConfigAuditInfo: true
-          metricsRbacAssessmentInfo: true
-          metricsInfraAssessmentInfo: true
-          metricsImageInfo: true
-          metricsClusterComplianceInfo: true
-          podLabels: {
-            azure.workload.identity/use: "true"
-          }
+          metricsExposedSecretInfo: false
+          metricsConfigAuditInfo: false
+          metricsRbacAssessmentInfo: false
+          metricsInfraAssessmentInfo: false
+          metricsImageInfo: false
+          metricsClusterComplianceInfo: false
+
         trivyOperator:
           # scanJobPodTemplateLabels comma-separated representation of the labels which the user wants the scanner pods to be
           # labeled with. Example: `foo=bar,env=stage` will labeled the scanner pods with the labels `foo: bar` and `env: stage`

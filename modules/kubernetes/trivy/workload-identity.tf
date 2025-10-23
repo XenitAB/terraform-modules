@@ -13,7 +13,7 @@ resource "azurerm_federated_identity_credential" "trivy" {
   subject             = "system:serviceaccount:trivy:trivy"
 }
 
-resource "azurerm_federated_identity_credential" "trivy-operator" {
+resource "azurerm_federated_identity_credential" "trivy_operator" {
   name                = "trivy-operator"
   resource_group_name = azurerm_user_assigned_identity.trivy.resource_group_name
   parent_id           = azurerm_user_assigned_identity.trivy.id

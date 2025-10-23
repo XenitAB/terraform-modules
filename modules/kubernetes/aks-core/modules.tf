@@ -293,7 +293,8 @@ module "fluxcd" {
   environment          = var.environment
   cluster_id           = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
   git_provider         = var.fluxcd_config.git_provider
-  bootstrap            = var.fluxcd_config.bootstrap
+  tenant_name          = var.platform_config.tenant_name
+  fleet_infra_config   = var.platform_config.fleet_infra_config
   location_short       = var.location_short
   oidc_issuer_url      = var.oidc_issuer_url
   resource_group_name  = data.azurerm_resource_group.this.name
@@ -307,10 +308,6 @@ module "fluxcd" {
     labels = ns.labels
     fluxcd = ns.flux
   }]
-
-  providers = {
-    git = git.tenant
-  }
 }
 
 module "gatekeeper" {

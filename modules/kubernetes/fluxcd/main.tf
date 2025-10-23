@@ -6,18 +6,6 @@ terraform {
       version = "4.19.0"
       source  = "hashicorp/azurerm"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.23.0"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.11.0"
-    }
-    flux = {
-      source  = "fluxcd/flux"
-      version = "1.4.0"
-    }
     git = {
       source  = "xenitab/git"
       version = ">=0.0.4"
@@ -25,61 +13,64 @@ terraform {
   }
 }
 
-locals {
-  git_auth_proxy_url = "http://git-auth-proxy.git-auth-proxy.svc.cluster.local"
-  git_path_separator = var.git_provider.azure_devops != null ? "_git" : ""
+# ------------------------------------------------------------
+# Argo CD application pattern (no direct in-cluster bootstrap)
+# ------------------------------------------------------------
+
+# 1. Flux app-of-apps Application (references chart directory with an Application for flux controllers)
+resource "git_repository_file" "flux_app_of_apps" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/flux-app.yaml"
+  content = templatefile("${path.module}/templates/flux-app.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
+  })
 }
 
-resource "kubernetes_namespace" "git_auth_proxy" {
-  metadata {
-    name = "git-auth-proxy"
-    labels = {
-      "xkf.xenit.io/kind" = "platform"
-    }
+# 2. Chart.yaml for our lightweight meta chart that embeds an Argo Application for flux
+resource "git_repository_file" "flux_chart" {
+  path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {})
+}
+
+# 3. values.yaml (currently minimal, placeholder for future overrides)
+resource "git_repository_file" "flux_values" {
+  path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {})
+}
+
+# 4. Flux controllers Application manifest (inside the chart)
+resource "git_repository_file" "flux_application" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/templates/flux.yaml"
+  content = templatefile("${path.module}/templates/flux.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    client_id   = azurerm_user_assigned_identity.flux_system.client_id
+  })
+}
+
+resource "git_repository_file" "tenant_app" {
+  for_each = {
+    for ns in var.namespaces :
+    ns.name => ns
+    if ns.fluxcd != null
   }
-}
 
-resource "helm_release" "git_auth_proxy" {
-  depends_on = [
-    kubernetes_namespace.git_auth_proxy,
-    kubernetes_namespace.flux_system
-  ]
+  override_on_create = true
+  path               = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/templates/${each.key}-app.yaml"
+  content = templatefile("${path.module}/templates/tenant-app.yaml.tpl", {
+    name        = each.key,
+    tenant_name = var.tenant_name
+    cluster_id  = var.cluster_id
+    environment = var.environment
+    project     = var.fleet_infra_config.argocd_project_name
+    server      = var.fleet_infra_config.k8s_api_server_url
+    repo_url    = var.fleet_infra_config.git_repo_url
 
-  chart       = "oci://ghcr.io/xenitab/helm-charts/git-auth-proxy"
-  name        = "git-auth-proxy"
-  namespace   = kubernetes_namespace.git_auth_proxy.metadata[0].name
-  version     = "v0.9.0"
-  max_history = 3
-  values = [templatefile("${path.module}/templates/git-auth-proxy-values.yaml.tpl", {
-    git_provider = var.git_provider
-    private_key  = var.git_provider.type == "github" ? base64encode(var.git_provider.github.private_key) : null
-    bootstrap    = var.bootstrap
-    tenants      = [for tenant in var.namespaces : tenant if tenant.fluxcd != null]
-  })]
-}
-
-resource "kubernetes_namespace" "flux_system" {
-  metadata {
-    name = "flux-system"
-  }
-
-  lifecycle {
-    ignore_changes = [
-      metadata
-    ]
-  }
-}
-
-resource "flux_bootstrap_git" "this" {
-  depends_on = [helm_release.git_auth_proxy]
-
-  #path                    = "clusters/${var.cluster_id}"
-  path                    = "tenants/${var.cluster_id}"
-  disable_secret_creation = var.bootstrap.disable_secret_creation
-  components              = toset(["source-controller", "kustomize-controller", "helm-controller", "notification-controller"])
-  kustomization_override = templatefile("${path.module}/templates/kustomization-override.yaml.tpl", {
-    url       = join("/", compact([local.git_auth_proxy_url, var.git_provider.organization, var.bootstrap.project, local.git_path_separator, var.bootstrap.repository]))
-    client_id = azurerm_user_assigned_identity.flux_system.client_id
   })
 }
 
@@ -91,19 +82,21 @@ resource "git_repository_file" "tenant" {
   }
 
   override_on_create = true
-  path               = "tenants/${var.cluster_id}/${each.key}.yaml"
-  content = templatefile("${path.module}/templates/tenant.yaml", {
-    create_crds         = each.value.fluxcd.create_crds,
-    environment         = var.environment,
-    name                = each.key,
-    include_tenant_name = each.value.fluxcd.include_tenant_name,
-    provider_type       = var.git_provider.type
-    url = join("/", compact([
-      local.git_auth_proxy_url,
-      var.git_provider.organization,
-      each.value.fluxcd.project,
-      local.git_path_separator,
-      each.value.fluxcd.repository
-    ]))
+  path               = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/flux/tenants/${each.key}/${each.key}.yaml"
+  content = templatefile("${path.module}/templates/tenant.yaml.tpl", {
+    environment   = var.environment,
+    name          = each.key,
+    provider_type = var.git_provider.type,
+    provider      = (var.git_provider.type == "azuredevops" ? "azure" : "github"),
+    url = (var.git_provider.type == "azuredevops" ?
+      "https://dev.azure.com/${var.git_provider.organization}/${each.value.fluxcd.project}/_git/${each.value.fluxcd.repository}" :
+      "https://github.com/${var.git_provider.organization}/${each.value.fluxcd.repository}.git"
+    ),
+    tenant_path            = (each.value.fluxcd.include_tenant_name ? "./tenant/${var.environment}/${each.key}" : "./tenant/${var.environment}"),
+    create_crds            = each.value.fluxcd.create_crds,
+    github_app_id          = base64encode(var.git_provider.github.application_id),
+    github_installation_id = base64encode(var.git_provider.github.installation_id),
+    github_app_key         = base64encode(var.git_provider.github.private_key),
+
   })
 }

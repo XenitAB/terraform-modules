@@ -155,8 +155,4 @@ module "aks_core" {
     vpa_enabled                       = true
   }
 
-  providers = {
-    git        = git
-    git.tenant = git
-  }
 }

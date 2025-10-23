@@ -13,6 +13,15 @@ resource "azurerm_federated_identity_credential" "trivy" {
   subject             = "system:serviceaccount:trivy:trivy"
 }
 
+resource "azurerm_federated_identity_credential" "trivy-operator" {
+  name                = "trivy-operator"
+  resource_group_name = azurerm_user_assigned_identity.trivy.resource_group_name
+  parent_id           = azurerm_user_assigned_identity.trivy.id
+  audience            = ["api://AzureADTokenExchange"]
+  issuer              = var.oidc_issuer_url
+  subject             = "system:serviceaccount:trivy:trivy-operator"
+}
+
 resource "azurerm_role_assignment" "trivy_acr" {
   scope                = data.azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"

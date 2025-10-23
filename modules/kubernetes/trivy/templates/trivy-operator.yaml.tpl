@@ -23,7 +23,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://aquasecurity.github.io/helm-charts
-    targetRevision: 0.27.0
+    targetRevision: 0.31.0
     chart: trivy-operator
     helm:
       valuesObject:
@@ -39,6 +39,8 @@ spec:
           severity: MEDIUM,HIGH,CRITICAL
           ignoreUnfixed: true
           serverURL: "http://trivy.trivy.svc.cluster.local:4954"
+        podAnnotations:
+          azure.workload.identity/client-id: ${client_id}
         operator:
           # configAuditScannerEnabled the flag to enable configuration audit scanner
           configAuditScannerEnabled: false
@@ -50,10 +52,24 @@ spec:
           infraAssessmentScannerEnabled: false
           # scannerReportTTL the flag to set how long a report should exist. "" means that the ScannerReportTTL feature is disabled
           ScannerReportTTL: "25h"
+          # Enable metrics
+          metricsVulnIdEnabled: true
+          # Additional metrics settings
+          metricsExposedSecretInfo: true
+          metricsConfigAuditInfo: true
+          metricsRbacAssessmentInfo: true
+          metricsInfraAssessmentInfo: true
+          metricsImageInfo: true
+          metricsClusterComplianceInfo: true
+          podLabels: {
+            azure.workload.identity/use: "true"
+          }
         trivyOperator:
           # scanJobPodTemplateLabels comma-separated representation of the labels which the user wants the scanner pods to be
           # labeled with. Example: `foo=bar,env=stage` will labeled the scanner pods with the labels `foo: bar` and `env: stage`
           scanJobPodTemplateLabels: azure.workload.identity/use=true
+          scanJobAnnotations: "azure.workload.identity/client-id=${client_id}"
+          scanJobServiceAccountName: trivy-operator
         resources:
           requests:
             cpu: 15m

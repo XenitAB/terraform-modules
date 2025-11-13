@@ -28,5 +28,6 @@ resource "git_repository_file" "rabbitmq_operator" {
     environment             = var.environment
     project                 = var.fleet_infra_config.argocd_project_name
     server                  = var.fleet_infra_config.k8s_api_server_url
+    target_revision         = var.rabbitmq_config.target_revision
   })
 }

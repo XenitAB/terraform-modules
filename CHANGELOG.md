@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: move flux to install with argo & helm by @CalleB3 in [#1370](https://github.com/XenitAB/terraform-modules/pulls/1370)
 - Feat: switch Argo hub from PAT to Github App auth by @CalleB3 in [#1369](https://github.com/XenitAB/terraform-modules/pulls/1369)
 - Feat: Name override aks core keyvault value by @optocoupler in [#1366](https://github.com/XenitAB/terraform-modules/pulls/1366)
 - Feat: name override feature by @optocoupler in [#1365](https://github.com/XenitAB/terraform-modules/pulls/1365)
@@ -27,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: Remove node pool name validation by @yabracadabra in [#1396](https://github.com/XenitAB/terraform-modules/pulls/1396)
+- Fix: Add possibility to add tags on AKS resource by @CalleB3 in [#1391](https://github.com/XenitAB/terraform-modules/pulls/1391)
 - Fix: change chart name to datadog-operator by @yabracadabra in [#1388](https://github.com/XenitAB/terraform-modules/pulls/1388)
 - Fix: add default for keyvault_name_override by @CalleB3 in [#1373](https://github.com/XenitAB/terraform-modules/pulls/1373)
 - Fix: increase acceptable header size for argo ingress by @CalleB3 in [#1367](https://github.com/XenitAB/terraform-modules/pulls/1367)
@@ -40,6 +43,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: adding additional nodepool osdisksize option by @optocoupler in [#1398](https://github.com/XenitAB/terraform-modules/pulls/1398)
+- Chore: Rabbitmq operator bitnami migration by @optocoupler in [#1384](https://github.com/XenitAB/terraform-modules/pulls/1384)
+- Fix: Revert remove node pool name validation by @CalleB3 in [#1397](https://github.com/XenitAB/terraform-modules/pulls/1397)
+- Chore: Upgrade trivy and fix workload identity for scans by @CalleB3 in [#1394](https://github.com/XenitAB/terraform-modules/pulls/1394)
 - Chore: deprecate Telepresence module by @yabracadabra in [#1389](https://github.com/XenitAB/terraform-modules/pulls/1389)
 - Chore: bump valid k8s versions for upgrading by @CalleB3 in [#1386](https://github.com/XenitAB/terraform-modules/pulls/1386)
 - Chore: upgrade of vpa and vpa-recommender and goldilocks by @yabracadabra in [#1385](https://github.com/XenitAB/terraform-modules/pulls/1385)

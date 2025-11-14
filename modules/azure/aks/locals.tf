@@ -26,9 +26,9 @@ locals {
     "Standard_D48ads_v5" = 1800
     "Standard_D64ads_v5" = 2400
     "Standard_D96ads_v5" = 3600
-    
+
     "Standard_D32lds_v6" = 512
-    
+
     "Standard_E2ds_v5"   = 75
     "Standard_E4ds_v5"   = 150
     "Standard_E8ds_v5"   = 300

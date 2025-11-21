@@ -26,7 +26,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://litmuschaos.github.io/litmus-helm
-    targetRevision: 3.12.0
+    targetRevision: 3.23.0
     chart: litmus
     #helm:
       #valuesObject:

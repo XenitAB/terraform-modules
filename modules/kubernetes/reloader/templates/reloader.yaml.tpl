@@ -26,7 +26,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://stakater.github.io/stakater-charts
-    targetRevision: 2.0.0
+    targetRevision: 2.2.3
     chart: reloader
     helm:
       valuesObject:

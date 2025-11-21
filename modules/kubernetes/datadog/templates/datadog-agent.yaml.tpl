@@ -39,7 +39,7 @@ spec:
       replicas: 2
       priorityClassName: platform-low
       image:
-        name: "gcr.io/datadoghq/cluster-agent:7.66.0"
+        name: "gcr.io/datadoghq/cluster-agent:7.66.1"
       tolerations:
         - operator: Exists
       containers:

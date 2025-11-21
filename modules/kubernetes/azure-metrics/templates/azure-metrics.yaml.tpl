@@ -26,7 +26,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://webdevops.github.io/helm-charts
-    targetRevision: v1.2.8
+    targetRevision: v1.2.10
     chart: azure-metrics-exporter
     helm:
       valuesObject:

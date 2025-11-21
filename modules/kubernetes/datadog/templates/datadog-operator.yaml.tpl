@@ -23,10 +23,11 @@ spec:
     - Replace=true
   source:
     repoURL: https://helm.datadoghq.com
-    targetRevision: 2.9.2
+    targetRevision: 2.15.0
     chart: datadog-operator
     helm:
       valuesObject:
+        site: datadoghq.eu
         apiKeyExistingSecret: datadog-operator-apikey
         appKeyExistingSecret: datadog-operator-appkey
         installCRDs: true

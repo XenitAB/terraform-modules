@@ -23,7 +23,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://falcosecurity.github.io/charts
-    targetRevision: 4.21.3
+    targetRevision: 4.21.3  #skipped_20251121-breaking-template
     chart: falco
     helm:
       valuesObject:

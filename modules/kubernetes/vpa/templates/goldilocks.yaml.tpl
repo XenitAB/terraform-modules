@@ -22,7 +22,7 @@ spec:
     - ApplyOutOfSyncOnly=true
   source:
     repoURL: https://charts.fairwinds.com/stable
-    targetRevision: 10.0.1
+    targetRevision: 10.1.0
     chart: goldilocks
     helm:
       valuesObject:

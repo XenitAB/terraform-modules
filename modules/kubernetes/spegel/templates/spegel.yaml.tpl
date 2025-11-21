@@ -26,7 +26,7 @@ spec:
     - Replace=true
   source:
     repoURL: ghcr.io/spegel-org/helm-charts
-    targetRevision: v0.0.30
+    targetRevision: 0.5.1
     chart: spegel
     helm:
       valuesObject:

@@ -26,7 +26,7 @@ spec:
     - Replace=true
   source:
     repoURL: ghcr.io/nginxinc/charts
-    targetRevision: 1.4.0
+    targetRevision: 1.4.0 #skipped_20251121 due to deprication shortly
     chart: nginx-gateway-fabric
     helm:
       valuesObject:

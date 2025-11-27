@@ -22,7 +22,7 @@ spec:
     - ApplyOutOfSyncOnly=true
   source:
     repoURL: https://vmware-tanzu.github.io/helm-charts
-    targetRevision: v11.0.0
+    targetRevision: v11.1.1
     chart: velero
     helm:
       valuesObject:

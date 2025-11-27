@@ -687,7 +687,7 @@ variable "priority_expander_config" {
   type        = map(list(string))
   default     = null
 }
-
+/*
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
@@ -720,7 +720,7 @@ variable "promtail_config" {
     excluded_namespaces  = []
   }
 }
-
+*/
 variable "rabbitmq_config" {
   description = "The RabbitMQ operator configuration"
   type = object({

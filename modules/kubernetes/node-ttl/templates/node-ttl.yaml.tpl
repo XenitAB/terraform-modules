@@ -26,7 +26,7 @@ spec:
     - Replace=true
   source:
     repoURL: ghcr.io/xenitab/helm-charts
-    targetRevision: v0.0.9
+    targetRevision: v0.0.10
     chart: node-ttl
     helm:
       valuesObject:

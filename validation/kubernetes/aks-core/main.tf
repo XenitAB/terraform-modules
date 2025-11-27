@@ -109,6 +109,7 @@ module "aks_core" {
   ingress_nginx_config = {
     private_ingress_enabled = false
   }
+  /*
   prometheus_config = {
     azure_key_vault_name            = "foobar"
     tenant_id                       = ""
@@ -119,6 +120,7 @@ module "aks_core" {
     resource_selector               = ["platform"]
     namespace_selector              = ["platform"]
   }
+  */
   nginx_healthz_ingress_whitelist_ips = ""
   platform_config = {
     tenant_name = "my-tenant-name"

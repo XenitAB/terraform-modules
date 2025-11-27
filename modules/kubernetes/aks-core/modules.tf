@@ -598,7 +598,7 @@ module "popeye" {
   environment             = var.environment
   fleet_infra_config      = var.platform_config.fleet_infra_config
 }
-
+/*
 module "prometheus" {
   for_each = {
     for s in ["prometheus"] :
@@ -664,7 +664,7 @@ module "promtail" {
   tenant_name         = var.platform_config.tenant_name
   fleet_infra_config  = var.platform_config.fleet_infra_config
 }
-
+*/
 module "rabbitmq_operator" {
   for_each = {
     for s in ["rabbitmq"] :

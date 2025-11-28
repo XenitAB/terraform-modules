@@ -163,7 +163,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   vnet_subnet_id        = data.azurerm_subnet.node_pools[each.value.name].id
   zones                 = each.value.zones
 
-  temporary_name_for_rotation = "tmpXenitTofu"
+  temporary_name_for_rotation = "tmpxenittofu"
   auto_scaling_enabled        = true
   kubelet_disk_type           = each.value.kubelet_disk_type
   os_disk_type                = "Ephemeral"

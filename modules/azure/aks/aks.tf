@@ -177,7 +177,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   linux_os_config {
     sysctl_config {
       # Increase maximum number of open files
-      vm_max_map_count = 524288
+      vm_max_map_count = 262144
     }
   }
   node_taints = each.value.node_taints

@@ -164,17 +164,17 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   zones                 = each.value.zones
 
   temporary_name_for_rotation = "tmpXenitTofu"
-  auto_scaling_enabled = true
-  kubelet_disk_type    = each.value.kubelet_disk_type
-  os_disk_type         = "Ephemeral"
-  os_disk_size_gb      = local.vm_skus_disk_size_gb[each.value.vm_size]
-  orchestrator_version = each.value.version
-  vm_size              = each.value.vm_size
-  min_count            = each.value.min_count
-  max_count            = each.value.max_count
-  eviction_policy      = each.value.spot_enabled ? "Delete" : null
-  priority             = each.value.spot_enabled ? "Spot" : "Regular"
-  spot_max_price       = each.value.spot_max_price
+  auto_scaling_enabled        = true
+  kubelet_disk_type           = each.value.kubelet_disk_type
+  os_disk_type                = "Ephemeral"
+  os_disk_size_gb             = local.vm_skus_disk_size_gb[each.value.vm_size]
+  orchestrator_version        = each.value.version
+  vm_size                     = each.value.vm_size
+  min_count                   = each.value.min_count
+  max_count                   = each.value.max_count
+  eviction_policy             = each.value.spot_enabled ? "Delete" : null
+  priority                    = each.value.spot_enabled ? "Spot" : "Regular"
+  spot_max_price              = each.value.spot_max_price
   linux_os_config {
     sysctl_config {
       # Increase maximum number of open files

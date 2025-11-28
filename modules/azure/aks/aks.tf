@@ -174,7 +174,12 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   eviction_policy      = each.value.spot_enabled ? "Delete" : null
   priority             = each.value.spot_enabled ? "Spot" : "Regular"
   spot_max_price       = each.value.spot_max_price
-
+  linux_os_config {
+    sysctl_config {
+      # Increase maximum number of open files
+      vm_max_map_count = 524288
+    }
+  }
   node_taints = each.value.node_taints
   node_labels = merge({ "xkf.xenit.io/node-ttl" = "168h" }, each.value.node_labels, { "xkf.xenit.io/node-pool" = each.value.name })
 

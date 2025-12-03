@@ -6,6 +6,8 @@ metadata:
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
     argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: ${project}
   destination:

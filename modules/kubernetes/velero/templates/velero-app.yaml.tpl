@@ -5,6 +5,8 @@ metadata:
   namespace: ${tenant_name}-${environment}
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: ${project}
   destination:

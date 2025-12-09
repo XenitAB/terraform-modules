@@ -20,10 +20,10 @@ variable "aad_groups" {
 
 variable "aad_pod_identity_config" {
   description = "Configuration for aad pod identity"
-  type = map(object({
+  type = optional(map(object({
     id        = string
     client_id = string
-  }))
+  })))
 }
 
 variable "acr_name_override" {

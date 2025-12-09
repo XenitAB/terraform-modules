@@ -27,8 +27,8 @@ spec:
     - ApplyOutOfSyncOnly=true
     - Replace=true
   source:
-    repoURL: ghcr.io/nginxinc/charts
-    targetRevision: 1.4.0 #skipped_20251121 due to deprication shortly
+    repoURL: ghcr.io/nginx/charts
+    targetRevision: 2.2.1
     chart: nginx-gateway-fabric
     helm:
       valuesObject:

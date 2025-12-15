@@ -272,7 +272,6 @@ variable "environment" {
 variable "envoy_gateway" {
   description = "Should we deploy envoy-gateway"
   type = object({
-    enabled = optional(bool, false)
     envoy_gateway_config = optional(object({
       logging_level             = optional(string, "info")
       replicas_count            = optional(number, 2)

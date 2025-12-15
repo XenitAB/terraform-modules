@@ -208,7 +208,6 @@ module "envoy_gateway" {
 
   source = "../../kubernetes/envoy-gateway"
 
-  azure_policy_enabled = var.platform_config.azure_policy_enabled
   cluster_id           = local.cluster_id
   envoy_gateway_config = var.envoy_gateway.envoy_gateway_config
   tenant_name          = var.platform_config.tenant_name

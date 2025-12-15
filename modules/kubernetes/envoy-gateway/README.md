@@ -14,7 +14,6 @@ This module is used to add [`envoy-gateway`](https://gateway.envoyproxy.io/docs/
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
 | <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
 ## Modules
@@ -25,9 +24,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_policy_definition.envoy_gateway_require_tls](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_definition) | resource |
-| [azurerm_policy_set_definition.tls](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/policy_set_definition) | resource |
 | [git_repository_file.envoy_gateway](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.envoy_gateway_require_tls_kyverno](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 
 ## Inputs
 

@@ -660,6 +660,7 @@ variable "platform_config" {
     trivy_enabled                     = optional(bool, false)
     velero_enabled                    = optional(bool, false)
     vpa_enabled                       = optional(bool, false)
+    envoy_gateway_enabled             = optional(bool, false)
   })
 }
 

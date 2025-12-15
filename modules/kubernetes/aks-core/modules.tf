@@ -203,7 +203,7 @@ module "envoy_gateway" {
   for_each = {
     for s in ["envoy_gateway"] :
     s => s
-    if var.envoy_gateway.enabled
+    if var.platform_config.envoy_gateway_enabled
   }
 
   source = "../../kubernetes/envoy-gateway"

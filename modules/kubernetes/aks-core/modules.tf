@@ -198,8 +198,6 @@ module "eck_operator" {
 }
 
 module "envoy_gateway" {
-  depends_on = [module.gateway_api]
-
   for_each = {
     for s in ["envoy_gateway"] :
     s => s
@@ -213,6 +211,7 @@ module "envoy_gateway" {
   tenant_name          = var.platform_config.tenant_name
   environment          = var.environment
   fleet_infra_config   = var.platform_config.fleet_infra_config
+  
 }
 
 module "external_dns" {

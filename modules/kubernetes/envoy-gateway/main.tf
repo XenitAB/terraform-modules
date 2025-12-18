@@ -30,8 +30,13 @@ resource "git_repository_file" "envoy_gateway" {
   })
 }
 
-resource "git_repository_file" "envoy_gateway_require_tls_kyverno" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/envoy-gateway-require-tls-kyverno.yaml"
-  content = templatefile("${path.module}/templates/envoy-gateway-require-tls-kyverno.yaml.tpl", {
+resource "git_repository_file" "envoy_gateway_extras" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/envoy-gateway-extras.yaml"
+  content = templatefile("${path.module}/templates/envoy-gateway-extras.yaml.tpl", {
+  })
+}
+resource "git_repository_file" "envoy_gateway_manifest" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/envoy-gateway-manifest.yaml"
+  content = templatefile("${path.module}/templates/envoy-gateway-manifest.yaml.tpl", {
   })
 }

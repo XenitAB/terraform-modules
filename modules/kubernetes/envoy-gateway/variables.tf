@@ -1,8 +1,3 @@
-variable "azure_policy_enabled" {
-  description = "If Azure policy is enabled"
-  type        = bool
-}
-
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
@@ -39,8 +34,3 @@ variable "tenant_name" {
   type        = string
 }
 
-variable "tenant_namespaces" {
-  description = "List of tenant namespaces"
-  type        = list(string)
-  default     = []
-}

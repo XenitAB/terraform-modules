@@ -35,6 +35,10 @@ spec:
     chart: cert-manager
     helm:
       valuesObject:
+        config:
+          apiVersion: controller.config.cert-manager.io/v1alpha1
+          kind: ControllerConfiguration
+          enableGatewayAPI: true
         installCRDs: true
         global:
           priorityClassName: "platform-medium"

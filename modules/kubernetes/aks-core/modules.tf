@@ -198,22 +198,20 @@ module "eck_operator" {
 }
 
 module "envoy_gateway" {
-  depends_on = [module.gateway_api]
-
   for_each = {
     for s in ["envoy_gateway"] :
     s => s
-    if var.envoy_gateway.enabled
+    if var.platform_config.envoy_gateway_enabled
   }
 
   source = "../../kubernetes/envoy-gateway"
 
-  azure_policy_enabled = var.platform_config.azure_policy_enabled
   cluster_id           = local.cluster_id
   envoy_gateway_config = var.envoy_gateway.envoy_gateway_config
   tenant_name          = var.platform_config.tenant_name
   environment          = var.environment
   fleet_infra_config   = var.platform_config.fleet_infra_config
+  
 }
 
 module "external_dns" {

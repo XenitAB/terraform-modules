@@ -68,8 +68,11 @@ resource "azurerm_kubernetes_cluster" "this" {
   oidc_issuer_enabled       = true
   workload_identity_enabled = true
 
-  node_os_upgrade_channel = "Unmanaged"
+  node_os_upgrade_channel = var.aks_node_os_upgrade_channel
 
+  node_provisioning_profile {
+    mode = "Auto"
+  }
   auto_scaler_profile {
     # Pods should not depend on local storage like EmptyDir or HostPath
     skip_nodes_with_local_storage = false

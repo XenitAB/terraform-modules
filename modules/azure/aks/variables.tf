@@ -198,6 +198,12 @@ variable "aks_cost_analysis_enabled" {
   default     = false
 }
 
+variable "aks_node_os_upgrade_channel" {
+  description = "Node OS upgrade channel for AKS nodes"
+  type        = string
+  default     = "NodeImage"
+}
+
 variable "aks_default_node_pool_vm_size" {
   description = "The VM size of the AKS clusters default node pool. Do not override unless explicitly required."
   type        = string

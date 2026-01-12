@@ -232,12 +232,6 @@ resource "azurerm_monitor_diagnostic_setting" "log_analytics_workspace_audit" {
   enabled_log {
     category = "kube-audit-admin"
   }
-
-  #metric is deprecated in favour of enabled_metric but since attribute is false we can leave it commented out since enabled_log is being used https://search.opentofu.org/provider/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting
-  #metric {
-  #  category = "AllMetrics"
-  #  enabled  = false
-  #}
 }
 
 resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
@@ -249,12 +243,6 @@ resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
   enabled_log {
     category = "kube-audit-admin"
   }
-
-  #metric is deprecated in favour of enabled_metric but since attribute is false we can leave it commented out since enabled_log is being used https://search.opentofu.org/provider/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting
-  #metric {
-  #  category = "AllMetrics"
-  #  enabled  = false
-  #}
 }
 
 resource "azurerm_storage_management_policy" "log_storage_account_audit_policy" {
@@ -323,12 +311,6 @@ resource "azurerm_monitor_diagnostic_setting" "log_eventhub_audit" {
   enabled_log {
     category = "cluster-autoscaler"
   }
-
-  #metric is deprecated in favour of enabled_metric but since attribute is false we can leave it commented out since enabled_log is being used https://search.opentofu.org/provider/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting
-  #metric {
-  #  category = "AllMetrics"
-  #  enabled  = false
-  #}
 }
 
 # This is a work around to stop any update of the AKS cluster to force a recreation of the role assignments.

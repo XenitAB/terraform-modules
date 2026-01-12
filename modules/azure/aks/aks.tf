@@ -232,11 +232,6 @@ resource "azurerm_monitor_diagnostic_setting" "log_analytics_workspace_audit" {
   enabled_log {
     category = "kube-audit-admin"
   }
-
-  metric {
-    category = "AllMetrics"
-    enabled  = false
-  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
@@ -247,11 +242,6 @@ resource "azurerm_monitor_diagnostic_setting" "log_storage_account_audit" {
 
   enabled_log {
     category = "kube-audit-admin"
-  }
-
-  metric {
-    category = "AllMetrics"
-    enabled  = false
   }
 }
 
@@ -320,11 +310,6 @@ resource "azurerm_monitor_diagnostic_setting" "log_eventhub_audit" {
 
   enabled_log {
     category = "cluster-autoscaler"
-  }
-
-  metric {
-    category = "AllMetrics"
-    enabled  = false
   }
 }
 

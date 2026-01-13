@@ -4,7 +4,7 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.57.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.23.0 |
@@ -14,7 +14,7 @@
 | Name | Version |
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.57.0 |
 | <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
@@ -29,11 +29,11 @@ No modules.
 |------|------|
 | [azuread_application.dex](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application) | resource |
 | [azuread_application_password.dex](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application_password) | resource |
-| [azurerm_federated_identity_credential.argocd_application_controller](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/federated_identity_credential) | resource |
-| [azurerm_federated_identity_credential.argocd_server](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/federated_identity_credential) | resource |
-| [azurerm_key_vault_access_policy.argocd](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/key_vault_access_policy) | resource |
-| [azurerm_role_assignment.argocd_admin](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
-| [azurerm_user_assigned_identity.argocd](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/user_assigned_identity) | resource |
+| [azurerm_federated_identity_credential.argocd_application_controller](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/federated_identity_credential) | resource |
+| [azurerm_federated_identity_credential.argocd_server](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/federated_identity_credential) | resource |
+| [azurerm_key_vault_access_policy.argocd](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_role_assignment.argocd_admin](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/role_assignment) | resource |
+| [azurerm_user_assigned_identity.argocd](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/user_assigned_identity) | resource |
 | [git_repository_file.argocd](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.argocd_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.argocd_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
@@ -45,9 +45,9 @@ No modules.
 | [helm_release.argocd_spoke_setup](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
 | [kubernetes_namespace.argocd](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
 | [azuread_group.all_owner](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/data-sources/group) | data source |
-| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/client_config) | data source |
-| [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/key_vault) | data source |
-| [azurerm_key_vault_secret.key](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/data-sources/client_config) | data source |
+| [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/data-sources/key_vault) | data source |
+| [azurerm_key_vault_secret.key](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/data-sources/key_vault_secret) | data source |
 
 ## Inputs
 

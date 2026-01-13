@@ -73,11 +73,9 @@ resource "azurerm_kubernetes_cluster" "this" {
   node_provisioning_profile {
     mode = var.aks_node_provisioning_mode
   }
-
   upgrade_override {
     force_upgrade_enabled = false
   }
-  
   auto_scaler_profile {
     # Pods should not depend on local storage like EmptyDir or HostPath
     skip_nodes_with_local_storage = false
@@ -85,7 +83,6 @@ resource "azurerm_kubernetes_cluster" "this" {
     # TODO: When supported we should make use of multiple expanders #499
     expander = local.auto_scaler_expander
   }
-
   network_profile {
     network_plugin      = var.cilium_enabled ? "azure" : "kubenet"
     network_plugin_mode = var.cilium_enabled ? "overlay" : null

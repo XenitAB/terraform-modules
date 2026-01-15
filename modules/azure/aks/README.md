@@ -90,6 +90,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | <a name="input_aks_cost_analysis_enabled"></a> [aks\_cost\_analysis\_enabled](#input\_aks\_cost\_analysis\_enabled) | If AKS cost analysis should be enabled | `bool` | `false` | no |
 | <a name="input_aks_default_node_pool_vm_size"></a> [aks\_default\_node\_pool\_vm\_size](#input\_aks\_default\_node\_pool\_vm\_size) | The VM size of the AKS clusters default node pool. Do not override unless explicitly required. | `string` | `"Standard_D2ds_v5"` | no |
 | <a name="input_aks_default_node_pool_zones"></a> [aks\_default\_node\_pool\_zones](#input\_aks\_default\_node\_pool\_zones) | The default node pool zones. | `list(string)` | <pre>[<br/>  "1",<br/>  "2",<br/>  "3"<br/>]</pre> | no |
+| <a name="input_aks_force_upgrade_enabled"></a> [aks\_force\_upgrade\_enabled](#input\_aks\_force\_upgrade\_enabled) | If force upgrade should be enabled for AKS clusters | `bool` | `false` | no |
 | <a name="input_aks_joblogs_retention_days"></a> [aks\_joblogs\_retention\_days](#input\_aks\_joblogs\_retention\_days) | How many days to keep logs from automation jobs | `number` | `7` | no |
 | <a name="input_aks_name_suffix"></a> [aks\_name\_suffix](#input\_aks\_name\_suffix) | The suffix for the Azure Kubernetes Service (AKS) clusters | `number` | n/a | yes |
 | <a name="input_aks_node_os_upgrade_channel"></a> [aks\_node\_os\_upgrade\_channel](#input\_aks\_node\_os\_upgrade\_channel) | Node OS upgrade channel for AKS nodes | `string` | `"Unmanaged"` | no |

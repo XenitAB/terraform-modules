@@ -201,7 +201,7 @@ variable "aks_cost_analysis_enabled" {
 variable "aks_node_os_upgrade_channel" {
   description = "Node OS upgrade channel for AKS nodes"
   type        = string
-  default     = "NodeImage"
+  default     = "Unmanaged"
 }
 
 variable "aks_node_provisioning_mode" {

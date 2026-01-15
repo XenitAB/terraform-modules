@@ -73,6 +73,10 @@ resource "azurerm_kubernetes_cluster" "this" {
   node_provisioning_profile {
     mode = var.aks_node_provisioning_mode
   }
+  upgrade_override {
+    force_upgrade_enabled = var.aks_force_upgrade_enabled
+  }
+  
   auto_scaler_profile {
     # Pods should not depend on local storage like EmptyDir or HostPath
     skip_nodes_with_local_storage = false

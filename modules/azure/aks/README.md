@@ -92,7 +92,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 | <a name="input_aks_default_node_pool_zones"></a> [aks\_default\_node\_pool\_zones](#input\_aks\_default\_node\_pool\_zones) | The default node pool zones. | `list(string)` | <pre>[<br/>  "1",<br/>  "2",<br/>  "3"<br/>]</pre> | no |
 | <a name="input_aks_joblogs_retention_days"></a> [aks\_joblogs\_retention\_days](#input\_aks\_joblogs\_retention\_days) | How many days to keep logs from automation jobs | `number` | `7` | no |
 | <a name="input_aks_name_suffix"></a> [aks\_name\_suffix](#input\_aks\_name\_suffix) | The suffix for the Azure Kubernetes Service (AKS) clusters | `number` | n/a | yes |
-| <a name="input_aks_node_os_upgrade_channel"></a> [aks\_node\_os\_upgrade\_channel](#input\_aks\_node\_os\_upgrade\_channel) | Node OS upgrade channel for AKS nodes | `string` | `"NodeImage"` | no |
+| <a name="input_aks_node_os_upgrade_channel"></a> [aks\_node\_os\_upgrade\_channel](#input\_aks\_node\_os\_upgrade\_channel) | Node OS upgrade channel for AKS nodes | `string` | `"Unmanaged"` | no |
 | <a name="input_aks_node_provisioning_mode"></a> [aks\_node\_provisioning\_mode](#input\_aks\_node\_provisioning\_mode) | Node provisioning mode for AKS nodes | `string` | `"Manual"` | no |
 | <a name="input_aks_public_ip_prefix_id"></a> [aks\_public\_ip\_prefix\_id](#input\_aks\_public\_ip\_prefix\_id) | Public IP ID AKS egresses from | `string` | n/a | yes |
 | <a name="input_alerts_enabled"></a> [alerts\_enabled](#input\_alerts\_enabled) | If metric alerts on audit logs are enabled | `bool` | `false` | no |

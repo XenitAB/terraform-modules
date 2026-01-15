@@ -73,8 +73,12 @@ resource "azurerm_kubernetes_cluster" "this" {
   node_provisioning_profile {
     mode = var.aks_node_provisioning_mode
   }
-  upgrade_override {
-    force_upgrade_enabled = var.aks_force_upgrade_enabled
+  dynamic "upgrade_override" {
+    for_each = var.aks_force_upgrade_enabled ? [true] : []
+
+    content {
+      force_upgrade_enabled = true
+    }
   }
   
   auto_scaler_profile {

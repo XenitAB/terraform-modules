@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: added node_provision_profile to handle NodeImage and NodeOsUpgradeChannel by @yabracadabra in [#1410](https://github.com/XenitAB/terraform-modules/pulls/1410)
+- Feat: Adding another type of vcpu family by @optocoupler in [#1408](https://github.com/XenitAB/terraform-modules/pulls/1408)
+- Feat: enabling cert-manager to create certificates as secrets for k8s… by @optocoupler in [#1406](https://github.com/XenitAB/terraform-modules/pulls/1406)
 - Feat: adding max vm map count to an increased default value for all n… by @yabracadabra in [#1401](https://github.com/XenitAB/terraform-modules/pulls/1401)
 - Feat: move flux to install with argo & helm by @CalleB3 in [#1370](https://github.com/XenitAB/terraform-modules/pulls/1370)
 - Feat: switch Argo hub from PAT to Github App auth by @CalleB3 in [#1369](https://github.com/XenitAB/terraform-modules/pulls/1369)
@@ -29,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: the metric block is depricated in favour for enabled_metric  by @yabracadabra in [#1409](https://github.com/XenitAB/terraform-modules/pulls/1409)
 - Fix: finalizers for argocd by @yabracadabra in [#1403](https://github.com/XenitAB/terraform-modules/pulls/1403)
 - Fix: Remove node pool name validation by @yabracadabra in [#1396](https://github.com/XenitAB/terraform-modules/pulls/1396)
 - Fix: Add possibility to add tags on AKS resource by @CalleB3 in [#1391](https://github.com/XenitAB/terraform-modules/pulls/1391)

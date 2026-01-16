@@ -7,14 +7,14 @@ This module is used to add Litmus chaos engineering [`litmuschaos`](https://litm
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.57.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.57.0 |
 | <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
 ## Modules
@@ -26,8 +26,8 @@ No modules.
 | Name | Type |
 |------|------|
 | [git_repository_file.litmus](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
-| [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/key_vault) | data source |
-| [azurerm_key_vault_secret.mongodb](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault.core](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/data-sources/key_vault) | data source |
+| [azurerm_key_vault_secret.mongodb](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/data-sources/key_vault_secret) | data source |
 
 ## Inputs
 

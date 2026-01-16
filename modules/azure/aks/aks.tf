@@ -68,7 +68,18 @@ resource "azurerm_kubernetes_cluster" "this" {
   oidc_issuer_enabled       = true
   workload_identity_enabled = true
 
-  node_os_upgrade_channel = "Unmanaged"
+  node_os_upgrade_channel = var.aks_node_os_upgrade_channel
+
+  node_provisioning_profile {
+    mode = var.aks_node_provisioning_mode
+  }
+  dynamic "upgrade_override" {
+    for_each = var.aks_force_upgrade_enabled ? [true] : []
+
+    content {
+      force_upgrade_enabled = true
+    }
+  }
 
   auto_scaler_profile {
     # Pods should not depend on local storage like EmptyDir or HostPath
@@ -77,7 +88,6 @@ resource "azurerm_kubernetes_cluster" "this" {
     # TODO: When supported we should make use of multiple expanders #499
     expander = local.auto_scaler_expander
   }
-
   network_profile {
     network_plugin      = var.cilium_enabled ? "azure" : "kubenet"
     network_plugin_mode = var.cilium_enabled ? "overlay" : null

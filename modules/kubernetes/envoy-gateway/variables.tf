@@ -13,9 +13,15 @@ variable "envoy_gateway_config" {
   type = object({
     logging_level             = optional(string, "info")
     replicas_count            = optional(number, 2)
-    resources_memory_limit    = optional(string, "")
-    resources_cpu_requests    = optional(string, "")
-    resources_memory_requests = optional(string, "")
+    resources_memory_limit    = optional(string, "1Gi")
+    resources_cpu_limit       = optional(string, "1000m")
+    resources_cpu_requests    = optional(string, "100m")
+    resources_memory_requests = optional(string, "256Mi")
+    # Envoy Proxy (data plane) resources - these handle actual traffic
+    proxy_cpu_limit           = optional(string, "2000m")
+    proxy_memory_limit        = optional(string, "2Gi")
+    proxy_cpu_requests        = optional(string, "200m")
+    proxy_memory_requests     = optional(string, "512Mi")
   })
   default = {}
 }

@@ -67,7 +67,7 @@ resource "helm_release" "argocd" {
   chart       = "oci://ghcr.io/argoproj/argo-helm/argo-cd"
   name        = "argo-cd"
   namespace   = "argocd"
-  version     = "8.3.7"
+  version     = "9.3.4"
   max_history = 3
 
   values = [templatefile("${path.module}/templates/argocd-values.yaml.tpl", {

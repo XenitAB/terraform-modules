@@ -87,6 +87,16 @@ resource "kubernetes_network_policy" "tenant" {
       }
     }
 
+    ingress {
+      from {
+        namespace_selector {
+          match_labels = {
+            "kubernetes.io/metadata.name" = "grafana-k8s-monitoring"
+          }
+        }
+      }
+    }
+    
     egress {
       to {
         namespace_selector {}

@@ -56,6 +56,11 @@ variable "resource_group_name" {
   type        = string
 }
 
+variable "subscription_id" {
+  type        = string
+  description = "Azure subscription ID."
+}
+
 # Monthly occurence currently not supported
 variable "aks_automation_config" {
   description = "AKS automation configuration"

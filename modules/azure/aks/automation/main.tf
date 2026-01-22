@@ -8,6 +8,17 @@ resource "azurerm_user_assigned_identity" "aks_automation" {
   location            = var.location
   name                = "uai-${var.aks_name}-auto"
 }
+resource "azurerm_role_assignment" "aks_automation" {
+  scope                = var.aks_id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_user_assigned_identity.aks_automation.principal_id
+}
+
+resource "azurerm_role_assignment" "automation_access" {
+  scope                = azurerm_automation_account.aks.id
+  role_definition_name = "Automation Operator"
+  principal_id         = azuread_group.automation_access.id
+}
 
 resource "azurerm_automation_account" "aks" {
   name                          = "auto-${var.aks_name}"
@@ -112,6 +123,20 @@ resource "azurerm_monitor_action_group" "xks" {
   email_receiver {
     name          = "sendtoxenit"
     email_address = var.notification_email
+  }
+}
+
+resource "azurerm_monitor_diagnostic_setting" "automation_account" {
+  name               = "log-${var.aks_name}"
+  target_resource_id = azurerm_automation_account.aks.id
+  storage_account_id = var.storage_account_id
+
+  enabled_log {
+    category = "JobLogs"
+  }
+
+  enabled_log {
+    category = "JobStreams"
   }
 }
 

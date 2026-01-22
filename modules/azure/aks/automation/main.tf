@@ -5,6 +5,7 @@ data "azurerm_resource_group" "this" {
   name = var.resource_group_name
 }
 
+# Removed due to verbose output during 'plan' and 'apply' for role assignment scope 
 # data "azurerm_kubernetes_cluster" "xks" {
 #   name                = var.aks_name
 #   resource_group_name = data.azurerm_resource_group.this.name

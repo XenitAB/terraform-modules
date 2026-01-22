@@ -5,10 +5,10 @@ data "azurerm_resource_group" "this" {
   name = var.resource_group_name
 }
 
-data "azurerm_kubernetes_cluster" "xks" {
-  name                = var.aks_name
-  resource_group_name = data.azurerm_resource_group.this.name
-}
+# data "azurerm_kubernetes_cluster" "xks" {
+#   name                = var.aks_name
+#   resource_group_name = data.azurerm_resource_group.this.name
+# }
 
 resource "azuread_group" "automation_access" {
   display_name     = "az-auto-${var.aks_name}-operator"
@@ -22,7 +22,7 @@ resource "azurerm_user_assigned_identity" "aks_automation" {
 }
 
 resource "azurerm_role_assignment" "aks_automation" {
-  scope                = data.azurerm_kubernetes_cluster.xks.id
+  scope                = var.aks_id
   role_definition_name = "Contributor"
   principal_id         = azurerm_user_assigned_identity.aks_automation.principal_id
 }
@@ -123,11 +123,6 @@ resource "azurerm_monitor_diagnostic_setting" "automation_account" {
 
   enabled_log {
     category = "JobStreams"
-  }
-
-  metric {
-    category = "AllMetrics"
-    enabled  = false
   }
 }
 

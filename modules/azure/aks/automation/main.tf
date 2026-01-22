@@ -2,6 +2,10 @@
 # data "azurerm_resource_group" "this" {
 #   name = var.resource_group_name
 # }
+resource "azuread_group" "automation_access" {
+  display_name     = "az-auto-${var.aks_name}-operator"
+  security_enabled = true
+}
 
 resource "azurerm_user_assigned_identity" "aks_automation" {
   resource_group_name = var.resource_group_name

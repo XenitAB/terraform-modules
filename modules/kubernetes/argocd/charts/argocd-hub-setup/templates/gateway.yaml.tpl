@@ -9,7 +9,7 @@ spec:
   gatewayClassName: eg
   listeners:
     - name: https
-      hostname: ${global_domain}
+      hostname: {{ $global_domain }}
       protocol: HTTPS
       port: 443
       tls:

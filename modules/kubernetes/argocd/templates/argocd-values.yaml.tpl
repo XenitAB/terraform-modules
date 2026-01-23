@@ -115,8 +115,8 @@ server:
     ## Must reference an existing Gateway
     # @default -- `[]` (See [values.yaml])
     parentRefs:
-      - name: shared-gateway
-        namespace: envoy-gateway
+      - name: argocd-gateway
+        namespace: argocd
         sectionName: https
     # -- List of hostnames for the HTTPRoute
     # @default -- `[]` (See [values.yaml])

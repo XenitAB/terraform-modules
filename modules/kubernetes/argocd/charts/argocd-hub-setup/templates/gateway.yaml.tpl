@@ -9,7 +9,7 @@ spec:
   gatewayClassName: eg
   listeners:
     - name: https
-      hostname: {{ $global_domain }}
+      hostname: {{ required "global_domain must be set" .Values.global_domain | quote }}
       protocol: HTTPS
       port: 443
       tls:

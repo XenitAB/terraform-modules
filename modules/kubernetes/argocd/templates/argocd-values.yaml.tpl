@@ -79,7 +79,7 @@ applicationSet:
   replicas: ${application_set_replicas}
 
 global:
-  domain: gw1.${global_domain}
+  domain: ${global_domain}
   # Do we want to be able to run argo on system pool or spot instances?
   # tolerations: 
   networkPolicy:
@@ -90,7 +90,7 @@ server:
   autoscaling:
     enabled: true
   ingress:
-    enabled: true
+    enabled: false
     ingressClassName: nginx
     annotations:
       cert-manager.io/cluster-issuer: "letsencrypt"
@@ -121,7 +121,7 @@ server:
     # -- List of hostnames for the HTTPRoute
     # @default -- `[]` (See [values.yaml])
     hostnames: 
-      - gw1.${global_domain}
+      - ${global_domain}
       # - argocd.example.com
     # -- HTTPRoute rules configuration
     # @default -- `[]` (See [values.yaml])

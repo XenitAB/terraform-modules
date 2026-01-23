@@ -79,7 +79,7 @@ applicationSet:
   replicas: ${application_set_replicas}
 
 global:
-  domain: ${global_domain}
+  domain: gw1.${global_domain}
   # Do we want to be able to run argo on system pool or spot instances?
   # tolerations: 
   networkPolicy:

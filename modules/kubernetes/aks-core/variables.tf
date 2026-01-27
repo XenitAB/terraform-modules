@@ -668,7 +668,7 @@ variable "platform_config" {
     gateway_api_enabled               = optional(bool, false)
     grafana_agent_enabled             = optional(bool, false)
     grafana_alloy_enabled             = optional(bool, false)
-    grafana_alloy_migration_enabled   = optional(bool, false)
+    grafana_alloy_migration_enabled   = optional(bool, true)
     grafana_k8s_monitoring_enabled    = optional(bool, false)
     ingress_nginx_enabled             = optional(bool, true)
     karpenter_enabled                 = optional(bool, false)

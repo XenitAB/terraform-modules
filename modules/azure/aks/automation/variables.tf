@@ -8,6 +8,11 @@ variable "aks_name" {
   type        = string
 }
 
+variable "aks_id" {
+  type        = string
+  description = "Resource ID of the AKS cluster."
+}
+
 variable "alerts_enabled" {
   description = "If metric alerts on audit logs are enabled"
   type        = string
@@ -49,6 +54,11 @@ variable "notification_email" {
 variable "resource_group_name" {
   description = "The name of the resource group"
   type        = string
+}
+
+variable "subscription_id" {
+  type        = string
+  description = "Azure subscription ID."
 }
 
 # Monthly occurence currently not supported

@@ -24,7 +24,7 @@ spec:
     - ApplyOutOfSyncOnly=true
   source:
     repoURL: ghcr.io/argoproj/argo-helm
-    targetRevision: 8.0.6
+    targetRevision: 9.3.4
     chart: argo-cd
     helm:
       valuesObject:

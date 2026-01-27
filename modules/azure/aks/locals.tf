@@ -83,6 +83,8 @@ locals {
     "Standard_E16pds_v5" = 600
     "Standard_E20pds_v5" = 750
     "Standard_E32pds_v5" = 1200
+
+    "Standard_D4lds_v5" = 75
   }
   policy_effect_deploy  = "DeployIfNotExists"
   policy_effect_disable = "Disabled"

@@ -9,6 +9,9 @@ module "automation" {
 
   source = "./automation"
 
+  subscription_id            = data.azurerm_subscription.current.subscription_id
+  resource_group_name        = data.azurerm_resource_group.this.name
+  aks_id                     = azurerm_kubernetes_cluster.this.id
   aks_managed_identity       = var.aad_groups.aks_managed_identity.id
   aks_name                   = azurerm_kubernetes_cluster.this.name
   aks_automation_config      = var.aks_automation_config
@@ -19,7 +22,6 @@ module "automation" {
   location                   = var.location
   location_short             = var.location_short
   notification_email         = var.notification_email
-  resource_group_name        = data.azurerm_resource_group.this.name
   environment                = var.environment
   storage_account_id         = data.azurerm_storage_account.log.id
 }

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: grafana-alloy-app
+description: A Helm chart for deploying grafana-alloy as an app-of-app (migration from grafana-agent)
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

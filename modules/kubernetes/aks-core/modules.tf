@@ -407,6 +407,39 @@ module "grafana_alloy" {
   fleet_infra_config  = var.platform_config.fleet_infra_config
 }
 
+module "grafana_alloy_migration" {
+
+  for_each = {
+    for s in ["grafana-alloy-migration"] :
+    s => s
+    if var.platform_config.grafana_alloy_migration_enabled
+  }
+
+  source = "../../kubernetes/grafana-alloy-migration"
+
+  azure_config = {
+    azure_key_vault_name = var.grafana_alloy_migration_config.azure_key_vault_name
+    keyvault_secret_name = var.grafana_alloy_migration_config.keyvault_secret_name
+  }
+  remote_write_urls = {
+    metrics = var.grafana_alloy_migration_config.remote_write_urls.metrics
+    logs    = var.grafana_alloy_migration_config.remote_write_urls.logs
+    traces  = var.grafana_alloy_migration_config.remote_write_urls.traces
+  }
+  aks_name                = var.name
+  cluster_id              = local.cluster_id
+  cluster_name            = "${var.name}${local.aks_name_suffix}"
+  environment             = var.environment
+  location_short          = var.location_short
+  namespace_include       = length(var.namespaces) > 0 ? var.namespaces[*].name : []
+  extra_namespaces        = var.grafana_alloy_migration_config.extra_namespaces
+  include_kubelet_metrics = var.grafana_alloy_migration_config.include_kubelet_metrics
+  oidc_issuer_url         = var.oidc_issuer_url
+  resource_group_name     = data.azurerm_resource_group.this.name
+  tenant_name             = var.platform_config.tenant_name
+  fleet_infra_config      = var.platform_config.fleet_infra_config
+}
+
 module "grafana_k8s_monitoring" {
 
   for_each = {

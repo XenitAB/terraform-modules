@@ -124,6 +124,7 @@ variable "azure_policy_config" {
       "linkerd-cni",
       "velero",
       "grafana-agent",
+      "grafana-alloy",
     ]
     mutations = [
       {
@@ -413,6 +414,32 @@ variable "grafana_alloy_config" {
   })
 }
 
+variable "grafana_alloy_migration_config" {
+  description = "Grafana Alloy Migration configuration (migrated from grafana-agent)"
+  type = object({
+    azure_key_vault_name = string
+    keyvault_secret_name = string
+    remote_write_urls = object({
+      metrics = string
+      logs    = string
+      traces  = string
+    })
+    extra_namespaces        = list(string)
+    include_kubelet_metrics = bool
+  })
+  default = {
+    azure_key_vault_name = ""
+    keyvault_secret_name = ""
+    remote_write_urls = {
+      metrics = ""
+      logs    = ""
+      traces  = ""
+    }
+    extra_namespaces        = ["ingress-nginx"]
+    include_kubelet_metrics = false
+  }
+}
+
 variable "grafana_k8s_monitor_config" {
   description = "Grafana k8s monitor chart config"
   type = object({
@@ -641,6 +668,7 @@ variable "platform_config" {
     gateway_api_enabled               = optional(bool, false)
     grafana_agent_enabled             = optional(bool, false)
     grafana_alloy_enabled             = optional(bool, false)
+    grafana_alloy_migration_enabled   = optional(bool, false)
     grafana_k8s_monitoring_enabled    = optional(bool, false)
     ingress_nginx_enabled             = optional(bool, true)
     karpenter_enabled                 = optional(bool, false)

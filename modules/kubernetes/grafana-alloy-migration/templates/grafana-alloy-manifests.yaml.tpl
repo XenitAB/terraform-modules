@@ -162,7 +162,7 @@ data:
       
       stage.cri {}
       
-      stage.labels {
+      stage.static_labels {
         values = {
           cluster     = "${cluster_name}",
           environment = "${environment}",

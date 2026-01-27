@@ -194,6 +194,14 @@ data:
           password = local.file.logs_password.content
         }
       }
+    }
+    %{ endif }
+    
+    /********************************************
+     * TRACES COLLECTION
+     ********************************************/
+    
+    %{ if remote_write_traces_url != "" }
     // Load credentials from mounted secret
     local.file "traces_username" {
       filename = "/mnt/secrets-store/traces_username"
@@ -242,27 +250,18 @@ data:
       }
     }
     
+    // Basic auth for OTLP export
+    otelcol.auth.basic "default" {
+      username = nonsensitive(local.file.traces_username.content)
+      password = local.file.traces_password.content
+    }
+    
     // Export to remote endpoint
     otelcol.exporter.otlphttp "default" {
       client {
         endpoint = "${remote_write_traces_url}"
-        
-        auth = otelcol.auth.basic.default.handler
+        auth     = otelcol.auth.basic.default.handler
       }
-    }
-    
-    otelcol.auth.basic "default" {
-      username = nonsensitive(local.file.traces_username.content)
-      password = local.file.traces_password.content
-        endpoint = "${remote_write_traces_url}"
-        
-        auth = otelcol.auth.basic.default.handler
-      }
-    }
-    
-    otelcol.auth.basic "default" {
-      username = "$${TRACES_USERNAME}"
-      password = "$${TRACES_PASSWORD}"
     }
     %{ endif }
 ---

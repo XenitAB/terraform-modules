@@ -193,7 +193,8 @@ data:
           username = nonsensitive(local.file.logs_username.content)
           password = local.file.logs_password.content
         }
-      }Load credentials from mounted secret
+      }
+    // Load credentials from mounted secret
     local.file "traces_username" {
       filename = "/mnt/secrets-store/traces_username"
     }

@@ -25,7 +25,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 0.13.2
+    targetRevision: 1.5.2
     chart: alloy
     helm:
       valuesObject:

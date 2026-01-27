@@ -30,9 +30,8 @@ spec:
     - ApplyOutOfSyncOnly=true
     - Replace=true
   source:
-    repoURL: oci://docker.io/envoyproxy
-    targetRevision: v1.6.3
-    chart: gateway-helm
+    repoURL: oci://docker.io/envoyproxy/gateway-helm
+    chart: v1.6.3
     helm:
       valuesObject:
         config:

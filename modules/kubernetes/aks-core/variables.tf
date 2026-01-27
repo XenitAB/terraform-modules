@@ -269,20 +269,6 @@ variable "environment" {
   type        = string
 }
 
-variable "envoy_gateway" {
-  description = "Should we deploy envoy-gateway"
-  type = object({
-    enabled = optional(bool, false)
-    envoy_gateway_config = optional(object({
-      logging_level             = optional(string, "info")
-      replicas_count            = optional(number, 2)
-      resources_memory_limit    = optional(string, "")
-      resources_cpu_requests    = optional(string, "")
-      resources_memory_requests = optional(string, "")
-    }), {})
-  })
-  default = {}
-}
 
 variable "external_dns_config" {
   description = "ExternalDNS config"
@@ -299,6 +285,23 @@ variable "external_dns_hostname" {
   description = "hostname for ingress-nginx to use for external-dns"
   type        = string
   default     = ""
+}
+
+variable "envoy_gateway_config" {
+  description = "Configuration for Envoy Gateway"
+  type = object({
+    logging_level             = optional(string, "info")
+    replicas_count            = optional(number, 2)
+    resources_memory_limit    = optional(string, "1Gi")
+    resources_cpu_limit       = optional(string, "1000m")
+    resources_cpu_requests    = optional(string, "100m")
+    resources_memory_requests = optional(string, "256Mi")
+    proxy_cpu_limit           = optional(string, "2000m")
+    proxy_memory_limit        = optional(string, "2Gi")
+    proxy_cpu_requests        = optional(string, "200m")
+    proxy_memory_requests     = optional(string, "512Mi")
+  })
+  default = {}
 }
 
 variable "external_secrets_config" {
@@ -425,6 +428,16 @@ variable "grafana_k8s_monitor_config" {
     exclude_namespaces            = optional(list(string), [])
     node_exporter_node_affinity   = optional(map(string), {})
   })
+  default = {
+    azure_key_vault_name          = ""
+    grafana_cloud_prometheus_host = ""
+    grafana_cloud_loki_host       = ""
+    grafana_cloud_tempo_host      = ""
+    cluster_name                  = ""
+    include_namespaces            = ""
+    exclude_namespaces            = []
+    node_exporter_node_affinity   = {}
+  }
 }
 
 variable "keyvault_name_override" {
@@ -633,6 +646,7 @@ variable "platform_config" {
     datadog_enabled                   = optional(bool, false)
     defender_enabled                  = optional(bool, false)
     eck_operator_enabled              = optional(bool, false)
+    envoy_gateway_enabled             = optional(bool, false)
     external_dns_enabled              = optional(bool, true)
     external_secrets_operator_enabled = optional(bool, false)
     falco_enabled                     = optional(bool, true)

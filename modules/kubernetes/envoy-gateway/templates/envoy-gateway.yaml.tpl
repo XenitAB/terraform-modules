@@ -31,7 +31,7 @@ spec:
     - Replace=true
   source:
     repoURL: oci://docker.io/envoyproxy
-    targetRevision: v0.0.0-latest
+    targetRevision: v1.6.3
     chart: gateway-helm
     helm:
       valuesObject:

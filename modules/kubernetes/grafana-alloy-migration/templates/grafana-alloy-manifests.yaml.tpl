@@ -9,43 +9,26 @@ data:
      * METRICS COLLECTION
      ********************************************/
     
-    // Discover ServiceMonitors
-    discovery.kubernetes "servicemonitors" {
-      role = "pod"
-      
-      namespaces {
-        own_namespace = false
-      }
-      
-      selectors {
-        role = "pod"
-        label = "xkf.xenit.io/monitoring=tenant"
-      }
-    }
-    
-    // Discover PodMonitors
-    discovery.kubernetes "podmonitors" {
-      role = "pod"
-      
-      namespaces {
-        own_namespace = false
-      }
-      
-      selectors {
-        role = "pod"
-        label = "xkf.xenit.io/monitoring=tenant"
-      }
-    }
-    
-    // Scrape metrics from discovered targets
-    prometheus.scrape "default" {
-      targets    = discovery.kubernetes.servicemonitors.targets
+    // Discover ServiceMonitors and scrape their targets
+    prometheus.operator.servicemonitors "servicemonitors" {
       forward_to = [prometheus.relabel.default.receiver]
+      
+      selector {
+        match_labels = {
+          "xkf.xenit.io/monitoring" = "tenant"
+        }
+      }
     }
     
-    prometheus.scrape "pods" {
-      targets    = discovery.kubernetes.podmonitors.targets
+    // Discover PodMonitors and scrape their targets
+    prometheus.operator.podmonitors "podmonitors" {
       forward_to = [prometheus.relabel.default.receiver]
+      
+      selector {
+        match_labels = {
+          "xkf.xenit.io/monitoring" = "tenant"
+        }
+      }
     }
     
     // Add cluster and environment labels
@@ -60,6 +43,11 @@ data:
       rule {
         target_label = "environment"
         replacement  = "${environment}"
+      }
+      
+      rule {
+        target_label = "collector"
+        replacement  = "alloy"
       }
     }
     
@@ -181,6 +169,11 @@ data:
       rule {
         target_label = "environment"
         replacement  = "${environment}"
+      }
+      
+      rule {
+        target_label = "collector"
+        replacement  = "alloy"
       }
     }
     

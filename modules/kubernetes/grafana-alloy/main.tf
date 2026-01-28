@@ -94,6 +94,7 @@ resource "git_repository_file" "grafana_alloy_manifests" {
     ingress_nginx_observability = tostring(contains(var.extra_namespaces, "ingress-nginx"))
     include_kubelet_metrics     = var.include_kubelet_metrics
     kubelet_metrics_namespaces  = join("|", compact(concat(var.namespace_include, var.extra_namespaces)))
+    namespace_include           = var.namespace_include
     azure_config                = var.azure_config
     client_id                   = data.azurerm_user_assigned_identity.xenit.client_id
     tenant_id                   = data.azurerm_user_assigned_identity.xenit.tenant_id

@@ -1,4 +1,24 @@
 ---
+# ClientTrafficPolicy for HTTP to HTTPS redirect
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: http-to-https-redirect
+  namespace: envoy-gateway
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: GatewayClass
+    name: ${tenant_name}-${environment}
+  # Redirect HTTP to HTTPS
+  http1:
+    preserveHeaderCase: true
+  http2:
+    initialConnectionWindowSize: 1048576
+    initialStreamWindowSize: 65536
+  # HTTP to HTTPS redirect
+  enableHTTPSRedirect: true
+---
 # SecurityPolicy for rate limiting, CORS, JWT, and security headers
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
@@ -8,8 +28,8 @@ metadata:
 spec:
   targetRef:
     group: gateway.networking.k8s.io
-    kind: Gateway
-    name: default-gateway
+    kind: GatewayClass
+    name: ${tenant_name}-${environment}
   # Rate limiting to prevent abuse
   rateLimiting:
     type: Global
@@ -74,8 +94,8 @@ metadata:
 spec:
   targetRef:
     group: gateway.networking.k8s.io
-    kind: Gateway
-    name: default-gateway
+    kind: GatewayClass
+    name: ${tenant_name}-${environment}
   type: JSONPatch
   jsonPatches:
     # Add security response headers

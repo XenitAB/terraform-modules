@@ -52,6 +52,8 @@ resource "git_repository_file" "envoy_gateway" {
 resource "git_repository_file" "envoy_gateway_security_policy" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/envoy-gateway/manifests/security-policy.yaml"
   content = templatefile("${path.module}/templates/security-policy.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
   })
 }
 

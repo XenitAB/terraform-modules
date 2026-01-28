@@ -392,19 +392,23 @@ module "grafana_alloy" {
     azure_key_vault_name = var.grafana_alloy_config.azure_key_vault_name
     keyvault_secret_name = var.grafana_alloy_config.keyvault_secret_name
   }
-  grafana_alloy_config = {
-    grafana_otelcol_auth_basic_username = var.grafana_alloy_config.grafana_otelcol_auth_basic_username
-    grafana_otelcol_exporter_endpoint   = var.grafana_alloy_config.grafana_otelcol_exporter_endpoint
-    cluster_name                        = var.grafana_alloy_config.cluster_name
+  remote_write_urls = {
+    metrics = var.grafana_alloy_config.remote_write_urls.metrics
+    logs    = var.grafana_alloy_config.remote_write_urls.logs
+    traces  = var.grafana_alloy_config.remote_write_urls.traces
   }
-  aks_name            = var.name
-  cluster_id          = local.cluster_id
-  environment         = var.environment
-  location_short      = var.location_short
-  oidc_issuer_url     = var.oidc_issuer_url
-  resource_group_name = data.azurerm_resource_group.this.name
-  tenant_name         = var.platform_config.tenant_name
-  fleet_infra_config  = var.platform_config.fleet_infra_config
+  aks_name                = var.name
+  cluster_id              = local.cluster_id
+  cluster_name            = "${var.name}${local.aks_name_suffix}"
+  environment             = var.environment
+  location_short          = var.location_short
+  namespace_include       = length(var.namespaces) > 0 ? var.namespaces[*].name : []
+  extra_namespaces        = var.grafana_alloy_config.extra_namespaces
+  include_kubelet_metrics = var.grafana_alloy_config.include_kubelet_metrics
+  oidc_issuer_url         = var.oidc_issuer_url
+  resource_group_name     = data.azurerm_resource_group.this.name
+  tenant_name             = var.platform_config.tenant_name
+  fleet_infra_config      = var.platform_config.fleet_infra_config
 }
 
 module "grafana_k8s_monitoring" {

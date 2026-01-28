@@ -124,6 +124,7 @@ variable "azure_policy_config" {
       "linkerd-cni",
       "velero",
       "grafana-agent",
+      "grafana-alloy",
     ]
     mutations = [
       {
@@ -403,14 +404,29 @@ variable "grafana_agent_config" {
 }
 
 variable "grafana_alloy_config" {
-  description = "Grafana Alloy config"
+  description = "Grafana Alloy configuration"
   type = object({
-    azure_key_vault_name                = string
-    keyvault_secret_name                = string
-    cluster_name                        = string
-    grafana_otelcol_auth_basic_username = string
-    grafana_otelcol_exporter_endpoint   = string
+    azure_key_vault_name = string
+    keyvault_secret_name = string
+    remote_write_urls = object({
+      metrics = string
+      logs    = string
+      traces  = string
+    })
+    extra_namespaces        = list(string)
+    include_kubelet_metrics = bool
   })
+  default = {
+    azure_key_vault_name = ""
+    keyvault_secret_name = ""
+    remote_write_urls = {
+      metrics = ""
+      logs    = ""
+      traces  = ""
+    }
+    extra_namespaces        = ["ingress-nginx"]
+    include_kubelet_metrics = false
+  }
 }
 
 variable "grafana_k8s_monitor_config" {

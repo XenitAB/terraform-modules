@@ -34,7 +34,18 @@ spec:
           name: grafana-alloy
           annotations:
             azure.workload.identity/client-id: ${client_id}
+        rbac:
+          create: true
+          extraClusterRoleRules:
+            - apiGroups: ["monitoring.coreos.com"]
+              resources: ["podmonitors", "servicemonitors"]
+              verbs: ["get", "list", "watch"]
+            - apiGroups: [""]
+              resources: ["namespaces"]
+              verbs: ["get", "list", "watch"]
         alloy:
+          clustering:
+            enabled: false
           extraPorts:
             - name: otlp-http
               port: 4318

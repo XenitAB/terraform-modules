@@ -14,8 +14,10 @@ data:
       forward_to = [prometheus.relabel.default.receiver]
       
       selector {
-        match_labels = {
-          "xkf.xenit.io/monitoring" = "tenant"
+        match_expression {
+          key      = "xkf.xenit.io/monitoring"
+          operator = "In"
+          values   = ["tenant"]
         }
       }
     }
@@ -25,8 +27,10 @@ data:
       forward_to = [prometheus.relabel.default.receiver]
       
       selector {
-        match_labels = {
-          "xkf.xenit.io/monitoring" = "tenant"
+        match_expression {
+          key      = "xkf.xenit.io/monitoring"
+          operator = "In"
+          values   = ["tenant"]
         }
       }
     }
@@ -105,21 +109,16 @@ data:
       filename = "/mnt/secrets-store/logs_password"
     }
     
-    // Discover pods for log collection
+    // Discover pods in tenant namespaces only
     discovery.kubernetes "pods" {
       role = "pod"
       
       namespaces {
-        own_namespace = false
-      }
-      
-      selectors {
-        role = "pod"
-        label = "xkf.xenit.io/monitoring=tenant"
+        names = [${join(", ", formatlist("\"%s\"", namespace_include))}]
       }
     }
     
-    // Collect pod logs
+    // Add labels for log targets
     discovery.relabel "pod_logs" {
       targets = discovery.kubernetes.pods.targets
       
@@ -257,52 +256,6 @@ data:
       }
     }
     %{ endif }
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: grafana-alloy
-rules:
-  - apiGroups:
-      - ""
-    resources:
-      - nodes
-      - nodes/proxy
-      - nodes/metrics
-      - services
-      - endpoints
-      - pods
-      - events
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - networking.k8s.io
-    resources:
-      - ingresses
-    verbs:
-      - get
-      - list
-      - watch
-  - nonResourceURLs:
-      - /metrics
-      - /metrics/cadvisor
-    verbs:
-      - get
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: grafana-alloy
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: grafana-alloy
-subjects:
-  - kind: ServiceAccount
-    name: grafana-alloy
-    namespace: grafana-alloy
 ---
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass

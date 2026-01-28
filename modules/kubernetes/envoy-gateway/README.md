@@ -26,8 +26,8 @@ No modules.
 | [git_repository_file.envoy_gateway](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.envoy_gateway_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.envoy_gateway_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
-| [git_repository_file.envoy_gateway_resources](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
-| [git_repository_file.envoy_gateway_security_policy](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.envoy_gateway_extras](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.envoy_gateway_manifests](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.envoy_gateway_values](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 
 ## Inputs

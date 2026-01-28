@@ -404,18 +404,7 @@ variable "grafana_agent_config" {
 }
 
 variable "grafana_alloy_config" {
-  description = "Grafana Alloy config"
-  type = object({
-    azure_key_vault_name                = string
-    keyvault_secret_name                = string
-    cluster_name                        = string
-    grafana_otelcol_auth_basic_username = string
-    grafana_otelcol_exporter_endpoint   = string
-  })
-}
-
-variable "grafana_alloy_migration_config" {
-  description = "Grafana Alloy Migration configuration (migrated from grafana-agent)"
+  description = "Grafana Alloy configuration"
   type = object({
     azure_key_vault_name = string
     keyvault_secret_name = string
@@ -668,7 +657,6 @@ variable "platform_config" {
     gateway_api_enabled               = optional(bool, false)
     grafana_agent_enabled             = optional(bool, false)
     grafana_alloy_enabled             = optional(bool, false)
-    grafana_alloy_migration_enabled   = optional(bool, true)
     grafana_k8s_monitoring_enabled    = optional(bool, false)
     ingress_nginx_enabled             = optional(bool, true)
     karpenter_enabled                 = optional(bool, false)

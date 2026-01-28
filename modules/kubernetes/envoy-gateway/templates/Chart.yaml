@@ -1,0 +1,6 @@
+apiVersion: v2
+name: envoy-gateway-app
+description: A Helm chart for deploying envoy-gateway as an app-of-app
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

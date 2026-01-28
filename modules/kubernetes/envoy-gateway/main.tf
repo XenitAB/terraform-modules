@@ -12,15 +12,34 @@ terraform {
       source  = "xenitab/git"
       version = ">=0.0.4"
     }
-    azurerm = {
-      version = "4.57.0"
-      source  = "hashicorp/azurerm"
-    }
   }
 }
 
+resource "git_repository_file" "envoy_gateway_chart" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/envoy-gateway/Chart.yaml"
+  content = templatefile("${path.module}/templates/Chart.yaml", {
+  })
+}
+
+resource "git_repository_file" "envoy_gateway_values" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/envoy-gateway/values.yaml"
+  content = templatefile("${path.module}/templates/values.yaml", {
+  })
+}
+
+resource "git_repository_file" "envoy_gateway_app" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/envoy-gateway-app.yaml"
+  content = templatefile("${path.module}/templates/envoy-gateway-app.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
+  })
+}
+
 resource "git_repository_file" "envoy_gateway" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/templates/envoy-gateway.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/envoy-gateway/templates/envoy-gateway.yaml"
   content = templatefile("${path.module}/templates/envoy-gateway.yaml.tpl", {
     envoy_gateway_config = var.envoy_gateway_config
     tenant_name          = var.tenant_name
@@ -30,122 +49,22 @@ resource "git_repository_file" "envoy_gateway" {
   })
 }
 
-resource "azurerm_policy_definition" "envoy_gateway_require_tls" {
-  for_each = {
-    for s in ["envoy_gateway"] :
-    s => s
-    if var.azure_policy_enabled
-  }
-
-  name         = "EnvoyGatewayRequireTLS"
-  display_name = "Envoy Gatway must have traffic policy"
-  policy_type  = "Custom"
-  mode         = "Microsoft.Kubernetes.Data"
-
-  metadata = <<METADATA
-    {
-      "category": "XKS"
-    }
-    METADATA
-
-  policy_rule = <<POLICY_RULE
-    {
-      "if": {
-        "field": "type",
-        "in": [
-          "Microsoft.ContainerService/managedClusters"
-        ]
-      },
-      "then": {
-        "effect": "[parameters('effect')]",
-        "details": {
-          "templateInfo": {
-            "sourceType": "Base64Encoded",
-            "content":  "${local.envoy_gateway_require_tls}" 
-          },
-          "apiGroups": [
-            "gateway.envoyproxy"
-          ],
-          "kinds": [
-            "ClientTrafficPolicy"
-          ],
-          "namespaces": "[parameters('namespaces')]",
-          "excludedNamespaces": "[parameters('excludedNamespaces')]"
-        }
-      }
-    }
-    POLICY_RULE
-
-  # Not including labelSelector parameter
-  parameters = <<PARAMETERS
-    {
-      "effect": {
-        "type": "String",
-        "metadata": {
-          "displayName": "Effect",
-          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
-        },
-        "allowedValues": [
-          "audit",
-          "deny",
-          "disabled"
-        ],
-        "defaultValue": "deny"
-      },
-      "excludedNamespaces": {
-        "type": "Array",
-        "metadata": {
-          "displayName": "Namespace exclusions",
-          "description": "List of Kubernetes namespaces to exclude from policy evaluation."
-        },
-        "defaultValue": []
-      },
-      "namespaces": {
-        "type": "Array",
-        "metadata": {
-          "displayName": "Namespace inclusions",
-          "description": "List of Kubernetes namespaces to only include in policy evaluation. An empty list means the policy is applied to all resources in all namespaces."
-        },
-        "defaultValue": []
-      }
-    }
-    PARAMETERS
+resource "git_repository_file" "envoy_gateway_extras" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/envoy-gateway/templates/envoy-gateway-extras.yaml"
+  content = templatefile("${path.module}/templates/envoy-gateway-extras.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+    cluster_id  = var.cluster_id
+    project     = var.fleet_infra_config.argocd_project_name
+    repo_url    = var.fleet_infra_config.git_repo_url
+    server      = var.fleet_infra_config.k8s_api_server_url
+  })
 }
 
-resource "azurerm_policy_set_definition" "tls" {
-  for_each = {
-    for s in ["envoy_gateway"] :
-    s => s
-    if var.azure_policy_enabled
-  }
-
-  name         = "XKSDefaultPolicySet"
-  policy_type  = "Custom"
-  description  = "This policy set defines a baseline standard for XKS tenant clusters"
-  display_name = "Xenit Kubernetes Service baseline standards for XKS tenant clusters"
-
-  metadata = <<METADATA
-    {
-      "category": "Kubernetes"
-    }
-    METADATA
-
-  policy_definition_reference {
-    policy_definition_id = azurerm_policy_definition.envoy_gateway_require_tls[0].id
-    parameter_values     = <<VALUE
-    {
-      "effect": {
-        "value": "deny"
-      },
-      "namespaces": {
-        "value": ${jsonencode(var.tenant_namespaces)}
-      },
-      "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'))]"
-      }
-    }
-    VALUE
-  }
+resource "git_repository_file" "envoy_gateway_manifests" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/envoy-gateway/manifests/envoy-gateway-extras.yaml"
+  content = templatefile("${path.module}/templates/envoy-gateway-manifests.yaml.tpl", {
+    tenant_name = var.tenant_name
+    environment = var.environment
+  })
 }
-
-# TO-DO: There is a azurerm_resource_policy_assignment missing here.

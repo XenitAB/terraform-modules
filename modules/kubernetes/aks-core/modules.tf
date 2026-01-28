@@ -131,6 +131,22 @@ module "cert_manager" {
   rbac_create                = var.cert_manager_config.rbac_create
 }
 
+module "envoy_gateway" {
+  for_each = {
+    for s in ["envoy-gateway"] :
+    s => s
+    if var.platform_config.envoy_gateway_enabled
+  }
+
+  source = "../../kubernetes/envoy-gateway"
+
+  cluster_id           = local.cluster_id
+  environment          = var.environment
+  envoy_gateway_config = var.envoy_gateway_config
+  tenant_name          = var.platform_config.tenant_name
+  fleet_infra_config   = var.platform_config.fleet_infra_config
+}
+
 module "control_plane_logs" {
   for_each = {
     for s in ["control_plane_logs"] :
@@ -195,25 +211,6 @@ module "eck_operator" {
   tenant_name            = var.platform_config.tenant_name
   environment            = var.environment
   fleet_infra_config     = var.platform_config.fleet_infra_config
-}
-
-module "envoy_gateway" {
-  depends_on = [module.gateway_api]
-
-  for_each = {
-    for s in ["envoy_gateway"] :
-    s => s
-    if var.envoy_gateway.enabled
-  }
-
-  source = "../../kubernetes/envoy-gateway"
-
-  azure_policy_enabled = var.platform_config.azure_policy_enabled
-  cluster_id           = local.cluster_id
-  envoy_gateway_config = var.envoy_gateway.envoy_gateway_config
-  tenant_name          = var.platform_config.tenant_name
-  environment          = var.environment
-  fleet_infra_config   = var.platform_config.fleet_infra_config
 }
 
 module "external_dns" {

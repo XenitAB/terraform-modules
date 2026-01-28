@@ -11,16 +11,17 @@ provider "git" {}
 
 module "aks_core" {
   source = "../../../modules/kubernetes/aks-core"
-  envoy_gateway = {
-    enabled = true
-    envoy_gateway_config = {
-      logging_level             = "debug"
-      replicas_count            = 42
-      resources_memory_limit    = "30g"
-      resources_cpu_requests    = "5000mi"
-      resources_memory_requests = "50g"
-    }
-
+  envoy_gateway_config = {
+    logging_level             = "debug"
+    replicas_count            = 42
+    resources_memory_limit    = "1Gi"
+    resources_cpu_limit       = "1000m"
+    resources_cpu_requests    = "100m"
+    resources_memory_requests = "256Mi"
+    proxy_cpu_limit           = "2000m"
+    proxy_memory_limit        = "2Gi"
+    proxy_cpu_requests        = "200m"
+    proxy_memory_requests     = "512Mi"
   }
   grafana_k8s_monitor_config = {
     grafana_cloud_prometheus_host = "sda"
@@ -137,6 +138,7 @@ module "aks_core" {
     control_plane_logs_enabled        = true
     datadog_enabled                   = true
     eck_operator_enabled              = true
+    envoy_gateway_enabled             = true
     external_secrets_operator_enabled = true
     gateway_api_enabled               = true
     grafana_agent_enabled             = true

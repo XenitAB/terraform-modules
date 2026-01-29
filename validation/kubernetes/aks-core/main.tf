@@ -34,12 +34,22 @@ module "aks_core" {
     exclude_namespaces            = ["threetwoone"]
   }
   grafana_alloy_config = {
+    remote_write_urls = {
+      traces  = "https://test.grafana.net/tempo"
+      metrics = "https://test.grafana.net/api/prom/push"
+      logs    = "https://test.grafana.net/api/prom/push"
+    }
     cluster_name                        = "awesome_cluster"
     azure_key_vault_name                = "foobar"
     keyvault_secret_name                = "barfoo"
     grafana_otelcol_auth_basic_username = "some-integers"
     grafana_otelcol_exporter_endpoint   = "some-url"
+    include_kubelet_metrics             = false
+    extra_namespaces = [
+      "foo-nginx",
+    ]
   }
+
   name                    = "baz"
   aks_name_suffix         = 1
   core_name               = "core"

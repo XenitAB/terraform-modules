@@ -123,7 +123,7 @@ variable "azure_policy_config" {
       "linkerd",
       "linkerd-cni",
       "velero",
-      "grafana-agent",
+      "grafana-alloy",
     ]
     mutations = [
       {
@@ -366,54 +366,30 @@ variable "global_location_short" {
   type        = string
 }
 
-variable "grafana_agent_config" {
-  description = "The Grafan-Agent configuration"
-  sensitive   = true
+variable "grafana_alloy_config" {
+  description = "Grafana Alloy configuration"
   type = object({
+    azure_key_vault_name = string
+    keyvault_secret_name = string
     remote_write_urls = object({
       metrics = string
       logs    = string
       traces  = string
     })
-    credentials = object({
-      metrics_username = string
-      metrics_password = string
-      logs_username    = string
-      logs_password    = string
-      traces_username  = string
-      traces_password  = string
-    })
     extra_namespaces        = list(string)
     include_kubelet_metrics = bool
   })
   default = {
+    azure_key_vault_name = ""
+    keyvault_secret_name = ""
     remote_write_urls = {
       metrics = ""
       logs    = ""
       traces  = ""
     }
-    credentials = {
-      metrics_username = ""
-      metrics_password = ""
-      logs_username    = ""
-      logs_password    = ""
-      traces_username  = ""
-      traces_password  = ""
-    }
     extra_namespaces        = ["ingress-nginx"]
     include_kubelet_metrics = false
   }
-}
-
-variable "grafana_alloy_config" {
-  description = "Grafana Alloy config"
-  type = object({
-    azure_key_vault_name                = string
-    keyvault_secret_name                = string
-    cluster_name                        = string
-    grafana_otelcol_auth_basic_username = string
-    grafana_otelcol_exporter_endpoint   = string
-  })
 }
 
 variable "grafana_k8s_monitor_config" {
@@ -653,7 +629,6 @@ variable "platform_config" {
     fluxcd_enabled                    = optional(bool, true)
     gatekeeper_enabled                = optional(bool, true)
     gateway_api_enabled               = optional(bool, false)
-    grafana_agent_enabled             = optional(bool, false)
     grafana_alloy_enabled             = optional(bool, false)
     grafana_k8s_monitoring_enabled    = optional(bool, false)
     ingress_nginx_enabled             = optional(bool, true)

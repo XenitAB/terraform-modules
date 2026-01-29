@@ -58,8 +58,8 @@ variable "gatekeeper_enabled" {
   default     = false
 }
 
-variable "grafana_agent_enabled" {
-  description = "Should grafana-agent be enabled"
+variable "grafana_alloy_enabled" {
+  description = "Should grafana-alloy be enabled"
   type        = bool
   default     = false
 }

@@ -25,19 +25,43 @@ spec:
     - Replace=true
   source:
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 10.1.5
+    targetRevision: 1.5.2
     chart: alloy
     helm:
       valuesObject:
         serviceAccount:
           create: true
+          name: grafana-alloy
           annotations:
             azure.workload.identity/client-id: ${client_id}
+        rbac:
+          create: true
+          extraClusterRoleRules:
+            - apiGroups: ["monitoring.coreos.com"]
+              resources: ["podmonitors", "servicemonitors"]
+              verbs: ["get", "list", "watch"]
+            - apiGroups: [""]
+              resources: ["namespaces"]
+              verbs: ["get", "list", "watch"]
         alloy:
+          clustering:
+            enabled: false
           extraPorts:
-            - name: otpl-http-trace
+            - name: otlp-http
               port: 4318
               targetPort: 4318
+              protocol: TCP
+            - name: otlp-grpc
+              port: 4317
+              targetPort: 4317
+              protocol: TCP
+            - name: otlp-legacy
+              port: 55681
+              targetPort: 55681
+              protocol: TCP
+            - name: jaeger
+              port: 55678
+              targetPort: 55678
               protocol: TCP
           mounts:
             extra:
@@ -52,17 +76,26 @@ spec:
           configMap:
             create: false
             name: grafana-alloy-config
-            key: config
+            key: config.alloy
+          resources:
+            requests:
+              cpu: 25m
+              memory: 100Mi
         controller:
           podLabels:
             azure.workload.identity/use: "true"
           type: 'deployment'
+          replicas: 2
+          priorityClassName: platform-medium
+          tolerations:
+            - operator: "Exists"
           volumes:
             extra:
             - name: temp-storage
+              emptyDir: {}
             - name: secret-store
               csi:
                 driver: secrets-store.csi.k8s.io
                 readOnly: true
                 volumeAttributes:
-                  secretProviderClass: grafana-alloy-secrets
+                  secretProviderClass: grafana-alloy-credentials

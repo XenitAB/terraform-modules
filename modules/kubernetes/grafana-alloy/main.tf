@@ -47,15 +47,15 @@ resource "git_repository_file" "grafana_alloy_app" {
 resource "git_repository_file" "grafana_alloy" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/grafana-alloy/templates/grafana-alloy.yaml"
   content = templatefile("${path.module}/templates/grafana-alloy.yaml.tpl", {
-    tenant_name          = var.tenant_name
-    environment          = var.environment
-    cluster_id           = var.cluster_id
-    project              = var.fleet_infra_config.argocd_project_name
-    server               = var.fleet_infra_config.k8s_api_server_url
-    repo_url             = var.fleet_infra_config.git_repo_url
-    azure_config         = var.azure_config
-    client_id            = data.azurerm_user_assigned_identity.xenit.client_id
-    tenant_id            = data.azurerm_user_assigned_identity.xenit.tenant_id
+    tenant_name  = var.tenant_name
+    environment  = var.environment
+    cluster_id   = var.cluster_id
+    project      = var.fleet_infra_config.argocd_project_name
+    server       = var.fleet_infra_config.k8s_api_server_url
+    repo_url     = var.fleet_infra_config.git_repo_url
+    azure_config = var.azure_config
+    client_id    = data.azurerm_user_assigned_identity.xenit.client_id
+    tenant_id    = data.azurerm_user_assigned_identity.xenit.tenant_id
   })
 }
 

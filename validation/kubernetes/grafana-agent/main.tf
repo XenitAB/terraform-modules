@@ -2,7 +2,9 @@ terraform {}
 
 provider "kubernetes" {}
 
-provider "helm" {}
+provider "git" {
+  
+}
 
 module "grafana_agent" {
   source = "../../../modules/kubernetes/grafana-agent"

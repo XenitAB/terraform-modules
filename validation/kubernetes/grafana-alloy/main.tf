@@ -7,15 +7,15 @@ provider "helm" {}
 module "grafana_alloy" {
   source = "../../../modules/kubernetes/grafana-alloy"
 
-  cluster_id           = "foo"
-  oidc_issuer_url      = "url"
-  resource_group_name  = "rg-name"
-  environment          = "dev"
-  aks_name             = "fooburrito"
-  location_short       = "foob"
-  cluster_name         = "awesome_cluster"
-  tenant_name          = "foo"
-  namespace_include = ["footest-namespace"]
+  cluster_id          = "foo"
+  oidc_issuer_url     = "url"
+  resource_group_name = "rg-name"
+  environment         = "dev"
+  aks_name            = "fooburrito"
+  location_short      = "foob"
+  cluster_name        = "awesome_cluster"
+  tenant_name         = "foo"
+  namespace_include   = ["footest-namespace"]
 
   azure_config = {
     azure_key_vault_name = "key-vault-name"

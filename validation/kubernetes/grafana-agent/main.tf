@@ -3,7 +3,7 @@ terraform {}
 provider "kubernetes" {}
 
 provider "git" {
-  
+
 }
 
 module "grafana_agent" {

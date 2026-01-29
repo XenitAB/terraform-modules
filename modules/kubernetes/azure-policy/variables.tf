@@ -20,10 +20,8 @@ variable "azure_policy_config" {
   })
   default = {
     exclude_namespaces = [
-      "linkerd",
-      "linkerd-cni",
-      "velero",
-      "grafana-agent",
+      "test1",
+      "test2",
     ]
     mutations = [
       {

@@ -789,7 +789,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('spegel'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray(${local.exclude_namespaces}),createArray('spegel'))]"
       },
       "permittedClassNames": {
         "value": "[createArray('platform-low','platform-medium','platform-high','tenant-low','tenant-medium','tenant-high')]"
@@ -840,7 +840,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azure-metrics','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray(${local.exclude_namespaces}),createArray('aad-pod-identity','ambassador','azure-metrics','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','vpa'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -858,7 +858,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('ambassador'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray(${local.exclude_namespaces}),createArray('ambassador'))]"
       }
     }
     VALUE
@@ -873,7 +873,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azad-kube-proxy','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','node-ttl','prometheus','reloader','spegel','trivy','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray(${local.exclude_namespaces}),createArray('aad-pod-identity','ambassador','azad-kube-proxy','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','node-ttl','prometheus','reloader','spegel','trivy','vpa'))]"
       },
        "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -891,7 +891,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('prometheus'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray(${local.exclude_namespaces}),createArray('prometheus'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -909,7 +909,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray(${local.exclude_namespaces}))]"
       },
       "allowedExternalIPs": {
         "value": "[parameters('allowedExternalIPs')]"
@@ -927,7 +927,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','prometheus','spegel'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray(${local.exclude_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','prometheus','spegel'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -945,7 +945,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','datadog','falco','prometheus','promtail','spegel'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray(${local.exclude_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','datadog','falco','prometheus','promtail','spegel'))]"
       },
       "allowedVolumeTypes": {
         "value": "[concat(parameters('allowedVolumeTypes'),createArray('configMap','downwardAPI','emptyDir','persistentVolumeClaim','secret','projected','csi'))]"
@@ -966,7 +966,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('csi-secrets-store-provider-azure','falco'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray(${local.exclude_namespaces}),createArray('csi-secrets-store-provider-azure','falco'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -990,7 +990,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('requiredDropCapabilities')]"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','azure-metrics','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','ingress-healthz','prometheus','reloader','spegel','trivy','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray(${local.exclude_namespaces}),createArray('aad-pod-identity','azure-metrics','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','ingress-healthz','prometheus','reloader','spegel','trivy','vpa'))]"
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -1008,7 +1008,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Audit"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','cert-manager','controle-plane-logs','trivy','vpa'))]"
+        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray(${local.exclude_namespaces}),createArray('aad-pod-identity','cert-manager','controle-plane-logs','trivy','vpa'))]"
       },
       "requiredProbes": {
         "value": "[parameters('requiredProbes')]"

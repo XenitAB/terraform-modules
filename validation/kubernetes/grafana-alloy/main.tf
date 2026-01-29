@@ -13,14 +13,14 @@ module "grafana_alloy" {
   environment         = "dev"
   aks_name            = "fooburrito"
   location_short      = "foob"
-  grafana_alloy_config = {
-    cluster_name                        = "awesome_cluster"
-    azure_key_vault_name                = "foobar"
-    keyvault_secret_name                = "barfoo"
-    grafana_otelcol_auth_basic_username = "some-integers"
-    grafana_otelcol_exporter_endpoint   = "some-url"
+  cluster_name        = "awesome_cluster"
+  tenant_name         = "foo"
+  namespace_include   = ["footest-namespace"]
+
+  azure_config = {
+    azure_key_vault_name = "key-vault-name"
+    keyvault_secret_name = "secret-name"
   }
-  tenant_name = "foo"
   fleet_infra_config = {
     argocd_project_name = "foo-fleet-infra"
     git_repo_url        = "http://some-git-repo.git"

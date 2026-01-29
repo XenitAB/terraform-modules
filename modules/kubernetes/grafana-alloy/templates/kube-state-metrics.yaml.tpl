@@ -12,7 +12,7 @@ spec:
   project: ${project}
   destination:
     server: ${server}
-    namespace: grafana-agent
+    namespace: grafana-alloy
   revisionHistoryLimit: 5
   syncPolicy:
     automated:

@@ -50,15 +50,15 @@ resource "kubernetes_network_policy" "allow_egress_ingress_datadog" {
   }
 }
 
-resource "kubernetes_network_policy" "allow_egress_ingress_grafana_agent" {
+resource "kubernetes_network_policy" "allow_egress_ingress_grafana_alloy" {
   for_each = {
     for ns in var.namespaces :
     ns.name => ns
-    if var.platform_config.grafana_agent_enabled && var.kubernetes_network_policy_default_deny
+    if(var.platform_config.grafana_alloy_enabled || var.platform_config.grafana_alloy_enabled) && var.kubernetes_network_policy_default_deny
   }
 
   metadata {
-    name      = "allow-ingress-egress-grafana-agent"
+    name      = "allow-ingress-egress-grafana-alloy"
     namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
 
     labels = {
@@ -72,14 +72,10 @@ resource "kubernetes_network_policy" "allow_egress_ingress_grafana_agent" {
 
     egress {
       to {
-        pod_selector {
-          match_labels = {
-            "name" = "grafana-agent-traces"
-          }
-        }
+        pod_selector {}
         namespace_selector {
           match_labels = {
-            "name" = "grafana-agent"
+            "name" = "grafana-alloy"
           }
         }
       }
@@ -88,7 +84,7 @@ resource "kubernetes_network_policy" "allow_egress_ingress_grafana_agent" {
       from {
         namespace_selector {
           match_labels = {
-            "name" = "grafana-agent"
+            "name" = "grafana-alloy"
           }
         }
       }

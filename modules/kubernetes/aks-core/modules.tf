@@ -344,40 +344,6 @@ module "gateway_api" {
   fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
-module "grafana_agent" {
-  for_each = {
-    for s in ["grafana-agent"] :
-    s => s
-    if var.platform_config.grafana_agent_enabled
-  }
-
-  source = "../../kubernetes/grafana-agent"
-
-  remote_write_urls = {
-    metrics = var.grafana_agent_config.remote_write_urls.metrics
-    logs    = var.grafana_agent_config.remote_write_urls.logs
-    traces  = var.grafana_agent_config.remote_write_urls.traces
-  }
-
-  credentials = {
-    metrics_username = var.grafana_agent_config.credentials.metrics_username
-    metrics_password = var.grafana_agent_config.credentials.metrics_password
-    logs_username    = var.grafana_agent_config.credentials.logs_username
-    logs_password    = var.grafana_agent_config.credentials.logs_password
-    traces_username  = var.grafana_agent_config.credentials.traces_username
-    traces_password  = var.grafana_agent_config.credentials.traces_password
-  }
-
-  cluster_id              = local.cluster_id
-  cluster_name            = "${var.name}${local.aks_name_suffix}"
-  environment             = var.environment
-  namespace_include       = length(var.namespaces) > 0 ? var.namespaces[*].name : []
-  extra_namespaces        = var.grafana_agent_config.extra_namespaces
-  include_kubelet_metrics = var.grafana_agent_config.include_kubelet_metrics
-  tenant_name             = var.platform_config.tenant_name
-  fleet_infra_config      = var.platform_config.fleet_infra_config
-}
-
 module "grafana_alloy" {
 
   for_each = {
@@ -392,19 +358,23 @@ module "grafana_alloy" {
     azure_key_vault_name = var.grafana_alloy_config.azure_key_vault_name
     keyvault_secret_name = var.grafana_alloy_config.keyvault_secret_name
   }
-  grafana_alloy_config = {
-    grafana_otelcol_auth_basic_username = var.grafana_alloy_config.grafana_otelcol_auth_basic_username
-    grafana_otelcol_exporter_endpoint   = var.grafana_alloy_config.grafana_otelcol_exporter_endpoint
-    cluster_name                        = var.grafana_alloy_config.cluster_name
+  remote_write_urls = {
+    metrics = var.grafana_alloy_config.remote_write_urls.metrics
+    logs    = var.grafana_alloy_config.remote_write_urls.logs
+    traces  = var.grafana_alloy_config.remote_write_urls.traces
   }
-  aks_name            = var.name
-  cluster_id          = local.cluster_id
-  environment         = var.environment
-  location_short      = var.location_short
-  oidc_issuer_url     = var.oidc_issuer_url
-  resource_group_name = data.azurerm_resource_group.this.name
-  tenant_name         = var.platform_config.tenant_name
-  fleet_infra_config  = var.platform_config.fleet_infra_config
+  aks_name                = var.name
+  cluster_id              = local.cluster_id
+  cluster_name            = "${var.name}${local.aks_name_suffix}"
+  environment             = var.environment
+  location_short          = var.location_short
+  namespace_include       = length(var.namespaces) > 0 ? var.namespaces[*].name : []
+  extra_namespaces        = var.grafana_alloy_config.extra_namespaces
+  include_kubelet_metrics = var.grafana_alloy_config.include_kubelet_metrics
+  oidc_issuer_url         = var.oidc_issuer_url
+  resource_group_name     = data.azurerm_resource_group.this.name
+  tenant_name             = var.platform_config.tenant_name
+  fleet_infra_config      = var.platform_config.fleet_infra_config
 }
 
 module "grafana_k8s_monitoring" {
@@ -436,7 +406,7 @@ module "grafana_k8s_monitoring" {
   cilium_enabled           = var.platform_config.cilium_enabled
   falco_enabled            = var.platform_config.falco_enabled
   gatekeeper_enabled       = var.platform_config.gatekeeper_enabled
-  grafana_agent_enabled    = var.platform_config.grafana_agent_enabled
+  grafana_alloy_enabled    = var.platform_config.grafana_alloy_enabled
   linkerd_enabled          = var.platform_config.linkerd_enabled
   node_local_dns_enabled   = var.platform_config.node_local_dns_enabled
   node_ttl_enabled         = var.platform_config.node_ttl_enabled

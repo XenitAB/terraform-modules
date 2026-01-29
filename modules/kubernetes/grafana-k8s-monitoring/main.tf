@@ -81,7 +81,7 @@ resource "git_repository_file" "monitors" {
     aad_pod_identity_enabled = var.aad_pod_identity_enabled
     azad_kube_proxy_enabled  = var.azad_kube_proxy_enabled
     trivy_enabled            = var.trivy_enabled
-    grafana_agent_enabled    = var.grafana_agent_enabled
+    grafana_alloy_enabled    = var.grafana_alloy_enabled
     node_local_dns_enabled   = var.node_local_dns_enabled
     promtail_enabled         = var.promtail_enabled
     node_ttl_enabled         = var.node_ttl_enabled

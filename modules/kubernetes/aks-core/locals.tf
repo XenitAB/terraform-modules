@@ -19,7 +19,7 @@ locals {
     "trivy",
     "tigera-operator",
     "velero",
-    "grafana-agent",
+    "grafana-alloy",
     "promtail",
     "prometheus",
     "node-ttl",

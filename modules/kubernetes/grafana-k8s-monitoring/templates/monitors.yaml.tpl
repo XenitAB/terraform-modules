@@ -262,19 +262,19 @@ spec:
     interval: 180s
 
 %{ endif }
-%{ if grafana_agent_enabled }
+%{ if grafana_alloy_enabled }
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: grafana-agent
-  namespace: grafana-agent
+  name: grafana-alloy
+  namespace: grafana-alloy
   labels:
     xkf.xenit.io/monitoring: platform
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: grafana-agent
+      app.kubernetes.io/name: alloy
   podMetricsEndpoints:
     - port: http-metrics
 %{ endif }

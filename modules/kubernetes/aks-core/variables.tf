@@ -123,7 +123,6 @@ variable "azure_policy_config" {
       "linkerd",
       "linkerd-cni",
       "velero",
-      "grafana-agent",
       "grafana-alloy",
     ]
     mutations = [
@@ -362,45 +361,6 @@ variable "gateway_api_config" {
 variable "global_location_short" {
   description = "The Azure region short name where the global resources resides."
   type        = string
-}
-
-variable "grafana_agent_config" {
-  description = "The Grafan-Agent configuration"
-  sensitive   = true
-  type = object({
-    remote_write_urls = object({
-      metrics = string
-      logs    = string
-      traces  = string
-    })
-    credentials = object({
-      metrics_username = string
-      metrics_password = string
-      logs_username    = string
-      logs_password    = string
-      traces_username  = string
-      traces_password  = string
-    })
-    extra_namespaces        = list(string)
-    include_kubelet_metrics = bool
-  })
-  default = {
-    remote_write_urls = {
-      metrics = ""
-      logs    = ""
-      traces  = ""
-    }
-    credentials = {
-      metrics_username = ""
-      metrics_password = ""
-      logs_username    = ""
-      logs_password    = ""
-      traces_username  = ""
-      traces_password  = ""
-    }
-    extra_namespaces        = ["ingress-nginx"]
-    include_kubelet_metrics = false
-  }
 }
 
 variable "grafana_alloy_config" {
@@ -655,7 +615,6 @@ variable "platform_config" {
     fluxcd_enabled                    = optional(bool, true)
     gatekeeper_enabled                = optional(bool, true)
     gateway_api_enabled               = optional(bool, false)
-    grafana_agent_enabled             = optional(bool, false)
     grafana_alloy_enabled             = optional(bool, false)
     grafana_k8s_monitoring_enabled    = optional(bool, false)
     ingress_nginx_enabled             = optional(bool, true)

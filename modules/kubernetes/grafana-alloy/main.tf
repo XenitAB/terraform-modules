@@ -1,10 +1,3 @@
-/**
-  * # Grafana Alloy (Migration from Grafana Agent)
-  *
-  * Adds [Grafana Alloy](https://github.com/grafana/alloy/tree/main/operations/helm) to a Kubernetes cluster.
-  * This module is designed to migrate from grafana-agent to grafana-alloy while maintaining similar functionality.
-  */
-
 terraform {
   required_version = ">= 1.3.0"
 

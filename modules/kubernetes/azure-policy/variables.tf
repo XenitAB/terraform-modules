@@ -23,7 +23,7 @@ variable "azure_policy_config" {
       "linkerd",
       "linkerd-cni",
       "velero",
-      "grafana-agent",
+      "grafana-alloy",
     ]
     mutations = [
       {

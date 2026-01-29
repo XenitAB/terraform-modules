@@ -5,7 +5,7 @@ metadata:
   namespace: ${tenant_name}-${environment}
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "1"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:

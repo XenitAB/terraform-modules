@@ -51,7 +51,7 @@ spec:
           enabled: true
           kube-state-metrics:
             collectors:
-              - nodes  # Endast nodes - ger kube_node_status_capacity{resource="cpu"}
+              - nodes
           node-exporter:
             enabled: false
           opencost:

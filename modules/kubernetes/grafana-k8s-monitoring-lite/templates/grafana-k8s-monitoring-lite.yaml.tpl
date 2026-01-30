@@ -33,7 +33,6 @@ spec:
           scrapeInterval: "300s"
         cluster:
           name: "${cluster_name}"
-        
         destinations:
           - name: xenitsweden-prom
             type: prometheus
@@ -46,7 +45,6 @@ spec:
               create: false
               name: prometheus-grafana-cloud
               namespace: grafana-k8s-monitoring-lite
-
         clusterMetrics:
           enabled: true
           kube-state-metrics:
@@ -58,7 +56,6 @@ spec:
             enabled: false
           kepler:
             enabled: false
-
         clusterEvents:
           enabled: false
         podLogs:
@@ -69,7 +66,6 @@ spec:
           enabled: false
         prometheusOperatorObjects:
           enabled: false
-
         alloy-metrics:
           enabled: true
           alloy:
@@ -90,13 +86,11 @@ spec:
                     readOnly: true
                     volumeAttributes:
                       secretProviderClass: grafana-k8s-monitor-lite-secrets
-
         alloy-singleton:
           enabled: false
         alloy-logs:
           enabled: false
         alloy-receiver:
           enabled: false
-
         crds:
           deploy: true

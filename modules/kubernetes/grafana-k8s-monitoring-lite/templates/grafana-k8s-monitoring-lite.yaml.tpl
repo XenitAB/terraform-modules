@@ -30,11 +30,10 @@ spec:
     helm:
       valuesObject:
         global:
-          scrapeInterval: "300s"  # 5 minuter - räcker för CPU-räkning
+          scrapeInterval: "300s"
         cluster:
           name: "${cluster_name}"
         
-        # Endast Prometheus destination (metrics)
         destinations:
           - name: xenitsweden-prom
             type: prometheus
@@ -48,7 +47,6 @@ spec:
               name: prometheus-grafana-cloud
               namespace: grafana-k8s-monitoring-lite
 
-        # Endast kube-state-metrics för node info
         clusterMetrics:
           enabled: true
           kube-state-metrics:
@@ -61,7 +59,6 @@ spec:
           kepler:
             enabled: false
 
-        # Stäng av allt annat
         clusterEvents:
           enabled: false
         podLogs:
@@ -72,8 +69,7 @@ spec:
           enabled: false
         prometheusOperatorObjects:
           enabled: false
-        
-        # Minimal Alloy-config
+
         alloy-metrics:
           enabled: true
           alloy:
@@ -94,8 +90,7 @@ spec:
                     readOnly: true
                     volumeAttributes:
                       secretProviderClass: grafana-k8s-monitor-lite-secrets
-        
-        # Stäng av övriga Alloy-komponenter
+
         alloy-singleton:
           enabled: false
         alloy-logs:

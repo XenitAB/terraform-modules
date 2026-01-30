@@ -51,7 +51,7 @@ spec:
             collectors:
               - nodes
           node-exporter:
-            enabled: false
+            enabled: true
           opencost:
             enabled: false
           kepler:

@@ -382,7 +382,7 @@ module "grafana_k8s_monitoring" {
   for_each = {
     for s in ["grafana_k8s_monitoring"] :
     s => s
-    if var.platform_config.grafana_k8s_monitoring_enabled
+    if var.platform_config.grafana_k8s_monitoring_enabled && var.environment == "prod"
   }
 
   source = "../../kubernetes/grafana-k8s-monitoring"
@@ -417,6 +417,28 @@ module "grafana_k8s_monitoring" {
   environment              = var.environment
   fleet_infra_config       = var.platform_config.fleet_infra_config
   subscription_id          = data.azurerm_client_config.current.subscription_id
+}
+
+module "grafana_k8s_monitoring_lite" {
+
+  for_each = {
+    for s in ["grafana_k8s_monitoring_lite"] :
+    s => s
+    if var.platform_config.grafana_k8s_monitoring_enabled && var.environment != "prod"
+  }
+
+  source = "../../kubernetes/grafana-k8s-monitoring-lite"
+
+  azure_key_vault_name = var.grafana_k8s_monitor_config.azure_key_vault_name
+  cluster_id           = local.cluster_id
+  cluster_name         = var.grafana_k8s_monitor_config.cluster_name
+  environment          = var.environment
+  fleet_infra_config   = var.platform_config.fleet_infra_config
+  key_vault_id         = data.azurerm_key_vault.core.id
+  location             = data.azurerm_resource_group.this.location
+  oidc_issuer_url      = var.oidc_issuer_url
+  resource_group_name  = data.azurerm_resource_group.this.name
+  tenant_name          = var.platform_config.tenant_name
 }
 
 module "ingress_nginx" {

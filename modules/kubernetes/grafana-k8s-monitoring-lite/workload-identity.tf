@@ -14,8 +14,8 @@ resource "azurerm_federated_identity_credential" "grafana_k8s_monitor_lite" {
 }
 
 resource "azurerm_key_vault_access_policy" "grafana_k8s_monitor_lite" {
-  key_vault_id   = var.key_vault_id
-  tenant_id      = azurerm_user_assigned_identity.grafana_k8s_monitor_lite.tenant_id
-  object_id      = azurerm_user_assigned_identity.grafana_k8s_monitor_lite.principal_id
+  key_vault_id       = var.key_vault_id
+  tenant_id          = azurerm_user_assigned_identity.grafana_k8s_monitor_lite.tenant_id
+  object_id          = azurerm_user_assigned_identity.grafana_k8s_monitor_lite.principal_id
   secret_permissions = ["Get"]
 }

@@ -28,7 +28,8 @@ spec:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true
     - ApplyOutOfSyncOnly=true
-    - Replace=true
+    - ServerSideApply=true
+    - SkipHooks=true
   source:
     repoURL: docker.io/envoyproxy
     targetRevision: v1.6.3

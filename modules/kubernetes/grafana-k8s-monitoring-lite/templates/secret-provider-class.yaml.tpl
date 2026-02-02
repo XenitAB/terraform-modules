@@ -32,3 +32,5 @@ spec:
           key: username
         - objectName: prometheus-grafana-cloud-password
           key: password
+        - objectName: prometheus-grafana-cloud-user
+          key: tenantId

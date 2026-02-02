@@ -39,22 +39,36 @@ spec:
             url: https://prometheus-prod-39-prod-eu-north-0.grafana.net/api/prom/push
             auth:
               type: basic
-              username: username
-              password: password
+              usernameKey: username
+              passwordKey: password
             secret:
               create: false
               name: prometheus-grafana-cloud
               namespace: grafana-k8s-monitoring-lite
+            tls:
+              insecureSkipVerify: false
         clusterMetrics:
           enabled: true
           kube-state-metrics:
-            collectors:
-              - nodes
+            deploy: true
+            podAnnotations: {kubernetes.azure.com/set-kube-service-host-fqdn: "true"}
           node-exporter:
+            deploy: false
+          windows-exporter:
+            deploy: false
+          kubelet:
             enabled: true
-          opencost:
+          cadvisor:
+            enabled: true
+          apiServer:
             enabled: false
-          kepler:
+          kubeletResource:
+            enabled: true
+          kubeControllerManager:
+            enabled: false
+          kubeProxy:
+            enabled: false
+          kubeScheduler:
             enabled: false
         clusterEvents:
           enabled: false
@@ -91,6 +105,8 @@ spec:
         alloy-logs:
           enabled: false
         alloy-receiver:
+          enabled: false
+        alloy-profiles:
           enabled: false
         crds:
           deploy: true

@@ -382,7 +382,7 @@ module "grafana_k8s_monitoring" {
   for_each = {
     for s in ["grafana_k8s_monitoring"] :
     s => s
-    if var.platform_config.grafana_k8s_monitoring_enabled && var.environment == "prod"
+    if var.platform_config.grafana_k8s_monitoring_enabled && contains(["prod", "prd", "production"], var.environment)
   }
 
   source = "../../kubernetes/grafana-k8s-monitoring"
@@ -424,7 +424,7 @@ module "grafana_k8s_monitoring_lite" {
   for_each = {
     for s in ["grafana_k8s_monitoring_lite"] :
     s => s
-    if var.platform_config.grafana_k8s_monitoring_enabled && var.environment != "prod"
+    if var.platform_config.grafana_k8s_monitoring_enabled && !contains(["prod", "prd", "production"], var.environment)
   }
 
   source = "../../kubernetes/grafana-k8s-monitoring-lite"

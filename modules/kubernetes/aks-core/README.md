@@ -48,7 +48,7 @@ This module is used to create AKS clusters.
 | <a name="module_gateway_api"></a> [gateway\_api](#module\_gateway\_api) | ../../kubernetes/gateway-api | n/a |
 | <a name="module_grafana_alloy"></a> [grafana\_alloy](#module\_grafana\_alloy) | ../../kubernetes/grafana-alloy | n/a |
 | <a name="module_grafana_k8s_monitoring"></a> [grafana\_k8s\_monitoring](#module\_grafana\_k8s\_monitoring) | ../../kubernetes/grafana-k8s-monitoring | n/a |
-| <a name="module_grafana_k8s_monitoring_lite"></a> [grafana\_k8s\_monitoring\_lite](#module\_grafana\_k8s\_monitoring\_lite) | ../../kubernetes/grafana-k8s-monitoring-lite | n/a |
+| <a name="module_grafana_k8s_monitoring_billable"></a> [grafana\_k8s\_monitoring\_billable](#module\_grafana\_k8s\_monitoring\_billable) | ../../kubernetes/grafana-k8s-monitoring-billable | n/a |
 | <a name="module_ingress_nginx"></a> [ingress\_nginx](#module\_ingress\_nginx) | ../../kubernetes/ingress-nginx | n/a |
 | <a name="module_karpenter"></a> [karpenter](#module\_karpenter) | ../../kubernetes/karpenter | n/a |
 | <a name="module_linkerd"></a> [linkerd](#module\_linkerd) | ../../kubernetes/linkerd | n/a |

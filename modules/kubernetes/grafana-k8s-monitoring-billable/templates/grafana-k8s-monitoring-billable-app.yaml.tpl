@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana-k8s-monitoring-lite-app
+  name: grafana-k8s-monitoring-billable-app
   namespace: ${tenant_name}-${environment}
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: ${repo_url}
     targetRevision: HEAD
-    path: platform/${tenant_name}/${cluster_id}/argocd-applications/grafana-k8s-monitoring-lite
+    path: platform/${tenant_name}/${cluster_id}/argocd-applications/grafana-k8s-monitoring-billable
   destination:
     server: https://kubernetes.default.svc
     namespace: ${tenant_name}-${environment}

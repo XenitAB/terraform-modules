@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana-k8s-monitoring-lite
+  name: grafana-k8s-monitoring-billable
   namespace: ${tenant_name}-${environment}
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
@@ -12,7 +12,7 @@ spec:
   project: ${project}
   destination:
     server: ${server}
-    namespace: grafana-k8s-monitoring-lite
+    namespace: grafana-k8s-monitoring-billable
   revisionHistoryLimit: 5
   syncPolicy:
     automated:
@@ -44,7 +44,7 @@ spec:
             secret:
               create: false
               name: prometheus-grafana-cloud
-              namespace: grafana-k8s-monitoring-lite
+              namespace: grafana-k8s-monitoring-billable
             tls:
               insecureSkipVerify: false
         clusterMetrics:
@@ -99,7 +99,7 @@ spec:
                     driver: secrets-store.csi.k8s.io
                     readOnly: true
                     volumeAttributes:
-                      secretProviderClass: grafana-k8s-monitor-lite-secrets
+                      secretProviderClass: grafana-k8s-monitor-billable-secrets
         alloy-singleton:
           enabled: false
         alloy-logs:

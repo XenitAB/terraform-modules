@@ -1,7 +1,7 @@
-# grafana-k8s-monitoring-lite
+# grafana-k8s-monitoring-billable
 
-Lightweight version of grafana-k8s-monitoring that only collects node CPU metrics.
-Sends only `kube_node_status_capacity{resource="cpu"}` to Grafana Cloud.
+Lightweight version of grafana-k8s-monitoring that only collects node metrics for billing purposes.
+Sends only node metrics to Grafana Cloud.
 
 ## Requirements
 
@@ -26,13 +26,13 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_federated_identity_credential.grafana_k8s_monitor_lite](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/federated_identity_credential) | resource |
-| [azurerm_key_vault_access_policy.grafana_k8s_monitor_lite](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/key_vault_access_policy) | resource |
-| [azurerm_user_assigned_identity.grafana_k8s_monitor_lite](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/user_assigned_identity) | resource |
-| [git_repository_file.grafana_k8s_monitoring_lite](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
-| [git_repository_file.grafana_k8s_monitoring_lite_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
-| [git_repository_file.grafana_k8s_monitoring_lite_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
-| [git_repository_file.grafana_k8s_monitoring_lite_extras](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [azurerm_federated_identity_credential.grafana_k8s_monitor_billable](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/federated_identity_credential) | resource |
+| [azurerm_key_vault_access_policy.grafana_k8s_monitor_billable](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_user_assigned_identity.grafana_k8s_monitor_billable](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/user_assigned_identity) | resource |
+| [git_repository_file.grafana_k8s_monitoring_billable](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.grafana_k8s_monitoring_billable_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.grafana_k8s_monitoring_billable_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.grafana_k8s_monitoring_billable_extras](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.secret_provider_class](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 
 ## Inputs

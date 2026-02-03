@@ -1,8 +1,8 @@
 apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
-  name: grafana-k8s-monitor-lite-secrets
-  namespace: grafana-k8s-monitoring-lite
+  name: grafana-k8s-monitor-billable-secrets
+  namespace: grafana-k8s-monitoring-billable
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
 spec:

@@ -4,8 +4,8 @@ provider "kubernetes" {}
 
 provider "helm" {}
 
-module "grafana-k8s-monitoring-lite" {
-  source              = "../../../modules/kubernetes/grafana-k8s-monitoring"
+module "grafana-k8s-monitoring-billable" {
+  source              = "../../../modules/kubernetes/grafana-k8s-monitoring-billable"
   cluster_id          = "yabadabadoo"
   cluster_name        = "foobar123"
   key_vault_id        = "secretstuff"

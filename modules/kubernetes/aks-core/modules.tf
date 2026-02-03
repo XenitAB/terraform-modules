@@ -419,15 +419,15 @@ module "grafana_k8s_monitoring" {
   subscription_id          = data.azurerm_client_config.current.subscription_id
 }
 
-module "grafana_k8s_monitoring_lite" {
+module "grafana_k8s_monitoring_billable" {
 
   for_each = {
-    for s in ["grafana_k8s_monitoring_lite"] :
+    for s in ["grafana_k8s_monitoring_billable"] :
     s => s
     if var.platform_config.grafana_k8s_monitoring_enabled && !contains(["prod", "prd", "production", "mgmt"], var.environment)
   }
 
-  source = "../../kubernetes/grafana-k8s-monitoring-lite"
+  source = "../../kubernetes/grafana-k8s-monitoring-billable"
 
   azure_key_vault_name = var.grafana_k8s_monitor_config.azure_key_vault_name
   cluster_id           = local.cluster_id

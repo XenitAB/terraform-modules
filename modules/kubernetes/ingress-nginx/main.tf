@@ -138,4 +138,6 @@ resource "git_repository_file" "ingress_nginx_manifests" {
     nginx_healthz_ingress_whitelist_ips = var.nginx_healthz_ingress_whitelist_ips
     nginx_healthz_ingress_hostname      = var.nginx_healthz_ingress_hostname
   })
+    logs_enabled          = var.logs_enabled
+
 }

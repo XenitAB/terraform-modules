@@ -129,6 +129,7 @@ module "cert_manager" {
   environment                = var.environment
   fleet_infra_config         = var.platform_config.fleet_infra_config
   rbac_create                = var.cert_manager_config.rbac_create
+  logs_enabled               = var.cert_manager_config.logs_enabled
 }
 
 module "control_plane_logs" {
@@ -245,6 +246,7 @@ module "external_dns" {
   tenant_name                = var.platform_config.tenant_name
   fleet_infra_config         = var.platform_config.fleet_infra_config
   rbac_create                = var.external_dns_config.rbac_create
+  logs_enabled               = var.external_dns_config.logs_enabled
 }
 
 module "external_secrets_operator" {
@@ -450,6 +452,7 @@ module "ingress_nginx" {
   tenant_name                         = var.platform_config.tenant_name
   environment                         = var.environment
   fleet_infra_config                  = var.platform_config.fleet_infra_config
+  logs_enabled                        = var.ingress_nginx_config.logs_enabled
 }
 
 module "karpenter" {

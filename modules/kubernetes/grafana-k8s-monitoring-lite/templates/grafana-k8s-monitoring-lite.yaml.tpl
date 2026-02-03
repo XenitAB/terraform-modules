@@ -57,13 +57,13 @@ spec:
           windows-exporter:
             deploy: false
           kubelet:
-            enabled: true
+            enabled: false
           cadvisor:
-            enabled: true
+            enabled: false
           apiServer:
             enabled: false
           kubeletResource:
-            enabled: true
+            enabled: false
           kubeControllerManager:
             enabled: false
           kubeProxy:

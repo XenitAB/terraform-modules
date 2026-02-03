@@ -382,7 +382,7 @@ module "grafana_k8s_monitoring" {
   for_each = {
     for s in ["grafana_k8s_monitoring"] :
     s => s
-    if var.platform_config.grafana_k8s_monitoring_enabled && contains(["prod", "prd", "production"], var.environment)
+    if var.platform_config.grafana_k8s_monitoring_enabled && contains(["prod", "prd", "production", "mgmt"], var.environment)
   }
 
   source = "../../kubernetes/grafana-k8s-monitoring"

@@ -17,7 +17,9 @@ resource "helm_release" "argocd_hub_setup" {
       var.fleet_infra_config,
       { "uai_id" : azurerm_user_assigned_identity.argocd.principal_id },
       { "secrets" : local.key_vault_secret_values },
-      { "global_domain" : var.argocd_config.global_domain }
+      { "global_domain" : var.argocd_config.global_domain },
+      { "tenant_name" : var.tenant_name },
+      { "environment" : var.environment }
     ))
   ]
 

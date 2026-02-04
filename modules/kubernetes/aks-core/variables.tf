@@ -622,7 +622,7 @@ variable "platform_config" {
     datadog_enabled                   = optional(bool, false)
     defender_enabled                  = optional(bool, false)
     eck_operator_enabled              = optional(bool, false)
-    envoy_gateway_enabled             = optional(bool, false)
+    envoy_gateway_enabled             = optional(bool, true)
     external_dns_enabled              = optional(bool, true)
     external_secrets_operator_enabled = optional(bool, false)
     falco_enabled                     = optional(bool, true)

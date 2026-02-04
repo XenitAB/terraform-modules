@@ -6,7 +6,7 @@ metadata:
   name: argocd-gateway
   namespace: argocd
 spec:
-  gatewayClassName: eg
+  gatewayClassName: {{ printf "%s-%s" .Values.tenant_name .Values.environment }}
   listeners:
     - name: https
       hostname: {{ required "global_domain must be set" .Values.global_domain | quote }}

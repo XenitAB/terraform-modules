@@ -89,6 +89,7 @@ server:
   replicas: ${server_replicas}
   autoscaling:
     enabled: true
+  #keeping the ingress-config here for reference, but we are using Gateway/HTTPRoute instead
   ingress:
     enabled: false
     ingressClassName: nginx
@@ -105,42 +106,20 @@ server:
         - ${global_domain}
         secretName: argocd-tls
   httproute:
-  # -- Enable HTTPRoute resource for Argo CD server (Gateway API)
     enabled: true
-    # -- Additional HTTPRoute labels
     labels: {}
-    # -- Additional HTTPRoute annotations
     annotations: {}
-    # -- Gateway API parentRefs for the HTTPRoute
-    ## Must reference an existing Gateway
-    # @default -- `[]` (See [values.yaml])
     parentRefs:
       - name: argocd-gateway
         namespace: argocd
         sectionName: https
-    # -- List of hostnames for the HTTPRoute
-    # @default -- `[]` (See [values.yaml])
     hostnames: 
       - ${global_domain}
-      # - argocd.example.com
-    # -- HTTPRoute rules configuration
-    # @default -- `[]` (See [values.yaml])
     rules:
       - matches:
           - path:
               type: PathPrefix
               value: /
-        # filters: []
-        #   - type: RequestHeaderModifier
-        #     requestHeaderModifier:
-        #       add:
-        #         - name: X-Custom-Header
-        #           value: custom-value
-
-  # Gateway API GRPCRoute configuration
-  # NOTE: Gateway API support is in EXPERIMENTAL status
-  # Support depends on your Gateway controller implementation
-  # Refer to https://gateway-api.sigs.k8s.io/implementations/ for controller-specific details
   log:
     level: debug
   metrics:

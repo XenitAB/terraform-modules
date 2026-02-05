@@ -199,6 +199,7 @@ resource "git_repository_file" "argocd_extras_manifests" {
 
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/argocd/manifests/argocd-extras.yaml"
   content = templatefile("${path.module}/templates/argocd-hub-manifests.yaml.tpl", {
+    global_domain  = var.argocd_config.global_domain
     azure_tenants  = var.argocd_config.azure_tenants
     sync_windows   = var.argocd_config.sync_windows
     key_vault_name = var.key_vault_name

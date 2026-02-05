@@ -89,8 +89,9 @@ server:
   replicas: ${server_replicas}
   autoscaling:
     enabled: true
+  #keeping the ingress-config here for reference, but we are using Gateway/HTTPRoute instead
   ingress:
-    enabled: true
+    enabled: false
     ingressClassName: nginx
     annotations:
       cert-manager.io/cluster-issuer: "letsencrypt"
@@ -104,6 +105,21 @@ server:
       - hosts:
         - ${global_domain}
         secretName: argocd-tls
+  httproute:
+    enabled: true
+    labels: {}
+    annotations: {}
+    parentRefs:
+      - name: argocd-gateway
+        namespace: argocd
+        sectionName: https
+    hostnames: 
+      - ${global_domain}
+    rules:
+      - matches:
+          - path:
+              type: PathPrefix
+              value: /
   log:
     level: debug
   metrics:

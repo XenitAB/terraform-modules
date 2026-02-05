@@ -7,6 +7,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`aad-pod-identity`](aad-pod-identity/README.md)
 - [`aks-core`](aks-core/README.md)
 - [`argocd`](argocd/README.md)
+- [`awx-operator`](awx-operator/README.md)
 - [`azad-kube-proxy`](azad-kube-proxy/README.md)
 - [`azure-metrics`](azure-metrics/README.md)
 - [`azure-policy`](azure-policy/README.md)

@@ -379,7 +379,7 @@ module "grafana_k8s_monitoring" {
   for_each = {
     for s in ["grafana_k8s_monitoring"] :
     s => s
-    if var.platform_config.grafana_k8s_monitoring_enabled && contains(["prod", "prd", "production", "mgmt"], var.environment)
+    if var.platform_config.grafana_k8s_monitoring_enabled && contains(["production", "prod", "prd", "management", "mgmt", "mgt", "man"], var.environment) # Cost-control governance to only allow in production environments
   }
 
   source = "../../kubernetes/grafana-k8s-monitoring"
@@ -421,7 +421,7 @@ module "grafana_k8s_monitoring_billable" {
   for_each = {
     for s in ["grafana_k8s_monitoring_billable"] :
     s => s
-    if var.platform_config.grafana_k8s_monitoring_enabled && !contains(["prod", "prd", "production", "mgmt"], var.environment)
+    if var.platform_config.grafana_k8s_monitoring_billable_enabled
   }
 
   source = "../../kubernetes/grafana-k8s-monitoring-billable"

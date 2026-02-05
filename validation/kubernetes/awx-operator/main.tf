@@ -9,7 +9,7 @@ module "awx-operator" {
     instance_name   = "awx"
     service_type    = "ClusterIP"
     ingress_type    = "ingress"
-    hostname        = "awx.sandbox.example.com"
+    hostname        = "xae.sand.xenit.example.io"
   }
   tenant_name = "unbox"
   environment = "sand"

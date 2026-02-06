@@ -115,7 +115,7 @@ variable "awx_config" {
     create_instance = optional(bool, true)
     instance_name   = optional(string, "awx")
     service_type    = optional(string, "ClusterIP")
-    ingress_type    = optional(string, "ingress")
+    ingress_type    = optional(string, "none")
     hostname        = optional(string, "")
   })
   default = {}

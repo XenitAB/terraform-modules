@@ -28,7 +28,7 @@ resource "git_repository_file" "awx_operator_app" {
 }
 
 resource "git_repository_file" "awx_operator_chart" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/awx-operator/Chart.yaml"
+  path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/awx-operator/Chart.yaml"
   content = templatefile("${path.module}/templates/Chart.yaml", {})
 }
 
@@ -48,10 +48,10 @@ resource "git_repository_file" "awx_instance" {
 
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/awx-operator/manifests/awx-instance.yaml"
   content = templatefile("${path.module}/templates/awx-instance.yaml.tpl", {
-    instance_name  = var.awx_config.instance_name
-    service_type   = var.awx_config.service_type
-    ingress_type   = var.awx_config.ingress_type
-    hostname       = var.awx_config.hostname
+    instance_name = var.awx_config.instance_name
+    service_type  = var.awx_config.service_type
+    ingress_type  = var.awx_config.ingress_type
+    hostname      = var.awx_config.hostname
   })
 }
 

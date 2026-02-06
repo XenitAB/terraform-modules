@@ -24,7 +24,7 @@ variable "awx_config" {
     create_instance = optional(bool, true)
     instance_name   = optional(string, "awx")
     service_type    = optional(string, "ClusterIP")
-    ingress_type    = optional(string, "none")
+    ingress_type    = optional(string, "none") #create an own gateway-api gateway with httproutes
     hostname        = optional(string, "")
   })
   default = {}

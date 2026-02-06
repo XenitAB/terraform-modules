@@ -147,7 +147,7 @@ module "envoy_gateway" {
   fleet_infra_config   = var.platform_config.fleet_infra_config
   healthz_config = {
     hostname      = "health.${var.cert_manager_config.dns_zone[0]}"
-    whitelist_ips = [for ip in split(",", var.nginx_healthz_ingress_whitelist_ips) : trimspace(ip) if trimspace(ip) != ""]
+    whitelist_ips = var.envoy_gateway_config.healthz_whitelist_ips
   }
 }
 

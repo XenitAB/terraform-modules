@@ -11,6 +11,29 @@ spec:
       serviceAccountRef:
         name: argocd-application-controller
 ---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: argocd-gateway
+  namespace: argocd
+spec:
+  gatewayClassName: ${tenant_name}-${environment}
+  listeners:
+    - name: https
+      hostname: ${global_domain}
+      protocol: HTTPS
+      port: 443
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: argocd-tls
+      allowedRoutes:
+        namespaces:
+          from: All
+---
 %{ for azure_tenant in azure_tenants ~}
 %{ for cluster in azure_tenant.clusters ~}
 %{ if cluster.api_server != "https://kubernetes.default.svc" }

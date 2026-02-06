@@ -206,5 +206,7 @@ resource "git_repository_file" "argocd_extras_manifests" {
     tenant_id      = data.azurerm_client_config.current.tenant_id
     uai_id         = azurerm_user_assigned_identity.argocd.principal_id
     vault_url      = data.azurerm_key_vault.core.vault_uri
+    tenant_name    = var.tenant_name
+    environment    = var.environment
   })
 }

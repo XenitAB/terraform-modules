@@ -8,7 +8,7 @@ module "awx-operator" {
     create_instance = true
     instance_name   = "awx"
     service_type    = "ClusterIP"
-    ingress_type    = "ingress"
+    ingress_type    = "none"
     hostname        = "xae.sand.xenit.example.io"
   }
   tenant_name = "unbox"

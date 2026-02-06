@@ -68,3 +68,13 @@ resource "git_repository_file" "envoy_gateway_manifests" {
     environment = var.environment
   })
 }
+
+resource "git_repository_file" "envoy_gateway_healthz" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/envoy-gateway/manifests/healthz.yaml"
+  content = templatefile("${path.module}/templates/envoy-gateway-healthz.yaml.tpl", {
+    healthz_hostname      = var.healthz_config.hostname
+    healthz_whitelist_ips = var.healthz_config.whitelist_ips
+    tenant_name           = var.tenant_name
+    environment           = var.environment
+  })
+}

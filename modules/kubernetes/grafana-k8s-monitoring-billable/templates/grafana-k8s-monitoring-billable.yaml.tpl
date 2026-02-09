@@ -52,6 +52,10 @@ spec:
           kube-state-metrics:
             deploy: true
             podAnnotations: {kubernetes.azure.com/set-kube-service-host-fqdn: "true"}
+            metricsTuning:
+              useDefaultAllowList: false
+              includeMetrics:
+                - kube_node_status_capacity
           node-exporter:
             deploy: false
           windows-exporter:

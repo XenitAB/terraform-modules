@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### ⛓️‍💥 Breaking Changes
 - Feat!: add support for ArgoCD by @landerss1 in [#1339](https://github.com/XenitAB/terraform-modules/pulls/1339)
 
+
+
 ### 🚀 New Features
 - Feat: adding max vm map count to an increased default value for all n… by @yabracadabra in [#1401](https://github.com/XenitAB/terraform-modules/pulls/1401)
 - Feat: move flux to install with argo & helm by @CalleB3 in [#1370](https://github.com/XenitAB/terraform-modules/pulls/1370)

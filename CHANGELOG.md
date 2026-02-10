@@ -7,10 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 2026.02.01
+
 ### ⛓️‍💥 Breaking Changes
 - Feat!: add support for ArgoCD by @landerss1 in [#1339](https://github.com/XenitAB/terraform-modules/pulls/1339)
-
-
 
 ### 🚀 New Features
 - Feat: adding max vm map count to an increased default value for all n… by @yabracadabra in [#1401](https://github.com/XenitAB/terraform-modules/pulls/1401)

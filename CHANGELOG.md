@@ -7,7 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## 2026.02.01
+### 🐛 Bug Fixes
+- Fix: add argocd ClientTrafficPolicy for hubs by @CalleB3 in [#1427](https://github.com/XenitAB/terraform-modules/pulls/1427)
+
+
+
+## [2026.02.1](https://github.com/XenitAB/terraform-modules/releases/tag/2026.02.1)
 
 ### ⛓️‍💥 Breaking Changes
 - Feat!: add support for ArgoCD by @landerss1 in [#1339](https://github.com/XenitAB/terraform-modules/pulls/1339)
@@ -15,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🚀 New Features
+- Feat: migrate ArgoCD to gateway-api by @yabracadabra in [#1414](https://github.com/XenitAB/terraform-modules/pulls/1414)
+- Feat: Envoy gateway hardening by @optocoupler in [#1415](https://github.com/XenitAB/terraform-modules/pulls/1415)
+- Feat: Migrate Grafana-Agent to Grafana-Alloy by @yabracadabra in [#1416](https://github.com/XenitAB/terraform-modules/pulls/1416)
+- Feat: added node_provision_profile to handle NodeImage and NodeOsUpgradeChannel by @yabracadabra in [#1410](https://github.com/XenitAB/terraform-modules/pulls/1410)
+- Feat: Adding another type of vcpu family by @optocoupler in [#1408](https://github.com/XenitAB/terraform-modules/pulls/1408)
+- Feat: enabling cert-manager to create certificates as secrets for k8s… by @optocoupler in [#1406](https://github.com/XenitAB/terraform-modules/pulls/1406)
 - Feat: adding max vm map count to an increased default value for all n… by @yabracadabra in [#1401](https://github.com/XenitAB/terraform-modules/pulls/1401)
 - Feat: move flux to install with argo & helm by @CalleB3 in [#1370](https://github.com/XenitAB/terraform-modules/pulls/1370)
 - Feat: switch Argo hub from PAT to Github App auth by @CalleB3 in [#1369](https://github.com/XenitAB/terraform-modules/pulls/1369)
@@ -31,6 +42,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: add argo hub-spoke gateway by @CalleB3 in [#1425](https://github.com/XenitAB/terraform-modules/pulls/1425)
+- Fix: disable BGP route propagation for route tables by @Forsmans in [#1420](https://github.com/XenitAB/terraform-modules/pulls/1420)
+- Fix: enable envoy gateway by default by @CalleB3 in [#1421](https://github.com/XenitAB/terraform-modules/pulls/1421)
+- Fix: add httproutes as source to external-dns by @CalleB3 in [#1418](https://github.com/XenitAB/terraform-modules/pulls/1418)
+- Fix: grafana-alloy sync-wave to apply correctly by @yabracadabra in [#1417](https://github.com/XenitAB/terraform-modules/pulls/1417)
+- Fix: the metric block is depricated in favour for enabled_metric  by @yabracadabra in [#1409](https://github.com/XenitAB/terraform-modules/pulls/1409)
 - Fix: finalizers for argocd by @yabracadabra in [#1403](https://github.com/XenitAB/terraform-modules/pulls/1403)
 - Fix: Remove node pool name validation by @yabracadabra in [#1396](https://github.com/XenitAB/terraform-modules/pulls/1396)
 - Fix: Add possibility to add tags on AKS resource by @CalleB3 in [#1391](https://github.com/XenitAB/terraform-modules/pulls/1391)
@@ -46,7 +63,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+### 🚜 Refactor
+- Refactor: simplify automation module by @yabracadabra in [#1413](https://github.com/XenitAB/terraform-modules/pulls/1413)
+
+
+
 ### ⚙️ Miscellaneous
+- Chore: bump actions/checkout from 3 to 6 by @yabracadabra in [#1400](https://github.com/XenitAB/terraform-modules/pulls/1400)
+- Chore: bump peter-evans/create-pull-request from 7 to 8 by @yabracadabra in [#1405](https://github.com/XenitAB/terraform-modules/pulls/1405)
+- Chore: bump argocd from 8.3.7 to 9.3.4 by @yabracadabra in [#1412](https://github.com/XenitAB/terraform-modules/pulls/1412)
+- Chore: bump argocd from 8.0.6 to 9.3.4 by @yabracadabra in [#1411](https://github.com/XenitAB/terraform-modules/pulls/1411)
 - Fix: Fixing temporary required name by @yabracadabra in [#1402](https://github.com/XenitAB/terraform-modules/pulls/1402)
 - Chore: upgrade of module components by @yabracadabra in [#1399](https://github.com/XenitAB/terraform-modules/pulls/1399)
 - Chore: adding additional nodepool osdisksize option by @optocoupler in [#1398](https://github.com/XenitAB/terraform-modules/pulls/1398)

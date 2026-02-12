@@ -108,6 +108,19 @@ variable "argocd_config" {
   }
 }
 
+variable "awx_config" {
+  description = "AWX Operator configuration"
+  type = object({
+    target_revision = optional(string, "2.19.1")
+    create_instance = optional(bool, true)
+    instance_name   = optional(string, "awx")
+    service_type    = optional(string, "ClusterIP")
+    ingress_type    = optional(string, "none")
+    hostname        = optional(string, "")
+  })
+  default = {}
+}
+
 variable "azure_policy_config" {
   description = "A list of Azure policy mutations to create and include in the XKS policy set definition"
   type = object({
@@ -613,6 +626,7 @@ variable "platform_config" {
     })
     aad_pod_identity_enabled          = optional(bool, false)
     argocd_enabled                    = optional(bool, true)
+    awx_enabled                       = optional(bool, false)
     azure_metrics_enabled             = optional(bool, false)
     azure_policy_enabled              = optional(bool, false)
     azure_service_operator_enabled    = optional(bool, false)

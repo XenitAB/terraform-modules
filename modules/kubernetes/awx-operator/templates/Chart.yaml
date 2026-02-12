@@ -1,0 +1,5 @@
+apiVersion: v2
+name: awx-operator
+description: AWX Operator ArgoCD Application
+type: application
+version: 0.1.0

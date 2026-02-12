@@ -647,6 +647,21 @@ module "rabbitmq_operator" {
   fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
+module "awx_operator" {
+  for_each = {
+    for s in ["awx"] :
+    s => s
+    if var.platform_config.awx_enabled
+  }
+
+  source             = "../../kubernetes/awx-operator"
+  cluster_id         = local.cluster_id
+  awx_config         = var.awx_config
+  tenant_name        = var.platform_config.tenant_name
+  environment        = var.environment
+  fleet_infra_config = var.platform_config.fleet_infra_config
+}
+
 module "reloader" {
   for_each = {
     for s in ["reloader"] :

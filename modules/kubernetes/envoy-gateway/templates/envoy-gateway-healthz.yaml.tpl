@@ -13,7 +13,7 @@ spec:
     - name: health-https
       protocol: HTTPS
       port: 443
-      hostname: "${healthz_hostname}"
+      hostname: "health.${healthz_hostname}"
       tls:
         mode: Terminate
         certificateRefs:
@@ -47,7 +47,7 @@ spec:
     - name: health-gateway
       namespace: envoy-gateway
   hostnames:
-    - "${healthz_hostname}"
+    - "health.${healthz_hostname}"
   rules:
     - matches:
         - path:

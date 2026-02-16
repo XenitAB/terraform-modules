@@ -154,6 +154,7 @@ module "aks_core" {
     grafana_agent_enabled             = true
     grafana_alloy_enabled             = true
     grafana_k8s_monitoring_enabled    = true
+    ingress_nginx_enabled             = true
     karpenter_enabled                 = true
     linkerd_enabled                   = true
     litmus_enabled                    = true

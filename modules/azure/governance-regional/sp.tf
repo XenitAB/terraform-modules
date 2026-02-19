@@ -33,6 +33,6 @@ resource "azurerm_key_vault_secret" "aad_sp" {
   content_type = "application/json"
 
   depends_on = [
-    azurerm_key_vault_access_policy.ap_owner_spn
+    azurerm_role_assignment.ra_owner_spn
   ]
 }

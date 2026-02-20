@@ -27,6 +27,7 @@ No modules.
 | [git_repository_file.envoy_gateway_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.envoy_gateway_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.envoy_gateway_extras](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
+| [git_repository_file.envoy_gateway_healthz](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.envoy_gateway_manifests](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.envoy_gateway_values](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 
@@ -38,6 +39,7 @@ No modules.
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_envoy_gateway_config"></a> [envoy\_gateway\_config](#input\_envoy\_gateway\_config) | Configuration for the username and password | <pre>object({<br/>    logging_level             = optional(string, "info")<br/>    replicas_count            = optional(number, 2)<br/>    resources_memory_limit    = optional(string, "1Gi")<br/>    resources_cpu_limit       = optional(string, "1000m")<br/>    resources_cpu_requests    = optional(string, "100m")<br/>    resources_memory_requests = optional(string, "256Mi")<br/>    # Envoy Proxy (data plane) resources - these handle actual traffic<br/>    proxy_cpu_limit       = optional(string, "2000m")<br/>    proxy_memory_limit    = optional(string, "2Gi")<br/>    proxy_cpu_requests    = optional(string, "200m")<br/>    proxy_memory_requests = optional(string, "512Mi")<br/>  })</pre> | `{}` | no |
 | <a name="input_fleet_infra_config"></a> [fleet\_infra\_config](#input\_fleet\_infra\_config) | Fleet infra configuration | <pre>object({<br/>    git_repo_url        = string<br/>    argocd_project_name = string<br/>    k8s_api_server_url  = string<br/>  })</pre> | n/a | yes |
+| <a name="input_healthz_config"></a> [healthz\_config](#input\_healthz\_config) | Configuration for the health check endpoint exposed via the Envoy Gateway. | <pre>object({<br/>    hostname      = string<br/>    whitelist_ips = optional(list(string), [])<br/>  })</pre> | n/a | yes |
 | <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | The name of the tenant | `string` | n/a | yes |
 
 ## Outputs

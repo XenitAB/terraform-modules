@@ -35,6 +35,14 @@ variable "fleet_infra_config" {
   })
 }
 
+variable "healthz_config" {
+  description = "Configuration for the health check endpoint exposed via the Envoy Gateway."
+  type = object({
+    hostname      = string
+    whitelist_ips = optional(list(string), [])
+  })
+}
+
 variable "tenant_name" {
   description = "The name of the tenant"
   type        = string

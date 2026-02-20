@@ -11,6 +11,7 @@ locals {
     "falco",
     "flux-system",
     "grafana-k8s-monitoring",
+    "grafana-k8s-monitoring-billable",
     "ingress-nginx",
     "linkerd",
     "linkerd-cni",

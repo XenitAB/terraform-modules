@@ -28,6 +28,7 @@ This directory contains all the Kubernetes Terraform modules.
 - [`grafana-agent`](grafana-agent/README.md)
 - [`grafana-alloy`](grafana-alloy/README.md)
 - [`grafana-k8s-monitoring`](grafana-k8s-monitoring/README.md)
+- [`grafana-k8s-monitoring-billable`](grafana-k8s-monitoring-billable/README.md)
 - [`helm-crd-oci`](helm-crd-oci/README.md)
 - [`helm-crd`](helm-crd/README.md)
 - [`ingress-healthz`](ingress-healthz/README.md)

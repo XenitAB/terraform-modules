@@ -7,8 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### 🚀 New Features
+- Feat: created k8s_monitoring_billing for billing metrics by @yabracadabra in [#1419](https://github.com/XenitAB/terraform-modules/pulls/1419)
+
+
+
 ### 🐛 Bug Fixes
 - Fix: add argocd ClientTrafficPolicy for hubs by @CalleB3 in [#1427](https://github.com/XenitAB/terraform-modules/pulls/1427)
+
+
+
+### ⚙️ Miscellaneous
 
 
 

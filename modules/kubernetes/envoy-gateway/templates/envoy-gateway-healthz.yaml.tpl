@@ -13,7 +13,7 @@ spec:
     - name: health-https
       protocol: HTTPS
       port: 443
-      hostname: "health.${healthz_hostname}"
+      hostname: "health-gw.${healthz_hostname}"
       tls:
         mode: Terminate
         certificateRefs:
@@ -47,7 +47,7 @@ spec:
     - name: health-gateway
       namespace: envoy-gateway
   hostnames:
-    - "health.${healthz_hostname}"
+    - "health-gw.${healthz_hostname}"
   rules:
     - matches:
         - path:
@@ -82,6 +82,7 @@ spec:
         principal:
           clientCIDRs:
 %{~ for cidr in flatten([for entry in healthz_whitelist_ips : split(",", entry)]) }
-            - "${trimspace(cidr)}"
+          - "${trimspace(cidr)}"
+
 %{~ endfor }
 %{~ endif ~}

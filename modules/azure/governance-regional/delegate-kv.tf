@@ -28,90 +28,120 @@ resource "azurerm_key_vault" "delegate_kv" {
   sku_name                    = "standard"
   purge_protection_enabled    = each.value.key_vault_purge_protection_enabled
   enabled_for_disk_encryption = true
+  rbac_authorization_enabled  = each.value.rbac_authorization_enabled_kv
 }
 
-resource "azurerm_key_vault_access_policy" "ap_owner_spn" {
+resource "azurerm_role_assignment" "ra_owner_spn" {
   for_each = {
-    for rg in var.resource_group_configs :
-    rg.common_name => rg
-    if rg.delegate_key_vault == true
+    for pair in setproduct(
+      [
+        for rg in var.resource_group_configs : rg.common_name
+        if rg.delegate_key_vault == true
+      ],
+      local.key_vault_rbac_roles.key_secret
+      ) : "${pair[0]}-${pair[1]}" => {
+      rg_name = pair[0]
+      role    = pair[1]
+    }
   }
 
-  key_vault_id       = azurerm_key_vault.delegate_kv[each.key].id
-  tenant_id          = data.azurerm_client_config.current.tenant_id
-  object_id          = data.azuread_service_principal.owner_spn.id
-  key_permissions    = local.key_vault_default_permissions.key_permissions
-  secret_permissions = local.key_vault_default_permissions.secret_permissions
+  scope                = azurerm_key_vault.delegate_kv[each.value.rg_name].id
+  role_definition_name = each.value.role
+  principal_id         = data.azuread_service_principal.owner_spn.id
 }
 
-resource "azurerm_key_vault_access_policy" "ap_rg_aad_group" {
+resource "azurerm_role_assignment" "ra_rg_aad_group" {
   for_each = {
-    for rg in var.resource_group_configs :
-    rg.common_name => rg
-    if rg.delegate_key_vault == true
+    for pair in setproduct(
+      [
+        for rg in var.resource_group_configs : rg.common_name
+        if rg.delegate_key_vault == true
+      ],
+      local.key_vault_rbac_roles.key_secret_cert
+      ) : "${pair[0]}-${pair[1]}" => {
+      rg_name = pair[0]
+      role    = pair[1]
+    }
   }
 
-  key_vault_id            = azurerm_key_vault.delegate_kv[each.key].id
-  tenant_id               = data.azurerm_client_config.current.tenant_id
-  object_id               = var.azuread_groups.rg_contributor[each.key].id
-  key_permissions         = local.key_vault_default_permissions.key_permissions
-  secret_permissions      = local.key_vault_default_permissions.secret_permissions
-  certificate_permissions = local.key_vault_default_permissions.certificate_permissions
+  scope                = azurerm_key_vault.delegate_kv[each.value.rg_name].id
+  role_definition_name = each.value.role
+  principal_id         = var.azuread_groups.rg_contributor[each.value.rg_name].id
 }
 
-resource "azurerm_key_vault_access_policy" "ap_rg_sp" {
+resource "azurerm_role_assignment" "ra_rg_sp" {
   for_each = {
-    for rg in var.resource_group_configs :
-    rg.common_name => rg
-    if rg.delegate_key_vault == true && rg.delegate_service_principal == true
+    for pair in setproduct(
+      [
+        for rg in var.resource_group_configs : rg.common_name
+        if rg.delegate_key_vault == true && rg.delegate_service_principal == true
+      ],
+      local.key_vault_rbac_roles.key_secret
+      ) : "${pair[0]}-${pair[1]}" => {
+      rg_name = pair[0]
+      role    = pair[1]
+    }
   }
 
-  key_vault_id       = azurerm_key_vault.delegate_kv[each.key].id
-  tenant_id          = data.azurerm_client_config.current.tenant_id
-  object_id          = var.azuread_apps.rg_contributor[each.key].service_principal_object_id
-  key_permissions    = local.key_vault_default_permissions.key_permissions
-  secret_permissions = local.key_vault_default_permissions.secret_permissions
+  scope                = azurerm_key_vault.delegate_kv[each.value.rg_name].id
+  role_definition_name = each.value.role
+  principal_id         = var.azuread_apps.rg_contributor[each.value.rg_name].service_principal_object_id
 }
 
-resource "azurerm_key_vault_access_policy" "ap_kvreader_sp" {
+resource "azurerm_role_assignment" "ra_kvreader_sp" {
   for_each = {
-    for rg in var.resource_group_configs :
-    rg.common_name => rg
-    if rg.delegate_key_vault == true
+    for pair in setproduct(
+      [
+        for rg in var.resource_group_configs : rg.common_name
+        if rg.delegate_key_vault == true
+      ],
+      local.key_vault_rbac_roles.key_secret
+      ) : "${pair[0]}-${pair[1]}" => {
+      rg_name = pair[0]
+      role    = pair[1]
+    }
   }
 
-  key_vault_id       = azurerm_key_vault.delegate_kv[each.key].id
-  tenant_id          = data.azurerm_client_config.current.tenant_id
-  object_id          = var.azuread_apps.delegate_kv[each.key].service_principal_object_id
-  key_permissions    = local.key_vault_default_permissions.key_permissions
-  secret_permissions = local.key_vault_default_permissions.secret_permissions
+  scope                = azurerm_key_vault.delegate_kv[each.value.rg_name].id
+  role_definition_name = each.value.role
+  principal_id         = var.azuread_apps.delegate_kv[each.value.rg_name].service_principal_object_id
 }
 
-resource "azurerm_key_vault_access_policy" "ap_sub_aad_group_owner" {
+resource "azurerm_role_assignment" "ra_sub_aad_group_owner" {
   for_each = {
-    for rg in var.resource_group_configs :
-    rg.common_name => rg
-    if rg.delegate_key_vault == true
+    for pair in setproduct(
+      [
+        for rg in var.resource_group_configs : rg.common_name
+        if rg.delegate_key_vault == true
+      ],
+      local.key_vault_rbac_roles.key_secret_cert
+      ) : "${pair[0]}-${pair[1]}" => {
+      rg_name = pair[0]
+      role    = pair[1]
+    }
   }
 
-  key_vault_id            = azurerm_key_vault.delegate_kv[each.key].id
-  tenant_id               = data.azurerm_client_config.current.tenant_id
-  object_id               = var.azuread_groups.sub_owner.id
-  key_permissions         = local.key_vault_default_permissions.key_permissions
-  secret_permissions      = local.key_vault_default_permissions.secret_permissions
-  certificate_permissions = local.key_vault_default_permissions.certificate_permissions
+  scope                = azurerm_key_vault.delegate_kv[each.value.rg_name].id
+  role_definition_name = each.value.role
+  principal_id         = var.azuread_groups.sub_owner.id
 }
 
-resource "azurerm_key_vault_access_policy" "ap_sub_aad_group_contributor" {
+resource "azurerm_role_assignment" "ra_sub_aad_group_contributor" {
   for_each = {
-    for rg in var.resource_group_configs :
-    rg.common_name => rg
-    if rg.delegate_key_vault == true
+    for pair in setproduct(
+      [
+        for rg in var.resource_group_configs : rg.common_name
+        if rg.delegate_key_vault == true
+      ],
+      local.key_vault_rbac_roles.key_secret
+      ) : "${pair[0]}-${pair[1]}" => {
+      rg_name = pair[0]
+      role    = pair[1]
+    }
   }
 
-  key_vault_id       = azurerm_key_vault.delegate_kv[each.key].id
-  tenant_id          = data.azurerm_client_config.current.tenant_id
-  object_id          = var.azuread_groups.sub_contributor.id
-  key_permissions    = local.key_vault_default_permissions.key_permissions
-  secret_permissions = local.key_vault_default_permissions.secret_permissions
+  scope                = azurerm_key_vault.delegate_kv[each.value.rg_name].id
+  role_definition_name = each.value.role
+  principal_id         = var.azuread_groups.sub_contributor.id
 }
+

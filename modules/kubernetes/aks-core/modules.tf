@@ -146,7 +146,7 @@ module "envoy_gateway" {
   tenant_name          = var.platform_config.tenant_name
   fleet_infra_config   = var.platform_config.fleet_infra_config
   healthz_config = {
-    hostname      = var.platform_config.ingress_nginx_enabled ? "${var.cert_manager_config.dns_zone[0]}" : var.cert_manager_config.dns_zone[0]
+    hostname      = var.platform_config.ingress_nginx_enabled ? var.cert_manager_config.dns_zone[0] : var.cert_manager_config.dns_zone[0]
     whitelist_ips = var.envoy_gateway_config.healthz_whitelist_ips
   }
 }

@@ -28,7 +28,7 @@ resource "azurerm_key_vault" "delegate_kv" {
   sku_name                    = "standard"
   purge_protection_enabled    = each.value.key_vault_purge_protection_enabled
   enabled_for_disk_encryption = true
-  rbac_authorization_enabled  = true
+  rbac_authorization_enabled  = each.value.rbac_authorization_enabled_kv
 }
 
 resource "azurerm_role_assignment" "ra_owner_spn" {
@@ -144,3 +144,4 @@ resource "azurerm_role_assignment" "ra_sub_aad_group_contributor" {
   role_definition_name = each.value.role
   principal_id         = var.azuread_groups.sub_contributor.id
 }
+

@@ -60,7 +60,9 @@ spec:
             kind: HTTPRouteFilter
             name: healthz-direct-response
 %{~ if length(healthz_whitelist_ips) > 0 ~}
+
 ---
+
 # IP allowlist — equivalent to the nginx whitelist-source-range annotation.
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy

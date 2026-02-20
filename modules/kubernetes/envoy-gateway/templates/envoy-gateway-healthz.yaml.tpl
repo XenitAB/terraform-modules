@@ -81,7 +81,7 @@ spec:
         action: Allow
         principal:
           clientCIDRs:
-%{~ for cidr in healthz_whitelist_ips }
-            - "${cidr}"
+%{~ for cidr in flatten([for entry in healthz_whitelist_ips : split(",", entry)]) }
+            - "${trimspace(cidr)}"
 %{~ endfor }
 %{~ endif ~}

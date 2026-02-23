@@ -38,7 +38,7 @@ resource "azurerm_role_assignment" "ra_owner_spn" {
         for rg in var.resource_group_configs : rg.common_name
         if rg.delegate_key_vault == true
       ],
-      local.key_vault_rbac_roles.key_secret
+      local.key_vault_rbac_roles_owner
       ) : "${pair[0]}-${pair[1]}" => {
       rg_name = pair[0]
       role    = pair[1]
@@ -57,7 +57,7 @@ resource "azurerm_role_assignment" "ra_rg_aad_group" {
         for rg in var.resource_group_configs : rg.common_name
         if rg.delegate_key_vault == true
       ],
-      local.key_vault_rbac_roles.key_secret_cert
+      local.key_vault_rbac_roles_key_secret_cert
       ) : "${pair[0]}-${pair[1]}" => {
       rg_name = pair[0]
       role    = pair[1]
@@ -76,7 +76,7 @@ resource "azurerm_role_assignment" "ra_rg_sp" {
         for rg in var.resource_group_configs : rg.common_name
         if rg.delegate_key_vault == true && rg.delegate_service_principal == true
       ],
-      local.key_vault_rbac_roles.key_secret
+      local.key_vault_rbac_roles_key_secret
       ) : "${pair[0]}-${pair[1]}" => {
       rg_name = pair[0]
       role    = pair[1]
@@ -95,7 +95,7 @@ resource "azurerm_role_assignment" "ra_kvreader_sp" {
         for rg in var.resource_group_configs : rg.common_name
         if rg.delegate_key_vault == true
       ],
-      local.key_vault_rbac_roles.key_secret
+      local.key_vault_rbac_roles_key_secret_cert_user
       ) : "${pair[0]}-${pair[1]}" => {
       rg_name = pair[0]
       role    = pair[1]
@@ -114,7 +114,7 @@ resource "azurerm_role_assignment" "ra_sub_aad_group_owner" {
         for rg in var.resource_group_configs : rg.common_name
         if rg.delegate_key_vault == true
       ],
-      local.key_vault_rbac_roles.key_secret_cert
+      local.key_vault_rbac_roles_key_secret_cert
       ) : "${pair[0]}-${pair[1]}" => {
       rg_name = pair[0]
       role    = pair[1]
@@ -133,7 +133,7 @@ resource "azurerm_role_assignment" "ra_sub_aad_group_contributor" {
         for rg in var.resource_group_configs : rg.common_name
         if rg.delegate_key_vault == true
       ],
-      local.key_vault_rbac_roles.key_secret
+      local.key_vault_rbac_roles_key_secret
       ) : "${pair[0]}-${pair[1]}" => {
       rg_name = pair[0]
       role    = pair[1]

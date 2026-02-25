@@ -17,18 +17,21 @@ metadata:
   namespace: envoy-gateway
   annotations:
     argocd.argoproj.io/sync-wave: "2"
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   gatewayClassName: ${tenant_name}-${environment}
   listeners:
     - name: http
       protocol: HTTP
       port: 80
+      hostname: "${wildcard_hostname}"
       allowedRoutes:
         namespaces:
           from: All
     - name: https
       protocol: HTTPS
       port: 443
+      hostname: "${wildcard_hostname}"
       tls:
         mode: Terminate
         certificateRefs:

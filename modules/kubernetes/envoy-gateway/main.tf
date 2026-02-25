@@ -64,8 +64,9 @@ resource "git_repository_file" "envoy_gateway_extras" {
 resource "git_repository_file" "envoy_gateway_manifests" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/envoy-gateway/manifests/envoy-gateway-extras.yaml"
   content = templatefile("${path.module}/templates/envoy-gateway-manifests.yaml.tpl", {
-    tenant_name = var.tenant_name
-    environment = var.environment
+    tenant_name        = var.tenant_name
+    environment        = var.environment
+    wildcard_hostname  = var.default_gateway_config.wildcard_hostname
   })
 }
 

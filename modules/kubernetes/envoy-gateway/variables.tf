@@ -35,6 +35,13 @@ variable "fleet_infra_config" {
   })
 }
 
+variable "default_gateway_config" {
+  description = "Configuration for the default shared gateway."
+  type = object({
+    wildcard_hostname = string
+  })
+}
+
 variable "healthz_config" {
   description = "Configuration for the health check endpoint exposed via the Envoy Gateway."
   type = object({

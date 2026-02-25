@@ -10,6 +10,33 @@ spec:
   controllerName: gateway.envoyproxy.io/gatewayclass-controller
   description: "${tenant_name} ${environment} gateway class managed by Xenit"
 ---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: default-gateway
+  namespace: envoy-gateway
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  gatewayClassName: ${tenant_name}-${environment}
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: https
+      protocol: HTTPS
+      port: 443
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: default-gateway-secret
+      allowedRoutes:
+        namespaces:
+          from: All
+---
 # ConstraintTemplate for validating TLS configuration
 apiVersion: templates.gatekeeper.sh/v1
 kind: ConstraintTemplate

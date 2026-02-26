@@ -146,6 +146,7 @@ module "envoy_gateway" {
   tenant_name          = var.platform_config.tenant_name
   fleet_infra_config   = var.platform_config.fleet_infra_config
   default_gateway_config = {
+    enabled           = var.envoy_gateway_config.default_gateway_enabled
     wildcard_hostname = "*.${var.cert_manager_config.dns_zone[0]}"
   }
   healthz_config = {

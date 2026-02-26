@@ -9,6 +9,7 @@ metadata:
 spec:
   controllerName: gateway.envoyproxy.io/gatewayclass-controller
   description: "${tenant_name} ${environment} gateway class managed by Xenit"
+%{~ if default_gateway_enabled }
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
@@ -39,6 +40,7 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+%{~ endif }
 ---
 # ConstraintTemplate for validating TLS configuration
 apiVersion: templates.gatekeeper.sh/v1

@@ -145,6 +145,10 @@ module "envoy_gateway" {
   envoy_gateway_config = var.envoy_gateway_config
   tenant_name          = var.platform_config.tenant_name
   fleet_infra_config   = var.platform_config.fleet_infra_config
+  default_gateway_config = {
+    enabled           = var.envoy_gateway_config.default_gateway_enabled
+    wildcard_hostname = "*.${var.cert_manager_config.dns_zone[0]}"
+  }
   healthz_config = {
     hostname      = var.platform_config.ingress_nginx_enabled ? "health-gw.${var.cert_manager_config.dns_zone[0]}" : "health.${var.cert_manager_config.dns_zone[0]}"
     whitelist_ips = var.envoy_gateway_config.healthz_whitelist_ips
@@ -418,6 +422,28 @@ module "grafana_k8s_monitoring" {
   environment              = var.environment
   fleet_infra_config       = var.platform_config.fleet_infra_config
   subscription_id          = data.azurerm_client_config.current.subscription_id
+}
+
+module "grafana_k8s_monitoring_billable" {
+
+  for_each = {
+    for s in ["grafana_k8s_monitoring_billable"] :
+    s => s
+    if var.platform_config.grafana_k8s_monitoring_billable_enabled
+  }
+
+  source = "../../kubernetes/grafana-k8s-monitoring-billable"
+
+  azure_key_vault_name = var.grafana_k8s_monitor_config.azure_key_vault_name
+  cluster_id           = local.cluster_id
+  cluster_name         = var.grafana_k8s_monitor_config.cluster_name
+  environment          = var.environment
+  fleet_infra_config   = var.platform_config.fleet_infra_config
+  key_vault_id         = data.azurerm_key_vault.core.id
+  location             = data.azurerm_resource_group.this.location
+  oidc_issuer_url      = var.oidc_issuer_url
+  resource_group_name  = data.azurerm_resource_group.this.name
+  tenant_name          = var.platform_config.tenant_name
 }
 
 module "ingress_nginx" {

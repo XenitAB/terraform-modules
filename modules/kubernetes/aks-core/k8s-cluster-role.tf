@@ -42,6 +42,8 @@ resource "kubernetes_cluster_role" "custom_resource_edit" {
       "datadogmetrics.datadoghq.com",
       "datadogmonitors.datadoghq.com",
       "secrets-store.csi.x-k8s.io",
+      "gateway.networking.k8s.io",
+      "gateway.envoyproxy.io",
     ]
     resources = ["*"]
     verbs     = ["*"]

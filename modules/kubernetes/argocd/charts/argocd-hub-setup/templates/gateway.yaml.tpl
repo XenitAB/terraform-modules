@@ -21,3 +21,17 @@ spec:
         namespaces:
           from: All
 ---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: preserve-escaped-slashes
+  namespace: argocd
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: argocd-gateway
+  path:
+    escapedSlashesAction: KeepUnchanged
+    disableMergeSlashes: true
+---

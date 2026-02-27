@@ -1,3 +1,4 @@
+%{~ if !default_gateway_enabled }
 ---
 # Gateway with a dedicated HTTPS listener for the health check endpoint.
 apiVersion: gateway.networking.k8s.io/v1
@@ -21,6 +22,7 @@ spec:
       allowedRoutes:
         namespaces:
           from: Same
+%{~ endif }
 ---
 # Direct response — Envoy itself returns 200 OK without proxying anywhere.
 # If the proxy pod is down the request fails, giving the same "is the
@@ -44,8 +46,13 @@ metadata:
   namespace: envoy-gateway
 spec:
   parentRefs:
+%{~ if default_gateway_enabled }
+    - name: default-gateway
+      namespace: envoy-gateway
+%{~ else }
     - name: health-gateway
       namespace: envoy-gateway
+%{~ endif }
   hostnames:
     - "${healthz_hostname}"
   rules:

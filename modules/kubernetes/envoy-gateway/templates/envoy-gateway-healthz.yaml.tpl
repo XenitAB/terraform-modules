@@ -85,7 +85,7 @@ spec:
     defaultAction: Deny
     rules:
       - name: allow-monitoring
-        action: Allowenvoy
+        action: Allow
         principal:
           clientCIDRs:
 %{~ for cidr in flatten([for entry in healthz_whitelist_ips : split(",", entry)]) }

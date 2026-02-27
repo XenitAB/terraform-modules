@@ -30,7 +30,7 @@ module "envoy-gateway" {
   default_gateway_config = {
     enabled           = true
     wildcard_hostname = "*.foo.example.com"
-  } 
+  }
   healthz_config = {
     hostname      = "envoy-health.dev.foo.example.com"
     whitelist_ips = ["10.0.0.0/8", "192.168.1.0/24"]

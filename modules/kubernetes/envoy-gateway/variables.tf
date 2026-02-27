@@ -38,8 +38,9 @@ variable "fleet_infra_config" {
 variable "default_gateway_config" {
   description = "Configuration for the default shared gateway."
   type = object({
-    enabled           = optional(bool, false)
-    wildcard_hostname = string
+    enabled            = optional(bool, false)
+    wildcard_hostname  = string
+    private_lb_gateway = optional(bool, false)
   })
 }
 

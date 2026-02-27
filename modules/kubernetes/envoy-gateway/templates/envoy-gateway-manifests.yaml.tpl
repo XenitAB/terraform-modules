@@ -9,7 +9,7 @@ metadata:
 spec:
   controllerName: gateway.envoyproxy.io/gatewayclass-controller
   description: "${tenant_name} ${environment} gateway class managed by Xenit"
-%{~ if default_gateway_enabled }
+%{ if default_gateway_enabled = true }
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
@@ -19,6 +19,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
     cert-manager.io/cluster-issuer: letsencrypt
+%{ if default_gateway_enabled && private_lb_gateway ~}
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+%{ endif ~}
 spec:
   gatewayClassName: ${tenant_name}-${environment}
   listeners:
@@ -33,7 +36,7 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-%{~ endif }
+%{ endif }
 ---
 # ConstraintTemplate for validating TLS configuration
 apiVersion: templates.gatekeeper.sh/v1

@@ -302,6 +302,7 @@ variable "envoy_gateway_config" {
     proxy_memory_requests     = optional(string, "512Mi")
     healthz_whitelist_ips     = optional(list(string), [""])
     default_gateway_enabled   = optional(bool, false)
+    private_lb                = optional(bool, false)
   })
   default = {}
 }

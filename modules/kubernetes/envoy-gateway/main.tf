@@ -68,6 +68,7 @@ resource "git_repository_file" "envoy_gateway_manifests" {
     environment             = var.environment
     default_gateway_enabled = var.default_gateway_config.enabled
     wildcard_hostname       = var.default_gateway_config.wildcard_hostname
+    private_lb_gateway      = var.default_gateway_config.private_lb
   })
 }
 

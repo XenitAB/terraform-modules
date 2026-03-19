@@ -31,7 +31,6 @@ No modules.
 | <a name="input_fleet_infra_config"></a> [fleet\_infra\_config](#input\_fleet\_infra\_config) | Fleet infra configuration | <pre>object({<br/>    git_repo_url        = string<br/>    argocd_project_name = string<br/>    k8s_api_server_url  = string<br/>  })</pre> | n/a | yes |
 | <a name="input_node_selector"></a> [node\_selector](#input\_node\_selector) | Optional node selector used to scope the DaemonSet to specific nodes | `map(string)` | `{}` | no |
 | <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | The name of the tenant | `string` | n/a | yes |
-| <a name="input_tolerations"></a> [tolerations](#input\_tolerations) | Optional tolerations for the DaemonSet | <pre>list(object({<br/>    key               = optional(string)<br/>    operator          = optional(string)<br/>    value             = optional(string)<br/>    effect            = optional(string)<br/>    tolerationSeconds = optional(number)<br/>  }))</pre> | `[]` | no |
 | <a name="input_vm_max_map_count"></a> [vm\_max\_map\_count](#input\_vm\_max\_map\_count) | The vm.max\_map\_count value to enforce on all eligible nodes | `number` | `262144` | no |
 
 ## Outputs

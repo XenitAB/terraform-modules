@@ -25,17 +25,10 @@ spec:
       hostPID: true
 %{ if length(keys(node_selector)) > 0 ~}
       nodeSelector:
-${indent(8, yamlencode(node_selector))}
+%{ for key, value in node_selector ~}
+        ${key}: ${value}
+%{ endfor ~}
 %{ endif ~}
-      tolerations:
-${indent(8, yamlencode(concat([
-  {
-    key      = "CriticalAddonsOnly"
-    operator = "Exists"
-  }
-], [for toleration in tolerations : {
-  for key, value in toleration : key => value if value != null
-}]))) }
       containers:
         - name: sysctl
           image: busybox:1.36

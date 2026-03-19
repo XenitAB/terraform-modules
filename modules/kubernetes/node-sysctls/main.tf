@@ -23,11 +23,10 @@ resource "git_repository_file" "node_sysctls_app" {
 }
 
 resource "git_repository_file" "node_sysctls_manifest" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/node-sysctls/node-sysctls.yaml"
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/node-sysctls/manifests/node-sysctls.yaml"
 
   content = templatefile("${path.module}/templates/node-sysctls-manifest.yaml.tpl", {
     vm_max_map_count = var.vm_max_map_count
     node_selector    = var.node_selector
-    tolerations      = var.tolerations
   })
 }

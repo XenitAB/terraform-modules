@@ -33,15 +33,3 @@ variable "node_selector" {
   type        = map(string)
   default     = {}
 }
-
-variable "tolerations" {
-  description = "Optional tolerations for the DaemonSet"
-  type = list(object({
-    key               = optional(string)
-    operator          = optional(string)
-    value             = optional(string)
-    effect            = optional(string)
-    tolerationSeconds = optional(number)
-  }))
-  default = []
-}

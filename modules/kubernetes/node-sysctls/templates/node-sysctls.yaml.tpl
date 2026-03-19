@@ -29,5 +29,5 @@ spec:
   source:
     repoURL: ${repo_url}
     targetRevision: HEAD
-    path: platform/${tenant_name}/${cluster_id}/node-sysctls
+    path: platform/${tenant_name}/${cluster_id}/argocd-applications/node-sysctls/manifests
 

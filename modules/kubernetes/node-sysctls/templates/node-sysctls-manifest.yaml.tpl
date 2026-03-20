@@ -31,7 +31,7 @@ spec:
 %{ endif ~}
       containers:
         - name: sysctl
-          image: busybox:1.36
+          image: dhi/busybox:1.37.0-debian13
           imagePullPolicy: IfNotPresent
           command:
             - sh

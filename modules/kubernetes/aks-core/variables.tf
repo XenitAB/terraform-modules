@@ -642,6 +642,7 @@ variable "platform_config" {
     nginx_gateway_enabled                   = optional(bool, false)
     node_local_dns_enabled                  = optional(bool, true)
     node_ttl_enabled                        = optional(bool, true)
+    node_sysctls_enabled                    = optional(bool, false)
     popeye_enabled                          = optional(bool, false)
     prometheus_enabled                      = optional(bool, false)
     promtail_enabled                        = optional(bool, false)

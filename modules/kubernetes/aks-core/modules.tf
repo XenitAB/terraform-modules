@@ -585,10 +585,11 @@ module "node_sysctls" {
 
   source = "../../kubernetes/node-sysctls"
 
-  cluster_id         = local.cluster_id
-  environment        = var.environment
-  fleet_infra_config = var.platform_config.fleet_infra_config
-  tenant_name        = var.platform_config.tenant_name
+  cluster_id          = local.cluster_id
+  environment         = var.environment
+  fleet_infra_config  = var.platform_config.fleet_infra_config
+  node_sysctls_config = var.node_sysctls_config
+  tenant_name         = var.platform_config.tenant_name
 }
 
 module "popeye" {

@@ -10,6 +10,12 @@ terraform {
 }
 
 resource "git_repository_file" "node_sysctls_app" {
+  for_each = {
+    for s in ["node-sysctls"] :
+    s => s
+    if length(var.node_sysctls_config) > 0
+  }
+
   path = "platform/${var.tenant_name}/${var.cluster_id}/templates/node-sysctls.yaml"
 
   content = templatefile("${path.module}/templates/node-sysctls.yaml.tpl", {
@@ -22,11 +28,30 @@ resource "git_repository_file" "node_sysctls_app" {
   })
 }
 
+resource "git_repository_file" "node_sysctls_namespace" {
+  for_each = {
+    for s in ["node-sysctls"] :
+    s => s
+    if length(var.node_sysctls_config) > 0
+  }
+
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/node-sysctls/manifests/namespace.yaml"
+
+  content = templatefile("${path.module}/templates/node-sysctls-namespace.yaml.tpl", {})
+}
+
 resource "git_repository_file" "node_sysctls_manifest" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/node-sysctls/manifests/node-sysctls.yaml"
+  for_each = {
+    for profile in var.node_sysctls_config :
+    profile.name => profile
+  }
+
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/node-sysctls/manifests/node-sysctls-${each.key}.yaml"
 
   content = templatefile("${path.module}/templates/node-sysctls-manifest.yaml.tpl", {
-    vm_max_map_count = var.vm_max_map_count
-    node_selector    = var.node_selector
+    name          = each.value.name
+    sysctls       = each.value.sysctls
+    node_selector = each.value.node_selector
+    tolerations   = each.value.tolerations
   })
 }

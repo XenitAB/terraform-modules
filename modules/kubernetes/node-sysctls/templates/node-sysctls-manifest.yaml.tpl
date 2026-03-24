@@ -1,25 +1,18 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: node-sysctls
-  labels:
-    xkf.xenit.io/kind: platform
----
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: node-sysctls
+  name: node-sysctls-${name}
   namespace: node-sysctls
 spec:
   selector:
     matchLabels:
-      app: node-sysctls
+      app: node-sysctls-${name}
   updateStrategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: node-sysctls
+        app: node-sysctls-${name}
     spec:
       serviceAccountName: default
       hostPID: true
@@ -27,6 +20,17 @@ spec:
       nodeSelector:
 %{ for key, value in node_selector ~}
         ${key}: ${value}
+%{ endfor ~}
+%{ endif ~}
+%{ if length(tolerations) > 0 ~}
+      tolerations:
+%{ for toleration in tolerations ~}
+        - key: ${toleration.key}
+          operator: ${toleration.operator}
+%{ if toleration.operator == "Equal" ~}
+          value: "${toleration.value}"
+%{ endif ~}
+          effect: ${toleration.effect}
 %{ endfor ~}
 %{ endif ~}
       containers:
@@ -37,7 +41,9 @@ spec:
             - sh
             - -c
             - |
-              sysctl -w vm.max_map_count=${vm_max_map_count}
+%{ for key, value in sysctls ~}
+              sysctl -w ${key}=${value}
+%{ endfor ~}
               while true; do sleep 3600; done
           securityContext:
             privileged: true

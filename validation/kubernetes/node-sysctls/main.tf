@@ -44,7 +44,7 @@ module "node_sysctls" {
       name = "gpu"
       sysctls = {
         "kernel.numa_balancing" = "0"
-        "vm.swappiness"        = "0"
+        "vm.swappiness"         = "0"
       }
       node_selector = {
         "accelerator" = "nvidia"

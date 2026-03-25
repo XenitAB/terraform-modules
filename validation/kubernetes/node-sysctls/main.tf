@@ -41,22 +41,62 @@ module "node_sysctls" {
       ]
     },
     {
-      profile_name = "gpu"
+      profile_name = "gpu-llm"
       sysctls = {
         "kernel.numa_balancing" = "0"
         "vm.swappiness"         = "0"
       }
       node_selector = {
-        "accelerator" = "nvidia" # could be `"workload" = "gpu"´ as well, but this is just an example of the possibilities
+        "accelerator" = "nvidia" # could be `"workload" = "gpu-llm"´ as well, but this is just an example of the possibilities
       }
       tolerations = [
         {
-          key      = "nvidia.com/gpu" # could be `key = "workload"´ and `value = "gpu"´ as well, but this is just an example of the possibilities
+          key      = "nvidia.com/gpu" # could be `key = "workload"´ and `value = "gpu-llm"´ as well, but this is just an example of the possibilities
           operator = "Exists"
           effect   = "NoSchedule"
         }
       ]
     },
+    {
+  profile_name = "gpu-hpc"
+      sysctls = {
+        "kernel.numa_balancing" = "0"
+        "vm.zone_reclaim_mode"  = "0"
+        "vm.swappiness"         = "1"
+      }
+  node_selector = {
+    "workload" = "gpu-hpc"
+  }
+  tolerations = [
+    {
+      key      = "workload"
+      operator = "Equal"
+      value    = "gpu-hpc"
+      effect   = "NoSchedule"
+    }
+  ]
+},
+    {
+  profile_name = "cpu-hpc"
+      sysctls = {
+        "kernel.numa_balancing" = "0"
+        "vm.zone_reclaim_mode"  = "0"
+        "vm.swappiness"         = "1"
+        "vm.dirty_ratio"        = "10"
+        "vm.dirty_background_ratio" = "5"
+      }
+  node_selector = {
+    "workload" = "cpu-hpc"
+  }
+  tolerations = [
+    {
+      key      = "workload"
+      operator = "Equal"
+      value    = "cpu-hpc"
+      effect   = "NoSchedule"
+    }
+  ]
+},
     {
       profile_name = "network-intensive"
       sysctls = {

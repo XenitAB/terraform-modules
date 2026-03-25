@@ -47,11 +47,11 @@ module "node_sysctls" {
         "vm.swappiness"         = "0"
       }
       node_selector = {
-        "accelerator" = "nvidia"
+        "accelerator" = "nvidia" # could be `"workload" = "gpu"´ as well, but this is just an example of the possibilities
       }
       tolerations = [
         {
-          key      = "nvidia.com/gpu"
+          key      = "nvidia.com/gpu" # could be `key = "workload"´ and `value = "gpu"´ as well, but this is just an example of the possibilities
           operator = "Exists"
           effect   = "NoSchedule"
         }

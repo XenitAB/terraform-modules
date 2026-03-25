@@ -58,45 +58,53 @@ module "node_sysctls" {
       ]
     },
     {
-  profile_name = "gpu-hpc"
+      profile_name = "gpu-hpc"
       sysctls = {
         "kernel.numa_balancing" = "0"
         "vm.zone_reclaim_mode"  = "0"
         "vm.swappiness"         = "1"
       }
-  node_selector = {
-    "workload" = "gpu-hpc"
-  }
-  tolerations = [
-    {
-      key      = "workload"
-      operator = "Equal"
-      value    = "gpu-hpc"
-      effect   = "NoSchedule"
-    }
-  ]
-},
-    {
-  profile_name = "cpu-hpc"
-      sysctls = {
-        "kernel.numa_balancing" = "0"
-        "vm.zone_reclaim_mode"  = "0"
-        "vm.swappiness"         = "1"
-        "vm.dirty_ratio"        = "10"
-        "vm.dirty_background_ratio" = "5"
+      node_selector = {
+        "workload" = "gpu-hpc"
       }
-  node_selector = {
-    "workload" = "cpu-hpc"
-  }
-  tolerations = [
+      tolerations = [
+        {
+          key      = "workload"
+          operator = "Equal"
+          value    = "gpu-hpc"
+          effect   = "NoSchedule"
+        }
+      ]
+    },
     {
-      key      = "workload"
-      operator = "Equal"
-      value    = "cpu-hpc"
-      effect   = "NoSchedule"
-    }
-  ]
-},
+      profile_name = "cpu-hpc"
+      sysctls = {
+        "kernel.numa_balancing"           = "0"
+        "kernel.sched_migration_cost_ns"  = "5000000"
+        "kernel.sched_autogroup_enabled"  = "0"
+        "vm.zone_reclaim_mode"            = "0"
+        "vm.swappiness"                   = "1"
+        "vm.dirty_ratio"                  = "10"
+        "vm.dirty_background_ratio"       = "5"
+        "fs.file-max"                     = "2097152"
+        "net.core.rmem_max"               = "134217728"
+        "net.core.wmem_max"               = "134217728"
+        "net.core.netdev_max_backlog"     = "250000"
+        "net.ipv4.tcp_rmem"               = "4096 87380 134217728"
+        "net.ipv4.tcp_wmem"               = "4096 65536 134217728"
+      }
+      node_selector = {
+        "workload" = "cpu-hpc"
+      }
+      tolerations = [
+        {
+          key      = "workload"
+          operator = "Equal"
+          value    = "cpu-hpc"
+          effect   = "NoSchedule"
+        }
+      ]
+    },
     {
       profile_name = "network-intensive"
       sysctls = {

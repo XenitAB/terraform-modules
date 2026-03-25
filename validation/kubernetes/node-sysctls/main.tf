@@ -41,19 +41,19 @@ module "node_sysctls" {
       ]
     },
     {
-      profile_name = "gpu-llm"
+      profile_name = "gpu-llm"          # example profile name, could be `gpu-llm` or `gpu-ai` or something else, but this is just an example of the possibilities
       sysctls = {
-        "kernel.numa_balancing" = "0"
-        "vm.swappiness"         = "0"
+        "kernel.numa_balancing" = "0"   # example setting to handle numa balancing for GPU workloads, could be "1" as well depending on the workload requirements, but this is just an example of the possibilities
+        "vm.swappiness"         = "0"   # example setting to minimize swapping for GPU workloads, could be "1" as well depending on the workload requirements, but this is just an example of the possibilities
       }
       node_selector = {
-        "accelerator" = "nvidia" # could be `"workload" = "gpu-llm"´ as well, but this is just an example of the possibilities
+        "accelerator" = "nvidia"        # could be `"workload" = "gpu-llm"´ as well, but this is just an example of the possibilities
       }
       tolerations = [
         {
-          key      = "nvidia.com/gpu" # could be `key = "workload"´ and `value = "gpu-llm"´ as well, but this is just an example of the possibilities
-          operator = "Exists"
-          effect   = "NoSchedule"
+          key      = "nvidia.com/gpu"   # could be `key = "workload"´ and `value = "gpu-llm"´ as well, but this is just an example of the possibilities
+          operator = "Exists"           # should be "Equal" normally to match architectural pattern (value not removed), but this is just an example of the possibilities
+          effect   = "NoSchedule"       # should be "NoSchedule" normally to match architectural pattern (value not removed & pod have matching toleration), but this is just an example of the possibilities
         }
       ]
     },

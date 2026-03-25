@@ -659,7 +659,7 @@ variable "platform_config" {
 variable "node_sysctls_config" {
   description = "List of sysctl profiles to apply on cluster nodes. Each profile creates a DaemonSet that sets the specified sysctl parameters on nodes matching the node selector and tolerations."
   type = list(object({
-    name          = string
+    profile_name  = string
     sysctls       = map(string)
     node_selector = optional(map(string), {})
     tolerations = optional(list(object({
@@ -681,7 +681,7 @@ variable "node_sysctls_config" {
   }
 
   validation {
-    condition     = length(var.node_sysctls_config) == length(distinct([for p in var.node_sysctls_config : p.name]))
+    condition     = length(var.node_sysctls_config) == length(distinct([for p in var.node_sysctls_config : p.profile_name]))
     error_message = "All node_sysctls_config profile names must be unique."
   }
 }

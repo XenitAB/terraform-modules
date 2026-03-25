@@ -24,7 +24,7 @@ module "node_sysctls" {
 
   node_sysctls_config = [
     {
-      name = "elasticsearch"
+      profile_name = "elasticsearch"
       sysctls = {
         "vm.max_map_count" = "262144"
       }
@@ -41,7 +41,7 @@ module "node_sysctls" {
       ]
     },
     {
-      name = "gpu"
+      profile_name = "gpu"
       sysctls = {
         "kernel.numa_balancing" = "0"
         "vm.swappiness"         = "0"
@@ -58,7 +58,7 @@ module "node_sysctls" {
       ]
     },
     {
-      name = "network-intensive"
+      profile_name = "network-intensive"
       sysctls = {
         "net.core.somaxconn"           = "65535"
         "net.ipv4.tcp_max_syn_backlog" = "65535"

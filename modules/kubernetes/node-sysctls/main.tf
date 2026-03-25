@@ -43,13 +43,13 @@ resource "git_repository_file" "node_sysctls_namespace" {
 resource "git_repository_file" "node_sysctls_manifest" {
   for_each = {
     for profile in var.node_sysctls_config :
-    profile.name => profile
+    profile.profile_name => profile
   }
 
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/node-sysctls/manifests/node-sysctls-${each.key}.yaml"
 
   content = templatefile("${path.module}/templates/node-sysctls-manifest.yaml.tpl", {
-    name          = each.value.name
+    name          = each.value.profile_name
     sysctls       = each.value.sysctls
     node_selector = each.value.node_selector
     tolerations   = each.value.tolerations

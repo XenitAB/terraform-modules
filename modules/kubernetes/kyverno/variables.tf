@@ -1,0 +1,98 @@
+variable "aad_groups" {
+  description = "Configuration for Azure AD Groups (AAD Groups)"
+  type = list(object({
+    namespace = string
+    id        = string
+    name      = string
+  }))
+}
+
+variable "cluster_id" {
+  description = "Unique identifier of the cluster across regions and instances."
+  type        = string
+}
+
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
+
+variable "fleet_infra_config" {
+  description = "Fleet infra configuration"
+  type = object({
+    git_repo_url        = string
+    argocd_project_name = string
+    k8s_api_server_url  = string
+  })
+}
+
+variable "global_resource_group_name" {
+  description = "The Azure global resource group name"
+  type        = string
+}
+
+variable "location" {
+  description = "The Azure region name."
+  type        = string
+}
+
+variable "location_short" {
+  description = "The Azure region short name."
+  type        = string
+}
+
+variable "namespaces" {
+  description = "The namespaces that should be created in Kubernetes."
+  type = list(
+    object({
+      name   = string
+      labels = map(string)
+      flux = optional(object({
+        provider            = string
+        project             = optional(string)
+        repository          = string
+        include_tenant_name = optional(bool, false)
+        create_crds         = optional(bool, false)
+      }))
+    })
+  )
+}
+
+variable "oidc_issuer_url" {
+  description = "Kubernetes OIDC issuer URL for workload identity."
+  type        = string
+}
+
+variable "rbac_create" {
+  description = "If role assignments should be created for the hosted zones"
+  type        = bool
+  default     = true
+}
+
+variable "resource_group_name" {
+  description = "The Azure resource group name"
+  type        = string
+}
+
+variable "subscription_id" {
+  description = "The Azure subscription id"
+  type        = string
+}
+
+variable "tenant_name" {
+  description = "The name of the tenant"
+  type        = string
+}
+
+variable "kyverno_config" {
+  description = "Kyverno configuration"
+  type = object({
+    admission_controller_replicas  = optional(number, 3)
+    background_controller_replicas = optional(number, 2)
+    cleanup_controller_replicas    = optional(number, 2)
+    reports_controller_replicas    = optional(number, 2)
+  })
+  default = {}
+}
+

@@ -55,6 +55,6 @@ spec:
           excludeGroups:
             - system:nodes
           excludeNamespaces:
-          %{ for ns in exclude_namespaces ~}
-        - ${ns}
-          %{ endfor }
+            %{ for ns in exclude_namespaces ~}
+  - ${ns}
+            %{ endfor }

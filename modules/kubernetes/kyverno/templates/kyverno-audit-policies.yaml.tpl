@@ -23,17 +23,9 @@ spec:
       any:
       - resources:
           namespaces:
-          - "kube-system"
-          - "reloader"
-          - "falco"
-          - "flux-system"
-          - "spegel"
-          - "trivy"
-          - "gatekeeper-system"
-          - "kyverno"
-          - "vpa"
-          - "external-dns"
-          - "cert-manager"
+          %{ for ns in exclude_namespaces ~}
+  - ${ns}
+          %{ endfor }
     validate:
       message: "Containers should have readiness probes configured"
       pattern:
@@ -175,7 +167,9 @@ spec:
         any:
         - resources:
             namespaces:
-            - "kube-system"
+            %{ for ns in exclude_namespaces ~}
+  - ${ns}
+            %{ endfor }
       context:
         - name: deployment
           apiCall:

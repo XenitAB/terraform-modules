@@ -24,23 +24,9 @@ spec:
       any:
       - resources:
           namespaces:
-          - "kube-system"
-          - "reloader"
-          - "falco"
-          - "flux-system"
-          - "spegel"
-          - "gatekeeper-system"
-          - "kyverno"
-          - "flux-system"
-          - "cert-manager"
-          - "datadog"
-          - "linkerd"
-          - "external-dns"
-          - "falco"
-          - "trivy"
-          - "vpa"
-          - "kube-node-lease"
-          - "kube-public"
+          %{ for ns in exclude_namespaces ~}
+  - ${ns}
+          %{ endfor }
     validate:
       message: "Services of type NodePort are not allowed"
       pattern:
@@ -100,23 +86,9 @@ spec:
       any:
       - resources:
           namespaces:
-          - "kube-system"
-          - "reloader"
-          - "falco"
-          - "flux-system"
-          - "spegel"
-          - "gatekeeper-system"
-          - "kyverno"
-          - "flux-system"
-          - "cert-manager"
-          - "datadog"
-          - "linkerd"
-          - "external-dns"
-          - "falco"
-          - "trivy"
-          - "vpa"
-          - "kube-node-lease"
-          - "kube-public"
+          %{ for ns in exclude_namespaces ~}
+  - ${ns}
+          %{ endfor }
     validate:
       message: "Privileged containers are not allowed"
       pattern:
@@ -162,24 +134,9 @@ spec:
       any:
       - resources:
           namespaces:
-          - "kube-system"
-          - "reloader"
-          - "falco"
-          - "flux-system"
-          - "spegel"
-          - "gatekeeper-system"
-          - "kyverno"
-          - "flux-system"
-          - "cert-manager"
-          - "datadog"
-          - "prometheus"
-          - "linkerd"
-          - "external-dns"
-          - "falco"
-          - "trivy"
-          - "vpa"
-          - "kube-node-lease"
-          - "kube-public"
+          %{ for ns in exclude_namespaces ~}
+  - ${ns}
+          %{ endfor }
     validate:
       message: "Sharing the host namespaces is disallowed"
       pattern:
@@ -213,24 +170,9 @@ spec:
       any:
       - resources:
           namespaces:
-          - "kube-system"
-          - "reloader"
-          - "falco"
-          - "flux-system"
-          - "spegel"
-          - "gatekeeper-system"
-          - "kyverno"
-          - "flux-system"
-          - "cert-manager"
-          - "datadog"
-          - "prometheus"
-          - "linkerd"
-          - "external-dns"
-          - "falco"
-          - "trivy"
-          - "vpa"
-          - "kube-node-lease"
-          - "kube-public"
+          %{ for ns in exclude_namespaces ~}
+  - ${ns}
+          %{ endfor }
     validate:
       message: "Host networking is not allowed"
       pattern:
@@ -262,24 +204,9 @@ spec:
       any:
       - resources:
           namespaces:
-          - "kube-system"
-          - "reloader"
-          - "falco"
-          - "flux-system"
-          - "spegel"
-          - "gatekeeper-system"
-          - "kyverno"
-          - "flux-system"
-          - "cert-manager"
-          - "datadog"
-          - "prometheus"
-          - "linkerd"
-          - "external-dns"
-          - "falco"
-          - "trivy"
-          - "vpa"
-          - "kube-node-lease"
-          - "kube-public"
+          %{ for ns in exclude_namespaces ~}
+  - ${ns}
+          %{ endfor }
     validate:
       message: "Changing the proc mount from the default is not allowed"
       pattern:
@@ -324,24 +251,9 @@ spec:
       any:
       - resources:
           namespaces:
-          - "kube-system"
-          - "reloader"
-          - "falco"
-          - "flux-system"
-          - "spegel"
-          - "gatekeeper-system"
-          - "kyverno"
-          - "flux-system"
-          - "cert-manager"
-          - "datadog"
-          - "prometheus"
-          - "linkerd"
-          - "external-dns"
-          - "falco"
-          - "trivy"
-          - "vpa"
-          - "kube-node-lease"
-          - "kube-public"
+          %{ for ns in exclude_namespaces ~}
+  - ${ns}
+          %{ endfor }
     validate:
       message: "Volume type is not allowed. Only configMap, downwardAPI, emptyDir, persistentVolumeClaim, secret, projected, and csi volumes are permitted."
       deny:
@@ -482,24 +394,9 @@ spec:
       any:
       - resources:
           namespaces:
-          - "kube-system"
-          - "reloader"
-          - "falco"
-          - "flux-system"
-          - "spegel"
-          - "gatekeeper-system"
-          - "kyverno"
-          - "flux-system"
-          - "cert-manager"
-          - "datadog"
-          - "prometheus"
-          - "linkerd"
-          - "external-dns"
-          - "falco"
-          - "trivy"
-          - "vpa"
-          - "kube-node-lease"
-          - "kube-public"
+          %{ for ns in exclude_namespaces ~}
+  - ${ns}
+          %{ endfor }
     validate:
       message: "Pod must specify a priorityClassName from the allowed list"
       anyPattern:
@@ -546,23 +443,10 @@ spec:
       exclude:
         any:
         - resources:
-              namespaces:
-              - "argocd"
-              - "reloader"
-              - "kube-system"
-              - "gatekeeper-system"
-              - "spegel"
-              - "kyverno"
-              - "flux-system"
-              - "cert-manager"
-              - "datadog"
-              - "linkerd"
-              - "external-dns"
-              - "falco"
-              - "trivy"
-              - "vpa"
-              - "kube-node-lease"
-              - "kube-public"
+            namespaces:
+            %{ for ns in exclude_namespaces ~}
+  - ${ns}
+            %{ endfor }
       validate:
         message: >
           Running as root, allowing privilege escalation, running privileged

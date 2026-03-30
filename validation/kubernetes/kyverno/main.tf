@@ -1,8 +1,8 @@
 terraform {}
 
 module "kyverno" {
-  source     = "../../../modules/kubernetes/kyverno"
-  cluster_id = "foobar"
+  source      = "../../../modules/kubernetes/kyverno"
+  cluster_id  = "foobar"
   tenant_name = "foo"
   environment = "dev"
   fleet_infra_config = {

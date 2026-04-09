@@ -47,7 +47,7 @@ module "node_sysctls" {
         "vm.swappiness"         = "0" # example setting to minimize swapping for GPU workloads, could be "1" as well depending on the workload requirements, but this is just an example of the possibilities
       }
       node_selector = {
-        "accelerator" = "nvidia" # could be `"workload" = "gpu-llm"` as well, but this is just an example of the possibilities
+        "accelerator" = "nvidia" # could be ´"workload" = "gpu-llm"´ as well, but this is just an example of the possibilities
       }
       tolerations = [
         {

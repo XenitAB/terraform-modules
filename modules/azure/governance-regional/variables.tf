@@ -36,6 +36,7 @@ variable "resource_group_configs" {
       disable_unique_suffix              = bool # Disable unique_suffix on resource names
       key_vault_purge_protection_enabled = optional(bool, false)
       tags                               = map(string)
+      rbac_authorization_enabled_kv      = optional(bool, true)
     })
   )
 }

@@ -347,6 +347,14 @@ variable "gatekeeper_config" {
   }
 }
 
+variable "kyverno_config" {
+  description = "Configuration for Kyverno"
+  type = object({
+    exclude_namespaces = optional(list(string), [])
+  })
+  default = {}
+}
+
 variable "gateway_api_config" {
   description = "The Gateway API configuration"
   type = object({
@@ -636,6 +644,7 @@ variable "platform_config" {
     grafana_k8s_monitoring_billable_enabled = optional(bool, false)
     ingress_nginx_enabled                   = optional(bool, true)
     karpenter_enabled                       = optional(bool, false)
+    kyverno_enabled                         = optional(bool, false)
     linkerd_enabled                         = optional(bool, false)
     litmus_enabled                          = optional(bool, false)
     mirrord_enabled                         = optional(bool, false)

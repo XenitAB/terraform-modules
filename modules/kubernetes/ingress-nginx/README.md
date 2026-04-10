@@ -5,14 +5,14 @@ This module is used to add [`ingress-nginx`](https://github.com/kubernetes/ingre
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
 ## Modules
@@ -22,7 +22,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [git_repository_file.ingress_nginx](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.ingress_nginx_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.ingress_nginx_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
@@ -34,7 +34,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aad_groups"></a> [aad\_groups](#input\_aad\_groups) | Configuration for Azure AD Groups (AAD Groups) | <pre>list(object({<br/>    namespace = string<br/>    id        = string<br/>    name      = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_customization"></a> [customization](#input\_customization) | Global customization that will be applied to all ingress controllers. | <pre>object({<br/>    allow_snippet_annotations = bool<br/>    http_snippet              = string<br/>    extra_config              = map(string)<br/>    extra_headers             = map(string)<br/>  })</pre> | <pre>{<br/>  "allow_snippet_annotations": false,<br/>  "extra_config": {},<br/>  "extra_headers": {},<br/>  "http_snippet": ""<br/>}</pre> | no |

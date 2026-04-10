@@ -12,7 +12,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.57.0 |
@@ -21,20 +21,20 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.57.0 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_automation"></a> [automation](#module\_automation) | ./automation | n/a |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azuread_group_member.aks_cluster_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
 | [azuread_group_member.aks_managed_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
 | [azuread_group_member.tenant](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
@@ -78,7 +78,7 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aad_groups"></a> [aad\_groups](#input\_aad\_groups) | Configuration for Azure AD Groups (AAD Groups) | <pre>object({<br/>    view = map(any)<br/>    edit = map(any)<br/>    cluster_admin = object({<br/>      id   = string<br/>      name = string<br/>    })<br/>    cluster_view = object({<br/>      id   = string<br/>      name = string<br/>    })<br/>    aks_managed_identity = object({<br/>      id   = string<br/>      name = string<br/>    })<br/>  })</pre> | n/a | yes |
 | <a name="input_add_default_security_lb_rule"></a> [add\_default\_security\_lb\_rule](#input\_add\_default\_security\_lb\_rule) | Should default LB rule (allow internat to azure lb ips) be applied to NSG? | `bool` | `false` | no |
 | <a name="input_additonal_security_rules"></a> [additonal\_security\_rules](#input\_additonal\_security\_rules) | Rules for trafic in the NSG associated to AKS | <pre>list(object({<br/>    name                       = string<br/>    priority                   = number<br/>    direction                  = string<br/>    access                     = string<br/>    protocol                   = string<br/>    source_port_range          = string<br/>    destination_port_range     = string<br/>    source_address_prefix      = string<br/>    destination_address_prefix = string<br/>  }))</pre> | `[]` | no |
@@ -122,5 +122,5 @@ https://pumpingco.de/blog/modify-aks-default-node-pool-in-terraform-without-rede
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_kube_config"></a> [kube\_config](#output\_kube\_config) | Kube config for the created AKS cluster |

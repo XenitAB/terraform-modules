@@ -6,7 +6,7 @@ We are using: https://github.com/webdevops/azure-metrics-exporter to gather the 
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.57.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
@@ -14,7 +14,7 @@ We are using: https://github.com/webdevops/azure-metrics-exporter to gather the 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.57.0 |
 | <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
@@ -25,7 +25,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_federated_identity_credential.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/federated_identity_credential) | resource |
 | [azurerm_role_assignment.azure_metrics](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.azure_metrics_aks_reader](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/role_assignment) | resource |
@@ -36,7 +36,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aks_managed_identity"></a> [aks\_managed\_identity](#input\_aks\_managed\_identity) | AKS Azure AD managed identity | `string` | n/a | yes |
 | <a name="input_aks_name"></a> [aks\_name](#input\_aks\_name) | The commonName to use for the deploy | `string` | n/a | yes |
 | <a name="input_aks_name_suffix"></a> [aks\_name\_suffix](#input\_aks\_name\_suffix) | The suffix for the aks clusters | `number` | n/a | yes |

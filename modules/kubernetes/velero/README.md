@@ -5,7 +5,7 @@ This module is used to add [`velero`](https://github.com/vmware-tanzu/velero) to
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
@@ -13,7 +13,7 @@ This module is used to add [`velero`](https://github.com/vmware-tanzu/velero) to
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
 | <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
@@ -24,7 +24,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_federated_identity_credential.velero](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/federated_identity_credential) | resource |
 | [azurerm_role_assignment.external_storage_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.velero_msi](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/role_assignment) | resource |
@@ -43,7 +43,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aks_managed_identity"></a> [aks\_managed\_identity](#input\_aks\_managed\_identity) | AKS Azure AD managed identity | `string` | n/a | yes |
 | <a name="input_azure_config"></a> [azure\_config](#input\_azure\_config) | Azure specific configuration | <pre>object({<br/>    storage_account_name      = string,<br/>    storage_account_container = string<br/>  })</pre> | <pre>{<br/>  "storage_account_container": "",<br/>  "storage_account_name": ""<br/>}</pre> | no |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
@@ -59,5 +59,5 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_velero"></a> [velero](#output\_velero) | Velero configuration |

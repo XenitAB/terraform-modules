@@ -5,7 +5,7 @@ Adds [Grafana Alloy](https://github.com/grafana/alloy/tree/main/operations/helm)
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
@@ -13,7 +13,7 @@ Adds [Grafana Alloy](https://github.com/grafana/alloy/tree/main/operations/helm)
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
 | <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
@@ -24,7 +24,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_federated_identity_credential.grafana_alloy](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/federated_identity_credential) | resource |
 | [git_repository_file.grafana_alloy](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.grafana_alloy_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
@@ -37,7 +37,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aks_name"></a> [aks\_name](#input\_aks\_name) | The AKS cluster short name, e.g. 'aks'. | `string` | n/a | yes |
 | <a name="input_azure_config"></a> [azure\_config](#input\_azure\_config) | Azure specific configuration | <pre>object({<br/>    azure_key_vault_name = string<br/>    keyvault_secret_name = string<br/>  })</pre> | <pre>{<br/>  "azure_key_vault_name": "",<br/>  "keyvault_secret_name": ""<br/>}</pre> | no |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |

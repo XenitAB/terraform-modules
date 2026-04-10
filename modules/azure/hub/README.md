@@ -9,7 +9,7 @@ Use together with the `core` module to create a peered network where SPOF (singl
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
@@ -17,7 +17,7 @@ Use together with the `core` module to create a peered network where SPOF (singl
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
 
@@ -28,7 +28,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_nat_gateway.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/nat_gateway) | resource |
 | [azurerm_nat_gateway_public_ip_prefix_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/nat_gateway_public_ip_prefix_association) | resource |
 | [azurerm_network_security_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/network_security_group) | resource |
@@ -46,7 +46,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
 | <a name="input_azure_role_definition_prefix"></a> [azure\_role\_definition\_prefix](#input\_azure\_role\_definition\_prefix) | Prefix for Azure Role Definition names | `string` | `"role"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment (short name) to use for the deploy | `string` | n/a | yes |
@@ -61,7 +61,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_public_ip_prefixes"></a> [public\_ip\_prefixes](#output\_public\_ip\_prefixes) | Public IP prefix information |
 | <a name="output_resource_groups"></a> [resource\_groups](#output\_resource\_groups) | Resource group information |
 | <a name="output_subnets"></a> [subnets](#output\_subnets) | Subnet information |

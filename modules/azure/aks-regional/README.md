@@ -5,7 +5,7 @@ This module is used to create resources that are used by AKS clusters.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
@@ -15,7 +15,7 @@ This module is used to create resources that are used by AKS clusters.
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
@@ -27,7 +27,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azuread_group_member.aad_pod_identity](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/group_member) | resource |
 | [azurerm_eventhub.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/eventhub) | resource |
 | [azurerm_eventhub_namespace.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/eventhub_namespace) | resource |
@@ -53,7 +53,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aks_authorized_ips"></a> [aks\_authorized\_ips](#input\_aks\_authorized\_ips) | Authorized IPs to access AKS API | `list(string)` | n/a | yes |
 | <a name="input_aks_managed_identity"></a> [aks\_managed\_identity](#input\_aks\_managed\_identity) | AKS Azure AD managed identity | `string` | n/a | yes |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
@@ -72,7 +72,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_aad_pod_identity"></a> [aad\_pod\_identity](#output\_aad\_pod\_identity) | aad-pod-identity user assigned identities |
 | <a name="output_aks_authorized_ips"></a> [aks\_authorized\_ips](#output\_aks\_authorized\_ips) | IP addresses authorized for API communication to Azure Kubernetes Service |
 | <a name="output_aks_managed_identity_group_id"></a> [aks\_managed\_identity\_group\_id](#output\_aks\_managed\_identity\_group\_id) | The group id of aks managed identity |

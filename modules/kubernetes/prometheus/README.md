@@ -5,7 +5,7 @@ Adds [Prometheus](https://github.com/prometheus-community/helm-charts/tree/main/
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
@@ -13,7 +13,7 @@ Adds [Prometheus](https://github.com/prometheus-community/helm-charts/tree/main/
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
 | <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
@@ -24,7 +24,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_federated_identity_credential.prometheus](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/federated_identity_credential) | resource |
 | [git_repository_file.monitors](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.prometheus](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
@@ -40,7 +40,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aad_pod_identity_enabled"></a> [aad\_pod\_identity\_enabled](#input\_aad\_pod\_identity\_enabled) | Should aad pod dentity be enabled | `bool` | `false` | no |
 | <a name="input_aks_name"></a> [aks\_name](#input\_aks\_name) | The AKS cluster short name, e.g. 'aks'. | `string` | n/a | yes |
 | <a name="input_azad_kube_proxy_enabled"></a> [azad\_kube\_proxy\_enabled](#input\_azad\_kube\_proxy\_enabled) | Should azad-kube-proxy be enabled | `bool` | `false` | no |

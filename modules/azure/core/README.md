@@ -7,7 +7,7 @@ Easiest is to define this RG in the governance module.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
 | <a name="requirement_azurecaf"></a> [azurecaf](#requirement\_azurecaf) | 2.0.0-preview3 |
@@ -16,7 +16,7 @@ Easiest is to define this RG in the governance module.
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
 | <a name="provider_azurecaf"></a> [azurecaf](#provider\_azurecaf) | 2.0.0-preview3 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
@@ -24,13 +24,13 @@ Easiest is to define this RG in the governance module.
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_names"></a> [names](#module\_names) | ../names | n/a |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_monitor_action_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/monitor_action_group) | resource |
 | [azurerm_monitor_metric_alert.log](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/monitor_metric_alert) | resource |
 | [azurerm_network_security_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/network_security_group) | resource |
@@ -67,7 +67,7 @@ Easiest is to define this RG in the governance module.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_alerts_enabled"></a> [alerts\_enabled](#input\_alerts\_enabled) | Should alert rules be created by default | `bool` | `false` | no |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
 | <a name="input_azure_role_definition_prefix"></a> [azure\_role\_definition\_prefix](#input\_azure\_role\_definition\_prefix) | Prefix for Azure Role Definition names | `string` | `"role"` | no |
@@ -88,7 +88,7 @@ Easiest is to define this RG in the governance module.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_network_security_groups"></a> [network\_security\_groups](#output\_network\_security\_groups) | Output for Azure Network Security Groups |
 | <a name="output_route_tables"></a> [route\_tables](#output\_route\_tables) | Output for Azure Routing Tables |
 | <a name="output_subnets"></a> [subnets](#output\_subnets) | Output for Azure Virtual Network Subnets |

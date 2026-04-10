@@ -1,7 +1,7 @@
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
@@ -9,7 +9,7 @@
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
 
@@ -20,7 +20,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/container_registry) | resource |
 | [azurerm_container_registry_task.acr_purge_task](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/container_registry_task) | resource |
 | [azurerm_dns_zone.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/dns_zone) | resource |
@@ -37,7 +37,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_acr_admin_enabled"></a> [acr\_admin\_enabled](#input\_acr\_admin\_enabled) | If ACR admin account should be enabled | `bool` | `false` | no |
 | <a name="input_acr_name_override"></a> [acr\_name\_override](#input\_acr\_name\_override) | Override default name of ACR | `string` | `""` | no |
 | <a name="input_aks_group_name_prefix"></a> [aks\_group\_name\_prefix](#input\_aks\_group\_name\_prefix) | Prefix for AKS Azure AD groups | `string` | `"aks"` | no |

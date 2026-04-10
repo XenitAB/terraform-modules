@@ -9,7 +9,7 @@ Follow this guide to setup the agent pool (manually): https://docs.microsoft.com
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.4 |
@@ -17,7 +17,7 @@ Follow this guide to setup the agent pool (manually): https://docs.microsoft.com
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
 
@@ -28,7 +28,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_key_vault_secret.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_linux_virtual_machine_scale_set.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/linux_virtual_machine_scale_set) | resource |
 | [tls_private_key.this](https://registry.terraform.io/providers/hashicorp/tls/4.0.4/docs/resources/private_key) | resource |
@@ -38,7 +38,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_keyvault_name"></a> [keyvault\_name](#input\_keyvault\_name) | The keyvault name | `string` | `""` | no |
 | <a name="input_keyvault_resource_group_name"></a> [keyvault\_resource\_group\_name](#input\_keyvault\_resource\_group\_name) | The keyvault resource group name | `string` | `""` | no |

@@ -6,14 +6,14 @@ Adds [`grafana-agent`](https://grafana.com/docs/agent/latest/) (the operator) am
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
 
 ## Modules
@@ -23,7 +23,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [git_repository_file.grafana_agent](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.grafana_agent_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.grafana_agent_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
@@ -35,7 +35,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | the cluster name | `string` | n/a | yes |
 | <a name="input_credentials"></a> [credentials](#input\_credentials) | grafana-agent credentials | <pre>object({<br/>    metrics_username = string<br/>    metrics_password = string<br/>    logs_username    = string<br/>    logs_password    = string<br/>    traces_username  = string<br/>    traces_password  = string<br/>  })</pre> | n/a | yes |

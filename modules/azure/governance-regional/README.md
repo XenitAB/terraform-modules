@@ -5,7 +5,7 @@ This module is used for governance on a regional level and not using any specifi
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
 | <a name="requirement_azurecaf"></a> [azurecaf](#requirement\_azurecaf) | 2.0.0-preview3 |
@@ -16,7 +16,7 @@ This module is used for governance on a regional level and not using any specifi
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
 | <a name="provider_azurecaf"></a> [azurecaf](#provider\_azurecaf) | 2.0.0-preview3 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
@@ -24,13 +24,13 @@ This module is used for governance on a regional level and not using any specifi
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_names"></a> [names](#module\_names) | ../names | n/a |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azuread_application_password.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application_password) | resource |
 | [azuread_application_password.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application_password) | resource |
 | [azurerm_key_vault.delegate_kv](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/key_vault) | resource |
@@ -58,7 +58,7 @@ This module is used for governance on a regional level and not using any specifi
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aad_sp_passwords"></a> [aad\_sp\_passwords](#input\_aad\_sp\_passwords) | Application password per resource group. | `map(string)` | n/a | yes |
 | <a name="input_azuread_apps"></a> [azuread\_apps](#input\_azuread\_apps) | Azure AD applications from global | <pre>object({<br/>    delegate_kv = map(object({<br/>      display_name                = string<br/>      application_object_id       = string<br/>      client_id                   = string<br/>      service_principal_object_id = string<br/>    }))<br/>    rg_contributor = map(object({<br/>      display_name                = string<br/>      application_object_id       = string<br/>      client_id                   = string<br/>      service_principal_object_id = string<br/>    }))<br/>    sub_reader = object({<br/>      display_name                = string<br/>      application_object_id       = string<br/>      client_id                   = string<br/>      service_principal_object_id = string<br/>    })<br/>  })</pre> | n/a | yes |
 | <a name="input_azuread_groups"></a> [azuread\_groups](#input\_azuread\_groups) | Azure AD groups from global | <pre>object({<br/>    rg_owner = map(object({<br/>      id = string<br/>    }))<br/>    rg_contributor = map(object({<br/>      id = string<br/>    }))<br/>    rg_reader = map(object({<br/>      id = string<br/>    }))<br/>    sub_owner = object({<br/>      id = string<br/>    })<br/>    sub_contributor = object({<br/>      id = string<br/>    })<br/>    sub_reader = object({<br/>      id = string<br/>    })<br/>    service_endpoint_join = object({<br/>      id = string<br/>    })<br/>  })</pre> | n/a | yes |
@@ -74,5 +74,5 @@ This module is used for governance on a regional level and not using any specifi
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_key_vault_name"></a> [key\_vault\_name](#output\_key\_vault\_name) | Output each keyvault name |

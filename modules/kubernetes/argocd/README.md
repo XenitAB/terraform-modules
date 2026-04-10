@@ -1,7 +1,7 @@
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.19.0 |
@@ -12,7 +12,7 @@
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.19.0 |
 | <a name="provider_git"></a> [git](#provider\_git) | >=0.0.4 |
@@ -26,7 +26,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azuread_application.dex](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application) | resource |
 | [azuread_application_password.dex](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application_password) | resource |
 | [azurerm_federated_identity_credential.argocd_application_controller](https://registry.terraform.io/providers/hashicorp/azurerm/4.19.0/docs/resources/federated_identity_credential) | resource |
@@ -52,7 +52,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aks_cluster_id"></a> [aks\_cluster\_id](#input\_aks\_cluster\_id) | AKS cluster id. | `string` | n/a | yes |
 | <a name="input_argocd_config"></a> [argocd\_config](#input\_argocd\_config) | ArgoCD configuration | <pre>object({<br/>    aad_group_name                  = optional(string, "az-sub-xks-all-owner")<br/>    cluster_role                    = optional(string, "Spoke")<br/>    application_set_replicas        = optional(number, 2)<br/>    controller_replicas             = optional(number, 3)<br/>    repo_server_replicas            = optional(number, 2)<br/>    server_replicas                 = optional(number, 2)<br/>    dynamic_sharding                = optional(bool, false)<br/>    controller_status_processors    = optional(number, 50)<br/>    controller_operation_processors = optional(number, 100)<br/>    argocd_k8s_client_qps           = optional(number, 150)<br/>    argocd_k8s_client_burst         = optional(number, 300)<br/>    redis_enabled                   = optional(bool, true)<br/>    global_domain                   = optional(string, "")<br/>    ingress_whitelist_ip            = optional(string, "")<br/>    dex_tenant_name                 = optional(string, "")<br/>    dex_redirect_domains            = optional(string, "")<br/>    oidc_issuer_url                 = optional(map(string), {})<br/>    sync_windows = optional(list(object({<br/>      kind        = string<br/>      schedule    = string<br/>      duration    = string<br/>      manual_sync = optional(bool, true)<br/>    })), [])<br/>    azure_tenants = optional(list(object({<br/>      tenant_name = string<br/>      tenant_id   = string<br/>      clusters = list(object({<br/>        name            = string<br/>        api_server      = string<br/>        environment     = string<br/>        azure_client_id = optional(string, "")<br/>        ca_data         = optional(string, "")<br/>        tenants = list(object({<br/>          # This will be used to only if cluster_role is set to 'Hub-Spoke' to create AppProject <br/>          # roles that limit access to the project, based on the AAD group we create for each <br/>          # tenant namespace.<br/>          aad_group   = optional(string, "")<br/>          name        = string<br/>          namespace   = string<br/>          repo_url    = string<br/>          repo_path   = string<br/>          secret_name = string<br/>        }))<br/>      }))<br/>    })), [])<br/>  })</pre> | `{}` | no |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |

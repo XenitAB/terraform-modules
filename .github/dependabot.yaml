@@ -5,10 +5,12 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "terraform"
-    directory: "/modules/azure"
+    directories:
+      - "**/*"
     schedule:
-      interval: "daily"
+      interval: "weekly"
   - package-ecosystem: "opentofu"
-    directory: "/modules/kubernetes/"
+    directories:
+      - "**/*"
     schedule:
-      interval: "daily"
+      interval: "weekly"

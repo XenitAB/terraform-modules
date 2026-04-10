@@ -7,8 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### 🚀 New Features
+- Feat: kyverno draft push a lot of needs to be fixed but i want to get it out … by @optocoupler in [#1438](https://github.com/XenitAB/terraform-modules/pulls/1438)
+- Feat: add healthz endpoint to envoy-gateway by @CalleB3 in [#1423](https://github.com/XenitAB/terraform-modules/pulls/1423)
+- Feat: created k8s_monitoring_billing for billing metrics by @yabracadabra in [#1419](https://github.com/XenitAB/terraform-modules/pulls/1419)
+
+
+
 ### 🐛 Bug Fixes
+- Fix: node-sysctl DaemonSet configuration for specific node-level conf by @yabracadabra in [#1436](https://github.com/XenitAB/terraform-modules/pulls/1436)
+- Fix: Envoy healthz by @optocoupler in [#1432](https://github.com/XenitAB/terraform-modules/pulls/1432)
+- Fix: add default gateway to envoy by @CalleB3 in [#1430](https://github.com/XenitAB/terraform-modules/pulls/1430)
+- Fix: add gateway api_groups for tenants access by @CalleB3 in [#1431](https://github.com/XenitAB/terraform-modules/pulls/1431)
 - Fix: add argocd ClientTrafficPolicy for hubs by @CalleB3 in [#1427](https://github.com/XenitAB/terraform-modules/pulls/1427)
+
+
+
+### ⚙️ Miscellaneous
+- Fix: update check action to terraform-docs by @yabracadabra in [#1439](https://github.com/XenitAB/terraform-modules/pulls/1439)
 
 
 

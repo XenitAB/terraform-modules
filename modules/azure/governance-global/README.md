@@ -5,7 +5,7 @@ This module is used for governance on a global level and not using any specific 
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.50.0 |
 | <a name="requirement_azurecaf"></a> [azurecaf](#requirement\_azurecaf) | 2.0.0-preview3 |
@@ -16,7 +16,7 @@ This module is used for governance on a global level and not using any specific 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.50.0 |
 | <a name="provider_azurecaf"></a> [azurecaf](#provider\_azurecaf) | 2.0.0-preview3 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.57.0 |
@@ -25,13 +25,13 @@ This module is used for governance on a global level and not using any specific 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_names"></a> [names](#module\_names) | ../names | n/a |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azuread_application.aad_app](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application) | resource |
 | [azuread_application.delegate_kv_aad](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application) | resource |
 | [azuread_application.sub_reader_sp](https://registry.terraform.io/providers/hashicorp/azuread/2.50.0/docs/resources/application) | resource |
@@ -97,7 +97,7 @@ This module is used for governance on a global level and not using any specific 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aks_group_name_prefix"></a> [aks\_group\_name\_prefix](#input\_aks\_group\_name\_prefix) | Prefix for AKS Azure AD groups | `string` | `"aks"` | no |
 | <a name="input_azure_ad_group_prefix"></a> [azure\_ad\_group\_prefix](#input\_azure\_ad\_group\_prefix) | Prefix for Azure AD Groups | `string` | `"az"` | no |
 | <a name="input_delegate_acr"></a> [delegate\_acr](#input\_delegate\_acr) | Should Azure Container Registry delegation be configured? | `bool` | `true` | no |
@@ -115,7 +115,7 @@ This module is used for governance on a global level and not using any specific 
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_aad_sp_passwords"></a> [aad\_sp\_passwords](#output\_aad\_sp\_passwords) | Application password per resource group. |
 | <a name="output_azuread_apps"></a> [azuread\_apps](#output\_azuread\_apps) | Output for Azure AD applications |
 | <a name="output_azuread_groups"></a> [azuread\_groups](#output\_azuread\_groups) | Output for Azure AD Groups |

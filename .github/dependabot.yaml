@@ -5,6 +5,12 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "terraform"
-    directory: "/"
+    directories:
+      - "**/*"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+  - package-ecosystem: "opentofu"
+    directories:
+      - "**/*"
+    schedule:
+      interval: "weekly"

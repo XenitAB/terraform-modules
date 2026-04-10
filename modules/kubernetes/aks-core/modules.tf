@@ -333,6 +333,24 @@ module "gatekeeper" {
   fleet_infra_config             = var.platform_config.fleet_infra_config
 }
 
+module "kyverno" {
+  for_each = {
+    for s in ["kyverno"] :
+    s => s
+    if var.platform_config.kyverno_enabled
+  }
+
+  source = "../../kubernetes/kyverno"
+
+  cluster_id         = local.cluster_id
+  tenant_name        = var.platform_config.tenant_name
+  environment        = var.environment
+  fleet_infra_config = var.platform_config.fleet_infra_config
+  kyverno_config = {
+    exclude_namespaces = var.kyverno_config.exclude_namespaces
+  }
+}
+
 module "gateway_api" {
   for_each = {
     for s in ["gateway-api"] :
@@ -574,6 +592,22 @@ module "node_ttl" {
   tenant_name                 = var.platform_config.tenant_name
   environment                 = var.environment
   fleet_infra_config          = var.platform_config.fleet_infra_config
+}
+
+module "node_sysctls" {
+  for_each = {
+    for s in ["node-sysctls"] :
+    s => s
+    if var.platform_config.node_sysctls_enabled
+  }
+
+  source = "../../kubernetes/node-sysctls"
+
+  cluster_id          = local.cluster_id
+  environment         = var.environment
+  fleet_infra_config  = var.platform_config.fleet_infra_config
+  node_sysctls_config = var.node_sysctls_config
+  tenant_name         = var.platform_config.tenant_name
 }
 
 module "popeye" {

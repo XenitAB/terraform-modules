@@ -151,7 +151,6 @@ module "aks_core" {
     envoy_gateway_enabled             = true
     external_secrets_operator_enabled = true
     gateway_api_enabled               = true
-    grafana_agent_enabled             = true
     grafana_alloy_enabled             = true
     grafana_k8s_monitoring_enabled    = true
     ingress_nginx_enabled             = true

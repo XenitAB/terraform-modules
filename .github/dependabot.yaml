@@ -6,11 +6,13 @@ updates:
       interval: "weekly"
   - package-ecosystem: "terraform"
     directories:
-      - "**/*"
+      - "/modules/*"
+      - "/validation/*"
     schedule:
       interval: "weekly"
   - package-ecosystem: "opentofu"
     directories:
-      - "**/*"
+      - "/modules/*"
+      - "/validation/*"
     schedule:
       interval: "weekly"

@@ -32,7 +32,7 @@ spec:
     - SkipHooks=true
   source:
     repoURL: docker.io/envoyproxy
-    targetRevision: 0.0.0-latest
+    targetRevision: 1.7.1@sha256:67c00488b14afe868028b63b5f745ef543e2445e9d56086af8f7e2d16fe581af
     chart: gateway-helm
     helm:
       valuesObject:

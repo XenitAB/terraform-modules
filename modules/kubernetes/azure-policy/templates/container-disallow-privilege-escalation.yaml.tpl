@@ -20,6 +20,7 @@ spec:
       - reloader
       - spegel
       - vpa
+      - node-sysctls
       %{ for ns in exclude_namespaces }
       - ${ns}
       %{ endfor }

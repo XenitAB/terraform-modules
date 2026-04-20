@@ -96,14 +96,14 @@ resource "azurerm_policy_definition" "k8s_block_node_port" {
         "type": "String",
         "metadata": {
           "displayName": "Effect",
-          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
+          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'Deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
         },
         "allowedValues": [
           "audit",
-          "deny",
+          "Deny",
           "disabled"
         ],
-        "defaultValue": "deny"
+        "defaultValue": "Deny"
       },
       "excludedNamespaces": {
         "type": "Array",
@@ -172,14 +172,14 @@ resource "azurerm_policy_definition" "k8s_secrets_store_csi_unique_volume" {
         "type": "String",
         "metadata": {
           "displayName": "Effect",
-          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
+          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'Deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
         },
         "allowedValues": [
           "audit",
-          "deny",
+          "Deny",
           "disabled"
         ],
-        "defaultValue": "deny"
+        "defaultValue": "Deny"
       },
       "excludedNamespaces": {
         "type": "Array",
@@ -250,14 +250,14 @@ resource "azurerm_policy_definition" "flux_disable_cross_namespace_source" {
         "type": "String",
         "metadata": {
           "displayName": "Effect",
-          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
+          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'Deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
         },
         "allowedValues": [
           "audit",
-          "deny",
+          "Deny",
           "disabled"
         ],
-        "defaultValue": "deny"
+        "defaultValue": "Deny"
       },
       "excludedNamespaces": {
         "type": "Array",
@@ -328,14 +328,14 @@ resource "azurerm_policy_definition" "flux_require_service_account" {
         "type": "String",
         "metadata": {
           "displayName": "Effect",
-          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
+          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'Deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
         },
         "allowedValues": [
           "audit",
-          "deny",
+          "Deny",
           "disabled"
         ],
-        "defaultValue": "deny"
+        "defaultValue": "Deny"
       },
       "excludedNamespaces": {
         "type": "Array",
@@ -407,14 +407,14 @@ resource "azurerm_policy_definition" "k8s_pod_priority_class" {
         "type": "String",
         "metadata": {
           "displayName": "Effect",
-          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
+          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'Deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
         },
         "allowedValues": [
           "audit",
-          "deny",
+          "Deny",
           "disabled"
         ],
-        "defaultValue": "deny"
+        "defaultValue": "Deny"
       },
       "excludedNamespaces": {
         "type": "Array",
@@ -492,14 +492,14 @@ resource "azurerm_policy_definition" "k8s_require_ingress_class" {
         "type": "String",
         "metadata": {
           "displayName": "Effect",
-          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
+          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'Deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
         },
         "allowedValues": [
           "audit",
-          "deny",
+          "Deny",
           "disabled"
         ],
-        "defaultValue": "deny"
+        "defaultValue": "Deny"
       },
       "excludedNamespaces": {
         "type": "Array",
@@ -575,14 +575,14 @@ resource "azurerm_policy_definition" "azure_identity_format" {
         "type": "String",
         "metadata": {
           "displayName": "Effect",
-          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
+          "description": "'audit' allows a non-compliant resource to be created or updated, but flags it as non-compliant. 'Deny' blocks the non-compliant resource creation or update. 'disabled' turns off the policy."
         },
         "allowedValues": [
           "audit",
-          "deny",
+          "Deny",
           "disabled"
         ],
-        "defaultValue": "deny"
+        "defaultValue": "Deny"
       },
       "excludedNamespaces": {
         "type": "Array",
@@ -727,7 +727,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "namespaces": {
         "value": ${jsonencode(var.tenant_namespaces)}
@@ -744,7 +744,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray('flux-system'))]"
@@ -758,7 +758,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray('spegel'))]"
@@ -772,7 +772,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[parameters('excludedNamespaces')]"
@@ -786,7 +786,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('spegel'))]"
@@ -803,7 +803,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[parameters('excludedNamespaces')]"
@@ -820,7 +820,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[parameters('excludedNamespaces')]"
@@ -837,7 +837,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azure-metrics','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','vpa'))]"
@@ -855,7 +855,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('ambassador'))]"
@@ -870,7 +870,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azad-kube-proxy','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','node-ttl','prometheus','reloader','spegel','trivy','vpa'))]"
@@ -888,7 +888,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('prometheus'))]"
@@ -906,7 +906,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}))]"
@@ -924,7 +924,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','prometheus','spegel'))]"
@@ -942,7 +942,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','datadog','falco','prometheus','promtail','spegel'))]"
@@ -963,7 +963,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "excludedNamespaces": {
         "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('csi-secrets-store-provider-azure','falco'))]"
@@ -981,7 +981,7 @@ resource "azurerm_policy_set_definition" "xks" {
     parameter_values     = <<VALUE
     {
       "effect": {
-        "value": "deny"
+        "value": "Deny"
       },
       "allowedCapabilities": {
         "value": "[parameters('allowedCapabilities')]"

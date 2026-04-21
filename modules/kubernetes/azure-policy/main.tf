@@ -865,7 +865,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": ${jsonencode(concat(local.system_namespaces_list, ["aad-pod-identity", "ambassador", "azad-kube-proxy", "cert-manager", "controle-plane-logs", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "flux-system", "ingress-nginx", "node-ttl", "prometheus", "reloader", "spegel", "trivy", "vpa"], var.azure_policy_config.exclude_namespaces))}
+        "value": ${jsonencode(concat(local.system_namespaces_list, ["aad-pod-identity", "ambassador", "azad-kube-proxy", "cert-manager", "controle-plane-logs", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "flux-system", "ingress-nginx", "node-sysctls", "node-ttl", "prometheus", "reloader", "spegel", "trivy", "vpa"], var.azure_policy_config.exclude_namespaces))}
       },
        "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -883,7 +883,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": ${jsonencode(concat(local.system_namespaces_list, ["prometheus"], var.azure_policy_config.exclude_namespaces))}
+        "value": ${jsonencode(concat(local.system_namespaces_list, ["node-sysctls", "prometheus"], var.azure_policy_config.exclude_namespaces))}
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"

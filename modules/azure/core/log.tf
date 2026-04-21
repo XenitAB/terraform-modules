@@ -86,7 +86,7 @@ resource "azurerm_monitor_metric_alert" "log" {
     metric_namespace       = "Microsoft.Storage/storageAccounts"
     operator               = "LessThan"
     skip_metric_validation = false
-    threshold              = 51200
+    threshold              = 40960
   }
 
   action {

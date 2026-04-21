@@ -90,18 +90,6 @@ spec:
       value:
         minVersion: '1.2'
         maxVersion: '1.3'
-        ciphers:
-          # TLS 1.3 ciphers (preferred)
-          - TLS_AES_128_GCM_SHA256
-          - TLS_AES_256_GCM_SHA384
-          - TLS_CHACHA20_POLY1305_SHA256
-          # TLS 1.2 ciphers (fallback)
-          - ECDHE-ECDSA-AES128-GCM-SHA256
-          - ECDHE-ECDSA-CHACHA20-POLY1305
-          - ECDHE-RSA-AES128-GCM-SHA256
-          - ECDHE-RSA-CHACHA20-POLY1305
-          - ECDHE-ECDSA-AES256-GCM-SHA384
-          - ECDHE-RSA-AES256-GCM-SHA384
         ecdhCurves:
           - X25519
           - P-256

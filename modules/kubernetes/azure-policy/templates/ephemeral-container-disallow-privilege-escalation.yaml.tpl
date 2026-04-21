@@ -5,25 +5,9 @@ metadata:
 spec:
   match:
     excludedNamespaces:
-      - calico-system
-      - gatekeeper-system
-      - kube-system
-      - tigera-operator
-      - aad-pod-identity
-      - cert-manager
-      - csi-secrets-store-provider-azure
-      - datadog
-      - external-dns
-      - falco
-      - ingress-nginx
-      - prometheus
-      - reloader
-      - spegel
-      - vpa
-      - node-sysctls
-      %{ for ns in exclude_namespaces }
+      %{ for ns in exclude_namespaces ~}
       - ${ns}
-      %{ endfor }
+      %{ endfor ~}
     scope: Namespaced
     kinds:
       - apiGroups: ["*"]

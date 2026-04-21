@@ -35,7 +35,7 @@ spec:
 %{ endif ~}
       containers:
         - name: sysctl
-          image: dhi/busybox:1.37.0-debian13
+          image: cgr.dev/chainguard/busybox@sha256:f9ca35446158a61c6fc535fa3154d0378af13800834c46ade63c94f1fc25d839
           imagePullPolicy: IfNotPresent
           command:
             - sh

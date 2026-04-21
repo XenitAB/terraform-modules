@@ -5,9 +5,9 @@ metadata:
 spec:
   match:
     excludedNamespaces:
-      %{ for ns in exclude_namespaces ~}
+      %{ for ns in exclude_namespaces }
       - ${ns}
-      %{ endfor ~}
+      %{ endfor }
     scope: Namespaced
     kinds:
       - apiGroups: ["*"]

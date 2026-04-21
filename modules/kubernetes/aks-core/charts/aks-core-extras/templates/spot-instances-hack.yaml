@@ -76,14 +76,14 @@ spec:
         effect: NoSchedule
       containers:
       - name: busybox
-        image: busybox:1.31
+        image: cgr.dev/chainguard/busybox@sha256:f9ca35446158a61c6fc535fa3154d0378af13800834c46ade63c94f1fc25d839
         command: 
          - "sh"
          - "-c"
          - "sleep infinity"
       initContainers:
       - name: kubectl-patch
-        image: alpine/kubectl
+        image: cgr.dev/chainguard/kubectl:latest
         command:
           - kubectl
           - patch
@@ -95,7 +95,7 @@ spec:
             [{"op": "replace", "path": "/webhooks/0/rules/0/operations/0",
             "value":"CREATE"}]
       - name: kubectl-taint
-        image: alpine/kubectl
+        image: cgr.dev/chainguard/kubectl:latest
         command:
          - "sh"
          - "-c"

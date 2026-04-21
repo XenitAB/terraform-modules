@@ -1,5 +1,6 @@
 locals {
-  system_namespaces = "'calico-system', 'gatekeeper-system', 'kube-system', 'tigera-operator'"
+  system_namespaces_list = ["calico-system", "gatekeeper-system", "kube-system", "tigera-operator"]
+  system_namespaces      = join(", ", [for ns in local.system_namespaces_list : "'${ns}'"])
 
   azure_identity_format = base64encode(
     templatefile("${path.module}/templates/azure-identity-format.yaml.tpl", {

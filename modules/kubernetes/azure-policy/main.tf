@@ -676,14 +676,6 @@ resource "azurerm_policy_set_definition" "xks" {
         },
         "defaultValue": []
       },
-      "excludedNamespaces": {
-        "type": "Array",
-        "metadata": {
-          "displayName": "Namespace exclusions",
-          "description": "List of Kubernetes namespaces to exclude from policy evaluation."
-        },
-        "defaultValue": []
-      },
       "excludedImages": {
         "type": "Array",
         "metadata": {
@@ -733,7 +725,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": ${jsonencode(var.tenant_namespaces)}
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray('ambassador','azureserviceoperator-system'))]"
+        "value": ${jsonencode(concat(var.azure_policy_config.exclude_namespaces, ["ambassador", "azureserviceoperator-system"]))}
       }
     }
     VALUE
@@ -747,7 +739,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray('flux-system'))]"
+        "value": ${jsonencode(concat(var.azure_policy_config.exclude_namespaces, ["flux-system"]))}
       }
     }
     VALUE
@@ -761,7 +753,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray('spegel'))]"
+        "value": ${jsonencode(concat(var.azure_policy_config.exclude_namespaces, ["spegel"]))}
       }
     }
     VALUE
@@ -775,7 +767,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[parameters('excludedNamespaces')]"
+        "value": ${jsonencode(var.azure_policy_config.exclude_namespaces)}
       }
     }
     VALUE
@@ -789,7 +781,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('spegel'))]"
+        "value": ${jsonencode(concat(local.system_namespaces_list, ["spegel"], var.azure_policy_config.exclude_namespaces))}
       },
       "permittedClassNames": {
         "value": "[createArray('platform-low','platform-medium','platform-high','tenant-low','tenant-medium','tenant-high')]"
@@ -806,7 +798,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[parameters('excludedNamespaces')]"
+        "value": ${jsonencode(var.azure_policy_config.exclude_namespaces)}
       },
       "permittedClassNames": {
         "value": "[createArray('nginx','nginx-private','nginx-public')]"
@@ -823,7 +815,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[parameters('excludedNamespaces')]"
+        "value": ${jsonencode(var.azure_policy_config.exclude_namespaces)}
       }
     }
     VALUE
@@ -840,7 +832,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azure-metrics','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','prometheus','reloader','spegel','vpa'))]"
+        "value": ${jsonencode(concat(local.system_namespaces_list, ["aad-pod-identity", "ambassador", "azure-metrics", "cert-manager", "controle-plane-logs", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "flux-system", "ingress-nginx", "prometheus", "reloader", "spegel", "vpa"], var.azure_policy_config.exclude_namespaces))}
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -858,7 +850,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('ambassador'))]"
+        "value": ${jsonencode(concat(local.system_namespaces_list, ["ambassador"], var.azure_policy_config.exclude_namespaces))}
       }
     }
     VALUE
@@ -873,7 +865,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','ambassador','azad-kube-proxy','cert-manager','controle-plane-logs','csi-secrets-store-provider-azure','datadog','external-dns','falco','flux-system','ingress-nginx','node-ttl','prometheus','reloader','spegel','trivy','vpa'))]"
+        "value": ${jsonencode(concat(local.system_namespaces_list, ["aad-pod-identity", "ambassador", "azad-kube-proxy", "cert-manager", "controle-plane-logs", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "flux-system", "ingress-nginx", "node-ttl", "prometheus", "reloader", "spegel", "trivy", "vpa"], var.azure_policy_config.exclude_namespaces))}
       },
        "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -891,7 +883,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('prometheus'))]"
+        "value": ${jsonencode(concat(local.system_namespaces_list, ["prometheus"], var.azure_policy_config.exclude_namespaces))}
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -909,7 +901,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}))]"
+        "value": ${jsonencode(concat(local.system_namespaces_list, var.azure_policy_config.exclude_namespaces))}
       },
       "allowedExternalIPs": {
         "value": "[parameters('allowedExternalIPs')]"
@@ -927,7 +919,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','prometheus','spegel'))]"
+        "value": ${jsonencode(concat(local.system_namespaces_list, ["aad-pod-identity", "csi-secrets-store-provider-azure", "prometheus", "spegel"], var.azure_policy_config.exclude_namespaces))}
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -945,7 +937,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','csi-secrets-store-provider-azure','datadog','falco','prometheus','promtail','spegel'))]"
+        "value": ${jsonencode(concat(local.system_namespaces_list, ["aad-pod-identity", "csi-secrets-store-provider-azure", "datadog", "falco", "prometheus", "promtail", "spegel"], var.azure_policy_config.exclude_namespaces))}
       },
       "allowedVolumeTypes": {
         "value": "[concat(parameters('allowedVolumeTypes'),createArray('configMap','downwardAPI','emptyDir','persistentVolumeClaim','secret','projected','csi'))]"
@@ -966,7 +958,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Deny"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('csi-secrets-store-provider-azure','falco'))]"
+        "value": ${jsonencode(concat(local.system_namespaces_list, ["csi-secrets-store-provider-azure", "falco"], var.azure_policy_config.exclude_namespaces))}
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -990,7 +982,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "[parameters('requiredDropCapabilities')]"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','azure-metrics','csi-secrets-store-provider-azure','cert-manager','datadog','external-dns','falco','flux-system','ingress-nginx','ingress-healthz','prometheus','reloader','spegel','trivy','vpa'))]"
+        "value": ${jsonencode(concat(local.system_namespaces_list, ["aad-pod-identity", "azure-metrics", "csi-secrets-store-provider-azure", "cert-manager", "datadog", "external-dns", "falco", "flux-system", "ingress-nginx", "ingress-healthz", "prometheus", "reloader", "spegel", "trivy", "vpa"], var.azure_policy_config.exclude_namespaces))}
       },
       "excludedImages": {
         "value": "[parameters('excludedImages')]"
@@ -1008,7 +1000,7 @@ resource "azurerm_policy_set_definition" "xks" {
         "value": "Audit"
       },
       "excludedNamespaces": {
-        "value": "[concat(parameters('excludedNamespaces'),createArray(${local.system_namespaces}),createArray('aad-pod-identity','cert-manager','controle-plane-logs','trivy','vpa'))]"
+        "value": ${jsonencode(concat(local.system_namespaces_list, ["aad-pod-identity", "cert-manager", "controle-plane-logs", "trivy", "vpa"], var.azure_policy_config.exclude_namespaces))}
       },
       "requiredProbes": {
         "value": "[parameters('requiredProbes')]"
@@ -1041,9 +1033,4 @@ resource "azurerm_resource_policy_assignment" "this" {
   resource_id          = data.azurerm_kubernetes_cluster.this.id
   policy_definition_id = azurerm_policy_set_definition.xks.id
 
-  parameters = jsonencode({
-    excludedNamespaces = {
-      value = var.azure_policy_config.exclude_namespaces
-    }
-  })
 }

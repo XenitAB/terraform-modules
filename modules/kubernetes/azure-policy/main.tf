@@ -1040,6 +1040,10 @@ resource "azurerm_resource_policy_assignment" "this" {
   name                 = "aks-${var.environment}-${var.location_short}-${var.aks_name}${var.aks_name_suffix}-assignment"
   resource_id          = data.azurerm_kubernetes_cluster.this.id
   policy_definition_id = azurerm_policy_set_definition.xks.id
+
+  parameters = jsonencode({
+    excludedNamespaces = {
+      value = var.azure_policy_config.exclude_namespaces
+    }
+  })
 }
-
-

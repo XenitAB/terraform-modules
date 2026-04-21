@@ -49,7 +49,7 @@ resource "git_repository_file" "node_sysctls_manifest" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/node-sysctls/manifests/node-sysctls-${each.key}.yaml"
 
   content = templatefile("${path.module}/templates/node-sysctls-manifest.yaml.tpl", {
-    name          = each.value.profile_name
+    name          = replace(each.value.profile_name, "_", "-")
     sysctls       = each.value.sysctls
     node_selector = each.value.node_selector
     tolerations   = each.value.tolerations

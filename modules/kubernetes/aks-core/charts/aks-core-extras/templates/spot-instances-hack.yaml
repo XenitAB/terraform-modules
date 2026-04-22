@@ -83,7 +83,7 @@ spec:
          - "sleep infinity"
       initContainers:
       - name: kubectl-patch
-        image: cgr.dev/chainguard/kubectl:latest
+        image: cgr.dev/chainguard/kubectl@sha256:f6917be5d911e65bf1bc7935351a5646858af3919384359997c3682bb2b29cc3
         command:
           - kubectl
           - patch
@@ -95,11 +95,18 @@ spec:
             [{"op": "replace", "path": "/webhooks/0/rules/0/operations/0",
             "value":"CREATE"}]
       - name: kubectl-taint
-        image: cgr.dev/chainguard/kubectl:latest
+        image: cgr.dev/chainguard/kubectl@sha256:f6917be5d911e65bf1bc7935351a5646858af3919384359997c3682bb2b29cc3
+        env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
         command:
-         - "sh"
-         - "-c"
-         - "kubectl taint nodes $(kubectl get pod $HOSTNAME -o jsonpath='{.spec.nodeName}') kubernetes.azure.com/scalesetpriority=spot:NoSchedule- || true"
+          - kubectl
+          - taint
+          - nodes
+          - "$(NODE_NAME)"
+          - "kubernetes.azure.com/scalesetpriority=spot:NoSchedule-"
       nodeSelector:
         kubernetes.azure.com/scalesetpriority: spot
 {{- end }}

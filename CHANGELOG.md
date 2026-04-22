@@ -15,6 +15,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: removed shell dept on kubectl exec by @yabracadabra in [#1460](https://github.com/XenitAB/terraform-modules/pulls/1460)
+- Fix: added chainguard images by @yabracadabra in [#1458](https://github.com/XenitAB/terraform-modules/pulls/1458)
+- Fix: modify namespace exclusions in azure-policy locals by @yabracadabra in [#1457](https://github.com/XenitAB/terraform-modules/pulls/1457)
+- Fix: change threshold value from 51200 to 40960 by @yabracadabra in [#1437](https://github.com/XenitAB/terraform-modules/pulls/1437)
+- Fix: added opentofu support for dependabot -r without overlap by @yabracadabra in [#1445](https://github.com/XenitAB/terraform-modules/pulls/1445)
+- Fix: Azure policy deny -> Deny by @CalleB3 in [#1455](https://github.com/XenitAB/terraform-modules/pulls/1455)
+- Fix: converting underscores (_) to dashes (-) in daemonset, labels an… by @yabracadabra in [#1454](https://github.com/XenitAB/terraform-modules/pulls/1454)
+- Fix: Exclude node-sysctls from azure-policy by @CalleB3 in [#1452](https://github.com/XenitAB/terraform-modules/pulls/1452)
+- Fix: revert to 0.0.0-latest due to crds by @yabracadabra in [#1450](https://github.com/XenitAB/terraform-modules/pulls/1450)
+- Fix: added sha by @yabracadabra in [#1447](https://github.com/XenitAB/terraform-modules/pulls/1447)
+- Fix: changed container image for node-sysctls by @yabracadabra in [#1446](https://github.com/XenitAB/terraform-modules/pulls/1446)
+- Fix: Dependabot opentofu support by @yabracadabra in [#1444](https://github.com/XenitAB/terraform-modules/pulls/1444)
+- Fix: added opentofu support for dependabot -r by @yabracadabra in [#1443](https://github.com/XenitAB/terraform-modules/pulls/1443)
+- Fix: added opentofu support for dependabot by @yabracadabra in [#1442](https://github.com/XenitAB/terraform-modules/pulls/1442)
 - Fix: node-sysctl DaemonSet configuration for specific node-level conf by @yabracadabra in [#1436](https://github.com/XenitAB/terraform-modules/pulls/1436)
 - Fix: Envoy healthz by @optocoupler in [#1432](https://github.com/XenitAB/terraform-modules/pulls/1432)
 - Fix: add default gateway to envoy by @CalleB3 in [#1430](https://github.com/XenitAB/terraform-modules/pulls/1430)
@@ -24,6 +38,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Fix: Bump aks_core_extras version from 0.1.0 to 0.1.1 by @CalleB3 in [#1459](https://github.com/XenitAB/terraform-modules/pulls/1459)
+- Fix: remove TLS ciphers from envoy-gateway manifests by @yabracadabra in [#1451](https://github.com/XenitAB/terraform-modules/pulls/1451)
+- Chore: update targetRevision for envoy-gateway chart by @yabracadabra in [#1449](https://github.com/XenitAB/terraform-modules/pulls/1449)
+- Chore: update Terraform version to 1.5.7 by @yabracadabra in [#1441](https://github.com/XenitAB/terraform-modules/pulls/1441)
+- Chore(deps): bump hashicorp/setup-terraform from 3 to 4 by @yabracadabra in [#1434](https://github.com/XenitAB/terraform-modules/pulls/1434)
 - Fix: update check action to terraform-docs by @yabracadabra in [#1439](https://github.com/XenitAB/terraform-modules/pulls/1439)
 
 

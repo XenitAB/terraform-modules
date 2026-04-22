@@ -1,5 +1,20 @@
 locals {
-  system_namespaces = "'calico-system', 'gatekeeper-system', 'kube-system', 'tigera-operator'"
+  system_namespaces_list = ["calico-system", "gatekeeper-system", "kube-system", "tigera-operator"]
+  system_namespaces      = join(", ", [for ns in local.system_namespaces_list : "'${ns}'"])
+
+  # Per-template extra namespace exclusions beyond system_namespaces_list.
+  # These are combined with var.azure_policy_config.exclude_namespaces at render time.
+  mutation_extra_exclude_namespaces = {
+    "container-disallow-privilege-escalation.yaml.tpl"           = ["aad-pod-identity", "cert-manager", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "ingress-nginx", "prometheus", "reloader", "spegel", "vpa", "node-sysctls"]
+    "container-drop-capabilities.yaml.tpl"                       = ["aad-pod-identity", "cert-manager", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "ingress-nginx", "prometheus", "reloader", "spegel", "vpa", "trivy"]
+    "container-read-only-root-fs.yaml.tpl"                       = ["aad-pod-identity", "cert-manager", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "ingress-nginx", "prometheus", "reloader", "spegel", "vpa"]
+    "ephemeral-container-disallow-privilege-escalation.yaml.tpl" = ["aad-pod-identity", "cert-manager", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "ingress-nginx", "prometheus", "reloader", "spegel", "vpa", "node-sysctls"]
+    "ephemeral-container-drop-capabilities.yaml.tpl"             = ["aad-pod-identity", "cert-manager", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "ingress-nginx", "prometheus", "reloader", "spegel", "vpa", "trivy"]
+    "ephemeral-container-read-only-root-fs.yaml.tpl"             = ["aad-pod-identity", "cert-manager", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "ingress-nginx", "prometheus", "reloader", "spegel", "vpa"]
+    "init-container-disallow-privilege-escalation.yaml.tpl"      = ["aad-pod-identity", "cert-manager", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "ingress-nginx", "prometheus", "reloader", "spegel", "vpa", "node-sysctls"]
+    "init-container-drop-capabilities.yaml.tpl"                  = ["aad-pod-identity", "cert-manager", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "ingress-nginx", "prometheus", "reloader", "spegel", "vpa", "trivy"]
+    "init-container-read-only-root-fs.yaml.tpl"                  = ["aad-pod-identity", "cert-manager", "csi-secrets-store-provider-azure", "datadog", "external-dns", "falco", "ingress-nginx", "prometheus", "reloader", "spegel", "vpa"]
+  }
 
   azure_identity_format = base64encode(
     templatefile("${path.module}/templates/azure-identity-format.yaml.tpl", {

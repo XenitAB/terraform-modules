@@ -126,6 +126,7 @@ spec:
     - p, proj:${tenant.namespace}-${cluster.environment}-tenant:${tenant.namespace}-${cluster.environment}-role, applications, *, *, allow
     - p, proj:${tenant.namespace}-${cluster.environment}-tenant:${tenant.namespace}-${cluster.environment}-role, applicationsets, *, *, allow
     - p, proj:${tenant.namespace}-${cluster.environment}-tenant:${tenant.namespace}-${cluster.environment}-role, repositories, *, *, allow
+%{ if length(sync_windows) > 0 ~}
   syncWindows:
   %{ for sync_window in sync_windows ~}
   - kind: "${sync_window.kind}"
@@ -134,6 +135,7 @@ spec:
       duration: "${sync_window.duration}"
       manualSync: ${sync_window.manual_sync}
   %{ endfor }
+%{ endif ~}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application

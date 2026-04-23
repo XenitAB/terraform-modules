@@ -1,3 +1,4 @@
+%{ if anytrue([for t in flatten([for at in azure_tenants : [for c in at.clusters : c.tenants]]) : t.repo_type == "github"]) ~}
 apiVersion: external-secrets.io/v1
 kind: SecretStore
 metadata:
@@ -11,6 +12,7 @@ spec:
       serviceAccountRef:
         name: argocd-application-controller
 ---
+%{ endif ~}
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
@@ -33,20 +35,6 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
----
-apiVersion: gateway.envoyproxy.io/v1alpha1
-kind: ClientTrafficPolicy
-metadata:
-  name: preserve-escaped-slashes
-  namespace: argocd
-spec:
-  targetRef:
-    group: gateway.networking.k8s.io
-    kind: Gateway
-    name: argocd-gateway
-  path:
-    escapedSlashesAction: KeepUnchanged
-    disableMergeSlashes: true
 ---
 %{ for azure_tenant in azure_tenants ~}
 %{ for cluster in azure_tenant.clusters ~}
@@ -126,6 +114,7 @@ spec:
     - p, proj:${tenant.namespace}-${cluster.environment}-tenant:${tenant.namespace}-${cluster.environment}-role, applications, *, *, allow
     - p, proj:${tenant.namespace}-${cluster.environment}-tenant:${tenant.namespace}-${cluster.environment}-role, applicationsets, *, *, allow
     - p, proj:${tenant.namespace}-${cluster.environment}-tenant:${tenant.namespace}-${cluster.environment}-role, repositories, *, *, allow
+%{ if length(sync_windows) > 0 ~}
   syncWindows:
   %{ for sync_window in sync_windows ~}
   - kind: "${sync_window.kind}"
@@ -134,6 +123,7 @@ spec:
       duration: "${sync_window.duration}"
       manualSync: ${sync_window.manual_sync}
   %{ endfor }
+%{ endif ~}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -158,6 +148,20 @@ spec:
       - RespectIgnoreDifferences=true
       - ApplyOutOfSyncOnly=true
 ---
+%{ if tenant.repo_type == "azdo" ~}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-${tenant.name}-${cluster.environment}
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  name: ${tenant.name}-${cluster.environment}
+  url: ${tenant.repo_url}
+  type: git
+%{ else ~}
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
@@ -184,6 +188,7 @@ spec:
   - secretKey: githubAppPrivateKey
     remoteRef:
       key: ${tenant.secret_name}
+%{ endif ~}
 ---
 %{ endfor }
 %{ endfor }

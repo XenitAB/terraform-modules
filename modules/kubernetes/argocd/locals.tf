@@ -18,9 +18,8 @@ locals {
   key_vault_secret_names = distinct(flatten([
     for azure_tenant in var.argocd_config.azure_tenants : [
       for cluster in azure_tenant.clusters : [
-        for tenant in cluster.tenants : [
-          tenant.secret_name
-        ]
+        for tenant in cluster.tenants : tenant.secret_name
+        if tenant.repo_type == "github" && tenant.secret_name != ""
       ]
     ]
   ]))

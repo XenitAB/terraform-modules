@@ -161,26 +161,18 @@ spec:
       - ApplyOutOfSyncOnly=true
 ---
 %{ if tenant.repo_type == "azdo" ~}
-apiVersion: external-secrets.io/v1
-kind: ExternalSecret
+apiVersion: v1
+kind: Secret
 metadata:
   name: repo-${tenant.name}-${cluster.environment}
   namespace: argocd
-spec:
-  refreshInterval: 0
-  secretStoreRef:
-    kind: SecretStore
-    name: ${key_vault_name}
-  target:
-    name: repo-${tenant.name}-${cluster.environment}
-    template:
-      metadata:
-        labels:
-          argocd.argoproj.io/secret-type: repository
-      data:
-        name: ${tenant.name}-${cluster.environment}
-        url: ${tenant.repo_url}
-        type: git
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  name: ${tenant.name}-${cluster.environment}
+  url: ${tenant.repo_url}
+  type: git
 %{ else ~}
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret

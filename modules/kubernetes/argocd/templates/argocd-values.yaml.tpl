@@ -66,10 +66,18 @@ repoServer:
   env:
     - name: ARGOCD_GIT_ATTEMPTS_COUNT
       value: "3"
+    - name: ARGOCD_REPO_SERVER_AZURE_WORKLOAD_IDENTITY_ENABLED
+      value: "true"
   metrics:
     enabled: true
     serviceMonitor:
       enabled: true
+  podLabels:
+    azure.workload.identity/use: "true"
+  serviceAccount:
+    annotations:
+      azure.workload.identity/client-id: "${client_id}"
+      azure.workload.identity/tenant-id: "${tenant_id}"
 
 notifications:
   metrics:
@@ -153,6 +161,7 @@ server:
 configs:
   cm:
     admin.enabled: false
+    azure.workload.identity.enabled: "true"
     application.resourceTrackingMethod: annotation
     dex.config: |
       connectors:

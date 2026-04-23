@@ -7,6 +7,20 @@
 {{- range .clusters }}
 {{- $cluster := . }}
 {{- range .tenants }}
+{{- if eq .repo_type "azdo" }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ printf "repo-%s-%s-%s" $azure_tenant.tenant_name $cluster.environment .name }}
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  name: {{ printf "%s-%s-%s" $azure_tenant.tenant_name $cluster.environment .name }}
+  type: git
+  url: {{ .repo_url }}
+---
+{{- else }}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -22,6 +36,7 @@ data:
   githubAppInstallationID: {{ .github_installation_id | b64enc }}
   githubAppPrivateKey: {{ get $secrets .secret_name | b64enc }}
 ---
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}

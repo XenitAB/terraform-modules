@@ -158,6 +158,28 @@ spec:
       - RespectIgnoreDifferences=true
       - ApplyOutOfSyncOnly=true
 ---
+%{ if tenant.repo_type == "azdo" ~}
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: repo-${tenant.name}-${cluster.environment}
+  namespace: argocd
+spec:
+  refreshInterval: 0
+  secretStoreRef:
+    kind: SecretStore
+    name: ${key_vault_name}
+  target:
+    name: repo-${tenant.name}-${cluster.environment}
+    template:
+      metadata:
+        labels:
+          argocd.argoproj.io/secret-type: repository
+      data:
+        name: ${tenant.name}-${cluster.environment}
+        url: ${tenant.repo_url}
+        type: git
+%{ else ~}
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
@@ -184,6 +206,7 @@ spec:
   - secretKey: githubAppPrivateKey
     remoteRef:
       key: ${tenant.secret_name}
+%{ endif ~}
 ---
 %{ endfor }
 %{ endfor }

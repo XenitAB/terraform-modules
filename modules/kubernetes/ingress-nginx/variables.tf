@@ -77,12 +77,6 @@ variable "fleet_infra_config" {
   })
 }
 
-variable "linkerd_enabled" {
-  description = "Should linkerd be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "min_replicas" {
   description = "The desired number of minimum replicas"
   type        = number

@@ -77,7 +77,6 @@ resource "git_repository_file" "monitors" {
   content = templatefile("${path.module}/templates/monitors.yaml.tpl", {
     falco_enabled            = var.falco_enabled
     gatekeeper_enabled       = var.gatekeeper_enabled
-    linkerd_enabled          = var.linkerd_enabled
     aad_pod_identity_enabled = var.aad_pod_identity_enabled
     azad_kube_proxy_enabled  = var.azad_kube_proxy_enabled
     trivy_enabled            = var.trivy_enabled

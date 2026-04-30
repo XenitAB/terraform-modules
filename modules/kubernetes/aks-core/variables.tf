@@ -120,8 +120,7 @@ variable "azure_policy_config" {
   })
   default = {
     exclude_namespaces = [
-      "linkerd",
-      "linkerd-cni",
+
       "velero",
       "grafana-alloy",
     ]
@@ -645,7 +644,6 @@ variable "platform_config" {
     ingress_nginx_enabled                   = optional(bool, true)
     karpenter_enabled                       = optional(bool, false)
     kyverno_enabled                         = optional(bool, false)
-    linkerd_enabled                         = optional(bool, false)
     litmus_enabled                          = optional(bool, false)
     mirrord_enabled                         = optional(bool, false)
     nginx_gateway_enabled                   = optional(bool, false)

@@ -123,14 +123,5 @@ resource "kubernetes_network_policy" "tenant" {
         pod_selector {}
       }
     }
-    egress {
-      to {
-        namespace_selector {
-          match_labels = {
-            "name" = "linkerd"
-          }
-        }
-      }
-    }
   }
 }

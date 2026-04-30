@@ -31,7 +31,7 @@ spec:
       valuesObject:
         # Use EBPF instead of kernel module
         driver:
-          kind: ebpf
+          kind: auto
         falcoctl:
           artifact:
             install:

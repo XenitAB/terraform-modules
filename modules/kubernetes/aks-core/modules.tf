@@ -430,7 +430,6 @@ module "grafana_k8s_monitoring" {
   falco_enabled            = var.platform_config.falco_enabled
   gatekeeper_enabled       = var.platform_config.gatekeeper_enabled
   grafana_alloy_enabled    = var.platform_config.grafana_alloy_enabled
-  linkerd_enabled          = var.platform_config.linkerd_enabled
   node_local_dns_enabled   = var.platform_config.node_local_dns_enabled
   node_ttl_enabled         = var.platform_config.node_ttl_enabled
   promtail_enabled         = var.platform_config.promtail_enabled
@@ -465,8 +464,6 @@ module "grafana_k8s_monitoring_billable" {
 }
 
 module "ingress_nginx" {
-  depends_on = [module.linkerd]
-
   for_each = {
     for s in ["ingress-nginx"] :
     s => s
@@ -485,7 +482,6 @@ module "ingress_nginx" {
   private_ingress_enabled             = var.ingress_nginx_config.private_ingress_enabled
   customization                       = var.ingress_nginx_config.customization
   customization_private               = var.ingress_nginx_config.customization_private
-  linkerd_enabled                     = var.platform_config.linkerd_enabled
   datadog_enabled                     = var.platform_config.datadog_enabled
   cluster_id                          = local.cluster_id
   replicas                            = var.ingress_nginx_config.replicas
@@ -526,20 +522,6 @@ module "karpenter" {
   location            = data.azurerm_resource_group.this.location
   resource_group_name = data.azurerm_resource_group.this.name
   subscription_id     = data.azurerm_client_config.current.subscription_id
-}
-
-module "linkerd" {
-  for_each = {
-    for s in ["linkerd"] :
-    s => s
-    if var.platform_config.linkerd_enabled
-  }
-
-  cluster_id         = local.cluster_id
-  source             = "../../kubernetes/linkerd"
-  tenant_name        = var.platform_config.tenant_name
-  environment        = var.environment
-  fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
 module "litmus" {
@@ -659,7 +641,6 @@ module "prometheus" {
   falco_enabled            = var.platform_config.falco_enabled
   gatekeeper_enabled       = var.platform_config.gatekeeper_enabled
   grafana_agent_enabled    = var.platform_config.grafana_agent_enabled
-  linkerd_enabled          = var.platform_config.linkerd_enabled
   node_local_dns_enabled   = var.platform_config.node_local_dns_enabled
   node_ttl_enabled         = var.platform_config.node_ttl_enabled
   promtail_enabled         = var.platform_config.promtail_enabled

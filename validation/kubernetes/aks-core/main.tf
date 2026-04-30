@@ -155,7 +155,6 @@ module "aks_core" {
     grafana_k8s_monitoring_enabled    = true
     ingress_nginx_enabled             = true
     karpenter_enabled                 = true
-    linkerd_enabled                   = true
     litmus_enabled                    = true
     mirrord_enabled                   = true
     nginx_gateway_enabled             = true

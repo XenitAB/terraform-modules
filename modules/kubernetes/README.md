@@ -35,7 +35,6 @@ This directory contains all the Kubernetes Terraform modules.
 - [`ingress-nginx`](ingress-nginx/README.md)
 - [`karpenter`](karpenter/README.md)
 - ['kyverno'] (kyverno/README.md)
-- [`linkerd`](linkerd/README.md)
 - [`litmus`](litmus/README.md)
 - [`nginx-gateway-fabric`](nginx-gateway-fabric/README.md)
 - [`node-local-dns`](node-local-dns/README.md)

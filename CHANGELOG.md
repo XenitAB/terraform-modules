@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: codeowners by @yabracadabra in [#1462](https://github.com/XenitAB/terraform-modules/pulls/1462)
 - Feat: kyverno draft push a lot of needs to be fixed but i want to get it out … by @optocoupler in [#1438](https://github.com/XenitAB/terraform-modules/pulls/1438)
 - Feat: add healthz endpoint to envoy-gateway by @CalleB3 in [#1423](https://github.com/XenitAB/terraform-modules/pulls/1423)
 - Feat: created k8s_monitoring_billing for billing metrics by @yabracadabra in [#1419](https://github.com/XenitAB/terraform-modules/pulls/1419)
@@ -15,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: removed shell dept on kubectl exec by @yabracadabra in [#1460](https://github.com/XenitAB/terraform-modules/pulls/1460)
+- Fix: added chainguard images by @yabracadabra in [#1458](https://github.com/XenitAB/terraform-modules/pulls/1458)
+- Fix: modify namespace exclusions in azure-policy locals by @yabracadabra in [#1457](https://github.com/XenitAB/terraform-modules/pulls/1457)
+- Fix: change threshold value from 51200 to 40960 by @yabracadabra in [#1437](https://github.com/XenitAB/terraform-modules/pulls/1437)
 - Fix: added opentofu support for dependabot -r without overlap by @yabracadabra in [#1445](https://github.com/XenitAB/terraform-modules/pulls/1445)
 - Fix: Azure policy deny -> Deny by @CalleB3 in [#1455](https://github.com/XenitAB/terraform-modules/pulls/1455)
 - Fix: converting underscores (_) to dashes (-) in daemonset, labels an… by @yabracadabra in [#1454](https://github.com/XenitAB/terraform-modules/pulls/1454)
@@ -34,6 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: remove linkerd module and related config by @CalleB3 in [#1464](https://github.com/XenitAB/terraform-modules/pulls/1464)
+- Fix: Bump aks_core_extras version from 0.1.0 to 0.1.1 by @CalleB3 in [#1459](https://github.com/XenitAB/terraform-modules/pulls/1459)
 - Fix: remove TLS ciphers from envoy-gateway manifests by @yabracadabra in [#1451](https://github.com/XenitAB/terraform-modules/pulls/1451)
 - Chore: update targetRevision for envoy-gateway chart by @yabracadabra in [#1449](https://github.com/XenitAB/terraform-modules/pulls/1449)
 - Chore: update Terraform version to 1.5.7 by @yabracadabra in [#1441](https://github.com/XenitAB/terraform-modules/pulls/1441)

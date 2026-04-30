@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: codeowners by @yabracadabra in [#1462](https://github.com/XenitAB/terraform-modules/pulls/1462)
 - Feat: kyverno draft push a lot of needs to be fixed but i want to get it out … by @optocoupler in [#1438](https://github.com/XenitAB/terraform-modules/pulls/1438)
 - Feat: add healthz endpoint to envoy-gateway by @CalleB3 in [#1423](https://github.com/XenitAB/terraform-modules/pulls/1423)
 - Feat: created k8s_monitoring_billing for billing metrics by @yabracadabra in [#1419](https://github.com/XenitAB/terraform-modules/pulls/1419)
@@ -38,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### ⚙️ Miscellaneous
+- Chore: remove linkerd module and related config by @CalleB3 in [#1464](https://github.com/XenitAB/terraform-modules/pulls/1464)
 - Fix: Bump aks_core_extras version from 0.1.0 to 0.1.1 by @CalleB3 in [#1459](https://github.com/XenitAB/terraform-modules/pulls/1459)
 - Fix: remove TLS ciphers from envoy-gateway manifests by @yabracadabra in [#1451](https://github.com/XenitAB/terraform-modules/pulls/1451)
 - Chore: update targetRevision for envoy-gateway chart by @yabracadabra in [#1449](https://github.com/XenitAB/terraform-modules/pulls/1449)

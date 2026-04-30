@@ -91,12 +91,6 @@ variable "key_vault_id" {
   type        = string
 }
 
-variable "linkerd_enabled" {
-  description = "Should linkerd be enabled"
-  type        = bool
-  default     = false
-}
-
 variable "location" {
   description = "The Azure region name."
   type        = string

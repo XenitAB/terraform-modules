@@ -73,8 +73,12 @@ resource "azurerm_kubernetes_cluster" "this" {
   node_provisioning_profile {
     mode = var.aks_node_provisioning_mode
   }
-  upgrade_override {
-    force_upgrade_enabled = var.aks_force_upgrade_enabled
+  dynamic "upgrade_override" {
+    for_each = var.aks_force_upgrade_enabled ? [true] : []
+
+    content {
+      force_upgrade_enabled = true
+    }
   }
 
   auto_scaler_profile {
@@ -156,6 +160,15 @@ resource "azurerm_kubernetes_cluster" "this" {
     }
   }
   tags = var.aks_config.tags
+
+  lifecycle {
+    # force_upgrade_enabled is a one-shot flag on the AKS API; once set,
+    # removing it sends an empty/null upgrade_override which the API rejects
+    # ("parsing time \"\"" / cannot be unset). Ignore drift after first apply.
+    ignore_changes = [
+      upgrade_override,
+    ]
+  }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "this" {

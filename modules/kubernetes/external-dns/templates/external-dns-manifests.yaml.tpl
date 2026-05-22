@@ -1,3 +1,4 @@
+%{~ if logs_enabled ~}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -34,6 +35,7 @@ roleRef:
   name: logs-external-dns
 ---
 %{ endfor }
+%{ endif }
 
 apiVersion: v1
 kind: Secret

@@ -32,6 +32,12 @@ variable "key_vault_id" {
   type        = string
 }
 
+variable "key_vault_rbac_enabled" {
+  description = "If true, grant the grafana-k8s-monitoring-billable workload-identity user-assigned identity access to the Key Vault using an Azure RBAC role assignment (Key Vault Secrets User) instead of an access policy. Set this to true when the target Key Vault was created with `enable_rbac_authorization = true`."
+  type        = bool
+  default     = false
+}
+
 variable "location" {
   description = "Azure region"
   type        = string

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: opt-in Azure Key Vault RBAC authorization across `governance-regional`, `aks-regional`, `github-runner`, `aks-core` (argocd / datadog / grafana-k8s-monitoring / grafana-k8s-monitoring-billable). New variables default to `false` so existing deployments are unaffected. See [`MIGRATION_KEYVAULT_RBAC.md`](MIGRATION_KEYVAULT_RBAC.md) for the migration path.
 - Feat: codeowners by @yabracadabra in [#1462](https://github.com/XenitAB/terraform-modules/pulls/1462)
 - Feat: kyverno draft push a lot of needs to be fixed but i want to get it out … by @optocoupler in [#1438](https://github.com/XenitAB/terraform-modules/pulls/1438)
 - Feat: add healthz endpoint to envoy-gateway by @CalleB3 in [#1423](https://github.com/XenitAB/terraform-modules/pulls/1423)

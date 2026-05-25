@@ -42,9 +42,30 @@ resource "azurerm_federated_identity_credential" "argocd_application_controller"
 }
 
 resource "azurerm_key_vault_access_policy" "argocd" {
+  count              = var.key_vault_rbac_enabled ? 0 : 1
   key_vault_id       = data.azurerm_key_vault.core.id
   tenant_id          = data.azurerm_client_config.current.tenant_id
   object_id          = azurerm_user_assigned_identity.argocd.principal_id
   key_permissions    = local.key_vault_default_permissions.key_permissions
   secret_permissions = local.key_vault_default_permissions.secret_permissions
+}
+
+# RBAC equivalents of the access policy above. ArgoCD only reads secrets and
+# performs decrypt/unwrap on keys, so `Key Vault Secrets User` + `Key Vault
+# Crypto User` are the least-privilege equivalents of the previous
+# permission set.
+resource "azurerm_role_assignment" "argocd_kv_secrets_user" {
+  count                = var.key_vault_rbac_enabled ? 1 : 0
+  scope                = data.azurerm_key_vault.core.id
+  role_definition_name = "Key Vault Secrets User"
+  principal_id         = azurerm_user_assigned_identity.argocd.principal_id
+  principal_type       = "ServicePrincipal"
+}
+
+resource "azurerm_role_assignment" "argocd_kv_crypto_user" {
+  count                = var.key_vault_rbac_enabled ? 1 : 0
+  scope                = data.azurerm_key_vault.core.id
+  role_definition_name = "Key Vault Crypto User"
+  principal_id         = azurerm_user_assigned_identity.argocd.principal_id
+  principal_type       = "ServicePrincipal"
 }

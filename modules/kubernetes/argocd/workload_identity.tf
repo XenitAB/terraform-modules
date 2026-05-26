@@ -59,16 +59,14 @@ resource "azurerm_key_vault_access_policy" "argocd" {
 # RBAC equivalents of the access policy above. ArgoCD only reads secrets and
 # performs decrypt/unwrap on keys, so `Key Vault Secrets User` + `Key Vault
 # Crypto User` are the least-privilege equivalents of the previous
-# permission set.
+# permission set. They are always created so the grants are in place before
+# the vault is flipped to RBAC mode; Azure ignores them while the vault is
+# still in access-policy mode.
 resource "azurerm_role_assignment" "argocd_kv_secrets_user" {
   scope                = data.azurerm_key_vault.core.id
   role_definition_name = "Key Vault Secrets User"
   principal_id         = azurerm_user_assigned_identity.argocd.principal_id
   principal_type       = "ServicePrincipal"
-
-  lifecycle {
-    enabled = var.key_vault_rbac_enabled
-  }
 }
 
 resource "azurerm_role_assignment" "argocd_kv_crypto_user" {
@@ -76,8 +74,4 @@ resource "azurerm_role_assignment" "argocd_kv_crypto_user" {
   role_definition_name = "Key Vault Crypto User"
   principal_id         = azurerm_user_assigned_identity.argocd.principal_id
   principal_type       = "ServicePrincipal"
-
-  lifecycle {
-    enabled = var.key_vault_rbac_enabled
-  }
 }

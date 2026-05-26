@@ -27,13 +27,12 @@ resource "azurerm_key_vault_access_policy" "xenit" {
 
 # RBAC equivalent of the access policy above. `Key Vault Administrator` is
 # the closest equivalent to the previous full key + secret permission set.
+# It is always created so the grant is in place before the vault is flipped
+# to RBAC mode; Azure ignores it while the vault is still in access-policy
+# mode.
 resource "azurerm_role_assignment" "xenit_kv" {
   scope                = data.azurerm_key_vault.core.id
   role_definition_name = "Key Vault Administrator"
   principal_id         = azurerm_user_assigned_identity.xenit.principal_id
   principal_type       = "ServicePrincipal"
-
-  lifecycle {
-    enabled = var.key_vault_rbac_enabled
-  }
 }

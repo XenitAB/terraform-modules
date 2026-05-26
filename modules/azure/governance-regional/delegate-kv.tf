@@ -120,15 +120,18 @@ resource "azurerm_key_vault_access_policy" "ap_sub_aad_group_contributor" {
   secret_permissions = local.key_vault_default_permissions.secret_permissions
 }
 
-# RBAC mode: used when key_vault_enable_rbac_authorization == true. These role assignments
-# mirror the access-policy resources above 1:1. "Key Vault Administrator" is the closest
-# built-in equivalent to the full key/secret/certificate permission set granted by the
-# access policies.
+# RBAC grants: created eagerly for every delegated Key Vault, regardless of
+# `key_vault_enable_rbac_authorization`. Azure ignores role assignments while
+# the vault is in access-policy mode, so these are inert until the vault is
+# flipped to RBAC — at which point the cutover is instant with no 403 gap.
+# They mirror the access-policy resources above 1:1. "Key Vault Administrator"
+# is the closest built-in equivalent to the full key/secret/certificate
+# permission set granted by the access policies.
 resource "azurerm_role_assignment" "rbac_owner_spn" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
-    if rg.delegate_key_vault == true && rg.key_vault_enable_rbac_authorization == true
+    if rg.delegate_key_vault == true
   }
 
   scope                = azurerm_key_vault.delegate_kv[each.key].id
@@ -141,7 +144,7 @@ resource "azurerm_role_assignment" "rbac_rg_aad_group" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
-    if rg.delegate_key_vault == true && rg.key_vault_enable_rbac_authorization == true
+    if rg.delegate_key_vault == true
   }
 
   scope                = azurerm_key_vault.delegate_kv[each.key].id
@@ -154,7 +157,7 @@ resource "azurerm_role_assignment" "rbac_rg_sp" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
-    if rg.delegate_key_vault == true && rg.delegate_service_principal == true && rg.key_vault_enable_rbac_authorization == true
+    if rg.delegate_key_vault == true && rg.delegate_service_principal == true
   }
 
   scope                = azurerm_key_vault.delegate_kv[each.key].id
@@ -167,7 +170,7 @@ resource "azurerm_role_assignment" "rbac_kvreader_sp" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
-    if rg.delegate_key_vault == true && rg.key_vault_enable_rbac_authorization == true
+    if rg.delegate_key_vault == true
   }
 
   scope                = azurerm_key_vault.delegate_kv[each.key].id
@@ -180,7 +183,7 @@ resource "azurerm_role_assignment" "rbac_sub_aad_group_owner" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
-    if rg.delegate_key_vault == true && rg.key_vault_enable_rbac_authorization == true
+    if rg.delegate_key_vault == true
   }
 
   scope                = azurerm_key_vault.delegate_kv[each.key].id
@@ -193,7 +196,7 @@ resource "azurerm_role_assignment" "rbac_sub_aad_group_contributor" {
   for_each = {
     for rg in var.resource_group_configs :
     rg.common_name => rg
-    if rg.delegate_key_vault == true && rg.key_vault_enable_rbac_authorization == true
+    if rg.delegate_key_vault == true
   }
 
   scope                = azurerm_key_vault.delegate_kv[each.key].id

@@ -138,14 +138,12 @@ resource "azurerm_key_vault_access_policy" "this" {
 
 # RBAC equivalent of the access policy above. The runner only needs to read
 # secrets, so `Key Vault Secrets User` is the least-privilege equivalent of
-# `secret_permissions = ["Get"]`.
+# `secret_permissions = ["Get"]`. It is always created so the grant is in
+# place before the vault is flipped to RBAC mode; Azure ignores it while the
+# vault is still in access-policy mode.
 resource "azurerm_role_assignment" "kv_secrets_user" {
   scope                = data.azurerm_key_vault.this.id
   role_definition_name = "Key Vault Secrets User"
   principal_id         = azurerm_linux_virtual_machine_scale_set.this.identity[0].principal_id
   principal_type       = "ServicePrincipal"
-
-  lifecycle {
-    enabled = var.key_vault_rbac_enabled
-  }
 }

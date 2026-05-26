@@ -430,6 +430,13 @@ variable "keyvault_name_override" {
   type        = string
   default     = ""
 }
+
+variable "key_vault_rbac_enabled" {
+  description = "If true, child modules (argocd, datadog, grafana-k8s-monitoring, grafana-k8s-monitoring-billable) grant their workload-identity user-assigned identities access to the core Key Vault using Azure RBAC role assignments instead of access policies. Set this to true when the target Key Vault was created with `enable_rbac_authorization = true` (see `governance-regional`)."
+  type        = bool
+  default     = false
+}
+
 variable "group_name_prefix" {
   description = "Prefix for Azure AD groups"
   type        = string

@@ -31,6 +31,12 @@ variable "keyvault_resource_group_name" {
   default     = ""
 }
 
+variable "key_vault_rbac_enabled" {
+  description = "If true, grant the VMSS system-assigned identity access to the Key Vault using an Azure RBAC role assignment (Key Vault Secrets User) instead of an access policy. Set this to true when the target Key Vault was created with `enable_rbac_authorization = true`."
+  type        = bool
+  default     = false
+}
+
 variable "source_image_id" {
   description = "The Azure Pipelines agent image id"
   type        = string

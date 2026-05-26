@@ -35,6 +35,7 @@ module "argocd" {
   location                 = data.azurerm_resource_group.this.location
   core_resource_group_name = "rg-${var.environment}-${var.location_short}-${var.core_name}"
   key_vault_name           = data.azurerm_key_vault.core.name
+  key_vault_rbac_enabled   = var.key_vault_rbac_enabled
   fleet_infra_config       = var.platform_config.fleet_infra_config
   tenant_name              = var.platform_config.tenant_name
 }
@@ -192,17 +193,18 @@ module "datadog" {
   azure_config = {
     azure_key_vault_name = var.datadog_config.azure_key_vault_name
   }
-  cluster_id          = local.cluster_id
-  datadog_site        = var.datadog_config.datadog_site
-  environment         = var.environment
-  key_vault_id        = data.azurerm_key_vault.core.id
-  location            = data.azurerm_resource_group.this.location
-  location_short      = var.location_short
-  namespace_include   = var.datadog_config.namespaces
-  oidc_issuer_url     = var.oidc_issuer_url
-  resource_group_name = data.azurerm_resource_group.this.name
-  tenant_name         = var.platform_config.tenant_name
-  fleet_infra_config  = var.platform_config.fleet_infra_config
+  cluster_id             = local.cluster_id
+  datadog_site           = var.datadog_config.datadog_site
+  environment            = var.environment
+  key_vault_id           = data.azurerm_key_vault.core.id
+  key_vault_rbac_enabled = var.key_vault_rbac_enabled
+  location               = data.azurerm_resource_group.this.location
+  location_short         = var.location_short
+  namespace_include      = var.datadog_config.namespaces
+  oidc_issuer_url        = var.oidc_issuer_url
+  resource_group_name    = data.azurerm_resource_group.this.name
+  tenant_name            = var.platform_config.tenant_name
+  fleet_infra_config     = var.platform_config.fleet_infra_config
 }
 
 module "eck_operator" {
@@ -410,12 +412,13 @@ module "grafana_k8s_monitoring" {
 
   source = "../../kubernetes/grafana-k8s-monitoring"
 
-  key_vault_id        = data.azurerm_key_vault.core.id
-  location            = data.azurerm_resource_group.this.location
-  oidc_issuer_url     = var.oidc_issuer_url
-  resource_group_name = data.azurerm_resource_group.this.name
-  cluster_id          = local.cluster_id
-  cluster_name        = var.grafana_k8s_monitor_config.cluster_name
+  key_vault_id           = data.azurerm_key_vault.core.id
+  key_vault_rbac_enabled = var.key_vault_rbac_enabled
+  location               = data.azurerm_resource_group.this.location
+  oidc_issuer_url        = var.oidc_issuer_url
+  resource_group_name    = data.azurerm_resource_group.this.name
+  cluster_id             = local.cluster_id
+  cluster_name           = var.grafana_k8s_monitor_config.cluster_name
   grafana_k8s_monitor_config = {
     azure_key_vault_name          = var.grafana_k8s_monitor_config.azure_key_vault_name
     grafana_cloud_prometheus_host = var.grafana_k8s_monitor_config.grafana_cloud_prometheus_host
@@ -451,16 +454,17 @@ module "grafana_k8s_monitoring_billable" {
 
   source = "../../kubernetes/grafana-k8s-monitoring-billable"
 
-  azure_key_vault_name = var.grafana_k8s_monitor_config.azure_key_vault_name
-  cluster_id           = local.cluster_id
-  cluster_name         = var.grafana_k8s_monitor_config.cluster_name
-  environment          = var.environment
-  fleet_infra_config   = var.platform_config.fleet_infra_config
-  key_vault_id         = data.azurerm_key_vault.core.id
-  location             = data.azurerm_resource_group.this.location
-  oidc_issuer_url      = var.oidc_issuer_url
-  resource_group_name  = data.azurerm_resource_group.this.name
-  tenant_name          = var.platform_config.tenant_name
+  azure_key_vault_name   = var.grafana_k8s_monitor_config.azure_key_vault_name
+  cluster_id             = local.cluster_id
+  cluster_name           = var.grafana_k8s_monitor_config.cluster_name
+  environment            = var.environment
+  fleet_infra_config     = var.platform_config.fleet_infra_config
+  key_vault_id           = data.azurerm_key_vault.core.id
+  key_vault_rbac_enabled = var.key_vault_rbac_enabled
+  location               = data.azurerm_resource_group.this.location
+  oidc_issuer_url        = var.oidc_issuer_url
+  resource_group_name    = data.azurerm_resource_group.this.name
+  tenant_name            = var.platform_config.tenant_name
 }
 
 module "ingress_nginx" {

@@ -92,6 +92,12 @@ variable "key_vault_name" {
   type        = string
 }
 
+variable "key_vault_rbac_enabled" {
+  description = "If true, grant the ArgoCD workload-identity user-assigned identity access to the core Key Vault using Azure RBAC role assignments (Key Vault Secrets User + Key Vault Crypto User) instead of an access policy. Set this to true when the target Key Vault was created with `enable_rbac_authorization = true`."
+  type        = bool
+  default     = false
+}
+
 variable "location" {
   description = "The Azure region name."
   type        = string

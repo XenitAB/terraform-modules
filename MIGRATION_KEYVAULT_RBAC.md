@@ -36,6 +36,18 @@ and grants are issued as `azurerm_role_assignment` resources instead of
 until you explicitly opt in. There is no implicit upgrade path; nothing happens
 on `terraform apply` unless you set the flag.
 
+## OpenTofu version requirement
+
+The consumer modules use the [`enabled` meta-argument](https://opentofu.org/docs/v1.11/language/meta-arguments/enabled/)
+(inside `lifecycle`) to toggle between the access policy and the role
+assignment, which requires **OpenTofu ≥ 1.11.0**. All module `main.tf` files
+in this repository now declare `required_version = ">= 1.11.0"`. If you pinned
+an older OpenTofu in CI, bump it before consuming this version of the modules.
+
+The `governance-regional` module keeps the toggle inside its existing
+`for_each` filter (because `enabled` cannot be combined with `count` or
+`for_each`), but the same minimum version still applies for consistency.
+
 ## The Azure constraint
 
 A Key Vault is **either policy-mode or RBAC-mode at any given moment** — never

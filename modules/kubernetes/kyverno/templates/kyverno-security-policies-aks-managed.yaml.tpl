@@ -54,34 +54,6 @@ spec:
       - resources:
           kinds:
           - Service
-    validate:
-      message: "Services with external IPs are not allowed"
-      pattern:
-        spec:
-          X(externalIPs): "null"
-
----
-apiVersion: kyverno.io/v1
-kind: ClusterPolicy
-metadata:
-  name: disallow-privileged-containers
-  annotations:
-    policies.kyverno.io/title: Disallow Privileged Containers
-    policies.kyverno.io/category: Pod Security Standards (Restricted)
-    policies.kyverno.io/severity: high
-    policies.kyverno.io/description: >-
-      Privileged containers share namespaces with the host system and do not offer
-      any security. They should be disallowed.
-spec:
-  validationFailureAction: Enforce
-  background: true
-  rules:
-  - name: check-privileged
-    match:
-      any:
-      - resources:
-          kinds:
-          - Pod
     exclude:
       any:
       - resources:
@@ -90,23 +62,13 @@ spec:
   - ${ns}
           %{ endfor }
     validate:
-      message: "Privileged containers are not allowed"
-      pattern:
-        spec:
-          =(securityContext):
-            =(privileged): "false"
-          containers:
-          - name: "*"
-            =(securityContext):
-              =(privileged): "false"
-          =(initContainers):
-          - name: "*"
-            =(securityContext):
-              =(privileged): "false"
-          =(ephemeralContainers):
-          - name: "*"
-            =(securityContext):
-              =(privileged): "false"
+      message: "Services with external IPs are not allowed"
+      deny:
+        conditions:
+          any:
+          - key: "{{ request.object.spec.externalIPs || `[]` | length(@) }}"
+            operator: GreaterThan
+            value: 0
 ---
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
@@ -137,6 +99,13 @@ spec:
           %{ for ns in exclude_namespaces ~}
   - ${ns}
           %{ endfor }
+          %{ if mirrord_enabled }
+      - resources:
+          kinds:
+          - Pod
+          annotations:
+            operator.metalbear.co/owner: "*"
+          %{ endif }
     validate:
       message: "Sharing the host namespaces is disallowed"
       pattern:
@@ -254,6 +223,13 @@ spec:
           %{ for ns in exclude_namespaces ~}
   - ${ns}
           %{ endfor }
+          %{ if mirrord_enabled }
+      - resources:
+          kinds:
+          - Pod
+          annotations:
+            operator.metalbear.co/owner: "*"
+          %{ endif }
     validate:
       message: "Volume type is not allowed. Only configMap, downwardAPI, emptyDir, persistentVolumeClaim, secret, projected, and csi volumes are permitted."
       deny:
@@ -347,32 +323,6 @@ spec:
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: require-ingress-class
-  annotations:
-    policies.kyverno.io/title: Require Ingress Class
-    policies.kyverno.io/category: Best Practices
-    policies.kyverno.io/severity: low
-    policies.kyverno.io/description: >-
-      Ingress resources should specify an ingressClassName to ensure proper routing.
-spec:
-  validationFailureAction: Enforce
-  background: true
-  rules:
-  - name: check-ingress-class
-    match:
-      any:
-      - resources:
-          kinds:
-          - Ingress
-    validate:
-      message: "Ingress must specify an ingressClassName"
-      pattern:
-        spec:
-          ingressClassName: "?*"
----
-apiVersion: kyverno.io/v1
-kind: ClusterPolicy
-metadata:
   name: require-pod-priority-class
   annotations:
     policies.kyverno.io/title: Require Pod Priority Class
@@ -397,6 +347,13 @@ spec:
           %{ for ns in exclude_namespaces ~}
   - ${ns}
           %{ endfor }
+          %{ if mirrord_enabled }
+      - resources:
+          kinds:
+          - Pod
+          annotations:
+            operator.metalbear.co/owner: "*"
+          %{ endif }
     validate:
       message: "Pod must specify a priorityClassName from the allowed list"
       anyPattern:
@@ -416,16 +373,49 @@ spec:
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
+  name: require-ingress-class
+  annotations:
+    policies.kyverno.io/title: Require Ingress Class
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/severity: low
+    policies.kyverno.io/description: >-
+      Ingress resources should specify an ingressClassName to ensure proper routing.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: check-ingress-class
+    match:
+      any:
+      - resources:
+          kinds:
+          - Ingress
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          %{ for ns in exclude_namespaces ~}
+  - ${ns}
+          %{ endfor }
+    validate:
+      message: "Ingress must specify an ingressClassName"
+      pattern:
+        spec:
+          ingressClassName: "?*"
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
   name: disallow-insecure-security-context
   annotations:
     policies.kyverno.io/title: Disallow Insecure Security Contexts
     policies.kyverno.io/category: Security
     policies.kyverno.io/severity: high
-    policies.kyverno.io/description: >
-      This policy blocks Pods and higher-level controllers from running as root,
-      allowing privilege escalation, or using privileged mode.
+    policies.kyverno.io/description: >-
+      Pods must run as non-root with privilege escalation disabled,
+      non-privileged mode, and read-only root filesystem.
 spec:
-  validationFailureAction: Enforce  # change to "Audit" to test
+  validationFailureAction: Enforce
   background: true
   rules:
     - name: disallow-root-and-privileged
@@ -434,12 +424,6 @@ spec:
           - resources:
               kinds:
                 - Pod
-                - Deployment
-                - DaemonSet
-                - StatefulSet
-                - ReplicaSet
-                - Job
-                - CronJob
       exclude:
         any:
         - resources:
@@ -447,31 +431,34 @@ spec:
             %{ for ns in exclude_namespaces ~}
   - ${ns}
             %{ endfor }
+        %{ if mirrord_enabled }
+        - resources:
+            kinds:
+            - Pod
+            annotations:
+              operator.metalbear.co/owner: "*"
+        %{ endif }
       validate:
-        message: >
+        message: >-
           Running as root, allowing privilege escalation, running privileged
           containers, or not using readOnlyRootFilesystem is not allowed.
         pattern:
           spec:
-            =(template):
-              spec:
-                containers:
-                  - securityContext:
-                      runAsNonRoot: true
-                      allowPrivilegeEscalation: false
-                      privileged: false
-                      readOnlyRootFilesystem: true
-                =(initContainers):
-                  - securityContext:
-                      runAsNonRoot: true
-                      allowPrivilegeEscalation: false
-                      privileged: false
-                      readOnlyRootFilesystem: true
-                =(ephemeralContainers):
-                  - securityContext:
-                      runAsNonRoot: true
-                      allowPrivilegeEscalation: false
-                      privileged: false
-                      readOnlyRootFilesystem: true
-            =(securityContext):
-              runAsNonRoot: true
+            containers:
+              - securityContext:
+                  runAsNonRoot: true
+                  allowPrivilegeEscalation: false
+                  =(privileged): false
+                  readOnlyRootFilesystem: true
+            =(initContainers):
+              - securityContext:
+                  runAsNonRoot: true
+                  allowPrivilegeEscalation: false
+                  =(privileged): false
+                  readOnlyRootFilesystem: true
+            =(ephemeralContainers):
+              - securityContext:
+                  runAsNonRoot: true
+                  allowPrivilegeEscalation: false
+                  =(privileged): false
+                  readOnlyRootFilesystem: true

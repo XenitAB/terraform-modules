@@ -26,6 +26,11 @@ spec:
           %{ for ns in exclude_namespaces ~}
   - ${ns}
           %{ endfor }
+      %{ if mirrord_enabled ~}
+      - resources:
+          annotations:
+            operator.metalbear.co/owner: "*"
+      %{ endif ~}
     validate:
       message: "Containers should have readiness probes configured"
       pattern:
@@ -50,7 +55,7 @@ metadata:
       is greater than or equal to the number of replicas defined in the matching
       Deployment or HPA. Prevents upgrade issues where nodes cannot be drained.
 spec:
-  validationFailureAction: enforce
+  validationFailureAction: Enforce
   background: true
   rules:
     # Rule when an HPA exists: compare minAvailable to HPA minReplicas
@@ -67,7 +72,9 @@ spec:
         any:
         - resources:
             namespaces:
-            - "kube-system"
+            %{ for ns in exclude_namespaces ~}
+  - "${ns}"
+            %{ endfor }
       context:
         - name: deployment
           apiCall:
@@ -110,7 +117,9 @@ spec:
         any:
         - resources:
             namespaces:
-            - "kube-system"
+            %{ for ns in exclude_namespaces ~}
+  - "${ns}"
+            %{ endfor }
       context:
         - name: deployment
           apiCall:
@@ -151,7 +160,7 @@ metadata:
     policies.kyverno.io/description: >-
       Denies a Deployment scale operation that would set replicas less than or equal to a matching PodDisruptionBudget minAvailable.
 spec:
-  validationFailureAction: enforce
+  validationFailureAction: Enforce
   background: false # subresources cannot be background scanned
   rules:
     - name: deny-deployment-scale-below-pdb-minavailable
@@ -214,7 +223,7 @@ metadata:
       must be strictly less than the available replica count. This prevents node drain
       deadlocks during upgrades and maintenance.
 spec:
-  validationFailureAction: enforce
+  validationFailureAction: Enforce
   background: true
   rules:
     - name: deny-pdb-minavailable-zero
@@ -230,7 +239,9 @@ spec:
         any:
         - resources:
             namespaces:
-            - "kube-system"
+            %{ for ns in exclude_namespaces ~}
+  - "${ns}"
+            %{ endfor }
       preconditions:
         all:
           - key: "{{ request.object.spec.minAvailable || '' }}"
@@ -257,7 +268,9 @@ spec:
         any:
         - resources:
             namespaces:
-            - "kube-system"
+            %{ for ns in exclude_namespaces ~}
+  - "${ns}"
+            %{ endfor }
       context:
         - name: deployment
           apiCall:
@@ -302,7 +315,9 @@ spec:
         any:
         - resources:
             namespaces:
-            - "kube-system"
+            %{ for ns in exclude_namespaces ~}
+  - "${ns}"
+            %{ endfor }
       context:
         - name: deployment
           apiCall:

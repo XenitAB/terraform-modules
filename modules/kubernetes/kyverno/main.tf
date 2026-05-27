@@ -67,28 +67,43 @@ resource "git_repository_file" "kyverno_audit_policies" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kyverno/manifests/policies/kyverno-audit-policies.yaml"
   content = templatefile("${path.module}/templates/kyverno-audit-policies.yaml.tpl", {
     exclude_namespaces = var.kyverno_config.exclude_namespaces
+    mirrord_enabled    = var.mirrord_enabled
   })
 }
 
-resource "git_repository_file" "kyverno_mutation_policies" {
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kyverno/manifests/policies/kyverno-mutation-policies.yaml"
-  content = templatefile("${path.module}/templates/kyverno-mutation-policies.yaml.tpl", {
-  })
-}
-
-resource "git_repository_file" "kyverno_security_policies" {
+resource "git_repository_file" "kyverno_mutation_policies_default_security_context" {
   count = var.azure_policy_enabled ? 0 : 1
 
-  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kyverno/manifests/policies/kyverno-security-policies.yaml"
-  content = templatefile("${path.module}/templates/kyverno-security-policies.yaml.tpl", {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kyverno/manifests/policies/kyverno-mutation-policies-default-security-context.yaml"
+  content = templatefile("${path.module}/templates/kyverno-mutation-policies-default-security-context.yaml.tpl", {
     exclude_namespaces = var.kyverno_config.exclude_namespaces
     mirrord_enabled    = var.mirrord_enabled
   })
 }
 
-resource "git_repository_file" "kyverno_flux_policies" {
+resource "git_repository_file" "kyverno_mutation_policies_extras" {
+  path    = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kyverno/manifests/policies/kyverno-mutation-policies-extras.yaml"
+  content = templatefile("${path.module}/templates/kyverno-mutation-policies-extras.yaml.tpl", {})
+}
+
+resource "git_repository_file" "kyverno_security_policies_aks_managed" {
   count = var.azure_policy_enabled ? 0 : 1
 
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kyverno/manifests/policies/kyverno-security-policies-aks-managed.yaml"
+  content = templatefile("${path.module}/templates/kyverno-security-policies-aks-managed.yaml.tpl", {
+    exclude_namespaces = var.kyverno_config.exclude_namespaces
+    mirrord_enabled    = var.mirrord_enabled
+  })
+}
+
+resource "git_repository_file" "kyverno_security_policies_extras" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kyverno/manifests/policies/kyverno-security-policies-extras.yaml"
+  content = templatefile("${path.module}/templates/kyverno-security-policies-extras.yaml.tpl", {
+    exclude_namespaces = var.kyverno_config.exclude_namespaces
+  })
+}
+
+resource "git_repository_file" "kyverno_flux_policies" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kyverno/manifests/policies/kyverno-flux-policies.yaml"
   content = templatefile("${path.module}/templates/kyverno-flux-policies.yaml.tpl", {
   })

@@ -198,3 +198,139 @@ spec:
               - key: "{{ request.object.spec.replicas }}"
                 operator: Equals
                 value: "{{ pdbs[0].spec.minAvailable }}"
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: deny-pdb-no-disruption-allowed
+  annotations:
+    policies.kyverno.io/title: Deny PDB that blocks all disruptions
+    policies.kyverno.io/category: Reliability
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/description: >-
+      Denies creation of a PodDisruptionBudget where minAvailable is set to a value
+      that would prevent any voluntary disruptions. minAvailable must be at least 1
+      (not zero) and must leave room for at least one pod to be evicted, meaning it
+      must be strictly less than the available replica count. This prevents node drain
+      deadlocks during upgrades and maintenance.
+spec:
+  validationFailureAction: enforce
+  background: true
+  rules:
+    - name: deny-pdb-minavailable-zero
+      match:
+        any:
+        - resources:
+            kinds:
+            - PodDisruptionBudget
+            operations:
+            - CREATE
+            - UPDATE
+      exclude:
+        any:
+        - resources:
+            namespaces:
+            - "kube-system"
+      preconditions:
+        all:
+          - key: "{{ request.object.spec.minAvailable || '' }}"
+            operator: NotEquals
+            value: ""
+      validate:
+        message: "PodDisruptionBudget minAvailable must be at least 1."
+        deny:
+          conditions:
+            any:
+              - key: "{{ request.object.spec.minAvailable }}"
+                operator: LessThan
+                value: 1
+    - name: deny-pdb-minavailable-equals-replicas-with-hpa
+      match:
+        any:
+        - resources:
+            kinds:
+            - PodDisruptionBudget
+            operations:
+            - CREATE
+            - UPDATE
+      exclude:
+        any:
+        - resources:
+            namespaces:
+            - "kube-system"
+      context:
+        - name: deployment
+          apiCall:
+            urlPath: "/apis/apps/v1/namespaces/{{ request.namespace }}/deployments"
+            jmesPath: "items[?spec.selector.matchLabels.app==request.object.spec.selector.matchLabels.app || spec.selector.matchLabels.\"app.kubernetes.io/name\"==request.object.spec.selector.matchLabels.\"app.kubernetes.io/name\"]"
+        - name: hpa
+          apiCall:
+            urlPath: "/apis/autoscaling/v2/namespaces/{{ request.namespace }}/horizontalpodautoscalers"
+            jmesPath: "items[?spec.scaleTargetRef.kind=='Deployment' && spec.scaleTargetRef.name==deployment[0].metadata.name]"
+      preconditions:
+        all:
+          - key: "{{ request.object.spec.selector.matchLabels | length(@) }}"
+            operator: GreaterThan
+            value: 0
+          - key: "{{ deployment | length(@) }}"
+            operator: GreaterThan
+            value: 0
+          - key: "{{ hpa | length(@) }}"
+            operator: GreaterThan
+            value: 0
+          - key: "{{ request.object.spec.minAvailable || '' }}"
+            operator: NotEquals
+            value: ""
+      validate:
+        message: "PodDisruptionBudget minAvailable must be strictly less than HPA minReplicas to allow at least one disruption."
+        deny:
+          conditions:
+            any:
+              - key: "{{ request.object.spec.minAvailable }}"
+                operator: GreaterThanOrEquals
+                value: "{{ hpa[0].spec.minReplicas }}"
+    - name: deny-pdb-minavailable-equals-replicas-no-hpa
+      match:
+        any:
+        - resources:
+            kinds:
+            - PodDisruptionBudget
+            operations:
+            - CREATE
+            - UPDATE
+      exclude:
+        any:
+        - resources:
+            namespaces:
+            - "kube-system"
+      context:
+        - name: deployment
+          apiCall:
+            urlPath: "/apis/apps/v1/namespaces/{{ request.namespace }}/deployments"
+            jmesPath: "items[?spec.selector.matchLabels.app==request.object.spec.selector.matchLabels.app || spec.selector.matchLabels.\"app.kubernetes.io/name\"==request.object.spec.selector.matchLabels.\"app.kubernetes.io/name\"]"
+        - name: hpa
+          apiCall:
+            urlPath: "/apis/autoscaling/v2/namespaces/{{ request.namespace }}/horizontalpodautoscalers"
+            jmesPath: "items[?spec.scaleTargetRef.kind=='Deployment' && spec.scaleTargetRef.name==deployment[0].metadata.name]"
+      preconditions:
+        all:
+          - key: "{{ request.object.spec.selector.matchLabels | length(@) }}"
+            operator: GreaterThan
+            value: 0
+          - key: "{{ deployment | length(@) }}"
+            operator: GreaterThan
+            value: 0
+          - key: "{{ hpa | length(@) }}"
+            operator: Equals
+            value: 0
+          - key: "{{ request.object.spec.minAvailable || '' }}"
+            operator: NotEquals
+            value: ""
+      validate:
+        message: "PodDisruptionBudget minAvailable must be strictly less than Deployment replicas to allow at least one disruption."
+        deny:
+          conditions:
+            any:
+              - key: "{{ request.object.spec.minAvailable }}"
+                operator: GreaterThanOrEquals
+                value: "{{ deployment[0].spec.replicas }}"

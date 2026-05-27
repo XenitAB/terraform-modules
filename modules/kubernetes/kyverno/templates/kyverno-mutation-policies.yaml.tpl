@@ -1,5 +1,145 @@
-apiVersion: kyverno.io/v2alpha1
-kind: MutatePolicy
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: default-security-context
+  annotations:
+    policies.kyverno.io/title: Default Security Context
+    policies.kyverno.io/category: Security
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/description: >-
+      Sets secure defaults for pod and container security contexts when not already specified.
+      Equivalent to gatekeeper Assign mutations for allowPrivilegeEscalation, readOnlyRootFilesystem,
+      capabilities drop, seccompProfile, and automountServiceAccountToken.
+spec:
+  background: true
+  rules:
+  - name: default-allow-privilege-escalation
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          - kyverno
+    mutate:
+      patchStrategicMerge:
+        spec:
+          containers:
+          - (name): "*"
+            securityContext:
+              +(allowPrivilegeEscalation): false
+          initContainers:
+          - (name): "*"
+            securityContext:
+              +(allowPrivilegeEscalation): false
+          ephemeralContainers:
+          - (name): "*"
+            securityContext:
+              +(allowPrivilegeEscalation): false
+  - name: default-read-only-root-filesystem
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          - kyverno
+    mutate:
+      patchStrategicMerge:
+        spec:
+          containers:
+          - (name): "*"
+            securityContext:
+              +(readOnlyRootFilesystem): true
+          initContainers:
+          - (name): "*"
+            securityContext:
+              +(readOnlyRootFilesystem): true
+          ephemeralContainers:
+          - (name): "*"
+            securityContext:
+              +(readOnlyRootFilesystem): true
+  - name: default-drop-capabilities
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          - kyverno
+    mutate:
+      patchStrategicMerge:
+        spec:
+          containers:
+          - (name): "*"
+            securityContext:
+              capabilities:
+                +(drop):
+                - NET_RAW
+                - CAP_SYS_ADMIN
+          initContainers:
+          - (name): "*"
+            securityContext:
+              capabilities:
+                +(drop):
+                - NET_RAW
+                - CAP_SYS_ADMIN
+          ephemeralContainers:
+          - (name): "*"
+            securityContext:
+              capabilities:
+                +(drop):
+                - NET_RAW
+                - CAP_SYS_ADMIN
+  - name: default-seccomp-profile
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          - kyverno
+    mutate:
+      patchStrategicMerge:
+        spec:
+          +(securityContext):
+            seccompProfile:
+              type: RuntimeDefault
+  - name: default-automount-service-account-token
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          - kyverno
+    mutate:
+      patchStrategicMerge:
+        spec:
+          +(automountServiceAccountToken): false
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
 metadata:
   name: remove-azure-spot-taints
   annotations:
@@ -17,17 +157,28 @@ spec:
       - resources:
           kinds:
           - Node
+    preconditions:
+      all:
+      - key: "{{ request.object.spec.taints[] || `[]` | length(@) }}"
+        operator: GreaterThan
+        value: 0
     mutate:
-      patchesJson6902: |-
-        - path: "/spec/taints"
-          op: remove
-          value:
-          - effect: NoSchedule
-            key: kubernetes.azure.com/scalesetpriority
-            value: spot
+      foreach:
+      - list: "request.object.spec.taints"
+        preconditions:
+          all:
+          - key: "{{ element.key }}"
+            operator: Equals
+            value: "kubernetes.azure.com/scalesetpriority"
+          - key: "{{ element.effect }}"
+            operator: Equals
+            value: "NoSchedule"
+        patchesJson6902: |-
+          - path: "/spec/taints/{{ elementIndex }}"
+            op: remove
 ---
-apiVersion: kyverno.io/v2alpha1
-kind: MutatePolicy
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
 metadata:
   name: mutate-deployment-replicas-based-on-pdb
   annotations:
@@ -57,7 +208,7 @@ spec:
         operator: GreaterThan
         value: 0
     mutate:
-      forEach:
+      foreach:
       - list: "{{ pdbs }}"
         preconditions:
           all:
@@ -78,8 +229,8 @@ spec:
           spec:
             replicas: "{{ add(element.spec.minAvailable, `1`) }}"
 ---
-apiVersion: kyverno.io/v2alpha1
-kind: MutatePolicy
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
 metadata:
   name: mutate-hpa-replicas-based-on-pdb
   annotations:
@@ -119,7 +270,7 @@ spec:
         operator: GreaterThan
         value: 0
     mutate:
-      forEach:
+      foreach:
       - list: "{{ pdbs }}"
         preconditions:
           all:
@@ -140,8 +291,8 @@ spec:
           spec:
             minReplicas: "{{ add(element.spec.minAvailable, `1`) }}"
 ---
-apiVersion: kyverno.io/v2alpha1
-kind: GeneratePolicy
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
 metadata:
   name: mutate-resources-on-pdb-changes
   annotations:
@@ -176,7 +327,7 @@ spec:
         operator: GreaterThan
         value: 0
     generate:
-      forEach:
+      foreach:
       - list: "{{ deployments }}"
         preconditions:
           all:
@@ -228,7 +379,7 @@ spec:
         operator: GreaterThan
         value: 0
     generate:
-      forEach:
+      foreach:
       - list: "{{ hpas }}"
         context:
         - name: targetDeployment

@@ -77,13 +77,18 @@ resource "git_repository_file" "kyverno_mutation_policies" {
 }
 
 resource "git_repository_file" "kyverno_security_policies" {
+  count = var.azure_policy_enabled ? 0 : 1
+
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kyverno/manifests/policies/kyverno-security-policies.yaml"
   content = templatefile("${path.module}/templates/kyverno-security-policies.yaml.tpl", {
     exclude_namespaces = var.kyverno_config.exclude_namespaces
+    mirrord_enabled    = var.mirrord_enabled
   })
 }
 
 resource "git_repository_file" "kyverno_flux_policies" {
+  count = var.azure_policy_enabled ? 0 : 1
+
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/kyverno/manifests/policies/kyverno-flux-policies.yaml"
   content = templatefile("${path.module}/templates/kyverno-flux-policies.yaml.tpl", {
   })

@@ -30,23 +30,52 @@ spec:
     helm:
       releaseName: kyverno
       valuesObject:
-        replicaCount: ${kyverno_config.admission_controller_replicas}
-
         admissionController:
           replicas: ${kyverno_config.admission_controller_replicas}
+          priorityClassName: platform-high
           serviceMonitor:
-            enabled: false #check why this is here
+            enabled: false
           webhookAnnotations:
-            admissions.enforcer/disabled: "true" #check why this is here
+            admissions.enforcer/disabled: "true"
+          container:
+            resources:
+              requests:
+                cpu: 100m
+                memory: 256Mi
+              limits:
+                memory: 750Mi
+          tolerations:
+            - key: "kubernetes.azure.com/scalesetpriority"
+              operator: "Equal"
+              value: "spot"
+              effect: "NoSchedule"
 
         backgroundController:
           replicas: ${kyverno_config.background_controller_replicas}
+          priorityClassName: platform-high
+          tolerations:
+            - key: "kubernetes.azure.com/scalesetpriority"
+              operator: "Equal"
+              value: "spot"
+              effect: "NoSchedule"
 
         cleanupController:
           replicas: ${kyverno_config.cleanup_controller_replicas}
+          priorityClassName: platform-high
+          tolerations:
+            - key: "kubernetes.azure.com/scalesetpriority"
+              operator: "Equal"
+              value: "spot"
+              effect: "NoSchedule"
 
         reportsController:
           replicas: ${kyverno_config.reports_controller_replicas}
+          priorityClassName: platform-high
+          tolerations:
+            - key: "kubernetes.azure.com/scalesetpriority"
+              operator: "Equal"
+              value: "spot"
+              effect: "NoSchedule"
 
         metricsConfig:
           metricsRefreshInterval: 30s

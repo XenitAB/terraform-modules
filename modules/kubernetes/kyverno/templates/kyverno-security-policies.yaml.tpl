@@ -56,9 +56,12 @@ spec:
           - Service
     validate:
       message: "Services with external IPs are not allowed"
-      pattern:
-        spec:
-          X(externalIPs): "null"
+      deny:
+        conditions:
+          any:
+          - key: "{{ request.object.spec.externalIPs || `[]` | length(@) }}"
+            operator: GreaterThan
+            value: 0
 
 ---
 apiVersion: kyverno.io/v1
@@ -89,6 +92,13 @@ spec:
           %{ for ns in exclude_namespaces ~}
   - ${ns}
           %{ endfor }
+          %{ if mirrord_enabled }
+      - resources:
+          kinds:
+          - Pod
+          annotations:
+            operator.metalbear.co/owner: "*"
+          %{ endif }
     validate:
       message: "Privileged containers are not allowed"
       pattern:
@@ -137,6 +147,13 @@ spec:
           %{ for ns in exclude_namespaces ~}
   - ${ns}
           %{ endfor }
+          %{ if mirrord_enabled }
+      - resources:
+          kinds:
+          - Pod
+          annotations:
+            operator.metalbear.co/owner: "*"
+          %{ endif }
     validate:
       message: "Sharing the host namespaces is disallowed"
       pattern:
@@ -254,6 +271,13 @@ spec:
           %{ for ns in exclude_namespaces ~}
   - ${ns}
           %{ endfor }
+          %{ if mirrord_enabled }
+      - resources:
+          kinds:
+          - Pod
+          annotations:
+            operator.metalbear.co/owner: "*"
+          %{ endif }
     validate:
       message: "Volume type is not allowed. Only configMap, downwardAPI, emptyDir, persistentVolumeClaim, secret, projected, and csi volumes are permitted."
       deny:
@@ -421,11 +445,11 @@ metadata:
     policies.kyverno.io/title: Disallow Insecure Security Contexts
     policies.kyverno.io/category: Security
     policies.kyverno.io/severity: high
-    policies.kyverno.io/description: >
-      This policy blocks Pods and higher-level controllers from running as root,
-      allowing privilege escalation, or using privileged mode.
+    policies.kyverno.io/description: >-
+      Pods must run as non-root with privilege escalation disabled,
+      non-privileged mode, and read-only root filesystem.
 spec:
-  validationFailureAction: Enforce  # change to "Audit" to test
+  validationFailureAction: Enforce
   background: true
   rules:
     - name: disallow-root-and-privileged
@@ -434,12 +458,6 @@ spec:
           - resources:
               kinds:
                 - Pod
-                - Deployment
-                - DaemonSet
-                - StatefulSet
-                - ReplicaSet
-                - Job
-                - CronJob
       exclude:
         any:
         - resources:
@@ -447,31 +465,143 @@ spec:
             %{ for ns in exclude_namespaces ~}
   - ${ns}
             %{ endfor }
+        %{ if mirrord_enabled }
+        - resources:
+            kinds:
+            - Pod
+            annotations:
+              operator.metalbear.co/owner: "*"
+        %{ endif }
       validate:
-        message: >
+        message: >-
           Running as root, allowing privilege escalation, running privileged
           containers, or not using readOnlyRootFilesystem is not allowed.
         pattern:
           spec:
-            =(template):
-              spec:
-                containers:
-                  - securityContext:
-                      runAsNonRoot: true
-                      allowPrivilegeEscalation: false
-                      privileged: false
-                      readOnlyRootFilesystem: true
-                =(initContainers):
-                  - securityContext:
-                      runAsNonRoot: true
-                      allowPrivilegeEscalation: false
-                      privileged: false
-                      readOnlyRootFilesystem: true
-                =(ephemeralContainers):
-                  - securityContext:
-                      runAsNonRoot: true
-                      allowPrivilegeEscalation: false
-                      privileged: false
-                      readOnlyRootFilesystem: true
-            =(securityContext):
-              runAsNonRoot: true
+            containers:
+              - securityContext:
+                  runAsNonRoot: true
+                  allowPrivilegeEscalation: false
+                  =(privileged): false
+                  readOnlyRootFilesystem: true
+            =(initContainers):
+              - securityContext:
+                  runAsNonRoot: true
+                  allowPrivilegeEscalation: false
+                  =(privileged): false
+                  readOnlyRootFilesystem: true
+            =(ephemeralContainers):
+              - securityContext:
+                  runAsNonRoot: true
+                  allowPrivilegeEscalation: false
+                  =(privileged): false
+                  readOnlyRootFilesystem: true
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-loadbalancer-services
+  annotations:
+    policies.kyverno.io/title: Disallow LoadBalancer Services
+    policies.kyverno.io/category: Security
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/description: >-
+      LoadBalancer services expose workloads directly to the internet. This policy
+      prevents the use of LoadBalancer services to enforce traffic routing through
+      ingress controllers.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: disallow-loadbalancer
+    match:
+      any:
+      - resources:
+          kinds:
+          - Service
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          %{ for ns in exclude_namespaces ~}
+  - ${ns}
+          %{ endfor }
+    validate:
+      message: "Services of type LoadBalancer are not allowed"
+      pattern:
+        spec:
+          type: "!LoadBalancer"
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-wildcard-ingress
+  annotations:
+    policies.kyverno.io/title: Disallow Wildcard Ingress
+    policies.kyverno.io/category: Security
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/description: >-
+      Ingress resources should not use wildcard hostnames as they can intercept traffic
+      for all hostnames in the cluster. This policy blocks Ingress resources that use
+      a wildcard (*) as the hostname.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: disallow-wildcard-hostname
+    match:
+      any:
+      - resources:
+          kinds:
+          - Ingress
+    validate:
+      message: "Wildcard (*) hostname in Ingress is not allowed"
+      deny:
+        conditions:
+          any:
+          - key: "{{ request.object.spec.rules[?host == '*'] | length(@) }}"
+            operator: GreaterThan
+            value: 0
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-unique-csi-volumes
+  annotations:
+    policies.kyverno.io/title: Require Unique CSI SecretProviderClass
+    policies.kyverno.io/category: Security
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/description: >-
+      Each secrets-store CSI volume must reference a unique secretProviderClass to
+      prevent unintended secret sharing between volumes. This policy enforces that
+      no two CSI volumes in a Pod use the same secretProviderClass.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: unique-secret-provider-class
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          %{ for ns in exclude_namespaces ~}
+  - ${ns}
+          %{ endfor }
+    preconditions:
+      all:
+      - key: "{{ request.object.spec.volumes[?csi && csi.driver == 'secrets-store.csi.k8s.io'] | length(@) }}"
+        operator: GreaterThan
+        value: 0
+    validate:
+      message: "Each secrets-store CSI volume must use a unique secretProviderClass"
+      deny:
+        conditions:
+          any:
+          - key: "{{ request.object.spec.volumes[?csi && csi.driver == 'secrets-store.csi.k8s.io'].csi.volumeAttributes.secretProviderClass | length(@) }}"
+            operator: NotEquals
+            value: "{{ request.object.spec.volumes[?csi && csi.driver == 'secrets-store.csi.k8s.io'].csi.volumeAttributes.secretProviderClass | unique(@) | length(@) }}"

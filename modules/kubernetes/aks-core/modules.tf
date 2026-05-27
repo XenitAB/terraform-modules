@@ -342,12 +342,14 @@ module "kyverno" {
 
   source = "../../kubernetes/kyverno"
 
-  cluster_id         = local.cluster_id
-  tenant_name        = var.platform_config.tenant_name
-  environment        = var.environment
-  fleet_infra_config = var.platform_config.fleet_infra_config
+  cluster_id           = local.cluster_id
+  azure_policy_enabled = var.platform_config.azure_policy_enabled
+  mirrord_enabled      = var.platform_config.mirrord_enabled
+  tenant_name          = var.platform_config.tenant_name
+  environment          = var.environment
+  fleet_infra_config   = var.platform_config.fleet_infra_config
   kyverno_config = {
-    exclude_namespaces = var.kyverno_config.exclude_namespaces
+    exclude_namespaces = concat(var.kyverno_config.exclude_namespaces, local.exclude_namespaces)
   }
 }
 

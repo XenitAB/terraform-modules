@@ -20,8 +20,6 @@ variable "azure_policy_config" {
   })
   default = {
     exclude_namespaces = [
-      "linkerd",
-      "linkerd-cni",
       "velero",
       "grafana-alloy",
     ]

@@ -41,6 +41,21 @@ resource "azurerm_federated_identity_credential" "argocd_application_controller"
   subject             = "system:serviceaccount:argocd:argocd-application-controller"
 }
 
+resource "azurerm_federated_identity_credential" "argocd_repo_server" {
+  for_each = {
+    for env, url in var.argocd_config.oidc_issuer_url :
+    env => url
+    if var.argocd_config.oidc_issuer_url != ""
+  }
+
+  name                = "argocd-repo-server-${each.key}"
+  resource_group_name = azurerm_user_assigned_identity.argocd.resource_group_name
+  parent_id           = azurerm_user_assigned_identity.argocd.id
+  audience            = ["api://AzureADTokenExchange"]
+  issuer              = each.value
+  subject             = "system:serviceaccount:argocd:argocd-repo-server"
+}
+
 resource "azurerm_key_vault_access_policy" "argocd" {
   key_vault_id       = data.azurerm_key_vault.core.id
   tenant_id          = data.azurerm_client_config.current.tenant_id

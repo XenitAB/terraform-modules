@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### 🚀 New Features
+- Feat: argocd hub/hub-spoke wi auth for devops by @CalleB3 in [#1461](https://github.com/XenitAB/terraform-modules/pulls/1461)
 - Feat: codeowners by @yabracadabra in [#1462](https://github.com/XenitAB/terraform-modules/pulls/1462)
 - Feat: kyverno draft push a lot of needs to be fixed but i want to get it out … by @optocoupler in [#1438](https://github.com/XenitAB/terraform-modules/pulls/1438)
 - Feat: add healthz endpoint to envoy-gateway by @CalleB3 in [#1423](https://github.com/XenitAB/terraform-modules/pulls/1423)
@@ -16,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### 🐛 Bug Fixes
+- Fix: add lifecycle_ignore to upgrade_override by @CalleB3 in [#1468](https://github.com/XenitAB/terraform-modules/pulls/1468)
+- Fix: remove dynamic from force_upgrade_enabled to prevent null value by @CalleB3 in [#1467](https://github.com/XenitAB/terraform-modules/pulls/1467)
+- Fix: change Falco driver kind from ebpf to auto by @yabracadabra in [#1463](https://github.com/XenitAB/terraform-modules/pulls/1463)
 - Fix: removed shell dept on kubectl exec by @yabracadabra in [#1460](https://github.com/XenitAB/terraform-modules/pulls/1460)
 - Fix: added chainguard images by @yabracadabra in [#1458](https://github.com/XenitAB/terraform-modules/pulls/1458)
 - Fix: modify namespace exclusions in azure-policy locals by @yabracadabra in [#1457](https://github.com/XenitAB/terraform-modules/pulls/1457)

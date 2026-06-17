@@ -13,7 +13,7 @@ resource "kubernetes_namespace" "tenant" {
   }
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 

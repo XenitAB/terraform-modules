@@ -317,6 +317,14 @@ variable "external_secrets_config" {
   default = {}
 }
 
+variable "falco_config" {
+  description = "Configuration for falco"
+  type = object({
+    driver_kind = optional(string, "modern_ebpf")
+  })
+  default = {}
+}
+
 variable "fluxcd_config" {
   description = "Configuration for FluxCD"
   type = object({

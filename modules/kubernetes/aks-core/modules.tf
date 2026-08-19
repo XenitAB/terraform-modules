@@ -279,6 +279,7 @@ module "falco" {
 
   cluster_id         = local.cluster_id
   cilium_enabled     = var.platform_config.cilium_enabled
+  driver_kind        = var.falco_config.driver_kind
   tenant_name        = var.platform_config.tenant_name
   environment        = var.environment
   fleet_infra_config = var.platform_config.fleet_infra_config

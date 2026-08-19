@@ -186,7 +186,6 @@ spec:
             - macro: user_known_contact_k8s_api_server_activities
               condition: >
                 (container.image.repository in (
-                  "kubernetes-sigs.github.io/external-dns",
                   "ghcr.io/xenitab/git-auth-proxy",
                   "docker.io/grafana/loki",
                   "grafana/fluent-bit-plugin-loki",

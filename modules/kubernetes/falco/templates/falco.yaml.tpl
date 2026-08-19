@@ -25,7 +25,7 @@ spec:
     - Replace=true
   source:
     repoURL: https://falcosecurity.github.io/charts
-    targetRevision: 9.1.0 #skipped_20260819 falcoctl ruleset refs below are pinned to this chart's Falco version and have to be bumped in the same change
+    targetRevision: 9.1.0
     chart: falco
     helm:
       valuesObject:
@@ -47,8 +47,14 @@ spec:
         # The three rulesets version independently of one another. falco-rules
         # tracks the Falco release - 5.1.0 is exactly what the 0.44.1 image bakes
         # in, same layer digest as cmake/modules/rules.cmake pins - while the
-        # incubating and sandbox rulesets are on their own major. Bump all three
-        # together with the chart.
+        # incubating and sandbox rulesets are on their own major.
+        # NOTE FOR CHART BUMPS: these three refs are tied to the chart's Falco
+        # version and do not move on their own. When targetRevision above changes
+        # - including when tf-latest-version raises it automatically - check the
+        # new image's cmake/modules/rules.cmake for the falco-rules version it
+        # bakes in and pick the incubating/sandbox majors that declare the same
+        # required_engine_version. Leaving them behind loads a ruleset the engine
+        # may reject, or one whose macro names have drifted again.
         # follow is off: with exact pins there is nothing to follow, and a sidecar
         # that re-resolves refs on its own schedule can move the loaded ruleset
         # out from under git. Its refs are kept in sync regardless, so turning it

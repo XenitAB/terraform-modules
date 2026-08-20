@@ -9,6 +9,17 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "driver_kind" {
+  description = "Which Falco driver to use. Falco 0.44 removed the legacy BPF probe, so the remaining options are modern_ebpf, kmod and auto."
+  type        = string
+  default     = "modern_ebpf"
+
+  validation {
+    condition     = contains(["modern_ebpf", "kmod", "auto"], var.driver_kind)
+    error_message = "driver_kind must be one of modern_ebpf, kmod or auto."
+  }
+}
+
 variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string

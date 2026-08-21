@@ -136,9 +136,18 @@ spec:
         # coarse for rule-hit alerting).
         metrics:
           enabled: true
-          interval: 15m
+          interval: 1h # default is 15m for prod
           # preserves the previous falco.metrics.output_rule: true
           outputRule: true
+          rules_counters_enabled: false # mind the cost/ingestion to grafana cloud
+          resource_utilization_enabled: false
+          kernel_event_counters_enabled: true
+          kernel_event_counters_per_cpu_enabled: false # per-CPU is noisy!
+          state_counters_enabled: false
+          libbpf_stats_enabled: false
+          plugins_metrics_enabled: false
+          convert_memory_to_mb: true
+
         podPriorityClassName: platform-high
         scc:
           # -- Create OpenShift's Security Context Constraint.

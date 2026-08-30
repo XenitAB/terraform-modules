@@ -7,7 +7,7 @@ Sends only node metrics to Grafana Cloud.
 
 | Name | Version |
 | ---- | ------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.57.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
 
@@ -28,6 +28,7 @@ No modules.
 | ---- | ---- |
 | [azurerm_federated_identity_credential.grafana_k8s_monitor_billable](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/federated_identity_credential) | resource |
 | [azurerm_key_vault_access_policy.grafana_k8s_monitor_billable](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_role_assignment.grafana_k8s_monitor_billable_kv_secrets_user](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/role_assignment) | resource |
 | [azurerm_user_assigned_identity.grafana_k8s_monitor_billable](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/user_assigned_identity) | resource |
 | [git_repository_file.grafana_k8s_monitoring_billable](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.grafana_k8s_monitoring_billable_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
@@ -45,6 +46,7 @@ No modules.
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name (dev, qa, prod) | `string` | n/a | yes |
 | <a name="input_fleet_infra_config"></a> [fleet\_infra\_config](#input\_fleet\_infra\_config) | Fleet infrastructure configuration | <pre>object({<br/>    argocd_project_name = string<br/>    git_repo_url        = string<br/>    k8s_api_server_url  = string<br/>  })</pre> | n/a | yes |
 | <a name="input_key_vault_id"></a> [key\_vault\_id](#input\_key\_vault\_id) | ID of the Azure Key Vault | `string` | n/a | yes |
+| <a name="input_key_vault_rbac_enabled"></a> [key\_vault\_rbac\_enabled](#input\_key\_vault\_rbac\_enabled) | If true, grant the grafana-k8s-monitoring-billable workload-identity user-assigned identity access to the Key Vault using an Azure RBAC role assignment (Key Vault Secrets User) instead of an access policy. Set this to true when the target Key Vault was created with `enable_rbac_authorization = true`. | `bool` | `false` | no |
 | <a name="input_location"></a> [location](#input\_location) | Azure region | `string` | n/a | yes |
 | <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | Kubernetes OIDC issuer URL for workload identity | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | Name of the Azure resource group | `string` | n/a | yes |

@@ -36,6 +36,8 @@ resource "azurerm_key_vault_secret" "delegate_kv_aad" {
 
   depends_on = [
     azurerm_key_vault_access_policy.ap_kvreader_sp,
-    azurerm_key_vault_access_policy.ap_owner_spn
+    azurerm_key_vault_access_policy.ap_owner_spn,
+    azurerm_role_assignment.rbac_kvreader_sp,
+    azurerm_role_assignment.rbac_owner_spn
   ]
 }

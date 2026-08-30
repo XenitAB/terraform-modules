@@ -12,7 +12,7 @@ Setup an image using Packer according [github-runner](https://github.com/XenitAB
 
 | Name | Version |
 | ---- | ------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.57.0 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.4 |
 
@@ -34,6 +34,7 @@ No modules.
 | [azurerm_key_vault_access_policy.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_secret.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_linux_virtual_machine_scale_set.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/linux_virtual_machine_scale_set) | resource |
+| [azurerm_role_assignment.kv_secrets_user](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/role_assignment) | resource |
 | [tls_private_key.this](https://registry.terraform.io/providers/hashicorp/tls/4.0.4/docs/resources/private_key) | resource |
 | [azurerm_key_vault.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/data-sources/key_vault) | data source |
 | [azurerm_key_vault_secret.github_secrets](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/data-sources/key_vault_secret) | data source |
@@ -50,6 +51,7 @@ No modules.
 | <a name="input_github_installation_id_kvsecret"></a> [github\_installation\_id\_kvsecret](#input\_github\_installation\_id\_kvsecret) | The Azure KeyVault Secret containing the GitHub App Installation ID | `string` | `"github-installation-id"` | no |
 | <a name="input_github_organization_kvsecret"></a> [github\_organization\_kvsecret](#input\_github\_organization\_kvsecret) | The Azure KeyVault Secret containing the GitHub Organization name | `string` | `"github-organization"` | no |
 | <a name="input_github_private_key_kvsecret"></a> [github\_private\_key\_kvsecret](#input\_github\_private\_key\_kvsecret) | The AzureKey Vault Secret containing the GitHub App Private Key | `string` | `"github-private-key"` | no |
+| <a name="input_key_vault_rbac_enabled"></a> [key\_vault\_rbac\_enabled](#input\_key\_vault\_rbac\_enabled) | If true, grant the VMSS system-assigned identity access to the Key Vault using an Azure RBAC role assignment (Key Vault Secrets User) instead of an access policy. Set this to true when the target Key Vault was created with `enable_rbac_authorization = true`. | `bool` | `false` | no |
 | <a name="input_keyvault_name"></a> [keyvault\_name](#input\_keyvault\_name) | The keyvault name | `string` | `""` | no |
 | <a name="input_keyvault_resource_group_name"></a> [keyvault\_resource\_group\_name](#input\_keyvault\_resource\_group\_name) | The keyvault resource group name | `string` | `""` | no |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The Azure region short name | `string` | n/a | yes |

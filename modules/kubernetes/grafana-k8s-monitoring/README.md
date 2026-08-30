@@ -6,7 +6,7 @@ Adds [grafana-k8s-monitoring](https://github.com/grafana/k8s-monitoring-helm/tre
 
 | Name | Version |
 | ---- | ------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.57.0 |
 | <a name="requirement_git"></a> [git](#requirement\_git) | >=0.0.4 |
 
@@ -27,6 +27,7 @@ No modules.
 | ---- | ---- |
 | [azurerm_federated_identity_credential.grafana_k8s_monitor](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/federated_identity_credential) | resource |
 | [azurerm_key_vault_access_policy.grafana_k8s_monitor](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_role_assignment.grafana_k8s_monitor_kv_secrets_user](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/role_assignment) | resource |
 | [azurerm_user_assigned_identity.grafana_k8s_monitor](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/user_assigned_identity) | resource |
 | [git_repository_file.grafana_k8s_monitoring](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.grafana_k8s_monitoring_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
@@ -53,6 +54,7 @@ No modules.
 | <a name="input_grafana_alloy_enabled"></a> [grafana\_alloy\_enabled](#input\_grafana\_alloy\_enabled) | Should grafana-alloy be enabled | `bool` | `false` | no |
 | <a name="input_grafana_k8s_monitor_config"></a> [grafana\_k8s\_monitor\_config](#input\_grafana\_k8s\_monitor\_config) | Configuration for the username and password | <pre>object({<br/>    grafana_cloud_prometheus_host = string<br/>    grafana_cloud_loki_host       = string<br/>    grafana_cloud_tempo_host      = string<br/>    azure_key_vault_name          = string<br/>    include_namespaces            = string<br/>    exclude_namespaces            = optional(list(string), [])<br/>    node_exporter_node_affinity   = optional(map(string))<br/>  })</pre> | <pre>{<br/>  "azure_key_vault_name": "",<br/>  "exclude_namespaces": [<br/>    ""<br/>  ],<br/>  "grafana_cloud_loki_host": "",<br/>  "grafana_cloud_prometheus_host": "",<br/>  "grafana_cloud_tempo_host": "",<br/>  "include_namespaces": "",<br/>  "node_exporter_node_affinity": {}<br/>}</pre> | no |
 | <a name="input_key_vault_id"></a> [key\_vault\_id](#input\_key\_vault\_id) | Core key vault id | `string` | n/a | yes |
+| <a name="input_key_vault_rbac_enabled"></a> [key\_vault\_rbac\_enabled](#input\_key\_vault\_rbac\_enabled) | If true, grant the grafana-k8s-monitoring workload-identity user-assigned identity access to the Key Vault using an Azure RBAC role assignment (Key Vault Secrets User) instead of an access policy. Set this to true when the target Key Vault was created with `enable_rbac_authorization = true`. | `bool` | `false` | no |
 | <a name="input_location"></a> [location](#input\_location) | The Azure region name. | `string` | n/a | yes |
 | <a name="input_node_local_dns_enabled"></a> [node\_local\_dns\_enabled](#input\_node\_local\_dns\_enabled) | Should node local DNS be enabled | `bool` | `false` | no |
 | <a name="input_node_ttl_enabled"></a> [node\_ttl\_enabled](#input\_node\_ttl\_enabled) | Should Node TTL be enabled | `bool` | `false` | no |

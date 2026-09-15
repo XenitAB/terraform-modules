@@ -31,13 +31,14 @@ No modules.
 | Name | Type |
 | ---- | ---- |
 | [azurerm_federated_identity_credential.arc_external_secrets](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/federated_identity_credential) | resource |
+| [azurerm_key_vault_access_policy.arc](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_user_assigned_identity.arc](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/resources/user_assigned_identity) | resource |
 | [git_repository_file.arc_app](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.arc_chart](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.arc_controller](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.arc_external_secret](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.arc_runner_set](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
 | [git_repository_file.arc_values](https://registry.terraform.io/providers/xenitab/git/latest/docs/resources/repository_file) | resource |
-| [azurerm_user_assigned_identity.xenit](https://registry.terraform.io/providers/hashicorp/azurerm/4.57.0/docs/data-sources/user_assigned_identity) | data source |
 
 ## Inputs
 
@@ -50,6 +51,7 @@ No modules.
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_fleet_infra_config"></a> [fleet\_infra\_config](#input\_fleet\_infra\_config) | Fleet infra configuration | <pre>object({<br/>    git_repo_url        = string<br/>    argocd_project_name = string<br/>    k8s_api_server_url  = string<br/>  })</pre> | n/a | yes |
+| <a name="input_key_vault_id"></a> [key\_vault\_id](#input\_key\_vault\_id) | Resource ID of the Key Vault holding the GitHub App private key. Required if arc\_runner\_set\_config is set. | `string` | `""` | no |
 | <a name="input_location"></a> [location](#input\_location) | The Azure region name. | `string` | n/a | yes |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | The short name of the Azure region, e.g. 'sdc'. Required if arc\_runner\_set\_config is set. | `string` | `""` | no |
 | <a name="input_oidc_issuer_url"></a> [oidc\_issuer\_url](#input\_oidc\_issuer\_url) | Kubernetes OIDC issuer URL for workload identity. | `string` | n/a | yes |
@@ -60,4 +62,4 @@ No modules.
 
 | Name | Description |
 | ---- | ----------- |
-| <a name="output_eso_client_id"></a> [eso\_client\_id](#output\_eso\_client\_id) | Client ID of the shared identity federated for the runner scale set's ExternalSecret. Null if arc\_runner\_set\_config was not set. |
+| <a name="output_eso_client_id"></a> [eso\_client\_id](#output\_eso\_client\_id) | Client ID of the dedicated identity federated for the runner scale set's ExternalSecret. Null if arc\_runner\_set\_config was not set. |

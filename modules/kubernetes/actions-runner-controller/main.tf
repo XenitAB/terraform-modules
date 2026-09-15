@@ -85,7 +85,7 @@ resource "git_repository_file" "arc_external_secret" {
   content = templatefile("${path.module}/templates/external-secret-arc.yaml.tpl", {
     runners_namespace          = local.runners_namespace
     eso_service_account_name   = local.eso_service_account_name
-    eso_client_id              = data.azurerm_user_assigned_identity.xenit[0].client_id
+    eso_client_id              = azurerm_user_assigned_identity.arc[0].client_id
     azure_tenant_id            = var.azure_tenant_id
     github_app_id              = var.arc_runner_set_config.github_app_id
     github_app_installation_id = var.arc_runner_set_config.github_app_installation_id

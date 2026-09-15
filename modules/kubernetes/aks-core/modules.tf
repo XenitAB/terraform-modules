@@ -32,6 +32,7 @@ module "actions_runner_controller" {
   cluster_id            = local.cluster_id
   environment           = var.environment
   fleet_infra_config    = var.platform_config.fleet_infra_config
+  key_vault_id          = data.azurerm_key_vault.core.id
   location              = data.azurerm_resource_group.this.location
   location_short        = var.location_short
   oidc_issuer_url       = var.oidc_issuer_url

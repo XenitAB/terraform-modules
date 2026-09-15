@@ -19,6 +19,7 @@ module "actions_runner_controller" {
   location_short  = "loc"
   oidc_issuer_url = "url"
   azure_tenant_id = "00000000-0000-0000-0000-000000000000"
+  key_vault_id    = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-name/providers/Microsoft.KeyVault/vaults/kv-test"
   arc_runner_set_config = {
     runner_scale_set_name      = "test-runners"
     github_config_url          = "https://github.com/foo/bar"

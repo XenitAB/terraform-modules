@@ -49,6 +49,12 @@ variable "environment" {
   type        = string
 }
 
+variable "key_vault_id" {
+  description = "Resource ID of the Key Vault holding the GitHub App private key. Required if arc_runner_set_config is set."
+  type        = string
+  default     = ""
+}
+
 variable "location_short" {
   description = "The short name of the Azure region, e.g. 'sdc'. Required if arc_runner_set_config is set."
   type        = string

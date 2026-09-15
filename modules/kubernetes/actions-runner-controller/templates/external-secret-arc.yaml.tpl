@@ -1,3 +1,12 @@
+# Created here so the ESO resources below have a namespace before the runner-set
+# Application (which also targets it) has synced. ArgoCD applies Namespace first.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ${runners_namespace}
+  labels:
+    xkf.xenit.io/kind: platform
+---
 # GitHub App credentials for the ARC listener.
 #
 # Only the private key is a secret. The app id and installation id are

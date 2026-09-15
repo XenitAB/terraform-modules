@@ -32,6 +32,20 @@ variable "acr_name_override" {
   default     = ""
 }
 
+variable "actions_runner_controller_config" {
+  description = "Configuration for the GitHub Actions Runner Controller (ARC) controller deployment."
+  type = object({
+    chart_version             = optional(string, "0.14.2")
+    namespace                 = optional(string, "arc-system")
+    replica_count             = optional(number, 1)
+    watch_single_namespace    = optional(string, "")
+    resources_cpu_requests    = optional(string, "50m")
+    resources_memory_requests = optional(string, "128Mi")
+    resources_memory_limit    = optional(string, "512Mi")
+  })
+  default = {}
+}
+
 variable "additional_storage_classes" {
   description = "List of additional storage classes to create"
   type = list(object({
@@ -629,6 +643,7 @@ variable "platform_config" {
       k8s_api_server_url  = string
     })
     aad_pod_identity_enabled                = optional(bool, false)
+    actions_runner_controller_enabled       = optional(bool, false)
     argocd_enabled                          = optional(bool, true)
     azure_metrics_enabled                   = optional(bool, false)
     azure_policy_enabled                    = optional(bool, false)

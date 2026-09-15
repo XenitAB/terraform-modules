@@ -4,10 +4,9 @@
   * This module is used to add the [`gha-runner-scale-set-controller`](https://github.com/actions/actions-runner-controller)
   * to Kubernetes clusters.
   *
-  * The module only deploys the controller itself. Runner scale sets (`AutoscalingRunnerSet`) are highly
-  * tenant-specific (GitHub App credentials, target org/repo, node placement) and are intentionally out of
-  * scope for this module; deploy them as additional Argo CD Applications alongside it, reusing the
-  * `workload_identity` output if they need Azure access.
+  * The controller is always deployed. The runner scale set and its GitHub App
+  * credentials (ExternalSecret) are only generated when `arc_runner_set_config`
+  * is set, since they're tenant-specific (target org/repo, GitHub App).
   */
 
 terraform {
@@ -56,8 +55,41 @@ resource "git_repository_file" "arc_controller" {
     environment          = var.environment
     project              = var.fleet_infra_config.argocd_project_name
     server               = var.fleet_infra_config.k8s_api_server_url
-    client_id            = azurerm_user_assigned_identity.arc.client_id
     arc_config           = var.arc_config
     service_account_name = local.service_account_name
+  })
+}
+
+resource "git_repository_file" "arc_runner_set" {
+  count = var.arc_runner_set_config != null ? 1 : 0
+
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/actions-runner-controller/templates/arc-runner-set.yaml"
+  content = templatefile("${path.module}/templates/arc-runner-set.yaml.tpl", {
+    tenant_name           = var.tenant_name
+    environment           = var.environment
+    project               = var.fleet_infra_config.argocd_project_name
+    server                = var.fleet_infra_config.k8s_api_server_url
+    chart_version         = var.arc_config.chart_version
+    runners_namespace     = local.runners_namespace
+    runner_scale_set_name = var.arc_runner_set_config.runner_scale_set_name
+    github_config_url     = var.arc_runner_set_config.github_config_url
+    min_runners           = var.arc_runner_set_config.min_runners
+    max_runners           = var.arc_runner_set_config.max_runners
+  })
+}
+
+resource "git_repository_file" "arc_external_secret" {
+  count = var.arc_runner_set_config != null ? 1 : 0
+
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/actions-runner-controller/templates/external-secret-arc.yaml"
+  content = templatefile("${path.module}/templates/external-secret-arc.yaml.tpl", {
+    runners_namespace          = local.runners_namespace
+    eso_service_account_name   = local.eso_service_account_name
+    eso_client_id              = data.azurerm_user_assigned_identity.xenit[0].client_id
+    azure_tenant_id            = var.azure_tenant_id
+    github_app_id              = var.arc_runner_set_config.github_app_id
+    github_app_installation_id = var.arc_runner_set_config.github_app_installation_id
+    key_vault_name             = var.arc_runner_set_config.key_vault_name
+    key_vault_secret_name      = var.arc_runner_set_config.key_vault_secret_name
   })
 }

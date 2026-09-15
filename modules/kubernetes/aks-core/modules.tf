@@ -25,14 +25,18 @@ module "actions_runner_controller" {
 
   source = "../../kubernetes/actions-runner-controller"
 
-  arc_config          = var.actions_runner_controller_config
-  cluster_id          = local.cluster_id
-  environment         = var.environment
-  fleet_infra_config  = var.platform_config.fleet_infra_config
-  location            = data.azurerm_resource_group.this.location
-  oidc_issuer_url     = var.oidc_issuer_url
-  resource_group_name = data.azurerm_resource_group.this.name
-  tenant_name         = var.platform_config.tenant_name
+  aks_name              = var.name
+  arc_config            = var.actions_runner_controller_config
+  arc_runner_set_config = var.arc_runner_set_config
+  azure_tenant_id       = data.azurerm_client_config.current.tenant_id
+  cluster_id            = local.cluster_id
+  environment           = var.environment
+  fleet_infra_config    = var.platform_config.fleet_infra_config
+  location              = data.azurerm_resource_group.this.location
+  location_short        = var.location_short
+  oidc_issuer_url       = var.oidc_issuer_url
+  resource_group_name   = data.azurerm_resource_group.this.name
+  tenant_name           = var.platform_config.tenant_name
 }
 
 module "argocd" {

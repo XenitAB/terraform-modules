@@ -46,6 +46,21 @@ variable "actions_runner_controller_config" {
   default = {}
 }
 
+variable "arc_runner_set_config" {
+  description = "Configuration for the ARC runner scale set and its GitHub App credentials. Leave null to deploy only the controller."
+  type = object({
+    runner_scale_set_name      = string
+    github_config_url          = string
+    github_app_id              = string
+    github_app_installation_id = string
+    key_vault_name             = string
+    key_vault_secret_name      = optional(string, "github-arc-private-key")
+    min_runners                = optional(number, 0)
+    max_runners                = optional(number, 8)
+  })
+  default = null
+}
+
 variable "additional_storage_classes" {
   description = "List of additional storage classes to create"
   type = list(object({

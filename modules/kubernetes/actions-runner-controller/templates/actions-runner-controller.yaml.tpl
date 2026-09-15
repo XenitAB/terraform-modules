@@ -37,13 +37,9 @@ spec:
         flags:
           watchSingleNamespace: ${arc_config.watch_single_namespace}
         %{~ endif ~}
-        podLabels:
-          azure.workload.identity/use: "true"
         serviceAccount:
           create: true
           name: ${service_account_name}
-          annotations:
-            azure.workload.identity/client-id: ${client_id}
         resources:
           requests:
             cpu: ${arc_config.resources_cpu_requests}

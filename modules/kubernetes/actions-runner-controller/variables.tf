@@ -12,6 +12,33 @@ variable "arc_config" {
   default = {}
 }
 
+variable "aks_name" {
+  description = "The AKS cluster short name, e.g. 'aks'. Required if arc_runner_set_config is set."
+  type        = string
+  default     = ""
+}
+
+variable "arc_runner_set_config" {
+  description = "Configuration for the runner scale set and its GitHub App credentials. Leave null to deploy only the controller."
+  type = object({
+    runner_scale_set_name      = string
+    github_config_url          = string
+    github_app_id              = string
+    github_app_installation_id = string
+    key_vault_name             = string
+    key_vault_secret_name      = optional(string, "github-arc-private-key")
+    min_runners                = optional(number, 0)
+    max_runners                = optional(number, 8)
+  })
+  default = null
+}
+
+variable "azure_tenant_id" {
+  description = "Azure AD tenant ID for the ExternalSecret's SecretStore. Required if arc_runner_set_config is set."
+  type        = string
+  default     = ""
+}
+
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."
   type        = string
@@ -20,6 +47,12 @@ variable "cluster_id" {
 variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string
+}
+
+variable "location_short" {
+  description = "The short name of the Azure region, e.g. 'sdc'. Required if arc_runner_set_config is set."
+  type        = string
+  default     = ""
 }
 
 variable "fleet_infra_config" {

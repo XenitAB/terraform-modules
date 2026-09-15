@@ -89,11 +89,14 @@ spec:
               - name: runner
                 image: ghcr.io/actions/actions-runner:2.337.0
                 command: ["/home/runner/run.sh"]
-                # No readOnlyRootFilesystem here: the runner unpacks the
-                # workflow into /home/runner/_work and writes its registration
-                # under its own install directory.
+                # Explicit false is required: the runner writes run-helper.sh and
+                # unpacks the workflow into /home/runner, and the cluster's default
+                # security-context mutation sets readOnlyRootFilesystem=true when
+                # the field is absent. The image is exempted from the matching
+                # deny constraint, so false is admitted.
                 securityContext:
                   allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: false
                   runAsNonRoot: true
                   runAsUser: 1000
                   capabilities:

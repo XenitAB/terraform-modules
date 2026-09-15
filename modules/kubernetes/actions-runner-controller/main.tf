@@ -71,6 +71,8 @@ resource "git_repository_file" "arc_runner_set" {
     server                = var.fleet_infra_config.k8s_api_server_url
     chart_version         = var.arc_config.chart_version
     runners_namespace     = local.runners_namespace
+    controller_namespace  = var.arc_config.namespace
+    service_account_name  = local.service_account_name
     runner_scale_set_name = var.arc_runner_set_config.runner_scale_set_name
     github_config_url     = var.arc_runner_set_config.github_config_url
     min_runners           = var.arc_runner_set_config.min_runners

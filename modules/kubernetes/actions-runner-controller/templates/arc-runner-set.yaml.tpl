@@ -40,6 +40,12 @@ spec:
         # Secret produced by ESO from Key Vault; see external-secret-arc.yaml.
         githubConfigSecret: arc-github-app
 
+        # Set explicitly: the chart otherwise discovers the controller by label
+        # at template time, which fails when the controller isn't rendered here.
+        controllerServiceAccount:
+          namespace: ${controller_namespace}
+          name: ${service_account_name}
+
         minRunners: ${min_runners}
         maxRunners: ${max_runners}
 

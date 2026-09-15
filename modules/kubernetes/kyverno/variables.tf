@@ -29,6 +29,18 @@ variable "kyverno_config" {
   default = {}
 }
 
+variable "azure_policy_enabled" {
+  description = "If Azure Policy is handling admission control. When true, overlapping security policies are not deployed to avoid race conditions."
+  type        = bool
+  default     = false
+}
+
+variable "mirrord_enabled" {
+  description = "If Kyverno validations should make an exemption for mirrord agent."
+  type        = bool
+  default     = false
+}
+
 variable "tenant_name" {
   description = "The name of the tenant"
   type        = string

@@ -1,5 +1,5 @@
-apiVersion: kyverno.io/v2alpha1
-kind: MutatePolicy
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
 metadata:
   name: remove-azure-spot-taints
   annotations:
@@ -17,17 +17,28 @@ spec:
       - resources:
           kinds:
           - Node
+    preconditions:
+      all:
+      - key: "{{ request.object.spec.taints[] || `[]` | length(@) }}"
+        operator: GreaterThan
+        value: 0
     mutate:
-      patchesJson6902: |-
-        - path: "/spec/taints"
-          op: remove
-          value:
-          - effect: NoSchedule
-            key: kubernetes.azure.com/scalesetpriority
-            value: spot
+      foreach:
+      - list: "request.object.spec.taints"
+        preconditions:
+          all:
+          - key: "{{ element.key }}"
+            operator: Equals
+            value: "kubernetes.azure.com/scalesetpriority"
+          - key: "{{ element.effect }}"
+            operator: Equals
+            value: "NoSchedule"
+        patchesJson6902: |-
+          - path: "/spec/taints/{{ elementIndex }}"
+            op: remove
 ---
-apiVersion: kyverno.io/v2alpha1
-kind: MutatePolicy
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
 metadata:
   name: mutate-deployment-replicas-based-on-pdb
   annotations:
@@ -57,7 +68,7 @@ spec:
         operator: GreaterThan
         value: 0
     mutate:
-      forEach:
+      foreach:
       - list: "{{ pdbs }}"
         preconditions:
           all:
@@ -78,8 +89,8 @@ spec:
           spec:
             replicas: "{{ add(element.spec.minAvailable, `1`) }}"
 ---
-apiVersion: kyverno.io/v2alpha1
-kind: MutatePolicy
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
 metadata:
   name: mutate-hpa-replicas-based-on-pdb
   annotations:
@@ -119,7 +130,7 @@ spec:
         operator: GreaterThan
         value: 0
     mutate:
-      forEach:
+      foreach:
       - list: "{{ pdbs }}"
         preconditions:
           all:
@@ -140,8 +151,8 @@ spec:
           spec:
             minReplicas: "{{ add(element.spec.minAvailable, `1`) }}"
 ---
-apiVersion: kyverno.io/v2alpha1
-kind: GeneratePolicy
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
 metadata:
   name: mutate-resources-on-pdb-changes
   annotations:
@@ -176,7 +187,7 @@ spec:
         operator: GreaterThan
         value: 0
     generate:
-      forEach:
+      foreach:
       - list: "{{ deployments }}"
         preconditions:
           all:
@@ -228,7 +239,7 @@ spec:
         operator: GreaterThan
         value: 0
     generate:
-      forEach:
+      foreach:
       - list: "{{ hpas }}"
         context:
         - name: targetDeployment

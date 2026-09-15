@@ -55,6 +55,7 @@ variable "arc_runner_set_config" {
     github_app_installation_id = string
     key_vault_name             = string
     key_vault_secret_name      = optional(string, "github-arc-private-key")
+    runner_group               = optional(string, "")
     min_runners                = optional(number, 0)
     max_runners                = optional(number, 8)
   })

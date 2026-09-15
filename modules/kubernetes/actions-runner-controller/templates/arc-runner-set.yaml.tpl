@@ -36,6 +36,9 @@ spec:
         # silently strands every job that still asks for the old one.
         runnerScaleSetName: ${runner_scale_set_name}
         githubConfigUrl: ${github_config_url}
+        %{~ if runner_group != "" ~}
+        runnerGroup: ${runner_group}
+        %{~ endif ~}
 
         # Secret produced by ESO from Key Vault; see external-secret-arc.yaml.
         githubConfigSecret: arc-github-app

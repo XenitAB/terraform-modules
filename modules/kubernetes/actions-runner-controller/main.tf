@@ -75,6 +75,7 @@ resource "git_repository_file" "arc_runner_set" {
     service_account_name  = local.service_account_name
     runner_scale_set_name = var.arc_runner_set_config.runner_scale_set_name
     github_config_url     = var.arc_runner_set_config.github_config_url
+    runner_group          = var.arc_runner_set_config.runner_group
     min_runners           = var.arc_runner_set_config.min_runners
     max_runners           = var.arc_runner_set_config.max_runners
   })

@@ -27,7 +27,6 @@ module "actions_runner_controller" {
 
   arc_config          = var.actions_runner_controller_config
   cluster_id          = local.cluster_id
-  enabled             = true
   environment         = var.environment
   fleet_infra_config  = var.platform_config.fleet_infra_config
   location            = data.azurerm_resource_group.this.location

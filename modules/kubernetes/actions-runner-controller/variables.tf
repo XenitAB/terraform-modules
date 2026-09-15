@@ -17,12 +17,6 @@ variable "cluster_id" {
   type        = string
 }
 
-variable "enabled" {
-  description = "If the GitHub Actions Runner Controller should be deployed. Disabled by default; enable it explicitly for tenants that need self-hosted runners."
-  type        = bool
-  default     = false
-}
-
 variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string

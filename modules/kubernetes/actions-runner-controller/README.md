@@ -3,9 +3,7 @@
 This module is used to add the [`gha-runner-scale-set-controller`](https://github.com/actions/actions-runner-controller)
 to Kubernetes clusters.
 
-The module only deploys the controller itself. It is disabled by default (`enabled = false`) and
-requires no other input to be added to a cluster's module list ahead of time - flip `enabled` to `true`
-when a tenant actually needs self-hosted runners. Runner scale sets (`AutoscalingRunnerSet`) are highly
+The module only deploys the controller itself. Runner scale sets (`AutoscalingRunnerSet`) are highly
 tenant-specific (GitHub App credentials, target org/repo, node placement) and are intentionally out of
 scope for this module; deploy them as additional Argo CD Applications alongside it, reusing the
 `workload_identity` output if they need Azure access.
@@ -46,7 +44,6 @@ No modules.
 | ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_arc_config"></a> [arc\_config](#input\_arc\_config) | Configuration for the GitHub Actions Runner Controller (ARC) controller deployment. | <pre>object({<br/>    chart_version             = optional(string, "0.14.2")<br/>    namespace                 = optional(string, "arc-system")<br/>    replica_count             = optional(number, 1)<br/>    watch_single_namespace    = optional(string, "")<br/>    resources_cpu_requests    = optional(string, "50m")<br/>    resources_memory_requests = optional(string, "128Mi")<br/>    resources_memory_limit    = optional(string, "512Mi")<br/>  })</pre> | `{}` | no |
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | Unique identifier of the cluster across regions and instances. | `string` | n/a | yes |
-| <a name="input_enabled"></a> [enabled](#input\_enabled) | If the GitHub Actions Runner Controller should be deployed. Disabled by default; enable it explicitly for tenants that need self-hosted runners. | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the deploy | `string` | n/a | yes |
 | <a name="input_fleet_infra_config"></a> [fleet\_infra\_config](#input\_fleet\_infra\_config) | Fleet infra configuration | <pre>object({<br/>    git_repo_url        = string<br/>    argocd_project_name = string<br/>    k8s_api_server_url  = string<br/>  })</pre> | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | The Azure region name. | `string` | n/a | yes |
@@ -58,4 +55,4 @@ No modules.
 
 | Name | Description |
 | ---- | ----------- |
-| <a name="output_workload_identity"></a> [workload\_identity](#output\_workload\_identity) | Workload identity created for ARC, when enabled. Reuse this for runner scale sets deployed alongside the controller that need Azure access. |
+| <a name="output_workload_identity"></a> [workload\_identity](#output\_workload\_identity) | Workload identity created for ARC. Reuse this for runner scale sets deployed alongside the controller that need Azure access. |

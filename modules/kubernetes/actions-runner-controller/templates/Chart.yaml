@@ -1,0 +1,6 @@
+apiVersion: v2
+name: actions-runner-controller-app
+description: A Helm chart for deploying the GitHub Actions Runner Controller as an app-of-app
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

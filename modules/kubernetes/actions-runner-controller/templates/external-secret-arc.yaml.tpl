@@ -24,7 +24,7 @@ spec:
   target:
     name: arc-github-app
     template:
-      engine: v2
+      engineVersion: v2
       data:
         # The chart looks these three keys up by name. The ids must be
         # strings -- unquoted they become numbers and the listener rejects them.

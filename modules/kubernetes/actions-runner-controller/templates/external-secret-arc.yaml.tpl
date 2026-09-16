@@ -4,6 +4,10 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: ${runners_namespace}
+%{ if prune_protection ~}
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+%{ endif ~}
   labels:
     xkf.xenit.io/kind: platform
 ---
@@ -16,6 +20,10 @@ kind: ExternalSecret
 metadata:
   name: arc-github-app
   namespace: ${runners_namespace}
+%{ if prune_protection ~}
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+%{ endif ~}
 spec:
   refreshInterval: 1h0m0s
   secretStoreRef:
@@ -30,7 +38,7 @@ spec:
         # strings -- unquoted they become numbers and the listener rejects them.
         github_app_id: "${github_app_id}"
         github_app_installation_id: "${github_app_installation_id}"
-        github_app_private_key: "{{`{{ .privateKey }}`}}"
+        github_app_private_key: "${legacy_helm_template ? "{{`{{ .privateKey }}`}}" : "{{ .privateKey }}"}"
   data:
     - secretKey: privateKey
       remoteRef:
@@ -41,6 +49,10 @@ kind: SecretStore
 metadata:
   name: azure-kv
   namespace: ${runners_namespace}
+%{ if prune_protection ~}
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+%{ endif ~}
 spec:
   provider:
     azurekv:
@@ -60,4 +72,7 @@ metadata:
   name: ${eso_service_account_name}
   namespace: ${runners_namespace}
   annotations:
+%{ if prune_protection ~}
+    argocd.argoproj.io/sync-options: Prune=false
+%{ endif ~}
     azure.workload.identity/client-id: ${eso_client_id}

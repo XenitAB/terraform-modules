@@ -76,10 +76,9 @@ spec:
         template:
           spec:
             # Runner pods execute arbitrary workflow code from the repository.
-            # Keep them off the nodes that run the rest of the platform.
+            # The toleration lets them onto a dedicated arc node pool when one
+            # exists; without a nodeSelector they otherwise schedule anywhere.
             priorityClassName: platform-low
-            nodeSelector:
-              node-pool: arc
             tolerations:
               - key: "node-pool"
                 operator: "Equal"

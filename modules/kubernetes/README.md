@@ -5,6 +5,7 @@ This directory contains all the Kubernetes Terraform modules.
 ## Modules
 
 - [`aad-pod-identity`](aad-pod-identity/README.md)
+- [`actions-runner-controller`](actions-runner-controller/README.md)
 - [`aks-core`](aks-core/README.md)
 - [`argocd`](argocd/README.md)
 - [`azad-kube-proxy`](azad-kube-proxy/README.md)

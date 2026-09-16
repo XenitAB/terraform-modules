@@ -23,6 +23,8 @@ locals {
     "node-ttl",
     "spegel",
     "vpa",
+    "arc-system",
+    "arc-runners",
   ]
   cluster_id = "${var.location_short}-${var.environment}-${var.name}${local.aks_name_suffix}"
   dns_zones = var.external_dns_config.rbac_create ? {

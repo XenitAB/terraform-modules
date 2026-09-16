@@ -16,6 +16,30 @@ module "aad_pod_identity" {
   fleet_infra_config = var.platform_config.fleet_infra_config
 }
 
+module "actions_runner_controller" {
+  for_each = {
+    for s in ["actions-runner-controller"] :
+    s => s
+    if var.platform_config.actions_runner_controller_enabled
+  }
+
+  source = "../../kubernetes/actions-runner-controller"
+
+  aks_name              = var.name
+  arc_config            = var.actions_runner_controller_config
+  arc_runner_set_config = var.arc_runner_set_config
+  azure_tenant_id       = data.azurerm_client_config.current.tenant_id
+  cluster_id            = local.cluster_id
+  environment           = var.environment
+  fleet_infra_config    = var.platform_config.fleet_infra_config
+  key_vault_id          = data.azurerm_key_vault.core.id
+  location              = data.azurerm_resource_group.this.location
+  location_short        = var.location_short
+  oidc_issuer_url       = var.oidc_issuer_url
+  resource_group_name   = data.azurerm_resource_group.this.name
+  tenant_name           = var.platform_config.tenant_name
+}
+
 module "argocd" {
   depends_on = [module.karpenter]
 

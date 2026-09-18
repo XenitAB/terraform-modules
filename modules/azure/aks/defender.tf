@@ -1,7 +1,3 @@
-resource "azurerm_security_center_auto_provisioning" "this" {
-  auto_provision = "Off"
-}
-
 resource "azurerm_security_center_subscription_pricing" "containers" {
   for_each = {
     for s in ["defender"] :

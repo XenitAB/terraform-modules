@@ -32,11 +32,11 @@ resource "azurerm_eventhub_namespace_authorization_rule" "listen" {
 }
 
 resource "azurerm_eventhub" "this" {
-  name                = "audit-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
-  namespace_name      = azurerm_eventhub_namespace.this.name
-  resource_group_name = azurerm_eventhub_namespace.this.resource_group_name
-  partition_count     = 2
-  message_retention   = 1
+  name         = "audit-${var.environment}-${var.location_short}-${var.name}-${var.unique_suffix}"
+  namespace_id = azurerm_eventhub_namespace.this.id
+  #  resource_group_name = azurerm_eventhub_namespace.this.resource_group_name
+  partition_count   = 2
+  message_retention = 1
 }
 
 #tfsec:ignore:AZU023

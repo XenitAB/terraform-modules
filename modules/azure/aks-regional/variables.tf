@@ -87,3 +87,9 @@ variable "keyvault_name_override" {
   type        = string
   default     = ""
 }
+
+variable "key_vault_rbac_enabled" {
+  description = "If true, grant the xenit user-assigned identity access to the core Key Vault using an Azure RBAC role assignment (Key Vault Administrator) instead of an access policy. Set this to true when the target Key Vault was created with `enable_rbac_authorization = true` (see `governance-regional`)."
+  type        = bool
+  default     = false
+}

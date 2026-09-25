@@ -35,7 +35,11 @@ variable "resource_group_configs" {
       lock_resource_group                = bool # Adds management_lock (CanNotDelete) to the resource group
       disable_unique_suffix              = bool # Disable unique_suffix on resource names
       key_vault_purge_protection_enabled = optional(bool, false)
-      tags                               = map(string)
+      # When true, the delegated Key Vault is created with enable_rbac_authorization = true
+      # and access is granted via Azure RBAC role assignments instead of access policies.
+      # Defaults to false to preserve the historical access-policy behaviour.
+      key_vault_enable_rbac_authorization = optional(bool, false)
+      tags                                = map(string)
     })
   )
 }

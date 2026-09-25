@@ -6,6 +6,11 @@ variable "aad_groups" {
     name      = string
   }))
 }
+variable "logs_enabled" {
+  description = "should role and rolebinding for log access be created"
+  type        = bool
+  default     = true
+}
 
 variable "cluster_id" {
   description = "Unique identifier of the cluster across regions and instances."

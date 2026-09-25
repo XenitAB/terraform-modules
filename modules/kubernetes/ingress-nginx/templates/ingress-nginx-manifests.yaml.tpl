@@ -1,3 +1,4 @@
+%{~ if logs_enabled ~}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -34,6 +35,7 @@ roleRef:
   name: logs-ingress-nginx
 ---
 %{ endfor }
+%{ endif }
 %{~ if default_certificate.enabled ~}
 apiVersion: cert-manager.io/v1
 kind: Certificate

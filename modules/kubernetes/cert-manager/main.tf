@@ -81,5 +81,6 @@ resource "git_repository_file" "cert_manager_manifests" {
     gateway_api_enabled      = var.gateway_api_enabled
     gateway_solver_name      = var.gateway_api_config.gateway_name
     gateway_solver_namespace = var.gateway_api_config.gateway_namespace
+    logs_enabled             = var.logs_enabled
   })
 }

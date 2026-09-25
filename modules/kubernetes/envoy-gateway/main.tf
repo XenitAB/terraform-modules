@@ -49,6 +49,17 @@ resource "git_repository_file" "envoy_gateway" {
   })
 }
 
+resource "git_repository_file" "envoy_gateway_crds" {
+  path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/envoy-gateway/templates/envoy-gateway-crds.yaml"
+  content = templatefile("${path.module}/templates/envoy-gateway-crds.yaml.tpl", {
+    envoy_gateway_config = var.envoy_gateway_config
+    tenant_name          = var.tenant_name
+    environment          = var.environment
+    project              = var.fleet_infra_config.argocd_project_name
+    server               = var.fleet_infra_config.k8s_api_server_url
+  })
+}
+
 resource "git_repository_file" "envoy_gateway_extras" {
   path = "platform/${var.tenant_name}/${var.cluster_id}/argocd-applications/envoy-gateway/templates/envoy-gateway-extras.yaml"
   content = templatefile("${path.module}/templates/envoy-gateway-extras.yaml.tpl", {

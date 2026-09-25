@@ -4,8 +4,11 @@ variable "cluster_id" {
 }
 
 variable "envoy_gateway_config" {
-  description = "Configuration for the username and password"
+  description = "Configuration for the Envoy Gateway deployment"
   type = object({
+    # Helm chart version for both gateway-helm and gateway-crds-helm
+    chart_version = optional(string, "v1.7.2")
+
     logging_level             = optional(string, "info")
     replicas_count            = optional(number, 2)
     resources_memory_limit    = optional(string, "1Gi")
@@ -17,6 +20,13 @@ variable "envoy_gateway_config" {
     proxy_memory_limit    = optional(string, "2Gi")
     proxy_cpu_requests    = optional(string, "200m")
     proxy_memory_requests = optional(string, "512Mi")
+
+    # Image SHA256 digests for supply chain security. See more here matching matrix: https://gateway.envoyproxy.io/news/releases/matrix/
+    # For the gateway controller image, we pin to the digest of the specific versioned image (e.g. v1.7.2) to ensure stability and security.
+    # gateway:v1.7.2
+    controller_image = optional(string, "docker.io/envoyproxy/gateway@sha256:a997e823dee831b38c1802fead055a71958e968195fc359bb63780abe799fb4f")
+    # envoy:distroless-v1.37.2
+    proxy_image = optional(string, "docker.io/envoyproxy/envoy@sha256:299a859d0cba5369a1070f96779399f2b491a6349bafaf7348babacfd1660d8d")
   })
   default = {}
 }

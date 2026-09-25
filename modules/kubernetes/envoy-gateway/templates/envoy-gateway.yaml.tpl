@@ -32,10 +32,15 @@ spec:
     - SkipHooks=true
   source:
     repoURL: docker.io/envoyproxy
-    targetRevision: 0.0.0-latest
+    targetRevision: ${envoy_gateway_config.chart_version}
     chart: gateway-helm
     helm:
+      skipCrds: true
       valuesObject:
+        global:
+          images:
+            envoyGateway:
+              image: "${envoy_gateway_config.controller_image}"
         config:
           envoyGateway:
             logging:
@@ -60,6 +65,7 @@ spec:
                       prometheus.io/scrape: "true"
                       prometheus.io/port: "19001"
                   container:
+                    image: "${envoy_gateway_config.proxy_image}"
                     securityContext:
                       allowPrivilegeEscalation: false
                       runAsNonRoot: true

@@ -98,6 +98,31 @@ resource "kubernetes_role_binding" "custom_resource_edit" {
   }
 }
 
+resource "kubernetes_role_binding" "argocd_view" {
+  depends_on = [kubernetes_namespace.tenant]
+  for_each   = var.platform_config.argocd_enabled ? { for ns in var.namespaces : ns.name => ns } : {}
+
+  metadata {
+    name      = "argocd-view"
+    namespace = kubernetes_namespace.tenant[each.key].metadata[0].name
+
+    labels = {
+      "aad-group-name"    = var.aad_groups.view[each.key].name
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = kubernetes_cluster_role.argocd_view[0].metadata[0].name
+  }
+  subject {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "Group"
+    name      = var.aad_groups.view[each.key].id
+  }
+}
+
 resource "kubernetes_role_binding" "top" {
   depends_on = [kubernetes_namespace.tenant]
   for_each   = { for ns in var.namespaces : ns.name => ns }

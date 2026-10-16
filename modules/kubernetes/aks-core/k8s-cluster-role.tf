@@ -48,6 +48,47 @@ resource "kubernetes_cluster_role" "custom_resource_edit" {
     resources = ["*"]
     verbs     = ["*"]
   }
+
+  # Tenants manage the Argo CD resources that live in their own namespace.
+  # Scoped to the resource kinds a tenant owns: argoproj.io also carries other
+  # CRDs, and AppProjects define what a tenant may deploy, so they stay out.
+  dynamic "rule" {
+    for_each = var.platform_config.argocd_enabled ? [1] : []
+    content {
+      api_groups = ["argoproj.io"]
+      resources  = ["applications", "applicationsets"]
+      verbs      = ["*"]
+    }
+  }
+  dynamic "rule" {
+    for_each = var.platform_config.argocd_enabled ? [1] : []
+    content {
+      api_groups = ["argocd-image-updater.argoproj.io"]
+      resources  = ["imageupdaters"]
+      verbs      = ["*"]
+    }
+  }
+}
+
+resource "kubernetes_cluster_role" "argocd_view" {
+  count = var.platform_config.argocd_enabled ? 1 : 0
+
+  metadata {
+    name = "argocd-view"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  rule {
+    api_groups = ["argoproj.io"]
+    resources  = ["applications", "applicationsets", "appprojects"]
+    verbs      = ["get", "list", "watch"]
+  }
+  rule {
+    api_groups = ["argocd-image-updater.argoproj.io"]
+    resources  = ["imageupdaters"]
+    verbs      = ["get", "list", "watch"]
+  }
 }
 
 resource "kubernetes_cluster_role" "top" {

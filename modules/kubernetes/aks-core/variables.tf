@@ -99,8 +99,17 @@ variable "argocd_config" {
         }))
       }))
     })), [])
+    # Cluster-wide kubectl access to Argo CD resources for every tenant's AAD groups.
+    # "view": view and edit groups can read. "edit": edit groups can also write, which
+    # through Argo CD can deploy anything its AppProjects allow.
+    tenant_cluster_access = optional(string, "none")
   })
   default = {}
+
+  validation {
+    condition     = contains(["none", "view", "edit"], var.argocd_config.tenant_cluster_access)
+    error_message = "Invalid tenant_cluster_access: ${var.argocd_config.tenant_cluster_access}. Allowed values: ['none', 'view', 'edit']"
+  }
 
   validation {
     condition     = contains(["Hub", "Spoke", "Hub-Spoke"], var.argocd_config.cluster_role)

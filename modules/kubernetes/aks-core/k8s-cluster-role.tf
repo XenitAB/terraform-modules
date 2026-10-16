@@ -50,6 +50,54 @@ resource "kubernetes_cluster_role" "custom_resource_edit" {
   }
 }
 
+resource "kubernetes_cluster_role" "argocd_resource_view" {
+  count = local.argocd_tenant_cluster_access != "none" ? 1 : 0
+
+  metadata {
+    name = "argocd-resource-view"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  rule {
+    api_groups = ["argoproj.io"]
+    resources  = ["applications", "applicationsets", "appprojects"]
+    verbs      = ["get", "list", "watch"]
+  }
+  rule {
+    api_groups = ["argocd-image-updater.argoproj.io"]
+    resources  = ["imageupdaters"]
+    verbs      = ["get", "list", "watch"]
+  }
+}
+
+resource "kubernetes_cluster_role" "argocd_resource_edit" {
+  count = local.argocd_tenant_cluster_access == "edit" ? 1 : 0
+
+  metadata {
+    name = "argocd-resource-edit"
+    labels = {
+      "xkf.xenit.io/kind" = "platform"
+    }
+  }
+  rule {
+    api_groups = ["argoproj.io"]
+    resources  = ["applications", "applicationsets"]
+    verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
+  }
+  # AppProjects define what a tenant may deploy, so they stay read-only.
+  rule {
+    api_groups = ["argoproj.io"]
+    resources  = ["appprojects"]
+    verbs      = ["get", "list", "watch"]
+  }
+  rule {
+    api_groups = ["argocd-image-updater.argoproj.io"]
+    resources  = ["imageupdaters"]
+    verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
+  }
+}
+
 resource "kubernetes_cluster_role" "top" {
   metadata {
     name = "top"

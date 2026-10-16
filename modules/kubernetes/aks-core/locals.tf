@@ -40,4 +40,7 @@ locals {
       name      = group.name
     }
   ]
+
+  # Cluster-wide access for every tenant's groups to Argo CD resources; "none" unless Argo CD runs here.
+  argocd_tenant_cluster_access = var.platform_config.argocd_enabled ? var.argocd_config.tenant_cluster_access : "none"
 }

@@ -51,7 +51,7 @@ resource "kubernetes_cluster_role" "custom_resource_edit" {
 }
 
 resource "kubernetes_cluster_role" "argocd_resource_view" {
-  count = local.argocd_tenant_cluster_access != "none" ? 1 : 0
+  count = var.platform_config.argocd_enabled ? 1 : 0
 
   metadata {
     name = "argocd-resource-view"
@@ -72,7 +72,7 @@ resource "kubernetes_cluster_role" "argocd_resource_view" {
 }
 
 resource "kubernetes_cluster_role" "argocd_resource_edit" {
-  count = local.argocd_tenant_cluster_access == "edit" ? 1 : 0
+  count = var.platform_config.argocd_enabled ? 1 : 0
 
   metadata {
     name = "argocd-resource-edit"

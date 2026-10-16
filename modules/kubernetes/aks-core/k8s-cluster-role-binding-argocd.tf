@@ -1,6 +1,6 @@
 resource "kubernetes_cluster_role_binding" "view_argocd" {
   depends_on = [kubernetes_namespace.tenant]
-  for_each   = local.argocd_tenant_cluster_access != "none" ? { for ns in var.namespaces : ns.name => ns } : {}
+  for_each   = var.platform_config.argocd_enabled ? { for ns in var.namespaces : ns.name => ns } : {}
 
   metadata {
     name = "${each.value.name}-view-argocd"
@@ -24,7 +24,7 @@ resource "kubernetes_cluster_role_binding" "view_argocd" {
 
 resource "kubernetes_cluster_role_binding" "edit_argocd" {
   depends_on = [kubernetes_namespace.tenant]
-  for_each   = local.argocd_tenant_cluster_access != "none" ? { for ns in var.namespaces : ns.name => ns } : {}
+  for_each   = var.platform_config.argocd_enabled ? { for ns in var.namespaces : ns.name => ns } : {}
 
   metadata {
     name = "${each.value.name}-edit-argocd"
@@ -37,10 +37,7 @@ resource "kubernetes_cluster_role_binding" "edit_argocd" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name = (local.argocd_tenant_cluster_access == "edit"
-      ? kubernetes_cluster_role.argocd_resource_edit[0].metadata[0].name
-      : kubernetes_cluster_role.argocd_resource_view[0].metadata[0].name
-    )
+    name      = kubernetes_cluster_role.argocd_resource_edit[0].metadata[0].name
   }
   subject {
     kind      = "Group"
